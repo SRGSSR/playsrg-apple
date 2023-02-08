@@ -241,7 +241,7 @@ final class SectionViewController: UIViewController {
                 rightBarButtonItems.append(shareButtonItem)
             }
             
-            if model.configuration.properties.subscriptionShow != nil {
+            if let show = model.configuration.properties.subscriptionShow, Self.isSubscriptionPossible(for: show) {
                 let subscriptionButtonItem = UIBarButtonItem(image: UIImage(named: Self.subscriptionIcon(for: subscriptionStatus)),
                                                              style: .plain,
                                                              target: self,
@@ -279,6 +279,10 @@ final class SectionViewController: UIViewController {
         default:
             return String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
         }
+    }
+    
+    private static func isSubscriptionPossible(for show: SRGShow) -> Bool {
+        return PushService.shared != nil && FavoritesContainsShow(show)
     }
     
     private static func subscriptionIcon(for subscriptionStatus: UserDataPublishers.SubscriptionStatus) -> String {
