@@ -26,6 +26,11 @@ clean:
 	@xcodebuild clean
 	@echo "... done.\n"
 
+rbenv:
+	@echo "Installing needed ruby version if missing..."
+	@Scripts/rbenv-install.sh "./"
+	@echo "... done.\n"
+
 .PHONY: help
 help:
 	@echo "The following targets are available:"
@@ -33,4 +38,5 @@ help:
 	@echo "   setup     Setup project"
 	@echo "   lint      Lint project and fix issues"
 	@echo "   clean     Clean the project and its dependencies"
+	@echo "   rbenv     Install needed ruby version if missing"
 	@echo "   help      Display this message"
