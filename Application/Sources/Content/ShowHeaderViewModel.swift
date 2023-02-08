@@ -53,12 +53,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var favoriteLabel: String {
-        if isFavorite {
-            return NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
-        }
-        else {
-            return NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")
-        }
+        return NSLocalizedString("Favorites", comment: "Label displayed in the show view")
     }
     
     var shouldDisplayFavoriteRemovalAlert: Bool {
