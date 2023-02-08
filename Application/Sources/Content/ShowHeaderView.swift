@@ -89,12 +89,16 @@ struct ShowHeaderView: View {
 #endif
         let horizontalSizeClass: UIUserInterfaceSizeClass
         
-        private var alignment: HorizontalAlignment {
+        private var stackAlignment: HorizontalAlignment {
+            return (horizontalSizeClass == .compact) ? .center : .leading
+        }
+        
+        private var titleAlignment: TextAlignment {
             return (horizontalSizeClass == .compact) ? .center : .leading
         }
         
         var body: some View {
-            VStack(alignment: alignment, spacing: ShowHeaderView.verticalSpacing) {
+            VStack(alignment: stackAlignment, spacing: ShowHeaderView.verticalSpacing) {
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)
@@ -102,7 +106,7 @@ struct ShowHeaderView: View {
                     // when calculated with a `UIHostingController`, but without this the text does not occupy
                     // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(titleAlignment)
                     .foregroundColor(.white)
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.play_green))
