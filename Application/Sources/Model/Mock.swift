@@ -152,6 +152,7 @@ enum Mock {
     enum Show: String {
         case standard
         case overflow
+        case short
     }
     
     static func show(_ kind: Show = .standard) -> SRGShow {

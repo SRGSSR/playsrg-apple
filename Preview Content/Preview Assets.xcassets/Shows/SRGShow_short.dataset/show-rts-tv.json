@@ -1,0 +1,18 @@
+{
+   "id" : "13643200",
+   "vendor" : "RTS",
+   "transmission" : "TV",
+   "urn" : "urn:rts:show:tv:13643200",
+   "title" : "#Helvetica",
+   "description" : "Grands entretiens éco-politiques",
+   "imageUrl" : "https://www.rts.ch/2023/02/01/16/41/13749950.image/16x9",
+   "imageTitle" : "#Helvetica [RTS]",
+   "posterImageUrl" : "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+   "posterImageIsFallbackUrl" : true,
+   "podcastImageUrl" : "https://ws.srf.ch/asset/image/audio/55a549a3-6529-44d2-99ff-4482e9f82b8d/PODCAST.jpg",
+   "podcastImageIsFallbackUrl" : true,
+   "audioDescriptionAvailable" : false,
+   "subtitlesAvailable" : false,
+   "multiAudioLanguagesAvailable" : false,
+   "allowIndexing" : true
+}

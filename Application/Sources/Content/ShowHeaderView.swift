@@ -45,7 +45,6 @@ struct ShowHeaderView: View {
                     DescriptionView(model: model, horizontalSizeClass: .compact)
                         .padding(.horizontal, 16)
                         .padding(.vertical)
-                        .frame(maxWidth: .infinity)
                         .offset(y: -30)
                 }
                 .padding(.bottom, 20)
@@ -56,7 +55,6 @@ struct ShowHeaderView: View {
                     DescriptionView(model: model, horizontalSizeClass: .regular)
                         .padding(.horizontal, 16)
                         .padding(.vertical)
-                        .frame(maxWidth: .infinity)
                     ImageView(source: model.imageUrl)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .overlay(ImageOverlay(horizontalSizeClass: .regular))
@@ -138,6 +136,7 @@ struct ShowHeaderView: View {
 #endif
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         
         private func favoriteAction() {
