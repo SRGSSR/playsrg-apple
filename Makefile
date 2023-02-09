@@ -26,6 +26,7 @@ clean:
 	@xcodebuild clean
 	@echo "... done.\n"
 
+.PHONY: rbenv
 rbenv:
 	@echo "Installing needed ruby version if missing..."
 	@Scripts/rbenv-install.sh "./"
