@@ -208,6 +208,10 @@ final class MediaCellSize: NSObject {
     static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(constant(iOS: 84, tvOS: 120)))
     }
+    
+    static func largeList(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(120))
+    }
 }
 
 // MARK: Preview

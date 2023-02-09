@@ -239,6 +239,7 @@ extension SectionViewModel {
     
     enum SectionLayout: Hashable {
         case liveMediaGrid
+        case mediaList
         case mediaGrid
         case showGrid
         case topicGrid
@@ -401,6 +402,8 @@ private extension SectionViewModel {
             case .notifications:
                 return .notificationList
 #endif
+            case .show:
+                return .mediaList
             default:
                 return .mediaGrid
             }

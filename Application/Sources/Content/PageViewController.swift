@@ -544,58 +544,58 @@ private extension PageViewController {
                 
                 switch section.viewModelProperties.layout {
                 case .heroStage:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { layoutWidth, _ in
                         return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .highlight:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { layoutWidth, _ in
                         return HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .headline:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { layoutWidth, _ in
                         return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .element:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { layoutWidth, _ in
                         return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .elementSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { layoutWidth, _ in
                         return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
                         return MediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .liveMediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
                         return LiveMediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .showSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
                         return ShowCellSize.swimlane(for: section.properties.imageVariant)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .topicSelector:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
                         return TopicCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
@@ -614,7 +614,7 @@ private extension PageViewController {
                     }
 #if os(iOS)
                 case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
                         return ShowAccessCellSize.fullWidth()
                     }
 #endif
