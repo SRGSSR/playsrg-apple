@@ -4,7 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
+#if os(iOS)
 import ExpandableText
+#endif
 import NukeUI
 import SwiftUI
 
@@ -205,11 +207,19 @@ struct ShowHeaderView: View {
             }
             
             var body: some View {
+#if os(iOS)
                 ExpandableText(text: content, expand: $expanded)
-                    .lineLimit(lineLimit)
                     .srgFont(.body)
+                    .lineLimit(lineLimit)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.srgGray96)
+#else
+                Text(content)
+                    .srgFont(.body)
+                    .lineLimit(lineLimit)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.srgGray96)
+#endif
             }
             
             init(_ content: String, expanded: Binding<Bool>) {
