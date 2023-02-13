@@ -68,6 +68,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/ExpandableText</string>
+			<key>Title</key>
+			<string>ExpandableText</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
 			<string>Firebase (10.3.0)</string>

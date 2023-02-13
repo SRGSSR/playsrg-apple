@@ -4,8 +4,28 @@
 //  License information is available from the LICENSE file.
 //
 
+import ExpandableText
 import NukeUI
 import SwiftUI
+
+// MARK: Contract
+
+@objc protocol ShowHeaderViewAction {
+    func sizeUpdated(sender: Any?, event: SizeUpdatedEvent?)
+}
+
+class SizeUpdatedEvent: UIEvent {
+    let expanded: Bool
+    
+    init(expanded: Bool) {
+        self.expanded = expanded
+        super.init()
+    }
+    
+    override init() {
+        fatalError("init() is not available")
+    }
+}
 
 // MARK: View
 
@@ -14,26 +34,39 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow
     @StateObject private var model = ShowHeaderViewModel()
     
+    @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
+    
+    @State private var descriptionExpanded: Bool
+    
+    @FirstResponder private var firstResponder
+    
     fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
     
-    init(show: SRGShow) {
+    init(show: SRGShow, descriptionExpanded: Bool) {
         _show = .constant(show)
+        self.descriptionExpanded = descriptionExpanded
     }
     
     var body: some View {
-        MainView(model: model)
+        MainView(model: model, descriptionExpanded: $descriptionExpanded)
             .onAppear {
                 model.show = show
             }
             .onChange(of: show) { newValue in
                 model.show = newValue
             }
+            .onChange(of: descriptionExpanded) { newValue in
+                firstResponder.sendAction(#selector(ShowHeaderViewAction.sizeUpdated(sender:event:)), for: SizeUpdatedEvent(expanded: newValue))
+            }
+            .responderChain(from: firstResponder)
     }
     
     /// Behavior: h-hug, v-hug.
     fileprivate struct MainView: View {
         @ObservedObject var model: ShowHeaderViewModel
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
+        
+        @Binding var descriptionExpanded: Bool
         
         var body: some View {
             if horizontalSizeClass == .compact {
@@ -42,7 +75,7 @@ struct ShowHeaderView: View {
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .overlay(ImageOverlay(horizontalSizeClass: .compact))
                         .layoutPriority(1)
-                    DescriptionView(model: model, horizontalSizeClass: .compact)
+                    DescriptionView(model: model, horizontalSizeClass: .compact, descriptionExpanded: $descriptionExpanded)
                         .padding(.horizontal, 16)
                         .padding(.vertical)
                         .offset(y: -30)
@@ -52,10 +85,10 @@ struct ShowHeaderView: View {
             }
             else {
                 HStack(spacing: 0) {
-                    DescriptionView(model: model, horizontalSizeClass: .regular)
+                    DescriptionView(model: model, horizontalSizeClass: .regular, descriptionExpanded: $descriptionExpanded)
                         .padding(.horizontal, 16)
                         .padding(.vertical)
-                    ImageView(source: model.imageUrl)
+                    ImageView(source: model.imageUrl, contentMode: .aspectFitTop)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .overlay(ImageOverlay(horizontalSizeClass: .regular))
                 }
@@ -86,6 +119,8 @@ struct ShowHeaderView: View {
         @State var isFocused = false
 #endif
         let horizontalSizeClass: UIUserInterfaceSizeClass
+        
+        @Binding var descriptionExpanded: Bool
         
         private var stackAlignment: HorizontalAlignment {
             return (horizontalSizeClass == .compact) ? .center : .leading
@@ -120,14 +155,14 @@ struct ShowHeaderView: View {
                 }
                 if let lead = model.lead {
 #if os(iOS)
-                    LeadView(lead)
+                    LeadView(lead, expanded: $descriptionExpanded)
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
 #else
                     Button {
                         navigateToText(lead)
                     } label: {
-                        LeadView(lead)
+                        LeadView(lead, expanded: $descriptionExpanded)
                             // See above
                             .fixedSize(horizontal: false, vertical: true)
                             .onParentFocusChange { isFocused = $0 }
@@ -163,16 +198,23 @@ struct ShowHeaderView: View {
         private struct LeadView: View {
             let content: String
             
+            @Binding var expanded: Bool
+            
+            private var lineLimit: Int {
+                return !expanded ? constant(iOS: 3, tvOS: 6) : Int.max
+            }
+            
             var body: some View {
-                Text(content)
+                ExpandableText(text: content, expand: $expanded)
+                    .lineLimit(lineLimit)
                     .srgFont(.body)
-                    .lineLimit(6)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.srgGray96)
             }
             
-            init(_ content: String) {
+            init(_ content: String, expanded: Binding<Bool>) {
                 self.content = content
+                _expanded = expanded
             }
         }
     }
@@ -181,11 +223,11 @@ struct ShowHeaderView: View {
 // MARK: Size
 
 enum ShowHeaderViewSize {
-    static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, descriptionExpanded: Bool) -> NSCollectionLayoutSize {
         let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
         let model = ShowHeaderViewModel()
         model.show = show
-        let size = ShowHeaderView.MainView(model: model).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+        let size = ShowHeaderView.MainView(model: model, descriptionExpanded: .constant(descriptionExpanded)).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
     }
 }
@@ -197,17 +239,28 @@ struct ShowHeaderView_Previews: PreviewProvider {
         return model
     }()
     
+    private static let model2: ShowHeaderViewModel = {
+        let model = ShowHeaderViewModel()
+        model.show = Mock.show(.overflow)
+        return model
+    }()
+    
     static var previews: some View {
 #if os(tvOS)
-        ShowHeaderView.MainView(model: model)
+        ShowHeaderView.MainView(model: model, descriptionExpanded: .constant(false))
             .previewLayout(.sizeThatFits)
 #else
-        ShowHeaderView.MainView(model: model)
+        ShowHeaderView.MainView(model: model, descriptionExpanded: .constant(false))
             .frame(width: 1000)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .regular)
         
-        ShowHeaderView.MainView(model: model)
+        ShowHeaderView.MainView(model: model2, descriptionExpanded: .constant(false))
+            .frame(width: 1000)
+            .previewLayout(.sizeThatFits)
+            .environment(\.horizontalSizeClass, .regular)
+        
+        ShowHeaderView.MainView(model: model, descriptionExpanded: .constant(false))
             .frame(width: 375)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .compact)

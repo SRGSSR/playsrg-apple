@@ -37,6 +37,8 @@ final class SectionViewController: UIViewController {
     private var contentInsets: UIEdgeInsets
     private var leftBarButtonItem: UIBarButtonItem?
     
+    private var headerExpanded = false
+    
     private var globalHeaderTitle: String? {
 #if os(tvOS)
         return (tabBarController == nil && model.displaysTitle) ? model.title : nil
@@ -134,7 +136,7 @@ final class SectionViewController: UIViewController {
             guard let self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
+            view.content = SectionHeaderView(section: section, configuration: self.model.configuration, descriptionExpanded: self.headerExpanded)
         }
         
         let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionFooterView>>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] view, _, indexPath in
@@ -694,11 +696,12 @@ private extension SectionViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment, headerExpanded: Bool) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section,
                                                         configuration: configuration,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
-                                                        horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
+                                                        horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass,
+                                                        headerExpanded: headerExpanded)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 header.pinToVisibleBounds = configuration.viewModelProperties.pinHeadersToVisibleBounds
                 
@@ -783,7 +786,7 @@ private extension SectionViewController {
             let configuration = self.model.configuration
             
             let layoutSection = layoutSection(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment, headerExpanded: self.headerExpanded)
             layoutSection.supplementariesFollowContentInsets = false
             return layoutSection
         }, configuration: layoutConfiguration())
@@ -859,6 +862,7 @@ private extension SectionViewController {
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
         let configuration: SectionViewModel.Configuration
+        let descriptionExpanded: Bool
         
         var body: some View {
             switch section.header {
@@ -872,13 +876,13 @@ private extension SectionViewController {
                     Color.clear
                 }
             case let .show(show):
-                ShowHeaderView(show: show)
+                ShowHeaderView(show: show, descriptionExpanded: descriptionExpanded)
             case .none:
                 Color.clear
             }
         }
         
-        static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, headerExpanded: Bool) -> NSCollectionLayoutSize {
             switch section.header {
             case let .title(title):
                 return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: SectionViewController.margin, layoutWidth: layoutWidth)
@@ -890,7 +894,7 @@ private extension SectionViewController {
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
                 }
             case let .show(show):
-                return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass, descriptionExpanded: headerExpanded)
             case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
@@ -925,5 +929,14 @@ private extension SectionViewController {
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
+    }
+}
+
+extension SectionViewController: ShowHeaderViewAction {
+    func sizeUpdated(sender: Any?, event: SizeUpdatedEvent?) {
+        guard let event else { return }
+        
+        self.headerExpanded = event.expanded
+        self.collectionView.collectionViewLayout.invalidateLayout()
     }
 }
