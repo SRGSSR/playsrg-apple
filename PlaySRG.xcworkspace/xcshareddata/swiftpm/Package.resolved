@@ -55,15 +55,6 @@
       }
     },
     {
-      "identity" : "expandabletext",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SRGSSR/ExpandableText",
-      "state" : {
-        "branch" : "public-states",
-        "revision" : "02c85036ffd0a71ecff9327e4a9bf6d6f390d15c"
-      }
-    },
-    {
       "identity" : "firebase-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",

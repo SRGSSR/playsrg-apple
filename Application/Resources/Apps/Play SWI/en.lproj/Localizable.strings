@@ -365,9 +365,6 @@
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media not available yet";
 
-/* More button label */
-"More" = "More";
-
 /* Autoplay setting section footer */
 "More content is automatically played after playback of the current content ends." = "More content is automatically played after playback of the current content ends.";
 
