@@ -164,11 +164,16 @@ struct ShowHeaderView: View {
             let content: String
             
             var body: some View {
+#if os(iOS)
+            TruncableTextView(content: content, lineLimit: 3) {
+            }
+            #else
                 Text(content)
                     .srgFont(.body)
                     .lineLimit(6)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.srgGray96)
+#endif
             }
             
             init(_ content: String) {
@@ -191,26 +196,41 @@ enum ShowHeaderViewSize {
 }
 
 struct ShowHeaderView_Previews: PreviewProvider {
-    private static let model: ShowHeaderViewModel = {
+    private static let model1: ShowHeaderViewModel = {
         let model = ShowHeaderViewModel()
         model.show = Mock.show()
         return model
     }()
     
+    private static let model2: ShowHeaderViewModel = {
+        let model = ShowHeaderViewModel()
+        model.show = Mock.show(.overflow)
+        return model
+    }()
+    
     static var previews: some View {
 #if os(tvOS)
-        ShowHeaderView.MainView(model: model)
-            .previewLayout(.sizeThatFits)
+        Group {
+            ShowHeaderView.MainView(model: model1)
+            ShowHeaderView.MainView(model: model2)
+        }
+        .previewLayout(.sizeThatFits)
 #else
-        ShowHeaderView.MainView(model: model)
-            .frame(width: 1000)
-            .previewLayout(.sizeThatFits)
-            .environment(\.horizontalSizeClass, .regular)
+        Group {
+            ShowHeaderView.MainView(model: model1)
+            ShowHeaderView.MainView(model: model2)
+        }
+        .previewLayout(.sizeThatFits)
+        .frame(width: 1000)
+        .environment(\.horizontalSizeClass, .regular)
         
-        ShowHeaderView.MainView(model: model)
-            .frame(width: 375)
-            .previewLayout(.sizeThatFits)
-            .environment(\.horizontalSizeClass, .compact)
+        Group {
+            ShowHeaderView.MainView(model: model1)
+            ShowHeaderView.MainView(model: model2)
+        }
+        .frame(width: 375)
+        .previewLayout(.sizeThatFits)
+        .environment(\.horizontalSizeClass, .compact)
 #endif
     }
 }
