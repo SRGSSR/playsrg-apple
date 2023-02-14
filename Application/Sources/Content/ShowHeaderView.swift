@@ -4,11 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#if os(iOS)
-import ExpandableText
-#endif
 import NukeUI
 import SwiftUI
+
+#if os(iOS)
+import ExpandableText
+import SRGAppearanceSwift
+#endif
 
 // MARK: Contract
 
@@ -209,9 +211,9 @@ struct ShowHeaderView: View {
             var body: some View {
 #if os(iOS)
                 ExpandableText(text: content, expand: $expanded)
-                    .srgFont(.body)
+                    .expandButton(TextSet(text: NSLocalizedString("More", comment: "More button label"), font: SRGFont.font(.body), color: .white))
+                    .font(SRGFont.font(.body))
                     .lineLimit(lineLimit)
-                    .multilineTextAlignment(.leading)
                     .foregroundColor(.srgGray96)
 #else
                 Text(content)
