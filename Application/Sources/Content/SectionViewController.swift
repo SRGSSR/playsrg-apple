@@ -938,7 +938,6 @@ extension SectionViewController: ShowHeaderViewAction {
         if #available(iOS 15.0, *) {
             if let sheet = sheetTextViewController.sheetPresentationController {
                 sheet.detents = [.medium()]
-                sheet.prefersGrabberVisible = true
             }
         }
         present(sheetTextViewController, animated: true, completion: nil)

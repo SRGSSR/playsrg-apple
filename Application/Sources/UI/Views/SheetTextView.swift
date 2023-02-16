@@ -14,17 +14,45 @@ struct SheetTextView: View {
     let content: String
     
     var body: some View {
-        ScrollView(.vertical) {
-            HStack(spacing: 0) {
-                Text(content)
-                    .srgFont(.body)
-                    .foregroundColor(.srgGrayC7)
-                    .multilineTextAlignment(.leading)
-                    .padding(.horizontal, 28)
-                Spacer(minLength: 0)
+        VStack(spacing: 0) {
+            Handle()
+                .frame(height: 50)
+            ScrollView(.vertical) {
+                HStack(spacing: 0) {
+                    Text(content)
+                        .srgFont(.body)
+                        .foregroundColor(.srgGrayC7)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 28)
+                    Spacer(minLength: 0)
+                }
+            }
+            .padding(.bottom, 28)
+        }
+    }
+    
+    /// Behavior: h-exp, v-exp
+    struct Handle: View {
+        var body: some View {
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    Grabber()
+                    Spacer()
+                }
+                Spacer()
             }
         }
-        .padding(.vertical, 28)
+        
+        /// Behavior: h-hug, v-hug
+        private struct Grabber: View {
+            var body: some View {
+                RoundedRectangle(cornerRadius: 2.5)
+                    .frame(width: 38, height: 5)
+                    .foregroundColor(.srgGrayC7)
+            }
+        }
     }
 }
 
