@@ -127,9 +127,6 @@ struct ShowHeaderView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(titleAlignment)
                     .foregroundColor(.white)
-                if let broadcastInformation = model.broadcastInformation {
-                    Badge(text: broadcastInformation, color: Color(.play_green))
-                }
                 if horizontalSizeClass == .compact {
                     ExpandingButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
                         .frame(height: constant(iOS: 40, tvOS: 70))
@@ -155,6 +152,9 @@ struct ShowHeaderView: View {
                     }
                     .buttonStyle(TextButtonStyle(focused: isFocused))
 #endif
+                }
+                if let broadcastInformation = model.broadcastInformation {
+                    Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)

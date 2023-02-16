@@ -16,6 +16,13 @@ private enum BadgeMetrics {
 struct Badge: View {
     let text: String
     let color: Color
+    let textColor: Color
+    
+    init(text: String, color: Color, textColor: Color = .white) {
+        self.text = text
+        self.color = color
+        self.textColor = textColor
+    }
     
     var body: some View {
         Text(text)
@@ -23,7 +30,7 @@ struct Badge: View {
             .textCase(.uppercase)
             .lineLimit(1)
             .truncationMode(.head)
-            .foregroundColor(.white)
+            .foregroundColor(textColor)
             .padding(.vertical, constant(iOS: 2, tvOS: 5))
             .padding(.horizontal, BadgeMetrics.horizontalPadding)
             .background(color)
