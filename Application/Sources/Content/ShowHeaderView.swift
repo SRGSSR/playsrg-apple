@@ -7,6 +7,25 @@
 import NukeUI
 import SwiftUI
 
+// MARK: Contract
+
+@objc protocol ShowHeaderViewAction {
+    func showMore(sender: Any?, event: ShowMoreEvent?)
+}
+
+class ShowMoreEvent: UIEvent {
+    let content: String
+    
+    init(content: String) {
+        self.content = content
+        super.init()
+    }
+    
+    override init() {
+        fatalError("init() is not available")
+    }
+}
+
 // MARK: View
 
 /// Behavior: h-hug, v-hug
@@ -163,17 +182,23 @@ struct ShowHeaderView: View {
         private struct LeadView: View {
             let content: String
             
+            @FirstResponder private var firstResponder
+            
             var body: some View {
+                Group {
 #if os(iOS)
-            TruncableTextView(content: content, lineLimit: 3) {
-            }
-            #else
-                Text(content)
-                    .srgFont(.body)
-                    .lineLimit(6)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.srgGray96)
+                    TruncableTextView(content: content, lineLimit: 3) {
+                        firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
+                    }
+#else
+                    Text(content)
+                        .srgFont(.body)
+                        .lineLimit(6)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.srgGray96)
 #endif
+                }
+                .responderChain(from: firstResponder)
             }
             
             init(_ content: String) {
