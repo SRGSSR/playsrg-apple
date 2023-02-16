@@ -23,8 +23,8 @@ struct TruncableTextView: View {
     let showMore: () -> Void
     
     private let fontStyle: SRGFont.Style = .body
-    private let showMoreButtonString = NSLocalizedString("Show more", comment: "Show more button label")
-    private let showMoreBackgroundColor: Color = .srgGray16
+    private let moreButtonString = NSLocalizedString("More", comment: "More button label")
+    private let moreBackgroundColor: Color = .srgGray16
     
     private func text(lineLimit: Int?) -> some View {
         return Text(content)
@@ -44,30 +44,30 @@ struct TruncableTextView: View {
                 .mask(
                     VStack(spacing: 0) {
                         Rectangle()
-                            .foregroundColor(showMoreBackgroundColor)
+                            .foregroundColor(moreBackgroundColor)
                         
                         HStack(spacing: 0) {
                             Rectangle()
-                                .foregroundColor(showMoreBackgroundColor)
+                                .foregroundColor(moreBackgroundColor)
                             if isTruncated {
                                 HStack(alignment: .bottom, spacing: 0) {
                                     LinearGradient(
                                         gradient: Gradient(stops: [
-                                            Gradient.Stop(color: showMoreBackgroundColor, location: 0),
+                                            Gradient.Stop(color: moreBackgroundColor, location: 0),
                                             Gradient.Stop(color: .clear, location: 0.8)
                                         ]),
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     )
-                                    .frame(width: 32, height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
+                                    .frame(width: 32, height: moreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
                                     
                                     Rectangle()
                                         .foregroundColor(.clear)
-                                        .frame(width: showMoreButtonString.widthOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))), alignment: .center)
+                                        .frame(width: moreButtonString.widthOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))), alignment: .center)
                                 }
                             }
                         }
-                        .frame(height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
+                        .frame(height: moreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
                     }
                 )
             
@@ -75,7 +75,7 @@ struct TruncableTextView: View {
                 Button(action: {
                     showMore()
                 }, label: {
-                    Text(showMoreButtonString)
+                    Text(moreButtonString)
                         .srgFont(fontStyle)
                         .foregroundColor(.white)
                 })
