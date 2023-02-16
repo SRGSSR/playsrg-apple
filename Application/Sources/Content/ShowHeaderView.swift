@@ -33,7 +33,7 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow
     @StateObject private var model = ShowHeaderViewModel()
     
-    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
+    fileprivate static let verticalSpacing: CGFloat = 24
     
     init(show: SRGShow) {
         _show = .constant(show)
@@ -54,6 +54,8 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
+        private static let bottomPadding: CGFloat = constant(iOS: 24, tvOS: 50)
+        
         var body: some View {
             if horizontalSizeClass == .compact {
                 VStack(alignment: .center, spacing: 0) {
@@ -66,7 +68,7 @@ struct ShowHeaderView: View {
                         .padding(.vertical)
                         .offset(y: -30)
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, Self.bottomPadding)
                 .focusable()
             }
             else {
@@ -78,7 +80,7 @@ struct ShowHeaderView: View {
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .overlay(ImageOverlay(horizontalSizeClass: .regular))
                 }
-                .padding(.bottom, constant(iOS: 20, tvOS: 50))
+                .padding(.bottom, Self.bottomPadding)
                 .focusable()
             }
         }
