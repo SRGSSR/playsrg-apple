@@ -41,7 +41,14 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var broadcastInformation: String? {
-        return show?.broadcastInformation?.message
+        if let broadcastInformation = show?.broadcastInformation {
+            let nowDate = Date()
+            if nowDate >= broadcastInformation.startDate,
+               nowDate < broadcastInformation.endDate {
+                return broadcastInformation.message
+            }
+        }
+        return nil
     }
     
     var imageUrl: URL? {
