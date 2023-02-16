@@ -128,12 +128,19 @@ struct ShowHeaderView: View {
                     .multilineTextAlignment(titleAlignment)
                     .foregroundColor(.white)
                 if horizontalSizeClass == .compact {
-                    ExpandingButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
+                    ExpandingButton(icon: model.favoriteIcon,
+                                    label: model.favoriteLabel,
+                                    accessibilityLabel: model.favoriteAccessibilityLabel,
+                                    action: favoriteAction)
                         .frame(height: constant(iOS: 40, tvOS: 70))
                         .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 }
                 else {
-                    SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
+                    SimpleButton(icon: model.favoriteIcon,
+                                 label: model.favoriteLabel,
+                                 labelMinimumScaleFactor: 1,
+                                 accessibilityLabel: model.favoriteAccessibilityLabel,
+                                 action: favoriteAction)
                         .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 }
                 if let lead = model.lead {
