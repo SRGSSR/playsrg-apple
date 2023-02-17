@@ -6,10 +6,10 @@
 
 import UIKit
 
-extension UIWindowScene {
+extension UIWindow {
     var isLandscape: Bool {
 #if os(iOS)
-        return interfaceOrientation.isLandscape
+        return self.bounds.width > self.bounds.height
 #else
         return true
 #endif

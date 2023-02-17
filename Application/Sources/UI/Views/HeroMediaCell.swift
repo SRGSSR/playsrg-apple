@@ -148,7 +148,7 @@ enum HeroMediaCellSize {
         if horizontalSizeClass == .compact {
             return 9 / 11
         }
-        else if let isLandscape = UIApplication.shared.mainWindowScene?.isLandscape, isLandscape {
+        else if let isLandscape = UIApplication.shared.mainWindow?.isLandscape, isLandscape {
             return 2 / 5
         }
         else {
