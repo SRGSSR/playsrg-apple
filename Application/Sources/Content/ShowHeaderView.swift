@@ -54,40 +54,52 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
+        @State private var isLandscape: Bool
+        
+        init(model: ShowHeaderViewModel) {
+            self.model = model
+            self.isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
+        }
+        
         var body: some View {
-            if horizontalSizeClass == .compact {
-                VStack(alignment: .center, spacing: 0) {
-                    ImageView(source: model.imageUrl)
-                        .aspectRatio(16 / 9, contentMode: .fit)
-                        .overlay(ImageOverlay(horizontalSizeClass: .compact))
-                        .layoutPriority(1)
-                    DescriptionView(model: model, horizontalSizeClass: .compact)
-                        .padding(.horizontal, 16)
-                        .offset(y: -30)
+            Group {
+                if horizontalSizeClass == .compact || !isLandscape {
+                    VStack(alignment: .center, spacing: 0) {
+                        ImageView(source: model.imageUrl)
+                            .aspectRatio(16 / 9, contentMode: .fit)
+                            .overlay(ImageOverlay(isHorizontal: false))
+                            .layoutPriority(1)
+                        DescriptionView(model: model, centerLayout: horizontalSizeClass == .compact)
+                            .padding(.horizontal, 16)
+                            .offset(y: -30)
+                    }
+                    .padding(.bottom, -6)
+                    .focusable()
                 }
-                .padding(.bottom, -6)
-                .focusable()
+                else {
+                    HStack(spacing: 0) {
+                        DescriptionView(model: model, centerLayout: false)
+                            .padding(.horizontal, 16)
+                        ImageView(source: model.imageUrl)
+                            .aspectRatio(16 / 9, contentMode: .fit)
+                            .overlay(ImageOverlay(isHorizontal: true))
+                    }
+                    .padding(.bottom, constant(iOS: 24, tvOS: 50))
+                    .focusable()
+                }
             }
-            else {
-                HStack(spacing: 0) {
-                    DescriptionView(model: model, horizontalSizeClass: .regular)
-                        .padding(.horizontal, 16)
-                    ImageView(source: model.imageUrl)
-                        .aspectRatio(16 / 9, contentMode: .fit)
-                        .overlay(ImageOverlay(horizontalSizeClass: .regular))
-                }
-                .padding(.bottom, constant(iOS: 24, tvOS: 50))
-                .focusable()
+            .readSize { _ in
+                isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
             }
         }
     }
     
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
-        let horizontalSizeClass: UIUserInterfaceSizeClass
+        let isHorizontal: Bool
         
         var body: some View {
-            if horizontalSizeClass == .regular {
+            if isHorizontal {
                 LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .leading)
             }
             else {
@@ -102,14 +114,14 @@ struct ShowHeaderView: View {
 #if os(tvOS)
         @State var isFocused = false
 #endif
-        let horizontalSizeClass: UIUserInterfaceSizeClass
+        let centerLayout: Bool
         
         private var stackAlignment: HorizontalAlignment {
-            return (horizontalSizeClass == .compact) ? .center : .leading
+            return centerLayout ? .center : .leading
         }
         
         private var titleAlignment: TextAlignment {
-            return (horizontalSizeClass == .compact) ? .center : .leading
+            return centerLayout ? .center : .leading
         }
         
         var body: some View {
@@ -123,7 +135,7 @@ struct ShowHeaderView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(titleAlignment)
                     .foregroundColor(.white)
-                if horizontalSizeClass == .compact {
+                if centerLayout {
                     ExpandingButton(icon: model.favoriteIcon,
                                     label: model.favoriteLabel,
                                     accessibilityLabel: model.favoriteAccessibilityLabel,
