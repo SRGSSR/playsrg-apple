@@ -7,11 +7,15 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 /**
  *  View containing a text view that can display a "show more" button if text is troncated.
  *
  *  Borrowed from https://www.fivestars.blog/articles/trucated-text/ and https://github.com/NuPlay/ExpandableText
  */
+
+/// Behavior: h-exp, v-hug
 struct TruncableTextView: View {
     let content: String
     let lineLimit: Int?
@@ -35,61 +39,64 @@ struct TruncableTextView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottomTrailing) {
-            text(lineLimit: lineLimit)
-                .readSize { size in
-                    truncatedSize = size
-                    isTruncated = truncatedSize != intrinsicSize
-                }
-                .mask(
-                    VStack(spacing: 0) {
-                        Rectangle()
-                            .foregroundColor(showMoreBackgroundColor)
-                        
-                        HStack(spacing: 0) {
+        HStack(spacing: 0) {
+            ZStack(alignment: .bottomTrailing) {
+                text(lineLimit: lineLimit)
+                    .readSize { size in
+                        truncatedSize = size
+                        isTruncated = truncatedSize != intrinsicSize
+                    }
+                    .mask(
+                        VStack(spacing: 0) {
                             Rectangle()
                                 .foregroundColor(showMoreBackgroundColor)
-                            if isTruncated {
-                                HStack(alignment: .bottom, spacing: 0) {
-                                    LinearGradient(
-                                        gradient: Gradient(stops: [
-                                            Gradient.Stop(color: showMoreBackgroundColor, location: 0),
-                                            Gradient.Stop(color: .clear, location: 0.8)
-                                        ]),
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
-                                    .frame(width: 32, height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
-                                    
-                                    Rectangle()
-                                        .foregroundColor(.clear)
-                                        .frame(width: showMoreButtonString.widthOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))), alignment: .center)
+                            
+                            HStack(spacing: 0) {
+                                Rectangle()
+                                    .foregroundColor(showMoreBackgroundColor)
+                                if isTruncated {
+                                    HStack(alignment: .bottom, spacing: 0) {
+                                        LinearGradient(
+                                            gradient: Gradient(stops: [
+                                                Gradient.Stop(color: showMoreBackgroundColor, location: 0),
+                                                Gradient.Stop(color: .clear, location: 0.8)
+                                            ]),
+                                            startPoint: .leading,
+                                            endPoint: .trailing
+                                        )
+                                        .frame(width: 32, height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
+                                        
+                                        Rectangle()
+                                            .foregroundColor(.clear)
+                                            .frame(width: showMoreButtonString.widthOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))), alignment: .center)
+                                    }
                                 }
                             }
+                            .frame(height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
                         }
-                        .frame(height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
-                    }
-                )
-            
-            if isTruncated {
-                Button(action: {
-                    showMore()
-                }, label: {
-                    Text(showMoreButtonString)
-                        .srgFont(fontStyle)
-                        .foregroundColor(.white)
-                })
-            }
-        }
-        .background(
-            text(lineLimit: nil)
-                .fixedSize(horizontal: false, vertical: true)
-                .hidden()
-                .readSize { size in
-                    intrinsicSize = size
-                    isTruncated = truncatedSize != intrinsicSize
+                    )
+                
+                if isTruncated {
+                    Button(action: {
+                        showMore()
+                    }, label: {
+                        Text(showMoreButtonString)
+                            .srgFont(fontStyle)
+                            .foregroundColor(.white)
+                    })
                 }
-        )
+            }
+            .background(
+                text(lineLimit: nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .hidden()
+                    .readSize { size in
+                        intrinsicSize = size
+                        isTruncated = truncatedSize != intrinsicSize
+                    }
+            )
+            Spacer(minLength: 0)
+        }
     }
     
     private func fontToUIFont(font: Font) -> UIFont {
