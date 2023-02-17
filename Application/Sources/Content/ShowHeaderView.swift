@@ -15,11 +15,9 @@ import SwiftUI
 
 class ShowMoreEvent: UIEvent {
     let content: String
-    let show: SRGShow
     
-    init(content: String, show: SRGShow) {
+    init(content: String) {
         self.content = content
-        self.show = show
         super.init()
     }
     
@@ -54,14 +52,8 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug.
     fileprivate struct MainView: View {
         @ObservedObject var model: ShowHeaderViewModel
-        let withDetails: Bool
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
-        init(model: ShowHeaderViewModel, withDetails: Bool = true) {
-            self.model = model
-            self.withDetails = withDetails
-        }
-                
         var body: some View {
             if horizontalSizeClass == .compact {
                 VStack(alignment: .center, spacing: 0) {
@@ -69,7 +61,7 @@ struct ShowHeaderView: View {
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .overlay(ImageOverlay(horizontalSizeClass: .compact))
                         .layoutPriority(1)
-                    DescriptionView(model: model, withDetails: withDetails, horizontalSizeClass: .compact)
+                    DescriptionView(model: model, horizontalSizeClass: .compact)
                         .padding(.horizontal, 16)
                         .offset(y: -30)
                 }
@@ -78,7 +70,7 @@ struct ShowHeaderView: View {
             }
             else {
                 HStack(spacing: 0) {
-                    DescriptionView(model: model, withDetails: withDetails, horizontalSizeClass: .regular)
+                    DescriptionView(model: model, horizontalSizeClass: .regular)
                         .padding(.horizontal, 16)
                     ImageView(source: model.imageUrl)
                         .aspectRatio(16 / 9, contentMode: .fit)
@@ -107,7 +99,6 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
-        let withDetails: Bool
 #if os(tvOS)
         @State var isFocused = false
 #endif
@@ -148,16 +139,16 @@ struct ShowHeaderView: View {
                                  action: favoriteAction)
                     .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 }
-                if withDetails, let lead = model.lead, let show = model.show {
+                if let lead = model.lead {
 #if os(iOS)
-                    LeadView(lead, show: show)
+                    LeadView(lead)
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
 #else
                     Button {
                         navigateToText(lead)
                     } label: {
-                        LeadView(lead, show: show)
+                        LeadView(lead)
                             // See above
                             .fixedSize(horizontal: false, vertical: true)
                             .onParentFocusChange { isFocused = $0 }
@@ -165,7 +156,7 @@ struct ShowHeaderView: View {
                     .buttonStyle(TextButtonStyle(focused: isFocused))
 #endif
                 }
-                if withDetails, let broadcastInformation = model.broadcastInformation {
+                if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
                 }
             }
@@ -195,7 +186,6 @@ struct ShowHeaderView: View {
         /// Behavior: h-exp, v-hug
         private struct LeadView: View {
             let content: String
-            let show: SRGShow
             
             @FirstResponder private var firstResponder
             
@@ -203,7 +193,7 @@ struct ShowHeaderView: View {
                 Group {
 #if os(iOS)
                     TruncableTextView(content: content, lineLimit: 3) {
-                        firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content, show: show))
+                        firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
                     }
 #else
                     Text(content)
@@ -216,9 +206,8 @@ struct ShowHeaderView: View {
                 .responderChain(from: firstResponder)
             }
             
-            init(_ content: String, show: SRGShow) {
+            init(_ content: String) {
                 self.content = content
-                self.show = show
             }
         }
     }
@@ -227,11 +216,11 @@ struct ShowHeaderView: View {
 // MARK: Size
 
 enum ShowHeaderViewSize {
-    static func recommended(for show: SRGShow, withDetails: Bool = true, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
         let model = ShowHeaderViewModel()
         model.show = show
-        let size = ShowHeaderView.MainView(model: model, withDetails: withDetails).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+        let size = ShowHeaderView.MainView(model: model).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
     }
 }
@@ -268,7 +257,6 @@ struct ShowHeaderView_Previews: PreviewProvider {
         Group {
             ShowHeaderView.MainView(model: model1)
             ShowHeaderView.MainView(model: model2)
-            ShowHeaderView.MainView(model: model2, withDetails: false)
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)
