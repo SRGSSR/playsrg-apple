@@ -54,8 +54,6 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
-        private static let bottomPadding: CGFloat = constant(iOS: 24, tvOS: 50)
-        
         var body: some View {
             if horizontalSizeClass == .compact {
                 VStack(alignment: .center, spacing: 0) {
@@ -65,22 +63,20 @@ struct ShowHeaderView: View {
                         .layoutPriority(1)
                     DescriptionView(model: model, horizontalSizeClass: .compact)
                         .padding(.horizontal, 16)
-                        .padding(.vertical)
                         .offset(y: -30)
                 }
-                .padding(.bottom, Self.bottomPadding)
+                .padding(.bottom, -6)
                 .focusable()
             }
             else {
                 HStack(spacing: 0) {
                     DescriptionView(model: model, horizontalSizeClass: .regular)
                         .padding(.horizontal, 16)
-                        .padding(.vertical)
                     ImageView(source: model.imageUrl)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .overlay(ImageOverlay(horizontalSizeClass: .regular))
                 }
-                .padding(.bottom, Self.bottomPadding)
+                .padding(.bottom, constant(iOS: 24, tvOS: 50))
                 .focusable()
             }
         }
