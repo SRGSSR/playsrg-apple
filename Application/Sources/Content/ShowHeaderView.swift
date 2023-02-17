@@ -128,8 +128,8 @@ struct ShowHeaderView: View {
                                     label: model.favoriteLabel,
                                     accessibilityLabel: model.favoriteAccessibilityLabel,
                                     action: favoriteAction)
-                        .frame(height: constant(iOS: 40, tvOS: 70))
-                        .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                    .frame(height: constant(iOS: 40, tvOS: 70))
+                    .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 }
                 else {
                     SimpleButton(icon: model.favoriteIcon,
@@ -137,7 +137,7 @@ struct ShowHeaderView: View {
                                  labelMinimumScaleFactor: 1,
                                  accessibilityLabel: model.favoriteAccessibilityLabel,
                                  action: favoriteAction)
-                        .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                    .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 }
                 if let lead = model.lead {
 #if os(iOS)
