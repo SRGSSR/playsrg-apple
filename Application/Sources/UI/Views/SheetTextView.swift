@@ -29,6 +29,7 @@ struct SheetTextView: View {
             }
             .padding(.bottom, 28)
         }
+        .background(Color.srgGray23)
     }
     
     /// Behavior: h-exp, v-exp

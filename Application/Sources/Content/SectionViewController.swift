@@ -934,7 +934,6 @@ extension SectionViewController: ShowHeaderViewAction {
         guard let event else { return }
         
         let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
-        sheetTextViewController.view.backgroundColor = .srgGray23
         if #available(iOS 15.0, *) {
             if let sheet = sheetTextViewController.sheetPresentationController {
                 if #available(iOS 16.0, *) {
