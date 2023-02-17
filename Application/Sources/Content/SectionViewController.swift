@@ -937,7 +937,26 @@ extension SectionViewController: ShowHeaderViewAction {
         sheetTextViewController.view.backgroundColor = .srgGray23
         if #available(iOS 15.0, *) {
             if let sheet = sheetTextViewController.sheetPresentationController {
-                sheet.detents = [.medium()]
+                if #available(iOS 16.0, *) {
+                    let showMoreDetent = UISheetPresentationController.Detent.custom(identifier: nil, resolver: { context in
+                        if context.containerTraitCollection.horizontalSizeClass == .compact {
+                            let showHeaderSize = ShowHeaderViewSize.recommended(for: event.show, withDetails: false, layoutWidth: self.view.bounds.width, horizontalSizeClass: context.containerTraitCollection.horizontalSizeClass)
+                            let detentValue = self.view.bounds.height
+                            - (self.navigationController?.navigationBar.frame.height ?? 0)
+                            - showHeaderSize.heightDimension.dimension
+                            - self.view.safeAreaInsets.bottom
+                            
+                            return min(detentValue, context.maximumDetentValue)
+                        }
+                        else {
+                            return context.maximumDetentValue / 2
+                        }
+                    })
+                    sheet.detents = [showMoreDetent]
+                }
+                else {
+                    sheet.detents = [.medium()]
+                }
             }
         }
         present(sheetTextViewController, animated: true, completion: nil)
