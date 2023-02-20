@@ -37,7 +37,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var lead: String? {
-        return show?.lead
+        return show?.lead?.isEmpty ?? true ? show?.summary : show?.lead
     }
     
     var broadcastInformation: String? {
