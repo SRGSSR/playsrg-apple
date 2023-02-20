@@ -68,12 +68,12 @@ platform :ios do
         display_name_suffix: nightly_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
         build_name: nightly_build_name(branch_name),
-        platform: platform
+        platform:
       )
 
       appcenter_lane(
         appname: appcenter_ios_nightly_appcenter_names[index],
-        destinations: ENV['PLAY_NIGHTLY_APPCENTER_DESTINATIONS'],
+        destinations: ENV.fetch('PLAY_NIGHTLY_APPCENTER_DESTINATIONS', nil),
         notes: nightly_changelog(platform, service)
       )
 
@@ -102,7 +102,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_nightly_identifiers,
-      group_name: ENV['ITUNES_CONNECT_TF_GROUPS']
+      group_name: ENV.fetch('ITUNES_CONNECT_TF_GROUPS', nil)
     )
   end
 
@@ -120,12 +120,12 @@ platform :ios do
         scheme: ios_application_schemes[index],
         display_name_suffix: ' 🎯',
         version_suffix: '-beta',
-        platform: platform
+        platform:
       )
 
       appcenter_lane(
         appname: appcenter_ios_beta_appcenter_names[index],
-        destinations: ENV['PLAY_BETA_APPCENTER_DESTINATIONS'],
+        destinations: ENV.fetch('PLAY_BETA_APPCENTER_DESTINATIONS', nil),
         notes: what_s_new_for_beta(platform, nil),
         notify_testers: true
       )
@@ -155,7 +155,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_beta_identifiers,
-      group_name: ENV['ITUNES_CONNECT_TF_GROUPS']
+      group_name: ENV.fetch('ITUNES_CONNECT_TF_GROUPS', nil)
     )
   end
 
@@ -729,7 +729,7 @@ platform :ios do
         display_name_suffix: nightly_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
         build_name: nightly_build_name(branch_name),
-        platform: platform,
+        platform:,
         export_to_appstore: true
       )
 
@@ -777,7 +777,7 @@ platform :ios do
         scheme: schemes[index],
         display_name_suffix: ' 🎯',
         version_suffix: '-beta',
-        platform: platform,
+        platform:,
         export_to_appstore: true
       )
 
@@ -825,8 +825,8 @@ platform :ios do
 
     build_lane(
       configuration: 'AppStore',
-      scheme: scheme,
-      platform: platform,
+      scheme:,
+      platform:,
       export_to_appstore: true
     )
 
@@ -900,9 +900,9 @@ platform :ios do
       export_method: options[:export_to_appstore] ? 'app-store' : 'enterprise',
       include_bitcode: false,
       export_team_id: options[:team_id],
-      destination: destination,
-      derived_data_path: derived_data_path,
-      output_directory: output_directory
+      destination:,
+      derived_data_path:,
+      output_directory:
     )
   end
 
@@ -912,9 +912,9 @@ platform :ios do
 
     if options[:upload_dsym]
       appcenter_upload(
-        api_token: ENV['PLAY_APPCENTER_TOKEN'],
+        api_token: ENV.fetch('PLAY_APPCENTER_TOKEN', nil),
         owner_type: 'organization',
-        owner_name: ENV['PLAY_APPCENTER_OWNER'],
+        owner_name: ENV.fetch('PLAY_APPCENTER_OWNER', nil),
         app_name: options[:appname],
         release_notes: options[:notes],
         upload_dsym_only: true,
@@ -922,9 +922,9 @@ platform :ios do
       )
     else
       appcenter_upload(
-        api_token: ENV['PLAY_APPCENTER_TOKEN'],
+        api_token: ENV.fetch('PLAY_APPCENTER_TOKEN', nil),
         owner_type: 'organization',
-        owner_name: ENV['PLAY_APPCENTER_OWNER'],
+        owner_name: ENV.fetch('PLAY_APPCENTER_OWNER', nil),
         app_name: options[:appname],
         release_notes: options[:notes],
         destination_type: 'group',
@@ -943,7 +943,7 @@ platform :ios do
     UI.message "Preparing invitations to #{email}. 📩"
 
     app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
-    group_name = options[:group_name] || ENV['ITUNES_CONNECT_TF_GROUPS']
+    group_name = options[:group_name] || ENV.fetch('ITUNES_CONNECT_TF_GROUPS', nil)
 
     spaceship_login
 
@@ -1062,15 +1062,21 @@ def derived_data_path
 end
 
 def appcenter_ios_nightly_appcenter_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_NIGHTLY_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_NIGHTLY_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_tvos_nightly_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_NIGHTLY_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_TV_NIGHTLY_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_ios_nightly_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_IOS_NIGHTLY_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_IOS_NIGHTLY_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_testflight_nightly_names(platform)
@@ -1084,15 +1090,21 @@ def appcenter_testflight_nightly_names(platform)
 end
 
 def appcenter_ios_beta_appcenter_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_BETA_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_BETA_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_tvos_beta_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_BETA_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_TV_BETA_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_ios_beta_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_IOS_BETA_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_IOS_BETA_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_testflight_beta_names(platform)
@@ -1106,11 +1118,15 @@ def appcenter_testflight_beta_names(platform)
 end
 
 def appcenter_tvos_appstore_build_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_APPSTORE_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_TV_APPSTORE_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_ios_appstore_build_names
-  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_APPSTORE_APPCENTER_APPNAME"] }
+  business_units.map do |business_unit|
+    ENV.fetch("PLAY_#{business_unit}_APPSTORE_APPCENTER_APPNAME", nil)
+  end
 end
 
 def appcenter_appstore_build_names(platform)
@@ -1125,18 +1141,18 @@ end
 
 def appstore_nightly_identifiers
   business_units.map do |business_unit|
-    ENV["ITUNES_CONNECT_NIGHLTY_#{business_unit}_APP_IDENTIFIER"]
+    ENV.fetch("ITUNES_CONNECT_NIGHLTY_#{business_unit}_APP_IDENTIFIER", nil)
   end
 end
 
 def appstore_beta_identifiers
   business_units.map do |business_unit|
-    ENV["ITUNES_CONNECT_BETA_#{business_unit}_APP_IDENTIFIER"]
+    ENV.fetch("ITUNES_CONNECT_BETA_#{business_unit}_APP_IDENTIFIER", nil)
   end
 end
 
 def appstore_build_identifiers
-  business_units.map { |business_unit| ENV["#{business_unit}_APP_IDENTIFIER"] }
+  business_units.map { |business_unit| ENV.fetch("#{business_unit}_APP_IDENTIFIER", nil) }
 end
 
 def itc_business_units
@@ -1148,7 +1164,7 @@ end
 
 def itc_team_ids
   itc_business_units.map do |itc_business_unit|
-    ENV["#{itc_business_unit}_ITUNES_CONNECT_TEAM_ID"]
+    ENV.fetch("#{itc_business_unit}_ITUNES_CONNECT_TEAM_ID", nil)
   end
 end
 
@@ -1266,7 +1282,7 @@ def release_notes_to_html(text)
     if line.start_with?('-')
       output += "<ul>\n" unless in_list
       in_list = true
-      output += "<li>#{line[1..-1].strip}</li>\n"
+      output += "<li>#{line[1..].strip}</li>\n"
     else
       output += "</ul>\n" if in_list
       in_list = false
@@ -1414,9 +1430,11 @@ def srg_app_store_connect_api_key(business_unit = nil)
   return unless key_prefix
 
   folder_path = Dir.chdir('..') { Dir.pwd }
-  { id: ENV["#{key_prefix}_APPSTORE_CONNECT_API_KEY_ID"],
-    issuerId: ENV["#{key_prefix}_APPSTORE_CONNECT_API_KEY_ISSUER_ID"],
-    filePath: "#{folder_path}/Configuration/#{ENV["#{key_prefix}_APPSTORE_CONNECT_API_KEY_PATH"]}" }
+  { id: ENV.fetch("#{key_prefix}_APPSTORE_CONNECT_API_KEY_ID", nil),
+    issuerId: ENV.fetch("#{key_prefix}_APPSTORE_CONNECT_API_KEY_ISSUER_ID", nil),
+    filePath: "#{folder_path}/Configuration/#{ENV.fetch(
+      "#{key_prefix}_APPSTORE_CONNECT_API_KEY_PATH", nil
+    )}" }
 end
 
 def login_with_app_store_connect_api_key
@@ -1438,7 +1456,7 @@ def pilot_fast_upload(app_identifier, platform)
 
   login_with_app_store_connect_api_key
   pilot(
-    app_identifier: app_identifier,
+    app_identifier:,
     app_platform: appstore_platform(platform),
     skip_waiting_for_build_processing: true
   )
@@ -1458,22 +1476,26 @@ rescue StandardError => e
 end
 
 def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
-  groups = is_public_beta ? ENV['ITUNES_CONNECT_TF_PUBLIC_GROUPS'] : ENV['ITUNES_CONNECT_TF_GROUPS']
+  groups = ENV.fetch(testflight_group_key(is_public_beta), nil)
 
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
-    app_identifier: app_identifier,
+    app_identifier:,
     app_platform: appstore_platform(platform),
     app_version: marketing_version_from_tag_version(tag_version),
     build_number: build_number_from_tag_version(tag_version),
-    changelog: changelog,
+    changelog:,
     distribute_external: true,
-    groups: groups,
+    groups:,
     notify_external_testers: true,
     demo_account_required: false,
-    beta_app_review_info: beta_app_review_info
+    beta_app_review_info:
   )
+end
+
+def testflight_group_key(is_public_beta)
+  is_public_beta ? 'ITUNES_CONNECT_TF_PUBLIC_GROUPS' : 'ITUNES_CONNECT_TF_GROUPS'
 end
 
 def upload_appcenter_dsyms(appcenter_appname)
@@ -1504,8 +1526,8 @@ def latest_appcenter_build_number(app_names)
   build_number = 0
   app_names.each_index do |index|
     number = Integer(appcenter_fetch_version_number(
-      api_token: ENV['PLAY_APPCENTER_TOKEN'],
-      owner_name: ENV['PLAY_APPCENTER_OWNER'],
+      api_token: ENV.fetch('PLAY_APPCENTER_TOKEN', nil),
+      owner_name: ENV.fetch('PLAY_APPCENTER_OWNER', nil),
       app_name: app_names[index]
     )['build_number'])
 
@@ -1540,8 +1562,8 @@ def screenshots(platform, business_unit)
     scheme: screenshots_scheme(platform, business_unit),
     languages: [device_language(business_unit)],
     devices: snapshot_devices(platform),
-    derived_data_path: derived_data_path,
-    output_directory: output_directory
+    derived_data_path:,
+    output_directory:
   )
 end
 
@@ -1580,7 +1602,7 @@ def can_upload_testflight_build(app_identifier, platform, tag_version)
   login_with_app_store_connect_api_key
   appstore_build_number = latest_testflight_build_number(
     platform: appstore_platform(platform),
-    app_identifier: app_identifier
+    app_identifier:
   )
 
   (appstore_build_number < build_number.to_i)
@@ -1604,9 +1626,9 @@ def srg_deliver(platform, tag_version, metadata_path, submit_for_review)
     build_number: build_number_from_tag_version(tag_version),
     skip_binary_upload: true,
     skip_screenshots: true,
-    metadata_path: metadata_path,
+    metadata_path:,
     precheck_include_in_app_purchases: false,
-    submit_for_review: submit_for_review,
+    submit_for_review:,
     submission_information: { add_id_info_uses_idfa: false },
     automatic_release: true,
     force: true # Don't stop to wait manual preview
@@ -1710,7 +1732,7 @@ def bump_build_number_beta_workflow(platform)
   tag = srg_tag(platform)
 
   git_pull(only_tags: true)
-  if git_tag_exists(tag: tag)
+  if git_tag_exists(tag:)
     UI.important "Tag \"#{tag}\" already exists. Probably done by an other build (to AppCenter, to TestFlight or did it manually). ⚠️"
   else
     srg_add_tag_and_bump_build_number(platform, tag)
@@ -1719,7 +1741,7 @@ def bump_build_number_beta_workflow(platform)
 end
 
 def srg_add_tag_and_bump_build_number(platform, tag)
-  add_git_tag(tag: tag)
+  add_git_tag(tag:)
   bump_build_number_commit(platform)
   git_pull(rebase: true)
   push_to_git_remote
@@ -1741,10 +1763,10 @@ end
 
 def beta_app_review_info
   {
-    contact_email: ENV['ITUNES_CONNECT_REVIEW_EMAIL'],
-    contact_first_name: ENV['ITUNES_CONNECT_REVIEW_FIRST_NAME'],
-    contact_last_name: ENV['ITUNES_CONNECT_REVIEW_LAST_NAME'],
-    contact_phone: ENV['ITUNES_CONNECT_REVIEW_PHONE']
+    contact_email: ENV.fetch('ITUNES_CONNECT_REVIEW_EMAIL', nil),
+    contact_first_name: ENV.fetch('ITUNES_CONNECT_REVIEW_FIRST_NAME', nil),
+    contact_last_name: ENV.fetch('ITUNES_CONNECT_REVIEW_LAST_NAME', nil),
+    contact_phone: ENV.fetch('ITUNES_CONNECT_REVIEW_PHONE', nil)
   }
 end
 
@@ -1832,7 +1854,7 @@ def spaceship_delete_tester(app, tester)
 end
 
 def spaceship_new_tester(email, first_name, last_name)
-  { email: email, firstName: first_name, lastName: last_name }
+  { email:, firstName: first_name, lastName: last_name }
 end
 
 def spaceship_add_tester(group, email, first_name, last_name)
@@ -1846,7 +1868,7 @@ end
 
 def spaceship_app_latest_known_version(platform, app)
   includes = Spaceship::ConnectAPI::AppStoreVersion::ESSENTIAL_INCLUDES
-  app.get_latest_app_store_version(platform: spaceship_platform(platform), includes: includes)
+  app.get_latest_app_store_version(platform: spaceship_platform(platform), includes:)
 end
 
 def publish_on_github_pages(output_directory, releases_directory)
@@ -1873,7 +1895,7 @@ def slack_beta_release(platform, tag_version)
 
   slack(
     message: "#{platform_emoji(platform)} Welcome to the latest Play #{platform} beta 🎯",
-    channel: ENV['SLACK_CHANNEL'],
+    channel: ENV.fetch('SLACK_CHANNEL', nil),
     default_payloads: [],
     payload: slack_payload(platform, tag_version),
     attachment_properties: {
@@ -1908,7 +1930,7 @@ def jira_issues_url(platform, marketing_version)
   return 'NaN' unless ENV['JIRA_URL']
 
   jira_issues_query = "fixVersion%20%3D%20%22Play%20#{platform}%20#{marketing_version}%22"
-  "#{ENV['JIRA_URL']}/issues/?jql=#{jira_issues_query}"
+  "#{ENV.fetch('JIRA_URL', nil)}/issues/?jql=#{jira_issues_query}"
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
