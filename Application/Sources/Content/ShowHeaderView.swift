@@ -58,7 +58,7 @@ struct ShowHeaderView: View {
         
         init(model: ShowHeaderViewModel) {
             self.model = model
-            self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
+            self.isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
         }
         
         var body: some View {
@@ -89,7 +89,7 @@ struct ShowHeaderView: View {
                 }
             }
             .readSize { _ in
-                isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
+                isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
             }
         }
     }
