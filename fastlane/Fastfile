@@ -1740,7 +1740,7 @@ def bump_build_number_beta_workflow(platform)
 end
 
 def srg_add_tag_and_bump_build_number(platform, tag)
-  add_git_tag(tag:)
+  add_git_tag(tag:, sign: true)
   bump_build_number_commit(platform)
   git_pull(rebase: true)
   push_to_git_remote
