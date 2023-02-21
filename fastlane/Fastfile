@@ -1476,8 +1476,6 @@ rescue StandardError => e
 end
 
 def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
-  groups = ENV.fetch(testflight_group_key(is_public_beta), nil)
-
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
@@ -1487,15 +1485,16 @@ def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_pu
     build_number: build_number_from_tag_version(tag_version),
     changelog:,
     distribute_external: true,
-    groups:,
+    groups: testflight_groups(is_public_beta),
     notify_external_testers: true,
     demo_account_required: false,
     beta_app_review_info:
   )
 end
 
-def testflight_group_key(is_public_beta)
-  is_public_beta ? 'ITUNES_CONNECT_TF_PUBLIC_GROUPS' : 'ITUNES_CONNECT_TF_GROUPS'
+def testflight_groups(is_public_beta)
+  groups_key = is_public_beta ? 'ITUNES_CONNECT_TF_PUBLIC_GROUPS' : 'ITUNES_CONNECT_TF_GROUPS'
+  ENV.fetch(groups_key, nil)
 end
 
 def upload_appcenter_dsyms(appcenter_appname)
