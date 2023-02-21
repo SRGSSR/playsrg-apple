@@ -52,11 +52,11 @@
 		04C2DE7F2937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE802937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE812937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
-		04D21DBC299BEB42009CEA15 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04D21DBD299BEB42009CEA15 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04D21DBE299BEB42009CEA15 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04D21DBF299BEB42009CEA15 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04D21DC0299BEB42009CEA15 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
+		04D21DBC299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DBD299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DBE299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DBF299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DC0299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
 		04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
@@ -117,11 +117,11 @@
 		04F184EF28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
 		04F184F028F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
 		04F184F128F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
-		04FE629F29A4F2AF00628570 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04FE62A029A4F2B000628570 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04FE62A129A4F2B100628570 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04FE62A229A4F2B100628570 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
-		04FE62A329A4F2B200628570 /* TruncableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */; };
+		04FE629F29A4F2AF00628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A029A4F2B000628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A129A4F2B100628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A229A4F2B100628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A329A4F2B200628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
 		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
@@ -2727,7 +2727,7 @@
 		0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsHiddenEvent.swift; sourceTree = "<group>"; };
 		04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClickEvent.swift; sourceTree = "<group>"; };
-		04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruncableTextView.swift; sourceTree = "<group>"; };
+		04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruncatableTextView.swift; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
@@ -4778,7 +4778,7 @@
 				6FE14E6A263EA9B5004AD913 /* TitleView.swift */,
 				6FDFD88B24E6BC9200F20382 /* TopicCell.swift */,
 				6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */,
-				04D21DBB299BEB42009CEA15 /* TruncableTextView.swift */,
+				04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */,
 				6FDAAD93283283EB008E2806 /* WebView.swift */,
 			);
 			path = Views;
@@ -8436,7 +8436,7 @@
 				6F978B512849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F33E60D2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6FDEC19226DE307E0020A03F /* PresenterMode.swift in Sources */,
-				04D21DBC299BEB42009CEA15 /* TruncableTextView.swift in Sources */,
+				04D21DBC299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0827DA251F0D437400A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6F33443428642A8B00E664F1 /* MediaSearchSettings.swift in Sources */,
 				6F0850F426256A7700B4E410 /* Reachability.m in Sources */,
@@ -8755,7 +8755,7 @@
 				6F49EF94263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD95283283EB008E2806 /* WebView.swift in Sources */,
 				04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */,
-				04D21DBD299BEB42009CEA15 /* TruncableTextView.swift in Sources */,
+				04D21DBD299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5C271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
@@ -9011,7 +9011,7 @@
 				6F49EF95263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD96283283EB008E2806 /* WebView.swift in Sources */,
 				04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */,
-				04D21DBE299BEB42009CEA15 /* TruncableTextView.swift in Sources */,
+				04D21DBE299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5D271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9267,7 +9267,7 @@
 				6F49EF96263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD97283283EB008E2806 /* WebView.swift in Sources */,
 				04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */,
-				04D21DBF299BEB42009CEA15 /* TruncableTextView.swift in Sources */,
+				04D21DBF299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5E271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9453,7 +9453,7 @@
 				6F9122C31DC8708400725EEB /* PlayErrors.m in Sources */,
 				6F573D0826D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
-				04D21DC0299BEB42009CEA15 /* TruncableTextView.swift in Sources */,
+				04D21DC0299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				6FD4C2E5268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F2F556F27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				6FE862702657C5F30061D3F0 /* MoreCell.swift in Sources */,
@@ -9690,7 +9690,7 @@
 				6F6CD8622865767700DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FC413D524EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				6FA8E57F261CB791003FFDCF /* DataViewController.m in Sources */,
-				04FE629F29A4F2AF00628570 /* TruncableTextView.swift in Sources */,
+				04FE629F29A4F2AF00628570 /* TruncatableTextView.swift in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FA8257AAF240077322C /* NSBundle+PlaySRG.m in Sources */,
 				6FD1EF3C2861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -9837,7 +9837,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04FE62A029A4F2B000628570 /* TruncableTextView.swift in Sources */,
+				04FE62A029A4F2B000628570 /* TruncatableTextView.swift in Sources */,
 				6FE86F722719C4CC0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B324F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AB2541647400A28E79 /* Colors.swift in Sources */,
@@ -9990,7 +9990,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04FE62A129A4F2B100628570 /* TruncableTextView.swift in Sources */,
+				04FE62A129A4F2B100628570 /* TruncatableTextView.swift in Sources */,
 				6FE86F732719C4CC0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B424F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AC2541647400A28E79 /* Colors.swift in Sources */,
@@ -10143,7 +10143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04FE62A229A4F2B100628570 /* TruncableTextView.swift in Sources */,
+				04FE62A229A4F2B100628570 /* TruncatableTextView.swift in Sources */,
 				6FE86F742719C4CD0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B524F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AD2541647400A28E79 /* Colors.swift in Sources */,
@@ -10353,7 +10353,7 @@
 				6F3CCEA226CAC7A2004039E2 /* Blur.swift in Sources */,
 				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				0825914927285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
-				04FE62A329A4F2B200628570 /* TruncableTextView.swift in Sources */,
+				04FE62A329A4F2B200628570 /* TruncatableTextView.swift in Sources */,
 				6F73BFBF26563C830032D742 /* Content.swift in Sources */,
 				6FCE7AC9260367B90037A861 /* HostViews.swift in Sources */,
 				6F9ABCE42813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,

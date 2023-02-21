@@ -193,7 +193,7 @@ struct ShowHeaderView: View {
             @FirstResponder private var firstResponder
             
             var body: some View {
-                TruncableTextView(content: content, lineLimit: 3) {
+                TruncatableTextView(content: content, lineLimit: 3) {
                     firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
                 }
                 .responderChain(from: firstResponder)

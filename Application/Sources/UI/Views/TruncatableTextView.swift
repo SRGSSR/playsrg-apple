@@ -16,7 +16,7 @@ import SwiftUI
  */
 
 /// Behavior: h-exp, v-hug
-struct TruncableTextView: View {
+struct TruncatableTextView: View {
     let content: String
     let lineLimit: Int?
     
@@ -181,8 +181,8 @@ struct TruncableTextView: View {
 struct TruncableTextView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            TruncableTextView(content: "Short description.", lineLimit: 3) {}
-            TruncableTextView(content: String.loremIpsum, lineLimit: 3) {}
+            TruncatableTextView(content: "Short description.", lineLimit: 3) {}
+            TruncatableTextView(content: String.loremIpsum, lineLimit: 3) {}
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)
