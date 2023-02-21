@@ -13,7 +13,7 @@ import SwiftUI
 struct SimpleButton: View {
     private let icon: String
     private let label: String?
-    private let labelMinimumScaleFactor: CGFloat
+    private let labelMinimumScaleFactor: CGFloat?
     private let accessibilityLabel: String
     private let accessibilityHint: String?
     private let action: () -> Void
@@ -23,7 +23,7 @@ struct SimpleButton: View {
     init(icon: String, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = nil
-        self.labelMinimumScaleFactor = 1
+        self.labelMinimumScaleFactor = nil
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityHint = accessibilityHint
         self.action = action
@@ -45,7 +45,7 @@ struct SimpleButton: View {
                 if let label {
                     Text(label)
                         .srgFont(.button)
-                        .minimumScaleFactor(labelMinimumScaleFactor)
+                        .minimumScaleFactor(labelMinimumScaleFactor ?? 1)
                         .lineLimit(1)
                 }
             }
