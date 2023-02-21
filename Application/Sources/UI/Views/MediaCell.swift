@@ -149,8 +149,8 @@ struct MediaCell: View {
         }
         
         private var summary: String? {
-            guard horizontalSizeClass == .regular else { return nil }
-            guard style == .dateAndSummary else { return nil }
+            guard horizontalSizeClass == .regular, style == .dateAndSummary else { return nil }
+            
             guard let media else { return .placeholder(length: 15) }
             return MediaDescription.summary(for: media)
         }
@@ -192,7 +192,7 @@ struct MediaCell: View {
                     .lineLimit(titleLineLimit)
                     .foregroundColor(.srgGrayC7)
                     .layoutPriority(1)
-                if style == .dateAndSummary, let summary {
+                if let summary {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(2)
