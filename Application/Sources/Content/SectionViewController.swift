@@ -722,8 +722,7 @@ private extension SectionViewController {
                         }
                     }
                     else {
-                        // MediaPlayerViewController metadata max width is 564 points.
-                        let spacing = (layoutWidth - 564) / 4
+                        let spacing = (layoutWidth - LayoutMaxListWidth) / 4
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { layoutWidth, _ in
                             return MediaCellSize.largeList(layoutWidth: layoutWidth)
                         }

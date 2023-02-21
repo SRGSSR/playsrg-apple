@@ -14,6 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 OBJC_EXPORT const CGFloat LayoutMaxListWidth API_AVAILABLE(tvos(14.0));
 
 /**
+ *  The standard maximum list width on iOS and iPadOS.
+ */
+OBJC_EXPORT const CGFloat LayoutMaxListWidth API_AVAILABLE(ios(14.1));
+
+/**
  *  Standard corner radius constants.
  */
 OBJC_EXPORT const CGFloat LayoutStandardLabelCornerRadius;

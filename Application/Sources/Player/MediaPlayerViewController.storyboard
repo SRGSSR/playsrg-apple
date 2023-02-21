@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -674,6 +674,7 @@
                         <outlet property="livestreamButtonImageView" destination="Lud-EO-TIz" id="laS-wA-W8i"/>
                         <outlet property="livestreamView" destination="96L-N2-RWf" id="Hgh-N7-oCr"/>
                         <outlet property="metadataHeightConstraint" destination="Zzw-0L-BQe" id="kTv-BV-f8P"/>
+                        <outlet property="metadataWidthConstraint" destination="zQ4-zw-c1F" id="cqx-G2-Zdo"/>
                         <outlet property="moreEpisodesLabel" destination="n6K-Dg-J9D" id="uWX-iH-vOI"/>
                         <outlet property="multiAudioImageView" destination="aeL-66-EET" id="jnS-8h-Ajc"/>
                         <outlet property="playerAspectRatioConstraint" destination="sHT-jJ-Lxy" id="sae-Wk-L16"/>
