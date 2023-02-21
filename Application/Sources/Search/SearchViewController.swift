@@ -598,7 +598,7 @@ private extension SearchViewController {
                 switch section {
                 case .medias:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
@@ -608,7 +608,7 @@ private extension SearchViewController {
                         }
                     }
                 case .mostSearchedShows, .shows:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
                         return ShowCellSize.swimlane(for: .default)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary

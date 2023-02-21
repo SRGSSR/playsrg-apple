@@ -717,14 +717,14 @@ private extension SectionViewController {
                 case .mediaList:
 #if os(iOS)
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing, top: top) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
                     else {
                         // MediaPlayerViewController metadata max width is 564 points.
                         let spacing = (layoutWidth - 564) / 4
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: spacing, top: top) { layoutWidth, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { layoutWidth, _ in
                             return MediaCellSize.largeList(layoutWidth: layoutWidth)
                         }
                     }
@@ -735,7 +735,7 @@ private extension SectionViewController {
 #endif
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing, top: top) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
@@ -759,7 +759,7 @@ private extension SectionViewController {
 #if os(iOS)
                 case .downloadGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing, top: top) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
                             return DownloadCellSize.fullWidth()
                         }
                     }
@@ -769,7 +769,7 @@ private extension SectionViewController {
                         }
                     }
                 case .notificationList:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalSpacing: Self.itemSpacing, top: top) { _, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
                         return NotificationCellSize.fullWidth()
                     }
 #endif

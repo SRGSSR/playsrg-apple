@@ -345,11 +345,11 @@ extension UIHostingController {
 extension NSCollectionLayoutSection {
     typealias CellSizer = (_ layoutWidth: CGFloat, _ spacing: CGFloat) -> NSCollectionLayoutSize
     
-    static func horizontal(layoutWidth: CGFloat, horizontalSpacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
-        let horizontalMargin = constant(iOS: 2 * horizontalSpacing, tvOS: 0)
+    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
+        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
         
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
-        let cellSize = cellSizer(effectiveLayoutWidth, horizontalSpacing)
+        let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
