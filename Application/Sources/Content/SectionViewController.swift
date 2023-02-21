@@ -928,11 +928,11 @@ private extension SectionViewController {
     }
 }
 
-#if os(iOS)
 extension SectionViewController: ShowHeaderViewAction {
     func showMore(sender: Any?, event: ShowMoreEvent?) {
         guard let event else { return }
         
+#if os(iOS)
         let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
         if #available(iOS 15.0, *) {
             if let sheet = sheetTextViewController.sheetPresentationController {
@@ -940,6 +940,8 @@ extension SectionViewController: ShowHeaderViewAction {
             }
         }
         present(sheetTextViewController, animated: true, completion: nil)
+#else
+        navigateToText(event.content)
+#endif
     }
 }
-#endif

@@ -111,9 +111,6 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
-#if os(tvOS)
-        @State var isFocused = false
-#endif
         let centerLayout: Bool
         
         private var stackAlignment: HorizontalAlignment {
@@ -157,15 +154,9 @@ struct ShowHeaderView: View {
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
 #else
-                    Button {
-                        navigateToText(lead)
-                    } label: {
                         LeadView(lead)
                             // See above
                             .fixedSize(horizontal: false, vertical: true)
-                            .onParentFocusChange { isFocused = $0 }
-                    }
-                    .buttonStyle(TextButtonStyle(focused: isFocused))
 #endif
                 }
                 if let broadcastInformation = model.broadcastInformation {
@@ -202,18 +193,8 @@ struct ShowHeaderView: View {
             @FirstResponder private var firstResponder
             
             var body: some View {
-                Group {
-#if os(iOS)
-                    TruncableTextView(content: content, lineLimit: 3) {
-                        firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
-                    }
-#else
-                    Text(content)
-                        .srgFont(.body)
-                        .lineLimit(6)
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(.srgGray96)
-#endif
+                TruncableTextView(content: content, lineLimit: 3) {
+                    firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
                 }
                 .responderChain(from: firstResponder)
             }
