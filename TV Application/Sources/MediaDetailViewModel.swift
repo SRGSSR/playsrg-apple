@@ -25,12 +25,13 @@ final class MediaDetailViewModel: ObservableObject {
                 guard let media else {
                     return Just(MediaData.empty).eraseToAnyPublisher()
                 }
-                return Publishers.CombineLatest(
+                return Publishers.CombineLatest3(
                     UserDataPublishers.laterAllowedActionPublisher(for: media),
+                    UserDataPublishers.playbackProgressPublisher(for: media),
                     Self.relatedMediasPublisher(for: media, from: self?.mediaData ?? .empty)
                 )
-                .map { action, relatedMedias in
-                    return MediaData(media: media, watchLaterAllowedAction: action, relatedMedias: relatedMedias)
+                .map { action, progress, relatedMedias in
+                    return MediaData(media: media, watchLaterAllowedAction: action, canBeDeletedFromHistory: progress != nil, relatedMedias: relatedMedias)
                 }
                 .eraseToAnyPublisher()
             }
@@ -61,6 +62,10 @@ final class MediaDetailViewModel: ObservableObject {
         return mediaData.watchLaterAllowedAction
     }
     
+    var canBeDeletedFromHistory: Bool {
+        return mediaData.canBeDeletedFromHistory
+    }
+    
     var relatedMedias: [SRGMedia] {
         return mediaData.relatedMedias
     }
@@ -73,7 +78,18 @@ final class MediaDetailViewModel: ObservableObject {
             let action = added ? .add : .remove as AnalyticsListAction
             AnalyticsHiddenEvent.watchLater(action: action, source: .button, urn: media.urn).send()
             
-            self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, relatedMedias: self.mediaData.relatedMedias)
+            self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, canBeDeletedFromHistory: self.mediaData.canBeDeletedFromHistory, relatedMedias: self.mediaData.relatedMedias)
+        }
+    }
+    
+    func deletedFromHistory() {
+        guard let media else { return }
+        HistoryRemoveMedias([media]) { error in
+            guard error == nil else { return }
+            
+            AnalyticsHiddenEvent.historyRemove(source: .button, urn: media.urn).send()
+            
+            self.mediaData = MediaData(media: media, watchLaterAllowedAction: self.mediaData.watchLaterAllowedAction, canBeDeletedFromHistory: false, relatedMedias: self.mediaData.relatedMedias)
         }
     }
 }
@@ -104,8 +120,9 @@ extension MediaDetailViewModel {
     private struct MediaData {
         let media: SRGMedia?
         let watchLaterAllowedAction: WatchLaterAction
+        let canBeDeletedFromHistory: Bool
         let relatedMedias: [SRGMedia]
         
-        static var empty = Self(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
+        static var empty = Self(media: nil, watchLaterAllowedAction: .none, canBeDeletedFromHistory: false, relatedMedias: [])
     }
 }

@@ -220,6 +220,11 @@ struct MediaDetailView: View {
                         navigateToShow(show)
                     }
                 }
+                if model.canBeDeletedFromHistory {
+                    LabeledButton(icon: "history", label: NSLocalizedString("Delete from history", comment: "Button to delete a media from the history from the media detail view")) {
+                        model.deletedFromHistory()
+                    }
+                }
             }
         }
     }

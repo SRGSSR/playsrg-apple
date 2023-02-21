@@ -36,6 +36,7 @@ struct LabeledButton: View {
                 .srgFont(.subtitle2)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
+                .minimumScaleFactor(0.8)
                 .foregroundColor(isFocused ? .white : .gray)
         }
         .frame(width: 148)
@@ -54,6 +55,10 @@ struct LabeledButton_Previews: PreviewProvider {
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Long label")
+            LabeledButton(icon: "history", label: "Supprimer de l'historique", action: {})
+                .previewLayout(PreviewLayout.sizeThatFits)
+                .padding()
+                .previewDisplayName("Very long label")
         }
     }
 }
