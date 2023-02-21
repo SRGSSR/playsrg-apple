@@ -59,7 +59,6 @@ struct TruncableTextView: View {
         
         private let fontStyle: SRGFont.Style = .body
         private let showMoreButtonString = NSLocalizedString("More", comment: "More button label")
-        private let showMoreBackgroundColor: Color = .srgGray16
         
         private func text(lineLimit: Int?) -> some View {
             return Text(content)
@@ -80,30 +79,10 @@ struct TruncableTextView: View {
                         .mask(
                             VStack(spacing: 0) {
                                 Rectangle()
-                                    .foregroundColor(showMoreBackgroundColor)
-                                
-                                HStack(spacing: 0) {
-                                    Rectangle()
-                                        .foregroundColor(showMoreBackgroundColor)
-                                    if isTruncated {
-                                        HStack(alignment: .bottom, spacing: 0) {
-                                            LinearGradient(
-                                                gradient: Gradient(stops: [
-                                                    Gradient.Stop(color: showMoreBackgroundColor, location: 0),
-                                                    Gradient.Stop(color: .clear, location: 0.8)
-                                                ]),
-                                                startPoint: .leading,
-                                                endPoint: .trailing
-                                            )
-                                            .frame(width: 32, height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
-                                            
-                                            Rectangle()
-                                                .foregroundColor(.clear)
-                                                .frame(width: showMoreButtonString.widthOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))), alignment: .center)
-                                        }
-                                    }
+                                    .foregroundColor(.black)
+                                if isTruncated {
+                                    BottomMask(fontStyle: fontStyle, showMoreButtonString: showMoreButtonString)
                                 }
-                                .frame(height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
                             }
                         )
                     
@@ -136,34 +115,62 @@ struct TruncableTextView: View {
             }
         }
         
-        private func fontToUIFont(font: Font) -> UIFont {
-            switch font {
+        /// Behavior: h-exp, v-hug
+        struct BottomMask: View {
+            let fontStyle: SRGFont.Style
+            let showMoreButtonString: String
+            
+            var body: some View {
+                HStack(alignment: .bottom, spacing: 0) {
+                    Rectangle()
+                        .foregroundColor(.black)
+                    
+                    LinearGradient(
+                        gradient: Gradient(stops: [
+                            Gradient.Stop(color: .black, location: 0),
+                            Gradient.Stop(color: .clear, location: 0.8)
+                        ]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                    .frame(width: 32, height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
+                    
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: showMoreButtonString.widthOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))), alignment: .center)
+                }
+                .frame(height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
+            }
+            
+            private func fontToUIFont(font: Font) -> UIFont {
+                switch font {
 #if os(iOS)
-            case .largeTitle:
-                return UIFont.preferredFont(forTextStyle: .largeTitle)
+                case .largeTitle:
+                    return UIFont.preferredFont(forTextStyle: .largeTitle)
 #endif
-            case .title:
-                return UIFont.preferredFont(forTextStyle: .title1)
-            case .title2:
-                return UIFont.preferredFont(forTextStyle: .title2)
-            case .title3:
-                return UIFont.preferredFont(forTextStyle: .title3)
-            case .headline:
-                return UIFont.preferredFont(forTextStyle: .headline)
-            case .subheadline:
-                return UIFont.preferredFont(forTextStyle: .subheadline)
-            case .callout:
-                return UIFont.preferredFont(forTextStyle: .callout)
-            case .caption:
-                return UIFont.preferredFont(forTextStyle: .caption1)
-            case .caption2:
-                return UIFont.preferredFont(forTextStyle: .caption2)
-            case .footnote:
-                return UIFont.preferredFont(forTextStyle: .footnote)
-            case .body:
-                return UIFont.preferredFont(forTextStyle: .body)
-            default:
-                return UIFont.preferredFont(forTextStyle: .body)
+                case .title:
+                    return UIFont.preferredFont(forTextStyle: .title1)
+                case .title2:
+                    return UIFont.preferredFont(forTextStyle: .title2)
+                case .title3:
+                    return UIFont.preferredFont(forTextStyle: .title3)
+                case .headline:
+                    return UIFont.preferredFont(forTextStyle: .headline)
+                case .subheadline:
+                    return UIFont.preferredFont(forTextStyle: .subheadline)
+                case .callout:
+                    return UIFont.preferredFont(forTextStyle: .callout)
+                case .caption:
+                    return UIFont.preferredFont(forTextStyle: .caption1)
+                case .caption2:
+                    return UIFont.preferredFont(forTextStyle: .caption2)
+                case .footnote:
+                    return UIFont.preferredFont(forTextStyle: .footnote)
+                case .body:
+                    return UIFont.preferredFont(forTextStyle: .body)
+                default:
+                    return UIFont.preferredFont(forTextStyle: .body)
+                }
             }
         }
     }
