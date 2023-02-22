@@ -59,9 +59,7 @@ struct TruncatableTextView: View {
         
         private let fontStyle: SRGFont.Style = .body
         private let showMoreButtonString = NSLocalizedString("More", comment: "More button label")
-        
-        @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
-        
+                
         private func text(lineLimit: Int?) -> some View {
             return Text(content)
                 .srgFont(fontStyle)
@@ -97,7 +95,7 @@ struct TruncatableTextView: View {
                                 .srgFont(fontStyle)
                                 .foregroundColor(.white)
                         })
-                        .disabled(isVoiceOverRunning)
+                        .accessibilityHidden(true)
 #else
                         Text(showMoreButtonString)
                             .srgFont(fontStyle)
