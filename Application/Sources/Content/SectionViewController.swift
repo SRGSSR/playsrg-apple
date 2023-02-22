@@ -296,10 +296,10 @@ final class SectionViewController: UIViewController {
     
     private static func subscriptionAccessibilityLabel(for subscriptionStatus: UserDataPublishers.SubscriptionStatus) -> String {
         if subscriptionStatus == .subscribed {
-            return PlaySRGAccessibilityLocalizedString("Stop notify me", comment: "Subscription accessibility label when notification enabled in the show view")
+            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
         }
         else {
-            return PlaySRGAccessibilityLocalizedString("Notify me", comment: "Subscription accessibility label to be notified in the show view")
+            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
         }
     }
 #endif
