@@ -162,14 +162,6 @@ final class SectionViewController: UIViewController {
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
-        
-#if os(iOS)
-        model.$subscriptionStatus
-            .sink { [weak self] subscriptionStatus in
-                self?.updateNavigationBar(subscriptionStatus: subscriptionStatus)
-            }
-            .store(in: &cancellables)
-#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -205,7 +197,7 @@ final class SectionViewController: UIViewController {
         updateNavigationBar()
     }
     
-    private func updateNavigationBar(for state: SectionViewModel.State, subscriptionStatus: UserDataPublishers.SubscriptionStatus) {
+    private func updateNavigationBar(for state: SectionViewModel.State) {
         if model.configuration.properties.supportsEdition && state.hasContent {
             navigationItem.rightBarButtonItem = editButtonItem
             
@@ -230,42 +222,24 @@ final class SectionViewController: UIViewController {
         else {
             navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
             
-            var rightBarButtonItems = [] as [UIBarButtonItem]
-            
             if model.configuration.properties.sharingItem != nil {
                 let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
                                                       style: .plain,
                                                       target: self,
                                                       action: #selector(self.shareContent(_:)))
                 shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on player view")
-                rightBarButtonItems.append(shareButtonItem)
+                navigationItem.rightBarButtonItem = shareButtonItem
             }
-            
-            if let show = model.configuration.properties.subscriptionShow, Self.isSubscriptionPossible(for: show) {
-                let subscriptionButtonItem = UIBarButtonItem(image: UIImage(named: Self.subscriptionIcon(for: subscriptionStatus)),
-                                                             style: .plain,
-                                                             target: self,
-                                                             action: #selector(self.toggleSubscription(_:)))
-                subscriptionButtonItem.accessibilityLabel = Self.subscriptionAccessibilityLabel(for: subscriptionStatus)
-                rightBarButtonItems.append(subscriptionButtonItem)
+            else {
+                navigationItem.rightBarButtonItem = nil
             }
-            
-            navigationItem.setRightBarButtonItems(rightBarButtonItems, animated: false)
             
             navigationItem.leftBarButtonItem = leftBarButtonItem
         }
     }
     
     private func updateNavigationBar() {
-        updateNavigationBar(for: model.state, subscriptionStatus: model.subscriptionStatus)
-    }
-    
-    private func updateNavigationBar(for state: SectionViewModel.State) {
-        updateNavigationBar(for: state, subscriptionStatus: model.subscriptionStatus)
-    }
-    
-    private func updateNavigationBar(subscriptionStatus: UserDataPublishers.SubscriptionStatus) {
-        updateNavigationBar(for: model.state, subscriptionStatus: subscriptionStatus)
+        updateNavigationBar(for: model.state)
     }
     
     private static func title(for numberOfSelectedItems: Int) -> String {
@@ -278,28 +252,6 @@ final class SectionViewController: UIViewController {
             return NSLocalizedString("1 item", comment: "Title displayed when 1 item has been selected")
         default:
             return String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
-        }
-    }
-    
-    private static func isSubscriptionPossible(for show: SRGShow) -> Bool {
-        return PushService.shared != nil && FavoritesContainsShow(show)
-    }
-    
-    private static func subscriptionIcon(for subscriptionStatus: UserDataPublishers.SubscriptionStatus) -> String {
-        if subscriptionStatus == .subscribed {
-            return "subscription_full"
-        }
-        else {
-            return "subscription"
-        }
-    }
-    
-    private static func subscriptionAccessibilityLabel(for subscriptionStatus: UserDataPublishers.SubscriptionStatus) -> String {
-        if subscriptionStatus == .subscribed {
-            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
-        }
-        else {
-            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
         }
     }
 #endif
@@ -378,16 +330,6 @@ final class SectionViewController: UIViewController {
         popoverPresentationController?.barButtonItem = barButtonItem
         
         self.present(activityViewController, animated: true, completion: nil)
-    }
-    
-    @objc private func toggleSubscription(_ barButtonItem: UIBarButtonItem) {
-        guard let show = model.configuration.properties.subscriptionShow, FavoritesToggleSubscriptionForShow(show) else { return }
-        
-        let isSubscribed = (model.subscriptionStatus == .subscribed)
-        let action = isSubscribed ? .remove : .add as AnalyticsListAction
-        AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
-        
-        Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
     }
     
     @objc private func deleteSelectedItems(_ barButtonItem: UIBarButtonItem) {
