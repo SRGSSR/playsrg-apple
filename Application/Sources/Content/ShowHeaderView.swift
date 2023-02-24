@@ -133,20 +133,12 @@ struct ShowHeaderView: View {
                     .multilineTextAlignment(titleAlignment)
                     .foregroundColor(.white)
                 if centerLayout {
-                    ExpandingButton(icon: model.favoriteIcon,
-                                    label: model.favoriteLabel,
-                                    accessibilityLabel: model.favoriteAccessibilityLabel,
-                                    action: favoriteAction)
-                    .frame(height: constant(iOS: 40, tvOS: 70))
-                    .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                    SubscribeButton(model: model, maxWidth: .infinity)
+                        .frame(height: constant(iOS: 40, tvOS: 70))
                 }
                 else {
-                    SimpleButton(icon: model.favoriteIcon,
-                                 label: model.favoriteLabel,
-                                 labelMinimumScaleFactor: 1,
-                                 accessibilityLabel: model.favoriteAccessibilityLabel,
-                                 action: favoriteAction)
-                    .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                    SubscribeButton(model: model, maxWidth: nil)
+                        .frame(height: constant(iOS: 40, tvOS: 70))
                 }
                 if let lead = model.lead {
 #if os(iOS)
@@ -166,26 +158,6 @@ struct ShowHeaderView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         
-        private func favoriteAction() {
-            if model.shouldDisplayFavoriteRemovalAlert {
-                model.isFavoriteRemovalAlertDisplayed = true
-            }
-            else {
-                model.toggleFavorite()
-            }
-        }
-        
-        private func favoriteRemovalAlert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-                model.toggleFavorite()
-            }
-            return Alert(title: Text(NSLocalizedString("Delete from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete a favorite")),
-                         message: Text(NSLocalizedString("The favorite and notification subscription will be deleted on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete a favorite")),
-                         primaryButton: primaryButton,
-                         secondaryButton: secondaryButton)
-        }
-        
         /// Behavior: h-exp, v-hug
         private struct LeadView: View {
             let content: String
@@ -201,6 +173,152 @@ struct ShowHeaderView: View {
             
             init(_ content: String) {
                 self.content = content
+            }
+        }
+        
+        /// Behavior: h-maxWidth, v-hug
+        private struct SubscribeButton: View {
+            @ObservedObject var model: ShowHeaderViewModel
+            let maxWidth: CGFloat?
+            
+            @State private var isFocused = false
+            
+            var body: some View {
+                Group {
+                    if model.subscribeState == .notFavorited {
+                        Button(action: {
+                            model.addFavorite()
+                        }) {
+                            SubscribeButtonView(state: model.subscribeState)
+                                .onParentFocusChange { isFocused = $0 }
+                                .frame(maxWidth: maxWidth)
+                                .foregroundColor(isFocused ? .srgGray16 : .srgGrayC7)
+                        }
+                        .buttonStyle(FlatButtonStyle(focused: isFocused))
+                    }
+                    else {
+#if os(iOS)
+                        Menu {
+                            Picker("", selection: $model.pickerSubscribeState) {
+                                HStack {
+                                    Text("No notifications")
+                                    Image(systemName: "bell")
+                                }
+                                .tag(ShowHeaderViewModel.SubscribeState.notSubscribed)
+                                HStack {
+                                    Text("Notify me")
+                                    Image(systemName: "bell.fill")
+                                }
+                                .tag(ShowHeaderViewModel.SubscribeState.subscribed)
+                            }
+                            if #available(iOS 15.0, *) {
+                                Button(role: .destructive, action: { removeFavoriteAction() }) {
+                                    HStack {
+                                        Text("Delete from favorites")
+                                        Image(systemName: "star.fill")
+                                    }
+                                }
+                            }
+                            else {
+                                Button(action: { removeFavoriteAction() }) {
+                                    HStack {
+                                        Text("Delete from favorites")
+                                        Image(systemName: "star.fill")
+                                    }
+                                }
+                            }
+                        } label: {
+                            Button(action: {}) {
+                                SubscribeButtonView(state: model.subscribeState)
+                                    .onParentFocusChange { isFocused = $0 }
+                                    .frame(maxWidth: maxWidth)
+                                    .foregroundColor(isFocused ? .srgGray16 : .srgGrayC7)
+                            }
+                        }
+                        .frame(height: constant(iOS: 40, tvOS: 70))
+                        .buttonStyle(FlatButtonStyle(focused: isFocused))
+#else
+                        Button(action: { removeFavoriteAction() }) {
+                            SubscribeButtonView(state: model.subscribeState)
+                                .onParentFocusChange { isFocused = $0 }
+                                .frame(maxWidth: maxWidth)
+                                .foregroundColor(isFocused ? .srgGray16 : .srgGrayC7)
+                        }
+                        .buttonStyle(FlatButtonStyle(focused: isFocused))
+#endif
+                    }
+                }
+                .frame(height: constant(iOS: 40, tvOS: 70))
+                .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+            }
+            
+            private func favoriteRemovalAlert() -> Alert {
+                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                    model.removeFavorite()
+                }
+                return Alert(title: Text(NSLocalizedString("Delete from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete a favorite")),
+                             message: Text(NSLocalizedString("The favorite and notification subscription will be deleted on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete a favorite")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
+            
+            private func removeFavoriteAction() {
+                if model.shouldDisplayFavoriteRemovalAlert {
+                    model.isFavoriteRemovalAlertDisplayed = true
+                }
+                else {
+                    model.removeFavorite()
+                }
+            }
+        }
+        
+        private struct SubscribeButtonView: View {
+            let state: ShowHeaderViewModel.SubscribeState
+            
+            var body: some View {
+                switch state {
+                case .notFavorited:
+                    HStack(spacing: 8) {
+                        Image(systemName: "star")
+                        SubscribeButtonTextView(NSLocalizedString("Add to favorites", comment: ""))
+                    }
+#if os(iOS)
+                case .notSubscribed:
+                    HStack(spacing: 8) {
+                        Image(systemName: "bell")
+                        SubscribeButtonTextView(NSLocalizedString("Favorites", comment: ""))
+                        Image(systemName: "chevron.down")
+                    }
+                case .subscribed:
+                    HStack(spacing: 8) {
+                        Image(systemName: "bell.fill")
+                        SubscribeButtonTextView(NSLocalizedString("Favorites", comment: ""))
+                        Image(systemName: "chevron.down")
+                    }
+#else
+                default:
+                    HStack(spacing: 8) {
+                        Image(systemName: "star.fill")
+                        SubscribeButtonTextView(NSLocalizedString("Favorites", comment: ""))
+                    }
+#endif
+                }
+            }
+        }
+        
+        private struct SubscribeButtonTextView: View {
+            let content: String
+            
+            init(_ content: String) {
+                self.content = content
+            }
+            
+            var body: some View {
+                Text(content)
+                    .srgFont(.button)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(1)
             }
         }
     }

@@ -13,7 +13,13 @@ import SRGIdentity
 final class ShowHeaderViewModel: ObservableObject {
     @Published var show: SRGShow?
     
-    @Published private(set) var isFavorite = false
+    enum SubscribeState {
+        case notFavorited
+        case notSubscribed
+        case subscribed
+    }
+    
+    @Published private(set) var subscribeState = SubscribeState.notFavorited
     
     @Published var isFavoriteRemovalAlertDisplayed = false
     
@@ -23,13 +29,38 @@ final class ShowHeaderViewModel: ObservableObject {
             .dropFirst()
             .map { show in
                 guard let show else {
-                    return Just(false).eraseToAnyPublisher()
+                    return Just(SubscribeState.notFavorited).eraseToAnyPublisher()
                 }
+#if os(iOS)
+                return Publishers.CombineLatest(
+                    UserDataPublishers.favoritePublisher(for: show),
+                    UserDataPublishers.subscriptionStatusPublisher(for: show)
+                )
+                .map { isFavorite, subscriptionStatus in
+                    if isFavorite {
+                        if subscriptionStatus == UserDataPublishers.SubscriptionStatus.subscribed {
+                            return .subscribed
+                        }
+                        else {
+                            return .notSubscribed
+                        }
+                    }
+                    else {
+                        return .notFavorited
+                    }
+                }
+                .eraseToAnyPublisher()
+#else
                 return UserDataPublishers.favoritePublisher(for: show)
+                    .map { isFavorite in
+                        return isFavorite ? .notSubscribed : .notFavorited
+                    }
+                    .eraseToAnyPublisher()
+#endif
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
-            .assign(to: &$isFavorite)
+            .assign(to: &$subscribeState)
     }
     
     var title: String? {
@@ -48,46 +79,62 @@ final class ShowHeaderViewModel: ObservableObject {
         return url(for: show?.image, size: .large)
     }
     
-    var favoriteIcon: String {
-        return isFavorite ? "favorite_full" : "favorite"
-    }
-    
-    var favoriteLabel: String {
-        if isFavorite {
-            return NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
-        }
-        else {
-            return NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")
-        }
-    }
-    
     var shouldDisplayFavoriteRemovalAlert: Bool {
         guard let loggedIn = SRGIdentityService.current?.isLoggedIn, loggedIn, let show else { return false }
         return FavoritesIsSubscribedToShow(show)
     }
     
-    func toggleFavorite() {
+    func addFavorite() {
         guard let show else { return }
-        FavoritesToggleShow(show)
+        FavoritesAddShow(show)
         
-        let action = isFavorite ? .remove : .add as AnalyticsListAction
-        AnalyticsHiddenEvent.favorite(action: action, source: .button, urn: show.urn).send()
+        AnalyticsHiddenEvent.favorite(action: .add, source: .button, urn: show.urn).send()
         
 #if os(iOS)
-        Banner.showFavorite(!isFavorite, forItemWithName: show.title)
+        Banner.showFavorite(true, forItemWithName: show.title)
 #endif
     }
-}
-
-// MARK: Accessibility
-
-extension ShowHeaderViewModel {
-    var favoriteAccessibilityLabel: String {
-        if isFavorite {
-            return PlaySRGAccessibilityLocalizedString("Delete from favorites", comment: "Favorite label in the show view when a show has been favorited")
+    
+    func removeFavorite() {
+        guard let show else { return }
+        FavoritesRemoveShows([show])
+        
+        AnalyticsHiddenEvent.favorite(action: .remove, source: .button, urn: show.urn).send()
+        
+#if os(iOS)
+        Banner.showFavorite(false, forItemWithName: show.title)
+#endif
+    }
+    
+#if os(iOS)
+    var pickerSubscribeState: SubscribeState {
+        get {
+            return subscribeState
         }
-        else {
-            return PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
+        set {
+            toggleSubscription(to: newValue)
         }
     }
+    
+    private func toggleSubscription(to subscribeState: SubscribeState) {
+        guard let show, self.subscribeState != .notFavorited else { return }
+        
+        switch subscribeState {
+        case .subscribed:
+            if self.subscribeState != .subscribed && FavoritesToggleSubscriptionForShow(show) {
+                AnalyticsHiddenEvent.subscription(action: .add, source: .button, urn: show.urn).send()
+                
+                Banner.showSubscription(true, forItemWithName: show.title)
+            }
+        case .notSubscribed:
+            if self.subscribeState != .notSubscribed && FavoritesToggleSubscriptionForShow(show) {
+                AnalyticsHiddenEvent.subscription(action: .add, source: .button, urn: show.urn).send()
+                
+                Banner.showSubscription(true, forItemWithName: show.title)
+            }
+        default:
+            break
+        }
+    }
+#endif
 }
