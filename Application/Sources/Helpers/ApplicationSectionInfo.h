@@ -6,7 +6,9 @@
 
 #import "ApplicationSection.h"
 #import "RadioChannel.h"
+#if TARGET_OS_IOS
 #import "UserNotification.h"
+#endif
 
 @import Foundation;
 @import UIKit;

@@ -24,9 +24,7 @@ struct SettingsView: View {
     var body: some View {
         List {
 #if os(tvOS)
-            if model.supportsLogin {
-                ProfileSection(model: model)
-            }
+            ProfileSection(model: model)
 #endif
 #if os(iOS)
             QualitySection()
@@ -55,20 +53,31 @@ struct SettingsView: View {
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
-    
+
+#if os(tvOS)
     // MARK: Profile section
     
-#if os(tvOS)
     private struct ProfileSection: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
             PlaySection {
-                ProfileButton(model: model)
+                ForEach(ApplicationSectionInfo.profileApplicationSectionInfos(withNotificationPreview: false), id: \.applicationSection) { applicationSectionInfo in
+                    Button(applicationSectionInfo.title, action: navigateTo(applicationSectionInfo.applicationSection))
+                }
+                if model.supportsLogin {
+                    ProfileButton(model: model)
+                }
             } header: {
                 Text(NSLocalizedString("Profile", comment: "Profile section header"))
             } footer: {
-                Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer"))
+                model.supportsLogin ? Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")) : nil
+            }
+        }
+        
+        private func navigateTo(_ applicationSection: ApplicationSection) -> (() -> Void) {
+            return {
+                navigateToApplicationSection(applicationSection)
             }
         }
     }

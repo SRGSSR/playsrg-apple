@@ -7,7 +7,9 @@
 #import "ApplicationSectionInfo.h"
 
 #import "ApplicationConfiguration.h"
+#if TARGET_OS_IOS
 #import "PushService.h"
+#endif
 
 ApplicationSectionOptionKey const ApplicationSectionOptionNotificationKey = @"ApplicationSectionOptionNotification";
 ApplicationSectionOptionKey const ApplicationSectionOptionSearchMediaTypeOptionKey = @"ApplicationSectionOptionSearchMediaTypeOption";
@@ -42,6 +44,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
                                                               options:options];
 }
 
+#if TARGET_OS_IOS
 + (ApplicationSectionInfo *)applicationSectionInfoWithNotification:(UserNotification *)notification
 {
     return [[ApplicationSectionInfo alloc] initWithApplicationSection:ApplicationSectionNotifications
@@ -49,10 +52,12 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
                                                                   uid:notification.identifier
                                                               options:@{ ApplicationSectionOptionNotificationKey : notification }];
 }
+#endif
 
 + (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfosWithNotificationPreview:(BOOL)notificationPreview
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
+#if TARGET_OS_IOS
     if (PushService.sharedService.enabled) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
         
@@ -64,10 +69,13 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
             }
         }
     }
+#endif
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionWatchLater radioChannel:nil]];
+#if TARGET_OS_IOS
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionDownloads radioChannel:nil]];
+#endif
     
     return sectionInfos.copy;
 }
