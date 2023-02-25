@@ -128,6 +128,9 @@ final class SectionViewController: UIViewController {
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
             view.content = TitleView(text: self.globalHeaderTitle)
+            if let hostController = view.hostController {
+                self.addChild(hostController)
+            }
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -135,6 +138,9 @@ final class SectionViewController: UIViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
+            if let hostController = view.hostController {
+                self.addChild(hostController)
+            }
         }
         
         let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionFooterView>>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] view, _, indexPath in
@@ -142,6 +148,9 @@ final class SectionViewController: UIViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionFooterView(section: section)
+            if let hostController = view.hostController {
+                self.addChild(hostController)
+            }
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
