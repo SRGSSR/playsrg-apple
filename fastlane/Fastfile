@@ -1683,7 +1683,8 @@ def release_notes_table_for_html(platform, business_unit)
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
-  table = get_appstore_release_notes_table(platform, business_unit)
+  file_name = "What_s new #{platform}.csv"
+  table = get_appstore_release_notes_table(file_name, business_unit)
 
   version_row = table.select { |row| row[0] == marketing_version }.first
   release_notes = version_row[1] if version_row
@@ -1693,8 +1694,7 @@ def get_appstore_release_notes(platform, business_unit, marketing_version)
   release_notes
 end
 
-def get_appstore_release_notes_table(platform, business_unit)
-  file_name = "What_s new #{platform}.csv"
+def get_appstore_release_notes_table(file_name, business_unit)
   file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
   CSV.read(file_path)
 end
