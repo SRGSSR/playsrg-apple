@@ -108,34 +108,38 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 
 - (UIImage *)image
 {
+    return [UIImage imageNamed:self.imageName];
+}
+
+- (NSString *)imageName {
     switch (self.applicationSection) {
         case ApplicationSectionSearch: {
-            return [UIImage imageNamed:@"search"];
+            return @"search";
             break;
         }
             
         case ApplicationSectionFavorites: {
-            return [UIImage imageNamed:@"favorite"];
+            return @"favorite";
             break;
         }
             
         case ApplicationSectionWatchLater: {
-            return [UIImage imageNamed:@"watch_later"];
+            return @"watch_later";
             break;
         }
             
         case ApplicationSectionDownloads: {
-            return [UIImage imageNamed:@"download"];
+            return @"download";
             break;
         }
             
         case ApplicationSectionHistory: {
-            return [UIImage imageNamed:@"history"];
+            return @"history";
             break;
         }
             
         case ApplicationSectionNotifications: {
-            return [UIImage imageNamed:@"subscription"];
+            return @"subscription";
             break;
         }
             

@@ -63,7 +63,14 @@ struct SettingsView: View {
         var body: some View {
             PlaySection {
                 ForEach(ApplicationSectionInfo.profileApplicationSectionInfos(withNotificationPreview: false), id: \.applicationSection) { applicationSectionInfo in
-                    Button(applicationSectionInfo.title, action: navigateTo(applicationSectionInfo.applicationSection))
+                    Button(action: navigateTo(applicationSectionInfo.applicationSection)) {
+                        HStack(spacing: 16) {
+                            if let imageName = applicationSectionInfo.imageName {
+                                Image(decorative: imageName)
+                            }
+                            Text(applicationSectionInfo.title)
+                        }
+                    }
                 }
                 if model.supportsLogin {
                     ProfileButton(model: model)
