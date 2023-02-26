@@ -71,13 +71,13 @@ struct MediaCell: View {
             }
 #else
             Stack(direction: direction, spacing: 0) {
-                MediaVisualView(media: media, size: .small)
+                MediaVisualView(media: media, size: .small, embeddedDirection: direction)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
                     .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                     .redactable()
                     .layoutPriority(1)
-                DescriptionView(media: media, style: style)
+                DescriptionView(media: media, style: style, embeddedDirection: direction)
                     .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.top, verticalPadding)
@@ -108,6 +108,22 @@ struct MediaCell: View {
     private struct DescriptionView: View {
         let media: SRGMedia?
         let style: MediaDescription.Style
+        let embeddedDirection: StackDirection
+        
+        init(
+            media: SRGMedia?,
+            style: MediaDescription.Style,
+            embeddedDirection: StackDirection = .vertical
+        ) {
+            self.media = media
+            self.style = style
+            self.embeddedDirection = embeddedDirection
+        }
+        
+        private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
+            guard let media else { return nil }
+            return MediaDescription.availabilityBadgeProperties(for: media)
+        }
         
         private var subtitle: String? {
             guard let media else { return .placeholder(length: 15) }
@@ -120,7 +136,10 @@ struct MediaCell: View {
         }
         
         var body: some View {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 1) {
+                if embeddedDirection == .horizontal, let properties = availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                }
                 if let subtitle {
                     Text(subtitle)
                         .srgFont(.subtitle1)

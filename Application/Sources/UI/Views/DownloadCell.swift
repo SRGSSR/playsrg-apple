@@ -59,7 +59,7 @@ struct DownloadCell: View {
         Stack(direction: direction, spacing: 0) {
             Group {
                 if let media = download?.media {
-                    MediaVisualView(media: media, size: .small)
+                    MediaVisualView(media: media, size: .small, embeddedDirection: direction)
                 }
                 else {
                     ImageView(source: imageUrl)
