@@ -72,7 +72,7 @@ struct DownloadCell: View {
             .redactable()
             .layoutPriority(1)
             
-            DescriptionView(model: model)
+            DescriptionView(model: model, embeddedDirection: direction)
                 .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.top, verticalPadding)
@@ -90,12 +90,17 @@ struct DownloadCell: View {
     private struct DescriptionView: View {
         @ObservedObject var model: DownloadCellViewModel
         
+        let embeddedDirection: StackDirection
+        
         private var title: String {
             return model.title ?? .placeholder(length: 10)
         }
         
         var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 1) {
+                if embeddedDirection == .horizontal, let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                }
                 Text(title)
                     .srgFont(.H4)
                     .lineLimit(2)
