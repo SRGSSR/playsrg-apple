@@ -148,7 +148,7 @@ struct MediaCell: View {
                 }
                 Text(title)
                     .srgFont(.H4)
-                    .lineLimit(2)
+                    .lineLimit(embeddedDirection == .horizontal ? 3 : 2)
                     .foregroundColor(.srgGrayC7)
                     .layoutPriority(1)
             }

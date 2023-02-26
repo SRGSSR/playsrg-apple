@@ -103,7 +103,7 @@ struct DownloadCell: View {
                 }
                 Text(title)
                     .srgFont(.H4)
-                    .lineLimit(2)
+                    .lineLimit(embeddedDirection == .horizontal ? 3 : 2)
                 HStack {
                     Icon(model: model)
                     if let subtitle = model.subtitle {
