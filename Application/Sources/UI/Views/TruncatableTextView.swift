@@ -23,16 +23,9 @@ struct TruncatableTextView: View {
     let showMore: () -> Void
     
     @State private var isTruncated = false
-#if os(tvOS)
     @State private var isFocused = false
-#endif
     
     var body: some View {
-#if os(iOS)
-        MainView(content: content, lineLimit: lineLimit, isTruncated: $isTruncated) {
-            showMore()
-        }
-#else
         Button {
             showMore()
         } label: {
@@ -41,9 +34,10 @@ struct TruncatableTextView: View {
             }
             .onParentFocusChange { isFocused = $0 }
         }
+#if os(tvOS)
         .buttonStyle(TextButtonStyle(focused: isFocused))
-        .disabled(!isTruncated)
 #endif
+        .disabled(!isTruncated)
     }
     
     /// Behavior: h-exp, v-hug
@@ -87,20 +81,9 @@ struct TruncatableTextView: View {
                         )
                     
                     if isTruncated {
-#if os(iOS)
-                        Button(action: {
-                            showMore()
-                        }, label: {
-                            Text(showMoreButtonString)
-                                .srgFont(fontStyle)
-                                .foregroundColor(.white)
-                        })
-                        .accessibilityHidden(true)
-#else
                         Text(showMoreButtonString)
                             .srgFont(fontStyle)
                             .foregroundColor(.white)
-#endif
                     }
                 }
                 .background(
