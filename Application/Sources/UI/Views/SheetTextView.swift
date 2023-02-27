@@ -14,9 +14,8 @@ struct SheetTextView: View {
     let content: String
     
     var body: some View {
-        VStack(spacing: 0) {
-            Handle()
-                .frame(height: 50)
+        VStack(spacing: 18) {
+            Handle(action: nil)
             ScrollView(.vertical) {
                 HStack(spacing: 0) {
                     Text(content)
@@ -30,30 +29,6 @@ struct SheetTextView: View {
             .padding(.bottom, 28)
         }
         .background(Color.srgGray23)
-    }
-    
-    /// Behavior: h-exp, v-exp
-    struct Handle: View {
-        var body: some View {
-            VStack {
-                Spacer()
-                HStack {
-                    Spacer()
-                    Grabber()
-                    Spacer()
-                }
-                Spacer()
-            }
-        }
-        
-        /// Behavior: h-hug, v-hug
-        private struct Grabber: View {
-            var body: some View {
-                RoundedRectangle(cornerRadius: 2.5)
-                    .frame(width: 38, height: 5)
-                    .foregroundColor(.srgGrayC7)
-            }
-        }
     }
 }
 

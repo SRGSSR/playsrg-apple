@@ -24,7 +24,7 @@ struct ProgramView: View {
     
     var body: some View {
         VStack(spacing: 18) {
-            Handle()
+            Handle(action: nil)
             ScrollView {
                 VStack(spacing: 16) {
                     InteractiveVisualView(model: model)
@@ -48,21 +48,12 @@ struct ProgramView: View {
                 }
             }
         }
-        .padding([.horizontal, .top], 14)
+        .padding(.horizontal, 14)
         .onAppear {
             model.data = data
         }
         .onChange(of: data) { newValue in
             model.data = newValue
-        }
-    }
-    
-    // Behavior: h-hug, v-hug
-    private struct Handle: View {
-        var body: some View {
-            RoundedRectangle(cornerRadius: 4)
-                .fill(Color.white)
-                .frame(width: 36, height: 4)
         }
     }
     
