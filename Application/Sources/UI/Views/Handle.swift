@@ -23,6 +23,8 @@ struct Handle: View {
             }
         }
         .frame(height: 20)
+        .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Close", comment: "Close button label on handle view"),
+                              traits: .isButton)
     }
     
     /// Behavior: h-hug, v-hug
