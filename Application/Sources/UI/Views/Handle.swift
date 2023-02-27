@@ -8,11 +8,10 @@ import SwiftUI
 
 /// Behavior: h-exp, v-hug
 struct Handle: View {
-    let action: (() -> Void)?
+    let action: (() -> Void)
     
     var body: some View {
         Button {
-            guard let action else { return }
             action()
         }  label: {
             // Use similar values as Aiolos `ResizeHandle`.
@@ -24,7 +23,6 @@ struct Handle: View {
             }
         }
         .frame(height: 20)
-        .disabled(action == nil)
     }
     
     /// Behavior: h-hug, v-hug

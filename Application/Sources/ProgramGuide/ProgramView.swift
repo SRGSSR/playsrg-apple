@@ -24,7 +24,10 @@ struct ProgramView: View {
     
     var body: some View {
         VStack(spacing: 18) {
-            Handle(action: nil)
+            Handle {
+                guard let viewController = UIApplication.shared.mainTopViewController else { return }
+                viewController.dismiss(animated: true)
+            }
             ScrollView {
                 VStack(spacing: 16) {
                     InteractiveVisualView(model: model)

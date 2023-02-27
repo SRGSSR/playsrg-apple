@@ -15,7 +15,10 @@ struct SheetTextView: View {
     
     var body: some View {
         VStack(spacing: 18) {
-            Handle(action: nil)
+            Handle {
+                guard let viewController = UIApplication.shared.mainTopViewController else { return }
+                viewController.dismiss(animated: true)
+            }
             ScrollView(.vertical) {
                 HStack(spacing: 0) {
                     Text(content)
