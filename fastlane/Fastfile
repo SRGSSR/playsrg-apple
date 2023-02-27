@@ -1646,6 +1646,7 @@ def appstore_release_metadata_path(platform, business_unit, tag_version)
   language_directory = "#{metadata_directory}/#{appstore_language(business_unit)}"
   Dir.chdir('..') { FileUtils.mkdir_p(language_directory) }
 
+  collect_appstore_copyright(business_unit, language_directory)
   collect_appstore_release_notes(platform, business_unit, language_directory, tag_version)
 
   metadata_directory
@@ -1660,6 +1661,24 @@ def appstore_language(business_unit)
     'SWI' => 'en-US'
   }
   languages[business_unit]
+end
+
+def appstore_copyright(business_unit)
+  copyrights = {
+    'RSI' => 'Radiotelevisione Svizzera',
+    'RTR' => 'RTR Radiotelevisiun Svizra Rumantscha',
+    'RTS' => 'RTS Radio Télévision Suisse',
+    'SRF' => 'Schweizer Radio und Fernsehen (SRF)',
+    'SWI' => 'swissinfo.ch'
+  }
+  copyrights[business_unit]
+end
+
+def collect_appstore_copyright(business_unit, language_directory)
+  copyright = "#{Date.today.year} #{appstore_copyright(business_unit)}"
+  file_name = 'copyright.txt'
+  Dir.chdir("../#{language_directory}") { File.write(file_name, copyright) }
+  UI.important "Copyright for Play #{business_unit}:\n#{copyright}"
 end
 
 def collect_appstore_release_notes(platform, business_unit, language_directory, tag_version)
@@ -1683,7 +1702,8 @@ def release_notes_table_for_html(platform, business_unit)
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
-  table = get_appstore_release_notes_table(platform, business_unit)
+  file_name = "What_s new #{platform}.csv"
+  table = get_appstore_release_notes_table(file_name, business_unit)
 
   version_row = table.select { |row| row[0] == marketing_version }.first
   release_notes = version_row[1] if version_row
@@ -1693,8 +1713,7 @@ def get_appstore_release_notes(platform, business_unit, marketing_version)
   release_notes
 end
 
-def get_appstore_release_notes_table(platform, business_unit)
-  file_name = "What_s new #{platform}.csv"
+def get_appstore_release_notes_table(file_name, business_unit)
   file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
   CSV.read(file_path)
 end
