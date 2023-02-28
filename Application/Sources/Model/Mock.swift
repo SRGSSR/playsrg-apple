@@ -124,6 +124,11 @@ enum Mock {
         return mockObject(kind.rawValue, type: SRGMedia.self)
     }
     
+    static func download(_ kind: Media = .standard) -> Download? {
+        let media = mockObject(kind.rawValue, type: SRGMedia.self)
+        return Download.add(for: media)
+    }
+    
 #if os(iOS)
     enum Notification: String {
         case standard

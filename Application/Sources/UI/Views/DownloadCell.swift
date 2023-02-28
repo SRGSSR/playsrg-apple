@@ -195,3 +195,30 @@ enum DownloadCellSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }
+
+// MARK: Preview
+
+struct DownloadCell_Previews: PreviewProvider {
+    private static let verticalLayoutSize = DownloadCellSize.grid(layoutWidth: 1024, spacing: 16).previewSize
+    private static let horizontalLayoutSize = DownloadCellSize.fullWidth().previewSize
+    
+    static var previews: some View {
+        Group {
+            DownloadCell(download: Mock.download(), layout: .vertical)
+            DownloadCell(download: Mock.download(.noShow), layout: .vertical)
+            DownloadCell(download: Mock.download(.rich), layout: .vertical)
+            DownloadCell(download: Mock.download(.overflow), layout: .vertical)
+            DownloadCell(download: Mock.download(.nineSixteen), layout: .vertical)
+        }
+        .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
+        
+        Group {
+            DownloadCell(download: Mock.download(), layout: .horizontal)
+            DownloadCell(download: Mock.download(.noShow), layout: .horizontal)
+            DownloadCell(download: Mock.download(.rich), layout: .horizontal)
+            DownloadCell(download: Mock.download(.overflow), layout: .horizontal)
+            DownloadCell(download: Mock.download(.nineSixteen), layout: .horizontal)
+        }
+        .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
+    }
+}
