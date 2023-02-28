@@ -126,9 +126,9 @@ struct ShowHeaderView: View {
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)
-                    // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
-                    // when calculated with a `UIHostingController`, but without this the text does not occupy
-                    // all lines it could.
+                // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
+                // when calculated with a `UIHostingController`, but without this the text does not occupy
+                // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(titleAlignment)
                     .foregroundColor(.white)
@@ -151,12 +151,12 @@ struct ShowHeaderView: View {
                 if let lead = model.lead {
 #if os(iOS)
                     LeadView(lead)
-                        // See above
+                    // See above
                         .fixedSize(horizontal: false, vertical: true)
 #else
-                        LeadView(lead)
-                            // See above
-                            .fixedSize(horizontal: false, vertical: true)
+                    LeadView(lead)
+                    // See above
+                        .fixedSize(horizontal: false, vertical: true)
 #endif
                 }
                 if let broadcastInformation = model.broadcastInformation {
