@@ -18,6 +18,7 @@ struct MediaVisualView<Content: View>: View {
     
     let size: SRGImageSize
     let contentMode: ImageView.ContentMode
+    let embeddedDirection: StackDirection
     
     @Binding private var content: (SRGMedia?) -> Content
     
@@ -27,11 +28,13 @@ struct MediaVisualView<Content: View>: View {
         media: SRGMedia?,
         size: SRGImageSize,
         contentMode: ImageView.ContentMode = .aspectFit,
+        embeddedDirection: StackDirection = .vertical,
         @ViewBuilder content: @escaping (SRGMedia?) -> Content
     ) {
         _media = .constant(media)
         self.size = size
         self.contentMode = contentMode
+        self.embeddedDirection = embeddedDirection
         _content = .constant(content)
     }
     
@@ -41,7 +44,7 @@ struct MediaVisualView<Content: View>: View {
             content(media)
             BlockingOverlay(media: media)
             
-            if let properties = model.availabilityBadgeProperties {
+            if embeddedDirection == .vertical, let properties = model.availabilityBadgeProperties {
                 Badge(text: properties.text, color: Color(properties.color))
                     .padding([.top, .leading], padding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -114,8 +117,8 @@ struct MediaVisualView<Content: View>: View {
 // MARK: Extensions
 
 extension MediaVisualView where Content == EmptyView {
-    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit) {
-        self.init(media: media, size: size, contentMode: contentMode) { _ in
+    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit, embeddedDirection: StackDirection = .vertical) {
+        self.init(media: media, size: size, contentMode: contentMode, embeddedDirection: embeddedDirection) { _ in
             EmptyView()
         }
     }

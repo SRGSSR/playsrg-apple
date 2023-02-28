@@ -53,5 +53,6 @@
       } ]
    },
    "presentation" : "DEFAULT",
-   "aspectRatio" : "16:9"
+   "aspectRatio" : "16:9",
+  "podcastSdUrl": "https://www.srgssr.ch/typo3conf/ext/is_design/Resources/Public/imgs/logo.svg"
 }

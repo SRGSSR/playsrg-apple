@@ -59,7 +59,7 @@ struct DownloadCell: View {
         Stack(direction: direction, spacing: 0) {
             Group {
                 if let media = download?.media {
-                    MediaVisualView(media: media, size: .small)
+                    MediaVisualView(media: media, size: .small, embeddedDirection: direction)
                 }
                 else {
                     ImageView(source: imageUrl)
@@ -72,7 +72,7 @@ struct DownloadCell: View {
             .redactable()
             .layoutPriority(1)
             
-            DescriptionView(model: model)
+            DescriptionView(model: model, embeddedDirection: direction)
                 .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                 .padding(.horizontal, horizontalPadding)
                 .padding(.top, verticalPadding)
@@ -90,15 +90,21 @@ struct DownloadCell: View {
     private struct DescriptionView: View {
         @ObservedObject var model: DownloadCellViewModel
         
+        let embeddedDirection: StackDirection
+        
         private var title: String {
             return model.title ?? .placeholder(length: 10)
         }
         
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
+                if embeddedDirection == .horizontal, let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                        .padding(.bottom, 4)
+                }
                 Text(title)
                     .srgFont(.H4)
-                    .lineLimit(2)
+                    .lineLimit(embeddedDirection == .horizontal ? 3 : 2)
                 HStack {
                     Icon(model: model)
                     if let subtitle = model.subtitle {
@@ -187,5 +193,32 @@ enum DownloadCellSize {
     
     static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
+    }
+}
+
+// MARK: Preview
+
+struct DownloadCell_Previews: PreviewProvider {
+    private static let verticalLayoutSize = DownloadCellSize.grid(layoutWidth: 1024, spacing: 16).previewSize
+    private static let horizontalLayoutSize = DownloadCellSize.fullWidth().previewSize
+    
+    static var previews: some View {
+        Group {
+            DownloadCell(download: Mock.download(), layout: .vertical)
+            DownloadCell(download: Mock.download(.noShow), layout: .vertical)
+            DownloadCell(download: Mock.download(.rich), layout: .vertical)
+            DownloadCell(download: Mock.download(.overflow), layout: .vertical)
+            DownloadCell(download: Mock.download(.nineSixteen), layout: .vertical)
+        }
+        .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
+        
+        Group {
+            DownloadCell(download: Mock.download(), layout: .horizontal)
+            DownloadCell(download: Mock.download(.noShow), layout: .horizontal)
+            DownloadCell(download: Mock.download(.rich), layout: .horizontal)
+            DownloadCell(download: Mock.download(.overflow), layout: .horizontal)
+            DownloadCell(download: Mock.download(.nineSixteen), layout: .horizontal)
+        }
+        .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
     }
 }

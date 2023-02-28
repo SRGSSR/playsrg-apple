@@ -12,6 +12,11 @@ final class DownloadCellViewModel: ObservableObject {
     @Published var download: Download?
     @Published private(set) var state: State = .unknown
     
+    var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
+        guard let media = download?.media else { return nil }
+        return MediaDescription.availabilityBadgeProperties(for: media)
+    }
+    
     var title: String? {
         return download?.title
     }

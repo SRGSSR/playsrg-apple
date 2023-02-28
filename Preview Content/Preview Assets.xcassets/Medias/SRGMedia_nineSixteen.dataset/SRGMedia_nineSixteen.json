@@ -39,5 +39,6 @@
       "language" : "Français",
       "source" : "HLS"
    } ],
-   "aspectRatio" : "9:16"
+   "aspectRatio" : "9:16",
+  "podcastSdUrl": "https://www.srgssr.ch/typo3conf/ext/is_design/Resources/Public/imgs/logo.svg"
 }
