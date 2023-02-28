@@ -97,9 +97,10 @@ struct DownloadCell: View {
         }
         
         var body: some View {
-            VStack(alignment: .leading, spacing: 1) {
+            VStack(alignment: .leading, spacing: 0) {
                 if embeddedDirection == .horizontal, let properties = model.availabilityBadgeProperties {
                     Badge(text: properties.text, color: Color(properties.color))
+                        .padding(.bottom, 4)
                 }
                 Text(title)
                     .srgFont(.H4)

@@ -136,9 +136,10 @@ struct MediaCell: View {
         }
         
         var body: some View {
-            VStack(alignment: .leading, spacing: 1) {
+            VStack(alignment: .leading, spacing: 0) {
                 if embeddedDirection == .horizontal, let properties = availabilityBadgeProperties {
                     Badge(text: properties.text, color: Color(properties.color))
+                        .padding(.bottom, 4)
                 }
                 if let subtitle {
                     Text(subtitle)
