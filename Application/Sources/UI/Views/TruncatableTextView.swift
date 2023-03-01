@@ -25,6 +25,17 @@ struct TruncatableTextView: View {
     @State private var isTruncated = false
     @State private var isFocused = false
     
+    init(content: String, lineLimit: Int?, showMore: @escaping () -> Void) {
+        // Compact the content to not have "show more" button floating alone at bottom right.
+        self.content = content
+            .replacingOccurrences(of: "\r", with: "\n")
+            .replacingOccurrences(of: "\n\n", with: "\n")
+            .trimmingCharacters(in: .newlines)
+        
+        self.lineLimit = lineLimit
+        self.showMore = showMore
+    }
+    
     var body: some View {
         Button {
             showMore()
@@ -44,16 +55,16 @@ struct TruncatableTextView: View {
     fileprivate struct MainView: View {
         let content: String
         let lineLimit: Int?
-        @Binding var isTruncated: Bool
+        @Binding private(set) var isTruncated: Bool
+        
+        let showMore: () -> Void
         
         @State private var intrinsicSize: CGSize = .zero
         @State private var truncatedSize: CGSize = .zero
         
-        let showMore: () -> Void
-        
         private let fontStyle: SRGFont.Style = .body
         private let showMoreButtonString = NSLocalizedString("More", comment: "More button label")
-                
+        
         private func text(lineLimit: Int?) -> some View {
             return Text(content)
                 .srgFont(fontStyle)
