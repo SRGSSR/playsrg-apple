@@ -161,7 +161,6 @@ struct ShowHeaderView: View {
 #endif
                     }
                 }
-                .animation(.easeOut)
                 .frame(height: constant(iOS: 40, tvOS: 70))
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 if let lead = model.lead {
