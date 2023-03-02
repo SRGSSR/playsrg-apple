@@ -63,6 +63,10 @@ struct ShowHeaderView: View {
             self.isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
         }
         
+        private var descriptionHorizontalPadding: CGFloat {
+            return constant(iOS: horizontalSizeClass == .compact ? 16 : 32, tvOS: 0)
+        }
+        
         var body: some View {
             Group {
                 if horizontalSizeClass == .compact || !isLandscape {
@@ -72,7 +76,7 @@ struct ShowHeaderView: View {
                             .overlay(ImageOverlay(isHorizontal: false))
                             .layoutPriority(1)
                         DescriptionView(model: model, centerLayout: horizontalSizeClass == .compact)
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, descriptionHorizontalPadding)
                             .offset(y: compactDescriptionOffet)
                     }
                     .padding(.bottom, 24 + compactDescriptionOffet)
@@ -81,7 +85,8 @@ struct ShowHeaderView: View {
                 else {
                     HStack(spacing: 0) {
                         DescriptionView(model: model, centerLayout: false)
-                            .padding(.horizontal, 32)
+                            .padding(.leading, descriptionHorizontalPadding)
+                            .padding(.trailing, 16)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
                             .overlay(ImageOverlay(isHorizontal: true))
