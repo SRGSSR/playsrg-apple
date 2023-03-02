@@ -28,8 +28,9 @@ struct TruncatableTextView: View {
     init(content: String, lineLimit: Int?, showMore: @escaping () -> Void) {
         // Compact the content to not have "show more" button floating alone at bottom right.
         self.content = content
-            .replacingOccurrences(of: "\r", with: "\n")
-            .replacingOccurrences(of: "\n\n", with: "\n")
+            .replacingOccurrences(of: "\r", with: " ")
+            .replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "  ", with: " ")
             .trimmingCharacters(in: .newlines)
         
         self.lineLimit = lineLimit
