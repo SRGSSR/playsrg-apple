@@ -52,7 +52,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var lead: String? {
-        return show?.lead?.isEmpty ?? true ? show?.summary : show?.lead
+        return show?.leadOrSummary
     }
     
     var broadcastInformation: String? {

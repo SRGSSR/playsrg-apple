@@ -89,7 +89,7 @@ struct FeaturedShowContent: FeaturedContent {
     }
     
     var summary: String? {
-        return show?.summary
+        return show?.leadOrSummary
     }
     
     var accessibilityLabel: String? {
