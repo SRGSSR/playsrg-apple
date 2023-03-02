@@ -756,7 +756,7 @@ private extension SectionViewController {
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
-                        MediaCell(media: media, style: constant(iOS: .dateAndSummary, tvOS: .date), layout: constant(iOS: .horizontal, tvOS: .vertical))
+                        MediaCell(media: media, style: .date)
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)
                     default:

@@ -64,7 +64,7 @@ struct ShowHeaderView: View {
         }
         
         private var descriptionHorizontalPadding: CGFloat {
-            return constant(iOS: horizontalSizeClass == .compact ? 16 : 32, tvOS: 0)
+            return constant(iOS: 16, tvOS: 0)
         }
         
         var body: some View {

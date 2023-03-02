@@ -392,7 +392,7 @@ private extension SectionViewModel {
                 return .notificationList
 #endif
             case .show:
-                return .mediaList
+                return .mediaGrid
             default:
                 return .mediaGrid
             }
