@@ -102,10 +102,13 @@ struct ShowHeaderView: View {
         
         var body: some View {
             if isHorizontal {
-                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .leading)
+                Group {
+                    LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: UnitPoint(x: 0.1, y: 0.5), endPoint: .leading)
+                    LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: UnitPoint(x: 0.5, y: 0.95), endPoint: .bottom)
+                }
             }
             else {
-                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: UnitPoint(x: 0.5, y: 0.85), endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: UnitPoint(x: 0.5, y: 0.9), endPoint: .bottom)
             }
         }
     }
