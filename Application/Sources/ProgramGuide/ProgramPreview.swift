@@ -78,7 +78,7 @@ struct ProgramPreview: View {
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
         var body: some View {
-            LinearGradient(gradient: Gradient(colors: [.srgGray16, .clear]), startPoint: .leading, endPoint: .center)
+            LinearGradient(colors: [.srgGray16, .clear], startPoint: .leading, endPoint: .center)
         }
     }
 }
