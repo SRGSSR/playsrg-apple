@@ -79,7 +79,7 @@ struct ShowHeaderView: View {
                 else {
                     HStack(spacing: 0) {
                         DescriptionView(model: model, centerLayout: false)
-                            .padding(.horizontal, 16)
+                            .padding(.horizontal, 32)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
                             .overlay(ImageOverlay(isHorizontal: true))
