@@ -129,6 +129,9 @@ struct ShowHeaderView: View {
                 // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                 // when calculated with a `UIHostingController`, but without this the text does not occupy
                 // all lines it could.
+                    .fixedSize(horizontal: false, vertical: true)
+                    .multilineTextAlignment(titleAlignment)
+                    .foregroundColor(.white)
                 HStack(spacing: 8) {
                     if centerLayout {
                         ExpandingButton(icon: model.favoriteIcon,
