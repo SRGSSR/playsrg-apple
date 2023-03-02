@@ -86,7 +86,7 @@ struct ShowHeaderView: View {
                             .aspectRatio(16 / 9, contentMode: .fit)
                             .overlay(ImageOverlay(isHorizontal: true))
                     }
-                    .padding(.bottom, constant(iOS: 24, tvOS: 50))
+                    .padding(.bottom, constant(iOS: 40, tvOS: 50))
                     .focusable()
                 }
             }
