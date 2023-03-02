@@ -22,6 +22,7 @@ struct Badge: View {
             .srgFont(.label)
             .textCase(.uppercase)
             .lineLimit(1)
+            .truncationMode(.head)
             .foregroundColor(.white)
             .padding(.vertical, constant(iOS: 2, tvOS: 5))
             .padding(.horizontal, BadgeMetrics.horizontalPadding)
