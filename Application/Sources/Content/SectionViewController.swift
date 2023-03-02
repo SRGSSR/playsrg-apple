@@ -181,6 +181,32 @@ final class SectionViewController: UIViewController {
         userActivity = model.configuration.viewModelProperties.userActivity
     }
     
+#if os(iOS)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
+            if case let .configured(section) = model.configuration.wrappedValue, case .show = section {
+                PlayApplicationRunOnce({ completionHandler in
+                    let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                            message: NSLocalizedString("You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                            preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Enable", comment: "title of enable button"), style: .default, handler: { _ in
+                        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
+                        UserDefaults.standard.synchronize()
+                        if let navigationController = self.navigationController {
+                            navigationController.popViewController(animated: true)
+                        }
+                    }))
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Skip", comment: "Title of a Skip button"), style: .cancel, handler: nil))
+                    present(alertController, animated: true, completion: nil)
+                    completionHandler(true)
+                }, "ShowPageBetaTestsAlert1")
+            }
+        }
+    }
+#endif
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         userActivity = nil
@@ -756,7 +782,12 @@ private extension SectionViewController {
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
-                        MediaCell(media: media, style: .date)
+                        if configuration.viewModelProperties.layout == .mediaList {
+                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                        }
+                        else {
+                            MediaCell(media: media, style: .date)
+                        }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)
                     default:

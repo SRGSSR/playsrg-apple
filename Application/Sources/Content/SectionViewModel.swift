@@ -392,7 +392,11 @@ private extension SectionViewModel {
                 return .notificationList
 #endif
             case .show:
+#if os(iOS)
+                return ApplicationSettingMediaListLayoutEnabled() ? .mediaList : .mediaGrid
+#else
                 return .mediaGrid
+#endif
             default:
                 return .mediaGrid
             }

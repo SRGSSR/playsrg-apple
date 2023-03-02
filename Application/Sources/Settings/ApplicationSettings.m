@@ -167,3 +167,13 @@ BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
 }
+
+BOOL ApplicationSettingMediaListLayoutEnabled(void)
+{
+    if (! NSBundle.mainBundle.play_isAppStoreRelease) {
+        return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingMediaListLayoutEnabled];
+    }
+    else {
+        return NO;
+    }
+}

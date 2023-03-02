@@ -64,7 +64,16 @@ struct ShowHeaderView: View {
         }
         
         private var descriptionHorizontalPadding: CGFloat {
-            return constant(iOS: 16, tvOS: 0)
+#if os(iOS)
+            if ApplicationSettingMediaListLayoutEnabled() && horizontalSizeClass == .regular {
+                return 32
+            }
+            else {
+                return 16
+            }
+#else
+            return 0
+#endif
         }
         
         var body: some View {

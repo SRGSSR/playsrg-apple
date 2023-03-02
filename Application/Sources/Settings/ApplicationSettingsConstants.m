@@ -19,6 +19,7 @@ NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLo
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLivestreamURNForChannels";
 NSString * const PlaySRGSettingServiceIdentifier = @"PlaySRGSettingServiceIdentifier";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
+NSString * const PlaySRGSettingMediaListLayoutEnabled = @"PlaySRGSettingMediaListLayoutEnabled";
 
 __attribute__((constructor)) static void ApplicationSettingsConstantsInit(void)
 {
