@@ -56,6 +56,8 @@ struct ShowHeaderView: View {
         
         @State private var isLandscape: Bool
         
+        private let compactDescriptionOffet: CGFloat = -12
+        
         init(model: ShowHeaderViewModel) {
             self.model = model
             self.isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
@@ -71,9 +73,9 @@ struct ShowHeaderView: View {
                             .layoutPriority(1)
                         DescriptionView(model: model, centerLayout: horizontalSizeClass == .compact)
                             .padding(.horizontal, 16)
-                            .offset(y: -30)
+                            .offset(y: compactDescriptionOffet)
                     }
-                    .padding(.bottom, -6)
+                    .padding(.bottom, 24 + compactDescriptionOffet)
                     .focusable()
                 }
                 else {
