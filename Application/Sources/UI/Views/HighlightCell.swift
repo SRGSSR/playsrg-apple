@@ -77,7 +77,7 @@ struct HighlightCell: View {
                     ZStack(alignment: .bottom) {
                         ImageView(source: imageUrl, contentMode: contentMode)
                         if let highlight {
-                            LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .bottom, endPoint: .center)
+                            LinearGradient(colors: [.srgGray16.opacity(0.9), .clear], startPoint: .bottom, endPoint: .center)
                             Text(highlight.title)
                                 .srgFont(.H2)
                                 .lineLimit(2)
@@ -91,7 +91,7 @@ struct HighlightCell: View {
                     ZStack(alignment: .leading) {
                         ImageView(source: imageUrl, contentMode: contentMode)
                         if let highlight {
-                            LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
+                            LinearGradient(colors: [.srgGray16.opacity(0.9), .clear], startPoint: .leading, endPoint: .trailing)
                             DescriptionView(highlight: highlight)
                                 .padding(.horizontal, 60)
                                 .padding(.vertical, 40)

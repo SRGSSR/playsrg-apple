@@ -29,6 +29,9 @@ struct SettingsView: View {
             }
 #endif
 #if os(iOS)
+            if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
+                BetaTestsSection()
+            }
             QualitySection()
 #endif
             PlaybackSection()
@@ -130,6 +133,20 @@ struct SettingsView: View {
                 Text(NSLocalizedString("Quality", comment: "Quality settings section header"))
             } footer: {
                 Text(NSLocalizedString("To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.", comment: "Quality settings section footer"))
+            }
+        }
+    }
+    
+    private struct BetaTestsSection: View {
+        @AppStorage(PlaySRGSettingMediaListLayoutEnabled) var isMediaListLayoutEnabled = false
+        
+        var body: some View {
+            PlaySection {
+                Toggle(NSLocalizedString("Display episodes as a list in show pages (iPad)", comment: "Toggle label to enable episodes as a list in show pages setting label"), isOn: $isMediaListLayoutEnabled)
+            } header: {
+                Text(NSLocalizedString("Beta tests", comment: "Beta tests section header"))
+            } footer: {
+                Text(NSLocalizedString("This section is only available for beta testers.", comment: "Beta tests section footer"))
             }
         }
     }

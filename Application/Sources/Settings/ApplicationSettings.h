@@ -49,4 +49,6 @@ OBJC_EXPORT void ApplicationSettingSetLastOpenedRadioChannel(RadioChannel *radio
 
 OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
 
+OBJC_EXPORT BOOL ApplicationSettingMediaListLayoutEnabled(void);
+
 NS_ASSUME_NONNULL_END

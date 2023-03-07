@@ -104,7 +104,7 @@ final class SectionViewController: UIViewController {
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
 #endif
-                
+        
         self.view = view
     }
     
@@ -128,6 +128,9 @@ final class SectionViewController: UIViewController {
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
             view.content = TitleView(text: self.globalHeaderTitle)
+            if let hostController = view.hostController {
+                self.addChild(hostController)
+            }
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -135,6 +138,9 @@ final class SectionViewController: UIViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
+            if let hostController = view.hostController {
+                self.addChild(hostController)
+            }
         }
         
         let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionFooterView>>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] view, _, indexPath in
@@ -142,6 +148,9 @@ final class SectionViewController: UIViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionFooterView(section: section)
+            if let hostController = view.hostController {
+                self.addChild(hostController)
+            }
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -162,6 +171,15 @@ final class SectionViewController: UIViewController {
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
+        
+#if os(iOS)
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &cancellables)
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -171,6 +189,29 @@ final class SectionViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         userActivity = model.configuration.viewModelProperties.userActivity
     }
+    
+#if os(iOS)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
+            if case let .configured(section) = model.configuration.wrappedValue, case .show = section {
+                PlayApplicationRunOnce({ completionHandler in
+                    let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                            message: NSLocalizedString("You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                            preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Enable", comment: "title of enable button"), style: .default, handler: { _ in
+                        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
+                        UserDefaults.standard.synchronize()
+                    }))
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Skip", comment: "Title of a Skip button"), style: .cancel, handler: nil))
+                    present(alertController, animated: true, completion: nil)
+                    completionHandler(true)
+                }, "ShowPageBetaTestsAlert1")
+            }
+        }
+    }
+#endif
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -386,7 +427,7 @@ extension SectionViewController {
     @objc static func downloadsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.downloads))
     }
-
+    
     @objc static func notificationsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.notifications))
     }
@@ -656,6 +697,24 @@ private extension SectionViewController {
                 let top = section.header.sectionTopInset
                 
                 switch configuration.viewModelProperties.layout {
+                case .mediaList:
+#if os(iOS)
+                    if horizontalSizeClass == .compact {
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
+                            return MediaCellSize.fullWidth()
+                        }
+                    }
+                    else {
+                        let spacing = (layoutWidth - LayoutMaxListWidth) / 4
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { layoutWidth, _ in
+                            return MediaCellSize.largeList(layoutWidth: layoutWidth)
+                        }
+                    }
+#else
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                        return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
+                    }
+#endif
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
@@ -729,7 +788,12 @@ private extension SectionViewController {
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
-                        MediaCell(media: media, style: .date)
+                        if configuration.viewModelProperties.layout == .mediaList {
+                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                        }
+                        else {
+                            MediaCell(media: media, style: .date)
+                        }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)
                     default:
@@ -848,5 +912,23 @@ private extension SectionViewController {
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
+    }
+}
+
+extension SectionViewController: ShowHeaderViewAction {
+    func showMore(sender: Any?, event: ShowMoreEvent?) {
+        guard let event else { return }
+        
+#if os(iOS)
+        let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
+        if #available(iOS 15.0, *) {
+            if let sheet = sheetTextViewController.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        }
+        present(sheetTextViewController, animated: true, completion: nil)
+#else
+        navigateToText(event.content)
+#endif
     }
 }

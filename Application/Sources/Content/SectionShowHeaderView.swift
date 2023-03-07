@@ -75,7 +75,7 @@ struct SectionShowHeaderView: View {
         
         var body: some View {
             if horizontalSizeClass == .regular {
-                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .trailing)
+                LinearGradient(colors: [.clear, .srgGray16], startPoint: .center, endPoint: .trailing)
             }
         }
     }

@@ -29,6 +29,7 @@ OBJC_EXPORT NSString *PlaySRGNonLocalizedString(NSString *string);
 @interface NSBundle (PlaySRG)
 
 @property (nonatomic, readonly) NSString *play_friendlyVersionNumber;
+@property (nonatomic, readonly) BOOL play_isAppStoreRelease;
 
 @end
 

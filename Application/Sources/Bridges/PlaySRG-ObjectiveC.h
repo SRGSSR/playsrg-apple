@@ -29,6 +29,7 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "Orientation.h"
 #import "PlayAccessibilityFormatter.h"
+#import "PlayApplication.h"
 #import "PlayApplicationNavigation.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"

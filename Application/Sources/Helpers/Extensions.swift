@@ -90,6 +90,18 @@ extension String {
     var capitalizedFirstLetter: String {
         return prefix(1).capitalized + dropFirst()
     }
+    
+    func heightOfString(usingFont font: UIFont) -> CGFloat {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size.height
+    }
+    
+    func widthOfString(usingFont font: UIFont) -> CGFloat {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size.width
+    }
 }
 
 extension Array {
@@ -346,7 +358,7 @@ extension NSCollectionLayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = spacing
+        section.interGroupSpacing = constant(iOS: 8, tvOS: 40)
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }

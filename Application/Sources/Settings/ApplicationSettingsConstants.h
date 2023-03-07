@@ -21,5 +21,6 @@ OBJC_EXPORT NSString * const PlaySRGSettingLastLoggedInEmailAddress;
 OBJC_EXPORT NSString * const PlaySRGSettingSelectedLivestreamURNForChannels;
 OBJC_EXPORT NSString * const PlaySRGSettingServiceIdentifier;
 OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
+OBJC_EXPORT NSString * const PlaySRGSettingMediaListLayoutEnabled;
 
 NS_ASSUME_NONNULL_END

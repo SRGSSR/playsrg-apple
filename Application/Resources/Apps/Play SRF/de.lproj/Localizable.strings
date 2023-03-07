@@ -365,6 +365,9 @@
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Inhalt noch nicht verfügbar";
 
+/* More button label */
+"More" = "Mehr";
+
 /* Autoplay setting section footer */
 "More content is automatically played after playback of the current content ends." = "Nach Beendigung der Wiedergabe des aktuellen Inhalts werden weitere Inhalte automatisch abgespielt.";
 
@@ -432,10 +435,10 @@
 "Notifications have been enabled for %@" = "%@ wurde zu den Push-Mitteilungen hinzugefügt";
 
 /* Subscription label when notification enabled in the show view */
-"Notified" = "Mitteilungen aktiviert";
+"Notified" = "Notified";
 
 /* Subscription label to be notified in the show view */
-"Notify me" = "Mitteilungen aktivieren";
+"Notify me" = "Notify me";
 
 /* Now button in program guide */
 "Now" = "Jetzt";
@@ -542,7 +545,7 @@
 "Resume" = "Weiter abspielen";
 
 /* Title label used to present medias whose playback can be resumed */
-"Resume playback" = "Fortsetzen";
+"Resume playback" = "Weiterschauen";
 
 /* Label to present the search view
    Search shortcut label

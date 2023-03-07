@@ -31,7 +31,6 @@ final class ShowHeaderViewModel: ObservableObject {
             .switchToLatest()
             .receive(on: DispatchQueue.main)
             .assign(to: &$isFavorite)
-        
 #if os(iOS)
         // Drop initial values; relevant values are first assigned when the view appears
         $show
@@ -53,7 +52,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var lead: String? {
-        return show?.lead
+        return show?.leadOrSummary
     }
     
     var broadcastInformation: String? {
@@ -61,7 +60,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return url(for: show?.image, size: .medium)
+        return url(for: show?.image, size: .large)
     }
     
     var favoriteIcon: String {
@@ -89,9 +88,7 @@ final class ShowHeaderViewModel: ObservableObject {
     
     var subscriptionIcon: String {
         switch subscriptionStatus {
-        case .unavailable:
-            return "subscription_disabled"
-        case .unsubscribed:
+        case .unavailable, .unsubscribed:
             return "subscription"
         case .subscribed:
             return "subscription_full"

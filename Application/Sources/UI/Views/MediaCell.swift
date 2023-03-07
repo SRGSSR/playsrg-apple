@@ -16,8 +16,19 @@ struct MediaCell: View {
         case adaptive
     }
     
+    enum Style {
+        /// Show information emphasis
+        case show
+        /// Date information emphasis
+        case date
+        /// Date information emphasis with summary
+        case dateAndSummary
+        /// Time information emphasis
+        case time
+    }
+    
     let media: SRGMedia?
-    let style: MediaDescription.Style
+    let style: Style
     let layout: Layout
     let action: (() -> Void)?
     
@@ -50,7 +61,7 @@ struct MediaCell: View {
         return isSelected && media != nil
     }
     
-    init(media: SRGMedia?, style: MediaDescription.Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
+    init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
         self.layout = layout
@@ -107,12 +118,12 @@ struct MediaCell: View {
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
         let media: SRGMedia?
-        let style: MediaDescription.Style
+        let style: MediaCell.Style
         let embeddedDirection: StackDirection
         
         init(
             media: SRGMedia?,
-            style: MediaDescription.Style,
+            style: MediaCell.Style,
             embeddedDirection: StackDirection = .vertical
         ) {
             self.media = media
@@ -125,14 +136,43 @@ struct MediaCell: View {
             return MediaDescription.availabilityBadgeProperties(for: media)
         }
         
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
+        
         private var subtitle: String? {
             guard let media else { return .placeholder(length: 15) }
-            return MediaDescription.subtitle(for: media, style: style)
+            return MediaDescription.subtitle(for: media, style: mediaDescriptionStyle)
         }
         
         private var title: String {
             guard let media else { return .placeholder(length: 8) }
-            return MediaDescription.title(for: media, style: style)
+            return MediaDescription.title(for: media, style: mediaDescriptionStyle)
+        }
+        
+        private var summary: String? {
+            guard horizontalSizeClass == .regular, style == .dateAndSummary else { return nil }
+            
+            guard let media else { return .placeholder(length: 15) }
+            return MediaDescription.summary(for: media)
+        }
+        
+        private var mediaDescriptionStyle: MediaDescription.Style {
+            switch style {
+            case .show:
+                return .show
+            case .date, .dateAndSummary:
+                return .date
+            case .time:
+                return .time
+            }
+        }
+        
+        private var titleLineLimit: Int {
+            if horizontalSizeClass == .regular && style == .dateAndSummary {
+                return 1
+            }
+            else {
+                return embeddedDirection == .horizontal ? 3 : 2
+            }
         }
         
         var body: some View {
@@ -149,9 +189,15 @@ struct MediaCell: View {
                 }
                 Text(title)
                     .srgFont(.H4)
-                    .lineLimit(embeddedDirection == .horizontal ? 3 : 2)
+                    .lineLimit(titleLineLimit)
                     .foregroundColor(.srgGrayC7)
                     .layoutPriority(1)
+                if let summary {
+                    Text(summary)
+                        .srgFont(.body)
+                        .lineLimit(2)
+                        .foregroundColor(.srgGrayC7)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
@@ -208,6 +254,10 @@ final class MediaCellSize: NSObject {
     static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(constant(iOS: 84, tvOS: 120)))
     }
+    
+    static func largeList(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(100))
+    }
 }
 
 // MARK: Preview
@@ -215,7 +265,9 @@ final class MediaCellSize: NSObject {
 struct MediaCell_Previews: PreviewProvider {
     private static let verticalLayoutSize = MediaCellSize.swimlane().previewSize
     private static let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
-    private static let style = MediaDescription.Style.show
+    private static let horizontalLargeListLayoutSize = MediaCellSize.largeList(layoutWidth: 564).previewSize
+    private static let style = MediaCell.Style.show
+    private static let largeListStyle = MediaCell.Style.dateAndSummary
     
     static var previews: some View {
         Group {
@@ -236,6 +288,15 @@ struct MediaCell_Previews: PreviewProvider {
             MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)
         }
         .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
+        
+        Group {
+            MediaCell(media: Mock.media(), style: Self.largeListStyle, layout: .horizontal)
+            MediaCell(media: Mock.media(.noShow), style: Self.largeListStyle, layout: .horizontal)
+            MediaCell(media: Mock.media(.rich), style: Self.largeListStyle, layout: .horizontal)
+            MediaCell(media: Mock.media(.overflow), style: Self.largeListStyle, layout: .horizontal)
+            MediaCell(media: Mock.media(.nineSixteen), style: Self.largeListStyle, layout: .horizontal)
+        }
+        .previewLayout(.fixed(width: horizontalLargeListLayoutSize.width, height: horizontalLargeListLayoutSize.height))
 #endif
     }
 }
