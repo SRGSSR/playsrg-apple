@@ -60,7 +60,7 @@ struct ShowHeaderView: View {
         
         init(model: ShowHeaderViewModel) {
             self.model = model
-            self.isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
+            self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
         }
         
         private var descriptionHorizontalPadding: CGFloat {
@@ -105,7 +105,7 @@ struct ShowHeaderView: View {
                 }
             }
             .readSize { _ in
-                isLandscape = (UIApplication.shared.mainWindowScene?.isLandscape ?? false)
+                isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
             }
         }
     }
