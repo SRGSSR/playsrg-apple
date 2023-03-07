@@ -171,6 +171,15 @@ final class SectionViewController: UIViewController {
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
+        
+#if os(iOS)
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.collectionView.reloadData()
+            }
+            .store(in: &cancellables)
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,9 +203,6 @@ final class SectionViewController: UIViewController {
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Enable", comment: "title of enable button"), style: .default, handler: { _ in
                         UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
                         UserDefaults.standard.synchronize()
-                        if let navigationController = self.navigationController {
-                            navigationController.popViewController(animated: true)
-                        }
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Skip", comment: "Title of a Skip button"), style: .cancel, handler: nil))
                     present(alertController, animated: true, completion: nil)

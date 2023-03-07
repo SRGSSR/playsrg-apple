@@ -57,6 +57,10 @@ struct ShowHeaderView: View {
         @State private var isLandscape: Bool
         
         private let compactDescriptionOffet: CGFloat = -12
+      
+#if os(iOS)
+        @AppStorage(PlaySRGSettingMediaListLayoutEnabled) var isMediaListLayoutEnabled = false
+#endif
         
         init(model: ShowHeaderViewModel) {
             self.model = model
@@ -65,7 +69,7 @@ struct ShowHeaderView: View {
         
         private var descriptionHorizontalPadding: CGFloat {
 #if os(iOS)
-            if ApplicationSettingMediaListLayoutEnabled() && horizontalSizeClass == .regular {
+            if isMediaListLayoutEnabled && horizontalSizeClass == .regular {
                 return 32
             }
             else {
