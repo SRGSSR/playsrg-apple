@@ -1696,13 +1696,15 @@ end
 def release_notes_table_for_html(platform, business_unit)
   minimum_version = Gem::Version.new(release_notes_minimum_version(platform))
 
-  table = get_appstore_release_notes_table(platform, business_unit)
+  file_name = get_appstore_release_notes_file_name(platform)
+
+  table = get_appstore_release_notes_table(file_name, business_unit)
   table = table.sort_by { |row| Gem::Version.new(row[0]) }.reverse
   table.select { |row| Gem::Version.new(row[0]) >= minimum_version }
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
-  file_name = "What_s new #{platform}.csv"
+  file_name = get_appstore_release_notes_file_name(platform)
   table = get_appstore_release_notes_table(file_name, business_unit)
 
   version_row = table.select { |row| row[0] == marketing_version }.first
@@ -1716,6 +1718,10 @@ end
 def get_appstore_release_notes_table(file_name, business_unit)
   file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
   CSV.read(file_path)
+end
+
+def get_appstore_release_notes_file_name(platform)
+  "What_s new #{platform}.csv"
 end
 
 def crowdin_language(business_unit)
