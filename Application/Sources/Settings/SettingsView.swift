@@ -125,8 +125,12 @@ struct SettingsView: View {
         
         var body: some View {
             Button(action: action) {
-                Text(text)
-                    .foregroundColor(model.isLoggedIn ? .red : .primary)
+                HStack(alignment: .center) {
+                    Spacer()
+                    Text(text)
+                        .foregroundColor(model.isLoggedIn ? .red : .primary)
+                    Spacer()
+                }
             }
             .alert(isPresented: $isAlertDisplayed, content: alert)
         }
