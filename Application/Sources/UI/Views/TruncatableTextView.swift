@@ -79,8 +79,10 @@ struct TruncatableTextView: View {
                 ZStack(alignment: .bottomTrailing) {
                     text(lineLimit: lineLimit)
                         .readSize { size in
-                            truncatedSize = size
-                            isTruncated = truncatedSize != intrinsicSize
+                            if size != .zero {
+                                truncatedSize = size
+                                isTruncated = truncatedSize != intrinsicSize
+                            }
                         }
                         .mask(
                             VStack(spacing: 0) {
@@ -103,8 +105,10 @@ struct TruncatableTextView: View {
                         .fixedSize(horizontal: false, vertical: true)
                         .hidden()
                         .readSize { size in
-                            intrinsicSize = size
-                            isTruncated = truncatedSize != intrinsicSize
+                            if size != .zero {
+                                intrinsicSize = size
+                                isTruncated = truncatedSize != intrinsicSize
+                            }
                         }
                 )
                 Spacer(minLength: 0)
