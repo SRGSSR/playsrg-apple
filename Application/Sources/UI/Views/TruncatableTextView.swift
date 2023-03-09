@@ -136,7 +136,7 @@ struct TruncatableTextView: View {
                         startPoint: .leading,
                         endPoint: .trailing
                     )
-                    .frame(width: 32, height: showMoreButtonString.heightOfString(usingFontStyle: fontStyle))
+                    .frame(width: constant(iOS: 32, tvOS: 60), height: showMoreButtonString.heightOfString(usingFontStyle: fontStyle))
                     
                     Rectangle()
                         .foregroundColor(.clear)
