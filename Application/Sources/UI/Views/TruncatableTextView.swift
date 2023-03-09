@@ -120,6 +120,9 @@ struct TruncatableTextView: View {
             let fontStyle: SRGFont.Style
             let showMoreButtonString: String
             
+            // Content size changes are tracked to update mask.
+            @Environment(\.sizeCategory) private var sizeCategory
+            
             var body: some View {
                 HStack(alignment: .bottom, spacing: 0) {
                     Rectangle()
@@ -133,44 +136,13 @@ struct TruncatableTextView: View {
                         startPoint: .leading,
                         endPoint: .trailing
                     )
-                    .frame(width: 32, height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
+                    .frame(width: 32, height: showMoreButtonString.heightOfString(usingFontStyle: fontStyle))
                     
                     Rectangle()
                         .foregroundColor(.clear)
-                        .frame(width: showMoreButtonString.widthOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))), alignment: .center)
+                        .frame(width: showMoreButtonString.widthOfString(usingFontStyle: fontStyle), alignment: .center)
                 }
-                .frame(height: showMoreButtonString.heightOfString(usingFont: fontToUIFont(font: SRGFont.font(fontStyle))))
-            }
-            
-            private func fontToUIFont(font: Font) -> UIFont {
-                switch font {
-#if os(iOS)
-                case .largeTitle:
-                    return UIFont.preferredFont(forTextStyle: .largeTitle)
-#endif
-                case .title:
-                    return UIFont.preferredFont(forTextStyle: .title1)
-                case .title2:
-                    return UIFont.preferredFont(forTextStyle: .title2)
-                case .title3:
-                    return UIFont.preferredFont(forTextStyle: .title3)
-                case .headline:
-                    return UIFont.preferredFont(forTextStyle: .headline)
-                case .subheadline:
-                    return UIFont.preferredFont(forTextStyle: .subheadline)
-                case .callout:
-                    return UIFont.preferredFont(forTextStyle: .callout)
-                case .caption:
-                    return UIFont.preferredFont(forTextStyle: .caption1)
-                case .caption2:
-                    return UIFont.preferredFont(forTextStyle: .caption2)
-                case .footnote:
-                    return UIFont.preferredFont(forTextStyle: .footnote)
-                case .body:
-                    return UIFont.preferredFont(forTextStyle: .body)
-                default:
-                    return UIFont.preferredFont(forTextStyle: .body)
-                }
+                .frame(height: showMoreButtonString.heightOfString(usingFontStyle: fontStyle))
             }
         }
     }
