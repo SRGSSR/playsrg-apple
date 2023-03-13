@@ -6,6 +6,7 @@
 
 import Combine
 import Foundation
+import SRGAppearanceSwift
 import SRGDataProviderCombine
 import SwiftUI
 
@@ -91,13 +92,15 @@ extension String {
         return prefix(1).capitalized + dropFirst()
     }
     
-    func heightOfString(usingFont font: UIFont) -> CGFloat {
+    func heightOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
+        let font = SRGFont.font(fontStyle) as UIFont
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = self.size(withAttributes: fontAttributes)
         return size.height
     }
     
-    func widthOfString(usingFont font: UIFont) -> CGFloat {
+    func widthOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
+        let font = SRGFont.font(fontStyle) as UIFont
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = self.size(withAttributes: fontAttributes)
         return size.width
