@@ -18,6 +18,8 @@ final class ShowHeaderViewModel: ObservableObject {
     
     @Published var isFavoriteRemovalAlertDisplayed = false
     
+    private var wouldLikeToSubscribe = false
+    
     init() {
         // Drop initial values; relevant values are first assigned when the view appears
         $show
@@ -43,6 +45,20 @@ final class ShowHeaderViewModel: ObservableObject {
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
+            .map { subscriptionStatus in
+                if self.wouldLikeToSubscribe {
+                    if let pushService = PushService.shared, pushService.isEnabled {
+                        if subscriptionStatus != .subscribed {
+                            self.toggleSubscription()
+                        }
+                        else if let show = self.show {
+                            Banner.showSubscription(true, forItemWithName: show.title)
+                        }
+                        self.wouldLikeToSubscribe = false
+                    }
+                }
+                return subscriptionStatus
+            }
             .assign(to: &$subscriptionStatus)
 #endif
     }
@@ -119,13 +135,18 @@ final class ShowHeaderViewModel: ObservableObject {
     
 #if os(iOS)
     func toggleSubscription() {
-        guard let show, FavoritesToggleSubscriptionForShow(show) else { return }
+        guard let show else { return }
         
-        let isSubscribed = (subscriptionStatus == .subscribed)
-        let action = isSubscribed ? .remove : .add as AnalyticsListAction
-        AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
-        
-        Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
+        if FavoritesToggleSubscriptionForShow(show) {
+            let isSubscribed = (subscriptionStatus == .subscribed)
+            let action = isSubscribed ? .remove : .add as AnalyticsListAction
+            AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
+            
+            Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
+        }
+        else if let pushService = PushService.shared, !pushService.isEnabled {
+            wouldLikeToSubscribe = true
+        }
     }
 #endif
 }
