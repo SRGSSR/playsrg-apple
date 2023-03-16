@@ -52,7 +52,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var lead: String? {
-        return show?.leadOrSummary
+        return show?.play_summary
     }
     
     var broadcastInformation: String? {

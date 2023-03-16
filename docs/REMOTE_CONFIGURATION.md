@@ -68,6 +68,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 The radio channel JSON dictionaries have one more key:
 
 * `homepageHidden` (optional, boolean): Set to `true` iff a homepage does not have to be displayed for the radio channel. If omitted, `false`.
+* `showLeadPreferred` (optional, boolean): Set to `true` iff show pages and show elements should display lead instead of description. If omitted, `false`.
 
 ## Audio homepage
 
