@@ -51,7 +51,7 @@ final class ShowHeaderViewModel: ObservableObject {
         return show?.title
     }
     
-    var lead: String? {
+    var summary: String? {
         return show?.play_summary
     }
     
