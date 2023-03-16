@@ -190,15 +190,9 @@ struct ShowHeaderView: View {
                 .frame(height: constant(iOS: 40, tvOS: 70))
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 if let summary = model.show?.play_summary {
-#if os(iOS)
                     SummaryView(summary)
                     // See above
                         .fixedSize(horizontal: false, vertical: true)
-#else
-                    SummaryView(summary)
-                    // See above
-                        .fixedSize(horizontal: false, vertical: true)
-#endif
                 }
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
