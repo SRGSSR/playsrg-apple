@@ -175,6 +175,14 @@ Get AppStore App status for iOS and tvOS
 
 Publish release notes for iOS and tvOS on Github pages
 
+### ios afterAppStoreValidationGitFlow
+
+```sh
+[bundle exec] fastlane ios afterAppStoreValidationGitFlow
+```
+
+After AppStore validation git flow: merges to master, tags released platforms, merges first tag to develop. Bumps marketing version and build number and pushes.
+
 ### ios iOSrsiScreenshots
 
 ```sh
