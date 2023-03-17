@@ -22,6 +22,9 @@ struct TruncatableTextView: View {
     
     let showMore: () -> Void
     
+    var foregroundColor: Color = .srgGray96
+    var secondaryColor: Color = .white
+    
     @State private var isTruncated = false
     @State private var isFocused = false
     
@@ -37,11 +40,25 @@ struct TruncatableTextView: View {
         self.showMore = showMore
     }
     
+    func foregroundColor(_ color: Color) -> Self {
+        var truncatableTextView = self
+        
+        truncatableTextView.foregroundColor = color
+        return truncatableTextView
+    }
+    
+    func secondaryColor(_ color: Color) -> Self {
+        var truncatableTextView = self
+        
+        truncatableTextView.secondaryColor = color
+        return truncatableTextView
+    }
+    
     var body: some View {
         Button {
             showMore()
         } label: {
-            MainView(content: content, lineLimit: lineLimit, isTruncated: $isTruncated) {
+            MainView(content: content, lineLimit: lineLimit, foregroundColor: foregroundColor, secondaryColor: secondaryColor, isTruncated: $isTruncated) {
                 showMore()
             }
             .onParentFocusChange { isFocused = $0 }
@@ -56,6 +73,8 @@ struct TruncatableTextView: View {
     fileprivate struct MainView: View {
         let content: String
         let lineLimit: Int?
+        let foregroundColor: Color
+        let secondaryColor: Color
         @Binding private(set) var isTruncated: Bool
         
         let showMore: () -> Void
@@ -70,7 +89,7 @@ struct TruncatableTextView: View {
             return Text(content)
                 .srgFont(fontStyle)
                 .lineLimit(lineLimit)
-                .foregroundColor(.srgGray96)
+                .foregroundColor(foregroundColor)
                 .multilineTextAlignment(.leading)
         }
         
@@ -97,7 +116,7 @@ struct TruncatableTextView: View {
                     if isTruncated {
                         Text(showMoreButtonString)
                             .srgFont(fontStyle)
-                            .foregroundColor(.white)
+                            .foregroundColor(secondaryColor)
                     }
                 }
                 .background(
@@ -155,6 +174,9 @@ struct TruncableTextView_Previews: PreviewProvider {
         Group {
             TruncatableTextView(content: "Short description.", lineLimit: 3) {}
             TruncatableTextView(content: String.loremIpsum, lineLimit: 3) {}
+            TruncatableTextView(content: String.loremIpsum, lineLimit: 3) {}
+                .foregroundColor(.white)
+                .secondaryColor(.srgGray96)
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)

@@ -154,24 +154,14 @@ struct MediaDetailView: View {
     
     private struct SummaryView: View {
         @ObservedObject var model: MediaDetailViewModel
-        @State var isFocused = false
         
         var body: some View {
-            GeometryReader { geometry in
-                VStack(alignment: .leading, spacing: 0) {
-                    if let summary = model.media?.play_fullSummary {
-                        Button {
-                            navigateToText(summary)
-                        } label: {
-                            Text(summary)
-                                .foregroundColor(.white)
-                                .srgFont(.body)
-                                .frame(width: geometry.size.width, alignment: .leading)
-                                .padding(.vertical, 5)
-                                .onParentFocusChange { isFocused = $0 }
-                        }
-                        .buttonStyle(TextButtonStyle(focused: isFocused))
+            VStack(alignment: .leading, spacing: 0) {
+                if let summary = model.media?.play_fullSummary {
+                    TruncatableTextView(content: summary, lineLimit: 3) {
+                        navigateToText(summary)
                     }
+                    .foregroundColor(.white)
                 }
             }
         }
