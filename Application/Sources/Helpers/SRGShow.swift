@@ -7,7 +7,15 @@
 import SRGDataProvider
 
 extension SRGShow {
-    var leadOrSummary: String? {
+    var play_summary: String? {
+        return ApplicationConfiguration.shared.isShowLeadPreferred ? leadOrSummary : summaryOrLead
+    }
+    
+    private var leadOrSummary: String? {
         return lead?.isEmpty ?? true ? summary : lead
+    }
+    
+    private var summaryOrLead: String? {
+        return summary?.isEmpty ?? true ? lead : summary
     }
 }

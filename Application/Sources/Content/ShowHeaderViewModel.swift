@@ -67,8 +67,8 @@ final class ShowHeaderViewModel: ObservableObject {
         return show?.title
     }
     
-    var lead: String? {
-        return show?.leadOrSummary
+    var summary: String? {
+        return show?.play_summary
     }
     
     var broadcastInformation: String? {

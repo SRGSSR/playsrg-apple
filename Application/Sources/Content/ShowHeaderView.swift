@@ -189,16 +189,10 @@ struct ShowHeaderView: View {
                 }
                 .frame(height: constant(iOS: 40, tvOS: 70))
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
-                if let lead = model.lead {
-#if os(iOS)
-                    LeadView(lead)
+                if let summary = model.show?.play_summary {
+                    SummaryView(summary)
                     // See above
                         .fixedSize(horizontal: false, vertical: true)
-#else
-                    LeadView(lead)
-                    // See above
-                        .fixedSize(horizontal: false, vertical: true)
-#endif
                 }
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
@@ -234,7 +228,7 @@ struct ShowHeaderView: View {
 #endif
         
         /// Behavior: h-exp, v-hug
-        private struct LeadView: View {
+        private struct SummaryView: View {
             let content: String
             
             @FirstResponder private var firstResponder
