@@ -435,10 +435,10 @@
 "Notifications have been enabled for %@" = "%@ wurde zu den Push-Mitteilungen hinzugefügt";
 
 /* Subscription label when notification enabled in the show view */
-"Notified" = "Notified";
+"Notified" = "Benachrichtigt";
 
 /* Subscription label to be notified in the show view */
-"Notify me" = "Notify me";
+"Notify me" = "Benachrichtigen";
 
 /* Now button in program guide */
 "Now" = "Jetzt";
