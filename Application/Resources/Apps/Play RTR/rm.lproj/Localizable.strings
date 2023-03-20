@@ -365,6 +365,9 @@
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media betg disponibel";
 
+/* More button label */
+"More" = "Dapli";
+
 /* Autoplay setting section footer */
 "More content is automatically played after playback of the current content ends." = "Automaticamein dapli cuntegn suenter playback sche inabel.";
 
@@ -435,7 +438,7 @@
 "Notified" = "Notifitgà";
 
 /* Subscription label to be notified in the show view */
-"Notify me" = "Trametta messadi a mai";
+"Notify me" = "Ma notifitgar";
 
 /* Now button in program guide */
 "Now" = "Ussa";

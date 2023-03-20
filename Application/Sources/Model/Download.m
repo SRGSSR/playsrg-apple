@@ -539,7 +539,7 @@ static NSArray<Download *> *s_sortedDownloads;
     NSString *extension = types.lastObject ?: @"mov";
     
     // Try to fix the default arbitrary binary data response with the url file extension
-    if ([type.lowercaseString isEqualToString:@"application"] && [extension.lowercaseString isEqualToString:@"octet-stream"]) {
+    if ([extension.lowercaseString isEqualToString:@"octet-stream"]) {
         if (self.downloadMediaURL.pathExtension != nil) {
             extension = self.downloadMediaURL.pathExtension;
         }

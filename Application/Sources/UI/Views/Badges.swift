@@ -16,14 +16,23 @@ private enum BadgeMetrics {
 struct Badge: View {
     let text: String
     let color: Color
+    let textColor: Color
+    
+    init(text: String, color: Color, textColor: Color = .white) {
+        self.text = text
+        self.color = color
+        self.textColor = textColor
+    }
     
     var body: some View {
         Text(text)
             .srgFont(.label)
             .textCase(.uppercase)
             .lineLimit(1)
-            .foregroundColor(.white)
-            .padding(.vertical, constant(iOS: 2, tvOS: 5))
+            .truncationMode(.head)
+            .foregroundColor(textColor)
+            .padding(.top, constant(iOS: 2, tvOS: 5))
+            .padding(.bottom, constant(iOS: 2, tvOS: 4))
             .padding(.horizontal, BadgeMetrics.horizontalPadding)
             .background(color)
             .cornerRadius(BadgeMetrics.cornerRadius)

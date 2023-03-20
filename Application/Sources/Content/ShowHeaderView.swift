@@ -7,6 +7,25 @@
 import NukeUI
 import SwiftUI
 
+// MARK: Contract
+
+@objc protocol ShowHeaderViewAction {
+    func showMore(sender: Any?, event: ShowMoreEvent?)
+}
+
+class ShowMoreEvent: UIEvent {
+    let content: String
+    
+    init(content: String) {
+        self.content = content
+        super.init()
+    }
+    
+    override init() {
+        fatalError("init() is not available")
+    }
+}
+
 // MARK: View
 
 /// Behavior: h-hug, v-hug
@@ -14,7 +33,7 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow
     @StateObject private var model = ShowHeaderViewModel()
     
-    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
+    fileprivate static let verticalSpacing: CGFloat = 24
     
     init(show: SRGShow) {
         _show = .constant(show)
@@ -35,38 +54,79 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
-        private var direction: StackDirection {
-            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+        @State private var isLandscape: Bool
+        
+        private let compactDescriptionOffet: CGFloat = -12
+      
+#if os(iOS)
+        @AppStorage(PlaySRGSettingMediaListLayoutEnabled) var isMediaListLayoutEnabled = false
+#endif
+        
+        init(model: ShowHeaderViewModel) {
+            self.model = model
+            self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
         }
         
-        private var alignment: StackAlignment {
-            return (horizontalSizeClass == .compact) ? .center : .leading
+        private var descriptionHorizontalPadding: CGFloat {
+#if os(iOS)
+            if isMediaListLayoutEnabled && horizontalSizeClass == .regular {
+                return 32
+            }
+            else {
+                return 16
+            }
+#else
+            return 0
+#endif
         }
         
         var body: some View {
-            Stack(direction: direction, alignment: alignment, spacing: 0) {
-                ImageView(source: model.imageUrl)
-                    .aspectRatio(16 / 9, contentMode: .fit)
-                    .overlay(ImageOverlay(horizontalSizeClass: horizontalSizeClass))
-                    .adaptiveMainFrame(for: horizontalSizeClass)
-                    .layoutPriority(1)
-                DescriptionView(model: model)
-                    .padding(.horizontal, constant(iOS: 16, tvOS: 80))
-                    .padding(.vertical)
-                    .frame(maxWidth: .infinity)
+            Group {
+                if horizontalSizeClass == .compact || !isLandscape {
+                    VStack(alignment: .center, spacing: 0) {
+                        ImageView(source: model.imageUrl)
+                            .aspectRatio(16 / 9, contentMode: .fit)
+                            .overlay(ImageOverlay(isHorizontal: false))
+                            .layoutPriority(1)
+                        DescriptionView(model: model, centerLayout: horizontalSizeClass == .compact)
+                            .padding(.horizontal, descriptionHorizontalPadding)
+                            .offset(y: compactDescriptionOffet)
+                    }
+                    .padding(.bottom, 24 + compactDescriptionOffet)
+                    .focusable()
+                }
+                else {
+                    HStack(spacing: 0) {
+                        DescriptionView(model: model, centerLayout: false)
+                            .padding(.leading, descriptionHorizontalPadding)
+                            .padding(.trailing, 16)
+                        ImageView(source: model.imageUrl)
+                            .aspectRatio(16 / 9, contentMode: .fit)
+                            .overlay(ImageOverlay(isHorizontal: true))
+                    }
+                    .padding(.bottom, constant(iOS: 40, tvOS: 50))
+                    .focusable()
+                }
             }
-            .padding(.bottom, constant(iOS: 20, tvOS: 50))
-            .focusable()
+            .readSize { _ in
+                isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
+            }
         }
     }
     
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
-        let horizontalSizeClass: UIUserInterfaceSizeClass
+        let isHorizontal: Bool
         
         var body: some View {
-            if horizontalSizeClass == .regular {
-                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .trailing)
+            if isHorizontal {
+                Group {
+                    LinearGradient(colors: [.clear, .srgGray16], startPoint: UnitPoint(x: 0.1, y: 0.5), endPoint: .leading)
+                    LinearGradient(colors: [.clear, .srgGray16], startPoint: UnitPoint(x: 0.5, y: 0.95), endPoint: .bottom)
+                }
+            }
+            else {
+                LinearGradient(colors: [.clear, .srgGray16], startPoint: UnitPoint(x: 0.5, y: 0.9), endPoint: .bottom)
             }
         }
     }
@@ -74,51 +134,71 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
-#if os(tvOS)
-        @State var isFocused = false
-#endif
+        let centerLayout: Bool
+        
+        private var stackAlignment: HorizontalAlignment {
+            return centerLayout ? .center : .leading
+        }
+        
+        private var titleAlignment: TextAlignment {
+            return centerLayout ? .center : .leading
+        }
         
         var body: some View {
-            VStack(spacing: ShowHeaderView.verticalSpacing) {
-                if let broadcastInformation = model.broadcastInformation {
-                    Badge(text: broadcastInformation, color: Color(.play_green))
-                }
+            VStack(alignment: stackAlignment, spacing: ShowHeaderView.verticalSpacing) {
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)
-                    // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
-                    // when calculated with a `UIHostingController`, but without this the text does not occupy
-                    // all lines it could.
+                // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
+                // when calculated with a `UIHostingController`, but without this the text does not occupy
+                // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.srgGrayC7)
-                if let lead = model.lead {
+                    .multilineTextAlignment(titleAlignment)
+                    .foregroundColor(.white)
+                HStack(spacing: 8) {
+                    if centerLayout {
+                        ExpandingButton(icon: model.favoriteIcon,
+                                        label: model.favoriteLabel,
+                                        accessibilityLabel: model.favoriteAccessibilityLabel,
+                                        action: favoriteAction)
+                        .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
 #if os(iOS)
-                    LeadView(lead)
-                        // See above
-                        .fixedSize(horizontal: false, vertical: true)
-#else
-                    Button {
-                        navigateToText(lead)
-                    } label: {
-                        LeadView(lead)
-                            // See above
-                            .fixedSize(horizontal: false, vertical: true)
-                            .onParentFocusChange { isFocused = $0 }
-                    }
-                    .buttonStyle(TextButtonStyle(focused: isFocused))
+                        if model.isSubscriptionPossible {
+                            ExpandingButton(icon: model.subscriptionIcon,
+                                            label: model.subscriptionLabel,
+                                            accessibilityLabel: model.subscriptionAccessibilityLabel,
+                                            action: subscriptionAction)
+                        }
 #endif
-                }
-                HStack(spacing: 20) {
-                    SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
+                    }
+                    else {
+                        SimpleButton(icon: model.favoriteIcon,
+                                     label: model.favoriteLabel,
+                                     labelMinimumScaleFactor: 1,
+                                     accessibilityLabel: model.favoriteAccessibilityLabel,
+                                     action: favoriteAction)
 #if os(iOS)
-                    if model.isSubscriptionPossible {
-                        SimpleButton(icon: model.subscriptionIcon, label: model.subscriptionLabel, accessibilityLabel: model.subscriptionAccessibilityLabel, action: subscriptionAction)
-                    }
+                        if model.isSubscriptionPossible {
+                            SimpleButton(icon: model.subscriptionIcon,
+                                         label: model.subscriptionLabel,
+                                         accessibilityLabel: model.subscriptionAccessibilityLabel,
+                                         action: subscriptionAction)
+                        }
 #endif
+                    }
                 }
+                .frame(height: constant(iOS: 40, tvOS: 70))
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                if let summary = model.show?.play_summary {
+                    SummaryView(summary)
+                    // See above
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                if let broadcastInformation = model.broadcastInformation {
+                    Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
+                }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         
         private func favoriteAction() {
@@ -148,34 +228,20 @@ struct ShowHeaderView: View {
 #endif
         
         /// Behavior: h-exp, v-hug
-        private struct LeadView: View {
+        private struct SummaryView: View {
             let content: String
             
+            @FirstResponder private var firstResponder
+            
             var body: some View {
-                Text(content)
-                    .srgFont(.body)
-                    .lineLimit(6)
-                    .multilineTextAlignment(.center)
-                    .foregroundColor(.srgGray96)
+                TruncatableTextView(content: content, lineLimit: 3) {
+                    firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
+                }
+                .responderChain(from: firstResponder)
             }
             
             init(_ content: String) {
                 self.content = content
-            }
-        }
-    }
-}
-
-// MARK: Helpers
-
-private extension View {
-    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
-        return Group {
-            if horizontalSizeClass == .compact {
-                self
-            }
-            else {
-                frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
             }
         }
     }
@@ -194,26 +260,41 @@ enum ShowHeaderViewSize {
 }
 
 struct ShowHeaderView_Previews: PreviewProvider {
-    private static let model: ShowHeaderViewModel = {
+    private static let model1: ShowHeaderViewModel = {
         let model = ShowHeaderViewModel()
         model.show = Mock.show()
         return model
     }()
     
+    private static let model2: ShowHeaderViewModel = {
+        let model = ShowHeaderViewModel()
+        model.show = Mock.show(.overflow)
+        return model
+    }()
+    
     static var previews: some View {
 #if os(tvOS)
-        ShowHeaderView.MainView(model: model)
-            .previewLayout(.sizeThatFits)
+        Group {
+            ShowHeaderView.MainView(model: model1)
+            ShowHeaderView.MainView(model: model2)
+        }
+        .previewLayout(.sizeThatFits)
 #else
-        ShowHeaderView.MainView(model: model)
-            .frame(width: 1000)
-            .previewLayout(.sizeThatFits)
-            .environment(\.horizontalSizeClass, .regular)
+        Group {
+            ShowHeaderView.MainView(model: model1)
+            ShowHeaderView.MainView(model: model2)
+        }
+        .previewLayout(.sizeThatFits)
+        .frame(width: 1000)
+        .environment(\.horizontalSizeClass, .regular)
         
-        ShowHeaderView.MainView(model: model)
-            .frame(width: 375)
-            .previewLayout(.sizeThatFits)
-            .environment(\.horizontalSizeClass, .compact)
+        Group {
+            ShowHeaderView.MainView(model: model1)
+            ShowHeaderView.MainView(model: model2)
+        }
+        .frame(width: 375)
+        .previewLayout(.sizeThatFits)
+        .environment(\.horizontalSizeClass, .compact)
 #endif
     }
 }

@@ -117,6 +117,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UIView *playerView;
 @property (nonatomic, weak) IBOutlet SRGLetterboxView *letterboxView;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *metadataWidthConstraint;
+
 // Normal appearance (on-demand, scheduled livestream)
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
@@ -406,6 +408,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     self.multiAudioImageView.isAccessibilityElement = YES;
+    
+    self.metadataWidthConstraint.constant = LayoutMaxListWidth;
     
     // Ensure consistent initial layout constraint priorities
     self.playerTopConstraint.priority = MediaPlayerBottomConstraintNormalPriority;

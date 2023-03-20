@@ -155,6 +155,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
 @property (nonatomic, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
+@property (nonatomic, getter=isShowLeadPreferred) BOOL showLeadPreferred;
+
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 @property (nonatomic) NSURL *overridePlayURL;
 #endif
@@ -406,6 +408,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.searchSettingsHidden = [firebaseConfiguration boolForKey:@"searchSettingsHidden"];
     self.searchSettingSubtitledHidden = [firebaseConfiguration boolForKey:@"searchSettingSubtitledHidden"];
     self.showsSearchHidden = [firebaseConfiguration boolForKey:@"showsSearchHidden"];
+    
+    self.showLeadPreferred = [firebaseConfiguration boolForKey:@"showLeadPreferred"];
     
     [NSNotificationCenter.defaultCenter postNotificationName:ApplicationConfigurationDidChangeNotification
                                                       object:self];

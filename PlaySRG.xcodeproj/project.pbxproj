@@ -22,16 +22,26 @@
 		0447E0AC2861C726001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AB2861C726001B7285 /* Introspect */; };
 		0447E0AE2861C72D001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AD2861C72D001B7285 /* Introspect */; };
 		0447E0B02861C73B001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AF2861C73B001B7285 /* Introspect */; };
-		0451ECE328742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECE428742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECE528742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECE628742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECE728742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECE828742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECE928742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECEA28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECEB28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		0451ECEC28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		044E392029B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392129B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392229B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392329B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392429B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392529B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392629B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392729B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392829B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392929B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		0451ECE328742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECE428742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECE528742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECE628742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECE728742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECE828742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECE928742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECEA28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECEB28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		0451ECEC28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0456C4A12976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
 		0456C4A22976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
 		0456C4A32976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
@@ -52,6 +62,16 @@
 		04C2DE7F2937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE802937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE812937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
+		04D21DBC299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DBD299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DBE299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DBF299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D21DC0299BEB42009CEA15 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04D2A92B29ACFE5900E11B28 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2A92A29ACFE5900E11B28 /* Handle.swift */; };
+		04D2A92C29ACFE5900E11B28 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2A92A29ACFE5900E11B28 /* Handle.swift */; };
+		04D2A92D29ACFE5900E11B28 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2A92A29ACFE5900E11B28 /* Handle.swift */; };
+		04D2A92E29ACFE5900E11B28 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2A92A29ACFE5900E11B28 /* Handle.swift */; };
+		04D2A92F29ACFE5900E11B28 /* Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2A92A29ACFE5900E11B28 /* Handle.swift */; };
 		04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
@@ -92,6 +112,11 @@
 		04E4DEF7283696AD00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEF8283696AF00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEF9283696AF00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
+		04EB14C2299E312200FD004A /* SheetTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB14C1299E312200FD004A /* SheetTextView.swift */; };
+		04EB14C3299E312200FD004A /* SheetTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB14C1299E312200FD004A /* SheetTextView.swift */; };
+		04EB14C4299E312200FD004A /* SheetTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB14C1299E312200FD004A /* SheetTextView.swift */; };
+		04EB14C5299E312200FD004A /* SheetTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB14C1299E312200FD004A /* SheetTextView.swift */; };
+		04EB14C6299E312200FD004A /* SheetTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB14C1299E312200FD004A /* SheetTextView.swift */; };
 		04F184CE28EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
 		04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
 		04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
@@ -107,6 +132,11 @@
 		04F184EF28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
 		04F184F028F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
 		04F184F128F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04FE629F29A4F2AF00628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A029A4F2B000628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A129A4F2B100628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A229A4F2B100628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
+		04FE62A329A4F2B200628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
 		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
@@ -2709,13 +2739,17 @@
 		0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
-		0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+PlaySRG.swift"; sourceTree = "<group>"; };
+		044E391F29B10C9100C1768A /* SRGShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRGShow.swift; sourceTree = "<group>"; };
+		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsHiddenEvent.swift; sourceTree = "<group>"; };
 		04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClickEvent.swift; sourceTree = "<group>"; };
+		04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruncatableTextView.swift; sourceTree = "<group>"; };
+		04D2A92A29ACFE5900E11B28 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
+		04EB14C1299E312200FD004A /* SheetTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetTextView.swift; sourceTree = "<group>"; };
 		04F184CD28EC5EE500B1207C /* ShowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowButton.swift; sourceTree = "<group>"; };
 		04F184E728F097E900B1207C /* BadgeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeList.swift; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -3905,6 +3939,7 @@
 				08AF947E217D27E40028B082 /* SharingItem.h */,
 				08AF947F217D27E40028B082 /* SharingItem.m */,
 				6F74293C265BE52E0000538D /* Signals.swift */,
+				044E391F29B10C9100C1768A /* SRGShow.swift */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
@@ -4698,8 +4733,8 @@
 				6F4843CA23EC3ADF00868F78 /* AccessibilityView.h */,
 				6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */,
 				6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */,
-				0809812F2622195900AA586B /* Badges.swift */,
 				04F184E728F097E900B1207C /* BadgeList.swift */,
+				0809812F2622195900AA586B /* Badges.swift */,
 				6F475FB21EB37BC6003021EA /* Banner.h */,
 				6F475FB31EB37BC6003021EA /* Banner.m */,
 				6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */,
@@ -4722,6 +4757,7 @@
 				6FCB65EF26F4994C00A95C07 /* GoogleCastFloatingButton.swift */,
 				6FD68616246052A100B8018A /* GradientView.h */,
 				6FD68617246052A100B8018A /* GradientView.m */,
+				04D2A92A29ACFE5900E11B28 /* Handle.swift */,
 				6FE14E5F263EA83C004AD913 /* HeaderView.swift */,
 				6FCE753426D3786F00667298 /* HeroMediaCell.swift */,
 				6FB89E26283DEA12006F9C6C /* HighlightCell.swift */,
@@ -4747,6 +4783,7 @@
 				6F5E99ED283B4C4100DD8A4A /* SafariView.swift */,
 				6F40B7782726CB8300DDFED0 /* SearchBar.swift */,
 				043CBF0B286512CF0063FD97 /* SearchBarView.swift */,
+				04EB14C1299E312200FD004A /* SheetTextView.swift */,
 				085C0D982611F33E008E07C8 /* ShowAccessCell.swift */,
 				04F184CD28EC5EE500B1207C /* ShowButton.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
@@ -4760,6 +4797,7 @@
 				6FE14E6A263EA9B5004AD913 /* TitleView.swift */,
 				6FDFD88B24E6BC9200F20382 /* TopicCell.swift */,
 				6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */,
+				04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */,
 				6FDAAD93283283EB008E2806 /* WebView.swift */,
 			);
 			path = Views;
@@ -4820,7 +4858,7 @@
 				6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */,
 				6F4760761EB37D60003021EA /* UIWindow+PlaySRG.h */,
 				6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */,
-				0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */,
+				0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -8384,7 +8422,7 @@
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
 				0456C4A12976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FD633EA1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
-				0451ECE328742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECE328742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6FF65C542835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				0407308528635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */,
@@ -8417,6 +8455,7 @@
 				6F978B512849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F33E60D2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6FDEC19226DE307E0020A03F /* PresenterMode.swift in Sources */,
+				04D21DBC299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0827DA251F0D437400A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6F33443428642A8B00E664F1 /* MediaSearchSettings.swift in Sources */,
 				6F0850F426256A7700B4E410 /* Reachability.m in Sources */,
@@ -8445,7 +8484,9 @@
 				6F2DE05326440FB00059335E /* ActivityIndicator.swift in Sources */,
 				6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */,
+				04D2A92B29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6F8D54422639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
+				04EB14C2299E312200FD004A /* SheetTextView.swift in Sources */,
 				6FB0AEFC217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				E694A9F51D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6F80106920443230009FE197 /* PlayApplication.m in Sources */,
@@ -8477,6 +8518,7 @@
 				6F16C7A326025698006F685A /* PageViewController.swift in Sources */,
 				04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
+				044E392029B10C9200C1768A /* SRGShow.swift in Sources */,
 				6F40B7792726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
 				6FE9049226F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
@@ -8586,7 +8628,7 @@
 				6FE9048726F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				08F5DB11262DC7F700F717D0 /* Logger.swift in Sources */,
 				6FAAF78A20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
-				0451ECE428742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECE428742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FFF8EDD2664BFA90016B793 /* Colors.swift in Sources */,
 				6FAE561D26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6FD1EF382861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -8623,6 +8665,7 @@
 				6FE9049326F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6F0AF6E5267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				04D2A92C29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FB9B3D726CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				0456C4A22976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */,
@@ -8689,6 +8732,7 @@
 				6FC2F7F92628F23700BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AF91DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
+				044E392129B10C9200C1768A /* SRGShow.swift in Sources */,
 				082910AF239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981312622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDC2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -8710,6 +8754,7 @@
 				6F8D54432639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE171EA63D5A00965F45 /* PlayMiniPlayerView.m in Sources */,
 				6FB89E28283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04EB14C3299E312200FD004A /* SheetTextView.swift in Sources */,
 				08209309208F522B00711DE4 /* PushService.m in Sources */,
 				6F40B77A2726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FE21EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -8733,6 +8778,7 @@
 				6F49EF94263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD95283283EB008E2806 /* WebView.swift in Sources */,
 				04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */,
+				04D21DBD299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5C271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
@@ -8840,7 +8886,7 @@
 				6FCE753726D3786F00667298 /* HeroMediaCell.swift in Sources */,
 				6FE9048826F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				08F5DB12262DC7F700F717D0 /* Logger.swift in Sources */,
-				0451ECE528742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECE528742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FAAF78C20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EDE2664BFAA0016B793 /* Colors.swift in Sources */,
 				6FD1EF392861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -8877,6 +8923,7 @@
 				6FF65C562835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				6FE9049426F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6F0AF6E6267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
+				04D2A92D29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				0456C4A32976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FB9B3D826CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
@@ -8943,6 +8990,7 @@
 				6FC2F7FA2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AFA1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
+				044E392229B10C9200C1768A /* SRGShow.swift in Sources */,
 				082910B0239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981322622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDD2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -8964,6 +9012,7 @@
 				6F8D54442639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE191EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				6FB89E29283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04EB14C4299E312200FD004A /* SheetTextView.swift in Sources */,
 				0820930A208F522B00711DE4 /* PushService.m in Sources */,
 				6F40B77B2726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FE31EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -8987,6 +9036,7 @@
 				6F49EF95263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD96283283EB008E2806 /* WebView.swift in Sources */,
 				04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */,
+				04D21DBE299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5D271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9094,7 +9144,7 @@
 				6FCE753826D3786F00667298 /* HeroMediaCell.swift in Sources */,
 				6FE9048926F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				08F5DB13262DC7F700F717D0 /* Logger.swift in Sources */,
-				0451ECE628742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECE628742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FAAF78E20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EDF2664BFAA0016B793 /* Colors.swift in Sources */,
 				6FD1EF3A2861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -9131,6 +9181,7 @@
 				6FF65C572835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				6FE9049526F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6F0AF6E7267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
+				04D2A92E29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				0456C4A42976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FB9B3D926CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
@@ -9197,6 +9248,7 @@
 				6FC2F7FB2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AFB1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E323D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
+				044E392329B10C9200C1768A /* SRGShow.swift in Sources */,
 				082910B1239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981332622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDE2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -9218,6 +9270,7 @@
 				6F8D54452639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1B1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				6FB89E2A283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04EB14C5299E312200FD004A /* SheetTextView.swift in Sources */,
 				0820930B208F522B00711DE4 /* PushService.m in Sources */,
 				6F40B77C2726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FE41EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -9241,6 +9294,7 @@
 				6F49EF96263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD97283283EB008E2806 /* WebView.swift in Sources */,
 				04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */,
+				04D21DBF299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5E271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9358,7 +9412,7 @@
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651826BC58C800454A28 /* CalendarView.swift in Sources */,
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
-				0451ECE728742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECE728742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				08AF2AF126BA83EE00C4745E /* ExpandingButton.swift in Sources */,
 				6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
@@ -9426,6 +9480,7 @@
 				6F9122C31DC8708400725EEB /* PlayErrors.m in Sources */,
 				6F573D0826D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
+				04D21DC0299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				6FD4C2E5268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F2F556F27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				6FE862702657C5F30061D3F0 /* MoreCell.swift in Sources */,
@@ -9508,6 +9563,7 @@
 				0875851723A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
+				044E392429B10C9200C1768A /* SRGShow.swift in Sources */,
 				6FF65C5E28360EB100AF0768 /* Onboarding.swift in Sources */,
 				087584F323A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -9533,6 +9589,8 @@
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
 				6F16C81026025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10F2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
+				04EB14C6299E312200FD004A /* SheetTextView.swift in Sources */,
+				04D2A92F29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FCA5BE027D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F16C7A726025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
@@ -9661,6 +9719,7 @@
 				6F6CD8622865767700DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FC413D524EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				6FA8E57F261CB791003FFDCF /* DataViewController.m in Sources */,
+				04FE629F29A4F2AF00628570 /* TruncatableTextView.swift in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FA8257AAF240077322C /* NSBundle+PlaySRG.m in Sources */,
 				6FD1EF3C2861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -9679,7 +9738,7 @@
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F924286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F762719C5650082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECE828742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECE828742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FC413D224EEEDC900FDF806 /* RadioChannel.m in Sources */,
@@ -9738,6 +9797,7 @@
 				6FD4C2E6268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162B2837C7160074845E /* SettingsView.swift in Sources */,
 				6F8D54472639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
+				044E392529B10C9200C1768A /* SRGShow.swift in Sources */,
 				6FEF236C2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6B2719C46C0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981352622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -9807,6 +9867,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FE62A029A4F2B000628570 /* TruncatableTextView.swift in Sources */,
 				6FE86F722719C4CC0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B324F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AB2541647400A28E79 /* Colors.swift in Sources */,
@@ -9831,7 +9892,7 @@
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F925286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F772719C5670082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECE928742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECE928742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FC413DA24EEEDC900FDF806 /* RadioChannel.m in Sources */,
@@ -9890,6 +9951,7 @@
 				6FD4C2E7268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162C2837C7170074845E /* SettingsView.swift in Sources */,
 				6F8D54482639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
+				044E392629B10C9200C1768A /* SRGShow.swift in Sources */,
 				6FEF236D2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6D2719C46F0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981362622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -9959,6 +10021,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FE62A129A4F2B100628570 /* TruncatableTextView.swift in Sources */,
 				6FE86F732719C4CC0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B424F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AC2541647400A28E79 /* Colors.swift in Sources */,
@@ -9983,7 +10046,7 @@
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F926286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F782719C5680082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECEA28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECEA28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FC413E224EEEDCA00FDF806 /* RadioChannel.m in Sources */,
@@ -10042,6 +10105,7 @@
 				6FD4C2E8268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162D2837C7170074845E /* SettingsView.swift in Sources */,
 				6F8D54492639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
+				044E392729B10C9200C1768A /* SRGShow.swift in Sources */,
 				6FEF236E2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6E2719C4700082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981372622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -10111,6 +10175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FE62A229A4F2B100628570 /* TruncatableTextView.swift in Sources */,
 				6FE86F742719C4CD0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B524F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AD2541647400A28E79 /* Colors.swift in Sources */,
@@ -10135,7 +10200,7 @@
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F927286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F792719C5690082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECEB28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECEB28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FC413EA24EEEDCA00FDF806 /* RadioChannel.m in Sources */,
@@ -10194,6 +10259,7 @@
 				6FD4C2E9268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162E2837C7180074845E /* SettingsView.swift in Sources */,
 				6F8D544A2639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
+				044E392829B10C9200C1768A /* SRGShow.swift in Sources */,
 				6FEF236F2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6F2719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981382622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -10275,7 +10341,7 @@
 				04F184F128F097E900B1207C /* BadgeList.swift in Sources */,
 				6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */,
 				6F7C664E26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
-				0451ECEC28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
+				0451ECEC28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				085C0DCC26132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F8012628F23C00BF6B19 /* ResponderChain.swift in Sources */,
 				6FD1EF402861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -10320,6 +10386,7 @@
 				6F3CCEA226CAC7A2004039E2 /* Blur.swift in Sources */,
 				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				0825914927285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
+				04FE62A329A4F2B200628570 /* TruncatableTextView.swift in Sources */,
 				6F73BFBF26563C830032D742 /* Content.swift in Sources */,
 				6FCE7AC9260367B90037A861 /* HostViews.swift in Sources */,
 				6F9ABCE42813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -10349,6 +10416,7 @@
 				6FEF23702732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F702719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981392622195900AA586B /* LiveMediaCell.swift in Sources */,
+				044E392929B10C9200C1768A /* SRGShow.swift in Sources */,
 				6F0B16332837C72E0074845E /* SettingsViewModel.swift in Sources */,
 				0858CA64271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,

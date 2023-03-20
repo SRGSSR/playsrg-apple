@@ -125,6 +125,11 @@ enum Mock {
     }
     
 #if os(iOS)
+    static func download(_ kind: Media = .standard) -> Download? {
+        let media = mockObject(kind.rawValue, type: SRGMedia.self)
+        return Download.add(for: media)
+    }
+    
     enum Notification: String {
         case standard
         case overflow
@@ -147,6 +152,7 @@ enum Mock {
     enum Show: String {
         case standard
         case overflow
+        case short
     }
     
     static func show(_ kind: Show = .standard) -> SRGShow {

@@ -53,4 +53,13 @@ NSString *PlaySRGNonLocalizedString(NSString *string)
 #endif
 }
 
+- (BOOL)play_isAppStoreRelease
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    return NO;
+#else
+    return ![self play_isTestFlightDistribution];
+#endif
+}
+
 @end

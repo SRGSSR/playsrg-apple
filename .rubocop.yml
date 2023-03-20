@@ -14,7 +14,7 @@ AllCops:
 Metrics/BlockLength:
   Enabled: true
   Max: 35
-  IgnoredMethods: ['platform', 'for_platform', 'abstract_target']
+  AllowedMethods: ['platform', 'for_platform', 'abstract_target']
   
 # Default is too restrictive, when optional properties have to be checked
 Metrics/MethodLength:
@@ -25,7 +25,7 @@ Metrics/MethodLength:
 Layout/LineLength:
   Enabled: true
   Max: 100
-  IgnoredPatterns: ['^gem', '^(\s+|)desc', '^(\s+|)UI.']
+  AllowedPatterns: ['^gem', '^(\s+|)desc', '^(\s+|)UI.']
 
 # They have not to be snake_case
 Naming/FileName:

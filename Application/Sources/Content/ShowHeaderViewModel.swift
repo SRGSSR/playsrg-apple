@@ -18,6 +18,8 @@ final class ShowHeaderViewModel: ObservableObject {
     
     @Published var isFavoriteRemovalAlertDisplayed = false
     
+    private var wouldLikeToSubscribe = false
+    
     init() {
         // Drop initial values; relevant values are first assigned when the view appears
         $show
@@ -31,7 +33,6 @@ final class ShowHeaderViewModel: ObservableObject {
             .switchToLatest()
             .receive(on: DispatchQueue.main)
             .assign(to: &$isFavorite)
-        
 #if os(iOS)
         // Drop initial values; relevant values are first assigned when the view appears
         $show
@@ -44,6 +45,20 @@ final class ShowHeaderViewModel: ObservableObject {
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
+            .map { subscriptionStatus in
+                if self.wouldLikeToSubscribe {
+                    if let pushService = PushService.shared, pushService.isEnabled {
+                        if subscriptionStatus != .subscribed {
+                            self.toggleSubscription()
+                        }
+                        else if let show = self.show {
+                            Banner.showSubscription(true, forItemWithName: show.title)
+                        }
+                        self.wouldLikeToSubscribe = false
+                    }
+                }
+                return subscriptionStatus
+            }
             .assign(to: &$subscriptionStatus)
 #endif
     }
@@ -52,8 +67,8 @@ final class ShowHeaderViewModel: ObservableObject {
         return show?.title
     }
     
-    var lead: String? {
-        return show?.lead
+    var summary: String? {
+        return show?.play_summary
     }
     
     var broadcastInformation: String? {
@@ -61,7 +76,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return url(for: show?.image, size: .medium)
+        return url(for: show?.image, size: .large)
     }
     
     var favoriteIcon: String {
@@ -89,9 +104,7 @@ final class ShowHeaderViewModel: ObservableObject {
     
     var subscriptionIcon: String {
         switch subscriptionStatus {
-        case .unavailable:
-            return "subscription_disabled"
-        case .unsubscribed:
+        case .unavailable, .unsubscribed:
             return "subscription"
         case .subscribed:
             return "subscription_full"
@@ -112,7 +125,7 @@ final class ShowHeaderViewModel: ObservableObject {
         guard let show else { return }
         FavoritesToggleShow(show)
         
-        let action = isFavorite ? .add : .remove as AnalyticsListAction
+        let action = isFavorite ? .remove : .add as AnalyticsListAction
         AnalyticsHiddenEvent.favorite(action: action, source: .button, urn: show.urn).send()
         
 #if os(iOS)
@@ -122,13 +135,18 @@ final class ShowHeaderViewModel: ObservableObject {
     
 #if os(iOS)
     func toggleSubscription() {
-        guard let show, FavoritesToggleSubscriptionForShow(show) else { return }
+        guard let show else { return }
         
-        let isSubscribed = (subscriptionStatus == .subscribed)
-        let action = isSubscribed ? .add : .remove as AnalyticsListAction
-        AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
-        
-        Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
+        if FavoritesToggleSubscriptionForShow(show) {
+            let isSubscribed = (subscriptionStatus == .subscribed)
+            let action = isSubscribed ? .remove : .add as AnalyticsListAction
+            AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
+            
+            Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
+        }
+        else if let pushService = PushService.shared, !pushService.isEnabled {
+            wouldLikeToSubscribe = true
+        }
     }
 #endif
 }

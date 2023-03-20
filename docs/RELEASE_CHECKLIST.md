@@ -27,9 +27,7 @@
 | Release to the store ||||||
 | [iOS] Update Github pages to display hidden releases (with fastlane\*) ||||||
 | [iOS] Check what's new information with production applications ||||||
-| Finish git-flow release ||||||
-| Bump patch / build version numbers in project ||||||
-| Push master, develop and tag ||||||
+| Finish git-flow release, tags, Bump patch / build version numbers and push (with fastlane\*) ||||||
 | Close milestone and issues on github ||||||
 | Create github release ||||||
 | Update status page on Confluence (Release date, old versions section) ||||||
@@ -53,6 +51,8 @@
 	- **Play SRG tvOS AppStore releases** (with `true` to `submit_for_review` parameter):  `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
 - Publish release notes on Github pages with correct released status (AppStore and TestFlight release notes)
  	- **Play SRG Publish release notes**: `fastlane ios publishReleaseNotes`
+- After AppStore validation, finish git-flow release, bump build version numbers, push master, develop and tag.
+ 	- **Play SRG After AppStore validation GitFlow**: `fastlane ios afterAppStoreValidationGitFlow`
 
 ### \*\*Manual fastlane:
 

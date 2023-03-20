@@ -6,6 +6,7 @@
 
 import Combine
 import Foundation
+import SRGAppearanceSwift
 import SRGDataProviderCombine
 import SwiftUI
 
@@ -89,6 +90,20 @@ extension String {
     
     var capitalizedFirstLetter: String {
         return prefix(1).capitalized + dropFirst()
+    }
+    
+    func heightOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
+        let font = SRGFont.font(fontStyle) as UIFont
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size.height
+    }
+    
+    func widthOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
+        let font = SRGFont.font(fontStyle) as UIFont
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size.width
     }
 }
 
@@ -346,7 +361,7 @@ extension NSCollectionLayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = spacing
+        section.interGroupSpacing = constant(iOS: 8, tvOS: 40)
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }

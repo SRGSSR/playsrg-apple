@@ -24,4 +24,8 @@ extension UserDefaults {
     @objc dynamic var PlaySRGSettingUserLocation: String? {
         return string(forKey: PlaySRG.PlaySRGSettingUserLocation)
     }
+    
+    @objc dynamic var PlaySRGSettingMediaListLayoutEnabled: Bool {
+        return bool(forKey: PlaySRG.PlaySRGSettingMediaListLayoutEnabled)
+    }
 }

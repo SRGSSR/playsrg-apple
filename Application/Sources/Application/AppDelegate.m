@@ -132,7 +132,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [Download updateUnplayableDownloads];
         completionHandler(YES);
-    }, @"updateUnplayableDownloads");
+    }, @"updateUnplayableDownloads2");
     
     [self checkForForcedUpdates];
     

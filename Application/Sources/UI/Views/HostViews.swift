@@ -94,7 +94,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
  *  Collection view reusable view hosting `SwiftUI` content.
  */
 class HostSupplementaryView<Content: View>: UICollectionReusableView {
-    private var hostController: UIHostingController<Content>?
+    private(set) var hostController: UIHostingController<Content>?
     
     private func update(with content: Content?) {
         if let rootView = content {

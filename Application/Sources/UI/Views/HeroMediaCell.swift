@@ -68,7 +68,7 @@ struct HeroMediaCell: View {
             ZStack {
                 MediaVisualView(media: media, size: .large, contentMode: contentMode) { media in
                     if media != nil {
-                        LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.7)]), startPoint: .center, endPoint: .bottom)
+                        LinearGradient(colors: [.clear, .init(white: 0, opacity: 0.7)], startPoint: .center, endPoint: .bottom)
                     }
                 }
                 DescriptionView(media: media, label: label)
@@ -148,7 +148,7 @@ enum HeroMediaCellSize {
         if horizontalSizeClass == .compact {
             return 9 / 11
         }
-        else if let isLandscape = UIApplication.shared.mainWindowScene?.isLandscape, isLandscape {
+        else if let isLandscape = UIApplication.shared.mainWindow?.isLandscape, isLandscape {
             return 2 / 5
         }
         else {
