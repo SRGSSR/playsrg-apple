@@ -297,11 +297,13 @@ platform :ios do
 
         latest_version = spaceship_app_latest_known_version(platform, app)
         if !latest_version || latest_version.version_string == live_version.version_string
-          UI.message "Play #{business_unit} #{platform} version #{live_version.version_string} (#{live_version.build.version}) is the latest one."
+          UI.success "Play #{business_unit} #{platform} version #{live_version.version_string} (#{live_version.build.version}) is the latest one."
         else
           build_version = latest_version.build ? latest_version.build.version : 'NaN'
           UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is #{latest_version.app_store_state}."
         end
+        version_localization = spaceship_app_version_localization(latest_version)
+        UI.message "What's new (#{version_localization.locale}):\n#{version_localization.whats_new}"
         UI.message '-----'
       end
     end
@@ -1893,6 +1895,10 @@ end
 def spaceship_app_latest_known_version(platform, app)
   includes = Spaceship::ConnectAPI::AppStoreVersion::ESSENTIAL_INCLUDES
   app.get_latest_app_store_version(platform: spaceship_platform(platform), includes:)
+end
+
+def spaceship_app_version_localization(version)
+  Spaceship::ConnectAPI::AppStoreVersionLocalization.all(app_store_version_id: version.id).first
 end
 
 def publish_on_github_pages(output_directory, releases_directory)
