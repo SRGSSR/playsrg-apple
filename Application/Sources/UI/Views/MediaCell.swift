@@ -251,12 +251,8 @@ final class MediaCellSize: NSObject {
         return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
     
-    static func fullWidth() -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(constant(iOS: 84, tvOS: 120)))
-    }
-    
-    static func largeList(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(100))
+    static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)))
     }
 }
 
@@ -265,7 +261,7 @@ final class MediaCellSize: NSObject {
 struct MediaCell_Previews: PreviewProvider {
     private static let verticalLayoutSize = MediaCellSize.swimlane().previewSize
     private static let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
-    private static let horizontalLargeListLayoutSize = MediaCellSize.largeList(layoutWidth: 564).previewSize
+    private static let horizontalLargeListLayoutSize = MediaCellSize.fullWidth(horizontalSizeClass: .regular).previewSize
     private static let style = MediaCell.Style.show
     private static let largeListStyle = MediaCell.Style.dateAndSummary
     

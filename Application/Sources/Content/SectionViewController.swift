@@ -699,16 +699,9 @@ private extension SectionViewController {
                 switch configuration.viewModelProperties.layout {
                 case .mediaList:
 #if os(iOS)
-                    if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
-                            return MediaCellSize.fullWidth()
-                        }
-                    }
-                    else {
-                        let spacing = (layoutWidth - LayoutMaxListWidth) / 4
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { layoutWidth, _ in
-                            return MediaCellSize.largeList(layoutWidth: layoutWidth)
-                        }
+                    let spacing = horizontalSizeClass == .compact ? Self.itemSpacing : Self.itemSpacing * 2
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { _, _ in
+                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
                     }
 #else
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
