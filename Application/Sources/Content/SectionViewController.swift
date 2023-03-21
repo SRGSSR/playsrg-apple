@@ -64,7 +64,7 @@ final class SectionViewController: UIViewController {
         model = SectionViewModel(section: section, filter: filter)
         self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
-        contentInsets = Self.contentInsets(for: model.state)
+        contentInsets = Self.contentInsets(for: model.state, displayDivider: model.configuration.viewModelProperties.displayDivider)
         super.init(nibName: nil, bundle: nil)
         title = model.displaysTitle ? model.title : nil
     }
@@ -116,9 +116,11 @@ final class SectionViewController: UIViewController {
         updateNavigationBar()
 #endif
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
             guard let self else { return }
-            cell.content = ItemCell(item: item, configuration: self.model.configuration)
+            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            let isLastItem = indexPath.row + 1 == self.dataSource.snapshot().numberOfItems(inSection: section)
+            cell.content = ItemCell(item: item, configuration: self.model.configuration, isLastItem: isLastItem)
         }
         
         dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView, minimumIndexTitlesCount: 4) { collectionView, indexPath, item in
@@ -312,7 +314,7 @@ final class SectionViewController: UIViewController {
         updateNavigationBar(for: state)
 #endif
         
-        contentInsets = Self.contentInsets(for: state)
+        contentInsets = Self.contentInsets(for: state, displayDivider: model.configuration.viewModelProperties.displayDivider)
         play_setNeedsContentInsetsUpdate()
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -348,9 +350,10 @@ final class SectionViewController: UIViewController {
         initialSectionId = nil
     }
     
-    private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
+    private static func contentInsets(for state: SectionViewModel.State, displayDivider: Bool) -> UIEdgeInsets {
         let top = (state.headerSize == .zero) ? Self.layoutVerticalMargin : 0
-        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        let bottom = displayDivider ? 0 : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: bottom, right: 0)
     }
     
 #if os(iOS)
@@ -701,7 +704,7 @@ private extension SectionViewController {
 #if os(iOS)
                     let spacing = horizontalSizeClass == .compact ? Self.itemSpacing : Self.itemSpacing * 2
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { _, _ in
-                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass, displayDivider: configuration.viewModelProperties.displayDivider)
                     }
 #else
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
@@ -771,6 +774,7 @@ private extension SectionViewController {
     struct ItemCell: View {
         let item: SectionViewModel.Item
         let configuration: SectionViewModel.Configuration
+        let isLastItem: Bool
         
         var body: some View {
             switch item {
@@ -782,7 +786,12 @@ private extension SectionViewController {
                     switch configuredSection {
                     case .show:
                         if configuration.viewModelProperties.layout == .mediaList {
-                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                            if configuration.viewModelProperties.displayDivider {
+                                MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, dividerStyle: isLastItem ? .hidden : .display)
+                            }
+                            else {
+                                MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                            }
                         }
                         else {
                             MediaCell(media: media, style: .date)

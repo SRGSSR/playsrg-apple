@@ -27,9 +27,16 @@ struct MediaCell: View {
         case time
     }
     
+    enum DividerStyle {
+        case none
+        case hidden
+        case display
+    }
+    
     let media: SRGMedia?
     let style: Style
     let layout: Layout
+    let dividerStyle: DividerStyle
     let action: (() -> Void)?
     
     fileprivate var onFocusAction: ((Bool) -> Void)?
@@ -61,10 +68,15 @@ struct MediaCell: View {
         return isSelected && media != nil
     }
     
-    init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
+    private var dividerSpacing: CGFloat {
+        return horizontalSizeClass == .compact ? 8 : 16
+    }
+    
+    init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, dividerStyle: DividerStyle = .none, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
         self.layout = layout
+        self.dividerStyle = dividerStyle
         self.action = action
     }
     
@@ -81,17 +93,28 @@ struct MediaCell: View {
                     .padding(.top, verticalPadding)
             }
 #else
-            Stack(direction: direction, spacing: 0) {
-                MediaVisualView(media: media, size: .small, embeddedDirection: direction)
-                    .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
-                    .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
-                    .cornerRadius(LayoutStandardViewCornerRadius)
-                    .redactable()
-                    .layoutPriority(1)
-                DescriptionView(media: media, style: style, embeddedDirection: direction)
-                    .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
-                    .padding(.horizontal, horizontalPadding)
-                    .padding(.top, verticalPadding)
+            Stack(direction: .vertical, spacing: 0) {
+                Stack(direction: direction, spacing: 0) {
+                    MediaVisualView(media: media, size: .small, embeddedDirection: direction)
+                        .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
+                        .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
+                        .cornerRadius(LayoutStandardViewCornerRadius)
+                        .redactable()
+                        .layoutPriority(1)
+                    DescriptionView(media: media, style: style, embeddedDirection: direction)
+                        .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
+                        .padding(.horizontal, horizontalPadding)
+                        .padding(.top, verticalPadding)
+                }
+                if direction == .horizontal && dividerStyle == .display {
+                    DividerView()
+                        .padding(.top, dividerSpacing)
+                }
+                if direction == .horizontal && dividerStyle == .hidden {
+                    DividerView()
+                        .padding(.top, dividerSpacing)
+                        .hidden()
+                }
             }
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
 #endif
@@ -202,6 +225,15 @@ struct MediaCell: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
+    
+    /// Behavior: h-exp, v-hug
+    private struct DividerView: View {
+        var body: some View {
+            Rectangle()
+                .foregroundColor(.srgGray33)
+                .frame(height: 1)
+        }
+    }
 }
 
 // MARK: Modifiers
@@ -251,8 +283,12 @@ final class MediaCellSize: NSObject {
         return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
     
-    static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)))
+    static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact, displayDivider: Bool = false, dividerSpacing: CGFloat = 8) -> NSCollectionLayoutSize {
+        var height = horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
+        if displayDivider {
+            height += horizontalSizeClass == .compact ? 9 : 17
+        }
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
     }
 }
 
