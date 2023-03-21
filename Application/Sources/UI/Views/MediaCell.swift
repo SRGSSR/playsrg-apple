@@ -103,7 +103,7 @@ struct MediaCell: View {
                         .layoutPriority(1)
                     DescriptionView(media: media, style: style, embeddedDirection: direction)
                         .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
-                        .padding(.horizontal, horizontalPadding)
+                        .padding(.leading, horizontalPadding)
                         .padding(.top, verticalPadding)
                 }
                 if direction == .horizontal && dividerStyle == .display {
