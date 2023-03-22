@@ -59,6 +59,7 @@ struct ShowHeaderView: View {
         private let compactDescriptionOffet: CGFloat = -12
       
 #if os(iOS)
+        // App storage property changes are tracked to update layout. Only application setting function is used to take care of the app build distribution.
         @AppStorage(PlaySRGSettingMediaListLayoutEnabled) var isMediaListLayoutEnabled = false
 #endif
         
@@ -69,7 +70,7 @@ struct ShowHeaderView: View {
         
         private var descriptionHorizontalPadding: CGFloat {
 #if os(iOS)
-            if isMediaListLayoutEnabled && horizontalSizeClass == .regular {
+            if ApplicationSettingMediaListLayoutEnabled() && horizontalSizeClass == .regular {
                 return 32
             }
             else {
