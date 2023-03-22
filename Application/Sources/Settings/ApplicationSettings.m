@@ -168,6 +168,16 @@ BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
 }
 
+BOOL ApplicationSettingMediaListDividerEnabled(void)
+{
+    if (! NSBundle.mainBundle.play_isAppStoreRelease) {
+        return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingMediaListDividerEnabled];
+    }
+    else {
+        return NO;
+    }
+}
+
 BOOL ApplicationSettingMediaListLayoutEnabled(void)
 {
     if (! NSBundle.mainBundle.play_isAppStoreRelease) {

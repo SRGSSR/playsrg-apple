@@ -175,12 +175,18 @@ final class SectionViewController: UIViewController {
             .store(in: &cancellables)
         
 #if os(iOS)
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.collectionView.reloadData()
-            }
-            .store(in: &cancellables)
+        Publishers.Merge(
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListDividerEnabled),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] _ in
+            guard let self else { return }
+            
+            self.contentInsets = Self.contentInsets(for: self.model.state, displayDivider: self.model.configuration.viewModelProperties.displayDivider)
+            self.collectionView.reloadData()
+        }
+        .store(in: &cancellables)
 #endif
     }
     
@@ -714,7 +720,7 @@ private extension SectionViewController {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
-                            return MediaCellSize.fullWidth()
+                            return MediaCellSize.fullWidth(displayDivider: configuration.viewModelProperties.displayDivider)
                         }
                     }
                     else {
@@ -785,16 +791,12 @@ private extension SectionViewController {
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
+                        let dividerStyle = configuration.viewModelProperties.displayDivider ? isLastItem ? .hidden : .display : .none as MediaCell.DividerStyle
                         if configuration.viewModelProperties.layout == .mediaList {
-                            if configuration.viewModelProperties.displayDivider {
-                                MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, dividerStyle: isLastItem ? .hidden : .display)
-                            }
-                            else {
-                                MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
-                            }
+                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, dividerStyle: dividerStyle)
                         }
                         else {
-                            MediaCell(media: media, style: .date)
+                            MediaCell(media: media, style: .date, dividerStyle: dividerStyle)
                         }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)

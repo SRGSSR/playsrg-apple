@@ -29,7 +29,7 @@ struct SettingsView: View {
             }
 #endif
 #if os(iOS)
-            if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
+            if !Bundle.main.play_isAppStoreRelease {
                 BetaTestsSection()
             }
             QualitySection()
@@ -139,10 +139,14 @@ struct SettingsView: View {
     
     private struct BetaTestsSection: View {
         @AppStorage(PlaySRGSettingMediaListLayoutEnabled) var isMediaListLayoutEnabled = false
+        @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
         
         var body: some View {
             PlaySection {
-                Toggle(NSLocalizedString("Display episodes as a list in show pages (iPad)", comment: "Toggle label to enable episodes as a list in show pages setting label"), isOn: $isMediaListLayoutEnabled)
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    Toggle(NSLocalizedString("Always display episodes as a list in show pages (iPad)", comment: "Toggle label to enable episodes as a list in show pages setting label"), isOn: $isMediaListLayoutEnabled)
+                }
+                Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
             } header: {
                 Text(NSLocalizedString("Beta tests", comment: "Beta tests section header"))
             } footer: {

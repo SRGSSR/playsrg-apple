@@ -411,7 +411,7 @@ private extension SectionViewModel {
 #if os(iOS)
             switch configuredSection {
             case .show:
-                return ApplicationSettingMediaListLayoutEnabled()
+                return ApplicationSettingMediaListDividerEnabled()
             default:
                 return false
             }
