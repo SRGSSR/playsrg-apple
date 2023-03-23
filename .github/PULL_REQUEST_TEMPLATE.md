@@ -9,7 +9,7 @@
 
 ### Checklist
 
-- The branch should been rebased onto the `develop` branch for whole test and nighty, but it's not required.*
+- The branch should be rebased onto the `develop` branch for whole tests with nighties, but it's not required.*
 - The code followed the code style:
 	-  [ ] `swiftlint` has run to ensure the *Swift* code style is valid.
 	-  [ ] `rubocop -a` has run to ensure the *Ruby* code style is valid.
