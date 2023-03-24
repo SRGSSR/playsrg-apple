@@ -105,6 +105,14 @@ struct MediaCell: View {
                         .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                         .padding(.leading, horizontalPadding)
                         .padding(.top, verticalPadding)
+                    if direction == .horizontal, style == .dateAndSummary, horizontalSizeClass == .regular {
+                        Button {
+                        } label: {
+                            Image("ellipsis")
+                                .foregroundColor(.srgGrayC7)
+                        }
+                        .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("More", comment: "More button label"))
+                    }
                 }
                 if direction == .horizontal && dividerStyle == .display {
                     DividerView()
