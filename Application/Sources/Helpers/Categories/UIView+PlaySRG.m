@@ -26,7 +26,9 @@
 {
     UIResponder *responder = self.nextResponder;
     while (responder) {
-        if ([responder isKindOfClass:UIViewController.class]) {
+        if ([responder isKindOfClass:UIViewController.class] &&
+            // Ignore SwiftUI hosting view controllers
+             [NSStringFromClass(responder.class) rangeOfString:@"SwiftUI"].location == NSNotFound) {
             return (UIViewController *)responder;
         }
         responder = responder.nextResponder;

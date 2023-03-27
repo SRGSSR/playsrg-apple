@@ -121,6 +121,9 @@ final class SectionViewController: UIViewController {
             let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
             let isLastItem = indexPath.row + 1 == self.dataSource.snapshot().numberOfItems(inSection: section)
             cell.content = ItemCell(item: item, configuration: self.model.configuration, isLastItem: isLastItem)
+            if let hostController = cell.hostController {
+                self.addChild(hostController)
+            }
         }
         
         dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView, minimumIndexTitlesCount: 4) { collectionView, indexPath, item in

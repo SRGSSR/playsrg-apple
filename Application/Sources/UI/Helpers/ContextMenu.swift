@@ -100,7 +100,7 @@ extension ContextMenu {
         return configuration(for: media, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
     
-    private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
+    static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
             watchLaterAction(for: media),
             historyAction(for: media),

@@ -54,6 +54,7 @@
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
+#import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 #import "UserNotification.h"

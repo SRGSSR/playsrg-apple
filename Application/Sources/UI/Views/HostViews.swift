@@ -10,7 +10,7 @@ import UIKit
 /**
  *  Internal wrapper to bridge UIKit cell properties with SwiftUI environment.
  */
-private struct HostCellView<Content: View>: View {
+struct HostCellView<Content: View>: View {
     let isEditing: Bool
     let isSelected: Bool
     let isUIKitFocused: Bool
@@ -36,7 +36,7 @@ private struct HostCellView<Content: View>: View {
  *  Collection view cell hosting `SwiftUI` content.
  */
 class HostCollectionViewCell<Content: View>: UICollectionViewCell {
-    private var hostController: UIHostingController<HostCellView<Content>>?
+    private(set) var hostController: UIHostingController<HostCellView<Content>>?
     
     private func update(with content: Content?, editing: Bool, selected: Bool, UIKitFocused: Bool) {
         if let content {
