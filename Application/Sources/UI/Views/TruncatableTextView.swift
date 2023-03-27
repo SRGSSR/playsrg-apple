@@ -83,7 +83,8 @@ struct TruncatableTextView: View {
         @State private var truncatedSize: CGSize = .zero
         
         private let fontStyle: SRGFont.Style = .body
-        private let showMoreButtonString = NSLocalizedString("More", comment: "More button label")
+        private let showMoreButtonString = NSLocalizedString("More", comment: "More label on truncatable text view")
+        private let showMoreButtonStringAccessibilityLabel = PlaySRGAccessibilityLocalizedString("More", comment: "More label on truncatable text view")
         
         private func text(lineLimit: Int?) -> some View {
             return Text(content)
@@ -117,6 +118,7 @@ struct TruncatableTextView: View {
                         Text(showMoreButtonString)
                             .srgFont(fontStyle)
                             .foregroundColor(secondaryColor)
+                            .accessibilityLabel(showMoreButtonStringAccessibilityLabel)
                     }
                 }
                 .background(
