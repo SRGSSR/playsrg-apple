@@ -30,6 +30,7 @@
 "Audio described" = "Audiodécrit";
 
 /* Close button label
+   Close button label on handle view
    Close button label on player view */
 "Close" = "Fermer";
 
@@ -102,7 +103,8 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Gère les informations du compte";
 
-/* More button label */
+/* More button label
+   More label on truncatable text view */
 "More" = "Pluss";
 
 /* A more episode button label
