@@ -113,6 +113,10 @@
 /* Label of the button to become beta tester */
 "Become a beta tester" = "Devenez bêta-testeur";
 
+/* Beta tests alert title
+   Beta tests section header */
+"Beta tests" = "Beta tests";
+
 /* Show by date short button title */
 "By date" = "Par date";
 
@@ -204,6 +208,9 @@
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Afficher les épisodes pour %@";
 
+/* Toggle label to enable episodes as a list in show pages setting label */
+"Display episodes as a list in show pages (iPad)" = "Display episodes as a list in show pages (iPad)";
+
 /* Done button title */
 "Done" = "OK";
 
@@ -216,7 +223,8 @@
 /* Search setting */
 "Duration" = "Durée";
 
-/* Label for the button keeping autoplay enabled */
+/* Label for the button keeping autoplay enabled
+   title of enable button */
 "Enable" = "Activer";
 
 /* Label of the button to toggle FLEX */
@@ -365,7 +373,7 @@
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Contenu non disponible";
 
-/* More button label */
+/* More label on truncatable text view */
 "More" = "Plus";
 
 /* Autoplay setting section footer */
@@ -608,7 +616,8 @@
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Simuler une alerte mémoire";
 
-/* Title of the button to skip updating the application */
+/* Title of a Skip button
+   Title of the button to skip updating the application */
 "Skip" = "Ignorer";
 
 /* Short label identifying content which will be available soon. */
@@ -723,6 +732,9 @@
 /* Related content media list title */
 "This might interest you" = "Cela pourrait vous intéresser";
 
+/* Beta tests section footer */
+"This section is only available for beta testers." = "This section is only available for beta testers.";
+
 /* Advanced features section footer
    Reset section footer */
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "Cette section n’est disponible que dans les versions nightly et beta, et n'apparaîtra pas en production.";
@@ -823,6 +835,9 @@
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "Vous pouvez activer ou désactiver cette fonctionnalité dans les réglages à tout moment.";
+
+/* Beta tests alert explanation */
+"You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab." = "You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.";
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vous avez été automatiquement déconnecté. Connectez-vous à nouveau pour conserver vos données synchronisées entre vos appareils.";
