@@ -144,9 +144,9 @@ struct SettingsView: View {
         var body: some View {
             PlaySection {
                 if UIDevice.current.userInterfaceIdiom == .pad {
-                    Toggle(NSLocalizedString("Always display episodes as a list in show pages (iPad)", comment: "Toggle label to enable episodes as a list in show pages setting label"), isOn: $isMediaListLayoutEnabled)
+                    Toggle(NSLocalizedString("Always display episodes as a list in show pages (iPad)", comment: "Beta tests toggle label to enable episodes as a list in show pages setting label"), isOn: $isMediaListLayoutEnabled)
                 }
-                Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
+                Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Beta tests toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
             } header: {
                 Text(NSLocalizedString("Beta tests", comment: "Beta tests section header"))
             } footer: {

@@ -205,20 +205,44 @@ final class SectionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
+        if !Bundle.main.play_isAppStoreRelease {
             if case let .configured(section) = model.configuration.wrappedValue, case .show = section {
                 PlayApplicationRunOnce({ completionHandler in
-                    let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
-                                                            message: NSLocalizedString("You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
-                                                            preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Enable", comment: "title of enable button"), style: .default, handler: { _ in
-                        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
-                        UserDefaults.standard.synchronize()
-                    }))
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Skip", comment: "Title of a Skip button"), style: .cancel, handler: nil))
-                    present(alertController, animated: true, completion: nil)
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        if UserDefaults.standard.bool(forKey: PlaySRGSettingMediaListLayoutEnabled) {
+                            let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                                    message: NSLocalizedString("Thank you to test the new layout. An update version is now available.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                                    preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title of an information alert button"), style: .cancel, handler: { _ in
+                                UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListDividerEnabled)
+                                UserDefaults.standard.synchronize()
+                            }))
+                            present(alertController, animated: true, completion: nil)
+                        }
+                        else {
+                            let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                                    message: NSLocalizedString("You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                                    preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title of an information alert button"), style: .cancel, handler: { _ in
+                                UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
+                                UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListDividerEnabled)
+                                UserDefaults.standard.synchronize()
+                            }))
+                            present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                    else if UIDevice.current.userInterfaceIdiom == .phone {
+                        let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                                message: NSLocalizedString("You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                                preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title of an information alert button"), style: .cancel, handler: { _ in
+                            UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListDividerEnabled)
+                            UserDefaults.standard.synchronize()
+                        }))
+                        present(alertController, animated: true, completion: nil)
+                    }
                     completionHandler(true)
-                }, "ShowPageBetaTestsAlert1")
+                }, "ShowPageBetaTestsAlert2")
             }
         }
     }
