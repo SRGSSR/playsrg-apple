@@ -64,6 +64,9 @@
 /* Show A-Z short button title */
 "A to Z" = "Dad A fin Z";
 
+/* Beta tests toggle label to add line dividers in episodes list in show pages setting label */
+"Add line dividers in episodes list in show pages" = "Add line dividers in episodes list in show pages";
+
 /* Button to add an event to Calendar application */
 "Add to Calendar" = "Agiuntar al chalender";
 
@@ -79,6 +82,9 @@
 
 /* Search setting option */
 "All" = "Tut";
+
+/* Beta tests toggle label to enable episodes as a list in show pages setting label */
+"Always display episodes as a list in show pages (iPad)" = "Always display episodes as a list in show pages (iPad)";
 
 /* Subtitle availability setting section footer */
 "Always visible when VoiceOver is active." = "Adina visibel cun VoiceOver activà.";
@@ -208,9 +214,6 @@
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Mussa las episodas %@";
 
-/* Toggle label to enable episodes as a list in show pages setting label */
-"Display episodes as a list in show pages (iPad)" = "Display episodes as a list in show pages (iPad)";
-
 /* Done button title */
 "Done" = "Fatg";
 
@@ -223,8 +226,7 @@
 /* Search setting */
 "Duration" = "Durada";
 
-/* Label for the button keeping autoplay enabled
-   title of enable button */
+/* Label for the button keeping autoplay enabled */
 "Enable" = "Activar";
 
 /* Label of the button to toggle FLEX */
@@ -451,7 +453,8 @@
 /* Now button in program guide */
 "Now" = "Ussa";
 
-/* Title of the button displayed at the end of an onboarding
+/* Title of an information alert button
+   Title of the button displayed at the end of an onboarding
    Title of the button to validate date settings
    Title of the search settings button to apply settings */
 "OK" = "OK";
@@ -616,8 +619,7 @@
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Simular in avertiment da memoria";
 
-/* Title of a Skip button
-   Title of the button to skip updating the application */
+/* Title of the button to skip updating the application */
 "Skip" = "Finir";
 
 /* Short label identifying content which will be available soon. */
@@ -662,6 +664,9 @@
 
 /* Server setting name */
 "Test" = "Test";
+
+/* Beta tests alert explanation */
+"Thank you to test the new layout. An update version is now available.\nThis preview can be disable at anytime in the application settings, in profile tab." = "Thank you to test the new layout. An update version is now available.\nThis preview can be disable at anytime in the application settings, in profile tab.";
 
 /* Add to Calendar alert explanation */
 "The application uses the calendar to add TV programs." = "L'applicaziun utilisescha il chalender per agiuntar programs da TV.";
@@ -836,11 +841,11 @@
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "Vus paudais puspe activar questa funcziun.";
 
-/* Beta tests alert explanation */
-"You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab." = "You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.";
-
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vus essas vegni deconnectà automaticamain. Per mantegnair la sincronisaziun da las datas sur tut ils apparats far anc ina giada il login.";
+
+/* Beta tests alert explanation */
+"You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab." = "You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.";
 
 /* Label of the button to display feedback form */
 "Your feedback" = "Voss resun";

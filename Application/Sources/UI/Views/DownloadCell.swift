@@ -74,7 +74,7 @@ struct DownloadCell: View {
             
             DescriptionView(model: model, embeddedDirection: direction)
                 .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
-                .padding(.horizontal, horizontalPadding)
+                .padding(.leading, horizontalPadding)
                 .padding(.top, verticalPadding)
         }
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)

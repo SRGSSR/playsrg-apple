@@ -288,6 +288,7 @@ extension SectionViewModel {
 
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
+    var displayDivider: Bool { get }
     var pinHeadersToVisibleBounds: Bool { get }
     var userActivity: NSUserActivity? { get }
     var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode { get }
@@ -319,6 +320,10 @@ private extension SectionViewModel {
             default:
                 return .mediaGrid
             }
+        }
+        
+        var displayDivider: Bool {
+            return false
         }
         
         var pinHeadersToVisibleBounds: Bool {
@@ -400,6 +405,19 @@ private extension SectionViewModel {
             default:
                 return .mediaGrid
             }
+        }
+        
+        var displayDivider: Bool {
+#if os(iOS)
+            switch configuredSection {
+            case .show:
+                return ApplicationSettingMediaListDividerEnabled()
+            default:
+                return false
+            }
+#else
+            return false
+#endif
         }
         
         var pinHeadersToVisibleBounds: Bool {

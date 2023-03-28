@@ -25,6 +25,10 @@ extension UserDefaults {
         return string(forKey: PlaySRG.PlaySRGSettingUserLocation)
     }
     
+    @objc dynamic var PlaySRGSettingMediaListDividerEnabled: Bool {
+        return bool(forKey: PlaySRG.PlaySRGSettingMediaListDividerEnabled)
+    }
+    
     @objc dynamic var PlaySRGSettingMediaListLayoutEnabled: Bool {
         return bool(forKey: PlaySRG.PlaySRGSettingMediaListLayoutEnabled)
     }

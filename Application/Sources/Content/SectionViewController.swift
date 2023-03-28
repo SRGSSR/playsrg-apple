@@ -64,7 +64,7 @@ final class SectionViewController: UIViewController {
         model = SectionViewModel(section: section, filter: filter)
         self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
-        contentInsets = Self.contentInsets(for: model.state)
+        contentInsets = Self.contentInsets(for: model.state, displayDivider: model.configuration.viewModelProperties.displayDivider)
         super.init(nibName: nil, bundle: nil)
         title = model.displaysTitle ? model.title : nil
     }
@@ -116,9 +116,14 @@ final class SectionViewController: UIViewController {
         updateNavigationBar()
 #endif
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
             guard let self else { return }
-            cell.content = ItemCell(item: item, configuration: self.model.configuration)
+            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            let isLastItem = indexPath.row + 1 == self.dataSource.snapshot().numberOfItems(inSection: section)
+            cell.content = ItemCell(item: item, configuration: self.model.configuration, isLastItem: isLastItem)
+            if let hostController = cell.hostController {
+                self.addChild(hostController)
+            }
         }
         
         dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView, minimumIndexTitlesCount: 4) { collectionView, indexPath, item in
@@ -173,12 +178,18 @@ final class SectionViewController: UIViewController {
             .store(in: &cancellables)
         
 #if os(iOS)
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.collectionView.reloadData()
-            }
-            .store(in: &cancellables)
+        Publishers.Merge(
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListDividerEnabled),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] _ in
+            guard let self else { return }
+            
+            self.contentInsets = Self.contentInsets(for: self.model.state, displayDivider: self.model.configuration.viewModelProperties.displayDivider)
+            self.collectionView.reloadData()
+        }
+        .store(in: &cancellables)
 #endif
     }
     
@@ -194,20 +205,44 @@ final class SectionViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
+        if !Bundle.main.play_isAppStoreRelease {
             if case let .configured(section) = model.configuration.wrappedValue, case .show = section {
                 PlayApplicationRunOnce({ completionHandler in
-                    let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
-                                                            message: NSLocalizedString("You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
-                                                            preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Enable", comment: "title of enable button"), style: .default, handler: { _ in
-                        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
-                        UserDefaults.standard.synchronize()
-                    }))
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Skip", comment: "Title of a Skip button"), style: .cancel, handler: nil))
-                    present(alertController, animated: true, completion: nil)
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        if UserDefaults.standard.bool(forKey: PlaySRGSettingMediaListLayoutEnabled) {
+                            let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                                    message: NSLocalizedString("Thank you to test the new layout. An update version is now available.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                                    preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title of an information alert button"), style: .cancel, handler: { _ in
+                                UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListDividerEnabled)
+                                UserDefaults.standard.synchronize()
+                            }))
+                            present(alertController, animated: true, completion: nil)
+                        }
+                        else {
+                            let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                                    message: NSLocalizedString("You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                                    preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title of an information alert button"), style: .cancel, handler: { _ in
+                                UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
+                                UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListDividerEnabled)
+                                UserDefaults.standard.synchronize()
+                            }))
+                            present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                    else if UIDevice.current.userInterfaceIdiom == .phone {
+                        let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
+                                                                message: NSLocalizedString("You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
+                                                                preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title of an information alert button"), style: .cancel, handler: { _ in
+                            UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListDividerEnabled)
+                            UserDefaults.standard.synchronize()
+                        }))
+                        present(alertController, animated: true, completion: nil)
+                    }
                     completionHandler(true)
-                }, "ShowPageBetaTestsAlert1")
+                }, "ShowPageBetaTestsAlert2")
             }
         }
     }
@@ -312,7 +347,7 @@ final class SectionViewController: UIViewController {
         updateNavigationBar(for: state)
 #endif
         
-        contentInsets = Self.contentInsets(for: state)
+        contentInsets = Self.contentInsets(for: state, displayDivider: model.configuration.viewModelProperties.displayDivider)
         play_setNeedsContentInsetsUpdate()
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -348,9 +383,10 @@ final class SectionViewController: UIViewController {
         initialSectionId = nil
     }
     
-    private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
+    private static func contentInsets(for state: SectionViewModel.State, displayDivider: Bool) -> UIEdgeInsets {
         let top = (state.headerSize == .zero) ? Self.layoutVerticalMargin : 0
-        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        let bottom = displayDivider ? 0 : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: bottom, right: 0)
     }
     
 #if os(iOS)
@@ -699,16 +735,9 @@ private extension SectionViewController {
                 switch configuration.viewModelProperties.layout {
                 case .mediaList:
 #if os(iOS)
-                    if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
-                            return MediaCellSize.fullWidth()
-                        }
-                    }
-                    else {
-                        let spacing = (layoutWidth - LayoutMaxListWidth) / 4
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { layoutWidth, _ in
-                            return MediaCellSize.largeList(layoutWidth: layoutWidth)
-                        }
+                    let spacing = horizontalSizeClass == .compact ? Self.itemSpacing : Self.itemSpacing * 2
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { _, _ in
+                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass, displayDivider: configuration.viewModelProperties.displayDivider)
                     }
 #else
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
@@ -718,7 +747,7 @@ private extension SectionViewController {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
-                            return MediaCellSize.fullWidth()
+                            return MediaCellSize.fullWidth(displayDivider: configuration.viewModelProperties.displayDivider)
                         }
                     }
                     else {
@@ -778,6 +807,7 @@ private extension SectionViewController {
     struct ItemCell: View {
         let item: SectionViewModel.Item
         let configuration: SectionViewModel.Configuration
+        let isLastItem: Bool
         
         var body: some View {
             switch item {
@@ -788,11 +818,12 @@ private extension SectionViewController {
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
+                        let dividerStyle = configuration.viewModelProperties.displayDivider ? isLastItem ? .hidden : .display : .none as MediaCell.DividerStyle
                         if configuration.viewModelProperties.layout == .mediaList {
-                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, dividerStyle: dividerStyle)
                         }
                         else {
-                            MediaCell(media: media, style: .date)
+                            MediaCell(media: media, style: .date, dividerStyle: dividerStyle)
                         }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)
