@@ -2748,6 +2748,7 @@
 		044E391F29B10C9100C1768A /* SRGShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRGShow.swift; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsHiddenEvent.swift; sourceTree = "<group>"; };
+		0497D5FE29D4B626005BF060 /* REMOTE_CONFIGURATION.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = REMOTE_CONFIGURATION.md; path = docs/REMOTE_CONFIGURATION.md; sourceTree = "<group>"; };
 		04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClickEvent.swift; sourceTree = "<group>"; };
 		04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruncatableTextView.swift; sourceTree = "<group>"; };
 		04D2A92A29ACFE5900E11B28 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
@@ -4344,6 +4345,7 @@
 			isa = PBXGroup;
 			children = (
 				6F7C089426CE4E2A00166CE7 /* Podfile */,
+				0497D5FE29D4B626005BF060 /* REMOTE_CONFIGURATION.md */,
 				6FAAF77620CABA3A00BB58A3 /* Common */,
 				6FAAF77520CAB6ED00BB58A3 /* Application */,
 				6F331CE524D06B8200C096AB /* TV Application */,
