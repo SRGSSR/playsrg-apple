@@ -5,6 +5,24 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Get SRGUserData CoreData checkout path.&#10;SRG_USER_DATA_DATA=&quot;${DERIVED_DATA_DIR}/SourcePackages/checkouts/srguserdata-apple/Sources/SRGUserData/Data&quot;&#10;&#10;# Apply write permission on XC mapping files, to avoid MappingModelCompile errors.&#10;find &quot;$SRG_USER_DATA_DATA&quot; -type d -name &quot;*.xcmappingmodel&quot; -exec chmod +w {}/xcmapping.xml \;&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "08C68DF61D38D72000BB8AAA"
+                     BuildableName = "Play RSI.app"
+                     BlueprintName = "Play RSI"
+                     ReferencedContainer = "container:PlaySRG.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <PostActions>
          <ExecutionAction
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
