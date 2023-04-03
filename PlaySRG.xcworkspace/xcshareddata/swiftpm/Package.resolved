@@ -357,7 +357,7 @@
       "location" : "https://github.com/SRGSSR/srguserdata-apple.git",
       "state" : {
         "branch" : "feature/5-swift-package-manager-mac-os-ventura",
-        "revision" : "614dbf415ea86e14e8962d291e44dce3ce824386"
+        "revision" : "3840173c5073a5f8ab355c5823dd3d538a6646cc"
       }
     },
     {
