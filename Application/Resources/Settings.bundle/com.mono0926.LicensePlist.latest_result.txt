@@ -135,7 +135,7 @@ name: grpc-ios, nameSpecified: gRPC, owner: grpc, version: 1.44.3-grpc, source: 
 
 name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 3.1.0, source: https://github.com/google/gtm-session-fetcher
 
-name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.10.6, source: https://github.com/urbanairship/ios-library
+name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.11.3, source: https://github.com/urbanairship/ios-library
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 
