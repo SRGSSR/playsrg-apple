@@ -356,8 +356,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srguserdata-apple.git",
       "state" : {
-        "branch" : "feature/5-swift-package-manager-mac-os-ventura",
-        "revision" : "3840173c5073a5f8ab355c5823dd3d538a6646cc"
+        "branch" : "develop",
+        "revision" : "b116c3c7e0317c30bb0d0aac0ae0ef24c57275d0"
       }
     },
     {

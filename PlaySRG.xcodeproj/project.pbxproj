@@ -19170,7 +19170,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
-				branch = "feature/5-swift-package-manager-mac-os-ventura";
+				branch = develop;
 				kind = branch;
 			};
 		};
