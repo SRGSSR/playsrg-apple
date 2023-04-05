@@ -923,7 +923,6 @@ platform :ios do
       configuration: options[:configuration],
       scheme: options[:scheme],
       silent: true,
-      clean: true,
       xcargs: srg_xcargs(options),
       export_method: options[:export_to_appstore] ? 'app-store' : 'enterprise',
       include_bitcode: false,
