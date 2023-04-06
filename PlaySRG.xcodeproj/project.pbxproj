@@ -6120,9 +6120,10 @@
 		08C68D471D38D49600BB8AAA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {

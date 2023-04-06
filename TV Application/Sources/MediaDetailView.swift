@@ -189,8 +189,9 @@ struct MediaDetailView: View {
                         navigateToMedia(media, play: true, playAnalyticsClickEvent: playAnalyticsClickEvent)
                     }
                 }
-                if let action = model.watchLaterAllowedAction, let isRemoval = (action == .remove) {
+                if model.watchLaterAllowedAction != .none {
                     // TODO: Write in a better way
+                    let isRemoval = (model.watchLaterAllowedAction == .remove)
                     LabeledButton(icon: isRemoval ? "watch_later_full" : "watch_later",
                                   label: isRemoval
                                     ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list")
