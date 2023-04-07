@@ -8,7 +8,7 @@
 
 #import "Banner.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
@@ -114,7 +114,7 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.song = song;
     self.playing = playing;
     
-    self.timeLabel.text = [NSDateFormatter.play_timeFormatter stringFromDate:song.date];
+    self.timeLabel.text = [NSDateFormatter.play_time stringFromDate:song.date];
     self.timeLabel.font = [SongTableViewCell timeLabelFont];
     
     self.titleLabel.text = song.title;

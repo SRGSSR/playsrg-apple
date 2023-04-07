@@ -15,7 +15,6 @@
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlaySRG-Swift.h"
 #import "SRGDataProvider+PlaySRG.h"
@@ -184,7 +183,7 @@
             
             // Unbreakable spaces before / after the separator
             self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
-            self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+            self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:currentProgram.startDate], [NSDateFormatter.play_time stringFromDate:currentProgram.endDate]];
         }
         else {
             self.titleLabel.text = channel.title;

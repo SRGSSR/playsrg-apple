@@ -37,6 +37,16 @@
 		042F6F4129E08D12003F46AA /* NSArray+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */; };
 		042F6F4229E08D12003F46AA /* NSArray+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */; };
 		042F6F4329E08D12003F46AA /* NSArray+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */; };
+		042F6F4A29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F4B29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F4C29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F4D29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F4E29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F4F29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F5029E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F5129E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F5229E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F5329E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
 		043CBF0C286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0D286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0E286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
@@ -1068,11 +1078,6 @@
 		6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
 		6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
 		6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
-		6F4760341EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6F4760351EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6F4760361EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6F4760371EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6F4760381EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
 		6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
@@ -2342,11 +2347,6 @@
 		6FF0C84E26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */; };
 		6FF0C84F26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */; };
 		6FF0C85026B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */; };
-		6FF129C4256C0A9D0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6FF129C5256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6FF129C6256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6FF129C7256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
-		6FF129C8256C0A9F0042F446 /* NSDateFormatter+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */; };
 		6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
 		6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
 		6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
@@ -2742,6 +2742,7 @@
 		042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSet+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSArray+PlaySRG.swift"; sourceTree = "<group>"; };
+		042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDateFormatter+playSRG.swift"; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		044E391F29B10C9100C1768A /* SRGShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRGShow.swift; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3105,8 +3106,6 @@
 		6F475FB31EB37BC6003021EA /* Banner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Banner.m; sourceTree = "<group>"; };
 		6F4760191EB37BD1003021EA /* PlayDurationFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayDurationFormatter.h; sourceTree = "<group>"; };
 		6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayDurationFormatter.m; sourceTree = "<group>"; };
-		6F47601B1EB37BD1003021EA /* NSDateFormatter+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+PlaySRG.h"; sourceTree = "<group>"; };
-		6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+PlaySRG.m"; sourceTree = "<group>"; };
 		6F47606A1EB37D60003021EA /* UIColor+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PlaySRG.h"; sourceTree = "<group>"; };
 		6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PlaySRG.m"; sourceTree = "<group>"; };
 		6F47606C1EB37D60003021EA /* UIDevice+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+PlaySRG.h"; sourceTree = "<group>"; };
@@ -3844,6 +3843,7 @@
 			isa = PBXGroup;
 			children = (
 				042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */,
+				042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */,
 				042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */,
 				042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */,
 				0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */,
@@ -4821,8 +4821,6 @@
 			children = (
 				6F4EA1411EE0351B00BEC4DA /* NSBundle+PlaySRG.h */,
 				0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */,
-				6F47601B1EB37BD1003021EA /* NSDateFormatter+PlaySRG.h */,
-				6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */,
 				6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */,
 				6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */,
 				089EA00F201148170070E11A /* NSTimer+PlaySRG.h */,
@@ -8404,6 +8402,7 @@
 				086F8D5522984B29001BE2F4 /* Favorites.m in Sources */,
 				6FE2873C2481448C00358CFF /* SongsViewController.m in Sources */,
 				0858CA5B271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
+				042F6F4A29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6F9122BF1DC8708400725EEB /* PlayErrors.m in Sources */,
 				6FFF8EDC2664BFA90016B793 /* Colors.swift in Sources */,
 				6FE1B9191FAC34D600A58F3B /* ContentInsets.m in Sources */,
@@ -8550,7 +8549,6 @@
 				6FD633DE1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				6F9ABCD02813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6FAE0259266812AF00791A76 /* FocusTracker.swift in Sources */,
-				6F4760341EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDF08DC218B126700B2AF2C /* Recommendation.m in Sources */,
 				6F54D35926050FE4008B46FF /* MediaVisualView.swift in Sources */,
 				6F054FC026B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
@@ -8705,7 +8703,6 @@
 				6F88139623D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB812604B66400457331 /* TopicCell.swift in Sources */,
 				6FDEC19326DE307E0020A03F /* PresenterMode.swift in Sources */,
-				6F4760351EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				042F6F2A29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA45268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9A26CAC7A2004039E2 /* Blur.swift in Sources */,
@@ -8787,6 +8784,7 @@
 				04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBD299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5C271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
+				042F6F4B29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -8964,7 +8962,6 @@
 				6F88139723D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB802604B66300457331 /* TopicCell.swift in Sources */,
 				6FDEC19426DE307E0020A03F /* PresenterMode.swift in Sources */,
-				6F4760361EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA46268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9B26CAC7A2004039E2 /* Blur.swift in Sources */,
@@ -9046,6 +9043,7 @@
 				04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBE299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5D271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
+				042F6F4C29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -9223,7 +9221,6 @@
 				6F88139823D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB7F2604B66300457331 /* TopicCell.swift in Sources */,
 				6FDEC19526DE307E0020A03F /* PresenterMode.swift in Sources */,
-				6F4760371EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				042F6F2C29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA47268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9C26CAC7A2004039E2 /* Blur.swift in Sources */,
@@ -9305,6 +9302,7 @@
 				04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBF299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5E271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
+				042F6F4D29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -9424,6 +9422,7 @@
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
 				0451ECE728742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				08AF2AF126BA83EE00C4745E /* ExpandingButton.swift in Sources */,
+				042F6F4E29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6F054FC426B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
@@ -9481,7 +9480,6 @@
 				6F88139923D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB7E2604B66200457331 /* TopicCell.swift in Sources */,
 				6FDEC19626DE307E0020A03F /* PresenterMode.swift in Sources */,
-				6F4760381EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				042F6F2D29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA48268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9D26CAC7A2004039E2 /* Blur.swift in Sources */,
@@ -9826,6 +9824,7 @@
 				6FDB2ABF24E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83A268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D60270DE4FE00210713 /* Publishers.swift in Sources */,
+				042F6F4F29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6FFFB9B7252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6135225843C7E00C5FE4B /* PlayApplication.m in Sources */,
 				6F8A545F2655100400AE78FD /* SectionViewController.swift in Sources */,
@@ -9848,7 +9847,6 @@
 				6FDB2AC524E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DE261C9D3C003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7C2745140000CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				6FF129C4256C0A9D0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				0456C4A62976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88C24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */,
@@ -9979,6 +9977,7 @@
 				6FDB2AC024E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83B268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D61270DE4FE00210713 /* Publishers.swift in Sources */,
+				042F6F5029E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6FFFB9B8252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6136725843C8100C5FE4B /* PlayApplication.m in Sources */,
 				6F8A54602655100400AE78FD /* SectionViewController.swift in Sources */,
@@ -10001,7 +10000,6 @@
 				6FDB2AC624E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DF261C9D3D003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7D2745140100CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				6FF129C5256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				0456C4A72976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88D24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */,
@@ -10132,6 +10130,7 @@
 				6FDB2AC124E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83C268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D62270DE4FE00210713 /* Publishers.swift in Sources */,
+				042F6F5129E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6FFFB9B9252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */,
 				6F8A54612655100500AE78FD /* SectionViewController.swift in Sources */,
@@ -10154,7 +10153,6 @@
 				6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2E0261C9D3D003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7E2745140100CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				6FF129C6256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				0456C4A82976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88E24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
@@ -10285,6 +10283,7 @@
 				6FDB2AC224E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83D268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D63270DE4FE00210713 /* Publishers.swift in Sources */,
+				042F6F5229E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6FFFB9BA252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */,
 				6F8A54622655100500AE78FD /* SectionViewController.swift in Sources */,
@@ -10307,7 +10306,6 @@
 				6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2FA261C9D3E003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7F2745140200CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				6FF129C7256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				0456C4A92976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88F24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
@@ -10407,6 +10405,7 @@
 				6FDF54FB28530BAC0068BABB /* SearchViewController.swift in Sources */,
 				6F85F7682567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3041F827393FC2001E64BF /* UICollectionView+PlaySRG.m in Sources */,
+				042F6F5329E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
 				6F9F575E2746678E00DCA629 /* ProgramPreview.swift in Sources */,
 				6F6CD8662865767A00DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */,
@@ -10464,7 +10463,6 @@
 				6FDB2AC924E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2FB261C9D3E003FFDCF /* PageViewController.swift in Sources */,
 				6F928E802745140300CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				6FF129C8256C0A9F0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD89024E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413F024EEEDCB00FDF806 /* ApplicationSection.m in Sources */,
 				6F8BE03027A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,

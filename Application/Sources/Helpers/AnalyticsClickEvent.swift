@@ -92,7 +92,7 @@ struct AnalyticsClickEvent {
     static func tvGuideCalendar(to selectedDate: Date) -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionCalendarClick",
-            value1: DateFormatter.play_iso8601Calendar().string(from: selectedDate),
+            value1: DateFormatter.play_iso8601CalendarDate.string(from: selectedDate),
             value2: PageId.tvGuide.rawValue
         )
     }

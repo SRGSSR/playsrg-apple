@@ -22,7 +22,6 @@
 #import "Layout.h"
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
@@ -982,7 +981,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (currentProgram) {
         // Unbreakable spaces before / after the separator
         self.currentProgramTitleLabel.text = currentProgram.show.title ?: currentProgram.title;
-        self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+        self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:currentProgram.startDate], [NSDateFormatter.play_time stringFromDate:currentProgram.endDate]];
         
         BOOL hidden = (currentProgram.show == nil);
         self.currentProgramMoreEpisodesButton.hidden = hidden;

@@ -8,8 +8,8 @@
 
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
+#import "PlaySRG-Swift.h"
 #import "SRGProgram+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -121,7 +121,7 @@
         self.titleLabel.textColor = UIColor.whiteColor;
         
         // Unbreakable spaces before / after the separator
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:program.startDate], [NSDateFormatter.play_time stringFromDate:program.endDate]];
         self.subtitleLabel.textColor = UIColor.whiteColor;
         
         self.disabledOverlayView.hidden = YES;
@@ -134,7 +134,7 @@
         
         self.titleLabel.textColor = UIColor.srg_gray96Color;
         
-        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next, at %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next, at %@", @"Introductory time for next program information"), [NSDateFormatter.play_time stringFromDate:program.startDate]];
         self.subtitleLabel.textColor = UIColor.srg_gray96Color;
         
         self.disabledOverlayView.hidden = NO;
@@ -147,7 +147,7 @@
         self.titleLabel.textColor = UIColor.whiteColor;
         
         // Unbreakable spaces before / after the separator
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:program.startDate], [NSDateFormatter.play_time stringFromDate:program.endDate]];
         self.subtitleLabel.textColor = UIColor.whiteColor;
         
         self.disabledOverlayView.hidden = YES;

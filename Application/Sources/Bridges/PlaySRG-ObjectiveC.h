@@ -26,7 +26,6 @@
 #import "MediaPreviewViewController.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "Orientation.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayApplication.h"

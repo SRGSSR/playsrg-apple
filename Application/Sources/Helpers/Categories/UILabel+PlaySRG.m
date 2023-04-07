@@ -8,10 +8,10 @@
 
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayDurationFormatter.h"
+#import "PlaySRG-Swift.h"
 #import "SRGMedia+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 
@@ -48,7 +48,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 - (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
 {
     if (mediaMetadata.date) {
-        NSString *text = [NSDateFormatter.play_shortDateAndTimeFormatter stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
+        NSString *text = [NSDateFormatter.play_shortDateAndTime stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
         NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(mediaMetadata.date);
         
         NSDate *nowDate = NSDate.date;
@@ -57,7 +57,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
                 && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
             NSDateComponents *remainingDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
             if (remainingDateComponents.day > kDayNearExpirationThreshold) {
-                NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDateFormatter stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
+                NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDate stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
                 // Unbreakable spaces before / after the separator
                 text = [text stringByAppendingFormat:@" · %@", expiration];
                 

@@ -80,7 +80,7 @@ final class ProgramViewModel: ObservableObject {
         guard let program else { return nil }
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)
-        let day = DateFormatter.play_relativeFull.string(from: program.startDate)
+        let day = DateFormatter.play_relativeFullDate.string(from: program.startDate)
         return "\(startTime) - \(endTime) · \(day)"
     }
     
@@ -88,7 +88,7 @@ final class ProgramViewModel: ObservableObject {
         guard let program else { return nil }
         return String(format: PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
             .appending(", ")
-            .appending(DateFormatter.play_relativeFull.string(from: program.startDate))
+            .appending(DateFormatter.play_relativeFullDate.string(from: program.startDate))
     }
     
     private var seasonNumber: NSNumber? {
