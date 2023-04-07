@@ -27,6 +27,11 @@
 		042F6F3029E075E3003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		042F6F3129E075E4003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		042F6F3229E075E5003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		042F6F3429E08785003F46AA /* NSSet+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */; };
+		042F6F3529E08785003F46AA /* NSSet+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */; };
+		042F6F3629E08785003F46AA /* NSSet+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */; };
+		042F6F3729E08785003F46AA /* NSSet+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */; };
+		042F6F3829E08785003F46AA /* NSSet+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */; };
 		043CBF0C286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0D286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0E286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
@@ -1820,11 +1825,6 @@
 		6FC0C69C245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
 		6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
 		6FC0C69E245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */; };
-		6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
-		6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
-		6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
-		6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
-		6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */; };
 		6FC24A7E26395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */; };
 		6FC24A7F26395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */; };
 		6FC24A8026395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */; };
@@ -2745,6 +2745,7 @@
 		0406040D29CE6293001F2BD0 /* MediaMoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaMoreButton.swift; sourceTree = "<group>"; };
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+PlaySRG.swift"; sourceTree = "<group>"; };
+		042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSet+PlaySRG.swift"; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		044E391F29B10C9100C1768A /* SRGShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRGShow.swift; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3268,8 +3269,6 @@
 		6FBE537F271FFB5600F90B68 /* Top Shelf Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Top Shelf Extension.xcconfig"; sourceTree = "<group>"; };
 		6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramHeaderView.m; sourceTree = "<group>"; };
 		6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgramHeaderView.xib; sourceTree = "<group>"; };
-		6FC1FA862292E3460036CB34 /* NSSet+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+PlaySRG.h"; sourceTree = "<group>"; };
-		6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+PlaySRG.m"; sourceTree = "<group>"; };
 		6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedDescriptionView.swift; sourceTree = "<group>"; };
 		6FC2A21B265E3D2300EBC0F0 /* SectionShowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionShowHeaderView.swift; sourceTree = "<group>"; };
 		6FC2F7932628F1B200BF6B19 /* ResponderChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderChain.swift; sourceTree = "<group>"; };
@@ -3850,6 +3849,7 @@
 		042F6F2729E0710C003F46AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */,
 				042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */,
 				0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */,
 			);
@@ -4830,8 +4830,6 @@
 				0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */,
 				6F47601B1EB37BD1003021EA /* NSDateFormatter+PlaySRG.h */,
 				6F47601C1EB37BD1003021EA /* NSDateFormatter+PlaySRG.m */,
-				6FC1FA862292E3460036CB34 /* NSSet+PlaySRG.h */,
-				6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */,
 				6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */,
 				6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */,
 				089EA00F201148170070E11A /* NSTimer+PlaySRG.h */,
@@ -8367,6 +8365,7 @@
 				6FD1EF4D2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80E9C221A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
+				042F6F3429E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F6E9061283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F010E11286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				6FE14E60263EA83C004AD913 /* HeaderView.swift in Sources */,
@@ -8424,7 +8423,6 @@
 				6F00875D219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F4760131EB37BC6003021EA /* Banner.m in Sources */,
 				085C0DCE261326C8008E07C8 /* RadioChannel.swift in Sources */,
-				6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6F11BADB27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
 				6F54C9682717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */,
 				6F362A9026A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -8656,7 +8654,6 @@
 				6FEF23732732C2D40098C639 /* TimelineView.swift in Sources */,
 				6F54C9692717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */,
 				6FA8479B26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
-				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6F054FC126B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6F8BE02827A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF5D1FC2747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -8828,6 +8825,7 @@
 				6F010E12286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				6F0850F526256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2744203AD99C00FDE899 /* Playlist.m in Sources */,
+				042F6F3529E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F676852281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F978B522849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F939F702090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -8916,7 +8914,6 @@
 				6F54C96A2717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */,
 				08AF2AEF26BA83EE00C4745E /* ExpandingButton.swift in Sources */,
 				6FA8479C26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
-				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6F8BE02927A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF5D1FD2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F054FC226B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
@@ -9087,6 +9084,7 @@
 				6F010E13286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				6F0850F626256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */,
+				042F6F3629E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F676853281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F978B532849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F939F712090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -9175,7 +9173,6 @@
 				6F54C96B2717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */,
 				08AF2AF026BA83EE00C4745E /* ExpandingButton.swift in Sources */,
 				6FA8479D26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
-				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6F8BE02A27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF5D1FE2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F054FC326B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
@@ -9346,6 +9343,7 @@
 				6F010E14286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				6F0850F726256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2746203AD99C00FDE899 /* Playlist.m in Sources */,
+				042F6F3729E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F676854281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F978B542849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F939F722090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -9434,7 +9432,6 @@
 				0451ECE728742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				08AF2AF126BA83EE00C4745E /* ExpandingButton.swift in Sources */,
 				6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
-				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6F054FC426B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
@@ -9451,6 +9448,7 @@
 				6F475FE01EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70A22F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				6FE9049626F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
+				042F6F3829E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F0AF6E8267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FDF54F628530BAC0068BABB /* SearchViewController.swift in Sources */,
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
