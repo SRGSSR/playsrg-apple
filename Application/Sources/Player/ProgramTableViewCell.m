@@ -11,7 +11,6 @@
 #import "PlayAccessibilityFormatter.h"
 #import "PlaySRG-Swift.h"
 #import "SRGProgram+PlaySRG.h"
-#import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
 @import SRGAppearance;
@@ -42,7 +41,7 @@
     self.backgroundColor = UIColor.clearColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackground;
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     

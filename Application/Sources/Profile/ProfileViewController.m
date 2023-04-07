@@ -16,7 +16,6 @@
 #import "ProfileTableViewCell.h"
 #import "PushService.h"
 #import "TableView.h"
-#import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"

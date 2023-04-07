@@ -13,7 +13,6 @@
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
-#import "UIColor+PlaySRG.h"
 #import "UITableView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 

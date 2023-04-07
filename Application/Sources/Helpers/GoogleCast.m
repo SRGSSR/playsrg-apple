@@ -11,7 +11,6 @@
 #import "History.h"
 #import "PlayErrors.h"
 #import "PlaySRG-Swift.h"
-#import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 #import <objc/runtime.h>

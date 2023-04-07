@@ -10,7 +10,6 @@
 #import "MediaPlayerViewController.h"
 #import "PlayMiniPlayerView.h"
 #import "GoogleCastMiniPlayerView.h"
-#import "UIColor+PlaySRG.h"
 #import "UIVisualEffectView+PlaySRG.h"
 
 @import GoogleCast;

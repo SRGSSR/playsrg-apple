@@ -12,7 +12,6 @@
 #import "Calendar.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIVisualEffectView+PlaySRG.h"

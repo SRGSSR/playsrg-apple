@@ -8,7 +8,6 @@
 
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "UIColor+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 
 @import SRGAppearance;

@@ -42,7 +42,6 @@
 #import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
 #import "TableView.h"
-#import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -380,7 +379,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showWrapperView.layer.masksToBounds = YES;
     
-    self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackground;
     
     self.moreEpisodesLabel.textColor = UIColor.srg_grayC7Color;
     

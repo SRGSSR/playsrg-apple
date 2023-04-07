@@ -9,7 +9,6 @@
 #import "Banner.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
 @import SRGAppearance;

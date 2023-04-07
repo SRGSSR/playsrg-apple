@@ -18,7 +18,6 @@
 #import "RadioChannelsViewController.h"
 #import "SplitViewController.h"
 #import "TabBarActionable.h"
-#import "UIColor+PlaySRG.h"
 
 @import libextobjc;
 @import MAKVONotificationCenter;
@@ -438,7 +437,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
         profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-        profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
+        profileTabBarItem.badgeColor = UIColor.play_notificationRed;
     }
     else {
         profileTabBarItem.badgeValue = nil;
