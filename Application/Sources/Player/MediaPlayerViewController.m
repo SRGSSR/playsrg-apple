@@ -43,7 +43,6 @@
 #import "StoreReview.h"
 #import "TableView.h"
 #import "UIDevice+PlaySRG.h"
-#import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 #import "UITableView+PlaySRG.h"
@@ -889,9 +888,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateRadioHomeButton];
         self.radioHomeButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         
-        UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
+        UIImage *youthProtectionColorImage = [UIImage imageFor:media.youthProtectionColor];
         if (youthProtectionColorImage) {
-            self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
+            self.youthProtectionColorImageView.image = youthProtectionColorImage;
             self.youthProtectionColorLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
             self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
             self.youthProtectionColorSpacerView.hidden = NO;

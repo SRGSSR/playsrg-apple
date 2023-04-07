@@ -4,11 +4,16 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "UIImage+PlaySRG.h"
-
 @import SRGDataProviderModel;
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NS_ENUM(NSInteger, ImagePlaceholder) {
+    ImagePlaceholderNone,
+    ImagePlaceholderMedia,
+    ImagePlaceholderMediaList,
+    ImagePlaceholderNotification
+};
 
 @interface UIImageView (PlaySRG)
 

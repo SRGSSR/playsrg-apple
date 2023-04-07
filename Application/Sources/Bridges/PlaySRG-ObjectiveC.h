@@ -49,7 +49,6 @@
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
-#import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 #import "UIView+PlaySRG.h"

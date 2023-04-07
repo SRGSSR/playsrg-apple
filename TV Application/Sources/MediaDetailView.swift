@@ -135,7 +135,7 @@ struct MediaDetailView: View {
         var body: some View {
             HStack(spacing: 30) {
                 HStack(spacing: 4) {
-                    if let youthProtectionColor = model.youthProtectionColor, let youthProtectionLogoImage = YouthProtectionImageForColor(youthProtectionColor) {
+                    if let youthProtectionColor = model.youthProtectionColor, let youthProtectionLogoImage = UIImage.image(for: youthProtectionColor) {
                         Image(uiImage: youthProtectionLogoImage)
                     }
                     if let media = model.media, let duration = MediaDescription.duration(for: media) {
