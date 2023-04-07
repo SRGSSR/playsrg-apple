@@ -14,7 +14,6 @@
 #import "NSString+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 #import "UIColor+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
 #import "WebViewController.h"
 
 @import libextobjc;

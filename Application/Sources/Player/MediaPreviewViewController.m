@@ -25,7 +25,6 @@
 #import "UIImageView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
 @import SRGAnalyticsDataProvider;

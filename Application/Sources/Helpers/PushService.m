@@ -11,7 +11,6 @@
 #import "ApplicationSettings.h"
 #import "PlaySRG-Swift.h"
 #import "UIView+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
 #import "UserNotification.h"
 
 @import AirshipCore;

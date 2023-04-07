@@ -22,6 +22,11 @@
 		042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2C29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2D29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
+		042F6F2E29E075E0003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		042F6F2F29E075E1003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		042F6F3029E075E3003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		042F6F3129E075E4003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
+		042F6F3229E075E5003F46AA /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		043CBF0C286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0D286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0E286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
@@ -47,11 +52,6 @@
 		0451ECE528742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0451ECE628742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0451ECE728742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
-		0451ECE828742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
-		0451ECE928742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
-		0451ECEA28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
-		0451ECEB28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
-		0451ECEC28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0456C4A12976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
 		0456C4A22976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
 		0456C4A32976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
@@ -1068,31 +1068,26 @@
 		6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F47607B1EB37D60003021EA /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */; };
-		6F47607E1EB37D60003021EA /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
 		6F47607F1EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F4760801EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F4760811EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F4760821EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6F4760841EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */; };
-		6F4760851EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
 		6F4760861EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F4760871EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F4760881EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F4760891EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6F47608B1EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */; };
-		6F47608C1EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
 		6F47608D1EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F47608E1EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F47608F1EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F4760901EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6F4760921EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */; };
-		6F4760931EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
 		6F4760941EB37DF2003021EA /* UIColor+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606B1EB37D60003021EA /* UIColor+PlaySRG.m */; };
 		6F4760951EB37DF2003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F4760961EB37DF2003021EA /* UIImage+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606F1EB37D60003021EA /* UIImage+PlaySRG.m */; };
 		6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */; };
-		6F47609A1EB37DF2003021EA /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
 		6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
 		6F4843CD23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
 		6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
@@ -1390,11 +1385,6 @@
 		6F7C664C26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
 		6F7C664D26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
 		6F7C664E26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
-		6F7C666F26DE809100B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
-		6F7C667026DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
-		6F7C667126DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
-		6F7C667226DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
-		6F7C667326DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
 		6F7C89CF20AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
 		6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
 		6F7C89D120AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
@@ -3130,8 +3120,6 @@
 		6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PlaySRG.m"; sourceTree = "<group>"; };
 		6F4760741EB37D60003021EA /* UIViewController+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PlaySRG.h"; sourceTree = "<group>"; };
 		6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PlaySRG.m"; sourceTree = "<group>"; };
-		6F4760761EB37D60003021EA /* UIWindow+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+PlaySRG.h"; sourceTree = "<group>"; };
-		6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+PlaySRG.m"; sourceTree = "<group>"; };
 		6F4843CA23EC3ADF00868F78 /* AccessibilityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccessibilityView.h; sourceTree = "<group>"; };
 		6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityView.m; sourceTree = "<group>"; };
 		6F4843D123EC4D4D00868F78 /* GoogleCastPlaybackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCastPlaybackButton.h; sourceTree = "<group>"; };
@@ -3863,6 +3851,7 @@
 			isa = PBXGroup;
 			children = (
 				042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */,
+				0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4883,9 +4872,6 @@
 				6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */,
 				6F4760741EB37D60003021EA /* UIViewController+PlaySRG.h */,
 				6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */,
-				6F4760761EB37D60003021EA /* UIWindow+PlaySRG.h */,
-				6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */,
-				0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -8540,7 +8526,6 @@
 				6F85E4B71EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
 				0406040E29CE6293001F2BD0 /* MediaMoreButton.swift in Sources */,
 				6F54D39026050FFE008B46FF /* BlockingOverlay.swift in Sources */,
-				6F47607E1EB37D60003021EA /* UIWindow+PlaySRG.m in Sources */,
 				6FDF08F0218B126700B2AF2C /* UpdateInfo.m in Sources */,
 				6FAE561C26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6F30AB9C2604B66600457331 /* TopicCell.swift in Sources */,
@@ -8768,7 +8753,6 @@
 				082910AF239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981312622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDC2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
-				6F4760851EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */,
 				6FD2A35623C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FC1D4A5887002C10D5 /* WebViewController.m in Sources */,
 				6F390D7F268C97D600587B1F /* FocusableRegion.swift in Sources */,
@@ -9028,7 +9012,6 @@
 				082910B0239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981322622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDD2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
-				6F47608C1EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */,
 				6FD2A35723C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FD1D4A5888002C10D5 /* WebViewController.m in Sources */,
 				6F390D80268C97D700587B1F /* FocusableRegion.swift in Sources */,
@@ -9288,7 +9271,6 @@
 				082910B1239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981332622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDE2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
-				6F4760931EB37DF1003021EA /* UIWindow+PlaySRG.m in Sources */,
 				6FD2A35823C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FE1D4A5888002C10D5 /* WebViewController.m in Sources */,
 				6F390D81268C97D800587B1F /* FocusableRegion.swift in Sources */,
@@ -9549,7 +9531,6 @@
 				082910B2239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981342622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCD42813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
-				6F47609A1EB37DF2003021EA /* UIWindow+PlaySRG.m in Sources */,
 				6FD2A35923C7628000456DCB /* ForegroundTimer.m in Sources */,
 				E64BA3FF1D4A5888002C10D5 /* WebViewController.m in Sources */,
 				6F390D82268C97D800587B1F /* FocusableRegion.swift in Sources */,
@@ -9777,7 +9758,6 @@
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F924286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F762719C5650082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECE828742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FC413D224EEEDC900FDF806 /* RadioChannel.m in Sources */,
@@ -9794,7 +9774,6 @@
 				6F676856281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD52813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6FE14E65263EA83C004AD913 /* HeaderView.swift in Sources */,
-				6F7C666F26DE809100B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */,
 				08F5DB15262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E72638C37900EB029E /* LabeledCardButton.swift in Sources */,
@@ -9884,6 +9863,7 @@
 				6FDFD88C24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				04F184ED28F097E900B1207C /* BadgeList.swift in Sources */,
+				042F6F2E29E075E0003F46AA /* UIWindow+PlaySRG.swift in Sources */,
 				6F8BE02C27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E55256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -9932,7 +9912,6 @@
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F925286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F772719C5670082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECE928742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FC413DA24EEEDC900FDF806 /* RadioChannel.m in Sources */,
@@ -9949,7 +9928,6 @@
 				6F676857281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD62813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6FE14E66263EA83C004AD913 /* HeaderView.swift in Sources */,
-				6F7C667026DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB16262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E82638C37900EB029E /* LabeledCardButton.swift in Sources */,
@@ -10039,6 +10017,7 @@
 				6FDFD88D24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				04F184EE28F097E900B1207C /* BadgeList.swift in Sources */,
+				042F6F2F29E075E1003F46AA /* UIWindow+PlaySRG.swift in Sources */,
 				6F8BE02D27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E56256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -10087,7 +10066,6 @@
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F926286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F782719C5680082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECEA28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FC413E224EEEDCA00FDF806 /* RadioChannel.m in Sources */,
@@ -10104,7 +10082,6 @@
 				6F676858281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD72813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6FE14E67263EA83C004AD913 /* HeaderView.swift in Sources */,
-				6F7C667126DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB17262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E92638C37900EB029E /* LabeledCardButton.swift in Sources */,
@@ -10194,6 +10171,7 @@
 				6FDFD88E24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				04F184EF28F097E900B1207C /* BadgeList.swift in Sources */,
+				042F6F3029E075E3003F46AA /* UIWindow+PlaySRG.swift in Sources */,
 				6F8BE02E27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E57256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -10242,7 +10220,6 @@
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F927286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F792719C5690082CAE9 /* ProgramCellViewModel.swift in Sources */,
-				0451ECEB28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FC413EA24EEEDCA00FDF806 /* RadioChannel.m in Sources */,
@@ -10259,7 +10236,6 @@
 				6F676859281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD82813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6FE14E68263EA83C004AD913 /* HeaderView.swift in Sources */,
-				6F7C667226DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB18262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125EA2638C37900EB029E /* LabeledCardButton.swift in Sources */,
@@ -10349,6 +10325,7 @@
 				6FDFD88F24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				04F184F028F097E900B1207C /* BadgeList.swift in Sources */,
+				042F6F3129E075E4003F46AA /* UIWindow+PlaySRG.swift in Sources */,
 				6F8BE02F27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E58256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -10383,7 +10360,6 @@
 				04F184F128F097E900B1207C /* BadgeList.swift in Sources */,
 				6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */,
 				6F7C664E26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
-				0451ECEC28742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				085C0DCC26132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F8012628F23C00BF6B19 /* ResponderChain.swift in Sources */,
 				6FD1EF402861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -10409,7 +10385,6 @@
 				6F67685A281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD92813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6FE14E69263EA83C004AD913 /* HeaderView.swift in Sources */,
-				6F7C667326DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6FEC8A0C261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB19262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125EB2638C37900EB029E /* LabeledCardButton.swift in Sources */,
@@ -10451,6 +10426,7 @@
 				6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */,
 				6FB2C1142719AAE3003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				6F710A2F2644637B0035CA03 /* EmptyContentView.swift in Sources */,
+				042F6F3229E075E5003F46AA /* UIWindow+PlaySRG.swift in Sources */,
 				6F3D680D256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6525DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FD4C2EA268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,

@@ -56,7 +56,6 @@
 #import "UIScrollView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
 #import "UserNotification.h"
 #import "WatchLater.h"
 #import "WebViewController.h"

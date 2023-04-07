@@ -51,7 +51,6 @@
 #import "UITableView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
 @import GoogleCast;
@@ -2106,7 +2105,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
     [sceneDelegate.rootTabBarController pushViewController:showViewController animated:NO];
-    [sceneDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+    [sceneDelegate.window play_dismissAllViewControllersWithAnimated:YES completion:nil];
 }
 
 - (IBAction)openRadioHome:(id)sender
@@ -2121,7 +2120,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
     [sceneDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
-    [sceneDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+    [sceneDelegate.window play_dismissAllViewControllersWithAnimated:YES completion:nil];
 }
 
 - (IBAction)toggleFavorite:(id)sender
