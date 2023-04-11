@@ -83,9 +83,6 @@
 /* Search setting option */
 "All" = "Tout";
 
-/* Beta tests toggle label to enable episodes as a list in show pages setting label */
-"Always display episodes as a list in show pages (iPad)" = "Always display episodes as a list in show pages (iPad)";
-
 /* Subtitle availability setting section footer */
 "Always visible when VoiceOver is active." = "Toujours visible lorsque VoiceOver est activé.";
 
@@ -118,10 +115,6 @@
 
 /* Label of the button to become beta tester */
 "Become a beta tester" = "Devenez bêta-testeur";
-
-/* Beta tests alert title
-   Beta tests section header */
-"Beta tests" = "Beta tests";
 
 /* Show by date short button title */
 "By date" = "Par date";
@@ -453,8 +446,7 @@
 /* Now button in program guide */
 "Now" = "Maintenant";
 
-/* Title of an information alert button
-   Title of the button displayed at the end of an onboarding
+/* Title of the button displayed at the end of an onboarding
    Title of the button to validate date settings
    Title of the search settings button to apply settings */
 "OK" = "OK";
@@ -665,9 +657,6 @@
 /* Server setting name */
 "Test" = "Test";
 
-/* Beta tests alert explanation */
-"Thank you to test the new layout. An update version is now available.\nThis preview can be disable at anytime in the application settings, in profile tab." = "Thank you to test the new layout. An update version is now available.\nThis preview can be disable at anytime in the application settings, in profile tab.";
-
 /* Add to Calendar alert explanation */
 "The application uses the calendar to add TV programs." = "L'application utilise le calendrier pour ajouter des programmes TV.";
 
@@ -736,9 +725,6 @@
 
 /* Related content media list title */
 "This might interest you" = "Cela pourrait vous intéresser";
-
-/* Beta tests section footer */
-"This section is only available for beta testers." = "This section is only available for beta testers.";
 
 /* Advanced features section footer
    Reset section footer */
@@ -843,9 +829,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vous avez été automatiquement déconnecté. Connectez-vous à nouveau pour conserver vos données synchronisées entre vos appareils.";
-
-/* Beta tests alert explanation */
-"You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab." = "You'll preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.";
 
 /* Label of the button to display feedback form */
 "Your feedback" = "Votre avis";
