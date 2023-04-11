@@ -398,7 +398,7 @@ private extension SectionViewModel {
 #endif
             case .show:
 #if os(iOS)
-                return ApplicationSettingMediaListLayoutEnabled() ? .mediaList : .mediaGrid
+                return .mediaList
 #else
                 return .mediaGrid
 #endif

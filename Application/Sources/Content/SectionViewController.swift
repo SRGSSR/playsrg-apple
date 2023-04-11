@@ -178,18 +178,15 @@ final class SectionViewController: UIViewController {
             .store(in: &cancellables)
         
 #if os(iOS)
-        Publishers.Merge(
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListDividerEnabled),
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
-        )
-        .receive(on: DispatchQueue.main)
-        .sink { [weak self] _ in
-            guard let self else { return }
-            
-            self.contentInsets = Self.contentInsets(for: self.model.state, displayDivider: self.model.configuration.viewModelProperties.displayDivider)
-            self.collectionView.reloadData()
-        }
-        .store(in: &cancellables)
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListDividerEnabled)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                
+                self.contentInsets = Self.contentInsets(for: self.model.state, displayDivider: self.model.configuration.viewModelProperties.displayDivider)
+                self.collectionView.reloadData()
+            }
+            .store(in: &cancellables)
 #endif
     }
     
