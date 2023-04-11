@@ -177,7 +177,7 @@ final class SectionViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-#if os(iOS)
+#if os(iOS) && (DEBUG || NIGHTLY || BETA)
         ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListDividerEnabled)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in

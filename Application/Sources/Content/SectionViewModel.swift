@@ -408,7 +408,7 @@ private extension SectionViewModel {
         }
         
         var displayDivider: Bool {
-#if os(iOS)
+#if os(iOS) && (DEBUG || NIGHTLY || BETA)
             switch configuredSection {
             case .show:
                 return ApplicationSettingMediaListDividerEnabled()

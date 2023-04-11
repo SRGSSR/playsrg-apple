@@ -170,10 +170,5 @@ BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 
 BOOL ApplicationSettingMediaListDividerEnabled(void)
 {
-    if (! NSBundle.mainBundle.play_isAppStoreRelease) {
-        return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingMediaListDividerEnabled];
-    }
-    else {
-        return NO;
-    }
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingMediaListDividerEnabled];
 }
