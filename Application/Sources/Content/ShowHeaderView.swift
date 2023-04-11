@@ -31,16 +31,19 @@ class ShowMoreEvent: UIEvent {
 /// Behavior: h-hug, v-hug
 struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow
+    let horizontalPadding: CGFloat
+    
     @StateObject private var model = ShowHeaderViewModel()
     
     fileprivate static let verticalSpacing: CGFloat = 24
     
-    init(show: SRGShow) {
+    init(show: SRGShow, horizontalPadding: CGFloat) {
         _show = .constant(show)
+        self.horizontalPadding = horizontalPadding
     }
     
     var body: some View {
-        MainView(model: model)
+        MainView(model: model, horizontalPadding: horizontalPadding)
             .onAppear {
                 model.show = show
             }
@@ -52,23 +55,21 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug.
     fileprivate struct MainView: View {
         @ObservedObject var model: ShowHeaderViewModel
+        let horizontalPadding: CGFloat
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
         @State private var isLandscape: Bool
         
         private let compactDescriptionOffet: CGFloat = -12
         
-        init(model: ShowHeaderViewModel) {
+        init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
+            self.horizontalPadding = horizontalPadding
             self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
         }
         
         private var descriptionHorizontalPadding: CGFloat {
-#if os(iOS)
-            return horizontalSizeClass == .regular ? 32 : 16
-#else
-            return 0
-#endif
+            return horizontalSizeClass == .compact ? horizontalPadding : horizontalPadding * 2
         }
         
         var body: some View {
@@ -241,11 +242,11 @@ struct ShowHeaderView: View {
 // MARK: Size
 
 enum ShowHeaderViewSize {
-    static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func recommended(for show: SRGShow, horizontalPadding: CGFloat, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
         let model = ShowHeaderViewModel()
         model.show = show
-        let size = ShowHeaderView.MainView(model: model).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+        let size = ShowHeaderView.MainView(model: model, horizontalPadding: horizontalPadding).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
     }
 }
@@ -266,22 +267,22 @@ struct ShowHeaderView_Previews: PreviewProvider {
     static var previews: some View {
 #if os(tvOS)
         Group {
-            ShowHeaderView.MainView(model: model1)
-            ShowHeaderView.MainView(model: model2)
+            ShowHeaderView.MainView(model: model1, horizontalPadding: 0)
+            ShowHeaderView.MainView(model: model2, horizontalPadding: 0)
         }
         .previewLayout(.sizeThatFits)
 #else
         Group {
-            ShowHeaderView.MainView(model: model1)
-            ShowHeaderView.MainView(model: model2)
+            ShowHeaderView.MainView(model: model1, horizontalPadding: 16)
+            ShowHeaderView.MainView(model: model2, horizontalPadding: 16)
         }
         .previewLayout(.sizeThatFits)
         .frame(width: 1000)
         .environment(\.horizontalSizeClass, .regular)
         
         Group {
-            ShowHeaderView.MainView(model: model1)
-            ShowHeaderView.MainView(model: model2)
+            ShowHeaderView.MainView(model: model1, horizontalPadding: 16)
+            ShowHeaderView.MainView(model: model2, horizontalPadding: 16)
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)
