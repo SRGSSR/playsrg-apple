@@ -685,8 +685,7 @@ private extension SectionViewController {
                 switch configuration.viewModelProperties.layout {
                 case .mediaList:
 #if os(iOS)
-                    let spacing = horizontalSizeClass == .compact ? Self.itemSpacing : Self.itemSpacing * 2
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { _, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
                         return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass, displayDivider: configuration.viewModelProperties.displayDivider)
                     }
 #else
