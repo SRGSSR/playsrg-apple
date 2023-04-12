@@ -321,11 +321,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateSharingStatus];
         
         if (letterboxController.continuousPlaybackUpcomingMedia) {
-            Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
-            
             [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionDisplay
-                                                           mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN
-                                                  recommendationUid:playlist.recommendationUid]
+                                                           mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN]
              send];
         }
     }];
@@ -557,11 +554,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [super viewDidDisappear:animated];
     
     if (self.letterboxController.continuousPlaybackUpcomingMedia) {
-        Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)self.letterboxController.playlistDataSource : nil;
-        
         [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
-                                                       mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN
-                                              recommendationUid:playlist.recommendationUid]
+                                                       mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN]
          send];
     }
     
@@ -1664,12 +1658,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didEngageInContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
 {
-    SRGLetterboxController *controller = letterboxView.controller;
-    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
-    
     [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlay
-                                                   mediaUrn:upcomingMedia.URN
-                                          recommendationUid:playlist.recommendationUid]
+                                                   mediaUrn:upcomingMedia.URN]
      send];
 }
 
@@ -1691,12 +1681,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self presentViewController:alertController animated:YES completion:nil];
     }, @"DisableAutoplayAsked");
     
-    SRGLetterboxController *controller = letterboxView.controller;
-    Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
-    
     [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
-                                                   mediaUrn:upcomingMedia.URN
-                                          recommendationUid:playlist.recommendationUid]
+                                                   mediaUrn:upcomingMedia.URN]
      send];
 }
 

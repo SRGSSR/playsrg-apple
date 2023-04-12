@@ -31,13 +31,12 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvent {
+    static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsHiddenEvent {
         return Self(
             name: "continuous_playback",
             source: action.source,
             type: action.type,
-            value: mediaUrn,
-            value1: recommendationUid
+            value: mediaUrn
         )
     }
     
@@ -182,8 +181,8 @@ struct AnalyticsHiddenEvent {
         self.event.send()
     }
     
-    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
+    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsHiddenEventObjC {
+        return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn))
     }
     
     @objc class func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEventObjC {
