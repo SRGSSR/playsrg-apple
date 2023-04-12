@@ -33,7 +33,7 @@ Depending on the business unit some functionalities might not be available (e.g.
 
 ## Compatibility
 
-The project runs on iOS 14, tvOS 14 and above and must be opened with the latest Xcode version.
+The project runs on iOS 14.1, tvOS 14 and above and must be opened with the latest Xcode version.
 
 ## Contributing
 
