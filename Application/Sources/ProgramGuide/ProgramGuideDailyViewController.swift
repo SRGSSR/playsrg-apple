@@ -21,7 +21,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyContentView: HostView<EmptyContentView>!
     
-    private static let margin: CGFloat = 10
+    private static let layoutHorizontalMargin: CGFloat = 10
     private static let verticalSpacing: CGFloat = 3
     
     var day: SRGDay {
@@ -67,8 +67,8 @@ final class ProgramGuideDailyViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Self.margin),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Self.margin)
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Self.layoutHorizontalMargin),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Self.layoutHorizontalMargin)
         ])
         
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
