@@ -38,13 +38,27 @@ rbenv:
 	@Scripts/rbenv-install.sh "./"
 	@echo "... done.\n"
 
+.PHONY: git-hook-install
+git-hook-install:
+	@echo "Installing git hooks..."
+	@git config core.hooksPath hooks
+	@echo "... done.\n"
+
+.PHONY: git-hook-uninstall
+git-hook-uninstall:
+	@echo "Uninstalling git hooks..."
+	@git config --unset core.hooksPath
+	@echo "... done.\n"
+
 .PHONY: help
 help:
 	@echo "The following targets are available:"
-	@echo "   all       Build the project"
-	@echo "   setup     Setup project"
-	@echo "   lint      Swift lint project and fix issues"
-	@echo "   clean     Clean the project and its dependencies"
-	@echo "   quality   Run quality checks"
-	@echo "   rbenv     Install needed ruby version if missing"
-	@echo "   help      Display this message"
+	@echo "   all                 Build the project"
+	@echo "   setup               Setup project"
+	@echo "   lint                Swift lint project and fix issues"
+	@echo "   clean               Clean the project and its dependencies"
+	@echo "   quality             Run quality checks"
+	@echo "   rbenv               Install needed ruby version if missing"
+	@echo "   git-hook-install    Use hooks located in ./hooks"
+	@echo "   git-hook-uninstall  Use default hooks located in .git/hooks"
+	@echo "   help                Display this message"

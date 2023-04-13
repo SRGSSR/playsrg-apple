@@ -11,6 +11,6 @@ fi
 echo "... checking Ruby scripts..."
 bundle exec rubocop --format quiet
 echo "... checking Shell scripts..."
-shellcheck Scripts/*.sh
+shellcheck Scripts/*.sh hooks/*
 echo "... checking YAML files..."
 yamllint .*.yml .github

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#================================================================
+# Quality check
+#================================================================
+
+eval "$(rbenv init -)"
+PATH="$(which swiftlint):$(which ruby):$PATH"
+
+echo "pre commit"
+echo "Current directory is: $(pwd)"
+if Scripts/check-quality.sh only-changes; then
+	echo "✅ Quality checked"
+else
+	echo "❌ Quality check failed"
+	exit 1
+fi
