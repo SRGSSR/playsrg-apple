@@ -412,7 +412,7 @@ struct SettingsView: View {
             @ObservedObject var model: SettingsViewModel
         
 #if os(iOS)
-            @State private var isAlertDisplayed = false
+            @State private var isActionSheetDisplayed = false
             @State private var isMailComposeDisplayed = false
             
             private var supportRecipients: [String] {
@@ -420,22 +420,9 @@ struct SettingsView: View {
                 return [supportEmailAddress]
             }
             
-            // TODO: Once the code requires iOS 15+ we can use the updated 15.0 alert API (or confirmationDialog API) and
-            //       have a cancel button. To avoid writing the code twice the old API is currently used, which limits
-            //       the number of buttons to two. But this is simpler than having both implementations coexist for now.
-            private var primaryButton: Alert.Button {
-                if !supportRecipients.isEmpty {
-                    return .default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
-                        isMailComposeDisplayed = true
-                    }
-                }
-                else {
-                    return .cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-                }
-            }
-            
-            private func alert() -> Alert {
-                let secondaryButton = Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
+            private func actionSheet() -> ActionSheet {
+                var buttons = [Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}]
+                buttons.append(Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
                     model.copySupportInformation()
                     Banner.show(
                         with: .info,
@@ -443,11 +430,15 @@ struct SettingsView: View {
                         image: nil,
                         sticky: false
                     )
+                })
+                if !supportRecipients.isEmpty {
+                    buttons.append(Alert.Button.default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
+                        isMailComposeDisplayed = true
+                    })
                 }
-                return Alert(
+                return ActionSheet(
                     title: Text(NSLocalizedString("Support information", comment: "Support information alert title")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
+                    buttons: buttons
                 )
             }
             
@@ -460,7 +451,7 @@ struct SettingsView: View {
             
             private func action() {
 #if os(iOS)
-                isAlertDisplayed = true
+                isActionSheetDisplayed = true
 #else
                 navigateToText(SupportInformation.generate())
 #endif
@@ -471,7 +462,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Support information", comment: "Label of the button to access support information"))
                 }
 #if os(iOS)
-                .alert(isPresented: $isAlertDisplayed, content: alert)
+                .actionSheet(isPresented: $isActionSheetDisplayed, content: actionSheet)
                 .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
 #endif
             }
