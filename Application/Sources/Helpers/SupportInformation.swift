@@ -85,6 +85,10 @@ import UIKit
     @objc static func generate() -> String {
         var components = [String]()
         
+        components.append("Issue:")
+        components.append("")
+        components.append("")
+        
         components.append("General information")
         components.append( "-------------------")
         components.append("Date and time: \(dateAndTime)")
