@@ -445,7 +445,7 @@ struct SettingsView: View {
             private func mailComposeView() -> MailComposeView {
                 return MailComposeView()
                     .toRecipients(supportRecipients)
-                    .messageBody(SupportInformation.generate())
+                    .messageBody(SupportInformation.generate(toMailBody: true))
             }
 #endif
             
