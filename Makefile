@@ -26,6 +26,12 @@ clean:
 	@xcodebuild clean
 	@echo "... done.\n"
 
+.PHONY: quality
+quality:
+	@echo "Checking quality..."
+	@Scripts/check-quality.sh
+	@echo "... done.\n"
+
 .PHONY: rbenv
 rbenv:
 	@echo "Installing needed ruby version if missing..."
@@ -37,7 +43,8 @@ help:
 	@echo "The following targets are available:"
 	@echo "   all       Build the project"
 	@echo "   setup     Setup project"
-	@echo "   lint      Lint project and fix issues"
+	@echo "   lint      Swift lint project and fix issues"
 	@echo "   clean     Clean the project and its dependencies"
+	@echo "   quality   Run quality checks"
 	@echo "   rbenv     Install needed ruby version if missing"
 	@echo "   help      Display this message"
