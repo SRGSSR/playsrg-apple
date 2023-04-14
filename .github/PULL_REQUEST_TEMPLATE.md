@@ -15,4 +15,4 @@
 - [ ] The documentation has been updated (if relevant).
 - [ ] Issues are linked to the PR, if any.
 
-* The project uses Github merge queue feature, which rebases onto the `develop` branch before squashing and merging the PR. 
+\* The project uses Github merge queue feature, which rebases onto the `develop` branch before squashing and merging the PR. 
