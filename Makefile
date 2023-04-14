@@ -14,12 +14,6 @@ setup:
 	@pod install
 	@echo "... done.\n"
 
-.PHONY: lint
-lint:
-	@echo "Linting project..."
-	@swiftlint --fix && swiftlint
-	@echo "... done.\n"
-
 .PHONY: clean
 clean:
 	@echo "Cleaning up build products..."
@@ -36,6 +30,12 @@ rbenv:
 check-quality:
 	@echo "Checking quality..."
 	@Scripts/check-quality.sh
+	@echo "... done.\n"
+
+.PHONY: fix-quality
+fix-quality:
+	@echo "Fixing quality..."
+	@Scripts/fix-quality.sh
 	@echo "... done.\n"
 
 .PHONY: git-hook-install
@@ -55,9 +55,9 @@ help:
 	@echo "The following targets are available:"
 	@echo "   all                 Build the project"
 	@echo "   setup               Setup project"
-	@echo "   lint                Swift lint project and fix issues"
 	@echo "   clean               Clean the project and its dependencies"
 	@echo "   check-quality       Run quality checks"
+	@echo "   fix-quality         Fix quality automatically (if possible)"
 	@echo "   rbenv               Install needed ruby version if missing"
 	@echo "   git-hook-install    Use hooks located in ./hooks"
 	@echo "   git-hook-uninstall  Use default hooks located in .git/hooks"
