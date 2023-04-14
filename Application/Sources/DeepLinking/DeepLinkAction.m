@@ -39,12 +39,11 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 #pragma mark Class methods
 
-+ (instancetype)unsupportedActionWithOptions:(UISceneOpenURLOptions *)options source:(AnalyticsOpenUrlSource)source
++ (instancetype)unsupportedActionWithSource:(AnalyticsOpenUrlSource)source
 {
     AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionOpenPlayApp
                                                                                  source:source
-                                                                                    urn:nil
-                                                                      sourceApplication:options.sourceApplication];
+                                                                                    urn:nil];
     
     return [[self alloc] initWithType:DeepLinkTypeUnsupported
                            identifier:@""
@@ -54,28 +53,27 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 + (instancetype)actionFromURLContext:(UIOpenURLContext *)URLContext
 {
-    return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsOpenUrlSourceCustomURL canConvertURL:YES];
+    return [self actionFromURL:URLContext.URL source:AnalyticsOpenUrlSourceCustomURL canConvertURL:YES];
 }
 
 + (instancetype)actionFromUniversalLinkURL:(NSURL *)URL
 {
-    return [self actionFromURL:URL options:nil source:AnalyticsOpenUrlSourceUniversalLink canConvertURL:YES];
+    return [self actionFromURL:URL source:AnalyticsOpenUrlSourceUniversalLink canConvertURL:YES];
 }
 
-+ (instancetype)actionFromURL:(NSURL *)URL options:(UISceneOpenURLOptions *)options source:(AnalyticsOpenUrlSource)source canConvertURL:(BOOL)canConvertURL
++ (instancetype)actionFromURL:(NSURL *)URL source:(AnalyticsOpenUrlSource)source canConvertURL:(BOOL)canConvertURL
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     NSString *type = URLComponents.host.lowercaseString;
     if ([type isEqualToString:DeepLinkTypeMedia]) {
         NSString *mediaURN = URLComponents.path.lastPathComponent;
         if (! mediaURN) {
-            return [self unsupportedActionWithOptions:options source:source];
+            return [self unsupportedActionWithSource:source];
         }
         
         AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionPlayMedia
                                                                                      source:source
-                                                                                        urn:mediaURN
-                                                                          sourceApplication:options.sourceApplication];
+                                                                                        urn:mediaURN];
         
         return [[self alloc] initWithType:type
                                identifier:mediaURN
@@ -85,13 +83,12 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     else if ([type isEqualToString:DeepLinkTypeShow]) {
         NSString *showURN = URLComponents.path.lastPathComponent;
         if (! showURN) {
-            return [self unsupportedActionWithOptions:options source:source];
+            return [self unsupportedActionWithSource:source];
         }
         
         AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionDisplayShow
                                                                                      source:source
-                                                                                        urn:showURN
-                                                                          sourceApplication:options.sourceApplication];
+                                                                                        urn:showURN];
         
         return [[self alloc] initWithType:type
                                identifier:showURN
@@ -101,13 +98,12 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     else if ([type isEqualToString:DeepLinkTypeTopic]) {
         NSString *topicURN = URLComponents.path.lastPathComponent;
         if (! topicURN) {
-            return [self unsupportedActionWithOptions:options source:source];
+            return [self unsupportedActionWithSource:source];
         }
         
         AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
                                                                                      source:source
-                                                                                        urn:topicURN
-                                                                          sourceApplication:options.sourceApplication];
+                                                                                        urn:topicURN];
         
         return [[self alloc] initWithType:type
                                identifier:topicURN
@@ -117,8 +113,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     else if ([@[ DeepLinkTypeHome, DeepLinkTypeAZ, DeepLinkTypeByDate, DeepLinkTypeSearch, DeepLinkTypeLivestreams ] containsObject:type]) {
         AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
                                                                                      source:source
-                                                                                        urn:type
-                                                                          sourceApplication:options.sourceApplication];
+                                                                                        urn:type];
         
         return [[self alloc] initWithType:type
                                identifier:type
@@ -128,13 +123,12 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     else if ([type isEqualToString:DeepLinkTypeSection]) {
         NSString *sectionUid = URLComponents.path.lastPathComponent;
         if (! sectionUid) {
-            return [self unsupportedActionWithOptions:options source:source];
+            return [self unsupportedActionWithSource:source];
         }
         
         AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
                                                                                      source:source
-                                                                                        urn:sectionUid
-                                                                          sourceApplication:options.sourceApplication];
+                                                                                        urn:sectionUid];
         
         return [[self alloc] initWithType:type
                                identifier:sectionUid
@@ -144,13 +138,12 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     else if ([type isEqualToString:DeepLinkTypeLink]) {
         NSString *URLString = [self valueForParameterWithName:@"url" inQueryItems:URLComponents.queryItems];
         if (! URLString) {
-            return [self unsupportedActionWithOptions:options source:source];
+            return [self unsupportedActionWithSource:source];
         }
         
         AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionDisplayUrl
                                                                                      source:source
-                                                                                        urn:URLString
-                                                                          sourceApplication:options.sourceApplication];
+                                                                                        urn:URLString];
         
         return [[self alloc] initWithType:type
                                identifier:URLString
@@ -161,15 +154,15 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     else if (canConvertURL) {
         NSURL *convertedURL = [DeepLinkService.currentService customURLFromWebURL:URL];
         if (convertedURL) {
-            return [self actionFromURL:convertedURL options:options source:source canConvertURL:NO];
+            return [self actionFromURL:convertedURL source:source canConvertURL:NO];
         }
         else {
-            return [self unsupportedActionWithOptions:options source:source];
+            return [self unsupportedActionWithSource:source];
         }
     }
 #endif
     else {
-        return [self unsupportedActionWithOptions:options source:source];
+        return [self unsupportedActionWithSource:source];
     }
 }
 

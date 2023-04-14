@@ -31,13 +31,12 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvent {
+    static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsHiddenEvent {
         return Self(
             name: "continuous_playback",
             source: action.source,
             type: action.type,
-            value: mediaUrn,
-            value1: recommendationUid
+            value: mediaUrn
         )
     }
     
@@ -88,13 +87,12 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvent {
+    static func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: "open_url",
             source: source.value,
             type: action.type,
-            value: urn,
-            value1: sourceApplication
+            value: urn
         )
     }
     
@@ -182,8 +180,8 @@ struct AnalyticsHiddenEvent {
         self.event.send()
     }
     
-    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
+    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsHiddenEventObjC {
+        return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn))
     }
     
     @objc class func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEventObjC {
@@ -206,8 +204,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
     
-    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.openUrl(action: action, source: source, urn: urn, sourceApplication: sourceApplication))
+    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> AnalyticsHiddenEventObjC {
+        return Self(event: AnalyticsHiddenEvent.openUrl(action: action, source: source, urn: urn))
     }
     
     @objc class func pictureInPicture(urn: String?) -> AnalyticsHiddenEventObjC {

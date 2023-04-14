@@ -48,10 +48,8 @@ extension UIViewController {
                 .sink { upcomingMedia in
                     guard let upcomingMedia else { return }
                     
-                    let playlist = controller.playlistDataSource as? Playlist
                     AnalyticsHiddenEvent.continuousPlayback(action: .display,
-                                                            mediaUrn: upcomingMedia.urn,
-                                                            recommendationUid: playlist?.recommendationUid)
+                                                            mediaUrn: upcomingMedia.urn)
                     .send()
                 }
                 .store(in: &cancellables)
