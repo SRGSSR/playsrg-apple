@@ -26,16 +26,16 @@ clean:
 	@xcodebuild clean
 	@echo "... done.\n"
 
-.PHONY: quality
-quality:
-	@echo "Checking quality..."
-	@Scripts/check-quality.sh
-	@echo "... done.\n"
-
 .PHONY: rbenv
 rbenv:
 	@echo "Installing needed ruby version if missing..."
 	@Scripts/rbenv-install.sh "./"
+	@echo "... done.\n"
+
+.PHONY: check-quality
+check-quality:
+	@echo "Checking quality..."
+	@Scripts/check-quality.sh
 	@echo "... done.\n"
 
 .PHONY: git-hook-install
@@ -57,7 +57,7 @@ help:
 	@echo "   setup               Setup project"
 	@echo "   lint                Swift lint project and fix issues"
 	@echo "   clean               Clean the project and its dependencies"
-	@echo "   quality             Run quality checks"
+	@echo "   check-quality       Run quality checks"
 	@echo "   rbenv               Install needed ruby version if missing"
 	@echo "   git-hook-install    Use hooks located in ./hooks"
 	@echo "   git-hook-uninstall  Use default hooks located in .git/hooks"
