@@ -8,8 +8,8 @@ The Play platform is more generally available on the web, on Android phones and 
 
 | Platform | Play RSI | Play RTR | Play RTS | Play SRF | Play SWI |
 |:-- |:--:|:--:|:--:|:--:|:--:|
-| iOS / tvOS | [🍎📱📺](https://itunes.apple.com/ch/app/play-rsi/id920753497) | [🍎📱📺](https://itunes.apple.com/ch/app/play-rtr/id920754925) | [🍎📱📺](https://itunes.apple.com/ch/app/play-rts/id920754415) | [🍎📱📺](https://itunes.apple.com/ch/app/play-srf/id638194352) | [🍎📱📺](https://itunes.apple.com/ch/app/play-swi/id920785201) |
-| Android / Android TV | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.rsi.player) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.rtr.player) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.rts.player) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.srf.mobile.srfplayer) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.swissinfo.player) |
+| iOS / tvOS | [🍎📱📺🚗](https://itunes.apple.com/ch/app/play-rsi/id920753497) | [🍎📱📺🚗](https://itunes.apple.com/ch/app/play-rtr/id920754925) | [🍎📱📺🚗](https://itunes.apple.com/ch/app/play-rts/id920754415) | [🍎📱📺🚗](https://itunes.apple.com/ch/app/play-srf/id638194352) | [🍎📱📺](https://itunes.apple.com/ch/app/play-swi/id920785201) |
+| Android / Android TV | [🤖📱📺🚗](https://play.google.com/store/apps/details?id=ch.rsi.player) | [🤖📱📺🚗](https://play.google.com/store/apps/details?id=ch.rtr.player) | [🤖📱📺🚗](https://play.google.com/store/apps/details?id=ch.rts.player) | [🤖📱📺🚗](https://play.google.com/store/apps/details?id=ch.srf.mobile.srfplayer) | [🤖📱](https://play.google.com/store/apps/details?id=ch.swissinfo.player) |
 | Web | [🖥📱💻](https://www.rsi.ch/play) | [🖥📱💻](https://www.rtr.ch/play) | [🖥📱💻](https://www.rts.ch/play) | [🖥📱💻](https://www.srf.ch/play) | [🖥📱💻](https://www.swissinfo.ch/play) |
 
 ![Screenshots](README-images/iphone-screenshots.png)
@@ -33,7 +33,7 @@ Depending on the business unit some functionalities might not be available (e.g.
 
 ## Compatibility
 
-The project runs on iOS 14, tvOS 14 and above and must be opened with the latest Xcode version.
+The project runs on iOS 14.1, tvOS 14 and above and must be opened with the latest Xcode version.
 
 ## Contributing
 
