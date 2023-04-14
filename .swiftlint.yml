@@ -1,3 +1,4 @@
+---
 included:
   - Application
   - Common
@@ -86,7 +87,7 @@ opt_in_rules:
   - vertical_whitespace_opening_braces
   - weak_delegate
   - xct_specific_matcher
-  
+
 analyzer_rules:
   - capture_variable
   - typesafe_array_init

@@ -1,3 +1,4 @@
+---
 inherit_mode:
   merge:
     - Include
@@ -15,7 +16,7 @@ Metrics/BlockLength:
   Enabled: true
   Max: 35
   AllowedMethods: ['platform', 'for_platform', 'abstract_target']
-  
+
 # Default is too restrictive, when optional properties have to be checked
 Metrics/MethodLength:
   Enabled: true
