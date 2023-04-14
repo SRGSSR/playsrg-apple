@@ -5,7 +5,7 @@
 #================================================================
 
 eval "$(rbenv init -)"
-PATH="$(which swiftlint):$(which ruby):$PATH"
+PATH="$(which swiftlint):$(which ruby):$(which pod):$PATH"
 
 echo "pre commit"
 echo "Current directory is: $(pwd)"
