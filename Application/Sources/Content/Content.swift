@@ -143,8 +143,7 @@ protocol SectionProperties {
     
 #if os(iOS)
     var sharingItem: SharingItem? { get }
-    
-    var displayingEpisodesOfShow: SRGShow? { get }
+    var displayedShow: SRGShow? { get }
 #endif
     
     /// Analytics information
@@ -286,7 +285,7 @@ private extension Content {
             return SharingItem(for: contentSection)
         }
         
-        var displayingEpisodesOfShow: SRGShow? {
+        var displayedShow: SRGShow? {
             return nil
         }
 #endif
@@ -645,7 +644,7 @@ private extension Content {
             }
         }
         
-        var displayingEpisodesOfShow: SRGShow? {
+        var displayedShow: SRGShow? {
             switch configuredSection {
             case let .show(show):
                 return show

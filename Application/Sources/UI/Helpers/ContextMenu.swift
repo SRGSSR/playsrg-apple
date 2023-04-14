@@ -218,8 +218,8 @@ extension ContextMenu {
               let show = media.show,
               let navigationController = viewController.navigationController else { return nil }
         if let sectionViewController = viewController as? SectionViewController,
-           let sectionShow = sectionViewController.model.configuration.properties.displayingEpisodesOfShow {
-            guard !show.isEqual(sectionShow) else { return nil }
+           let displayedShow = sectionViewController.model.configuration.properties.displayedShow {
+            guard !show.isEqual(displayedShow) else { return nil }
         }
         return UIAction(title: NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
                         image: UIImage(named: "episodes")) { _ in
