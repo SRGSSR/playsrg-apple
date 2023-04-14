@@ -31,13 +31,13 @@ rbenv-setup:
 	@echo "... done.\n"
 
 .PHONY: check-quality
-check-quality:
+check-quality: setup
 	@echo "Checking quality..."
 	@Scripts/check-quality.sh
 	@echo "... done.\n"
 
 .PHONY: fix-quality
-fix-quality:
+fix-quality: setup
 	@echo "Fixing quality..."
 	@Scripts/fix-quality.sh
 	@echo "... done.\n"
