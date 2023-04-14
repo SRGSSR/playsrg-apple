@@ -8,11 +8,8 @@ CONFIGURATION_FOLDER=Configuration
 all: setup
 
 .PHONY: setup
-setup: rbenv-setup
+setup:
 	@echo "Setting up the project..."
-	@echo "Running bundle install..."
-	@bundle install > /dev/null
-	@echo "Checkout configuration..."
 	@Scripts/checkout-configuration.sh "${CONFIGURATION_REPOSITORY_URL}" "${CONFIGURATION_COMMIT_SHA1}" "${CONFIGURATION_FOLDER}"
 	@echo "Running pod install..."
 	@pod install > /dev/null
@@ -24,10 +21,12 @@ clean:
 	@xcodebuild clean
 	@echo "... done.\n"
 
-.PHONY: rbenv-setup
-rbenv-setup:
+.PHONY: ruby-setup
+ruby-setup:
 	@echo "Installing needed ruby version if missing..."
 	@Scripts/rbenv-install.sh "./"
+	@echo "Running bundle install..."
+	@bundle install > /dev/null
 	@echo "... done.\n"
 
 .PHONY: check-quality
@@ -60,8 +59,9 @@ help:
 	@echo ""
 	@echo "   all                 Run setup"
 	@echo "   setup               Setup project"
-	@echo "   rbenv-setup         Install needed ruby version if missing"
 	@echo "   clean               Clean the project and its dependencies"
+	@echo ""
+	@echo "   ruby-setup          Install needed ruby version with rbenv if missing and run bundle install"
 	@echo ""
 	@echo "   check-quality       Run quality checks"
 	@echo "   fix-quality         Fix quality automatically (if possible)"
