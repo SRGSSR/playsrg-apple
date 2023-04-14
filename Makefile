@@ -8,10 +8,14 @@ CONFIGURATION_FOLDER=Configuration
 all: setup
 
 .PHONY: setup
-setup:
+setup: rbenv-setup
 	@echo "Setting up the project..."
+	@echo "Running bundle install..."
+	@bundle install > /dev/null
+	@echo "Checkout configuration..."
 	@Scripts/checkout-configuration.sh "${CONFIGURATION_REPOSITORY_URL}" "${CONFIGURATION_COMMIT_SHA1}" "${CONFIGURATION_FOLDER}"
-	@pod install
+	@echo "Running pod install..."
+	@pod install > /dev/null
 	@echo "... done.\n"
 
 .PHONY: clean
@@ -20,8 +24,8 @@ clean:
 	@xcodebuild clean
 	@echo "... done.\n"
 
-.PHONY: rbenv
-rbenv:
+.PHONY: rbenv-setup
+rbenv-setup:
 	@echo "Installing needed ruby version if missing..."
 	@Scripts/rbenv-install.sh "./"
 	@echo "... done.\n"
@@ -53,12 +57,16 @@ git-hook-uninstall:
 .PHONY: help
 help:
 	@echo "The following targets are available:"
-	@echo "   all                 Build the project"
+	@echo ""
+	@echo "   all                 Run setup"
 	@echo "   setup               Setup project"
+	@echo "   rbenv-setup         Install needed ruby version if missing"
 	@echo "   clean               Clean the project and its dependencies"
+	@echo ""
 	@echo "   check-quality       Run quality checks"
 	@echo "   fix-quality         Fix quality automatically (if possible)"
-	@echo "   rbenv               Install needed ruby version if missing"
+	@echo ""
 	@echo "   git-hook-install    Use hooks located in ./hooks"
 	@echo "   git-hook-uninstall  Use default hooks located in .git/hooks"
+	@echo ""
 	@echo "   help                Display this message"
