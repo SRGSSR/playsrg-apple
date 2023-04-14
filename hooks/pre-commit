@@ -7,8 +7,6 @@
 eval "$(rbenv init -)"
 PATH="$(which swiftlint):$(which ruby):$(which shellcheck):$(which yamllint):$(which pod):$PATH"
 
-echo "pre commit"
-echo "Current directory is: $(pwd)"
 if Scripts/check-quality.sh only-changes; then
 	echo "✅ Quality checked"
 else
