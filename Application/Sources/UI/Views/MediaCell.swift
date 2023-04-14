@@ -69,7 +69,7 @@ struct MediaCell: View {
     }
     
     private var dividerSpacing: CGFloat {
-        return horizontalSizeClass == .compact ? 8 : 16
+        return constant(iOS: 8, tvOS: 40)
     }
     
     init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, dividerStyle: DividerStyle = .none, action: (() -> Void)? = nil) {

@@ -34,6 +34,8 @@ final class SearchViewController: UIViewController {
     private weak var searchController: UISearchController?
     
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
+    private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private static func snapshot(from state: SearchViewModel.State) -> NSDiffableDataSourceSnapshot<SearchViewModel.Section, SearchViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SearchViewModel.Section, SearchViewModel.Item>()
@@ -572,7 +574,6 @@ extension SearchViewController: UIScrollViewDelegate {
 
 private extension SearchViewController {
     private static let emptyViewInsets = EdgeInsets(top: constant(iOS: 0, tvOS: 350), leading: 0, bottom: 0, trailing: 0)
-    private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
@@ -598,23 +599,23 @@ private extension SearchViewController {
                 switch section {
                 case .medias:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, spacing in
                             return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .mostSearchedShows, .shows:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
                         return ShowCellSize.swimlane(for: .default)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .topics:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, spacing in
                         return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .loading:

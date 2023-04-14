@@ -348,9 +348,7 @@ extension UIHostingController {
 extension NSCollectionLayoutSection {
     typealias CellSizer = (_ layoutWidth: CGFloat, _ spacing: CGFloat) -> NSCollectionLayoutSize
     
-    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
-        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
-        
+    static func horizontal(layoutWidth: CGFloat, horizontalMargin: CGFloat = 0, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         
@@ -366,9 +364,7 @@ extension NSCollectionLayoutSection {
         return section
     }
     
-    static func grid(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
-        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
-        
+    static func grid(layoutWidth: CGFloat, horizontalMargin: CGFloat = 0, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         

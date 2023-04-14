@@ -160,6 +160,13 @@ static void *s_kvoContext = &s_kvoContext;
         completionHandler(YES);
     }, @"MigrateSelectedLiveStreamURNForChannels");
     
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        [userDefaults removeObjectForKey:PlaySRGSettingMediaListDividerEnabled];
+        [userDefaults synchronize];
+        completionHandler(YES);
+    }, @"ClearMediaListDividerPreference");
+    
     FavoritesUpdatePushService();
     
     [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {

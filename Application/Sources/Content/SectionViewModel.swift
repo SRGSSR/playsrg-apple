@@ -398,7 +398,7 @@ private extension SectionViewModel {
 #endif
             case .show:
 #if os(iOS)
-                return ApplicationSettingMediaListLayoutEnabled() ? .mediaList : .mediaGrid
+                return .mediaList
 #else
                 return .mediaGrid
 #endif
@@ -408,7 +408,7 @@ private extension SectionViewModel {
         }
         
         var displayDivider: Bool {
-#if os(iOS)
+#if os(iOS) && (DEBUG || NIGHTLY || BETA)
             switch configuredSection {
             case .show:
                 return ApplicationSettingMediaListDividerEnabled()

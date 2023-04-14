@@ -29,9 +29,6 @@ struct SettingsView: View {
             }
 #endif
 #if os(iOS)
-            if !Bundle.main.play_isAppStoreRelease {
-                BetaTestsSection()
-            }
             QualitySection()
 #endif
             PlaybackSection()
@@ -133,24 +130,6 @@ struct SettingsView: View {
                 Text(NSLocalizedString("Quality", comment: "Quality settings section header"))
             } footer: {
                 Text(NSLocalizedString("To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.", comment: "Quality settings section footer"))
-            }
-        }
-    }
-    
-    private struct BetaTestsSection: View {
-        @AppStorage(PlaySRGSettingMediaListLayoutEnabled) var isMediaListLayoutEnabled = false
-        @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
-        
-        var body: some View {
-            PlaySection {
-                if UIDevice.current.userInterfaceIdiom == .pad {
-                    Toggle(NSLocalizedString("Always display episodes as a list in show pages (iPad)", comment: "Beta tests toggle label to enable episodes as a list in show pages setting label"), isOn: $isMediaListLayoutEnabled)
-                }
-                Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Beta tests toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
-            } header: {
-                Text(NSLocalizedString("Beta tests", comment: "Beta tests section header"))
-            } footer: {
-                Text(NSLocalizedString("This section is only available for beta testers.", comment: "Beta tests section footer"))
             }
         }
     }
@@ -508,6 +487,9 @@ struct SettingsView: View {
         @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
         @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
+#if os(iOS)
+        @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
+#endif
         
         var body: some View {
             PlaySection {
@@ -530,6 +512,9 @@ struct SettingsView: View {
                 Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
                 Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
                 Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
+#if os(iOS)
+                Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Beta tests toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
+#endif
                 NextLink {
                     PosterImagesSelectionView()
 #if os(iOS)
