@@ -19171,8 +19171,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.1;
 			};
 		};
 		6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */ = {

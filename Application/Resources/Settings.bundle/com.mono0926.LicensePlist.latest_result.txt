@@ -177,7 +177,7 @@ name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, versio
 
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgnetwork-apple
 
-name: srguserdata-apple, nameSpecified: srguserdata-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srguserdata-apple
+name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.3.1, source: https://github.com/SRGSSR/srguserdata-apple
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.4, source: https://github.com/apple/swift-collections
 
