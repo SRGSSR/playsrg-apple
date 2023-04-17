@@ -356,8 +356,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srguserdata-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "b116c3c7e0317c30bb0d0aac0ae0ef24c57275d0"
+        "revision" : "956a83501cc2ce84e2552a80a2ef08fbaa1fc5fc",
+        "version" : "3.3.1"
       }
     },
     {
