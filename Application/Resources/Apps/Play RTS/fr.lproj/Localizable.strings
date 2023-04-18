@@ -65,7 +65,7 @@
 "A to Z" = "De A à Z";
 
 /* Beta tests toggle label to add line dividers in episodes list in show pages setting label */
-"Add line dividers in episodes list in show pages" = "Add line dividers in episodes list in show pages";
+"Add line dividers in episodes list in show pages" = "Ajouter des séparateurs entre épisodes dans les pages d'Émissions";
 
 /* Button to add an event to Calendar application */
 "Add to Calendar" = "Ajouter au calendrier";
