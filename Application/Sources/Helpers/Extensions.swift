@@ -112,14 +112,10 @@ extension String {
     }
     
     /*
-     * Compact the string to not contain any empty lines.
+     * Compact the string to not contain any empty lines or white spaces.
      */
     var compacted: String {
-        return self
-            .components(separatedBy: .newlines)
-            .filter { !$0.isEmpty }
-            .map { $0.trimmingCharacters(in: .whitespaces) }
-            .joined(separator: " ")
+        return self.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
     }
 }
 
