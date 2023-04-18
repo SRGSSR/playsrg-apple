@@ -84,6 +84,11 @@ extension String {
             eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
             """
     
+    static let loremIpsumWithSpacesAndNewLine: String = """
+            \r\n   Lorem ipsum dolor sit amet.\r\n\r\n\rConsetetur sadipscing elitr, sed diam \
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\r\n
+            """
+    
     func unobfuscated() -> String {
         return components(separatedBy: .decimalDigits).joined()
     }
@@ -111,10 +116,10 @@ extension String {
      */
     var compacted: String {
         return self
-            .replacingOccurrences(of: "\r", with: " ")
-            .replacingOccurrences(of: "\n", with: " ")
-            .replacingOccurrences(of: "  ", with: " ")
-            .trimmingCharacters(in: .newlines)
+            .components(separatedBy: .newlines)
+            .filter { !$0.isEmpty }
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+            .joined(separator: " ")
     }
 }
 

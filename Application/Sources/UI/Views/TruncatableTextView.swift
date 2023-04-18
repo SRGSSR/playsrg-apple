@@ -175,6 +175,7 @@ struct TruncableTextView_Previews: PreviewProvider {
             TruncatableTextView(content: String.loremIpsum, lineLimit: 3) {}
                 .foregroundColor(.white)
                 .secondaryColor(.srgGray96)
+            TruncatableTextView(content: String.loremIpsumWithSpacesAndNewLine, lineLimit: 3) {}
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)
