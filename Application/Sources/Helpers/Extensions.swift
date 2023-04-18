@@ -84,6 +84,11 @@ extension String {
             eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
             """
     
+    static let loremIpsumWithSpacesAndNewLine: String = """
+            \r\n   Lorem ipsum dolor sit amet.\r\n\r\n\rConsetetur sadipscing elitr, sed diam \
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\r\n
+            """
+    
     func unobfuscated() -> String {
         return components(separatedBy: .decimalDigits).joined()
     }
@@ -104,6 +109,13 @@ extension String {
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = self.size(withAttributes: fontAttributes)
         return size.width
+    }
+    
+    /*
+     * Compact the string to not contain any empty lines or white spaces.
+     */
+    var compacted: String {
+        return self.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
     }
 }
 
