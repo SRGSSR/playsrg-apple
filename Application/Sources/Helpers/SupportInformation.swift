@@ -82,8 +82,14 @@ import UIKit
     }
 #endif
     
-    @objc static func generate() -> String {
+    @objc static func generate(toMailBody: Bool = false) -> String {
         var components = [String]()
+        
+        if toMailBody {
+            components.append("Issue:")
+            components.append("")
+            components.append("")
+        }
         
         components.append("General information")
         components.append( "-------------------")
