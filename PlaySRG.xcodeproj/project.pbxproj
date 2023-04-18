@@ -66,6 +66,7 @@
 		04C02F9A29EECAE4008C747E /* SRGMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C02F9329EECAE3008C747E /* SRGMedia.swift */; };
 		04C02F9B29EECAE4008C747E /* SRGMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C02F9329EECAE3008C747E /* SRGMedia.swift */; };
 		04C02F9C29EECAE4008C747E /* SRGMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C02F9329EECAE3008C747E /* SRGMedia.swift */; };
+		04C02F9D29EF13F2008C747E /* SRGMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C02F9329EECAE3008C747E /* SRGMedia.swift */; };
 		04C2DE782937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE792937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE7A2937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
@@ -10478,6 +10479,7 @@
 				6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */,
 				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CF2721786F00C134AA /* DeepLinkAction.m in Sources */,
+				04C02F9D29EF13F2008C747E /* SRGMedia.swift in Sources */,
 				6F6C7ADD2820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7F2719C5D30082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
