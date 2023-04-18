@@ -105,6 +105,14 @@ extension String {
         let size = self.size(withAttributes: fontAttributes)
         return size.width
     }
+    
+    var compactString: String {
+        return self
+            .replacingOccurrences(of: "\r", with: " ")
+            .replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "  ", with: " ")
+            .trimmingCharacters(in: .newlines)
+    }
 }
 
 extension Array {
