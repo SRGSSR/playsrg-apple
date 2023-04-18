@@ -178,8 +178,7 @@ struct MediaCell: View {
             guard horizontalSizeClass == .regular, style == .dateAndSummary else { return nil }
             
             guard let media else { return .placeholder(length: 15) }
-            // Compact the summary to not have empty lines.
-            return MediaDescription.summary(for: media)?.compactString
+            return MediaDescription.summary(for: media)
         }
         
         private var mediaDescriptionStyle: MediaDescription.Style {

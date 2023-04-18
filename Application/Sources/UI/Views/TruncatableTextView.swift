@@ -30,7 +30,7 @@ struct TruncatableTextView: View {
     
     init(content: String, lineLimit: Int?, showMore: @escaping () -> Void) {
         // Compact the content to not have "show more" button floating alone at bottom right.
-        self.content = content.compactString
+        self.content = content.compacted
         
         self.lineLimit = lineLimit
         self.showMore = showMore

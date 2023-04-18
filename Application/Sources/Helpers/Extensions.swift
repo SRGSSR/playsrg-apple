@@ -106,7 +106,10 @@ extension String {
         return size.width
     }
     
-    var compactString: String {
+    /*
+     * Compact the string to not contain any empty lines.
+     */
+    var compacted: String {
         return self
             .replacingOccurrences(of: "\r", with: " ")
             .replacingOccurrences(of: "\n", with: " ")
