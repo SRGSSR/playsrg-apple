@@ -32,7 +32,6 @@
 #import "Reachability.h"
 #import "RelatedContentView.h"
 #import "SharingItem.h"
-#import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
