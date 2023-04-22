@@ -5,7 +5,7 @@
 //
 
 import SRGAnalytics
-import SRGDataProvider
+import SRGDataProviderModel
 
 /**
  *  Play analytics click event. Defined for native and web Play applications.

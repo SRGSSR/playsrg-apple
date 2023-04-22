@@ -5,7 +5,7 @@
 //
 
 import SRGAnalytics
-import SRGDataProvider
+import SRGDataProviderModel
 
 /**
  *  Play analytics hidden event. Defined for native Play applications only.
