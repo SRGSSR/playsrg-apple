@@ -42,7 +42,6 @@
 #import "SongsViewController.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
-#import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"

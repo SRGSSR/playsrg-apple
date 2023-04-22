@@ -9,7 +9,7 @@
 #import "ChannelServiceSetup.h"
 #import "ForegroundTimer.h"
 #import "Reachability.h"
-#import "SRGProgram+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 
 @import libextobjc;
 @import SRGDataProviderNetwork;

@@ -35,7 +35,6 @@
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
-#import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"

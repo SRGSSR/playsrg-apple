@@ -6,7 +6,7 @@
 
 #import "SRGProgramComposition+PlaySRG.h"
 
-#import "SRGProgram+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 
 @implementation SRGProgramComposition (PlaySRG)
 

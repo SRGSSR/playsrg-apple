@@ -10,7 +10,6 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlaySRG-Swift.h"
-#import "SRGProgram+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
 @import SRGAppearance;
@@ -114,7 +113,7 @@
     }
     
     if ([dateInterval containsDate:program.startDate]) {
-        self.accessibilityLabel = [program play_accessibilityLabelWithChannel:nil];
+        self.accessibilityLabel = [program play_accessibilityLabelWith:nil];
         self.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint");
         
         self.titleLabel.textColor = UIColor.whiteColor;
@@ -140,7 +139,7 @@
         self.userInteractionEnabled = NO;
     }
     else {
-        self.accessibilityLabel = [program play_accessibilityLabelWithChannel:nil];
+        self.accessibilityLabel = [program play_accessibilityLabelWith:nil];
         self.accessibilityHint = nil;
         
         self.titleLabel.textColor = UIColor.whiteColor;
