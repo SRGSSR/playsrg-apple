@@ -19,7 +19,6 @@
 #import "PlaySRG-Swift.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
-#import "SRGProgramComposition+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -173,7 +172,7 @@
         [self.mediaInfoStackView play_setHidden:YES];
         [self.channelInfoStackView play_setHidden:NO];
         
-        SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
+        SRGProgram *currentProgram = [self.programComposition play_programAt:NSDate.date];
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
             

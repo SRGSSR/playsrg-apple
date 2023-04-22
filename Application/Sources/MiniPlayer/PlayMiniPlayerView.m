@@ -17,7 +17,6 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 #import "SRGLetterboxController+PlaySRG.h"
-#import "SRGProgramComposition+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
@@ -212,7 +211,7 @@
     }
     
     NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
-    SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
+    SRGProgram *currentProgram = [self.programComposition play_programAt:currentDate];
     if (currentProgram) {
         self.titleLabel.text = currentProgram.title;
     }
@@ -230,7 +229,7 @@
 {
     if ([self.controller.media isEqual:self.media]) {
         NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
-        SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
+        SRGProgram *currentProgram = [self.programComposition play_programAt:currentDate];
         if (currentProgram) {
             self.progressView.progress = fmaxf(fminf([currentDate timeIntervalSinceDate:currentProgram.startDate] / [currentProgram.endDate timeIntervalSinceDate:currentProgram.startDate], 1.f), 0.f);
             self.progressView.hidden = NO;
@@ -334,7 +333,7 @@
         NSMutableString *accessibilityLabel = [NSMutableString stringWithFormat:format, channel.title];
         
         NSDate *currentDate = self.controller.currentDate ?: NSDate.date;
-        SRGProgram *currentProgram = [self.programComposition play_programAtDate:currentDate];
+        SRGProgram *currentProgram = [self.programComposition play_programAt:currentDate];
         if (currentProgram) {
             [accessibilityLabel appendFormat:@", %@", currentProgram.title];
         }

@@ -35,7 +35,6 @@
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
-#import "SRGProgramComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
 #import "TableView.h"
@@ -1021,7 +1020,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     NSDate *fromDate = (dateInterval.duration != 0.) ? dateInterval.startDate : nil;
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
-    return [[self.programComposition play_programsFromDate:fromDate toDate:nil withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    return [[self.programComposition play_programsFrom:fromDate to:nil withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 #pragma mark Channel updates
