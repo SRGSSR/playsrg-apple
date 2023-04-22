@@ -30,7 +30,6 @@
 #import "Playlist.h"
 #import "Reachability.h"
 #import "ScrollableContent.h"
-#import "SRGMedia+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"

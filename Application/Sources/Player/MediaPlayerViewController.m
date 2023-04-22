@@ -34,7 +34,6 @@
 #import "SharingItem.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
-#import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
@@ -864,7 +863,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.summaryLabel.text = media.play_fullSummary;
         
         BOOL downloaded = (mainChapterMedia != nil) ? [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded : NO;
-        BOOL isWebFirst = mainChapterMedia.play_webFirst;
+        BOOL isWebFirst = mainChapterMedia.play_isWebFirst;
         BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
         BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
         BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;

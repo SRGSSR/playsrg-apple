@@ -10,7 +10,7 @@
 #import "ApplicationSettings+Common.h"
 #import "PlayFirebaseConfiguration.h"
 #import "PlayLogger.h"
-#import "SRGMedia+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 
 @import libextobjc;
 @import MediaAccessibility;
@@ -477,7 +477,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    if (PlayIsSwissTXTURN(media.URN)) {
+    if ([SRGMedia PlayIsSwissTXTURN:media.URN]) {
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
         URLComponents.path = [[[[URLComponents.path stringByAppendingPathComponent:@"tv"]
                                 stringByAppendingPathComponent:@"-"]

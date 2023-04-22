@@ -41,7 +41,6 @@
 #import "SharingItem.h"
 #import "SongsViewController.h"
 #import "SRGLetterboxController+PlaySRG.h"
-#import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"

@@ -12,7 +12,6 @@
 #import "PlayAccessibilityFormatter.h"
 #import "PlayDurationFormatter.h"
 #import "PlaySRG-Swift.h"
-#import "SRGMedia+PlaySRG.h"
 
 @import SRGAppearance;
 
@@ -41,7 +40,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     [self play_displayDurationLabelWithTimeAvailability:[mediaMetadata timeAvailabilityAtDate:NSDate.date]
                                                duration:mediaMetadata.duration
                       isLivestreamOrScheduledLivestream:isLivestreamOrScheduledLivestream
-                                            isLiveEvent:PlayIsSwissTXTURN(mediaMetadata.URN)];
+                                            isLiveEvent:[SRGMedia PlayIsSwissTXTURN:mediaMetadata.URN]];
 }
 
 - (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata

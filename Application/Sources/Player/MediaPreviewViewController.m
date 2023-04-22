@@ -18,7 +18,6 @@
 #import "PlayErrors.h"
 #import "PlaySRG-Swift.h"
 #import "SRGDataProvider+PlaySRG.h"
-#import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
