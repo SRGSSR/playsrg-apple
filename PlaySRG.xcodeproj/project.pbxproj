@@ -87,16 +87,16 @@
 		0447E0AC2861C726001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AB2861C726001B7285 /* Introspect */; };
 		0447E0AE2861C72D001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AD2861C72D001B7285 /* Introspect */; };
 		0447E0B02861C73B001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AF2861C73B001B7285 /* Introspect */; };
-		044E392029B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392129B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392229B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392329B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392429B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392529B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392629B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392729B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392829B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
-		044E392929B10C9200C1768A /* SRGShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow.swift */; };
+		044E392029B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392129B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392229B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392329B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392429B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392529B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392629B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392729B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392829B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
+		044E392929B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */; };
 		0451ECE328742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0451ECE428742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0451ECE528742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
@@ -2727,7 +2727,7 @@
 		042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PlaySRG.swift"; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		043ECDBE29F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGChannel+PlaySRG.swift"; sourceTree = "<group>"; };
-		044E391F29B10C9100C1768A /* SRGShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRGShow.swift; sourceTree = "<group>"; };
+		044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SRGShow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsHiddenEvent.swift; sourceTree = "<group>"; };
 		0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGMedia+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3822,6 +3822,7 @@
 				0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */,
 				042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */,
 				043ECDBE29F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift */,
+				044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */,
 				0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */,
 			);
 			path = Extensions;
@@ -3925,7 +3926,6 @@
 				08AF947E217D27E40028B082 /* SharingItem.h */,
 				08AF947F217D27E40028B082 /* SharingItem.m */,
 				6F74293C265BE52E0000538D /* Signals.swift */,
-				044E391F29B10C9100C1768A /* SRGShow.swift */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
@@ -8473,7 +8473,7 @@
 				6F16C7A326025698006F685A /* PageViewController.swift in Sources */,
 				04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
-				044E392029B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392029B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6F40B7792726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
 				6FE9049226F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
@@ -8689,7 +8689,7 @@
 				6FC2F7F92628F23700BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AF91DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
-				044E392129B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392129B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				082910AF239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981312622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDC2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -8946,7 +8946,7 @@
 				6FC2F7FA2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AFA1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
-				044E392229B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392229B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				082910B0239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981322622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDD2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -9203,7 +9203,7 @@
 				6FC2F7FB2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AFB1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E323D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
-				044E392329B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392329B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				082910B1239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981332622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCDE2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -9518,7 +9518,7 @@
 				0875851723A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
-				044E392429B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392429B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6FF65C5E28360EB100AF0768 /* Onboarding.swift in Sources */,
 				087584F323A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -9748,7 +9748,7 @@
 				6FD4C2E6268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162B2837C7160074845E /* SettingsView.swift in Sources */,
 				6F8D54472639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
-				044E392529B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392529B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6FEF236C2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6B2719C46C0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5A29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
@@ -9900,7 +9900,7 @@
 				6FD4C2E7268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162C2837C7170074845E /* SettingsView.swift in Sources */,
 				6F8D54482639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
-				044E392629B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392629B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6FEF236D2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6D2719C46F0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5B29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
@@ -10052,7 +10052,7 @@
 				6FD4C2E8268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162D2837C7170074845E /* SettingsView.swift in Sources */,
 				6F8D54492639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
-				044E392729B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392729B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6FEF236E2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6E2719C4700082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5C29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
@@ -10204,7 +10204,7 @@
 				6FD4C2E9268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F0B162E2837C7180074845E /* SettingsView.swift in Sources */,
 				6F8D544A2639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
-				044E392829B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392829B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6FEF236F2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6F2719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5D29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
@@ -10361,7 +10361,7 @@
 				6FEF23702732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F702719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981392622195900AA586B /* LiveMediaCell.swift in Sources */,
-				044E392929B10C9200C1768A /* SRGShow.swift in Sources */,
+				044E392929B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6F0B16332837C72E0074845E /* SettingsViewModel.swift in Sources */,
 				0858CA64271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
