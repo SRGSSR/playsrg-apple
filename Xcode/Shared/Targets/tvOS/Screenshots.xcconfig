@@ -1,6 +1,4 @@
 #include "Xcode/Shared/Targets/tvOS/Common.xcconfig"
 
-SWIFT_OBJC_BRIDGING_HEADER = $(PROJECT_DIR)/UITests/Screenshots/Sources/Bridges/Screenshots-ObjectiveC-Bridge.h
-
 TARGET__BUNDLE_IDENTIFIER_SUFFIX = .tv-screenshots-uitest
 TARGET__PRODUCT_NAME_SUFFIX = $() screenshots

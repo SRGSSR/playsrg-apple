@@ -29,19 +29,19 @@ class ApplicationScreenshots: XCTestCase {
     }
     
     func testSnapshots() {
-        if let videosTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.videosTabBarItem.rawValue) {
+        if let videosTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.videosTabBarItem.value) {
             videosTabBarItem.tap()
             sleep(10)
             snapshot("1-VideosHomeScreen")
         }
         
-        if let audiosTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.audiosTabBarItem.rawValue) {
+        if let audiosTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.audiosTabBarItem.value) {
             audiosTabBarItem.tap()
             sleep(10)
             snapshot("2-AudiosHomeScreen")
         }
         
-        if let livestreamsTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.livestreamsTabBarItem.rawValue) {
+        if let livestreamsTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.livestreamsTabBarItem.value) {
             livestreamsTabBarItem.tap()
             sleep(10)
             snapshot("3-LiveHomeScreen")
@@ -51,19 +51,19 @@ class ApplicationScreenshots: XCTestCase {
                 sleep(10)
                 snapshot("4-RadioLivePlayer")
                 
-                if let closeButton = button(withIdentifier: AccessibilityIdentifier.closeButton.rawValue) {
+                if let closeButton = button(withIdentifier: AccessibilityIdentifier.closeButton.value) {
                     closeButton.tap()
                 }
             }
         }
         
-        if let showsTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.showsTabBarItem.rawValue) {
+        if let showsTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.showsTabBarItem.value) {
             showsTabBarItem.tap()
             sleep(10)
             snapshot("5-ShowsScreen")
         }
         
-        if let searchTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.searchTabBarItem.rawValue),
+        if let searchTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.searchTabBarItem.value),
            let searchText = Self.configuration["SearchText"] as? String {
             searchTabBarItem.tap()
             

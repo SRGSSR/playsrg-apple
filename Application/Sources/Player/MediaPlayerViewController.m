@@ -6,7 +6,6 @@
 
 #import "MediaPlayerViewController.h"
 
-#import "AccessibilityIdentifierConstants.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
@@ -512,7 +511,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [self setUserInterfaceBehaviorForMedia:media animated:NO];
     
     self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on player view");
-    self.closeButton.accessibilityIdentifier = AccessibilityIdentifierCloseButton;
+    self.closeButton.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierCloseButton].value;
     
     self.shareButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
     

@@ -39,19 +39,19 @@ class ApplicationScreenshots: XCTestCase {
             previousIdentifier = identifier
             
             switch identifier {
-            case AccessibilityIdentifier.videosTabBarItem.rawValue:
+            case AccessibilityIdentifier.videosTabBarItem.value:
                 sleep(10)
                 snapshot("1-VideosHomeScreen")
-            case AccessibilityIdentifier.livestreamsTabBarItem.rawValue:
+            case AccessibilityIdentifier.livestreamsTabBarItem.value:
                 sleep(10)
                 snapshot("2-LiveHomeScreen")
-            case AccessibilityIdentifier.tvGuideTabBarItem.rawValue:
+            case AccessibilityIdentifier.tvGuideTabBarItem.value:
                 sleep(10)
                 snapshot("3-TvGuideScreen")
-            case AccessibilityIdentifier.showsTabBarItem.rawValue:
+            case AccessibilityIdentifier.showsTabBarItem.value:
                 sleep(20)       // Need more time for some BUs
                 snapshot("4-ShowsScreen")
-            case AccessibilityIdentifier.searchTabBarItem.rawValue:
+            case AccessibilityIdentifier.searchTabBarItem.value:
                 if let searchText = Self.configuration["SearchText"] as? String {
                     let searchField = XCUIApplication().searchFields.firstMatch
                     searchField.typeText(searchText)

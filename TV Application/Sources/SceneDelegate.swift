@@ -56,7 +56,7 @@ final class SceneDelegate: UIResponder {
         
         let videosViewController = PageViewController(id: .video)
         videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
-        videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.rawValue
+        videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.value
         viewControllers.append(videosViewController)
         
         let configuration = ApplicationConfiguration.shared
@@ -65,7 +65,7 @@ final class SceneDelegate: UIResponder {
         if let firstChannel = configuration.radioHomepageChannels.first {
             let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
-            audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.rawValue
+            audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.value
             viewControllers.append(audiosViewController)
         }
 #endif
@@ -73,33 +73,33 @@ final class SceneDelegate: UIResponder {
         if !configuration.liveHomeSections.isEmpty {
             let liveViewController = PageViewController(id: .live)
             liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
-            liveViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.rawValue
+            liveViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.value
             viewControllers.append(liveViewController)
         }
         
         if !configuration.isTvGuideUnavailable {
             let programGuideViewController = ProgramGuideViewController()
             programGuideViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("TV guide", comment: "TV program guide view title"), image: nil, tag: 3)
-            programGuideViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.tvGuideTabBarItem.rawValue
+            programGuideViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.tvGuideTabBarItem.value
             viewControllers.append(programGuideViewController)
         }
         
         if !configuration.areShowsUnavailable {
             let showsViewController = SectionViewController.showsViewController(forChannelUid: nil)
             showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 4)
-            showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.rawValue
+            showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.value
             viewControllers.append(showsViewController)
         }
         
         let searchViewController = SearchViewController.viewController()
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 5)
-        searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.rawValue
+        searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.value
         viewControllers.append(searchViewController)
         
         let profileViewController = UIHostingController(rootView: SettingsView())
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 6)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", comment: "Profile button label on home view")
-        profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue
+        profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.value
         viewControllers.append(profileViewController)
         
         if viewControllers.count > 1 {
