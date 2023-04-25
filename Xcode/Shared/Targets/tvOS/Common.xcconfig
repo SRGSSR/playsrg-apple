@@ -1,8 +1,8 @@
 #include "Xcode/Shared/Common.xcconfig"
 
 // Version information
-MARKETING_VERSION = 1.6.10
-CURRENT_PROJECT_VERSION = 60
+MARKETING_VERSION = 1.6.11
+CURRENT_PROJECT_VERSION = 61
 
 SDKROOT = appletvos
 TARGETED_DEVICE_FAMILY=3
