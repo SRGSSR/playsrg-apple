@@ -17,7 +17,6 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayFirebaseConfiguration.h"
-#import "Playlist.h"
 #import "PlayLogger.h"
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
@@ -159,6 +158,13 @@ static void *s_kvoContext = &s_kvoContext;
         [userDefaults synchronize];
         completionHandler(YES);
     }, @"MigrateSelectedLiveStreamURNForChannels");
+    
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        [userDefaults removeObjectForKey:PlaySRGSettingMediaListDividerEnabled];
+        [userDefaults synchronize];
+        completionHandler(YES);
+    }, @"ClearMediaListDividerPreference");
     
     FavoritesUpdatePushService();
     
@@ -360,12 +366,8 @@ static void *s_kvoContext = &s_kvoContext;
 {
     SRGMedia *media = notification.userInfo[SRGLetterboxMediaKey];
     if (media) {
-        SRGLetterboxController *letterboxController = notification.object;
-        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
-        
         [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
-                                                       mediaUrn:media.URN
-                                              recommendationUid:playlist.recommendationUid]
+                                                       mediaUrn:media.URN]
          send];
     }
 }

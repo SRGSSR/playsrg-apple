@@ -89,7 +89,7 @@ enum MediaDescription {
     }
     
     static func summary(for media: SRGMedia) -> String? {
-        return media.summary
+        return media.play_summary?.compacted
     }
     
     static func duration(for media: SRGMedia) -> Double? {

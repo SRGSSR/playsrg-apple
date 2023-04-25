@@ -9,10 +9,10 @@
 
 ### Checklist
 
-- [ ] The branch has been rebased onto the `develop` branch.
-- The code followed the code style:
-	-  [ ] `swiftlint` has run to ensure the *Swift* code style is valid.
-	-  [ ] `rubocop -a` has run to ensure the *Ruby* code style is valid.
+- The branch should be rebased onto the `develop` branch for whole tests with nighties, but it's not required.*
+- The code followed the code style as `make quality` passes with a green tick on the last commit.
 - [ ] Remote configuration properties have been properly documented (if relevant).
 - [ ] The documentation has been updated (if relevant).
 - [ ] Issues are linked to the PR, if any.
+
+\* The project uses Github merge queue feature, which rebases onto the `develop` branch before squashing and merging the PR. 

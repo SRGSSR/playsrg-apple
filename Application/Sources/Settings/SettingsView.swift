@@ -29,9 +29,6 @@ struct SettingsView: View {
             }
 #endif
 #if os(iOS)
-            if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
-                BetaTestsSection()
-            }
             QualitySection()
 #endif
             PlaybackSection()
@@ -133,20 +130,6 @@ struct SettingsView: View {
                 Text(NSLocalizedString("Quality", comment: "Quality settings section header"))
             } footer: {
                 Text(NSLocalizedString("To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.", comment: "Quality settings section footer"))
-            }
-        }
-    }
-    
-    private struct BetaTestsSection: View {
-        @AppStorage(PlaySRGSettingMediaListLayoutEnabled) var isMediaListLayoutEnabled = false
-        
-        var body: some View {
-            PlaySection {
-                Toggle(NSLocalizedString("Display episodes as a list in show pages (iPad)", comment: "Toggle label to enable episodes as a list in show pages setting label"), isOn: $isMediaListLayoutEnabled)
-            } header: {
-                Text(NSLocalizedString("Beta tests", comment: "Beta tests section header"))
-            } footer: {
-                Text(NSLocalizedString("This section is only available for beta testers.", comment: "Beta tests section footer"))
             }
         }
     }
@@ -429,7 +412,7 @@ struct SettingsView: View {
             @ObservedObject var model: SettingsViewModel
         
 #if os(iOS)
-            @State private var isAlertDisplayed = false
+            @State private var isActionSheetDisplayed = false
             @State private var isMailComposeDisplayed = false
             
             private var supportRecipients: [String] {
@@ -437,22 +420,9 @@ struct SettingsView: View {
                 return [supportEmailAddress]
             }
             
-            // TODO: Once the code requires iOS 15+ we can use the updated 15.0 alert API (or confirmationDialog API) and
-            //       have a cancel button. To avoid writing the code twice the old API is currently used, which limits
-            //       the number of buttons to two. But this is simpler than having both implementations coexist for now.
-            private var primaryButton: Alert.Button {
-                if !supportRecipients.isEmpty {
-                    return .default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
-                        isMailComposeDisplayed = true
-                    }
-                }
-                else {
-                    return .cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-                }
-            }
-            
-            private func alert() -> Alert {
-                let secondaryButton = Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
+            private func actionSheet() -> ActionSheet {
+                var buttons = [Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}]
+                buttons.append(Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
                     model.copySupportInformation()
                     Banner.show(
                         with: .info,
@@ -460,24 +430,28 @@ struct SettingsView: View {
                         image: nil,
                         sticky: false
                     )
+                })
+                if !supportRecipients.isEmpty {
+                    buttons.append(Alert.Button.default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
+                        isMailComposeDisplayed = true
+                    })
                 }
-                return Alert(
+                return ActionSheet(
                     title: Text(NSLocalizedString("Support information", comment: "Support information alert title")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
+                    buttons: buttons
                 )
             }
             
             private func mailComposeView() -> MailComposeView {
                 return MailComposeView()
                     .toRecipients(supportRecipients)
-                    .messageBody(SupportInformation.generate())
+                    .messageBody(SupportInformation.generate(toMailBody: true))
             }
 #endif
             
             private func action() {
 #if os(iOS)
-                isAlertDisplayed = true
+                isActionSheetDisplayed = true
 #else
                 navigateToText(SupportInformation.generate())
 #endif
@@ -488,7 +462,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Support information", comment: "Label of the button to access support information"))
                 }
 #if os(iOS)
-                .alert(isPresented: $isAlertDisplayed, content: alert)
+                .actionSheet(isPresented: $isActionSheetDisplayed, content: actionSheet)
                 .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
 #endif
             }
@@ -504,6 +478,9 @@ struct SettingsView: View {
         @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
         @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
+#if os(iOS)
+        @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
+#endif
         
         var body: some View {
             PlaySection {
@@ -526,6 +503,9 @@ struct SettingsView: View {
                 Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
                 Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
                 Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
+#if os(iOS)
+                Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Beta tests toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
+#endif
                 NextLink {
                     PosterImagesSelectionView()
 #if os(iOS)

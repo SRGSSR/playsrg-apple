@@ -17,11 +17,8 @@ class LetterboxDelegate: NSObject {
             .sink { notification in
                 guard let media = notification.userInfo?[SRGLetterboxMediaKey] as? SRGMedia else { return }
                 
-                let controller = notification.object as? SRGLetterboxController,
-                    playlist = controller?.playlistDataSource as? Playlist
                 AnalyticsHiddenEvent.continuousPlayback(action: .playAutomatic,
-                                                        mediaUrn: media.urn,
-                                                        recommendationUid: playlist?.recommendationUid)
+                                                        mediaUrn: media.urn)
                 .send()
             }
             .store(in: &cancellables)
@@ -30,18 +27,14 @@ class LetterboxDelegate: NSObject {
 
 extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didEngageInContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
-        let playlist = letterboxViewController.controller.playlistDataSource as? Playlist
         AnalyticsHiddenEvent.continuousPlayback(action: .play,
-                                                mediaUrn: upcomingMedia.urn,
-                                                recommendationUid: playlist?.recommendationUid)
+                                                mediaUrn: upcomingMedia.urn)
         .send()
     }
     
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didCancelContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
-        let playlist = letterboxViewController.controller.playlistDataSource as? Playlist
         AnalyticsHiddenEvent.continuousPlayback(action: .cancel,
-                                                mediaUrn: upcomingMedia.urn,
-                                                recommendationUid: playlist?.recommendationUid)
+                                                mediaUrn: upcomingMedia.urn)
         .send()
     }
     

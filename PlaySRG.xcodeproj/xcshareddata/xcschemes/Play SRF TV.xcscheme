@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1400"
+   LastUpgradeVersion = "1430"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Get SRGUserData checkout path.&#10;SRG_USER_DATA=$(find &quot;$DERIVED_DATA_DIR&quot; -path &quot;*/SourcePackages/checkouts/srguserdata-apple&quot; -type d)&#10;&#10;# Apply SRGUserData script.&#10;sh &quot;$SRG_USER_DATA/Scripts/coredata-compilation-fix.sh&quot; &quot;$SRG_USER_DATA&quot;&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "6F331CE324D06B8200C096AB"
+                     BuildableName = "Play SRF.app"
+                     BlueprintName = "Play SRF TV"
+                     ReferencedContainer = "container:PlaySRG.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <PostActions>
          <ExecutionAction
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">

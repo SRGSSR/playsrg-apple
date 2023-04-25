@@ -18,7 +18,8 @@ final class SectionViewController: UIViewController {
     let fromPushNotification: Bool
     
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
-    private static let margin = constant(iOS: 2 * itemSpacing, tvOS: 0)
+    private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
+    private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -64,7 +65,7 @@ final class SectionViewController: UIViewController {
         model = SectionViewModel(section: section, filter: filter)
         self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
-        contentInsets = Self.contentInsets(for: model.state)
+        contentInsets = Self.contentInsets(for: model.state, displayDivider: model.configuration.viewModelProperties.displayDivider)
         super.init(nibName: nil, bundle: nil)
         title = model.displaysTitle ? model.title : nil
     }
@@ -116,9 +117,14 @@ final class SectionViewController: UIViewController {
         updateNavigationBar()
 #endif
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
             guard let self else { return }
-            cell.content = ItemCell(item: item, configuration: self.model.configuration)
+            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            let isLastItem = indexPath.row + 1 == self.dataSource.snapshot().numberOfItems(inSection: section)
+            cell.content = ItemCell(item: item, configuration: self.model.configuration, isLastItem: isLastItem)
+            if let hostController = cell.hostController {
+                self.addChild(hostController)
+            }
         }
         
         dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView, minimumIndexTitlesCount: 4) { collectionView, indexPath, item in
@@ -172,11 +178,14 @@ final class SectionViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-#if os(iOS)
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListLayoutEnabled)
+#if os(iOS) && (DEBUG || NIGHTLY || BETA)
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListDividerEnabled)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.collectionView.reloadData()
+                guard let self else { return }
+                
+                self.contentInsets = Self.contentInsets(for: self.model.state, displayDivider: self.model.configuration.viewModelProperties.displayDivider)
+                self.collectionView.reloadData()
             }
             .store(in: &cancellables)
 #endif
@@ -189,29 +198,6 @@ final class SectionViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         userActivity = model.configuration.viewModelProperties.userActivity
     }
-    
-#if os(iOS)
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if UIDevice.current.userInterfaceIdiom == .pad && !Bundle.main.play_isAppStoreRelease {
-            if case let .configured(section) = model.configuration.wrappedValue, case .show = section {
-                PlayApplicationRunOnce({ completionHandler in
-                    let alertController = UIAlertController(title: NSLocalizedString("Beta tests", comment: "Beta tests alert title"),
-                                                            message: NSLocalizedString("You can preview a new layout to display episodes.\nThis preview can be disable at anytime in the application settings, in profile tab.", comment: "Beta tests alert explanation"),
-                                                            preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Enable", comment: "title of enable button"), style: .default, handler: { _ in
-                        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingMediaListLayoutEnabled)
-                        UserDefaults.standard.synchronize()
-                    }))
-                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Skip", comment: "Title of a Skip button"), style: .cancel, handler: nil))
-                    present(alertController, animated: true, completion: nil)
-                    completionHandler(true)
-                }, "ShowPageBetaTestsAlert1")
-            }
-        }
-    }
-#endif
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -312,7 +298,7 @@ final class SectionViewController: UIViewController {
         updateNavigationBar(for: state)
 #endif
         
-        contentInsets = Self.contentInsets(for: state)
+        contentInsets = Self.contentInsets(for: state, displayDivider: model.configuration.viewModelProperties.displayDivider)
         play_setNeedsContentInsetsUpdate()
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -348,9 +334,10 @@ final class SectionViewController: UIViewController {
         initialSectionId = nil
     }
     
-    private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
+    private static func contentInsets(for state: SectionViewModel.State, displayDivider: Bool) -> UIEdgeInsets {
         let top = (state.headerSize == .zero) ? Self.layoutVerticalMargin : 0
-        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        let bottom = displayDivider ? 0 : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: bottom, right: 0)
     }
     
 #if os(iOS)
@@ -661,8 +648,6 @@ extension SectionViewController: TabBarActionable {
 // MARK: Layout
 
 private extension SectionViewController {
-    private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
-    
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
@@ -699,43 +684,36 @@ private extension SectionViewController {
                 switch configuration.viewModelProperties.layout {
                 case .mediaList:
 #if os(iOS)
-                    if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
-                            return MediaCellSize.fullWidth()
-                        }
-                    }
-                    else {
-                        let spacing = (layoutWidth - LayoutMaxListWidth) / 4
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: spacing, top: top) { layoutWidth, _ in
-                            return MediaCellSize.largeList(layoutWidth: layoutWidth)
-                        }
+                    let horizontalMargin = horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
+                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass, displayDivider: configuration.viewModelProperties.displayDivider)
                     }
 #else
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
 #endif
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
-                            return MediaCellSize.fullWidth()
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
+                            return MediaCellSize.fullWidth(displayDivider: configuration.viewModelProperties.displayDivider)
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                             return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .liveMediaGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .showGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return ShowCellSize.grid(for: configuration.properties.imageVariant, layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .topicGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
 #if os(iOS)
@@ -746,12 +724,12 @@ private extension SectionViewController {
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                             return DownloadCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .notificationList:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
                         return NotificationCellSize.fullWidth()
                     }
 #endif
@@ -778,6 +756,7 @@ private extension SectionViewController {
     struct ItemCell: View {
         let item: SectionViewModel.Item
         let configuration: SectionViewModel.Configuration
+        let isLastItem: Bool
         
         var body: some View {
             switch item {
@@ -788,11 +767,12 @@ private extension SectionViewController {
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
+                        let dividerStyle = configuration.viewModelProperties.displayDivider ? isLastItem ? .hidden : .display : .none as MediaCell.DividerStyle
                         if configuration.viewModelProperties.layout == .mediaList {
-                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, dividerStyle: dividerStyle)
                         }
                         else {
-                            MediaCell(media: media, style: .date)
+                            MediaCell(media: media, style: .date, dividerStyle: dividerStyle)
                         }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)
@@ -850,7 +830,7 @@ private extension SectionViewController {
         var body: some View {
             switch section.header {
             case let .title(title):
-                TransluscentHeaderView(title: title, horizontalPadding: SectionViewController.margin)
+                TransluscentHeaderView(title: title, horizontalPadding: SectionViewController.layoutHorizontalMargin)
             case let .item(item):
                 switch item {
                 case let .show(show):
@@ -859,7 +839,7 @@ private extension SectionViewController {
                     Color.clear
                 }
             case let .show(show):
-                ShowHeaderView(show: show)
+                ShowHeaderView(show: show, horizontalPadding: SectionViewController.layoutHorizontalMargin)
             case .none:
                 Color.clear
             }
@@ -868,7 +848,7 @@ private extension SectionViewController {
         static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch section.header {
             case let .title(title):
-                return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: SectionViewController.margin, layoutWidth: layoutWidth)
+                return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: SectionViewController.layoutHorizontalMargin, layoutWidth: layoutWidth)
             case let .item(item):
                 switch item {
                 case let .show(show):
@@ -877,7 +857,7 @@ private extension SectionViewController {
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
                 }
             case let .show(show):
-                return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                return ShowHeaderViewSize.recommended(for: show, horizontalPadding: SectionViewController.layoutHorizontalMargin, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
             case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }

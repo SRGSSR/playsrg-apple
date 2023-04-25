@@ -31,7 +31,8 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 14.2.0')
+    # Use .xcode-version file
+    xcodes(select_for_current_build_only: true)
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
@@ -922,7 +923,6 @@ platform :ios do
       configuration: options[:configuration],
       scheme: options[:scheme],
       silent: true,
-      clean: true,
       xcargs: srg_xcargs(options),
       export_method: options[:export_to_appstore] ? 'app-store' : 'enterprise',
       include_bitcode: false,
@@ -1843,6 +1843,7 @@ def gitflow_release_platforms(platforms, branch_name)
   tag_versions = platforms.map { |platform| tag_version(platform) }
 
   gitflow_release(tags, branch_name)
+  git_delete(branch_name)
   platforms.each_index do |index|
     bump_marketing_version_and_build_number_commit(platforms[index], tag_versions[index])
   end
@@ -1865,6 +1866,13 @@ def gitflow_release(tags, branch_name)
     sh 'git checkout develop'
     sh 'git pull --rebase'
     sh "git merge --no-ff #{tags[0]}"
+  end
+end
+
+def git_delete(branch_name)
+  Dir.chdir('..') do
+    sh "git push -d origin #{branch_name}"
+    sh "git branch -d #{branch_name}"
   end
 end
 

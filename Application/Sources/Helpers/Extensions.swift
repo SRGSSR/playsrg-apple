@@ -84,6 +84,11 @@ extension String {
             eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
             """
     
+    static let loremIpsumWithSpacesAndNewLine: String = """
+            \r\n   Lorem ipsum dolor sit amet.\r\n\r\n\rConsetetur sadipscing elitr, sed diam \
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\r\n
+            """
+    
     func unobfuscated() -> String {
         return components(separatedBy: .decimalDigits).joined()
     }
@@ -104,6 +109,13 @@ extension String {
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = self.size(withAttributes: fontAttributes)
         return size.width
+    }
+    
+    /*
+     * Compact the string to not contain any empty lines or white spaces.
+     */
+    var compacted: String {
+        return self.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
     }
 }
 
@@ -348,9 +360,7 @@ extension UIHostingController {
 extension NSCollectionLayoutSection {
     typealias CellSizer = (_ layoutWidth: CGFloat, _ spacing: CGFloat) -> NSCollectionLayoutSize
     
-    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
-        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
-        
+    static func horizontal(layoutWidth: CGFloat, horizontalMargin: CGFloat = 0, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         
@@ -361,14 +371,12 @@ extension NSCollectionLayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = constant(iOS: 8, tvOS: 40)
+        section.interGroupSpacing = spacing
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }
     
-    static func grid(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
-        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
-        
+    static func grid(layoutWidth: CGFloat, horizontalMargin: CGFloat = 0, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         

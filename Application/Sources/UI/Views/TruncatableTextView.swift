@@ -30,11 +30,7 @@ struct TruncatableTextView: View {
     
     init(content: String, lineLimit: Int?, showMore: @escaping () -> Void) {
         // Compact the content to not have "show more" button floating alone at bottom right.
-        self.content = content
-            .replacingOccurrences(of: "\r", with: " ")
-            .replacingOccurrences(of: "\n", with: " ")
-            .replacingOccurrences(of: "  ", with: " ")
-            .trimmingCharacters(in: .newlines)
+        self.content = content.compacted
         
         self.lineLimit = lineLimit
         self.showMore = showMore
@@ -83,7 +79,8 @@ struct TruncatableTextView: View {
         @State private var truncatedSize: CGSize = .zero
         
         private let fontStyle: SRGFont.Style = .body
-        private let showMoreButtonString = NSLocalizedString("More", comment: "More button label")
+        private let showMoreButtonString = NSLocalizedString("More", comment: "More label on truncatable text view")
+        private let showMoreButtonStringAccessibilityLabel = PlaySRGAccessibilityLocalizedString("More", comment: "More label on truncatable text view")
         
         private func text(lineLimit: Int?) -> some View {
             return Text(content)
@@ -117,6 +114,7 @@ struct TruncatableTextView: View {
                         Text(showMoreButtonString)
                             .srgFont(fontStyle)
                             .foregroundColor(secondaryColor)
+                            .accessibilityLabel(showMoreButtonStringAccessibilityLabel)
                     }
                 }
                 .background(
@@ -177,6 +175,7 @@ struct TruncableTextView_Previews: PreviewProvider {
             TruncatableTextView(content: String.loremIpsum, lineLimit: 3) {}
                 .foregroundColor(.white)
                 .secondaryColor(.srgGray96)
+            TruncatableTextView(content: String.loremIpsumWithSpacesAndNewLine, lineLimit: 3) {}
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)

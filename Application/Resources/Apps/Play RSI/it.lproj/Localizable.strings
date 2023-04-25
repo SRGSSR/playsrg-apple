@@ -64,6 +64,9 @@
 /* Show A-Z short button title */
 "A to Z" = "Dalla A alla Z";
 
+/* Beta tests toggle label to add line dividers in episodes list in show pages setting label */
+"Add line dividers in episodes list in show pages" = "Add line dividers in episodes list in show pages";
+
 /* Button to add an event to Calendar application */
 "Add to Calendar" = "Aggiungere al calendario";
 
@@ -365,7 +368,7 @@
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media non disponibile";
 
-/* More button label */
+/* More label on truncatable text view */
 "More" = "Altro";
 
 /* Autoplay setting section footer */
