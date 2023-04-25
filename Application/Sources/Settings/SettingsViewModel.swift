@@ -168,16 +168,16 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    var openFeedbackForm: (() -> Void)? {
-        guard let url = ApplicationConfiguration.shared.feedbackUrlWithParameters else { return nil }
+    var openUserSuggestionForm: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.userSuggestionUrlWithParameters else { return nil }
         return {
             guard let topViewController = UIApplication.shared.mainTopViewController else { return }
             
             let webViewController = WebViewController(request: URLRequest(url: url), customizationBlock: { webView in
                 webView.scrollView.isScrollEnabled = false
             })
-            webViewController.title = NSLocalizedString("Your feedback", comment: "Title displayed at the top of the feedback view")
-            webViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("OK", comment: "Title of the feedback settings button to close the view"), style: .done, target: self, action: #selector(self.dismissTopViewController(_:)))
+            webViewController.title = NSLocalizedString("Your suggestion", comment: "Title displayed at the top of the user suggestion view")
+            webViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("OK", comment: "Title of feedback button to close the view"), style: .done, target: self, action: #selector(self.dismissTopViewController(_:)))
             topViewController.present(UINavigationController(rootViewController: webViewController), animated: true)
         }
     }

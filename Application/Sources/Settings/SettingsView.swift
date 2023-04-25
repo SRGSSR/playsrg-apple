@@ -36,6 +36,7 @@ struct SettingsView: View {
 #endif
             ContentSection(model: model)
             InformationSection(model: model)
+            HelpAndContactSection(model: model)
 #if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
             ResetSection(model: model)
@@ -400,12 +401,6 @@ struct SettingsView: View {
                 }
 #endif
                 VersionCell(model: model)
-#if os(iOS)
-                if let openFeedbackForm = model.openFeedbackForm {
-                    Button(NSLocalizedString("Your feedback", comment: "Label of the button to display feedback form"), action: openFeedbackForm)
-                }
-#endif
-                SupportInformationButton(model: model)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
@@ -427,17 +422,36 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+    
+    // MARK: Help and Contact section
+    
+    private struct HelpAndContactSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                SupportInformationButton(model: model)
+#if os(iOS)
+                if let openUserSuggestionForm = model.openUserSuggestionForm {
+                    Button(NSLocalizedString("A suggestion to share?", comment: "Label of the button to display user suggestion form"), action: openUserSuggestionForm)
+                }
+#endif
+            } header: {
+                Text(NSLocalizedString("Help and contact", comment: "Help and contact section header"))
+            }
+        }
         
         private struct SupportInformationButton: View {
             @ObservedObject var model: SettingsViewModel
-        
+            
 #if os(iOS)
             @State private var isActionSheetDisplayed = false
             @State private var isMailComposeDisplayed = false
             
-            private var supportRecipients: [String] {
-                guard MailComposeView.canSendMail(), let supportEmailAddress = ApplicationConfiguration.shared.supportEmailAddress else { return [] }
-                return [supportEmailAddress]
+            private var supportRecipient: String? {
+                guard MailComposeView.canSendMail(), let supportEmailAddress = ApplicationConfiguration.shared.supportEmailAddress else { return nil }
+                return supportEmailAddress
             }
             
             private func actionSheet() -> ActionSheet {
@@ -451,27 +465,28 @@ struct SettingsView: View {
                         sticky: false
                     )
                 })
-                if !supportRecipients.isEmpty {
-                    buttons.append(Alert.Button.default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
-                        isMailComposeDisplayed = true
-                    })
-                }
                 return ActionSheet(
-                    title: Text(NSLocalizedString("Support information", comment: "Support information alert title")),
+                    title: Text(NSLocalizedString("Additional informations to share to support team", comment: "Additional informations to support alert title")),
+                    message: Text(SupportInformation.generate()),
                     buttons: buttons
                 )
             }
             
             private func mailComposeView() -> MailComposeView {
                 return MailComposeView()
-                    .toRecipients(supportRecipients)
+                    .toRecipients([supportRecipient ?? ""])
                     .messageBody(SupportInformation.generate(toMailBody: true))
             }
 #endif
             
             private func action() {
 #if os(iOS)
-                isActionSheetDisplayed = true
+                if supportRecipient != nil {
+                    isMailComposeDisplayed = true
+                }
+                else {
+                    isActionSheetDisplayed = true
+                }
 #else
                 navigateToText(SupportInformation.generate())
 #endif
@@ -479,7 +494,7 @@ struct SettingsView: View {
             
             var body: some View {
                 Button(action: action) {
-                    Text(NSLocalizedString("Support information", comment: "Label of the button to access support information"))
+                    Text(NSLocalizedString("Report a technical issue", comment: "Label of the button to report a technical issue"))
                 }
 #if os(iOS)
                 .actionSheet(isPresented: $isActionSheetDisplayed, content: actionSheet)
@@ -488,381 +503,381 @@ struct SettingsView: View {
             }
         }
     }
-    
+                
     // MARK: Advanced features section
-    
+                
 #if DEBUG || NIGHTLY || BETA
-    private struct AdvancedFeaturesSection: View {
-        @ObservedObject var model: SettingsViewModel
-        
-        @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
-        @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
-        @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
+                private struct AdvancedFeaturesSection: View {
+                    @ObservedObject var model: SettingsViewModel
+                    
+                    @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
+                    @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
+                    @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
 #if os(iOS)
-        @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
+                    @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
 #endif
-        
-        var body: some View {
-            PlaySection {
-                NextLink {
-                    ServiceSelectionView()
+                    
+                    var body: some View {
+                        PlaySection {
+                            NextLink {
+                                ServiceSelectionView()
 #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
+                                    .navigationBarTitleDisplayMode(.inline)
 #endif
-                } label: {
-                    ServiceSelectionCell()
-                }
-                NextLink {
-                    UserLocationSelectionView()
+                            } label: {
+                                ServiceSelectionCell()
+                            }
+                            NextLink {
+                                UserLocationSelectionView()
 #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
+                                    .navigationBarTitleDisplayMode(.inline)
 #endif
-                } label: {
-                    UserLocationSelectionCell()
-                }
-                Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
-                Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
-                Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
+                            } label: {
+                                UserLocationSelectionCell()
+                            }
+                            Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
+                            Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
+                            Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
 #if os(iOS)
-                Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Beta tests toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
+                            Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Beta tests toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)
 #endif
-                NextLink {
-                    PosterImagesSelectionView()
+                            NextLink {
+                                PosterImagesSelectionView()
 #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
+                                    .navigationBarTitleDisplayMode(.inline)
 #endif
-                } label: {
-                    PosterImagesSelectionCell()
-                }
+                            } label: {
+                                PosterImagesSelectionCell()
+                            }
 #if os(iOS) && APPCENTER
-                VersionsAndReleaseNotesButton()
+                            VersionsAndReleaseNotesButton()
 #endif
-            } header: {
-                Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
-            } footer: {
-                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer"))
-            }
-        }
-        
-        private struct ServiceSelectionCell: View {
-            @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
-            
-            private var selectedService: Service {
-                return Service.service(forId: selectedServiceId)
-            }
-            
-            var body: some View {
-                HStack {
-                    Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
-                    Spacer()
-                    Text(selectedService.name)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.trailing)
-                        .lineLimit(2)
-                }
-            }
-        }
-        
-        private struct UserLocationSelectionCell: View {
-            @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
-            
-            var body: some View {
-                HStack {
-                    Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
-                    Spacer()
-                    Text(selectedUserLocation.description)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.trailing)
-                        .lineLimit(2)
-                }
-            }
-        }
-        
+                        } header: {
+                            Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
+                        } footer: {
+                            Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer"))
+                        }
+                    }
+                    
+                    private struct ServiceSelectionCell: View {
+                        @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
+                        
+                        private var selectedService: Service {
+                            return Service.service(forId: selectedServiceId)
+                        }
+                        
+                        var body: some View {
+                            HStack {
+                                Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
+                                Spacer()
+                                Text(selectedService.name)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.trailing)
+                                    .lineLimit(2)
+                            }
+                        }
+                    }
+                    
+                    private struct UserLocationSelectionCell: View {
+                        @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
+                        
+                        var body: some View {
+                            HStack {
+                                Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
+                                Spacer()
+                                Text(selectedUserLocation.description)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.trailing)
+                                    .lineLimit(2)
+                            }
+                        }
+                    }
+                    
 #if os(iOS) && APPCENTER
-        private struct VersionsAndReleaseNotesButton: View {
-            @State private var isSheetDisplayed = false
-            
-            private var appCenterUrl: URL? {
-                guard let appCenterUrlString = Bundle.main.object(forInfoDictionaryKey: "AppCenterURL") as? String, !appCenterUrlString.isEmpty else {
-                    return nil
-                }
-                return URL(string: appCenterUrlString)
-            }
-            
-            var body: some View {
-                if let appCenterUrl {
-                    Button(NSLocalizedString("Versions and release notes", comment: "Label of the button to access release notes and download internal builds (App Center)"), action: action)
-                        .sheet(isPresented: $isSheetDisplayed) {
-                            SafariView(url: appCenterUrl)
-                                .ignoresSafeArea()
+                    private struct VersionsAndReleaseNotesButton: View {
+                        @State private var isSheetDisplayed = false
+                        
+                        private var appCenterUrl: URL? {
+                            guard let appCenterUrlString = Bundle.main.object(forInfoDictionaryKey: "AppCenterURL") as? String, !appCenterUrlString.isEmpty else {
+                                return nil
+                            }
+                            return URL(string: appCenterUrlString)
                         }
-                }
-            }
-            
-            private func action() {
-                UserDefaults.standard.removeObject(forKey: "MSAppCenterPostponedTimestamp")
-                Distribute.checkForUpdate()
-                isSheetDisplayed = true
-            }
-        }
-#endif
-        
-        private struct PosterImagesSelectionCell: View {
-            @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
-            
-            var body: some View {
-                HStack {
-                    Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
-                    Spacer()
-                    Text(selectedPosterImages.description)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.trailing)
-                        .lineLimit(2)
-                }
-            }
-        }
-        
-        private struct ServiceSelectionView: View {
-            var body: some View {
-                List {
-                    ForEach(Service.services) { service in
-                        ServiceCell(service: service)
+                        
+                        var body: some View {
+                            if let appCenterUrl {
+                                Button(NSLocalizedString("Versions and release notes", comment: "Label of the button to access release notes and download internal builds (App Center)"), action: action)
+                                    .sheet(isPresented: $isSheetDisplayed) {
+                                        SafariView(url: appCenterUrl)
+                                            .ignoresSafeArea()
+                                    }
+                            }
+                        }
+                        
+                        private func action() {
+                            UserDefaults.standard.removeObject(forKey: "MSAppCenterPostponedTimestamp")
+                            Distribute.checkForUpdate()
+                            isSheetDisplayed = true
+                        }
                     }
-                }
-                .srgFont(.body)
+#endif
+                    
+                    private struct PosterImagesSelectionCell: View {
+                        @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+                        
+                        var body: some View {
+                            HStack {
+                                Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
+                                Spacer()
+                                Text(selectedPosterImages.description)
+                                    .foregroundColor(.secondary)
+                                    .multilineTextAlignment(.trailing)
+                                    .lineLimit(2)
+                            }
+                        }
+                    }
+                    
+                    private struct ServiceSelectionView: View {
+                        var body: some View {
+                            List {
+                                ForEach(Service.services) { service in
+                                    ServiceCell(service: service)
+                                }
+                            }
+                            .srgFont(.body)
 #if os(tvOS)
-                .listStyle(GroupedListStyle())
-                .frame(maxWidth: LayoutMaxListWidth)
+                            .listStyle(GroupedListStyle())
+                            .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
-            }
-        }
-        
-        private struct ServiceCell: View {
-            let service: Service
-            
-            @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceId: String?
-            
-            var body: some View {
-                Button(action: select) {
-                    HStack {
-                        Text(service.name)
-                        Spacer()
-                        if isSelected() {
-                            Image(systemName: "checkmark")
+                            .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
                         }
                     }
-                }
-                .foregroundColor(.primary)
-            }
-            
-            private func isSelected() -> Bool {
-                if let selectedServiceId {
-                    return service.id == selectedServiceId
-                }
-                else {
-                    return service == .production
-                }
-            }
-            
-            private func select() {
-                selectedServiceId = service.id
-            }
-        }
-        
-        private struct UserLocationSelectionView: View {
-            var body: some View {
-                List {
-                    ForEach(UserLocation.allCases) { userLocation in
-                        LocationCell(userLocation: userLocation)
+                    
+                    private struct ServiceCell: View {
+                        let service: Service
+                        
+                        @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceId: String?
+                        
+                        var body: some View {
+                            Button(action: select) {
+                                HStack {
+                                    Text(service.name)
+                                    Spacer()
+                                    if isSelected() {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                            .foregroundColor(.primary)
+                        }
+                        
+                        private func isSelected() -> Bool {
+                            if let selectedServiceId {
+                                return service.id == selectedServiceId
+                            }
+                            else {
+                                return service == .production
+                            }
+                        }
+                        
+                        private func select() {
+                            selectedServiceId = service.id
+                        }
                     }
-                }
-                .srgFont(.body)
+                    
+                    private struct UserLocationSelectionView: View {
+                        var body: some View {
+                            List {
+                                ForEach(UserLocation.allCases) { userLocation in
+                                    LocationCell(userLocation: userLocation)
+                                }
+                            }
+                            .srgFont(.body)
 #if os(tvOS)
-                .listStyle(GroupedListStyle())
-                .frame(maxWidth: LayoutMaxListWidth)
+                            .listStyle(GroupedListStyle())
+                            .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
-            }
-        }
-        
-        private struct LocationCell: View {
-            let userLocation: UserLocation
-            
-            @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
-            
-            var body: some View {
-                Button(action: select) {
-                    HStack {
-                        Text(userLocation.description)
-                        Spacer()
-                        if userLocation == selectedUserLocation {
-                            Image(systemName: "checkmark")
+                            .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
                         }
                     }
-                }
-                .foregroundColor(.primary)
-            }
-            
-            private func select() {
-                selectedUserLocation = userLocation
-            }
-        }
-        
-        // MARK: Poster images selection
-        
-        private struct PosterImagesSelectionView: View {
-            var body: some View {
-                List {
-                    ForEach(PosterImages.allCases) { posterImages in
-                        PosterImagesCell(posterImages: posterImages)
+                    
+                    private struct LocationCell: View {
+                        let userLocation: UserLocation
+                        
+                        @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
+                        
+                        var body: some View {
+                            Button(action: select) {
+                                HStack {
+                                    Text(userLocation.description)
+                                    Spacer()
+                                    if userLocation == selectedUserLocation {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                            .foregroundColor(.primary)
+                        }
+                        
+                        private func select() {
+                            selectedUserLocation = userLocation
+                        }
                     }
-                }
-                .srgFont(.body)
+                    
+                    // MARK: Poster images selection
+                    
+                    private struct PosterImagesSelectionView: View {
+                        var body: some View {
+                            List {
+                                ForEach(PosterImages.allCases) { posterImages in
+                                    PosterImagesCell(posterImages: posterImages)
+                                }
+                            }
+                            .srgFont(.body)
 #if os(tvOS)
-                .listStyle(GroupedListStyle())
-                .frame(maxWidth: LayoutMaxListWidth)
+                            .listStyle(GroupedListStyle())
+                            .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
-            }
-        }
-        
-        private struct PosterImagesCell: View {
-            let posterImages: PosterImages
-            
-            @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
-            
-            var body: some View {
-                Button(action: select) {
-                    HStack {
-                        Text(posterImages.description)
-                        Spacer()
-                        if posterImages == selectedPosterImages {
-                            Image(systemName: "checkmark")
+                            .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
+                        }
+                    }
+                    
+                    private struct PosterImagesCell: View {
+                        let posterImages: PosterImages
+                        
+                        @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+                        
+                        var body: some View {
+                            Button(action: select) {
+                                HStack {
+                                    Text(posterImages.description)
+                                    Spacer()
+                                    if posterImages == selectedPosterImages {
+                                        Image(systemName: "checkmark")
+                                    }
+                                }
+                            }
+                            .foregroundColor(.primary)
+                        }
+                        
+                        private func select() {
+                            selectedPosterImages = posterImages
                         }
                     }
                 }
-                .foregroundColor(.primary)
-            }
-            
-            private func select() {
-                selectedPosterImages = posterImages
-            }
-        }
-    }
 #endif
-    
-    // MARK: Reset section
-    
+                
+                // MARK: Reset section
+                
 #if DEBUG || NIGHTLY || BETA
-    private struct ResetSection: View {
-        @ObservedObject var model: SettingsViewModel
-        
-        var body: some View {
-            PlaySection {
-                Button(NSLocalizedString("Clear web cache", comment: "Label of the button to clear the web cache"), action: model.clearWebCache)
-                    .foregroundColor(.red)
-                Button(NSLocalizedString("Clear vector image cache", comment: "Label of the button to clear the vector image cache"), action: model.clearVectorImageCache)
-                    .foregroundColor(.red)
-                Button(NSLocalizedString("Clear all contents", comment: "Label of the button to clear all contents"), action: model.clearAllContents)
-                    .foregroundColor(.red)
-                Button(NSLocalizedString("Simulate memory warning", comment: "Label of the button to simulate a memory warning"), action: model.simulateMemoryWarning)
-            } header: {
-                Text(NSLocalizedString("Reset", comment: "Reset section header"))
-            } footer: {
-                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Reset section footer"))
-            }
-        }
-    }
+                private struct ResetSection: View {
+                    @ObservedObject var model: SettingsViewModel
+                    
+                    var body: some View {
+                        PlaySection {
+                            Button(NSLocalizedString("Clear web cache", comment: "Label of the button to clear the web cache"), action: model.clearWebCache)
+                                .foregroundColor(.red)
+                            Button(NSLocalizedString("Clear vector image cache", comment: "Label of the button to clear the vector image cache"), action: model.clearVectorImageCache)
+                                .foregroundColor(.red)
+                            Button(NSLocalizedString("Clear all contents", comment: "Label of the button to clear all contents"), action: model.clearAllContents)
+                                .foregroundColor(.red)
+                            Button(NSLocalizedString("Simulate memory warning", comment: "Label of the button to simulate a memory warning"), action: model.simulateMemoryWarning)
+                        } header: {
+                            Text(NSLocalizedString("Reset", comment: "Reset section header"))
+                        } footer: {
+                            Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Reset section footer"))
+                        }
+                    }
+                }
 #endif
-    
-    // MARK: Developer section
-    
+                
+                // MARK: Developer section
+                
 #if os(iOS) && (DEBUG || APPCENTER)
-    private struct DeveloperSection: View {
-        var body: some View {
-            PlaySection {
-                Button(NSLocalizedString("Enable / disable FLEX", comment: "Label of the button to toggle FLEX"), action: toggleFlex)
-            } header: {
-                Text(NSLocalizedString("Developer", comment: "Developer section header"))
-            } footer: {
-                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Reset section footer"))
+                private struct DeveloperSection: View {
+                    var body: some View {
+                        PlaySection {
+                            Button(NSLocalizedString("Enable / disable FLEX", comment: "Label of the button to toggle FLEX"), action: toggleFlex)
+                        } header: {
+                            Text(NSLocalizedString("Developer", comment: "Developer section header"))
+                        } footer: {
+                            Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Reset section footer"))
+                        }
+                    }
+                    
+                    private func toggleFlex() {
+                        FLEXManager.shared.toggleExplorer()
+                    }
+                }
+#endif
+                
+                // MARK: Presentation
+                
+                /**
+                 *  Presents with a modal sheet on tvOS (better), with a navigation level otherwise.
+                 */
+                private struct NextLink<Destination: View, Label: View>: View {
+                    @ViewBuilder var destination: () -> Destination
+                    @ViewBuilder var label: () -> Label
+                    
+#if os(tvOS)
+                    @State private var isPresented = false
+#endif
+                    
+                    var body: some View {
+#if os(tvOS)
+                        Button(action: action, label: label)
+                            .sheet(isPresented: $isPresented, content: destination)
+#else
+                        NavigationLink(destination: {
+                            destination()
+                                .navigationBarTitleDisplayMode(.inline)
+                        }, label: label)
+#endif
+                    }
+                    
+#if os(tvOS)
+                    private func action() {
+                        isPresented = true
+                    }
+#endif
+                }
+                
+                /**
+                 *  Simple wrapper for static list items.
+                 */
+                private struct ListItem<Content: View>: View {
+                    @ViewBuilder var content: () -> Content
+                    
+                    var body: some View {
+#if os(tvOS)
+                        Button(action: { /* Nothing, just to make the item focusable */ }, label: content)
+#else
+                        content()
+#endif
+                    }
+                }
             }
-        }
-        
-        private func toggleFlex() {
-            FLEXManager.shared.toggleExplorer()
-        }
-    }
-#endif
-    
-    // MARK: Presentation
-    
-    /**
-     *  Presents with a modal sheet on tvOS (better), with a navigation level otherwise.
-     */
-    private struct NextLink<Destination: View, Label: View>: View {
-        @ViewBuilder var destination: () -> Destination
-        @ViewBuilder var label: () -> Label
-        
-#if os(tvOS)
-        @State private var isPresented = false
-#endif
-        
-        var body: some View {
-#if os(tvOS)
-            Button(action: action, label: label)
-                .sheet(isPresented: $isPresented, content: destination)
-#else
-            NavigationLink(destination: {
-                destination()
-                    .navigationBarTitleDisplayMode(.inline)
-            }, label: label)
-#endif
-        }
-        
-#if os(tvOS)
-        private func action() {
-            isPresented = true
-        }
-#endif
-    }
-    
-    /**
-     *  Simple wrapper for static list items.
-     */
-    private struct ListItem<Content: View>: View {
-        @ViewBuilder var content: () -> Content
-        
-        var body: some View {
-#if os(tvOS)
-            Button(action: { /* Nothing, just to make the item focusable */ }, label: content)
-#else
-            content()
-#endif
-        }
-    }
-}
-
-// MARK: Analytics
-
-private extension SettingsView {
-    private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.settings.rawValue
-    }
-    
-    private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
-    }
-}
-
-// MARK: Preview
-
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            SettingsView()
-        }
-        .navigationViewStyle(.stack)
-    }
-}
+            
+            // MARK: Analytics
+            
+            private extension SettingsView {
+                private var analyticsPageTitle: String {
+                    return AnalyticsPageTitle.settings.rawValue
+                }
+                
+                private var analyticsPageLevels: [String]? {
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+                }
+            }
+            
+            // MARK: Preview
+            
+            struct SettingsView_Previews: PreviewProvider {
+                static var previews: some View {
+                    NavigationView {
+                        SettingsView()
+                    }
+                    .navigationViewStyle(.stack)
+                }
+            }
