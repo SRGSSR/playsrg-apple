@@ -171,8 +171,19 @@ final class SettingsViewModel: ObservableObject {
     var openFeedbackForm: (() -> Void)? {
         guard let url = ApplicationConfiguration.shared.feedbackUrlWithParameters else { return nil }
         return {
-            UIApplication.shared.open(url)
+            guard let topViewController = UIApplication.shared.mainTopViewController else { return }
+            
+            let webViewController = WebViewController(request: URLRequest(url: url), customizationBlock: { webView in
+                webView.scrollView.isScrollEnabled = false
+            })
+            webViewController.title = NSLocalizedString("Your feedback", comment: "Title displayed at the top of the feedback view")
+            webViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("OK", comment: "Title of the feedback settings button to close the view"), style: .done, target: self, action: #selector(self.dismissTopViewController(_:)))
+            topViewController.present(UINavigationController(rootViewController: webViewController), animated: true)
         }
+    }
+    
+    @objc private func dismissTopViewController(_ barButtonItem: UIBarButtonItem) {
+        UIApplication.shared.mainTopViewController?.dismiss(animated: true)
     }
     
     func copySupportInformation() {
