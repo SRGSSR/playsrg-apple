@@ -186,6 +186,14 @@ final class SettingsViewModel: ObservableObject {
         UIApplication.shared.mainTopViewController?.dismiss(animated: true)
     }
     
+    var supportEmailAdress: String? {
+        return ApplicationConfiguration.shared.supportEmailAddress
+    }
+    
+    func copySupportMailAdress() {
+        UIPasteboard.general.string = supportEmailAdress
+    }
+    
     func copySupportInformation() {
         UIPasteboard.general.string = SupportInformation.generate()
     }
