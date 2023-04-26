@@ -199,10 +199,13 @@ final class SettingsViewModel: ObservableObject {
         UIPasteboard.general.string = SupportInformation.generate()
     }
     
-    func rateApplication() {
-        if let windowScene = UIApplication.shared.mainWindowScene {
-            SKStoreReviewController.requestReview(in: windowScene)
-        }
+    func evaluateApplication() {
+        guard let topViewController = UIApplication.shared.mainTopViewController else { return }
+        
+        let productViewController = SKStoreProductViewController()
+        productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: ApplicationConfiguration.shared.appStoreProductIdentifier])
+        
+        topViewController.present(productViewController, animated: true)
     }
 #endif
     

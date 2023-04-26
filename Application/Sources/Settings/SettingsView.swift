@@ -436,7 +436,7 @@ struct SettingsView: View {
                 if let openUserSuggestionForm = model.openUserSuggestionForm {
                     Button(NSLocalizedString("A suggestion to share?", comment: "Label of the button to display user suggestion form"), action: openUserSuggestionForm)
                 }
-                RateApplicationButton(model: model)
+                EvaluateApplicationButton(model: model)
 #endif
             } header: {
                 Text(NSLocalizedString("Help and contact", comment: "Help and contact section header"))
@@ -523,16 +523,16 @@ struct SettingsView: View {
         }
         
 #if os(iOS)
-        private struct RateApplicationButton: View {
+        private struct EvaluateApplicationButton: View {
             @ObservedObject var model: SettingsViewModel
             
             private func action() {
-                model.rateApplication()
+                model.evaluateApplication()
             }
             
             var body: some View {
                 Button(action: action) {
-                    Text(NSLocalizedString("Rate the application", comment: "Label of the button to rate the application"))
+                    Text(NSLocalizedString("Evaluate the application", comment: "Label of the button to evaluate the application"))
                 }
             }
         }
