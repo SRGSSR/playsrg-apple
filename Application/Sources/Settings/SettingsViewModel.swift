@@ -8,6 +8,7 @@ import Combine
 import SRGIdentity
 import SRGUserData
 import YYWebImage
+import StoreKit
 
 // MARK: View model
 
@@ -56,9 +57,9 @@ final class SettingsViewModel: ObservableObject {
         
         ThrottledSignal.preferenceUpdates()
             .prepend(())
-            // swiftlint:disable empty_count
+        // swiftlint:disable empty_count
             .map { FavoritesShowURNs().count != 0 }
-            // swiftlint:enable empty_count
+        // swiftlint:enable empty_count
             .assign(to: &$hasFavorites)
         
         ThrottledSignal.watchLaterUpdates()
@@ -119,7 +120,7 @@ final class SettingsViewModel: ObservableObject {
         guard let identityService = SRGIdentityService.current, identityService.isLoggedIn else { return nil }
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), Self.string(for: synchronizationDate))
     }
-        
+    
     var version: String {
         return Bundle.main.play_friendlyVersionNumber
     }
@@ -196,6 +197,12 @@ final class SettingsViewModel: ObservableObject {
     
     func copySupportInformation() {
         UIPasteboard.general.string = SupportInformation.generate()
+    }
+    
+    func rateApplication() {
+        if let windowScene = UIApplication.shared.mainWindowScene {
+            SKStoreReviewController.requestReview(in: windowScene)
+        }
     }
 #endif
     
