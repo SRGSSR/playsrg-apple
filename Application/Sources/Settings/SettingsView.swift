@@ -36,7 +36,7 @@ struct SettingsView: View {
 #endif
             ContentSection(model: model)
             InformationSection(model: model)
-            HelpAndContactSection(model: model)
+            HelpSection(model: model)
 #if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
             ResetSection(model: model)
@@ -426,7 +426,7 @@ struct SettingsView: View {
     
     // MARK: Help and Contact section
     
-    private struct HelpAndContactSection: View {
+    private struct HelpSection: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
@@ -434,7 +434,7 @@ struct SettingsView: View {
                 SupportInformationButton(model: model)
 #if os(iOS)
                 if let openUserSuggestionForm = model.openUserSuggestionForm {
-                    Button(NSLocalizedString("A suggestion to share?", comment: "Label of the button to display user suggestion form"), action: openUserSuggestionForm)
+                    UserSuggestionFormButton(action: openUserSuggestionForm)
                 }
                 EvaluateApplicationButton(model: model)
 #endif
@@ -523,6 +523,16 @@ struct SettingsView: View {
         }
         
 #if os(iOS)
+        private struct UserSuggestionFormButton: View {
+            let action: (() -> Void)
+            
+            var body: some View {
+                Button(action: action) {
+                    Text(NSLocalizedString("A suggestion to share?", comment: "Label of the button to display user suggestion form"))
+                }
+            }
+        }
+        
         private struct EvaluateApplicationButton: View {
             @ObservedObject var model: SettingsViewModel
             
