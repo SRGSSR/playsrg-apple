@@ -30,7 +30,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
-			<string>AppCenter (5.0.0)</string>
+			<string>AppCenter (5.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -39,14 +39,6 @@
 			<string>com.mono0926.LicensePlist/AutoCoding</string>
 			<key>Title</key>
 			<string>AutoCoding (2.2.3)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/boringssl-SwiftPM</string>
-			<key>Title</key>
-			<string>BoringSSL-GRPC (0.9.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
