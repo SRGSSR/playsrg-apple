@@ -60,7 +60,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleResumePlayback;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleScheduledLivestreams;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHelpAndContact;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;

@@ -50,7 +50,6 @@ AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
 AnalyticsPageTitle const AnalyticsPageTitleResumePlayback = @"resume playback";
 AnalyticsPageTitle const AnalyticsPageTitleScheduledLivestreams = @"scheduled livestreams";
 AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
-AnalyticsPageTitle const AnalyticsPageTitleHelpAndContact = @"Help and contact";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
 AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";

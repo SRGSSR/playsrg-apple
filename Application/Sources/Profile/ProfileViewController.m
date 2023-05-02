@@ -66,7 +66,6 @@
     if (SRGIdentityService.currentIdentityService) {
         self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
     }
-    self.tableView.tableFooterView = [ProfileHelpFooterView view];
     
     [self.tableView registerReusableNotificationCell];
     
