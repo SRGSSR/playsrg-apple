@@ -54,22 +54,9 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 }
 #endif
 
-+ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfosWithNotificationPreview:(BOOL)notificationPreview
++ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfos
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
-#if TARGET_OS_IOS
-    if (PushService.sharedService.enabled) {
-        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
-        
-        if (notificationPreview) {
-            NSArray<UserNotification *> *unreadNotifications = UserNotification.unreadNotifications;
-            NSArray<UserNotification *> *previewNotifications = [unreadNotifications subarrayWithRange:NSMakeRange(0, MIN(3, unreadNotifications.count))];
-            for (UserNotification *notification in previewNotifications) {
-                [sectionInfos addObject:[self applicationSectionInfoWithNotification:notification]];
-            }
-        }
-    }
-#endif
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionWatchLater radioChannel:nil]];

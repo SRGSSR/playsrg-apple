@@ -63,7 +63,7 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                ForEach(ApplicationSectionInfo.profileApplicationSectionInfos(withNotificationPreview: false), id: \.applicationSection) { applicationSectionInfo in
+                ForEach(ApplicationSectionInfo.profileApplicationSectionInfos(), id: \.applicationSection) { applicationSectionInfo in
                     Button(action: navigateTo(applicationSectionInfo.applicationSection)) {
                         HStack(spacing: 16) {
                             if let imageName = applicationSectionInfo.imageName {

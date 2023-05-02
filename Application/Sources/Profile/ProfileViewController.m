@@ -67,8 +67,6 @@
         self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
     }
     
-    [self.tableView registerReusableNotificationCell];
-    
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
@@ -154,7 +152,7 @@
 
 - (void)reloadData
 {
-    self.sectionInfos = [ApplicationSectionInfo profileApplicationSectionInfosWithNotificationPreview:self.splitViewController.collapsed];
+    self.sectionInfos = [ApplicationSectionInfo profileApplicationSectionInfos];
     [self reloadTableView];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -163,16 +161,6 @@
 }
 
 #pragma mark Helpers
-
-- (UserNotification *)notificationAtIndexPath:(NSIndexPath *)indexPath
-{
-    ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
-    if (applicationSectionInfo.applicationSection != ApplicationSectionNotifications) {
-        return nil;
-    }
-    
-    return applicationSectionInfo.options[ApplicationSectionOptionNotificationKey];
-}
 
 - (UIViewController *)viewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
@@ -370,53 +358,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self notificationAtIndexPath:indexPath]) {
-        return [tableView dequeueReusableNotificationCellFor:indexPath];
-    }
-    else {
-        return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProfileTableViewCell.class) forIndexPath:indexPath];
-    }
+    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProfileTableViewCell.class) forIndexPath:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self notificationAtIndexPath:indexPath]) {
-        return [[NotificationCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
-    }
-    else {
-        return ProfileTableViewCell.height;
-    }
+    return ProfileTableViewCell.height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserNotification *notification = [self notificationAtIndexPath:indexPath];
-    if (notification) {
-        UITableViewCell<NotificationSettable> *notificationTableViewCell = (UITableViewCell<NotificationSettable> *)cell;
-        notificationTableViewCell.notification = notification;
-    }
-    else {
-        ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
-        profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
-        profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
-    }
+    ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
+    profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
+    profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserNotification *notification = [self notificationAtIndexPath:indexPath];
-    if (notification) {
-        [self navigateToNotification:notification animated:YES];
-        
-        // Update the cell dot right away
-        [self reloadTableView];
-    }
-    else {
-        ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
-        [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:YES];
-    }
+    ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
+    [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:YES];
 }
 
 #pragma mark Actions

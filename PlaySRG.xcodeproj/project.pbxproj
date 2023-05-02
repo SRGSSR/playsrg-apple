@@ -953,11 +953,6 @@
 		6F33443628642A8B00E664F1 /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
 		6F33443728642A8B00E664F1 /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
 		6F33443828642A8B00E664F1 /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
-		6F33E60D2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
-		6F33E60E2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
-		6F33E60F2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
-		6F33E6102860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
-		6F33E6112860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
 		6F33E6122860AEFF00724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
 		6F33E6132860AF0000724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
 		6F33E6152860AF0200724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
@@ -3056,7 +3051,6 @@
 		6F331D2C24D06BC600C096AB /* Play RTR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RTR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331D4424D06C2600C096AB /* Play SWI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SWI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaSearchSettings.swift; sourceTree = "<group>"; };
-		6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCell+UIKit.swift"; sourceTree = "<group>"; };
 		6F33E6182860B5EF00724E76 /* SearchSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsView.swift; sourceTree = "<group>"; };
 		6F33E61E2860BED900724E76 /* SearchSettingsNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsNavigationView.swift; sourceTree = "<group>"; };
 		6F340F50220DA99B00778CA3 /* History.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
@@ -4757,7 +4751,6 @@
 				6FD9595326989FD900739FAE /* MediaVisualViewModel.swift */,
 				6FE8626B2657C5F30061D3F0 /* MoreCell.swift */,
 				6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */,
-				6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */,
 				6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */,
 				6FD1EF362861A39400BCBF19 /* PlaySection.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
@@ -8410,7 +8403,6 @@
 				088899452077627900242654 /* TVChannel.m in Sources */,
 				08F4683A26C6CAE400CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6F978B512849C3CA003061E8 /* ScrollableContent.m in Sources */,
-				6F33E60D2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6FDEC19226DE307E0020A03F /* PresenterMode.swift in Sources */,
 				04D21DBC299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				6F33443428642A8B00E664F1 /* MediaSearchSettings.swift in Sources */,
@@ -8608,7 +8600,6 @@
 				6F54D2BA2604FB16008B46FF /* ShowCell.swift in Sources */,
 				6FCA5BDD27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
-				6F33E60E2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6F6C7AD52820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F2E160A26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
@@ -8865,7 +8856,6 @@
 				6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDE27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D42604FB18008B46FF /* ShowCell.swift in Sources */,
-				6F33E60F2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6F6C7AD62820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160B26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
@@ -9122,7 +9112,6 @@
 				6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDF27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D52604FB19008B46FF /* ShowCell.swift in Sources */,
-				6F33E6102860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6F6C7AD72820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D623EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160C26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
@@ -9498,7 +9487,6 @@
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
 				042F6F6429E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* UserNotification.m in Sources */,
-				6F33E6112860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC522626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				6F5B4D622833F8F3004F5BA3 /* FeaturesView.swift in Sources */,
