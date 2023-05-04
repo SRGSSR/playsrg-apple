@@ -9,6 +9,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSectionInfo.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettings+Common.h"
 #import "ApplicationSettingsConstants.h"
