@@ -13,7 +13,6 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 #import "ProfileAccountHeaderView.h"
-#import "ProfileTableViewCell.h"
 #import "PushService.h"
 #import "TableView.h"
 #import "UIDevice+PlaySRG.h"
@@ -28,7 +27,7 @@
 @property (nonatomic) NSArray<NSArray<ApplicationSectionInfo *> *> *sectionInfos;
 @property (nonatomic) ApplicationSectionInfo *currentSectionInfo;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
 
 @end
 
@@ -38,16 +37,10 @@
 
 - (instancetype)init
 {
-    if (self = [self initFromStoryboard]) {
+    if (self = [super init]) {
         self.title = NSLocalizedString(@"Profile", @"Title displayed at the top of the profile view");
     }
     return self;
-}
-
-- (instancetype)initFromStoryboard
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
-    return storyboard.instantiateInitialViewController;
 }
 
 #pragma mark View lifecycle
@@ -58,6 +51,18 @@
     
     self.view.backgroundColor = UIColor.srg_gray16Color;
     self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+    tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [tableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [tableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor]
+    ]];
     
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;

@@ -477,16 +477,6 @@
 		0875851523A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850623A0025E00FA7207 /* ProfileAccountHeaderView.m */; };
 		0875851623A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850623A0025E00FA7207 /* ProfileAccountHeaderView.m */; };
 		0875851723A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850623A0025E00FA7207 /* ProfileAccountHeaderView.m */; };
-		0875851823A0025F00FA7207 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850723A0025E00FA7207 /* ProfileTableViewCell.m */; };
-		0875851923A0025F00FA7207 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850723A0025E00FA7207 /* ProfileTableViewCell.m */; };
-		0875851A23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850723A0025E00FA7207 /* ProfileTableViewCell.m */; };
-		0875851B23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850723A0025E00FA7207 /* ProfileTableViewCell.m */; };
-		0875851C23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850723A0025E00FA7207 /* ProfileTableViewCell.m */; };
-		0875851D23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0875850923A0025E00FA7207 /* ProfileViewController.storyboard */; };
-		0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0875850923A0025E00FA7207 /* ProfileViewController.storyboard */; };
-		0875851F23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0875850923A0025E00FA7207 /* ProfileViewController.storyboard */; };
-		0875852023A0025F00FA7207 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0875850923A0025E00FA7207 /* ProfileViewController.storyboard */; };
-		0875852123A0025F00FA7207 /* ProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0875850923A0025E00FA7207 /* ProfileViewController.storyboard */; };
 		0875852223A0025F00FA7207 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850A23A0025E00FA7207 /* ProfileViewController.m */; };
 		0875852323A0025F00FA7207 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850A23A0025E00FA7207 /* ProfileViewController.m */; };
 		0875852423A0025F00FA7207 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0875850A23A0025E00FA7207 /* ProfileViewController.m */; };
@@ -2813,11 +2803,8 @@
 		0875850323A0025E00FA7207 /* ProfileAccountHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileAccountHeaderView.xib; sourceTree = "<group>"; };
 		0875850423A0025E00FA7207 /* ProfileAccountHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileAccountHeaderView.h; sourceTree = "<group>"; };
 		0875850623A0025E00FA7207 /* ProfileAccountHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileAccountHeaderView.m; sourceTree = "<group>"; };
-		0875850723A0025E00FA7207 /* ProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTableViewCell.m; sourceTree = "<group>"; };
 		0875850823A0025E00FA7207 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
-		0875850923A0025E00FA7207 /* ProfileViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileViewController.storyboard; sourceTree = "<group>"; };
 		0875850A23A0025E00FA7207 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		0875850D23A0025F00FA7207 /* ProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTableViewCell.h; sourceTree = "<group>"; };
 		087BC6611EDF1B7B00EED89B /* UILabel+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+PlaySRG.h"; sourceTree = "<group>"; };
 		087BC6621EDF1B7B00EED89B /* UILabel+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+PlaySRG.m"; sourceTree = "<group>"; };
 		087CDB6B240DC39100BDFAEA /* Configuration.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
@@ -3994,11 +3981,8 @@
 				0875850323A0025E00FA7207 /* ProfileAccountHeaderView.xib */,
 				044B405A2A01764900A10DB7 /* ProfileCell.swift */,
 				044B408E2A02B6B500A10DB7 /* ProfileCell+UIKit.swift */,
-				0875850D23A0025F00FA7207 /* ProfileTableViewCell.h */,
-				0875850723A0025E00FA7207 /* ProfileTableViewCell.m */,
 				0875850823A0025E00FA7207 /* ProfileViewController.h */,
 				0875850A23A0025E00FA7207 /* ProfileViewController.m */,
-				0875850923A0025E00FA7207 /* ProfileViewController.storyboard */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -6410,7 +6394,6 @@
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
 				6FD2CBC31DD19B0200B44958 /* placeholder_media.pdf in Resources */,
-				0875851D23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FA7EC3920AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6425,7 +6408,6 @@
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FE28774248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FB89A0C26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
-				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6F0AF6EA267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F2961FD2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
@@ -6458,7 +6440,6 @@
 				08C6912A1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6FC0C69C245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				6FE28775248168A100358CFF /* SongTableViewCell.xib in Resources */,
-				0875851F23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				6FB89A0D26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
@@ -6508,7 +6489,6 @@
 				6F3A47B11DD19A6900C79E67 /* RTRResources.xcassets in Resources */,
 				6F1938331EFBFEA40017B1D1 /* ApplicationConfiguration.json in Resources */,
 				E66BEC241DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
-				0875852023A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6F5F4FCC1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				6F4EA1371EE034C500BEC4DA /* Accessibility.strings in Resources */,
 				08DADF8F20D92D6500291AD1 /* placeholder_notification.pdf in Resources */,
@@ -6550,7 +6530,6 @@
 				6F5F4FCD1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				08C690811D38E3E600BB8AAA /* Localizable.strings in Resources */,
 				086BDE1E1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
-				0875852123A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FD2CBC71DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */,
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
@@ -8522,7 +8501,6 @@
 				6F33E6192860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				6F475FBE1EB37BC6003021EA /* DataViewController.m in Sources */,
 				0821D53E227F5ED300FC091F /* DeepLinkService.m in Sources */,
-				0875851823A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F362A8426A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F49EF93263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
@@ -8666,7 +8644,6 @@
 				042F6F2A29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA45268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9A26CAC7A2004039E2 /* Blur.swift in Sources */,
-				0875851923A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFB726563C830032D742 /* Content.swift in Sources */,
 				6FD1EF432861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545B2655100400AE78FD /* SectionViewController.swift in Sources */,
@@ -8924,7 +8901,6 @@
 				042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA46268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9B26CAC7A2004039E2 /* Blur.swift in Sources */,
-				0875851A23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFB826563C830032D742 /* Content.swift in Sources */,
 				6FD1EF442861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545C2655100400AE78FD /* SectionViewController.swift in Sources */,
@@ -9182,7 +9158,6 @@
 				042F6F2C29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA47268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9C26CAC7A2004039E2 /* Blur.swift in Sources */,
-				0875851B23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFB926563C830032D742 /* Content.swift in Sources */,
 				6FD1EF452861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545D2655100400AE78FD /* SectionViewController.swift in Sources */,
@@ -9438,7 +9413,6 @@
 				042F6F2D29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F5FAA48268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9D26CAC7A2004039E2 /* Blur.swift in Sources */,
-				0875851C23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFBA26563C830032D742 /* Content.swift in Sources */,
 				6F8A545E2655100400AE78FD /* SectionViewController.swift in Sources */,
 				0406041229CE6293001F2BD0 /* MediaMoreButton.swift in Sources */,
