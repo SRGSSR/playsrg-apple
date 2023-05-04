@@ -40,6 +40,11 @@ OBJC_EXPORT ApplicationSectionOptionKey const ApplicationSectionOptionShowByDate
 + (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfos;
 
 /**
+ *  Return the help section infos available for the current configuration.
+ */
++ (NSArray<ApplicationSectionInfo *> *)helpApplicationSectionInfos;
+
+/**
  *  Properties.
  */
 @property (nonatomic, readonly) ApplicationSection applicationSection;

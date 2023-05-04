@@ -67,6 +67,22 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
     return sectionInfos.copy;
 }
 
++ (NSArray<ApplicationSectionInfo *> *)helpApplicationSectionInfos
+{
+    NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
+    if (ApplicationConfiguration.sharedApplicationConfiguration.impressumURL != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFAQs radioChannel:nil]];
+    }
+    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionTechnicaIssue radioChannel:nil]];
+    if (ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFeedback radioChannel:nil]];
+    }
+    if (ApplicationConfiguration.sharedApplicationConfiguration.appStoreProductIdentifier != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionEvaluateApplication radioChannel:nil]];
+    }
+    return sectionInfos.copy;
+}
+
 #pragma Object lifecycle
 
 - (instancetype)initWithApplicationSection:(ApplicationSection)applicationSection title:(NSString *)title uid:(NSString *)uid options:(NSDictionary<ApplicationSectionOptionKey, id> *)options

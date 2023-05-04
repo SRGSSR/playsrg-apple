@@ -25,7 +25,7 @@
 
 @interface ProfileViewController ()
 
-@property (nonatomic) NSArray<ApplicationSectionInfo *> *sectionInfos;
+@property (nonatomic) NSArray<NSArray<ApplicationSectionInfo *> *> *sectionInfos;
 @property (nonatomic) ApplicationSectionInfo *currentSectionInfo;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -66,6 +66,8 @@
     if (SRGIdentityService.currentIdentityService) {
         self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
     }
+    
+    [self.tableView registerReusableProfileCell];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -113,7 +115,7 @@
     // automatically onto the primary at startup for narrow layouts, which is not what we want). We must still avoid
     // overriding a section if already installed before by application shorcuts.
     if (! self.currentSectionInfo && [self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO animated:NO];
+        [self openApplicationSectionInfo:self.sectionInfos.firstObject.firstObject interactive:NO animated:NO];
     }
 }
 
@@ -152,7 +154,12 @@
 
 - (void)reloadData
 {
-    self.sectionInfos = [ApplicationSectionInfo profileApplicationSectionInfos];
+    self.sectionInfos = [NSArray arrayWithObjects:
+                         [ApplicationSectionInfo profileApplicationSectionInfos],
+                         [ApplicationSectionInfo helpApplicationSectionInfos],
+                         nil];
+    
+    [ApplicationSectionInfo profileApplicationSectionInfos];
     [self reloadTableView];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -278,9 +285,19 @@
         return;
     }
     
-    NSUInteger index = [self.sectionInfos indexOfObject:self.currentSectionInfo];
+    NSUInteger section = NSNotFound;
+    NSUInteger index = NSNotFound;
+    
+    for (NSUInteger i = 0; i < [self.sectionInfos count]; i++) {
+        index = [self.sectionInfos[i] indexOfObject:self.currentSectionInfo];
+        if (index != NSNotFound) {
+            section = i;
+            break;
+        }
+    }
+    
     if (index != NSNotFound) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
         [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     else {
@@ -348,36 +365,36 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.sectionInfos.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.sectionInfos.count;
+    return self.sectionInfos[section].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProfileTableViewCell.class) forIndexPath:indexPath];
+    return [tableView dequeueReusableProfileCellFor:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ProfileTableViewCell.height;
+    return 50.f;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
-    profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
+    UITableViewCell<ApplicationSectionInfoSettable> *profileTableViewCell = (UITableViewCell<ApplicationSectionInfoSettable> *)cell;
+    profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.section][indexPath.row];
     profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
+    ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.section][indexPath.row];
     [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:YES];
 }
 
