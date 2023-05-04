@@ -122,7 +122,7 @@ struct ProgramCell: View {
         @ObservedObject var model: ProgramCellViewModel
         let compact: Bool
         
-        private let canPlayHeight: CGFloat = 25
+        private let canPlayHeight: CGFloat = 24
         
         var body: some View {
             HStack(spacing: 10) {
