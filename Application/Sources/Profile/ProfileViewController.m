@@ -180,45 +180,60 @@
         return nil;
     }
     
-    UIViewController *viewController = nil;
-    switch (applicationSectionInfo.applicationSection) {
-        case ApplicationSectionNotifications: {
-            viewController = [SectionViewController notificationsViewController];
-            break;
-        }
-            
-        case ApplicationSectionHistory: {
-            viewController = [SectionViewController historyViewController];
-            break;
-        }
-            
-        case ApplicationSectionFavorites: {
-            viewController = [SectionViewController favoriteShowsViewController];
-            break;
-        }
-            
-        case ApplicationSectionWatchLater: {
-            viewController = [SectionViewController watchLaterViewController];
-            break;
-        }
-            
-        case ApplicationSectionDownloads: {
-            viewController = [SectionViewController downloadsViewController];
-            break;
-        }
-            
-        default: {
-            break;
-        }
+    if (applicationSectionInfo.applicationSection == ApplicationSectionEvaluateApplication) {
+        return [ProfileHelp evaluateApplicationViewController];
     }
-    
-    if (! viewController) {
-        return nil;
+    else {
+        UIViewController *viewController = nil;
+        switch (applicationSectionInfo.applicationSection) {
+            case ApplicationSectionNotifications: {
+                viewController = [SectionViewController notificationsViewController];
+                break;
+            }
+                
+            case ApplicationSectionHistory: {
+                viewController = [SectionViewController historyViewController];
+                break;
+            }
+                
+            case ApplicationSectionFavorites: {
+                viewController = [SectionViewController favoriteShowsViewController];
+                break;
+            }
+                
+            case ApplicationSectionWatchLater: {
+                viewController = [SectionViewController watchLaterViewController];
+                break;
+            }
+                
+            case ApplicationSectionDownloads: {
+                viewController = [SectionViewController downloadsViewController];
+                break;
+            }
+                
+            case ApplicationSectionFeedback: {
+                viewController = [ProfileHelp feedbackViewController];
+                break;
+            }
+                
+            case ApplicationSectionFAQs: {
+                viewController = [ProfileHelp faqsViewController];
+                break;
+            }
+                
+            default: {
+                break;
+            }
+        }
+        
+        if (! viewController) {
+            return nil;
+        }
+        
+        // Always wrap into a navigation controller. The split view takes care of moving view controllers between navigation
+        // controllers when collapsing or expanding
+        return [[NavigationController alloc] initWithRootViewController:viewController];
     }
-    
-    // Always wrap into a navigation controller. The split view takes care of moving view controllers between navigation
-    // controllers when collapsing or expanding
-    return [[NavigationController alloc] initWithRootViewController:viewController];
 }
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo interactive:(BOOL)interactive animated:(BOOL)animated
@@ -242,42 +257,49 @@
     
     UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
     if (viewController) {
-        self.currentSectionInfo = applicationSectionInfo;
-        
-        if (interactive) {
-            void (^showDetail)(void) = ^{
-                [self.splitViewController showDetailViewController:viewController sender:self];
-            };
-            
-            if (animated) {
-                showDetail();
-            }
-            else {
-                [UIView performWithoutAnimation:showDetail];
-            }
+        if (applicationSectionInfo.applicationSection == ApplicationSectionEvaluateApplication ||
+            applicationSectionInfo.applicationSection == ApplicationSectionTechnicaIssue) {
+            [self presentViewController:viewController animated:YES completion:nil];
+            return YES;
         }
         else {
-            // Adding the details view controller on-the-fly avoids automatic collapsing (i.e. starting with the details
-            // on top of the primary) when starting in compact layout.
-            NSMutableArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers.mutableCopy;
-            if (viewControllers.count == 1) {
-                [viewControllers addObject:viewController];
-            }
-            else if (viewControllers.count == 2) {
-                [viewControllers replaceObjectAtIndex:1 withObject:viewController];
+            self.currentSectionInfo = applicationSectionInfo;
+            
+            if (interactive) {
+                void (^showDetail)(void) = ^{
+                    [self.splitViewController showDetailViewController:viewController sender:self];
+                };
+                
+                if (animated) {
+                    showDetail();
+                }
+                else {
+                    [UIView performWithoutAnimation:showDetail];
+                }
             }
             else {
-                return NO;
+                // Adding the details view controller on-the-fly avoids automatic collapsing (i.e. starting with the details
+                // on top of the primary) when starting in compact layout.
+                NSMutableArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers.mutableCopy;
+                if (viewControllers.count == 1) {
+                    [viewControllers addObject:viewController];
+                }
+                else if (viewControllers.count == 2) {
+                    [viewControllers replaceObjectAtIndex:1 withObject:viewController];
+                }
+                else {
+                    return NO;
+                }
+                self.splitViewController.viewControllers = viewControllers.copy;
+                [self updateSelection];
             }
-            self.splitViewController.viewControllers = viewControllers.copy;
-            [self updateSelection];
+            
+            // Transfer the VoiceOver focus automatically, as is for example done in the Settings application.
+            if (! self.splitViewController.collapsed) {
+                UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
+            }
+            return YES;
         }
-        
-        // Transfer the VoiceOver focus automatically, as is for example done in the Settings application.
-        if (! self.splitViewController.collapsed) {
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
-        }
-        return YES;
     }
     else {
         return NO;

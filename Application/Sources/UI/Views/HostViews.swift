@@ -186,6 +186,46 @@ class HostTableViewCell<Content: View>: UITableViewCell {
 }
 
 /**
+ *  Table view view reusable view hosting `SwiftUI` content.
+ */
+class HostTableViewHeaderFooterView<Content: View>: UITableViewHeaderFooterView {
+    private(set) var hostController: UIHostingController<Content>?
+    
+    private func update(with content: Content?) {
+        if let rootView = content {
+            if let hostController {
+                hostController.rootView = rootView
+            }
+            else {
+                hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+            }
+            
+            if let hostView = hostController?.view, hostView.superview != self {
+                hostView.backgroundColor = .clear
+                addSubview(hostView)
+                
+                hostView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    hostView.topAnchor.constraint(equalTo: topAnchor),
+                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                ])
+            }
+        }
+        else if let hostView = hostController?.view {
+            hostView.removeFromSuperview()
+        }
+    }
+    
+    var content: Content? {
+        didSet {
+            update(with: content)
+        }
+    }
+}
+
+/**
  *  Simple view hosting `SwiftUI` content.
  */
 class HostView<Content: View>: UIView {
