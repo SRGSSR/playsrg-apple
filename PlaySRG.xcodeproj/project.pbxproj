@@ -272,6 +272,16 @@
 		04FB9CA92A04327A00A9B69E /* ProfileHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CA62A04327900A9B69E /* ProfileHelp.swift */; };
 		04FB9CAA2A04327A00A9B69E /* ProfileHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CA62A04327900A9B69E /* ProfileHelp.swift */; };
 		04FB9CAB2A04327A00A9B69E /* ProfileHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CA62A04327900A9B69E /* ProfileHelp.swift */; };
+		04FB9CAD2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CAC2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift */; };
+		04FB9CAE2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CAC2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift */; };
+		04FB9CAF2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CAC2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift */; };
+		04FB9CB02A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CAC2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift */; };
+		04FB9CB12A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CAC2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift */; };
+		04FB9CB32A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */; };
+		04FB9CB42A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */; };
+		04FB9CB52A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */; };
+		04FB9CB62A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */; };
+		04FB9CB72A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */; };
 		04FE629F29A4F2AF00628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
 		04FE62A029A4F2B000628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
 		04FE62A129A4F2B100628570 /* TruncatableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */; };
@@ -2763,6 +2773,8 @@
 		04F184CD28EC5EE500B1207C /* ShowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowButton.swift; sourceTree = "<group>"; };
 		04F184E728F097E900B1207C /* BadgeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeList.swift; sourceTree = "<group>"; };
 		04FB9CA62A04327900A9B69E /* ProfileHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHelp.swift; sourceTree = "<group>"; };
+		04FB9CAC2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileSectionHeader+UIKit.swift"; sourceTree = "<group>"; };
+		04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSectionHeaderView.swift; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
@@ -3988,6 +4000,8 @@
 				044B405A2A01764900A10DB7 /* ProfileCell.swift */,
 				044B408E2A02B6B500A10DB7 /* ProfileCell+UIKit.swift */,
 				04FB9CA62A04327900A9B69E /* ProfileHelp.swift */,
+				04FB9CAC2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift */,
+				04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */,
 				0875850823A0025E00FA7207 /* ProfileViewController.h */,
 				0875850A23A0025E00FA7207 /* ProfileViewController.m */,
 			);
@@ -8327,6 +8341,7 @@
 				0481D5AF29F460C500D174B3 /* SRGProgramComposition+PlaySRG.swift in Sources */,
 				6FF65C5A28360EB100AF0768 /* Onboarding.swift in Sources */,
 				0875852223A0025F00FA7207 /* ProfileViewController.m in Sources */,
+				04FB9CB32A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				6FB2C10B2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				E6971AED1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F46B7B5281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
@@ -8383,6 +8398,7 @@
 				E64BA3FA1D4A587E002C10D5 /* WebViewController.m in Sources */,
 				0827DA1E1F0D36D900A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F88139523D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
+				04FB9CAD2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */,
 				6F47602F1EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				04E4DEEB283678C900698BF8 /* ServiceMessage.swift in Sources */,
 				087BC6631EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
@@ -8542,6 +8558,7 @@
 				6F9210E826AEDDD200291CA9 /* Environment.swift in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760801EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
+				04FB9CB42A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				044B405C2A01764900A10DB7 /* ProfileCell.swift in Sources */,
 				6FC2A21D265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				0809813B2622195900AA586B /* Badges.swift in Sources */,
@@ -8598,6 +8615,7 @@
 				6F8BE02827A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF5D1FC2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6FE2873D2481448C00358CFF /* SongsViewController.m in Sources */,
+				04FB9CAE2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF23682732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F4843CD23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
@@ -8800,6 +8818,7 @@
 				6F9210EA26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760871EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
+				04FB9CB52A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				044B405D2A01764900A10DB7 /* ProfileCell.swift in Sources */,
 				6FC2A21E265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				0809813C2622195900AA586B /* Badges.swift in Sources */,
@@ -8856,6 +8875,7 @@
 				6F8BE02927A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF5D1FD2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F054FC226B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
+				04FB9CAF2A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */,
 				6FE2873E2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF23692732C2410098C639 /* ChannelHeaderView.swift in Sources */,
@@ -9058,6 +9078,7 @@
 				6F9210EB26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
 				6F47608E1EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
+				04FB9CB62A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				044B405E2A01764900A10DB7 /* ProfileCell.swift in Sources */,
 				6FC2A21F265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				0809813D2622195900AA586B /* Badges.swift in Sources */,
@@ -9114,6 +9135,7 @@
 				6F8BE02A27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF5D1FE2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F054FC326B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
+				04FB9CB02A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */,
 				6FE2873F2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF236A2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
@@ -9335,6 +9357,7 @@
 				0821D542227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				6FD4C2DA268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6FF65C64283617DC00AF0768 /* OnboardingPage.swift in Sources */,
+				04FB9CB72A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				04D5F923286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6F475FC71EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F1A77872643CAB600A00EFC /* EmptyContentView.swift in Sources */,
@@ -9437,6 +9460,7 @@
 				6FE862702657C5F30061D3F0 /* MoreCell.swift in Sources */,
 				0827DA221F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F54D35D26050FE6008B46FF /* MediaVisualView.swift in Sources */,
+				04FB9CB12A051BB600A9B69E /* ProfileSectionHeader+UIKit.swift in Sources */,
 				6F0EDA692448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				0407308928635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */,
 				6FC6A12E2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,

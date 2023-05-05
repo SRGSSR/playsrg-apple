@@ -73,6 +73,7 @@
     }
     
     [self.tableView registerReusableProfileCell];
+    [self.tableView registerReusableProfileSectionHeader];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -406,6 +407,23 @@
 }
 
 #pragma mark UITableViewDelegate protocol
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return (section == 1) ? 50.f : 0.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        UITableViewHeaderFooterView<ProfileSectionSettable> *headerView = [tableView dequeueReusableProfileSectionHeader];
+        headerView.title = NSLocalizedString(@"Help and contact", @"Help and contact header title");
+        return headerView;
+    }
+    else {
+        return nil;
+    }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
