@@ -4,30 +4,41 @@
 //  License information is available from the LICENSE file.
 //
 
+import SafariServices
 import StoreKit
 
 @objc class ProfileHelp: NSObject {
-    @objc static var feedbackViewController: UIViewController? {
-        guard let url = ApplicationConfiguration.shared.userSuggestionUrlWithParameters else { return nil }
+    @objc static func showFeedbackForm() -> Bool {
+        guard let url = ApplicationConfiguration.shared.userSuggestionUrlWithParameters else { return false }
         
-        let webViewController = WebViewController(request: URLRequest(url: url), customizationBlock: { webView in
-            webView.scrollView.isScrollEnabled = false
-        })
-        webViewController.title = NSLocalizedString("Help us to improve the application", comment: "Title displayed at the top of the feedback view")
-        return webViewController
+        return showSafariViewController(url: url)
     }
     
-    @objc static var faqsViewController: UIViewController? {
-        guard let url = ApplicationConfiguration.shared.impressumURL else { return nil }
+    @objc static func showFaqs() -> Bool {
+        guard let url = ApplicationConfiguration.shared.impressumURL else { return false }
         
-        let webViewController = WebViewController(request: URLRequest(url: url), customizationBlock: nil)
-        webViewController.title = NSLocalizedString("FAQs", comment: "Title displayed at the top of the FAQs view")
-        return webViewController
+        return showSafariViewController(url: url)
     }
     
-    @objc static var evaluateApplicationViewController: UIViewController? {
+    @objc static func showStorePage() -> Bool {
+        guard let tabBarController = UIApplication.shared.mainTabBarController else { return false }
+        
         let productViewController = SKStoreProductViewController()
         productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: ApplicationConfiguration.shared.appStoreProductIdentifier])
-        return productViewController
+        
+        tabBarController.play_top.present(productViewController, animated: true)
+        return true
+    }
+    
+    private static func showSafariViewController(url: URL) -> Bool {
+        guard let tabBarController = UIApplication.shared.mainTabBarController else { return false }
+        
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.dismissButtonStyle = .close
+        safariViewController.preferredBarTintColor = UIColor.srgGray16
+        safariViewController.preferredControlTintColor = UIColor.srgGrayC7
+        
+        tabBarController.play_top.present(safariViewController, animated: true)
+        return true
     }
 }

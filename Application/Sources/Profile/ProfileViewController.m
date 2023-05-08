@@ -175,21 +175,30 @@
 
 #pragma mark Helpers
 
-- (UIViewController *)modalViewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+- (BOOL)openHelpSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
     if (! applicationSectionInfo) {
-        return nil;
+        return NO;
     }
     
-    UIViewController *viewController = nil;
+    BOOL opened = NO;
     switch (applicationSectionInfo.applicationSection) {
+        case ApplicationSectionFAQs: {
+            opened = [ProfileHelp showFaqs];
+            break;
+        }
+        
         case ApplicationSectionTechnicaIssue: {
-            viewController = [ProfileHelp technicalIssueViewController];
+            break;
+        }
+            
+        case ApplicationSectionFeedback: {
+            opened = [ProfileHelp showFeedbackForm];
             break;
         }
             
         case ApplicationSectionEvaluateApplication: {
-            viewController = [ProfileHelp evaluateApplicationViewController];
+            opened = [ProfileHelp showStorePage];
             break;
         }
             
@@ -197,8 +206,7 @@
             break;
         }
     }
-    
-    return viewController;
+    return opened;
 }
 
 - (UIViewController *)viewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
@@ -234,16 +242,6 @@
             break;
         }
             
-        case ApplicationSectionFeedback: {
-            viewController = [ProfileHelp feedbackViewController];
-            break;
-        }
-            
-        case ApplicationSectionFAQs: {
-            viewController = [ProfileHelp faqsViewController];
-            break;
-        }
-            
         default: {
             break;
         }
@@ -264,31 +262,21 @@
         return NO;
     }
     
-    // Do not reload a section if already the current one (just return to the navigation root if possible)
-    if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
-        NSArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers;
-        if (viewControllers.count == 2) {
-            UIViewController *detailViewController = viewControllers[1];
-            if ([detailViewController isKindOfClass:UINavigationController.class]) {
-                UINavigationController *detailNavigationController = (UINavigationController *)detailViewController;
-                [detailNavigationController popToRootViewControllerAnimated:animated];
-            }
-        }
-        return YES;
-    }
+    NSIndexPath *indexPath = [self indexPathForSectionInfo:applicationSectionInfo];
     
-    if (applicationSectionInfo.isModalPresentation) {
-        UIViewController *viewController = [self modalViewControllerForSectionInfo:applicationSectionInfo];
-        if (viewController) {
-            viewController.modalPresentationStyle = UIModalPresentationFullScreen;
-            [self presentViewController:viewController animated:YES completion:nil];
+    if (indexPath.section == 0) {
+        // Do not reload a section if already the current one (just return to the navigation root if possible)
+        if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
+            NSArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers;
+            if (viewControllers.count == 2) {
+                UIViewController *detailViewController = viewControllers[1];
+                if ([detailViewController isKindOfClass:UINavigationController.class]) {
+                    UINavigationController *detailNavigationController = (UINavigationController *)detailViewController;
+                    [detailNavigationController popToRootViewControllerAnimated:animated];
+                }
+            }
             return YES;
         }
-        else {
-            return NO;
-        }
-    }
-    else {
         UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
         if (viewController) {
             self.currentSectionInfo = applicationSectionInfo;
@@ -332,6 +320,12 @@
             return NO;
         }
     }
+    else if (indexPath.section == 1) {
+        return [self openHelpSectionInfo:applicationSectionInfo];
+    }
+    else {
+        return NO;
+    }
 }
 
 - (void)updateSelection
@@ -340,19 +334,9 @@
         return;
     }
     
-    NSUInteger section = NSNotFound;
-    NSUInteger index = NSNotFound;
+    NSIndexPath *indexPath = [self indexPathForSectionInfo:self.currentSectionInfo];
     
-    for (NSUInteger i = 0; i < [self.sectionInfos count]; i++) {
-        index = [self.sectionInfos[i] indexOfObject:self.currentSectionInfo];
-        if (index != NSNotFound) {
-            section = i;
-            break;
-        }
-    }
-    
-    if (index != NSNotFound) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:section];
+    if (indexPath.section != NSNotFound && indexPath.row != NSNotFound) {
         [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     else {
@@ -362,6 +346,27 @@
         }
     }
 }
+
+- (NSIndexPath *)indexPathForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    if (! applicationSectionInfo) {
+        return [NSIndexPath indexPathForRow:NSNotFound inSection:NSNotFound];
+    }
+    
+    NSUInteger section = NSNotFound;
+    NSUInteger row = NSNotFound;
+    
+    for (NSUInteger i = 0; i < [self.sectionInfos count]; i++) {
+        row = [self.sectionInfos[i] indexOfObject:applicationSectionInfo];
+        if (row != NSNotFound) {
+            section = i;
+            break;
+        }
+    }
+    
+    return [NSIndexPath indexPathForRow:row inSection:section];
+}
+
 
 #pragma mark ContentInsets protocol
 
