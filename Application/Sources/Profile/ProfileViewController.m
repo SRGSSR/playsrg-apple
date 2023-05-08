@@ -189,6 +189,7 @@
         }
         
         case ApplicationSectionTechnicaIssue: {
+            opened = [ProfileHelp showSupporByEmail];
             break;
         }
             

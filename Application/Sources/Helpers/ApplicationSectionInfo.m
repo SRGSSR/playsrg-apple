@@ -73,7 +73,9 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
     if (ApplicationConfiguration.sharedApplicationConfiguration.impressumURL != nil) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFAQs radioChannel:nil]];
     }
-    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionTechnicaIssue radioChannel:nil]];
+    if (ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionTechnicaIssue radioChannel:nil]];
+    }
     if (ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL != nil) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFeedback radioChannel:nil]];
     }
