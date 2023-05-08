@@ -134,7 +134,7 @@ class HostSupplementaryView<Content: View>: UICollectionReusableView {
  *  Table view cell hosting `SwiftUI` content.
  */
 class HostTableViewCell<Content: View>: UITableViewCell {
-    private var hostController: UIHostingController<Content>?
+    private var hostController: UIHostingController<HostCellView<Content>>?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -151,8 +151,9 @@ class HostTableViewCell<Content: View>: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func update(with content: Content?) {
-        if let rootView = content {
+    private func update(with content: Content?, editing: Bool, selected: Bool, UIKitFocused: Bool) {
+        if let content {
+            let rootView = HostCellView(editing: editing, selected: selected, UIKitFocused: UIKitFocused, content: content)
             if let hostController {
                 hostController.rootView = rootView
             }
@@ -180,7 +181,25 @@ class HostTableViewCell<Content: View>: UITableViewCell {
     
     var content: Content? {
         didSet {
-            update(with: content)
+            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    override var isEditing: Bool {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    var isUIKitFocused = false {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
         }
     }
 }
