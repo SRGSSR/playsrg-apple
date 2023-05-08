@@ -175,66 +175,87 @@
 
 #pragma mark Helpers
 
+- (UIViewController *)modalViewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    if (! applicationSectionInfo) {
+        return nil;
+    }
+    
+    UIViewController *viewController = nil;
+    switch (applicationSectionInfo.applicationSection) {
+        case ApplicationSectionTechnicaIssue: {
+            viewController = [ProfileHelp technicalIssueViewController];
+            break;
+        }
+            
+        case ApplicationSectionEvaluateApplication: {
+            viewController = [ProfileHelp evaluateApplicationViewController];
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
+    
+    return viewController;
+}
+
 - (UIViewController *)viewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
     if (! applicationSectionInfo) {
         return nil;
     }
     
-    if (applicationSectionInfo.applicationSection == ApplicationSectionEvaluateApplication) {
-        return [ProfileHelp evaluateApplicationViewController];
-    }
-    else {
-        UIViewController *viewController = nil;
-        switch (applicationSectionInfo.applicationSection) {
-            case ApplicationSectionNotifications: {
-                viewController = [SectionViewController notificationsViewController];
-                break;
-            }
-                
-            case ApplicationSectionHistory: {
-                viewController = [SectionViewController historyViewController];
-                break;
-            }
-                
-            case ApplicationSectionFavorites: {
-                viewController = [SectionViewController favoriteShowsViewController];
-                break;
-            }
-                
-            case ApplicationSectionWatchLater: {
-                viewController = [SectionViewController watchLaterViewController];
-                break;
-            }
-                
-            case ApplicationSectionDownloads: {
-                viewController = [SectionViewController downloadsViewController];
-                break;
-            }
-                
-            case ApplicationSectionFeedback: {
-                viewController = [ProfileHelp feedbackViewController];
-                break;
-            }
-                
-            case ApplicationSectionFAQs: {
-                viewController = [ProfileHelp faqsViewController];
-                break;
-            }
-                
-            default: {
-                break;
-            }
+    UIViewController *viewController = nil;
+    switch (applicationSectionInfo.applicationSection) {
+        case ApplicationSectionNotifications: {
+            viewController = [SectionViewController notificationsViewController];
+            break;
         }
-        
-        if (! viewController) {
-            return nil;
+            
+        case ApplicationSectionHistory: {
+            viewController = [SectionViewController historyViewController];
+            break;
         }
-        
-        // Always wrap into a navigation controller. The split view takes care of moving view controllers between navigation
-        // controllers when collapsing or expanding
-        return [[NavigationController alloc] initWithRootViewController:viewController];
+            
+        case ApplicationSectionFavorites: {
+            viewController = [SectionViewController favoriteShowsViewController];
+            break;
+        }
+            
+        case ApplicationSectionWatchLater: {
+            viewController = [SectionViewController watchLaterViewController];
+            break;
+        }
+            
+        case ApplicationSectionDownloads: {
+            viewController = [SectionViewController downloadsViewController];
+            break;
+        }
+            
+        case ApplicationSectionFeedback: {
+            viewController = [ProfileHelp feedbackViewController];
+            break;
+        }
+            
+        case ApplicationSectionFAQs: {
+            viewController = [ProfileHelp faqsViewController];
+            break;
+        }
+            
+        default: {
+            break;
+        }
     }
+    
+    if (! viewController) {
+        return nil;
+    }
+    
+    // Always wrap into a navigation controller. The split view takes care of moving view controllers between navigation
+    // controllers when collapsing or expanding
+    return [[NavigationController alloc] initWithRootViewController:viewController];
 }
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo interactive:(BOOL)interactive animated:(BOOL)animated
@@ -256,14 +277,20 @@
         return YES;
     }
     
-    UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
-    if (viewController) {
-        if (applicationSectionInfo.applicationSection == ApplicationSectionEvaluateApplication ||
-            applicationSectionInfo.applicationSection == ApplicationSectionTechnicaIssue) {
+    if (applicationSectionInfo.isModalPresentation) {
+        UIViewController *viewController = [self modalViewControllerForSectionInfo:applicationSectionInfo];
+        if (viewController) {
+            viewController.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:viewController animated:YES completion:nil];
             return YES;
         }
         else {
+            return NO;
+        }
+    }
+    else {
+        UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
+        if (viewController) {
             self.currentSectionInfo = applicationSectionInfo;
             
             if (interactive) {
@@ -301,9 +328,9 @@
             }
             return YES;
         }
-    }
-    else {
-        return NO;
+        else {
+            return NO;
+        }
     }
 }
 
