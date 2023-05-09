@@ -60,15 +60,15 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `color` (optional, string): The channel primary hex color. Used as navigation bar background color. If omitted, gray.
 * `secondColor` (optional, string): The channel second hex color. Currently used for gradients. If omitted, same as `color`.
 * `titleColor` (optional, string): Hex color of the text displayed on top of colored areas (should provide sufficient contrast with `color` and `secondColor`). If omitted, white.
-* `hasDarkStatusBar` (optional, boolean): `true` iff the status bar should be dark for this channel. If omitted, `false`.
+* `hasDarkStatusBar` (optional, boolean): `true` if the status bar should be dark for this channel. If omitted, `false`.
 * `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
 
 The radio channel JSON dictionaries have one more key:
 
-* `homepageHidden` (optional, boolean): Set to `true` iff a homepage does not have to be displayed for the radio channel. If omitted, `false`.
-* `showLeadPreferred` (optional, boolean): Set to `true` iff show pages and show elements should display lead instead of description. If omitted, `false`.
+* `homepageHidden` (optional, boolean): Set to `true` if a homepage does not have to be displayed for the radio channel. If omitted, `false`.
+* `showLeadPreferred` (optional, boolean): Set to `true` if show pages and show elements should display lead instead of description. If omitted, `false`.
 
 ## Audio homepage
 
