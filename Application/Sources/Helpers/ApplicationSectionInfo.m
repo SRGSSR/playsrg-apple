@@ -122,12 +122,12 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
         }
             
         case ApplicationSectionFavorites: {
-            return @"favorite";
+            return @"favorite_full";
             break;
         }
             
         case ApplicationSectionWatchLater: {
-            return @"watch_later";
+            return @"watch_later_full";
             break;
         }
             
@@ -142,7 +142,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
         }
             
         case ApplicationSectionNotifications: {
-            return @"subscription";
+            return @"subscription_full";
             break;
         }
             
