@@ -70,7 +70,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 + (NSArray<ApplicationSectionInfo *> *)helpApplicationSectionInfos
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
-    if (ApplicationConfiguration.sharedApplicationConfiguration.impressumURL != nil) {
+    if (ApplicationConfiguration.sharedApplicationConfiguration.faqURL != nil) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFAQs radioChannel:nil]];
     }
     if (ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress != nil) {

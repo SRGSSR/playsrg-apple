@@ -16,7 +16,7 @@ import SwiftUI
     }
     
     @objc static func showFaqs() -> Bool {
-        guard let url = ApplicationConfiguration.shared.impressumURL else { return false }
+        guard let url = ApplicationConfiguration.shared.faqURL else { return false }
         
         return showSafariViewController(url: url)
     }

@@ -14,6 +14,7 @@
   "tvLiveHomeSections": "tvLive,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioWatchLater",
   "minimumSocialViewCount": 50,
+  "faqURL": "https://www.rsi.ch/play/tv/guida",
   "termsAndConditionsURL": "https://www.rsi.ch/la-rsi/Condizioni-generali-di-uso-del-sito-RSI-8585464.html",
   "dataProtectionURL": "https://www.rsi.ch/la-rsi/Dichiarazione-sulla-protezione-dei-dati-10499633.html",
   "whatsNewURL": "https://srgssr.github.io/playsrg-apple/releases/release_notes-ios-rsi.html",
