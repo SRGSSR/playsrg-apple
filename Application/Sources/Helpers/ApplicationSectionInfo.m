@@ -79,9 +79,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
     if (ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL != nil) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFeedback radioChannel:nil]];
     }
-    if (ApplicationConfiguration.sharedApplicationConfiguration.appStoreProductIdentifier != nil) {
-        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionEvaluateApplication radioChannel:nil]];
-    }
+    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionEvaluateApplication radioChannel:nil]];
     return sectionInfos.copy;
 }
 
@@ -150,22 +148,6 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
             
         default: {
             return nil;
-            break;
-        }
-    }
-}
-
-- (BOOL)isModalPresentation
-{
-    switch (self.applicationSection) {
-        case ApplicationSectionTechnicaIssue:
-        case ApplicationSectionEvaluateApplication: {
-            return YES;
-            break;
-        }
-            
-        default: {
-            return NO;
             break;
         }
     }
