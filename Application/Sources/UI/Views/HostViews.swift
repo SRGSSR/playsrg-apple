@@ -151,9 +151,9 @@ class HostTableViewCell<Content: View>: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func update(with content: Content?, editing: Bool, selected: Bool, UIKitFocused: Bool) {
+    private func update(with content: Content?, editing: Bool, selected: Bool, selectionStyle: UITableViewCell.SelectionStyle, UIKitFocused: Bool) {
         if let content {
-            let rootView = HostCellView(editing: editing, selected: selected, UIKitFocused: UIKitFocused, content: content)
+            let rootView = HostCellView(editing: editing, selected: selected && selectionStyle != .none, UIKitFocused: UIKitFocused, content: content)
             if let hostController {
                 hostController.rootView = rootView
             }
@@ -181,25 +181,36 @@ class HostTableViewCell<Content: View>: UITableViewCell {
     
     var content: Content? {
         didSet {
-            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
         }
     }
     
     override var isEditing: Bool {
         didSet {
-            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
         }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
     }
     
     override var isSelected: Bool {
         didSet {
-            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    override var selectionStyle: UITableViewCell.SelectionStyle {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
         }
     }
     
     var isUIKitFocused = false {
         didSet {
-            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
         }
     }
 }

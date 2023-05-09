@@ -322,6 +322,7 @@
         }
     }
     else if (indexPath.section == 1) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
         return [self openHelpSectionInfo:applicationSectionInfo];
     }
     else {
