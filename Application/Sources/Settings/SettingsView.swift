@@ -36,7 +36,11 @@ struct SettingsView: View {
 #endif
             ContentSection(model: model)
             InformationSection(model: model)
-            HelpAndContactSection(model: model)
+#if os(tvOS)
+            if let supportEmailAdress = model.supportEmailAdress {
+                HelpAndContactSection(supportEmailAdress: supportEmailAdress)
+            }
+#endif
 #if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
             ResetSection(model: model)
@@ -423,121 +427,41 @@ struct SettingsView: View {
             }
         }
     }
-    
+
+#if os(tvOS)
     // MARK: Help and Contact section
     
     private struct HelpAndContactSection: View {
-        @ObservedObject var model: SettingsViewModel
+        let supportEmailAdress: String
         
         var body: some View {
             PlaySection {
-                SupportInformationButton(model: model)
-#if os(iOS)
-                if let openUserSuggestionForm = model.openUserSuggestionForm {
-                    Button(NSLocalizedString("A suggestion to share?", comment: "Label of the button to display user suggestion form"), action: openUserSuggestionForm)
-                }
-                EvaluateApplicationButton(model: model)
-#endif
+                SupportInformationButton(supportEmailAdress: supportEmailAdress)
             } header: {
                 Text(NSLocalizedString("Help and contact", comment: "Help and contact section header"))
             }
         }
         
         private struct SupportInformationButton: View {
-            @ObservedObject var model: SettingsViewModel
+            let supportEmailAdress: String
             
-#if os(iOS)
             @State private var isActionSheetDisplayed = false
             @State private var isMailComposeDisplayed = false
             
-            private var canSendMail: Bool {
-                return MailComposeView.canSendMail() && model.supportEmailAdress != nil
-            }
-            
-            private func actionSheet() -> ActionSheet {
-                var buttons = [Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}]
-                if let supportEmailAdress = model.supportEmailAdress {
-                    buttons.append(Alert.Button.default(Text(String(format: NSLocalizedString("Copy %@", comment: "Label of the button to copy support email to the pasteboard"), supportEmailAdress))) {
-                        model.copySupportMailAdress()
-                        Banner.show(
-                            with: .info,
-                            message: NSLocalizedString("Support email has been copied to the pasteboard", comment: "Information message displayed when support information has been copied to the pasteboard"),
-                            image: nil,
-                            sticky: false
-                        )
-                    })
-                }
-                buttons.append(Alert.Button.default(Text(NSLocalizedString("Copy support information", comment: "Label of the button to copy support information to the pasteboard"))) {
-                    model.copySupportInformation()
-                    Banner.show(
-                        with: .info,
-                        message: NSLocalizedString("Support information has been copied to the pasteboard", comment: "Information message displayed when support information has been copied to the pasteboard"),
-                        image: nil,
-                        sticky: false
-                    )
-                })
-                if let supportEmailAdress = model.supportEmailAdress {
-                    return ActionSheet(
-                        title: Text(NSLocalizedString("With this device you can not send us feedback", comment: "Missing mail app to support alert title")),
-                        message: Text(String(format: NSLocalizedString("Please create an email account or send your feedback directly to %@.", comment: "Missing mail app to support alert description"), supportEmailAdress)),
-                        buttons: buttons
-                    )
-                }
-                else {
-                    return ActionSheet(
-                        title: Text(NSLocalizedString("Additional informations to share to support team", comment: "Additional informations to support alert title")),
-                        buttons: buttons
-                    )
-                }
-            }
-            
-            private func mailComposeView() -> MailComposeView {
-                return MailComposeView()
-                    .toRecipients([model.supportEmailAdress ?? ""])
-                    .messageBody(SupportInformation.generate(toMailBody: true))
-            }
-#endif
-            
             private func action() {
-#if os(iOS)
-                if canSendMail {
-                    isMailComposeDisplayed = true
-                }
-                else {
-                    isActionSheetDisplayed = true
-                }
-#else
-                navigateToText(SupportInformation.generate())
-#endif
+                let headerText = NSLocalizedString("Please send your feedback directly to our support team.", comment: "Apple TV app can't send email to the support introduction")
+                let text = String(format: "%@\n\n%@\n\n%@", headerText, supportEmailAdress, SupportInformation.generate())
+                navigateToText(text)
             }
             
             var body: some View {
                 Button(action: action) {
-                    Text(NSLocalizedString("Report a technical issue", comment: "Label of the button to report a technical issue"))
-                }
-#if os(iOS)
-                .actionSheet(isPresented: $isActionSheetDisplayed, content: actionSheet)
-                .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
-#endif
-            }
-        }
-        
-#if os(iOS)
-        private struct EvaluateApplicationButton: View {
-            @ObservedObject var model: SettingsViewModel
-            
-            private func action() {
-                model.evaluateApplication()
-            }
-            
-            var body: some View {
-                Button(action: action) {
-                    Text(NSLocalizedString("Evaluate the application", comment: "Label of the button to evaluate the application"))
+                    Text(NSLocalizedString("Display support information", comment: "Label of the button to display support information"))
                 }
             }
         }
-#endif
     }
+#endif
     
     // MARK: Advanced features section
     
