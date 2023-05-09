@@ -449,8 +449,8 @@ struct SettingsView: View {
             @State private var isMailComposeDisplayed = false
             
             private func action() {
-                let headerText = NSLocalizedString("Please send your feedback directly to our support team.", comment: "Apple TV app can't send email to the support introduction")
-                let text = String(format: "%@\n\n%@\n\n%@", headerText, supportEmailAdress, SupportInformation.generate())
+                let headerText = String(format: NSLocalizedString("Please contact us at %@", comment: "Apple TV header when displayed support information"), supportEmailAdress)
+                let text = String(format: "%@\n\n%@", headerText, SupportInformation.generate())
                 navigateToText(text)
             }
             

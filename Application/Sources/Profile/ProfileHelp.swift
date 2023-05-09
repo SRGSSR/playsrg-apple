@@ -78,8 +78,8 @@ import SwiftUI
     
     private static func supporEmailAlertController(_ supportEmailAdress: String) -> UIAlertController {
         let alertViewController = UIAlertController(
-            title: NSLocalizedString("With this device you can not send us feedback", comment: "Missing mail app to support alert title"),
-            message: String(format: NSLocalizedString("Please create an email account or send your feedback directly to %@.", comment: "Missing mail app to support alert description"), supportEmailAdress),
+            title: NSLocalizedString("No mail application found", comment: "Missing mail application alert title"),
+            message: String(format: NSLocalizedString("Please contact us at %@", comment: "Missing mail application description"), supportEmailAdress),
             preferredStyle: .alert)
         
         alertViewController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel))
