@@ -51,6 +51,7 @@ import SwiftUI
         safariViewController.dismissButtonStyle = .close
         safariViewController.preferredBarTintColor = UIColor.srgGray16
         safariViewController.preferredControlTintColor = UIColor.srgGrayC7
+        safariViewController.modalPresentationStyle = .pageSheet
         
         tabBarController.play_top.present(safariViewController, animated: true)
         return true
