@@ -169,8 +169,8 @@ class HostTableViewCell<Content: View>: UITableViewCell {
                 NSLayoutConstraint.activate([
                     hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin / 2),
                     hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutMargin / 2),
-                    hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin),
-                    hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin)
+                    hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin * 2),
+                    hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin * 2)
                 ])
             }
         }
