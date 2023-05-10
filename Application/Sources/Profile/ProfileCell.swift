@@ -43,10 +43,12 @@ struct ProfileCell: View {
                     .srgFont(.body)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Image(decorative: "chevron")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 16)
+                if !applicationSectioninfo.isModalPresentation {
+                    Image(decorative: "chevron")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 16)
+                }
             }
             .foregroundColor(.srgGrayC7)
             .padding(.horizontal, 16)

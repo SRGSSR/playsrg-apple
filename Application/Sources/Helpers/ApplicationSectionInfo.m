@@ -153,6 +153,24 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
     }
 }
 
+- (BOOL)isModalPresentation
+{
+    switch (self.applicationSection) {
+        case ApplicationSectionFAQs:
+        case ApplicationSectionTechnicaIssue:
+        case ApplicationSectionFeedback:
+        case ApplicationSectionEvaluateApplication: {
+            return YES;
+            break;
+        }
+            
+        default: {
+            return NO;
+            break;
+        }
+    }
+}
+
 - (RadioChannel *)radioChannel
 {
     return [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid];
