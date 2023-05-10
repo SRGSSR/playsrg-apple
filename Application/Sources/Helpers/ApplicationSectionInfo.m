@@ -57,6 +57,11 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 + (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfos
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
+#if TARGET_OS_IOS
+    if (PushService.sharedService.enabled) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
+    }
+#endif
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionWatchLater radioChannel:nil]];
