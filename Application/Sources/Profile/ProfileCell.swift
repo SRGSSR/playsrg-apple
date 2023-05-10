@@ -7,7 +7,7 @@
 import SRGAppearanceSwift
 import SwiftUI
 
-// MARK: Cell
+// MARK: View
 
 struct ProfileCell: View {
     let applicationSectioninfo: ApplicationSectionInfo
@@ -57,6 +57,17 @@ struct ProfileCell: View {
         }
     }
 }
+
+// MARK: Size
+
+class ProfileCellSize: NSObject {
+    @objc static func height() -> CGFloat {
+        let fontMetrics = UIFontMetrics(forTextStyle: .body)
+        return fontMetrics.scaledValue(for: 50.0)
+    }
+}
+
+// MARK: Preview
 
 struct ProfileCell_Previews: PreviewProvider {
     static var previews: some View {
