@@ -167,8 +167,8 @@ class HostTableViewCell<Content: View>: UITableViewCell {
                 
                 hostView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin / 2),
-                    hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutMargin / 2),
+                    hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin),
+                    hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
                     hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin * 2),
                     hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin * 2)
                 ])

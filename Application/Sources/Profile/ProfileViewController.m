@@ -379,7 +379,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutPaddingContentInsets;
+    return LayoutPaddingContentInsets;
 }
 
 #pragma mark PlayApplicationNavigation protocol
