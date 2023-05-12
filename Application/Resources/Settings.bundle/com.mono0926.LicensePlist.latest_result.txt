@@ -103,37 +103,35 @@ body:
                    …
 version: 2.0.1
 
-name: abseil-cpp-SwiftPM, nameSpecified: abseil, owner: firebase, version: 0.20220203.2, source: https://github.com/firebase/abseil-cpp-SwiftPM
+name: abseil-cpp-binary, nameSpecified: abseil, owner: google, version: 1.2021110200.0, source: https://github.com/google/abseil-cpp-binary
 
 name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 1.9.7, source: https://github.com/IdeasOnCanvas/Aiolos
 
-name: appcenter-sdk-apple, nameSpecified: AppCenter, owner: microsoft, version: 5.0.0, source: https://github.com/microsoft/appcenter-sdk-apple
-
-name: boringssl-SwiftPM, nameSpecified: BoringSSL-GRPC, owner: firebase, version: 0.9.1, source: https://github.com/firebase/boringssl-SwiftPM
+name: appcenter-sdk-apple, nameSpecified: AppCenter, owner: microsoft, version: 5.0.2, source: https://github.com/microsoft/appcenter-sdk-apple
 
 name: Comscore-Swift-Package-Manager, nameSpecified: Comscore-Swift-Package-Manager, owner: comScore, version: 6.10.0, source: https://github.com/comScore/Comscore-Swift-Package-Manager
 
 name: DZNEmptyDataSet, nameSpecified: DZNEmptyDataSet, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.3.0, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.9.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FSCalendar, nameSpecified: FSCalendar, owner: WenchaoD, version: 2.8.4, source: https://github.com/WenchaoD/FSCalendar
 
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg6, source: https://github.com/SRGSSR/FXReachability
 
-name: Gifu, nameSpecified: Gifu, owner: kaishin, version: 3.3.1, source: https://github.com/kaishin/Gifu
+name: Gifu, nameSpecified: Gifu, owner: kaishin, version: 3.4.1, source: https://github.com/kaishin/Gifu
 
-name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 10.1.0, source: https://github.com/google/GoogleAppMeasurement
+name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 10.9.0, source: https://github.com/google/GoogleAppMeasurement
 
 name: GoogleCastSDK-ios-no-bluetooth, nameSpecified: GoogleCastSDK-ios-no-bluetooth, owner: SRGSSR, version: 4.7.1-beta.1, source: https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth
 
-name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.2.0, source: https://github.com/google/GoogleDataTransport
+name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.2.2, source: https://github.com/google/GoogleDataTransport
 
-name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.10.0, source: https://github.com/google/GoogleUtilities
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.11.1, source: https://github.com/google/GoogleUtilities
 
-name: grpc-ios, nameSpecified: gRPC, owner: grpc, version: 1.44.3-grpc, source: https://github.com/grpc/grpc-ios
+name: grpc-binary, nameSpecified: gRPC, owner: google, version: 1.44.0, source: https://github.com/google/grpc-binary
 
-name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 3.1.0, source: https://github.com/google/gtm-session-fetcher
+name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 3.1.1, source: https://github.com/google/gtm-session-fetcher
 
 name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.11.3, source: https://github.com/urbanairship/ios-library
 
@@ -155,7 +153,7 @@ name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version
 
 name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.11.0, source: https://github.com/microsoft/PLCrashReporter
 
-name: promises, nameSpecified: Promises, owner: google, version: 2.1.1, source: https://github.com/google/promises
+name: promises, nameSpecified: Promises, owner: google, version: 2.2.0, source: https://github.com/google/promises
 
 name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.10.0, source: https://github.com/SRGSSR/srganalytics-apple
 
@@ -181,11 +179,11 @@ name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.3
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.4, source: https://github.com/apple/swift-collections
 
-name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.20.3, source: https://github.com/apple/swift-protobuf
+name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.21.0, source: https://github.com/apple/swift-protobuf
 
 name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.6, source: https://github.com/SwiftKickMobile/SwiftMessages
 
-name: SwiftUI-Introspect, nameSpecified: Introspect, owner: siteline, version: 0.1.4, source: https://github.com/siteline/SwiftUI-Introspect
+name: SwiftUI-Introspect, nameSpecified: Introspect, owner: siteline, version: 0.2.3, source: https://github.com/siteline/SwiftUI-Introspect
 
 name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg5, source: https://github.com/SRGSSR/TCCore-xcframework-apple
 
