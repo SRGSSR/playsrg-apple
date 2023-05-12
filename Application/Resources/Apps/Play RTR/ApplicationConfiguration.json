@@ -7,6 +7,7 @@
   "playURL": "https://www.rtr.ch/play/",
   "playServiceURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
+  "sourceCodeURL": "https://github.com/SRGSSR/playsrg-apple",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvScheduledLivestreams",
   "tvLiveHomeSections": "tvLive,tvScheduledLivestreams,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioWatchLater",

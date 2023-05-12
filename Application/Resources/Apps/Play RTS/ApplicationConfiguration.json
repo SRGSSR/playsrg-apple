@@ -11,6 +11,7 @@
   "identityWebserviceURL": "https://hummingbird.rts.ch/api/profile",
   "identityWebsiteURL": "https://www.rts.ch/profile",
   "userDataServiceURL": "https://profil.rts.ch/api",
+  "sourceCodeURL": "https://github.com/SRGSSR/playsrg-apple",
   "supportEmailAddress": "support.play@rts.ch",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvScheduledLivestreams",
   "tvLiveHomeSections": "tvLive,tvScheduledLivestreams,radioLive,radioLiveSatellite",
