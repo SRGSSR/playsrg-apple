@@ -8,6 +8,7 @@
   "playURL": "https://play.swissinfo.ch/play/",
   "playServiceURL": "https://play.swissinfo.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
+  "sourceCodeURL": "https://github.com/SRGSSR/playsrg-apple",
   "minimumSocialViewCount": 50,
   "dataProtectionURL": "https://www.swissinfo.ch/eng/data-privacy-statement/133174",
   "whatsNewURL": "https://srgssr.github.io/playsrg-apple/releases/release_notes-ios-swi.html",
