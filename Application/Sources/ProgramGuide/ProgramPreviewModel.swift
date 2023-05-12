@@ -51,7 +51,7 @@ final class ProgramPreviewModel: ObservableObject {
     var timeInformation: String {
         guard let program else { return .placeholder(length: 8) }
         let nowDate = Date()
-        if program.play_contains(nowDate) {
+        if program.play_containsDate(nowDate) {
             let remainingTimeInterval = program.endDate.timeIntervalSince(nowDate)
             let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
             return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)

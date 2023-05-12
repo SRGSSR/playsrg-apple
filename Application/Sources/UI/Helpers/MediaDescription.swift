@@ -39,7 +39,7 @@ enum MediaDescription {
     }
     
     private static func formattedDate(for media: SRGMedia) -> String {
-        return DateFormatter.play_relative.string(from: media.date).capitalizedFirstLetter
+        return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
     }
     
     private static func formattedTime(for media: SRGMedia) -> String {
@@ -75,7 +75,7 @@ enum MediaDescription {
                 }
                 else {
                     // Unbreakable spaces before / after the separator
-                    return "\(show.title) · \(DateFormatter.play_relativeShort.string(from: media.date))"
+                    return "\(show.title) · \(DateFormatter.play_relativeShortDate.string(from: media.date))"
                 }
             }
             else {
@@ -112,7 +112,7 @@ enum MediaDescription {
     
     private static func expiration(for media: SRGMedia) -> String? {
         guard let endDate = media.endDate else { return nil }
-        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), DateFormatter.play_short.string(from: endDate))
+        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), DateFormatter.play_shortDate.string(from: endDate))
     }
     
     static func availability(for media: SRGMedia) -> String {

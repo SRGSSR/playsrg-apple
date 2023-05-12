@@ -5,7 +5,7 @@
 //
 
 import SRGAnalytics
-import SRGDataProvider
+import SRGDataProviderModel
 
 /**
  *  Play analytics click event. Defined for native and web Play applications.
@@ -92,7 +92,7 @@ struct AnalyticsClickEvent {
     static func tvGuideCalendar(to selectedDate: Date) -> Self {
         return Self(
             name: "DateSelectionCalendarClick",
-            value1: DateFormatter.play_iso8601Calendar().string(from: selectedDate),
+            value1: DateFormatter.play_iso8601CalendarDate.string(from: selectedDate),
             value2: PageId.tvGuide.rawValue
         )
     }

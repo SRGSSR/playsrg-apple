@@ -36,7 +36,7 @@ struct NotificationCell: View {
         let notification: UserNotification
         
         private var title: String {
-            let date = DateFormatter.play_relativeShort.string(from: notification.date)
+            let date = DateFormatter.play_relativeShortDate.string(from: notification.date)
             
             let title = notification.title
             if !title.isEmpty {

@@ -110,7 +110,7 @@ extension UIViewController {
     }
     
     private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {
-        if program.play_contains(Date()) {
+        if program.play_containsDate(Date()) {
             return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
                 .compactMap { $0.first(where: { $0.channel == channel }) }
                 .eraseToAnyPublisher()

@@ -10,7 +10,6 @@
 #import "ApplicationSettingsConstants.h"
 #import "MediaPlayerViewController.h"
 #import "PlaySRG-Swift.h"
-#import "UIWindow+PlaySRG.h"
 
 @import FXReachability;
 @import libextobjc;

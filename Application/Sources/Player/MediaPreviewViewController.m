@@ -15,17 +15,13 @@
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "PlayErrors.h"
+#import "PlaySRG-Swift.h"
 #import "SRGDataProvider+PlaySRG.h"
-#import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
-#import "SRGProgramComposition+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
-#import "UIStackView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
 @import SRGAnalyticsDataProvider;
@@ -176,7 +172,7 @@
         [self.mediaInfoStackView play_setHidden:YES];
         [self.channelInfoStackView play_setHidden:NO];
         
-        SRGProgram *currentProgram = [self.programComposition play_programAtDate:NSDate.date];
+        SRGProgram *currentProgram = [self.programComposition play_programAt:NSDate.date];
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
             
@@ -185,7 +181,7 @@
             
             // Unbreakable spaces before / after the separator
             self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
-            self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+            self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:currentProgram.startDate], [NSDateFormatter.play_time stringFromDate:currentProgram.endDate]];
         }
         else {
             self.titleLabel.text = channel.title;

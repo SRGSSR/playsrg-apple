@@ -160,7 +160,7 @@ final class ProgramGuideGridViewController: UIViewController {
             }
 #if os(tvOS)
             if let channel = model.selectedChannel ?? model.channels.first, let section = state.sections.first(where: { $0 == channel }) ?? state.sections.first,
-               let currentProgram = state.items(for: section).compactMap(\.program).first(where: { $0.play_contains(model.date(for: model.time)) }) {
+               let currentProgram = state.items(for: section).compactMap(\.program).first(where: { $0.play_containsDate(model.date(for: model.time)) }) {
                 model.focusedProgram = currentProgram
             }
             else {

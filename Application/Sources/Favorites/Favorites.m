@@ -9,7 +9,7 @@
 #import "PlaySRG-Swift.h"
 
 #if TARGET_OS_IOS
-#import "NSSet+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "PushService+Private.h"
 #endif
 
@@ -135,10 +135,10 @@ void FavoritesUpdatePushService(void)
     NSSet<NSString *> *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
     
     if (! [subscribedURNs isEqualToSet:subscribedPushServiceURNs]) {
-        NSSet<NSString *> *toSubscribeURNs = [subscribedURNs play_setByRemovingObjectsInSet:subscribedPushServiceURNs];
+        NSSet<NSString *> *toSubscribeURNs = [subscribedURNs setByRemovingObjectsIn:subscribedPushServiceURNs];
         [PushService.sharedService subscribeToShowURNs:toSubscribeURNs];
         
-        NSSet<NSString *> *toUnsubscribeURNs = [subscribedPushServiceURNs play_setByRemovingObjectsInSet:subscribedURNs];
+        NSSet<NSString *> *toUnsubscribeURNs = [subscribedPushServiceURNs setByRemovingObjectsIn:subscribedURNs];
         [PushService.sharedService unsubscribeFromShowURNs:toUnsubscribeURNs];
     }
     

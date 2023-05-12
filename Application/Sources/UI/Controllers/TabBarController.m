@@ -6,7 +6,6 @@
 
 #import "TabBarController.h"
 
-#import "AccessibilityIdentifierConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Layout.h"
@@ -18,7 +17,6 @@
 #import "RadioChannelsViewController.h"
 #import "SplitViewController.h"
 #import "TabBarActionable.h"
-#import "UIColor+PlaySRG.h"
 
 @import libextobjc;
 @import MAKVONotificationCenter;
@@ -272,7 +270,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videos", @"Videos tab title")
                                                                    image:[UIImage imageNamed:@"videos_tab"]
                                                                      tag:TabBarItemIdentifierVideos];
-    videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
+    videosTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierVideosTabBarItem].value;
  
     UIViewController *videosViewController = [PageViewController videosViewController];
     NavigationController *videosNavigationController = [[NavigationController alloc] initWithRootViewController:videosViewController];
@@ -285,7 +283,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Audios", @"Audios tab title")
                                                                    image:[UIImage imageNamed:@"audios_tab"]
                                                                      tag:TabBarItemIdentifierAudios];
-    audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
+    audiosTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierAudiosTabBarItem].value;
     return audiosTabBarItem;
 }
 
@@ -322,7 +320,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Livestreams", @"Livestreams tab bar title")
                                                                      image:[UIImage imageNamed:@"livestreams_tab"]
                                                                        tag:TabBarItemIdentifierLivestreams];
-        liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
+        liveTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierLivestreamsTabBarItem].value;
         
         UIViewController *liveViewController = [PageViewController liveViewController];
         NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:liveViewController];
@@ -339,7 +337,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Search", @"Search tab bar title")
                                                                    image:[UIImage imageNamed:@"search_tab"]
                                                                      tag:TabBarItemIdentifierSearch];
-    searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
+    searchTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierSearchTabBarItem].value;
  
     UIViewController *searchViewController = [SearchViewController viewController];
     NavigationController *searchNavigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
@@ -352,7 +350,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Profile", @"Profile tab bar title")
                                                                     image:[UIImage imageNamed:@"profile_tab"]
                                                                       tag:TabBarItemIdentifierProfile];
-    profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
+    profileTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierProfileTabBarItem].value;
     
     UIViewController *profileViewController = [[ProfileViewController alloc] init];
     NavigationController *profileNavigationController = [[NavigationController alloc] initWithRootViewController:profileViewController];
@@ -438,7 +436,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     if (PushService.sharedService.enabled && profileTabBarItem && badgeNumber != 0) {
         profileTabBarItem.badgeValue = (badgeNumber > 99) ? @"99+" : @(badgeNumber).stringValue;
-        profileTabBarItem.badgeColor = UIColor.play_notificationRedColor;
+        profileTabBarItem.badgeColor = UIColor.play_notificationRed;
     }
     else {
         profileTabBarItem.badgeValue = nil;

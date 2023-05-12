@@ -6,8 +6,6 @@
 
 #import "NSString+PlaySRG.h"
 
-#import "NSDateFormatter+PlaySRG.h"
-
 @import CommonCrypto;
 
 static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void *, CC_LONG, unsigned char *), CC_LONG digestLength)

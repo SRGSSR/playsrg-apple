@@ -6,7 +6,6 @@
 
 #import "MediaPlayerViewController.h"
 
-#import "AccessibilityIdentifierConstants.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
@@ -22,7 +21,6 @@
 #import "Layout.h"
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
@@ -33,26 +31,18 @@
 #import "Reachability.h"
 #import "RelatedContentView.h"
 #import "SharingItem.h"
-#import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
-#import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
-#import "SRGProgram+PlaySRG.h"
-#import "SRGProgramComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
 #import "TableView.h"
-#import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
-#import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
-#import "UIStackView+PlaySRG.h"
 #import "UITableView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
 @import GoogleCast;
@@ -383,7 +373,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showWrapperView.layer.masksToBounds = YES;
     
-    self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackground;
     
     self.moreEpisodesLabel.textColor = UIColor.srg_grayC7Color;
     
@@ -521,7 +511,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [self setUserInterfaceBehaviorForMedia:media animated:NO];
     
     self.closeButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Close", @"Close button label on player view");
-    self.closeButton.accessibilityIdentifier = AccessibilityIdentifierCloseButton;
+    self.closeButton.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierCloseButton].value;
     
     self.shareButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
     
@@ -870,7 +860,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.summaryLabel.text = media.play_fullSummary;
         
         BOOL downloaded = (mainChapterMedia != nil) ? [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded : NO;
-        BOOL isWebFirst = mainChapterMedia.play_webFirst;
+        BOOL isWebFirst = mainChapterMedia.play_isWebFirst;
         BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
         BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
         BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;
@@ -893,9 +883,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateRadioHomeButton];
         self.radioHomeButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         
-        UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
+        UIImage *youthProtectionColorImage = [UIImage imageFor:media.youthProtectionColor];
         if (youthProtectionColorImage) {
-            self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
+            self.youthProtectionColorImageView.image = youthProtectionColorImage;
             self.youthProtectionColorLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
             self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
             self.youthProtectionColorSpacerView.hidden = NO;
@@ -984,7 +974,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (currentProgram) {
         // Unbreakable spaces before / after the separator
         self.currentProgramTitleLabel.text = currentProgram.show.title ?: currentProgram.title;
-        self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+        self.currentProgramSubtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:currentProgram.startDate], [NSDateFormatter.play_time stringFromDate:currentProgram.endDate]];
         
         BOOL hidden = (currentProgram.show == nil);
         self.currentProgramMoreEpisodesButton.hidden = hidden;
@@ -1029,7 +1019,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     NSDate *fromDate = (dateInterval.duration != 0.) ? dateInterval.startDate : nil;
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(SRGProgram.new, startDate) ascending:NO];
-    return [[self.programComposition play_programsFromDate:fromDate toDate:nil withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    return [[self.programComposition play_programsFrom:fromDate to:nil withMediaURNs:mediaURNs] sortedArrayUsingDescriptors:@[sortDescriptor]];
 }
 
 #pragma mark Channel updates
@@ -2107,7 +2097,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
     [sceneDelegate.rootTabBarController pushViewController:showViewController animated:NO];
-    [sceneDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+    [sceneDelegate.window play_dismissAllViewControllersWithAnimated:YES completion:nil];
 }
 
 - (IBAction)openRadioHome:(id)sender
@@ -2122,7 +2112,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
     [sceneDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
-    [sceneDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+    [sceneDelegate.window play_dismissAllViewControllersWithAnimated:YES completion:nil];
 }
 
 - (IBAction)toggleFavorite:(id)sender

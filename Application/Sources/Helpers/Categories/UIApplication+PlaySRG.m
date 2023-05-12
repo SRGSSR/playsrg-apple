@@ -6,7 +6,6 @@
 
 #import "UIApplication+PlaySRG.h"
 
-#import "UIColor+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
 @import SafariServices;
