@@ -106,9 +106,9 @@ final class ProgramGuideDailyViewController: UIViewController {
                 guard let self else { return }
                 switch change {
                 case let .time(time):
-                    self.scrollToTime(time, animated: true)
+                    scrollToTime(time, animated: true)
                 case .channel:
-                    self.scrollToTime(self.programGuideModel.time, animated: false)
+                    scrollToTime(programGuideModel.time, animated: false)
                 default:
                     break
                 }

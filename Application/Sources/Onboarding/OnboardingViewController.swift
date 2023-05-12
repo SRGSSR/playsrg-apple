@@ -24,7 +24,7 @@ final class OnboardingViewController: BaseViewController {
     
     static func viewController(for onboarding: Onboarding!) -> OnboardingViewController {
         let storyboard = UIStoryboard(name: "OnboardingViewController", bundle: nil)
-        let viewController = storyboard.instantiateInitialViewController() as! OnboardingViewController
+        let viewController = storyboard.instantiateInitialViewController() as! Self
         viewController.onboarding = onboarding
         viewController.title = onboarding.title
         return viewController

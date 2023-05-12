@@ -112,7 +112,7 @@ struct ProgramCell: View {
             }
             .cornerRadius(4)
             .readSize { size in
-                self.availableSize = size
+                availableSize = size
             }
         }
     }

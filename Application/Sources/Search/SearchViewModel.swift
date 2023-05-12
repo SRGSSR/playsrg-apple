@@ -63,7 +63,7 @@ final class SearchViewModel: ObservableObject {
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
-                    return !self.state.hasContent
+                    return !state.hasContent
                 },
             ApplicationSignal.foregroundAfterTimeInBackground()
         )

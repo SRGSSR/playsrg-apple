@@ -34,7 +34,7 @@ final class LiveMediaCellViewModel: ObservableObject {
         if let media, let channel = media.channel, media.contentType == .livestream {
             channelObserver = ChannelService.shared.addObserverForUpdates(with: channel, livestreamUid: media.uid) { [weak self] composition in
                 guard let self else { return }
-                self.programComposition = composition
+                programComposition = composition
             }
         }
     }

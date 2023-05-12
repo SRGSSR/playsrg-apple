@@ -100,7 +100,7 @@ final class ProgramGuideGridViewController: UIViewController {
         
         let headerViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ChannelHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let channel = snapshot.sectionIdentifiers[indexPath.section]
             view.content = ChannelHeaderView(channel: channel)
         }
@@ -124,12 +124,12 @@ final class ProgramGuideGridViewController: UIViewController {
                 guard let self else { return }
                 switch change {
                 case let .day(day):
-                    self.dailyModel.day = day
+                    dailyModel.day = day
                 case let .time(time):
-                    self.scrollToTarget(ScrollTarget(time: time), animated: true)
+                    scrollToTarget(ScrollTarget(time: time), animated: true)
                 case let .dayAndTime(day: day, time: time):
-                    self.dailyModel.day = day
-                    self.scrollToTarget(ScrollTarget(time: time), animated: true)
+                    dailyModel.day = day
+                    scrollToTarget(ScrollTarget(time: time), animated: true)
                 default:
                     break
                 }

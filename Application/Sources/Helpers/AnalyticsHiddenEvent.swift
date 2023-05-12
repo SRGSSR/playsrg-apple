@@ -22,7 +22,7 @@ struct AnalyticsHiddenEvent {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
     }
     
-    static func calendarEventAdd(channel: SRGChannel) -> AnalyticsHiddenEvent {
+    static func calendarEventAdd(channel: SRGChannel) -> Self {
         return Self(
             name: "calendar_add",
             source: "button",
@@ -31,7 +31,7 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsHiddenEvent {
+    static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> Self {
         return Self(
             name: "continuous_playback",
             source: action.source,
@@ -40,7 +40,7 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.downloadName,
             source: source.value,
@@ -48,7 +48,7 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.favoriteName,
             source: source.value,
@@ -56,14 +56,14 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func googleGast(urn: String) -> AnalyticsHiddenEvent {
+    static func googleGast(urn: String) -> Self {
         return Self(
             name: "google_cast",
             value: urn
         )
     }
     
-    static func historyRemove(source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func historyRemove(source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: "history_remove",
             source: source.value,
@@ -71,14 +71,14 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func identity(action: AnalyticsIdentityAction) -> AnalyticsHiddenEvent {
+    static func identity(action: AnalyticsIdentityAction) -> Self {
         return Self(
             name: "identity",
             labels: action.labels
         )
     }
     
-    static func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsHiddenEvent {
+    static func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> Self {
         return Self(
             name: from.name,
             source: overrideSource ?? from.source,
@@ -87,7 +87,7 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> Self {
         return Self(
             name: "open_url",
             source: source.value,
@@ -96,14 +96,14 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func pictureInPicture(urn: String?) -> AnalyticsHiddenEvent {
+    static func pictureInPicture(urn: String?) -> Self {
         return Self(
             name: "picture_in_picture",
             value: urn
         )
     }
     
-    static func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> AnalyticsHiddenEvent {
+    static func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> Self {
         return Self(
             name: action.name,
             source: source.value,
@@ -113,14 +113,14 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEvent {
+    static func shortcutItem(action: AnalyticsShortcutItemAction) -> Self {
         return Self(
             name: "quick_actions",
             type: action.type
         )
     }
     
-    static func subscription(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func subscription(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.subscriptionName,
             source: source.value,
@@ -128,7 +128,7 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsHiddenEvent {
+    static func userActivity(action: AnalyticsUserActivityAction, urn: String) -> Self {
         return Self(
             name: "user_activity_ios",
             source: "handoff",
@@ -137,7 +137,7 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.watchLaterName,
             source: source.value,

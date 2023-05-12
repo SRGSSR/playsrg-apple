@@ -40,7 +40,7 @@ struct LabeledCardButton<Content: View, Label: View>: View {
             .onFocusChange { focused in
                 isFocused = focused
                 
-                if let onFocusAction = self.onFocusChangeAction {
+                if let onFocusAction = onFocusChangeAction {
                     onFocusAction(focused)
                 }
             }

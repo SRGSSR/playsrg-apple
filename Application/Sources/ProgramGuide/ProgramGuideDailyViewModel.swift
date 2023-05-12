@@ -160,7 +160,7 @@ extension ProgramGuideDailyViewModel {
         case content(firstPartyBouquet: Bouquet, thirdPartyBouquet: Bouquet, day: SRGDay)
         case failed(error: Error)
         
-        fileprivate static func loading(firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel], day: SRGDay) -> State {
+        fileprivate static func loading(firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel], day: SRGDay) -> Self {
             return .content(firstPartyBouquet: .loading(channels: firstPartyChannels), thirdPartyBouquet: .loading(channels: thirdPartyChannels), day: day)
         }
         
