@@ -43,7 +43,7 @@ enum Content {
 #endif
         
         case highlightPlaceholder(index: Int)
-        case highlight(_ highlight: Highlight, item: Item?)
+        case highlight(_ highlight: Highlight, item: Self?)
         
         case transparent
         
@@ -68,12 +68,12 @@ enum Content {
             }
         }
         
-        static func groupAlphabetically(_ items: [Item]) -> [(key: Character, value: [Item])] {
+        static func groupAlphabetically(_ items: [Self]) -> [(key: Character, value: [Self])] {
             return items.groupedAlphabetically { $0.title }
         }
     }
     
-    static func medias(from items: [Content.Item]) -> [SRGMedia] {
+    static func medias(from items: [Self.Item]) -> [SRGMedia] {
         return items.compactMap { item in
             if case let .media(media) = item {
                 return media
@@ -85,7 +85,7 @@ enum Content {
     }
     
 #if os(iOS)
-    static func downloads(from items: [Content.Item]) -> [Download] {
+    static func downloads(from items: [Self.Item]) -> [Download] {
         return items.compactMap { item in
             if case let .download(download) = item {
                 return download
@@ -96,7 +96,7 @@ enum Content {
         }
     }
     
-    static func notifications(from items: [Content.Item]) -> [UserNotification] {
+    static func notifications(from items: [Self.Item]) -> [UserNotification] {
         return items.compactMap { item in
             if case let .notification(notification) = item {
                 return notification
@@ -108,7 +108,7 @@ enum Content {
     }
 #endif
     
-    static func shows(from items: [Content.Item]) -> [SRGShow] {
+    static func shows(from items: [Self.Item]) -> [SRGShow] {
         return items.compactMap { item in
             if case let .show(show) = item {
                 return show

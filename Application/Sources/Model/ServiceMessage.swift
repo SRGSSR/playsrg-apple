@@ -17,7 +17,7 @@ struct ServiceMessage: Codable, Identifiable, Equatable {
         return data.text
     }
     
-    static func == (lhs: ServiceMessage, rhs: ServiceMessage) -> Bool {
+    static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.id == rhs.id
     }
     

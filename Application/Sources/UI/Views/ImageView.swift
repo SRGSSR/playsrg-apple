@@ -55,7 +55,7 @@ struct ImageView: View {
     let source: ImageRequestConvertible?
     let contentMode: ContentMode
     
-    private static func alignment(for contentMode: ImageView.ContentMode) -> Alignment {
+    private static func alignment(for contentMode: Self.ContentMode) -> Alignment {
         switch contentMode {
         case .aspectFit, .aspectFill, .center, .fill, .aspectFillFocused:
             return .center
