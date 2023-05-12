@@ -54,7 +54,7 @@ platform :ios do
     service = 'AppCenter'
 
     build_number = latest_appcenter_build_number(appcenter_ios_nightly_appcenter_names)
-    xcode_override_build_number(platform, build_number + 1)
+    xcode_override_build_number(build_number + 1)
 
     tag_version = tag_version(platform)
 
@@ -739,7 +739,7 @@ platform :ios do
     service = 'TestFlight'
 
     build_number = srg_latest_testflight_build_number(appstore_nightly_identifiers, platform)
-    xcode_override_build_number(platform, build_number + 1)
+    xcode_override_build_number(build_number + 1)
 
     tag_version = tag_version(platform)
 
@@ -1201,7 +1201,7 @@ end
 
 # Returns current tag version
 def tag_version(platform)
-  "#{xcode_marketing_version(platform)}-#{xcode_build_number(platform)}"
+  "#{xcode_marketing_version(platform)}-#{xcode_build_number}"
 end
 
 def srg_tag(platform)
@@ -1434,18 +1434,18 @@ def xcode_override_marketing_version(platform, marketing_version)
   marketing_version
 end
 
-# Returns the build number for a platform
-def xcode_build_number(platform)
+# Returns the build number
+def xcode_build_number
   get_xcconfig_value(
-    path: srg_xcconfig_path(platform),
+    path: srg_xcconfig_common_path,
     name: 'CURRENT_PROJECT_VERSION'
   )
 end
 
-# Override build number for a platform (current project version)
-def xcode_override_build_number(platform, build_number)
+# Override build number (current project version)
+def xcode_override_build_number(build_number)
   update_xcconfig_value(
-    path: srg_xcconfig_path(platform),
+    path: srg_xcconfig_common_path,
     name: 'CURRENT_PROJECT_VERSION',
     value: build_number.to_s
   )
@@ -1454,6 +1454,10 @@ end
 
 def srg_xcconfig_path(platform)
   "Xcode/Shared/Targets/#{platform}/Common.xcconfig"
+end
+
+def srg_xcconfig_common_path
+  'Xcode/Shared/Common.xcconfig'
 end
 
 def appstore_platform(platform)
@@ -1786,7 +1790,7 @@ def pull_translations
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repository,
-# only if we are on the develop branch and the tag does not already exist.
+# only if we are on the develop branch.
 def bump_build_number_beta_workflow(platform)
   return unless git_branch_name.include? 'develop'
 
@@ -1796,27 +1800,13 @@ def bump_build_number_beta_workflow(platform)
   if git_tag_exists(tag:)
     UI.important "Tag \"#{tag}\" already exists. Probably done by an other build (to AppCenter, to TestFlight or did it manually). ⚠️"
   else
-    srg_add_tag_and_bump_build_number(platform, tag)
+    add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
   end
-end
 
-def srg_add_tag_and_bump_build_number(platform, tag)
-  add_git_tag(tag:, sign: true)
-  bump_build_number_commit(platform)
+  bump_build_number_commit
   git_pull(rebase: true)
   push_to_git_remote
-end
-
-def bump_build_number_commit(platform)
-  build_number = bump_build_number(xcode_build_number(platform))
-  build_number = xcode_override_build_number(platform, build_number)
-  commit_version_bump(
-    xcodeproj: 'PlaySRG.xcodeproj',
-    message: "Bump #{platform} build number to #{build_number}",
-    include: srg_xcconfig_path(platform),
-    ignore: /.+/
-  )
 end
 
 def git_branch_name
@@ -1833,19 +1823,20 @@ def beta_app_review_info
 end
 
 # Gitflow release platforms: Merge to master, tag platforms, merge one tag to develop, bump
-# marketing version and build number and push to the repository, only if we are not on the
+# marketing version(s) and build number and push to the repository, only if we are not on the
 # master branch and at least, one platform has to be released.
 def gitflow_release_platforms(platforms, branch_name)
   return if branch_name.include? 'master'
   return unless platforms.count.positive?
 
   tags = platforms.map { |platform| srg_tag(platform) }
-  tag_versions = platforms.map { |platform| tag_version(platform) }
 
   gitflow_release(tags, branch_name)
   git_delete(branch_name)
+
+  bump_build_number_commit
   platforms.each_index do |index|
-    bump_marketing_version_and_build_number_commit(platforms[index], tag_versions[index])
+    bump_marketing_version_commit(platforms[index])
   end
 
   push_to_git_remote(local_branch: 'master', remote_branch: 'master')
@@ -1876,15 +1867,24 @@ def git_delete(branch_name)
   end
 end
 
-def bump_marketing_version_and_build_number_commit(platform, tag_version)
-  build_number = bump_build_number(build_number_from_tag_version(tag_version))
-  build_number = xcode_override_build_number(platform, build_number)
-  marketing_version = bump_marketing_version(marketing_version_from_tag_version(tag_version))
+def bump_marketing_version_commit(platform)
+  marketing_version = bump_marketing_version(xcode_marketing_version(platform))
   marketing_version = xcode_override_marketing_version(platform, marketing_version)
   commit_version_bump(
     xcodeproj: 'PlaySRG.xcodeproj',
-    message: "Bump #{platform} version to #{marketing_version}-#{build_number}",
+    message: "Bump #{platform} version to #{marketing_version}",
     include: srg_xcconfig_path(platform),
+    ignore: /.+/
+  )
+end
+
+def bump_build_number_commit
+  build_number = bump_build_number(xcode_build_number)
+  build_number = xcode_override_build_number(build_number)
+  commit_version_bump(
+    xcodeproj: 'PlaySRG.xcodeproj',
+    message: "Bump build number to #{build_number}",
+    include: srg_xcconfig_common_path,
     ignore: /.+/
   )
 end
