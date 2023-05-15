@@ -10,15 +10,19 @@ import SwiftUI
 // MARK: View
 
 struct ProfileAccountHeaderView: View {
+    @StateObject private var model = ProfileAccountHeaderViewModel()
+    
     @Environment(\.isSelected) var isSelected
     
     var body: some View {
-        MainView()
+        MainView(model: model)
             .selectionAppearance(.dimmed, when: isSelected)
     }
     
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
+        @ObservedObject var model: ProfileAccountHeaderViewModel
+        
         @Environment(\.isUIKitFocused) private var isFocused
         
         private var spacing: CGFloat {
@@ -29,11 +33,11 @@ struct ProfileAccountHeaderView: View {
         
         var body: some View {
             HStack(spacing: 8) {
-                Image(decorative: "account_logged_in_icon")
+                Image(decorative: model.data.decorativeName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: iconHeight)
-                Text(NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet"))
+                Text(model.data.accountText)
                     .srgFont(.body)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
