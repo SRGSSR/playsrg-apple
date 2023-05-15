@@ -22,17 +22,13 @@ struct ProfileAccountHeaderView: View {
         
         @Environment(\.isUIKitFocused) private var isFocused
         
-        private var spacing: CGFloat {
-            return 10
-        }
-        
         private let iconHeight: CGFloat = 36
         
         var body: some View {
             Button {
                 model.manageAccount()
             } label: {
-                HStack(spacing: 8) {
+                HStack(spacing: 12) {
                     Image(decorative: model.data.decorativeName)
                         .resizable()
                         .aspectRatio(contentMode: .fit)

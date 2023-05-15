@@ -25,10 +25,6 @@ struct ProfileCell: View {
         
         @Environment(\.isUIKitFocused) private var isFocused
         
-        private var spacing: CGFloat {
-            return 10
-        }
-        
         private let iconHeight: CGFloat = 24
         
         var body: some View {
