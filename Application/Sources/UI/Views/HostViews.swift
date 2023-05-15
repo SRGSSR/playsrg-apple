@@ -260,11 +260,19 @@ class HostTableViewHeaderFooterView<Content: View>: UITableViewHeaderFooterView 
  */
 class HostView<Content: View>: UIView {
     let ignoresSafeArea: Bool
+    let topAnchorConstant: CGFloat
+    let bottomAnchorConstant: CGFloat
+    let leadingAnchorConstant: CGFloat
+    let trailingAnchorConstant: CGFloat
     
     private var hostController: UIHostingController<Content>?
     
-    init(frame: CGRect, ignoresSafeArea: Bool) {
+    init(frame: CGRect, ignoresSafeArea: Bool = true, topAnchorConstant: CGFloat = 0, bottomAnchorConstant: CGFloat = 0, leadingAnchorConstant: CGFloat = 0, trailingAnchorConstant: CGFloat = 0) {
         self.ignoresSafeArea = ignoresSafeArea
+        self.topAnchorConstant = topAnchorConstant
+        self.bottomAnchorConstant = bottomAnchorConstant
+        self.leadingAnchorConstant = leadingAnchorConstant
+        self.trailingAnchorConstant = trailingAnchorConstant
         super.init(frame: frame)
     }
     
@@ -291,10 +299,10 @@ class HostView<Content: View>: UIView {
                 
                 hostView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    hostView.topAnchor.constraint(equalTo: topAnchor),
-                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                    hostView.topAnchor.constraint(equalTo: topAnchor, constant: topAnchorConstant),
+                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: bottomAnchorConstant),
+                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingAnchorConstant),
+                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: trailingAnchorConstant)
                 ])
             }
         }

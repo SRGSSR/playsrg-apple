@@ -12,7 +12,6 @@
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "ProfileAccountHeaderView.h"
 #import "PushService.h"
 #import "TableView.h"
 #import "UIDevice+PlaySRG.h"
@@ -69,7 +68,7 @@
     self.tableView.delegate = self;
     
     if (SRGIdentityService.currentIdentityService) {
-        self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
+        self.tableView.tableHeaderView = [self.tableView profileAccountHeaderView];
     }
     
     [self.tableView registerReusableProfileCell];
