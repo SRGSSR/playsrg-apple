@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import SRGIdentity
 
 // MARK: View model
@@ -28,6 +29,18 @@ final class ProfileAccountHeaderViewModel: ObservableObject {
         guard let identityService = SRGIdentityService.current else { data = .notLogged; return }
         
         data = Data(isLoggedIn: identityService.isLoggedIn, account: identityService.account)
+        
+        Publishers.CombineLatest3(
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceDidUpdateAccount, object: identityService),
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogout, object: identityService)
+            )
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
+        .map { _ in
+            Data(isLoggedIn: identityService.isLoggedIn, account: identityService.account)
+        }
+        .removeDuplicates()
+        .assign(to: &$data)
     }
 }
 
