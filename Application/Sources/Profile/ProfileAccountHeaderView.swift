@@ -11,12 +11,9 @@ import SwiftUI
 
 struct ProfileAccountHeaderView: View {
     @StateObject private var model = ProfileAccountHeaderViewModel()
-    
-    @Environment(\.isSelected) var isSelected
-    
+        
     var body: some View {
         MainView(model: model)
-            .selectionAppearance(.dimmed, when: isSelected)
     }
     
     /// Behavior: h-exp, v-exp
@@ -32,26 +29,30 @@ struct ProfileAccountHeaderView: View {
         private let iconHeight: CGFloat = 36
         
         var body: some View {
-            HStack(spacing: 8) {
-                Image(decorative: model.data.decorativeName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: iconHeight)
-                Text(model.data.accountText)
-                    .srgFont(.body)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Image(decorative: "chevron")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 16)
+            Button {
+                model.manageAccount()
+            } label: {
+                HStack(spacing: 8) {
+                    Image(decorative: model.data.decorativeName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: iconHeight)
+                    Text(model.data.accountText)
+                        .srgFont(.body)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Image(decorative: "chevron")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 16)
+                }
+                .foregroundColor(.srgGrayC7)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 4)
+                .frame(maxHeight: .infinity)
+                .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
+                .cornerRadius(4)
             }
-            .foregroundColor(.srgGrayC7)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 4)
-            .frame(maxHeight: .infinity)
-            .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
-            .cornerRadius(4)
         }
     }
 }

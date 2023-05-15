@@ -30,7 +30,7 @@ final class ProfileAccountHeaderViewModel: ObservableObject {
         
         data = Data(isLoggedIn: identityService.isLoggedIn, account: identityService.account)
         
-        Publishers.CombineLatest3(
+        Publishers.Merge3(
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceDidUpdateAccount, object: identityService),
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogout, object: identityService)

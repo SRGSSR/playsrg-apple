@@ -117,7 +117,7 @@ final class SettingsViewModel: ObservableObject {
 #endif
     
     var synchronizationStatus: String? {
-        guard let identityService = SRGIdentityService.current, identityService.isLoggedIn else { return nil }
+        guard isLoggedIn else { return nil }
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), Self.string(for: synchronizationDate))
     }
     
