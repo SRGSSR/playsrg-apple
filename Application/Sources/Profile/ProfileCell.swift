@@ -28,7 +28,7 @@ struct ProfileCell: View {
         private let iconHeight: CGFloat = 24
         
         var body: some View {
-            HStack(spacing: 8) {
+            HStack(spacing: LayoutMargin) {
                 if let image = applicationSectioninfo.image {
                     Image(uiImage: image)
                         .resizable()
