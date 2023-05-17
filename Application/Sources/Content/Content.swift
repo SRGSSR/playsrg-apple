@@ -144,6 +144,7 @@ protocol SectionProperties {
 #if os(iOS)
     var sharingItem: SharingItem? { get }
     var displayedShow: SRGShow? { get }
+    var canResetApplicationBadge: Bool { get }
 #endif
     
     /// Analytics information
@@ -287,6 +288,10 @@ private extension Content {
         
         var displayedShow: SRGShow? {
             return nil
+        }
+        
+        var canResetApplicationBadge: Bool {
+            return false
         }
 #endif
         
@@ -650,6 +655,15 @@ private extension Content {
                 return show
             default:
                 return nil
+            }
+        }
+        
+        var canResetApplicationBadge: Bool {
+            switch configuredSection {
+            case .notifications:
+                return true
+            default:
+                return false
             }
         }
 #endif

@@ -12,11 +12,9 @@
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "PushService.h"
 #import "TableView.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
-#import "UIViewController+PlaySRG.h"
 
 @import SRGAppearance;
 @import SRGIdentity;
@@ -79,14 +77,6 @@
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationDidBecomeActive:)
-                                               name:UIApplicationDidBecomeActiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationWillResignActive:)
-                                               name:UIApplicationWillResignActiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(pushServiceDidReceiveNotification:)
                                                name:PushServiceDidReceiveNotification
                                              object:nil];
@@ -111,25 +101,11 @@
 {
     [super viewWillAppear:animated];
     
-    [PushService.sharedService resetApplicationBadge];
-    
-    // Ensure latest notifications are displayed
-    [self reloadData];
-    
     // On iPad where split screen can be used, load the secondary view afterwards (if loaded too early it will be collapsed
     // automatically onto the primary at startup for narrow layouts, which is not what we want). We must still avoid
     // overriding a section if already installed before by application shorcuts.
     if (! self.currentSectionInfo && [self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         [self openApplicationSectionInfo:self.sectionInfos.firstObject.firstObject interactive:NO animated:NO];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if ([self play_isMovingFromParentViewController]) {
-        [PushService.sharedService resetApplicationBadge];
     }
 }
 
@@ -489,24 +465,6 @@
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
 {
     [self reloadData];
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)notification
-{
-    if (self.play_viewVisible) {
-        [PushService.sharedService resetApplicationBadge];
-        
-        // Ensure correct notification badge on notification cell availability after dismissal of the initial system alert
-        // (displayed once at most), asking the user to enable push notifications.
-        [self reloadData];
-    }
-}
-
-- (void)applicationWillResignActive:(NSNotification *)notification
-{
-    if (self.play_viewVisible) {
-        [PushService.sharedService resetApplicationBadge];
-    }
 }
 
 - (void)pushServiceDidReceiveNotification:(NSNotification *)notification

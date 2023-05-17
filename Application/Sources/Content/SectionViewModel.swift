@@ -97,6 +97,16 @@ final class SectionViewModel: ObservableObject {
         }
     }
     
+#if os(iOS)
+    func resetApplicationBadgeIfNeeded() {
+        guard let pushService = PushService.shared else { return }
+        
+        if configuration.properties.canResetApplicationBadge {
+            pushService.resetApplicationBadge()
+        }
+    }
+#endif
+    
     private func reloadSignal() -> AnyPublisher<Void, Never> {
         return Publishers.Merge3(
             trigger.signal(activatedBy: TriggerId.reload),

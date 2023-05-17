@@ -193,6 +193,7 @@ final class SectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        model.resetApplicationBadgeIfNeeded()
         model.reload()
         deselectItems(in: collectionView, animated: animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
