@@ -11,7 +11,21 @@ import Combine
 final class ProfileCellModel: ObservableObject {
     @Published var applicationSectioninfo: ApplicationSectionInfo?
     
+    @Published private(set) var unreadNotifications = false
+    
     init() {
+        $applicationSectioninfo
+            .dropFirst()
+            .map { applicationSectioninfo in
+                guard applicationSectioninfo?.applicationSection == .notifications else {
+                    return Just(false).eraseToAnyPublisher()
+                }
+                return ApplicationSignal.pushServiceHasBadgeUpdate()
+            }
+            .switchToLatest()
+            .removeDuplicates()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$unreadNotifications)
     }
 }
 

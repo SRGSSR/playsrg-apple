@@ -53,6 +53,11 @@ struct ProfileCell: View {
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                if model.unreadNotifications {
+                    Text("●")
+                        .foregroundColor(Color(.play_notificationRed))
+                        .srgFont(.subtitle1)
+                }
                 if !model.isModalPresentation {
                     Image(decorative: "chevron")
                         .resizable()
