@@ -10,18 +10,30 @@ import SwiftUI
 // MARK: View
 
 struct ProfileCell: View {
-    let applicationSectioninfo: ApplicationSectionInfo
+    @Binding private(set) var applicationSectioninfo: ApplicationSectionInfo?
+    
+    @StateObject private var model = ProfileCellModel()
     
     @Environment(\.isSelected) var isSelected
     
+    init(applicationSectioninfo: ApplicationSectionInfo?) {
+        _applicationSectioninfo = .constant(applicationSectioninfo)
+    }
+    
     var body: some View {
-        MainView(applicationSectioninfo: applicationSectioninfo)
+        MainView(model: model)
             .selectionAppearance(.dimmed, when: isSelected)
+            .onAppear {
+                model.applicationSectioninfo = applicationSectioninfo
+            }
+            .onChange(of: applicationSectioninfo) { newValue in
+                model.applicationSectioninfo = newValue
+            }
     }
     
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
-        let applicationSectioninfo: ApplicationSectionInfo
+        @ObservedObject var model: ProfileCellModel
         
         @Environment(\.isUIKitFocused) private var isFocused
         
@@ -29,17 +41,19 @@ struct ProfileCell: View {
         
         var body: some View {
             HStack(spacing: LayoutMargin) {
-                if let image = applicationSectioninfo.image {
+                if let image = model.image {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: iconHeight)
                 }
-                Text(applicationSectioninfo.title)
-                    .srgFont(.body)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                if !applicationSectioninfo.isModalPresentation {
+                if let title = model.title {
+                    Text(title)
+                        .srgFont(.body)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                if !model.isModalPresentation {
                     Image(decorative: "chevron")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -70,6 +84,6 @@ class ProfileCellSize: NSObject {
 struct ProfileCell_Previews: PreviewProvider {
     static var previews: some View {
         ProfileCell(applicationSectioninfo: ApplicationSectionInfo(applicationSection: .favorites, radioChannel: nil))
-            .previewLayout(.sizeThatFits)
+            .previewLayout(.fixed(width: 360, height: ProfileCellSize.height()))
     }
 }

@@ -187,6 +187,11 @@
 		048FD2112A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD20E2A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift */; };
 		048FD2122A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD20E2A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift */; };
 		048FD2132A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD20E2A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift */; };
+		048FD24D2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */; };
+		048FD24E2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */; };
+		048FD24F2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */; };
+		048FD2502A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */; };
+		048FD2512A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */; };
 		04C2DE782937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE792937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE7A2937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
@@ -2759,6 +2764,7 @@
 		048FD2022A1225B200929AE5 /* ProfileAccountHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountHeaderView.swift; sourceTree = "<group>"; };
 		048FD2082A122BF100929AE5 /* ProfileAccountHeaderView+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileAccountHeaderView+UIKit.swift"; sourceTree = "<group>"; };
 		048FD20E2A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAccountHeaderViewModel.swift; sourceTree = "<group>"; };
+		048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellModel.swift; sourceTree = "<group>"; };
 		0497D5FE29D4B626005BF060 /* REMOTE_CONFIGURATION.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = REMOTE_CONFIGURATION.md; path = docs/REMOTE_CONFIGURATION.md; sourceTree = "<group>"; };
 		04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClickEvent.swift; sourceTree = "<group>"; };
 		04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruncatableTextView.swift; sourceTree = "<group>"; };
@@ -3994,6 +4000,7 @@
 				048FD20E2A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift */,
 				044B405A2A01764900A10DB7 /* ProfileCell.swift */,
 				044B408E2A02B6B500A10DB7 /* ProfileCell+UIKit.swift */,
+				048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */,
 				04FB9CA62A04327900A9B69E /* ProfileHelp.swift */,
 				04FB9CB22A0542BB00A9B69E /* ProfileSectionHeaderView.swift */,
 				04FB9CAC2A051BB600A9B69E /* ProfileSectionHeaderView+UIKit.swift */,
@@ -8347,6 +8354,7 @@
 				6F5FAA44268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
 				6FC2A21C265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
+				048FD24D2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6FCA5BDC27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				6F6C7AC92820576000BC3EA5 /* UserLocation.swift in Sources */,
@@ -8726,6 +8734,7 @@
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC726B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
+				048FD24E2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F362A8526A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				0406040F29CE6293001F2BD0 /* MediaMoreButton.swift in Sources */,
@@ -8988,6 +8997,7 @@
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC826B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
+				048FD24F2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F362A8626A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				0406041029CE6293001F2BD0 /* MediaMoreButton.swift in Sources */,
@@ -9250,6 +9260,7 @@
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC926B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
+				048FD2502A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F362A8726A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				0406041129CE6293001F2BD0 /* MediaMoreButton.swift in Sources */,
@@ -9494,6 +9505,7 @@
 				6F475FC21EB37BC6003021EA /* DataViewController.m in Sources */,
 				0801E07F1D4A4A810008021E /* RadioChannel.m in Sources */,
 				6FB0AF00217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
+				048FD2512A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F6C7ACD2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				042F6F5929E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
 				6FDAAD98283283EB008E2806 /* WebView.swift in Sources */,
