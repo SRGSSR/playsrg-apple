@@ -17,8 +17,8 @@ final class SettingsViewModel: ObservableObject {
 #if os(tvOS)
     @Published private(set) var account: SRGAccount?
 #endif
-    @Published private(set) var hasHistoryEntries = false
     @Published private(set) var hasFavorites = false
+    @Published private(set) var hasHistoryEntries = false
     @Published private(set) var hasWatchLaterItems = false
     @Published private var synchronizationDate: Date?
     
@@ -44,6 +44,13 @@ final class SettingsViewModel: ObservableObject {
 #endif
         }
         
+        ThrottledSignal.preferenceUpdates()
+            .prepend(())
+        // swiftlint:disable empty_count
+            .map { FavoritesShowURNs().count != 0 }
+        // swiftlint:enable empty_count
+            .assign(to: &$hasFavorites)
+        
         ThrottledSignal.historyUpdates()
             .prepend(())
             .map { [weak self] _ in
@@ -54,13 +61,6 @@ final class SettingsViewModel: ObservableObject {
             .switchToLatest()
             .receive(on: DispatchQueue.main)
             .assign(to: &$hasHistoryEntries)
-        
-        ThrottledSignal.preferenceUpdates()
-            .prepend(())
-        // swiftlint:disable empty_count
-            .map { FavoritesShowURNs().count != 0 }
-        // swiftlint:enable empty_count
-            .assign(to: &$hasFavorites)
         
         ThrottledSignal.watchLaterUpdates()
             .prepend(())
@@ -174,16 +174,16 @@ final class SettingsViewModel: ObservableObject {
     }
 #endif
     
+    func removeFavorites() {
+        FavoritesRemoveShows(nil)
+        AnalyticsHiddenEvent.favorite(action: .remove, source: .button, urn: nil).send()
+    }
+    
     func removeHistory() {
         SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: { error in
             guard error == nil else { return }
             AnalyticsHiddenEvent.historyRemove(source: .button, urn: nil).send()
         })
-    }
-    
-    func removeFavorites() {
-        FavoritesRemoveShows(nil)
-        AnalyticsHiddenEvent.favorite(action: .remove, source: .button, urn: nil).send()
     }
     
     func removeWatchLaterItems() {

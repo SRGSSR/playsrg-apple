@@ -83,7 +83,7 @@ struct SettingsView: View {
             } header: {
                 Text(NSLocalizedString("Profile", comment: "Profile section header"))
             } footer: {
-                model.supportsLogin ? Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")) : nil
+                model.supportsLogin ? Text(NSLocalizedString("Synchronize favorites, playback history and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")) : nil
             }
         }
         
@@ -229,8 +229,8 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                HistoryRemovalButton(model: model)
                 FavoritesRemovalButton(model: model)
+                HistoryRemovalButton(model: model)
                 WatchLaterRemovalButton(model: model)
             } header: {
                 Text(NSLocalizedString("Content", comment: "Content settings section header"))
@@ -238,48 +238,6 @@ struct SettingsView: View {
                 if let synchronizationStatus = model.synchronizationStatus {
                     Text(synchronizationStatus)
                 }
-            }
-        }
-        
-        private struct HistoryRemovalButton: View {
-            @ObservedObject var model: SettingsViewModel
-            @State private var isAlertDisplayed = false
-            
-            private func alert() -> Alert {
-                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
-                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-                    model.removeHistory()
-                }
-                if model.isLoggedIn {
-                    return Alert(
-                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
-                        message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
-                        primaryButton: primaryButton,
-                        secondaryButton: secondaryButton
-                    )
-                }
-                else {
-                    return Alert(
-                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
-                        primaryButton: primaryButton,
-                        secondaryButton: secondaryButton
-                    )
-                }
-            }
-            
-            private func action() {
-                if model.hasHistoryEntries {
-                    isAlertDisplayed = true
-                }
-            }
-            
-            var body: some View {
-                Button(action: action) {
-                    Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
-                        .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
-                }
-                .disabled(!model.hasHistoryEntries)
-                .alert(isPresented: $isAlertDisplayed, content: alert)
             }
         }
         
@@ -321,6 +279,48 @@ struct SettingsView: View {
                         .foregroundColor(model.hasFavorites ? .red : .secondary)
                 }
                 .disabled(!model.hasFavorites)
+                .alert(isPresented: $isAlertDisplayed, content: alert)
+            }
+        }
+        
+        private struct HistoryRemovalButton: View {
+            @ObservedObject var model: SettingsViewModel
+            @State private var isAlertDisplayed = false
+            
+            private func alert() -> Alert {
+                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
+                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                    model.removeHistory()
+                }
+                if model.isLoggedIn {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                        message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+                else {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+            }
+            
+            private func action() {
+                if model.hasHistoryEntries {
+                    isAlertDisplayed = true
+                }
+            }
+            
+            var body: some View {
+                Button(action: action) {
+                    Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
+                        .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
+                }
+                .disabled(!model.hasHistoryEntries)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
             }
         }
