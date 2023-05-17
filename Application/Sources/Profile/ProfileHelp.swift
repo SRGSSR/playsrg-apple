@@ -48,7 +48,6 @@ import SwiftUI
         guard let tabBarController = UIApplication.shared.mainTabBarController else { return false }
         
         let safariViewController = SFSafariViewController(url: url)
-        safariViewController.dismissButtonStyle = .close
         safariViewController.preferredBarTintColor = UIColor.srgGray16
         safariViewController.preferredControlTintColor = UIColor.srgGrayC7
         safariViewController.modalPresentationStyle = .pageSheet
