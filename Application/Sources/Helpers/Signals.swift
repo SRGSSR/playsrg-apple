@@ -222,6 +222,7 @@ enum ApplicationSignal {
             .map { _ in
                 return UIApplication.shared.applicationIconBadgeNumber != 0
             }
+            .prepend(UIApplication.shared.applicationIconBadgeNumber != 0)
             .eraseToAnyPublisher()
     }
 #endif

@@ -16,14 +16,11 @@ final class ProfileCellModel: ObservableObject {
     init() {
         $applicationSectioninfo
             .dropFirst()
-            .map { applicationSectioninfo in
-                guard applicationSectioninfo?.applicationSection == .notifications else {
-                    return Just(false).eraseToAnyPublisher()
-                }
+            .filter { $0?.applicationSection == .notifications }
+            .map { _ in
                 return ApplicationSignal.pushServiceHasBadgeUpdate()
             }
             .switchToLatest()
-            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .assign(to: &$unreadNotifications)
     }
