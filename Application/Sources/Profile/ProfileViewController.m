@@ -72,6 +72,8 @@
     [self.tableView registerReusableProfileCell];
     [self.tableView registerReusableProfileSectionHeader];
     
+    [self reloadData];
+    
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
