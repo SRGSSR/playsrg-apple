@@ -14,15 +14,12 @@ struct ProfileCell: View {
     
     @StateObject private var model = ProfileCellModel()
     
-    @Environment(\.isSelected) var isSelected
-    
     init(applicationSectioninfo: ApplicationSectionInfo?) {
         _applicationSectioninfo = .constant(applicationSectioninfo)
     }
     
     var body: some View {
         MainView(model: model)
-            .selectionAppearance(.dimmed, when: isSelected)
             .onAppear {
                 model.applicationSectioninfo = applicationSectioninfo
             }
@@ -35,6 +32,7 @@ struct ProfileCell: View {
     private struct MainView: View {
         @ObservedObject var model: ProfileCellModel
         
+        @Environment(\.isSelected) var isSelected
         @Environment(\.isUIKitFocused) private var isFocused
         
         private let iconHeight: CGFloat = 24
@@ -69,7 +67,7 @@ struct ProfileCell: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 4)
             .frame(maxHeight: .infinity)
-            .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
+            .background(!isFocused && !isSelected ? Color.srgGray23 : Color.srgGray33)
             .cornerRadius(4)
         }
     }
@@ -90,5 +88,8 @@ struct ProfileCell_Previews: PreviewProvider {
     static var previews: some View {
         ProfileCell(applicationSectioninfo: ApplicationSectionInfo(applicationSection: .favorites, radioChannel: nil))
             .previewLayout(.fixed(width: 360, height: ProfileCellSize.height()))
+        ProfileCell(applicationSectioninfo: ApplicationSectionInfo(applicationSection: .favorites, radioChannel: nil))
+            .previewLayout(.fixed(width: 360, height: ProfileCellSize.height()))
+            .environment(\.isSelected, true)
     }
 }
