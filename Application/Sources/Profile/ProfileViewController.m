@@ -79,14 +79,6 @@
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(pushServiceDidReceiveNotification:)
-                                               name:PushServiceDidReceiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(pushServiceBadgeDidChange:)
-                                               name:PushServiceBadgeDidChangeNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(pushServiceStatusDidChange:)
                                                name:PushServiceStatusDidChangeNotification
                                              object:nil];
@@ -465,16 +457,6 @@
 #pragma mark Notifications
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
-{
-    [self reloadData];
-}
-
-- (void)pushServiceDidReceiveNotification:(NSNotification *)notification
-{
-    [self reloadData];
-}
-
-- (void)pushServiceBadgeDidChange:(NSNotification *)notification
 {
     [self reloadData];
 }
