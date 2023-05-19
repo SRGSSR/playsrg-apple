@@ -382,7 +382,7 @@ struct AnalyticsHiddenEvent {
 @objc enum AnalyticsOpenHelpAction: UInt {
     case faq
     case technicalIssue
-    case improveApp
+    case feedbackApp
     case evaluateApp
     
     fileprivate var name: String {
@@ -391,8 +391,8 @@ struct AnalyticsHiddenEvent {
             return "faq_open"
         case .technicalIssue:
             return "technical_issue_open"
-        case .improveApp:
-            return "improve_app_open"
+        case .feedbackApp:
+            return "feedback_app_open"
         case .evaluateApp:
             return "evaluate_app_open"
         }

@@ -13,7 +13,7 @@ import SwiftUI
         guard let url = ApplicationConfiguration.shared.userSuggestionUrlWithParameters else { return false }
         
         return showSafariViewController(url: url) {
-            AnalyticsHiddenEvent.openHelp(action: .improveApp).send()
+            AnalyticsHiddenEvent.openHelp(action: .feedbackApp).send()
         }
     }
     
