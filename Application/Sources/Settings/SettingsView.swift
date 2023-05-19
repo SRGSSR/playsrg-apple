@@ -35,12 +35,12 @@ struct SettingsView: View {
             PermissionsSection(model: model)
 #endif
             ContentSection(model: model)
-            InformationSection(model: model)
 #if os(tvOS)
             if model.canDisplayHelpAndContactSection {
                 HelpAndContactSection(model: model)
             }
 #endif
+            InformationSection(model: model)
 #if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
             ResetSection(model: model)
