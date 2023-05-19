@@ -97,15 +97,19 @@ final class SectionViewModel: ObservableObject {
         }
     }
     
-#if os(iOS)
+    /// Can be used on all platforms to minimize preprocessor need, but never emits on platforms not supporting
+    /// push notifications
     func resetApplicationBadgeIfNeeded() {
+#if os(iOS)
         guard let pushService = PushService.shared else { return }
         
         if configuration.properties.canResetApplicationBadge {
             pushService.resetApplicationBadge()
         }
-    }
+#else
+        return
 #endif
+    }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
         return Publishers.Merge3(
