@@ -12,13 +12,17 @@ import SwiftUI
     @objc static func showFeedbackForm() -> Bool {
         guard let url = ApplicationConfiguration.shared.userSuggestionUrlWithParameters else { return false }
         
-        return showSafariViewController(url: url)
+        return showSafariViewController(url: url) {
+            AnalyticsHiddenEvent.openHelp(action: .improveApp).send()
+        }
     }
     
     @objc static func showFaqs() -> Bool {
         guard let url = ApplicationConfiguration.shared.faqURL else { return false }
         
-        return showSafariViewController(url: url)
+        return showSafariViewController(url: url) {
+            AnalyticsHiddenEvent.openHelp(action: .faq).send()
+        }
     }
     
     @objc static func showStorePage() -> Bool {
@@ -27,7 +31,9 @@ import SwiftUI
         let productViewController = SKStoreProductViewController()
         productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: ApplicationConfiguration.shared.appStoreProductIdentifier])
         
-        tabBarController.play_top.present(productViewController, animated: true)
+        tabBarController.play_top.present(productViewController, animated: true) {
+            AnalyticsHiddenEvent.openHelp(action: .evaluateApp).send()
+        }
         return true
     }
     
@@ -36,15 +42,19 @@ import SwiftUI
               let tabBarController = UIApplication.shared.mainTabBarController else { return false }
         
         if MailComposeView.canSendMail() {
-            tabBarController.play_top.present(supportEmailMailComposeViewController(supportEmailAddress), animated: true)
+            tabBarController.play_top.present(supportEmailMailComposeViewController(supportEmailAddress), animated: true) {
+                AnalyticsHiddenEvent.openHelp(action: .technicalIssue).send()
+            }
         }
         else {
-            tabBarController.play_top.present(supporEmailAlertController(supportEmailAddress), animated: true)
+            tabBarController.play_top.present(supporEmailAlertController(supportEmailAddress), animated: true) {
+                AnalyticsHiddenEvent.openHelp(action: .technicalIssue).send()
+            }
         }
         return true
     }
     
-    private static func showSafariViewController(url: URL) -> Bool {
+    private static func showSafariViewController(url: URL, completion: @escaping () -> Void) -> Bool {
         guard let tabBarController = UIApplication.shared.mainTabBarController else { return false }
         
         let safariViewController = SFSafariViewController(url: url)
@@ -52,7 +62,7 @@ import SwiftUI
         safariViewController.preferredControlTintColor = UIColor.srgGrayC7
         safariViewController.modalPresentationStyle = .pageSheet
         
-        tabBarController.play_top.present(safariViewController, animated: true)
+        tabBarController.play_top.present(safariViewController, animated: true, completion: completion)
         return true
     }
     
