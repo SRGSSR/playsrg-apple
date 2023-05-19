@@ -37,8 +37,8 @@ struct SettingsView: View {
             ContentSection(model: model)
             InformationSection(model: model)
 #if os(tvOS)
-            if let supportEmailAdress = model.supportEmailAdress {
-                HelpAndContactSection(supportEmailAdress: supportEmailAdress)
+            if model.canDisplayHelpAndContactSection {
+                HelpAndContactSection(model: model)
             }
 #endif
 #if DEBUG || NIGHTLY || BETA
@@ -427,35 +427,31 @@ struct SettingsView: View {
             }
         }
     }
-
+    
 #if os(tvOS)
     // MARK: Help and Contact section
     
     private struct HelpAndContactSection: View {
-        let supportEmailAdress: String
+        @ObservedObject var model: SettingsViewModel
         
         var body: some View {
             PlaySection {
-                SupportInformationButton(supportEmailAdress: supportEmailAdress)
+                if let showSupportInformation = model.showSupportInformation {
+                    SupportInformationButton(showSupportInformation: showSupportInformation)
+                }
             } header: {
                 Text(NSLocalizedString("Help and contact", comment: "Help and contact section header"))
             }
         }
         
         private struct SupportInformationButton: View {
-            let supportEmailAdress: String
+            let showSupportInformation: (() -> Void)
             
             @State private var isActionSheetDisplayed = false
             @State private var isMailComposeDisplayed = false
             
-            private func action() {
-                let headerText = String(format: NSLocalizedString("Please contact us at %@", comment: "Apple TV header when displayed support information"), supportEmailAdress)
-                let text = String(format: "%@\n\n%@", headerText, SupportInformation.generate())
-                navigateToText(text)
-            }
-            
             var body: some View {
-                Button(action: action) {
+                Button(action: showSupportInformation) {
                     Text(NSLocalizedString("Display support information", comment: "Label of the button to display support information"))
                 }
             }
