@@ -452,7 +452,7 @@ struct SettingsView: View {
             
             var body: some View {
                 Button(action: showSupportInformation) {
-                    Text(NSLocalizedString("Display support information", comment: "Label of the button to display support information"))
+                    Text(NSLocalizedString("Report a technical issue", comment: "Label of the button to present technical issue report instructions"))
                 }
             }
         }
