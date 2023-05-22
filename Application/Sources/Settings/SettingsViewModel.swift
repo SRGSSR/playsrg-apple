@@ -7,8 +7,8 @@
 import Combine
 import SRGIdentity
 import SRGUserData
-import YYWebImage
 import StoreKit
+import YYWebImage
 
 // MARK: View model
 
