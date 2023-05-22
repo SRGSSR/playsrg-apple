@@ -155,3 +155,26 @@ NSURL *ApplicationSettingServiceURL(void)
 {
     return [ServiceObjC urlForServiceId:ApplicationSettingServiceIdentifier()];
 }
+
+BOOL ApplicationSettingAutoplayEnabled(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled];
+}
+
+BOOL ApplicationSettingSubtitleAvailabilityDisplayed(void)
+{
+    if (ApplicationConfiguration.sharedApplicationConfiguration.subtitleAvailabilityHidden) {
+        return NO;
+    }
+    
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingSubtitleAvailabilityDisplayed];
+}
+
+BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void)
+{
+    if (ApplicationConfiguration.sharedApplicationConfiguration.audioDescriptionAvailabilityHidden) {
+        return NO;
+    }
+    
+    return UIAccessibilityIsVoiceOverRunning() || [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAudioDescriptionAvailabilityDisplayed];
+}

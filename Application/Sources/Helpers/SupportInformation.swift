@@ -54,6 +54,22 @@ import UIKit
         return status(for: identityService.isLoggedIn)
     }
     
+    private static var continuousAutoplayStatus: String {
+        return status(for: ApplicationSettingAutoplayEnabled())
+    }
+    
+    private static var preferredSubtitleAvailability: String {
+        return status(for: ApplicationSettingSubtitleAvailabilityDisplayed())
+    }
+    
+    private static var preferredAudioDescriptionAvailability: String {
+        return status(for: ApplicationSettingAudioDescriptionAvailabilityDisplayed())
+    }
+    
+    private static var voiceOverEnabled: String {
+        return status(for: UIAccessibility.isVoiceOverRunning)
+    }
+    
 #if os(iOS)
     private static var backgroundVideoPlaybackStatus: String {
         return status(for: ApplicationSettingBackgroundVideoPlaybackEnabled())
@@ -101,15 +117,25 @@ import UIKit
         components.append("OS version: \(operatingSystemVersion)")
         components.append("Model: \(model)")
         components.append("Model identifier: \(modelIdentifier)")
+        components.append("")
+        
+        components.append("User settings")
+        components.append( "-------------------")
+        components.append("Autoplay enabled: \(continuousAutoplayStatus)")
 #if os(iOS)
         components.append("Background video playback enabled: \(backgroundVideoPlaybackStatus)")
 #endif
-        components.append("Logged in: \(loginStatus)")
+        components.append("Preferred subtitle availability: \(preferredSubtitleAvailability)")
+        components.append("Preferred audio description availability: \(preferredAudioDescriptionAvailability)")
+        components.append("VoiceOver enabled: \(voiceOverEnabled)")
+        if SRGIdentityService.current != nil {
+            components.append("Logged in: \(loginStatus)")
+        }
         components.append("")
         
 #if os(iOS)
         components.append("Push notification information")
-        components.append( "----------------------------")
+        components.append( "-------------------")
         components.append("Push notifications enabled: \(pushNotificationStatus)")
         components.append("Airship identifier: \(airshipIdentifier)")
         components.append("Device push notification token: \(deviceToken)")
