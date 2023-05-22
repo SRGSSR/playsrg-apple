@@ -75,7 +75,6 @@ extension UIViewController {
         present(pageViewController, animated: animated, completion: completion)
     }
     
-#if os(tvOS)
     func navigateToProgram(_ program: SRGProgram, in channel: SRGChannel, animated: Bool = true, completion: (() -> Void)? = nil) {
         cancellable = mediaPublisher(for: program, in: channel)?
             .receive(on: DispatchQueue.main)
@@ -90,11 +89,23 @@ extension UIViewController {
                 self?.navigateToMedia(media, mediaAnalyticsClickEvent: mediaAnalyticsClickEvent, playAnalyticsClickEvent: playAnalyticsClickEvent, from: program, animated: animated, completion: completion)
             }
     }
-#endif
     
     func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true, completion: (() -> Void)? = nil) {
         let sectionViewController = SectionViewController(section: section, filter: filter)
         present(sectionViewController, animated: animated, completion: completion)
+    }
+    
+    func navigateToApplicationSection(_ applicationSection: ApplicationSection, animated: Bool = true, completion: (() -> Void)? = nil) {
+        switch applicationSection {
+        case .history:
+            present(SectionViewController.historyViewController(), animated: animated, completion: completion)
+        case .favorites:
+            present(SectionViewController.favoriteShowsViewController(), animated: animated, completion: completion)
+        case .watchLater:
+            present(SectionViewController.watchLaterViewController(), animated: animated, completion: completion)
+        default:
+            break
+        }
     }
     
     func navigateToText(_ text: String, animated: Bool = true, completion: (() -> Void)? = nil) {
@@ -152,6 +163,14 @@ func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
     guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
     isPresenting = true
     topViewController.navigateToTopic(topic, animated: animated) {
+        isPresenting = false
+    }
+}
+
+func navigateToApplicationSection(_ applicationSection: ApplicationSection, animated: Bool = true) {
+    guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
+    isPresenting = true
+    topViewController.navigateToApplicationSection(applicationSection, animated: animated) {
         isPresenting = false
     }
 }
