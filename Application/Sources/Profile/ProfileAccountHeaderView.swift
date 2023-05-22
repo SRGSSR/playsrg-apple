@@ -25,15 +25,29 @@ struct ProfileAccountHeaderView: View {
         private let layoutScale: CGFloat = 1.5
         private let iconHeight: CGFloat = 24 * 1.5
         
+        private let serviceLogoHeight: CGFloat = 24 * 1.5 * 0.6
+        private let serviceLogoOffsetX: CGFloat = 14
+        private let serviceLogoOffsetY: CGFloat = -3
+        
         var body: some View {
             Button {
                 model.manageAccount()
             } label: {
                 HStack(spacing: LayoutMargin * layoutScale) {
-                    Image(decorative: model.data.decorativeName)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: iconHeight)
+                    ZStack(alignment: .topTrailing) {
+                        Image(decorative: model.data.decorativeName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: iconHeight)
+                        if let image = UIImage(named: "identity_service_logo") {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(height: serviceLogoHeight)
+                                .offset(x: serviceLogoOffsetX, y: serviceLogoOffsetY)
+                        }
+                    }
+                    .padding(.trailing, trailingImagePadding)
                     Text(model.data.accountText)
                         .srgFont(.body)
                         .lineLimit(1)
@@ -50,6 +64,10 @@ struct ProfileAccountHeaderView: View {
                 .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
                 .cornerRadius(4)
             }
+        }
+        
+        private var trailingImagePadding: CGFloat {
+            return UIImage(named: "identity_service_logo") != nil ? serviceLogoOffsetX : 0
         }
     }
 }
