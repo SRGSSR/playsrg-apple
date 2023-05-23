@@ -16,8 +16,10 @@ final class ProfileCellModel: ObservableObject {
     init() {
         $applicationSectioninfo
             .dropFirst()
-            .filter { $0?.applicationSection == .notifications }
-            .map { _ in
+            .map { applicationSectioninfo in
+                guard applicationSectioninfo?.applicationSection == .notifications else {
+                    return Just(false).eraseToAnyPublisher()
+                }
                 return ApplicationSignal.pushServiceHasBadgeUpdate()
             }
             .switchToLatest()
