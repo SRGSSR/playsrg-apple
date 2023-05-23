@@ -9,6 +9,7 @@
   "playServiceURL": "https://www.srf.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "sourceCodeURL": "https://github.com/SRGSSR/playsrg-apple",
+  "supportEmailAddress": "srf@srf.ch",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvLiveCenterScheduledLivestreams,tvLiveCenterEpisodes",
   "tvLiveHomeSections": "tvLive,tvLiveCenterScheduledLivestreams,tvLiveCenterEpisodes,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioWatchLater",
