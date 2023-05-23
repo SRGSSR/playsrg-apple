@@ -46,7 +46,7 @@ extension ApplicationConfiguration {
     }
     
     private static var version: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        return Bundle.main.play_friendlyVersionNumber
     }
     
     private static var type: String {
