@@ -11,7 +11,7 @@ import Combine
 final class ProfileCellModel: ObservableObject {
     @Published var applicationSectioninfo: ApplicationSectionInfo?
     
-    @Published private(set) var unreadNotifications = false
+    @Published private(set) var unread = false
     
     init() {
         $applicationSectioninfo
@@ -24,7 +24,7 @@ final class ProfileCellModel: ObservableObject {
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
-            .assign(to: &$unreadNotifications)
+            .assign(to: &$unread)
     }
 }
 

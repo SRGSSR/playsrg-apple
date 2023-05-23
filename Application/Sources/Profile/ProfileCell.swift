@@ -51,7 +51,7 @@ struct ProfileCell: View {
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                if model.unreadNotifications {
+                if model.unread {
                     Text("●")
                         .foregroundColor(Color(.play_notificationRed))
                         .srgFont(.subtitle1)
