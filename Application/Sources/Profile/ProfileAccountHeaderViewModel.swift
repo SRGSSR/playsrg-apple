@@ -34,13 +34,32 @@ final class ProfileAccountHeaderViewModel: ObservableObject {
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceDidUpdateAccount, object: identityService),
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogout, object: identityService)
-            )
+        )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
         .map { _ in
             Data(isLoggedIn: identityService.isLoggedIn, account: identityService.account)
         }
         .removeDuplicates()
         .assign(to: &$data)
+    }
+}
+
+// MARK: Accessibility
+
+extension ProfileAccountHeaderViewModel {
+    var accessibilityLabel: String {
+        if let accountDescription = data.accountDescription {
+            return String(format: PlaySRGAccessibilityLocalizedString("Logged in user: %@", comment: "Accessibility introductory text for the logged in user"), accountDescription)
+        }
+        else {
+            return data.text
+        }
+    }
+    
+    var accessibilityHint: String {
+        return data.isLoggedIn ?
+        PlaySRGAccessibilityLocalizedString("Manages account information", comment: "Accessibility hint for the profile header when user is logged in") :
+        PlaySRGAccessibilityLocalizedString("allows to log in or create an account and synchronize data.", comment: "Accessibility hint for the profile header when user is not logged in")
     }
 }
 
@@ -56,13 +75,23 @@ extension ProfileAccountHeaderViewModel {
             return isLoggedIn ? "account_logged_in_icon" : "account_logged_out_icon"
         }
         
-        var accountText: String {
+        var accountDescription: String? {
+            guard isLoggedIn else { return nil }
+            if let displayName = account?.displayName {
+                return displayName
+            }
+            else if let emmailAddress = account?.emailAddress {
+                return emmailAddress
+            }
+            else {
+                return nil
+            }
+        }
+        
+        var text: String {
             if isLoggedIn {
-                if let displayName = account?.displayName {
-                    return displayName
-                }
-                else if let emmailAddress = account?.emailAddress {
-                    return emmailAddress
+                if let accountDescription {
+                    return accountDescription
                 }
                 else {
                     return NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet")

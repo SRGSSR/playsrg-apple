@@ -48,7 +48,7 @@ struct ProfileAccountHeaderView: View {
                         }
                     }
                     .padding(.trailing, trailingImagePadding)
-                    Text(model.data.accountText)
+                    Text(model.data.text)
                         .srgFont(.body)
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -63,6 +63,7 @@ struct ProfileAccountHeaderView: View {
                 .frame(maxHeight: .infinity)
                 .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
                 .cornerRadius(4)
+                .accessibilityElement(label: model.accessibilityLabel, hint: model.accessibilityHint)
             }
         }
         
