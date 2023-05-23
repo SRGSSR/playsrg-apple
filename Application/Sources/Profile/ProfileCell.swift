@@ -32,10 +32,23 @@ struct ProfileCell: View {
     private struct MainView: View {
         @ObservedObject var model: ProfileCellModel
         
-        @Environment(\.isSelected) var isSelected
+        @Environment(\.isSelected) private var isSelected
         @Environment(\.isUIKitFocused) private var isFocused
         
         private let iconHeight: CGFloat = 24
+        
+        private var accessibilityLabel: String? {
+            if model.unread {
+                return "\(model.title ?? ""), \(PlaySRGAccessibilityLocalizedString("Unread", comment: "Unread state button"))"
+            }
+            else {
+                return model.title
+            }
+        }
+        
+        private var accessibilityTraits: AccessibilityTraits {
+            return isSelected ? [.isButton, .isSelected] : .isButton
+        }
         
         var body: some View {
             HStack(spacing: LayoutMargin) {
@@ -69,6 +82,7 @@ struct ProfileCell: View {
             .frame(maxHeight: .infinity)
             .background(!isFocused && !isSelected ? Color.srgGray23 : Color.srgGray33)
             .cornerRadius(4)
+            .accessibilityElement(label: accessibilityLabel, traits: accessibilityTraits)
         }
     }
 }
