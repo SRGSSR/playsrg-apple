@@ -105,7 +105,7 @@ import UIKit
             components.append(NSLocalizedString("Issue:", comment: "Issue title on top of mail body to declare a technical issue"))
             components.append("")
             components.append("")
-            components.append("-------------------------------------------------------")
+            components.append("--------------------------------------")
         }
         
         components.append("General information")
