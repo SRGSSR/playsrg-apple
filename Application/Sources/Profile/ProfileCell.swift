@@ -38,8 +38,8 @@ struct ProfileCell: View {
         private let iconHeight: CGFloat = 24
         
         private var accessibilityLabel: String? {
-            if model.unread {
-                return "\(model.title ?? ""), \(PlaySRGAccessibilityLocalizedString("Unread", comment: "Unread state button"))"
+            if model.unreads {
+                return "\(model.title ?? ""), \(PlaySRGAccessibilityLocalizedString("Unreads", comment: "Unreads state button"))"
             }
             else {
                 return model.title
@@ -64,7 +64,7 @@ struct ProfileCell: View {
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                if model.unread {
+                if model.unreads {
                     Text("●")
                         .foregroundColor(Color(.play_notificationRed))
                         .srgFont(.subtitle1)

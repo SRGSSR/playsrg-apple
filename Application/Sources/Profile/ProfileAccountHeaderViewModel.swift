@@ -59,7 +59,7 @@ extension ProfileAccountHeaderViewModel {
     var accessibilityHint: String {
         return data.isLoggedIn ?
         PlaySRGAccessibilityLocalizedString("Manages account information", comment: "Accessibility hint for the profile header when user is logged in") :
-        PlaySRGAccessibilityLocalizedString("allows to log in or create an account and synchronize data.", comment: "Accessibility hint for the profile header when user is not logged in")
+        PlaySRGAccessibilityLocalizedString("allows to log in or create an account in order to synchronize data.", comment: "Accessibility hint for the profile header when user is not logged in")
     }
 }
 
