@@ -20,7 +20,9 @@ final class ProfileCellModel: ObservableObject {
                 guard applicationSectioninfo?.applicationSection == .notifications else {
                     return Just(false).eraseToAnyPublisher()
                 }
-                return ApplicationSignal.hasUserUnreadNotifications()
+                return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
+                    return ApplicationSignal.hasUserUnreadNotifications()
+                }
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
