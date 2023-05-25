@@ -315,7 +315,7 @@
 "Information" = "Information";
 
 /* Issue title on top of mail body to declare a technical issue */
-"Issue:" = "Soucis rencontré :";
+"Issue:" = "Problème rencontré :";
 
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Garder";
