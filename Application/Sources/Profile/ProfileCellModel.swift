@@ -20,7 +20,7 @@ final class ProfileCellModel: ObservableObject {
                 guard applicationSectioninfo?.applicationSection == .notifications else {
                     return Just(false).eraseToAnyPublisher()
                 }
-                return ApplicationSignal.pushServiceHasBadgeUpdate()
+                return ApplicationSignal.hasUserUnreadNotifications()
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)

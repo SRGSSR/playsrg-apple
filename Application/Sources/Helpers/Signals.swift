@@ -217,12 +217,21 @@ enum ApplicationSignal {
     }
     
 #if os(iOS)
-    static func pushServiceHasBadgeUpdate() -> AnyPublisher<Bool, Never> {
+    static func isPushServiceBadgeDisplayed() -> AnyPublisher<Bool, Never> {
         return NotificationCenter.default.weakPublisher(for: .PushServiceBadgeDidChange)
             .map { _ in
                 return UIApplication.shared.applicationIconBadgeNumber != 0
             }
             .prepend(UIApplication.shared.applicationIconBadgeNumber != 0)
+            .eraseToAnyPublisher()
+    }
+    
+    static func hasUserUnreadNotifications() -> AnyPublisher<Bool, Never> {
+        return NotificationCenter.default.weakPublisher(for: .UserNotificationsDidChange)
+            .map { _ in
+                return !UserNotification.unreadNotifications.isEmpty
+            }
+            .prepend(!UserNotification.unreadNotifications.isEmpty)
             .eraseToAnyPublisher()
     }
 #endif

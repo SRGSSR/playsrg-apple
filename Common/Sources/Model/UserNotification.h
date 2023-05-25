@@ -12,6 +12,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  Notitfication sent when the user notification list has changed.
+ */
+OBJC_EXPORT NSString * const UserNotificationsDidChangeNotification;
+
+/**
  *  Valid notification types
  */
 typedef NS_ENUM(NSInteger, UserNotificationType) {
