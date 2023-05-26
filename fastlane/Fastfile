@@ -1653,8 +1653,9 @@ def prepare_appstore_release(platform, business_unit, options)
   tag_version = options[:tag_version] || tag_version(platform)
   submit_for_review = options[:submit_for_review] || false
 
-  metadata_path = appstore_release_metadata_path(platform, business_unit, tag_version)
+  return unless can_run_deliver(business_unit, platform)
 
+  metadata_path = appstore_release_metadata_path(platform, business_unit, tag_version)
   srg_deliver(platform, tag_version, metadata_path, submit_for_review)
 end
 
@@ -2002,6 +2003,26 @@ end
 
 def spaceship_app_version_localization(version)
   Spaceship::ConnectAPI::AppStoreVersionLocalization.all(app_store_version_id: version.id).first
+end
+
+def can_run_deliver(business_unit, platform)
+  spaceship_login_with_api_key(business_unit)
+  app = spaceship_bu_appstore_build_app(business_unit)
+  return false unless app
+
+  latest_version = spaceship_app_latest_known_version(platform, app)
+  return true unless latest_version
+
+  build_version = latest_version.build ? latest_version.build.version : 'NaN'
+  app_store_state = latest_version.app_store_state
+  UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is #{app_store_state}."
+
+  app__store_state = Spaceship::ConnectAPI::AppInfo::AppStoreState
+  review_states = [app__store_state::WAITING_FOR_REVIEW, app__store_state::IN_REVIEW]
+  return true unless review_states.include? app_store_state
+
+  UI.success "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is already submitted. ✅"
+  false
 end
 
 def publish_on_github_pages(output_directory, releases_directory)
