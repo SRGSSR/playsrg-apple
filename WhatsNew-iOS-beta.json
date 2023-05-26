@@ -187,5 +187,6 @@
   "3.6.11-408": "- Better show description content. [RSI, RTR, SRF]\n- Apply subscription after accepting OS notifications.\n- Truncatable text view fixes with various font sizes.",
   "3.6.11-409": "- Update unplayable downloaded videos.",
     "3.6.12-410": "- iPhone and iPad: An opt-out option for beta testers to disable a preview of a new layout on show page.\n- A better pronunciation of \"more\" with VoiceOver in show page.",
-    "3.6.12-411": "- Improved readability on show pages with a vertical list on iPad.\n- Get a better summary text on media and show elements on homepage and topic pages.\n- Metrics cleanup."
+    "3.6.12-411": "- Improved readability on show pages with a vertical list on iPad.\n- Get a better summary text on media and show elements on homepage and topic pages.\n- Metrics cleanup.",
+    "3.6.13-412": "- AppStore release with internal dependency updates."
 }
