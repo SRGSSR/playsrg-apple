@@ -58,11 +58,11 @@ import UIKit
         return status(for: ApplicationSettingAutoplayEnabled())
     }
     
-    private static var preferredSubtitleAvailability: String {
+    private static var subtitleAvailabilityDisplayed: String {
         return status(for: ApplicationSettingSubtitleAvailabilityDisplayed())
     }
     
-    private static var preferredAudioDescriptionAvailability: String {
+    private static var audioDescriptionAvailabilityDisplayed: String {
         return status(for: ApplicationSettingAudioDescriptionAvailabilityDisplayed())
     }
     
@@ -126,8 +126,12 @@ import UIKit
 #if os(iOS)
         components.append("Background video playback enabled: \(backgroundVideoPlaybackStatus)")
 #endif
-        components.append("Preferred subtitle availability: \(preferredSubtitleAvailability)")
-        components.append("Preferred audio description availability: \(preferredAudioDescriptionAvailability)")
+        if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
+            components.append("Subtitle availability displayed: \(subtitleAvailabilityDisplayed)")
+        }
+        if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+            components.append("Audio description availability displayed: \(audioDescriptionAvailabilityDisplayed)")
+        }
         components.append("VoiceOver enabled: \(voiceOverEnabled)")
         if SRGIdentityService.current != nil {
             components.append("Logged in: \(loginStatus)")
