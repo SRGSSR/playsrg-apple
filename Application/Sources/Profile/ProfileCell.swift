@@ -91,8 +91,7 @@ struct ProfileCell: View {
 
 class ProfileCellSize: NSObject {
     @objc static func height() -> CGFloat {
-        let fontMetrics = UIFontMetrics(forTextStyle: .body)
-        return fontMetrics.scaledValue(for: 50.0)
+        return 50
     }
 }
 

@@ -77,8 +77,7 @@ struct ProfileAccountHeaderView: View {
 
 extension ProfileAccountHeaderView {
     static func size() -> CGSize {
-        let fontMetrics = UIFontMetrics(forTextStyle: .body)
-        return CGSize(width: .zero, height: fontMetrics.scaledValue(for: 66.0))
+        return CGSize(width: .zero, height: 66)
     }
 }
 
