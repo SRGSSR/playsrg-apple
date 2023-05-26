@@ -30,7 +30,9 @@ struct SettingsView: View {
             QualitySection()
 #endif
             PlaybackSection()
-            DisplaySection()
+            if !(ApplicationConfiguration.shared.isSubtitleAvailabilityHidden && ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden) {
+                DisplaySection()
+            }
 #if os(iOS)
             PermissionsSection(model: model)
 #endif
@@ -58,7 +60,7 @@ struct SettingsView: View {
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
-
+    
 #if os(tvOS)
     // MARK: Profile section
     
@@ -194,8 +196,12 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                Toggle(NSLocalizedString("Subtitle availability", comment: "Subtitle availability setting label"), isOn: $isSubtitleAvailabilityDisplayed)
-                Toggle(NSLocalizedString("Audio description availability", comment: "Audio description availability setting label"), isOn: $isAudioDescriptionAvailabilityDisplayed)
+                if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
+                    Toggle(NSLocalizedString("Subtitle availability", comment: "Subtitle availability setting label"), isOn: $isSubtitleAvailabilityDisplayed)
+                }
+                if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+                    Toggle(NSLocalizedString("Audio description availability", comment: "Audio description availability setting label"), isOn: $isAudioDescriptionAvailabilityDisplayed)
+                }
             } header: {
                 Text(NSLocalizedString("Display", comment: "Display settings section header"))
             } footer: {
