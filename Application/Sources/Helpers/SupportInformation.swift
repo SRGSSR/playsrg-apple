@@ -59,11 +59,11 @@ import UIKit
     }
     
     private static var subtitleAvailabilityDisplayed: String {
-        return status(for: ApplicationSettingSubtitleAvailabilityDisplayed())
+        return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingSubtitleAvailabilityDisplayed))
     }
     
     private static var audioDescriptionAvailabilityDisplayed: String {
-        return status(for: ApplicationSettingAudioDescriptionAvailabilityDisplayed())
+        return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed))
     }
     
     private static var voiceOverEnabled: String {

@@ -52,7 +52,4 @@ OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
 
 OBJC_EXPORT BOOL ApplicationSettingAutoplayEnabled(void);
 
-OBJC_EXPORT BOOL ApplicationSettingSubtitleAvailabilityDisplayed(void);
-OBJC_EXPORT BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void);
-
 NS_ASSUME_NONNULL_END
