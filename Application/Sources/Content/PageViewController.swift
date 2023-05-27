@@ -313,6 +313,10 @@ extension PageViewController {
     @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
         return PageViewController(id: .topic(topic))
     }
+    
+    @objc static func showViewController(for show: SRGShow) -> UIViewController {
+        return show.transmission == .radio ? SectionViewController.showViewController(for: show) : PageViewController(id: .show(show))
+    }
 }
 
 // MARK: Protocols
@@ -357,18 +361,18 @@ extension PageViewController: UICollectionViewDelegate {
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             case let .show(show):
                 if let navigationController {
-                    let showViewController = SectionViewController.showViewController(for: show)
+                    let showViewController = PageViewController.showViewController(for: show)
                     navigationController.pushViewController(showViewController, animated: true)
                 }
             case let .topic(topic):
                 if let navigationController {
-                    let pageViewController = PageViewController(id: .topic(topic))
+                    let pageViewController = PageViewController.topicViewController(for: topic)
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
             case let .highlight(_, highlightedItem):
                 if let navigationController {
                     if case let .show(show) = highlightedItem {
-                        let showViewController = SectionViewController.showViewController(for: show)
+                        let showViewController = PageViewController.showViewController(for: show)
                         navigationController.pushViewController(showViewController, animated: true)
                     }
                     else {

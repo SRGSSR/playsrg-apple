@@ -349,7 +349,7 @@ final class ProgramViewModel: ObservableObject {
                       let window = UIApplication.shared.mainWindow else {
                     return
                 }
-                let showViewController = SectionViewController.showViewController(for: show)
+                let showViewController = PageViewController.showViewController(for: show)
                 tabBarController.pushViewController(showViewController, animated: false)
                 window.play_dismissAllViewControllers(animated: true, completion: nil)
             }

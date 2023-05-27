@@ -223,7 +223,7 @@ extension ContextMenu {
         }
         return UIAction(title: NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
                         image: UIImage(resource: .episodes)) { _ in
-            let showViewController = SectionViewController.showViewController(for: show)
+            let showViewController = PageViewController.showViewController(for: show)
             navigationController.pushViewController(showViewController, animated: true)
         }
     }
@@ -234,7 +234,7 @@ extension ContextMenu {
 extension ContextMenu {
     static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: identifier) {
-            return SectionViewController.showViewController(for: show)
+            return PageViewController.showViewController(for: show)
         } actionProvider: { _ in
             return menu(for: show, in: viewController)
         }

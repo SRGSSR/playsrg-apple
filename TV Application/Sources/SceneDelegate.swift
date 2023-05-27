@@ -54,7 +54,7 @@ final class SceneDelegate: UIResponder {
     private static func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
-        let videosViewController = PageViewController(id: .video)
+        let videosViewController = PageViewController.videosViewController()
         videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
         videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.value
         viewControllers.append(videosViewController)
@@ -63,7 +63,7 @@ final class SceneDelegate: UIResponder {
         
 #if DEBUG
         if let firstChannel = configuration.radioHomepageChannels.first {
-            let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
+            let audiosViewController = PageViewController.audiosViewController(forRadioChannel: firstChannel)
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.value
             viewControllers.append(audiosViewController)
@@ -71,7 +71,7 @@ final class SceneDelegate: UIResponder {
 #endif
         
         if !configuration.liveHomeSections.isEmpty {
-            let liveViewController = PageViewController(id: .live)
+            let liveViewController = PageViewController.liveViewController()
             liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
             liveViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.value
             viewControllers.append(liveViewController)
