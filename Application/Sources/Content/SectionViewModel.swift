@@ -450,7 +450,7 @@ private extension SectionViewModel {
 #if os(iOS)
                 userActivity.isEligibleForPrediction = true
                 userActivity.persistentIdentifier = show.urn
-                let suggestedInvocationPhraseFormat = (show.transmission == .radio) ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
+                let suggestedInvocationPhraseFormat = show.transmission == .radio ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
                 userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
 #endif
                 

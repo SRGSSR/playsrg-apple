@@ -729,7 +729,7 @@ private extension Content {
         var analyticsLevels: [String]? {
             switch configuredSection {
             case let .show(show):
-                let level1 = (show.transmission == .radio) ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
+                let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
                 return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
             case let .radioAllShows(channelUid),
                 let .radioFavoriteShows(channelUid: channelUid),

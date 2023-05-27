@@ -21,6 +21,8 @@ final class PageViewModel: Identifiable, ObservableObject {
             return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
         case let .topic(topic):
             return topic.title
+        case let .show(show):
+            return show.title
         }
     }
     
@@ -33,6 +35,8 @@ final class PageViewModel: Identifiable, ObservableObject {
             return AnalyticsPageTitle.home.rawValue
         case let .topic(topic):
             return topic.title
+        case let .show(show):
+            return show.title
         }
     }
     
@@ -42,7 +46,7 @@ final class PageViewModel: Identifiable, ObservableObject {
             return AnalyticsPageType.landingPage.rawValue
         case  .live:
             return AnalyticsPageType.live.rawValue
-        case .topic:
+        case .topic, .show:
             return AnalyticsPageType.overview.rawValue
         }
     }
@@ -57,6 +61,9 @@ final class PageViewModel: Identifiable, ObservableObject {
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
         case .topic:
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
+        case let .show(show):
+            let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
+            return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
         }
     }
     
@@ -194,6 +201,7 @@ extension PageViewModel {
         case audio(channel: RadioChannel)
         case live
         case topic(_ topic: SRGTopic)
+        case show(_ show: SRGShow)
         
 #if os(iOS)
         var isNavigationBarHidden: Bool {
@@ -366,6 +374,10 @@ private extension PageViewModel {
                 .eraseToAnyPublisher()
         case let .topic(topic):
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                .eraseToAnyPublisher()
+        case let .show(show):
+            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
