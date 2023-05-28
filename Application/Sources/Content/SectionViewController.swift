@@ -250,7 +250,7 @@ final class SectionViewController: UIViewController {
                                                       style: .plain,
                                                       target: self,
                                                       action: #selector(self.shareContent(_:)))
-                shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on player view")
+                shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on section detail view")
                 navigationItem.rightBarButtonItem = shareButtonItem
             }
             else {

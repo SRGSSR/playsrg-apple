@@ -221,6 +221,15 @@ extension PageViewModel {
                 return false
             }
         }
+        
+        var sharingItem: SharingItem? {
+            switch self {
+            case let .show(show):
+                return SharingItem(for: show)
+            default:
+                return nil
+            }
+        }
 #endif
         
         var supportsCastButton: Bool {

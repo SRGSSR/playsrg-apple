@@ -254,6 +254,18 @@ final class PageViewController: UIViewController {
         }
         
         navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
+        
+        if model.id.sharingItem != nil {
+            let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
+                                                  style: .plain,
+                                                  target: self,
+                                                  action: #selector(self.shareContent(_:)))
+            shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on content page view")
+            navigationItem.rightBarButtonItem = shareButtonItem
+        }
+        else {
+            navigationItem.rightBarButtonItem = nil
+        }
     }
     
     @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
@@ -261,6 +273,18 @@ final class PageViewController: UIViewController {
             refreshControl.endRefreshing()
         }
         refreshTriggered = true
+    }
+    
+    @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
+        guard let sharingItem = model.id.sharingItem else { return }
+        
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, from: .button)
+        activityViewController.modalPresentationStyle = .popover
+        
+        let popoverPresentationController = activityViewController.popoverPresentationController
+        popoverPresentationController?.barButtonItem = barButtonItem
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
 #endif
     
