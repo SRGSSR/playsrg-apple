@@ -782,7 +782,7 @@ private extension SectionViewController {
             case let .show(show):
                 let imageVariant = configuration.properties.imageVariant
                 switch configuration.wrappedValue {
-                case let .content(contentSection):
+                case let .content(contentSection, _):
                     switch contentSection.type {
                     case .predefined:
                         switch contentSection.presentation.type {

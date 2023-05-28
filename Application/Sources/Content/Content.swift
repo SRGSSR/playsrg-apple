@@ -13,13 +13,13 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
 
 enum Content {
     enum Section: Hashable {
-        case content(SRGContentSection)
+        case content(SRGContentSection, displayedShow: SRGShow? = nil)
         case configured(ConfiguredSection)
         
         var properties: SectionProperties {
             switch self {
-            case let .content(section):
-                return ContentSectionProperties(contentSection: section)
+            case let .content(section, displayedShow):
+                return ContentSectionProperties(contentSection: section, displayedShow: displayedShow)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
             }
@@ -141,9 +141,9 @@ protocol SectionProperties {
     var emptyType: EmptyContentView.`Type` { get }
     var hasHighlightedItem: Bool { get }
     
+    var displayedShow: SRGShow? { get }
 #if os(iOS)
     var sharingItem: SharingItem? { get }
-    var displayedShow: SRGShow? { get }
     var canResetApplicationBadge: Bool { get }
 #endif
     
@@ -175,6 +175,7 @@ protocol SectionProperties {
 private extension Content {
     struct ContentSectionProperties: SectionProperties {
         let contentSection: SRGContentSection
+        let displayedShow: SRGShow?
         
         private var presentation: SRGContentPresentation {
             return contentSection.presentation
@@ -281,14 +282,9 @@ private extension Content {
         var hasHighlightedItem: Bool {
             return presentation.type == .showPromotion
         }
-        
 #if os(iOS)
         var sharingItem: SharingItem? {
             return SharingItem(for: contentSection)
-        }
-        
-        var displayedShow: SRGShow? {
-            return nil
         }
         
         var canResetApplicationBadge: Bool {
@@ -366,7 +362,7 @@ private extension Content {
                 return [.showPlaceholder(index: 0)]
             case .topicSelector:
                 return (0..<kDefaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
-            case .swimlane, .mediaElementSwimlane, .heroStage, .grid:
+            case .swimlane, .mediaElementSwimlane, .heroStage, .grid, .availableEpisodes:
                 switch contentSection.type {
                 case .showAndMedias:
                     let mediaPlaceholderItems: [Content.Item] = (1..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -449,6 +445,17 @@ private extension Content {
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
 #endif
+                case .availableEpisodes:
+                    if let show = displayedShow {
+                        return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
+                            .map { $0.map { .media($0) } }
+                            .eraseToAnyPublisher()
+                    }
+                    else {
+                        return Just([])
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                    }
                 default:
                     return Just([])
                         .setFailureType(to: Error.self)
@@ -649,20 +656,19 @@ private extension Content {
             return false
         }
         
+        var displayedShow: SRGShow? {
+            if case let .show(show) = configuredSection {
+                return show
+            }
+            else {
+                return nil
+            }
+        }
 #if os(iOS)
         var sharingItem: SharingItem? {
             switch configuredSection {
             case let .show(show):
                 return SharingItem(for: show)
-            default:
-                return nil
-            }
-        }
-        
-        var displayedShow: SRGShow? {
-            switch configuredSection {
-            case let .show(show):
-                return show
             default:
                 return nil
             }

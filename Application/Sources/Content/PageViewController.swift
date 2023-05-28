@@ -631,6 +631,17 @@ private extension PageViewController {
                         return ShowAccessCellSize.fullWidth()
                     }
 #endif
+                case .mediaList:
+#if os(iOS)
+                    let horizontalMargin = horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin, spacing: Self.itemSpacing) { _, _ in
+                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                    }
+#else
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                        return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
+                    }
+#endif
                 }
             }
             
@@ -664,7 +675,9 @@ private extension PageViewController {
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                PlaySRG.MediaCell(media: media, style: .show)
+                PlaySRG.MediaCell(media: media, style: section.properties.displayedShow != nil ? .date : .show)
+            case .mediaList:
+                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
             default:
                 PlaySRG.MediaCell(media: media, style: .show, layout: .vertical)
             }
@@ -698,6 +711,7 @@ private extension PageViewController {
                 case .mediaPlaceholder:
                     MediaCell(media: nil, section: item.section)
                 case let .media(media):
+                    
                     MediaCell(media: media, section: item.section)
                 case .showPlaceholder:
                     ShowCell(show: nil, section: item.section)

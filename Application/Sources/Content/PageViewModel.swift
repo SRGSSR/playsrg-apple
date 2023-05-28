@@ -26,6 +26,15 @@ final class PageViewModel: Identifiable, ObservableObject {
         }
     }
     
+    var displayedShow: SRGShow? {
+        if case let .show(show) = id {
+            return show
+        }
+        else {
+            return nil
+        }
+    }
+    
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
     
@@ -166,7 +175,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     private static func hasLoadMore(for section: Section, in sections: [Section]) -> Bool {
-        if section == sections.last && section.viewModelProperties.hasGridLayout {
+        if section == sections.last && section.viewModelProperties.hasLoadMore {
             return true
         }
         else {
@@ -302,6 +311,7 @@ extension PageViewModel {
         case liveMediaGrid
         case liveMediaSwimlane
         case mediaGrid
+        case mediaList
         case mediaSwimlane
         case showGrid
         case showSwimlane
@@ -331,7 +341,7 @@ extension PageViewModel {
         
         var viewModelProperties: PageViewModelProperties {
             switch wrappedValue {
-            case let .content(section):
+            case let .content(section, _):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section, index: index)
@@ -378,7 +388,7 @@ private extension PageViewModel {
                 .eraseToAnyPublisher()
         case let .show(show):
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, displayedShow: show), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
             return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
@@ -452,9 +462,9 @@ extension PageViewModelProperties {
     }
 #endif
     
-    var hasGridLayout: Bool {
+    var hasLoadMore: Bool {
         switch layout {
-        case .mediaGrid, .showGrid, .liveMediaGrid:
+        case .mediaGrid, .mediaList, .showGrid, .liveMediaGrid:
             return true
         default:
             return false
@@ -494,6 +504,12 @@ private extension PageViewModel {
                 return (contentSection.type == .shows) ? .showSwimlane : .mediaSwimlane
             case .grid:
                 return (contentSection.type == .shows) ? .showGrid : .mediaGrid
+            case .availableEpisodes:
+#if os(iOS)
+                return .mediaList
+#else
+                return .mediaGrid
+#endif
             case .livestreams:
                 return .liveMediaSwimlane
             default:

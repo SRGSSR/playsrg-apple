@@ -142,7 +142,7 @@ extension SectionViewModel {
         
         var viewModelProperties: SectionViewModelProperties {
             switch wrappedValue {
-            case let .content(section):
+            case let .content(section, _):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
