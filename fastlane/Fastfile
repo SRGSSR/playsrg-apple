@@ -1847,7 +1847,7 @@ end
 def gitflow_release(tags, branch_name)
   Dir.chdir('..') do
     sh 'git checkout master'
-    sh 'git pull --rebase'
+    sh 'git pull --rebase origin master'
     sh "git merge --no-ff #{branch_name}"
   end
   tags.each do |tag|
@@ -1856,7 +1856,7 @@ def gitflow_release(tags, branch_name)
   end
   Dir.chdir('..') do
     sh 'git checkout develop'
-    sh 'git pull --rebase'
+    sh 'git pull --rebase origin develop'
     sh "git merge --no-ff #{tags[0]}"
   end
 end
