@@ -8,12 +8,10 @@
 
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayDurationFormatter.h"
-#import "SRGMedia+PlaySRG.h"
-#import "UIColor+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 
 @import SRGAppearance;
 
@@ -42,13 +40,13 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     [self play_displayDurationLabelWithTimeAvailability:[mediaMetadata timeAvailabilityAtDate:NSDate.date]
                                                duration:mediaMetadata.duration
                       isLivestreamOrScheduledLivestream:isLivestreamOrScheduledLivestream
-                                            isLiveEvent:PlayIsSwissTXTURN(mediaMetadata.URN)];
+                                            isLiveEvent:[SRGMedia PlayIsSwissTXTURN:mediaMetadata.URN]];
 }
 
 - (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
 {
     if (mediaMetadata.date) {
-        NSString *text = [NSDateFormatter.play_shortDateAndTimeFormatter stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
+        NSString *text = [NSDateFormatter.play_shortDateAndTime stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
         NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(mediaMetadata.date);
         
         NSDate *nowDate = NSDate.date;
@@ -57,7 +55,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
                 && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
             NSDateComponents *remainingDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
             if (remainingDateComponents.day > kDayNearExpirationThreshold) {
-                NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDateFormatter stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
+                NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDate stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
                 // Unbreakable spaces before / after the separator
                 text = [text stringByAppendingFormat:@" · %@", expiration];
                 
@@ -88,7 +86,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     NSDate *nowDate = NSDate.date;
     SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
-        self.backgroundColor = UIColor.play_greenColor;
+        self.backgroundColor = UIColor.play_green;
         
         text = NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.");
     }
@@ -99,7 +97,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
     else if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
              && (mediaMetadata.contentType == SRGContentTypeEpisode || mediaMetadata.contentType == SRGContentTypeClip)) {
-        self.backgroundColor = UIColor.play_orangeColor;
+        self.backgroundColor = UIColor.play_orange;
         
         NSDateComponents *monthsDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
         if (monthsDateComponents.day <= kDayNearExpirationThreshold) {
@@ -159,7 +157,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_displayDurationLabelWithName:(NSString *)name isLive:(BOOL)isLive
 {
-    self.backgroundColor = isLive ? UIColor.srg_lightRedColor : UIColor.play_blackDurationLabelBackgroundColor;
+    self.backgroundColor = isLive ? UIColor.srg_lightRedColor : UIColor.play_blackDurationLabelBackground;
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     

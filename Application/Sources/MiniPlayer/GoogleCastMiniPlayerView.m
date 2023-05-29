@@ -11,7 +11,6 @@
 #import "GoogleCastPlaybackButton.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "UIWindow+PlaySRG.h"
 
 @import SRGAnalytics;
 @import SRGAppearance;

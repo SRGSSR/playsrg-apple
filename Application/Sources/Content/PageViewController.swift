@@ -144,14 +144,14 @@ final class PageViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: self.globalHeaderTitle)
+            view.content = TitleView(text: globalHeaderTitle)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: self.model.id)
+            view.content = SectionHeaderView(section: section, pageId: model.id)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -180,8 +180,8 @@ final class PageViewController: UIViewController {
         
         NotificationCenter.default.weakPublisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .sink { [weak self] _ in
-                guard let self, self.play_isViewCurrent else { return }
-                self.updateNavigationBar(animated: true)
+                guard let self, play_isViewCurrent else { return }
+                updateNavigationBar(animated: true)
             }
             .store(in: &cancellables)
 #endif

@@ -6,7 +6,6 @@
 
 #import "NavigationController.h"
 
-#import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 @import SRGAppearance;

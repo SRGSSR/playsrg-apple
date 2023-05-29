@@ -6,8 +6,8 @@
 
 #import "DeepLinkService.h"
 
-#import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
+#import "PlaySRG-Swift.h"
 #import "Reachability.h"
 
 @import JavaScriptCore;
@@ -110,7 +110,7 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
     
     if ([playURL.host.lowercaseString isEqualToString:@"unsupported"]) {
         SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
-        [report setString:[[NSDateFormatter play_rfc3339DateFormatter] stringFromDate:NSDate.date] forKey:@"clientTime"];
+        [report setString:[[NSDateFormatter play_rfc3339Date] stringFromDate:NSDate.date] forKey:@"clientTime"];
         [report setString:NSBundle.mainBundle.bundleIdentifier forKey:@"clientId"];
         [report setNumber:[context objectForKeyedSubscript:@"parsePlayUrlVersion"].toNumber forKey:@"jsVersion"];
         [report setString:URL.absoluteString forKey:@"url"];

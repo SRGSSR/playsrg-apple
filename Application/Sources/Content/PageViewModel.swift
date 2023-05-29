@@ -126,13 +126,13 @@ final class PageViewModel: Identifiable, ObservableObject {
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
-                    return self.state.sections.isEmpty
+                    return state.sections.isEmpty
                 },
             ApplicationSignal.foregroundAfterTimeInBackground(),
             ApplicationSignal.applicationConfigurationUpdate()
                 .filter { [weak self] in
                     guard let self else { return false }
-                    return self.id.isConfigured
+                    return id.isConfigured
                 }
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)

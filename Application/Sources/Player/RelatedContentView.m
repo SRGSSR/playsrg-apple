@@ -9,7 +9,6 @@
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIApplication+PlaySRG.h"
-#import "UIColor+PlaySRG.h"
 
 @import SRGAppearance;
 

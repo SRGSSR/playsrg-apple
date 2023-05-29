@@ -31,7 +31,7 @@ struct ExpandingCardButton<Content: View>: View {
                 content()
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .onParentFocusChange { focused in
-                        if let onFocusAction = self.onFocusChangeAction {
+                        if let onFocusAction = onFocusChangeAction {
                             onFocusAction(focused)
                         }
                         isFocused = focused

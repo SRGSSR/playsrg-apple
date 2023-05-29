@@ -6,7 +6,9 @@
 
 #import "ApplicationSection.h"
 #import "RadioChannel.h"
+#if TARGET_OS_IOS
 #import "UserNotification.h"
+#endif
 
 @import Foundation;
 @import UIKit;
@@ -44,6 +46,7 @@ OBJC_EXPORT ApplicationSectionOptionKey const ApplicationSectionOptionShowByDate
 @property (nonatomic, readonly, copy) NSString *title;
 @property (nonatomic, readonly, copy, nullable) NSString *uid;
 @property (nonatomic, readonly, nullable) UIImage *image;
+@property (nonatomic, readonly, nullable) NSString *imageName;
 @property (nonatomic, readonly, nullable) NSDictionary<ApplicationSectionOptionKey, id> *options;
 
 @property (nonatomic, readonly, nullable) RadioChannel *radioChannel;

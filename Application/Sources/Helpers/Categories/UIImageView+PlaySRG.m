@@ -8,7 +8,6 @@
 
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
-#import "UIImage+PlaySRG.h"
 
 #import <objc/runtime.h>
 
@@ -123,12 +122,32 @@
 
 #pragma mark Standard image loading
 
+- (NSString *)filePathForImagePlaceholder:(ImagePlaceholder)imagePlaceholder
+{
+    NSString *resource = nil;
+    switch (imagePlaceholder) {
+        case ImagePlaceholderMedia:
+            resource = @"placeholder_media";
+            break;
+        case ImagePlaceholderMediaList:
+            resource = @"placeholder_media_list";
+            break;
+        case ImagePlaceholderNotification:
+            resource = @"placeholder_notification";
+            break;
+        default:
+            break;
+    }
+    
+    return [NSBundle.mainBundle pathForResource:resource ofType:@"pdf"];
+}
+
 - (void)play_requestImage:(SRGImage *)image
                  withSize:(SRGImageSize)size
               placeholder:(ImagePlaceholder)placeholder
     unavailabilityHandler:(void (^)(void))unavailabilityHandler
 {
-    NSString *filePath = FilePathForImagePlaceholder(placeholder);
+    NSString *filePath = [self filePathForImagePlaceholder:placeholder];
     CGSize recommendedSize = SRGRecommendedImageCGSize(size, image.variant);
     UIImage *placeholderImage = filePath ? [UIImage srg_vectorImageAtPath:filePath withSize:recommendedSize] : nil;
     

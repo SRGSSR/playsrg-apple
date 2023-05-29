@@ -119,11 +119,11 @@ final class SectionViewController: UIViewController {
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
             guard let self else { return }
-            let section = self.dataSource.snapshot().sectionIdentifiers[indexPath.section]
-            let isLastItem = indexPath.row + 1 == self.dataSource.snapshot().numberOfItems(inSection: section)
-            cell.content = ItemCell(item: item, configuration: self.model.configuration, isLastItem: isLastItem)
+            let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
+            let isLastItem = indexPath.row + 1 == dataSource.snapshot().numberOfItems(inSection: section)
+            cell.content = ItemCell(item: item, configuration: model.configuration, isLastItem: isLastItem)
             if let hostController = cell.hostController {
-                self.addChild(hostController)
+                addChild(hostController)
             }
         }
         
@@ -133,29 +133,29 @@ final class SectionViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: self.globalHeaderTitle)
+            view.content = TitleView(text: globalHeaderTitle)
             if let hostController = view.hostController {
-                self.addChild(hostController)
+                addChild(hostController)
             }
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
+            view.content = SectionHeaderView(section: section, configuration: model.configuration)
             if let hostController = view.hostController {
-                self.addChild(hostController)
+                addChild(hostController)
             }
         }
         
         let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionFooterView>>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] view, _, indexPath in
             guard let self else { return }
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionFooterView(section: section)
             if let hostController = view.hostController {
-                self.addChild(hostController)
+                addChild(hostController)
             }
         }
         
@@ -184,8 +184,8 @@ final class SectionViewController: UIViewController {
             .sink { [weak self] _ in
                 guard let self else { return }
                 
-                self.contentInsets = Self.contentInsets(for: self.model.state, displayDivider: self.model.configuration.viewModelProperties.displayDivider)
-                self.collectionView.reloadData()
+                contentInsets = Self.contentInsets(for: model.state, displayDivider: model.configuration.viewModelProperties.displayDivider)
+                collectionView.reloadData()
             }
             .store(in: &cancellables)
 #endif

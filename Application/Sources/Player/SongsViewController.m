@@ -9,11 +9,10 @@
 #import "ApplicationConfiguration.h"
 #import "ForegroundTimer.h"
 #import "Layout.h"
+#import "PlaySRG-Swift.h"
 #import "SongTableViewCell.h"
 #import "SRGLetterboxController+PlaySRG.h"
-#import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
-#import "UIColor+PlaySRG.h"
 #import "UITableView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 

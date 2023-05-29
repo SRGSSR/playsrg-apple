@@ -6,7 +6,6 @@
 
 #import "UserNotification.h"
 
-#import "UIImage+PlaySRG.h"
 #import "NSFileManager+PlaySRG.h"
 #import "PlayLogger.h"
 

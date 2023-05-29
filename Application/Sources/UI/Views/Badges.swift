@@ -125,7 +125,7 @@ struct YouthProtectionBadge: View {
     let color: SRGYouthProtectionColor
     
     var body: some View {
-        if let image = YouthProtectionImageForColor(color) {
+        if let image = UIImage.image(for: color) {
             Image(uiImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)

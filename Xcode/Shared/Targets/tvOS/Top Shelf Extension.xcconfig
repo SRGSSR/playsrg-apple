@@ -1,6 +1,4 @@
 #include "Xcode/Shared/Targets/tvOS/Common.xcconfig"
 
-SWIFT_OBJC_BRIDGING_HEADER=$(PROJECT_DIR)/Extensions/TopShelf/Sources/Bridges/PlaySRG-TopShelf-ObjectiveC.h
-
 TARGET__BUNDLE_IDENTIFIER_SUFFIX = .top-shelf-extension
 TARGET__PRODUCT_NAME_SUFFIX = $() top shelf extension

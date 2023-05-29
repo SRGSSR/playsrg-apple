@@ -105,9 +105,9 @@ final class SearchViewController: UIViewController {
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, settings: self.model.settings)
+            view.content = SectionHeaderView(section: section, settings: model.settings)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
@@ -117,9 +117,9 @@ final class SearchViewController: UIViewController {
         model.$state
             .sink { [weak self] state in
                 guard let self else { return }
-                self.reloadData(for: state)
+                reloadData(for: state)
 #if os(tvOS)
-                guard let searchController = self.searchController else { return }
+                guard let searchController = searchController else { return }
                 if case let .loaded(rows: _, suggestions: suggestions) = state {
                     if let suggestions {
                         searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }

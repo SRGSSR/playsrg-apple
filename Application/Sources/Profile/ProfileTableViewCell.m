@@ -8,7 +8,6 @@
 
 #import "DownloadSession.h"
 #import "PushService.h"
-#import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
 @import SRGAppearance;

@@ -7,7 +7,9 @@
 #import "ApplicationSectionInfo.h"
 
 #import "ApplicationConfiguration.h"
+#if TARGET_OS_IOS
 #import "PushService.h"
+#endif
 
 ApplicationSectionOptionKey const ApplicationSectionOptionNotificationKey = @"ApplicationSectionOptionNotification";
 ApplicationSectionOptionKey const ApplicationSectionOptionSearchMediaTypeOptionKey = @"ApplicationSectionOptionSearchMediaTypeOption";
@@ -42,6 +44,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
                                                               options:options];
 }
 
+#if TARGET_OS_IOS
 + (ApplicationSectionInfo *)applicationSectionInfoWithNotification:(UserNotification *)notification
 {
     return [[ApplicationSectionInfo alloc] initWithApplicationSection:ApplicationSectionNotifications
@@ -49,10 +52,12 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
                                                                   uid:notification.identifier
                                                               options:@{ ApplicationSectionOptionNotificationKey : notification }];
 }
+#endif
 
 + (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfosWithNotificationPreview:(BOOL)notificationPreview
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
+#if TARGET_OS_IOS
     if (PushService.sharedService.enabled) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
         
@@ -64,10 +69,13 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
             }
         }
     }
+#endif
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionWatchLater radioChannel:nil]];
+#if TARGET_OS_IOS
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionDownloads radioChannel:nil]];
+#endif
     
     return sectionInfos.copy;
 }
@@ -100,34 +108,38 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 
 - (UIImage *)image
 {
+    return [UIImage imageNamed:self.imageName];
+}
+
+- (NSString *)imageName {
     switch (self.applicationSection) {
         case ApplicationSectionSearch: {
-            return [UIImage imageNamed:@"search"];
+            return @"search";
             break;
         }
             
         case ApplicationSectionFavorites: {
-            return [UIImage imageNamed:@"favorite"];
+            return @"favorite";
             break;
         }
             
         case ApplicationSectionWatchLater: {
-            return [UIImage imageNamed:@"watch_later"];
+            return @"watch_later";
             break;
         }
             
         case ApplicationSectionDownloads: {
-            return [UIImage imageNamed:@"download"];
+            return @"download";
             break;
         }
             
         case ApplicationSectionHistory: {
-            return [UIImage imageNamed:@"history"];
+            return @"history";
             break;
         }
             
         case ApplicationSectionNotifications: {
-            return [UIImage imageNamed:@"subscription"];
+            return @"subscription";
             break;
         }
             

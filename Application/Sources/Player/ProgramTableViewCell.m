@@ -8,10 +8,8 @@
 
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
-#import "SRGProgram+PlaySRG.h"
-#import "UIColor+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "UIImageView+PlaySRG.h"
 
 @import SRGAppearance;
@@ -42,7 +40,7 @@
     self.backgroundColor = UIColor.clearColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackground;
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
@@ -115,13 +113,13 @@
     }
     
     if ([dateInterval containsDate:program.startDate]) {
-        self.accessibilityLabel = [program play_accessibilityLabelWithChannel:nil];
+        self.accessibilityLabel = [program play_accessibilityLabelWith:nil];
         self.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint");
         
         self.titleLabel.textColor = UIColor.whiteColor;
         
         // Unbreakable spaces before / after the separator
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:program.startDate], [NSDateFormatter.play_time stringFromDate:program.endDate]];
         self.subtitleLabel.textColor = UIColor.whiteColor;
         
         self.disabledOverlayView.hidden = YES;
@@ -134,20 +132,20 @@
         
         self.titleLabel.textColor = UIColor.srg_gray96Color;
         
-        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next, at %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next, at %@", @"Introductory time for next program information"), [NSDateFormatter.play_time stringFromDate:program.startDate]];
         self.subtitleLabel.textColor = UIColor.srg_gray96Color;
         
         self.disabledOverlayView.hidden = NO;
         self.userInteractionEnabled = NO;
     }
     else {
-        self.accessibilityLabel = [program play_accessibilityLabelWithChannel:nil];
+        self.accessibilityLabel = [program play_accessibilityLabelWith:nil];
         self.accessibilityHint = nil;
         
         self.titleLabel.textColor = UIColor.whiteColor;
         
         // Unbreakable spaces before / after the separator
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_time stringFromDate:program.startDate], [NSDateFormatter.play_time stringFromDate:program.endDate]];
         self.subtitleLabel.textColor = UIColor.whiteColor;
         
         self.disabledOverlayView.hidden = YES;
