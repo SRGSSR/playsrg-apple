@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -24,6 +25,7 @@ struct ProfileAccountHeaderView: View {
         
         private let spacing: CGFloat = LayoutMargin * 1.5
         private let iconHeight: CGFloat = 24 * 1.5
+        private let lineWidth: CGFloat = 1.2
         
         private let serviceLogoHeight: CGFloat = 24 * 1.5 * 0.6
         private let serviceLogoOffsetX: CGFloat = 14
@@ -43,6 +45,31 @@ struct ProfileAccountHeaderView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: iconHeight)
+                        if let emailAddress = model.data.account?.emailAddress,
+                           let gravatarImageURL = URL(string: "https://www.gravatar.com/avatar/\(emailAddress.lowercased().play_md5hash)?d=404&s=\(300)") {
+                            LazyImage(source: gravatarImageURL) { state in
+                                if let image = state.image {
+                                    image
+                                        .resizingMode(.aspectFit)
+                                        .frame(maxWidth: iconHeight, maxHeight: iconHeight)
+                                        .mask(
+                                            Circle()
+                                                .frame(maxWidth: iconHeight, maxHeight: iconHeight)
+                                        )
+                                        .overlay(
+                                            Circle()
+                                                .stroke(Color.srgGrayC7, lineWidth: lineWidth)
+                                                .frame(maxWidth: iconHeight - lineWidth, maxHeight: iconHeight - lineWidth)
+                                        )
+                                        .opacity(1)
+                                }
+                                else {
+                                    Rectangle()
+                                        .foregroundColor(.clear)
+                                        .frame(maxWidth: iconHeight, maxHeight: iconHeight)
+                                }
+                            }
+                        }
                         if let image = UIImage(named: "identity_service_logo") {
                             Image(uiImage: image)
                                 .resizable()
