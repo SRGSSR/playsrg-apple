@@ -10,14 +10,21 @@ struct ProfileSectionHeaderView: View {
     let title: String
     
     var body: some View {
-        HeaderView(title: title, subtitle: nil, hasDetailDisclosure: false)
-            .padding(.horizontal, 16)
+        VStack(spacing: 0) {
+            Spacer(minLength: 0)
+            Text(title)
+                .srgFont(.H1)
+                .lineLimit(1)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .foregroundColor(.srgGrayC7)
+        .padding(.all, 16)
     }
 }
 
 struct ProfileSectionHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileSectionHeaderView(title: "Title")
-            .previewLayout(.sizeThatFits)
+            .previewLayout(.fixed(width: 320, height: 64))
     }
 }
