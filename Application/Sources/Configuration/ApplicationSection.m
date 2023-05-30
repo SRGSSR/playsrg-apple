@@ -14,7 +14,13 @@ NSString *TitleForApplicationSection(ApplicationSection applicationSection)
         s_names = @{ @(ApplicationSectionDownloads) : NSLocalizedString(@"Downloads", @"Label to present downloads"),
                      @(ApplicationSectionFavorites) : NSLocalizedString(@"Favorites", @"Label to present Favorites"),
                      @(ApplicationSectionHistory) : NSLocalizedString(@"History", @"Label to present history"),
-                     @(ApplicationSectionNotifications) : NSLocalizedString(@"Notifications", @"Label to present the help page"),
+                     @(ApplicationSectionNotifications) : NSLocalizedString(@"Notifications", @"Label to present Notifications"),
+                     
+                     @(ApplicationSectionFAQs) : NSLocalizedString(@"FAQs", @"Label to present FAQs"),
+                     @(ApplicationSectionTechnicaIssue) : NSLocalizedString(@"Report a technical issue", @"Label to present technical issue report instructions"),
+                     @(ApplicationSectionFeedback) : NSLocalizedString(@"Help us to improve the application", @"Label to present feedback form"),
+                     @(ApplicationSectionEvaluateApplication) : NSLocalizedString(@"Evaluate the application", @"Label to present the rate the application AppStore view"),
+                     
                      @(ApplicationSectionSearch) : NSLocalizedString(@"Search", @"Label to present the search view"),
                      @(ApplicationSectionShowByDate) : NSLocalizedString(@"Shows by date", @"Label to present shows (episodes) by date (radio or TV)"),
                      @(ApplicationSectionOverview) : NSLocalizedString(@"Overview", @"Label to present the main Videos / Audios views"),

@@ -134,7 +134,7 @@ class HostSupplementaryView<Content: View>: UICollectionReusableView {
  *  Table view cell hosting `SwiftUI` content.
  */
 class HostTableViewCell<Content: View>: UITableViewCell {
-    private var hostController: UIHostingController<Content>?
+    private var hostController: UIHostingController<HostCellView<Content>>?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -151,8 +151,9 @@ class HostTableViewCell<Content: View>: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func update(with content: Content?) {
-        if let rootView = content {
+    private func update(with content: Content?, editing: Bool, selected: Bool, selectionStyle: UITableViewCell.SelectionStyle, UIKitFocused: Bool) {
+        if let content {
+            let rootView = HostCellView(editing: editing, selected: selected && selectionStyle != .none, UIKitFocused: UIKitFocused, content: content)
             if let hostController {
                 hostController.rootView = rootView
             }
@@ -166,10 +167,79 @@ class HostTableViewCell<Content: View>: UITableViewCell {
                 
                 hostView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin / 2),
-                    hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutMargin / 2),
-                    hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin),
-                    hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin)
+                    hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin),
+                    hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                    hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin * 2),
+                    hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin * 2)
+                ])
+            }
+        }
+        else if let hostView = hostController?.view {
+            hostView.removeFromSuperview()
+        }
+    }
+    
+    var content: Content? {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    override var isEditing: Bool {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    override var selectionStyle: UITableViewCell.SelectionStyle {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    var isUIKitFocused = false {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, selectionStyle: selectionStyle, UIKitFocused: isUIKitFocused)
+        }
+    }
+}
+
+/**
+ *  Table view view reusable view hosting `SwiftUI` content.
+ */
+class HostTableViewHeaderFooterView<Content: View>: UITableViewHeaderFooterView {
+    private(set) var hostController: UIHostingController<Content>?
+    
+    private func update(with content: Content?) {
+        if let rootView = content {
+            if let hostController {
+                hostController.rootView = rootView
+            }
+            else {
+                hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+            }
+            
+            if let hostView = hostController?.view, hostView.superview != self {
+                hostView.backgroundColor = .clear
+                addSubview(hostView)
+                
+                hostView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    hostView.topAnchor.constraint(equalTo: topAnchor),
+                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor)
                 ])
             }
         }
@@ -190,11 +260,19 @@ class HostTableViewCell<Content: View>: UITableViewCell {
  */
 class HostView<Content: View>: UIView {
     let ignoresSafeArea: Bool
+    let topAnchorConstant: CGFloat
+    let bottomAnchorConstant: CGFloat
+    let leadingAnchorConstant: CGFloat
+    let trailingAnchorConstant: CGFloat
     
     private var hostController: UIHostingController<Content>?
     
-    init(frame: CGRect, ignoresSafeArea: Bool) {
+    init(frame: CGRect, ignoresSafeArea: Bool = true, topAnchorConstant: CGFloat = 0, bottomAnchorConstant: CGFloat = 0, leadingAnchorConstant: CGFloat = 0, trailingAnchorConstant: CGFloat = 0) {
         self.ignoresSafeArea = ignoresSafeArea
+        self.topAnchorConstant = topAnchorConstant
+        self.bottomAnchorConstant = bottomAnchorConstant
+        self.leadingAnchorConstant = leadingAnchorConstant
+        self.trailingAnchorConstant = trailingAnchorConstant
         super.init(frame: frame)
     }
     
@@ -221,10 +299,10 @@ class HostView<Content: View>: UIView {
                 
                 hostView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
-                    hostView.topAnchor.constraint(equalTo: topAnchor),
-                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor),
-                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor),
-                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                    hostView.topAnchor.constraint(equalTo: topAnchor, constant: topAnchorConstant),
+                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: bottomAnchorConstant),
+                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: leadingAnchorConstant),
+                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: trailingAnchorConstant)
                 ])
             }
         }

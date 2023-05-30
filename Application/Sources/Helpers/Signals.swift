@@ -216,6 +216,26 @@ enum ApplicationSignal {
 #endif
     }
     
+#if os(iOS)
+    static func isPushServiceBadgeDisplayed() -> AnyPublisher<Bool, Never> {
+        return NotificationCenter.default.weakPublisher(for: .PushServiceBadgeDidChange)
+            .map { _ in
+                return UIApplication.shared.applicationIconBadgeNumber != 0
+            }
+            .prepend(UIApplication.shared.applicationIconBadgeNumber != 0)
+            .eraseToAnyPublisher()
+    }
+    
+    static func hasUserUnreadNotifications() -> AnyPublisher<Bool, Never> {
+        return NotificationCenter.default.weakPublisher(for: .UserNotificationsDidChange)
+            .map { _ in
+                return !UserNotification.unreadNotifications.isEmpty
+            }
+            .prepend(!UserNotification.unreadNotifications.isEmpty)
+            .eraseToAnyPublisher()
+    }
+#endif
+    
     /**
      *  Emits a signal when the user default setting at the specified key path changes. The key path must bear
      *  the exact same name as the setting key. Key paths should be defined in `UserDefaults+ApplicationSettings.swift`.

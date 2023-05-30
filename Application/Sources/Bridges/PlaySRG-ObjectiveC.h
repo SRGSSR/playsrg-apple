@@ -9,6 +9,7 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSectionInfo.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettings+Common.h"
 #import "ApplicationSettingsConstants.h"
@@ -26,6 +27,7 @@
 #import "MediaPreviewViewController.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "NSString+PlaySRG.h"
 #import "Orientation.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayApplication.h"

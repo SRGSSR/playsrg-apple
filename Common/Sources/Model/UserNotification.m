@@ -11,6 +11,8 @@
 
 @import libextobjc;
 
+NSString * const UserNotificationsDidChangeNotification = @"UserNotificationsDidChangeNotification";
+
 static NSValueTransformer *NotificationTypeTransformer(void);
 
 static NSString *NotificationDescriptionForType(UserNotificationType notificationType)
@@ -124,6 +126,9 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
     [plistData writeToURL:[self notificationsFilePath] options:NSDataWritingAtomic error:&writeError];
     if (writeError) {
         PlayLogError(@"notifications", @"Could not save notifications data. Reason: %@", writeError);
+    }
+    else {
+        [NSNotificationCenter.defaultCenter postNotificationName:UserNotificationsDidChangeNotification object:nil];
     }
 }
 

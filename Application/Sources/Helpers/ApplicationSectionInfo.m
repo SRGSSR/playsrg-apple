@@ -54,29 +54,37 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 }
 #endif
 
-+ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfosWithNotificationPreview:(BOOL)notificationPreview
++ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfos
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
 #if TARGET_OS_IOS
     if (PushService.sharedService.enabled) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
-        
-        if (notificationPreview) {
-            NSArray<UserNotification *> *unreadNotifications = UserNotification.unreadNotifications;
-            NSArray<UserNotification *> *previewNotifications = [unreadNotifications subarrayWithRange:NSMakeRange(0, MIN(3, unreadNotifications.count))];
-            for (UserNotification *notification in previewNotifications) {
-                [sectionInfos addObject:[self applicationSectionInfoWithNotification:notification]];
-            }
-        }
     }
 #endif
-    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil]];
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil]];
-    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionWatchLater radioChannel:nil]];
+    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil]];
 #if TARGET_OS_IOS
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionDownloads radioChannel:nil]];
 #endif
+    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionWatchLater radioChannel:nil]];
     
+    return sectionInfos.copy;
+}
+
++ (NSArray<ApplicationSectionInfo *> *)helpApplicationSectionInfos
+{
+    NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
+    if (ApplicationConfiguration.sharedApplicationConfiguration.faqURL != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFAQs radioChannel:nil]];
+    }
+    if (ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionTechnicaIssue radioChannel:nil]];
+    }
+    if (ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFeedback radioChannel:nil]];
+    }
+    [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionEvaluateApplication radioChannel:nil]];
     return sectionInfos.copy;
 }
 
@@ -145,6 +153,24 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
             
         default: {
             return nil;
+            break;
+        }
+    }
+}
+
+- (BOOL)isModalPresentation
+{
+    switch (self.applicationSection) {
+        case ApplicationSectionFAQs:
+        case ApplicationSectionTechnicaIssue:
+        case ApplicationSectionFeedback:
+        case ApplicationSectionEvaluateApplication: {
+            return YES;
+            break;
+        }
+            
+        default: {
+            return NO;
             break;
         }
     }

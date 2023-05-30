@@ -30,11 +30,18 @@ struct SettingsView: View {
             QualitySection()
 #endif
             PlaybackSection()
-            DisplaySection()
+            if !(ApplicationConfiguration.shared.isSubtitleAvailabilityHidden && ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden) {
+                DisplaySection()
+            }
 #if os(iOS)
             PermissionsSection(model: model)
 #endif
             ContentSection(model: model)
+#if os(tvOS)
+            if model.canDisplayHelpAndContactSection {
+                HelpAndContactSection(model: model)
+            }
+#endif
             InformationSection(model: model)
 #if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
@@ -53,7 +60,7 @@ struct SettingsView: View {
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
-
+    
 #if os(tvOS)
     // MARK: Profile section
     
@@ -62,7 +69,7 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                ForEach(ApplicationSectionInfo.profileApplicationSectionInfos(withNotificationPreview: false), id: \.applicationSection) { applicationSectionInfo in
+                ForEach(ApplicationSectionInfo.profileApplicationSectionInfos(), id: \.applicationSection) { applicationSectionInfo in
                     Button(action: navigateTo(applicationSectionInfo.applicationSection)) {
                         HStack(spacing: 16) {
                             if let imageName = applicationSectionInfo.imageName {
@@ -78,7 +85,7 @@ struct SettingsView: View {
             } header: {
                 Text(NSLocalizedString("Profile", comment: "Profile section header"))
             } footer: {
-                model.supportsLogin ? Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")) : nil
+                model.supportsLogin ? Text(NSLocalizedString("Synchronize favorites, playback history and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")) : nil
             }
         }
         
@@ -189,8 +196,12 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                Toggle(NSLocalizedString("Subtitle availability", comment: "Subtitle availability setting label"), isOn: $isSubtitleAvailabilityDisplayed)
-                Toggle(NSLocalizedString("Audio description availability", comment: "Audio description availability setting label"), isOn: $isAudioDescriptionAvailabilityDisplayed)
+                if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
+                    Toggle(NSLocalizedString("Subtitle availability", comment: "Subtitle availability setting label"), isOn: $isSubtitleAvailabilityDisplayed)
+                }
+                if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+                    Toggle(NSLocalizedString("Audio description availability", comment: "Audio description availability setting label"), isOn: $isAudioDescriptionAvailabilityDisplayed)
+                }
             } header: {
                 Text(NSLocalizedString("Display", comment: "Display settings section header"))
             } footer: {
@@ -224,8 +235,8 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                HistoryRemovalButton(model: model)
                 FavoritesRemovalButton(model: model)
+                HistoryRemovalButton(model: model)
                 WatchLaterRemovalButton(model: model)
             } header: {
                 Text(NSLocalizedString("Content", comment: "Content settings section header"))
@@ -233,48 +244,6 @@ struct SettingsView: View {
                 if let synchronizationStatus = model.synchronizationStatus {
                     Text(synchronizationStatus)
                 }
-            }
-        }
-        
-        private struct HistoryRemovalButton: View {
-            @ObservedObject var model: SettingsViewModel
-            @State private var isAlertDisplayed = false
-            
-            private func alert() -> Alert {
-                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
-                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-                    model.removeHistory()
-                }
-                if model.isLoggedIn {
-                    return Alert(
-                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
-                        message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
-                        primaryButton: primaryButton,
-                        secondaryButton: secondaryButton
-                    )
-                }
-                else {
-                    return Alert(
-                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
-                        primaryButton: primaryButton,
-                        secondaryButton: secondaryButton
-                    )
-                }
-            }
-            
-            private func action() {
-                if model.hasHistoryEntries {
-                    isAlertDisplayed = true
-                }
-            }
-            
-            var body: some View {
-                Button(action: action) {
-                    Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
-                        .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
-                }
-                .disabled(!model.hasHistoryEntries)
-                .alert(isPresented: $isAlertDisplayed, content: alert)
             }
         }
         
@@ -316,6 +285,48 @@ struct SettingsView: View {
                         .foregroundColor(model.hasFavorites ? .red : .secondary)
                 }
                 .disabled(!model.hasFavorites)
+                .alert(isPresented: $isAlertDisplayed, content: alert)
+            }
+        }
+        
+        private struct HistoryRemovalButton: View {
+            @ObservedObject var model: SettingsViewModel
+            @State private var isAlertDisplayed = false
+            
+            private func alert() -> Alert {
+                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
+                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                    model.removeHistory()
+                }
+                if model.isLoggedIn {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                        message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+                else {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+            }
+            
+            private func action() {
+                if model.hasHistoryEntries {
+                    isAlertDisplayed = true
+                }
+            }
+            
+            var body: some View {
+                Button(action: action) {
+                    Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
+                        .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
+                }
+                .disabled(!model.hasHistoryEntries)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
             }
         }
@@ -400,12 +411,6 @@ struct SettingsView: View {
                 }
 #endif
                 VersionCell(model: model)
-#if os(iOS)
-                if let openFeedbackForm = model.openFeedbackForm {
-                    Button(NSLocalizedString("Your feedback", comment: "Label of the button to display feedback form"), action: openFeedbackForm)
-                }
-#endif
-                SupportInformationButton(model: model)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
@@ -427,67 +432,38 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+    
+#if os(tvOS)
+    // MARK: Help and Contact section
+    
+    private struct HelpAndContactSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                if let showSupportInformation = model.showSupportInformation {
+                    SupportInformationButton(showSupportInformation: showSupportInformation)
+                }
+            } header: {
+                Text(NSLocalizedString("Help and contact", comment: "Help and contact section header"))
+            }
+        }
         
         private struct SupportInformationButton: View {
-            @ObservedObject var model: SettingsViewModel
-        
-#if os(iOS)
+            let showSupportInformation: (() -> Void)
+            
             @State private var isActionSheetDisplayed = false
             @State private var isMailComposeDisplayed = false
             
-            private var supportRecipients: [String] {
-                guard MailComposeView.canSendMail(), let supportEmailAddress = ApplicationConfiguration.shared.supportEmailAddress else { return [] }
-                return [supportEmailAddress]
-            }
-            
-            private func actionSheet() -> ActionSheet {
-                var buttons = [Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}]
-                buttons.append(Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
-                    model.copySupportInformation()
-                    Banner.show(
-                        with: .info,
-                        message: NSLocalizedString("Support information has been copied to the pasteboard", comment: "Information message displayed when support information has been copied to the pasteboard"),
-                        image: nil,
-                        sticky: false
-                    )
-                })
-                if !supportRecipients.isEmpty {
-                    buttons.append(Alert.Button.default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
-                        isMailComposeDisplayed = true
-                    })
-                }
-                return ActionSheet(
-                    title: Text(NSLocalizedString("Support information", comment: "Support information alert title")),
-                    buttons: buttons
-                )
-            }
-            
-            private func mailComposeView() -> MailComposeView {
-                return MailComposeView()
-                    .toRecipients(supportRecipients)
-                    .messageBody(SupportInformation.generate(toMailBody: true))
-            }
-#endif
-            
-            private func action() {
-#if os(iOS)
-                isActionSheetDisplayed = true
-#else
-                navigateToText(SupportInformation.generate())
-#endif
-            }
-            
             var body: some View {
-                Button(action: action) {
-                    Text(NSLocalizedString("Support information", comment: "Label of the button to access support information"))
+                Button(action: showSupportInformation) {
+                    Text(NSLocalizedString("Report a technical issue", comment: "Label of the button to present technical issue report instructions"))
                 }
-#if os(iOS)
-                .actionSheet(isPresented: $isActionSheetDisplayed, content: actionSheet)
-                .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
-#endif
             }
         }
     }
+#endif
     
     // MARK: Advanced features section
     

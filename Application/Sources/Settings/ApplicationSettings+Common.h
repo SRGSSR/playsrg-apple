@@ -50,4 +50,6 @@ OBJC_EXPORT void ApplicationSettingSetServiceIdentifier(NSString * _Nullable ide
 
 OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
 
+OBJC_EXPORT BOOL ApplicationSettingAutoplayEnabled(void);
+
 NS_ASSUME_NONNULL_END
