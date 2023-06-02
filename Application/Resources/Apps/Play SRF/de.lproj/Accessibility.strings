@@ -27,7 +27,7 @@
 "Add to favorites" = "Zu den Favoriten hinzufügen";
 
 /* Accessibility hint for the profile header when user is not logged in */
-"allows to log in or create an account in order to synchronize data." = "allows to log in or create an account in order to synchronize data.";
+"allows to log in or create an account in order to synchronize data." = "Ermöglicht das Einloggen oder die Erstellung eines Kontos um Daten zu synchronisieren.";
 
 /* Accessibility label for the audio description badge */
 "Audio described" = "Audiodeskription";
@@ -220,7 +220,7 @@
 "Toggles selection." = "Auswahl aktivieren.";
 
 /* Unreads state button */
-"Unreads" = "Unreads";
+"Unreads" = "Ungelesen";
 
 /* Introductory title for warning notifications */
 "Warning" = "Warnung";
