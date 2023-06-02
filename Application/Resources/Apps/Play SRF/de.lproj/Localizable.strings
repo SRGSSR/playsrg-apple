@@ -640,7 +640,7 @@
 "Shows, topics and more" = "Sendungen, Kategorien und mehr";
 
 /* Text displayed within the sign in profile header when no user is logged in */
-"Sign in" = "Sign in";
+"Sign in" = "Anmelden";
 
 /* Title label used to present sign language scheduled livestream medias */
 "Sign language livestreams" = "Die Gebärdensprache Livestreams";
@@ -689,7 +689,7 @@
 "Support information has been copied to the pasteboard" = "Die Informationen wurden in die Zwischenablage kopiert";
 
 /* Login benefits description footer */
-"Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronize favorites, playback history and content saved for later on all devices connected to your account.";
+"Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und die für später gemerkten Inhalte auf allen mit Ihrem Konto verbundenen Geräten.";
 
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und die für später gemerkten Inhalte auf allen mit Ihrem Konto verbundenen Geräten.";
