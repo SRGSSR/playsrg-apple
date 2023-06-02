@@ -27,7 +27,7 @@
 "Add to favorites" = "Agiunscher a favurits";
 
 /* Accessibility hint for the profile header when user is not logged in */
-"allows to log in or create an account in order to synchronize data." = "allows to log in or create an account in order to synchronize data.";
+"allows to log in or create an account in order to synchronize data." = "permetta da far in login ni crear in conto per savair sincronisar las datas.";
 
 /* Accessibility label for the audio description badge */
 "Audio described" = "Audio descrit";
@@ -220,7 +220,7 @@
 "Toggles selection." = "Mida la selecziun.";
 
 /* Unreads state button */
-"Unreads" = "Unreads";
+"Unreads" = "betg legì";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";
