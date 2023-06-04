@@ -213,6 +213,18 @@ extension PageViewModel {
         case show(_ show: SRGShow)
         
 #if os(iOS)
+        var isLargeTitleDisplayMode: Bool {
+            if case .show = self {
+                return false
+            }
+            else {
+                // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
+                // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
+                // be incorrect at the top.
+                return !isNavigationBarHidden
+            }
+        }
+        
         var isNavigationBarHidden: Bool {
             switch self {
             case .video:

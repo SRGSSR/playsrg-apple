@@ -135,10 +135,7 @@ final class PageViewController: UIViewController {
         super.viewDidLoad()
         
 #if os(iOS)
-        // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
-        // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
-        // be incorrect at the top.
-        navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
+        navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
