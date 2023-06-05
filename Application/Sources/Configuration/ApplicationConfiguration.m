@@ -111,6 +111,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSURL *whatsNewURL;
 @property (nonatomic) NSURL *feedbackURL;
+@property (nonatomic) NSURL *faqURL;
 @property (nonatomic) NSURL *impressumURL;
 @property (nonatomic) NSURL *termsAndConditionsURL;
 @property (nonatomic) NSURL *dataProtectionURL;
@@ -337,6 +338,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *userDataServiceURLString = [firebaseConfiguration stringForKey:@"userDataServiceURL"];
     self.userDataServiceURL = userDataServiceURLString ? [NSURL URLWithString:userDataServiceURLString] : nil;
+    
+    NSString *faqURLString = [firebaseConfiguration stringForKey:@"faqURL"];
+    self.faqURL = faqURLString ? [NSURL URLWithString:faqURLString] : nil;
     
     NSString *feedbackURLString = [firebaseConfiguration stringForKey:@"feedbackURL"];
     self.feedbackURL = feedbackURLString ? [NSURL URLWithString:feedbackURLString] : nil;

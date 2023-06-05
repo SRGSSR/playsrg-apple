@@ -96,6 +96,13 @@ struct AnalyticsHiddenEvent {
         )
     }
     
+    static func openHelp(action: AnalyticsOpenHelpAction) -> Self {
+        return Self(
+            name: action.name,
+            source: "button"
+        )
+    }
+    
     static func pictureInPicture(urn: String?) -> Self {
         return Self(
             name: "picture_in_picture",
@@ -368,6 +375,26 @@ struct AnalyticsHiddenEvent {
             return "scheme_url"
         case .universalLink:
             return "deep_link"
+        }
+    }
+}
+
+@objc enum AnalyticsOpenHelpAction: UInt {
+    case faq
+    case technicalIssue
+    case feedbackApp
+    case evaluateApp
+    
+    fileprivate var name: String {
+        switch self {
+        case .faq:
+            return "faq_open"
+        case .technicalIssue:
+            return "technical_issue_open"
+        case .feedbackApp:
+            return "feedback_app_open"
+        case .evaluateApp:
+            return "evaluate_app_open"
         }
     }
 }

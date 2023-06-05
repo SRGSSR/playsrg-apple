@@ -18,6 +18,11 @@ typedef NS_ENUM(NSInteger, ApplicationSection) {
     ApplicationSectionHistory,
     ApplicationSectionNotifications,
     
+    ApplicationSectionFAQs,
+    ApplicationSectionTechnicaIssue,
+    ApplicationSectionFeedback,
+    ApplicationSectionEvaluateApplication,
+    
     ApplicationSectionOverview,
     ApplicationSectionLive,
     ApplicationSectionShowByDate,

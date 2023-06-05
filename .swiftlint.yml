@@ -98,7 +98,7 @@ analyzer_rules:
   - unused_import
 
 line_length: 300
-file_length: 1000
+file_length: 1200
 
 trailing_whitespace:
   ignores_empty_lines: true

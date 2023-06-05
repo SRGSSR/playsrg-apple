@@ -150,6 +150,12 @@
 /* Label of the button to copy support information to the pasteboard */
 "Copy to the pasteboard" = "Copiar el archiv provisoric";
 
+/* Label of the button to copy support email to the pasteboard */
+"Copy %@" = "Copiar %@";
+
+/* Label of the button to copy support information to the pasteboard */
+"Copy support information" = "Copiar infurmaziuns davar il support";
+
 /* Label of the button to display the data protection policy */
 "Data protection" = "Protecziun da datas";
 
@@ -237,8 +243,14 @@
 /* Episode of a serie */
 "Episode" = "Episoda";
 
+/* Label to present the rate the application AppStore view */
+"Evaluate the application" = "Evaluar l' applicaziun";
+
 /* Short label identifying content which has expired. */
 "Expired" = "Expirà";
+
+/* Label to present FAQs */
+"FAQs" = "FAQ";
 
 /* Label displayed in the show view when a show has been favorited
    Label to present Favorites
@@ -273,8 +285,15 @@
 /* HD setting label */
 "HD over cellular networks" = "HD sur la rait cellulara";
 
+/* Help and contact header title
+   Help and contact section header */
+"Help and contact" = "Agid e contact";
+
 /* Label of the button to display help and impressum */
 "Help and impressum" = "Agid ed impressum";
+
+/* Label to present feedback form */
+"Help us to improve the application" = "Ans gidai per meglierar l'applicaziun";
 
 /* Label to present history
    Title label used to present the history */
@@ -294,6 +313,9 @@
 
 /* Information section header */
 "Information" = "Infurmaziun";
+
+/* Issue title on top of mail body to declare a technical issue */
+"Issue:" = "Problem:";
 
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Tegnair";
@@ -421,13 +443,16 @@
 /* Text displayed when no history is available */
 "No history" = "Nagina cronologia";
 
+/* Missing mail application alert title */
+"No mail application found" = "Nagina applicaziun da mail a disposiziun";
+
 /* Text displayed when no notifications are available */
 "No notifications" = "Naginas notificaziuns";
 
 /* Default text displayed when no results are available */
 "No results" = "Nagin resultat";
 
-/* Label to present the help page
+/* Label to present Notifications
    Title label used to present notifications */
 "Notifications" = "Notificaziuns";
 
@@ -490,6 +515,10 @@
 /* Playback speed screen title */
 "Playback speed" = "Spertadad da reproducziun";
 
+/* Apple TV header when displayed support information
+   Missing mail application description */
+"Please contact us at %@" = "Per plaschair contactar nus sin %@";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular sin Play RTR";
 
@@ -538,6 +567,11 @@
 
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
+
+/* Label of the button to present technical issue report instructions
+   Label to present technical issue report instructions
+   Subject of the technical issue mail */
+"Report a technical issue" = "Rapportar in problem tecnic";
 
 /* Reset section header
    Title of the reset search settings button */
@@ -605,6 +639,9 @@
 /* Search placeholder text */
 "Shows, topics and more" = "Emissiuns, temas e dapli";
 
+/* Text displayed within the sign in profile header when no user is logged in */
+"Sign in" = "Login";
+
 /* Title label used to present sign language scheduled livestream medias */
 "Sign language livestreams" = "Livestreams en lingua da segns";
 
@@ -646,7 +683,13 @@
 "Support information" = "Infurmaziuns davart il support";
 
 /* Information message displayed when support information has been copied to the pasteboard */
+"Support email has been copied to the pasteboard" = "Infurmaziuns da support èn copiadas en las notizias";
+
+/* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Infurmaziuns da support èn copiadas en las notizias";
+
+/* Login benefits description footer */
+"Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";
 
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";

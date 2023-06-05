@@ -54,6 +54,22 @@ import UIKit
         return status(for: identityService.isLoggedIn)
     }
     
+    private static var continuousAutoplayStatus: String {
+        return status(for: ApplicationSettingAutoplayEnabled())
+    }
+    
+    private static var subtitleAvailabilityDisplayed: String {
+        return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingSubtitleAvailabilityDisplayed))
+    }
+    
+    private static var audioDescriptionAvailabilityDisplayed: String {
+        return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed))
+    }
+    
+    private static var voiceOverEnabled: String {
+        return status(for: UIAccessibility.isVoiceOverRunning)
+    }
+    
 #if os(iOS)
     private static var backgroundVideoPlaybackStatus: String {
         return status(for: ApplicationSettingBackgroundVideoPlaybackEnabled())
@@ -86,9 +102,10 @@ import UIKit
         var components = [String]()
         
         if toMailBody {
-            components.append("Issue:")
+            components.append(NSLocalizedString("Issue:", comment: "Issue title on top of mail body to declare a technical issue"))
             components.append("")
             components.append("")
+            components.append("--------------------------------------")
         }
         
         components.append("General information")
@@ -101,15 +118,29 @@ import UIKit
         components.append("OS version: \(operatingSystemVersion)")
         components.append("Model: \(model)")
         components.append("Model identifier: \(modelIdentifier)")
+        components.append("")
+        
+        components.append("User settings")
+        components.append( "-------------------")
+        components.append("Autoplay enabled: \(continuousAutoplayStatus)")
 #if os(iOS)
         components.append("Background video playback enabled: \(backgroundVideoPlaybackStatus)")
 #endif
-        components.append("Logged in: \(loginStatus)")
+        if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
+            components.append("Subtitle availability displayed: \(subtitleAvailabilityDisplayed)")
+        }
+        if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+            components.append("Audio description availability displayed: \(audioDescriptionAvailabilityDisplayed)")
+        }
+        components.append("VoiceOver enabled: \(voiceOverEnabled)")
+        if SRGIdentityService.current != nil {
+            components.append("Logged in: \(loginStatus)")
+        }
         components.append("")
         
 #if os(iOS)
         components.append("Push notification information")
-        components.append( "----------------------------")
+        components.append( "-------------------")
         components.append("Push notifications enabled: \(pushNotificationStatus)")
         components.append("Airship identifier: \(airshipIdentifier)")
         components.append("Device push notification token: \(deviceToken)")

@@ -12,23 +12,19 @@
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "ProfileAccountHeaderView.h"
-#import "ProfileTableViewCell.h"
-#import "PushService.h"
 #import "TableView.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
-#import "UIViewController+PlaySRG.h"
 
 @import SRGAppearance;
 @import SRGIdentity;
 
 @interface ProfileViewController ()
 
-@property (nonatomic) NSArray<ApplicationSectionInfo *> *sectionInfos;
+@property (nonatomic) NSArray<NSArray<ApplicationSectionInfo *> *> *sectionInfos;
 @property (nonatomic) ApplicationSectionInfo *currentSectionInfo;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
 
 @end
 
@@ -38,16 +34,10 @@
 
 - (instancetype)init
 {
-    if (self = [self initFromStoryboard]) {
+    if (self = [super init]) {
         self.title = NSLocalizedString(@"Profile", @"Title displayed at the top of the profile view");
     }
     return self;
-}
-
-- (instancetype)initFromStoryboard
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
-    return storyboard.instantiateInitialViewController;
 }
 
 #pragma mark View lifecycle
@@ -59,35 +49,34 @@
     self.view.backgroundColor = UIColor.srg_gray16Color;
     self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
     
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+    tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [tableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [tableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+        [tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor]
+    ]];
+    
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     if (SRGIdentityService.currentIdentityService) {
-        self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
+        self.tableView.tableHeaderView = [self.tableView profileAccountHeaderView];
     }
     
-    [self.tableView registerReusableNotificationCell];
+    [self.tableView registerReusableProfileCell];
+    [self.tableView registerReusableProfileSectionHeader];
+    
+    [self reloadData];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationDidBecomeActive:)
-                                               name:UIApplicationDidBecomeActiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(applicationWillResignActive:)
-                                               name:UIApplicationWillResignActiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(pushServiceDidReceiveNotification:)
-                                               name:PushServiceDidReceiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(pushServiceBadgeDidChange:)
-                                               name:PushServiceBadgeDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(pushServiceStatusDidChange:)
@@ -106,25 +95,11 @@
 {
     [super viewWillAppear:animated];
     
-    [PushService.sharedService resetApplicationBadge];
-    
-    // Ensure latest notifications are displayed
-    [self reloadData];
-    
     // On iPad where split screen can be used, load the secondary view afterwards (if loaded too early it will be collapsed
     // automatically onto the primary at startup for narrow layouts, which is not what we want). We must still avoid
     // overriding a section if already installed before by application shorcuts.
     if (! self.currentSectionInfo && [self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO animated:NO];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if ([self play_isMovingFromParentViewController]) {
-        [PushService.sharedService resetApplicationBadge];
+        [self openApplicationSectionInfo:self.sectionInfos.firstObject.firstObject interactive:NO animated:NO];
     }
 }
 
@@ -154,7 +129,12 @@
 
 - (void)reloadData
 {
-    self.sectionInfos = [ApplicationSectionInfo profileApplicationSectionInfosWithNotificationPreview:self.splitViewController.collapsed];
+    self.sectionInfos = [NSArray arrayWithObjects:
+                         [ApplicationSectionInfo profileApplicationSectionInfos],
+                         [ApplicationSectionInfo helpApplicationSectionInfos],
+                         nil];
+    
+    [ApplicationSectionInfo profileApplicationSectionInfos];
     [self reloadTableView];
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -164,14 +144,39 @@
 
 #pragma mark Helpers
 
-- (UserNotification *)notificationAtIndexPath:(NSIndexPath *)indexPath
+- (BOOL)openHelpSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
 {
-    ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
-    if (applicationSectionInfo.applicationSection != ApplicationSectionNotifications) {
-        return nil;
+    if (! applicationSectionInfo) {
+        return NO;
     }
     
-    return applicationSectionInfo.options[ApplicationSectionOptionNotificationKey];
+    BOOL opened = NO;
+    switch (applicationSectionInfo.applicationSection) {
+        case ApplicationSectionFAQs: {
+            opened = [ProfileHelp showFaqs];
+            break;
+        }
+        
+        case ApplicationSectionTechnicaIssue: {
+            opened = [ProfileHelp showSupporByEmail];
+            break;
+        }
+            
+        case ApplicationSectionFeedback: {
+            opened = [ProfileHelp showFeedbackForm];
+            break;
+        }
+            
+        case ApplicationSectionEvaluateApplication: {
+            opened = [ProfileHelp showStorePage];
+            break;
+        }
+            
+        default: {
+            break;
+        }
+    }
+    return opened;
 }
 
 - (UIViewController *)viewControllerForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
@@ -227,57 +232,67 @@
         return NO;
     }
     
-    // Do not reload a section if already the current one (just return to the navigation root if possible)
-    if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
-        NSArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers;
-        if (viewControllers.count == 2) {
-            UIViewController *detailViewController = viewControllers[1];
-            if ([detailViewController isKindOfClass:UINavigationController.class]) {
-                UINavigationController *detailNavigationController = (UINavigationController *)detailViewController;
-                [detailNavigationController popToRootViewControllerAnimated:animated];
-            }
-        }
-        return YES;
-    }
+    NSIndexPath *indexPath = [self indexPathForSectionInfo:applicationSectionInfo];
     
-    UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
-    if (viewController) {
-        self.currentSectionInfo = applicationSectionInfo;
-        
-        if (interactive) {
-            void (^showDetail)(void) = ^{
-                [self.splitViewController showDetailViewController:viewController sender:self];
-            };
+    if (indexPath.section == 0) {
+        // Do not reload a section if already the current one (just return to the navigation root if possible)
+        if (! self.splitViewController.collapsed && [applicationSectionInfo isEqual:self.currentSectionInfo]) {
+            NSArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers;
+            if (viewControllers.count == 2) {
+                UIViewController *detailViewController = viewControllers[1];
+                if ([detailViewController isKindOfClass:UINavigationController.class]) {
+                    UINavigationController *detailNavigationController = (UINavigationController *)detailViewController;
+                    [detailNavigationController popToRootViewControllerAnimated:animated];
+                }
+            }
+            return YES;
+        }
+        UIViewController *viewController = [self viewControllerForSectionInfo:applicationSectionInfo];
+        if (viewController) {
+            self.currentSectionInfo = applicationSectionInfo;
             
-            if (animated) {
-                showDetail();
+            if (interactive) {
+                void (^showDetail)(void) = ^{
+                    [self.splitViewController showDetailViewController:viewController sender:self];
+                };
+                
+                if (animated) {
+                    showDetail();
+                }
+                else {
+                    [UIView performWithoutAnimation:showDetail];
+                }
             }
             else {
-                [UIView performWithoutAnimation:showDetail];
+                // Adding the details view controller on-the-fly avoids automatic collapsing (i.e. starting with the details
+                // on top of the primary) when starting in compact layout.
+                NSMutableArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers.mutableCopy;
+                if (viewControllers.count == 1) {
+                    [viewControllers addObject:viewController];
+                }
+                else if (viewControllers.count == 2) {
+                    [viewControllers replaceObjectAtIndex:1 withObject:viewController];
+                }
+                else {
+                    return NO;
+                }
+                self.splitViewController.viewControllers = viewControllers.copy;
+                [self updateSelection];
             }
+            
+            // Transfer the VoiceOver focus automatically, as is for example done in the Settings application.
+            if (! self.splitViewController.collapsed) {
+                UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
+            }
+            return YES;
         }
         else {
-            // Adding the details view controller on-the-fly avoids automatic collapsing (i.e. starting with the details
-            // on top of the primary) when starting in compact layout.
-            NSMutableArray<UIViewController *> *viewControllers = self.splitViewController.viewControllers.mutableCopy;
-            if (viewControllers.count == 1) {
-                [viewControllers addObject:viewController];
-            }
-            else if (viewControllers.count == 2) {
-                [viewControllers replaceObjectAtIndex:1 withObject:viewController];
-            }
-            else {
-                return NO;
-            }
-            self.splitViewController.viewControllers = viewControllers.copy;
-            [self updateSelection];
+            return NO;
         }
-        
-        // Transfer the VoiceOver focus automatically, as is for example done in the Settings application.
-        if (! self.splitViewController.collapsed) {
-            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, viewController.view);
-        }
-        return YES;
+    }
+    else if (indexPath.section == 1) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        return [self openHelpSectionInfo:applicationSectionInfo];
     }
     else {
         return NO;
@@ -290,9 +305,9 @@
         return;
     }
     
-    NSUInteger index = [self.sectionInfos indexOfObject:self.currentSectionInfo];
-    if (index != NSNotFound) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    NSIndexPath *indexPath = [self indexPathForSectionInfo:self.currentSectionInfo];
+    
+    if (indexPath.section != NSNotFound && indexPath.row != NSNotFound) {
         [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     }
     else {
@@ -303,6 +318,27 @@
     }
 }
 
+- (NSIndexPath *)indexPathForSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
+{
+    if (! applicationSectionInfo) {
+        return [NSIndexPath indexPathForRow:NSNotFound inSection:NSNotFound];
+    }
+    
+    NSUInteger section = NSNotFound;
+    NSUInteger row = NSNotFound;
+    
+    for (NSUInteger i = 0; i < [self.sectionInfos count]; i++) {
+        row = [self.sectionInfos[i] indexOfObject:applicationSectionInfo];
+        if (row != NSNotFound) {
+            section = i;
+            break;
+        }
+    }
+    
+    return [NSIndexPath indexPathForRow:row inSection:section];
+}
+
+
 #pragma mark ContentInsets protocol
 
 - (NSArray<UIScrollView *> *)play_contentScrollViews
@@ -312,7 +348,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutPaddingContentInsets;
+    return LayoutPaddingContentInsets;
 }
 
 #pragma mark PlayApplicationNavigation protocol
@@ -360,63 +396,54 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.sectionInfos.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.sectionInfos.count;
+    return self.sectionInfos[section].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self notificationAtIndexPath:indexPath]) {
-        return [tableView dequeueReusableNotificationCellFor:indexPath];
-    }
-    else {
-        return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProfileTableViewCell.class) forIndexPath:indexPath];
-    }
+    return [tableView dequeueReusableProfileCellFor:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if ([self notificationAtIndexPath:indexPath]) {
-        return [[NotificationCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
+    return (section == 1) ? 64.f : 0.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 1) {
+        UITableViewHeaderFooterView<ProfileSectionSettable> *headerView = [tableView dequeueReusableProfileSectionHeader];
+        headerView.title = NSLocalizedString(@"Help and contact", @"Help and contact header title");
+        return headerView;
     }
     else {
-        return ProfileTableViewCell.height;
+        return nil;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [ProfileCellSize height] + LayoutMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserNotification *notification = [self notificationAtIndexPath:indexPath];
-    if (notification) {
-        UITableViewCell<NotificationSettable> *notificationTableViewCell = (UITableViewCell<NotificationSettable> *)cell;
-        notificationTableViewCell.notification = notification;
-    }
-    else {
-        ProfileTableViewCell *profileTableViewCell = (ProfileTableViewCell *)cell;
-        profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.row];
-        profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
-    }
+    UITableViewCell<ApplicationSectionInfoSettable> *profileTableViewCell = (UITableViewCell<ApplicationSectionInfoSettable> *)cell;
+    profileTableViewCell.applicationSectionInfo = self.sectionInfos[indexPath.section][indexPath.row];
+    profileTableViewCell.selectionStyle = self.splitViewController.collapsed ? UITableViewCellSelectionStyleNone : UITableViewCellSelectionStyleDefault;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UserNotification *notification = [self notificationAtIndexPath:indexPath];
-    if (notification) {
-        [self navigateToNotification:notification animated:YES];
-        
-        // Update the cell dot right away
-        [self reloadTableView];
-    }
-    else {
-        ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
-        [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:YES];
-    }
+    ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.section][indexPath.row];
+    [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:YES];
 }
 
 #pragma mark Actions
@@ -430,34 +457,6 @@
 #pragma mark Notifications
 
 - (void)accessibilityVoiceOverStatusChanged:(NSNotification *)notification
-{
-    [self reloadData];
-}
-
-- (void)applicationDidBecomeActive:(NSNotification *)notification
-{
-    if (self.play_viewVisible) {
-        [PushService.sharedService resetApplicationBadge];
-        
-        // Ensure correct notification badge on notification cell availability after dismissal of the initial system alert
-        // (displayed once at most), asking the user to enable push notifications.
-        [self reloadData];
-    }
-}
-
-- (void)applicationWillResignActive:(NSNotification *)notification
-{
-    if (self.play_viewVisible) {
-        [PushService.sharedService resetApplicationBadge];
-    }
-}
-
-- (void)pushServiceDidReceiveNotification:(NSNotification *)notification
-{
-    [self reloadData];
-}
-
-- (void)pushServiceBadgeDidChange:(NSNotification *)notification
 {
     [self reloadData];
 }

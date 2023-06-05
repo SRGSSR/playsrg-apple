@@ -22,6 +22,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
 * `feedbackURL` (optional, string): The URL of the feedback form.
+* `faqURL` (optional, string): The URL of the FAQs.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
 * `identityWebserviceURL` (optional, string): The URL of the identity webservices.

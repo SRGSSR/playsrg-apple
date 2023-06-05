@@ -155,3 +155,8 @@ NSURL *ApplicationSettingServiceURL(void)
 {
     return [ServiceObjC urlForServiceId:ApplicationSettingServiceIdentifier()];
 }
+
+BOOL ApplicationSettingAutoplayEnabled(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled];
+}

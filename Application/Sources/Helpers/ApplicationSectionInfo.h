@@ -35,9 +35,14 @@ OBJC_EXPORT ApplicationSectionOptionKey const ApplicationSectionOptionShowByDate
 + (ApplicationSectionInfo *)applicationSectionInfoWithApplicationSection:(ApplicationSection)applicationSection radioChannel:(nullable RadioChannel *)radioChannel options:(nullable NSDictionary<ApplicationSectionOptionKey, id> *)options;
 
 /**
- *  Return the profile section infos available for the current configuration (with optional inlined notification preview).
+ *  Return the profile section infos available for the current configuration.
  */
-+ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfosWithNotificationPreview:(BOOL)notificationPreview;
++ (NSArray<ApplicationSectionInfo *> *)profileApplicationSectionInfos;
+
+/**
+ *  Return the help section infos available for the current configuration.
+ */
++ (NSArray<ApplicationSectionInfo *> *)helpApplicationSectionInfos;
 
 /**
  *  Properties.
@@ -48,6 +53,7 @@ OBJC_EXPORT ApplicationSectionOptionKey const ApplicationSectionOptionShowByDate
 @property (nonatomic, readonly, nullable) UIImage *image;
 @property (nonatomic, readonly, nullable) NSString *imageName;
 @property (nonatomic, readonly, nullable) NSDictionary<ApplicationSectionOptionKey, id> *options;
+@property (nonatomic, readonly, getter=isModalPresentation) BOOL modalPresentation;
 
 @property (nonatomic, readonly, nullable) RadioChannel *radioChannel;
 

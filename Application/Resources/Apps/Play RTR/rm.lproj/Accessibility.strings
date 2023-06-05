@@ -26,6 +26,9 @@
    Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Agiunscher a favurits";
 
+/* Accessibility hint for the profile header when user is not logged in */
+"allows to log in or create an account in order to synchronize data." = "permetta da far in login ni crear in conto per savair sincronisar las datas.";
+
 /* Accessibility label for the audio description badge */
 "Audio described" = "Audio descrit";
 
@@ -100,7 +103,7 @@
 /* Accessibility text for the login / signup header */
 "Login or sign up" = "Login u registrar\n";
 
-/* Accessibility hint associated with the account header */
+/* Accessibility hint for the profile header when user is logged in */
 "Manages account information" = "Organisescha las infurmaziuns da l'account";
 
 /* More button label
@@ -215,6 +218,9 @@
    Notification cell hint in edit mode
    Show cell hint in edit mode */
 "Toggles selection." = "Mida la selecziun.";
+
+/* Unreads state button */
+"Unreads" = "betg legì";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";

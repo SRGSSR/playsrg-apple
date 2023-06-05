@@ -14,6 +14,7 @@ struct MailComposeView: UIViewControllerRepresentable {
     @Environment(\.presentationMode) private var presentationMode
     
     fileprivate var toRecipients: [String]?
+    fileprivate var subject: String?
     fileprivate var messageBody: String?
     
     static func canSendMail() -> Bool {
@@ -37,9 +38,18 @@ struct MailComposeView: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: Context) -> MFMailComposeViewController {
+        return viewController(context: context)
+    }
+    
+    func viewController(context: Context?) -> MFMailComposeViewController {
         let viewController = MFMailComposeViewController()
-        viewController.mailComposeDelegate = context.coordinator
+        if let coordinator = context?.coordinator {
+            viewController.mailComposeDelegate = coordinator
+        }
         viewController.setToRecipients(toRecipients)
+        if let subject {
+            viewController.setSubject(subject)
+        }
         if let messageBody {
             viewController.setMessageBody(messageBody, isHTML: false)
         }
@@ -57,6 +67,12 @@ extension MailComposeView {
     func toRecipients(_ toRecipients: [String]) -> Self {
         var view = self
         view.toRecipients = toRecipients
+        return view
+    }
+    
+    func subject(_ subject: String) -> Self {
+        var view = self
+        view.subject = subject
         return view
     }
     

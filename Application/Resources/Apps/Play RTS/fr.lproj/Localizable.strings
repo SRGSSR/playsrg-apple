@@ -150,6 +150,12 @@
 /* Label of the button to copy support information to the pasteboard */
 "Copy to the pasteboard" = "Copier dans le presse-papier";
 
+/* Label of the button to copy support email to the pasteboard */
+"Copy %@" = "Copier %@";
+
+/* Label of the button to copy support information to the pasteboard */
+"Copy support information" = "Copier les informations de support";
+
 /* Label of the button to display the data protection policy */
 "Data protection" = "Protection des données";
 
@@ -237,8 +243,14 @@
 /* Episode of a serie */
 "Episode" = "Épisode";
 
+/* Label to present the rate the application AppStore view */
+"Evaluate the application" = "Évaluer l'application";
+
 /* Short label identifying content which has expired. */
 "Expired" = "Expiré";
+
+/* Label to present FAQs */
+"FAQs" = "FAQ";
 
 /* Label displayed in the show view when a show has been favorited
    Label to present Favorites
@@ -273,8 +285,15 @@
 /* HD setting label */
 "HD over cellular networks" = "HD sur réseaux cellulaires";
 
+/* Help and contact header title
+   Help and contact section header */
+"Help and contact" = "Aide et contact";
+
 /* Label of the button to display help and impressum */
 "Help and impressum" = "Aide et contact";
+
+/* Label to present feedback form */
+"Help us to improve the application" = "Aidez-nous à améliorer l'application";
 
 /* Label to present history
    Title label used to present the history */
@@ -294,6 +313,9 @@
 
 /* Information section header */
 "Information" = "Information";
+
+/* Issue title on top of mail body to declare a technical issue */
+"Issue:" = "Problème rencontré :";
 
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Garder";
@@ -421,13 +443,16 @@
 /* Text displayed when no history is available */
 "No history" = "Aucun historique";
 
+/* Missing mail application alert title */
+"No mail application found" = "Aucune application de mail trouvée";
+
 /* Text displayed when no notifications are available */
 "No notifications" = "Aucune notification";
 
 /* Default text displayed when no results are available */
 "No results" = "Aucun résultat";
 
-/* Label to present the help page
+/* Label to present Notifications
    Title label used to present notifications */
 "Notifications" = "Notifications";
 
@@ -490,6 +515,10 @@
 /* Playback speed screen title */
 "Playback speed" = "Vitesse de lecture";
 
+/* Apple TV header when displayed support information
+   Missing mail application description */
+"Please contact us at %@" = "Veuillez nous contacter à %@";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Populaire sur Play RTS";
 
@@ -538,6 +567,11 @@
 
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Rediffusion";
+
+/* Label of the button to present technical issue report instructions
+   Label to present technical issue report instructions
+   Subject of the technical issue mail */
+"Report a technical issue" = "Signaler un problème technique";
 
 /* Reset section header
    Title of the reset search settings button */
@@ -605,6 +639,9 @@
 /* Search placeholder text */
 "Shows, topics and more" = "Émissions, sujets et plus encore";
 
+/* Text displayed within the sign in profile header when no user is logged in */
+"Sign in" = "Se connecter";
+
 /* Title label used to present sign language scheduled livestream medias */
 "Sign language livestreams" = "Directs signés";
 
@@ -646,7 +683,13 @@
 "Support information" = "Informations de support";
 
 /* Information message displayed when support information has been copied to the pasteboard */
+"Support email has been copied to the pasteboard" = "L'email de support a été copié dans le presse-papier";
+
+/* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Les informations de support ont été copiées dans le presse-papier";
+
+/* Login benefits description footer */
+"Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronisez les favoris, l'historique de lecture et le contenu à consulter plus tard sur tous les appareils liés à votre compte.";
 
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronisez l'historique de lecture, les favoris et le contenu à consulter plus tard sur tous les appareils liés à votre compte.";

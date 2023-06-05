@@ -46,7 +46,7 @@ extension ApplicationConfiguration {
     }
     
     private static var version: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        return Bundle.main.play_friendlyVersionNumber
     }
     
     private static var type: String {
@@ -57,23 +57,29 @@ extension ApplicationConfiguration {
         return UserDefaults.standard.string(forKey: "tc_unique_id")
     }
     
-    var feedbackUrlWithParameters: URL? {
-        guard let feedbackUrl = feedbackURL else { return nil }
-        guard var urlComponents = URLComponents(url: feedbackUrl, resolvingAgainstBaseURL: false) else { return feedbackUrl }
+    private static func typeformUrlWithParameters(_ url: URL) -> URL {
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return url }
+        guard let host = urlComponents.host, host.contains("typeform.") else { return url }
         
-        let feedbackQueryItems = [
+        let typeformQueryItems = [
             URLQueryItem(name: "platform", value: "iOS"),
-            URLQueryItem(name: "version", value: Self.version),
-            URLQueryItem(name: "type", value: Self.type),
-            URLQueryItem(name: "cid", value: Self.identifier)
+            URLQueryItem(name: "version", value: version),
+            URLQueryItem(name: "type", value: type),
+            URLQueryItem(name: "cid", value: identifier)
         ]
         if let queryItems = urlComponents.queryItems {
-            urlComponents.queryItems = feedbackQueryItems.appending(contentsOf: queryItems)
+            urlComponents.queryItems = typeformQueryItems.appending(contentsOf: queryItems)
         }
         else {
-            urlComponents.queryItems = feedbackQueryItems
+            urlComponents.queryItems = typeformQueryItems
         }
-        return urlComponents.url ?? feedbackUrl
+        return urlComponents.url ?? url
+    }
+    
+    var userSuggestionUrlWithParameters: URL? {
+        guard let feedbackUrl = feedbackURL else { return nil }
+        
+        return Self.typeformUrlWithParameters(feedbackUrl)
     }
 }
 

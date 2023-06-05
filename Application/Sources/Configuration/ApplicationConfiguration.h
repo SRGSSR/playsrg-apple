@@ -47,6 +47,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) NSURL *whatsNewURL;
 @property (nonatomic, readonly, nullable) NSURL *feedbackURL;
+@property (nonatomic, readonly, nullable) NSURL *faqURL;
 @property (nonatomic, readonly, nullable) NSURL *impressumURL;
 @property (nonatomic, readonly, nullable) NSURL *termsAndConditionsURL;
 @property (nonatomic, readonly, nullable) NSURL *dataProtectionURL;

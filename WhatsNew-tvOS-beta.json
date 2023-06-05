@@ -58,5 +58,7 @@
   "1.6.8-57": "- Fix program guide metrics.\n- Page metrics update.",
   "1.6.9-58": "- Updated show page header layout, including an update of the show more click to read the whole description.",
   "1.6.9-59": "- Better show description content. [RSI, RTR, SRF]\n- Use same truncatable text view in show and media pages.\n- Fix tvOS badge vertical text alignment.",
-    "1.6.10-60": "- Get a better summary text on media and show elements on homepage and topic pages.\n- Metrics cleanup."
+    "1.6.10-60": "- Get a better summary text on media and show elements on homepage and topic pages.\n- Metrics cleanup.",
+    "1.7.0-413": "- Personalized features (favorites, history and watch later) are available from the Profile tab.\n- Add help and contact in Profile tab.",
+    "1.7.0-414": "- AppStore release with all translations."
 }
