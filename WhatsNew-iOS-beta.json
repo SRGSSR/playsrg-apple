@@ -189,5 +189,6 @@
     "3.6.12-410": "- iPhone and iPad: An opt-out option for beta testers to disable a preview of a new layout on show page.\n- A better pronunciation of \"more\" with VoiceOver in show page.",
     "3.6.12-411": "- Improved readability on show pages with a vertical list on iPad.\n- Get a better summary text on media and show elements on homepage and topic pages.\n- Metrics cleanup.",
     "3.6.13-412": "- AppStore release with internal dependency updates.",
-    "3.7.0-413": "- Add help and contact in Profile tab."
+    "3.7.0-413": "- Add help and contact in Profile tab.",
+    "3.7.0-414": "- AppStore release with all translations."
 }
