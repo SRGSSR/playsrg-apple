@@ -60,5 +60,6 @@
   "1.6.9-59": "- Better show description content. [RSI, RTR, SRF]\n- Use same truncatable text view in show and media pages.\n- Fix tvOS badge vertical text alignment.",
     "1.6.10-60": "- Get a better summary text on media and show elements on homepage and topic pages.\n- Metrics cleanup.",
     "1.7.0-413": "- Personalized features (favorites, history and watch later) are available from the Profile tab.\n- Add help and contact in Profile tab.",
-    "1.7.0-414": "- AppStore release with all translations."
+    "1.7.0-414": "- AppStore release with all translations.",
+    "1.7.1-415": "- Update player dependency, and fix some playing issues. [SRF]"
 }
