@@ -415,6 +415,24 @@
       }
     },
     {
+      "identity" : "usercentrics-spm-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-sdk",
+      "state" : {
+        "revision" : "d08ca51849f77ec566af006151fd1ecec521a365",
+        "version" : "2.8.1"
+      }
+    },
+    {
+      "identity" : "usercentrics-spm-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-ui",
+      "state" : {
+        "revision" : "3390c554c93642eae94687b8b47f57984f0647d7",
+        "version" : "2.8.1"
+      }
+    },
+    {
       "identity" : "yywebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/YYWebImage.git",

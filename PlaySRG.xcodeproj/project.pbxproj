@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04030F4E2A34BD1100BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F4D2A34BD1100BC573B /* Usercentrics */; };
+		04030F512A34BD3A00BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F502A34BD3A00BC573B /* UsercentricsUI */; };
+		04030F532A34BD6D00BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F522A34BD6D00BC573B /* Usercentrics */; };
+		04030F552A34BD6D00BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F542A34BD6D00BC573B /* UsercentricsUI */; };
+		04030F572A34BD7700BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F562A34BD7700BC573B /* Usercentrics */; };
+		04030F592A34BD7700BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F582A34BD7700BC573B /* UsercentricsUI */; };
+		04030F5B2A34BD8300BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F5A2A34BD8300BC573B /* Usercentrics */; };
+		04030F5D2A34BD8300BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F5C2A34BD8300BC573B /* UsercentricsUI */; };
+		04030F5F2A34BD8B00BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F5E2A34BD8B00BC573B /* Usercentrics */; };
+		04030F612A34BD8B00BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F602A34BD8B00BC573B /* UsercentricsUI */; };
+		04030F632A34BD9300BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F622A34BD9300BC573B /* Usercentrics */; };
+		04030F652A34BD9300BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F642A34BD9300BC573B /* UsercentricsUI */; };
+		04030F672A34BD9C00BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F662A34BD9C00BC573B /* Usercentrics */; };
+		04030F692A34BD9C00BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F682A34BD9C00BC573B /* UsercentricsUI */; };
+		04030F6B2A34BDA400BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F6A2A34BDA400BC573B /* Usercentrics */; };
+		04030F6D2A34BDA400BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F6C2A34BDA400BC573B /* UsercentricsUI */; };
+		04030F6F2A34BDAC00BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F6E2A34BDAC00BC573B /* Usercentrics */; };
+		04030F712A34BDAC00BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F702A34BDAC00BC573B /* UsercentricsUI */; };
+		04030F732A34BDB400BC573B /* Usercentrics in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F722A34BDB400BC573B /* Usercentrics */; };
+		04030F752A34BDB400BC573B /* UsercentricsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 04030F742A34BDB400BC573B /* UsercentricsUI */; };
 		0406040E29CE6293001F2BD0 /* MediaMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406040D29CE6293001F2BD0 /* MediaMoreButton.swift */; };
 		0406040F29CE6293001F2BD0 /* MediaMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406040D29CE6293001F2BD0 /* MediaMoreButton.swift */; };
 		0406041029CE6293001F2BD0 /* MediaMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0406040D29CE6293001F2BD0 /* MediaMoreButton.swift */; };
@@ -3441,6 +3461,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F512A34BD3A00BC573B /* UsercentricsUI in Frameworks */,
 				6FA6C9082812D837007C3406 /* NukeUI in Frameworks */,
 				6F17DC16266AB81C009F74C6 /* Nuke in Frameworks */,
 				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
@@ -3460,6 +3481,7 @@
 				081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439728338F2900F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
+				04030F4E2A34BD1100BC573B /* Usercentrics in Frameworks */,
 				6F3B563A283B903C009A2D7D /* ShowTime in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
@@ -3472,6 +3494,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F552A34BD6D00BC573B /* UsercentricsUI in Frameworks */,
 				6FA6C90A2812D846007C3406 /* NukeUI in Frameworks */,
 				6F17DC18266AB837009F74C6 /* Nuke in Frameworks */,
 				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3491,6 +3514,7 @@
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439928338F3100F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
+				04030F532A34BD6D00BC573B /* Usercentrics in Frameworks */,
 				6F3B563C283B9057009A2D7D /* ShowTime in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
@@ -3503,6 +3527,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F592A34BD7700BC573B /* UsercentricsUI in Frameworks */,
 				6FA6C90C2812D84B007C3406 /* NukeUI in Frameworks */,
 				6F17DC1A266AB83E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3522,6 +3547,7 @@
 				081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439B28338F3700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
+				04030F572A34BD7700BC573B /* Usercentrics in Frameworks */,
 				6F3B563E283B905C009A2D7D /* ShowTime in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
@@ -3534,6 +3560,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F5D2A34BD8300BC573B /* UsercentricsUI in Frameworks */,
 				6FA6C90E2812D851007C3406 /* NukeUI in Frameworks */,
 				6F17DC1C266AB846009F74C6 /* Nuke in Frameworks */,
 				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3553,6 +3580,7 @@
 				081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439D28338F3C00F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
+				04030F5B2A34BD8300BC573B /* Usercentrics in Frameworks */,
 				6F3B5640283B9061009A2D7D /* ShowTime in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
@@ -3565,6 +3593,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F612A34BD8B00BC573B /* UsercentricsUI in Frameworks */,
 				6FA6C9102812D856007C3406 /* NukeUI in Frameworks */,
 				6F17DC1E266AB84E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3584,6 +3613,7 @@
 				081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439F28338F4700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
+				04030F5F2A34BD8B00BC573B /* Usercentrics in Frameworks */,
 				6F3B5642283B9067009A2D7D /* ShowTime in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
@@ -3671,6 +3701,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F632A34BD9300BC573B /* Usercentrics in Frameworks */,
 				08209A0B25780AAA0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
 				08EA3E78259D2AD6008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC3256E41EE00E42E31 /* SRGUserData in Frameworks */,
@@ -3682,6 +3713,7 @@
 				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC20266AB854009F74C6 /* Nuke in Frameworks */,
+				04030F652A34BD9300BC573B /* UsercentricsUI in Frameworks */,
 				6FEC899D261F16D500FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE82265CD70900A4882B /* Collections in Frameworks */,
@@ -3694,6 +3726,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F672A34BD9C00BC573B /* Usercentrics in Frameworks */,
 				082099F525780A7F0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
 				08EA3E82259D2B1B008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC5256E41F500E42E31 /* SRGUserData in Frameworks */,
@@ -3705,6 +3738,7 @@
 				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC22266AB85B009F74C6 /* Nuke in Frameworks */,
+				04030F692A34BD9C00BC573B /* UsercentricsUI in Frameworks */,
 				6FEC899F261F16DC00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE84265CD71000A4882B /* Collections in Frameworks */,
@@ -3717,6 +3751,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F6B2A34BDA400BC573B /* Usercentrics in Frameworks */,
 				08209A0D25780ABE0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
 				08EA3E7C259D2AE8008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */,
@@ -3728,6 +3763,7 @@
 				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC24266AB862009F74C6 /* Nuke in Frameworks */,
+				04030F6D2A34BDA400BC573B /* UsercentricsUI in Frameworks */,
 				6FEC89A1261F16E200FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE86265CD71700A4882B /* Collections in Frameworks */,
@@ -3740,6 +3776,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F6F2A34BDAC00BC573B /* Usercentrics in Frameworks */,
 				08209A0F25780AC50077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
 				08EA3E7E259D2AEF008D412F /* SRGIdentity in Frameworks */,
 				6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */,
@@ -3751,6 +3788,7 @@
 				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC26266AB867009F74C6 /* Nuke in Frameworks */,
+				04030F712A34BDAC00BC573B /* UsercentricsUI in Frameworks */,
 				6FEC89A3261F16E800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE88265CD71E00A4882B /* Collections in Frameworks */,
@@ -3763,6 +3801,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04030F732A34BDB400BC573B /* Usercentrics in Frameworks */,
 				08209A1125780ACB0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
 				08EA3E80259D2AF7008D412F /* SRGIdentity in Frameworks */,
 				6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */,
@@ -3774,6 +3813,7 @@
 				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC28266AB86D009F74C6 /* Nuke in Frameworks */,
+				04030F752A34BDB400BC573B /* UsercentricsUI in Frameworks */,
 				6FEC89A5261F16EE00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE8A265CD72400A4882B /* Collections in Frameworks */,
@@ -5352,6 +5392,8 @@
 				6F3B5639283B903C009A2D7D /* ShowTime */,
 				6F2345D0283BAB3600A9089D /* FSCalendar */,
 				0414BF202A685B73004543BD /* SwiftUIIntrospect */,
+				04030F4D2A34BD1100BC573B /* Usercentrics */,
+				04030F502A34BD3A00BC573B /* UsercentricsUI */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5406,6 +5448,8 @@
 				6F3B563B283B9057009A2D7D /* ShowTime */,
 				6F2345D2283BAB5000A9089D /* FSCalendar */,
 				0414BF222A685B81004543BD /* SwiftUIIntrospect */,
+				04030F522A34BD6D00BC573B /* Usercentrics */,
+				04030F542A34BD6D00BC573B /* UsercentricsUI */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5460,6 +5504,8 @@
 				6F3B563D283B905C009A2D7D /* ShowTime */,
 				6F2345D4283BAB5600A9089D /* FSCalendar */,
 				0414BF242A685B8E004543BD /* SwiftUIIntrospect */,
+				04030F562A34BD7700BC573B /* Usercentrics */,
+				04030F582A34BD7700BC573B /* UsercentricsUI */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5514,6 +5560,8 @@
 				6F3B563F283B9061009A2D7D /* ShowTime */,
 				6F2345D6283BAB5B00A9089D /* FSCalendar */,
 				0414BF262A685B98004543BD /* SwiftUIIntrospect */,
+				04030F5A2A34BD8300BC573B /* Usercentrics */,
+				04030F5C2A34BD8300BC573B /* UsercentricsUI */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5568,6 +5616,8 @@
 				6F3B5641283B9067009A2D7D /* ShowTime */,
 				6F2345D8283BAB6000A9089D /* FSCalendar */,
 				0414BF282A685BAC004543BD /* SwiftUIIntrospect */,
+				04030F5E2A34BD8B00BC573B /* Usercentrics */,
+				04030F602A34BD8B00BC573B /* UsercentricsUI */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -5795,6 +5845,8 @@
 				6FEEBE81265CD70900A4882B /* Collections */,
 				6F17DC1F266AB854009F74C6 /* Nuke */,
 				6FA6C9112812D85D007C3406 /* NukeUI */,
+				04030F622A34BD9300BC573B /* Usercentrics */,
+				04030F642A34BD9300BC573B /* UsercentricsUI */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -5837,6 +5889,8 @@
 				6FEEBE83265CD71000A4882B /* Collections */,
 				6F17DC21266AB85B009F74C6 /* Nuke */,
 				6FA6C9132812D861007C3406 /* NukeUI */,
+				04030F662A34BD9C00BC573B /* Usercentrics */,
+				04030F682A34BD9C00BC573B /* UsercentricsUI */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -5879,6 +5933,8 @@
 				6FEEBE85265CD71700A4882B /* Collections */,
 				6F17DC23266AB862009F74C6 /* Nuke */,
 				6FA6C9152812D866007C3406 /* NukeUI */,
+				04030F6A2A34BDA400BC573B /* Usercentrics */,
+				04030F6C2A34BDA400BC573B /* UsercentricsUI */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -5921,6 +5977,8 @@
 				6FEEBE87265CD71E00A4882B /* Collections */,
 				6F17DC25266AB867009F74C6 /* Nuke */,
 				6FA6C9172812D86C007C3406 /* NukeUI */,
+				04030F6E2A34BDAC00BC573B /* Usercentrics */,
+				04030F702A34BDAC00BC573B /* UsercentricsUI */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -5963,6 +6021,8 @@
 				6FEEBE89265CD72400A4882B /* Collections */,
 				6F17DC27266AB86D009F74C6 /* Nuke */,
 				6FA6C9192812D871007C3406 /* NukeUI */,
+				04030F722A34BDB400BC573B /* Usercentrics */,
+				04030F742A34BDB400BC573B /* UsercentricsUI */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -6298,6 +6358,8 @@
 				6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */,
 				6F3B5638283B903C009A2D7D /* XCRemoteSwiftPackageReference "ShowTime" */,
 				6F2345CF283BAB3600A9089D /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */,
+				04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -19086,6 +19148,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://bitbucket.org/usercentricscode/usercentrics-spm-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.1;
+			};
+		};
+		04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://bitbucket.org/usercentricscode/usercentrics-spm-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.1;
+			};
+		};
 		04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth";
@@ -19297,6 +19375,106 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		04030F4D2A34BD1100BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F502A34BD3A00BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F522A34BD6D00BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F542A34BD6D00BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F562A34BD7700BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F582A34BD7700BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F5A2A34BD8300BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F5C2A34BD8300BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F5E2A34BD8B00BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F602A34BD8B00BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F622A34BD9300BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F642A34BD9300BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F662A34BD9C00BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F682A34BD9C00BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F6A2A34BDA400BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F6C2A34BDA400BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F6E2A34BDAC00BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F702A34BDAC00BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
+		04030F722A34BDB400BC573B /* Usercentrics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */;
+			productName = Usercentrics;
+		};
+		04030F742A34BDB400BC573B /* UsercentricsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */;
+			productName = UsercentricsUI;
+		};
 		0414BF202A685B73004543BD /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
