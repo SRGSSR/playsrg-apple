@@ -86,6 +86,8 @@ extension AppDelegate: UIApplicationDelegate {
         let storeFileUrl = cachesDirectoryUrl.appendingPathComponent("PlayData.sqlite")
         SRGUserData.current = SRGUserData(storeFileURL: storeFileUrl, serviceURL: configuration.userDataServiceURL, identityService: SRGIdentityService.current)
         
+        UserCentricsHelper.setup()
+        
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
                                                                siteName: configuration.siteName)

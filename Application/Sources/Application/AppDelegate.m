@@ -100,6 +100,7 @@ static void *s_kvoContext = &s_kvoContext;
                                                name:SRGLetterboxPlaybackDidContinueAutomaticallyNotification
                                              object:nil];
     
+    [UserCentricsHelper setup];
     [self setupAnalytics];
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
