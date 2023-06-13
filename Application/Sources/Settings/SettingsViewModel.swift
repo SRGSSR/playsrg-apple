@@ -188,6 +188,13 @@ final class SettingsViewModel: ObservableObject {
     }
 #endif
     
+    var showPrivacySettings: (() -> Void)? {
+        guard UserCentricsHelper.isConfigured else { return nil }
+        return {
+            UserCentricsHelper.showSecondLayer()
+        }
+    }
+    
     func removeFavorites() {
         FavoritesRemoveShows(nil)
         AnalyticsHiddenEvent.favorite(action: .remove, source: .button, urn: nil).send()

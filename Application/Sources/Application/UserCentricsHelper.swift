@@ -30,6 +30,7 @@ private extension Notification.Name {
     private static var hasRunSetup = false
     private static var categoryToTemplateIdsMapping = [String: [String]]()
     
+    static var isConfigured = false
     @objc static var isShowingBanner = false
     @objc static var acceptedCategories = "" {
         didSet {
@@ -52,6 +53,7 @@ private extension Notification.Name {
         UsercentricsCore.configure(options: options)
         
         UsercentricsCore.isReady { status in
+            isConfigured = true
             categoryToTemplateIdsMapping = categoryToTemplateIdsMappingFromCMPData()
             acceptedCategories = acceptedCategories(acceptedServices: UsercentricsCore.shared.getConsents())
 #if DEBUG
@@ -147,7 +149,7 @@ private extension Notification.Name {
         }
     }
     
-    static func showSecondLayer(hostController: UIViewController?) {
+    static func showSecondLayer() {
         isShowingBanner = true
         NotificationCenter.default.post(name: Notification.Name.willDisplayUserConsentBanner, object: acceptedCategories)
         

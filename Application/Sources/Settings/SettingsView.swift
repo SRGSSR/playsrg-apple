@@ -403,11 +403,18 @@ struct SettingsView: View {
                 if let showDataProtection = model.showDataProtection {
                     Button(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"), action: showDataProtection)
                 }
+                if let showPrivacySettings = model.showPrivacySettings {
+                    Button(NSLocalizedString("Privacy settings", comment: "Label of the button to display the privacy settings"), action: showPrivacySettings)
+                }
                 if let showSourceCode = model.showSourceCode {
                     Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: showSourceCode)
                 }
                 if let becomeBetaTester = model.becomeBetaTester {
                     Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
+                }
+#else
+                if let showPrivacySettings = model.showPrivacySettings {
+                    Button(NSLocalizedString("Privacy settings", comment: "Label of the button to display the privacy settings"), action: showPrivacySettings)
                 }
 #endif
                 VersionCell(model: model)
