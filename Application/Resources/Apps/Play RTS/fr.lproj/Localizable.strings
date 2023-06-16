@@ -153,6 +153,9 @@
 /* Label of the button to copy support information to the pasteboard */
 "Copy support information" = "Copier les informations de support";
 
+/* Data privacy section header */
+"Data privacy" = "Confidentialité des données";
+
 /* Label of the button to display the data protection policy */
 "Data protection" = "Protection des données";
 
@@ -529,6 +532,9 @@
 /* Button title on CarPlay player for livestream previous programs
    Livestream previous programs screen title */
 "Previous shows" = "Émissions précédentes";
+
+/* Label of the button to display the privacy settings */
+"Privacy settings" = "Paramètres de confidentialité";
 
 /* Server setting name */
 "Production" = "Production";
