@@ -151,7 +151,7 @@ name: NukeUI, nameSpecified: NukeUI, owner: kean, version: 0.8.3, source: https:
 
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5, source: https://github.com/Ramotion/paper-onboarding
 
-name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.11.0, source: https://github.com/microsoft/PLCrashReporter
+name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.11.1, source: https://github.com/microsoft/PLCrashReporter
 
 name: promises, nameSpecified: Promises, owner: google, version: 2.2.0, source: https://github.com/google/promises
 

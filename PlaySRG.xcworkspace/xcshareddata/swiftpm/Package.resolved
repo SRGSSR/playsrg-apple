@@ -230,8 +230,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/PLCrashReporter.git",
       "state" : {
-        "revision" : "b1a342da19ed9b3af61ea2efa7656c2af30aeb7c",
-        "version" : "1.11.0"
+        "revision" : "1aed8f7dc79ce8e674c61e430ef51ca3db18cea9",
+        "version" : "1.11.1"
       }
     },
     {
