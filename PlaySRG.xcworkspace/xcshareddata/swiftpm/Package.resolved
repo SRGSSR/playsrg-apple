@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
       "state" : {
-        "revision" : "7e3c521ad689b0e2bbf5cfb62e19c9e1619feae2",
-        "version" : "6.10.0"
+        "revision" : "578ba864392b6bb90f03f11170f61d223a6107f2",
+        "version" : "6.10.1"
       }
     },
     {
