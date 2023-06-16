@@ -141,20 +141,6 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    var showTermsAndConditions: (() -> Void)? {
-        guard let url = ApplicationConfiguration.shared.termsAndConditionsURL else { return nil }
-        return {
-            UIApplication.shared.open(url)
-        }
-    }
-    
-    var showDataProtection: (() -> Void)? {
-        guard let url = ApplicationConfiguration.shared.dataProtectionURL else { return nil }
-        return {
-            UIApplication.shared.open(url)
-        }
-    }
-    
     var showSourceCode: (() -> Void)? {
         guard let url = ApplicationConfiguration.shared.sourceCodeURL else { return nil }
         return {
@@ -187,6 +173,24 @@ final class SettingsViewModel: ObservableObject {
         return ApplicationConfiguration.shared.supportEmailAddress
     }
 #endif
+    
+    var canDisplayDataPrivacySection: Bool {
+        return showDataProtection != nil || showPrivacySettings != nil
+    }
+    
+    var showTermsAndConditions: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.termsAndConditionsURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    var showDataProtection: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.dataProtectionURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
+    }
     
     var showPrivacySettings: (() -> Void)? {
         guard UserCentricsHelper.isConfigured else { return nil }

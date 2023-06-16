@@ -42,6 +42,9 @@ struct SettingsView: View {
                 HelpAndContactSection(model: model)
             }
 #endif
+            if model.canDisplayDataPrivacySection {
+                DataPrivacySection(model: model)
+            }
             InformationSection(model: model)
 #if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
@@ -374,6 +377,25 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: Data privacy section
+    
+    private struct DataPrivacySection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                if let showDataProtection = model.showDataProtection {
+                    Button(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"), action: showDataProtection)
+                }
+                if let showPrivacySettings = model.showPrivacySettings {
+                    Button(NSLocalizedString("Privacy settings", comment: "Label of the button to display the privacy settings"), action: showPrivacySettings)
+                }
+            } header: {
+                Text(NSLocalizedString("Data privacy", comment: "Data privacy section header"))
+            }
+        }
+    }
+    
     // MARK: Information section
     
     private struct InformationSection: View {
@@ -399,12 +421,6 @@ struct SettingsView: View {
                 }
                 if let showTermsAndConditions = model.showTermsAndConditions {
                     Button(NSLocalizedString("Terms and conditions", comment: "Label of the button to display terms and conditions"), action: showTermsAndConditions)
-                }
-                if let showDataProtection = model.showDataProtection {
-                    Button(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"), action: showDataProtection)
-                }
-                if let showPrivacySettings = model.showPrivacySettings {
-                    Button(NSLocalizedString("Privacy settings", comment: "Label of the button to display the privacy settings"), action: showPrivacySettings)
                 }
                 if let showSourceCode = model.showSourceCode {
                     Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: showSourceCode)
