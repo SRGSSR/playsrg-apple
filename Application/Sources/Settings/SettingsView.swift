@@ -500,6 +500,7 @@ struct SettingsView: View {
 #if os(iOS)
         @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
 #endif
+        @AppStorage(PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled) var isAlwaysAskUserConsentAtLaunchEnabled = false
         
         var body: some View {
             PlaySection {
@@ -533,6 +534,7 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
+                Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
 #if os(iOS) && APPCENTER
                 VersionsAndReleaseNotesButton()
 #endif

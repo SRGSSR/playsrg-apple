@@ -56,8 +56,10 @@ private extension Notification.Name {
             isConfigured = true
             categoryToTemplateIdsMapping = categoryToTemplateIdsMappingFromCMPData()
             acceptedCategories = acceptedCategories(acceptedServices: UsercentricsCore.shared.getConsents())
-#if DEBUG
-            showFirstLayer()
+#if DEBUG || NIGHTLY || BETA
+            if status.shouldCollectConsent || UserDefaults.standard.bool(forKey: PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled) {
+                showFirstLayer()
+            }
 #else
             if status.shouldCollectConsent {
                 showFirstLayer()

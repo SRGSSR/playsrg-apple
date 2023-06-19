@@ -20,6 +20,7 @@ NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSetti
 NSString * const PlaySRGSettingServiceIdentifier = @"PlaySRGSettingServiceIdentifier";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 NSString * const PlaySRGSettingMediaListDividerEnabled = @"PlaySRGSettingMediaListDividerEnabled";
+NSString * const PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled = @"PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled";
 
 __attribute__((constructor)) static void ApplicationSettingsConstantsInit(void)
 {

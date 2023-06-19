@@ -30,4 +30,8 @@ extension UserDefaults {
         return bool(forKey: PlaySRG.PlaySRGSettingMediaListDividerEnabled)
     }
 #endif
+    
+    @objc dynamic var PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled: Bool {
+        return bool(forKey: PlaySRG.PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled)
+    }
 }
