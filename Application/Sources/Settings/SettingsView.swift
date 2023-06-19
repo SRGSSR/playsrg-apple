@@ -42,8 +42,8 @@ struct SettingsView: View {
                 HelpAndContactSection(model: model)
             }
 #endif
-            if model.canDisplayDataPrivacySection {
-                DataPrivacySection(model: model)
+            if model.canDisplayPrivacySection {
+                PrivacySection(model: model)
             }
             InformationSection(model: model)
 #if DEBUG || NIGHTLY || BETA
@@ -377,9 +377,9 @@ struct SettingsView: View {
         }
     }
     
-    // MARK: Data privacy section
+    // MARK: Privacy section
     
-    private struct DataPrivacySection: View {
+    private struct PrivacySection: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
@@ -391,7 +391,7 @@ struct SettingsView: View {
                     Button(NSLocalizedString("Privacy settings", comment: "Label of the button to display the privacy settings"), action: showPrivacySettings)
                 }
             } header: {
-                Text(NSLocalizedString("Data privacy", comment: "Data privacy section header"))
+                Text(NSLocalizedString("Privacy", comment: "Privacy section header"))
             }
         }
     }

@@ -174,7 +174,7 @@ final class SettingsViewModel: ObservableObject {
     }
 #endif
     
-    var canDisplayDataPrivacySection: Bool {
+    var canDisplayPrivacySection: Bool {
         return showDataProtection != nil || showPrivacySettings != nil
     }
     
