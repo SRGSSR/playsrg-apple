@@ -193,9 +193,9 @@ final class SettingsViewModel: ObservableObject {
     }
     
     var showPrivacySettings: (() -> Void)? {
-        guard UserCentricsHelper.isConfigured else { return nil }
+        guard UserConsentHelper.isConfigured else { return nil }
         return {
-            UserCentricsHelper.showSecondLayer()
+            UserConsentHelper.showSecondLayer()
         }
     }
     

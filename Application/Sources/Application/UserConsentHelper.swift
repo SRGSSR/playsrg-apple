@@ -20,7 +20,7 @@ private extension Notification.Name {
     case UserCentrics
 }
 
-@objc class UserCentricsHelper: NSObject {
+@objc class UserConsentHelper: NSObject {
     private static let serviceToTemplateIdMapping: [UCService: String] = [
         UCService.CommandersAct: "1",
         UCService.FireBase: "2",
