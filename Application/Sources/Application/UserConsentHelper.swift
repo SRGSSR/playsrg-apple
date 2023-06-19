@@ -111,6 +111,7 @@ private extension Notification.Name {
         
         settings.layerBackgroundColor = backgroundColor
         settings.layerBackgroundSecondaryColor = backgroundColor
+        settings.font = BannerFont(regularFont: SRGFont.font(.body), boldFont: SRGFont.font(.subtitle2))
         settings.textColor = textColor
         settings.linkColor = primaryRedColor
         settings.links = LegalLinksSettings.hidden
