@@ -18,7 +18,7 @@ struct ChannelButton: View {
     @Environment(\.isSelected) var isSelected
     
     private var imageUrl: URL? {
-        return url(for: channel?.rawImage, size: .small, scaling: .preserveAspectRatio)
+        return url(for: channel?.rawImage, size: .small, scalingService: .integrationLayer)
     }
     
     var body: some View {

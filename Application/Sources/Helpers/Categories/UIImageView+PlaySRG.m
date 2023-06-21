@@ -165,7 +165,7 @@
         return;
     }
     
-    NSURL *URL = [SRGDataProvider.currentDataProvider URLForImage:image withSize:size scaling:SRGImageScalingDefault];
+    NSURL *URL = [SRGDataProvider.currentDataProvider URLForImage:image withSize:size scalingService:SRGImageScalingServiceDefault];
     
     // Fix for invalid images, incorrect Kids program images, and incorrect images for sports (RTS)
     // See https://srfmmz.atlassian.net/browse/AIS-15672

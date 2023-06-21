@@ -257,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "363171981dc1cf97d4b8db4ae2a1e052d2478124",
-        "version" : "8.0.0"
+        "branch" : "feature/legacy-image-services",
+        "revision" : "acd5f2eaa281466bb06649c4b15577786046414a"
       }
     },
     {
@@ -284,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "75818e9de479d6cc460840d6f924be9f144513d8",
-        "version" : "17.0.1"
+        "branch" : "feature/legacy-image-services",
+        "revision" : "1533690f1d339f99464e20209c7661f1455f41ae"
       }
     },
     {
@@ -311,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "1bc43e1ec53a984a5329053a26435b4f0530a194",
-        "version" : "9.0.0"
+        "branch" : "feature/legacy-image-services",
+        "revision" : "a0f65fd4198dbe7b4f11ddfca527ccdc351f0534"
       }
     },
     {
