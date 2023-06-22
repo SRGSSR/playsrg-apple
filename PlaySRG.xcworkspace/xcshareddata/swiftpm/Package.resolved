@@ -285,7 +285,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "feature/legacy-image-services",
-        "revision" : "1533690f1d339f99464e20209c7661f1455f41ae"
+        "revision" : "ca33ff0bed00ae93b55e3590081ad53e34c39a34"
       }
     },
     {
