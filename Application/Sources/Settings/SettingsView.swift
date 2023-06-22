@@ -473,6 +473,7 @@ struct SettingsView: View {
         
         @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
         @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
+        @AppStorage(PlaySRGSettingCentralizedImageServicePreferred) var isCentralizedImageServicePreferred = false
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
 #if os(iOS)
         @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
@@ -498,6 +499,7 @@ struct SettingsView: View {
                 }
                 Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
                 Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
+                Toggle(NSLocalizedString("Centralized image service", comment: "Centralized image service setting label"), isOn: $isCentralizedImageServicePreferred)
                 Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
 #if os(iOS)
                 Toggle(NSLocalizedString("Add line dividers in episodes list in show pages", comment: "Beta tests toggle label to add line dividers in episodes list in show pages setting label"), isOn: $isMediaListDividerEnabled)

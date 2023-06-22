@@ -8,6 +8,7 @@
 
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
+#import "PlaySRG-Swift.h"
 
 #import <objc/runtime.h>
 
@@ -165,7 +166,7 @@
         return;
     }
     
-    NSURL *URL = [SRGDataProvider.currentDataProvider URLForImage:image withSize:size scalingService:SRGImageScalingServiceDefault];
+    NSURL *URL = [SRGDataProvider.currentDataProvider URLForImage:image withSize:size scalingService:[SRGDataProvider play_imageScalingService:SRGImageScalingServiceDefault]];
     
     // Fix for invalid images, incorrect Kids program images, and incorrect images for sports (RTS)
     // See https://srfmmz.atlassian.net/browse/AIS-15672

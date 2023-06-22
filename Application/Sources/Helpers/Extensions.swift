@@ -36,7 +36,7 @@ func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
 }
 
 func url(for image: SRGImage?, size: SRGImageSize, scalingService: SRGImageScalingService = .default) -> URL? {
-    return SRGDataProvider.current!.url(for: image, size: size, scalingService: scalingService)
+    return SRGDataProvider.current!.url(for: image, size: size, scalingService: imageScalingService(scalingService))
 }
 
 extension Comparable {

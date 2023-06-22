@@ -10,6 +10,7 @@
 #import "PlaySRG-Swift.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
+#import "PlaySRG-Swift.h"
 
 @import FXReachability;
 @import libextobjc;
@@ -502,7 +503,7 @@ static NSArray<Download *> *s_sortedDownloads;
     
     self.presentation = media.presentation;
     
-    self.downloadImageURL = [SRGDataProvider.currentDataProvider URLForImage:media.image withSize:SRGImageSizeMedium scalingService:SRGImageScalingServiceDefault];
+    self.downloadImageURL = [SRGDataProvider.currentDataProvider URLForImage:media.image withSize:SRGImageSizeMedium scalingService:[SRGDataProvider play_imageScalingService:SRGImageScalingServiceDefault]];
     
     self.uid = media.uid;
     self.URN = media.URN;
