@@ -72,20 +72,6 @@ private extension Notification.Name {
         hasRunSetup = true
     }
     
-    private static func categoryToTemplateIdsMappingFromCMPData() -> [String: [String]] {
-        var categoryToTemplateIdsMapping = [String: [String]]()
-        
-        let data = UsercentricsCore.shared.getCMPData(),
-            categories = data.categories,
-            services = data.services
-        
-        for category in categories {
-            categoryToTemplateIdsMapping[category.categorySlug] = services.filter({ $0.categorySlug == category.categorySlug }).compactMap({ $0.templateId })
-        }
-        
-        return categoryToTemplateIdsMapping
-    }
-    
 #if os(iOS)
     private static func buttonSettings(denyVisible: Bool, isFirstLayer: Bool = false, color: UIColor?) -> [ButtonSettings] {
         var buttons: [ButtonSettings] = [ButtonSettings]()
@@ -161,6 +147,20 @@ private extension Notification.Name {
             acceptedCategories = acceptedCategories(acceptedServices: response.consents)
             NotificationCenter.default.post(name: Notification.Name.didCollectUserConsent, object: acceptedCategories)
         }
+    }
+    
+    private static func categoryToTemplateIdsMappingFromCMPData() -> [String: [String]] {
+        var categoryToTemplateIdsMapping = [String: [String]]()
+        
+        let data = UsercentricsCore.shared.getCMPData(),
+            categories = data.categories,
+            services = data.services
+        
+        for category in categories {
+            categoryToTemplateIdsMapping[category.categorySlug] = services.filter({ $0.categorySlug == category.categorySlug }).compactMap({ $0.templateId })
+        }
+        
+        return categoryToTemplateIdsMapping
     }
     
     private static func acceptedCategories(acceptedServices: [UsercentricsServiceConsent]) -> String {
