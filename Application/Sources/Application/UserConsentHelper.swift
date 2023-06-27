@@ -91,7 +91,7 @@ private extension Notification.Name {
     
     private static var bannerSettings: BannerSettings? {
 #if os(iOS)
-        let backgroundColor = UIColor.srgGray33
+        let backgroundColor = UIColor.srgGray23
         let textColor = UIColor.srgGrayC7
         let primaryRedColor = UIColor.srgRed
         
@@ -99,12 +99,15 @@ private extension Notification.Name {
         
         settings.layerBackgroundColor = backgroundColor
         settings.layerBackgroundSecondaryColor = backgroundColor
-        settings.font = BannerFont(regularFont: SRGFont.font(.body), boldFont: SRGFont.font(.subtitle2))
+        settings.font = BannerFont(regularFont: SRGFont.font(.body), boldFont: SRGFont.font(.H3))
         settings.textColor = textColor
-        settings.linkColor = primaryRedColor
+        settings.linkColor = textColor
         settings.links = LegalLinksSettings.hidden
-        settings.toggleStyleSettings = ToggleStyleSettings(activeBackgroundColor: primaryRedColor)
-        settings.tabColor = primaryRedColor
+        settings.toggleStyleSettings = ToggleStyleSettings(activeBackgroundColor: primaryRedColor,
+                                                           inactiveBackgroundColor: UIColor.srgGray96,
+                                                           disabledBackgroundColor: UIColor.srgGray33,
+                                                           disabledThumbColor: UIColor.srgGray96)
+        settings.tabColor = .white
         settings.logo = bannerLogoImage
         
         let cmpData = UsercentricsCore.shared.getCMPData()
