@@ -9,9 +9,9 @@ import Usercentrics
 import UsercentricsUI
 
 private extension Notification.Name {
-    static let didChangeUserConsent = Notification.Name("UserConsentDidChangeNotification")
+    static let willCollectUserConsent = Notification.Name("UserConsentWillCollectNotification")
     static let didCollectUserConsent = Notification.Name("UserConsentDidCollectNotification")
-    static let willDisplayUserConsentBanner = Notification.Name("UserConsentWillDisplayBannerNotification")
+    static let didChangeUserConsent = Notification.Name("UserConsentDidChangeNotification")
 }
 
 @objc enum UCService: Int {
@@ -132,7 +132,7 @@ private extension Notification.Name {
     
     private static func showFirstLayer() {
         isShowingBanner = true
-        NotificationCenter.default.post(name: Notification.Name.willDisplayUserConsentBanner, object: acceptedCategories)
+        NotificationCenter.default.post(name: Notification.Name.willCollectUserConsent, object: acceptedCategories)
         
         banner.showFirstLayer { response in
             isShowingBanner = false
@@ -143,7 +143,7 @@ private extension Notification.Name {
     
     static func showSecondLayer() {
         isShowingBanner = true
-        NotificationCenter.default.post(name: Notification.Name.willDisplayUserConsentBanner, object: acceptedCategories)
+        NotificationCenter.default.post(name: Notification.Name.willCollectUserConsent, object: acceptedCategories)
         
         banner.showSecondLayer { response in
             isShowingBanner = false
