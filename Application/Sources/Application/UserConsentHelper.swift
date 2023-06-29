@@ -86,7 +86,7 @@ private extension Notification.Name {
 #endif
     
     private static var bannerLogoImage: UIImage? {
-        return UIImage(named: "bu_logo_\(ApplicationConfiguration.shared.businessUnitIdentifier)")
+        return UIImage(named: "logo_bu_\(ApplicationConfiguration.shared.businessUnitIdentifier)")
     }
     
     private static var bannerSettings: BannerSettings? {

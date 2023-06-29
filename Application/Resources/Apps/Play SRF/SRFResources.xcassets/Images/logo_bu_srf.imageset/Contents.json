@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "BU=SRF.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "BU=SRF 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "BU=SRF 2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
