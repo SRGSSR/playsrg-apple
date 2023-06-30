@@ -19246,7 +19246,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/62-update-to-tag-commander-v5";
+				branch = "feature/66-user-consent";
 				kind = branch;
 			};
 		};
@@ -19286,7 +19286,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/283-update-to-commanders-act-version-5";
+				branch = "feature/298-user-consent";
 				kind = branch;
 			};
 		};

@@ -21,15 +21,19 @@ import UsercentricsUI
     @objc static let userConsentDidHideBannerNotification = Notification.Name("UserConsentHideBannerNotification")
     @objc static let userConsentDidChangeNotification = Notification.Name("UserConsentDidChangeNotification")
     
+    @objc static let userConsentAcceptedCategoriesKey = "userConsentAcceptedCategories"
+    
     // MARK: States
     
     static var isConfigured = false
     @objc static var isShowingBanner = false
     
-    @objc static var acceptedCategories = "" {
+    @objc static var acceptedCategories: [String] = [] {
         didSet {
             if oldValue != acceptedCategories {
-                NotificationCenter.default.post(name: userConsentDidChangeNotification, object: acceptedCategories)
+                SRGAnalyticsTracker.shared.acceptedUserConsentCategories = acceptedCategories
+                
+                NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentAcceptedCategoriesKey: acceptedCategories])
             }
         }
     }
@@ -88,23 +92,23 @@ import UsercentricsUI
     
     private static func showFirstLayer() {
         isShowingBanner = true
-        NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: acceptedCategories)
+        NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: nil)
         
         banner.showFirstLayer { response in
             isShowingBanner = false
             acceptedCategories = acceptedCategories(acceptedServices: response.consents)
-            NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: acceptedCategories)
+            NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: nil)
         }
     }
     
     static func showSecondLayer() {
         isShowingBanner = true
-        NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: acceptedCategories)
+        NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: nil)
         
         banner.showSecondLayer { response in
             isShowingBanner = false
             acceptedCategories = acceptedCategories(acceptedServices: response.consents)
-            NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: acceptedCategories)
+            NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: nil)
         }
     }
     
@@ -180,12 +184,12 @@ import UsercentricsUI
         return categoryToTemplateIdsMapping
     }
     
-    private static func acceptedCategories(acceptedServices: [UsercentricsServiceConsent]) -> String {
+    private static func acceptedCategories(acceptedServices: [UsercentricsServiceConsent]) -> [String] {
         var acceptedCategories: [String] = [String]()
         for (categorySlug, services) in categoryToTemplateIdsMapping
         where acceptedServices.contains(where: { services.contains($0.templateId) && $0.status }) {
             acceptedCategories.append(categorySlug)
         }
-        return acceptedCategories.joined(separator: ",")
+        return acceptedCategories
     }
 }
