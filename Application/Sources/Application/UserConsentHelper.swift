@@ -8,12 +8,6 @@ import SRGAppearance
 import Usercentrics
 import UsercentricsUI
 
-private extension Notification.Name {
-    static let willCollectUserConsent = Notification.Name("UserConsentWillCollectNotification")
-    static let didCollectUserConsent = Notification.Name("UserConsentDidCollectNotification")
-    static let didChangeUserConsent = Notification.Name("UserConsentDidChangeNotification")
-}
-
 @objc enum UCService: Int {
     case CommandersAct
     case FireBase
@@ -21,6 +15,32 @@ private extension Notification.Name {
 }
 
 @objc class UserConsentHelper: NSObject {
+    // MARK: Notification names
+    
+    @objc static let userConsentWillShowBannerNotification = Notification.Name("UserConsentWillShowBannerNotification")
+    @objc static let userConsentDidHideBannerNotification = Notification.Name("UserConsentHideBannerNotification")
+    @objc static let userConsentDidChangeNotification = Notification.Name("UserConsentDidChangeNotification")
+    
+    // MARK: States
+    
+    static var isConfigured = false
+    @objc static var isShowingBanner = false
+    
+    @objc static var acceptedCategories = "" {
+        didSet {
+            if oldValue != acceptedCategories {
+                NotificationCenter.default.post(name: userConsentDidChangeNotification, object: acceptedCategories)
+            }
+        }
+    }
+    
+    @objc static func hasConsentFor(service: UCService) -> Bool {
+        if let consentForService = UsercentricsCore.shared.getConsents().first(where: { $0.templateId == serviceToTemplateIdMapping[service] }) {
+            return consentForService.status
+        }
+        return false
+    }
+    
     private static let serviceToTemplateIdMapping: [UCService: String] = [
         UCService.CommandersAct: "1",
         UCService.FireBase: "2",
@@ -30,15 +50,7 @@ private extension Notification.Name {
     private static var hasRunSetup = false
     private static var categoryToTemplateIdsMapping = [String: [String]]()
     
-    static var isConfigured = false
-    @objc static var isShowingBanner = false
-    @objc static var acceptedCategories = "" {
-        didSet {
-            if oldValue != acceptedCategories {
-                NotificationCenter.default.post(name: Notification.Name.didChangeUserConsent, object: acceptedCategories)
-            }
-        }
-    }
+    // MARK: Setup
     
     @objc static func setup() {
         guard !hasRunSetup else { return }
@@ -70,6 +82,34 @@ private extension Notification.Name {
         }
         
         hasRunSetup = true
+    }
+    
+    // MARK: Banners
+    
+    private static func showFirstLayer() {
+        isShowingBanner = true
+        NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: acceptedCategories)
+        
+        banner.showFirstLayer { response in
+            isShowingBanner = false
+            acceptedCategories = acceptedCategories(acceptedServices: response.consents)
+            NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: acceptedCategories)
+        }
+    }
+    
+    static func showSecondLayer() {
+        isShowingBanner = true
+        NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: acceptedCategories)
+        
+        banner.showSecondLayer { response in
+            isShowingBanner = false
+            acceptedCategories = acceptedCategories(acceptedServices: response.consents)
+            NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: acceptedCategories)
+        }
+    }
+    
+    private static var banner: UsercentricsBanner {
+        return UsercentricsBanner(bannerSettings: bannerSettings)
     }
     
 #if os(iOS)
@@ -126,32 +166,6 @@ private extension Notification.Name {
 #endif
     }
     
-    private static var banner: UsercentricsBanner {
-        return UsercentricsBanner(bannerSettings: bannerSettings)
-    }
-    
-    private static func showFirstLayer() {
-        isShowingBanner = true
-        NotificationCenter.default.post(name: Notification.Name.willCollectUserConsent, object: acceptedCategories)
-        
-        banner.showFirstLayer { response in
-            isShowingBanner = false
-            acceptedCategories = acceptedCategories(acceptedServices: response.consents)
-            NotificationCenter.default.post(name: Notification.Name.didCollectUserConsent, object: acceptedCategories)
-        }
-    }
-    
-    static func showSecondLayer() {
-        isShowingBanner = true
-        NotificationCenter.default.post(name: Notification.Name.willCollectUserConsent, object: acceptedCategories)
-        
-        banner.showSecondLayer { response in
-            isShowingBanner = false
-            acceptedCategories = acceptedCategories(acceptedServices: response.consents)
-            NotificationCenter.default.post(name: Notification.Name.didCollectUserConsent, object: acceptedCategories)
-        }
-    }
-    
     private static func categoryToTemplateIdsMappingFromCMPData() -> [String: [String]] {
         var categoryToTemplateIdsMapping = [String: [String]]()
         
@@ -173,12 +187,5 @@ private extension Notification.Name {
             acceptedCategories.append(categorySlug)
         }
         return acceptedCategories.joined(separator: ",")
-    }
-    
-    @objc static func hasConsentFor(service: UCService) -> Bool {
-        if let consentForService = UsercentricsCore.shared.getConsents().first(where: { $0.templateId == serviceToTemplateIdMapping[service] }) {
-            return consentForService.status
-        }
-        return false
     }
 }
