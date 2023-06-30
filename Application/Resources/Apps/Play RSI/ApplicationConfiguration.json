@@ -1,6 +1,6 @@
 {
   "businessUnit": "rsi",
-  "container": 10,
+  "sourceKey": "1b30366c-9e8d-4720-8b12-4165f468f9ae",
   "siteName": "rsi-player-ios-v",
   "tvSiteName": "rsi-player-tvos-apple",
   "voiceOverLanguageCode": "it",

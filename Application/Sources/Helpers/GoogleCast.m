@@ -142,7 +142,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
     [castSession.remoteMediaClient loadMedia:[mediaInfoBuilder build] withOptions:options];
     
     SRGMedia *media = [mediaComposition mediaForSubdivision:mainChapter];
-    [[AnalyticsHiddenEventObjC googleGastWithUrn:media.URN] send];
+    [[AnalyticsEventObjC googleGastWithUrn:media.URN] send];
     [NSNotificationCenter.defaultCenter postNotificationName:GoogleCastPlaybackDidStartNotification
                                                       object:nil
                                                     userInfo:@{ GoogleCastMediaKey : media }];

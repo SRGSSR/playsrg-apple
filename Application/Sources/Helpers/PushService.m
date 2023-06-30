@@ -289,7 +289,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            [[AnalyticsHiddenEventObjC notificationWithAction:AnalyticsNotificationActionPlayMedia
+            [[AnalyticsEventObjC notificationWithAction:AnalyticsNotificationActionPlayMedia
                                                          from:AnalyticsNotificationFromOperatingSystem
                                                           uid:mediaURN
                                                overrideSource:userInfo[@"show"]
@@ -301,7 +301,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSString *showURN = userInfo[@"show"];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            [[AnalyticsHiddenEventObjC notificationWithAction:AnalyticsNotificationActionDisplayShow
+            [[AnalyticsEventObjC notificationWithAction:AnalyticsNotificationActionDisplayShow
                                                          from:AnalyticsNotificationFromOperatingSystem
                                                           uid:showURN
                                                overrideSource:nil
@@ -310,7 +310,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         }];
     }
     else {
-        [[AnalyticsHiddenEventObjC notificationWithAction:AnalyticsNotificationActionAlert
+        [[AnalyticsEventObjC notificationWithAction:AnalyticsNotificationActionAlert
                                                      from:AnalyticsNotificationFromOperatingSystem
                                                       uid:notificationContent.body
                                            overrideSource:nil

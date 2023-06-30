@@ -94,7 +94,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) SRGVendor vendor;
 
 @property (nonatomic, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
-@property (nonatomic) NSInteger analyticsContainer;
+@property (nonatomic, copy) NSString *analyticsSourceKey;
 
 @property (nonatomic, copy) NSString *siteName;
 
@@ -261,9 +261,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     if (! analyticsBusinessUnitIdentifier) {
         return NO;
     }
-    
-    NSNumber *analyticsContainer = [firebaseConfiguration numberForKey:@"container"];
-    if (! analyticsContainer) {
+
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSString *analyticsSourceKey = @"39ae8f94-595c-4ca4-81f7-fb7748bd3f04";
+#else
+    NSString *analyticsSourceKey = [firebaseConfiguration numberForKey:@"sourceKey"];
+#endif
+    if (! analyticsSourceKey) {
         return NO;
     }
     
@@ -310,7 +314,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.businessUnitIdentifier = businessUnitIdentifier;
     self.vendor = vendor;
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
-    self.analyticsContainer = analyticsContainer.integerValue;
+    self.analyticsSourceKey = analyticsSourceKey;
 #if TARGET_OS_IOS
     self.siteName = siteName;
 #else

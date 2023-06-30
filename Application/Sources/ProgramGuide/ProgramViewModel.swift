@@ -258,7 +258,7 @@ final class ProgramViewModel: ObservableObject {
                 guard error == nil else { return }
                 
                 let action = added ? .add : .remove as AnalyticsListAction
-                AnalyticsHiddenEvent.watchLater(action: action, source: .button, urn: media.urn).send()
+                AnalyticsEvent.watchLater(action: action, source: .button, urn: media.urn).send()
                 
                 self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, progress: self.mediaData.progress)
             }
@@ -500,7 +500,7 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
                 Banner.calendarEventAdded(withTitle: title)
                 
                 if let channel = self.channel {
-                    AnalyticsHiddenEvent.calendarEventAdd(channel: channel).send()
+                    AnalyticsEvent.calendarEventAdd(channel: channel).send()
                 }
             }
         }

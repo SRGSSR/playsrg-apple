@@ -160,7 +160,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                 return;
             }
             
-            [[AnalyticsHiddenEventObjC sharingWithAction:sharingItem.analyticsAction
+            [[AnalyticsEventObjC sharingWithAction:sharingItem.analyticsAction
                                                      uid:sharingItem.analyticsUid
                                         mediaContentType:sharingItem.mediaContentType
                                                   source:SharingItemSourceFrom(sharingItemFrom)
