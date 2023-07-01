@@ -52,16 +52,16 @@
 		042F6F4129E08D12003F46AA /* NSArray+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */; };
 		042F6F4229E08D12003F46AA /* NSArray+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */; };
 		042F6F4329E08D12003F46AA /* NSArray+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */; };
-		042F6F4A29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F4B29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F4C29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F4D29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F4E29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F4F29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F5029E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F5129E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F5229E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
-		042F6F5329E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */; };
+		042F6F4A29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F4B29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F4C29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F4D29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F4E29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F4F29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F5029E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F5129E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F5229E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
+		042F6F5329E09805003F46AA /* DateFormatter+playSRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */; };
 		042F6F5529E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5429E0A764003F46AA /* UIColor+PlaySRG.swift */; };
 		042F6F5629E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5429E0A764003F46AA /* UIColor+PlaySRG.swift */; };
 		042F6F5729E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5429E0A764003F46AA /* UIColor+PlaySRG.swift */; };
@@ -2738,7 +2738,7 @@
 		042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSet+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSArray+PlaySRG.swift"; sourceTree = "<group>"; };
-		042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDateFormatter+playSRG.swift"; sourceTree = "<group>"; };
+		042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+playSRG.swift"; sourceTree = "<group>"; };
 		042F6F5429E0A764003F46AA /* UIColor+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PlaySRG.swift"; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
@@ -3823,8 +3823,8 @@
 			isa = PBXGroup;
 			children = (
 				0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */,
+				042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */,
 				042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */,
-				042F6F4929E09805003F46AA /* NSDateFormatter+playSRG.swift */,
 				042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */,
 				043ECDBE29F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift */,
 				0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */,
@@ -8343,7 +8343,7 @@
 				086F8D5522984B29001BE2F4 /* Favorites.m in Sources */,
 				6FE2873C2481448C00358CFF /* SongsViewController.m in Sources */,
 				0858CA5B271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
-				042F6F4A29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F4A29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6F9122BF1DC8708400725EEB /* PlayErrors.m in Sources */,
 				6FFF8EDC2664BFA90016B793 /* Colors.swift in Sources */,
 				6FE1B9191FAC34D600A58F3B /* ContentInsets.m in Sources */,
@@ -8733,7 +8733,7 @@
 				04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBD299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5C271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
-				042F6F4B29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F4B29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -8996,7 +8996,7 @@
 				04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBE299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5D271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
-				042F6F4C29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F4C29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -9259,7 +9259,7 @@
 				04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBF299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
 				0858CA5E271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
-				042F6F4D29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F4D29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
@@ -9376,7 +9376,7 @@
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
 				0451ECE728742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				08AF2AF126BA83EE00C4745E /* ExpandingButton.swift in Sources */,
-				042F6F4E29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F4E29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6F054FC426B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
@@ -9781,7 +9781,7 @@
 				042F6F6529E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
 				6F1EE83A268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D60270DE4FE00210713 /* Publishers.swift in Sources */,
-				042F6F4F29E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F4F29E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6FFFB9B7252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6135225843C7E00C5FE4B /* PlayApplication.m in Sources */,
 				0481D5BF29F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
@@ -9933,7 +9933,7 @@
 				042F6F6629E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
 				6F1EE83B268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D61270DE4FE00210713 /* Publishers.swift in Sources */,
-				042F6F5029E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F5029E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6FFFB9B8252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6136725843C8100C5FE4B /* PlayApplication.m in Sources */,
 				0481D5C029F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
@@ -10085,7 +10085,7 @@
 				042F6F6729E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
 				6F1EE83C268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D62270DE4FE00210713 /* Publishers.swift in Sources */,
-				042F6F5129E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F5129E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6FFFB9B9252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */,
 				0481D5C129F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
@@ -10237,7 +10237,7 @@
 				042F6F6829E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
 				6F1EE83D268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D63270DE4FE00210713 /* Publishers.swift in Sources */,
-				042F6F5229E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F5229E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6FFFB9BA252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
 				08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */,
 				0481D5C229F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
@@ -10360,7 +10360,7 @@
 				6FDF54FB28530BAC0068BABB /* SearchViewController.swift in Sources */,
 				6F85F7682567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3041F827393FC2001E64BF /* UICollectionView+PlaySRG.m in Sources */,
-				042F6F5329E09805003F46AA /* NSDateFormatter+playSRG.swift in Sources */,
+				042F6F5329E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6F9F575E2746678E00DCA629 /* ProgramPreview.swift in Sources */,
 				6F6CD8662865767A00DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */,
