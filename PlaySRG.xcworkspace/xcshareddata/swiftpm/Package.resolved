@@ -285,7 +285,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "feature/legacy-image-services",
-        "revision" : "ca33ff0bed00ae93b55e3590081ad53e34c39a34"
+        "revision" : "4c52c8c5fda50887fb456258f7be3ece694a6423"
       }
     },
     {
@@ -312,7 +312,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "feature/legacy-image-services",
-        "revision" : "a0f65fd4198dbe7b4f11ddfca527ccdc351f0534"
+        "revision" : "b02cb0a30a6efd5380d0813ddbbfa8e386157f11"
       }
     },
     {
