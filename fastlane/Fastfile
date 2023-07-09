@@ -139,7 +139,7 @@ platform :ios do
       UI.success "#{ios_application_schemes[index]} (#{platform} Beta #{tag_version}) uploaded and distributed. ✅"
     end
 
-    bump_build_number_beta_workflow(platform)
+    beta_workflow(platform)
   end
 
   desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
@@ -839,7 +839,7 @@ platform :ios do
 
     slack_beta_release(platform, tag_version)
 
-    bump_build_number_beta_workflow(platform)
+    beta_workflow(platform)
   end
 
   desc 'Builds a new App Store build on App Store Connect with the current build number and and skips build processing.'
@@ -1814,9 +1814,13 @@ def pull_translations
   ENV['CROWDIN_TRANSLATIONS_PULLLED'] = '1'
 end
 
-# Beta workflow: tag the new beta, bump build number and push to the repository,
-# only if we are on the develop branch.
-def bump_build_number_beta_workflow(platform)
+def beta_workflow(platform)
+  tag_beta(platform)
+  bump_build_number_beta
+end
+
+# Beta workflow: tag the new beta and push to the repository only if we are on the develop branch.
+def tag_beta(platform)
   return unless git_branch_name.include? 'develop'
 
   tag = srg_tag(platform)
@@ -1827,7 +1831,13 @@ def bump_build_number_beta_workflow(platform)
   else
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
+    push_to_git_remote
   end
+end
+
+# Beta workflow: bump build number and push to the repository only if we are on the develop branch.
+def bump_build_number_beta
+  return unless git_branch_name.include? 'develop'
 
   bump_build_number_commit
   git_pull(rebase: true)
