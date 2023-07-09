@@ -1815,8 +1815,17 @@ def pull_translations
 end
 
 def beta_workflow(platform)
+  commits = []
+
+  commit = last_git_commit
+  is_what_s_new = ['what\'s new', 'whats new'].one? { |i| commit[:message].downcase.include? i }
+  commits.append(commit) if is_what_s_new
+
   tag_beta(platform)
   bump_build_number_beta
+  commits.append(last_git_commit)
+
+  cherrypick_beta_on_develop(commits)
 end
 
 # Beta workflow: tag the new beta and push to the repository only if we are on the develop branch.
@@ -1835,17 +1844,39 @@ def tag_beta(platform)
   end
 end
 
-# Beta workflow: bump build number and push to the repository only if we are on the develop branch.
+# Beta workflow: bump build number and push to the repository only if we are on the develop
+# or feature branch. Cherrypick on develop branch if we are on a feature branch.
 def bump_build_number_beta
-  return unless git_branch_name.include? 'develop'
+  branch_names = ['develop', 'feature']
+  return unless branch_names.one? { |i| git_branch_name.include? i }
 
   bump_build_number_commit
   git_pull(rebase: true)
   push_to_git_remote
 end
 
+def cherrypick_beta_on_develop(commits)
+  branch_name = git_branch_name
+  return unless branch_name.include? 'feature'
+
+  Dir.chdir('..') do
+    sh 'git checkout develop'
+    sh 'git pull --rebase origin develop'
+    commits.each do |commit|
+      sh "git cherry-pick --no-commit #{commit[:commit_hash]}"
+      sh "git commit -m \"#{commit[:message].strip}\"" unless git_status_clean
+    end
+    sh 'git push origin develop:develop'
+    sh "git checkout #{branch_name}"
+  end
+end
+
 def git_branch_name
   sh "git branch | grep \\* | cut -d ' ' -f2"
+end
+
+def git_status_clean
+  sh('git status --porcelain').strip.empty?
 end
 
 def beta_app_review_info
