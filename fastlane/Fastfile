@@ -57,18 +57,17 @@ platform :ios do
     xcode_override_build_number(build_number + 1)
 
     tag_version = tag_version(platform)
-
     branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, nightly_build_name(branch_name))
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
       build_lane(
         configuration: 'Nightly_AppCenter',
         scheme: ios_application_schemes[index],
         display_name_suffix: nightly_display_name_suffix(branch_name),
-        version_suffix: nightly_version_suffix(branch_name),
-        build_name: nightly_build_name(branch_name),
+        version_suffix: version_suffix('-nightly', branch_name),
+        build_name: build_name(branch_name),
         platform:
       )
 
@@ -114,13 +113,17 @@ platform :ios do
     platform = 'iOS'
 
     tag_version = tag_version(platform)
+    branch_name = git_branch_name
+
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
       build_lane(
         configuration: 'Beta_AppCenter',
         scheme: ios_application_schemes[index],
-        display_name_suffix: ' 🎯',
-        version_suffix: '-beta',
+        display_name_suffix: beta_display_name_suffix(branch_name),
+        version_suffix: version_suffix('-beta', branch_name),
+        build_name: build_name(branch_name),
         platform:
       )
 
@@ -742,10 +745,9 @@ platform :ios do
     xcode_override_build_number(build_number + 1)
 
     tag_version = tag_version(platform)
-
     branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, nightly_build_name(branch_name))
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
@@ -755,8 +757,8 @@ platform :ios do
         configuration: 'Nightly',
         scheme: schemes[index],
         display_name_suffix: nightly_display_name_suffix(branch_name),
-        version_suffix: nightly_version_suffix(branch_name),
-        build_name: nightly_build_name(branch_name),
+        version_suffix: version_suffix('-nightly', branch_name),
+        build_name: build_name(branch_name),
         platform:,
         export_to_appstore: true
       )
@@ -791,6 +793,9 @@ platform :ios do
     platform = options[:platform] || 'iOS'
 
     tag_version = tag_version(platform)
+    branch_name = git_branch_name
+
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
@@ -803,8 +808,9 @@ platform :ios do
       build_lane(
         configuration: 'Beta',
         scheme: schemes[index],
-        display_name_suffix: ' 🎯',
-        version_suffix: '-beta',
+        display_name_suffix: beta_display_name_suffix(branch_name),
+        version_suffix: version_suffix('-beta', branch_name),
+        build_name: build_name(branch_name),
         platform:,
         export_to_appstore: true
       )
@@ -846,6 +852,9 @@ platform :ios do
     next unless scheme
 
     tag_version = tag_version(platform)
+    branch_name = git_branch_name
+
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     can_upload = can_upload_testflight_build(nil, platform, tag_version)
     UI.message "#{scheme} (#{platform} App Store #{tag_version}) already uploaded 🔁 ✅" unless can_upload
@@ -854,6 +863,9 @@ platform :ios do
     build_lane(
       configuration: 'AppStore',
       scheme:,
+      display_name_suffix: appstore_display_name_suffix(branch_name),
+      version_suffix: version_suffix('', branch_name),
+      build_name: build_name(branch_name),
       platform:,
       export_to_appstore: true
     )
@@ -1363,15 +1375,27 @@ def nightly_display_name_suffix(branch_name)
   nightly_display_name_suffix
 end
 
-def nightly_version_suffix(branch_name)
-  nightly_version_suffix = '-nightly'
-  if branch_name.include? 'feature/'
-    nightly_version_suffix += "+#{branch_name.sub('feature/', '').strip}"
-  end
-  nightly_version_suffix
+def beta_display_name_suffix(branch_name)
+  beta_display_name_suffix = ' 🎯'
+  beta_display_name_suffix = ' 🪴' if branch_name.include? 'feature/'
+  beta_display_name_suffix
 end
 
-def nightly_build_name(branch_name)
+def appstore_display_name_suffix(branch_name)
+  appstore_display_name_suffix = ''
+  appstore_display_name_suffix = ' 🪵' if branch_name.include? 'feature/'
+  appstore_display_name_suffix
+end
+
+def version_suffix(version_suffix, branch_name)
+  if branch_name.include? 'feature/'
+    "#{version_suffix}+#{branch_name.sub('feature/', '').strip}"
+  else
+    version_suffix
+  end
+end
+
+def build_name(branch_name)
   if branch_name.include? 'feature/'
     branch_name.sub('feature/', '').strip
   else
