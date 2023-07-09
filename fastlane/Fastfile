@@ -22,7 +22,7 @@ platform :ios do
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
 
-    notify_version_to_ci(platform, tag_version, nil) unless lane.to_s.downcase.include?('nightlies')
+    notify_version_to_ci(platform, tag_version, nil) unless lane.to_s.downcase.include? 'nightlies'
 
     if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
