@@ -21,8 +21,9 @@ platform :ios do
   before_all do |lane, options|
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
+    branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, nil) unless lane.to_s.downcase.include? 'nightlies'
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
@@ -58,8 +59,6 @@ platform :ios do
 
     tag_version = tag_version(platform)
     branch_name = git_branch_name
-
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
       build_lane(
@@ -114,8 +113,6 @@ platform :ios do
 
     tag_version = tag_version(platform)
     branch_name = git_branch_name
-
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
       build_lane(
@@ -747,8 +744,6 @@ platform :ios do
     tag_version = tag_version(platform)
     branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
-
     schemes = application_schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -794,8 +789,6 @@ platform :ios do
 
     tag_version = tag_version(platform)
     branch_name = git_branch_name
-
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
@@ -853,8 +846,6 @@ platform :ios do
 
     tag_version = tag_version(platform)
     branch_name = git_branch_name
-
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     can_upload = can_upload_testflight_build(nil, platform, tag_version)
     UI.message "#{scheme} (#{platform} App Store #{tag_version}) already uploaded 🔁 ✅" unless can_upload
