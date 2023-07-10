@@ -177,6 +177,9 @@ import UsercentricsUI
             categories = data.categories,
             services = data.services
         
+        PlayLogDebug(category: "UserConsent", message: "Settings id: \(data.settings.settingsId)")
+        PlayLogDebug(category: "UserConsent", message: "categorySlugs / label: \(categories.map({ "\($0.categorySlug) / \($0.label)" }))")
+        
         for category in categories {
             categoryToTemplateIdsMapping[category.categorySlug] = services.filter({ $0.categorySlug == category.categorySlug }).compactMap({ $0.templateId })
         }
