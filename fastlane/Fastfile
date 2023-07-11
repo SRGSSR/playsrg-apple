@@ -1362,7 +1362,7 @@ end
 
 def nightly_display_name_suffix(branch_name)
   nightly_display_name_suffix = ' 🌙'
-  nightly_display_name_suffix = ' 🌿' if branch_name.include? 'feature/'
+  nightly_display_name_suffix = ' 🌱' if branch_name.include? 'feature/'
   nightly_display_name_suffix
 end
 
@@ -1374,7 +1374,7 @@ end
 
 def appstore_display_name_suffix(branch_name)
   appstore_display_name_suffix = ''
-  appstore_display_name_suffix = ' 🪵' if branch_name.include? 'feature/'
+  appstore_display_name_suffix = ' 🌳' if branch_name.include? 'feature/'
   appstore_display_name_suffix
 end
 
