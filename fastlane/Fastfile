@@ -107,7 +107,7 @@ platform :ios do
 
   # Betas
 
-  desc 'Builds an iOS beta on App Center with the current build number. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds an iOS beta on App Center with the current build number. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   lane :iOSbetasAppCenter do
     platform = 'iOS'
 
@@ -139,12 +139,12 @@ platform :ios do
     beta_workflow(platform)
   end
 
-  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   lane :tvOSbetas do
     testflight_betas(platform: 'tvOS')
   end
 
-  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   lane :iOSbetas do
     testflight_betas(platform: 'iOS')
   end
@@ -783,7 +783,7 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
-  desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   private_lane :testflight_betas do |options|
     platform = options[:platform] || 'iOS'
 
