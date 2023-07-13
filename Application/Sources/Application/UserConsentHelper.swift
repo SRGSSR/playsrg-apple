@@ -158,14 +158,17 @@ import UsercentricsUI
         let cmpData = UsercentricsCore.shared.getCMPData()
         let firstLayerDenyHidden = cmpData.settings.firstLayer?.hideButtonDeny?.boolValue ?? true
         
-        let fl_settings = FirstLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: !firstLayerDenyHidden, isFirstLayer: true, color: primaryRedColor)),
-                                                  backgroundColor: backgroundColor,
-                                                  cornerRadius: 8)
+        let firstLayerSettings = FirstLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: !firstLayerDenyHidden, isFirstLayer: true, color: primaryRedColor)),
+                                                         backgroundColor: backgroundColor,
+                                                         cornerRadius: 8)
         
-        let sl_settings = SecondLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: true, color: primaryRedColor)),
-                                                   showCloseButton: nil)
+        let secondLayerSettings = SecondLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: true, color: primaryRedColor)),
+                                                           showCloseButton: nil)
         
-        return BannerSettings(generalStyleSettings: settings, firstLayerStyleSettings: fl_settings, secondLayerStyleSettings: sl_settings, variantName: nil)
+        return BannerSettings(generalStyleSettings: settings,
+                              firstLayerStyleSettings: firstLayerSettings,
+                              secondLayerStyleSettings: secondLayerSettings,
+                              variantName: nil)
 #else
         guard let logoImage = bannerLogoImage else { return nil }
         return BannerSettings(logo: logoImage)
