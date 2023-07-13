@@ -118,13 +118,14 @@ import UsercentricsUI
     
 #if os(iOS)
     private static func buttonSettings(denyVisible: Bool, isFirstLayer: Bool = false, color: UIColor?) -> [ButtonSettings] {
+        let cornerRadius: CGFloat = 8
         var buttons: [ButtonSettings] = [ButtonSettings]()
-        buttons.append(ButtonSettings(type: .acceptAll, backgroundColor: color))
+        buttons.append(ButtonSettings(type: .acceptAll, backgroundColor: color, cornerRadius: cornerRadius))
         if denyVisible {
-            buttons.append(ButtonSettings(type: .denyAll, backgroundColor: color))
+            buttons.append(ButtonSettings(type: .denyAll, backgroundColor: color, cornerRadius: cornerRadius))
         }
         
-        buttons.append(isFirstLayer ? ButtonSettings(type: .more) : ButtonSettings(type: .save))
+        buttons.append(isFirstLayer ? ButtonSettings(type: .more, cornerRadius: cornerRadius) : ButtonSettings(type: .save, cornerRadius: cornerRadius))
         return buttons
     }
 #endif
@@ -158,7 +159,8 @@ import UsercentricsUI
         let firstLayerDenyHidden = cmpData.settings.firstLayer?.hideButtonDeny?.boolValue ?? true
         
         let fl_settings = FirstLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: !firstLayerDenyHidden, isFirstLayer: true, color: primaryRedColor)),
-                                                  backgroundColor: backgroundColor)
+                                                  backgroundColor: backgroundColor,
+                                                  cornerRadius: 8)
         
         let sl_settings = SecondLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: true, color: primaryRedColor)),
                                                    showCloseButton: nil)
