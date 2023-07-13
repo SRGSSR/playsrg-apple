@@ -54,6 +54,12 @@ extension UIViewController {
                 }
                 .store(in: &cancellables)
             
+            NotificationCenter.default.weakPublisher(for: UserConsentHelper.userConsentWillShowBannerNotification)
+                .sink { _ in
+                    controller.pause()
+                }
+                .store(in: &cancellables)
+            
             let position = HistoryResumePlaybackPositionForMedia(media)
             controller.playMedia(media, at: position, withPreferredSettings: nil)
             present(letterboxViewController, animated: animated) {

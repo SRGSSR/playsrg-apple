@@ -100,6 +100,10 @@ static void *s_kvoContext = &s_kvoContext;
                                                name:SRGLetterboxPlaybackDidContinueAutomaticallyNotification
                                              object:nil];
     
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(userConsentWillShowBanner:)
+                                               name:UserConsentHelper.userConsentWillShowBannerNotification
+                                             object:nil];
     [UserConsentHelper setup];
     [self setupAnalytics];
     
@@ -368,6 +372,11 @@ static void *s_kvoContext = &s_kvoContext;
                                                        mediaUrn:media.URN]
          send];
     }
+}
+
+- (void)userConsentWillShowBanner:(NSNotification *)notification
+{
+    [SRGLetterboxService.sharedService.controller pause];
 }
 
 - (void)userDidCancelLogin:(NSNotification *)notification
