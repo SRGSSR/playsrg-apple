@@ -276,7 +276,7 @@
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
         "branch" : "feature/62-update-to-tag-commander-v5",
-        "revision" : "e4b666ff0242b94e8163dcad510a99ede1015be4"
+        "revision" : "001801ada5c9c5bf5cb4522dddd54e5c66df3025"
       }
     },
     {
@@ -330,7 +330,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "feature/283-update-to-commanders-act-version-5",
-        "revision" : "0ae2532984ec6ed59c91063f19acdaab7df77fae"
+        "revision" : "4e9f973e1c0d47cdb1a46aefee254abd20f0ab37"
       }
     },
     {

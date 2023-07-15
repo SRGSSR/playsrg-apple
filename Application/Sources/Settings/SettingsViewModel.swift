@@ -107,7 +107,7 @@ final class SettingsViewModel: ObservableObject {
         if let opened = SRGIdentityService.current?.login(withEmailAddress: nil), opened {
             SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.login.rawValue, levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue])
             
-            AnalyticsHiddenEvent.identity(action: .displayLogin).send()
+            AnalyticsEvent.identity(action: .displayLogin).send()
         }
     }
     
@@ -172,7 +172,7 @@ final class SettingsViewModel: ObservableObject {
             let headerText = String(format: NSLocalizedString("Please contact us at %@", comment: "Apple TV header when displayed support information"), supportEmailAdress)
             let text = String(format: "%@\n\n%@", headerText, SupportInformation.generate())
             navigateToText(text)
-            AnalyticsHiddenEvent.openHelp(action: .technicalIssue).send()
+            AnalyticsEvent.openHelp(action: .technicalIssue).send()
         }
     }
     
@@ -205,20 +205,20 @@ final class SettingsViewModel: ObservableObject {
     
     func removeFavorites() {
         FavoritesRemoveShows(nil)
-        AnalyticsHiddenEvent.favorite(action: .remove, source: .button, urn: nil).send()
+        AnalyticsEvent.favorite(action: .remove, source: .button, urn: nil).send()
     }
     
     func removeHistory() {
         SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: { error in
             guard error == nil else { return }
-            AnalyticsHiddenEvent.historyRemove(source: .button, urn: nil).send()
+            AnalyticsEvent.historyRemove(source: .button, urn: nil).send()
         })
     }
     
     func removeWatchLaterItems() {
         SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: { error in
             guard error == nil else { return }
-            AnalyticsHiddenEvent.watchLater(action: .remove, source: .button, urn: nil).send()
+            AnalyticsEvent.watchLater(action: .remove, source: .button, urn: nil).send()
         })
     }
     

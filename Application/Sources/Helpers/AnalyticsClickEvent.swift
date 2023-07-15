@@ -12,7 +12,7 @@ import SRGDataProviderModel
  */
 struct AnalyticsClickEvent {
     let name: String
-    let labels: SRGAnalyticsHiddenEventLabels
+    let labels: SRGAnalyticsEventLabels
     
     private enum PageId: String {
         case tvGuide
@@ -23,7 +23,7 @@ struct AnalyticsClickEvent {
      *  Use this method to send the event when needed.
      */
     func send() {
-        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+        SRGAnalyticsTracker.shared.trackEvent(withName: name, labels: labels)
     }
     
     static func tvGuideOpenInfoBox(program: SRGProgram, programGuideLayout: ProgramGuideLayout) -> Self {
@@ -108,7 +108,7 @@ struct AnalyticsClickEvent {
     private init(name: String, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
         self.name = name
         
-        let labels = SRGAnalyticsHiddenEventLabels()
+        let labels = SRGAnalyticsEventLabels()
         labels.source = "2797"
         labels.type = "ClickEvent"
         labels.extraValue1 = value1

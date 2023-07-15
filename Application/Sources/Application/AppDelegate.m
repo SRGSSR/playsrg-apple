@@ -373,7 +373,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     SRGMedia *media = notification.userInfo[SRGLetterboxMediaKey];
     if (media) {
-        [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
+        [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
                                                        mediaUrn:media.URN]
          send];
     }
@@ -386,12 +386,12 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)userDidCancelLogin:(NSNotification *)notification
 {
-    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionCancelLogin] send];
+    [[AnalyticsEventObjC identityWithAction:AnalyticsIdentityActionCancelLogin] send];
 }
 
 - (void)userDidLogin:(NSNotification *)notification
 {
-    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionLogin] send];
+    [[AnalyticsEventObjC identityWithAction:AnalyticsIdentityActionLogin] send];
 }
 
 - (void)didUpdateAccount:(NSNotification *)notification
@@ -417,7 +417,7 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     AnalyticsIdentityAction action = unexpectedLogout ? AnalyticsIdentityActionUnexpectedLogout : AnalyticsIdentityActionLogout;
-    [[AnalyticsHiddenEventObjC identityWithAction:action] send];
+    [[AnalyticsEventObjC identityWithAction:action] send];
 }
 
 #pragma mark KVO
