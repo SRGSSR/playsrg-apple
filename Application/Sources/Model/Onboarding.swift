@@ -7,10 +7,10 @@
 import Foundation
 
 struct Onboarding: Codable, Identifiable {
-    static let onboardings: [Onboarding] = {
+    static let onboardings: [Self] = {
         let fileUrl = Bundle.main.url(forResource: "Onboardings", withExtension: "json")!
         let data = try! Data(contentsOf: fileUrl)
-        return try! JSONDecoder().decode([Onboarding].self, from: data)
+        return try! JSONDecoder().decode([Self].self, from: data)
             .filter { !ApplicationConfiguration.shared.hiddenOnboardingUids.contains($0.id) }
     }()
     

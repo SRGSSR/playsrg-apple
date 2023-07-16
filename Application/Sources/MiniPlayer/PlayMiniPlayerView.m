@@ -404,6 +404,7 @@
 
 - (IBAction)close:(id)sender
 {
+    [self.controller stop];
     [SRGLetterboxService.sharedService disableForController:self.controller];
     [self.controller reset];
     

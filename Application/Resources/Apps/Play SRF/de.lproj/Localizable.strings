@@ -147,9 +147,6 @@
 /* Message displayed when the user is about to delete content saved for later */
 "Content saved for later will be deleted on all devices connected to your account." = "Für später gespeicherte Inhalte werden auf allen mit Ihrem Konto verbundenen Geräten gelöscht.";
 
-/* Label of the button to copy support information to the pasteboard */
-"Copy to the pasteboard" = "In Zwischenablage kopieren";
-
 /* Label of the button to copy support email to the pasteboard */
 "Copy %@" = "Kopieren %@";
 
@@ -314,9 +311,6 @@
 /* Information section header */
 "Information" = "Informationen";
 
-/* Issue title on top of mail body to declare a technical issue */
-"Issue:" = "technisches Problem:";
-
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Behalten";
 
@@ -376,9 +370,6 @@
 
 /* Login button on Apple TV */
 "Login" = "Anmelden";
-
-/* Text displayed within the login / sign up profile header when no user is logged in */
-"Login / Sign up" = "Anmelden / Registrieren";
 
 /* Logout alert view title on Apple TV
    Logout button on Apple TV */
@@ -519,6 +510,9 @@
    Missing mail application description */
 "Please contact us at %@" = "Bitte kontaktieren Sie uns unter %@";
 
+/* Mail body header to declare a technical issue */
+"Please describe the issue below:" = "Bitte beschreiben Sie das Problem unten:";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Beliebt auf Play SRF";
 
@@ -602,9 +596,6 @@
 /* Title displayed when no item has been selected */
 "Select items" = "Auswählen";
 
-/* Label of the button to send support information by email */
-"Send by email" = "Per E-Mail senden";
-
 /* Label of the button to access server selection
    Server selection view title */
 "Server" = "Server";
@@ -678,10 +669,6 @@
 /* Search setting */
 "Subtitled" = "Mit Untertiteln";
 
-/* Label of the button to access support information
-   Support information alert title */
-"Support information" = "Supportinformationen";
-
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support email has been copied to the pasteboard" = "Die Support-E-Mail wurde in die Zwischenablage kopiert.";
 
@@ -690,9 +677,6 @@
 
 /* Login benefits description footer */
 "Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und die für später gemerkten Inhalte auf allen mit Ihrem Konto verbundenen Geräten.";
-
-/* Login benefits description footer */
-"Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und die für später gemerkten Inhalte auf allen mit Ihrem Konto verbundenen Geräten.";
 
 /* Label of the button to display terms and conditions */
 "Terms and conditions" = "Datenschutzerklärung";
@@ -872,9 +856,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Sie wurden automatisch abgemeldet. Melden Sie sich erneut an, um Ihre Daten zu synchronisieren.";
-
-/* Label of the button to display feedback form */
-"Your feedback" = "Feedback geben";
 
 /* Add to Calendar alert title */
 "“%@” would like to access to your calendar" = "„%@” möchte auf deinen Kalender zugreifen";

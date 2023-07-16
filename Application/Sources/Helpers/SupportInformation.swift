@@ -102,9 +102,8 @@ import UIKit
         var components = [String]()
         
         if toMailBody {
-            components.append(NSLocalizedString("Issue:", comment: "Issue title on top of mail body to declare a technical issue"))
-            components.append("")
-            components.append("")
+            components.append(NSLocalizedString("Please describe the issue below:", comment: "Mail body header to declare a technical issue"))
+            components.append(contentsOf: Array(repeating: "", count: 6))
             components.append("--------------------------------------")
         }
         

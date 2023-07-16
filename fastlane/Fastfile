@@ -21,8 +21,9 @@ platform :ios do
   before_all do |lane, options|
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
+    branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, nil) unless lane.to_s.downcase.include?('nightlies')
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
@@ -57,18 +58,15 @@ platform :ios do
     xcode_override_build_number(build_number + 1)
 
     tag_version = tag_version(platform)
-
     branch_name = git_branch_name
-
-    notify_version_to_ci(platform, tag_version, nightly_build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
       build_lane(
         configuration: 'Nightly_AppCenter',
         scheme: ios_application_schemes[index],
         display_name_suffix: nightly_display_name_suffix(branch_name),
-        version_suffix: nightly_version_suffix(branch_name),
-        build_name: nightly_build_name(branch_name),
+        version_suffix: version_suffix('-nightly', branch_name),
+        build_name: build_name(branch_name),
         platform:
       )
 
@@ -109,18 +107,20 @@ platform :ios do
 
   # Betas
 
-  desc 'Builds an iOS beta on App Center with the current build number. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds an iOS beta on App Center with the current build number. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   lane :iOSbetasAppCenter do
     platform = 'iOS'
 
     tag_version = tag_version(platform)
+    branch_name = git_branch_name
 
     ios_application_schemes.each_index do |index|
       build_lane(
         configuration: 'Beta_AppCenter',
         scheme: ios_application_schemes[index],
-        display_name_suffix: ' 🎯',
-        version_suffix: '-beta',
+        display_name_suffix: beta_display_name_suffix(branch_name),
+        version_suffix: version_suffix('-beta', branch_name),
+        build_name: build_name(branch_name),
         platform:
       )
 
@@ -136,15 +136,15 @@ platform :ios do
       UI.success "#{ios_application_schemes[index]} (#{platform} Beta #{tag_version}) uploaded and distributed. ✅"
     end
 
-    bump_build_number_beta_workflow(platform)
+    beta_workflow(platform)
   end
 
-  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   lane :tvOSbetas do
     testflight_betas(platform: 'tvOS')
   end
 
-  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   lane :iOSbetas do
     testflight_betas(platform: 'iOS')
   end
@@ -742,10 +742,7 @@ platform :ios do
     xcode_override_build_number(build_number + 1)
 
     tag_version = tag_version(platform)
-
     branch_name = git_branch_name
-
-    notify_version_to_ci(platform, tag_version, nightly_build_name(branch_name))
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
@@ -755,8 +752,8 @@ platform :ios do
         configuration: 'Nightly',
         scheme: schemes[index],
         display_name_suffix: nightly_display_name_suffix(branch_name),
-        version_suffix: nightly_version_suffix(branch_name),
-        build_name: nightly_build_name(branch_name),
+        version_suffix: version_suffix('-nightly', branch_name),
+        build_name: build_name(branch_name),
         platform:,
         export_to_appstore: true
       )
@@ -786,11 +783,12 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
-  desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   private_lane :testflight_betas do |options|
     platform = options[:platform] || 'iOS'
 
     tag_version = tag_version(platform)
+    branch_name = git_branch_name
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
@@ -803,8 +801,9 @@ platform :ios do
       build_lane(
         configuration: 'Beta',
         scheme: schemes[index],
-        display_name_suffix: ' 🎯',
-        version_suffix: '-beta',
+        display_name_suffix: beta_display_name_suffix(branch_name),
+        version_suffix: version_suffix('-beta', branch_name),
+        build_name: build_name(branch_name),
         platform:,
         export_to_appstore: true
       )
@@ -833,7 +832,7 @@ platform :ios do
 
     slack_beta_release(platform, tag_version)
 
-    bump_build_number_beta_workflow(platform)
+    beta_workflow(platform)
   end
 
   desc 'Builds a new App Store build on App Store Connect with the current build number and and skips build processing.'
@@ -846,6 +845,7 @@ platform :ios do
     next unless scheme
 
     tag_version = tag_version(platform)
+    branch_name = git_branch_name
 
     can_upload = can_upload_testflight_build(nil, platform, tag_version)
     UI.message "#{scheme} (#{platform} App Store #{tag_version}) already uploaded 🔁 ✅" unless can_upload
@@ -854,6 +854,9 @@ platform :ios do
     build_lane(
       configuration: 'AppStore',
       scheme:,
+      display_name_suffix: appstore_display_name_suffix(branch_name),
+      version_suffix: version_suffix('', branch_name),
+      build_name: build_name(branch_name),
       platform:,
       export_to_appstore: true
     )
@@ -1359,19 +1362,31 @@ end
 
 def nightly_display_name_suffix(branch_name)
   nightly_display_name_suffix = ' 🌙'
-  nightly_display_name_suffix = ' 🌿' if branch_name.include? 'feature/'
+  nightly_display_name_suffix = ' 🌱' if branch_name.include? 'feature/'
   nightly_display_name_suffix
 end
 
-def nightly_version_suffix(branch_name)
-  nightly_version_suffix = '-nightly'
-  if branch_name.include? 'feature/'
-    nightly_version_suffix += "+#{branch_name.sub('feature/', '').strip}"
-  end
-  nightly_version_suffix
+def beta_display_name_suffix(branch_name)
+  beta_display_name_suffix = ' 🎯'
+  beta_display_name_suffix = ' 🪴' if branch_name.include? 'feature/'
+  beta_display_name_suffix
 end
 
-def nightly_build_name(branch_name)
+def appstore_display_name_suffix(branch_name)
+  appstore_display_name_suffix = ''
+  appstore_display_name_suffix = ' 🌳' if branch_name.include? 'feature/'
+  appstore_display_name_suffix
+end
+
+def version_suffix(version_suffix, branch_name)
+  if branch_name.include? 'feature/'
+    "#{version_suffix}+#{branch_name.sub('feature/', '').strip}"
+  else
+    version_suffix
+  end
+end
+
+def build_name(branch_name)
   if branch_name.include? 'feature/'
     branch_name.sub('feature/', '').strip
   else
@@ -1790,9 +1805,22 @@ def pull_translations
   ENV['CROWDIN_TRANSLATIONS_PULLLED'] = '1'
 end
 
-# Beta workflow: tag the new beta, bump build number and push to the repository,
-# only if we are on the develop branch.
-def bump_build_number_beta_workflow(platform)
+def beta_workflow(platform)
+  commits = []
+
+  commit = last_git_commit
+  is_what_s_new = ['what\'s new', 'whats new'].one? { |i| commit[:message].downcase.include? i }
+  commits.append(commit) if is_what_s_new
+
+  tag_beta(platform)
+  bump_build_number_beta
+  commits.append(last_git_commit)
+
+  cherrypick_beta_on_develop(commits)
+end
+
+# Beta workflow: tag the new beta and push to the repository only if we are on the develop branch.
+def tag_beta(platform)
   return unless git_branch_name.include? 'develop'
 
   tag = srg_tag(platform)
@@ -1803,15 +1831,43 @@ def bump_build_number_beta_workflow(platform)
   else
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
+    push_to_git_remote
   end
+end
+
+# Beta workflow: bump build number and push to the repository only if we are on the develop
+# or feature branch. Cherrypick on develop branch if we are on a feature branch.
+def bump_build_number_beta
+  branch_names = ['develop', 'feature']
+  return unless branch_names.one? { |i| git_branch_name.include? i }
 
   bump_build_number_commit
   git_pull(rebase: true)
   push_to_git_remote
 end
 
+def cherrypick_beta_on_develop(commits)
+  branch_name = git_branch_name
+  return unless branch_name.include? 'feature'
+
+  Dir.chdir('..') do
+    sh 'git checkout develop'
+    sh 'git pull --rebase origin develop'
+    commits.each do |commit|
+      sh "git cherry-pick --no-commit #{commit[:commit_hash]}"
+      sh "git commit -m \"#{commit[:message].strip}\"" unless git_status_clean
+    end
+    sh 'git push origin develop:develop'
+    sh "git checkout #{branch_name}"
+  end
+end
+
 def git_branch_name
   sh "git branch | grep \\* | cut -d ' ' -f2"
+end
+
+def git_status_clean
+  sh('git status --porcelain').strip.empty?
 end
 
 def beta_app_review_info

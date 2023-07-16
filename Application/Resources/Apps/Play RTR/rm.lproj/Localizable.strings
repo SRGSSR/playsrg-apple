@@ -147,9 +147,6 @@
 /* Message displayed when the user is about to delete content saved for later */
 "Content saved for later will be deleted on all devices connected to your account." = "Cuntegn arcunà per pli tard vegn allontanà da tut ils apparats cun voss account.";
 
-/* Label of the button to copy support information to the pasteboard */
-"Copy to the pasteboard" = "Copiar el archiv provisoric";
-
 /* Label of the button to copy support email to the pasteboard */
 "Copy %@" = "Copiar %@";
 
@@ -314,9 +311,6 @@
 /* Information section header */
 "Information" = "Infurmaziun";
 
-/* Issue title on top of mail body to declare a technical issue */
-"Issue:" = "Problem:";
-
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Tegnair";
 
@@ -376,9 +370,6 @@
 
 /* Login button on Apple TV */
 "Login" = "Login";
-
-/* Text displayed within the login / sign up profile header when no user is logged in */
-"Login / Sign up" = "Login";
 
 /* Logout alert view title on Apple TV
    Logout button on Apple TV */
@@ -519,6 +510,9 @@
    Missing mail application description */
 "Please contact us at %@" = "Per plaschair contactar nus sin %@";
 
+/* Mail body header to declare a technical issue */
+"Please describe the issue below:" = "Descrivai per plaschair il sbagl sutvart:";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular sin Play RTR";
 
@@ -602,9 +596,6 @@
 /* Title displayed when no item has been selected */
 "Select items" = "Selecziunar elements";
 
-/* Label of the button to send support information by email */
-"Send by email" = "Trametter per e-mail";
-
 /* Label of the button to access server selection
    Server selection view title */
 "Server" = "Server";
@@ -678,10 +669,6 @@
 /* Search setting */
 "Subtitled" = "Suttitels";
 
-/* Label of the button to access support information
-   Support information alert title */
-"Support information" = "Infurmaziuns davart il support";
-
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support email has been copied to the pasteboard" = "Infurmaziuns da support èn copiadas en las notizias";
 
@@ -690,9 +677,6 @@
 
 /* Login benefits description footer */
 "Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";
-
-/* Login benefits description footer */
-"Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";
 
 /* Label of the button to display terms and conditions */
 "Terms and conditions" = "Cundiziuns generalas";
@@ -872,9 +856,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vus essas vegni deconnectà automaticamain. Per mantegnair la sincronisaziun da las datas sur tut ils apparats far anc ina giada il login.";
-
-/* Label of the button to display feedback form */
-"Your feedback" = "Voss resun";
 
 /* Add to Calendar alert title */
 "“%@” would like to access to your calendar" = "„%@” vul access a Voss chalender.";
