@@ -53,6 +53,12 @@ git-hook-uninstall:
 	@git config --unset core.hooksPath
 	@echo "... done.\n"
 
+.PHONY: spm-outdated
+spm-outdated:
+	@echo "Checking outdated Swift package dependencies..."
+	@Scripts/spm-outdated.sh
+	@echo "... done.\n"
+
 .PHONY: help
 help:
 	@echo "The following targets are available:"
@@ -68,5 +74,7 @@ help:
 	@echo ""
 	@echo "   git-hook-install    Use hooks located in ./hooks"
 	@echo "   git-hook-uninstall  Use default hooks located in .git/hooks"
+	@echo ""
+	@echo "   spm-outdated        Run outdated Swift package dependencies check"
 	@echo ""
 	@echo "   help                Display this message"
