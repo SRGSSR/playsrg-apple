@@ -70,7 +70,7 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 {
     NSParameterAssert(contentHandler);
     
-    NSURL *scaledImageURL = [self.dataProvider URLForImage:notification.image withSize:SRGImageSizeMedium scalingService:SRGImageScalingServiceBusinessUnit];
+    NSURL *scaledImageURL = [self.dataProvider URLForImage:notification.image withSize:SRGImageSizeMedium];
     if (! scaledImageURL) {
         contentHandler(content);
         return nil;

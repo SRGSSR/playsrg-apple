@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 OBJC_EXPORT NSString * const PlaySRGSettingHDOverCellularEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingPresenterModeEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingStandaloneEnabled;
-OBJC_EXPORT NSString * const PlaySRGSettingCentralizedImageServicePreferred;
 OBJC_EXPORT NSString * const PlaySRGSettingSectionWideSupportEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingPosterImages;
 OBJC_EXPORT NSString * const PlaySRGSettingAutoplayEnabled;
