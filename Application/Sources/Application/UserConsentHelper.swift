@@ -9,9 +9,20 @@ import Usercentrics
 import UsercentricsUI
 
 @objc enum UCService: Int {
-    case CommandersAct
-    case FireBase
-    case UserCentrics
+    case commandersact
+    case firebase
+    case usercentrics
+    
+    var templateId: String {
+        switch self {
+        case .commandersact:
+            return "1"
+        case .firebase:
+            return "2"
+        case .usercentrics:
+            return "3"
+        }
+    }
 }
 
 @objc class UserConsentHelper: NSObject {
@@ -21,38 +32,34 @@ import UsercentricsUI
     @objc static let userConsentDidHideBannerNotification = Notification.Name("UserConsentHideBannerNotification")
     @objc static let userConsentDidChangeNotification = Notification.Name("UserConsentDidChangeNotification")
     
-    @objc static let userConsentAcceptedCategoriesKey = "userConsentAcceptedCategories"
+    @objc static let userConsentServiceConsentsKey = "userConsentServiceConsents"
     
     // MARK: States
     
     static var isConfigured = false
     @objc static var isShowingBanner = false
     
-    @objc static var acceptedCategories: [String] = [] {
-        didSet {
-            if oldValue != acceptedCategories {
-                SRGAnalyticsTracker.shared.acceptedUserConsentCategories = acceptedCategories
-                
-                NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentAcceptedCategoriesKey: acceptedCategories])
-            }
-        }
+    @objc static func serviceConsents() -> [UsercentricsServiceConsent] {
+        return UsercentricsCore.shared.getConsents()
     }
     
     @objc static func hasConsentFor(service: UCService) -> Bool {
-        if let consentForService = UsercentricsCore.shared.getConsents().first(where: { $0.templateId == serviceToTemplateIdMapping[service] }) {
-            return consentForService.status
+        if let consent = UsercentricsCore.shared.getConsents().first(where: { $0.templateId == service.templateId }) {
+            return consent.status
         }
         return false
     }
     
-    private static let serviceToTemplateIdMapping: [UCService: String] = [
-        UCService.CommandersAct: "1",
-        UCService.FireBase: "2",
-        UCService.UserCentrics: "3"
-    ]
-    
     private static var hasRunSetup = false
-    private static var categoryToTemplateIdsMapping = [String: [String]]()
+    
+    private static func applyConsent(with serviceConsents: [UsercentricsServiceConsent]) {
+        SRGAnalyticsTracker.shared.acceptedUserConsentServices = serviceConsents.filter({ $0.status == true }).map({ $0.templateId })
+        
+        NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentServiceConsentsKey: serviceConsents])
+#if DEBUG
+        printServices()
+#endif
+    }
     
     // MARK: Setup
     
@@ -70,17 +77,19 @@ import UsercentricsUI
         
         UsercentricsCore.isReady { status in
             isConfigured = true
-            categoryToTemplateIdsMapping = categoryToTemplateIdsMappingFromCMPData()
-            acceptedCategories = acceptedCategories(acceptedServices: UsercentricsCore.shared.getConsents())
+            
+            var shouldCollectConsent = false
 #if DEBUG || NIGHTLY || BETA
-            if status.shouldCollectConsent || UserDefaults.standard.bool(forKey: PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled) {
-                showFirstLayer()
-            }
+            shouldCollectConsent = status.shouldCollectConsent || UserDefaults.standard.bool(forKey: PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled)
 #else
-            if status.shouldCollectConsent {
+            shouldCollectConsent = status.shouldCollectConsent
+#endif
+            if shouldCollectConsent {
                 showFirstLayer()
             }
-#endif
+            else {
+                applyConsent(with: UsercentricsCore.shared.getConsents())
+            }
         } onFailure: { error in
             PlayLogError(category: "UserCentrics", message: error.localizedDescription)
         }
@@ -96,7 +105,7 @@ import UsercentricsUI
         
         banner.showFirstLayer { response in
             isShowingBanner = false
-            acceptedCategories = acceptedCategories(acceptedServices: response.consents)
+            applyConsent(with: response.consents)
             NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: nil)
         }
     }
@@ -107,7 +116,7 @@ import UsercentricsUI
         
         banner.showSecondLayer { response in
             isShowingBanner = false
-            acceptedCategories = acceptedCategories(acceptedServices: response.consents)
+            applyConsent(with: response.consents)
             NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: nil)
         }
     }
@@ -175,29 +184,15 @@ import UsercentricsUI
 #endif
     }
     
-    private static func categoryToTemplateIdsMappingFromCMPData() -> [String: [String]] {
-        var categoryToTemplateIdsMapping = [String: [String]]()
-        
+#if DEBUG
+    private static func printServices() {
         let data = UsercentricsCore.shared.getCMPData(),
             categories = data.categories,
             services = data.services
         
         PlayLogDebug(category: "UserConsent", message: "Settings id: \(data.settings.settingsId)")
-        PlayLogDebug(category: "UserConsent", message: "categorySlugs / label: \(categories.map({ "\($0.categorySlug) / \($0.label)" }))")
-        
-        for category in categories {
-            categoryToTemplateIdsMapping[category.categorySlug] = services.filter({ $0.categorySlug == category.categorySlug }).compactMap({ $0.templateId })
-        }
-        
-        return categoryToTemplateIdsMapping
+        PlayLogDebug(category: "UserConsent", message: "categorySlug / label:\n\(categories.map({ "\($0.categorySlug) / \($0.label)" }).joined(separator: "\n"))")
+        PlayLogDebug(category: "UserConsent", message: "templateId / dataProcessor:\n\(services.map({ "\($0.templateId ?? "null") / \($0.dataProcessor ?? "null")" }).joined(separator: "\n"))")
     }
-    
-    private static func acceptedCategories(acceptedServices: [UsercentricsServiceConsent]) -> [String] {
-        var acceptedCategories: [String] = [String]()
-        for (categorySlug, services) in categoryToTemplateIdsMapping
-        where acceptedServices.contains(where: { services.contains($0.templateId) && $0.status }) {
-            acceptedCategories.append(categorySlug)
-        }
-        return acceptedCategories
-    }
+#endif
 }
