@@ -60,6 +60,9 @@ platform :ios do
     tag_version = tag_version(platform)
     branch_name = git_branch_name
 
+    # Build number overrided
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
+
     ios_application_schemes.each_index do |index|
       build_lane(
         configuration: 'Nightly_AppCenter',
@@ -743,6 +746,9 @@ platform :ios do
 
     tag_version = tag_version(platform)
     branch_name = git_branch_name
+
+    # Build number overrided
+    notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
