@@ -116,7 +116,17 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return url(for: program?.image, size: .medium)
+        let imageUrl = url(for: program?.image, size: .medium)
+        
+        // Ths is a workaround, to have a non blur image if channel svg logo are used. See https://github.com/SRGSSR/playsrg-apple/issues/344
+        if let imageUrl, let query = imageUrl.query,
+           let range = query.range(of: ".svg/format/png"), !range.isEmpty,
+           let channelRawImage = self.data?.channel.rawImage {
+            return url(for: channelRawImage, size: .medium)
+        }
+        else {
+            return imageUrl
+        }
     }
     
     private var duration: Double? {
