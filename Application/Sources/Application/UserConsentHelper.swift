@@ -8,19 +8,35 @@ import SRGAppearance
 import Usercentrics
 import UsercentricsUI
 
-@objc enum UCService: Int {
-    case commandersact
+enum UCService: Hashable, CaseIterable {
+#if os(iOS)
+    case airship
+#endif
+    case appcenter
+    case comscore
     case firebase
+    case letterbox
+    case tagcommander
     case usercentrics
     
     var templateId: String {
         switch self {
-        case .commandersact:
-            return "1"
+#if os(iOS)
+        case .airship:
+            return "hFLVABpNP"
+#endif
+        case .appcenter:
+            return "XB0GBAmWEQ7Spr"
+        case .comscore:
+            return "B1WMgcNodi-7"
         case .firebase:
-            return "2"
+            return "2nEos-2ls"
+        case .letterbox:
+            return "TBD"
+        case .tagcommander:
+            return "ryi2qNjOsbX"
         case .usercentrics:
-            return "3"
+            return "H1Vl5NidjWX"
         }
     }
 }
@@ -36,24 +52,49 @@ import UsercentricsUI
     
     // MARK: States
     
-    static var isConfigured = false
+    @objc static var isConfigured = false
     @objc static var isShowingBanner = false
     
     @objc static func serviceConsents() -> [UsercentricsServiceConsent] {
         return UsercentricsCore.shared.getConsents()
     }
     
-    @objc static func hasConsentFor(service: UCService) -> Bool {
-        if let consent = UsercentricsCore.shared.getConsents().first(where: { $0.templateId == service.templateId }) {
-            return consent.status
-        }
-        return false
-    }
-    
     private static var hasRunSetup = false
     
     private static func applyConsent(with serviceConsents: [UsercentricsServiceConsent]) {
         SRGAnalyticsTracker.shared.acceptedUserConsentServices = serviceConsents.filter({ $0.status == true }).map({ $0.templateId })
+        
+        for service in UCService.allCases {
+            let serviceConsent = serviceConsents.first(where: { $0.templateId == service.templateId })
+            let acceptedConsent = serviceConsent?.status ?? false
+            
+            switch service {
+#if os(iOS)
+            case .airship:
+                // TODO: Airship.analytics.isComponentEnabled = acceptedConsent ?
+                break
+#endif
+            case .appcenter:
+                // Only Crashes service is used. Not Analytics service.
+                break
+            case .comscore:
+                // TODO: Inform SRGAnalytics
+                break
+            case .firebase:
+                // IS_ANALYTICS_ENABLED is set to false in `GoogleService-Info-[BU].plist`.
+                // TODO: Analytics.setAnalyticsCollectionEnabled(acceptedConsent) ?
+                break
+            case .letterbox:
+                // TODO: Inform SRGLetterbox
+                break
+            case .tagcommander:
+                // TODO: Inform SRGAnalytics
+                break
+            case .usercentrics:
+                // Something to do?
+                break
+            }
+        }
         
         NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentServiceConsentsKey: serviceConsents])
 #if DEBUG
