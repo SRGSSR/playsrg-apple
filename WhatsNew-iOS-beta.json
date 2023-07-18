@@ -195,5 +195,6 @@
     "3.7.2-416": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update. ",
     "3.7.2-417": "Branch beta\n- Insert emoji in branch beta display name.\n- Add branch name in the version in settings view.",
     "3.7.2-418": "- Improve support email body.",
-    "3.7.2-419": "- Stop player quicker when closing mini player."
+    "3.7.2-419": "- Stop player quicker when closing mini player.",
+    "3.7.3-420": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update.\n- Page views have page name property."
 }
