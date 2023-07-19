@@ -17,6 +17,11 @@
 		0407308728635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */; };
 		0407308828635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */; };
 		0407308928635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */; };
+		0414BF212A685B73004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF202A685B73004543BD /* SwiftUIIntrospect */; };
+		0414BF232A685B81004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF222A685B81004543BD /* SwiftUIIntrospect */; };
+		0414BF252A685B8E004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF242A685B8E004543BD /* SwiftUIIntrospect */; };
+		0414BF272A685B98004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF262A685B98004543BD /* SwiftUIIntrospect */; };
+		0414BF292A685BAC004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF282A685BAC004543BD /* SwiftUIIntrospect */; };
 		042F6F2929E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2A29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
@@ -82,11 +87,6 @@
 		043ECDC629F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043ECDBE29F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift */; };
 		043ECDC729F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043ECDBE29F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift */; };
 		043ECDC829F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043ECDBE29F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift */; };
-		0447E0A82861C70B001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0A72861C70B001B7285 /* Introspect */; };
-		0447E0AA2861C71A001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0A92861C71A001B7285 /* Introspect */; };
-		0447E0AC2861C726001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AB2861C726001B7285 /* Introspect */; };
-		0447E0AE2861C72D001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AD2861C72D001B7285 /* Introspect */; };
-		0447E0B02861C73B001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AF2861C73B001B7285 /* Introspect */; };
 		044B405B2A01764900A10DB7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B405A2A01764900A10DB7 /* ProfileCell.swift */; };
 		044B405C2A01764900A10DB7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B405A2A01764900A10DB7 /* ProfileCell.swift */; };
 		044B405D2A01764900A10DB7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B405A2A01764900A10DB7 /* ProfileCell.swift */; };
@@ -1355,11 +1355,6 @@
 		6F710A2D2644637A0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F710A2E2644637B0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F710A2F2644637B0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
-		6F7269A92836CFE90072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269A82836CFE90072BA0B /* Introspect */; };
-		6F7269AB2836D0040072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269AA2836D0040072BA0B /* Introspect */; };
-		6F7269AD2836D00B0072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269AC2836D00B0072BA0B /* Introspect */; };
-		6F7269AF2836D0100072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269AE2836D0100072BA0B /* Introspect */; };
-		6F7269B12836D0160072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269B02836D0160072BA0B /* Introspect */; };
 		6F72E60726BA6B16001A890C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72E60526BA6B16001A890C /* SceneDelegate.m */; };
 		6F72E60826BA6B16001A890C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72E60526BA6B16001A890C /* SceneDelegate.m */; };
 		6F72E60926BA6B16001A890C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72E60526BA6B16001A890C /* SceneDelegate.m */; };
@@ -1985,11 +1980,6 @@
 		6FD1EF442861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
 		6FD1EF452861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
 		6FD1EF462861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
-		6FD1EF472861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
-		6FD1EF482861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
-		6FD1EF492861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
-		6FD1EF4A2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
-		6FD1EF4B2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
 		6FD1EF4D2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
 		6FD1EF4E2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
 		6FD1EF4F2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
@@ -3445,7 +3435,6 @@
 				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
 				6F548968283B8994001290E7 /* FLEX in Frameworks */,
 				6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */,
-				6F7269A92836CFE90072BA0B /* Introspect in Frameworks */,
 				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
@@ -3456,6 +3445,7 @@
 				6F2345D1283BAB3600A9089D /* FSCalendar in Frameworks */,
 				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				0414BF212A685B73004543BD /* SwiftUIIntrospect in Frameworks */,
 				081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439728338F2900F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
@@ -3476,7 +3466,6 @@
 				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F54896A283B89A8001290E7 /* FLEX in Frameworks */,
 				6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */,
-				6F7269AB2836D0040072BA0B /* Introspect in Frameworks */,
 				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
@@ -3487,6 +3476,7 @@
 				6F2345D3283BAB5000A9089D /* FSCalendar in Frameworks */,
 				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				0414BF232A685B81004543BD /* SwiftUIIntrospect in Frameworks */,
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439928338F3100F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
@@ -3507,7 +3497,6 @@
 				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F54896C283B89AE001290E7 /* FLEX in Frameworks */,
 				6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */,
-				6F7269AD2836D00B0072BA0B /* Introspect in Frameworks */,
 				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
@@ -3518,6 +3507,7 @@
 				6F2345D5283BAB5600A9089D /* FSCalendar in Frameworks */,
 				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				0414BF252A685B8E004543BD /* SwiftUIIntrospect in Frameworks */,
 				081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439B28338F3700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
@@ -3538,7 +3528,6 @@
 				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F54896E283B89B3001290E7 /* FLEX in Frameworks */,
 				6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */,
-				6F7269AF2836D0100072BA0B /* Introspect in Frameworks */,
 				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
@@ -3549,6 +3538,7 @@
 				6F2345D7283BAB5B00A9089D /* FSCalendar in Frameworks */,
 				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				0414BF272A685B98004543BD /* SwiftUIIntrospect in Frameworks */,
 				081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439D28338F3C00F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
@@ -3569,7 +3559,6 @@
 				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F548970283B89B8001290E7 /* FLEX in Frameworks */,
 				6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */,
-				6F7269B12836D0160072BA0B /* Introspect in Frameworks */,
 				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
@@ -3580,6 +3569,7 @@
 				6F2345D9283BAB6000A9089D /* FSCalendar in Frameworks */,
 				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				0414BF292A685BAC004543BD /* SwiftUIIntrospect in Frameworks */,
 				081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439F28338F4700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
@@ -3683,7 +3673,6 @@
 				6F17DC20266AB854009F74C6 /* Nuke in Frameworks */,
 				6FEC899D261F16D500FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
-				0447E0A82861C70B001B7285 /* Introspect in Frameworks */,
 				6FEEBE82265CD70900A4882B /* Collections in Frameworks */,
 				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3707,7 +3696,6 @@
 				6F17DC22266AB85B009F74C6 /* Nuke in Frameworks */,
 				6FEC899F261F16DC00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
-				0447E0AA2861C71A001B7285 /* Introspect in Frameworks */,
 				6FEEBE84265CD71000A4882B /* Collections in Frameworks */,
 				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3731,7 +3719,6 @@
 				6F17DC24266AB862009F74C6 /* Nuke in Frameworks */,
 				6FEC89A1261F16E200FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
-				0447E0AC2861C726001B7285 /* Introspect in Frameworks */,
 				6FEEBE86265CD71700A4882B /* Collections in Frameworks */,
 				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3755,7 +3742,6 @@
 				6F17DC26266AB867009F74C6 /* Nuke in Frameworks */,
 				6FEC89A3261F16E800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
-				0447E0AE2861C72D001B7285 /* Introspect in Frameworks */,
 				6FEEBE88265CD71E00A4882B /* Collections in Frameworks */,
 				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -3779,7 +3765,6 @@
 				6F17DC28266AB86D009F74C6 /* Nuke in Frameworks */,
 				6FEC89A5261F16EE00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
-				0447E0B02861C73B001B7285 /* Introspect in Frameworks */,
 				6FEEBE8A265CD72400A4882B /* Collections in Frameworks */,
 				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */,
@@ -5351,10 +5336,10 @@
 				04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9072812D837007C3406 /* NukeUI */,
 				6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */,
-				6F7269A82836CFE90072BA0B /* Introspect */,
 				6F548967283B8994001290E7 /* FLEX */,
 				6F3B5639283B903C009A2D7D /* ShowTime */,
 				6F2345D0283BAB3600A9089D /* FSCalendar */,
+				0414BF202A685B73004543BD /* SwiftUIIntrospect */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5405,10 +5390,10 @@
 				04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9092812D846007C3406 /* NukeUI */,
 				6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */,
-				6F7269AA2836D0040072BA0B /* Introspect */,
 				6F548969283B89A8001290E7 /* FLEX */,
 				6F3B563B283B9057009A2D7D /* ShowTime */,
 				6F2345D2283BAB5000A9089D /* FSCalendar */,
+				0414BF222A685B81004543BD /* SwiftUIIntrospect */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5459,10 +5444,10 @@
 				04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90B2812D84B007C3406 /* NukeUI */,
 				6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */,
-				6F7269AC2836D00B0072BA0B /* Introspect */,
 				6F54896B283B89AE001290E7 /* FLEX */,
 				6F3B563D283B905C009A2D7D /* ShowTime */,
 				6F2345D4283BAB5600A9089D /* FSCalendar */,
+				0414BF242A685B8E004543BD /* SwiftUIIntrospect */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5513,10 +5498,10 @@
 				04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90D2812D851007C3406 /* NukeUI */,
 				6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */,
-				6F7269AE2836D0100072BA0B /* Introspect */,
 				6F54896D283B89B3001290E7 /* FLEX */,
 				6F3B563F283B9061009A2D7D /* ShowTime */,
 				6F2345D6283BAB5B00A9089D /* FSCalendar */,
+				0414BF262A685B98004543BD /* SwiftUIIntrospect */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5567,10 +5552,10 @@
 				04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90F2812D856007C3406 /* NukeUI */,
 				6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */,
-				6F7269B02836D0160072BA0B /* Introspect */,
 				6F54896F283B89B8001290E7 /* FLEX */,
 				6F3B5641283B9067009A2D7D /* ShowTime */,
 				6F2345D8283BAB6000A9089D /* FSCalendar */,
+				0414BF282A685BAC004543BD /* SwiftUIIntrospect */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -5798,7 +5783,6 @@
 				6FEEBE81265CD70900A4882B /* Collections */,
 				6F17DC1F266AB854009F74C6 /* Nuke */,
 				6FA6C9112812D85D007C3406 /* NukeUI */,
-				0447E0A72861C70B001B7285 /* Introspect */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -5841,7 +5825,6 @@
 				6FEEBE83265CD71000A4882B /* Collections */,
 				6F17DC21266AB85B009F74C6 /* Nuke */,
 				6FA6C9132812D861007C3406 /* NukeUI */,
-				0447E0A92861C71A001B7285 /* Introspect */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -5884,7 +5867,6 @@
 				6FEEBE85265CD71700A4882B /* Collections */,
 				6F17DC23266AB862009F74C6 /* Nuke */,
 				6FA6C9152812D866007C3406 /* NukeUI */,
-				0447E0AB2861C726001B7285 /* Introspect */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -5927,7 +5909,6 @@
 				6FEEBE87265CD71E00A4882B /* Collections */,
 				6F17DC25266AB867009F74C6 /* Nuke */,
 				6FA6C9172812D86C007C3406 /* NukeUI */,
-				0447E0AD2861C72D001B7285 /* Introspect */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -5970,7 +5951,6 @@
 				6FEEBE89265CD72400A4882B /* Collections */,
 				6F17DC27266AB86D009F74C6 /* Nuke */,
 				6FA6C9192812D871007C3406 /* NukeUI */,
-				0447E0AF2861C73B001B7285 /* Introspect */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -9720,7 +9700,6 @@
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF98263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FD1EF472861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C63F271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F924286C4542000A5A4E /* Recommendation.swift in Sources */,
@@ -9873,7 +9852,6 @@
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF99263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FD1EF482861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C640271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F925286C4542000A5A4E /* Recommendation.swift in Sources */,
@@ -10026,7 +10004,6 @@
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9A263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FD1EF492861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C641271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F926286C4542000A5A4E /* Recommendation.swift in Sources */,
@@ -10179,7 +10156,6 @@
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9B263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
-				6FD1EF4A2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C642271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F927286C4542000A5A4E /* Recommendation.swift in Sources */,
@@ -10379,7 +10355,6 @@
 				042F6F5E29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
 				6FD4C2DF268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6F742946265BE52E0000538D /* Signals.swift in Sources */,
-				6FD1EF4B2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				04D5F928286C4542000A5A4E /* Recommendation.swift in Sources */,
 				0866967E273E63D1005AF2BA /* NowLineView.swift in Sources */,
 				6FA8E4FB261CAC4F003FFDCF /* Layout.m in Sources */,
@@ -19206,7 +19181,7 @@
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.4;
+				minimumVersion = 0.9.1;
 			};
 		};
 		6F9BF5B72720292B00945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
@@ -19300,30 +19275,30 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0447E0A72861C70B001B7285 /* Introspect */ = {
+		0414BF202A685B73004543BD /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
+			productName = SwiftUIIntrospect;
 		};
-		0447E0A92861C71A001B7285 /* Introspect */ = {
+		0414BF222A685B81004543BD /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
+			productName = SwiftUIIntrospect;
 		};
-		0447E0AB2861C726001B7285 /* Introspect */ = {
+		0414BF242A685B8E004543BD /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
+			productName = SwiftUIIntrospect;
 		};
-		0447E0AD2861C72D001B7285 /* Introspect */ = {
+		0414BF262A685B98004543BD /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
+			productName = SwiftUIIntrospect;
 		};
-		0447E0AF2861C73B001B7285 /* Introspect */ = {
+		0414BF282A685BAC004543BD /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
+			productName = SwiftUIIntrospect;
 		};
 		04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -19879,31 +19854,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
-		};
-		6F7269A82836CFE90072BA0B /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-		6F7269AA2836D0040072BA0B /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-		6F7269AC2836D00B0072BA0B /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-		6F7269AE2836D0100072BA0B /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
-		};
-		6F7269B02836D0160072BA0B /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
 		};
 		6F9BF5B62720292B00945973 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
