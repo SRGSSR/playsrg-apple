@@ -21,7 +21,6 @@
 #import "Favorites.h"
 #import "History.h"
 #import "Layout.h"
-#import "NSBundle+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
