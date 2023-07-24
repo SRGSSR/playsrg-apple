@@ -78,14 +78,15 @@ enum UCService: Hashable, CaseIterable {
                 Airship.analytics.isComponentEnabled = acceptedConsent
 #endif
             case .appcenter:
-                // Only Crashes service is used. Not Analytics service.
+                // Only `Crashes` service is used. `Analytics` service not instantiated.
+                // `AppCenterAnalytics` framework not imported.
                 break
             case .comscore:
                 // TODO: Inform SRGAnalytics
                 break
             case .firebase:
                 // IS_ANALYTICS_ENABLED is set to false in `GoogleService-Info-[BU].plist`.
-                // TODO: Analytics.setAnalyticsCollectionEnabled(acceptedConsent) ?
+                // `FirebaseAnalytics` framework not imported.
                 break
             case .letterbox:
                 // TODO: Inform SRGLetterbox
