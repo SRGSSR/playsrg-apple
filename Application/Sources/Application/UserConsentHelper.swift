@@ -64,48 +64,6 @@ enum UCService: Hashable, CaseIterable {
     
     private static var hasRunSetup = false
     
-    private static func applyConsent(with serviceConsents: [UsercentricsServiceConsent]) {
-        SRGAnalyticsTracker.shared.acceptedUserConsentServices = serviceConsents.filter({ $0.status == true }).map({ $0.templateId })
-        
-        for service in UCService.allCases {
-            let serviceConsent = serviceConsents.first(where: { $0.templateId == service.templateId })
-            let acceptedConsent = serviceConsent?.status ?? false
-            
-            switch service {
-#if os(iOS)
-            case .airship:
-                // Airship analytics component is disabled at launch. See `PushService.m`.
-                Airship.analytics.isComponentEnabled = acceptedConsent
-#endif
-            case .appcenter:
-                // Only `Crashes` service is used. `Analytics` service not instantiated.
-                // `AppCenterAnalytics` framework not imported.
-                break
-            case .comscore:
-                // TODO: Inform SRGAnalytics
-                break
-            case .firebase:
-                // IS_ANALYTICS_ENABLED is set to false in `GoogleService-Info-[BU].plist`.
-                // `FirebaseAnalytics` framework not imported.
-                break
-            case .letterbox:
-                // TODO: Inform SRGLetterbox
-                break
-            case .tagcommander:
-                // TODO: Inform SRGAnalytics
-                break
-            case .usercentrics:
-                // Something to do?
-                break
-            }
-        }
-        
-        NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentServiceConsentsKey: serviceConsents])
-#if DEBUG
-        printServices()
-#endif
-    }
-    
     // MARK: Setup
     
     @objc static func setup() {
@@ -170,20 +128,6 @@ enum UCService: Hashable, CaseIterable {
         return UsercentricsBanner(bannerSettings: bannerSettings)
     }
     
-#if os(iOS)
-    private static func buttonSettings(denyVisible: Bool, isFirstLayer: Bool = false, color: UIColor?) -> [ButtonSettings] {
-        let cornerRadius: CGFloat = 8
-        var buttons: [ButtonSettings] = [ButtonSettings]()
-        buttons.append(ButtonSettings(type: .acceptAll, backgroundColor: color, cornerRadius: cornerRadius))
-        if denyVisible {
-            buttons.append(ButtonSettings(type: .denyAll, backgroundColor: color, cornerRadius: cornerRadius))
-        }
-        
-        buttons.append(isFirstLayer ? ButtonSettings(type: .more, cornerRadius: cornerRadius) : ButtonSettings(type: .save, cornerRadius: cornerRadius))
-        return buttons
-    }
-#endif
-    
     private static var bannerLogoImage: UIImage? {
         return UIImage(named: "logo_bu_\(ApplicationConfiguration.shared.businessUnitIdentifier)")
     }
@@ -229,7 +173,68 @@ enum UCService: Hashable, CaseIterable {
 #endif
     }
     
+#if os(iOS)
+    private static func buttonSettings(denyVisible: Bool, isFirstLayer: Bool = false, color: UIColor?) -> [ButtonSettings] {
+        let cornerRadius: CGFloat = 8
+        var buttons: [ButtonSettings] = [ButtonSettings]()
+        buttons.append(ButtonSettings(type: .acceptAll, backgroundColor: color, cornerRadius: cornerRadius))
+        if denyVisible {
+            buttons.append(ButtonSettings(type: .denyAll, backgroundColor: color, cornerRadius: cornerRadius))
+        }
+        
+        buttons.append(isFirstLayer ? ButtonSettings(type: .more, cornerRadius: cornerRadius) : ButtonSettings(type: .save, cornerRadius: cornerRadius))
+        return buttons
+    }
+#endif
+    
+    // MARK: Apply consent
+    
+    private static func applyConsent(with serviceConsents: [UsercentricsServiceConsent]) {
+        SRGAnalyticsTracker.shared.acceptedUserConsentServices = serviceConsents.filter({ $0.status == true }).map({ $0.templateId })
+        
+        for service in UCService.allCases {
+            let serviceConsent = serviceConsents.first(where: { $0.templateId == service.templateId })
+            let acceptedConsent = serviceConsent?.status ?? false
+            
+            switch service {
+#if os(iOS)
+            case .airship:
+                // Airship analytics component is disabled at launch. See `PushService.m`.
+                Airship.analytics.isComponentEnabled = acceptedConsent
+#endif
+            case .appcenter:
+                // Only `Crashes` service is used. `Analytics` service not instantiated.
+                // `AppCenterAnalytics` framework not imported.
+                break
+            case .comscore:
+                // TODO: Inform SRGAnalytics
+                break
+            case .firebase:
+                // IS_ANALYTICS_ENABLED is set to false in `GoogleService-Info-[BU].plist`.
+                // `FirebaseAnalytics` framework not imported.
+                break
+            case .letterbox:
+                // TODO: Inform SRGLetterbox
+                break
+            case .tagcommander:
+                // TODO: Inform SRGAnalytics
+                break
+            case .usercentrics:
+                // Something to do?
+                break
+            }
+        }
+        
+        NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentServiceConsentsKey: serviceConsents])
 #if DEBUG
+        printServices()
+#endif
+    }
+    
+#if DEBUG
+    
+    // MARK: Debug
+    
     private static func printServices() {
         let data = UsercentricsCore.shared.getCMPData(),
             categories = data.categories,
