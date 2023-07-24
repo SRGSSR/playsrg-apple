@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
+#if os(iOS)
+import AirshipCore
+#endif
 import SRGAppearance
 import Usercentrics
 import UsercentricsUI
@@ -71,8 +74,8 @@ enum UCService: Hashable, CaseIterable {
             switch service {
 #if os(iOS)
             case .airship:
-                // TODO: Airship.analytics.isComponentEnabled = acceptedConsent ?
-                break
+                // Airship analytics component is disabled at launch. See `PushService.m`.
+                Airship.analytics.isComponentEnabled = acceptedConsent
 #endif
             case .appcenter:
                 // Only Crashes service is used. Not Analytics service.
