@@ -135,8 +135,8 @@ enum UCService: Hashable, CaseIterable {
     private static var bannerSettings: BannerSettings? {
 #if os(iOS)
         let backgroundColor = UIColor.srgGray23
+        let foregroundColor = UIColor.white
         let textColor = UIColor.srgGrayC7
-        let primaryRedColor = UIColor.srgRed
         
         var settings = GeneralStyleSettings()
         
@@ -146,21 +146,23 @@ enum UCService: Hashable, CaseIterable {
         settings.textColor = textColor
         settings.linkColor = textColor
         settings.links = LegalLinksSettings.hidden
-        settings.toggleStyleSettings = ToggleStyleSettings(activeBackgroundColor: primaryRedColor,
-                                                           inactiveBackgroundColor: UIColor.srgGray96,
-                                                           disabledBackgroundColor: UIColor.srgGray33,
-                                                           disabledThumbColor: UIColor.srgGray96)
-        settings.tabColor = .white
+        settings.toggleStyleSettings = ToggleStyleSettings(activeBackgroundColor: .srgRed,
+                                                           inactiveBackgroundColor: .srgGray96,
+                                                           disabledBackgroundColor: .srgGray33,
+                                                           activeThumbColor: .white,
+                                                           inactiveThumbColor: .white,
+                                                           disabledThumbColor: .srgGray96)
+        settings.tabColor = foregroundColor
+        settings.bordersColor = foregroundColor
         settings.logo = bannerLogoImage
         
         let cmpData = UsercentricsCore.shared.getCMPData()
-        let firstLayerDenyHidden = cmpData.settings.firstLayer?.hideButtonDeny?.boolValue ?? true
         
-        let firstLayerSettings = FirstLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: !firstLayerDenyHidden, isFirstLayer: true, color: primaryRedColor)),
+        let firstLayerSettings = FirstLayerStyleSettings(buttonLayout: .column(buttons: firstLayerButtonSettings(cmpData: cmpData)),
                                                          backgroundColor: backgroundColor,
                                                          cornerRadius: 8)
         
-        let secondLayerSettings = SecondLayerStyleSettings(buttonLayout: .column(buttons: buttonSettings(denyVisible: true, color: primaryRedColor)),
+        let secondLayerSettings = SecondLayerStyleSettings(buttonLayout: .column(buttons: secondLayerButtonSettings(cmpData: cmpData)),
                                                            showCloseButton: nil)
         
         return BannerSettings(generalStyleSettings: settings,
@@ -174,16 +176,31 @@ enum UCService: Hashable, CaseIterable {
     }
     
 #if os(iOS)
-    private static func buttonSettings(denyVisible: Bool, isFirstLayer: Bool = false, color: UIColor?) -> [ButtonSettings] {
-        let cornerRadius: CGFloat = 8
+    private static func firstLayerButtonSettings(cmpData: UsercentricsCMPData) -> [ButtonSettings] {
         var buttons: [ButtonSettings] = [ButtonSettings]()
-        buttons.append(ButtonSettings(type: .acceptAll, backgroundColor: color, cornerRadius: cornerRadius))
-        if denyVisible {
-            buttons.append(ButtonSettings(type: .denyAll, backgroundColor: color, cornerRadius: cornerRadius))
+        buttons.append(button(type: .acceptAll, isPrimary: true))
+        if !(cmpData.settings.firstLayer?.hideButtonDeny?.boolValue ?? false) {
+            buttons.append(button(type: .denyAll, isPrimary: true))
         }
-        
-        buttons.append(isFirstLayer ? ButtonSettings(type: .more, cornerRadius: cornerRadius) : ButtonSettings(type: .save, cornerRadius: cornerRadius))
+        buttons.append(button(type: .more, isPrimary: false))
         return buttons
+    }
+    
+    private static func secondLayerButtonSettings(cmpData: UsercentricsCMPData) -> [ButtonSettings] {
+        var buttons: [ButtonSettings] = [ButtonSettings]()
+        buttons.append(button(type: .acceptAll, isPrimary: false))
+        if !(cmpData.settings.secondLayer.hideButtonDeny?.boolValue ?? false) {
+            buttons.append(button(type: .denyAll, isPrimary: false))
+        }
+        buttons.append(button(type: .save, isPrimary: true))
+        return buttons
+    }
+    
+    private static func button(type: UsercentricsUI.ButtonType, isPrimary: Bool) -> ButtonSettings {
+        return ButtonSettings(type: type,
+                              textColor: isPrimary ? .white : .srgGray23,
+                              backgroundColor: isPrimary ? .srgRed : .srgGrayC7,
+                              cornerRadius: 8)
     }
 #endif
     
