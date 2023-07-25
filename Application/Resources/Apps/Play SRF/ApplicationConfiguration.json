@@ -27,5 +27,6 @@
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
   "audioDescriptionAvailabilityHidden": true,
   "posterImagesEnabled": true,
-  "tvThirdPartyChannelsAvailable": true
+  "tvThirdPartyChannelsAvailable": true,
+  "centralizedUserConsentPreferred": true
 }

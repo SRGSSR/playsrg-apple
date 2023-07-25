@@ -28,5 +28,6 @@
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
   "searchSettingSubtitledHidden": true,
   "subtitleAvailabilityHidden": true,
-  "audioDescriptionAvailabilityHidden": true
+  "audioDescriptionAvailabilityHidden": true,
+  "centralizedUserConsentPreferred": true
 }

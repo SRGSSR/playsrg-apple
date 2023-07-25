@@ -30,5 +30,6 @@
   "endToleranceRatio": 0.02,
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
   "searchSettingSubtitledHidden": true,
-  "showLeadPreferred": true
+  "showLeadPreferred": true,
+  "centralizedUserConsentPreferred": true
 }

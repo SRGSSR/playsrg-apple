@@ -309,5 +309,7 @@
 	<string>$(CONFIG__PLAY_MMF_SERVICE_URL)</string>
 	<key>UserCentricsRuleSetId</key>
 	<string>$(CONFIG__USER_CENTRICS_RULE_SET_ID)</string>
+	<key>UserCentricsSRGRuleSetId</key>
+	<string>$(CONFIG__USER_CENTRICS_SRG_RULE_SET_ID)</string>
 </dict>
 </plist>

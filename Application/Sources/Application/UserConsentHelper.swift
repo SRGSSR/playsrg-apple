@@ -70,7 +70,8 @@ enum UCService: Hashable, CaseIterable {
         guard !hasRunSetup else { return }
         
         let options = UsercentricsOptions()
-        if let ruleSetId = Bundle.main.object(forInfoDictionaryKey: "UserCentricsRuleSetId") as? String {
+        let ruleSetIdKey = ApplicationConfiguration.shared.isCentralizedUserConsentPreferred ? "UserCentricsSRGRuleSetId" : "UserCentricsRuleSetId"
+        if let ruleSetId = Bundle.main.object(forInfoDictionaryKey: ruleSetIdKey) as? String {
             options.ruleSetId = ruleSetId
         }
 #if DEBUG
