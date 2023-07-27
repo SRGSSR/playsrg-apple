@@ -18,7 +18,7 @@ enum UCService: Hashable, CaseIterable {
     case appcenter
     case comscore
     case firebase
-    case letterbox
+    case srgsnitch
     case tagcommander
     case usercentrics
     
@@ -34,8 +34,8 @@ enum UCService: Hashable, CaseIterable {
             return "B1WMgcNodi-7"
         case .firebase:
             return "2nEos-2ls"
-        case .letterbox:
-            return "f4dtYCtscCFT08"
+        case .srgsnitch:
+            return "OJxjJSgHYThNaE"
         case .tagcommander:
             return "ryi2qNjOsbX"
         case .usercentrics:
@@ -236,7 +236,7 @@ enum UCService: Hashable, CaseIterable {
                 // IS_ANALYTICS_ENABLED is set to false in `GoogleService-Info-[BU].plist`.
                 // `FirebaseAnalytics` framework not imported.
                 break
-            case .letterbox:
+            case .srgsnitch:
                 // TODO: Inform SRGLetterbox
                 break
             case .tagcommander:
