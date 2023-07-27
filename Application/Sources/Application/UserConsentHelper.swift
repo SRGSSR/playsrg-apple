@@ -243,7 +243,7 @@ enum UCService: Hashable, CaseIterable {
                 // TODO: Inform SRGAnalytics
                 break
             case .usercentrics:
-                // Something to do?
+                // Always essential. No settings available in the framework.
                 break
             }
         }
