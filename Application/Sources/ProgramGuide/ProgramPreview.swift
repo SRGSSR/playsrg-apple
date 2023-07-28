@@ -90,6 +90,7 @@ struct ProgramPreview_Previews: PreviewProvider {
         Group {
             ProgramPreview(data: ProgramAndChannel(program: Mock.program(), channel: Mock.channel()))
             ProgramPreview(data: ProgramAndChannel(program: Mock.program(.overflow), channel: Mock.channel()))
+            ProgramPreview(data: ProgramAndChannel(program: Mock.program(.fallbackImageUrl), channel: Mock.channel()))
             ProgramPreview(data: nil)
         }
         .previewLayout(.fixed(width: 1920, height: 700))

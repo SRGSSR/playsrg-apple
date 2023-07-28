@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "SRGProgram_fallbackImageUrl.json",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

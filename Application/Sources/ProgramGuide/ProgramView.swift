@@ -312,7 +312,11 @@ struct ProgramView_Previews: PreviewProvider {
     private static let size = CGSize(width: 320, height: 1200)
     
     static var previews: some View {
-        ProgramView(program: Mock.program(), channel: Mock.channel())
-            .previewLayout(.fixed(width: size.width, height: size.height))
+        Group {
+            ProgramView(program: Mock.program(), channel: Mock.channel())
+            ProgramView(program: Mock.program(.overflow), channel: Mock.channel())
+            ProgramView(program: Mock.program(.fallbackImageUrl), channel: Mock.channel())
+        }
+        .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
