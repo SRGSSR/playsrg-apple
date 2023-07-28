@@ -11,6 +11,14 @@ import Foundation
 // MARK: View model
 
 final class ProgramGuideViewModel: ObservableObject {
+#if os(tvOS)
+    /// Input data for the model
+    struct FocusedProgram: Hashable {
+        let program: SRGProgram
+        let channel: SRGChannel
+    }
+#endif
+    
     @Published private(set) var data: Data = .empty
     
     /// Only significant changes are published. Noisy changes (e.g. because of scrolling) are not published.
@@ -19,7 +27,7 @@ final class ProgramGuideViewModel: ObservableObject {
 #if os(iOS)
     @Published var isHeaderUserInteractionEnabled = true
 #else
-    @Published var focusedProgram: SRGProgram?
+    @Published var focusedProgram: FocusedProgram?
 #endif
     
     private(set) var day: SRGDay

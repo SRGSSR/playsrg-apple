@@ -116,16 +116,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        if let image = program?.image {
-            return url(for: image, size: .medium)
-        }
-        // Couldn't use channel image in Play SRG image service. Use raw image.
-        else if let channelRawImage = self.data?.channel.rawImage {
-            return url(for: channelRawImage, size: .medium)
-        }
-        else {
-            return nil
-        }
+        return program?.play_programGuideImageUrl(channel: channel)
     }
     
     private var duration: Double? {

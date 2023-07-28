@@ -22,4 +22,17 @@ extension SRGProgram {
         }
         return label + ", " + self.title
     }
+    
+    func play_programGuideImageUrl(channel: SRGChannel?, size: SRGImageSize = .medium) -> URL? {
+        if let image {
+            return PlaySRG.url(for: image, size: size)
+        }
+        // Couldn't use channel image in Play SRG image service. Use raw image.
+        else if let channelRawImage = channel?.rawImage {
+            return PlaySRG.url(for: channelRawImage, size: size)
+        }
+        else {
+            return nil
+        }
+    }
 }

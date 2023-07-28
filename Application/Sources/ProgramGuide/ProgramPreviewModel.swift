@@ -10,8 +10,16 @@ import SRGDataProviderModel
 // MARK: View model
 
 final class ProgramPreviewModel: ObservableObject {
-    @Published var program: SRGProgram?
+    @Published var focusProgram: ProgramGuideViewModel.FocusedProgram?
     @Published private(set) var date = Date()
+    
+    private var program: SRGProgram? {
+        return focusProgram?.program
+    }
+    
+    private var channel: SRGChannel? {
+        return focusProgram?.channel
+    }
     
     private var isLive: Bool {
         guard let program else { return false }
@@ -65,7 +73,7 @@ final class ProgramPreviewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return url(for: program?.image, size: .medium)
+        return program?.play_programGuideImageUrl(channel: channel)
     }
     
     init() {

@@ -25,7 +25,7 @@ struct ProgramGuideHeaderView: View {
     var body: some View {
 #if os(tvOS)
         ZStack {
-            ProgramPreview(program: model.focusedProgram)
+            ProgramPreview(focusedProgram: model.focusedProgram)
                 .accessibilityHidden(true)
             NavigationBar(model: model)
                 .focusable()

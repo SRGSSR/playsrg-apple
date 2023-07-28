@@ -13,12 +13,12 @@ import SwiftUI
 
 /// Behavior: h-exp, v-exp
 struct ProgramPreview: View {
-    @Binding var program: SRGProgram?
+    @Binding var focusedProgram: ProgramGuideViewModel.FocusedProgram?
     
     @StateObject private var model = ProgramPreviewModel()
     
-    init(program: SRGProgram?) {
-        _program = .constant(program)
+    init(focusedProgram: ProgramGuideViewModel.FocusedProgram?) {
+        _focusedProgram = .constant(focusedProgram)
     }
     
     var body: some View {
@@ -36,12 +36,12 @@ struct ProgramPreview: View {
                 Color.clear
             }
         }
-        .redactedIfNil(program)
+        .redactedIfNil(focusedProgram)
         .onAppear {
-            model.program = program
+            model.focusProgram = focusedProgram
         }
-        .onChange(of: program) { newValue in
-            model.program = newValue
+        .onChange(of: focusedProgram) { newValue in
+            model.focusProgram = newValue
         }
     }
     
@@ -88,9 +88,9 @@ struct ProgramPreview: View {
 struct ProgramPreview_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ProgramPreview(program: Mock.program())
-            ProgramPreview(program: Mock.program(.overflow))
-            ProgramPreview(program: nil)
+            ProgramPreview(focusedProgram: ProgramGuideViewModel.FocusedProgram(program: Mock.program(), channel: Mock.channel()))
+            ProgramPreview(focusedProgram: ProgramGuideViewModel.FocusedProgram(program: Mock.program(.overflow), channel: Mock.channel()))
+            ProgramPreview(focusedProgram: nil)
         }
         .previewLayout(.fixed(width: 1920, height: 700))
     }
