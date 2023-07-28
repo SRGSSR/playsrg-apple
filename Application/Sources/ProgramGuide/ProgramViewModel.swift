@@ -14,7 +14,7 @@ import SRGDataProviderModel
 // MARK: View model
 
 final class ProgramViewModel: ObservableObject {
-    @Published var data: Data? {
+    @Published var data: ProgramAndChannel? {
         didSet {
             Self.mediaDataPublisher(for: data?.program)
                 .receive(on: DispatchQueue.main)
@@ -116,7 +116,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return program?.play_programGuideImageUrl(channel: channel)
+        return data?.programGuideImageUrl(size: .medium)
     }
     
     private var duration: Double? {
@@ -439,12 +439,6 @@ extension ProgramViewModel {
 // MARK: Types
 
 extension ProgramViewModel {
-    /// Input data for the model
-    struct Data: Hashable {
-        let program: SRGProgram
-        let channel: SRGChannel
-    }
-    
     /// Data related to the program crew members
     struct CrewMembersData: Identifiable {
         let role: String?

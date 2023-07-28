@@ -11,7 +11,7 @@ import SwiftUI
 
 // Behavior: h-exp, v-hug
 struct ProgramView: View {
-    @Binding var data: ProgramViewModel.Data
+    @Binding var data: ProgramAndChannel
     @StateObject private var model = ProgramViewModel()
     
     static func viewController(for program: SRGProgram, channel: SRGChannel) -> UIViewController {

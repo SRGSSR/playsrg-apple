@@ -10,7 +10,7 @@ import SRGDataProviderModel
 // MARK: View model
 
 final class ProgramCellViewModel: ObservableObject {
-    @Published var data: Data?
+    @Published var data: ProgramAndChannel?
     @Published private(set) var date = Date()
     
     init() {
@@ -47,15 +47,5 @@ final class ProgramCellViewModel: ObservableObject {
         guard let program = data?.program else { return nil }
         let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
         return (0...1).contains(progress) ? progress : nil
-    }
-}
-
-// MARK: Types
-
-extension ProgramCellViewModel {
-    /// Input data for the model
-    struct Data: Hashable {
-        let program: SRGProgram
-        let channel: SRGChannel?
     }
 }

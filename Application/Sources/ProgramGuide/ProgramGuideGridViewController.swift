@@ -161,10 +161,10 @@ final class ProgramGuideGridViewController: UIViewController {
 #if os(tvOS)
             if let channel = model.selectedChannel ?? model.channels.first, let section = state.sections.first(where: { $0 == channel }) ?? state.sections.first,
                let currentProgram = state.items(for: section).compactMap(\.program).first(where: { $0.play_containsDate(model.date(for: model.time)) }) {
-                model.focusedProgram = ProgramGuideViewModel.FocusedProgram(program: currentProgram, channel: channel)
+                model.focusedProgramAndChannel = ProgramAndChannel(program: currentProgram, channel: channel)
             }
             else {
-                model.focusedProgram = nil
+                model.focusedProgramAndChannel = nil
             }
 #endif
         }
@@ -311,10 +311,10 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             model.selectedChannel = channel
             let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row].program
             if let program {
-                model.focusedProgram = ProgramGuideViewModel.FocusedProgram(program: program, channel: channel)
+                model.focusedProgramAndChannel = ProgramAndChannel(program: program, channel: channel)
             }
             else {
-                model.focusedProgram = nil
+                model.focusedProgramAndChannel = nil
             }
         }
     }
