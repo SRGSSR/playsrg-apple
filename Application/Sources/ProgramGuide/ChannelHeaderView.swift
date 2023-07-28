@@ -14,7 +14,7 @@ struct ChannelHeaderView: View {
     let channel: SRGChannel
     
     private var imageUrl: URL? {
-        return url(for: channel.rawImage, size: .small, scaling: .preserveAspectRatio)
+        return url(for: channel.rawImage, size: .small)
     }
     
     var body: some View {
@@ -51,8 +51,8 @@ struct ChannelHeaderView: View {
         
         var body: some View {
             Text(channel.title)
-                .srgFont(.button)
-                .lineLimit(1)
+                .srgFont(.body)
+                .lineLimit(2)
         }
     }
 }
