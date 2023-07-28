@@ -19,7 +19,7 @@ final class ProgramGuideViewModel: ObservableObject {
 #if os(iOS)
     @Published var isHeaderUserInteractionEnabled = true
 #else
-    @Published var focusedProgram: SRGProgram?
+    @Published var focusedProgramAndChannel: ProgramAndChannel?
 #endif
     
     private(set) var day: SRGDay

@@ -10,8 +10,12 @@ import SRGDataProviderModel
 // MARK: View model
 
 final class ProgramPreviewModel: ObservableObject {
-    @Published var program: SRGProgram?
+    @Published var data: ProgramAndChannel?
     @Published private(set) var date = Date()
+    
+    private var program: SRGProgram? {
+        return data?.program
+    }
     
     private var isLive: Bool {
         guard let program else { return false }
@@ -65,7 +69,7 @@ final class ProgramPreviewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return url(for: program?.image, size: .medium)
+        return data?.programGuideImageUrl(size: .medium)
     }
     
     init() {

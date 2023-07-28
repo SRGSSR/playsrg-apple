@@ -14,7 +14,7 @@ import SRGDataProviderModel
 // MARK: View model
 
 final class ProgramViewModel: ObservableObject {
-    @Published var data: Data? {
+    @Published var data: ProgramAndChannel? {
         didSet {
             Self.mediaDataPublisher(for: data?.program)
                 .receive(on: DispatchQueue.main)
@@ -116,17 +116,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        let imageUrl = url(for: program?.image, size: .medium)
-        
-        // Ths is a workaround, to have a non blur image if channel svg logo are used. See https://github.com/SRGSSR/playsrg-apple/issues/344
-        if let imageUrl, let query = imageUrl.query,
-           let range = query.range(of: ".svg/format/png"), !range.isEmpty,
-           let channelRawImage = self.data?.channel.rawImage {
-            return url(for: channelRawImage, size: .medium)
-        }
-        else {
-            return imageUrl
-        }
+        return data?.programGuideImageUrl(size: .medium)
     }
     
     private var duration: Double? {
@@ -449,12 +439,6 @@ extension ProgramViewModel {
 // MARK: Types
 
 extension ProgramViewModel {
-    /// Input data for the model
-    struct Data: Hashable {
-        let program: SRGProgram
-        let channel: SRGChannel
-    }
-    
     /// Data related to the program crew members
     struct CrewMembersData: Identifiable {
         let role: String?
