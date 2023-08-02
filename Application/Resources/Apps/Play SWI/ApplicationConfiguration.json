@@ -27,5 +27,6 @@
   "tvGuideUnavailable": true,
   "subtitleAvailabilityHidden": true,
   "audioDescriptionAvailabilityHidden": true,
-  "userConsentCentralizedRuleSetPreferred": true
+  "userConsentCentralizedRuleSetPreferred": true,
+  "userConsentDefaultLanguage": "en"
 }

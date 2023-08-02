@@ -73,6 +73,10 @@ enum UCService: Hashable, CaseIterable {
         let ruleSetIdKey = ApplicationConfiguration.shared.isUserConsentCentralizedRuleSetPreferred ? "UserCentricsSRGRuleSetId" : "UserCentricsRuleSetId"
         if let ruleSetId = Bundle.main.object(forInfoDictionaryKey: ruleSetIdKey) as? String {
             options.ruleSetId = ruleSetId
+            
+            if let defaultLanguage = ApplicationConfiguration.shared.userConsentDefaultLanguage {
+                options.defaultLanguage = defaultLanguage
+            }
         }
 #if DEBUG
         options.loggerLevel = .debug

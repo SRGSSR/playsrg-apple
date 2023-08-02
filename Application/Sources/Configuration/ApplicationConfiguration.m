@@ -159,6 +159,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=isShowLeadPreferred) BOOL showLeadPreferred;
 
 @property (nonatomic, getter=isUserConsentCentralizedRuleSetPreferred) BOOL userConsentCentralizedRuleSetPreferred;
+@property (nonatomic, copy) NSString *userConsentDefaultLanguage;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 @property (nonatomic) NSURL *overridePlayURL;
@@ -422,6 +423,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.showLeadPreferred = [firebaseConfiguration boolForKey:@"showLeadPreferred"];
     
     self.userConsentCentralizedRuleSetPreferred = [firebaseConfiguration boolForKey:@"userConsentCentralizedRuleSetPreferred"];
+    self.userConsentDefaultLanguage = [firebaseConfiguration stringForKey:@"userConsentDefaultLanguage"];
     
     [NSNotificationCenter.defaultCenter postNotificationName:ApplicationConfigurationDidChangeNotification
                                                       object:self];
