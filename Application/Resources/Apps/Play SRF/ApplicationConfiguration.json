@@ -28,5 +28,5 @@
   "audioDescriptionAvailabilityHidden": true,
   "posterImagesEnabled": true,
   "tvThirdPartyChannelsAvailable": true,
-  "centralizedUserConsentPreferred": true
+  "userConsentCentralizedRuleSetPreferred": true
 }
