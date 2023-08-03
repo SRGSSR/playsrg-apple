@@ -155,23 +155,23 @@ name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version
 
 name: promises, nameSpecified: Promises, owner: google, version: 2.2.0, source: https://github.com/google/promises
 
-name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srganalytics-apple
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 8.1.0, source: https://github.com/SRGSSR/srganalytics-apple
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.2.1, source: https://github.com/SRGSSR/srgappearance-apple
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgcontentprotection-apple
 
-name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgdataprovider-apple
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 18.0.0, source: https://github.com/SRGSSR/srgdataprovider-apple
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgdiagnostics-apple
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srgidentity-apple
 
-name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgletterbox-apple
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 9.1.0, source: https://github.com/SRGSSR/srgletterbox-apple
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srglogger-apple
 
-name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 7.1.0, source: https://github.com/SRGSSR/srgmediaplayer-apple
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 7.2.1, source: https://github.com/SRGSSR/srgmediaplayer-apple
 
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgnetwork-apple
 
