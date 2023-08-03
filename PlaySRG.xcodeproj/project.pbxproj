@@ -17,11 +17,6 @@
 		0407308728635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */; };
 		0407308828635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */; };
 		0407308928635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */; };
-		0414BF212A685B73004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF202A685B73004543BD /* SwiftUIIntrospect */; };
-		0414BF232A685B81004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF222A685B81004543BD /* SwiftUIIntrospect */; };
-		0414BF252A685B8E004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF242A685B8E004543BD /* SwiftUIIntrospect */; };
-		0414BF272A685B98004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF262A685B98004543BD /* SwiftUIIntrospect */; };
-		0414BF292A685BAC004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF282A685BAC004543BD /* SwiftUIIntrospect */; };
 		0407EFE62A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */; };
 		0407EFE72A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */; };
 		0407EFE82A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */; };
@@ -32,6 +27,11 @@
 		0407EFED2A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */; };
 		0407EFEE2A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */; };
 		0407EFEF2A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */; };
+		0414BF212A685B73004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF202A685B73004543BD /* SwiftUIIntrospect */; };
+		0414BF232A685B81004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF222A685B81004543BD /* SwiftUIIntrospect */; };
+		0414BF252A685B8E004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF242A685B8E004543BD /* SwiftUIIntrospect */; };
+		0414BF272A685B98004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF262A685B98004543BD /* SwiftUIIntrospect */; };
+		0414BF292A685BAC004543BD /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 0414BF282A685BAC004543BD /* SwiftUIIntrospect */; };
 		042F6F2929E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2A29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
@@ -19146,8 +19146,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
@@ -19186,16 +19186,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 18.0.0;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
