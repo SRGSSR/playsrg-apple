@@ -108,10 +108,12 @@ enum UCService: Hashable, CaseIterable {
     // MARK: Banners
     
     private static func showFirstLayer() {
+        guard let mainTopViewController = UIApplication.shared.mainTopViewController else { return }
+        
         isShowingBanner = true
         NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: nil)
         
-        banner.showFirstLayer { response in
+        banner.showFirstLayer(hostView: mainTopViewController) { response in
             isShowingBanner = false
             applyConsent(with: response.consents)
             NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: nil)
@@ -119,10 +121,12 @@ enum UCService: Hashable, CaseIterable {
     }
     
     static func showSecondLayer() {
+        guard let mainTopViewController = UIApplication.shared.mainTopViewController else { return }
+        
         isShowingBanner = true
         NotificationCenter.default.post(name: userConsentWillShowBannerNotification, object: nil)
         
-        banner.showSecondLayer { response in
+        banner.showSecondLayer(hostView: mainTopViewController) { response in
             isShowingBanner = false
             applyConsent(with: response.consents)
             NotificationCenter.default.post(name: userConsentDidHideBannerNotification, object: nil)
