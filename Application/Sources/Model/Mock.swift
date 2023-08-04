@@ -143,6 +143,7 @@ enum Mock {
     enum Program: String {
         case standard
         case overflow
+        case fallbackImageUrl
     }
     
     static func program(_ kind: Program = .standard) -> SRGProgram {

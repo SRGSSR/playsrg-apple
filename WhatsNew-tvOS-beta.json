@@ -63,5 +63,9 @@
     "1.7.0-414": "- AppStore release with all translations.",
     "1.7.1-415": "- Update player dependency, and fix some playing issues. [RTR, SRF]",
     "1.7.2-416": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update. ",
-    "1.7.2-417": "Branch beta\n- Insert emoji in branch beta display name.\n- Add branch name in the version in settings view."
+    "1.7.2-417": "Branch beta\n- Insert emoji in branch beta display name.\n- Add branch name in the version in settings view.",
+    "1.7.2-420": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update.\n- Page views have page name property.",
+    "1.7.2-421": "- Maintenance build.",
+    "1.7.2-422": "- Updated video/audio image in control center.\n- Image service maintnance. [RSI, RTR, SRF, SWI]",
+    "1.7.2-423": "- AppStore release."
 }

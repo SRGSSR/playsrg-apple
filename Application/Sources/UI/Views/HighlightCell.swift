@@ -59,7 +59,7 @@ struct HighlightCell: View {
         
         private var imageUrl: URL? {
             guard let highlight else { return nil }
-            return SRGDataProvider.current!.url(for: highlight.image, size: .large)
+            return url(for: highlight.image, size: .large)
         }
         
         private var contentMode: ImageView.ContentMode {

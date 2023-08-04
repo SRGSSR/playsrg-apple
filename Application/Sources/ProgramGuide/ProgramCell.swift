@@ -10,14 +10,14 @@ import SwiftUI
 // MARK: Cell
 
 struct ProgramCell: View {
-    @Binding var data: ProgramCellViewModel.Data
+    @Binding var data: ProgramAndChannel
     let direction: StackDirection
     
     @StateObject private var model = ProgramCellViewModel()
     
     @Environment(\.isSelected) private var isSelected
     
-    init(program: SRGProgram, channel: SRGChannel?, direction: StackDirection) {
+    init(program: SRGProgram, channel: SRGChannel, direction: StackDirection) {
         _data = .constant(.init(program: program, channel: channel))
         self.direction = direction
     }

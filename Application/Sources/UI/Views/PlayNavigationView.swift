@@ -4,14 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
-import Introspect
 import SRGAppearanceSwift
 import SwiftUI
+import SwiftUIIntrospect
 
 func PlayNavigationView<Content: View>(@ViewBuilder content: () -> Content) -> AnyView {
     return NavigationView(content: content)
-        .introspectNavigationController { navigationController in
-            let navigationBar = navigationController.navigationBar
+        .navigationViewStyle(.stack)
+        .introspect(.navigationView(style: .stack), on: .iOS(.v14, .v15, .v16, .v17), .tvOS(.v14, .v15, .v16, .v17)) {
+            let navigationBar = $0.navigationBar
 #if os(iOS)
             navigationBar.largeTitleTextAttributes = [
                 .font: SRGFont.font(family: .display, weight: .bold, fixedSize: 34) as UIFont

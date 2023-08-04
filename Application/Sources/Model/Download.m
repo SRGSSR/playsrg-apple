@@ -502,7 +502,7 @@ static NSArray<Download *> *s_sortedDownloads;
     
     self.presentation = media.presentation;
     
-    self.downloadImageURL = [SRGDataProvider.currentDataProvider URLForImage:media.image withSize:SRGImageSizeMedium scaling:SRGImageScalingDefault];
+    self.downloadImageURL = [SRGDataProvider.currentDataProvider URLForImage:media.image withSize:SRGImageSizeMedium];
     
     self.uid = media.uid;
     self.URN = media.URN;

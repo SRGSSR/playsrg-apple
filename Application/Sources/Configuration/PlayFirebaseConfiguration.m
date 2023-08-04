@@ -105,7 +105,9 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
 - (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(void (^)(PlayFirebaseConfiguration * _Nonnull))updateBlock
 {
     if (self = [super init]) {
-        self.remoteConfig = [FIRRemoteConfig remoteConfig];
+        if ([FIRApp defaultApp] != nil) {
+            self.remoteConfig = [FIRRemoteConfig remoteConfig];
+        }
         if (self.remoteConfig) {
 #if defined(DEBUG)
             // Make it possible to retrieve the configuration more frequently during development
