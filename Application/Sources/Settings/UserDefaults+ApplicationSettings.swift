@@ -31,7 +31,9 @@ extension UserDefaults {
     }
 #endif
     
+#if DEBUG || NIGHTLY || BETA
     @objc dynamic var PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled: Bool {
         return bool(forKey: PlaySRG.PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled)
     }
+#endif
 }
