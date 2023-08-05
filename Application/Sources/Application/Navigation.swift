@@ -61,7 +61,11 @@ extension UIViewController {
                 .store(in: &cancellables)
             
             let position = HistoryResumePlaybackPositionForMedia(media)
-            controller.playMedia(media, at: position, withPreferredSettings: nil)
+            controller.prepare(toPlay: media, at: position, withPreferredSettings: nil, completionHandler: {
+                if !UserConsentHelper.isShowingBanner {
+                    controller.play()
+                }
+            })
             present(letterboxViewController, animated: animated) {
                 SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
                 if let completion {

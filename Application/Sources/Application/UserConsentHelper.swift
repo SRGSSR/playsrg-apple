@@ -56,7 +56,7 @@ enum UCService: Hashable, CaseIterable {
     // MARK: States
     
     private(set) static var isConfigured = false
-    private(set) static var isShowingBanner = false
+    @objc private(set) static var isShowingBanner = false
     
     static func serviceConsents() -> [UsercentricsServiceConsent] {
         return UsercentricsCore.shared.getConsents()
