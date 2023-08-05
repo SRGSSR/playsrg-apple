@@ -120,21 +120,31 @@ final class SceneDelegate: UIResponder {
         let action = DeepLinkAction(from: urlContext)
         switch action.type {
         case .media:
+            UserConsentHelper.waitCollectingConsentRetain()
             SRGDataProvider.current!.media(withUrn: action.identifier)
                 .receive(on: DispatchQueue.main)
-                .sink { _ in
+                .sink { result in
+                    if case .failure = result {
+                        UserConsentHelper.waitCollectingConsentRelease()
+                    }
                 } receiveValue: { media in
                     navigateToMedia(media)
                     action.analyticsEvent.send()
+                    UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)
         case .show:
+            UserConsentHelper.waitCollectingConsentRetain()
             SRGDataProvider.current!.show(withUrn: action.identifier)
                 .receive(on: DispatchQueue.main)
-                .sink { _ in
+                .sink { result in
+                    if case .failure = result {
+                        UserConsentHelper.waitCollectingConsentRelease()
+                    }
                 } receiveValue: { show in
                     navigateToShow(show)
                     action.analyticsEvent.send()
+                    UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)
         default:

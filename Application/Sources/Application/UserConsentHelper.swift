@@ -62,13 +62,44 @@ enum UCService: Hashable, CaseIterable {
         return UsercentricsCore.shared.getConsents()
     }
     
+    // Retain potiential collecting consent banner to be displayed as modal on top of each views.
+    // Don't forget to call `waitCollectingConsentRelease()` when the blocking condition is over.
+    @objc static func waitCollectingConsentRetain() {
+        waitCollectingConsentPool += 1
+    }
+    
+    // Release waiting pool to allow to display collecting consent banner as modal on top of each views, if any.
+    @objc static func waitCollectingConsentRelease() {
+        guard waitCollectingConsentPool > 0 else { return }
+        
+        waitCollectingConsentPool -= 1
+        
+        if waitCollectingConsentPool == 0 && shouldCollectConsent {
+            shouldCollectConsent = false
+            
+            // Dispatch on next main thread loop, with a tiny delay.
+            DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+                showFirstLayer()
+            }
+        }
+    }
+    
     private static var hasRunSetup = false
+    
+    private static var waitCollectingConsentPool: UInt = 0
+    private static var shouldCollectConsent = false
     
     // MARK: Setup
     
     @objc static func setup() {
         guard !hasRunSetup else { return }
         
+        configureAndApplyConsents()
+        
+        hasRunSetup = true
+    }
+    
+    private static func configureAndApplyConsents() {
         let options = UsercentricsOptions()
         let ruleSetIdKey = ApplicationConfiguration.shared.isUserConsentCentralizedRuleSetPreferred ? "UserCentricsSRGRuleSetId" : "UserCentricsRuleSetId"
         if let ruleSetId = Bundle.main.object(forInfoDictionaryKey: ruleSetIdKey) as? String {
@@ -86,13 +117,13 @@ enum UCService: Hashable, CaseIterable {
         UsercentricsCore.isReady { status in
             isConfigured = true
             
-            var shouldCollectConsent = false
 #if DEBUG || NIGHTLY || BETA
             shouldCollectConsent = status.shouldCollectConsent || UserDefaults.standard.bool(forKey: PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled)
 #else
             shouldCollectConsent = status.shouldCollectConsent
 #endif
-            if shouldCollectConsent {
+            if shouldCollectConsent && waitCollectingConsentPool == 0 {
+                shouldCollectConsent = false
                 showFirstLayer()
             }
             else {
@@ -101,8 +132,6 @@ enum UCService: Hashable, CaseIterable {
         } onFailure: { error in
             PlayLogError(category: "UserCentrics", message: error.localizedDescription)
         }
-        
-        hasRunSetup = true
     }
     
     // MARK: Banners
