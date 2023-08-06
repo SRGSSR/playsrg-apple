@@ -2,7 +2,15 @@
   "images" : [
     {
       "filename" : "marts.pdf",
-      "idiom" : "universal"
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "marts 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "marts 2.pdf",
+      "idiom" : "tv"
     }
   ],
   "info" : {
