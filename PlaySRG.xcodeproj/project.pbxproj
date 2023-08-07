@@ -142,16 +142,16 @@
 		0451ECE528742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0451ECE628742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
 		0451ECE728742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */; };
-		0456C4A12976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A22976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A32976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A42976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A52976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A62976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A72976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A82976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4A92976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0456C4AA2976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
+		0456C4A12976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A22976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A32976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A42976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A52976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A62976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A72976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A82976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4A92976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
+		0456C4AA2976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */; };
 		0463DA102A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA112A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA122A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
@@ -2787,7 +2787,7 @@
 		044B408E2A02B6B500A10DB7 /* ProfileCell+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ProfileCell+UIKit.swift"; sourceTree = "<group>"; };
 		044E391F29B10C9100C1768A /* SRGShow+PlaySRG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SRGShow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
-		0456C4A02976EE460088508A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsHiddenEvent.swift; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
 		0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGMedia+PlaySRG.swift"; sourceTree = "<group>"; };
 		0481D5A329F44D4D00D174B3 /* SRGProgram+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGProgram+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3949,7 +3949,7 @@
 				04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
-				0456C4A02976EE460088508A /* AnalyticsEvent.swift */,
+				0456C4A02976EE460088508A /* AnalyticsHiddenEvent.swift */,
 				087584C723A0008500FA7207 /* ApplicationSectionInfo.h */,
 				087584CF23A0008500FA7207 /* ApplicationSectionInfo.m */,
 				6F4760181EB37BD1003021EA /* Categories */,
@@ -8452,7 +8452,7 @@
 				6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */,
 				6F573D0426D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
-				0456C4A12976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A12976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FD633EA1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				0451ECE328742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
 				082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -8703,7 +8703,7 @@
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				04D2A92C29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FB9B3D726CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
-				0456C4A22976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A22976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB126563ABD0032D742 /* DampedCollectionView.swift in Sources */,
@@ -8968,7 +8968,7 @@
 				6F0AF6E6267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				04D2A92D29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
-				0456C4A32976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A32976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FB9B3D826CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F56F9F6247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
@@ -9233,7 +9233,7 @@
 				6F0AF6E7267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				04D2A92E29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
-				0456C4A42976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A42976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FB9B3D926CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F56F9F7247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C698245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
@@ -9514,7 +9514,7 @@
 				0875852623A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				6FA5D1611F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				6F566E9924EEC40A0024B4CA /* ApplicationSection.m in Sources */,
-				0456C4A52976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A52976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6F72E60B26BA6B16001A890C /* SceneDelegate.m in Sources */,
 				6F11BADF27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
 				6FE14E6F263EA9B5004AD913 /* TitleView.swift in Sources */,
@@ -9903,7 +9903,7 @@
 				6FDB2AC524E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DE261C9D3C003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7C2745140000CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				0456C4A62976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A62976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88C24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				04F184ED28F097E900B1207C /* BadgeList.swift in Sources */,
@@ -10057,7 +10057,7 @@
 				6FDB2AC624E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DF261C9D3D003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7D2745140100CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				0456C4A72976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A72976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88D24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */,
 				04F184EE28F097E900B1207C /* BadgeList.swift in Sources */,
@@ -10211,7 +10211,7 @@
 				6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2E0261C9D3D003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7E2745140100CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				0456C4A82976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A82976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88E24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				04F184EF28F097E900B1207C /* BadgeList.swift in Sources */,
@@ -10365,7 +10365,7 @@
 				6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2FA261C9D3E003FFDCF /* PageViewController.swift in Sources */,
 				6F928E7F2745140200CE54B5 /* ProgramGuideViewController.swift in Sources */,
-				0456C4A92976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4A92976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FDFD88F24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
 				04F184F028F097E900B1207C /* BadgeList.swift in Sources */,
@@ -10484,7 +10484,7 @@
 				0858CA64271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F5A7914256ED7E000E884F2 /* History.m in Sources */,
-				0456C4AA2976EE460088508A /* AnalyticsEvent.swift in Sources */,
+				0456C4AA2976EE460088508A /* AnalyticsHiddenEvent.swift in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
 				04C2DE812937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */,
 				6F14B113283CA4EF00F79447 /* SettingsView.swift in Sources */,
@@ -19246,8 +19246,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/62-update-to-tag-commander-v5";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
@@ -19286,8 +19286,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/283-update-to-commanders-act-version-5";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {

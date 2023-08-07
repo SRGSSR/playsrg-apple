@@ -264,8 +264,11 @@ static void *s_kvoContext = &s_kvoContext;
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
-                                                                                                       sourceKey:applicationConfiguration.analyticsSourceKey
+                                                                                                       container:applicationConfiguration.analyticsContainer
                                                                                                         siteName:applicationConfiguration.siteName];
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    configuration.environmentMode = SRGAnalyticsEnvironmentModePreProduction;
+#endif
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
                                               identityService:SRGIdentityService.currentIdentityService];
 }
@@ -368,7 +371,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     SRGMedia *media = notification.userInfo[SRGLetterboxMediaKey];
     if (media) {
-        [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
+        [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
                                                        mediaUrn:media.URN]
          send];
     }
@@ -381,12 +384,12 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)userDidCancelLogin:(NSNotification *)notification
 {
-    [[AnalyticsEventObjC identityWithAction:AnalyticsIdentityActionCancelLogin] send];
+    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionCancelLogin] send];
 }
 
 - (void)userDidLogin:(NSNotification *)notification
 {
-    [[AnalyticsEventObjC identityWithAction:AnalyticsIdentityActionLogin] send];
+    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionLogin] send];
 }
 
 - (void)didUpdateAccount:(NSNotification *)notification
@@ -412,7 +415,7 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     AnalyticsIdentityAction action = unexpectedLogout ? AnalyticsIdentityActionUnexpectedLogout : AnalyticsIdentityActionLogout;
-    [[AnalyticsEventObjC identityWithAction:action] send];
+    [[AnalyticsHiddenEventObjC identityWithAction:action] send];
 }
 
 #pragma mark KVO

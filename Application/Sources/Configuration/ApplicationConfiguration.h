@@ -29,7 +29,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) SRGVendor vendor;
 
 @property (nonatomic, readonly, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
-@property (nonatomic, readonly, copy) NSString *analyticsSourceKey;
+@property (nonatomic, readonly) NSInteger analyticsContainer;
 
 @property (nonatomic, readonly, copy) NSString *siteName;
 

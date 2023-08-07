@@ -150,7 +150,7 @@ protocol SectionProperties {
     /// Analytics information
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
-    func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent?
+    func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent?
     
     /// Properties for section displayed as a row
     var rowHighlight: Highlight? { get }
@@ -330,14 +330,14 @@ private extension Content {
             }
         }
         
-        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
             switch presentation.type {
             case .favoriteShows:
-                return AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
-                return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsEvent.historyRemove(source: source, urn: nil)
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
             default:
                 return nil
             }
@@ -746,17 +746,17 @@ private extension Content {
             }
         }
         
-        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
-                return AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
             case .radioWatchLater, .watchLater:
-                return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .history, .radioResumePlayback:
-                return AnalyticsEvent.historyRemove(source: source, urn: nil)
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
 #if os(iOS)
             case .downloads:
-                return AnalyticsEvent.download(action: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.download(action: .remove, source: source, urn: nil)
 #endif
             default:
                 return nil
