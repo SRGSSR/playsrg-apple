@@ -104,6 +104,10 @@ static void *s_kvoContext = &s_kvoContext;
                                            selector:@selector(userConsentWillShowBanner:)
                                                name:UserConsentHelper.userConsentWillShowBannerNotification
                                              object:nil];
+    
+    [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
+    [PushService.sharedService updateApplicationBadge];
+    
     [UserConsentHelper setup];
     [self setupAnalytics];
     
@@ -145,9 +149,6 @@ static void *s_kvoContext = &s_kvoContext;
         firstLaunchDone = NO;
         completionHandler(YES);
     }, @"FirstLaunchDone");
-    
-    [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
-    [PushService.sharedService updateApplicationBadge];
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];

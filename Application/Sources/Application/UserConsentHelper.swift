@@ -89,6 +89,15 @@ enum UCService: Hashable, CaseIterable {
     private static var waitCollectingConsentPool: UInt = 0
     private static var shouldCollectConsent = false
     
+    static var acceptedServiceIds: [String] {
+        get {
+            return UserDefaults.standard.stringArray(forKey: PlaySRGSettingUserConsentAcceptedServiceIds) ?? []
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
+        }
+    }
+    
     // MARK: Setup
     
     @objc static func setup() {
@@ -113,6 +122,8 @@ enum UCService: Hashable, CaseIterable {
         options.loggerLevel = .debug
 #endif
         UsercentricsCore.configure(options: options)
+        
+        applyConsent(with: acceptedServiceIds)
         
         UsercentricsCore.isReady { status in
             isConfigured = true
@@ -245,11 +256,21 @@ enum UCService: Hashable, CaseIterable {
     // MARK: Apply consent
     
     private static func applyConsent(with serviceConsents: [UsercentricsServiceConsent]) {
-        SRGAnalyticsTracker.shared.acceptedUserConsentServices = serviceConsents.filter({ $0.status == true }).map({ $0.templateId })
+        applyConsent(with: serviceConsents.filter({ $0.status == true }).map({ $0.templateId }))
+        
+        NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentServiceConsentsKey: serviceConsents])
+#if DEBUG
+        printServices()
+#endif
+    }
+    
+    private static func applyConsent(with acceptedUserConsentServices: [String]) {
+        acceptedServiceIds = acceptedUserConsentServices
+        SRGAnalyticsTracker.shared.acceptedUserConsentServices = acceptedUserConsentServices
         
         for service in UCService.allCases {
-            let serviceConsent = serviceConsents.first(where: { $0.templateId == service.templateId })
-            let acceptedConsent = serviceConsent?.status ?? false
+            let acceptedUserConsentService = acceptedUserConsentServices.first(where: { $0 == service.templateId })
+            let acceptedConsent = (acceptedUserConsentService != nil) ? true : false
             
             switch service {
 #if os(iOS)
@@ -285,9 +306,8 @@ enum UCService: Hashable, CaseIterable {
             }
         }
         
-        NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentServiceConsentsKey: serviceConsents])
 #if DEBUG
-        printServices()
+        printApplyConsent()
 #endif
     }
     
@@ -303,6 +323,10 @@ enum UCService: Hashable, CaseIterable {
         PlayLogDebug(category: "UserConsent", message: "Settings id: \(data.settings.settingsId)")
         PlayLogDebug(category: "UserConsent", message: "categorySlug / label:\n\(categories.map({ "\($0.categorySlug) / \($0.label)" }).joined(separator: "\n"))")
         PlayLogDebug(category: "UserConsent", message: "templateId / dataProcessor:\n\(services.map({ "\($0.templateId ?? "null") / \($0.dataProcessor ?? "null")" }).joined(separator: "\n"))")
+    }
+    
+    private static func printApplyConsent() {
+        PlayLogDebug(category: "UserConsent", message: "Accepted templateIds:\n\(acceptedServiceIds.joined(separator: "\n"))")
     }
 #endif
 }
