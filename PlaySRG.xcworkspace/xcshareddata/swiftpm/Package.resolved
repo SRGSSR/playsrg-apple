@@ -266,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "branch" : "feature/66-user-consent",
-        "revision" : "3f2fdd3cdfdefa0abfcb6c262fbf181df80014de"
+        "branch" : "feature/62-update-to-tag-commander-v5",
+        "revision" : "54bde8b92642cdcf7398f445255fca5424b80e02"
       }
     },
     {
@@ -320,8 +320,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "feature/298-user-consent",
-        "revision" : "0ac163020874e1141b0b2dc58db3e5b0f0ad5521"
+        "branch" : "feature/283-update-to-commanders-act-version-5"",
+        "revision" : "ed44181271606ba8fce5b14649e1dd029cfd9662"
       }
     },
     {
