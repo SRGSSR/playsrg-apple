@@ -83,6 +83,9 @@
 /* Search setting option */
 "All" = "Tout";
 
+/* Always ask user consent at launch setting label */
+"Always ask user consent at launch" = "Toujours demander le consentement de l'utilisateur au lancement";
+
 /* Subtitle availability setting section footer */
 "Always visible when VoiceOver is active." = "Toujours visible lorsque VoiceOver est activé.";
 
@@ -152,9 +155,6 @@
 
 /* Label of the button to copy support information to the pasteboard */
 "Copy support information" = "Copier les informations de support";
-
-/* Privacy section header */
-"Privacy" = "Confidentialité";
 
 /* Label of the button to display the data protection policy */
 "Data protection" = "Protection des données";
@@ -532,6 +532,9 @@
 /* Button title on CarPlay player for livestream previous programs
    Livestream previous programs screen title */
 "Previous shows" = "Émissions précédentes";
+
+/* Privacy section header */
+"Privacy" = "Confidentialité";
 
 /* Label of the button to display the privacy settings */
 "Privacy settings" = "Paramètres de confidentialité";

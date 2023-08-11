@@ -83,6 +83,9 @@
 /* Search setting option */
 "All" = "Tut";
 
+/* Always ask user consent at launch setting label */
+"Always ask user consent at launch" = "Always ask user consent at launch";
+
 /* Subtitle availability setting section footer */
 "Always visible when VoiceOver is active." = "Adina visibel cun VoiceOver activà.";
 
@@ -529,6 +532,12 @@
 /* Button title on CarPlay player for livestream previous programs
    Livestream previous programs screen title */
 "Previous shows" = "Emissiuns precedentas";
+
+/* Privacy section header */
+"Privacy" = "Privacy";
+
+/* Label of the button to display the privacy settings */
+"Privacy settings" = "Privacy settings";
 
 /* Server setting name */
 "Production" = "Producziun";
