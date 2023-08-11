@@ -68,5 +68,6 @@
     "1.7.2-421": "- Maintenance build.",
     "1.7.2-422": "- Updated video/audio image in control center.\n- Image service maintnance. [RSI, RTR, SRF, SWI]",
     "1.7.2-423": "- AppStore release.",
-    "1.7.3-424": "- Update italian translations. [RSI]\n- Update channel logos. [RTS]\n- Fix service logo size in login view. [RTS]"
+    "1.7.3-424": "- Update italian translations. [RSI]\n- Update channel logos. [RTS]\n- Fix service logo size in login view. [RTS]",
+    "1.7.4-425": "Branch beta\n- Ask user consent at launch when needed.\n- Add privacy section in settings view."
 }
