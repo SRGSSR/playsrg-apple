@@ -719,10 +719,10 @@
 "The history will be deleted on all devices connected to your account." = "La cronologia sarà eliminata da tutti i dispositivi collegati al tuo account.";
 
 /* Title label used to present the radio latest audios */
-"The latest audios" = "Gli audio più recenti";
+"The latest audios" = "I più recenti";
 
 /* Title label used to present the radio latest audio episodes */
-"The latest episodes" = "Ultimi episodi";
+"The latest episodes" = "I più recenti";
 
 /* Error message when a media cannot be opened via Handoff
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
