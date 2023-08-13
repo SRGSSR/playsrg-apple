@@ -200,5 +200,6 @@
     "3.7.3-421": "- Maintenance build.",
     "3.7.3-422": "- Updated video/audio image in control center.\n- Image service maintnance. [RSI, RTR, SRF, SWI]",
     "3.7.3-423": "- Fix some crashes in the player.\n- AppStore release.",
-    "3.7.4-424": "- Update italian translations. [RSI]\n- Update channel logos. [RTS]"
+    "3.7.4-424": "- Update italian translations. [RSI]\n- Update channel logos. [RTS]",
+    "3.7.5-425": "Branch beta\n- Ask user consent at launch when needed.\n- Add privacy section in settings view."
 }
