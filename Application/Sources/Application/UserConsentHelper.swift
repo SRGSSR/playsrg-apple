@@ -89,9 +89,9 @@ enum UCService: Hashable, CaseIterable {
     private static var waitCollectingConsentPool: UInt = 0
     private static var shouldCollectConsent = false
     
-    static var acceptedServiceIds: [String] {
+    static var acceptedServiceIds: [String]? {
         get {
-            return UserDefaults.standard.stringArray(forKey: PlaySRGSettingUserConsentAcceptedServiceIds) ?? []
+            return UserDefaults.standard.stringArray(forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
         }
         set {
             UserDefaults.standard.set(newValue, forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
@@ -125,7 +125,9 @@ enum UCService: Hashable, CaseIterable {
 #endif
         UsercentricsCore.configure(options: options)
         
-        applyConsent(with: acceptedServiceIds)
+        if let acceptedServiceIds {
+            applyConsent(with: acceptedServiceIds)
+        }
         
         UsercentricsCore.isReady { status in
             isConfigured = true
@@ -310,7 +312,7 @@ enum UCService: Hashable, CaseIterable {
         }
         
 #if DEBUG
-        printApplyConsent()
+        printAcceptedServices(acceptedUserConsentServices)
 #endif
     }
     
@@ -328,8 +330,8 @@ enum UCService: Hashable, CaseIterable {
         PlayLogDebug(category: "UserConsent", message: "templateId / dataProcessor:\n\(services.map({ "\($0.templateId ?? "null") / \($0.dataProcessor ?? "null")" }).joined(separator: "\n"))")
     }
     
-    private static func printApplyConsent() {
-        PlayLogDebug(category: "UserConsent", message: "Accepted templateIds:\n\(acceptedServiceIds.joined(separator: "\n"))")
+    private static func printAcceptedServices(_ acceptedServices: [String]) {
+        PlayLogDebug(category: "UserConsent", message: "Accepted templateIds:\n\(acceptedServices.joined(separator: "\n"))")
     }
 #endif
 }
