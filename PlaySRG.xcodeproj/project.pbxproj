@@ -19246,8 +19246,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/66-user-consent";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.2.0;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
@@ -19286,8 +19286,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/298-user-consent";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.1;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {

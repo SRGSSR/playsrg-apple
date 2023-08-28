@@ -266,7 +266,6 @@ enum UCService: Hashable, CaseIterable {
     
     private static func applyConsent(with acceptedUserConsentServices: [String]) {
         acceptedServiceIds = acceptedUserConsentServices
-        SRGAnalyticsTracker.shared.consentedServices = acceptedUserConsentServices
         
         for service in UCService.allCases {
             let acceptedUserConsentService = acceptedUserConsentServices.first(where: { $0 == service.templateId })
