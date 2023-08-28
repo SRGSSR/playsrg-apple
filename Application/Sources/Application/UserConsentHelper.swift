@@ -125,9 +125,7 @@ enum UCService: Hashable, CaseIterable {
 #endif
         UsercentricsCore.configure(options: options)
         
-        if let acceptedServiceIds {
-            applyConsent(with: acceptedServiceIds)
-        }
+        applyConsent(with: acceptedServiceIds)
         
         UsercentricsCore.isReady { status in
             isConfigured = true
@@ -268,15 +266,17 @@ enum UCService: Hashable, CaseIterable {
 #endif
     }
     
-    private static func applyConsent(with acceptedUserConsentServices: [String]) {
-        acceptedServiceIds = acceptedUserConsentServices
+    private static func applyConsent(with acceptedServices: [String]?) {
+        acceptedServiceIds = acceptedServices
         
         srgAnalyticsLabels = SRGAnalyticsLabels()
-        srgAnalyticsLabels.customInfo = ["consent_services": acceptedUserConsentServices.joined(separator: ",")]
+        srgAnalyticsLabels.customInfo = ["consent_services": (acceptedServices ?? []).joined(separator: ",")]
         
         for service in UCService.allCases {
-            let acceptedUserConsentService = acceptedUserConsentServices.first(where: { $0 == service.templateId })
-            let acceptedConsent = (acceptedUserConsentService != nil)
+            let consentCollected = (acceptedServices != nil)
+            
+            let acceptedService = (acceptedServices ?? []).first(where: { $0 == service.templateId })
+            let acceptedConsent = (acceptedService != nil)
             
             switch service {
 #if os(iOS)
@@ -294,7 +294,7 @@ enum UCService: Hashable, CaseIterable {
                 // `AppCenterAnalytics` framework not imported.
                 break
             case .comscore:
-                srgAnalyticsLabels.comScoreCustomInfo = ["cs_ucfr": acceptedConsent ? "1" : "0"]
+                srgAnalyticsLabels.comScoreCustomInfo = ["cs_ucfr": consentCollected ? (acceptedConsent ? "1" : "0") : ""]
             case .firebase:
                 // IS_ANALYTICS_ENABLED is set to false in `GoogleService-Info-[BU].plist`.
                 // `FirebaseAnalytics` framework not imported.
@@ -312,7 +312,7 @@ enum UCService: Hashable, CaseIterable {
         }
         
 #if DEBUG
-        printAcceptedServices(acceptedUserConsentServices)
+        printAcceptedServices(acceptedServices)
 #endif
     }
     
@@ -330,8 +330,13 @@ enum UCService: Hashable, CaseIterable {
         PlayLogDebug(category: "UserConsent", message: "templateId / dataProcessor:\n\(services.map({ "\($0.templateId ?? "null") / \($0.dataProcessor ?? "null")" }).joined(separator: "\n"))")
     }
     
-    private static func printAcceptedServices(_ acceptedServices: [String]) {
-        PlayLogDebug(category: "UserConsent", message: "Accepted templateIds:\n\(acceptedServices.joined(separator: "\n"))")
+    private static func printAcceptedServices(_ acceptedServices: [String]?) {
+        if let acceptedServices {
+            PlayLogDebug(category: "UserConsent", message: "Accepted templateIds:\n\(acceptedServices.joined(separator: "\n"))")
+        }
+        else {
+            PlayLogDebug(category: "UserConsent", message: "No consent has been given yet")
+        }
     }
 #endif
 }
