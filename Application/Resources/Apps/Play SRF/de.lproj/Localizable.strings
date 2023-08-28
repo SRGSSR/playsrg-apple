@@ -84,7 +84,7 @@
 "All" = "Alle";
 
 /* Always ask user consent at launch setting label */
-"Always ask user consent at launch" = "Always ask user consent at launch";
+"Always ask user consent at launch" = "Beim Start immer die Zustimmung des Nutzers einholen";
 
 /* Subtitle availability setting section footer */
 "Always visible when VoiceOver is active." = "Immer sichtbar wenn VoiceOver aktiviert ist.";
@@ -534,10 +534,10 @@
 "Previous shows" = "Vorherige Sendungen";
 
 /* Privacy section header */
-"Privacy" = "Privacy";
+"Privacy" = "Datenschutz";
 
 /* Label of the button to display the privacy settings */
-"Privacy settings" = "Privacy settings";
+"Privacy settings" = "Datenschutz Einstellungen";
 
 /* Server setting name */
 "Production" = "Production";
