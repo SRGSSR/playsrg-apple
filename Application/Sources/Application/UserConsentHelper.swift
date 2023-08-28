@@ -97,6 +97,8 @@ enum UCService: Hashable, CaseIterable {
             UserDefaults.standard.set(newValue, forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
         }
     }
+
+    @objc private(set) static var srgAnalyticsLabels = SRGAnalyticsLabels()
     
     // MARK: Setup
     
@@ -267,9 +269,12 @@ enum UCService: Hashable, CaseIterable {
     private static func applyConsent(with acceptedUserConsentServices: [String]) {
         acceptedServiceIds = acceptedUserConsentServices
         
+        srgAnalyticsLabels = SRGAnalyticsLabels()
+        srgAnalyticsLabels.customInfo = ["consent_services": acceptedUserConsentServices.joined(separator: ",")]
+        
         for service in UCService.allCases {
             let acceptedUserConsentService = acceptedUserConsentServices.first(where: { $0 == service.templateId })
-            let acceptedConsent = (acceptedUserConsentService != nil) ? true : false
+            let acceptedConsent = (acceptedUserConsentService != nil)
             
             switch service {
 #if os(iOS)
@@ -287,8 +292,7 @@ enum UCService: Hashable, CaseIterable {
                 // `AppCenterAnalytics` framework not imported.
                 break
             case .comscore:
-                // TODO: Inform SRGAnalytics
-                break
+                srgAnalyticsLabels.comScoreCustomInfo = ["cs_ucfr": acceptedConsent ? "1" : "0"]
             case .firebase:
                 // IS_ANALYTICS_ENABLED is set to false in `GoogleService-Info-[BU].plist`.
                 // `FirebaseAnalytics` framework not imported.
@@ -297,7 +301,7 @@ enum UCService: Hashable, CaseIterable {
                 // TODO: Inform SRGLetterbox
                 break
             case .tagcommander:
-                // TODO: Inform SRGAnalytics
+                // Always essential. No settings available in the framework.
                 break
             case .usercentrics:
                 // Always essential. No settings available in the framework.

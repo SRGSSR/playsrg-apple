@@ -40,6 +40,10 @@
 
 static void *s_kvoContext = &s_kvoContext;
 
+@interface AppDelegate() <SRGAnalyticsTrackerDataSource>
+
+@end
+
 @implementation AppDelegate
 
 #pragma mark Application lifecycle
@@ -200,6 +204,13 @@ static void *s_kvoContext = &s_kvoContext;
     [PushService.sharedService updateApplicationBadge];
 }
 
+#pragma mark SRGAnalyticsTrackerDataSource protocol
+
+- (SRGAnalyticsLabels *)srg_globalLabels
+{
+    return UserConsentHelper.srgAnalyticsLabels;
+}
+
 #pragma mark Helpers
 
 - (void)setupAppCenter
@@ -271,6 +282,7 @@ static void *s_kvoContext = &s_kvoContext;
     configuration.environmentMode = SRGAnalyticsEnvironmentModePreProduction;
 #endif
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
+                                                   dataSource:self
                                               identityService:SRGIdentityService.currentIdentityService];
 }
 
