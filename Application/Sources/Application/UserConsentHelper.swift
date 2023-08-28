@@ -300,7 +300,7 @@ enum UCService: Hashable, CaseIterable {
                 // `FirebaseAnalytics` framework not imported.
                 break
             case .srgsnitch:
-                // TODO: Inform SRGLetterbox
+                // Always essential. No settings available in the framework.
                 break
             case .tagcommander:
                 // Always essential. No settings available in the framework.
