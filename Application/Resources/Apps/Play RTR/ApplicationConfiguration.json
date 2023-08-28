@@ -14,7 +14,7 @@
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioWatchLater",
   "minimumSocialViewCount": 50,
   "faqURL": "https://www.rtr.ch/play/tv/agid",
-  "dataProtectionURL": "https://www.rtr.ch/article/7872047",
+  "dataProtectionURL": "https://www.rtr.ch/dretgs-decleraziun-davart-la-protecziun-da-datas",
   "whatsNewURL": "https://srgssr.github.io/playsrg-apple/releases/release_notes-ios-rtr.html",
   "radioChannels": "[{\"uid\":\"12fb886e-b7aa-4e55-beb2-45dbc619f3c4\",\"name\":\"Radio RTR\",\"resourceUid\":\"radio_rtr\",\"songsViewStyle\":\"expanded\",\"color\":\"#AF001D\",\"secondColor\":\"#9B001B\"}]",
   "tvChannels": "[{\"uid\":\"f5dc82ed-4564-4223-903f-0bf6a13c5620\",\"name\":\"RTR auf SRF 1\",\"resourceUid\":\"rtr_srf1\",\"color\":\"#C91024\",\"secondColor\":\"#8D0614\"},{\"uid\":\"80bdf859-b58d-421d-bb27-ce1fba4637a7\",\"name\":\"RTR auf SRF Info\",\"resourceUid\":\"rtr_srf_info\",\"color\":\"#AF001E\",\"secondColor\":\"#830512\"},{\"uid\":\"2541c864-f883-4b80-9459-e1026e0e692e\",\"name\":\"RTR auf SRF 2\",\"resourceUid\":\"rtr_srf2\",\"color\":\"#FFB600\",\"secondColor\":\"#ED7004\",\"titleColor\":\"#333333\",\"hasDarkStatusBar\":true}]",
