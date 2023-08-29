@@ -84,12 +84,14 @@ enum UCService: Hashable, CaseIterable {
         }
     }
     
+    @objc private(set) static var srgAnalyticsLabels = SRGAnalyticsLabels()
+    
     private static var hasRunSetup = false
     
     private static var waitCollectingConsentPool: UInt = 0
     private static var shouldCollectConsent = false
     
-    static var acceptedServiceIds: [String]? {
+    private static var acceptedServiceIds: [String]? {
         get {
             return UserDefaults.standard.stringArray(forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
         }
@@ -97,8 +99,6 @@ enum UCService: Hashable, CaseIterable {
             UserDefaults.standard.set(newValue, forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
         }
     }
-
-    @objc private(set) static var srgAnalyticsLabels = SRGAnalyticsLabels()
     
     // MARK: Setup
     
