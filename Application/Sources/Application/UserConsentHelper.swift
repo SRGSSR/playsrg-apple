@@ -112,8 +112,7 @@ enum UCService: Hashable, CaseIterable {
     
     private static func configureAndApplyConsents() {
         let options = UsercentricsOptions()
-        let ruleSetIdKey = ApplicationConfiguration.shared.isUserConsentCentralizedRuleSetPreferred ? "UserCentricsSRGRuleSetId" : "UserCentricsRuleSetId"
-        if let ruleSetId = Bundle.main.object(forInfoDictionaryKey: ruleSetIdKey) as? String {
+        if let ruleSetId = Bundle.main.object(forInfoDictionaryKey: "UserCentricsRuleSetId") as? String {
             options.ruleSetId = ruleSetId
             
             if let defaultLanguage = ApplicationConfiguration.shared.userConsentDefaultLanguage {

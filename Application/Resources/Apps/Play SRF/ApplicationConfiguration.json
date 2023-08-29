@@ -28,6 +28,5 @@
   "audioDescriptionAvailabilityHidden": true,
   "posterImagesEnabled": true,
   "tvThirdPartyChannelsAvailable": true,
-  "userConsentCentralizedRuleSetPreferred": true,
   "userConsentDefaultLanguage": "de"
 }

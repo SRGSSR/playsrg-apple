@@ -29,6 +29,5 @@
   "searchSettingSubtitledHidden": true,
   "subtitleAvailabilityHidden": true,
   "audioDescriptionAvailabilityHidden": true,
-  "userConsentCentralizedRuleSetPreferred": true,
   "userConsentDefaultLanguage": "it"
 }

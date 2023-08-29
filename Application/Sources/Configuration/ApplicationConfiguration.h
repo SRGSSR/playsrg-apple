@@ -94,7 +94,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=isShowLeadPreferred) BOOL showLeadPreferred;
 
-@property (nonatomic, readonly, getter=isUserConsentCentralizedRuleSetPreferred) BOOL userConsentCentralizedRuleSetPreferred;
 @property (nonatomic, readonly, nullable) NSString *userConsentDefaultLanguage;
 
 - (nullable RadioChannel *)radioChannelForUid:(nullable NSString *)uid;

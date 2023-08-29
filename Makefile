@@ -1,7 +1,7 @@
 #!/usr/bin/xcrun make -f
 
 CONFIGURATION_REPOSITORY_URL=https://github.com/SRGSSR/playsrg-apple-configuration.git
-CONFIGURATION_COMMIT_SHA1=497fb065d49b4ccdf5568f2b5f00bf5ff9427785
+CONFIGURATION_COMMIT_SHA1=cf878c955afb0fd424cce6678bc7e5c3f7a817a1
 CONFIGURATION_FOLDER=Configuration
 
 .PHONY: all

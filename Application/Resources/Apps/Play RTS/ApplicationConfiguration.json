@@ -31,6 +31,5 @@
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
   "searchSettingSubtitledHidden": true,
   "showLeadPreferred": true,
-  "userConsentCentralizedRuleSetPreferred": true,
   "userConsentDefaultLanguage": "fr"
 }

@@ -17,7 +17,6 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `pageSize` (optional, number): The page size to use for media or show lists in general, 20 if not set.
 * `detailPageSize` (optional, number): The page size to use for media or show lists in detail page with load more capability, 40 if not set.
 * `voiceOverLanguageCode` (optional, string): The code of the language associated with the application. If set, this language is used when reading texts for accessibility purposes, otherwise the device language is used.
-* `userConsentCentralizedRuleSetPreferred` (optional, boolean): `true` iff the user consent centralized rule set is preferred. Othervise, business unit rule set is used. If omitted, `false`.
 * `userConsentDefaultLanguage` (optional , string): The default language for user consent. If omitted, the default language in user consent configuration is used. 
 
 ## URLs
