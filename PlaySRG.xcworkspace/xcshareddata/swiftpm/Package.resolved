@@ -257,8 +257,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "438f5cff10a7624624eced42852c9789eeab2889",
-        "version" : "8.1.0"
+        "revision" : "c92014ca8838ad3cf403735ce25757afb04cd31f",
+        "version" : "8.2.0"
       }
     },
     {
@@ -311,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "339a8525bc00206dfb7c5553f2340d7ceda7b20c",
-        "version" : "9.1.0"
+        "revision" : "a4b3c5378efa4db01c70006f500e64522feb67ba",
+        "version" : "9.1.1"
       }
     },
     {
@@ -412,6 +412,24 @@
       "state" : {
         "revision" : "8220ac38124613fb709508426f75fbac6921e261",
         "version" : "2.2.1"
+      }
+    },
+    {
+      "identity" : "usercentrics-spm-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-sdk",
+      "state" : {
+        "revision" : "08b2846714f8773ade5eda0650e540dfebf016ad",
+        "version" : "2.8.2"
+      }
+    },
+    {
+      "identity" : "usercentrics-spm-ui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-ui",
+      "state" : {
+        "revision" : "912546aa3f592c8a42104f761cc43c520ad73f94",
+        "version" : "2.8.2"
       }
     },
     {

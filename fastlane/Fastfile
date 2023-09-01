@@ -1561,11 +1561,17 @@ end
 
 def upload_appcenter_dsyms(appcenter_appname)
   dsym = lane_context[SharedValues::DSYM_OUTPUT_PATH]
-  appcenter_lane(
-    appname: appcenter_appname,
-    notes: 'DSYMs from local build (via fastlane).',
-    upload_dsym: dsym
-  )
+  begin
+    appcenter_lane(
+      appname: appcenter_appname,
+      notes: 'DSYMs from local build (via fastlane).',
+      upload_dsym: dsym
+    )
+  rescue StandardError => e
+    UI.important "Error uploading dSYM to App Center: #{e.message}"
+    Dir.chdir('..') { FileUtils.cp(dsym, 'build') }
+    UI.message "#{dsym.split('/').last} file copied to ./build folder."
+  end
   lane_context.delete(SharedValues::DSYM_OUTPUT_PATH)
 end
 

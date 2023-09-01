@@ -40,6 +40,10 @@
 
 static void *s_kvoContext = &s_kvoContext;
 
+@interface AppDelegate() <SRGAnalyticsTrackerDataSource>
+
+@end
+
 @implementation AppDelegate
 
 #pragma mark Application lifecycle
@@ -100,6 +104,15 @@ static void *s_kvoContext = &s_kvoContext;
                                                name:SRGLetterboxPlaybackDidContinueAutomaticallyNotification
                                              object:nil];
     
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(userConsentWillShowBanner:)
+                                               name:UserConsentHelper.userConsentWillShowBannerNotification
+                                             object:nil];
+    
+    [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
+    [PushService.sharedService updateApplicationBadge];
+    
+    [UserConsentHelper setup];
     [self setupAnalytics];
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
@@ -140,9 +153,6 @@ static void *s_kvoContext = &s_kvoContext;
         firstLaunchDone = NO;
         completionHandler(YES);
     }, @"FirstLaunchDone");
-    
-    [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
-    [PushService.sharedService updateApplicationBadge];
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];
@@ -192,6 +202,13 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [PushService.sharedService updateApplicationBadge];
+}
+
+#pragma mark SRGAnalyticsTrackerDataSource protocol
+
+- (SRGAnalyticsLabels *)srg_globalLabels
+{
+    return UserConsentHelper.srgAnalyticsLabels;
 }
 
 #pragma mark Helpers
@@ -265,6 +282,7 @@ static void *s_kvoContext = &s_kvoContext;
     configuration.environmentMode = SRGAnalyticsEnvironmentModePreProduction;
 #endif
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
+                                                   dataSource:self
                                               identityService:SRGIdentityService.currentIdentityService];
 }
 
@@ -370,6 +388,11 @@ static void *s_kvoContext = &s_kvoContext;
                                                        mediaUrn:media.URN]
          send];
     }
+}
+
+- (void)userConsentWillShowBanner:(NSNotification *)notification
+{
+    [SRGLetterboxService.sharedService.controller pause];
 }
 
 - (void)userDidCancelLogin:(NSNotification *)notification

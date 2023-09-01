@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "BU=RTS.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "BU=RTS 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "BU=RTS 2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

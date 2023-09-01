@@ -107,7 +107,11 @@
     };
     ApplicationConfigurationApplyControllerSettings(self.letterboxController);
     
-    [self.letterboxController playMedia:self.media atPosition:HistoryResumePlaybackPositionForMedia(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings()];
+    [self.letterboxController prepareToPlayMedia:self.media atPosition:HistoryResumePlaybackPositionForMedia(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings() completionHandler:^{
+        if (![UserConsentHelper isShowingBanner]) {
+            [self.letterboxController play];
+        }
+    }];
     [self.letterboxView setUserInterfaceHidden:YES animated:NO togglable:NO];
     [self.letterboxView setTimelineAlwaysHidden:YES animated:NO];
     
@@ -157,7 +161,9 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (self.shouldRestoreServicePlayback) {
                 [[AVAudioSession sharedInstance] setCategory:self.previousAudioSessionCategory error:nil];
-                [SRGLetterboxService.sharedService.controller play];
+                if (![UserConsentHelper isShowingBanner]) {
+                    [SRGLetterboxService.sharedService.controller play];
+                }
             }
         });
     }

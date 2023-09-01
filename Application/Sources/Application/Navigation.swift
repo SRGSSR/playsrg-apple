@@ -54,8 +54,18 @@ extension UIViewController {
                 }
                 .store(in: &cancellables)
             
+            NotificationCenter.default.weakPublisher(for: UserConsentHelper.userConsentWillShowBannerNotification)
+                .sink { _ in
+                    controller.pause()
+                }
+                .store(in: &cancellables)
+            
             let position = HistoryResumePlaybackPositionForMedia(media)
-            controller.playMedia(media, at: position, withPreferredSettings: nil)
+            controller.prepare(toPlay: media, at: position, withPreferredSettings: nil, completionHandler: {
+                if !UserConsentHelper.isShowingBanner {
+                    controller.play()
+                }
+            })
             present(letterboxViewController, animated: animated) {
                 SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
                 if let completion {
@@ -191,11 +201,13 @@ extension UIViewController {
         UserNotification.saveNotification(notification, read: true)
         
         if let mediaUrn = notification.mediaURN {
+            UserConsentHelper.waitCollectingConsentRetain()
             cancellable = SRGDataProvider.current!.media(withUrn: mediaUrn)
                 .receive(on: DispatchQueue.main)
                 .sink { result in
                     if case let .failure(error) = result {
                         Banner.showError(error)
+                        UserConsentHelper.waitCollectingConsentRelease()
                     }
                 } receiveValue: { [weak self] media in
                     guard let self else { return }
@@ -206,15 +218,18 @@ extension UIViewController {
                                                           overrideSource: notification.showURN,
                                                           overrideType: UserNotificationTypeString(notification.type))
                         .send()
+                        UserConsentHelper.waitCollectingConsentRelease()
                     }
                 }
         }
         else if let showUrn = notification.showURN {
+            UserConsentHelper.waitCollectingConsentRetain()
             cancellable = SRGDataProvider.current!.show(withUrn: showUrn)
                 .receive(on: DispatchQueue.main)
                 .sink { result in
                     if case let .failure(error) = result {
                         Banner.showError(error)
+                        UserConsentHelper.waitCollectingConsentRelease()
                     }
                 } receiveValue: { [weak self] show in
                     guard let navigationController = self?.navigationController else { return }
@@ -226,6 +241,7 @@ extension UIViewController {
                                                       uid: showUrn,
                                                       overrideType: UserNotificationTypeString(notification.type))
                     .send()
+                    UserConsentHelper.waitCollectingConsentRelease()
                 }
         }
         else {

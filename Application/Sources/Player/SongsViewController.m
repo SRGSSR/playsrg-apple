@@ -290,7 +290,9 @@
     SRGSong *song = self.items[indexPath.row];
     NSDate *seekDate = [song.date dateByAddingTimeInterval:0.3];
     [self.letterboxController seekToPosition:[SRGPosition positionAtDate:seekDate] withCompletionHandler:^(BOOL finished) {
-        [self.letterboxController play];
+        if (![UserConsentHelper isShowingBanner]) {
+            [self.letterboxController play];
+        }
     }];
 }
 

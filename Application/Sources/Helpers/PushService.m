@@ -165,6 +165,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 - (void)setupWithLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
     [UAirship takeOff:self.configuration launchOptions:launchOptions];
+    [UAirship.shared.privacyManager disableFeatures:UAFeaturesAnalytics];
     
     UAirship.push.defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
     UAirship.push.pushNotificationDelegate = self;

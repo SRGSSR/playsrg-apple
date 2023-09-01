@@ -148,13 +148,6 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    var showDataProtection: (() -> Void)? {
-        guard let url = ApplicationConfiguration.shared.dataProtectionURL else { return nil }
-        return {
-            UIApplication.shared.open(url)
-        }
-    }
-    
     var showSourceCode: (() -> Void)? {
         guard let url = ApplicationConfiguration.shared.sourceCodeURL else { return nil }
         return {
@@ -187,6 +180,28 @@ final class SettingsViewModel: ObservableObject {
         return ApplicationConfiguration.shared.supportEmailAddress
     }
 #endif
+    
+    var canDisplayPrivacySection: Bool {
+        return showDataProtection != nil || showPrivacySettings != nil
+    }
+    
+    var showDataProtection: (() -> Void)? {
+#if os(iOS)
+        guard let url = ApplicationConfiguration.shared.dataProtectionURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
+#else
+        return nil
+#endif
+    }
+    
+    var showPrivacySettings: (() -> Void)? {
+        guard UserConsentHelper.isConfigured else { return nil }
+        return {
+            UserConsentHelper.showSecondLayer()
+        }
+    }
     
     func removeFavorites() {
         FavoritesRemoveShows(nil)

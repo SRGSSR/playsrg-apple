@@ -379,7 +379,11 @@
     else {
         controller = [[SRGLetterboxController alloc] init];
         ApplicationConfigurationApplyControllerSettings(controller);
-        [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+        [controller prepareToPlayMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()completionHandler:^{
+            if (![UserConsentHelper isShowingBanner]) {
+                [controller play];
+            }
+        }];
         [SRGLetterboxService.sharedService enableWithController:controller pictureInPictureDelegate:nil];
     }
     

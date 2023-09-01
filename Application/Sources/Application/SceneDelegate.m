@@ -405,6 +405,8 @@ static void *s_kvoContext = &s_kvoContext;
 // Reset the app view controller hierachy to display the specified application section, executing the provided completion block when done.
 - (void)resetWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo completionBlock:(void (^)(void))completionBlock
 {
+    [UserConsentHelper waitCollectingConsentRetain];
+    
     void (^openApplicationSectionInfo)(void) = ^{
         [self.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
         completionBlock ? completionBlock() : nil;
@@ -418,28 +420,35 @@ static void *s_kvoContext = &s_kvoContext;
         [self.rootTabBarController dismissViewControllerAnimated:YES completion:^{
             [UIView setAnimationsEnabled:YES];
             openApplicationSectionInfo();
+            [UserConsentHelper waitCollectingConsentRelease];
         }];
     }
     else {
         openApplicationSectionInfo();
+        [UserConsentHelper waitCollectingConsentRelease];
     }
 }
 
 - (void)playURN:(NSString *)mediaURN media:(SRGMedia *)media atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification completion:(void (^)(PlayerType))completion
 {
+    [UserConsentHelper waitCollectingConsentRetain];
     if (media) {
         [self.rootTabBarController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
     }
     else {
         [[SRGDataProvider.currentDataProvider mediaWithURN:mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (media) {
-                [self.rootTabBarController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
+                [self.rootTabBarController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:^(PlayerType playerType) {
+                    [UserConsentHelper waitCollectingConsentRelease];
+                    completion ? completion(playerType) : nil;
+                }];
             }
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                      code:PlayErrorCodeNotFound
                                                  userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The media cannot be opened.", @"Error message when a media cannot be opened via Handoff, deep linking or a push notification") }];
                 [Banner showError:error];
+                [UserConsentHelper waitCollectingConsentRelease];
             }
         }] resume];
     }
@@ -447,9 +456,11 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)openShowURN:(NSString *)showURN show:(SRGShow *)show fromPushNotification:(BOOL)fromPushNotification
 {
+    [UserConsentHelper waitCollectingConsentRetain];
     if (show) {
         SectionViewController *showViewController = [SectionViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
         [self.rootTabBarController pushViewController:showViewController animated:YES];
+        [UserConsentHelper waitCollectingConsentRelease];
     }
     else {
         [[SRGDataProvider.currentDataProvider showWithURN:showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
@@ -463,12 +474,14 @@ static void *s_kvoContext = &s_kvoContext;
                                                  userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The show cannot be opened.", @"Error message when a show cannot be opened via Handoff, deep linking or a push notification") }];
                 [Banner showError:error];
             }
+            [UserConsentHelper waitCollectingConsentRelease];
         }] resume];
     }
 }
 
 - (void)openTopicURN:(NSString *)topicURN
 {
+    [UserConsentHelper waitCollectingConsentRetain];
     [[SRGDataProvider.currentDataProvider tvTopicsForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor withCompletionBlock:^(NSArray<SRGTopic *> * _Nullable topics, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGTopic.new, URN), topicURN];
         SRGTopic *topic = [topics filteredArrayUsingPredicate:predicate].firstObject;
@@ -482,11 +495,13 @@ static void *s_kvoContext = &s_kvoContext;
                                              userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error];
         }
+        [UserConsentHelper waitCollectingConsentRelease];
     }] resume];
 }
 
 - (void)openSectionUid:(NSString *)sectionUid
 {
+    [UserConsentHelper waitCollectingConsentRetain];
     [[SRGDataProvider.currentDataProvider contentSectionForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:sectionUid published:YES withCompletionBlock:^(SRGContentSection * _Nullable contentSection, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (contentSection) {
             SectionViewController *sectionViewController = [SectionViewController viewControllerForContentSection:contentSection];
@@ -498,6 +513,7 @@ static void *s_kvoContext = &s_kvoContext;
                                              userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The section cannot be opened.", @"Error message when a section cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error];
         }
+        [UserConsentHelper waitCollectingConsentRelease];
     }] resume];
 }
 

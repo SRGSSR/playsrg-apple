@@ -42,6 +42,9 @@ struct SettingsView: View {
                 HelpAndContactSection(model: model)
             }
 #endif
+            if model.canDisplayPrivacySection {
+                PrivacySection(model: model)
+            }
             InformationSection(model: model)
 #if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
@@ -374,6 +377,25 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: Privacy section
+    
+    private struct PrivacySection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                if let showDataProtection = model.showDataProtection {
+                    Button(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"), action: showDataProtection)
+                }
+                if let showPrivacySettings = model.showPrivacySettings {
+                    Button(NSLocalizedString("Privacy settings", comment: "Label of the button to display the privacy settings"), action: showPrivacySettings)
+                }
+            } header: {
+                Text(NSLocalizedString("Privacy", comment: "Privacy section header"))
+            }
+        }
+    }
+    
     // MARK: Information section
     
     private struct InformationSection: View {
@@ -399,9 +421,6 @@ struct SettingsView: View {
                 }
                 if let showTermsAndConditions = model.showTermsAndConditions {
                     Button(NSLocalizedString("Terms and conditions", comment: "Label of the button to display terms and conditions"), action: showTermsAndConditions)
-                }
-                if let showDataProtection = model.showDataProtection {
-                    Button(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"), action: showDataProtection)
                 }
                 if let showSourceCode = model.showSourceCode {
                     Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: showSourceCode)
@@ -477,6 +496,7 @@ struct SettingsView: View {
 #if os(iOS)
         @AppStorage(PlaySRGSettingMediaListDividerEnabled) var isMediaListDividerEnabled = false
 #endif
+        @AppStorage(PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled) var isAlwaysAskUserConsentAtLaunchEnabled = false
         
         var body: some View {
             PlaySection {
@@ -510,6 +530,7 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
+                Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
 #if os(iOS) && APPCENTER
                 VersionsAndReleaseNotesButton()
 #endif

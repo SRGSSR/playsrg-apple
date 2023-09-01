@@ -86,13 +86,15 @@ extension AppDelegate: UIApplicationDelegate {
         let storeFileUrl = cachesDirectoryUrl.appendingPathComponent("PlayData.sqlite")
         SRGUserData.current = SRGUserData(storeFileURL: storeFileUrl, serviceURL: configuration.userDataServiceURL, identityService: SRGIdentityService.current)
         
+        UserConsentHelper.setup()
+        
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
                                                                siteName: configuration.siteName)
 #if DEBUG || NIGHTLY || BETA
         analyticsConfiguration.environmentMode = .preProduction
 #endif
-        SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, identityService: SRGIdentityService.current)
+        SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, dataSource: self, identityService: SRGIdentityService.current)
         
 #if DEBUG || NIGHTLY || BETA
         Publishers.Merge(
@@ -131,5 +133,11 @@ extension AppDelegate: UIApplicationDelegate {
         // TODO: For perfectly safe behavior when the service URL is changed, we should have all Letterbox
         //       view controllers observe URL settings change and do the following in such cases. This is probably
         //       overkill for the time being.
+    }
+}
+
+extension AppDelegate: SRGAnalyticsTrackerDataSource {
+    var srg_globalLabels: SRGAnalyticsLabels {
+        UserConsentHelper.srgAnalyticsLabels
     }
 }

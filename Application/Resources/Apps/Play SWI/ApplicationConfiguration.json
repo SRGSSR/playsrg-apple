@@ -26,5 +26,6 @@
   "searchSettingSubtitledHidden": true,
   "tvGuideUnavailable": true,
   "subtitleAvailabilityHidden": true,
-  "audioDescriptionAvailabilityHidden": true
+  "audioDescriptionAvailabilityHidden": true,
+  "userConsentDefaultLanguage": "en"
 }

@@ -22,5 +22,9 @@ OBJC_EXPORT NSString * const PlaySRGSettingSelectedLivestreamURNForChannels;
 OBJC_EXPORT NSString * const PlaySRGSettingServiceIdentifier;
 OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
 OBJC_EXPORT NSString * const PlaySRGSettingMediaListDividerEnabled;
+OBJC_EXPORT NSString * const PlaySRGSettingUserConsentAcceptedServiceIds;
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+OBJC_EXPORT NSString * const PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled;
+#endif
 
 NS_ASSUME_NONNULL_END

@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "BU=RSI.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "BU=RSI 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "BU=RSI 2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
