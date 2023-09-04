@@ -123,7 +123,7 @@ name: Gifu, nameSpecified: Gifu, owner: kaishin, version: 3.4.1, source: https:/
 
 name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 10.13.0, source: https://github.com/google/GoogleAppMeasurement
 
-name: GoogleCastSDK-ios-no-bluetooth, nameSpecified: GoogleCastSDK-ios-no-bluetooth, owner: SRGSSR, version: 4.7.1-beta.1, source: https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth
+name: GoogleCastSDK-no-bluetooth, nameSpecified: GoogleCastSDK-no-bluetooth, owner: SRGSSR, version: 4.8.0, source: https://github.com/SRGSSR/GoogleCastSDK-no-bluetooth
 
 name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.2.5, source: https://github.com/google/GoogleDataTransport
 

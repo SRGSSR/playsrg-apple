@@ -100,12 +100,12 @@
       }
     },
     {
-      "identity" : "googlecastsdk-ios-no-bluetooth",
+      "identity" : "googlecastsdk-no-bluetooth",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth.git",
+      "location" : "https://github.com/SRGSSR/GoogleCastSDK-no-bluetooth",
       "state" : {
-        "revision" : "fb1ae18c88ce1cd1f12e7c6ae12c0b7cdc011c50",
-        "version" : "4.7.1-beta.1"
+        "revision" : "5e0f9f3deb7dea21856a57cd81a4d538cdb7d241",
+        "version" : "4.8.0"
       }
     },
     {
