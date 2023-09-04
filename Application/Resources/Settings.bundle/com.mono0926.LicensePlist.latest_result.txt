@@ -181,7 +181,7 @@ name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.3
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.4, source: https://github.com/apple/swift-collections
 
-name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.22.0, source: https://github.com/apple/swift-protobuf
+name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.23.0, source: https://github.com/apple/swift-protobuf
 
 name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.6, source: https://github.com/SwiftKickMobile/SwiftMessages
 
