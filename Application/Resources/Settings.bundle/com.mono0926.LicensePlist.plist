@@ -374,7 +374,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/SwiftUI-Introspect</string>
 			<key>Title</key>
-			<string>Introspect (0.9.1)</string>
+			<string>Introspect (0.12.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
