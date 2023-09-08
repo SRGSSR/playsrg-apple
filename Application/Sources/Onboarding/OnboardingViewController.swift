@@ -182,6 +182,10 @@ extension OnboardingViewController: SRGAnalyticsViewTracking {
         return onboarding.title
     }
     
+    var srg_pageViewType: String {
+        return AnalyticsPageType.help.rawValue
+    }
+    
     var srg_pageViewLevels: [String]? {
         return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.feature.rawValue]
     }

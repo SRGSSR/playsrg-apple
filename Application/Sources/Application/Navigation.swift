@@ -67,7 +67,7 @@ extension UIViewController {
                 }
             })
             present(letterboxViewController, animated: animated) {
-                SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
+                SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, type: AnalyticsPageType.detail.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
                 if let completion {
                     completion()
                 }

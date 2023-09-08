@@ -149,6 +149,7 @@ protocol SectionProperties {
     
     /// Analytics information
     var analyticsTitle: String? { get }
+    var analyticsType: String? { get }
     var analyticsLevels: [String]? { get }
     func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent?
     
@@ -316,6 +317,15 @@ private extension Content {
                 }
             case .none:
                 return nil
+            }
+        }
+        
+        var analyticsType: String? {
+            switch contentSection.type {
+            case .none:
+                return nil
+            default:
+                return AnalyticsPageType.detail.rawValue
             }
         }
         
@@ -702,6 +712,17 @@ private extension Content {
 #endif
             default:
                 return nil
+            }
+        }
+        
+        var analyticsType: String? {
+            switch configuredSection {
+            case .show, .radioAllShows, .tvAllShows:
+                return AnalyticsPageType.overview.rawValue
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage, .tvLive, .radioLive, .radioLiveSatellite:
+                return AnalyticsPageType.live.rawValue
+            default:
+                return AnalyticsPageType.detail.rawValue
             }
         }
         

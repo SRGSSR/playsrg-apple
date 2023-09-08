@@ -62,7 +62,7 @@ struct SettingsView: View {
         .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
 #endif
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
-        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.navigationPage.rawValue, levels: analyticsPageLevels)
     }
     
 #if os(tvOS)

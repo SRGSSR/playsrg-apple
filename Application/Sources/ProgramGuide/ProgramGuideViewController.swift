@@ -302,6 +302,10 @@ extension ProgramGuideViewController: SRGAnalyticsViewTracking {
         return AnalyticsPageTitle.programGuide.rawValue
     }
     
+    var srg_pageViewType: String {
+        return AnalyticsPageType.overview.rawValue
+    }
+    
     var srg_pageViewLevels: [String]? {
         return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
     }

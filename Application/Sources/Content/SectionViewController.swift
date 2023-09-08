@@ -609,6 +609,10 @@ extension SectionViewController: SRGAnalyticsViewTracking {
         return model.configuration.properties.analyticsTitle ?? ""
     }
     
+    var srg_pageViewType: String {
+        return model.configuration.properties.analyticsType ?? ""
+    }
+    
     var srg_pageViewLevels: [String]? {
         return model.configuration.properties.analyticsLevels
     }
