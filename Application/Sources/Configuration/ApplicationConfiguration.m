@@ -267,7 +267,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSString *analyticsSourceKey = @"39ae8f94-595c-4ca4-81f7-fb7748bd3f04";
 #else
-    NSString *analyticsSourceKey = [firebaseConfiguration numberForKey:@"sourceKey"];
+    NSString *analyticsSourceKey = [firebaseConfiguration stringForKey:@"sourceKey"];
 #endif
     if (! analyticsSourceKey) {
         return NO;
