@@ -70,5 +70,6 @@
     "1.7.2-423": "- AppStore release.",
     "1.7.3-424": "- Update italian translations. [RSI]\n- Update channel logos. [RTS]\n- Fix service logo size in login view. [RTS]",
     "1.7.4-425": "Branch beta\n- Ask user consent at launch when needed.\n- Add privacy section in settings view.",
-    "1.7.4-426": "- Implementation of a consent banner for the personal data usage."
+    "1.7.4-426": "- Implementation of a consent banner for the personal data usage.",
+    "1.7.5-427": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update.\n- Page view analytics have page type property."
 }
