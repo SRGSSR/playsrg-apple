@@ -65,7 +65,7 @@ final class SectionViewController: UIViewController {
         model = SectionViewModel(section: section, filter: filter)
         self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
-        contentInsets = Self.contentInsets(for: model.state, displayDivider: model.configuration.viewModelProperties.displayDivider)
+        contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
         title = model.displaysTitle ? model.title : nil
     }
@@ -177,18 +177,6 @@ final class SectionViewController: UIViewController {
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
-        
-#if os(iOS) && (DEBUG || NIGHTLY || BETA)
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingMediaListDividerEnabled)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                guard let self else { return }
-                
-                contentInsets = Self.contentInsets(for: model.state, displayDivider: model.configuration.viewModelProperties.displayDivider)
-                collectionView.reloadData()
-            }
-            .store(in: &cancellables)
-#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -299,7 +287,7 @@ final class SectionViewController: UIViewController {
         updateNavigationBar(for: state)
 #endif
         
-        contentInsets = Self.contentInsets(for: state, displayDivider: model.configuration.viewModelProperties.displayDivider)
+        contentInsets = Self.contentInsets(for: state)
         play_setNeedsContentInsetsUpdate()
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -335,9 +323,9 @@ final class SectionViewController: UIViewController {
         initialSectionId = nil
     }
     
-    private static func contentInsets(for state: SectionViewModel.State, displayDivider: Bool) -> UIEdgeInsets {
+    private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
         let top = (state.headerSize == .zero) ? Self.layoutVerticalMargin : 0
-        let bottom = displayDivider ? 0 : Self.layoutVerticalMargin
+        let bottom = Self.layoutVerticalMargin
         return UIEdgeInsets(top: top, left: 0, bottom: bottom, right: 0)
     }
     
@@ -687,7 +675,7 @@ private extension SectionViewController {
 #if os(iOS)
                     let horizontalMargin = horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
-                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass, displayDivider: configuration.viewModelProperties.displayDivider)
+                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
                     }
 #else
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
@@ -697,7 +685,7 @@ private extension SectionViewController {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
-                            return MediaCellSize.fullWidth(displayDivider: configuration.viewModelProperties.displayDivider)
+                            return MediaCellSize.fullWidth()
                         }
                     }
                     else {
@@ -768,12 +756,11 @@ private extension SectionViewController {
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
-                        let dividerStyle = configuration.viewModelProperties.displayDivider ? isLastItem ? .hidden : .display : .none as MediaCell.DividerStyle
                         if configuration.viewModelProperties.layout == .mediaList {
-                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, dividerStyle: dividerStyle)
+                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
                         }
                         else {
-                            MediaCell(media: media, style: .date, dividerStyle: dividerStyle)
+                            MediaCell(media: media, style: .date)
                         }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)
