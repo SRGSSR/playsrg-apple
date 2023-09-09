@@ -64,9 +64,6 @@
 /* Show A-Z short button title */
 "A to Z" = "Dalla A alla Z";
 
-/* Beta tests toggle label to add line dividers in episodes list in show pages setting label */
-"Add line dividers in episodes list in show pages" = "Aggiungere delle linee divisorie tra gli episodi all'interno di una scheda di programma";
-
 /* Button to add an event to Calendar application */
 "Add to Calendar" = "Aggiungere al calendario";
 

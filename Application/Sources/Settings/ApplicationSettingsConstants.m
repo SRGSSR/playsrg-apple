@@ -19,7 +19,6 @@ NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLo
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLivestreamURNForChannels";
 NSString * const PlaySRGSettingServiceIdentifier = @"PlaySRGSettingServiceIdentifier";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
-NSString * const PlaySRGSettingMediaListDividerEnabled = @"PlaySRGSettingMediaListDividerEnabled";
 NSString * const PlaySRGSettingUserConsentAcceptedServiceIds = @"PlaySRGSettingUserConsentAcceptedServiceIds";
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 NSString * const PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled = @"PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled";

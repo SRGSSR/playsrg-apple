@@ -25,12 +25,6 @@ extension UserDefaults {
         return string(forKey: PlaySRG.PlaySRGSettingUserLocation)
     }
     
-#if os(iOS) && (DEBUG || NIGHTLY || BETA)
-    @objc dynamic var PlaySRGSettingMediaListDividerEnabled: Bool {
-        return bool(forKey: PlaySRG.PlaySRGSettingMediaListDividerEnabled)
-    }
-#endif
-    
 #if DEBUG || NIGHTLY || BETA
     @objc dynamic var PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled: Bool {
         return bool(forKey: PlaySRG.PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled)
