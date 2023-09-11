@@ -320,8 +320,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "52f33f390ee27e6c21b7a51282e787636dcdf663",
-        "version" : "9.1.2"
+        "branch" : "feature/xcode15-ios17-tvos17",
+        "revision" : "bae2ccce78121b9100450dcbf27de2e4bb9eedb2"
       }
     },
     {
