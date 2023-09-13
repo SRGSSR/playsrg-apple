@@ -50,11 +50,6 @@ struct ShowCell: View {
             VStack(spacing: 0) {
                 ImageView(source: model.imageUrl(with: imageVariant))
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
-                if imageVariant != .poster {
-                    DescriptionView(model: model, style: style)
-                        .padding(.horizontal, ShowCellSize.horizontalPadding)
-                        .padding(.vertical, ShowCellSize.verticalPadding)
-                }
             }
             .background(Color.srgGray23)
             .redactable()

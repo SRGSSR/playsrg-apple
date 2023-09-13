@@ -89,10 +89,12 @@ struct MediaCell: View {
                         .cornerRadius(LayoutStandardViewCornerRadius)
                         .redactable()
                         .layoutPriority(1)
-                    DescriptionView(media: media, style: style, embeddedDirection: direction)
-                        .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
-                        .padding(.leading, horizontalPadding)
-                        .padding(.top, verticalPadding)
+                    if direction == .horizontal {
+                        DescriptionView(media: media, style: style, embeddedDirection: direction)
+                            .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
+                            .padding(.leading, horizontalPadding)
+                            .padding(.top, verticalPadding)
+                    }
                     if direction == .horizontal, style == .dateAndSummary, horizontalSizeClass == .regular, let media {
                         MediaMoreButton(media: media)
                     }

@@ -45,9 +45,7 @@ static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layo
 
 NSCollectionLayoutSize *LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
 {
-    // Use body as scaling curve; should offer pretty standard behavior covering all needs
-    UIFontMetrics *fontMetrics = [SRGFont metricsForFontWithStyle:SRGFontStyleBody];
-    CGFloat height = width / aspectRatio + [fontMetrics scaledValueForValue:heightOffset];
+    CGFloat height = width / aspectRatio;
     return [NSCollectionLayoutSize sizeWithWidthDimension:[NSCollectionLayoutDimension absoluteDimension:width]
                                           heightDimension:[NSCollectionLayoutDimension absoluteDimension:height]];
 }
