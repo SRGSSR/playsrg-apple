@@ -431,9 +431,9 @@ extension SearchViewController: UICollectionViewDelegate {
         case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
         case let .show(show):
-            guard let navigationController else { return }
+            guard let topViewController = UIApplication.shared.mainTopViewController else { return }
             let showViewController = SectionViewController.showViewController(for: show)
-            navigationController.pushViewController(showViewController, animated: true)
+            topViewController.present(showViewController, animated: true)
             
             SRGDataProvider.current!.increaseSearchResultsViewCount(for: show)
                 .sink { _ in } receiveValue: { _ in }

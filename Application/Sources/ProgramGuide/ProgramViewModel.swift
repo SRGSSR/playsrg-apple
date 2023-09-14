@@ -350,8 +350,9 @@ final class ProgramViewModel: ObservableObject {
                     return
                 }
                 let showViewController = SectionViewController.showViewController(for: show)
-                tabBarController.pushViewController(showViewController, animated: false)
-                window.play_dismissAllViewControllers(animated: true, completion: nil)
+                window.play_dismissAllViewControllers(animated: true) {
+                    tabBarController.present(showViewController, animated: true)
+                }
             }
         )
     }

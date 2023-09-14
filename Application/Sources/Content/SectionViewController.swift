@@ -629,9 +629,9 @@ extension SectionViewController: SectionShowHeaderViewAction {
 #if os(tvOS)
         navigateToShow(event.show)
 #else
-        if let navigationController {
+        if let topViewController = UIApplication.shared.mainTopViewController {
             let showViewController = SectionViewController.showViewController(for: event.show)
-            navigationController.pushViewController(showViewController, animated: true)
+            topViewController.present(showViewController, animated: true)
         }
 #endif
     }

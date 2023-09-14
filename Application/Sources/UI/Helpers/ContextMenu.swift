@@ -216,7 +216,7 @@ extension ContextMenu {
     private static func moreEpisodesAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         guard !ApplicationConfiguration.shared.areShowsUnavailable,
               let show = media.show,
-              let navigationController = viewController.navigationController else { return nil }
+              let topViewController = UIApplication.shared.mainTopViewController else { return nil }
         if let sectionViewController = viewController as? SectionViewController,
            let displayedShow = sectionViewController.model.configuration.properties.displayedShow {
             guard !show.isEqual(displayedShow) else { return nil }
@@ -224,7 +224,7 @@ extension ContextMenu {
         return UIAction(title: NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
                         image: UIImage(named: "episodes")) { _ in
             let showViewController = SectionViewController.showViewController(for: show)
-            navigationController.pushViewController(showViewController, animated: true)
+            topViewController.present(showViewController, animated: true)
         }
     }
 }

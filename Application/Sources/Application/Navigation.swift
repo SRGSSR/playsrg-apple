@@ -231,10 +231,10 @@ extension UIViewController {
                         Banner.showError(error)
                         UserConsentHelper.waitCollectingConsentRelease()
                     }
-                } receiveValue: { [weak self] show in
-                    guard let navigationController = self?.navigationController else { return }
+                } receiveValue: { show in
+                    guard let topViewController = UIApplication.shared.mainTopViewController else { return }
                     let showViewController = SectionViewController.showViewController(for: show)
-                    navigationController.pushViewController(showViewController, animated: animated)
+                        topViewController.present(showViewController, animated: animated)
                     
                     AnalyticsEvent.notification(action: .displayShow,
                                                 from: .application,
