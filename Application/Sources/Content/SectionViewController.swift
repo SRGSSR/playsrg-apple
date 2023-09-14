@@ -92,7 +92,13 @@ final class SectionViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
+
+        if #available(iOS 17.0, *) {
+            collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: UICollectionView, _) in
+                collectionView.collectionViewLayout.invalidateLayout()
+            }
+        }
+
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyContentView
         self.emptyContentView = emptyContentView
@@ -105,7 +111,6 @@ final class SectionViewController: UIViewController {
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
 #endif
-        
         self.view = view
     }
     
