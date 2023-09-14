@@ -321,7 +321,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "feature/xcode15-ios17-tvos17",
-        "revision" : "bae2ccce78121b9100450dcbf27de2e4bb9eedb2"
+        "revision" : "f4fbdeac4e7c723a89c7a6b5c248ecbe450c167c"
       }
     },
     {
