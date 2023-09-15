@@ -92,7 +92,7 @@ final class SectionViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-
+        
 #if os(iOS)
         if #available(iOS 17.0, *) {
             collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: UICollectionView, _) in
@@ -100,7 +100,7 @@ final class SectionViewController: UIViewController {
             }
         }
 #endif
-
+        
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyContentView
         self.emptyContentView = emptyContentView

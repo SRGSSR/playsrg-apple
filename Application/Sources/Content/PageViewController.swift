@@ -107,7 +107,7 @@ final class PageViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-
+        
 #if os(iOS)
         if #available(iOS 17.0, *) {
             collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: CollectionView, _) in
@@ -115,7 +115,7 @@ final class PageViewController: UIViewController {
             }
         }
 #endif
-
+        
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyContentView
         self.emptyContentView = emptyContentView

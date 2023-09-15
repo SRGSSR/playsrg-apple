@@ -15,7 +15,7 @@ import UIKit
 
 final class SearchViewController: UIViewController {
     private var model = SearchViewModel()
-        
+    
     private var cancellables = Set<AnyCancellable>()
     
     private var dataSource: UICollectionViewDiffableDataSource<SearchViewModel.Section, SearchViewModel.Item>!
@@ -74,7 +74,7 @@ final class SearchViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-
+        
 #if os(iOS)
         if #available(iOS 17.0, *) {
             collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: UICollectionView, _) in
@@ -82,7 +82,7 @@ final class SearchViewController: UIViewController {
             }
         }
 #endif
-
+        
         let emptyView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
