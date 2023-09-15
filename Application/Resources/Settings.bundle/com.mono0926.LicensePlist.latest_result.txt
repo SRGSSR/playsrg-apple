@@ -169,7 +169,7 @@ name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, versio
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srgidentity-apple
 
-name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgletterbox-apple
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 9.1.2, source: https://github.com/SRGSSR/srgletterbox-apple
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srglogger-apple
 
