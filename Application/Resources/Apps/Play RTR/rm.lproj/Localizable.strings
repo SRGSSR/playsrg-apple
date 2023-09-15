@@ -64,9 +64,6 @@
 /* Show A-Z short button title */
 "A to Z" = "Dad A fin Z";
 
-/* Beta tests toggle label to add line dividers in episodes list in show pages setting label */
-"Add line dividers in episodes list in show pages" = "Agiunger segns per sparter lingias en episodas";
-
 /* Button to add an event to Calendar application */
 "Add to Calendar" = "Agiuntar al chalender";
 
@@ -84,7 +81,7 @@
 "All" = "Tut";
 
 /* Always ask user consent at launch setting label */
-"Always ask user consent at launch" = "Al cumenzament adina dumandar suenter il consentiment da la utilisadra ni dal utilisader";
+"Always ask user consent at launch" = "Al cumenzament adina dumandar suenter il consentiment da l’utilisadra u da l’utilisader";
 
 /* Subtitle availability setting section footer */
 "Always visible when VoiceOver is active." = "Adina visibel cun VoiceOver activà.";

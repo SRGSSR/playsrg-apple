@@ -202,5 +202,7 @@
     "3.7.3-423": "- Fix some crashes in the player.\n- AppStore release.",
     "3.7.4-424": "- Update italian translations. [RSI]\n- Update channel logos. [RTS]",
     "3.7.5-425": "Branch beta\n- Ask user consent at launch when needed.\n- Add privacy section in settings view.",
-    "3.7.5-426": "- Implementation of a consent banner for the personal data usage."
+    "3.7.5-426": "- Implementation of a consent banner for the personal data usage.",
+    "3.7.6-427": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update.\n- Page view analytics have page type property.",
+    "3.7.6-428": "- Update Chromecast component.\n- Maintenance release."
 }

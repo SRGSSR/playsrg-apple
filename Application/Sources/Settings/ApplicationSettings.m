@@ -148,8 +148,3 @@ BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
 }
-
-BOOL ApplicationSettingMediaListDividerEnabled(void)
-{
-    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingMediaListDividerEnabled];
-}
