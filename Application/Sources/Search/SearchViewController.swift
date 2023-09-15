@@ -75,11 +75,13 @@ final class SearchViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
 
+#if os(iOS)
         if #available(iOS 17.0, *) {
             collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: UICollectionView, _) in
                 collectionView.collectionViewLayout.invalidateLayout()
             }
         }
+#endif
 
         let emptyView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyView
