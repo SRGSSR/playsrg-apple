@@ -19,67 +19,50 @@ import UIKit
 struct SettingsView: View {
     @StateObject private var model = SettingsViewModel()
     
-    var body: some View {
-#if os(tvOS)
-        if #available(tvOS 17, *) {
-            SectionList(model: model)
-                .scrollClipDisabled()
-        }
-        else {
-            SectionList(model: model)
-        }
-#else
-        SectionList(model: model)
-#endif
-    }
+    @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
     
-    private struct SectionList: View {
-        @ObservedObject var model: SettingsViewModel
-        
-        @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
-        
-        var body: some View {
-            List {
+    var body: some View {
+        List {
 #if os(tvOS)
-                ProfileSection(model: model)
+            ProfileSection(model: model)
 #endif
 #if os(iOS)
-                QualitySection()
+            QualitySection()
 #endif
-                PlaybackSection()
-                if !(ApplicationConfiguration.shared.isSubtitleAvailabilityHidden && ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden) {
-                    DisplaySection()
-                }
+            PlaybackSection()
+            if !(ApplicationConfiguration.shared.isSubtitleAvailabilityHidden && ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden) {
+                DisplaySection()
+            }
 #if os(iOS)
-                PermissionsSection(model: model)
+            PermissionsSection(model: model)
 #endif
-                ContentSection(model: model)
+            ContentSection(model: model)
 #if os(tvOS)
-                if model.canDisplayHelpAndContactSection {
-                    HelpAndContactSection(model: model)
-                }
+            if model.canDisplayHelpAndContactSection {
+                HelpAndContactSection(model: model)
+            }
 #endif
-                if model.canDisplayPrivacySection {
-                    PrivacySection(model: model)
-                }
-                InformationSection(model: model)
+            if model.canDisplayPrivacySection {
+                PrivacySection(model: model)
+            }
+            InformationSection(model: model)
 #if DEBUG || NIGHTLY || BETA
-                AdvancedFeaturesSection(model: model)
-                ResetSection(model: model)
+            AdvancedFeaturesSection(model: model)
+            ResetSection(model: model)
 #endif
 #if os(iOS) && (DEBUG || APPCENTER)
-                DeveloperSection()
+            DeveloperSection()
 #endif
-            }
-#if os(tvOS)
-            .listStyle(GroupedListStyle())
-            .frame(maxWidth: LayoutMaxListWidth)
-#else
-            .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
-#endif
-            .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
-            .tracked(withTitle: SettingsView.analyticsPageTitle, levels: SettingsView.analyticsPageLevels)
         }
+#if os(tvOS)
+        .listStyle(GroupedListStyle())
+        .frame(maxWidth: LayoutMaxListWidth)
+#else
+        .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
+#endif
+        .play_scrollClipDisabled()
+        .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
 #if os(tvOS)
@@ -856,11 +839,11 @@ struct SettingsView: View {
 // MARK: Analytics
 
 private extension SettingsView {
-    static var analyticsPageTitle: String {
+    private var analyticsPageTitle: String {
         return AnalyticsPageTitle.settings.rawValue
     }
     
-    static var analyticsPageLevels: [String]? {
+    private var analyticsPageLevels: [String]? {
         return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
     }
 }
