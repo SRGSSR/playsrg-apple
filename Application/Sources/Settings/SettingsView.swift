@@ -56,11 +56,11 @@ struct SettingsView: View {
         }
 #if os(tvOS)
         .listStyle(GroupedListStyle())
+        .play_scrollClipDisabled()
         .frame(maxWidth: LayoutMaxListWidth)
 #else
         .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
 #endif
-        .play_scrollClipDisabled()
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
@@ -624,6 +624,7 @@ struct SettingsView: View {
                 .srgFont(.body)
 #if os(tvOS)
                 .listStyle(GroupedListStyle())
+                .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
                 .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
@@ -672,6 +673,7 @@ struct SettingsView: View {
                 .srgFont(.body)
 #if os(tvOS)
                 .listStyle(GroupedListStyle())
+                .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
                 .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
@@ -713,6 +715,7 @@ struct SettingsView: View {
                 .srgFont(.body)
 #if os(tvOS)
                 .listStyle(GroupedListStyle())
+                .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
                 .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
