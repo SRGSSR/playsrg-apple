@@ -1,0 +1,24 @@
+---
+changelog:
+  exclude:
+    authors:
+      - rts-devops
+    labels:
+      - internal
+  categories:
+    - title: Improvements
+      labels:
+        - improvement
+    - title: Fixes
+      labels:
+        - bug
+    - title: Maintenances
+      labels:
+        - maintenance
+    - title: CI and dev tools
+      labels:
+        - CI
+        - 'dev tool'
+    - title: Other changes
+      labels:
+        - '*'
