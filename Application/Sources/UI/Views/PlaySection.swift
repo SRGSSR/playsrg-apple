@@ -49,3 +49,10 @@ func PlaySection<Content: View>(@ViewBuilder content: () -> Content) -> Section<
         EmptyView()
     }
 }
+
+extension Color {
+    static var play_sectionSecondary: Color {
+        // tvOS 17.0 introduced a new issue when presenting modal, the default focused appearance is broken after modal presentation dismissal. See https://github.com/SRGSSR/playsrg-apple/issues/336
+        return constant(iOS: .secondary, tvOS: .white)
+    }
+}

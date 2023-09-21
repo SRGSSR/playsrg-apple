@@ -286,7 +286,7 @@ struct SettingsView: View {
             var body: some View {
                 Button(action: action) {
                     Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
-                        .foregroundColor(model.hasFavorites ? .red : .secondary)
+                        .foregroundColor(model.hasFavorites ? .red : Color.play_sectionSecondary)
                 }
                 .disabled(!model.hasFavorites)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
@@ -328,7 +328,7 @@ struct SettingsView: View {
             var body: some View {
                 Button(action: action) {
                     Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
-                        .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
+                        .foregroundColor(model.hasHistoryEntries ? .red : Color.play_sectionSecondary)
                 }
                 .disabled(!model.hasHistoryEntries)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
@@ -370,7 +370,7 @@ struct SettingsView: View {
             var body: some View {
                 Button(action: action) {
                     Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
-                        .foregroundColor(model.hasWatchLaterItems ? .red : .secondary)
+                        .foregroundColor(model.hasWatchLaterItems ? .red : Color.play_sectionSecondary)
                 }
                 .disabled(!model.hasWatchLaterItems)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
@@ -445,7 +445,7 @@ struct SettingsView: View {
                         Text(NSLocalizedString("Version", comment: "Version label in settings"))
                         Spacer()
                         Text(model.version)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color.play_sectionSecondary)
                             .multilineTextAlignment(.trailing)
                             .lineLimit(2)
                     }
@@ -548,7 +548,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
                     Spacer()
                     Text(selectedService.name)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Color.play_sectionSecondary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
                 }
@@ -563,7 +563,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
                     Spacer()
                     Text(selectedUserLocation.description)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Color.play_sectionSecondary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
                 }
@@ -607,7 +607,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
                     Spacer()
                     Text(selectedPosterImages.description)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(Color.play_sectionSecondary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
                 }
