@@ -65,8 +65,8 @@ extension CarPlayTemplateListController: CarPlayTemplateController {
     }
     
     func didAppear(animated: Bool) {
-        if let pageViewTitle = list.pageViewTitle {
-            SRGAnalyticsTracker.shared.uncheckedTrackPageView(withTitle: pageViewTitle, levels: list.pageViewLevels)
+        if let pageViewTitle = list.pageViewTitle, let pageViewType = list.pageViewType {
+            SRGAnalyticsTracker.shared.uncheckedTrackPageView(withTitle: pageViewTitle, type: pageViewType, levels: list.pageViewLevels)
         }
     }
     

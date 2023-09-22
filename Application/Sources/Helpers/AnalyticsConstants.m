@@ -57,3 +57,10 @@ AnalyticsPageTitle const AnalyticsPageTitleTopics = @"topics";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
+
+AnalyticsPageType const AnalyticsPageTypeDetail = @"detail";
+AnalyticsPageType const AnalyticsPageTypeHelp = @"help";
+AnalyticsPageType const AnalyticsPageTypeLandingPage = @"landingpage";
+AnalyticsPageType const AnalyticsPageTypeLive = @"live";
+AnalyticsPageType const AnalyticsPageTypeNavigationPage = @"navigationpage";
+AnalyticsPageType const AnalyticsPageTypeOverview = @"overview";

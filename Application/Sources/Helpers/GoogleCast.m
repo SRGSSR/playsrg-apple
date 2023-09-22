@@ -142,7 +142,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
     [castSession.remoteMediaClient loadMedia:[mediaInfoBuilder build] withOptions:options];
     
     SRGMedia *media = [mediaComposition mediaForSubdivision:mainChapter];
-    [[AnalyticsHiddenEventObjC googleGastWithUrn:media.URN] send];
+    [[AnalyticsEventObjC googleGastWithUrn:media.URN] send];
     [NSNotificationCenter.defaultCenter postNotificationName:GoogleCastPlaybackDidStartNotification
                                                       object:nil
                                                     userInfo:@{ GoogleCastMediaKey : media }];
@@ -229,13 +229,13 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 {
     UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
-        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer type:AnalyticsPageTypeDetail levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
     else if ([topViewController isKindOfClass:UINavigationController.class]) {
         UINavigationController *navigationTopViewController = (UINavigationController *)topViewController;
         UIViewController *rootViewController = navigationTopViewController.viewControllers.firstObject;
         if ([rootViewController isKindOfClass:NSClassFromString(@"GCKUIDeviceConnectionViewController")]) {
-            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+            [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices type:AnalyticsPageTypeOverview levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
         }
     }
 }
@@ -289,7 +289,7 @@ static void commonInit(GCKUICastButton *self)
 
 - (void)openGoogleCastDeviceSelection:(id)sender
 {
-    [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+    [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices type:AnalyticsPageTypeOverview levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
 }
 
 @end

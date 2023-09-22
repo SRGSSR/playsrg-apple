@@ -163,6 +163,15 @@
       }
     },
     {
+      "identity" : "iosv5",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CommandersAct/iOSV5.git",
+      "state" : {
+        "revision" : "2e56e97db76d55657d0dc7d13e2fcd81ce4eaa6c",
+        "version" : "5.3.3"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -266,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "c92014ca8838ad3cf403735ce25757afb04cd31f",
-        "version" : "8.2.0"
+        "revision" : "5b42f334290ee3268f61b62d02e509ec74f4a721",
+        "version" : "9.0.0"
       }
     },
     {
@@ -320,8 +329,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "52f33f390ee27e6c21b7a51282e787636dcdf663",
-        "version" : "9.1.2"
+        "revision" : "8e08be657dabec5445131156f0323a5df3534a98",
+        "version" : "9.2.0"
       }
     },
     {
@@ -394,24 +403,6 @@
       "state" : {
         "revision" : "121c146fe591b1320238d054ae35c81ffa45f45a",
         "version" : "0.12.0"
-      }
-    },
-    {
-      "identity" : "tccore-xcframework-apple",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SRGSSR/TCCore-xcframework-apple.git",
-      "state" : {
-        "revision" : "eb686883e63af28174472a09eda97acf07179c88",
-        "version" : "4.5.4-srg5"
-      }
-    },
-    {
-      "identity" : "tcsdk-xcframework-apple",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SRGSSR/TCSDK-xcframework-apple.git",
-      "state" : {
-        "revision" : "c4becb0b250258b78cb46225af5e269da834db5a",
-        "version" : "4.4.1-srg5"
       }
     },
     {

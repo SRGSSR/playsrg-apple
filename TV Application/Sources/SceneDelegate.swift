@@ -129,7 +129,7 @@ final class SceneDelegate: UIResponder {
                     }
                 } receiveValue: { media in
                     navigateToMedia(media)
-                    action.analyticsHiddenEvent.send()
+                    action.analyticsEvent.send()
                     UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)
@@ -143,7 +143,7 @@ final class SceneDelegate: UIResponder {
                     }
                 } receiveValue: { show in
                     navigateToShow(show)
-                    action.analyticsHiddenEvent.send()
+                    action.analyticsEvent.send()
                     UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)

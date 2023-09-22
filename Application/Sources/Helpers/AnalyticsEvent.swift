@@ -8,18 +8,18 @@ import SRGAnalytics
 import SRGDataProviderModel
 
 /**
- *  Play analytics hidden event. Defined for native Play applications only.
+ *  Play analytics event. Defined for native Play applications only.
  */
-struct AnalyticsHiddenEvent {
+struct AnalyticsEvent {
     private let name: String
-    private let labels: SRGAnalyticsHiddenEventLabels
+    private let labels: SRGAnalyticsEventLabels
     
     /**
      *  Each struct created have expected values.
      *  Use this method to send the event when needed.
      */
     func send() {
-        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+        SRGAnalyticsTracker.shared.trackEvent(withName: name, labels: labels)
     }
     
     static func calendarEventAdd(channel: SRGChannel) -> Self {
@@ -155,7 +155,7 @@ struct AnalyticsHiddenEvent {
     private init(name: String, source: String? = nil, type: String? = nil, value: String? = nil, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
         self.name = name
         
-        let labels = SRGAnalyticsHiddenEventLabels()
+        let labels = SRGAnalyticsEventLabels()
         labels.source = source
         labels.type = type
         labels.value = value
@@ -167,17 +167,17 @@ struct AnalyticsHiddenEvent {
         self.labels = labels
     }
     
-    private init(name: String, labels: SRGAnalyticsHiddenEventLabels) {
+    private init(name: String, labels: SRGAnalyticsEventLabels) {
         self.name = name
         self.labels = labels
     }
 }
 
 /**
- *  Analytics hidden event compatibility for Objective-C, as a class.
+ *  Analytics event compatibility for Objective-C, as a class.
  */
-@objc class AnalyticsHiddenEventObjC: NSObject {
-    private let event: AnalyticsHiddenEvent
+@objc class AnalyticsEventObjC: NSObject {
+    private let event: AnalyticsEvent
     
     /**
      *  Each object created have expected values.
@@ -187,55 +187,55 @@ struct AnalyticsHiddenEvent {
         self.event.send()
     }
     
-    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn))
+    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.continuousPlayback(action: action, mediaUrn: mediaUrn))
     }
     
-    @objc class func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.download(action: action, source: source, urn: urn))
+    @objc class func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.download(action: action, source: source, urn: urn))
     }
     
-    @objc class func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.favorite(action: action, source: source, urn: urn))
+    @objc class func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.favorite(action: action, source: source, urn: urn))
     }
     
-    @objc class func googleGast(urn: String) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.googleGast(urn: urn))
+    @objc class func googleGast(urn: String) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.googleGast(urn: urn))
     }
     
-    @objc class func identity(action: AnalyticsIdentityAction) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.identity(action: action))
+    @objc class func identity(action: AnalyticsIdentityAction) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.identity(action: action))
     }
     
-    @objc class func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
+    @objc class func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
     
-    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.openUrl(action: action, source: source, urn: urn))
+    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.openUrl(action: action, source: source, urn: urn))
     }
     
-    @objc class func pictureInPicture(urn: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.pictureInPicture(urn: urn))
+    @objc class func pictureInPicture(urn: String?) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.pictureInPicture(urn: urn))
     }
     
-    @objc class func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.sharing(action: action, uid: uid, mediaContentType: mediaContentType, source: source, type: type))
+    @objc class func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.sharing(action: action, uid: uid, mediaContentType: mediaContentType, source: source, type: type))
     }
     
-    @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.shortcutItem(action: action))
+    @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.shortcutItem(action: action))
     }
     
-    @objc class func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.userActivity(action: action, urn: urn))
+    @objc class func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.userActivity(action: action, urn: urn))
     }
     
-    @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.watchLater(action: action, source: source, urn: urn))
+    @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
+        return Self(event: AnalyticsEvent.watchLater(action: action, source: source, urn: urn))
     }
     
-    required init(event: AnalyticsHiddenEvent) {
+    required init(event: AnalyticsEvent) {
         self.event = event
     }
 }
@@ -406,8 +406,8 @@ struct AnalyticsHiddenEvent {
     case logout
     case unexpectedLogout
     
-    fileprivate var labels: SRGAnalyticsHiddenEventLabels {
-        let labels = SRGAnalyticsHiddenEventLabels()
+    fileprivate var labels: SRGAnalyticsEventLabels {
+        let labels = SRGAnalyticsEventLabels()
         switch self {
         case .displayLogin:
             labels.type = "display_login"

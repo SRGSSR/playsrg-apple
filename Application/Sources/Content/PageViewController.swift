@@ -273,6 +273,7 @@ final class PageViewController: UIViewController {
             self.analyticsPageViewTracked = true
             
             SRGAnalyticsTracker.shared.trackPageView(withTitle: model.analyticsPageViewTitle,
+                                                     type: model.analyticsPageViewType,
                                                      levels: model.analyticsPageViewLevels,
                                                      labels: model.analyticsPageViewLabels(pageUid: pageUid),
                                                      fromPushNotification: false)

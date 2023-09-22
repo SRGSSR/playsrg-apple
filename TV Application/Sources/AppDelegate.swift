@@ -62,13 +62,13 @@ extension AppDelegate: UIApplicationDelegate {
             
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
                 .sink { _ in
-                    AnalyticsHiddenEvent.identity(action: .cancelLogin).send()
+                    AnalyticsEvent.identity(action: .cancelLogin).send()
                 }
                 .store(in: &cancellables)
             
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
                 .sink { _ in
-                    AnalyticsHiddenEvent.identity(action: .login).send()
+                    AnalyticsEvent.identity(action: .login).send()
                 }
                 .store(in: &cancellables)
             
@@ -77,7 +77,7 @@ extension AppDelegate: UIApplicationDelegate {
                     let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
 
                     let action = unexpectedLogout ? .unexpectedLogout : .logout as AnalyticsIdentityAction
-                    AnalyticsHiddenEvent.identity(action: action).send()
+                    AnalyticsEvent.identity(action: action).send()
                 }
                 .store(in: &cancellables)
         }
@@ -88,12 +88,11 @@ extension AppDelegate: UIApplicationDelegate {
         
         UserConsentHelper.setup()
         
-        let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
-                                                               container: configuration.analyticsContainer,
-                                                               siteName: configuration.siteName)
-#if DEBUG || NIGHTLY || BETA
-        analyticsConfiguration.environmentMode = .preProduction
-#endif
+        let analyticsConfiguration = SRGAnalyticsConfiguration(
+            businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
+            sourceKey: configuration.analyticsSourceKey,
+            siteName: configuration.siteName
+        )
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, dataSource: self, identityService: SRGIdentityService.current)
         
 #if DEBUG || NIGHTLY || BETA
@@ -138,6 +137,6 @@ extension AppDelegate: UIApplicationDelegate {
 
 extension AppDelegate: SRGAnalyticsTrackerDataSource {
     var srg_globalLabels: SRGAnalyticsLabels {
-        UserConsentHelper.srgAnalyticsLabels
+        SRGAnalyticsLabels.play_globalLabels
     }
 }
