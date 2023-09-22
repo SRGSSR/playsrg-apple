@@ -66,7 +66,7 @@
 	- Play RSI tvOS: `fastlane ios tvOSrsiScreenshots`
 	- Play RTR tvOS: `fastlane ios tvOSrtrScreenshots`
 	- Play RTS tvOS: `fastlane ios tvOSrtsScreenshots`
-	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots`
+	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots` (No upload to ASC, due to some marketing images)
 	- Play SWI tvOS: `fastlane ios tvOSswiScreenshots`
 - Application status (Ready for sale, In review, etc…)
 	- All published apps: `fastlane ios appStoreAppStatus`

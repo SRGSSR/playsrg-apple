@@ -213,7 +213,7 @@ RTS: Makes iOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios iOSsrfScreenshots
 ```
 
-SRF: Makes iOS screenshots. !!! No replacement made on App Store Connect !!!
+SRF: Makes iOS screenshots. No replacement made on App Store Connect.
 
 ### ios iOSswiScreenshots
 
@@ -413,7 +413,7 @@ RTS: Makes tvOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios tvOSsrfScreenshots
 ```
 
-SRF: Makes tvOS screenshots and replaces current ones on App Store Connect.
+SRF: Makes tvOS screenshots. No replacement made on App Store Connect.
 
 ### ios tvOSswiScreenshots
 
