@@ -103,6 +103,9 @@ enum UCService: Hashable, CaseIterable {
     // MARK: Setup
     
     @objc static func setup() {
+        // Skip user consent banner if making screenshots
+        guard !ProcessInfo.processInfo.arguments.contains("FL_SCREENSHOTS") else { return }
+        
         guard !hasRunSetup else { return }
         
         configureAndApplyConsents()

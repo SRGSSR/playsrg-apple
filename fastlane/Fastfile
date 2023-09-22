@@ -1655,6 +1655,7 @@ def upload_screenshots(platform)
     skip_binary_upload: true,
     skip_metadata: true,
     overwrite_screenshots: true,
+    ignore_language_directory_validation: true,
     precheck_include_in_app_purchases: false,
     force: true # Don't stop to wait manual preview
   )
@@ -1982,7 +1983,7 @@ def snapshot_ios_devices
   [
     'iPhone 14 Plus', # 6.5 inch, required
     'iPhone 8 Plus', # 5.5 inch, required
-    'iPad Pro (12.9-inch) (5th generation)', # 12.9 inch, required
+    'iPad Pro (12.9-inch) (6th generation)', # 12.9 inch, required
     'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
   ]
 end
