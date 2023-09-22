@@ -514,6 +514,15 @@ extension View {
     func eraseToAnyView() -> AnyView {
         AnyView(self)
     }
+    
+    @ViewBuilder
+    func play_scrollClipDisabled() -> some View {
+        if #available(iOS 17, tvOS 17, *) {
+            self.scrollClipDisabled()
+        } else {
+            self
+        }
+    }
 }
 
 extension UIApplication {
