@@ -559,22 +559,22 @@ extension UIApplication {
 }
 
 extension Locale {
-    static var currentLanguageIdentifier: String {
+    static let currentLanguageIdentifier: String = {
         if #available(iOS 16, tvOS 16, *) {
             return Locale.current.identifier(.bcp47)
         } else {
             return Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
         }
-    }
+    }()
     
-    static var preferredLanguageIdentifier: String {
+    static let preferredLanguageIdentifier: String = {
         let preferredLanguage = Locale.preferredLanguages.first ?? "en"
         if #available(iOS 16, tvOS 16, *) {
             return Locale(identifier: preferredLanguage).identifier(.bcp47)
         } else {
             return Locale(identifier: preferredLanguage).identifier.replacingOccurrences(of: "_", with: "-")
         }
-    }
+    }()
 }
 
 extension SRGAnalyticsLabels {
