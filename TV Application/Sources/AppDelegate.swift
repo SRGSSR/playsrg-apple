@@ -137,6 +137,6 @@ extension AppDelegate: UIApplicationDelegate {
 
 extension AppDelegate: SRGAnalyticsTrackerDataSource {
     var srg_globalLabels: SRGAnalyticsLabels {
-        UserConsentHelper.srgAnalyticsLabels
+        SRGAnalyticsLabels.play_globalLabels
     }
 }

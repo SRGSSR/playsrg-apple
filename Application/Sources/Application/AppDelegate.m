@@ -201,7 +201,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (SRGAnalyticsLabels *)srg_globalLabels
 {
-    return UserConsentHelper.srgAnalyticsLabels;
+    return SRGAnalyticsLabels.play_globalLabels;
 }
 
 #pragma mark Helpers
