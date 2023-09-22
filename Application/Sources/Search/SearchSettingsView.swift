@@ -114,7 +114,7 @@ struct SearchSettingsView: View {
         .srgFont(.body)
         .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
         .navigationTitle(NSLocalizedString("Filters", comment: "Search filters page title"))
-        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.navigationPage.rawValue, levels: analyticsPageLevels)
         .onAppear {
             model.query = query
             model.settings = settings

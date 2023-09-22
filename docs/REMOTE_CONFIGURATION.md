@@ -42,6 +42,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ## Analytics
 
+* `sourceKey` (mandatory, string): The source identifier to send events to.
 * `siteName` (mandatory, string): The iOS and iPadOS site name to send events to.
 * `tvSiteName` (mandatory, string): The tvOS site name to send events to.
 

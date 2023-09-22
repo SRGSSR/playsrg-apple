@@ -149,8 +149,9 @@ protocol SectionProperties {
     
     /// Analytics information
     var analyticsTitle: String? { get }
+    var analyticsType: String? { get }
     var analyticsLevels: [String]? { get }
-    func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent?
+    func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent?
     
     /// Properties for section displayed as a row
     var rowHighlight: Highlight? { get }
@@ -319,6 +320,15 @@ private extension Content {
             }
         }
         
+        var analyticsType: String? {
+            switch contentSection.type {
+            case .none:
+                return nil
+            default:
+                return AnalyticsPageType.detail.rawValue
+            }
+        }
+        
         var analyticsLevels: [String]? {
             switch contentSection.type {
             case .medias, .showAndMedias, .shows:
@@ -330,14 +340,14 @@ private extension Content {
             }
         }
         
-        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
             switch presentation.type {
             case .favoriteShows:
-                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
+                return AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
-                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
+                return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
+                return AnalyticsEvent.historyRemove(source: source, urn: nil)
             default:
                 return nil
             }
@@ -705,6 +715,17 @@ private extension Content {
             }
         }
         
+        var analyticsType: String? {
+            switch configuredSection {
+            case .show, .radioAllShows, .tvAllShows:
+                return AnalyticsPageType.overview.rawValue
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage, .tvLive, .radioLive, .radioLiveSatellite:
+                return AnalyticsPageType.live.rawValue
+            default:
+                return AnalyticsPageType.detail.rawValue
+            }
+        }
+        
         var analyticsLevels: [String]? {
             switch configuredSection {
             case let .show(show):
@@ -746,17 +767,17 @@ private extension Content {
             }
         }
         
-        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
-                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
+                return AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
             case .radioWatchLater, .watchLater:
-                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
+                return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
             case .history, .radioResumePlayback:
-                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
+                return AnalyticsEvent.historyRemove(source: source, urn: nil)
 #if os(iOS)
             case .downloads:
-                return AnalyticsHiddenEvent.download(action: .remove, source: source, urn: nil)
+                return AnalyticsEvent.download(action: .remove, source: source, urn: nil)
 #endif
             default:
                 return nil
