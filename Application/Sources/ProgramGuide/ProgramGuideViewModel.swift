@@ -164,7 +164,7 @@ private extension ProgramGuideViewModel {
     //       remove the day parameter.
     static func channels(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay) -> AnyPublisher<[PlayChannel], Error> {
         return SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider, minimal: true)
-            .map { $0.map(\.playChannel) }
+            .map { $0.map(\.channel) }
             .eraseToAnyPublisher()
     }
     

@@ -244,11 +244,11 @@ extension SRGDataProvider {
 
 /// Input data for tv programs publisher
 struct PlayProgramComposition: Hashable {
-    let playChannel: PlayChannel
+    let channel: PlayChannel
     let programs: [SRGProgram]?
     
     init(channel: SRGChannel, programs: [SRGProgram]?, external: Bool) {
-        self.playChannel = PlayChannel(wrappedValue: channel, external: external)
+        self.channel = PlayChannel(wrappedValue: channel, external: external)
         self.programs = programs
     }
 }

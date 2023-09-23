@@ -119,7 +119,7 @@ extension ProgramGuideDailyViewModel {
             case let .loading(channels: channels):
                 return channels
             case let .content(programCompositions: programCompositions):
-                return programCompositions.map(\.playChannel)
+                return programCompositions.map(\.channel)
             }
         }
         
@@ -128,7 +128,7 @@ extension ProgramGuideDailyViewModel {
         }
         
         private static func programs(for channel: PlayChannel, in programCompositions: [PlayProgramComposition]) -> [SRGProgram] {
-            return programCompositions.first(where: { $0.playChannel == channel })?.programs ?? []
+            return programCompositions.first(where: { $0.channel == channel })?.programs ?? []
         }
         
         fileprivate func isEmpty(for channel: PlayChannel) -> Bool {
