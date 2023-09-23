@@ -73,7 +73,21 @@ static NSNumber * TVGuideBouquetWithString(NSString *string)
     return s_bouqets[string];
 }
 
-NSArray<NSNumber *> *FirebaseConfigurationTVGuideBouquets(NSString *string)
+static BOOL TVGuideBouquetIsMainBouquet(TVGuideBouquet tvGuideBouquet, SRGVendor vendor)
+{
+    switch (tvGuideBouquet) {
+        case TVGuideBouquetThirdParty:
+            return NO;
+        case TVGuideBouquetRSI:
+            return vendor == SRGVendorRSI;
+        case TVGuideBouquetRTS:
+            return vendor == SRGVendorRTS;
+        case TVGuideBouquetSRF:
+            return vendor == SRGVendorSRF;
+    }
+}
+
+NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string, SRGVendor vendor)
 {
     NSMutableArray<NSNumber *> *tvGuideBouquets = [NSMutableArray array];
     
@@ -81,10 +95,15 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideBouquets(NSString *string)
     for (NSString *identifier in tvGuideBouquetIdentifiers) {
         NSNumber * tvGuideBouquet = TVGuideBouquetWithString(identifier);
         if (tvGuideBouquet != nil) {
-            [tvGuideBouquets addObject:tvGuideBouquet];
+            if (!([tvGuideBouquets containsObject:tvGuideBouquet] || TVGuideBouquetIsMainBouquet(tvGuideBouquet.intValue, vendor))) {
+                [tvGuideBouquets addObject:tvGuideBouquet];
+            }
+            else {
+                PlayLogWarning(@"configuration", @"TV guide other bouquet identifier %@ duplicated or main one. Skipped.", identifier);
+            }
         }
         else {
-            PlayLogWarning(@"configuration", @"Unknown TV guide bouquet identifier %@. Skipped.", identifier);
+            PlayLogWarning(@"configuration", @"Unknown TV guide other bouquet identifier %@. Skipped.", identifier);
         }
     }
     
@@ -278,10 +297,10 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideBouquets(NSString *string)
     return tvChannels.copy;
 }
 
-- (NSArray<NSNumber *> *)tvGuideBouquetsForKey:(NSString *)key
+- (NSArray<NSNumber *> *)tvGuideOtherBouquetsForKey:(NSString *)key vendor:(SRGVendor)vendor
 {
     NSString *tvGuideBouquetsString = [self stringForKey:key];
-    return tvGuideBouquetsString ? FirebaseConfigurationTVGuideBouquets(tvGuideBouquetsString) : @[];
+    return tvGuideBouquetsString ? FirebaseConfigurationTVGuideOtherBouquets(tvGuideBouquetsString, vendor) : @[];
 }
 
 #pragma mark Update

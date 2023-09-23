@@ -420,7 +420,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];
     self.satelliteRadioChannels = [firebaseConfiguration radioChannelsForKey:@"satelliteRadioChannels" defaultHomeSections:nil];
     
-    self.tvGuideOtherBouquetsObjc = [firebaseConfiguration tvGuideBouquetsForKey:@"tvGuideOtherBouquets"];
+    self.tvGuideOtherBouquetsObjc = [firebaseConfiguration tvGuideOtherBouquetsForKey:@"tvGuideOtherBouquets" vendor:vendor];
     
     NSNumber *pageSize = [firebaseConfiguration numberForKey:@"pageSize"];
     self.pageSize = pageSize ? MAX(pageSize.unsignedIntegerValue, 1) : 20;
