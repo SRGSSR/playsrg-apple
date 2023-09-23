@@ -1844,7 +1844,7 @@ def tag_beta(platform)
   else
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
-    push_to_git_remote
+    push_git_tags
   end
 end
 
