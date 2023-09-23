@@ -13,11 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_CLOSED_ENUM(NSInteger, TVGuideBouquet) {
     /**
-     *  Third party bouquet
+     *  Third party bouquet.
      */
     TVGuideBouquetThirdParty = 0,
     /**
-     *  SRG SSR business unit bouquets.
+     *  SRG SSR bouquets.
      */
     TVGuideBouquetRSI,
     TVGuideBouquetRTS,
