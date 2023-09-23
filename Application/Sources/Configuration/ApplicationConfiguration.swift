@@ -82,7 +82,7 @@ extension ApplicationConfiguration {
         return Self.typeformUrlWithParameters(feedbackUrl)
     }
     
-    var tvGuideThirdPartyBouquets: [TVGuideThirdPartyBouquet] {
+    var tvGuideOtherPartyBouquets: [TVGuideOtherPartyBouquet] {
         switch vendor {
         case .RTR, .SRF:
             return [.nonSRG, .RTS, .RSI]
@@ -131,7 +131,7 @@ enum ConfiguredSection: Hashable {
 #endif
 }
 
-enum TVGuideThirdPartyBouquet: Hashable {
+enum TVGuideOtherPartyBouquet: Hashable {
     case nonSRG
     
     case RSI

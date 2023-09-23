@@ -38,7 +38,7 @@ final class ProgramGuideGridViewController: UIViewController {
             self.dailyModel = dailyModel
         }
         else {
-            self.dailyModel = ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
+            self.dailyModel = ProgramGuideDailyViewModel(day: model.day, mainPartyChannels: model.mainPartyChannels, otherPartyChannels: model.otherPartyChannels)
         }
         super.init(nibName: nil, bundle: nil)
     }

@@ -42,7 +42,7 @@ final class ProgramGuideDailyViewController: UIViewController {
             model = programGuideDailyModel
         }
         else {
-            model = ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
+            model = ProgramGuideDailyViewModel(day: day, mainPartyChannels: programGuideModel.mainPartyChannels, otherPartyChannels: programGuideModel.otherPartyChannels)
         }
         self.programGuideModel = programGuideModel
         scrollTargetTime = programGuideModel.time

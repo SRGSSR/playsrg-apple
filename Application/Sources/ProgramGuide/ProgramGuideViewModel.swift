@@ -33,12 +33,12 @@ final class ProgramGuideViewModel: ObservableObject {
         return data.channels
     }
     
-    var firstPartyChannels: [PlayChannel] {
-        return data.firstPartyChannels
+    var mainPartyChannels: [PlayChannel] {
+        return data.mainPartyChannels
     }
     
-    var thirdPartyChannels: [PlayChannel] {
-        return data.thirdPartyChannels
+    var otherPartyChannels: [PlayChannel] {
+        return data.otherPartyChannels
     }
     
     var selectedChannel: PlayChannel? {
@@ -47,7 +47,7 @@ final class ProgramGuideViewModel: ObservableObject {
         }
         set {
             if let newValue, channels.contains(newValue), newValue != data.selectedChannel {
-                data = Data(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, selectedChannel: newValue)
+                data = Data(mainPartyChannels: mainPartyChannels, otherPartyChannels: otherPartyChannels, selectedChannel: newValue)
                 change = .channel(newValue)
             }
         }
@@ -126,16 +126,16 @@ final class ProgramGuideViewModel: ObservableObject {
 
 extension ProgramGuideViewModel {
     struct Data {
-        let firstPartyChannels: [PlayChannel]
-        let thirdPartyChannels: [PlayChannel]
+        let mainPartyChannels: [PlayChannel]
+        let otherPartyChannels: [PlayChannel]
         let selectedChannel: PlayChannel?
         
         static var empty: Self {
-            return Self(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
+            return Self(mainPartyChannels: [], otherPartyChannels: [], selectedChannel: nil)
         }
         
         var channels: [PlayChannel] {
-            return firstPartyChannels + thirdPartyChannels
+            return mainPartyChannels + otherPartyChannels
         }
     }
     
@@ -162,8 +162,8 @@ private extension ProgramGuideViewModel {
     
     // TODO: Once an IL request is available to get the channel list without any day, use this request and
     //       remove the day parameter.
-    static func channels(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay) -> AnyPublisher<[PlayChannel], Error> {
-        return SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider, minimal: true)
+    static func channels(for vendor: SRGVendor, mainProvider: Bool, day: SRGDay) -> AnyPublisher<[PlayChannel], Error> {
+        return SRGDataProvider.current!.tvProgramsPublisher(day: day, mainProvider: mainProvider, minimal: true)
             .map { $0.map(\.channel) }
             .eraseToAnyPublisher()
     }
@@ -172,18 +172,18 @@ private extension ProgramGuideViewModel {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
         
-        if applicationConfiguration.areTvThirdPartyChannelsAvailable {
+        if !applicationConfiguration.tvGuideOtherPartyBouquets.isEmpty {
             return Publishers.CombineLatest(
-                channels(for: vendor, provider: .SRG, day: day),
-                channels(for: vendor, provider: .thirdParty, day: day)
+                channels(for: vendor, mainProvider: true, day: day),
+                channels(for: vendor, mainProvider: false, day: day)
             )
-            .map { Data(firstPartyChannels: $0, thirdPartyChannels: $1, selectedChannel: matchingChannel(data.selectedChannel, in: $0 + $1)) }
+            .map { Data(mainPartyChannels: $0, otherPartyChannels: $1, selectedChannel: matchingChannel(data.selectedChannel, in: $0 + $1)) }
             .replaceError(with: data)
             .eraseToAnyPublisher()
         }
         else {
-            return channels(for: vendor, provider: .SRG, day: day)
-                .map { Data(firstPartyChannels: $0, thirdPartyChannels: [], selectedChannel: matchingChannel(data.selectedChannel, in: $0)) }
+            return channels(for: vendor, mainProvider: true, day: day)
+                .map { Data(mainPartyChannels: $0, otherPartyChannels: [], selectedChannel: matchingChannel(data.selectedChannel, in: $0)) }
                 .replaceError(with: data)
                 .eraseToAnyPublisher()
         }

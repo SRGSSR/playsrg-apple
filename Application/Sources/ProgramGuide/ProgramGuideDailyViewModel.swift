@@ -14,9 +14,9 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     @Published private(set) var state: State
     
     /// Channels can be provided if available for more efficient content loading
-    init(day: SRGDay, firstPartyChannels: [PlayChannel], thirdPartyChannels: [PlayChannel]) {
+    init(day: SRGDay, mainPartyChannels: [PlayChannel], otherPartyChannels: [PlayChannel]) {
         self.day = day
-        self.state = .loading(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, day: day)
+        self.state = .loading(mainPartyChannels: mainPartyChannels, otherPartyChannels: otherPartyChannels, day: day)
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
             $day
@@ -157,16 +157,16 @@ extension ProgramGuideDailyViewModel {
     }
     
     enum State {
-        case content(firstPartyBouquet: Bouquet, thirdPartyBouquet: Bouquet, day: SRGDay)
+        case content(mainPartyBouquet: Bouquet, otherPartyBouquet: Bouquet, day: SRGDay)
         case failed(error: Error)
         
-        fileprivate static func loading(firstPartyChannels: [PlayChannel], thirdPartyChannels: [PlayChannel], day: SRGDay) -> Self {
-            return .content(firstPartyBouquet: .loading(channels: firstPartyChannels), thirdPartyBouquet: .loading(channels: thirdPartyChannels), day: day)
+        fileprivate static func loading(mainPartyChannels: [PlayChannel], otherPartyChannels: [PlayChannel], day: SRGDay) -> Self {
+            return .content(mainPartyBouquet: .loading(channels: mainPartyChannels), otherPartyBouquet: .loading(channels: otherPartyChannels), day: day)
         }
         
         private var day: SRGDay? {
             switch self {
-            case let .content(firstPartyBouquet: _, thirdPartyBouquet: _, day: day):
+            case let .content(mainPartyBouquet: _, otherPartyBouquet: _, day: day):
                 return day
             case .failed:
                 return nil
@@ -175,8 +175,8 @@ extension ProgramGuideDailyViewModel {
         
         private var bouquets: [Bouquet] {
             switch self {
-            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: _):
-                return [firstPartyBouquet, thirdPartyBouquet]
+            case let .content(mainPartyBouquet: mainPartyBouquet, otherPartyBouquet: otherPartyBouquet, day: _):
+                return [mainPartyBouquet, otherPartyBouquet]
             case .failed:
                 return []
             }
@@ -188,12 +188,12 @@ extension ProgramGuideDailyViewModel {
         
         private func bouquet(for section: Section) -> Bouquet? {
             switch self {
-            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: _):
-                if firstPartyBouquet.contains(channel: section) {
-                    return firstPartyBouquet
+            case let .content(mainPartyBouquet: mainPartyBouquet, otherPartyBouquet: otherPartyBouquet, day: _):
+                if mainPartyBouquet.contains(channel: section) {
+                    return mainPartyBouquet
                 }
-                else if thirdPartyBouquet.contains(channel: section) {
-                    return thirdPartyBouquet
+                else if otherPartyBouquet.contains(channel: section) {
+                    return otherPartyBouquet
                 }
                 else {
                     return nil
@@ -245,38 +245,38 @@ private extension ProgramGuideDailyViewModel {
     static func state(from state: State?, for day: SRGDay) -> AnyPublisher<State, Error> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
-        if !applicationConfiguration.tvGuideThirdPartyBouquets.isEmpty {
+        if !applicationConfiguration.tvGuideOtherPartyBouquets.isEmpty {
             return Publishers.CombineLatest(
-                Self.bouquet(for: vendor, provider: .SRG, day: day, from: state),
-                Self.bouquet(for: vendor, provider: .thirdParty, day: day, from: state)
+                Self.bouquet(for: vendor, mainProvider: true, day: day, from: state),
+                Self.bouquet(for: vendor, mainProvider: false, day: day, from: state)
             )
-            .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1, day: day) }
+            .map { .content(mainPartyBouquet: $0, otherPartyBouquet: $1, day: day) }
             .eraseToAnyPublisher()
         }
         else {
-            return Self.bouquet(for: vendor, provider: .SRG, day: day, from: state)
-                .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty, day: day) }
+            return Self.bouquet(for: vendor, mainProvider: true, day: day, from: state)
+                .map { .content(mainPartyBouquet: $0, otherPartyBouquet: .empty, day: day) }
                 .eraseToAnyPublisher()
         }
     }
     
-    static func bouquet(from state: State?, for provider: SRGProgramProvider, day otherDay: SRGDay) -> Bouquet {
+    static func bouquet(from state: State?, for mainProvider: Bool, day otherDay: SRGDay) -> Bouquet {
         guard let state else { return .empty }
         switch state {
-        case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: day):
+        case let .content(mainPartyBouquet: mainPartyBouquet, otherPartyBouquet: otherPartyBouquet, day: day):
             guard otherDay.compare(day) == .orderedSame else {
-                return provider == .thirdParty ? .loading(channels: thirdPartyBouquet.channels) : .loading(channels: firstPartyBouquet.channels)
+                return mainProvider ? .loading(channels: mainPartyBouquet.channels) : .loading(channels: otherPartyBouquet.channels)
             }
-            return provider == .thirdParty ? thirdPartyBouquet : firstPartyBouquet
+            return mainProvider ? mainPartyBouquet : otherPartyBouquet
         case .failed:
             return .empty
         }
     }
     
-    static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from state: State?) -> AnyPublisher<Bouquet, Error> {
-        let bouquet = bouquet(from: state, for: provider, day: day)
-        return SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider, minimal: true)
-            .append(SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider))
+    static func bouquet(for vendor: SRGVendor, mainProvider: Bool, day: SRGDay, from state: State?) -> AnyPublisher<Bouquet, Error> {
+        let bouquet = bouquet(from: state, for: mainProvider, day: day)
+        return SRGDataProvider.current!.tvProgramsPublisher(day: day, mainProvider: mainProvider, minimal: true)
+            .append(SRGDataProvider.current!.tvProgramsPublisher(day: day, mainProvider: mainProvider))
             .map { .content(programCompositions: $0) }
             .tryCatch { error in
                 guard bouquet.hasPrograms else { throw error }

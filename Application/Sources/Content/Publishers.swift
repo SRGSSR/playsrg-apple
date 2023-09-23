@@ -204,24 +204,24 @@ extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
-    func tvProgramsPublisher(day: SRGDay? = nil, provider: SRGProgramProvider, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
+    func tvProgramsPublisher(day: SRGDay? = nil, mainProvider: Bool, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
         let applicationConfiguration = ApplicationConfiguration.shared
-        if provider == .SRG {
+        if mainProvider {
             return SRGDataProvider.current!.tvPrograms(for: applicationConfiguration.vendor, day: day, minimal: minimal)
                 .map { Array($0.map({ PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) })) }
                 .eraseToAnyPublisher()
         }
         else {
-            let tvThirdPartyProgramsPublishers = applicationConfiguration.tvGuideThirdPartyBouquets
-                .map { tvThirdPartyProgramsPublisher(day: day, thirdPartyBouquet: $0, minimal: minimal) }
-            return Publishers.concatenateMany(tvThirdPartyProgramsPublishers)
+            let tvOtherPartyProgramsPublishers = applicationConfiguration.tvGuideOtherPartyBouquets
+                .map { tvOtherPartyProgramsPublisher(day: day, otherPartyBouquet: $0, minimal: minimal) }
+            return Publishers.concatenateMany(tvOtherPartyProgramsPublishers)
                 .tryReduce([]) { $0 + $1 }
                 .eraseToAnyPublisher()
         }
     }
     
-    private func tvThirdPartyProgramsPublisher(day: SRGDay? = nil, thirdPartyBouquet: TVGuideThirdPartyBouquet, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
-        switch thirdPartyBouquet {
+    private func tvOtherPartyProgramsPublisher(day: SRGDay? = nil, otherPartyBouquet: TVGuideOtherPartyBouquet, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
+        switch otherPartyBouquet {
         case .RSI:
             return  SRGDataProvider.current!.tvPrograms(for: .RSI, day: day, minimal: minimal)
                 .map { Array($0.map({ PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) })) }
