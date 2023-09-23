@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/appcenter-sdk-apple.git",
       "state" : {
-        "revision" : "5756ddb0f09041e91bdb3b73c17296ac005ad11a",
-        "version" : "5.0.3"
+        "revision" : "1120c26835925f8314d035127c580bc71689c620",
+        "version" : "5.0.4"
       }
     },
     {
