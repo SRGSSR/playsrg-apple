@@ -29,5 +29,6 @@
   "searchSettingSubtitledHidden": true,
   "subtitleAvailabilityHidden": true,
   "audioDescriptionAvailabilityHidden": true,
+  "tvGuideOtherBouquets": "srf,rts",
   "userConsentDefaultLanguage": "it"
 }

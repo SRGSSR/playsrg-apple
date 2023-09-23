@@ -9,6 +9,22 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  TV guide bouquet.
+ */
+typedef NS_CLOSED_ENUM(NSInteger, TVGuideBouquet) {
+    /**
+     *  Third party bouquet
+     */
+    TVGuideBouquetThirdParty = 0,
+    /**
+     *  SRG SSR business unit bouquets.
+     */
+    TVGuideBouquetRSI,
+    TVGuideBouquetRTS,
+    TVGuideBouquetSRF
+};
+
+/**
  *  Represent a TV channel in the application configuration.
  */
 @interface TVChannel : Channel

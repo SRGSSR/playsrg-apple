@@ -212,16 +212,16 @@ extension SRGDataProvider {
                 .eraseToAnyPublisher()
         }
         else {
-            let tvOtherPartyProgramsPublishers = applicationConfiguration.tvGuideOtherPartyBouquets
-                .map { tvOtherPartyProgramsPublisher(day: day, otherPartyBouquet: $0, minimal: minimal) }
+            let tvOtherPartyProgramsPublishers = applicationConfiguration.tvGuideOtherBouquets
+                .map { tvOtherPartyProgramsPublisher(day: day, bouquet: $0, minimal: minimal) }
             return Publishers.concatenateMany(tvOtherPartyProgramsPublishers)
                 .tryReduce([]) { $0 + $1 }
                 .eraseToAnyPublisher()
         }
     }
     
-    private func tvOtherPartyProgramsPublisher(day: SRGDay? = nil, otherPartyBouquet: TVGuideOtherPartyBouquet, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
-        switch otherPartyBouquet {
+    private func tvOtherPartyProgramsPublisher(day: SRGDay? = nil, bouquet: TVGuideBouquet, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
+        switch bouquet {
         case .RSI:
             return  SRGDataProvider.current!.tvPrograms(for: .RSI, day: day, minimal: minimal)
                 .map { Array($0.map({ PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) })) }
@@ -234,7 +234,7 @@ extension SRGDataProvider {
             return  SRGDataProvider.current!.tvPrograms(for: .SRF, day: day, minimal: minimal)
                 .map { Array($0.map({ PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) })) }
                 .eraseToAnyPublisher()
-        case .nonSRG:
+        case .thirdParty:
             return  SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal)
                 .map { Array($0.map({ PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: true) })) }
                 .eraseToAnyPublisher()

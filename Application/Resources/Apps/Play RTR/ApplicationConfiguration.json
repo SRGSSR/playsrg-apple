@@ -26,6 +26,7 @@
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
   "discoverySubtitleOptionLanguage": "de",
   "audioDescriptionAvailabilityHidden": true,
+  "tvGuideOtherBouquets": "thirdparty,rts,rsi",
   "tvThirdPartyChannelsAvailable": true,
   "userConsentDefaultLanguage": "de"
 }

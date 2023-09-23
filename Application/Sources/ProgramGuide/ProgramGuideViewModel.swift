@@ -172,7 +172,7 @@ private extension ProgramGuideViewModel {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
         
-        if !applicationConfiguration.tvGuideOtherPartyBouquets.isEmpty {
+        if !applicationConfiguration.tvGuideOtherBouquets.isEmpty {
             return Publishers.CombineLatest(
                 channels(for: vendor, mainProvider: true, day: day),
                 channels(for: vendor, mainProvider: false, day: day)

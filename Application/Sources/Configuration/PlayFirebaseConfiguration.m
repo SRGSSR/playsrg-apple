@@ -59,6 +59,38 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
     return homeSections.copy;
 }
 
+static NSNumber * TVGuideBouquetWithString(NSString *string)
+{
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSString *, NSNumber *> *s_bouqets;
+    dispatch_once(&s_onceToken, ^{
+        s_bouqets = @{ @"thirdparty" : @(TVGuideBouquetThirdParty),
+                        @"rsi" : @(TVGuideBouquetRSI),
+                        @"rts" : @(TVGuideBouquetRTS),
+                        @"srf" : @(TVGuideBouquetSRF)
+        };
+    });
+    return s_bouqets[string];
+}
+
+NSArray<NSNumber *> *FirebaseConfigurationTVGuideBouquets(NSString *string)
+{
+    NSMutableArray<NSNumber *> *tvGuideBouquets = [NSMutableArray array];
+    
+    NSArray<NSString *> *tvGuideBouquetIdentifiers = [string componentsSeparatedByString:@","];
+    for (NSString *identifier in tvGuideBouquetIdentifiers) {
+        NSNumber * tvGuideBouquet = TVGuideBouquetWithString(identifier);
+        if (tvGuideBouquet != nil) {
+            [tvGuideBouquets addObject:tvGuideBouquet];
+        }
+        else {
+            PlayLogWarning(@"configuration", @"Unknown TV guide bouquet identifier %@. Skipped.", identifier);
+        }
+    }
+    
+    return tvGuideBouquets.copy;
+}
+
 @interface PlayFirebaseConfiguration ()
 
 @property (nonatomic) FIRRemoteConfig *remoteConfig;
@@ -244,6 +276,12 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
         }
     }
     return tvChannels.copy;
+}
+
+- (NSArray<NSNumber *> *)tvGuideBouquetsForKey:(NSString *)key
+{
+    NSString *tvGuideBouquetsString = [self stringForKey:key];
+    return tvGuideBouquetsString ? FirebaseConfigurationTVGuideBouquets(tvGuideBouquetsString) : @[];
 }
 
 #pragma mark Update

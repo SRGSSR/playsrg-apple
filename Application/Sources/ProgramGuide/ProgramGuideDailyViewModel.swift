@@ -245,7 +245,7 @@ private extension ProgramGuideDailyViewModel {
     static func state(from state: State?, for day: SRGDay) -> AnyPublisher<State, Error> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
-        if !applicationConfiguration.tvGuideOtherPartyBouquets.isEmpty {
+        if !applicationConfiguration.tvGuideOtherBouquets.isEmpty {
             return Publishers.CombineLatest(
                 Self.bouquet(for: vendor, mainProvider: true, day: day, from: state),
                 Self.bouquet(for: vendor, mainProvider: false, day: day, from: state)
