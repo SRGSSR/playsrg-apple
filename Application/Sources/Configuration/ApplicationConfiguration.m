@@ -143,7 +143,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, getter=isTvGuideUnavailable) BOOL tvGuideUnavailable;
-@property (nonatomic, getter=areTvThirdPartyChannelsAvailable) BOOL tvThirdPartyChannelsAvailable;
 
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
@@ -399,7 +398,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.downloadsHintsHidden = [firebaseConfiguration boolForKey:@"downloadsHintsHidden"];
     self.showsUnavailable = [firebaseConfiguration boolForKey:@"showsUnavailable"];
     self.tvGuideUnavailable = [firebaseConfiguration boolForKey:@"tvGuideUnavailable"];
-    self.tvThirdPartyChannelsAvailable = [firebaseConfiguration boolForKey:@"tvThirdPartyChannelsAvailable"];
     
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];

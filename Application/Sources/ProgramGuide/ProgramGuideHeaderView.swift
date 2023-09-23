@@ -207,7 +207,7 @@ enum ProgramGuideHeaderViewSize {
             return (horizontalSizeClass == .compact) ? 216 : 136
         }
 #else
-        return ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable ? 650 : 760
+        return ApplicationConfiguration.shared.tvGuideOtherBouquets.isEmpty ? 760 : 650
 #endif
     }
 }

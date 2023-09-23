@@ -27,6 +27,5 @@
   "discoverySubtitleOptionLanguage": "de",
   "audioDescriptionAvailabilityHidden": true,
   "tvGuideOtherBouquets": "thirdparty,rts,rsi",
-  "tvThirdPartyChannelsAvailable": true,
   "userConsentDefaultLanguage": "de"
 }
