@@ -1844,7 +1844,7 @@ def tag_beta(platform)
   else
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
-    push_to_git_remote
+    push_git_tags
   end
 end
 
@@ -1856,7 +1856,7 @@ def bump_build_number_beta
 
   bump_build_number_commit
   git_pull(rebase: true)
-  push_to_git_remote
+  push_to_git_remote(tags: false)
 end
 
 def cherrypick_beta_on_develop(commits)
@@ -1909,8 +1909,8 @@ def gitflow_release_platforms(platforms, branch_name)
     bump_marketing_version_commit(platforms[index])
   end
 
-  push_to_git_remote(local_branch: 'master', remote_branch: 'master')
-  push_to_git_remote(local_branch: 'develop', remote_branch: 'develop')
+  push_to_git_remote(local_branch: 'master', remote_branch: 'master', tags: true)
+  push_to_git_remote(local_branch: 'develop', remote_branch: 'develop', tags: false)
 end
 
 def gitflow_release(tags, branch_name)
