@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/appcenter-sdk-apple.git",
       "state" : {
-        "revision" : "5756ddb0f09041e91bdb3b73c17296ac005ad11a",
-        "version" : "5.0.3"
+        "revision" : "1120c26835925f8314d035127c580bc71689c620",
+        "version" : "5.0.4"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "2bfe6abe1014aafe5cf28401708f7d39f9926a76",
-        "version" : "10.14.0"
+        "revision" : "8a8ec57a272e0d31480fb0893dda0cf4f769b57e",
+        "version" : "10.15.0"
       }
     },
     {
@@ -419,8 +419,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-sdk",
       "state" : {
-        "revision" : "c3943c73144327d4d168fab0efb314b029041e3c",
-        "version" : "2.8.3"
+        "revision" : "4737612c73ae37cf3f2d5729c994ceaa388685a0",
+        "version" : "2.8.4"
       }
     },
     {
@@ -428,8 +428,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-ui",
       "state" : {
-        "revision" : "f15804092487750001e02230f571035e11ade1f1",
-        "version" : "2.8.3"
+        "revision" : "2a435ad5495970b2f2f6a2b60eab4124a6076f18",
+        "version" : "2.8.4"
       }
     },
     {
