@@ -67,10 +67,10 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
         return [AVMediaSelectionGroup mediaSelectionOptionsFromArray:matchingAudioOptions withMediaCharacteristics:characteristics].firstObject ?: matchingAudioOptions.firstObject;
     };
     
-    if (ApplicationConfiguration.sharedApplicationConfiguration.vendor == SRGVendorRTR) {
+    if (ApplicationConfiguration.sharedApplicationConfiguration.subtitleOptionLanguage != nil) {
         controller.subtitleConfigurationBlock = ^AVMediaSelectionOption * _Nullable(NSArray<AVMediaSelectionOption *> * _Nonnull subtitleOptions, AVMediaSelectionOption * _Nullable audioOption, AVMediaSelectionOption * _Nullable defaultSubtitleOption) {
             NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(AVMediaSelectionOption * _Nullable option, NSDictionary<NSString *,id> * _Nullable bindings) {
-                return [[option.locale objectForKey:NSLocaleLanguageCode] isEqualToString:@"de"];
+                return [[option.locale objectForKey:NSLocaleLanguageCode] isEqualToString:ApplicationConfiguration.sharedApplicationConfiguration.subtitleOptionLanguage];
             }];
             return [subtitleOptions filteredArrayUsingPredicate:predicate].firstObject ?: defaultSubtitleOption;
         };
@@ -137,6 +137,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+
+@property (nonatomic, copy) NSString *subtitleOptionLanguage;
+
 @property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
@@ -388,6 +391,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
+    
+    self.subtitleOptionLanguage = [firebaseConfiguration stringForKey:@"subtitleOptionLanguage"];
+    
     self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
     
 #if TARGET_OS_IOS
