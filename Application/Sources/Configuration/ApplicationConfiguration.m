@@ -66,6 +66,16 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
         NSArray<AVMediaCharacteristic> *characteristics = CFBridgingRelease(MAAudibleMediaCopyPreferredCharacteristics());
         return [AVMediaSelectionGroup mediaSelectionOptionsFromArray:matchingAudioOptions withMediaCharacteristics:characteristics].firstObject ?: matchingAudioOptions.firstObject;
     };
+    
+    if (ApplicationConfiguration.sharedApplicationConfiguration.vendor == SRGVendorRTR) {
+        controller.subtitleConfigurationBlock = ^AVMediaSelectionOption * _Nullable(NSArray<AVMediaSelectionOption *> * _Nonnull subtitleOptions, AVMediaSelectionOption * _Nullable audioOption, AVMediaSelectionOption * _Nullable defaultSubtitleOption) {
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(AVMediaSelectionOption * _Nullable option, NSDictionary<NSString *,id> * _Nullable bindings) {
+                return [[option.locale objectForKey:NSLocaleLanguageCode] isEqualToString:@"de"];
+            }];
+            return [subtitleOptions filteredArrayUsingPredicate:predicate].firstObject ?: defaultSubtitleOption;
+        };
+    }
+    
     [controller reloadMediaConfiguration];
     
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
