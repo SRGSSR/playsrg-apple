@@ -67,7 +67,7 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
         return [AVMediaSelectionGroup mediaSelectionOptionsFromArray:matchingAudioOptions withMediaCharacteristics:characteristics].firstObject ?: matchingAudioOptions.firstObject;
     };
     
-    if (ApplicationConfiguration.sharedApplicationConfiguration.discoverySubtitleOptionLanguage != nil) {
+    if (ApplicationConfiguration.sharedApplicationConfiguration.discoverySubtitleOptionLanguage != nil && !ApplicationSettingDiscoverySubtitleOptionLanguageRunOnce()) {
         controller.subtitleConfigurationBlock = ^AVMediaSelectionOption * _Nullable(NSArray<AVMediaSelectionOption *> * _Nonnull subtitleOptions, AVMediaSelectionOption * _Nullable audioOption, AVMediaSelectionOption * _Nullable defaultSubtitleOption) {
             NSString *subtitleOptionLanguage = ApplicationConfiguration.sharedApplicationConfiguration.discoverySubtitleOptionLanguage;
             NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(AVMediaSelectionOption * _Nullable option, NSDictionary<NSString *,id> * _Nullable bindings) {
@@ -77,6 +77,7 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
             AVMediaSelectionOption *subtitleOption = [subtitleOptions filteredArrayUsingPredicate:predicate].firstObject;
             if (subtitleOption != nil) {
                 MACaptionAppearanceAddSelectedLanguage(kMACaptionAppearanceDomainUser, (__bridge CFStringRef _Nonnull)(subtitleOptionLanguage));
+                ApplicationSettingSetDiscoverySubtitleOptionLanguageRunOnce(YES);
                 return subtitleOption;
             }
             else {

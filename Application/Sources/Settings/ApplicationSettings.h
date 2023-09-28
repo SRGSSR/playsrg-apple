@@ -46,4 +46,7 @@ OBJC_EXPORT void ApplicationSettingSetLastOpenedRadioChannel(RadioChannel *radio
 
 OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
 
+OBJC_EXPORT BOOL ApplicationSettingDiscoverySubtitleOptionLanguageRunOnce(void);
+OBJC_EXPORT void ApplicationSettingSetDiscoverySubtitleOptionLanguageRunOnce(BOOL discoverySubtitleOptionLanguageRunOnce);
+
 NS_ASSUME_NONNULL_END
