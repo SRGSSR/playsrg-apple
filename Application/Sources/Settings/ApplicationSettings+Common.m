@@ -160,3 +160,15 @@ BOOL ApplicationSettingAutoplayEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingAutoplayEnabled];
 }
+
+BOOL ApplicationSettingDiscoverySubtitleOptionLanguageRunOnce(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingDiscoverySubtitleOptionLanguageRunOnce];
+}
+
+void ApplicationSettingSetDiscoverySubtitleOptionLanguageRunOnce(BOOL discoverySubtitleOptionLanguageRunOnce)
+{
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setBool:discoverySubtitleOptionLanguageRunOnce forKey:PlaySRGSettingDiscoverySubtitleOptionLanguageRunOnce];
+    [userDefaults synchronize];
+}
