@@ -69,10 +69,19 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
     
     if (ApplicationConfiguration.sharedApplicationConfiguration.subtitleOptionLanguage != nil) {
         controller.subtitleConfigurationBlock = ^AVMediaSelectionOption * _Nullable(NSArray<AVMediaSelectionOption *> * _Nonnull subtitleOptions, AVMediaSelectionOption * _Nullable audioOption, AVMediaSelectionOption * _Nullable defaultSubtitleOption) {
+            NSString *subtitleOptionLanguage = ApplicationConfiguration.sharedApplicationConfiguration.subtitleOptionLanguage;
             NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(AVMediaSelectionOption * _Nullable option, NSDictionary<NSString *,id> * _Nullable bindings) {
-                return [[option.locale objectForKey:NSLocaleLanguageCode] isEqualToString:ApplicationConfiguration.sharedApplicationConfiguration.subtitleOptionLanguage];
+                return [[option.locale objectForKey:NSLocaleLanguageCode] isEqualToString:subtitleOptionLanguage];
             }];
-            return [subtitleOptions filteredArrayUsingPredicate:predicate].firstObject ?: defaultSubtitleOption;
+            
+            AVMediaSelectionOption *subtitleOption = [subtitleOptions filteredArrayUsingPredicate:predicate].firstObject;
+            if (subtitleOption != nil) {
+                MACaptionAppearanceAddSelectedLanguage(kMACaptionAppearanceDomainUser, (__bridge CFStringRef _Nonnull)(subtitleOptionLanguage));
+                return subtitleOption;
+            }
+            else {
+                return defaultSubtitleOption;
+            }
         };
     }
     
