@@ -31,8 +31,6 @@ OBJC_EXPORT SRGLetterboxPlaybackSettings *ApplicationSettingPlaybackSettings(voi
 
 OBJC_EXPORT NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void);
 
-OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
-
 OBJC_EXPORT NSString * _Nullable ApplicationSettingSelectedLivestreamURNForChannelUid(NSString * _Nullable channelUid);
 OBJC_EXPORT void ApplicationSettingSetSelectedLivestreamURNForChannelUid(NSString *channelUid, NSString * _Nullable mediaURN);
 
