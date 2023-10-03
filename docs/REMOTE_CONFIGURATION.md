@@ -143,5 +143,6 @@ Feeds
 * `posterImagesEnabled` (optional, boolean): If set to `true`, poster images are displayed where appropriate. 
 * `showsUnavailable` (optional, boolean): If set to `true`, all features related to shows are removed.
 * `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.
+* `discoverySubtitleOptionLanguage` (optional, string): Set system subtitle language to this value once and at the beginning to help user discover that content is subtitled in that language.
 * `tvGuideUnavailable` (optional, boolean): If set to `true`, TV guide access is removed and replaced with the legacy _by date_ access.
 * `tvThirdPartyChannelsAvailable` (optional, boolean): if set to `true`, third-party TV channel content is available in the TV guide.

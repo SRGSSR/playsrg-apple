@@ -63,6 +63,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+
+@property (nonatomic, readonly, copy, nullable) NSString *discoverySubtitleOptionLanguage;
+
 @property (nonatomic, readonly, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
 
 @property (nonatomic, readonly) NSArray<NSNumber *> *liveHomeSections;                  // wrap `HomeSection` values
@@ -94,7 +97,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=isShowLeadPreferred) BOOL showLeadPreferred;
 
-@property (nonatomic, readonly, nullable) NSString *userConsentDefaultLanguage;
+@property (nonatomic, readonly, copy, nullable) NSString *userConsentDefaultLanguage;
 
 - (nullable RadioChannel *)radioChannelForUid:(nullable NSString *)uid;
 - (nullable RadioChannel *)radioHomepageChannelForUid:(nullable NSString *)uid;         // only returns a result if the radio channel exists and has a corresponding homepage

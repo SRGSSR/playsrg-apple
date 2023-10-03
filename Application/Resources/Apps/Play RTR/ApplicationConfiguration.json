@@ -24,6 +24,7 @@
   "continuousPlaybackBackgroundTransitionDuration": 0,
   "endToleranceRatio": 0.02,
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
+  "discoverySubtitleOptionLanguage": "de",
   "audioDescriptionAvailabilityHidden": true,
   "tvThirdPartyChannelsAvailable": true,
   "userConsentDefaultLanguage": "de"
