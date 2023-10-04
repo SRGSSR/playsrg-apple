@@ -137,8 +137,6 @@ name: interop-ios-for-google-sdks, nameSpecified: InteropForGoogle, owner: googl
 
 name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.12.4, source: https://github.com/urbanairship/ios-library
 
-name: iOSV5, nameSpecified: TagCommander SDK V5, owner: CommandersAct, version: 5.3.3, source: https://github.com/CommandersAct/iOSV5
-
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 
 name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg4, source: https://github.com/SRGSSR/libextobjc
@@ -159,7 +157,7 @@ name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version
 
 name: promises, nameSpecified: Promises, owner: google, version: 2.3.1, source: https://github.com/google/promises
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 9.0.0, source: https://github.com/SRGSSR/srganalytics-apple
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 8.2.0, source: https://github.com/SRGSSR/srganalytics-apple
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.2.1, source: https://github.com/SRGSSR/srgappearance-apple
 
@@ -171,7 +169,7 @@ name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, versio
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srgidentity-apple
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 9.2.0, source: https://github.com/SRGSSR/srgletterbox-apple
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 9.1.2, source: https://github.com/SRGSSR/srgletterbox-apple
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srglogger-apple
 
@@ -188,6 +186,10 @@ name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.23.
 name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.6, source: https://github.com/SwiftKickMobile/SwiftMessages
 
 name: SwiftUI-Introspect, nameSpecified: Introspect, owner: siteline, version: 0.12.0, source: https://github.com/siteline/SwiftUI-Introspect
+
+name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg5, source: https://github.com/SRGSSR/TCCore-xcframework-apple
+
+name: TCSDK-xcframework-apple, nameSpecified: TCSDK, owner: SRGSSR, version: 4.4.1-srg5, source: https://github.com/SRGSSR/TCSDK-xcframework-apple
 
 name: UICKeyChainStore, nameSpecified: UICKeyChainStore, owner: kishikawakatsumi, version: 2.2.1, source: https://github.com/kishikawakatsumi/UICKeyChainStore
 

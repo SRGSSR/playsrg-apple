@@ -29,7 +29,7 @@ struct FeaturesView: View {
             OnboardingView(onboarding: onboarding)
                 .ignoresSafeArea()
         }
-        .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.help.rawValue, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     private struct OnboardingCell: View {

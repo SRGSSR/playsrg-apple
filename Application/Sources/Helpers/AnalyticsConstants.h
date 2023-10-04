@@ -68,16 +68,4 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 
-/**
- *  @name Analytics standard page types
- */
-typedef NSString * AnalyticsPageType NS_STRING_ENUM;
-
-OBJC_EXPORT AnalyticsPageType const AnalyticsPageTypeDetail;
-OBJC_EXPORT AnalyticsPageType const AnalyticsPageTypeHelp;
-OBJC_EXPORT AnalyticsPageType const AnalyticsPageTypeLandingPage;
-OBJC_EXPORT AnalyticsPageType const AnalyticsPageTypeLive;
-OBJC_EXPORT AnalyticsPageType const AnalyticsPageTypeNavigationPage;
-OBJC_EXPORT AnalyticsPageType const AnalyticsPageTypeOverview;
-
 NS_ASSUME_NONNULL_END

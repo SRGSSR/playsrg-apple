@@ -225,11 +225,6 @@
     return AnalyticsPageTitlePlayer;
 }
 
-- (NSString *)srg_pageViewType
-{
-    return AnalyticsPageTypeDetail;
-}
-
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelPreview ];

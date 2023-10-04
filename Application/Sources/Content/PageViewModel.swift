@@ -36,17 +36,6 @@ final class PageViewModel: Identifiable, ObservableObject {
         }
     }
     
-    var analyticsPageViewType: String {
-        switch id {
-        case .video, .audio:
-            return AnalyticsPageType.landingPage.rawValue
-        case  .live:
-            return AnalyticsPageType.live.rawValue
-        case .topic:
-            return AnalyticsPageType.overview.rawValue
-        }
-    }
-    
     var analyticsPageViewLevels: [String]? {
         switch id {
         case .video:

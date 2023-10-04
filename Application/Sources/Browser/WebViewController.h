@@ -39,13 +39,6 @@ typedef void (^WebViewControllerCustomizationBlock)(WKWebView *webView);
 @property (nonatomic, copy, nullable) NSString *analyticsPageTitle;
 
 /**
- *  Page type. Must be set before view display.
- *
- *  @discussion If `nil` no tracking is made.
- */
-@property (nonatomic, copy, nullable) NSString *analyticsPageType;
-
-/**
  *  Page levels. Defaults to `nil`.
  */
 @property (nonatomic, nullable) NSArray<AnalyticsPageLevel> *analyticsPageLevels;

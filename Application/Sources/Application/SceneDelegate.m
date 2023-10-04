@@ -120,31 +120,31 @@ static void *s_kvoContext = &s_kvoContext;
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         NSInteger startTime = [action parameterWithName:@"start_time"].integerValue;
         [self openMediaWithURN:action.identifier startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeShow]) {
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openShowWithURN:action.identifier channelUid:channelUid fromPushNotification:NO completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeTopic]) {
         [self openTopicWithURN:action.identifier completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeHome]) {
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openHomeWithChannelUid:channelUid completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeAZ]) {
         NSString *index = [action parameterWithName:@"index"];
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openShowListAtIndex:index withChannelUid:channelUid completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeByDate]) {
@@ -152,12 +152,12 @@ static void *s_kvoContext = &s_kvoContext;
         NSDate *date = dateString ? [NSDateFormatter.play_iso8601CalendarDate dateFromString:dateString] : nil;
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openCalendarAtDate:date withChannelUid:channelUid completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeSection]) {
         [self openSectionWithUid:action.identifier completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeSearch]) {
@@ -174,27 +174,27 @@ static void *s_kvoContext = &s_kvoContext;
         SRGMediaType mediaType = s_mediaTypes[mediaTypeName].integerValue;
         
         [self openSearchWithQuery:query mediaType:mediaType completionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeLivestreams]) {
         [self openLivestreamsWithCompletionBlock:^{
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeLink]) {
         NSURL *URL = [NSURL URLWithString:action.identifier];
         if (URL) {
             [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
-                [action.analyticsEvent send];
+                [action.analyticsHiddenEvent send];
             }];
         }
         else {
-            [action.analyticsEvent send];
+            [action.analyticsHiddenEvent send];
         }
     }
     else {
-        [action.analyticsEvent send];
+        [action.analyticsHiddenEvent send];
     }
 }
 
@@ -332,7 +332,7 @@ static void *s_kvoContext = &s_kvoContext;
             NSNumber *position = [userActivity.userInfo[@"position"] isKindOfClass:NSNumber.class] ? userActivity.userInfo[@"position"] : nil;
             [self playURN:mediaURN media:media atPosition:[SRGPosition positionAtTimeInSeconds:position.integerValue] fromPushNotification:NO completion:nil];
             
-            [[AnalyticsEventObjC userActivityWithAction:AnalyticsUserActivityActionPlayMedia urn:mediaURN] send];
+            [[AnalyticsHiddenEventObjC userActivityWithAction:AnalyticsUserActivityActionPlayMedia urn:mediaURN] send];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -353,7 +353,7 @@ static void *s_kvoContext = &s_kvoContext;
                 [self openShowURN:showURN show:show fromPushNotification:NO];
             }];
             
-            [[AnalyticsEventObjC userActivityWithAction:AnalyticsUserActivityActionDisplayShow urn:showURN] send];
+            [[AnalyticsHiddenEventObjC userActivityWithAction:AnalyticsUserActivityActionDisplayShow urn:showURN] send];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -378,19 +378,19 @@ static void *s_kvoContext = &s_kvoContext;
     ApplicationSectionInfo *applicationSectionInfo = nil;
     if ([shortcutItem.type isEqualToString:@"favorites"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil];
-        [[AnalyticsEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionFavorites] send];
+        [[AnalyticsHiddenEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionFavorites] send];
     }
     else if ([shortcutItem.type isEqualToString:@"downloads"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionDownloads radioChannel:nil];
-        [[AnalyticsEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionDownloads] send];
+        [[AnalyticsHiddenEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionDownloads] send];
     }
     else if ([shortcutItem.type isEqualToString:@"history"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil];
-        [[AnalyticsEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionHistory] send];
+        [[AnalyticsHiddenEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionHistory] send];
     }
     else if ([shortcutItem.type isEqualToString:@"search"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionSearch radioChannel:nil];
-        [[AnalyticsEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionSearch] send];
+        [[AnalyticsHiddenEventObjC shortcutItemWithAction:AnalyticsShortcutItemActionSearch] send];
     }
     else {
         return NO;

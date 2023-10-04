@@ -48,8 +48,8 @@ extension UIViewController {
                 .sink { upcomingMedia in
                     guard let upcomingMedia else { return }
                     
-                    AnalyticsEvent.continuousPlayback(action: .display,
-                                                      mediaUrn: upcomingMedia.urn)
+                    AnalyticsHiddenEvent.continuousPlayback(action: .display,
+                                                            mediaUrn: upcomingMedia.urn)
                     .send()
                 }
                 .store(in: &cancellables)
@@ -67,7 +67,7 @@ extension UIViewController {
                 }
             })
             present(letterboxViewController, animated: animated) {
-                SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, type: AnalyticsPageType.detail.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
+                SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
                 if let completion {
                     completion()
                 }
@@ -212,11 +212,11 @@ extension UIViewController {
                 } receiveValue: { [weak self] media in
                     guard let self else { return }
                     self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
-                        AnalyticsEvent.notification(action: .playMedia,
-                                                    from: .application,
-                                                    uid: mediaUrn,
-                                                    overrideSource: notification.showURN,
-                                                    overrideType: UserNotificationTypeString(notification.type))
+                        AnalyticsHiddenEvent.notification(action: .playMedia,
+                                                          from: .application,
+                                                          uid: mediaUrn,
+                                                          overrideSource: notification.showURN,
+                                                          overrideType: UserNotificationTypeString(notification.type))
                         .send()
                         UserConsentHelper.waitCollectingConsentRelease()
                     }
@@ -236,19 +236,19 @@ extension UIViewController {
                     let showViewController = SectionViewController.showViewController(for: show)
                     navigationController.pushViewController(showViewController, animated: animated)
                     
-                    AnalyticsEvent.notification(action: .displayShow,
-                                                from: .application,
-                                                uid: showUrn,
-                                                overrideType: UserNotificationTypeString(notification.type))
+                    AnalyticsHiddenEvent.notification(action: .displayShow,
+                                                      from: .application,
+                                                      uid: showUrn,
+                                                      overrideType: UserNotificationTypeString(notification.type))
                     .send()
                     UserConsentHelper.waitCollectingConsentRelease()
                 }
         }
         else {
-            AnalyticsEvent.notification(action: .alert,
-                                        from: .application,
-                                        uid: notification.body,
-                                        overrideType: UserNotificationTypeString(notification.type))
+            AnalyticsHiddenEvent.notification(action: .alert,
+                                              from: .application,
+                                              uid: notification.body,
+                                              overrideType: UserNotificationTypeString(notification.type))
             .send()
         }
     }

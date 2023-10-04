@@ -20,7 +20,7 @@ final class ProfileAccountHeaderViewModel: ObservableObject {
         } else {
             let lastLoggedInEmailAddress = UserDefaults.standard.string(forKey: PlaySRGSettingLastLoggedInEmailAddress)
             if identityService.login(withEmailAddress: lastLoggedInEmailAddress) {
-                AnalyticsEvent.identity(action: .displayLogin).send()
+                AnalyticsHiddenEvent.identity(action: .displayLogin).send()
             }
         }
     }

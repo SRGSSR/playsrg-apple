@@ -357,11 +357,6 @@
     return AnalyticsPageTitleShowsCalendar;
 }
 
-- (NSString *)srg_pageViewType
-{
-    return AnalyticsPageTypeOverview;
-}
-
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     if (self.radioChannel) {

@@ -138,7 +138,7 @@ extension ContextMenu {
                     guard error == nil else { return }
                     
                     let action = added ? .add : .remove as AnalyticsListAction
-                    AnalyticsEvent.watchLater(action: action, source: .contextMenu, urn: media.urn).send()
+                    AnalyticsHiddenEvent.watchLater(action: action, source: .contextMenu, urn: media.urn).send()
                     
                     Banner.showWatchLaterAdded(added, forItemWithName: media.title)
                 }
@@ -159,7 +159,7 @@ extension ContextMenu {
                 HistoryRemoveMedias([media]) { error in
                     guard error == nil else { return }
                     
-                    AnalyticsEvent.historyRemove(source: .contextMenu, urn: media.urn).send()
+                    AnalyticsHiddenEvent.historyRemove(source: .contextMenu, urn: media.urn).send()
                 }
             }
         }
@@ -194,7 +194,7 @@ extension ContextMenu {
                 }
                 
                 let action = (download == nil) ? .add : .remove as AnalyticsListAction
-                AnalyticsEvent.download(action: action, source: .contextMenu, urn: media.urn).send()
+                AnalyticsHiddenEvent.download(action: action, source: .contextMenu, urn: media.urn).send()
                 
                 Banner.showDownload(download == nil, forItemWithName: media.title)
             }
@@ -272,7 +272,7 @@ extension ContextMenu {
                 FavoritesToggleShow(show)
                 
                 let action = !isFavorite ? .add : .remove as AnalyticsListAction
-                AnalyticsEvent.favorite(action: action, source: .contextMenu, urn: show.urn).send()
+                AnalyticsHiddenEvent.favorite(action: action, source: .contextMenu, urn: show.urn).send()
                 
                 Banner.showFavorite(!isFavorite, forItemWithName: show.title)
             }

@@ -387,10 +387,6 @@ extension SearchViewController: SRGAnalyticsViewTracking {
         return AnalyticsPageTitle.home.rawValue
     }
     
-    var srg_pageViewType: String {
-        return AnalyticsPageType.navigationPage.rawValue
-    }
-    
     var srg_pageViewLevels: [String]? {
         return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
     }

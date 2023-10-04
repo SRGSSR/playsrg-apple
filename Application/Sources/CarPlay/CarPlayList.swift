@@ -47,17 +47,6 @@ enum CarPlayList {
         }
     }
     
-    var pageViewType: String? {
-        switch self {
-        case .latestEpisodesFromFavorites, .livePrograms, .mostPopularMedias:
-            return AnalyticsPageType.detail.rawValue
-        case .livestreams:
-            return AnalyticsPageType.live.rawValue
-        case .mostPopular:
-            return AnalyticsPageType.overview.rawValue
-        }
-    }
-    
     var pageViewLevels: [String]? {
         switch self {
         case .latestEpisodesFromFavorites:

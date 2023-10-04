@@ -13,7 +13,7 @@ import SwiftUI
         guard let url = ApplicationConfiguration.shared.userSuggestionUrlWithParameters else { return false }
         
         return showSafariViewController(url: url) {
-            AnalyticsEvent.openHelp(action: .feedbackApp).send()
+            AnalyticsHiddenEvent.openHelp(action: .feedbackApp).send()
         }
     }
     
@@ -21,7 +21,7 @@ import SwiftUI
         guard let url = ApplicationConfiguration.shared.faqURL else { return false }
         
         return showSafariViewController(url: url) {
-            AnalyticsEvent.openHelp(action: .faq).send()
+            AnalyticsHiddenEvent.openHelp(action: .faq).send()
         }
     }
     
@@ -32,7 +32,7 @@ import SwiftUI
         productViewController.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier: ApplicationConfiguration.shared.appStoreProductIdentifier])
         
         tabBarController.play_top.present(productViewController, animated: true) {
-            AnalyticsEvent.openHelp(action: .evaluateApp).send()
+            AnalyticsHiddenEvent.openHelp(action: .evaluateApp).send()
         }
         return true
     }
@@ -43,12 +43,12 @@ import SwiftUI
         
         if MailComposeView.canSendMail() {
             tabBarController.play_top.present(supportEmailMailComposeViewController(supportEmailAddress), animated: true) {
-                AnalyticsEvent.openHelp(action: .technicalIssue).send()
+                AnalyticsHiddenEvent.openHelp(action: .technicalIssue).send()
             }
         }
         else {
             tabBarController.play_top.present(supporEmailAlertController(supportEmailAddress), animated: true) {
-                AnalyticsEvent.openHelp(action: .technicalIssue).send()
+                AnalyticsHiddenEvent.openHelp(action: .technicalIssue).send()
             }
         }
         return true

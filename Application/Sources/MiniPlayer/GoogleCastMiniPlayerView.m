@@ -160,11 +160,11 @@
         mediaControlsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
         UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
         [topViewController presentViewController:mediaControlsViewController animated:YES completion:nil];
-        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer type:AnalyticsPageTypeDetail levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
     else {
         [[GCKCastContext sharedInstance] presentCastDialog];
-        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices type:AnalyticsPageTypeOverview levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
 }
 

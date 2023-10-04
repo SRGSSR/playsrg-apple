@@ -46,7 +46,7 @@ struct MediaDetailView: View {
         .onChange(of: media) { newValue in
             model.media = newValue
         }
-        .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.detail.rawValue, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         .redactedIfNil(media)
     }
     

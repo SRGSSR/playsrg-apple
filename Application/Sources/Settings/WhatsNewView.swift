@@ -32,7 +32,7 @@ struct WhatsNewView: View {
         .onChange(of: url) { newValue in
             model.url = newValue
         }
-        .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.help.rawValue, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
 }
 
