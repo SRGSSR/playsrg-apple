@@ -300,7 +300,7 @@ final class ProgramViewModel: ObservableObject {
                       let channel = self.data?.channel,
                       let tabBarController = UIApplication.shared.mainTabBarController else { return }
                 let eventStore = EKEventStore()
-                eventStore.requestAccess( to: EKEntityType.event, completion: { [weak self] granted, error in
+                eventStore.requestAccessToEvents(completion: { [weak self] granted, error in
                     DispatchQueue.main.async {
                         guard error == nil else {
                             Banner.showError(error)
@@ -503,6 +503,19 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
                     AnalyticsHiddenEvent.calendarEventAdd(channel: channel).send()
                 }
             }
+        }
+    }
+}
+
+// MARK: EKEventStore extension for iOS compatiblity
+
+private extension EKEventStore {
+    func requestAccessToEvents(completion: @escaping EKEventStoreRequestAccessCompletionHandler) {
+        if #available(iOS 17.0, *) {
+            self.requestWriteOnlyAccessToEvents(completion: completion)
+        }
+        else {
+            self.requestAccess( to: EKEntityType.event, completion: completion)
         }
     }
 }

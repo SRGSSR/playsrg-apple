@@ -6,5 +6,6 @@ xcargs('ONLY_ACTIVE_ARCH=YES')
 localize_simulator(true)
 override_status_bar(true)
 reinstall_app(true)
+launch_arguments(['FL_SCREENSHOTS'])
 
 clear_previous_screenshots(true)

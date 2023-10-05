@@ -15,6 +15,7 @@ NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled
 NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
 NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingSubtitleAvailabilityDisplayed";
 NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
+NSString * const PlaySRGSettingDiscoverySubtitleOptionLanguageRunOnce = @"PlaySRGSettingDiscoverySubtitleOptionLanguageRunOnce";
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLivestreamURNForChannels";
 NSString * const PlaySRGSettingServiceIdentifier = @"PlaySRGSettingServiceIdentifier";

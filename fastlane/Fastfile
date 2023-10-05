@@ -418,12 +418,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes iOS screenshots. !!! No replacement made on App Store Connect !!!'
+  desc 'SRF: Makes iOS screenshots. No replacement made on App Store Connect.'
   lane :iOSsrfScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'SRF')
-    # upload_screenshots(platform) # Don't erase existing ones, from SRF marketing team.
+    # Don't erase existing screenshots, from SRF marketing team.
   end
 
   desc 'SWI: Makes iOS screenshots and replaces current ones on App Store Connect.'
@@ -588,12 +588,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes tvOS screenshots and replaces current ones on App Store Connect.'
+  desc 'SRF: Makes tvOS screenshots. No replacement made on App Store Connect.'
   lane :tvOSsrfScreenshots do
     platform = 'tvOS'
 
     screenshots(platform, 'SRF')
-    upload_screenshots(platform)
+    # Don't erase existing screenshots, from SRF marketing team.
   end
 
   desc 'SWI: Makes tvOS screenshots and replaces current ones on App Store Connect.'
@@ -1655,6 +1655,7 @@ def upload_screenshots(platform)
     skip_binary_upload: true,
     skip_metadata: true,
     overwrite_screenshots: true,
+    ignore_language_directory_validation: true,
     precheck_include_in_app_purchases: false,
     force: true # Don't stop to wait manual preview
   )
@@ -1843,7 +1844,7 @@ def tag_beta(platform)
   else
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
-    push_to_git_remote
+    push_git_tags
   end
 end
 
@@ -1855,7 +1856,7 @@ def bump_build_number_beta
 
   bump_build_number_commit
   git_pull(rebase: true)
-  push_to_git_remote
+  push_to_git_remote(tags: false)
 end
 
 def cherrypick_beta_on_develop(commits)
@@ -1908,8 +1909,8 @@ def gitflow_release_platforms(platforms, branch_name)
     bump_marketing_version_commit(platforms[index])
   end
 
-  push_to_git_remote(local_branch: 'master', remote_branch: 'master')
-  push_to_git_remote(local_branch: 'develop', remote_branch: 'develop')
+  push_to_git_remote(local_branch: 'master', remote_branch: 'master', tags: true)
+  push_to_git_remote(local_branch: 'develop', remote_branch: 'develop', tags: false)
 end
 
 def gitflow_release(tags, branch_name)
@@ -1982,7 +1983,7 @@ def snapshot_ios_devices
   [
     'iPhone 14 Plus', # 6.5 inch, required
     'iPhone 8 Plus', # 5.5 inch, required
-    'iPad Pro (12.9-inch) (5th generation)', # 12.9 inch, required
+    'iPad Pro (12.9-inch) (6th generation)', # 12.9 inch, required
     'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
   ]
 end

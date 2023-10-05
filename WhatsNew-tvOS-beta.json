@@ -72,5 +72,7 @@
     "1.7.4-425": "Branch beta\n- Ask user consent at launch when needed.\n- Add privacy section in settings view.",
     "1.7.4-426": "- Implementation of a consent banner for the personal data usage.",
     "1.7.5-427": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update.\n- Page view analytics have page type property.",
-    "1.7.5-428": "- Maintenance release."
+    "1.7.5-428": "- Maintenance release.",
+    "1.7.6-430": "- tvOS 17 support.\n- Update profile view to fix a tvOS 17 issue.\n- Analytic events use a new server.",
+    "1.7.6-431": "- Set at first time, german subtitles on. [RTR]"
 }

@@ -5360,11 +5360,11 @@
 			buildPhases = (
 				232237A98B5828DBC825D3FD /* [CP] Check Pods Manifest.lock */,
 				08B836951FBDC07100D849D8 /* Restore original icons if needed */,
+				0806E7A71D4BA4ED002ED406 /* Make custom icons */,
 				08C68D851D38D6F400BB8AAA /* Sources */,
 				08AD6C6E266BDC5000FAF1FA /* Swift Lint */,
 				6FE3C7C21F74EC5C00D57D29 /* Update License Information */,
 				08C68D861D38D6F400BB8AAA /* Frameworks */,
-				0806E7A71D4BA4ED002ED406 /* Make custom icons */,
 				08C68D871D38D6F400BB8AAA /* Resources */,
 				085F7DCB1FA4E6890010AF34 /* Restore original icons */,
 				6F0108D022E96E96002DC778 /* Insert Version In Settings Bundle */,
@@ -5417,11 +5417,11 @@
 			buildPhases = (
 				7FAC09F6ECABDE6AAB74DCBC /* [CP] Check Pods Manifest.lock */,
 				08B836941FBDBEAB00D849D8 /* Restore original icons if needed */,
+				0806E7A61D4BA4DF002ED406 /* Make custom icons */,
 				08C68DBC1D38D70D00BB8AAA /* Sources */,
 				08A1C3BF2636E77900276A5E /* Swift Lint */,
 				6FE3C7C31F74EEA500D57D29 /* Update License Information */,
 				08C68DBD1D38D70D00BB8AAA /* Frameworks */,
-				0806E7A61D4BA4DF002ED406 /* Make custom icons */,
 				08C68DBE1D38D70D00BB8AAA /* Resources */,
 				085F7DCA1FA4E67B0010AF34 /* Restore original icons */,
 				6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */,
@@ -5473,11 +5473,11 @@
 			buildPhases = (
 				78466A9B6015AEDBE68B70AE /* [CP] Check Pods Manifest.lock */,
 				08B836961FBDC08400D849D8 /* Restore original icons if needed */,
+				0806E7A51D4BA4CF002ED406 /* Make custom icons */,
 				08C68DF31D38D72000BB8AAA /* Sources */,
 				08AD6C6F266BDC6D00FAF1FA /* Swift Lint */,
 				6FE3C7C41F74EEBE00D57D29 /* Update License Information */,
 				08C68DF41D38D72000BB8AAA /* Frameworks */,
-				0806E7A51D4BA4CF002ED406 /* Make custom icons */,
 				08C68DF51D38D72000BB8AAA /* Resources */,
 				085F7DC91FA4E6670010AF34 /* Restore original icons */,
 				6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */,
@@ -5529,11 +5529,11 @@
 			buildPhases = (
 				FBB9B98911CFC58048BECCF7 /* [CP] Check Pods Manifest.lock */,
 				08B836971FBDC09500D849D8 /* Restore original icons if needed */,
+				0806E7A41D4BA4BA002ED406 /* Make custom icons */,
 				08C68E2A1D38D73000BB8AAA /* Sources */,
 				08AD6C70266BDC7B00FAF1FA /* Swift Lint */,
 				6FE3C7C61F74EECF00D57D29 /* Update License Information */,
 				08C68E2B1D38D73000BB8AAA /* Frameworks */,
-				0806E7A41D4BA4BA002ED406 /* Make custom icons */,
 				08C68E2C1D38D73000BB8AAA /* Resources */,
 				085F7DC71FA4DD510010AF34 /* Restore original icons */,
 				6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */,
@@ -5585,11 +5585,11 @@
 			buildPhases = (
 				49ADB3012DE6D27CE66B2113 /* [CP] Check Pods Manifest.lock */,
 				08B836981FBDC0A100D849D8 /* Restore original icons if needed */,
+				0806E7A31D4BA494002ED406 /* Make custom icons */,
 				08C68E611D38D73C00BB8AAA /* Sources */,
 				08AD6C71266BDC8D00FAF1FA /* Swift Lint */,
 				6FE3C7C71F74EEDB00D57D29 /* Update License Information */,
 				08C68E621D38D73C00BB8AAA /* Frameworks */,
-				0806E7A31D4BA494002ED406 /* Make custom icons */,
 				08C68E631D38D73C00BB8AAA /* Resources */,
 				085F7DC81FA4E6570010AF34 /* Restore original icons */,
 				6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */,
@@ -5826,10 +5826,10 @@
 			buildPhases = (
 				3F06504E4BC663E2337102FC /* [CP] Check Pods Manifest.lock */,
 				08C13555256B2746002F67B8 /* Restore original icons if needed */,
+				08C13557256B277B002F67B8 /* Make custom icons */,
 				6F331CE024D06B8200C096AB /* Sources */,
 				08AD6C72266BDCA100FAF1FA /* Swift Lint */,
 				6F331CE124D06B8200C096AB /* Frameworks */,
-				08C13557256B277B002F67B8 /* Make custom icons */,
 				6F331CE224D06B8200C096AB /* Resources */,
 				08C13558256B27AC002F67B8 /* Restore original icons */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
@@ -5870,10 +5870,10 @@
 			buildPhases = (
 				FAE3B1C7F74BDAE7DC78737D /* [CP] Check Pods Manifest.lock */,
 				08C1356D256B28C0002F67B8 /* Restore original icons if needed */,
+				08C13571256B291D002F67B8 /* Make custom icons */,
 				6F331CF824D06BA200C096AB /* Sources */,
 				08AD6C73266BDCBB00FAF1FA /* Swift Lint */,
 				6F331CF924D06BA200C096AB /* Frameworks */,
-				08C13571256B291D002F67B8 /* Make custom icons */,
 				6F331CFA24D06BA200C096AB /* Resources */,
 				08C13575256B2977002F67B8 /* Restore original icons */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
@@ -5914,10 +5914,10 @@
 			buildPhases = (
 				E7AC0E2F6A0FB261ACE34DB4 /* [CP] Check Pods Manifest.lock */,
 				08C1356E256B28C7002F67B8 /* Restore original icons if needed */,
+				08C13572256B2922002F67B8 /* Make custom icons */,
 				6F331D1024D06BB800C096AB /* Sources */,
 				08AD6C74266BDCC800FAF1FA /* Swift Lint */,
 				6F331D1124D06BB800C096AB /* Frameworks */,
-				08C13572256B2922002F67B8 /* Make custom icons */,
 				6F331D1224D06BB800C096AB /* Resources */,
 				08C13576256B297E002F67B8 /* Restore original icons */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
@@ -5958,10 +5958,10 @@
 			buildPhases = (
 				1FF1158BC96D38AD87F2F9E1 /* [CP] Check Pods Manifest.lock */,
 				08C1356F256B28CF002F67B8 /* Restore original icons if needed */,
+				08C13573256B2927002F67B8 /* Make custom icons */,
 				6F331D2824D06BC600C096AB /* Sources */,
 				08AD6C75266BDCD400FAF1FA /* Swift Lint */,
 				6F331D2924D06BC600C096AB /* Frameworks */,
-				08C13573256B2927002F67B8 /* Make custom icons */,
 				6F331D2A24D06BC600C096AB /* Resources */,
 				08C13577256B2983002F67B8 /* Restore original icons */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
@@ -6002,10 +6002,10 @@
 			buildPhases = (
 				69679F3DF79A5A7DF70B2B79 /* [CP] Check Pods Manifest.lock */,
 				08C13570256B28D7002F67B8 /* Restore original icons if needed */,
+				08C13574256B292C002F67B8 /* Make custom icons */,
 				6F331D4024D06C2600C096AB /* Sources */,
 				08AD6C76266BDCDE00FAF1FA /* Swift Lint */,
 				6F331D4124D06C2600C096AB /* Frameworks */,
-				08C13574256B292C002F67B8 /* Make custom icons */,
 				6F331D4224D06C2600C096AB /* Resources */,
 				08C13578256B2989002F67B8 /* Restore original icons */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
@@ -6149,7 +6149,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {
@@ -10890,6 +10890,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -11986,6 +11987,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -13678,6 +13680,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -13740,6 +13743,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -13993,6 +13997,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -14152,6 +14157,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

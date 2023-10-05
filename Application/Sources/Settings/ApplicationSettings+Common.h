@@ -52,4 +52,7 @@ OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
 
 OBJC_EXPORT BOOL ApplicationSettingAutoplayEnabled(void);
 
+OBJC_EXPORT BOOL ApplicationSettingDiscoverySubtitleOptionLanguageRunOnce(void);
+OBJC_EXPORT void ApplicationSettingSetDiscoverySubtitleOptionLanguageRunOnce(BOOL discoverySubtitleOptionLanguageRunOnce);
+
 NS_ASSUME_NONNULL_END

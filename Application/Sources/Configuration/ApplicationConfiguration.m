@@ -66,6 +66,26 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
         NSArray<AVMediaCharacteristic> *characteristics = CFBridgingRelease(MAAudibleMediaCopyPreferredCharacteristics());
         return [AVMediaSelectionGroup mediaSelectionOptionsFromArray:matchingAudioOptions withMediaCharacteristics:characteristics].firstObject ?: matchingAudioOptions.firstObject;
     };
+    
+    if (ApplicationConfiguration.sharedApplicationConfiguration.discoverySubtitleOptionLanguage != nil && !ApplicationSettingDiscoverySubtitleOptionLanguageRunOnce()) {
+        controller.subtitleConfigurationBlock = ^AVMediaSelectionOption * _Nullable(NSArray<AVMediaSelectionOption *> * _Nonnull subtitleOptions, AVMediaSelectionOption * _Nullable audioOption, AVMediaSelectionOption * _Nullable defaultSubtitleOption) {
+            NSString *subtitleOptionLanguage = ApplicationConfiguration.sharedApplicationConfiguration.discoverySubtitleOptionLanguage;
+            NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(AVMediaSelectionOption * _Nullable option, NSDictionary<NSString *,id> * _Nullable bindings) {
+                return [[option.locale objectForKey:NSLocaleLanguageCode] isEqualToString:subtitleOptionLanguage];
+            }];
+            
+            AVMediaSelectionOption *subtitleOption = [subtitleOptions filteredArrayUsingPredicate:predicate].firstObject;
+            if (subtitleOption != nil) {
+                MACaptionAppearanceAddSelectedLanguage(kMACaptionAppearanceDomainUser, (__bridge CFStringRef _Nonnull)(subtitleOptionLanguage));
+                ApplicationSettingSetDiscoverySubtitleOptionLanguageRunOnce(YES);
+                return subtitleOption;
+            }
+            else {
+                return defaultSubtitleOption;
+            }
+        };
+    }
+    
     [controller reloadMediaConfiguration];
     
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
@@ -127,6 +147,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+
+@property (nonatomic, copy) NSString *discoverySubtitleOptionLanguage;
+
 @property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
@@ -374,6 +397,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
+    
+    self.discoverySubtitleOptionLanguage = [firebaseConfiguration stringForKey:@"discoverySubtitleOptionLanguage"];
+    
     self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
     
 #if TARGET_OS_IOS
