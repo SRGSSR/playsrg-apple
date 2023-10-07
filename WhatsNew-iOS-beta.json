@@ -207,5 +207,6 @@
     "3.7.6-428": "- Update Chromecast component.\n- Maintenance release.",
     "3.7.7-429": "- Fix player minor issues on iOS 17.",
     "3.7.8-430": "- iOS 17 support.\n- Add program to calendar autorisation adapted on iOS 17.\n- Analytic events use a new server.",
-    "3.7.8-431": "- Set at first time, german subtitles on. [RTR]"
+    "3.7.8-431": "- Set at first time, german subtitles on. [RTR]",
+    "3.7.9-432": "- Maintenance build.\n- Analytic events use a new server."
 }

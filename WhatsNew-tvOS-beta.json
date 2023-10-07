@@ -74,5 +74,6 @@
     "1.7.5-427": "Branch beta\n- Update SRGAnalytics with Tag Commander V5 update.\n- Page view analytics have page type property.",
     "1.7.5-428": "- Maintenance release.",
     "1.7.6-430": "- tvOS 17 support.\n- Update profile view to fix a tvOS 17 issue.\n- Analytic events use a new server.",
-    "1.7.6-431": "- Set at first time, german subtitles on. [RTR]"
+    "1.7.6-431": "- Set at first time, german subtitles on. [RTR]",
+    "1.7.7-432": "- Maintenance build.\n- Analytic events use a new server."
 }
