@@ -99,7 +99,7 @@ final class ShowHeaderViewModel: ObservableObject {
     
 #if os(iOS)
     var isSubscriptionPossible: Bool {
-        return PushService.shared != nil && isFavorite
+        return PushService.shared != nil
     }
     
     var subscriptionIcon: String {
