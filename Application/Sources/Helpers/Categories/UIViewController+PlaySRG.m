@@ -212,11 +212,7 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
             }];
         }
         else {
-            [letterboxController prepareToPlayMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()completionHandler:^{
-                if (![UserConsentHelper isShowingBanner]) {
-                    [letterboxController play];
-                }
-            }];
+            [letterboxController playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
         completion ? completion() : nil;
     }

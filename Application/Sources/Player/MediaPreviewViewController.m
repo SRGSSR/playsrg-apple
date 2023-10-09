@@ -107,11 +107,7 @@
     };
     ApplicationConfigurationApplyControllerSettings(self.letterboxController);
     
-    [self.letterboxController prepareToPlayMedia:self.media atPosition:HistoryResumePlaybackPositionForMedia(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings() completionHandler:^{
-        if (![UserConsentHelper isShowingBanner]) {
-            [self.letterboxController play];
-        }
-    }];
+    [self.letterboxController playMedia:self.media atPosition:HistoryResumePlaybackPositionForMedia(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings()];
     [self.letterboxView setUserInterfaceHidden:YES animated:NO togglable:NO];
     [self.letterboxView setTimelineAlwaysHidden:YES animated:NO];
     
