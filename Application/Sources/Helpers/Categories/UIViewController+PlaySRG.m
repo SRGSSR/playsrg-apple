@@ -206,9 +206,7 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
                 && letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             [letterboxController seekToPosition:position withCompletionHandler:^(BOOL finished) {
-                if (![UserConsentHelper isShowingBanner]) {
-                    [letterboxController play];
-                }
+                [letterboxController play];
             }];
         }
         else {

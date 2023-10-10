@@ -423,9 +423,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     if (self.originalLetterboxController) {
         // Always resume playback if the original controller was not playing
-        if (![UserConsentHelper isShowingBanner]) {
-            [self.letterboxController play];
-        }
+        [self.letterboxController play];
     }
     else {
         self.letterboxController.contentURLOverridingBlock = ^(NSString *URN) {
