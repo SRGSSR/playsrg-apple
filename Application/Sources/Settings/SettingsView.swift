@@ -53,6 +53,9 @@ struct SettingsView: View {
 #if os(iOS) && (DEBUG || APPCENTER)
             DeveloperSection()
 #endif
+#if DEBUG || NIGHTLY || BETA
+            DebugInformationSection(model: model)
+#endif
         }
 #if os(tvOS)
         .listStyle(GroupedListStyle())
@@ -430,13 +433,15 @@ struct SettingsView: View {
                     Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
                 }
 #endif
+#if !DEBUG && !NIGHTLY && !BETA
                 VersionCell(model: model)
+#endif
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
         }
         
-        private struct VersionCell: View {
+        fileprivate struct VersionCell: View {
             @ObservedObject var model: SettingsViewModel
             
             var body: some View {
@@ -787,6 +792,22 @@ struct SettingsView: View {
         
         private func toggleFlex() {
             FLEXManager.shared.toggleExplorer()
+        }
+    }
+#endif
+    
+    // MARK: Debug information section
+
+#if DEBUG || NIGHTLY || BETA
+    private struct DebugInformationSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                InformationSection.VersionCell(model: model)
+            } header: {
+                Text(NSLocalizedString("Information", comment: "Information section header"))
+            }
         }
     }
 #endif
