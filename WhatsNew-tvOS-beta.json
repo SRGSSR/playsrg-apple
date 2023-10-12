@@ -75,5 +75,6 @@
     "1.7.5-428": "- Maintenance release.",
     "1.7.6-430": "- tvOS 17 support.\n- Update profile view to fix a tvOS 17 issue.\n- Analytic events use a new server.",
     "1.7.6-431": "- Set at first time, german subtitles on. [RTR]",
-    "1.7.7-432": "- Maintenance build.\n- Analytic events use a new server."
+    "1.7.7-432": "- Maintenance build.\n- Analytic events use a new server.",
+    "1.7.7-433": "- Allow playing video and audio when displaying user consent banners.\n- Analytic events have language property."
 }
