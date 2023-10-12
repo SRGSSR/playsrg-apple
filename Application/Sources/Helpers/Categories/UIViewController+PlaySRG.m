@@ -206,17 +206,11 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
                 && letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             [letterboxController seekToPosition:position withCompletionHandler:^(BOOL finished) {
-                if (![UserConsentHelper isShowingBanner]) {
-                    [letterboxController play];
-                }
+                [letterboxController play];
             }];
         }
         else {
-            [letterboxController prepareToPlayMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()completionHandler:^{
-                if (![UserConsentHelper isShowingBanner]) {
-                    [letterboxController play];
-                }
-            }];
+            [letterboxController playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
         completion ? completion() : nil;
     }

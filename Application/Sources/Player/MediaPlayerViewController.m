@@ -423,9 +423,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     if (self.originalLetterboxController) {
         // Always resume playback if the original controller was not playing
-        if (![UserConsentHelper isShowingBanner]) {
-            [self.letterboxController play];
-        }
+        [self.letterboxController play];
     }
     else {
         self.letterboxController.contentURLOverridingBlock = ^(NSString *URN) {
@@ -434,18 +432,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         };
         
         if (self.originalMedia) {
-            [self.letterboxController prepareToPlayMedia:self.originalMedia atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings() completionHandler:^{
-                if (![UserConsentHelper isShowingBanner]) {
-                    [self.letterboxController play];
-                }
-            }];
+            [self.letterboxController playMedia:self.originalMedia atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
         else {
-            [self.letterboxController prepareToPlayURN:self.originalURN atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings() completionHandler:^{
-                if (![UserConsentHelper isShowingBanner]) {
-                    [self.letterboxController play];
-                }
-            }];
+            [self.letterboxController playURN:self.originalURN atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
     }
     

@@ -54,18 +54,9 @@ extension UIViewController {
                 }
                 .store(in: &cancellables)
             
-            NotificationCenter.default.weakPublisher(for: UserConsentHelper.userConsentWillShowBannerNotification)
-                .sink { _ in
-                    controller.pause()
-                }
-                .store(in: &cancellables)
-            
             let position = HistoryResumePlaybackPositionForMedia(media)
-            controller.prepare(toPlay: media, at: position, withPreferredSettings: nil, completionHandler: {
-                if !UserConsentHelper.isShowingBanner {
-                    controller.play()
-                }
-            })
+            controller.playMedia(media, at: position, withPreferredSettings: nil)
+            
             present(letterboxViewController, animated: animated) {
                 SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, type: AnalyticsPageType.detail.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
                 if let completion {
