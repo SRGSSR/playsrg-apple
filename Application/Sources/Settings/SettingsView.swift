@@ -54,7 +54,7 @@ struct SettingsView: View {
             DeveloperSection()
 #endif
 #if DEBUG || NIGHTLY || BETA
-            DebugInformationSection(model: model)
+            BottomAdditionalInformationSection(model: model)
 #endif
         }
 #if os(tvOS)
@@ -433,9 +433,7 @@ struct SettingsView: View {
                     Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
                 }
 #endif
-#if !DEBUG && !NIGHTLY && !BETA
                 VersionCell(model: model)
-#endif
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
@@ -796,10 +794,10 @@ struct SettingsView: View {
     }
 #endif
     
-    // MARK: Debug information section
+    // MARK: Bottom additional information section
 
 #if DEBUG || NIGHTLY || BETA
-    private struct DebugInformationSection: View {
+    private struct BottomAdditionalInformationSection: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
