@@ -24,23 +24,23 @@ struct EmptyContentView: View {
         self.insets = insets
     }
     
-    private func imageName(for type: `Type`) -> String {
+    private func largeImage(for type: `Type`) -> ImageResource {
         switch type {
         case .episodesFromFavorites, .favoriteShows:
-            return "favorite-background"
+            return .favoriteBackground
         case .generic:
-            return "media-background"
+            return .mediaBackground
         case .history, .resumePlayback:
-            return "history-background"
-        case .notifications:
-            return "subscription-background"
+            return .historyBackground
         case .search, .searchTutorial:
-            return "search-background"
+            return .searchBackground
         case .watchLater:
-            return "watch_later-background"
+            return .watchLaterBackground
 #if os(iOS)
+        case .notifications:
+            return .subscriptionBackground
         case .downloads:
-            return "download-background"
+            return .downloadBackground
 #endif
         }
     }
@@ -51,13 +51,13 @@ struct EmptyContentView: View {
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
-        case .notifications:
-            return NSLocalizedString("No notifications", comment: "Text displayed when no notifications are available")
         case .search:
             return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         case .searchTutorial:
             return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
 #if os(iOS)
+        case .notifications:
+            return NSLocalizedString("No notifications", comment: "Text displayed when no notifications are available")
         case .downloads:
             return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
 #endif
@@ -74,7 +74,7 @@ struct EmptyContentView: View {
             case let .empty(type: type):
                 VStack {
                     if layout == .standard {
-                        Image(decorative: imageName(for: type))
+                        Image(largeImage(for: type))
                     }
                     Text(emptyTitle(for: type))
                         .srgFont(.H2)
@@ -109,12 +109,12 @@ extension EmptyContentView {
         case favoriteShows
         case generic
         case history
-        case notifications
         case resumePlayback
         case search
         case searchTutorial
         case watchLater
 #if os(iOS)
+        case notifications
         case downloads
 #endif
     }

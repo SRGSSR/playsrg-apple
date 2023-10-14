@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct LabeledButton: View {
-    let icon: String
+    let icon: ImageResource
     let label: String
     let accessibilityLabel: String
     let accessibilityHint: String?
@@ -15,7 +15,7 @@ struct LabeledButton: View {
     
     @State private var isFocused = false
     
-    init(icon: String, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    init(icon: ImageResource, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
         self.accessibilityLabel = accessibilityLabel ?? label
@@ -26,7 +26,7 @@ struct LabeledButton: View {
     var body: some View {
         VStack {
             Button(action: action) {
-                Image(decorative: icon)
+                Image(icon)
                     .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onParentFocusChange { isFocused = $0 }
@@ -45,12 +45,12 @@ struct LabeledButton: View {
 struct LabeledButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LabeledButton(icon: "episodes", label: "Episodes", action: {})
+            LabeledButton(icon: .episodes, label: "Episodes", action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Short label")
             
-            LabeledButton(icon: "favorite", label: "Watch later", action: {})
+            LabeledButton(icon: .favorite, label: "Watch later", action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Long label")

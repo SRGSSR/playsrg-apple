@@ -41,7 +41,7 @@ struct ProfileAccountHeaderView: View {
             } label: {
                 HStack(spacing: spacing) {
                     ZStack(alignment: .topTrailing) {
-                        Image(decorative: model.data.decorativeName)
+                        Image(model.data.icon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: iconHeight)

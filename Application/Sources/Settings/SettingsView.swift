@@ -77,7 +77,7 @@ struct SettingsView: View {
                     Button(action: navigateTo(applicationSectionInfo.applicationSection)) {
                         HStack(spacing: 16) {
                             if let imageName = applicationSectionInfo.imageName {
-                                Image(decorative: imageName)
+                                Image(ImageResource(name: imageName, bundle: .main))
                             }
                             Text(applicationSectionInfo.title)
                         }

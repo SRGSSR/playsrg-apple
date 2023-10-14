@@ -37,7 +37,7 @@ struct FeaturesView: View {
         
         var body: some View {
             HStack {
-                Image(decorative: onboarding.iconName)
+                Image(onboarding.icon)
                 Text(onboarding.title)
             }
             .foregroundColor(.primary)

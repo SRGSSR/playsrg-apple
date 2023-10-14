@@ -115,12 +115,12 @@ struct MediaDetailView: View {
     }
     
     private struct AttributeView: View {
-        let icon: String
+        let icon: ImageResource
         let values: [String]
         
         var body: some View {
             HStack(spacing: 10) {
-                Image(decorative: icon)
+                Image(icon)
                 // Unbreakable spaces before / after the separator
                 Text(values.joined(separator: " - "))
                     .srgFont(.subtitle2)
@@ -143,10 +143,10 @@ struct MediaDetailView: View {
                     }
                 }
                 if let subtitleLanguages = model.media?.play_subtitleLanguages, !subtitleLanguages.isEmpty {
-                    AttributeView(icon: "subtitle_tracks", values: subtitleLanguages)
+                    AttributeView(icon: .subtitleTracks, values: subtitleLanguages)
                 }
                 if let audioLanguages = model.media?.play_audioLanguages, !audioLanguages.isEmpty {
-                    AttributeView(icon: "audio_tracks", values: audioLanguages)
+                    AttributeView(icon: .audioTracks, values: audioLanguages)
                 }
             }
         }
@@ -183,7 +183,7 @@ struct MediaDetailView: View {
         var body: some View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
-                LabeledButton(icon: "play", label: playButtonLabel) {
+                LabeledButton(icon: .play, label: playButtonLabel) {
                     if let media = model.media {
                         let playAnalyticsClickEvent = media.urn == model.playAnalyticsClickEventMediaUrn ? model.playAnalyticsClickEvent : nil
                         navigateToMedia(media, play: true, playAnalyticsClickEvent: playAnalyticsClickEvent)
@@ -192,7 +192,7 @@ struct MediaDetailView: View {
                 if model.watchLaterAllowedAction != .none {
                     // TODO: Write in a better way
                     let isRemoval = (model.watchLaterAllowedAction == .remove)
-                    LabeledButton(icon: isRemoval ? "watch_later_full" : "watch_later",
+                    LabeledButton(icon: isRemoval ? .watchLaterFull : .watchLater,
                                   label: isRemoval
                                     ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list")
                                     : model.media?.mediaType == .audio
@@ -207,7 +207,7 @@ struct MediaDetailView: View {
                     }
                 }
                 if let show = model.media?.show {
-                    LabeledButton(icon: "episodes", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
+                    LabeledButton(icon: .episodes, label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
                         navigateToShow(show)
                     }
                 }
