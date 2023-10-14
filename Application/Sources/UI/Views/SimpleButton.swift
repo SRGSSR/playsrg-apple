@@ -11,7 +11,7 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct SimpleButton: View {
-    private let icon: String
+    private let icon: ImageResource
     private let label: String?
     private let labelMinimumScaleFactor: CGFloat?
     private let accessibilityLabel: String
@@ -20,7 +20,7 @@ struct SimpleButton: View {
     
     @State private var isFocused = false
     
-    init(icon: String, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    init(icon: ImageResource, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = nil
         self.labelMinimumScaleFactor = nil
@@ -29,7 +29,7 @@ struct SimpleButton: View {
         self.action = action
     }
     
-    init(icon: String, label: String, labelMinimumScaleFactor: CGFloat = 0.8, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    init(icon: ImageResource, label: String, labelMinimumScaleFactor: CGFloat = 0.8, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
         self.labelMinimumScaleFactor = labelMinimumScaleFactor
@@ -41,7 +41,7 @@ struct SimpleButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                Image(decorative: icon)
+                Image(icon)
                 if let label {
                     Text(label)
                         .srgFont(.button)
@@ -62,8 +62,8 @@ struct SimpleButton: View {
 struct SimpleButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SimpleButton(icon: "favorite", label: "Add to favorites", action: {})
-            SimpleButton(icon: "favorite", accessibilityLabel: "Add to favorites", action: {})
+            SimpleButton(icon: .favorite, label: "Add to favorites", action: {})
+            SimpleButton(icon: .favorite, accessibilityLabel: "Add to favorites", action: {})
         }
         .padding()
         .previewLayout(.sizeThatFits)

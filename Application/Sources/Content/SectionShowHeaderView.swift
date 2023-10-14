@@ -126,7 +126,7 @@ struct SectionShowHeaderView: View {
         }
         
         var body: some View {
-            SimpleButton(icon: "episodes", label: show.title) {
+            SimpleButton(icon: .episodes, label: show.title) {
                 firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
             }
             .frame(maxWidth: 350)

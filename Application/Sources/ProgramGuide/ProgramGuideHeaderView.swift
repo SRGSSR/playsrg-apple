@@ -89,7 +89,7 @@ struct ProgramGuideHeaderView: View {
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
 #if os(iOS)
-                ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
+                ExpandingButton(icon: .calendar, label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
                 }
 #endif
@@ -115,7 +115,7 @@ struct ProgramGuideHeaderView: View {
         
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
-                ExpandingButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
+                ExpandingButton(icon: .chevronPrevious, accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
                     AnalyticsClickEvent.tvGuidePreviousDay().send()
                     model.switchToPreviousDay()
                 }
@@ -129,7 +129,7 @@ struct ProgramGuideHeaderView: View {
                 DateView(model: model)
 #endif
                 
-                ExpandingButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
+                ExpandingButton(icon: .chevronNext, accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
                     AnalyticsClickEvent.tvGuideNextDay().send()
                     model.switchToNextDay()
                 }
