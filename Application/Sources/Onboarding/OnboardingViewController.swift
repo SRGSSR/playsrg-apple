@@ -142,10 +142,10 @@ extension OnboardingViewController: PaperOnboardingDataSource {
         let titleFontSize = CGFloat(isTall ? 24.0 : 20.0)
         let subtitleFontSize = CGFloat(isTall ? 15.0 : 14.0)
         
-        return OnboardingItemInfo(informationImage: UIImage(resource: page.image(for: onboarding)),
+        return OnboardingItemInfo(informationImage: UIImage(named: page.imageName(for: onboarding)) ?? UIImage(),
                                   title: PlaySRGOnboardingLocalizedString(page.title, comment: nil),
                                   description: PlaySRGOnboardingLocalizedString(page.text, comment: nil),
-                                  pageIcon: UIImage(resource: page.icon(for: onboarding)),
+                                  pageIcon: UIImage(named: page.iconName(for: onboarding)) ?? UIImage(),
                                   color: page.color,
                                   titleColor: .white,
                                   descriptionColor: .white,

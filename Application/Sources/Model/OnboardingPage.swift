@@ -19,12 +19,12 @@ struct OnboardingPage: Codable, Identifiable {
         case colorHex = "color"
     }
     
-    func image(for onboarding: Onboarding) -> ImageResource {
-        return ImageResource(name: "\(onboarding.id)_\(id)", bundle: .main)
+    func imageName(for onboarding: Onboarding) -> String {
+        return "\(onboarding.id)_\(id)"
     }
     
-    func icon(for onboarding: Onboarding) -> ImageResource {
-        return ImageResource(name: "\(onboarding.id)_\(id)-small", bundle: .main)
+    func iconName(for onboarding: Onboarding) -> String {
+        return "\(onboarding.id)_\(id)-small"
     }
     
     var color: UIColor {
