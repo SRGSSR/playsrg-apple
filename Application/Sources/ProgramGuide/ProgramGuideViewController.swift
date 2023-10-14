@@ -97,7 +97,7 @@ final class ProgramGuideViewController: UIViewController {
     private func updateNavigationBar() {
         let isGrid = (layout == .grid)
         let layoutBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: isGrid ? "layout_grid_on" : "layout_list_on"),
+            image: UIImage(resource: isGrid ? .layoutGridOn : .layoutListOn),
             style: .plain,
             target: self,
             action: #selector(toggleLayout(_:))

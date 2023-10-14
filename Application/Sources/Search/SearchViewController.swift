@@ -248,7 +248,7 @@ final class SearchViewController: UIViewController {
         }
         
         if let filtersButton = filtersBarButtonItem?.customView as? UIButton {
-            let image = !SearchViewModel.areDefaultSettings(settings) ? UIImage(named: "filter_on") : UIImage(named: "filter_off")
+            let image = !SearchViewModel.areDefaultSettings(settings) ? UIImage(resource: .filterOn) : UIImage(resource: .filterOff)
             filtersButton.setImage(image, for: .normal)
         }
     }
