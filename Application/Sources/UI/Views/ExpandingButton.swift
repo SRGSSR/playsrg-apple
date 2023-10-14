@@ -70,16 +70,16 @@ struct ExpandingButton: View {
 struct ExpandingButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ExpandingButton(icon: .aToZ, label: "A to Z", action: {})
+            ExpandingButton(icon: .watchLater, label: "Later", action: {})
                 .padding()
                 .previewLayout(.fixed(width: 240, height: 120))
-            ExpandingButton(icon: .aToZ, label: "A to Z", action: {})
+            ExpandingButton(icon: .watchLater, label: "Later", action: {})
                 .padding()
                 .previewLayout(.fixed(width: 240, height: 120))
-            ExpandingButton(label: "A to Z", action: {})
+            ExpandingButton(label: "Later", action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 120))
-            ExpandingButton(icon: .aToZ, action: {})
+            ExpandingButton(icon: .watchLater, action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 120))
         }
