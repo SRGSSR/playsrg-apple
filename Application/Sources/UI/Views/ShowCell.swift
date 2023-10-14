@@ -92,12 +92,14 @@ struct ShowCell: View {
                     .srgFont(.H4)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
+#if os(iOS)
                 if style == .favorite, model.isSubscribed {
-                    Image(decorative: "subscription_full")
+                    Image(.subscriptionFull)
                         .resizable()
                         .scaledToFit()
                         .frame(height: 12)
                 }
+#endif
             }
             .foregroundColor(.srgGrayC7)
         }

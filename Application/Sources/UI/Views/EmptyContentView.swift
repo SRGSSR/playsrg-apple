@@ -81,7 +81,7 @@ struct EmptyContentView: View {
                 }
             case let .failed(error: error):
                 VStack {
-                    Image(decorative: "error-background")
+                    Image(.errorBackground)
                     Text(error.localizedDescription)
                         .srgFont(.H4)
                 }

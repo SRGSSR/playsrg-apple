@@ -58,7 +58,7 @@ struct DurationBadge: View {
 /// Behavior: h-hug, v-hug
 struct SubtitlesBadge: View {
     var body: some View {
-        Image(decorative: "subtitles")
+        Image(.subtitles)
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -69,7 +69,7 @@ struct SubtitlesBadge: View {
 /// Behavior: h-hug, v-hug
 struct AudioDescriptionBadge: View {
     var body: some View {
-        Image(decorative: "audio_description")
+        Image(.audioDescription)
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -80,7 +80,7 @@ struct AudioDescriptionBadge: View {
 /// Behavior: h-hug, v-hug
 struct SignLanguageBadge: View {
     var body: some View {
-        Image(decorative: "sign_language")
+        Image(.signLanguage)
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -91,7 +91,7 @@ struct SignLanguageBadge: View {
 /// Behavior: h-hug, v-hug
 struct MultiAudioBadge: View {
     var body: some View {
-        Image(decorative: "multiaudio")
+        Image(.multiaudio)
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -102,7 +102,7 @@ struct MultiAudioBadge: View {
 /// Behavior: h-hug, v-hug
 struct DolbyDigitalBadge: View {
     var body: some View {
-        Image(decorative: "dolby_digital")
+        Image(.dolbyDigital)
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -113,7 +113,7 @@ struct DolbyDigitalBadge: View {
 /// Behavior: h-hug, v-hug
 struct ThreeSixtyBadge: View {
     var body: some View {
-        Image(decorative: "360_media")
+        Image(._360Media)
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("360-degree content", comment: "Accessibility label for the 360 badge"))

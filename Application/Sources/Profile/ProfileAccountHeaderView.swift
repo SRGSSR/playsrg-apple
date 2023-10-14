@@ -83,7 +83,7 @@ struct ProfileAccountHeaderView: View {
                         .srgFont(.body)
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Image(decorative: "chevron")
+                    Image(.chevron)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 16)
