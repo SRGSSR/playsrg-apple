@@ -53,6 +53,9 @@ struct SettingsView: View {
 #if os(iOS) && (DEBUG || APPCENTER)
             DeveloperSection()
 #endif
+#if DEBUG || NIGHTLY || BETA
+            BottomAdditionalInformationSection(model: model)
+#endif
         }
 #if os(tvOS)
         .listStyle(GroupedListStyle())
@@ -436,7 +439,7 @@ struct SettingsView: View {
             }
         }
         
-        private struct VersionCell: View {
+        fileprivate struct VersionCell: View {
             @ObservedObject var model: SettingsViewModel
             
             var body: some View {
@@ -787,6 +790,22 @@ struct SettingsView: View {
         
         private func toggleFlex() {
             FLEXManager.shared.toggleExplorer()
+        }
+    }
+#endif
+    
+    // MARK: Bottom additional information section
+
+#if DEBUG || NIGHTLY || BETA
+    private struct BottomAdditionalInformationSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                InformationSection.VersionCell(model: model)
+            } header: {
+                Text(NSLocalizedString("Information", comment: "Information section header"))
+            }
         }
     }
 #endif
