@@ -14,9 +14,9 @@ extension UIImage {
     @objc static func image(for youthProtectionColor: SRGYouthProtectionColor) -> UIImage? {
         switch youthProtectionColor {
         case .yellow:
-            return UIImage(named: "youth_protection_yellow")
+            return UIImage(resource: .youthProtectionYellow)
         case .red:
-            return UIImage(named: "youth_protection_red")
+            return UIImage(resource: .youthProtectionRed)
         default:
             return nil
         }
@@ -28,15 +28,15 @@ extension UIImage {
     static func image(for blockingReason: SRGBlockingReason) -> UIImage? {
         switch blockingReason {
         case .geoblocking:
-            return UIImage(named: "geoblocked")
+            return UIImage(resource: .geoblocked)
         case .legal:
-            return UIImage(named: "legal")
+            return UIImage(resource: .legal)
         case .ageRating12, .ageRating18:
-            return UIImage(named: "age_rating")
+            return UIImage(resource: .ageRating)
         case .startDate, .endDate, .none:
             return nil
         default:
-            return UIImage(named: "generic_blocked")
+            return UIImage(resource: .genericBlocked)
         }
     }
 }

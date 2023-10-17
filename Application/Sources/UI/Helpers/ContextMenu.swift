@@ -126,7 +126,7 @@ extension ContextMenu {
         }
         
         func image(for action: WatchLaterAction) -> UIImage {
-            return (action == .add) ? UIImage(named: "watch_later")! : UIImage(named: "watch_later_full")!
+            return (action == .add) ? UIImage(resource: .watchLater) : UIImage(resource: .watchLaterFull)
         }
         
         let action = WatchLaterAllowedActionForMedia(media)
@@ -154,7 +154,7 @@ extension ContextMenu {
         guard HistoryContainsMedia(media) else { return nil }
                 
         let menuAction = UIAction(title: NSLocalizedString("Delete from history", comment: "Context menu action to delete a media from the history"),
-                                  image: UIImage(named: "history")!) { _ in
+                                  image: UIImage(resource: .history)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
                 HistoryRemoveMedias([media]) { error in
                     guard error == nil else { return }
@@ -180,7 +180,7 @@ extension ContextMenu {
         }
         
         func image(for download: Download?) -> UIImage {
-            return download != nil ? UIImage(named: "download_remove")! : UIImage(named: "download")!
+            return download != nil ? UIImage(resource: .downloadRemove) : UIImage(resource: .download)
         }
         
         let download = Download(for: media)
@@ -208,7 +208,7 @@ extension ContextMenu {
     private static func sharingAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         guard let sharingItem = SharingItem(for: media, at: CMTime.zero) else { return nil }
         return UIAction(title: NSLocalizedString("Share", comment: "Context menu action to share a media"),
-                        image: UIImage(named: "share")!) { _ in
+                        image: UIImage(resource: .share)) { _ in
             shareItem(sharingItem, in: viewController)
         }
     }
@@ -222,7 +222,7 @@ extension ContextMenu {
             guard !show.isEqual(displayedShow) else { return nil }
         }
         return UIAction(title: NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
-                        image: UIImage(named: "episodes")) { _ in
+                        image: UIImage(resource: .episodes)) { _ in
             let showViewController = SectionViewController.showViewController(for: show)
             navigationController.pushViewController(showViewController, animated: true)
         }
@@ -263,7 +263,7 @@ extension ContextMenu {
         }
         
         func image(isFavorite: Bool) -> UIImage {
-            return isFavorite ? UIImage(named: "favorite_full")! : UIImage(named: "favorite")!
+            return isFavorite ? UIImage(resource: .favoriteFull) : UIImage(resource: .favorite)
         }
         
         let isFavorite = FavoritesContainsShow(show)
@@ -286,7 +286,7 @@ extension ContextMenu {
     private static func sharingAction(for show: SRGShow, in viewController: UIViewController) -> UIAction? {
         guard let sharingItem = SharingItem(for: show) else { return nil }
         return UIAction(title: NSLocalizedString("Share", comment: "Context menu action to share a show"),
-                        image: UIImage(named: "share")!) { _ in
+                        image: UIImage(resource: .share)) { _ in
             shareItem(sharingItem, in: viewController)
         }
     }

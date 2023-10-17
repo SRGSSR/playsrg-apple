@@ -79,8 +79,8 @@ final class ShowHeaderViewModel: ObservableObject {
         return url(for: show?.image, size: .large)
     }
     
-    var favoriteIcon: String {
-        return isFavorite ? "favorite_full" : "favorite"
+    var favoriteIcon: ImageResource {
+        return isFavorite ? .favoriteFull : .favorite
     }
     
     var favoriteLabel: String {
@@ -102,12 +102,12 @@ final class ShowHeaderViewModel: ObservableObject {
         return PushService.shared != nil && isFavorite
     }
     
-    var subscriptionIcon: String {
+    var subscriptionIcon: ImageResource {
         switch subscriptionStatus {
         case .unavailable, .unsubscribed:
-            return "subscription"
+            return .subscription
         case .subscribed:
-            return "subscription_full"
+            return .subscriptionFull
         }
     }
     

@@ -216,7 +216,7 @@ final class ProgramViewModel: ObservableObject {
         let data = self.data
         let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel) : nil
         return ButtonProperties(
-            icon: "start_over",
+            icon: .startOver,
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
             action: {
                 guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
@@ -269,20 +269,20 @@ final class ProgramViewModel: ObservableObject {
             switch media.mediaType {
             case .audio:
                 return ButtonProperties(
-                    icon: "watch_later",
+                    icon: .watchLater,
                     label: NSLocalizedString("Listen later", comment: "Button label in program detail view to add an audio to the later list"),
                     action: toggleWatchLater
                 )
             default:
                 return ButtonProperties(
-                    icon: "watch_later",
+                    icon: .watchLater,
                     label: NSLocalizedString("Watch later", comment: "Button label in program detail view to add a video to the later list"),
                     action: toggleWatchLater
                 )
             }
         case .remove:
             return ButtonProperties(
-                icon: "watch_later_full",
+                icon: .watchLaterFull,
                 label: NSLocalizedString("Later", comment: "Watch later or listen later button label in program detail view when a media is in the later list"),
                 action: toggleWatchLater
             )
@@ -293,7 +293,7 @@ final class ProgramViewModel: ObservableObject {
     
     var calendarButtonProperties: ButtonProperties? {
         return ButtonProperties(
-            icon: "calendar",
+            icon: .calendar,
             label: NSLocalizedString("Add to Calendar", comment: "Button to add an event to Calendar application"),
             action: {
                 guard let program = self.program,
@@ -476,7 +476,7 @@ extension ProgramViewModel {
     
     /// Common button properties
     struct ButtonProperties {
-        let icon: String
+        let icon: ImageResource
         let label: String
         let action: () -> Void
     }

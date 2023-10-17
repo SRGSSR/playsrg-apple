@@ -70,7 +70,7 @@ struct ProfileCell: View {
                         .srgFont(.subtitle1)
                 }
                 if !model.isModalPresentation {
-                    Image(decorative: "chevron")
+                    Image(.chevron)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 16)

@@ -71,8 +71,8 @@ extension ProfileAccountHeaderViewModel {
         let isLoggedIn: Bool
         let account: SRGAccount?
         
-        var decorativeName: String {
-            return isLoggedIn ? "account_logged_in_icon" : "account_logged_out_icon"
+        var icon: ImageResource {
+            return isLoggedIn ? .accountLoggedInIcon : .accountLoggedOutIcon
         }
         
         var accountDescription: String? {

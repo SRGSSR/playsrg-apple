@@ -27,8 +27,8 @@ struct ShowButton: View {
         return url(for: show.image, size: .small)
     }
     
-    private var favoriteIcon: String {
-        return isFavorite ? "favorite_full" : "favorite"
+    private var favoriteIcon: ImageResource {
+        return isFavorite ? .favoriteFull : .favorite
     }
     
     private var accessibilityLabel: String {
@@ -51,7 +51,7 @@ struct ShowButton: View {
                 }
                 .padding(.vertical, 2)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                Image(decorative: favoriteIcon)
+                Image(favoriteIcon)
                     .padding(.trailing, 8)
             }
             .frame(height: 80)

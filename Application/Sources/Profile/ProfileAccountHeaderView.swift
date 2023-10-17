@@ -41,7 +41,7 @@ struct ProfileAccountHeaderView: View {
             } label: {
                 HStack(spacing: spacing) {
                     ZStack(alignment: .topTrailing) {
-                        Image(decorative: model.data.decorativeName)
+                        Image(model.data.icon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: iconHeight)
@@ -83,7 +83,7 @@ struct ProfileAccountHeaderView: View {
                         .srgFont(.body)
                         .lineLimit(1)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                    Image(decorative: "chevron")
+                    Image(.chevron)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 16)
