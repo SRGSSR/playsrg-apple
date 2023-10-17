@@ -69,7 +69,7 @@ final class ProgramPreviewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return data?.programGuideImageUrl(size: .medium)
+        return data?.programGuideImageUrl(size: .large)
     }
     
     init() {
