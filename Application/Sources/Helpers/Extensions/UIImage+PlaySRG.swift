@@ -16,7 +16,7 @@ extension UIImage {
         case .yellow:
             return UIImage(resource: .youthProtectionYellow)
         case .red:
-            return UIImage(resource: .youthProtectionYellow)
+            return UIImage(resource: .youthProtectionRed)
         default:
             return nil
         }
