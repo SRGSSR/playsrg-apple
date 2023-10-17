@@ -18,7 +18,7 @@ struct Onboarding: Codable, Identifiable {
     let title: String
     let pages: [OnboardingPage]
     
-    var icon: ImageResource {
-        return ImageResource(name: "\(id)_icon", bundle: .main)
+    var iconName: String {
+        return "\(id)_icon"
     }
 }
