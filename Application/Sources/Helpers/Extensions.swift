@@ -566,15 +566,6 @@ extension Locale {
             return Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
         }
     }()
-    
-    static let preferredLanguageIdentifier: String = {
-        let preferredLanguage = Locale.preferredLanguages.first ?? "en"
-        if #available(iOS 16, tvOS 16, *) {
-            return Locale(identifier: preferredLanguage).identifier(.bcp47)
-        } else {
-            return Locale(identifier: preferredLanguage).identifier.replacingOccurrences(of: "_", with: "-")
-        }
-    }()
 }
 
 extension SRGAnalyticsLabels {
@@ -583,7 +574,6 @@ extension SRGAnalyticsLabels {
         var customInfo: [String: String] = analyticsLabels.customInfo ?? [:]
         
         customInfo["navigation_app_language"] = Locale.currentLanguageIdentifier
-        customInfo["navigation_device_language"] = Locale.preferredLanguageIdentifier
         
         analyticsLabels.customInfo = customInfo
         return analyticsLabels
