@@ -9,6 +9,7 @@ import Foundation
 import SRGAppearanceSwift
 import SRGDataProviderCombine
 import SwiftUI
+import TCServerSide_noIDFA
 
 func constant<T>(iOS: T, tvOS: T) -> T {
 #if os(tvOS)
@@ -577,5 +578,24 @@ extension SRGAnalyticsLabels {
         
         analyticsLabels.customInfo = customInfo
         return analyticsLabels
+    }
+}
+
+extension SRGAnalyticsTracker {
+    @objc class func applySetupAnalyticsWorkWorkaround() {
+        // Workaround for Commanders Act migration from v4 to v5
+        
+        // 1. Migrate the TC unique id to new sdk id device property.
+        PlayApplicationRunOnce({ completionHandler in
+            let tcUniqueId = UserDefaults.standard.string(forKey: "tc_unique_id")
+            if let tcUniqueId, !tcUniqueId.isEmpty {
+                UserDefaults.standard.set(tcUniqueId, forKey: "#TC_SDK_ID#")
+                UserDefaults.standard.synchronize()
+            }
+            completionHandler(true)
+        }, "TCUniqueIdMigrationDone")
+        
+        // 2. Keep the TC unique id in new ids.
+        TCPredefinedVariables.sharedInstance().useLegacyUniqueIDForAnonymousID()
     }
 }

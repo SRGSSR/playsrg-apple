@@ -37,7 +37,6 @@
 @import SRGLetterbox;
 @import SRGNetwork;
 @import SRGUserData;
-@import TCServerSide_noIDFA;
 
 static void *s_kvoContext = &s_kvoContext;
 
@@ -262,20 +261,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)setupAnalytics
 {
-    // Workaround for Commanders Act migration from v4 to v5 (1 and 2)
-    
-    // 1. Migrate the TC unique id to new sdk id device property.
-    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-        NSString *tcUniqueId = [[NSUserDefaults standardUserDefaults] stringForKey:@"tc_unique_id"];
-        if (tcUniqueId.length != 0) {
-            [[NSUserDefaults standardUserDefaults] setObject:tcUniqueId forKey:@"#TC_SDK_ID#"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-        completionHandler(YES);
-    }, @"TCUniqueIdMigrationDone6");
-    
-    // 2. Keep the TC unique id in new ids.
-    [[TCPredefinedVariables sharedInstance] useLegacyUniqueIDForAnonymousID];
+    [SRGAnalyticsTracker applySetupAnalyticsWorkWorkaround];
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
