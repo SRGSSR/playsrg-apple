@@ -585,17 +585,12 @@ extension SRGAnalyticsTracker {
     @objc class func applySetupAnalyticsWorkaround() {
         // Workaround for Commanders Act migration from v4 to v5
         
-        // 1. Migrate the TC unique id value to new `device.sdk_id` property.
-        PlayApplicationRunOnce({ completionHandler in
-            let tcUniqueId = UserDefaults.standard.string(forKey: "tc_unique_id")
-            if let tcUniqueId, !tcUniqueId.isEmpty {
-                UserDefaults.standard.set(tcUniqueId, forKey: "#TC_SDK_ID#")
-                UserDefaults.standard.synchronize()
-            }
-            completionHandler(true)
-        }, "TCUniqueIdMigrationDone")
+        // 1. Use the TC unique id value for new `device.sdk_id` property.
+        if let tcUniqueID = TCPredefinedVariables.sharedInstance().uniqueIdentifier(), !tcUniqueID.isEmpty {
+            TCDevice.sharedInstance().sdkID = tcUniqueID
+        }
         
-        // 2. Keep the TC unique id value to the new `user.consistent_anonymous_id` property.
+        // 2. Use the TC unique id value for the new `user.consistent_anonymous_id` property.
         TCPredefinedVariables.sharedInstance().useLegacyUniqueIDForAnonymousID()
     }
 }
