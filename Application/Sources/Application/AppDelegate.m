@@ -261,6 +261,8 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)setupAnalytics
 {
+    [SRGAnalyticsTracker applySetupAnalyticsWorkaround];
+    
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
                                                                                                        sourceKey:applicationConfiguration.analyticsSourceKey
