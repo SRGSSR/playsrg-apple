@@ -122,7 +122,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
-@property (nonatomic) NSURL *playURL;
+@property (nonatomic) NSDictionary<NSNumber *, NSURL *> *playURLs;
 @property (nonatomic) NSURL *playServiceURL;
 @property (nonatomic) NSURL *middlewareURL;
 @property (nonatomic) NSURL *identityWebserviceURL;
@@ -185,7 +185,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSString *userConsentDefaultLanguage;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-@property (nonatomic) NSURL *overridePlayURL;
+@property (nonatomic) NSDictionary<NSNumber *, NSURL *> *overridePlayURLs;
 #endif
 
 @end
@@ -262,6 +262,43 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
 }
 
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+- (void)setOverridePlayURLForVendorBasedOnServiceURL:(NSURL *)serviceURL
+{
+    NSString *environment = nil;
+    
+    NSString *host = serviceURL.host;
+    if ([host containsString:@"test"]) {
+        environment = @"test";
+    }
+    else if ([host containsString:@"stage"]) {
+        environment = @"stage";
+    }
+    
+    if (environment) {
+        static dispatch_once_t s_onceToken;
+        static NSDictionary<NSNumber *, NSString *> *s_vendorPaths;
+        dispatch_once(&s_onceToken, ^{
+            s_vendorPaths = @{ @(SRGVendorRSI) : @"rsi",
+                               @(SRGVendorRTR) : @"rtr",
+                               @(SRGVendorRTS) : @"rts",
+                               @(SRGVendorSRF) : @"srf",
+                               @(SRGVendorSWI) : @"swi" };
+        });
+        
+        NSMutableDictionary<NSNumber *, NSURL *> *overridePlayURLs = [NSMutableDictionary new];
+        for (NSNumber *vendorNumber in s_vendorPaths.allKeys) {
+            NSString *URLString = [NSString stringWithFormat:@"https://play-web.herokuapp.com/%@/%@/play/", s_vendorPaths[vendorNumber], environment];
+            [overridePlayURLs setObject:[NSURL URLWithString:URLString] forKey:vendorNumber];
+        }
+        self.overridePlayURLs = overridePlayURLs.copy;
+    }
+    else {
+        self.overridePlayURLs = nil;
+    }
+}
+#endif
+
 #pragma mark Remote configuration
 
 // Return YES iff the activated remote configuration is valid, and stores the corresponding values. If the configuration
@@ -307,8 +344,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *playURLString = [firebaseConfiguration stringForKey:@"playURL"];
-    NSURL *playURL = playURLString ? [NSURL URLWithString:playURLString] : nil;
+    NSDictionary<NSNumber *, NSURL *> *playURLs = [firebaseConfiguration playURLsForKey:@"playURLs"];
+    NSURL *playURL = playURLs[@(vendor)];
     if (! playURL) {
         return NO;
     }
@@ -347,7 +384,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.siteName = tvSiteName;
 #endif
     
-    self.playURL = playURL;
+    self.playURLs = playURLs;
     self.playServiceURL = playServiceURL;
     self.middlewareURL = middlewareURL;
     self.whatsNewURL = whatsNewURL;
@@ -459,17 +496,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 #pragma mark Getters and setters
 
-- (NSURL *)playURL
-{
-    NSURL *playURL = _playURL;
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    if (self.overridePlayURL) {
-        playURL = self.overridePlayURL;
-    }
-#endif
-    return playURL;
-}
-
 - (NSArray<RadioChannel *> *)radioHomepageChannels
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(RadioChannel.new, homepageHidden)];
@@ -511,14 +537,25 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return [self radioChannelForUid:uid] ?: [self tvChannelForUid:uid];
 }
 
+- (NSURL *)playURLForVendor:(SRGVendor)vendor
+{
+    NSDictionary<NSNumber *, NSURL *> *playURLs = _playURLs;
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    if (self.overridePlayURLs) {
+        playURLs = self.overridePlayURLs;
+    }
+#endif
+    return playURLs[@(vendor)];
+}
+
 - (NSURL *)sharingURLForMedia:(SRGMedia *)media atTime:(CMTime)time
 {
-    if (! self.playURL || ! media) {
+    if (! media || ! [self playURLForVendor:media.vendor]) {
         return nil;
     }
     
     if ([SRGMedia PlayIsSwissTXTURN:media.URN]) {
-        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:media.vendor] resolvingAgainstBaseURL:NO];
         URLComponents.path = [[[[URLComponents.path stringByAppendingPathComponent:@"tv"]
                                 stringByAppendingPathComponent:@"-"]
                                stringByAppendingPathComponent:@"video"]
@@ -527,7 +564,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return URLComponents.URL;
     }
     else if (media.channel.vendor == SRGVendorSSATR) {
-        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:media.vendor] resolvingAgainstBaseURL:NO];
         URLComponents.path = [URLComponents.path stringByAppendingPathComponent:@"embed"];
         URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:media.URN] ];
         return URLComponents.URL;
@@ -545,7 +582,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
             return nil;
         }
         
-        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:media.vendor] resolvingAgainstBaseURL:NO];
         URLComponents.path = [[[[URLComponents.path stringByAppendingPathComponent:mediaTypeName]
                                 stringByAppendingPathComponent:@"redirect"]
                                stringByAppendingPathComponent:@"detail"]
@@ -564,7 +601,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSURL *)sharingURLForShow:(SRGShow *)show
 {
-    if (! self.playURL || ! show) {
+    if (! show || ! [self playURLForVendor:show.vendor]) {
         return nil;
     }
     
@@ -581,7 +618,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:show.vendor] resolvingAgainstBaseURL:NO];
     URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:showTypeName]
                            stringByAppendingPathComponent:@"quicklink"]
                           stringByAppendingPathComponent:show.uid];
@@ -590,7 +627,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSURL *)sharingURLForContentSection:(SRGContentSection *)contentSection
 {
-    if (! self.playURL || ! contentSection) {
+    if (! contentSection || ! [self playURLForVendor:contentSection.vendor]) {
         return nil;
     }
     
@@ -598,7 +635,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:contentSection.vendor] resolvingAgainstBaseURL:NO];
     URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:@"tv"]
                            stringByAppendingPathComponent:@"detail"]
                           stringByAppendingPathComponent:@"section"];

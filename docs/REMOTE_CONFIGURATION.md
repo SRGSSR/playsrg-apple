@@ -30,7 +30,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `identityWebsiteURL` (optional, string): The URL of the identity web portal.
 * `userDataServiceURL` (optional, string): The URL of the service with which user data can be synchronized (history, preferences, playlists).
 * `middlewareURL` (mandatory, string): The URL of the Play application middleware.
-* `playURL` (mandatory, string): The base URL of the Play web portal, used when building sharing URLs.
+* `playURLs` (mandatory, JSON): A JSON dictionary describing all base URLs of the Play web portals, used when building sharing URLs. Key (string) is the identifier of the business unit, value (string) is the base URL of the Play web portal. The `businessUnit` property value MUST be in the keys.
 * `playServiceURL` (mandatory, string): The base URL of the Play web service.
 * `sourceCodeURL` (optional, string); The URL where the application source code can be found.
 * `termsAndConditionsURL` (optional, string): The URL of the terms and conditions page.

@@ -225,36 +225,7 @@ static void *s_kvoContext = &s_kvoContext;
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     dataProvider.globalParameters = ApplicationSettingGlobalParameters();
     
-    NSString *environment = nil;
-    
-    NSString *host = serviceURL.host;
-    if ([host containsString:@"test"]) {
-        environment = @"test";
-    }
-    else if ([host containsString:@"stage"]) {
-        environment = @"stage";
-    }
-    
-    if (environment) {
-        static dispatch_once_t s_onceToken2;
-        static NSDictionary<NSNumber *, NSString *> *s_suffixes;
-        dispatch_once(&s_onceToken2, ^{
-            s_suffixes = @{ @(SRGVendorRSI) : @"rsi",
-                            @(SRGVendorRTR) : @"rtr",
-                            @(SRGVendorRTS) : @"rts",
-                            @(SRGVendorSRF) : @"srf",
-                            @(SRGVendorSWI) : @"swi" };
-        });
-        SRGVendor vendor = ApplicationConfiguration.sharedApplicationConfiguration.vendor;
-        NSString *suffix = s_suffixes[@(vendor)];
-        if (suffix) {
-            NSString *URLString = [NSString stringWithFormat:@"https://srgplayer-%@.%@.srf.ch/play/", suffix, environment];
-            [ApplicationConfiguration.sharedApplicationConfiguration setOverridePlayURL:[NSURL URLWithString:URLString]];
-        }
-    }
-    else {
-        [ApplicationConfiguration.sharedApplicationConfiguration setOverridePlayURL:nil];
-    }
+    [ApplicationConfiguration.sharedApplicationConfiguration setOverridePlayURLForVendorBasedOnServiceURL:serviceURL];
 #endif
     SRGDataProvider.currentDataProvider = dataProvider;
 }

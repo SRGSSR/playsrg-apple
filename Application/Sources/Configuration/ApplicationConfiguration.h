@@ -38,7 +38,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, copy) NSNumber *appStoreProductIdentifier;
 
-@property (nonatomic, readonly) NSURL *playURL;
 @property (nonatomic, readonly) NSURL *playServiceURL;
 @property (nonatomic, readonly) NSURL *middlewareURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebserviceURL;
@@ -105,6 +104,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 - (nullable TVChannel *)tvChannelForUid:(nullable NSString *)uid;
 - (nullable __kindof Channel *)channelForUid:(nullable NSString *)uid;
 
+
+- (nullable NSURL *)playURLForVendor:(SRGVendor)vendor;
+
 /**
  *  URLs to be used for sharing
  */
@@ -115,9 +117,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 
 /**
- *  An optionnal override play URL for test and stage environnements. Use `playURL` property to get the current URL.
+ *  Optionnal override play URLs for test and stage environnements. Use `playURLForVendor:` property to get the current URL.
  */
-- (void)setOverridePlayURL:(nullable NSURL *)overridePlayURL;
+- (void)setOverridePlayURLForVendorBasedOnServiceURL:(nullable NSURL *)serviceURL;
 
 #endif
 

@@ -303,6 +303,40 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
     return tvGuideBouquetsString ? FirebaseConfigurationTVGuideOtherBouquets(tvGuideBouquetsString, vendor) : @[];
 }
 
+- (NSDictionary<NSNumber *, NSURL *> *)playURLsForKey:(NSString *)key
+{
+    static NSDictionary<NSString *, NSNumber *> *s_vendors;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_vendors = @{ @"rsi" : @(SRGVendorRSI),
+                       @"rtr" : @(SRGVendorRTR),
+                       @"rts" : @(SRGVendorRTS),
+                       @"srf" : @(SRGVendorSRF),
+                       @"swi" : @(SRGVendorSWI) };
+    });
+    
+    NSMutableDictionary<NSNumber *, NSURL *> *playURLs = [NSMutableDictionary dictionary];
+    
+    NSDictionary *playURLsDictionary = [self JSONDictionaryForKey:key];
+    for (NSString *key in playURLsDictionary) {
+        NSNumber *vendor = s_vendors[key];
+        if (vendor) {
+            NSURL *URL = [NSURL URLWithString:playURLsDictionary[key]];
+            if (URL) {
+                playURLs[vendor] = URL;
+            }
+            else {
+                PlayLogWarning(@"configuration", @"Play URL configuration is not valid. The URL of %@ is not valid.", key);
+            }
+        }
+        else {
+            PlayLogWarning(@"configuration", @"Play URL configuration business unit identifier is not valid. %@ is not valid.", key);
+        }
+    }
+    
+    return playURLs.copy;
+}
+
 #pragma mark Update
 
 - (void)update

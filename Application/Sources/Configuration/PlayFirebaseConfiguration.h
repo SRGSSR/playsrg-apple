@@ -62,6 +62,11 @@ OBJC_EXPORT NSArray<NSNumber * /* HomeSection */> * _Nullable FirebaseConfigurat
  */
 - (NSArray<NSNumber * /* TVGuideBouquet */> *)tvGuideOtherBouquetsForKey:(NSString *)key vendor:(SRGVendor)vendor;
 
+/**
+ *  Play URLs accessor. Return an empty dictionnary if no valid data is found under the specified key.
+ */
+- (NSDictionary<NSNumber *, NSURL *> *)playURLsForKey:(NSString *)key;
+
 @end
 
 NS_ASSUME_NONNULL_END
