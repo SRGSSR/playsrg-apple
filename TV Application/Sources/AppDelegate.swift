@@ -88,7 +88,7 @@ extension AppDelegate: UIApplicationDelegate {
         
         UserConsentHelper.setup()
         
-        SRGAnalyticsTracker.applySetupAnalyticsWorkWorkaround()
+        SRGAnalyticsTracker.applySetupAnalyticsWorkaround()
         
         let analyticsConfiguration = SRGAnalyticsConfiguration(
             businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
