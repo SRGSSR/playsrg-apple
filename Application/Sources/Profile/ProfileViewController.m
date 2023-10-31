@@ -372,6 +372,11 @@
     return AnalyticsPageTitleHome;
 }
 
+- (NSString *)srg_pageViewType
+{
+    return AnalyticsPageTypeLandingPage;
+}
+
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     return @[ AnalyticsPageLevelPlay, AnalyticsPageLevelUser ];

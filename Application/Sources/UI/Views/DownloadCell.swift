@@ -127,13 +127,13 @@ struct DownloadCell: View {
         var body: some View {
             switch model.state {
             case .added, .suspended, .unknown:
-                Image(decorative: "downloadable_stop")
+                Image(.downloadableStop)
             case .downloading:
                 AnimatedDownloadIcon()
             case .downloaded:
-                Image(decorative: "downloadable_full")
+                Image(.downloadableFull)
             case .downloadable, .removed:
-                Image(decorative: "downloadable")
+                Image(.downloadable)
             }
         }
     }

@@ -311,7 +311,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateSharingStatus];
         
         if (letterboxController.continuousPlaybackUpcomingMedia) {
-            [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionDisplay
+            [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionDisplay
                                                            mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN]
              send];
         }
@@ -423,9 +423,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     if (self.originalLetterboxController) {
         // Always resume playback if the original controller was not playing
-        if (![UserConsentHelper isShowingBanner]) {
-            [self.letterboxController play];
-        }
+        [self.letterboxController play];
     }
     else {
         self.letterboxController.contentURLOverridingBlock = ^(NSString *URN) {
@@ -434,18 +432,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         };
         
         if (self.originalMedia) {
-            [self.letterboxController prepareToPlayMedia:self.originalMedia atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings() completionHandler:^{
-                if (![UserConsentHelper isShowingBanner]) {
-                    [self.letterboxController play];
-                }
-            }];
+            [self.letterboxController playMedia:self.originalMedia atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
         else {
-            [self.letterboxController prepareToPlayURN:self.originalURN atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings() completionHandler:^{
-                if (![UserConsentHelper isShowingBanner]) {
-                    [self.letterboxController play];
-                }
-            }];
+            [self.letterboxController playURN:self.originalURN atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
     }
     
@@ -554,7 +544,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [super viewDidDisappear:animated];
     
     if (self.letterboxController.continuousPlaybackUpcomingMedia) {
-        [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
+        [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
                                                        mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN]
          send];
     }
@@ -1503,6 +1493,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     return AnalyticsPageTitlePlayer;
 }
 
+- (NSString *)srg_pageViewType
+{
+    return AnalyticsPageTypeDetail;
+}
+
 - (NSArray<NSString *> *)srg_pageViewLevels
 {
     return @[ AnalyticsPageLevelPlay ];
@@ -1658,7 +1653,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didEngageInContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
 {
-    [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlay
+    [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlay
                                                    mediaUrn:upcomingMedia.URN]
      send];
 }
@@ -1681,7 +1676,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self presentViewController:alertController animated:YES completion:nil];
     }, @"DisableAutoplayAsked");
     
-    [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
+    [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
                                                    mediaUrn:upcomingMedia.URN]
      send];
 }
@@ -1725,7 +1720,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxDidStartPictureInPicture
 {
-    [[AnalyticsHiddenEventObjC pictureInPictureWithUrn:self.letterboxController.fullLengthMedia.URN] send];
+    [[AnalyticsEventObjC pictureInPictureWithUrn:self.letterboxController.fullLengthMedia.URN] send];
 }
 
 - (void)letterboxDidStopPlaybackFromPictureInPicture
@@ -1955,7 +1950,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
             AnalyticsListAction action = added ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-            [[AnalyticsHiddenEventObjC watchLaterWithAction:action source:AnalyticsListSourceButton urn:mainChapterMedia.URN] send];
+            [[AnalyticsEventObjC watchLaterWithAction:action source:AnalyticsListSourceButton urn:mainChapterMedia.URN] send];
             
             [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
         }
@@ -1982,7 +1977,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateDownloadStatus];
         
         AnalyticsListAction action = download ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-        [[AnalyticsHiddenEventObjC downloadWithAction:action source:AnalyticsListSourceButton urn:media.URN] send];
+        [[AnalyticsEventObjC downloadWithAction:action source:AnalyticsListSourceButton urn:media.URN] send];
     };
     
     if (! download) {
@@ -2138,7 +2133,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     BOOL isFavorite = FavoritesContainsShow(show);
     
     AnalyticsListAction action = isFavorite ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-    [[AnalyticsHiddenEventObjC favoriteWithAction:action source:AnalyticsListSourceButton urn:show.URN] send];
+    [[AnalyticsEventObjC favoriteWithAction:action source:AnalyticsListSourceButton urn:show.URN] send];
     
     [Banner showFavorite:isFavorite forItemWithName:show.title];
 }

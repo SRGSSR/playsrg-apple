@@ -97,7 +97,7 @@ final class SceneDelegate: UIResponder {
         viewControllers.append(searchViewController)
         
         let profileViewController = UIHostingController(rootView: SettingsView())
-        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 6)
+        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(resource: .profileTab).withRenderingMode(.alwaysTemplate), tag: 6)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", comment: "Profile button label on home view")
         profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.value
         viewControllers.append(profileViewController)
@@ -129,7 +129,7 @@ final class SceneDelegate: UIResponder {
                     }
                 } receiveValue: { media in
                     navigateToMedia(media)
-                    action.analyticsHiddenEvent.send()
+                    action.analyticsEvent.send()
                     UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)
@@ -143,7 +143,7 @@ final class SceneDelegate: UIResponder {
                     }
                 } receiveValue: { show in
                     navigateToShow(show)
-                    action.analyticsHiddenEvent.send()
+                    action.analyticsEvent.send()
                     UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)

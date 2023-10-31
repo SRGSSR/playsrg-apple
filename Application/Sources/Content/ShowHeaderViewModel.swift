@@ -79,8 +79,8 @@ final class ShowHeaderViewModel: ObservableObject {
         return url(for: show?.image, size: .large)
     }
     
-    var favoriteIcon: String {
-        return isFavorite ? "favorite_full" : "favorite"
+    var favoriteIcon: ImageResource {
+        return isFavorite ? .favoriteFull : .favorite
     }
     
     var favoriteLabel: String {
@@ -102,12 +102,12 @@ final class ShowHeaderViewModel: ObservableObject {
         return PushService.shared != nil && isFavorite
     }
     
-    var subscriptionIcon: String {
+    var subscriptionIcon: ImageResource {
         switch subscriptionStatus {
         case .unavailable, .unsubscribed:
-            return "subscription"
+            return .subscription
         case .subscribed:
-            return "subscription_full"
+            return .subscriptionFull
         }
     }
     
@@ -126,7 +126,7 @@ final class ShowHeaderViewModel: ObservableObject {
         FavoritesToggleShow(show)
         
         let action = isFavorite ? .remove : .add as AnalyticsListAction
-        AnalyticsHiddenEvent.favorite(action: action, source: .button, urn: show.urn).send()
+        AnalyticsEvent.favorite(action: action, source: .button, urn: show.urn).send()
         
 #if os(iOS)
         Banner.showFavorite(!isFavorite, forItemWithName: show.title)
@@ -140,7 +140,7 @@ final class ShowHeaderViewModel: ObservableObject {
         if FavoritesToggleSubscriptionForShow(show) {
             let isSubscribed = (subscriptionStatus == .subscribed)
             let action = isSubscribed ? .remove : .add as AnalyticsListAction
-            AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
+            AnalyticsEvent.subscription(action: action, source: .button, urn: show.urn).send()
             
             Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
         }

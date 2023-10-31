@@ -229,7 +229,7 @@ final class SectionViewController: UIViewController {
                 editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
                 
                 let numberOfSelectedItems = model.numberOfSelectedItems
-                let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
+                let deleteBarButtonItem = UIBarButtonItem(image: UIImage(resource: .delete), style: .plain, target: self, action: #selector(deleteSelectedItems))
                 deleteBarButtonItem.tintColor = .red
                 deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
                 deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
@@ -246,7 +246,7 @@ final class SectionViewController: UIViewController {
             navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
             
             if model.configuration.properties.sharingItem != nil {
-                let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
+                let shareButtonItem = UIBarButtonItem(image: UIImage(resource: .share),
                                                       style: .plain,
                                                       target: self,
                                                       action: #selector(self.shareContent(_:)))
@@ -607,6 +607,10 @@ extension SectionViewController: UIScrollViewDelegate {
 extension SectionViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
         return model.configuration.properties.analyticsTitle ?? ""
+    }
+    
+    var srg_pageViewType: String {
+        return model.configuration.properties.analyticsType ?? ""
     }
     
     var srg_pageViewLevels: [String]? {

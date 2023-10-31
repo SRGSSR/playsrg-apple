@@ -97,7 +97,7 @@ final class ProgramGuideViewController: UIViewController {
     private func updateNavigationBar() {
         let isGrid = (layout == .grid)
         let layoutBarButtonItem = UIBarButtonItem(
-            image: UIImage(named: isGrid ? "layout_grid_on" : "layout_list_on"),
+            image: UIImage(resource: isGrid ? .layoutGridOn : .layoutListOn),
             style: .plain,
             target: self,
             action: #selector(toggleLayout(_:))
@@ -300,6 +300,10 @@ extension ProgramGuideViewController: ProgramGuideHeaderViewActions {
 extension ProgramGuideViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
         return AnalyticsPageTitle.programGuide.rawValue
+    }
+    
+    var srg_pageViewType: String {
+        return AnalyticsPageType.overview.rawValue
     }
     
     var srg_pageViewLevels: [String]? {

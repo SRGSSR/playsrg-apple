@@ -283,13 +283,14 @@ enum UCService: Hashable, CaseIterable {
             switch service {
 #if os(iOS)
             case .airship:
-                // Airship analytics feature is disabled at launch. See `PushService.m`.
-                if acceptedConsent {
-                    Airship.shared.privacyManager.enableFeatures(Features.analytics)
-                }
-                else {
-                    Airship.shared.privacyManager.disableFeatures(Features.analytics)
-                }
+                if PushService.shared != nil {
+                    // Airship analytics feature is disabled at launch. See `PushService.m`.
+                    if acceptedConsent {
+                        Airship.shared.privacyManager.enableFeatures(Features.analytics)
+                    }
+                    else {
+                        Airship.shared.privacyManager.disableFeatures(Features.analytics)
+                    }}
 #endif
             case .appcenter:
                 // Only `Crashes` service is used. `Analytics` service not instantiated.

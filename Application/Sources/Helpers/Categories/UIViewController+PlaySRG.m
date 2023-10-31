@@ -206,17 +206,11 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
                 && letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             [letterboxController seekToPosition:position withCompletionHandler:^(BOOL finished) {
-                if (![UserConsentHelper isShowingBanner]) {
-                    [letterboxController play];
-                }
+                [letterboxController play];
             }];
         }
         else {
-            [letterboxController prepareToPlayMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()completionHandler:^{
-                if (![UserConsentHelper isShowingBanner]) {
-                    [letterboxController play];
-                }
-            }];
+            [letterboxController playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
         }
         completion ? completion() : nil;
     }
@@ -304,7 +298,7 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
         UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
         [topViewController presentViewController:mediaControlsViewController animated:animated completion:completion];
         
-        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+        [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer type:AnalyticsPageTypeDetail levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     };
     
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {

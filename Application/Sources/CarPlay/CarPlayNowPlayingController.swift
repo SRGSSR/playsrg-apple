@@ -126,6 +126,7 @@ extension CarPlayNowPlayingController: CarPlayTemplateController {
     func didAppear(animated: Bool) {
         SRGAnalyticsTracker.shared.uncheckedTrackPageView(
             withTitle: AnalyticsPageTitle.player.rawValue,
+            type: AnalyticsPageType.detail.rawValue,
             levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue]
         )
     }

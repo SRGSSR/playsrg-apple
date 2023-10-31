@@ -17,8 +17,8 @@ class LetterboxDelegate: NSObject {
             .sink { notification in
                 guard let media = notification.userInfo?[SRGLetterboxMediaKey] as? SRGMedia else { return }
                 
-                AnalyticsHiddenEvent.continuousPlayback(action: .playAutomatic,
-                                                        mediaUrn: media.urn)
+                AnalyticsEvent.continuousPlayback(action: .playAutomatic,
+                                                  mediaUrn: media.urn)
                 .send()
             }
             .store(in: &cancellables)
@@ -27,18 +27,18 @@ class LetterboxDelegate: NSObject {
 
 extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didEngageInContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
-        AnalyticsHiddenEvent.continuousPlayback(action: .play,
-                                                mediaUrn: upcomingMedia.urn)
+        AnalyticsEvent.continuousPlayback(action: .play,
+                                          mediaUrn: upcomingMedia.urn)
         .send()
     }
     
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didCancelContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
-        AnalyticsHiddenEvent.continuousPlayback(action: .cancel,
-                                                mediaUrn: upcomingMedia.urn)
+        AnalyticsEvent.continuousPlayback(action: .cancel,
+                                          mediaUrn: upcomingMedia.urn)
         .send()
     }
     
     func letterboxViewControllerDidStartPicture(inPicture letterboxViewController: SRGLetterboxViewController) {
-        AnalyticsHiddenEvent.pictureInPicture(urn: letterboxViewController.controller.fullLengthMedia?.urn).send()
+        AnalyticsEvent.pictureInPicture(urn: letterboxViewController.controller.fullLengthMedia?.urn).send()
     }
 }

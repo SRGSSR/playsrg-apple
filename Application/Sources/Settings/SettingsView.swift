@@ -53,6 +53,9 @@ struct SettingsView: View {
 #if os(iOS) && (DEBUG || APPCENTER)
             DeveloperSection()
 #endif
+#if DEBUG || NIGHTLY || BETA
+            BottomAdditionalInformationSection(model: model)
+#endif
         }
 #if os(tvOS)
         .listStyle(GroupedListStyle())
@@ -62,7 +65,7 @@ struct SettingsView: View {
         .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
 #endif
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
-        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
+        .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.navigationPage.rawValue, levels: analyticsPageLevels)
     }
     
 #if os(tvOS)
@@ -77,7 +80,7 @@ struct SettingsView: View {
                     Button(action: navigateTo(applicationSectionInfo.applicationSection)) {
                         HStack(spacing: 16) {
                             if let imageName = applicationSectionInfo.imageName {
-                                Image(decorative: imageName)
+                                Image(imageName)
                             }
                             Text(applicationSectionInfo.title)
                         }
@@ -436,7 +439,7 @@ struct SettingsView: View {
             }
         }
         
-        private struct VersionCell: View {
+        fileprivate struct VersionCell: View {
             @ObservedObject var model: SettingsViewModel
             
             var body: some View {
@@ -787,6 +790,22 @@ struct SettingsView: View {
         
         private func toggleFlex() {
             FLEXManager.shared.toggleExplorer()
+        }
+    }
+#endif
+    
+    // MARK: Bottom additional information section
+
+#if DEBUG || NIGHTLY || BETA
+    private struct BottomAdditionalInformationSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                InformationSection.VersionCell(model: model)
+            } header: {
+                Text(NSLocalizedString("Information", comment: "Information section header"))
+            }
         }
     }
 #endif

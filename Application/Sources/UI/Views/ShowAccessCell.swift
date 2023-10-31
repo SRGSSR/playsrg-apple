@@ -24,7 +24,7 @@ struct ShowAccessCell: View {
     
     private var showAZButtonProperties: ButtonProperties {
         return ButtonProperties(
-            icon: "a_to_z",
+            icon: .aToZ,
             label: NSLocalizedString("A to Z", comment: "Show A-Z short button title"),
             accessibilityLabel: PlaySRGAccessibilityLocalizedString("A to Z shows", comment: "Show A-Z button label")
         )
@@ -34,13 +34,13 @@ struct ShowAccessCell: View {
         switch style {
         case .calendar:
             return ButtonProperties(
-                icon: "calendar",
+                icon: .calendar,
                 label: NSLocalizedString("By date", comment: "Show by date short button title"),
                 accessibilityLabel: PlaySRGAccessibilityLocalizedString("Shows by date", comment: "Show by date button label")
             )
         case .programGuide:
             return ButtonProperties(
-                icon: "tv_guide",
+                icon: .tvGuide,
                 label: NSLocalizedString("TV guide", comment: "TV guide short button title")
             )
         }
@@ -68,11 +68,11 @@ extension ShowAccessCell {
     }
     
     private struct ButtonProperties {
-        let icon: String
+        let icon: ImageResource
         let label: String
         let accessibilityLabel: String?
         
-        init(icon: String, label: String, accessibilityLabel: String? = nil) {
+        init(icon: ImageResource, label: String, accessibilityLabel: String? = nil) {
             self.icon = icon
             self.label = label
             self.accessibilityLabel = accessibilityLabel

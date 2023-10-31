@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
       "state" : {
-        "revision" : "ede1a4aee58fc63a308e2babf3e33f55fedecb68",
-        "version" : "6.10.2"
+        "revision" : "fef761279a592960243e67f2aea110c6fa097fd8",
+        "version" : "6.11.0"
       }
     },
     {
@@ -163,6 +163,15 @@
       }
     },
     {
+      "identity" : "iosv5",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CommandersAct/iOSV5.git",
+      "state" : {
+        "revision" : "bff12bbf890409182a055999985a28b4608b9b14",
+        "version" : "5.4.2"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -266,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "c92014ca8838ad3cf403735ce25757afb04cd31f",
-        "version" : "8.2.0"
+        "revision" : "5fbe14159af7f61c86b8e02470cea97a133040f4",
+        "version" : "9.0.1"
       }
     },
     {
@@ -320,8 +329,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "52f33f390ee27e6c21b7a51282e787636dcdf663",
-        "version" : "9.1.2"
+        "revision" : "6fd631014a39074d4fec1dce00804fa468d833fd",
+        "version" : "9.2.1"
       }
     },
     {
@@ -394,24 +403,6 @@
       "state" : {
         "revision" : "121c146fe591b1320238d054ae35c81ffa45f45a",
         "version" : "0.12.0"
-      }
-    },
-    {
-      "identity" : "tccore-xcframework-apple",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SRGSSR/TCCore-xcframework-apple.git",
-      "state" : {
-        "revision" : "eb686883e63af28174472a09eda97acf07179c88",
-        "version" : "4.5.4-srg5"
-      }
-    },
-    {
-      "identity" : "tcsdk-xcframework-apple",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SRGSSR/TCSDK-xcframework-apple.git",
-      "state" : {
-        "revision" : "c4becb0b250258b78cb46225af5e269da834db5a",
-        "version" : "4.4.1-srg5"
       }
     },
     {

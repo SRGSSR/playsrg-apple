@@ -34,7 +34,7 @@ struct HeaderView: View {
                     .srgFont(.H3)
                     .lineLimit(1)
                 if hasDetailDisclosure {
-                    Image(decorative: "chevron")
+                    Image(.chevron)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: SRGFont.metricsForFont(with: .H3).scaledValue(for: 18))
