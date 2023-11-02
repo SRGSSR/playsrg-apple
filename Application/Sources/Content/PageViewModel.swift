@@ -35,6 +35,19 @@ final class PageViewModel: Identifiable, ObservableObject {
         }
     }
     
+    var displayedTitle: String? {
+#if os(tvOS)
+        if case .topic = id {
+            return title
+        }
+        else {
+            return nil
+        }
+#else
+        return nil
+#endif
+    }
+    
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
     

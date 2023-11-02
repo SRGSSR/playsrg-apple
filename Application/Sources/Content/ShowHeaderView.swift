@@ -30,14 +30,14 @@ class ShowMoreEvent: UIEvent {
 
 /// Behavior: h-hug, v-hug
 struct ShowHeaderView: View {
-    @Binding private(set) var show: SRGShow
+    @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
     
     @StateObject private var model = ShowHeaderViewModel()
     
     fileprivate static let verticalSpacing: CGFloat = 24
     
-    init(show: SRGShow, horizontalPadding: CGFloat) {
+    init(show: SRGShow?, horizontalPadding: CGFloat) {
         _show = .constant(show)
         self.horizontalPadding = horizontalPadding
     }
@@ -242,12 +242,17 @@ struct ShowHeaderView: View {
 // MARK: Size
 
 enum ShowHeaderViewSize {
-    static func recommended(for show: SRGShow, horizontalPadding: CGFloat, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
-        let model = ShowHeaderViewModel()
-        model.show = show
-        let size = ShowHeaderView.MainView(model: model, horizontalPadding: horizontalPadding).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
-        return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
+    static func recommended(for show: SRGShow?, horizontalPadding: CGFloat, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        if let show {
+            let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
+            let model = ShowHeaderViewModel()
+            model.show = show
+            let size = ShowHeaderView.MainView(model: model, horizontalPadding: horizontalPadding).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
+        }
+        else {
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+        }
     }
 }
 

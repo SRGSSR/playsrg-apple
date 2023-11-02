@@ -36,14 +36,6 @@ final class PageViewController: UIViewController {
     private var refreshTriggered = false
 #endif
     
-    private var globalHeaderTitle: String? {
-#if os(tvOS)
-        return tabBarController == nil ? model.title : nil
-#else
-        return nil
-#endif
-    }
-    
     private var analyticsPageViewTracked = false
     
     private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
@@ -148,7 +140,12 @@ final class PageViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: globalHeaderTitle)
+            view.content = TitleView(text: model.displayedTitle)
+        }
+        
+        let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
+            guard let self else { return }
+            view.content = ShowHeaderView(show: model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -161,6 +158,9 @@ final class PageViewController: UIViewController {
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == Header.global.rawValue {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            }
+            if kind == Header.showHeader.rawValue {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
             }
             else {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
@@ -307,6 +307,7 @@ final class PageViewController: UIViewController {
 private extension PageViewController {
     enum Header: String {
         case global
+        case showHeader
     }
     
 #if os(iOS)
@@ -556,26 +557,41 @@ private extension PageViewController {
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
-        let headerSize = TitleViewSize.recommended(forText: globalHeaderTitle)
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
-        configuration.boundarySupplementaryItems = [header]
-        
         return configuration
     }
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
+            let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
+            
+            func topSupplementaryItem() -> NSCollectionLayoutBoundarySupplementaryItem? {
+                if let show = self?.model.displayedShow {
+                    let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: 0, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading)
+                }
+                else if let title = self?.model.displayedTitle {
+                    let globalHeaderSize = TitleViewSize.recommended(forText: title)
+                    return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading)
+                }
+                else {
+                    return nil
+                }
+            }
             
             func sectionSupplementaryItems(for section: PageViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
-                return [header]
+                
+                if sectionIndex == 0, let topSupplementaryItem = topSupplementaryItem() {
+                    return [topSupplementaryItem, header]
+                }
+                else {
+                    return [header]
+                }
             }
             
             func layoutSection(for section: PageViewModel.Section) -> NSCollectionLayoutSection {
-                let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
-                
                 switch section.viewModelProperties.layout {
                 case .heroStage:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, _ in
