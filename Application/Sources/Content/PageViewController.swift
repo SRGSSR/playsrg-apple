@@ -537,6 +537,24 @@ extension PageViewController: SectionHeaderViewAction {
     }
 }
 
+extension PageViewController: ShowHeaderViewAction {
+    func showMore(sender: Any?, event: ShowMoreEvent?) {
+        guard let event else { return }
+        
+#if os(iOS)
+        let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
+        if #available(iOS 15.0, *) {
+            if let sheet = sheetTextViewController.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        }
+        present(sheetTextViewController, animated: true, completion: nil)
+#else
+        navigateToText(event.content)
+#endif
+    }
+}
+
 extension PageViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
         collectionView?.play_scrollToTop(animated: animated)
