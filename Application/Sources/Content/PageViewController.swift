@@ -537,6 +537,14 @@ extension PageViewController: SectionHeaderViewAction {
     }
 }
 
+extension PageViewController: TabBarActionable {
+    func performActiveTabAction(animated: Bool) {
+        collectionView?.play_scrollToTop(animated: animated)
+    }
+}
+
+#endif
+
 extension PageViewController: ShowHeaderViewAction {
     func showMore(sender: Any?, event: ShowMoreEvent?) {
         guard let event else { return }
@@ -554,14 +562,6 @@ extension PageViewController: ShowHeaderViewAction {
 #endif
     }
 }
-
-extension PageViewController: TabBarActionable {
-    func performActiveTabAction(animated: Bool) {
-        collectionView?.play_scrollToTop(animated: animated)
-    }
-}
-
-#endif
 
 // MARK: Layout
 
