@@ -779,7 +779,6 @@ private extension PageViewController {
                 case .mediaPlaceholder:
                     MediaCell(media: nil, section: item.section)
                 case let .media(media):
-                    
                     MediaCell(media: media, section: item.section)
                 case .showPlaceholder:
                     ShowCell(show: nil, section: item.section)
