@@ -86,7 +86,7 @@ final class PageViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
+        let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout(for: model, layoutWidth: 0, horizontalSizeClass: .unspecified))
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
@@ -99,14 +99,6 @@ final class PageViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
-#if os(iOS)
-        if #available(iOS 17.0, *) {
-            collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: CollectionView, _) in
-                collectionView.collectionViewLayout.invalidateLayout()
-            }
-        }
-#endif
         
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyContentView
@@ -194,11 +186,19 @@ final class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.collectionView.setCollectionViewLayout(layout(for: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass), animated: true)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
         updateNavigationBar(animated: animated)
 #endif
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Update configuration suplementary views layouts (ie: show header).
+        self.collectionView.setCollectionViewLayout(layout(for: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass), animated: false)
     }
     
     private func reloadData(for state: PageViewModel.State) {
@@ -570,43 +570,32 @@ private extension PageViewController {
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
-    private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
+    private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
+        if let show = model.displayedShow {
+            let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: Self.layoutHorizontalMargin, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading) ]
+        }
+        else if let title = model.displayedTitle {
+            let globalHeaderSize = TitleViewSize.recommended(forText: title)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading) ]
+        }
+        
         return configuration
     }
     
-    private func layout() -> UICollectionViewLayout {
+    private func layout(for model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
             
-            func topSupplementaryItem(horizontalMargin: CGFloat) -> NSCollectionLayoutBoundarySupplementaryItem? {
-                if let show = self?.model.displayedShow {
-                    let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: horizontalMargin, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-                    return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: -horizontalMargin, y: 0))
-                }
-                else if let title = self?.model.displayedTitle {
-                    let globalHeaderSize = TitleViewSize.recommended(forText: title)
-                    return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: -horizontalMargin, y: 0))
-                }
-                else {
-                    return nil
-                }
-            }
-            
             func sectionSupplementaryItems(for section: PageViewModel.Section, horizontalMargin: CGFloat) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
-                
-                if sectionIndex == 0, let topSupplementaryItem = topSupplementaryItem(horizontalMargin: horizontalMargin) {
-                    return [topSupplementaryItem, header]
-                }
-                else {
-                    return [header]
-                }
+                return [header]
             }
             
             func horizontalMargin(for section: PageViewModel.Section) -> CGFloat {
@@ -718,10 +707,9 @@ private extension PageViewController {
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
             let layoutSection = layoutSection(for: section)
-
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, horizontalMargin: horizontalMargin(for: section))
             return layoutSection
-        }, configuration: layoutConfiguration())
+        }, configuration: Self.layoutConfiguration(model: model, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass))
     }
 }
 
