@@ -421,9 +421,16 @@ private extension PageViewModel {
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .show(show):
-            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, displayedShow: show), index: $1) }) }
-                .eraseToAnyPublisher()
+            if show.transmission == .TV {
+                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, displayedShow: show), index: $1) }) }
+                    .eraseToAnyPublisher()
+            }
+            else {
+                return Just(Page(uid: nil, sections: [ Section(.configured(.show(show)), index: 0) ] ))
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
         case let .audio(channel: channel):
             return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
@@ -575,13 +582,19 @@ private extension PageViewModel {
 #else
                 return .liveMediaSwimlane
 #endif
-            case .favoriteShows, .radioFavoriteShows, .show:
+            case .favoriteShows, .radioFavoriteShows:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid
 #if os(iOS)
             case .radioShowAccess:
                 return .showAccess
+#endif
+            case .show:
+#if os(iOS)
+                return .mediaList
+#else
+                return .mediaGrid
 #endif
             default:
                 return .mediaSwimlane

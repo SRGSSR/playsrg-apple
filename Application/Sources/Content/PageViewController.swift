@@ -350,7 +350,7 @@ extension PageViewController {
     }
     
     @objc static func showViewController(for show: SRGShow) -> UIViewController {
-        return show.transmission == .radio ? SectionViewController.showViewController(for: show) : PageViewController(id: .show(show))
+        return PageViewController(id: .show(show))
     }
 }
 

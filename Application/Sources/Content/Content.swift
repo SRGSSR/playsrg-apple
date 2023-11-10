@@ -560,8 +560,6 @@ private extension Content {
                 return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
             case .radioWatchLater, .watchLater:
                 return NSLocalizedString("Later", comment: "Title Label used to present the audio later list")
-            case let .show(show):
-                return show.title
             case .tvLive:
                 return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
