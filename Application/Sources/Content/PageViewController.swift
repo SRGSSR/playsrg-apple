@@ -198,6 +198,7 @@ final class PageViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         updateLayoutConfiguation()
+        reloadData(for: self.model.state)
     }
     
     private func updateLayoutConfiguation() {
@@ -207,14 +208,20 @@ final class PageViewController: UIViewController {
         }
     }
     
+    private func emptyViewEdgeInsets() -> EdgeInsets {
+        let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
+        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+        return EdgeInsets(top: supplementaryItemsHeight, leading: 0, bottom: 0, trailing: 0)
+    }
+    
     private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
-            emptyContentView.content = EmptyContentView(state: .loading)
+            emptyContentView.content = EmptyContentView(state: .loading, insets: emptyViewEdgeInsets())
         case let .failed(error: error, _):
-            emptyContentView.content = EmptyContentView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error), insets: emptyViewEdgeInsets())
         case let .loaded(rows: rows, _):
-            emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic)) : nil
+            emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic), insets: emptyViewEdgeInsets()) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
