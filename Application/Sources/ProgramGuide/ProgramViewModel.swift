@@ -198,7 +198,7 @@ final class ProgramViewModel: ObservableObject {
                     }
                 }
                 
-                tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                tabBarController.dismissAndPresentMediaPlayer(with: media, position: nil)
             }
         }
         else {
@@ -227,12 +227,12 @@ final class ProgramViewModel: ObservableObject {
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Resume", comment: "Alert choice to resume playback"), style: .default, handler: { _ in
                         analyticsClickEvent?.send()
                         
-                        tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                        tabBarController.dismissAndPresentMediaPlayer(with: media, position: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Watch from start", comment: "Alert choice to watch content from start"), style: .default, handler: { _ in
                         analyticsClickEvent?.send()
                         
-                        tabBarController.play_presentMediaPlayer(with: media, position: .default, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                        tabBarController.dismissAndPresentMediaPlayer(with: media, position: .default)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
                     tabBarController.play_top.present(alertController, animated: true, completion: nil)
@@ -240,7 +240,7 @@ final class ProgramViewModel: ObservableObject {
                 else {
                     analyticsClickEvent?.send()
                     
-                    tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                    tabBarController.dismissAndPresentMediaPlayer(with: media, position: nil)
                 }
             }
         )
@@ -486,6 +486,21 @@ extension ProgramViewModel {
         let show: SRGShow
         let isFavorite: Bool
         let action: () -> Void
+    }
+}
+
+fileprivate extension TabBarController {
+    func dismissAndPresentMediaPlayer(with media: SRGMedia, position: SRGPosition?) {
+        var presentMediaPlayer: Void { self.play_presentMediaPlayer(with: media, position: position, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil) }
+        
+        if let presentedViewController = self.presentedViewController {
+            presentedViewController.dismiss(animated: true) {
+                presentMediaPlayer
+            }
+        }
+        else {
+            presentMediaPlayer
+        }
     }
 }
 
