@@ -192,6 +192,12 @@ final class PageViewController: UIViewController {
 #if os(iOS)
         updateNavigationBar(animated: animated)
 #endif
+        userActivity = model.userActivity
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        userActivity = nil
     }
     
     override func viewDidLayoutSubviews() {

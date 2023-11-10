@@ -407,6 +407,41 @@ extension PageViewModel {
     }
 }
 
+// MARK: User activity
+
+extension PageViewModel {
+    var userActivity: NSUserActivity? {
+        {
+            guard let bundleIdentifier = Bundle.main.bundleIdentifier,
+                  let applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") else {
+                return nil
+            }
+            
+            if case let .show(show) = id {
+                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: show, requiringSecureCoding: false) else { return nil }
+                let userActivity = NSUserActivity(activityType: bundleIdentifier.appending(".displaying"))
+                userActivity.title = String(format: NSLocalizedString("Display %@ episodes", comment: "User activity title when displaying a show page"), show.title)
+                userActivity.webpageURL = ApplicationConfiguration.shared.sharingURL(for: show)
+                userActivity.addUserInfoEntries(from: [
+                    "URNString": show.urn,
+                    "SRGShowData": data,
+                    "applicationVersion": applicationVersion
+                ])
+#if os(iOS)
+                userActivity.isEligibleForPrediction = true
+                userActivity.persistentIdentifier = show.urn
+                let suggestedInvocationPhraseFormat = show.transmission == .radio ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
+                userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
+#endif
+                return userActivity
+            }
+            else {
+                return nil
+            }
+        }()
+    }
+}
+
 // MARK: Publishers
 
 private extension PageViewModel {
