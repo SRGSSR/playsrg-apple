@@ -86,7 +86,7 @@ final class PageViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout(for: model, layoutWidth: 0, horizontalSizeClass: .unspecified))
+        let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout(for: model))
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
@@ -186,7 +186,9 @@ final class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.collectionView.setCollectionViewLayout(layout(for: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass), animated: true)
+        if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
+            collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass)
+        }
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
@@ -197,8 +199,10 @@ final class PageViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        // Update configuration suplementary views layouts (ie: show header).
-        self.collectionView.setCollectionViewLayout(layout(for: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass), animated: false)
+        // Update configuration suplementary views layouts (ie: show header layout).
+        if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
+            collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass)
+        }
     }
     
     private func reloadData(for state: PageViewModel.State) {
@@ -587,7 +591,7 @@ private extension PageViewController {
         return configuration
     }
     
-    private func layout(for model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> UICollectionViewLayout {
+    private func layout(for model: PageViewModel) -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
@@ -709,7 +713,7 @@ private extension PageViewController {
             let layoutSection = layoutSection(for: section)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, horizontalMargin: horizontalMargin(for: section))
             return layoutSection
-        }, configuration: Self.layoutConfiguration(model: model, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass))
+        }, configuration: Self.layoutConfiguration(model: model, layoutWidth: 0, horizontalSizeClass: .unspecified))
     }
 }
 
