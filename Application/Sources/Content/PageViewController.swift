@@ -187,7 +187,7 @@ final class PageViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
-            collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass)
+            collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
         }
         model.reload()
         deselectItems(in: collectionView, animated: animated)
@@ -201,7 +201,7 @@ final class PageViewController: UIViewController {
         
         // Update configuration suplementary views layouts (ie: show header layout).
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
-            collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.frame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass)
+            collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
         }
     }
     
@@ -574,18 +574,18 @@ private extension PageViewController {
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
-    private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> UICollectionViewCompositionalLayoutConfiguration {
+    private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         if let show = model.displayedShow {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: Self.layoutHorizontalMargin, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading) ]
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         else if let title = model.displayedTitle {
             let globalHeaderSize = TitleViewSize.recommended(forText: title)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading) ]
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         
         return configuration
@@ -713,7 +713,7 @@ private extension PageViewController {
             let layoutSection = layoutSection(for: section)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, horizontalMargin: horizontalMargin(for: section))
             return layoutSection
-        }, configuration: Self.layoutConfiguration(model: model, layoutWidth: 0, horizontalSizeClass: .unspecified))
+        }, configuration: Self.layoutConfiguration(model: model, layoutWidth: 0, horizontalSizeClass: .unspecified, offsetX: 0))
     }
 }
 
