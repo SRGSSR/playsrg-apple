@@ -808,6 +808,8 @@ struct SettingsView: View {
                 InformationSection.VersionCell(model: model)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
+            } footer: {
+                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Bottom additional information section footer"))
             }
         }
     }
