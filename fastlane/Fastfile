@@ -130,7 +130,7 @@ platform :ios do
       appcenter_lane(
         appname: appcenter_ios_beta_appcenter_names[index],
         destinations: ENV.fetch('PLAY_BETA_APPCENTER_DESTINATIONS', nil),
-        notes: what_s_new_for_beta(platform, nil),
+        notes: what_s_new_for_beta(platform, tag_version),
         notify_testers: true
       )
 
@@ -1231,7 +1231,11 @@ def what_s_new_for_beta(platform, tag_version)
 
   json = what_s_new_for_beta_json(platform)
   what_s_new = json[tag_version]
-  what_s_new || ''
+  what_s_new ||= ''
+  if !build_name(git_branch_name).empty? && !what_s_new.include?('Branch beta')
+    what_s_new = "Branch beta\n#{what_s_new}"
+  end
+  what_s_new
 end
 
 def build_number_for_version(platform, version)
