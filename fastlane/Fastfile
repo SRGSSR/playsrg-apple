@@ -76,7 +76,7 @@ platform :ios do
       appcenter_lane(
         appname: appcenter_ios_nightly_appcenter_names[index],
         destinations: ENV.fetch('PLAY_NIGHTLY_APPCENTER_DESTINATIONS', nil),
-        notes: nightly_changelog(platform, service)
+        notes: nightly_changelog(platform, service, branch_name)
       )
 
       clean_build_artifacts
@@ -776,7 +776,7 @@ platform :ios do
       clean_build_artifacts
     end
 
-    changelog = nightly_changelog(platform, service)
+    changelog = nightly_changelog(platform, service, branch_name)
 
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -1401,7 +1401,7 @@ def build_name(branch_name)
 end
 
 # Return a nightly changelog from git commit messages
-def nightly_changelog(platform, service)
+def nightly_changelog(platform, service, branch_name)
   last_commit_hash = last_nightlies_success_git_commit_hash(platform, service)
   last_commit_hash = 'HEAD^^^^^' if last_commit_hash.length < 12
 
@@ -1413,7 +1413,8 @@ def nightly_changelog(platform, service)
   # HAX: strip emoji from changelog
   changelog = changelog ? changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '').lstrip : ''
 
-  changelog.empty? ? 'No change log found for this build.' : changelog
+  changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
+  "Build name: Nightly #{build_name(branch_name)}\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
