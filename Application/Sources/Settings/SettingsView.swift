@@ -803,7 +803,7 @@ struct SettingsView: View {
         var body: some View {
             PlaySection {
                 if let checkForUpdates = model.checkForUpdates {
-                    Button(NSLocalizedString("Check for updates", comment: "Label of the button to open Apple Testflight application and see other builds to test"), action: checkForUpdates)
+                    Button(NSLocalizedString("Check for updates", comment: "Label of the button to open Apple TestFlight application and see other testable builds"), action: checkForUpdates)
                 }
                 InformationSection.VersionCell(model: model)
             } header: {
