@@ -53,6 +53,37 @@
 			</array>
 		</dict>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>srgtraffic</string>
+		<string>srf</string>
+		<string>srfsport</string>
+		<string>srfplayer</string>
+		<string>srfmeteo</string>
+		<string>srfradio3</string>
+		<string>srfvirus</string>
+		<string>srfjass</string>
+		<string>rtsinfo</string>
+		<string>rtssport</string>
+		<string>playrts</string>
+		<string>couleur3</string>
+		<string>dtqc3</string>
+		<string>rtsradio</string>
+		<string>rsinews</string>
+		<string>rsisport</string>
+		<string>rtskids</string>
+		<string>playrsi</string>
+		<string>rsich</string>
+		<string>rsiibazaar</string>
+		<string>rsizerovero</string>
+		<string>rsipeo</string>
+		<string>playrtr</string>
+		<string>ch.swissinfo.news</string>
+		<string>playswi</string>
+		<string>tvsvizzera</string>
+		<string>itms-beta</string>
+		<string>itms-appss</string>
+	</array>
 	<key>AppCenterSecret</key>
 	<string>$(CONFIG__APPCENTER_SECRET)</string>
 	<key>UIApplicationSceneManifest</key>
