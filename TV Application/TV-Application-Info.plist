@@ -86,6 +86,8 @@
 	</array>
 	<key>AppCenterSecret</key>
 	<string>$(CONFIG__APPCENTER_SECRET)</string>
+	<key>AppStoreAppleId</key>
+	<string>$(CONFIG__APPSTORE_APPLE_ID)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
