@@ -1,15 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "logo_rtsInfo.pdf",
+      "filename" : "rtsinfo_22.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "logo_rtsInfo-1.pdf",
+      "filename" : "rtsinfo_22 1.pdf",
       "idiom" : "ipad"
     },
     {
-      "filename" : "logo_rtsInfo-2.pdf",
+      "filename" : "rtsinfo_22 2.pdf",
       "idiom" : "tv"
     }
   ],
