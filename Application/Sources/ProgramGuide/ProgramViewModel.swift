@@ -19,10 +19,10 @@ final class ProgramViewModel: ObservableObject {
             Self.mediaDataPublisher(for: data?.program)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$mediaData)
-            Self.livestreamMediaPublisher(for: data?.channel)
+            Self.livestreamMediaPublisher(for: data?.channel.wrappedValue)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$livestreamMedia)
-            eventEditViewDelegateObject.channel = data?.channel
+            eventEditViewDelegateObject.channel = data?.channel.wrappedValue
         }
     }
     
@@ -52,7 +52,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     private var channel: SRGChannel? {
-        return data?.channel
+        return data?.channel.wrappedValue
     }
     
     private var isLive: Bool {
@@ -191,14 +191,14 @@ final class ProgramViewModel: ObservableObject {
             return { [self] in
                 if let data {
                     if media.contentType == .livestream {
-                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel.wrappedValue).send()
                     }
                     else {
-                        AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel.wrappedValue).send()
                     }
                 }
                 
-                tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                tabBarController.dismissAndPresentMediaPlayer(with: media, position: nil)
             }
         }
         else {
@@ -214,7 +214,7 @@ final class ProgramViewModel: ObservableObject {
         guard isLive, let media, media.blockingReason(at: Date()) == .none else { return nil }
         
         let data = self.data
-        let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel) : nil
+        let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel.wrappedValue) : nil
         return ButtonProperties(
             icon: .startOver,
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
@@ -227,12 +227,12 @@ final class ProgramViewModel: ObservableObject {
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Resume", comment: "Alert choice to resume playback"), style: .default, handler: { _ in
                         analyticsClickEvent?.send()
                         
-                        tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                        tabBarController.dismissAndPresentMediaPlayer(with: media, position: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Watch from start", comment: "Alert choice to watch content from start"), style: .default, handler: { _ in
                         analyticsClickEvent?.send()
                         
-                        tabBarController.play_presentMediaPlayer(with: media, position: .default, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                        tabBarController.dismissAndPresentMediaPlayer(with: media, position: .default)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
                     tabBarController.play_top.present(alertController, animated: true, completion: nil)
@@ -240,7 +240,7 @@ final class ProgramViewModel: ObservableObject {
                 else {
                     analyticsClickEvent?.send()
                     
-                    tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                    tabBarController.dismissAndPresentMediaPlayer(with: media, position: nil)
                 }
             }
         )
@@ -310,7 +310,7 @@ final class ProgramViewModel: ObservableObject {
                         guard let self else { return }
                         if granted {
                             let event = EKEvent(eventStore: eventStore)
-                            event.title = "\(program.title) - \(channel.title)"
+                            event.title = "\(program.title) - \(channel.wrappedValue.title)"
                             event.startDate = program.startDate
                             event.endDate = program.endDate
                             event.url = self.calendarUrl
@@ -367,7 +367,7 @@ final class ProgramViewModel: ObservableObject {
             return ApplicationConfiguration.shared.sharingURL(for: show)
         }
         else {
-            return ApplicationConfiguration.shared.playURL
+            return ApplicationConfiguration.shared.playURL(for: ApplicationConfiguration.shared.vendor)
         }
     }
     
@@ -486,6 +486,21 @@ extension ProgramViewModel {
         let show: SRGShow
         let isFavorite: Bool
         let action: () -> Void
+    }
+}
+
+fileprivate extension TabBarController {
+    func dismissAndPresentMediaPlayer(with media: SRGMedia, position: SRGPosition?) {
+        var presentMediaPlayer: Void { self.play_presentMediaPlayer(with: media, position: position, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil) }
+        
+        if let presentedViewController = self.presentedViewController {
+            presentedViewController.dismiss(animated: true) {
+                presentMediaPlayer
+            }
+        }
+        else {
+            presentMediaPlayer
+        }
     }
 }
 

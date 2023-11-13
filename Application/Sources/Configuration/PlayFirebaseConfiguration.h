@@ -9,6 +9,7 @@
 #import "TVChannel.h"
 
 @import Foundation;
+@import SRGDataProviderModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -55,6 +56,16 @@ OBJC_EXPORT NSArray<NSNumber * /* HomeSection */> * _Nullable FirebaseConfigurat
  */
 - (NSArray<RadioChannel *> *)radioChannelsForKey:(NSString *)key defaultHomeSections:(nullable NSArray<NSNumber * /* HomeSection */> *)defaultHomeSections;
 - (NSArray<TVChannel *> *)tvChannelsForKey:(NSString *)key;
+
+/**
+ *  TV guide other bouquets accessor, main bouquet excluded. Return an empty array if no valid data is found under the specified key.
+ */
+- (NSArray<NSNumber * /* TVGuideBouquet */> *)tvGuideOtherBouquetsForKey:(NSString *)key vendor:(SRGVendor)vendor;
+
+/**
+ *  Play URLs accessor. Return an empty dictionnary if no valid data is found under the specified key.
+ */
+- (NSDictionary<NSNumber *, NSURL *> *)playURLsForKey:(NSString *)key;
 
 @end
 

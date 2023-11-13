@@ -4,7 +4,7 @@
   "siteName": "rtr-player-ios-v",
   "tvSiteName": "rtr-player-tvos-apple",
   "appStoreProductIdentifier": 920754925,
-  "playURL": "https://www.rtr.ch/play/",
+  "playURLs": "{\"rsi\":\"https://www.rsi.ch/play/\",\"rtr\":\"https://www.rtr.ch/play/\",\"rts\":\"https://www.rts.ch/play/\",\"srf\":\"https://www.srf.ch/play/\",\"swi\":\"https://play.swissinfo.ch/play/\"}",
   "playServiceURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "sourceCodeURL": "https://github.com/SRGSSR/playsrg-apple",
@@ -26,6 +26,6 @@
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
   "discoverySubtitleOptionLanguage": "de",
   "audioDescriptionAvailabilityHidden": true,
-  "tvThirdPartyChannelsAvailable": true,
+  "tvGuideOtherBouquets": "thirdparty,rts,rsi",
   "userConsentDefaultLanguage": "de"
 }
