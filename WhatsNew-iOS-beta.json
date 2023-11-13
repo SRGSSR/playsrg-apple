@@ -211,5 +211,6 @@
     "3.7.9-432": "- Maintenance build.\n- Analytic events use a new server.",
     "3.7.9-433": "- Allow playing video and audio when displaying user consent banners.\n- Analytic events have language property.",
     "3.7.9-434": "- Increase player skip gesture area (double taps).",
-    "3.7.9-435": "- Patch analytics migration."
+    "3.7.9-435": "- Patch analytics migration.",
+    "3.7.10-436": "- Discover programs from all SRG SSR channels in the TV Guide.\n- Always display subscribe buttons in show page and profile page.\n- Update RTS Info channel logo. [RTS]"
 }
