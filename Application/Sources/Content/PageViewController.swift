@@ -593,6 +593,7 @@ private extension PageViewController {
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
+    private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
     
     private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
@@ -600,8 +601,8 @@ private extension PageViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         if let show = model.displayedShow {
-            let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: Self.layoutHorizontalMargin, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
+            let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
         }
         else if let title = model.displayedTitle {
             let globalHeaderSize = TitleViewSize.recommended(forText: title)
