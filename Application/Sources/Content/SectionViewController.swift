@@ -449,14 +449,6 @@ extension SectionViewController {
     @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
         return showsViewController(forChannelUid: channelUid, initialSectionId: nil)
     }
-    
-    @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {
-        return SectionViewController(section: .configured(.show(show)), fromPushNotification: fromPushNotification)
-    }
-    
-    @objc static func showViewController(for show: SRGShow) -> SectionViewController {
-        return showViewController(for: show, fromPushNotification: false)
-    }
 }
 
 // MARK: Protocols

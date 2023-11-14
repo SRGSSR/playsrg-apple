@@ -458,14 +458,14 @@ static void *s_kvoContext = &s_kvoContext;
 {
     [UserConsentHelper waitCollectingConsentRetain];
     if (show) {
-        SectionViewController *showViewController = [SectionViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
+        UIViewController *showViewController = [PageViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
         [self.rootTabBarController pushViewController:showViewController animated:YES];
         [UserConsentHelper waitCollectingConsentRelease];
     }
     else {
         [[SRGDataProvider.currentDataProvider showWithURN:showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (show) {
-                SectionViewController *showViewController = [SectionViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
+                UIViewController *showViewController = [PageViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
                 [self.rootTabBarController pushViewController:showViewController animated:YES];
             }
             else {

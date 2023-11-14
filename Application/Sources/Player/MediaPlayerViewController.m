@@ -2100,7 +2100,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
     [sceneDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
-    SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
+    UIViewController *showViewController = [PageViewController showViewControllerFor:show fromPushNotification:NO];
     [sceneDelegate.rootTabBarController pushViewController:showViewController animated:NO];
     [sceneDelegate.window play_dismissAllViewControllersWithAnimated:YES completion:nil];
 }
