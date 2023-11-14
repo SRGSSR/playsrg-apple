@@ -374,7 +374,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = isNavigationBarHidden ? 0 : Self.layoutVerticalMargin
+        let top = isNavigationBarHidden || (model.displayedShow != nil) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif
