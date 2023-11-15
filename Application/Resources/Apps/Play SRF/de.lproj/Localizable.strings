@@ -127,9 +127,6 @@
    Title of the cancel button in the alert view when deleting a download in the player view */
 "Cancel" = "Abbrechen";
 
-/* Label of the button to open Apple TestFlight application and see other testable builds */
-"Check for updates" = "Nach neuen Updates suchen";
-
 /* Information message of the action view to choose a regional radio
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Wählen Sie Ihr Regionaljournal";
@@ -683,6 +680,9 @@
 
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Die Informationen wurden in die Zwischenablage kopiert";
+
+/* Label of the button to open Apple TestFlight application and see other testable builds */
+"Switch version" = "Version ändern";
 
 /* Login benefits description footer */
 "Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und die für später gemerkten Inhalte auf allen mit Ihrem Konto verbundenen Geräten.";

@@ -802,8 +802,8 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                if let checkForUpdates = model.checkForUpdates {
-                    Button(NSLocalizedString("Check for updates", comment: "Label of the button to open Apple TestFlight application and see other testable builds"), action: checkForUpdates)
+                if let switchVersion = model.switchVersion {
+                    Button(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds"), action: switchVersion)
                 }
                 InformationSection.VersionCell(model: model)
             } header: {

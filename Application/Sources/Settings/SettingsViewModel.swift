@@ -249,7 +249,7 @@ final class SettingsViewModel: ObservableObject {
         UIApplication.shared.perform(selector)
     }
     
-    var checkForUpdates: (() -> Void)? {
+    var switchVersion: (() -> Void)? {
         guard let appStoreAppleId = Bundle.main.object(forInfoDictionaryKey: "AppStoreAppleId") as? String, !appStoreAppleId.isEmpty else { return nil }
         
         if let url = URL(string: "itms-beta://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {

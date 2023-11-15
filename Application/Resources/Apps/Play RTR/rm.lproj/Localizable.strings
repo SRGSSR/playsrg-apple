@@ -127,9 +127,6 @@
    Title of the cancel button in the alert view when deleting a download in the player view */
 "Cancel" = "Interrumper";
 
-/* Label of the button to open Apple TestFlight application and see other testable builds */
-"Check for updates" = "Verifitgar actualisaziun";
-
 /* Information message of the action view to choose a regional radio
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Selecziunà tes radio regiunal";
@@ -683,6 +680,9 @@
 
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Infurmaziuns da support èn copiadas en las notizias";
+
+/* Label of the button to open Apple TestFlight application and see other testable builds */
+"Switch version" = "Midar la versiun";
 
 /* Login benefits description footer */
 "Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";

@@ -127,9 +127,6 @@
    Title of the cancel button in the alert view when deleting a download in the player view */
 "Cancel" = "Annuler";
 
-/* Label of the button to open Apple TestFlight application and see other testable builds */
-"Check for updates" = "Vérifier les mises à jour";
-
 /* Information message of the action view to choose a regional radio
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Choisissez une radio régionale";
@@ -684,6 +681,9 @@
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Les informations de support ont été copiées dans le presse-papier";
 
+/* Label of the button to open Apple TestFlight application and see other testable builds */
+"Switch version" = "Changer de version";
+
 /* Login benefits description footer */
 "Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronisez les favoris, l'historique de lecture et le contenu à consulter plus tard sur tous les appareils liés à votre compte.";
 
@@ -868,4 +868,4 @@
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vous avez été automatiquement déconnecté. Connectez-vous à nouveau pour conserver vos données synchronisées entre vos appareils.";
 
 /* Add to Calendar alert title */
-"“%@” would like to access to your calendar" = "« %@ » souhaite accéder à vote calendrier.";
+"“%@” would like to access to your calendar" = "« %@ » souhaite accéder à votre calendrier.";
