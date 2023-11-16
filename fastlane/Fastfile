@@ -1404,6 +1404,18 @@ def build_name(branch_name)
   end
 end
 
+def changelog_build_name(branch_name)
+  if branch_name.include? 'feature/'
+    branch_name.sub('feature/', '').strip
+  elsif branch_name.include? 'release/'
+    branch_name.sub('release/', '').strip
+  elsif branch_name.include? 'hotfix/'
+    branch_name.sub('hotfix/', '').strip
+  else
+    branch_name
+  end
+end
+
 # Return a nightly changelog from git commit messages
 def nightly_changelog(platform, service, branch_name)
   last_commit_hash = last_nightlies_success_git_commit_hash(platform, service)
@@ -1418,7 +1430,10 @@ def nightly_changelog(platform, service, branch_name)
   changelog = changelog ? changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '').lstrip : ''
 
   changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
-  "Build name: Nightly #{build_name(branch_name)}\n#{changelog}"
+
+  build_suffix = nightly_display_name_suffix(branch_name).strip
+  build_name = "#{build_suffix} #{changelog_build_name(branch_name)} #{build_suffix}"
+  "Build #{build_name}\n\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
