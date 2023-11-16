@@ -59,6 +59,57 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
     return homeSections.copy;
 }
 
+static NSNumber * TVGuideBouquetWithString(NSString *string)
+{
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSString *, NSNumber *> *s_bouqets;
+    dispatch_once(&s_onceToken, ^{
+        s_bouqets = @{ @"thirdparty" : @(TVGuideBouquetThirdParty),
+                        @"rsi" : @(TVGuideBouquetRSI),
+                        @"rts" : @(TVGuideBouquetRTS),
+                        @"srf" : @(TVGuideBouquetSRF)
+        };
+    });
+    return s_bouqets[string];
+}
+
+static BOOL TVGuideBouquetIsMainBouquet(TVGuideBouquet tvGuideBouquet, SRGVendor vendor)
+{
+    switch (tvGuideBouquet) {
+        case TVGuideBouquetThirdParty:
+            return NO;
+        case TVGuideBouquetRSI:
+            return vendor == SRGVendorRSI;
+        case TVGuideBouquetRTS:
+            return vendor == SRGVendorRTS;
+        case TVGuideBouquetSRF:
+            return vendor == SRGVendorSRF;
+    }
+}
+
+NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string, SRGVendor vendor)
+{
+    NSMutableArray<NSNumber *> *tvGuideBouquets = [NSMutableArray array];
+    
+    NSArray<NSString *> *tvGuideBouquetIdentifiers = [string componentsSeparatedByString:@","];
+    for (NSString *identifier in tvGuideBouquetIdentifiers) {
+        NSNumber * tvGuideBouquet = TVGuideBouquetWithString(identifier);
+        if (tvGuideBouquet != nil) {
+            if (!([tvGuideBouquets containsObject:tvGuideBouquet] || TVGuideBouquetIsMainBouquet(tvGuideBouquet.intValue, vendor))) {
+                [tvGuideBouquets addObject:tvGuideBouquet];
+            }
+            else {
+                PlayLogWarning(@"configuration", @"TV guide other bouquet identifier %@ duplicated or main one. Skipped.", identifier);
+            }
+        }
+        else {
+            PlayLogWarning(@"configuration", @"Unknown TV guide other bouquet identifier %@. Skipped.", identifier);
+        }
+    }
+    
+    return tvGuideBouquets.copy;
+}
+
 @interface PlayFirebaseConfiguration ()
 
 @property (nonatomic) FIRRemoteConfig *remoteConfig;
@@ -244,6 +295,46 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
         }
     }
     return tvChannels.copy;
+}
+
+- (NSArray<NSNumber *> *)tvGuideOtherBouquetsForKey:(NSString *)key vendor:(SRGVendor)vendor
+{
+    NSString *tvGuideBouquetsString = [self stringForKey:key];
+    return tvGuideBouquetsString ? FirebaseConfigurationTVGuideOtherBouquets(tvGuideBouquetsString, vendor) : @[];
+}
+
+- (NSDictionary<NSNumber *, NSURL *> *)playURLsForKey:(NSString *)key
+{
+    static NSDictionary<NSString *, NSNumber *> *s_vendors;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_vendors = @{ @"rsi" : @(SRGVendorRSI),
+                       @"rtr" : @(SRGVendorRTR),
+                       @"rts" : @(SRGVendorRTS),
+                       @"srf" : @(SRGVendorSRF),
+                       @"swi" : @(SRGVendorSWI) };
+    });
+    
+    NSMutableDictionary<NSNumber *, NSURL *> *playURLs = [NSMutableDictionary dictionary];
+    
+    NSDictionary *playURLsDictionary = [self JSONDictionaryForKey:key];
+    for (NSString *key in playURLsDictionary) {
+        NSNumber *vendor = s_vendors[key];
+        if (vendor) {
+            NSURL *URL = [NSURL URLWithString:playURLsDictionary[key]];
+            if (URL) {
+                playURLs[vendor] = URL;
+            }
+            else {
+                PlayLogWarning(@"configuration", @"Play URL configuration is not valid. The URL of %@ is not valid.", key);
+            }
+        }
+        else {
+            PlayLogWarning(@"configuration", @"Play URL configuration business unit identifier is not valid. %@ is not valid.", key);
+        }
+    }
+    
+    return playURLs.copy;
 }
 
 #pragma mark Update

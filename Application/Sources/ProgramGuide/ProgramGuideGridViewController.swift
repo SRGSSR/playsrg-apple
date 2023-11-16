@@ -38,7 +38,7 @@ final class ProgramGuideGridViewController: UIViewController {
             self.dailyModel = dailyModel
         }
         else {
-            self.dailyModel = ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
+            self.dailyModel = ProgramGuideDailyViewModel(day: model.day, mainPartyChannels: model.mainPartyChannels, otherPartyChannels: model.otherPartyChannels)
         }
         super.init(nibName: nil, bundle: nil)
     }
@@ -84,7 +84,7 @@ final class ProgramGuideGridViewController: UIViewController {
             cell.content = ItemCell(item: item)
 #if os(tvOS)
             if let program = item.program {
-                cell.accessibilityLabel = program.play_accessibilityLabel(with: item.section)
+                cell.accessibilityLabel = program.play_accessibilityLabel(with: item.section.wrappedValue)
                 cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
             }
             else {
@@ -102,7 +102,7 @@ final class ProgramGuideGridViewController: UIViewController {
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let channel = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = ChannelHeaderView(channel: channel)
+            view.content = ChannelHeaderView(channel: channel.wrappedValue)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
@@ -190,7 +190,7 @@ private extension ProgramGuideGridViewController {
         return ProgramGuideGridLayout.xOffset(centeringDate: model.date(for: time), in: collectionView, day: model.day)
     }
     
-    func yOffset(for channel: SRGChannel?) -> CGFloat? {
+    func yOffset(for channel: PlayChannel?) -> CGFloat? {
         guard let channel, let sectionIndex = dataSource.snapshot().sectionIdentifiers.firstIndex(of: channel) else { return nil }
         return ProgramGuideGridLayout.yOffset(forSectionIndex: sectionIndex, in: collectionView)
     }
@@ -222,16 +222,16 @@ private extension ProgramGuideGridViewController {
 
 private extension ProgramGuideGridViewController {
     struct ScrollTarget {
-        let channel: SRGChannel?
+        let channel: PlayChannel?
         let time: TimeInterval?
         
-        init?(channel: SRGChannel?, time: TimeInterval?) {
+        init?(channel: PlayChannel?, time: TimeInterval?) {
             guard channel != nil || time != nil else { return nil }
             self.channel = channel
             self.time = time
         }
         
-        init(channel: SRGChannel) {
+        init(channel: PlayChannel) {
             self.channel = channel
             self.time = nil
         }
@@ -283,7 +283,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         }
         
 #if os(tvOS)
-        navigateToProgram(program, in: channel)
+        navigateToProgram(program, in: channel.wrappedValue)
 #else
         AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .grid).send()
         // Deselection is managed here rather than in view appearance methods, as those are not called with the

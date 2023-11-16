@@ -104,7 +104,7 @@ BOOL FavoritesIsSubscribedToShow(SRGShow *show)
 BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
 {
     if (! FavoritesContainsShow(show)) {
-        return NO;
+        FavoritesToggleShow(show);
     }
     
     if (! [PushService.sharedService toggleSubscriptionForShow:show]) {

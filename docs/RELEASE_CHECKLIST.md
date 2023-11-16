@@ -30,6 +30,7 @@
 | Finish git-flow release, tags, Bump patch / build version numbers and push (with fastlane\*) ||||||
 | Close milestone and issues on github ||||||
 | Create github release ||||||
+| Add release date on Jira release ||||||
 | Update status page on Confluence (Release date, old versions section) ||||||
 
 ### \*Fastlane on PlayCity CI:
