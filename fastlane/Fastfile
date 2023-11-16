@@ -1232,8 +1232,8 @@ def what_s_new_for_beta(platform, tag_version)
   json = what_s_new_for_beta_json(platform)
   what_s_new = json[tag_version]
   what_s_new ||= ''
-  if !build_name(git_branch_name).empty? && !what_s_new.include?('Branch beta')
-    what_s_new = "Branch beta\n#{what_s_new}"
+  if !build_name(git_branch_name).empty? && !what_s_new.include?('Beta from a branch')
+    what_s_new = "Beta from a branch\n\n#{what_s_new}"
   end
   what_s_new
 end
@@ -1431,7 +1431,7 @@ def nightly_changelog(platform, service, branch_name)
 
   changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
 
-  "Built from #{changelog_build_name(branch_name)}\n\n#{changelog}"
+  "Built from #{changelog_build_name(branch_name)} branch\n\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
