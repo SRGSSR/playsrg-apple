@@ -1431,9 +1431,7 @@ def nightly_changelog(platform, service, branch_name)
 
   changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
 
-  build_suffix = nightly_display_name_suffix(branch_name).strip
-  build_name = "#{build_suffix} #{changelog_build_name(branch_name)} #{build_suffix}"
-  "Build #{build_name}\n\n#{changelog}"
+  "Built from #{changelog_build_name(branch_name)}\n\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
