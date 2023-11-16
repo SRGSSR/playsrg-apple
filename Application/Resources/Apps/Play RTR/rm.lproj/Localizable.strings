@@ -681,6 +681,9 @@
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Infurmaziuns da support èn copiadas en las notizias";
 
+/* Label of the button to open Apple TestFlight application and see other testable builds */
+"Switch version" = "Midar la versiun";
+
 /* Login benefits description footer */
 "Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";
 
@@ -760,6 +763,7 @@
 "This might interest you" = "Quai pudess interessar Vus";
 
 /* Advanced features section footer
+   Bottom additional information section footer
    Reset section footer */
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "Questa secziun è mo disponibla en la versiun nightly ni beta e na vegn betg en producziun.";
 

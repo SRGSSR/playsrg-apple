@@ -681,6 +681,9 @@
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Die Informationen wurden in die Zwischenablage kopiert";
 
+/* Label of the button to open Apple TestFlight application and see other testable builds */
+"Switch version" = "Version ändern";
+
 /* Login benefits description footer */
 "Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und die für später gemerkten Inhalte auf allen mit Ihrem Konto verbundenen Geräten.";
 
@@ -760,6 +763,7 @@
 "This might interest you" = "Das könnte Sie auch interessieren";
 
 /* Advanced features section footer
+   Bottom additional information section footer
    Reset section footer */
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "Die erweiterten Funktionen sind nur in Nightlies oder Betas sichtbar.";
 

@@ -248,5 +248,27 @@ final class SettingsViewModel: ObservableObject {
         let selector = Selector("_p39e45r2f435o6r7837m12M34e5m6o67r8y8W9a9r66654n43i3n2g".unobfuscated())
         UIApplication.shared.perform(selector)
     }
+    
+    var switchVersion: (() -> Void)? {
+        guard let appStoreAppleId = Bundle.main.object(forInfoDictionaryKey: "AppStoreAppleId") as? String, !appStoreAppleId.isEmpty else { return nil }
+        
+        if let url = URL(string: "itms-beta://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {
+            return {
+                UIApplication.shared.open(url)
+            }
+        }
+        else if let url = URL(string: "https://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {
+#if os(iOS)
+            return {
+                UIApplication.shared.open(url)
+            }
+#else
+            return nil
+#endif
+        }
+        else {
+            return nil
+        }
+    }
 #endif
 }
