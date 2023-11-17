@@ -367,7 +367,7 @@ final class ProgramViewModel: ObservableObject {
             return ApplicationConfiguration.shared.sharingURL(for: show)
         }
         else {
-            return ApplicationConfiguration.shared.playURL(for: ApplicationConfiguration.shared.vendor)
+            return ApplicationConfiguration.shared.playURL(for: self.channel?.vendor ?? ApplicationConfiguration.shared.vendor)
         }
     }
     
