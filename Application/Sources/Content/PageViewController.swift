@@ -212,7 +212,6 @@ final class PageViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         updateLayoutConfiguation()
-        reloadData(for: self.model.state)
     }
     
     private func updateLayoutConfiguation() {
