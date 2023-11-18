@@ -1,0 +1,47 @@
+#
+# Crowdin configuration (PlaySRG project)
+#
+"project_id": "126201"
+# "api_token": "" # use --token option instead so that it is work on all computers.
+"base_path": "/tmp/playsrg-crowdin"
+"base_url": "https://api.crowdin.com"
+
+"preserve_hierarchy": true
+files: [
+  {
+    "source": "/Apple/Play App/*.strings",
+    "translation": "/%locale%/Apple/Play App/%original_file_name%"
+  },
+  {
+    "source": "/Apple/Play App/*.csv",
+    "translation": "/%locale%/Apple/Play App/%original_file_name%"
+  },
+  {
+    "source": "/Apple/SRGContentProtection Library/*.strings",
+    "translation": "/%locale%/Apple/SRGContentProtection Library/%original_file_name%"
+  },
+  {
+    "source": "/Apple/SRGDataprovider Library/*.strings",
+    "translation": "/%locale%/Apple/SRGDataprovider Library/%original_file_name%"
+  },
+  {
+    "source": "/Apple/SRGIdentity Library/*.strings",
+    "translation": "/%locale%/Apple/SRGIdentity Library/%original_file_name%"
+  },
+  {
+    "source": "/Apple/SRGLetterbox Library/*.strings",
+    "translation": "/%locale%/Apple/SRGLetterbox Library/%original_file_name%"
+  },
+  {
+    "source": "/Apple/SRGMediaPlayer Library/*.strings",
+    "translation": "/%locale%/Apple/SRGMediaPlayer Library/%original_file_name%"
+  },
+  {
+    "source": "/Apple/SRGNetwork Library/*.strings",
+    "translation": "/%locale%/Apple/SRGNetwork Library/%original_file_name%"
+  },
+  {
+    "source": "/Apple/SRGUserData Library/*.strings",
+    "translation": "/%locale%/Apple/SRGUserData Library/%original_file_name%"
+  }
+]
