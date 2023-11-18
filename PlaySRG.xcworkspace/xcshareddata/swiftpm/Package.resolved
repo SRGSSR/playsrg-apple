@@ -303,7 +303,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "feature/content-show-page",
-        "revision" : "51adab868ef12ee0a25fb8426e73322887f95c01"
+        "revision" : "cfe26d70ada19d97a358ec9ac1c14b30276dc296"
       }
     },
     {
