@@ -15,8 +15,8 @@ if [ -f "$ENV_FILE" ]; then
 	. "$ENV_FILE"
 fi
 
-if [ -z "$CROWDIN_API_KEY" ]; then
-	echo "CROWDIN_API_KEY environment variable is not set. Skipping Crowdin pulling."
+if [ -z "$CROWDIN_API_TOKEN" ]; then
+	echo "CROWDIN_API_TOKEN environment variable is not set. Skipping Crowdin pulling."
 	exit 0
 fi
 
@@ -28,11 +28,11 @@ CROWDIN_CONFIG_FILE="$script_dir/../crowdin.yml"
 
 # crowdin CLI needs sources in the current directory to get translations.
 echo "Downloading sources from Crowdin..."
-crowdin pull sources -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_KEY" --no-progress
+crowdin pull sources -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
 
 # crowdin CLI builds ZIP archive with the latest translations automatically.
 echo "Downloading the latest translations..."
-crowdin pull -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_KEY" --no-progress
+crowdin pull -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
 
 for i in "$@"
 do
