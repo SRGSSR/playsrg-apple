@@ -89,6 +89,18 @@ The project can be built without private settings but some features might not be
 
 Simply open the project with Xcode and wait until all dependencies have been retrieved. Then build and run the project.
 
+## Translations
+
+Pushing new translations needs to upload source files on [crowdin.com](https://crowdin.com/project/play-srg/sources/files).
+
+Pulling new translations:
+
+```
+make pull-translations
+```
+
+The script needs [Crowdin CLI](https://crowdin.github.io/crowdin-cli/).
+
 ## Releasing binaries
 
 The proprietary project uses [fastlane](https://fastlane.tools/) to [release binaries](RELEASE_CHECKLIST.md), either for internal purposes or for the AppStore.
