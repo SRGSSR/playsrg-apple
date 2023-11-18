@@ -360,11 +360,11 @@ final class ProgramViewModel: ObservableObject {
         if let media = self.media {
             return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
         }
+        else if let media = self.livestreamMedia, program?.timeAvailability(at: Date()) == .notYetAvailable {
+            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+        }
         else if let show {
             return ApplicationConfiguration.shared.sharingURL(for: show)
-        }
-        else if let media = self.livestreamMedia {
-            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
         }
         else {
             return ApplicationConfiguration.shared.playURL(for: self.channel?.vendor ?? ApplicationConfiguration.shared.vendor)
