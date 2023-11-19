@@ -148,9 +148,17 @@ struct MediaCell: View {
             return MediaDescription.subtitle(for: media, style: mediaDescriptionStyle)
         }
         
+        private var subtitleColor: Color {
+            return style == .date ? constant(iOS: .srgGray96, tvOS: .white) : .srgGray96
+        }
+        
         private var title: String {
             guard let media else { return .placeholder(length: 8) }
             return MediaDescription.title(for: media, style: mediaDescriptionStyle)
+        }
+        
+        private var titleColor: Color {
+            return style == .date ? constant(iOS: .srgGrayC7, tvOS: .white) : .srgGrayC7
         }
         
         private var summary: String? {
@@ -190,12 +198,12 @@ struct MediaCell: View {
                     Text(subtitle)
                         .srgFont(.subtitle1)
                         .lineLimit(2)
-                        .foregroundColor(.srgGray96)
+                        .foregroundColor(subtitleColor)
                 }
                 Text(title)
                     .srgFont(.H4)
                     .lineLimit(titleLineLimit)
-                    .foregroundColor(.srgGrayC7)
+                    .foregroundColor(titleColor)
                     .layoutPriority(1)
                 if let summary {
                     Text(summary)
