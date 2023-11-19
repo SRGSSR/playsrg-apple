@@ -93,6 +93,36 @@ final class PageViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
+#if os(tvOS)
+        if let show = model.id.displayedShow {
+            let imageView = UIImageView()
+            imageView.contentMode = .scaleAspectFill
+            imageView.play_requestImage(show.image, with: .large, placeholder: .none)
+            view.addSubview(imageView)
+            
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                imageView.topAnchor.constraint(equalTo: view.topAnchor),
+                imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
+            
+            let imageViewOverlay = UIView()
+            imageViewOverlay.backgroundColor = UIColor(white: 0, alpha: 0.6)
+            
+            imageView.addSubview(imageViewOverlay)
+            
+            imageViewOverlay.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                imageViewOverlay.topAnchor.constraint(equalTo: imageView.topAnchor),
+                imageViewOverlay.bottomAnchor.constraint(equalTo: imageView.bottomAnchor),
+                imageViewOverlay.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+                imageViewOverlay.trailingAnchor.constraint(equalTo: imageView.trailingAnchor)
+            ])
+        }
+#endif
+        
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout(for: model))
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
