@@ -92,9 +92,19 @@ struct ShowHeaderView: View {
                         DescriptionView(model: model, centerLayout: false)
                             .padding(.leading, descriptionHorizontalPadding)
                             .padding(.trailing, 16)
+#if os(tvOS)
+                            .frame(maxWidth: .infinity)
+                            .padding(.top, 120)
+                            .padding(.bottom, 240)
+#endif
+#if os(tvOS)
+                        Color.clear
+                            .frame(maxWidth: .infinity, maxHeight: 0)
+#else
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
                             .overlay(ImageOverlay(isHorizontal: true))
+#endif
                     }
                     .padding(.bottom, constant(iOS: 40, tvOS: 50))
                     .focusable()
