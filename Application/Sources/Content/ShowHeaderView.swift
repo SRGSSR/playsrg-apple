@@ -239,6 +239,7 @@ struct ShowHeaderView: View {
                 TruncatableTextView(content: content, lineLimit: 3) {
                     firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
                 }
+                .foregroundColor(constant(iOS: .srgGray96, tvOS: .srgGrayC7))
                 .responderChain(from: firstResponder)
             }
             
