@@ -194,7 +194,7 @@ final class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateLayoutConfiguation()
+        updateLayoutConfiguration()
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
@@ -211,10 +211,10 @@ final class PageViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        updateLayoutConfiguation()
+        updateLayoutConfiguration()
     }
     
-    private func updateLayoutConfiguation() {
+    private func updateLayoutConfiguration() {
         // Update configuration suplementary views layouts (ie: show header layout).
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
             collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
