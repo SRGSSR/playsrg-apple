@@ -131,7 +131,7 @@ final class PageViewController: UIViewController {
         
 #if os(iOS)
         navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
-        showHeaderVisible = model.id.displayedShow != nil
+        showHeaderVisible = model.id.hasShowHeaderView
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
@@ -382,7 +382,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = isNavigationBarHidden || (model.id.displayedShow != nil) ? 0 : Self.layoutVerticalMargin
+        let top = (isNavigationBarHidden || model.id.hasShowHeaderView) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif

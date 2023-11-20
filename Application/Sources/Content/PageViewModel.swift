@@ -216,6 +216,10 @@ extension PageViewModel {
             }
         }
         
+        var hasShowHeaderView: Bool {
+            return displayedShow != nil
+        }
+        
         var displayedTitle: String? {
 #if os(tvOS)
             if case .topic = self {
