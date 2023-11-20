@@ -34,6 +34,7 @@ final class PageViewController: UIViewController {
     }
     
     private var refreshTriggered = false
+    private var showHeaderVisible = false
 #endif
     
     private var analyticsPageViewTracked = false
@@ -128,6 +129,7 @@ final class PageViewController: UIViewController {
         
 #if os(iOS)
         navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
+        showHeaderVisible = model.displayedShow != nil
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
@@ -277,6 +279,7 @@ final class PageViewController: UIViewController {
             self.googleCastButton?.removeFromSuperview()
         }
         
+        navigationItem.title = !showHeaderVisible ? title : nil
         navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
         
         if model.id.sharingItem != nil {
@@ -463,6 +466,26 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         return preview(for: configuration, in: collectionView)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case Header.showHeader.rawValue:
+            showHeaderVisible = true
+            updateNavigationBar(animated: true)
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case Header.showHeader.rawValue:
+                showHeaderVisible = false
+                updateNavigationBar(animated: true)
+        default:
+            break
+        }
     }
     
     private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
