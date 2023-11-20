@@ -180,7 +180,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
 @property (nonatomic, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
-@property (nonatomic, getter=isLegacyShowPagePreferred) BOOL legacyShowPagePreferred;
+@property (nonatomic, getter=isPredefinedShowPagePreferred) BOOL predefinedShowPagePreferred;
 @property (nonatomic, getter=isShowLeadPreferred) BOOL showLeadPreferred;
 
 @property (nonatomic, copy) NSString *userConsentDefaultLanguage;
@@ -485,7 +485,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.searchSettingSubtitledHidden = [firebaseConfiguration boolForKey:@"searchSettingSubtitledHidden"];
     self.showsSearchHidden = [firebaseConfiguration boolForKey:@"showsSearchHidden"];
     
-    self.legacyShowPagePreferred = [firebaseConfiguration boolForKey:@"legacyShowPagePreferred"];
+    self.predefinedShowPagePreferred = [firebaseConfiguration boolForKey:@"predefinedShowPagePreferred"];
     self.showLeadPreferred = [firebaseConfiguration boolForKey:@"showLeadPreferred"];
     
     self.userConsentDefaultLanguage = [firebaseConfiguration stringForKey:@"userConsentDefaultLanguage"];

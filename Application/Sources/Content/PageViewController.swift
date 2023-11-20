@@ -364,12 +364,7 @@ extension PageViewController {
     }
     
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> UIViewController {
-        if ApplicationConfiguration().isLegacyShowPagePreferred {
-            return SectionViewController(section: .configured(.show(show)), fromPushNotification: fromPushNotification)
-        }
-        else {
-            return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
-        }
+        return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
     }
 }
 

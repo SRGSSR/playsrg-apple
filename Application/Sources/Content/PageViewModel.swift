@@ -462,7 +462,7 @@ private extension PageViewModel {
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .show(show):
-            if show.transmission == .TV && !ApplicationConfiguration.shared.areShowsUnavailable {
+            if show.transmission == .TV && !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
                 return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, displayedShow: show), index: $1) }) }
                     .eraseToAnyPublisher()

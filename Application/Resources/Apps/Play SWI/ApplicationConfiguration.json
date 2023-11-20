@@ -16,6 +16,7 @@
   "whatsNewURL": "https://srgssr.github.io/playsrg-apple/releases/release_notes-ios-swi.html",
   "downloadsHintsHidden": true,
   "showsUnavailable": true,
+  "predefinedShowPagePreferred": true,
   "continuousPlaybackPlayerViewTransitionDuration": 10,
   "continuousPlaybackForegroundTransitionDuration": 0,
   "continuousPlaybackBackgroundTransitionDuration": 0,
