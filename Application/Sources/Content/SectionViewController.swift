@@ -32,7 +32,6 @@ final class SectionViewController: UIViewController {
     private weak var refreshControl: UIRefreshControl!
     
     private var refreshTriggered = false
-    private var firstHeaderVisible = true
 #endif
     
     private var contentInsets: UIEdgeInsets
@@ -192,12 +191,6 @@ final class SectionViewController: UIViewController {
         model.reload()
         deselectItems(in: collectionView, animated: animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-        userActivity = model.configuration.viewModelProperties.userActivity
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        userActivity = nil
     }
     
 #if os(iOS)
@@ -237,13 +230,13 @@ final class SectionViewController: UIViewController {
                 navigationItem.leftBarButtonItem = deleteBarButtonItem
             }
             else {
-                navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
+                navigationItem.title = model.displaysTitle ? model.title : nil
                 editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
                 navigationItem.leftBarButtonItem = leftBarButtonItem
             }
         }
         else {
-            navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
+            navigationItem.title = model.displaysTitle ? model.title : nil
             
             if model.configuration.properties.sharingItem != nil {
                 let shareButtonItem = UIBarButtonItem(image: UIImage(resource: .share),
@@ -530,30 +523,6 @@ extension SectionViewController: UICollectionViewDelegate {
         return preview(for: configuration, in: collectionView)
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        switch elementKind {
-        case UICollectionView.elementKindSectionHeader:
-            if indexPath.section == 0 {
-                firstHeaderVisible = true
-                updateNavigationBar()
-            }
-        default:
-            break
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        switch elementKind {
-        case UICollectionView.elementKindSectionHeader:
-            if indexPath.section == 0 {
-                firstHeaderVisible = false
-                updateNavigationBar()
-            }
-        default:
-            break
-        }
-    }
-    
     private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
         guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
         let parameters = UIPreviewParameters()
@@ -754,8 +723,23 @@ private extension SectionViewController {
             switch item {
             case let .media(media):
                 switch configuration.wrappedValue {
-                case .content:
-                    MediaCell(media: media, style: .show)
+                case let .content(contentSection, _):
+                    switch contentSection.type {
+                    case .predefined:
+                        switch contentSection.presentation.type {
+                        case .availableEpisodes:
+                            if configuration.viewModelProperties.layout == .mediaList {
+                                MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                            }
+                            else {
+                                MediaCell(media: media, style: .date)
+                            }
+                        default:
+                            MediaCell(media: media, style: .show)
+                        }
+                    default:
+                        MediaCell(media: media, style: .show)
+                    }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .show:
@@ -829,8 +813,6 @@ private extension SectionViewController {
                 default:
                     Color.clear
                 }
-            case let .show(show):
-                ShowHeaderView(show: show, horizontalPadding: SectionViewController.layoutHorizontalMargin)
             case .none:
                 Color.clear
             }
@@ -847,8 +829,6 @@ private extension SectionViewController {
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
                 }
-            case let .show(show):
-                return ShowHeaderViewSize.recommended(for: show, horizontalPadding: SectionViewController.layoutHorizontalMargin, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
             case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }

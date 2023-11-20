@@ -606,12 +606,7 @@ private extension Content {
         }
         
         var displaysTitle: Bool {
-            switch configuredSection {
-            case .show:
-                return false
-            default:
-                return true
-            }
+            return true
         }
         
         var supportsEdition: Bool {
