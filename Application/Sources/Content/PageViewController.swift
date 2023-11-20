@@ -215,7 +215,7 @@ final class PageViewController: UIViewController {
     }
     
     private func updateLayoutConfiguration() {
-        // Update configuration suplementary views layouts (ie: show header layout).
+        // Update configuration supplementary views layouts (ie: show header layout).
         // Update configuration forces a collection view layout refresh. Updating only configuration.boundarySupplementaryItems does not.
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
             collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
