@@ -63,8 +63,8 @@ final class PageViewController: UIViewController {
     }
 #endif
     
-    init(id: PageViewModel.Id) {
-        model = PageViewModel(id: id)
+    init(id: PageViewModel.Id, fromPushNotification: Bool = false) {
+        model = PageViewModel(id: id, fromPushNotification: fromPushNotification)
         super.init(nibName: nil, bundle: nil)
         title = model.title
     }
@@ -324,7 +324,7 @@ final class PageViewController: UIViewController {
                                                      type: model.analyticsPageViewType,
                                                      levels: model.analyticsPageViewLevels,
                                                      labels: model.analyticsPageViewLabels(pageUid: pageUid),
-                                                     fromPushNotification: false)
+                                                     fromPushNotification: model.analyticsPageViewFromPushNotification)
         }
     }
 }
@@ -368,7 +368,7 @@ extension PageViewController {
             return SectionViewController(section: .configured(.show(show)), fromPushNotification: fromPushNotification)
         }
         else {
-            return PageViewController(id: .show(show))
+            return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
         }
     }
 }

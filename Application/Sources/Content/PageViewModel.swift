@@ -10,6 +10,7 @@ import SRGDataProviderCombine
 
 final class PageViewModel: Identifiable, ObservableObject {
     let id: Id
+    let fromPushNotification: Bool
     
     var title: String? {
         switch id {
@@ -97,10 +98,15 @@ final class PageViewModel: Identifiable, ObservableObject {
         return pageViewLabels
     }
     
+    var analyticsPageViewFromPushNotification: Bool {
+        return fromPushNotification
+    }
+    
     private let trigger = Trigger()
     
-    init(id: Id) {
+    init(id: Id, fromPushNotification: Bool = false) {
         self.id = id
+        self.fromPushNotification = fromPushNotification
         
         Publishers.Publish(onOutputFrom: reloadSignal()) { [weak self] in
             return Self.pagePublisher(id: id)
