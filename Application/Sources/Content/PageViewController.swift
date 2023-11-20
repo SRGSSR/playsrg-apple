@@ -67,7 +67,7 @@ final class PageViewController: UIViewController {
     init(id: PageViewModel.Id, fromPushNotification: Bool = false) {
         model = PageViewModel(id: id, fromPushNotification: fromPushNotification)
         super.init(nibName: nil, bundle: nil)
-        title = model.title
+        title = id.title
     }
     
     required init?(coder: NSCoder) {
@@ -129,7 +129,7 @@ final class PageViewController: UIViewController {
         
 #if os(iOS)
         navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
-        showHeaderVisible = model.displayedShow != nil
+        showHeaderVisible = model.id.displayedShow != nil
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
@@ -142,12 +142,12 @@ final class PageViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: model.displayedTitle)
+            view.content = TitleView(text: model.id.displayedTitle)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = ShowHeaderView(show: model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
+            view.content = ShowHeaderView(show: model.id.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -380,7 +380,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = isNavigationBarHidden || (model.displayedShow != nil) ? 0 : Self.layoutVerticalMargin
+        let top = isNavigationBarHidden || (model.id.displayedShow != nil) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif
@@ -626,11 +626,11 @@ private extension PageViewController {
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
-        if let show = model.displayedShow {
+        if let show = model.id.displayedShow {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
         }
-        else if let title = model.displayedTitle {
+        else if let title = model.id.displayedTitle {
             let globalHeaderSize = TitleViewSize.recommended(forText: title)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }

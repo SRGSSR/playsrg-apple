@@ -12,43 +12,6 @@ final class PageViewModel: Identifiable, ObservableObject {
     let id: Id
     let fromPushNotification: Bool
     
-    var title: String? {
-        switch id {
-        case .video:
-            return NSLocalizedString("Videos", comment: "Title displayed at the top of the video view")
-        case .audio:
-            return NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
-        case .live:
-            return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
-        case let .topic(topic):
-            return topic.title
-        case let .show(show):
-            return show.title
-        }
-    }
-    
-    var displayedShow: SRGShow? {
-        if case let .show(show) = id {
-            return show
-        }
-        else {
-            return nil
-        }
-    }
-    
-    var displayedTitle: String? {
-#if os(tvOS)
-        if case .topic = id {
-            return title
-        }
-        else {
-            return nil
-        }
-#else
-        return nil
-#endif
-    }
-    
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
     
@@ -279,6 +242,43 @@ extension PageViewModel {
             default:
                 return false
             }
+        }
+        
+        var title: String? {
+            switch self {
+            case .video:
+                return NSLocalizedString("Videos", comment: "Title displayed at the top of the video view")
+            case .audio:
+                return NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
+            case .live:
+                return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
+            case let .topic(topic):
+                return topic.title
+            case let .show(show):
+                return show.title
+            }
+        }
+        
+        var displayedShow: SRGShow? {
+            if case let .show(show) = self {
+                return show
+            }
+            else {
+                return nil
+            }
+        }
+        
+        var displayedTitle: String? {
+#if os(tvOS)
+            if case .topic = self {
+                return title
+            }
+            else {
+                return nil
+            }
+#else
+            return nil
+#endif
         }
         
         func canContain(show: SRGShow) -> Bool {
