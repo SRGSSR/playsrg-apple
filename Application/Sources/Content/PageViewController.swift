@@ -76,6 +76,10 @@ final class PageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var id: PageViewModel.Id {
+        return model.id
+    }
+    
     @objc var radioChannel: RadioChannel? {
         if case let .audio(channel: channel) = model.id {
             return channel
