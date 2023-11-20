@@ -17,6 +17,7 @@ import GoogleCast
 
 final class PageViewController: UIViewController {
     private let model: PageViewModel
+    private let fromPushNotification: Bool
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -65,7 +66,8 @@ final class PageViewController: UIViewController {
 #endif
     
     init(id: PageViewModel.Id, fromPushNotification: Bool = false) {
-        model = PageViewModel(id: id, fromPushNotification: fromPushNotification)
+        model = PageViewModel(id: id)
+        self.fromPushNotification = fromPushNotification
         super.init(nibName: nil, bundle: nil)
         title = id.title
     }
@@ -323,11 +325,11 @@ final class PageViewController: UIViewController {
             guard !self.analyticsPageViewTracked else { return }
             self.analyticsPageViewTracked = true
             
-            SRGAnalyticsTracker.shared.trackPageView(withTitle: model.analyticsPageViewTitle,
-                                                     type: model.analyticsPageViewType,
-                                                     levels: model.analyticsPageViewLevels,
-                                                     labels: model.analyticsPageViewLabels(pageUid: pageUid),
-                                                     fromPushNotification: model.analyticsPageViewFromPushNotification)
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: model.id.analyticsPageViewTitle,
+                                                     type: model.id.analyticsPageViewType,
+                                                     levels: model.id.analyticsPageViewLevels,
+                                                     labels: model.id.analyticsPageViewLabels(pageUid: pageUid),
+                                                     fromPushNotification: fromPushNotification)
         }
     }
 }

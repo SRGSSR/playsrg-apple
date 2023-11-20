@@ -10,66 +10,14 @@ import SRGDataProviderCombine
 
 final class PageViewModel: Identifiable, ObservableObject {
     let id: Id
-    let fromPushNotification: Bool
     
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
     
-    var analyticsPageViewTitle: String {
-        switch id {
-        case .video, .audio, .live:
-            return AnalyticsPageTitle.home.rawValue
-        case let .topic(topic):
-            return topic.title
-        case let .show(show):
-            return show.title
-        }
-    }
-    
-    var analyticsPageViewType: String {
-        switch id {
-        case .video, .audio:
-            return AnalyticsPageType.landingPage.rawValue
-        case  .live:
-            return AnalyticsPageType.live.rawValue
-        case .topic, .show:
-            return AnalyticsPageType.overview.rawValue
-        }
-    }
-    
-    var analyticsPageViewLevels: [String]? {
-        switch id {
-        case .video:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-        case let .audio(channel: channel):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
-        case .live:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-        case .topic:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
-        case let .show(show):
-            let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
-            return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
-        }
-    }
-    
-    func analyticsPageViewLabels(pageUid: String?) -> SRGAnalyticsPageViewLabels? {
-        guard let pageUid else { return nil }
-        
-        let pageViewLabels = SRGAnalyticsPageViewLabels()
-        pageViewLabels.customInfo = ["pac_page_id": pageUid]
-        return pageViewLabels
-    }
-    
-    var analyticsPageViewFromPushNotification: Bool {
-        return fromPushNotification
-    }
-    
     private let trigger = Trigger()
     
-    init(id: Id, fromPushNotification: Bool = false) {
+    init(id: Id) {
         self.id = id
-        self.fromPushNotification = fromPushNotification
         
         Publishers.Publish(onOutputFrom: reloadSignal()) { [weak self] in
             return Self.pagePublisher(id: id)
@@ -279,6 +227,52 @@ extension PageViewModel {
 #else
             return nil
 #endif
+        }
+        
+        var analyticsPageViewTitle: String {
+            switch self {
+            case .video, .audio, .live:
+                return AnalyticsPageTitle.home.rawValue
+            case let .topic(topic):
+                return topic.title
+            case let .show(show):
+                return show.title
+            }
+        }
+        
+        var analyticsPageViewType: String {
+            switch self {
+            case .video, .audio:
+                return AnalyticsPageType.landingPage.rawValue
+            case  .live:
+                return AnalyticsPageType.live.rawValue
+            case .topic, .show:
+                return AnalyticsPageType.overview.rawValue
+            }
+        }
+        
+        var analyticsPageViewLevels: [String]? {
+            switch self {
+            case .video:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+            case let .audio(channel: channel):
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+            case .live:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .topic:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
+            case let .show(show):
+                let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
+                return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
+            }
+        }
+        
+        func analyticsPageViewLabels(pageUid: String?) -> SRGAnalyticsPageViewLabels? {
+            guard let pageUid else { return nil }
+            
+            let pageViewLabels = SRGAnalyticsPageViewLabels()
+            pageViewLabels.customInfo = ["pac_page_id": pageUid]
+            return pageViewLabels
         }
         
         func canContain(show: SRGShow) -> Bool {
