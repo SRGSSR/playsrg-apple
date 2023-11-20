@@ -72,8 +72,8 @@ extension UIViewController {
     }
     
     func navigateToTopic(_ topic: SRGTopic, animated: Bool = true, completion: (() -> Void)? = nil) {
-        let pageViewController = PageViewController.topicViewController(for: topic)
-        present(pageViewController, animated: animated, completion: completion)
+        let topicViewController = PageViewController.topicViewController(for: topic)
+        present(topicViewController, animated: animated, completion: completion)
     }
     
     func navigateToProgram(_ program: SRGProgram, in channel: SRGChannel, animated: Bool = true, completion: (() -> Void)? = nil) {
@@ -270,8 +270,8 @@ extension UIViewController {
             navigationController.pushViewController(showViewController, animated: animated)
         case let .topic(topic):
             guard let navigationController else { return }
-            let pageViewController = PageViewController.topicViewController(for: topic)
-            navigationController.pushViewController(pageViewController, animated: animated)
+            let topicViewController = PageViewController.topicViewController(for: topic)
+            navigationController.pushViewController(topicViewController, animated: animated)
         case let .download(download):
             navigateToDownload(download, animated: animated)
         case let .notification(notification):

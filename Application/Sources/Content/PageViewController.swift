@@ -419,8 +419,8 @@ extension PageViewController: UICollectionViewDelegate {
                 }
             case let .topic(topic):
                 if let navigationController {
-                    let pageViewController = PageViewController.topicViewController(for: topic)
-                    navigationController.pushViewController(pageViewController, animated: true)
+                    let topicViewController = PageViewController.topicViewController(for: topic)
+                    navigationController.pushViewController(topicViewController, animated: true)
                 }
             case let .highlight(_, highlightedItem):
                 if let navigationController {
