@@ -432,16 +432,16 @@ extension SearchViewController: UICollectionViewDelegate {
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
         case let .show(show):
             guard let navigationController else { return }
-            let showViewController = PageViewController.showViewController(for: show)
-            navigationController.pushViewController(showViewController, animated: true)
+            let pageViewController = PageViewController(id: .show(show))
+            navigationController.pushViewController(pageViewController, animated: true)
             
             SRGDataProvider.current!.increaseSearchResultsViewCount(for: show)
                 .sink { _ in } receiveValue: { _ in }
                 .store(in: &cancellables)
         case let .topic(topic):
             guard let navigationController else { return }
-            let topicViewController = PageViewController.topicViewController(for: topic)
-            navigationController.pushViewController(topicViewController, animated: true)
+            let pageViewController = PageViewController(id: .topic(topic))
+            navigationController.pushViewController(pageViewController, animated: true)
         case .loading:
             break
         }

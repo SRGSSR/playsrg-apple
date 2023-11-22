@@ -67,13 +67,13 @@ extension UIViewController {
     }
     
     func navigateToShow(_ show: SRGShow, animated: Bool = true, completion: (() -> Void)? = nil) {
-        let showViewController = PageViewController.showViewController(for: show)
-        present(showViewController, animated: animated, completion: completion)
+        let pageViewController = PageViewController(id: .show(show))
+        present(pageViewController, animated: animated, completion: completion)
     }
     
     func navigateToTopic(_ topic: SRGTopic, animated: Bool = true, completion: (() -> Void)? = nil) {
-        let topicViewController = PageViewController.topicViewController(for: topic)
-        present(topicViewController, animated: animated, completion: completion)
+        let pageViewController = PageViewController(id: .topic(topic))
+        present(pageViewController, animated: animated, completion: completion)
     }
     
     func navigateToProgram(_ program: SRGProgram, in channel: SRGChannel, animated: Bool = true, completion: (() -> Void)? = nil) {
@@ -224,8 +224,8 @@ extension UIViewController {
                     }
                 } receiveValue: { [weak self] show in
                     guard let navigationController = self?.navigationController else { return }
-                    let showViewController = PageViewController.showViewController(for: show)
-                    navigationController.pushViewController(showViewController, animated: animated)
+                    let pageViewController = PageViewController(id: .show(show))
+                    navigationController.pushViewController(pageViewController, animated: animated)
                     
                     AnalyticsEvent.notification(action: .displayShow,
                                                 from: .application,
@@ -266,12 +266,12 @@ extension UIViewController {
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated, completion: nil)
         case let .show(show):
             guard let navigationController else { return }
-            let showViewController = PageViewController.showViewController(for: show)
-            navigationController.pushViewController(showViewController, animated: animated)
+            let pageViewController = PageViewController(id: .show(show))
+            navigationController.pushViewController(pageViewController, animated: animated)
         case let .topic(topic):
             guard let navigationController else { return }
-            let topicViewController = PageViewController.topicViewController(for: topic)
-            navigationController.pushViewController(topicViewController, animated: animated)
+            let pageViewController = PageViewController(id: .topic(topic))
+            navigationController.pushViewController(pageViewController, animated: animated)
         case let .download(download):
             navigateToDownload(download, animated: animated)
         case let .notification(notification):

@@ -591,8 +591,8 @@ extension SectionViewController: SectionShowHeaderViewAction {
         navigateToShow(event.show)
 #else
         if let navigationController {
-            let showViewController = PageViewController.showViewController(for: event.show)
-            navigationController.pushViewController(showViewController, animated: true)
+            let pageViewController = PageViewController(id: .show(event.show))
+            navigationController.pushViewController(pageViewController, animated: true)
         }
 #endif
     }

@@ -419,19 +419,19 @@ extension PageViewController: UICollectionViewDelegate {
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             case let .show(show):
                 if let navigationController {
-                    let showViewController = PageViewController.showViewController(for: show)
-                    navigationController.pushViewController(showViewController, animated: true)
+                    let pageViewController = PageViewController(id: .show(show))
+                    navigationController.pushViewController(pageViewController, animated: true)
                 }
             case let .topic(topic):
                 if let navigationController {
-                    let topicViewController = PageViewController.topicViewController(for: topic)
-                    navigationController.pushViewController(topicViewController, animated: true)
+                    let pageViewController = PageViewController(id: .topic(topic))
+                    navigationController.pushViewController(pageViewController, animated: true)
                 }
             case let .highlight(_, highlightedItem):
                 if let navigationController {
                     if case let .show(show) = highlightedItem {
-                        let showViewController = PageViewController.showViewController(for: show)
-                        navigationController.pushViewController(showViewController, animated: true)
+                        let pageViewController = PageViewController(id: .show(show))
+                        navigationController.pushViewController(pageViewController, animated: true)
                     }
                     else {
                         let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
