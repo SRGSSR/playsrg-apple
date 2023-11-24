@@ -356,23 +356,23 @@ private extension PageViewController {
 // MARK: Objective-C API
 
 extension PageViewController {
-    @objc static func videosViewController() -> UIViewController {
+    @objc static func videosViewController() -> PageViewController {
         return PageViewController(id: .video)
     }
     
-    @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> UIViewController {
+    @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> PageViewController {
         return PageViewController(id: .audio(channel: channel))
     }
     
-    @objc static func liveViewController() -> UIViewController {
+    @objc static func liveViewController() -> PageViewController {
         return PageViewController(id: .live)
     }
     
-    @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
+    @objc static func topicViewController(for topic: SRGTopic) -> PageViewController {
         return PageViewController(id: .topic(topic))
     }
     
-    @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> UIViewController {
+    @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> PageViewController {
         return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
     }
 }

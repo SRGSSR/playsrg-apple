@@ -272,7 +272,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                                                      tag:TabBarItemIdentifierVideos];
     videosTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierVideosTabBarItem].value;
  
-    UIViewController *pageViewController = [PageViewController videosViewController];
+    PageViewController *pageViewController = [PageViewController videosViewController];
     NavigationController *videosNavigationController = [[NavigationController alloc] initWithRootViewController:pageViewController];
     videosNavigationController.tabBarItem = videosTabBarItem;
     return videosNavigationController;
@@ -300,7 +300,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     }
     else if (radioChannels.count == 1) {
         RadioChannel *radioChannel = radioChannels.firstObject;
-        UIViewController *pageViewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
+        PageViewController *pageViewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
         NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:pageViewController];
         audiosNavigationController.tabBarItem = [self audiosTabBarItem];
         [audiosNavigationController updateWithRadioChannel:radioChannel animated:NO];
@@ -322,7 +322,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                                                        tag:TabBarItemIdentifierLivestreams];
         liveTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierLivestreamsTabBarItem].value;
         
-        UIViewController *pageViewController = [PageViewController liveViewController];
+        PageViewController *pageViewController = [PageViewController liveViewController];
         NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:pageViewController];
         liveNavigationController.tabBarItem = liveTabBarItem;
         return liveNavigationController;
