@@ -13,13 +13,13 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
 
 enum Content {
     enum Section: Hashable {
-        case content(SRGContentSection, displayedShow: SRGShow? = nil)
+        case content(SRGContentSection, show: SRGShow? = nil)
         case configured(ConfiguredSection)
         
         var properties: SectionProperties {
             switch self {
-            case let .content(section, displayedShow):
-                return ContentSectionProperties(contentSection: section, displayedShow: displayedShow)
+            case let .content(section, show):
+                return ContentSectionProperties(contentSection: section, show: show)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
             }
@@ -175,7 +175,7 @@ protocol SectionProperties {
 private extension Content {
     struct ContentSectionProperties: SectionProperties {
         let contentSection: SRGContentSection
-        let displayedShow: SRGShow?
+        let show: SRGShow?
         
         private var presentation: SRGContentPresentation {
             return contentSection.presentation
@@ -281,6 +281,10 @@ private extension Content {
         
         var hasHighlightedItem: Bool {
             return presentation.type == .showPromotion
+        }
+        
+        var displayedShow: SRGShow? {
+            return show
         }
 #if os(iOS)
         var sharingItem: SharingItem? {
@@ -446,7 +450,7 @@ private extension Content {
                         .eraseToAnyPublisher()
 #endif
                 case .availableEpisodes:
-                    if let show = displayedShow {
+                    if let show {
                         return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                             .map { $0.map { .media($0) } }
                             .eraseToAnyPublisher()
