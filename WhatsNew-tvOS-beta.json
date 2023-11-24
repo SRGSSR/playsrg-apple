@@ -80,5 +80,6 @@
     "1.7.7-434": "- Better image resolution on program guide.",
     "1.7.7-435": "- Patch analytics migration.",
     "1.7.8-436": "- Discover programs from all SRG SSR channels in the TV Guide.\n- Update RTS Info channel logo. [RTS]",
-    "1.7.8-437": "Branch beta\n- TV show pages are now editorialized.\n- Display page status (empty, network error, …) in show pages."
+    "1.7.8-437": "Branch beta\n- TV show pages are now editorialized.\n- Display page status (empty, network error, …) in show pages.",
+    "1.8.0-439": "- Discover programs from all SRG channels in the TV Guide. [RSI, RTR, RTS, SRF]\n- Video show pages can be editorialized, like series or documentaries pages. [RSI, RTR, RTS, SRF]"
 }
