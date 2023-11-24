@@ -466,7 +466,7 @@ private extension PageViewModel {
                     .eraseToAnyPublisher()
             }
             else {
-                return Just(Page(uid: nil, sections: [ Section(.configured(.show(show)), index: 0) ] ))
+                return Just(Page(uid: nil, sections: [ Section(.configured(.availableEpisodes(show)), index: 0) ] ))
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
@@ -629,7 +629,7 @@ private extension PageViewModel {
             case .radioShowAccess:
                 return .showAccess
 #endif
-            case .show:
+            case .availableEpisodes:
 #if os(iOS)
                 return .mediaList
 #else

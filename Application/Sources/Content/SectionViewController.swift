@@ -742,7 +742,7 @@ private extension SectionViewController {
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
-                    case .show:
+                    case .availableEpisodes:
                         if configuration.viewModelProperties.layout == .mediaList {
                             MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
                         }

@@ -90,7 +90,7 @@ extension ApplicationConfiguration {
 }
 
 enum ConfiguredSection: Hashable {
-    case show(SRGShow)
+    case availableEpisodes(SRGShow)
     
     case favoriteShows
     case history

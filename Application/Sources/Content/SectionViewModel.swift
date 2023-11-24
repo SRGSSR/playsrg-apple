@@ -405,7 +405,7 @@ private extension SectionViewModel {
             case .notifications:
                 return .notificationList
 #endif
-            case .show:
+            case .availableEpisodes:
 #if os(iOS)
                 return .mediaList
 #else
