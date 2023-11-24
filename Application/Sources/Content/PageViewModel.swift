@@ -11,62 +11,8 @@ import SRGDataProviderCombine
 final class PageViewModel: Identifiable, ObservableObject {
     let id: Id
     
-    var title: String? {
-        switch id {
-        case .video:
-            return NSLocalizedString("Videos", comment: "Title displayed at the top of the video view")
-        case .audio:
-            return NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
-        case .live:
-            return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
-        case let .topic(topic):
-            return topic.title
-        }
-    }
-    
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
-    
-    var analyticsPageViewTitle: String {
-        switch id {
-        case .video, .audio, .live:
-            return AnalyticsPageTitle.home.rawValue
-        case let .topic(topic):
-            return topic.title
-        }
-    }
-    
-    var analyticsPageViewType: String {
-        switch id {
-        case .video, .audio:
-            return AnalyticsPageType.landingPage.rawValue
-        case  .live:
-            return AnalyticsPageType.live.rawValue
-        case .topic:
-            return AnalyticsPageType.overview.rawValue
-        }
-    }
-    
-    var analyticsPageViewLevels: [String]? {
-        switch id {
-        case .video:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-        case let .audio(channel: channel):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
-        case .live:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-        case .topic:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
-        }
-    }
-    
-    func analyticsPageViewLabels(pageUid: String?) -> SRGAnalyticsPageViewLabels? {
-        guard let pageUid else { return nil }
-        
-        let pageViewLabels = SRGAnalyticsPageViewLabels()
-        pageViewLabels.customInfo = ["pac_page_id": pageUid]
-        return pageViewLabels
-    }
     
     private let trigger = Trigger()
     
@@ -159,7 +105,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     private static func hasLoadMore(for section: Section, in sections: [Section]) -> Bool {
-        if section == sections.last && section.viewModelProperties.hasGridLayout {
+        if section == sections.last && section.viewModelProperties.hasLoadMore {
             return true
         }
         else {
@@ -194,14 +140,36 @@ extension PageViewModel {
         case audio(channel: RadioChannel)
         case live
         case topic(_ topic: SRGTopic)
+        case show(_ show: SRGShow)
         
 #if os(iOS)
+        var isLargeTitleDisplayMode: Bool {
+            if case .show = self {
+                return false
+            }
+            else {
+                // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
+                // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
+                // be incorrect at the top.
+                return !isNavigationBarHidden
+            }
+        }
+        
         var isNavigationBarHidden: Bool {
             switch self {
             case .video:
                 return true
             default:
                 return false
+            }
+        }
+        
+        var sharingItem: SharingItem? {
+            switch self {
+            case let .show(show):
+                return SharingItem(for: show)
+            default:
+                return nil
             }
         }
 #endif
@@ -222,6 +190,93 @@ extension PageViewModel {
             default:
                 return false
             }
+        }
+        
+        var title: String? {
+            switch self {
+            case .video:
+                return NSLocalizedString("Videos", comment: "Title displayed at the top of the video view")
+            case .audio:
+                return NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
+            case .live:
+                return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
+            case let .topic(topic):
+                return topic.title
+            case let .show(show):
+                return show.title
+            }
+        }
+        
+        var displayedShow: SRGShow? {
+            if case let .show(show) = self {
+                return show
+            }
+            else {
+                return nil
+            }
+        }
+        
+        var hasShowHeaderView: Bool {
+            return displayedShow != nil
+        }
+        
+        var displayedTitle: String? {
+#if os(tvOS)
+            if case .topic = self {
+                return title
+            }
+            else {
+                return nil
+            }
+#else
+            return nil
+#endif
+        }
+        
+        var analyticsPageViewTitle: String {
+            switch self {
+            case .video, .audio, .live:
+                return AnalyticsPageTitle.home.rawValue
+            case let .topic(topic):
+                return topic.title
+            case let .show(show):
+                return show.title
+            }
+        }
+        
+        var analyticsPageViewType: String {
+            switch self {
+            case .video, .audio:
+                return AnalyticsPageType.landingPage.rawValue
+            case  .live:
+                return AnalyticsPageType.live.rawValue
+            case .topic, .show:
+                return AnalyticsPageType.overview.rawValue
+            }
+        }
+        
+        var analyticsPageViewLevels: [String]? {
+            switch self {
+            case .video:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+            case let .audio(channel: channel):
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+            case .live:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .topic:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
+            case let .show(show):
+                let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
+                return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
+            }
+        }
+        
+        func analyticsPageViewLabels(pageUid: String?) -> SRGAnalyticsPageViewLabels? {
+            guard let pageUid else { return nil }
+            
+            let pageViewLabels = SRGAnalyticsPageViewLabels()
+            pageViewLabels.customInfo = ["pac_page_id": pageUid]
+            return pageViewLabels
         }
         
         func canContain(show: SRGShow) -> Bool {
@@ -294,6 +349,7 @@ extension PageViewModel {
         case liveMediaGrid
         case liveMediaSwimlane
         case mediaGrid
+        case mediaList
         case mediaSwimlane
         case showGrid
         case showSwimlane
@@ -323,7 +379,7 @@ extension PageViewModel {
         
         var viewModelProperties: PageViewModelProperties {
             switch wrappedValue {
-            case let .content(section):
+            case let .content(section, _):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section, index: index)
@@ -355,6 +411,41 @@ extension PageViewModel {
     }
 }
 
+// MARK: User activity
+
+extension PageViewModel {
+    var userActivity: NSUserActivity? {
+        {
+            guard let bundleIdentifier = Bundle.main.bundleIdentifier,
+                  let applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") else {
+                return nil
+            }
+            
+            if case let .show(show) = id {
+                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: show, requiringSecureCoding: false) else { return nil }
+                let userActivity = NSUserActivity(activityType: bundleIdentifier.appending(".displaying"))
+                userActivity.title = String(format: NSLocalizedString("Display %@ episodes", comment: "User activity title when displaying a show page"), show.title)
+                userActivity.webpageURL = ApplicationConfiguration.shared.sharingURL(for: show)
+                userActivity.addUserInfoEntries(from: [
+                    "URNString": show.urn,
+                    "SRGShowData": data,
+                    "applicationVersion": applicationVersion
+                ])
+#if os(iOS)
+                userActivity.isEligibleForPrediction = true
+                userActivity.persistentIdentifier = show.urn
+                let suggestedInvocationPhraseFormat = show.transmission == .radio ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
+                userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
+#endif
+                return userActivity
+            }
+            else {
+                return nil
+            }
+        }()
+    }
+}
+
 // MARK: Publishers
 
 private extension PageViewModel {
@@ -368,6 +459,17 @@ private extension PageViewModel {
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
+        case let .show(show):
+            if show.transmission == .TV && !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
+                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, show: show), index: $1) }) }
+                    .eraseToAnyPublisher()
+            }
+            else {
+                return Just(Page(uid: nil, sections: [ Section(.configured(.availableEpisodes(show)), index: 0) ] ))
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
         case let .audio(channel: channel):
             return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
@@ -440,9 +542,9 @@ extension PageViewModelProperties {
     }
 #endif
     
-    var hasGridLayout: Bool {
+    var hasLoadMore: Bool {
         switch layout {
-        case .mediaGrid, .showGrid, .liveMediaGrid:
+        case .mediaGrid, .mediaList, .showGrid, .liveMediaGrid:
             return true
         default:
             return false
@@ -482,6 +584,12 @@ private extension PageViewModel {
                 return (contentSection.type == .shows) ? .showSwimlane : .mediaSwimlane
             case .grid:
                 return (contentSection.type == .shows) ? .showGrid : .mediaGrid
+            case .availableEpisodes:
+#if os(iOS)
+                return .mediaList
+#else
+                return .mediaGrid
+#endif
             case .livestreams:
                 return .liveMediaSwimlane
             default:
@@ -513,13 +621,19 @@ private extension PageViewModel {
 #else
                 return .liveMediaSwimlane
 #endif
-            case .favoriteShows, .radioFavoriteShows, .show:
+            case .favoriteShows, .radioFavoriteShows:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid
 #if os(iOS)
             case .radioShowAccess:
                 return .showAccess
+#endif
+            case .availableEpisodes:
+#if os(iOS)
+                return .mediaList
+#else
+                return .mediaGrid
 #endif
             default:
                 return .mediaSwimlane

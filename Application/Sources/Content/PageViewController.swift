@@ -17,6 +17,7 @@ import GoogleCast
 
 final class PageViewController: UIViewController {
     private let model: PageViewModel
+    private let fromPushNotification: Bool
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -34,15 +35,8 @@ final class PageViewController: UIViewController {
     }
     
     private var refreshTriggered = false
+    private var showHeaderVisible = false
 #endif
-    
-    private var globalHeaderTitle: String? {
-#if os(tvOS)
-        return tabBarController == nil ? model.title : nil
-#else
-        return nil
-#endif
-    }
     
     private var analyticsPageViewTracked = false
     
@@ -71,14 +65,19 @@ final class PageViewController: UIViewController {
     }
 #endif
     
-    init(id: PageViewModel.Id) {
+    init(id: PageViewModel.Id, fromPushNotification: Bool = false) {
         model = PageViewModel(id: id)
+        self.fromPushNotification = fromPushNotification
         super.init(nibName: nil, bundle: nil)
-        title = model.title
+        title = id.title
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    var id: PageViewModel.Id {
+        return model.id
     }
     
     @objc var radioChannel: RadioChannel? {
@@ -94,7 +93,7 @@ final class PageViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
+        let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout(for: model))
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
@@ -135,10 +134,8 @@ final class PageViewController: UIViewController {
         super.viewDidLoad()
         
 #if os(iOS)
-        // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
-        // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
-        // be incorrect at the top.
-        navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
+        navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
+        showHeaderVisible = model.id.hasShowHeaderView
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
@@ -151,7 +148,12 @@ final class PageViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: globalHeaderTitle)
+            view.content = TitleView(text: model.id.displayedTitle)
+        }
+        
+        let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
+            guard let self else { return }
+            view.content = ShowHeaderView(show: model.id.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -164,6 +166,9 @@ final class PageViewController: UIViewController {
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == Header.global.rawValue {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            }
+            if kind == Header.showHeader.rawValue {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
             }
             else {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
@@ -197,21 +202,48 @@ final class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        updateLayoutConfiguration()
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
         updateNavigationBar(animated: animated)
 #endif
+        userActivity = model.userActivity
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        userActivity = nil
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        updateLayoutConfiguration()
+    }
+    
+    private func updateLayoutConfiguration() {
+        // Update configuration supplementary views layouts (ie: show header layout).
+        // Update configuration forces a collection view layout refresh. Updating only configuration.boundarySupplementaryItems does not.
+        if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
+            collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
+        }
+    }
+    
+    private func emptyViewEdgeInsets() -> EdgeInsets {
+        let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
+        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+        return EdgeInsets(top: supplementaryItemsHeight, leading: 0, bottom: 0, trailing: 0)
     }
     
     private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
-            emptyContentView.content = EmptyContentView(state: .loading)
+            emptyContentView.content = EmptyContentView(state: .loading, insets: emptyViewEdgeInsets())
         case let .failed(error: error, _):
-            emptyContentView.content = EmptyContentView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error), insets: emptyViewEdgeInsets())
         case let .loaded(rows: rows, _):
-            emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic)) : nil
+            emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic), insets: emptyViewEdgeInsets()) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -253,7 +285,20 @@ final class PageViewController: UIViewController {
             self.googleCastButton?.removeFromSuperview()
         }
         
+        navigationItem.title = !showHeaderVisible ? title : nil
         navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
+        
+        if model.id.sharingItem != nil {
+            let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
+                                                  style: .plain,
+                                                  target: self,
+                                                  action: #selector(self.shareContent(_:)))
+            shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on content page view")
+            navigationItem.rightBarButtonItem = shareButtonItem
+        }
+        else {
+            navigationItem.rightBarButtonItem = nil
+        }
     }
     
     @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
@@ -261,6 +306,18 @@ final class PageViewController: UIViewController {
             refreshControl.endRefreshing()
         }
         refreshTriggered = true
+    }
+    
+    @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
+        guard let sharingItem = model.id.sharingItem else { return }
+        
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, from: .button)
+        activityViewController.modalPresentationStyle = .popover
+        
+        let popoverPresentationController = activityViewController.popoverPresentationController
+        popoverPresentationController?.barButtonItem = barButtonItem
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
 #endif
     
@@ -272,11 +329,11 @@ final class PageViewController: UIViewController {
             guard !self.analyticsPageViewTracked else { return }
             self.analyticsPageViewTracked = true
             
-            SRGAnalyticsTracker.shared.trackPageView(withTitle: model.analyticsPageViewTitle,
-                                                     type: model.analyticsPageViewType,
-                                                     levels: model.analyticsPageViewLevels,
-                                                     labels: model.analyticsPageViewLabels(pageUid: pageUid),
-                                                     fromPushNotification: false)
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: model.id.analyticsPageViewTitle,
+                                                     type: model.id.analyticsPageViewType,
+                                                     levels: model.id.analyticsPageViewLevels,
+                                                     labels: model.id.analyticsPageViewLabels(pageUid: pageUid),
+                                                     fromPushNotification: fromPushNotification)
         }
     }
 }
@@ -286,6 +343,7 @@ final class PageViewController: UIViewController {
 private extension PageViewController {
     enum Header: String {
         case global
+        case showHeader
     }
     
 #if os(iOS)
@@ -298,20 +356,24 @@ private extension PageViewController {
 // MARK: Objective-C API
 
 extension PageViewController {
-    @objc static func videosViewController() -> UIViewController {
+    @objc static func videosViewController() -> PageViewController {
         return PageViewController(id: .video)
     }
     
-    @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> UIViewController {
+    @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> PageViewController {
         return PageViewController(id: .audio(channel: channel))
     }
     
-    @objc static func liveViewController() -> UIViewController {
+    @objc static func liveViewController() -> PageViewController {
         return PageViewController(id: .live)
     }
     
-    @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
+    @objc static func topicViewController(for topic: SRGTopic) -> PageViewController {
         return PageViewController(id: .topic(topic))
+    }
+    
+    @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> PageViewController {
+        return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
     }
 }
 
@@ -324,7 +386,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = isNavigationBarHidden ? 0 : Self.layoutVerticalMargin
+        let top = (isNavigationBarHidden || model.id.hasShowHeaderView) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif
@@ -357,8 +419,8 @@ extension PageViewController: UICollectionViewDelegate {
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             case let .show(show):
                 if let navigationController {
-                    let showViewController = SectionViewController.showViewController(for: show)
-                    navigationController.pushViewController(showViewController, animated: true)
+                    let pageViewController = PageViewController(id: .show(show))
+                    navigationController.pushViewController(pageViewController, animated: true)
                 }
             case let .topic(topic):
                 if let navigationController {
@@ -368,8 +430,8 @@ extension PageViewController: UICollectionViewDelegate {
             case let .highlight(_, highlightedItem):
                 if let navigationController {
                     if case let .show(show) = highlightedItem {
-                        let showViewController = SectionViewController.showViewController(for: show)
-                        navigationController.pushViewController(showViewController, animated: true)
+                        let pageViewController = PageViewController(id: .show(show))
+                        navigationController.pushViewController(pageViewController, animated: true)
                     }
                     else {
                         let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
@@ -410,6 +472,26 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         return preview(for: configuration, in: collectionView)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case Header.showHeader.rawValue:
+            showHeaderVisible = true
+            updateNavigationBar(animated: true)
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case Header.showHeader.rawValue:
+                showHeaderVisible = false
+                updateNavigationBar(animated: true)
+        default:
+            break
+        }
     }
     
     private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
@@ -519,112 +601,158 @@ extension PageViewController: TabBarActionable {
 
 #endif
 
+extension PageViewController: ShowHeaderViewAction {
+    func showMore(sender: Any?, event: ShowMoreEvent?) {
+        guard let event else { return }
+        
+#if os(iOS)
+        let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
+        if #available(iOS 15.0, *) {
+            if let sheet = sheetTextViewController.sheetPresentationController {
+                sheet.detents = [.medium()]
+            }
+        }
+        present(sheetTextViewController, animated: true, completion: nil)
+#else
+        navigateToText(event.content)
+#endif
+    }
+}
+
 // MARK: Layout
 
 private extension PageViewController {
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
+    private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
     
-    private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
+    private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
-        let headerSize = TitleViewSize.recommended(forText: globalHeaderTitle)
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
-        configuration.boundarySupplementaryItems = [header]
+        if let show = model.id.displayedShow {
+            let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
+        }
+        else if let title = model.id.displayedTitle {
+            let globalHeaderSize = TitleViewSize.recommended(forText: title)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
+        }
         
         return configuration
     }
     
-    private func layout() -> UICollectionViewLayout {
+    private func layout(for model: PageViewModel) -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
+            let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
             
-            func sectionSupplementaryItems(for section: PageViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: PageViewModel.Section, horizontalMargin: CGFloat) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
             }
             
+            func horizontalMargin(for section: PageViewModel.Section) -> CGFloat {
+                switch section.viewModelProperties.layout {
+                case .mediaList:
+#if os(iOS)
+                    return horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
+#else
+                    return Self.layoutHorizontalMargin
+#endif
+                default:
+                    return Self.layoutHorizontalMargin
+                }
+            }
+            
             func layoutSection(for section: PageViewModel.Section) -> NSCollectionLayoutSection {
-                let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
-                
                 switch section.viewModelProperties.layout {
                 case .heroStage:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
                         return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .highlight:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
                         return HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .headline:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
                         return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .element:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
                         return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .elementSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
                         return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
                         return MediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .liveMediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
                         return LiveMediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .showSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
                         return ShowCellSize.swimlane(for: section.properties.imageVariant)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .topicSelector:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
                         return TopicCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
                             return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .liveMediaGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
                         return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .showGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
                         return ShowCellSize.grid(for: section.properties.imageVariant, layoutWidth: layoutWidth, spacing: spacing)
                     }
 #if os(iOS)
                 case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
                         return ShowAccessCellSize.fullWidth()
+                    }
+#endif
+                case .mediaList:
+#if os(iOS)
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
+                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                    }
+#else
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
+                        return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
 #endif
                 }
@@ -636,9 +764,9 @@ private extension PageViewController {
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
             let layoutSection = layoutSection(for: section)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, horizontalMargin: horizontalMargin(for: section))
             return layoutSection
-        }, configuration: layoutConfiguration())
+        }, configuration: Self.layoutConfiguration(model: model, layoutWidth: 0, horizontalSizeClass: .unspecified, offsetX: 0))
     }
 }
 
@@ -660,7 +788,9 @@ private extension PageViewController {
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                PlaySRG.MediaCell(media: media, style: .show)
+                PlaySRG.MediaCell(media: media, style: section.properties.displayedShow != nil ? .date : .show)
+            case .mediaList:
+                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
             default:
                 PlaySRG.MediaCell(media: media, style: .show, layout: .vertical)
             }

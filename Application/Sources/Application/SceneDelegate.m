@@ -458,15 +458,15 @@ static void *s_kvoContext = &s_kvoContext;
 {
     [UserConsentHelper waitCollectingConsentRetain];
     if (show) {
-        SectionViewController *showViewController = [SectionViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
-        [self.rootTabBarController pushViewController:showViewController animated:YES];
+        PageViewController *pageViewController = [PageViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
+        [self.rootTabBarController pushViewController:pageViewController animated:YES];
         [UserConsentHelper waitCollectingConsentRelease];
     }
     else {
         [[SRGDataProvider.currentDataProvider showWithURN:showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (show) {
-                SectionViewController *showViewController = [SectionViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
-                [self.rootTabBarController pushViewController:showViewController animated:YES];
+                PageViewController *pageViewController = [PageViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
+                [self.rootTabBarController pushViewController:pageViewController animated:YES];
             }
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -486,8 +486,8 @@ static void *s_kvoContext = &s_kvoContext;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGTopic.new, URN), topicURN];
         SRGTopic *topic = [topics filteredArrayUsingPredicate:predicate].firstObject;
         if (topic) {
-            UIViewController *topicViewController = [PageViewController topicViewControllerFor:topic];
-            [self.rootTabBarController pushViewController:topicViewController animated:YES];
+            PageViewController *pageViewController = [PageViewController topicViewControllerFor:topic];
+            [self.rootTabBarController pushViewController:pageViewController animated:YES];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain

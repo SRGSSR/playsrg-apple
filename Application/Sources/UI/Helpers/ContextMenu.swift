@@ -217,14 +217,14 @@ extension ContextMenu {
         guard !ApplicationConfiguration.shared.areShowsUnavailable,
               let show = media.show,
               let navigationController = viewController.navigationController else { return nil }
-        if let sectionViewController = viewController as? SectionViewController,
-           let displayedShow = sectionViewController.model.configuration.properties.displayedShow {
+        if let pageViewController = viewController as? PageViewController,
+           let displayedShow = pageViewController.id.displayedShow {
             guard !show.isEqual(displayedShow) else { return nil }
         }
         return UIAction(title: NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
                         image: UIImage(resource: .episodes)) { _ in
-            let showViewController = SectionViewController.showViewController(for: show)
-            navigationController.pushViewController(showViewController, animated: true)
+            let pageViewController = PageViewController(id: .show(show))
+            navigationController.pushViewController(pageViewController, animated: true)
         }
     }
 }
@@ -234,7 +234,7 @@ extension ContextMenu {
 extension ContextMenu {
     static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: identifier) {
-            return SectionViewController.showViewController(for: show)
+            return PageViewController(id: .show(show))
         } actionProvider: { _ in
             return menu(for: show, in: viewController)
         }

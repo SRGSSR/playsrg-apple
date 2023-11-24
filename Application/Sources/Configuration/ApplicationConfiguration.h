@@ -95,6 +95,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
 @property (nonatomic, readonly, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
+@property (nonatomic, readonly, getter=isPredefinedShowPagePreferred) BOOL predefinedShowPagePreferred;
 @property (nonatomic, readonly, getter=isShowLeadPreferred) BOOL showLeadPreferred;
 
 @property (nonatomic, readonly, copy, nullable) NSString *userConsentDefaultLanguage;

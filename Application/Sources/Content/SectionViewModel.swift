@@ -142,7 +142,7 @@ extension SectionViewModel {
         
         var viewModelProperties: SectionViewModelProperties {
             switch wrappedValue {
-            case let .content(section):
+            case let .content(section, _):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
@@ -160,7 +160,6 @@ extension SectionViewModel {
         case none
         case title(String)
         case item(Content.Item)
-        case show(SRGShow)
         
         var sectionTopInset: CGFloat {
             switch self {
@@ -175,7 +174,7 @@ extension SectionViewModel {
             switch self {
             case .title:
                 return .small
-            case .item, .show:
+            case .item:
                 return .large
             case .none:
                 return .zero
@@ -303,7 +302,6 @@ extension SectionViewModel {
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
     var pinHeadersToVisibleBounds: Bool { get }
-    var userActivity: NSUserActivity? { get }
     var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
@@ -327,6 +325,12 @@ private extension SectionViewModel {
                     return .liveMediaGrid
                 case .swimlane, .grid:
                     return (contentSection.type == .shows) ? .showGrid : .mediaGrid
+                case .availableEpisodes:
+#if os(iOS)
+                    return .mediaList
+#else
+                    return .mediaGrid
+#endif
                 default:
                     return .mediaGrid
                 }
@@ -352,10 +356,6 @@ private extension SectionViewModel {
 #else
             return false
 #endif
-        }
-        
-        var userActivity: NSUserActivity? {
-            return nil
         }
         
         var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
@@ -405,7 +405,7 @@ private extension SectionViewModel {
             case .notifications:
                 return .notificationList
 #endif
-            case .show:
+            case .availableEpisodes:
 #if os(iOS)
                 return .mediaList
 #else
@@ -429,44 +429,8 @@ private extension SectionViewModel {
 #endif
         }
         
-        var userActivity: NSUserActivity? {
-            guard let bundleIdentifier = Bundle.main.bundleIdentifier,
-                  let applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") else {
-                return nil
-            }
-            
-            switch configuredSection {
-            case let .show(show):
-                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: show, requiringSecureCoding: false) else { return nil }
-                let userActivity = NSUserActivity(activityType: bundleIdentifier.appending(".displaying"))
-                userActivity.title = String(format: NSLocalizedString("Display %@ episodes", comment: "User activity title when displaying a show page"), show.title)
-                userActivity.webpageURL = ApplicationConfiguration.shared.sharingURL(for: show)
-                userActivity.addUserInfoEntries(from: [
-                    "URNString": show.urn,
-                    "SRGShowData": data,
-                    "applicationVersion": applicationVersion
-                ])
-                
-#if os(iOS)
-                userActivity.isEligibleForPrediction = true
-                userActivity.persistentIdentifier = show.urn
-                let suggestedInvocationPhraseFormat = (show.transmission == .radio) ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
-                userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
-#endif
-                
-                return userActivity
-            default:
-                return nil
-            }
-        }
-        
         var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
-            switch configuredSection {
-            case .show:
-                return .never
-            default:
-                return .always
-            }
+            return .always
         }
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
@@ -475,8 +439,6 @@ private extension SectionViewModel {
                 return SectionViewModel.alphabeticalRows(from: items, smart: true)
             case .radioAllShows, .tvAllShows:
                 return SectionViewModel.alphabeticalRows(from: items, smart: false)
-            case let .show(show):
-                return SectionViewModel.consolidatedRows(with: items, header: .show(show))
 #if os(iOS)
             case .downloads:
                 return SectionViewModel.consolidatedRows(with: items, footer: .diskInfo)

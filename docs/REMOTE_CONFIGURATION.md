@@ -74,6 +74,7 @@ The radio channel JSON dictionaries have one more key:
 
 ## Shows
 
+* `predefinedShowPagePreferred` (optional, boolean): Set to `true` iff show pages need to be displayed with the predefined layout (ie: only one predefined section with available episodes). If omitted, `false`.
 * `showLeadPreferred` (optional, boolean): Set to `true` iff show pages and show elements should display lead instead of description. If omitted, `false`.
 
 ## Audio homepage
