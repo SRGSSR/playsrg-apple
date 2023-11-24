@@ -312,6 +312,8 @@ private extension Content {
                     return AnalyticsPageTitle.watchLater.rawValue
                 case .topicSelector:
                     return AnalyticsPageTitle.topics.rawValue
+                case .availableEpisodes:
+                    return AnalyticsPageTitle.availableEpisodes.rawValue
                 default:
                     return nil
                 }
@@ -334,7 +336,12 @@ private extension Content {
             case .medias, .showAndMedias, .shows:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
             case .predefined:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+                switch presentation.type {
+                case .availableEpisodes:
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, show?.title ?? ""]
+                default:
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+                }
             case .none:
                 return nil
             }
@@ -683,8 +690,8 @@ private extension Content {
         
         var analyticsTitle: String? {
             switch configuredSection {
-            case let .availableEpisodes(show):
-                return show.title
+            case .availableEpisodes:
+                return AnalyticsPageTitle.availableEpisodes.rawValue
             case .history:
                 return AnalyticsPageTitle.history.rawValue
             case .radioAllShows, .tvAllShows:
@@ -720,7 +727,7 @@ private extension Content {
         
         var analyticsType: String? {
             switch configuredSection {
-            case .availableEpisodes, .radioAllShows, .tvAllShows:
+            case .radioAllShows, .tvAllShows:
                 return AnalyticsPageType.overview.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage, .tvLive, .radioLive, .radioLiveSatellite:
                 return AnalyticsPageType.live.rawValue
@@ -733,7 +740,7 @@ private extension Content {
             switch configuredSection {
             case let .availableEpisodes(show):
                 let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
-                return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
+                return [AnalyticsPageLevel.play.rawValue, level1, show.title]
             case let .radioAllShows(channelUid),
                 let .radioFavoriteShows(channelUid: channelUid),
                 let .radioLatest(channelUid: channelUid),
