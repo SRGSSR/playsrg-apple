@@ -100,9 +100,6 @@
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Angemeldeter Nutzer: %@";
 
-/* Accessibility text for the login / signup header */
-"Login or sign up" = "Anmelden oder registrieren";
-
 /* Accessibility hint for the profile header when user is logged in */
 "Manages account information" = "Anmeldeinformationen verwalten";
 
@@ -113,9 +110,6 @@
 /* A more episode button label
    Button to access more episodes */
 "More episodes" = "Mehr zur Sendung";
-
-/* Text displayed when a user is logged in but no information has been retrieved yet */
-"My account" = "Mein Konto";
 
 /* Next day button label in program guide */
 "Next day" = "Nächster Tag";
@@ -186,7 +180,9 @@
 /* Settings button label on home view */
 "Settings" = "Einstellungen";
 
-/* Share button label on player view */
+/* Share button label on content page view
+   Share button label on player view
+   Share button label on section detail view */
 "Share" = "Inhalt teilen";
 
 /* Accessibility label of the song list handle when closed */

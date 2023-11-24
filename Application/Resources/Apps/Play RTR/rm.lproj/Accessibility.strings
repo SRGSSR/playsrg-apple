@@ -100,9 +100,6 @@
 /* Accessibility introductory text for the logged in user */
 "Logged in user: %@" = "Utilisader annunzià: %@";
 
-/* Accessibility text for the login / signup header */
-"Login or sign up" = "Login u registrar\n";
-
 /* Accessibility hint for the profile header when user is logged in */
 "Manages account information" = "Organisescha las infurmaziuns da l'account";
 
@@ -113,9 +110,6 @@
 /* A more episode button label
    Button to access more episodes */
 "More episodes" = "Dapli episodas";
-
-/* Text displayed when a user is logged in but no information has been retrieved yet */
-"My account" = "Mes conto";
 
 /* Next day button label in program guide */
 "Next day" = "Di suandant";
@@ -186,7 +180,9 @@
 /* Settings button label on home view */
 "Settings" = "Opziuns";
 
-/* Share button label on player view */
+/* Share button label on content page view
+   Share button label on player view
+   Share button label on section detail view */
 "Share" = "Divida";
 
 /* Accessibility label of the song list handle when closed */
