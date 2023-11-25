@@ -314,6 +314,55 @@ platform :ios do
     UI.message '-----'
   end
 
+  desc 'Get AppStore TestFlight App status for iOS and tvOS, lastest version'
+  lane :appStoreTestFlightAppStatus do
+    UI.message '-----'
+    business_units.map do |business_unit|
+      spaceship_login_with_api_key(business_unit)
+      app = spaceship_bu_appstore_build_app(business_unit)
+      next unless app
+
+      UI.message '-----'
+      UI.command_output "Switch to Play #{business_unit}"
+
+      group_builds = spaceship_app_beta_group_builds(app)
+
+      UI.message '-----'
+      ['iOS', 'tvOS'].map do |platform|
+        UI.message "Builds for Play #{business_unit} #{platform}"
+
+        latest_version = spaceship_app_latest_known_version(platform, app)
+        next unless latest_version
+
+        version = latest_version.version_string
+        builds = spaceship_app_builds(app.id, version, platform)
+
+        builds.filter { |build| !build.expired }.each do |build|
+          message = "Build Version: #{version}-#{build.version} (#{build.processing_state})"
+          build.processing_state == 'VALID' ? UI.success(message) : UI.important(message)
+
+          beta_detail = build.build_beta_detail
+          if beta_detail
+            beta_state = 'IN_BETA_TESTING'
+
+            int_state = spaceship_app_internal_groups_state(beta_detail, group_builds, build.id)
+            int_message = int_state[:message]
+            int_state[:state] == beta_state ? UI.success(int_message) : UI.important(int_message)
+
+            ext_state = spaceship_app_external_groups_state(beta_detail, group_builds, build.id)
+            ext_message = ext_state[:message]
+            ext_state[:state] == beta_state ? UI.success(ext_message) : UI.important(ext_message)
+
+          else
+            UI.important('Internal: NaN / External: NaN')
+          end
+        end
+        UI.message '-----'
+      end
+    end
+    UI.message '-----'
+  end
+
   # Public Release notes
 
   desc 'Publish release notes for iOS and tvOS on Github pages'
@@ -2110,6 +2159,50 @@ def can_run_deliver(business_unit, platform)
 
   UI.success "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is already submitted. ✅"
   false
+end
+
+def spaceship_app_beta_group_builds(app)
+  group_builds = []
+  app.get_beta_groups.each do |group|
+    state = group.is_internal_group ? 'Internal' : 'External'
+    UI.message "TestFlight group: #{group.name} (#{state}). Getting builds..."
+
+    builds = group.fetch_builds.filter { |build| !build.expired }
+    group_builds.push({ group:, builds: })
+  end
+  group_builds
+end
+
+def spaceship_app_builds(app_id, version, platform)
+  Spaceship::ConnectAPI::Build.all(
+    app_id:,
+    version:,
+    platform: spaceship_platform(platform)
+  )
+end
+
+def spaceship_app_internal_groups_state(beta_detail, group_builds, build_id)
+  build_filter = ->(group_build) { group_build[:builds].map(&:id).include?(build_id) }
+  filter_group_builds = group_builds.filter(&build_filter)
+  beta_groups = filter_group_builds.map { |group_build| group_build[:group] }
+
+  internal_groups = beta_groups.filter(&:is_internal_group)
+  group_names = internal_groups.map(&:name).join(', ')
+  state = beta_detail.internal_build_state
+  message = "- Internal: #{group_names} (#{state})"
+  { state:, message: }
+end
+
+def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
+  build_filter = ->(group_build) { group_build[:builds].map(&:id).include?(build_id) }
+  filter_group_builds = group_builds.filter(&build_filter)
+  beta_groups = filter_group_builds.map { |group_build| group_build[:group] }
+
+  external_groups = beta_groups.reject(&:is_internal_group)
+  group_names = external_groups.map(&:name).join(', ')
+  state = beta_detail.external_build_state
+  message = "- External: #{group_names} (#{state})"
+  { state:, message: }
 end
 
 def publish_on_github_pages(output_directory, releases_directory)
