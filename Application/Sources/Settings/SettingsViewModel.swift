@@ -243,13 +243,9 @@ final class SettingsViewModel: ObservableObject {
 #endif
     }
     
-#if DEBUG || NIGHTLY || BETA
-    func simulateMemoryWarning() {
-        let selector = Selector("_p39e45r2f435o6r7837m12M34e5m6o67r8y8W9a9r66654n43i3n2g".unobfuscated())
-        UIApplication.shared.perform(selector)
-    }
-    
     var switchVersion: (() -> Void)? {
+        guard !Bundle.main.play_isAppStoreRelease else { return nil }
+        
         guard let appStoreAppleId = Bundle.main.object(forInfoDictionaryKey: "AppStoreAppleId") as? String, !appStoreAppleId.isEmpty else { return nil }
         
         if let url = URL(string: "itms-beta://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {
@@ -269,6 +265,12 @@ final class SettingsViewModel: ObservableObject {
         else {
             return nil
         }
+    }
+    
+#if DEBUG || NIGHTLY || BETA
+    func simulateMemoryWarning() {
+        let selector = Selector("_p39e45r2f435o6r7837m12M34e5m6o67r8y8W9a9r66654n43i3n2g".unobfuscated())
+        UIApplication.shared.perform(selector)
     }
 #endif
 }

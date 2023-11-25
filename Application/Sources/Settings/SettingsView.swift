@@ -441,6 +441,10 @@ struct SettingsView: View {
                     Button(title, action: becomeBetaTester)
                 }
 #endif
+#else
+                if let switchVersion = model.switchVersion {
+                    Button("\(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds")) (TestFlight)", action: switchVersion)
+                }
 #endif
                 VersionCell(model: model)
             } header: {
