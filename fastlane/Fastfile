@@ -294,6 +294,9 @@ platform :ios do
       next unless app
 
       UI.message '-----'
+      UI.command_output "Switch to Play #{business_unit}"
+
+      UI.message '-----'
       ['iOS', 'tvOS'].map do |platform|
         live_version = spaceship_app_live_version(platform, app)
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
