@@ -431,7 +431,7 @@ struct SettingsView: View {
                 }
 #if NIGHTLY || BETA
                 if let switchVersion = model.switchVersion {
-                    Button(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds"), action: switchVersion)
+                    Button("\(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds")) (TestFlight)", action: switchVersion)
                 }
 #else
                 if let becomeBetaTester = model.becomeBetaTester {
@@ -816,7 +816,7 @@ struct SettingsView: View {
         var body: some View {
             PlaySection {
                 if let switchVersion = model.switchVersion {
-                    Button(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds"), action: switchVersion)
+                    Button("\(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds")) (TestFlight)", action: switchVersion)
                 }
                 InformationSection.VersionCell(model: model)
             } header: {
