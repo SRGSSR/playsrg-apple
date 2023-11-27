@@ -24,7 +24,7 @@
 
 /* Favorite label in the player view when a show can be favorited
    Favorite label in the show view when a show can be favorited */
-"Add to favorites" = "Aggiungere ai preferiti";
+"Add to favorites" = "Aggiungi preferiti";
 
 /* Accessibility hint for the profile header when user is not logged in */
 "allows to log in or create an account in order to synchronize data." = "permette di accedere o creare un account per sincronizzare i dati.";
