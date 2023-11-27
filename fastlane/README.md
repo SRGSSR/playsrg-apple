@@ -167,6 +167,14 @@ Prepare AppStore tvOS releases on App Store Connect with the current version and
 
 Get AppStore App status for iOS and tvOS
 
+### ios appStoreTestFlightAppStatus
+
+```sh
+[bundle exec] fastlane ios appStoreTestFlightAppStatus
+```
+
+Get AppStore TestFlight App status for iOS and tvOS, lastest version
+
 ### ios publishReleaseNotes
 
 ```sh
