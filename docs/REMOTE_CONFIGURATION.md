@@ -139,7 +139,7 @@ Feeds
 * `tvGuideUnavailable` (optional, boolean): If set to `true`, TV guide access is removed and replaced with the legacy _by date_ access.
 * `tvGuideOtherBouquets` (optional, string, multiple): TV guide other bouquets to display below the main vendor bouquet. Available values:
 	* `thirdparty`: Third party bouquet delivered for the vendor.
-	* `	rsi`: RSI vendor bouquet.
+	* `rsi`: RSI vendor bouquet.
 	* `rts`: RT vendor bouquet.
 	* `srf`: SR vendor bouquet.
 
