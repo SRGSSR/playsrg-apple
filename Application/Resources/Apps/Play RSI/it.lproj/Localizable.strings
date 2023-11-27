@@ -72,7 +72,7 @@
 
 /* Context menu action to add a show to favorites
    Label displayed in the show view when a show can be favorited */
-"Add to favorites" = "Aggiungere ai preferiti";
+"Add to favorites" = "Aggiungi preferiti";
 
 /* Advanced features section header */
 "Advanced features" = "Funzioni avanzate";
