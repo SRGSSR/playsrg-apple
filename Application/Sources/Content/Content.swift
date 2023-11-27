@@ -312,8 +312,6 @@ private extension Content {
                     return AnalyticsPageTitle.watchLater.rawValue
                 case .topicSelector:
                     return AnalyticsPageTitle.topics.rawValue
-                case .availableEpisodes:
-                    return AnalyticsPageTitle.availableEpisodes.rawValue
                 default:
                     return nil
                 }
@@ -336,12 +334,7 @@ private extension Content {
             case .medias, .showAndMedias, .shows:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
             case .predefined:
-                switch presentation.type {
-                case .availableEpisodes:
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, show?.title ?? ""]
-                default:
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-                }
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .none:
                 return nil
             }
@@ -690,8 +683,6 @@ private extension Content {
         
         var analyticsTitle: String? {
             switch configuredSection {
-            case .availableEpisodes:
-                return AnalyticsPageTitle.availableEpisodes.rawValue
             case .history:
                 return AnalyticsPageTitle.history.rawValue
             case .radioAllShows, .tvAllShows:
@@ -738,9 +729,6 @@ private extension Content {
         
         var analyticsLevels: [String]? {
             switch configuredSection {
-            case let .availableEpisodes(show):
-                let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
-                return [AnalyticsPageLevel.play.rawValue, level1, show.title]
             case let .radioAllShows(channelUid),
                 let .radioFavoriteShows(channelUid: channelUid),
                 let .radioLatest(channelUid: channelUid),

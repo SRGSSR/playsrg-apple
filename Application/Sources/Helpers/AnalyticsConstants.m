@@ -27,7 +27,6 @@ AnalyticsPageLevel const AnalyticsPageLevelTopic = @"topic";
 AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
-AnalyticsPageTitle const AnalyticsPageTitleAvailableEpisodes = @"available episodes";
 AnalyticsPageTitle const AnalyticsPageTitleDevices = @"devices";
 AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
 AnalyticsPageTitle const AnalyticsPageTitleFavorites = @"favorites";
