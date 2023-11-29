@@ -76,7 +76,7 @@ platform :ios do
       appcenter_lane(
         appname: appcenter_ios_nightly_appcenter_names[index],
         destinations: ENV.fetch('PLAY_NIGHTLY_APPCENTER_DESTINATIONS', nil),
-        notes: nightly_changelog(platform, service)
+        notes: nightly_changelog(platform, service, branch_name)
       )
 
       clean_build_artifacts
@@ -130,7 +130,7 @@ platform :ios do
       appcenter_lane(
         appname: appcenter_ios_beta_appcenter_names[index],
         destinations: ENV.fetch('PLAY_BETA_APPCENTER_DESTINATIONS', nil),
-        notes: what_s_new_for_beta(platform, nil),
+        notes: what_s_new_for_beta(platform, tag_version),
         notify_testers: true
       )
 
@@ -294,6 +294,9 @@ platform :ios do
       next unless app
 
       UI.message '-----'
+      UI.command_output "Switch to Play #{business_unit}"
+
+      UI.message '-----'
       ['iOS', 'tvOS'].map do |platform|
         live_version = spaceship_app_live_version(platform, app)
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
@@ -308,6 +311,55 @@ platform :ios do
         end
         version_localization = spaceship_app_version_localization(latest_version)
         UI.message "What's new (#{version_localization.locale}):\n#{version_localization.whats_new}"
+        UI.message '-----'
+      end
+    end
+    UI.message '-----'
+  end
+
+  desc 'Get AppStore TestFlight App status for iOS and tvOS, lastest version'
+  lane :appStoreTestFlightAppStatus do
+    UI.message '-----'
+    business_units.map do |business_unit|
+      spaceship_login_with_api_key(business_unit)
+      app = spaceship_bu_appstore_build_app(business_unit)
+      next unless app
+
+      UI.message '-----'
+      UI.command_output "Switch to Play #{business_unit}"
+
+      group_builds = spaceship_app_beta_group_builds(app)
+
+      UI.message '-----'
+      ['iOS', 'tvOS'].map do |platform|
+        UI.message "Builds for Play #{business_unit} #{platform}"
+
+        latest_version = spaceship_app_latest_known_version(platform, app)
+        next unless latest_version
+
+        version = latest_version.version_string
+        builds = spaceship_app_builds(app.id, version, platform)
+
+        builds.filter { |build| !build.expired }.each do |build|
+          message = "Build Version: #{version}-#{build.version} (#{build.processing_state})"
+          build.processing_state == 'VALID' ? UI.success(message) : UI.important(message)
+
+          beta_detail = build.build_beta_detail
+          if beta_detail
+            beta_state = 'IN_BETA_TESTING'
+
+            int_state = spaceship_app_internal_groups_state(beta_detail, group_builds, build.id)
+            int_message = int_state[:message]
+            int_state[:state] == beta_state ? UI.success(int_message) : UI.important(int_message)
+
+            ext_state = spaceship_app_external_groups_state(beta_detail, group_builds, build.id)
+            ext_message = ext_state[:message]
+            ext_state[:state] == beta_state ? UI.success(ext_message) : UI.important(ext_message)
+
+          else
+            UI.important('Internal: NaN / External: NaN')
+          end
+        end
         UI.message '-----'
       end
     end
@@ -776,7 +828,7 @@ platform :ios do
       clean_build_artifacts
     end
 
-    changelog = nightly_changelog(platform, service)
+    changelog = nightly_changelog(platform, service, branch_name)
 
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -1231,7 +1283,11 @@ def what_s_new_for_beta(platform, tag_version)
 
   json = what_s_new_for_beta_json(platform)
   what_s_new = json[tag_version]
-  what_s_new || ''
+  what_s_new ||= ''
+  if !build_name(git_branch_name).empty? && !what_s_new.include?('Beta from a branch')
+    what_s_new = "Beta from a branch\n\n#{what_s_new}"
+  end
+  what_s_new
 end
 
 def build_number_for_version(platform, version)
@@ -1400,8 +1456,20 @@ def build_name(branch_name)
   end
 end
 
+def changelog_build_name(branch_name)
+  if branch_name.include? 'feature/'
+    branch_name.sub('feature/', '').strip
+  elsif branch_name.include? 'release/'
+    branch_name.sub('release/', '').strip
+  elsif branch_name.include? 'hotfix/'
+    branch_name.sub('hotfix/', '').strip
+  else
+    branch_name
+  end
+end
+
 # Return a nightly changelog from git commit messages
-def nightly_changelog(platform, service)
+def nightly_changelog(platform, service, branch_name)
   last_commit_hash = last_nightlies_success_git_commit_hash(platform, service)
   last_commit_hash = 'HEAD^^^^^' if last_commit_hash.length < 12
 
@@ -1413,7 +1481,9 @@ def nightly_changelog(platform, service)
   # HAX: strip emoji from changelog
   changelog = changelog ? changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '').lstrip : ''
 
-  changelog.empty? ? 'No change log found for this build.' : changelog
+  changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
+
+  "Built from #{changelog_build_name(branch_name)} branch\n\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
@@ -1814,7 +1884,7 @@ def skip_pull_translations
 end
 
 def pull_translations
-  Dir.chdir('..') { sh 'Configuration/Scripts/pullCrowdin.sh --skip-copies' }
+  Dir.chdir('..') { sh 'Scripts/pullCrowdin.sh --skip-copies' }
   ENV['CROWDIN_TRANSLATIONS_PULLLED'] = '1'
 end
 
@@ -2092,6 +2162,50 @@ def can_run_deliver(business_unit, platform)
 
   UI.success "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is already submitted. ✅"
   false
+end
+
+def spaceship_app_beta_group_builds(app)
+  group_builds = []
+  app.get_beta_groups.each do |group|
+    state = group.is_internal_group ? 'Internal' : 'External'
+    UI.message "TestFlight group: #{group.name} (#{state}). Getting builds..."
+
+    builds = group.fetch_builds.filter { |build| !build.expired }
+    group_builds.push({ group:, builds: })
+  end
+  group_builds
+end
+
+def spaceship_app_builds(app_id, version, platform)
+  Spaceship::ConnectAPI::Build.all(
+    app_id:,
+    version:,
+    platform: spaceship_platform(platform)
+  )
+end
+
+def spaceship_app_internal_groups_state(beta_detail, group_builds, build_id)
+  build_filter = ->(group_build) { group_build[:builds].map(&:id).include?(build_id) }
+  filter_group_builds = group_builds.filter(&build_filter)
+  beta_groups = filter_group_builds.map { |group_build| group_build[:group] }
+
+  internal_groups = beta_groups.filter(&:is_internal_group)
+  group_names = internal_groups.map(&:name).join(', ')
+  state = beta_detail.internal_build_state
+  message = "- Internal: #{group_names} (#{state})"
+  { state:, message: }
+end
+
+def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
+  build_filter = ->(group_build) { group_build[:builds].map(&:id).include?(build_id) }
+  filter_group_builds = group_builds.filter(&build_filter)
+  beta_groups = filter_group_builds.map { |group_build| group_build[:group] }
+
+  external_groups = beta_groups.reject(&:is_internal_group)
+  group_names = external_groups.map(&:name).join(', ')
+  state = beta_detail.external_build_state
+  message = "- External: #{group_names} (#{state})"
+  { state:, message: }
 end
 
 def publish_on_github_pages(output_directory, releases_directory)

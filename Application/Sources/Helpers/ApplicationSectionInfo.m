@@ -58,7 +58,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 {
     NSMutableArray<ApplicationSectionInfo *> *sectionInfos = [NSMutableArray array];
 #if TARGET_OS_IOS
-    if (PushService.sharedService.enabled) {
+    if (PushService.sharedService != nil) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
     }
 #endif

@@ -30,7 +30,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `identityWebsiteURL` (optional, string): The URL of the identity web portal.
 * `userDataServiceURL` (optional, string): The URL of the service with which user data can be synchronized (history, preferences, playlists).
 * `middlewareURL` (mandatory, string): The URL of the Play application middleware.
-* `playURL` (mandatory, string): The base URL of the Play web portal, used when building sharing URLs.
+* `playURLs` (mandatory, JSON): A JSON dictionary describing all base URLs of the Play web portals, used when building sharing URLs. Key (string) is the identifier of the business unit, value (string) is the base URL of the Play web portal. The `businessUnit` property value MUST be in the keys.
 * `playServiceURL` (mandatory, string): The base URL of the Play web service.
 * `sourceCodeURL` (optional, string); The URL where the application source code can be found.
 * `termsAndConditionsURL` (optional, string): The URL of the terms and conditions page.
@@ -74,6 +74,7 @@ The radio channel JSON dictionaries have one more key:
 
 ## Shows
 
+* `predefinedShowPagePreferred` (optional, boolean): Set to `true` iff show pages need to be displayed with the predefined layout (ie: only one predefined section with available episodes). If omitted, `false`.
 * `showLeadPreferred` (optional, boolean): Set to `true` iff show pages and show elements should display lead instead of description. If omitted, `false`.
 
 ## Audio homepage
@@ -133,6 +134,15 @@ Feeds
 * `continuousPlaybackForegroundTransitionDuration` (optional, number): Duration in seconds for continuous playback when the application runs in foreground and the player view is not displayed. If empty, continuous playback is disabled; if equal to 0, upcoming media playback starts immediately.
 * `continuousPlaybackBackgroundTransitionDuration` (optional, number): Duration in seconds for continuous playback when the application runs in background. If empty, continuous playback is disabled; if equal to 0, upcoming media playback starts immediately.
 
+## TV guide
+
+* `tvGuideUnavailable` (optional, boolean): If set to `true`, TV guide access is removed and replaced with the legacy _by date_ access.
+* `tvGuideOtherBouquets` (optional, string, multiple): TV guide other bouquets to display below the main vendor bouquet. Available values:
+	* `thirdparty`: Third party bouquet delivered for the vendor.
+	* `rsi`: RSI vendor bouquet.
+	* `rts`: RT vendor bouquet.
+	* `srf`: SR vendor bouquet.
+
 ## Other functionalities
 
 * `audioDescriptionAvailabilityHidden` (optional, boolean): Set to `true` to hide audio description availability setting.
@@ -144,5 +154,3 @@ Feeds
 * `showsUnavailable` (optional, boolean): If set to `true`, all features related to shows are removed.
 * `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.
 * `discoverySubtitleOptionLanguage` (optional, string): Set system subtitle language to this value once and at the beginning to help user discover that content is subtitled in that language.
-* `tvGuideUnavailable` (optional, boolean): If set to `true`, TV guide access is removed and replaced with the legacy _by date_ access.
-* `tvThirdPartyChannelsAvailable` (optional, boolean): if set to `true`, third-party TV channel content is available in the TV guide.

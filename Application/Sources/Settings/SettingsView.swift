@@ -429,8 +429,21 @@ struct SettingsView: View {
                 if let showSourceCode = model.showSourceCode {
                     Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: showSourceCode)
                 }
+#if NIGHTLY || BETA
+                if let switchVersion = model.switchVersion {
+                    Button("\(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds")) (TestFlight)", action: switchVersion)
+                }
+#else
                 if let becomeBetaTester = model.becomeBetaTester {
-                    Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
+                    let title = Bundle.main.play_isTestFlightDistribution ?
+                    "\(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds")) (TestFlight)" :
+                    NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester")
+                    Button(title, action: becomeBetaTester)
+                }
+#endif
+#else
+                if let switchVersion = model.switchVersion {
+                    Button("\(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds")) (TestFlight)", action: switchVersion)
                 }
 #endif
                 VersionCell(model: model)
@@ -802,9 +815,14 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
+                if let switchVersion = model.switchVersion {
+                    Button("\(NSLocalizedString("Switch version", comment: "Label of the button to open Apple TestFlight application and see other testable builds")) (TestFlight)", action: switchVersion)
+                }
                 InformationSection.VersionCell(model: model)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
+            } footer: {
+                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Bottom additional information section footer"))
             }
         }
     }

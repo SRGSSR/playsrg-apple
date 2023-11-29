@@ -14,6 +14,8 @@
 	<string>$(CONFIG__APPCENTER_SECRET)</string>
 	<key>AppCenterURL</key>
 	<string>$(APPCENTER_URL)</string>
+	<key>AppStoreAppleId</key>
+	<string>$(CONFIG__APPSTORE_APPLE_ID)</string>
 	<key>ApplicationGroupIdentifier</key>
 	<string>$(COMMON__APP_GROUP_IDENTIFIER)</string>
 	<key>CFBundleDisplayName</key>

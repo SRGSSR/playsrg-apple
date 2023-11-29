@@ -28,6 +28,10 @@ enum Mock {
         return mockObject(kind.rawValue, type: SRGChannel.self)
     }
     
+    static func playChannel(_ kind: Channel = .standard) -> PlayChannel {
+        return PlayChannel(wrappedValue: mockObject(kind.rawValue, type: SRGChannel.self), external: false)
+    }
+    
     enum ContentSection: String {
         case standard
         case overflow

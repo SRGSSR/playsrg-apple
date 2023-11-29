@@ -17,7 +17,7 @@ struct ProgramCell: View {
     
     @Environment(\.isSelected) private var isSelected
     
-    init(program: SRGProgram, channel: SRGChannel, direction: StackDirection) {
+    init(program: SRGProgram, channel: PlayChannel, direction: StackDirection) {
         _data = .constant(.init(program: program, channel: channel))
         self.direction = direction
     }
@@ -170,39 +170,39 @@ struct ProgramCell_Previews: PreviewProvider {
     private static let height: CGFloat = constant(iOS: 80, tvOS: 120)
     
     static var previews: some View {
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .horizontal)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .horizontal)
             .previewLayout(.fixed(width: size.width, height: size.height))
             .background(Color.white)
             .previewDisplayName("horizontal")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 500, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 500")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 80, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 80")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 40, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 40")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 30, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 30")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 24, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 24")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 20, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 20")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 10, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 10")
-        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .vertical)
             .previewLayout(.fixed(width: 1, height: height))
             .background(Color.white)
             .previewDisplayName("vertical, w 1")

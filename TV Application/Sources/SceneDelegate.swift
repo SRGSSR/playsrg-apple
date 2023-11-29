@@ -54,27 +54,27 @@ final class SceneDelegate: UIResponder {
     private static func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
-        let videosViewController = PageViewController(id: .video)
-        videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
-        videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.value
-        viewControllers.append(videosViewController)
+        let pageViewController = PageViewController(id: .video)
+        pageViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
+        pageViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.value
+        viewControllers.append(pageViewController)
         
         let configuration = ApplicationConfiguration.shared
         
 #if DEBUG
         if let firstChannel = configuration.radioHomepageChannels.first {
-            let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
-            audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
-            audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.value
-            viewControllers.append(audiosViewController)
+            let pageViewController = PageViewController(id: .audio(channel: firstChannel))
+            pageViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
+            pageViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.value
+            viewControllers.append(pageViewController)
         }
 #endif
         
         if !configuration.liveHomeSections.isEmpty {
-            let liveViewController = PageViewController(id: .live)
-            liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
-            liveViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.value
-            viewControllers.append(liveViewController)
+            let pageViewController = PageViewController(id: .live)
+            pageViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
+            pageViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.value
+            viewControllers.append(pageViewController)
         }
         
         if !configuration.isTvGuideUnavailable {

@@ -13,13 +13,13 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
 
 enum Content {
     enum Section: Hashable {
-        case content(SRGContentSection)
+        case content(SRGContentSection, show: SRGShow? = nil)
         case configured(ConfiguredSection)
         
         var properties: SectionProperties {
             switch self {
-            case let .content(section):
-                return ContentSectionProperties(contentSection: section)
+            case let .content(section, show):
+                return ContentSectionProperties(contentSection: section, show: show)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
             }
@@ -141,9 +141,9 @@ protocol SectionProperties {
     var emptyType: EmptyContentView.`Type` { get }
     var hasHighlightedItem: Bool { get }
     
+    var displayedShow: SRGShow? { get }
 #if os(iOS)
     var sharingItem: SharingItem? { get }
-    var displayedShow: SRGShow? { get }
     var canResetApplicationBadge: Bool { get }
 #endif
     
@@ -175,6 +175,7 @@ protocol SectionProperties {
 private extension Content {
     struct ContentSectionProperties: SectionProperties {
         let contentSection: SRGContentSection
+        let show: SRGShow?
         
         private var presentation: SRGContentPresentation {
             return contentSection.presentation
@@ -282,13 +283,12 @@ private extension Content {
             return presentation.type == .showPromotion
         }
         
+        var displayedShow: SRGShow? {
+            return show
+        }
 #if os(iOS)
         var sharingItem: SharingItem? {
             return SharingItem(for: contentSection)
-        }
-        
-        var displayedShow: SRGShow? {
-            return nil
         }
         
         var canResetApplicationBadge: Bool {
@@ -366,7 +366,7 @@ private extension Content {
                 return [.showPlaceholder(index: 0)]
             case .topicSelector:
                 return (0..<kDefaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
-            case .swimlane, .mediaElementSwimlane, .heroStage, .grid:
+            case .swimlane, .mediaElementSwimlane, .heroStage, .grid, .availableEpisodes:
                 switch contentSection.type {
                 case .showAndMedias:
                     let mediaPlaceholderItems: [Content.Item] = (1..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -449,6 +449,17 @@ private extension Content {
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
 #endif
+                case .availableEpisodes:
+                    if let show {
+                        return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
+                            .map { $0.map { .media($0) } }
+                            .eraseToAnyPublisher()
+                    }
+                    else {
+                        return Just([])
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                    }
                 default:
                     return Just([])
                         .setFailureType(to: Error.self)
@@ -553,8 +564,6 @@ private extension Content {
                 return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
             case .radioWatchLater, .watchLater:
                 return NSLocalizedString("Later", comment: "Title Label used to present the audio later list")
-            case let .show(show):
-                return show.title
             case .tvLive:
                 return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
@@ -601,12 +610,7 @@ private extension Content {
         }
         
         var displaysTitle: Bool {
-            switch configuredSection {
-            case .show:
-                return false
-            default:
-                return true
-            }
+            return true
         }
         
         var supportsEdition: Bool {
@@ -649,20 +653,19 @@ private extension Content {
             return false
         }
         
-#if os(iOS)
-        var sharingItem: SharingItem? {
-            switch configuredSection {
-            case let .show(show):
-                return SharingItem(for: show)
-            default:
+        var displayedShow: SRGShow? {
+            if case let .availableEpisodes(show) = configuredSection {
+                return show
+            }
+            else {
                 return nil
             }
         }
-        
-        var displayedShow: SRGShow? {
+#if os(iOS)
+        var sharingItem: SharingItem? {
             switch configuredSection {
-            case let .show(show):
-                return show
+            case let .availableEpisodes(show):
+                return SharingItem(for: show)
             default:
                 return nil
             }
@@ -680,8 +683,6 @@ private extension Content {
         
         var analyticsTitle: String? {
             switch configuredSection {
-            case let .show(show):
-                return show.title
             case .history:
                 return AnalyticsPageTitle.history.rawValue
             case .radioAllShows, .tvAllShows:
@@ -717,7 +718,7 @@ private extension Content {
         
         var analyticsType: String? {
             switch configuredSection {
-            case .show, .radioAllShows, .tvAllShows:
+            case .radioAllShows, .tvAllShows:
                 return AnalyticsPageType.overview.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage, .tvLive, .radioLive, .radioLiveSatellite:
                 return AnalyticsPageType.live.rawValue
@@ -728,9 +729,6 @@ private extension Content {
         
         var analyticsLevels: [String]? {
             switch configuredSection {
-            case let .show(show):
-                let level1 = (show.transmission == .radio) ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
-                return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
             case let .radioAllShows(channelUid),
                 let .radioFavoriteShows(channelUid: channelUid),
                 let .radioLatest(channelUid: channelUid),
@@ -790,7 +788,7 @@ private extension Content {
         
         var placeholderRowItems: [Content.Item] {
             switch configuredSection {
-            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
+            case .availableEpisodes, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
                     .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
                     .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage:
                 return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -818,7 +816,7 @@ private extension Content {
             let vendor = configuration.vendor
             
             switch configuredSection {
-            case let .show(show):
+            case let .availableEpisodes(show):
                 return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()

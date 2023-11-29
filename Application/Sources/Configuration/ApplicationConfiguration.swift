@@ -81,10 +81,16 @@ extension ApplicationConfiguration {
         
         return Self.typeformUrlWithParameters(feedbackUrl)
     }
+    
+    var tvGuideOtherBouquets: [TVGuideBouquet] {
+        return self.tvGuideOtherBouquetsObjc.map { number in
+            return TVGuideBouquet(rawValue: number.intValue)!
+        }
+    }
 }
 
 enum ConfiguredSection: Hashable {
-    case show(SRGShow)
+    case availableEpisodes(SRGShow)
     
     case favoriteShows
     case history

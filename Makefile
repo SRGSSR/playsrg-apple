@@ -1,7 +1,7 @@
 #!/usr/bin/xcrun make -f
 
 CONFIGURATION_REPOSITORY_URL=https://github.com/SRGSSR/playsrg-apple-configuration.git
-CONFIGURATION_COMMIT_SHA1=cf878c955afb0fd424cce6678bc7e5c3f7a817a1
+CONFIGURATION_COMMIT_SHA1=ca02311d62e5896b485d02e4c1ee8fb8392a40a6
 CONFIGURATION_FOLDER=Configuration
 
 .PHONY: all
@@ -41,6 +41,12 @@ fix-quality:
 	@Scripts/fix-quality.sh
 	@echo "... done.\n"
 
+.PHONY: pull-translations
+pull-translations:
+	@echo "Pulling translations..."
+	@Scripts/pullCrowdin.sh
+	@echo "... done.\n"
+
 .PHONY: git-hook-install
 git-hook-install:
 	@echo "Installing git hooks..."
@@ -71,6 +77,8 @@ help:
 	@echo ""
 	@echo "   check-quality       Run quality checks"
 	@echo "   fix-quality         Fix quality automatically (if possible)"
+	@echo ""
+	@echo "   pull-translations   Pull new translations from Crowdin"
 	@echo ""
 	@echo "   git-hook-install    Use hooks located in ./hooks"
 	@echo "   git-hook-uninstall  Use default hooks located in .git/hooks"

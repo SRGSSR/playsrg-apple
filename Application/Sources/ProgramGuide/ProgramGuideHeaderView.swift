@@ -168,15 +168,15 @@ struct ProgramGuideHeaderView: View {
                 ScrollViewReader { proxy in
                     HStack(spacing: 10) {
                         if !model.channels.isEmpty {
-                            ForEach(model.channels, id: \.uid) { channel in
-                                ChannelButton(channel: channel) {
+                            ForEach(model.channels, id: \.wrappedValue.uid) { channel in
+                                ChannelButton(channel: channel.wrappedValue) {
                                     model.selectedChannel = channel
                                 }
                                 .environment(\.isSelected, channel == model.selectedChannel)
                             }
                             .onAppear {
                                 if let selectedChannel = model.selectedChannel {
-                                    proxy.scrollTo(selectedChannel.uid)
+                                    proxy.scrollTo(selectedChannel.wrappedValue.uid)
                                 }
                             }
                         }
@@ -207,7 +207,7 @@ enum ProgramGuideHeaderViewSize {
             return (horizontalSizeClass == .compact) ? 216 : 136
         }
 #else
-        return ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable ? 650 : 760
+        return ApplicationConfiguration.shared.tvGuideOtherBouquets.isEmpty ? 760 : 650
 #endif
     }
 }

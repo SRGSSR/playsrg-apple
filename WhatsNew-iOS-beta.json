@@ -211,5 +211,10 @@
     "3.7.9-432": "- Maintenance build.\n- Analytic events use a new server.",
     "3.7.9-433": "- Allow playing video and audio when displaying user consent banners.\n- Analytic events have language property.",
     "3.7.9-434": "- Increase player skip gesture area (double taps).",
-    "3.7.9-435": "- Patch analytics migration."
+    "3.7.9-435": "- Patch analytics migration.",
+    "3.7.10-436": "- Discover programs from all SRG SSR channels in the TV Guide.\n- Always display subscribe buttons in show page and profile page.\n- Update RTS Info channel logo. [RTS]",
+    "3.7.10-437": "Branch beta\n- TV show pages are now editorialized.\n- Display page status (empty, network error, …) in show pages.",
+    "3.7.10-438": "Beta from a branch\n\n- TV show pages are now editorialized.\n- Fix iOS 17 layout on iPad.",
+    "3.8.0-439": "- Discover programs from all SRG channels in the TV Guide. [RSI, RTR, RTS, SRF]\n- Video show pages can be editorialized, like series or documentaries pages. [RSI, RTR, RTS, SRF]",
+    "3.8.0-440": "- Shorter wording to \"add to favorites\" buttons. [RSI, SRF]\n- Switch version button for all iOS and tvOS TestFlight buids (private and public)."
 }

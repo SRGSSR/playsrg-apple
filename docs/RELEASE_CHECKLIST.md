@@ -4,7 +4,7 @@
 |:--:|:--:|:--:|:--:|:--:|:--:|
 | Edit SPM / Podfile dependencies to point at tagged versions ||||||
 | Verify that Package.resolved / Podfile.lock only contain tagged versions ||||||
-| Update application translations (with pullCrowdin .sh) ||||||
+| Update application translations (with make pull-translations) ||||||
 | Perform global diff with last release ||||||
 | Submit what's new for translation ||||||
 | Start git-flow release branch for new version ||||||
@@ -30,6 +30,7 @@
 | Finish git-flow release, tags, Bump patch / build version numbers and push (with fastlane\*) ||||||
 | Close milestone and issues on github ||||||
 | Create github release ||||||
+| Add release date on Jira release ||||||
 | Update status page on Confluence (Release date, old versions section) ||||||
 
 ### \*Fastlane on PlayCity CI:
