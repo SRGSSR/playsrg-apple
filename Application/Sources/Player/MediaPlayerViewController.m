@@ -35,7 +35,6 @@
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
 #import "StoreReview.h"
-#import "TableView.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
@@ -351,7 +350,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.currentProgramMoreEpisodesButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"More episodes", @"A more episode button label");
     
-    TableViewConfigure(self.programsTableView);
+    [TableView tableViewConfigure:self.programsTableView];
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
     

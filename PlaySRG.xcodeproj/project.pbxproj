@@ -57,6 +57,11 @@
 		041DD1762B1B95AA00C9368A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD1732B1B95AA00C9368A /* GradientView.swift */; };
 		041DD1772B1B95AA00C9368A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD1732B1B95AA00C9368A /* GradientView.swift */; };
 		041DD1782B1B95AA00C9368A /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD1732B1B95AA00C9368A /* GradientView.swift */; };
+		041DD17F2B1BA8B100C9368A /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD17E2B1BA8B100C9368A /* TableView.swift */; };
+		041DD1802B1BA8B100C9368A /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD17E2B1BA8B100C9368A /* TableView.swift */; };
+		041DD1812B1BA8B100C9368A /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD17E2B1BA8B100C9368A /* TableView.swift */; };
+		041DD1822B1BA8B100C9368A /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD17E2B1BA8B100C9368A /* TableView.swift */; };
+		041DD1832B1BA8B100C9368A /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041DD17E2B1BA8B100C9368A /* TableView.swift */; };
 		042F6F2929E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2A29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
 		042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */; };
@@ -1612,11 +1617,6 @@
 		6F978B572849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
 		6F978B582849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
 		6F978B592849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
-		6F982B93244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
-		6F982B94244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
-		6F982B95244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
-		6F982B96244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
-		6F982B97244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
 		6F9897CD2412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6F9897CE2412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6F9897CF2412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
@@ -2776,6 +2776,7 @@
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		0407EFE52A509F10004A0FAB /* Bundble+PlaySRG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundble+PlaySRG.swift"; sourceTree = "<group>"; };
 		041DD1732B1B95AA00C9368A /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		041DD17E2B1BA8B100C9368A /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		042F6F2829E0710C003F46AA /* UIStackView+PlaySRG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStackView+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F3329E08785003F46AA /* NSSet+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSet+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F3E29E08D12003F46AA /* NSArray+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSArray+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3230,8 +3231,6 @@
 		6F93962520CA5AE1003ECC1B /* NotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		6F978B4F2849C3CA003061E8 /* ScrollableContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollableContent.h; sourceTree = "<group>"; };
 		6F978B502849C3CA003061E8 /* ScrollableContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollableContent.m; sourceTree = "<group>"; };
-		6F982B91244F1E1200C0386E /* TableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableView.h; sourceTree = "<group>"; };
-		6F982B92244F1E1200C0386E /* TableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
 		6F9897CB2412582400B390A2 /* Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
 		6F9897CC2412582400B390A2 /* Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Layout.m; sourceTree = "<group>"; };
 		6F9ABCCF2813F43000B118A3 /* ImageViewPortraitPreviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewPortraitPreviews.swift; sourceTree = "<group>"; };
@@ -4837,8 +4836,7 @@
 				6FB899FE26335B090012F1B0 /* Stack.swift */,
 				6FEC91A721A6B39A00AA50C8 /* TableLoadMoreFooterView.h */,
 				6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */,
-				6F982B91244F1E1200C0386E /* TableView.h */,
-				6F982B92244F1E1200C0386E /* TableView.m */,
+				041DD17E2B1BA8B100C9368A /* TableView.swift */,
 				6FE14E6A263EA9B5004AD913 /* TitleView.swift */,
 				6FDFD88B24E6BC9200F20382 /* TopicCell.swift */,
 				6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */,
@@ -8560,6 +8558,7 @@
 				6FE38A27270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
 				042F6F6029E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
+				041DD17F2B1BA8B100C9368A /* TableView.swift in Sources */,
 				080981302622195900AA586B /* LiveMediaCell.swift in Sources */,
 				04C2DE782937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */,
 				0481D59929F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */,
@@ -8583,7 +8582,6 @@
 				6F8BE02727A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FA8479A26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */,
-				6F982B93244F1E1200C0386E /* TableView.m in Sources */,
 				6F091D5B270DE4FD00210713 /* Publishers.swift in Sources */,
 				6F80F66B27187AFC00867C3B /* CarPlayNowPlayingController.swift in Sources */,
 				6F33E6192860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
@@ -8827,7 +8825,6 @@
 				6F73C63B271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F8CBD822832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
-				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
 				6FB79BEF287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B6281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5B28360EB100AF0768 /* Onboarding.swift in Sources */,
@@ -8854,6 +8851,7 @@
 				042F6F3529E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F676852281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F978B522849C3CA003061E8 /* ScrollableContent.m in Sources */,
+				041DD1802B1BA8B100C9368A /* TableView.swift in Sources */,
 				E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6F488ACC22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4A261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -9092,7 +9090,6 @@
 				6F73C63C271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F8CBD832832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
-				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
 				6FB79BF0287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B7281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5C28360EB100AF0768 /* Onboarding.swift in Sources */,
@@ -9119,6 +9116,7 @@
 				042F6F3629E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F676853281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F978B532849C3CA003061E8 /* ScrollableContent.m in Sources */,
+				041DD1812B1BA8B100C9368A /* TableView.swift in Sources */,
 				E62459F01D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6F488ACD22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4B261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -9357,7 +9355,6 @@
 				6F73C63D271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F8CBD842832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
-				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
 				6FB79BF1287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B8281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5D28360EB100AF0768 /* Onboarding.swift in Sources */,
@@ -9384,6 +9381,7 @@
 				042F6F3729E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F676854281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F978B542849C3CA003061E8 /* ScrollableContent.m in Sources */,
+				041DD1822B1BA8B100C9368A /* TableView.swift in Sources */,
 				E62459F11D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6F488ACE22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4C261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -9616,11 +9614,11 @@
 				6FCF57E4263DDA9D001C4615 /* RedactingView.swift in Sources */,
 				6FE686E51EB9D57400067D40 /* ChannelService.m in Sources */,
 				6F8A5475265510F900AE78FD /* SectionViewModel.swift in Sources */,
-				6F982B97244F1E1200C0386E /* TableView.m in Sources */,
 				08C68F8E1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				6F4CF73A281341B7006AFE6D /* ImageView.swift in Sources */,
 				048FD2132A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift in Sources */,
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
+				041DD1832B1BA8B100C9368A /* TableView.swift in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
 				044E392429B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6FF65C5E28360EB100AF0768 /* Onboarding.swift in Sources */,

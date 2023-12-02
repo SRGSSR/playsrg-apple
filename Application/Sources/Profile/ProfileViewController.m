@@ -12,7 +12,6 @@
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "TableView.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 
@@ -61,7 +60,7 @@
         [tableView.topAnchor constraintEqualToAnchor:self.view.topAnchor]
     ]];
     
-    TableViewConfigure(self.tableView);
+    [TableView tableViewConfigure:self.tableView];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
