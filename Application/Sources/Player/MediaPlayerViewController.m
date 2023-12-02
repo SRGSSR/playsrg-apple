@@ -34,7 +34,6 @@
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
-#import "StoreReview.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"

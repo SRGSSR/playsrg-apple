@@ -122,6 +122,11 @@
 		04395F232B1BBA6600F6A634 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F202B1BBA6600F6A634 /* RefreshControl.swift */; };
 		04395F242B1BBA6600F6A634 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F202B1BBA6600F6A634 /* RefreshControl.swift */; };
 		04395F252B1BBA6600F6A634 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F202B1BBA6600F6A634 /* RefreshControl.swift */; };
+		04395F272B1BC44200F6A634 /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F262B1BC44200F6A634 /* StoreReview.swift */; };
+		04395F282B1BC44200F6A634 /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F262B1BC44200F6A634 /* StoreReview.swift */; };
+		04395F292B1BC44200F6A634 /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F262B1BC44200F6A634 /* StoreReview.swift */; };
+		04395F2A2B1BC44200F6A634 /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F262B1BC44200F6A634 /* StoreReview.swift */; };
+		04395F2B2B1BC44200F6A634 /* StoreReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F262B1BC44200F6A634 /* StoreReview.swift */; };
 		043CBF0C286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0D286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
 		043CBF0E286512D00063FD97 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043CBF0B286512CF0063FD97 /* SearchBarView.swift */; };
@@ -758,11 +763,6 @@
 		4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */; };
 		4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B84B55ACE1A98284136AC0E /* libPods-Play SRG-iOS-Play SRF.a */; };
 		6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF0993A83F1F18CBE90AF3E9 /* libPods-Play SRG-iOS-Play SWI.a */; };
-		6F00875D219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
-		6F00875E219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
-		6F00875F219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
-		6F008760219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
-		6F008761219AA888004BD6FF /* StoreReview.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F00875C219AA888004BD6FF /* StoreReview.m */; };
 		6F010E11286607450024A745 /* SearchSettingsBucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F010E10286607440024A745 /* SearchSettingsBucketCell.swift */; };
 		6F010E12286607450024A745 /* SearchSettingsBucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F010E10286607440024A745 /* SearchSettingsBucketCell.swift */; };
 		6F010E13286607450024A745 /* SearchSettingsBucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F010E10286607440024A745 /* SearchSettingsBucketCell.swift */; };
@@ -2785,6 +2785,7 @@
 		042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PlaySRG.swift"; sourceTree = "<group>"; };
 		04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableLoadMoreFooterView.swift; sourceTree = "<group>"; };
 		04395F202B1BBA6600F6A634 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
+		04395F262B1BC44200F6A634 /* StoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReview.swift; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		043ECDBE29F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGChannel+PlaySRG.swift"; sourceTree = "<group>"; };
 		044B405A2A01764900A10DB7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -3049,8 +3050,6 @@
 		640C32BF9990D8053AD33554 /* Pods-Play SRG-tvOS-Play SWI TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.beta.xcconfig"; sourceTree = "<group>"; };
 		6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play RTR.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ADC4098DF422C77345A1EF9 /* Pods-Play SRG-tvOS-Play RSI TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RSI TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F00875B219AA888004BD6FF /* StoreReview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StoreReview.h; sourceTree = "<group>"; };
-		6F00875C219AA888004BD6FF /* StoreReview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreReview.m; sourceTree = "<group>"; };
 		6F010E10286607440024A745 /* SearchSettingsBucketCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketCell.swift; sourceTree = "<group>"; };
 		6F0506E5245468EE0053253E /* SplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
 		6F0506E6245468EE0053253E /* SplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
@@ -3995,9 +3994,8 @@
 				08AF947E217D27E40028B082 /* SharingItem.h */,
 				08AF947F217D27E40028B082 /* SharingItem.m */,
 				6F74293C265BE52E0000538D /* Signals.swift */,
-				6F00875B219AA888004BD6FF /* StoreReview.h */,
-				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
+				04395F262B1BC44200F6A634 /* StoreReview.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -8430,7 +8428,6 @@
 				6F2E160926A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				6FAAF78820CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6F861AF81DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
-				6F00875D219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F4760131EB37BC6003021EA /* Banner.m in Sources */,
 				085C0DCE261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				6F11BADB27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
@@ -8548,6 +8545,7 @@
 				6FC2F7DF2628F23600BF6B19 /* ResponderChain.swift in Sources */,
 				6F33E6122860AEFF00724E76 /* Navigation.swift in Sources */,
 				6F8A545A2655100400AE78FD /* SectionViewController.swift in Sources */,
+				04395F272B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
 				6F362A8A26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
 				6FE38A27270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
@@ -8666,6 +8664,7 @@
 				04E4DEEC283678C900698BF8 /* ServiceMessage.swift in Sources */,
 				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651526BC58C800454A28 /* CalendarView.swift in Sources */,
+				04395F282B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				6F54D39126050FFF008B46FF /* BlockingOverlay.swift in Sources */,
 				6F928E78274513AB00CE54B5 /* ProgramGuideViewController.swift in Sources */,
 				08AF2AEE26BA83EE00C4745E /* ExpandingButton.swift in Sources */,
@@ -8700,7 +8699,6 @@
 				6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB126563ABD0032D742 /* DampedCollectionView.swift in Sources */,
-				6F00875E219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F54D32426050FBB008B46FF /* MediaCell.swift in Sources */,
 				6F4760841EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F23631A2833D57F00A1127C /* MailComposeView.swift in Sources */,
@@ -8931,6 +8929,7 @@
 				04E4DEED283678C900698BF8 /* ServiceMessage.swift in Sources */,
 				6FAE561E26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
+				04395F292B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				08B4651626BC58C800454A28 /* CalendarView.swift in Sources */,
 				6F928E79274513AB00CE54B5 /* ProgramGuideViewController.swift in Sources */,
 				6F54D39226050FFF008B46FF /* BlockingOverlay.swift in Sources */,
@@ -8966,7 +8965,6 @@
 				6F56F9F6247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB226563ABD0032D742 /* DampedCollectionView.swift in Sources */,
-				6F00875F219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F54D32326050FBB008B46FF /* MediaCell.swift in Sources */,
 				6F23631B2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F47608B1EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
@@ -9196,6 +9194,7 @@
 				04E4DEEE283678C900698BF8 /* ServiceMessage.swift in Sources */,
 				6FAE561F26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
+				04395F2A2B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				08B4651726BC58C800454A28 /* CalendarView.swift in Sources */,
 				6F928E7A274513AB00CE54B5 /* ProgramGuideViewController.swift in Sources */,
 				6F54D39326051000008B46FF /* BlockingOverlay.swift in Sources */,
@@ -9231,7 +9230,6 @@
 				6F56F9F7247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C698245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB326563ABD0032D742 /* DampedCollectionView.swift in Sources */,
-				6F008760219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F54D32526050FBC008B46FF /* MediaCell.swift in Sources */,
 				6F23631C2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F4760921EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
@@ -9494,7 +9492,6 @@
 				6F010E15286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				6F33E6172860AF0200724E76 /* Navigation.swift in Sources */,
 				6F73BFB426563ABD0032D742 /* DampedCollectionView.swift in Sources */,
-				6F008761219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F54D32626050FBD008B46FF /* MediaCell.swift in Sources */,
 				6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */,
 				0463DA142A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
@@ -9545,6 +9542,7 @@
 				6FC6A12E2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				6FD1EF462861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F80E9C621A682E70027CA2F /* TableRequestViewController.m in Sources */,
+				04395F2B2B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				6FE1B91D1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F742941265BE52E0000538D /* Signals.swift in Sources */,
 				6F566E8424EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
