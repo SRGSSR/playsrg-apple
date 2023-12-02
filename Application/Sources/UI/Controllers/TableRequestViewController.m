@@ -9,7 +9,6 @@
 #import "Banner.h"
 #import "PlaySRG-Swift.h"
 #import "RefreshControl.h"
-#import "TableLoadMoreFooterView.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 
