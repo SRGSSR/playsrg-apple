@@ -8,7 +8,6 @@
 
 #import "Banner.h"
 #import "PlaySRG-Swift.h"
-#import "RefreshControl.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 

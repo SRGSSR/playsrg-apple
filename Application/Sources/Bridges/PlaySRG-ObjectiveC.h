@@ -36,7 +36,6 @@
 #import "Playlist.h"
 #import "PushService.h"
 #import "Reachability.h"
-#import "RefreshControl.h"
 #import "SceneDelegate.h"
 #import "ScrollableContent.h"
 #import "SharingItem.h"
