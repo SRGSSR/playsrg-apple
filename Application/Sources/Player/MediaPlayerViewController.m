@@ -16,7 +16,6 @@
 #import "Favorites.h"
 #import "ForegroundTimer.h"
 #import "GoogleCast.h"
-#import "GradientView.h"
 #import "History.h"
 #import "Layout.h"
 #import "ModalTransition.h"
@@ -943,13 +942,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
     
     if (self.letterboxController.live) {
-        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.25f, 0.5f)
-                                             endColor:channel.secondColor atPoint:CGPointMake(0.75f, 0.5f)
+        [self.currentProgramView updateWithStartColor:channel.color at:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.secondColor at:CGPointMake(0.75f, 0.5f)
                                              animated:animated];
     }
     else {
-        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.25f, 0.5f)
-                                             endColor:channel.color atPoint:CGPointMake(0.75f, 0.5f)
+        [self.currentProgramView updateWithStartColor:channel.color at:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.color at:CGPointMake(0.75f, 0.5f)
                                              animated:animated];
     }
 }
