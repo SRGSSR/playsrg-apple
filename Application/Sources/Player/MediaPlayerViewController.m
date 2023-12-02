@@ -1323,7 +1323,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.livestreamView.hidden = [self isLivestreamButtonHidden];
     
     if (! self.livestreamMediasRequest) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
         SRGRequest *request = [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:media.channel.vendor channelUid:media.channel.uid withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             self.livestreamMedias = medias;
             self.livestreamView.hidden = [self isLivestreamButtonHidden];
