@@ -20,7 +20,7 @@ import UIKit
     
     // Apply standard Play configuration to a given table view (with manual cell height).
     @objc static func tableViewConfigure(_ tableView: UITableView) {
-        tableView.backgroundColor = UIColor.clear
+        tableView.backgroundColor = .clear
         tableView.indicatorStyle = .white
         tableView.separatorStyle = .none
         

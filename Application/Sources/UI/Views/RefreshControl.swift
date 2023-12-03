@@ -10,7 +10,7 @@ class RefreshControl: UIRefreshControl {
     override init() {
         super.init()
         
-        tintColor = UIColor.white
+        tintColor = .white
         layer.zPosition = -1.0 // Ensure the refresh control appears behind the cells
         isUserInteractionEnabled = false // Avoid conflicts with table view cell interactions when using VoiceOver
     }

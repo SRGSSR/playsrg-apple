@@ -11,9 +11,9 @@ class TableLoadMoreFooterView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
         
-        let loadingImageView = UIImageView.play_loadingImageView(withTintColor: UIColor.srgGrayC7)
+        let loadingImageView = UIImageView.play_loadingImageView(withTintColor: .srgGrayC7)
         addSubview(loadingImageView)
         
         loadingImageView.translatesAutoresizingMaskIntoConstraints = false

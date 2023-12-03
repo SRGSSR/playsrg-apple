@@ -30,8 +30,8 @@ import UIKit
     
     @objc func updateWithStartColor(_ startColor: UIColor?, at startPoint: CGPoint, endColor: UIColor?, at endPoint: CGPoint, animated: Bool) {
         let update: () -> Void = {
-            let fromColor = startColor ?? self.backgroundColor ?? UIColor.clear
-            let toColor = endColor ?? self.backgroundColor ?? UIColor.clear
+            let fromColor = startColor ?? self.backgroundColor ?? .clear
+            let toColor = endColor ?? self.backgroundColor ?? .clear
             
             self.gradientLayer.colors = [fromColor.cgColor, toColor.cgColor]
             self.gradientLayer.startPoint = startPoint
