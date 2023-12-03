@@ -46,9 +46,8 @@ final class SettingsViewModel: ObservableObject {
         
         ThrottledSignal.preferenceUpdates()
             .prepend(())
-        // swiftlint:disable empty_count
+        // swiftlint:disable:next empty_count
             .map { FavoritesShowURNs().count != 0 }
-        // swiftlint:enable empty_count
             .assign(to: &$hasFavorites)
         
         ThrottledSignal.historyUpdates()
