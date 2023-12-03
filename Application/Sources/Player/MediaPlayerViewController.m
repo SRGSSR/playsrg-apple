@@ -10,7 +10,6 @@
 #import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
-#import "Banner.h"
 #import "ChannelService.h"
 #import "Download.h"
 #import "Favorites.h"

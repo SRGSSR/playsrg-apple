@@ -6,7 +6,6 @@
 
 #import "SongTableViewCell.h"
 
-#import "Banner.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 #import "UIImageView+PlaySRG.h"
@@ -177,10 +176,10 @@ static const CGFloat SongTableViewMargin = 42.f;
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan && self.song) {
         [UIPasteboard.generalPasteboard setString:[NSString stringWithFormat:@"%@, %@", self.song.title, self.song.artist.name]];
         
-        [Banner showWithStyle:BannerStyleInfo
-                      message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when song title and artist name have been copied to the pasteboard")
-                        image:nil
-                       sticky:NO];
+        [Banner showWith:BannerStyleInfo
+                 message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when song title and artist name have been copied to the pasteboard")
+                   image:nil
+                  sticky:NO];
     }
 }
 

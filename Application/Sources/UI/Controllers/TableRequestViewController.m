@@ -6,7 +6,6 @@
 
 #import "TableRequestViewController.h"
 
-#import "Banner.h"
 #import "PlaySRG-Swift.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"

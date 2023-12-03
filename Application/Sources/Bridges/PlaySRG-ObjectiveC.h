@@ -13,7 +13,6 @@
 #import "ApplicationSettings.h"
 #import "ApplicationSettings+Common.h"
 #import "ApplicationSettingsConstants.h"
-#import "Banner.h"
 #import "BaseViewController.h"
 #import "CalendarViewController.h"
 #import "ChannelService.h"
