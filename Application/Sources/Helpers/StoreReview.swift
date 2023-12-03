@@ -21,8 +21,8 @@ import StoreKit
         let requestCountThreshold = 50
         
         if requestCount >= requestCountThreshold {
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
-                SKStoreReviewController.requestReview(in: windowScene)
+            if let mainWindowScene = UIApplication.shared.mainWindowScene {
+                SKStoreReviewController.requestReview(in: mainWindowScene)
             }
             requestCount = 0
         }
