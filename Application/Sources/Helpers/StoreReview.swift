@@ -20,10 +20,8 @@ import StoreKit
         var requestCount = userDefaults.integer(forKey: userDefaultsKey) + 1
         let requestCountThreshold = 50
         
-        if requestCount >= requestCountThreshold {
-            if let mainWindowScene = UIApplication.shared.mainWindowScene {
-                SKStoreReviewController.requestReview(in: mainWindowScene)
-            }
+        if requestCount >= requestCountThreshold, let mainWindowScene = UIApplication.shared.mainWindowScene {
+            SKStoreReviewController.requestReview(in: mainWindowScene)
             requestCount = 0
         }
         
