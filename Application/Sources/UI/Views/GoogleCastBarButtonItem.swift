@@ -16,12 +16,10 @@ import GoogleCast
     
     @objc init(for navigationBar: UINavigationBar) {
         super.init()
-        
-        let castButton = GCKUICastButton(frame: CGRect(x: 0.0, y: 0.0, width: 44.0, height: 44.0))
-        self.customView = castButton
-        
-        self.castButton = castButton
         self.navigationBar = navigationBar
+        
+        self.castButton = GCKUICastButton(frame: CGRect(x: 0.0, y: 0.0, width: 44.0, height: 44.0))
+        self.customView = castButton
         
         tintColorObservation = navigationBar.observe(\.tintColor, options: [.new]) { [weak self] _, _ in
             self?.updateAppearance()
