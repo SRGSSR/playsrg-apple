@@ -192,6 +192,11 @@
 		0463DA172A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA182A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA192A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
+		04708C0F2B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
+		04708C102B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
+		04708C112B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
+		04708C122B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
+		04708C132B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		0481D59929F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */; };
 		0481D59A29F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */; };
 		0481D59B29F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */; };
@@ -1208,11 +1213,6 @@
 		6F4760951EB37DF2003021EA /* UIDevice+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47606D1EB37D60003021EA /* UIDevice+PlaySRG.m */; };
 		6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */; };
-		6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
-		6F4843CD23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
-		6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
-		6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
-		6F4843D023EC3ADF00868F78 /* AccessibilityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */; };
 		6F4843D323EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
 		6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
 		6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */; };
@@ -2795,6 +2795,7 @@
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
+		04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityView.swift; sourceTree = "<group>"; };
 		0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGMedia+PlaySRG.swift"; sourceTree = "<group>"; };
 		0481D5A329F44D4D00D174B3 /* SRGProgram+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGProgram+PlaySRG.swift"; sourceTree = "<group>"; };
 		0481D5AE29F460C500D174B3 /* SRGProgramComposition+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGProgramComposition+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3150,8 +3151,6 @@
 		6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PlaySRG.m"; sourceTree = "<group>"; };
 		6F4760741EB37D60003021EA /* UIViewController+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+PlaySRG.h"; sourceTree = "<group>"; };
 		6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+PlaySRG.m"; sourceTree = "<group>"; };
-		6F4843CA23EC3ADF00868F78 /* AccessibilityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccessibilityView.h; sourceTree = "<group>"; };
-		6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityView.m; sourceTree = "<group>"; };
 		6F4843D123EC4D4D00868F78 /* GoogleCastPlaybackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCastPlaybackButton.h; sourceTree = "<group>"; };
 		6F4843D223EC4D4D00868F78 /* GoogleCastPlaybackButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCastPlaybackButton.m; sourceTree = "<group>"; };
 		6F4855A81E3A38D600B0141C /* SRGLetterboxDesignables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGLetterboxDesignables.m; sourceTree = "<group>"; };
@@ -4770,8 +4769,7 @@
 		6F475FA81EB37BC6003021EA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6F4843CA23EC3ADF00868F78 /* AccessibilityView.h */,
-				6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */,
+				04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */,
 				6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */,
 				04F184E728F097E900B1207C /* BadgeList.swift */,
 				0809812F2622195900AA586B /* Badges.swift */,
@@ -8512,7 +8510,6 @@
 				08AF9480217D27E40028B082 /* SharingItem.m in Sources */,
 				048FD2092A122BF100929AE5 /* ProfileAccountHeaderView+UIKit.swift in Sources */,
 				6F73BFB026563ABD0032D742 /* DampedCollectionView.swift in Sources */,
-				6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FEF23722732C2D40098C639 /* TimelineView.swift in Sources */,
 				6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F74293D265BE52E0000538D /* Signals.swift in Sources */,
@@ -8570,6 +8567,7 @@
 				6FDF08DC218B126700B2AF2C /* Recommendation.m in Sources */,
 				6F54D35926050FE4008B46FF /* MediaVisualView.swift in Sources */,
 				6F054FC026B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
+				04708C0F2B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F8BE02727A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FA8479A26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */,
@@ -8676,7 +8674,6 @@
 				04FB9CAE2A051BB600A9B69E /* ProfileSectionHeaderView+UIKit.swift in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF23682732C2410098C639 /* ChannelHeaderView.swift in Sources */,
-				6F4843CD23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6F54D2BA2604FB16008B46FF /* ShowCell.swift in Sources */,
 				6FCA5BDD27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
@@ -8850,6 +8847,7 @@
 				6F5E99EF283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
+				04708C102B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F091D5C270DE4FE00210713 /* Publishers.swift in Sources */,
 				0490B9FA2A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
 				6F264D7B2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
@@ -8942,7 +8940,6 @@
 				6FE2873E2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF23692732C2410098C639 /* ChannelHeaderView.swift in Sources */,
-				6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDE27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D42604FB18008B46FF /* ShowCell.swift in Sources */,
 				6F6C7AD62820578900BC3EA5 /* PosterImages.swift in Sources */,
@@ -9115,6 +9112,7 @@
 				6F5E99F0283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
+				04708C112B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F091D5D270DE4FE00210713 /* Publishers.swift in Sources */,
 				0490B9FB2A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
 				6F264D7C2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
@@ -9207,7 +9205,6 @@
 				6FE2873F2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF236A2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
-				6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDF27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D52604FB19008B46FF /* ShowCell.swift in Sources */,
 				6F6C7AD72820578900BC3EA5 /* PosterImages.swift in Sources */,
@@ -9380,6 +9377,7 @@
 				6F5E99F1283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
+				04708C122B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F091D5E270DE4FE00210713 /* Publishers.swift in Sources */,
 				0490B9FC2A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
 				6F264D7D2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
@@ -9466,7 +9464,6 @@
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F6E9065283E6EB10049FEEE /* Highlight.swift in Sources */,
-				6F4843D023EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6F54D2D62604FB19008B46FF /* ShowCell.swift in Sources */,
 				048FD2072A1225B200929AE5 /* ProfileAccountHeaderView.swift in Sources */,
 				04FB9CAB2A04327A00A9B69E /* ProfileHelp.swift in Sources */,
@@ -9575,6 +9572,7 @@
 				6FEF23762732C2D40098C639 /* TimelineView.swift in Sources */,
 				6FB89A0326335B090012F1B0 /* Stack.swift in Sources */,
 				08AF9484217D27E40028B082 /* SharingItem.m in Sources */,
+				04708C132B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F8D54462639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,

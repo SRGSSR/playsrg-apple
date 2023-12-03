@@ -6,7 +6,6 @@
 
 #import "PlayMiniPlayerView.h"
 
-#import "AccessibilityView.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
