@@ -12,8 +12,11 @@ import UIKit
 }
 
 @objc class AccessibilityView: UIView {
-    // swiftlint:disable:next private_outlet
-    @IBOutlet weak var delegate: AccessibilityViewDelegate?
+    @IBOutlet private weak var delegate: AccessibilityViewDelegate?
+    
+    public func setDelegate(_ delegate: AccessibilityViewDelegate?) {
+        self.delegate = delegate
+    }
     
     override var isAccessibilityElement: Bool {
         get {
