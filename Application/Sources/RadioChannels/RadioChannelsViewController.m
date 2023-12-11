@@ -47,7 +47,7 @@
     
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     if (navigationBar) {
-        self.navigationItem.rightBarButtonItem = [[GoogleCastBarButtonItem alloc] initForNavigationBar:navigationBar];
+        self.navigationItem.rightBarButtonItem = [[GoogleCastBarButtonItem alloc] initFor:navigationBar];
     }
 }
 

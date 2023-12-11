@@ -9,7 +9,6 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
-#import "Banner.h"
 #import "DeepLinkService.h"
 #import "Download.h"
 #import "Favorites.h"
@@ -372,10 +371,10 @@ static void *s_kvoContext = &s_kvoContext;
     if (unexpectedLogout) {
         // Display the warning banner after a while. Account view controller may take time to disappear, due to the animation.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [Banner showWithStyle:BannerStyleWarning
-                          message:NSLocalizedString(@"You have been automatically logged out. Login again to keep your data synchronized across devices.", @"Notification displayed when the user has been logged out unexpectedly.")
-                            image:[UIImage imageNamed:@"account"]
-                           sticky:YES];
+            [Banner showWith:BannerStyleWarning
+                     message:NSLocalizedString(@"You have been automatically logged out. Login again to keep your data synchronized across devices.", @"Notification displayed when the user has been logged out unexpectedly.")
+                       image:[UIImage imageNamed:@"account"]
+                      sticky:YES];
         });
     }
     

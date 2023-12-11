@@ -9,7 +9,6 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
-#import "Banner.h"
 #import "DeepLinkAction.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
@@ -108,10 +107,10 @@ static void *s_kvoContext = &s_kvoContext;
             ApplicationSettingSetServiceIdentifier(serviceIdentifier);
             
             NSString *serviceName = [ServiceObjC nameForServiceId:serviceIdentifier];
-            [Banner showWithStyle:BannerStyleInfo
-                          message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a custom URL."), serviceName]
-                            image:[UIImage imageNamed:@"settings"]
-                           sticky:NO];
+            [Banner showWith:BannerStyleInfo
+                     message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a custom URL."), serviceName]
+                       image:[UIImage imageNamed:@"settings"]
+                      sticky:NO];
         }
     }
 #endif

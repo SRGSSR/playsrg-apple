@@ -7,7 +7,6 @@
 #import "SharingItem.h"
 
 #import "ApplicationConfiguration.h"
-#import "Banner.h"
 #import "PlaySRG-Swift.h"
 
 @interface SharingItem ()
@@ -167,10 +166,10 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                                                     type:activityType] send];
             
             if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                [Banner showWithStyle:BannerStyleInfo
-                              message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                image:nil
-                               sticky:NO];
+                [Banner showWith:BannerStyleInfo
+                         message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
+                           image:nil
+                          sticky:NO];
             }
             
             completionBlock ? completionBlock(activityType) : nil;
