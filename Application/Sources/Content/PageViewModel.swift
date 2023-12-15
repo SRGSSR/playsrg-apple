@@ -29,7 +29,7 @@ final class PageViewModel: Identifiable, ObservableObject {
                                                      pageSize: Self.pageSize(for: section, in: page.sections),
                                                      paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
                             )
-                            .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
+                            .replaceError(with: Self.fallbackRow(for: section, state: self?.state))
                             .prepend(Self.placeholderRow(for: section, state: self?.state))
                         }
                     })
@@ -124,6 +124,15 @@ final class PageViewModel: Identifiable, ObservableObject {
         }
         else {
             return Row(section: section, items: Self.placeholderRowItems(for: section))
+        }
+    }
+    
+    private static func fallbackRow(for section: Section, state: State?) -> Row {
+        if let row = state?.rows.first(where: { $0.section == section }) {
+            return row
+        }
+        else {
+            return Row(section: section, items: [])
         }
     }
     
