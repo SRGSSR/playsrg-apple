@@ -165,10 +165,11 @@ extension SceneDelegate: UIWindowSceneDelegate {
         handleURLContexts(connectionOptions.urlContexts)
         
 #if DEBUG || NIGHTLY || BETA
-        Publishers.Merge3(
+        Publishers.Merge4(
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingForceSamEnabled)
         )
         .debounce(for: 0.7, scheduler: DispatchQueue.main)
         .sink {
