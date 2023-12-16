@@ -618,7 +618,7 @@ private extension PageViewModel {
             case .showAccess:
                 return .showAccess
 #endif
-            case .favoriteShows:
+            case .favoriteShows, .trendingShowsByTopic:
                 return .showSwimlane
             case .swimlane:
                 return (contentSection.type == .shows) ? .showSwimlane : .mediaSwimlane

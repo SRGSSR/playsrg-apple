@@ -201,6 +201,8 @@ private extension Content {
                     return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
                 case .topicSelector:
                     return NSLocalizedString("Topics", comment: "Title label used to present the topic list")
+                case .trendingShowsByTopic:
+                    return NSLocalizedString("More shows", comment: "Title label used to present the trending shows by topic")
                 default:
                     return nil
                 }
@@ -226,7 +228,7 @@ private extension Content {
                 return .poster
             case .predefined:
                 switch presentation.type {
-                case .favoriteShows:
+                case .favoriteShows, .trendingShowsByTopic:
                     return .poster
                 default:
                     return .default
@@ -452,6 +454,19 @@ private extension Content {
                     if let show {
                         return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                             .map { $0.map { .media($0) } }
+                            .eraseToAnyPublisher()
+                    }
+                    else {
+                        return Just([])
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                    }
+                case .trendingShowsByTopic:
+                    // FIXME: logic to select topic from the list
+                    if let show, let topic = show.topics?.first {
+                        return dataProvider.tvMostPopularShows(for: topic.vendor, topicUid: topic.uid, pageSize: pageSize, paginatedBy: paginator)
+                            .map { $0.filter { $0.urn != show.urn } }
+                            .map { $0.map { .show($0) } }
                             .eraseToAnyPublisher()
                     }
                     else {
