@@ -50,7 +50,15 @@ extension ApplicationConfiguration {
     }
     
     private static var type: String {
-        return UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "phone"
+        if ProcessInfo.processInfo.isMacCatalystApp || ProcessInfo.processInfo.isiOSAppOnMac {
+            return "desktop"
+        }
+        else if UIDevice.current.userInterfaceIdiom == .pad {
+            return "tablet"
+        }
+        else {
+            return "phone"
+        }
     }
     
     private static var identifier: String? {
