@@ -10,13 +10,11 @@
 #import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
-#import "Banner.h"
 #import "ChannelService.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "ForegroundTimer.h"
 #import "GoogleCast.h"
-#import "GradientView.h"
 #import "History.h"
 #import "Layout.h"
 #import "ModalTransition.h"
@@ -35,8 +33,6 @@
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
 #import "SRGResource+PlaySRG.h"
-#import "StoreReview.h"
-#import "TableView.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
@@ -352,7 +348,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.currentProgramMoreEpisodesButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"More episodes", @"A more episode button label");
     
-    TableViewConfigure(self.programsTableView);
+    [TableView tableViewConfigure:self.programsTableView];
     self.programsTableView.dataSource = self;
     self.programsTableView.delegate = self;
     
@@ -943,13 +939,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     Channel *channel = [[ApplicationConfiguration sharedApplicationConfiguration] channelForUid:channelUid];
     
     if (self.letterboxController.live) {
-        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.25f, 0.5f)
-                                             endColor:channel.secondColor atPoint:CGPointMake(0.75f, 0.5f)
+        [self.currentProgramView updateWithStartColor:channel.color at:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.secondColor at:CGPointMake(0.75f, 0.5f)
                                              animated:animated];
     }
     else {
-        [self.currentProgramView updateWithStartColor:channel.color atPoint:CGPointMake(0.25f, 0.5f)
-                                             endColor:channel.color atPoint:CGPointMake(0.75f, 0.5f)
+        [self.currentProgramView updateWithStartColor:channel.color at:CGPointMake(0.25f, 0.5f)
+                                             endColor:channel.color at:CGPointMake(0.75f, 0.5f)
                                              animated:animated];
     }
 }
@@ -1323,8 +1319,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.livestreamView.hidden = [self isLivestreamButtonHidden];
     
     if (! self.livestreamMediasRequest) {
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        SRGRequest *request = [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:applicationConfiguration.vendor channelUid:media.channel.uid withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        SRGRequest *request = [SRGDataProvider.currentDataProvider radioLivestreamsForVendor:media.channel.vendor channelUid:media.channel.uid withCompletionBlock:^(NSArray<SRGMedia *> * _Nullable medias, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             self.livestreamMedias = medias;
             self.livestreamView.hidden = [self isLivestreamButtonHidden];
         }];

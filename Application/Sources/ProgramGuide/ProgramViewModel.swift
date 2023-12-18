@@ -303,7 +303,7 @@ final class ProgramViewModel: ObservableObject {
                 eventStore.requestAccessToEvents(completion: { [weak self] granted, error in
                     DispatchQueue.main.async {
                         guard error == nil else {
-                            Banner.showError(error)
+                            Banner.showError(error as NSError?)
                             return
                         }
                         
@@ -512,7 +512,7 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true) {
             if action == .saved, let title = controller.event?.title {
-                Banner.calendarEventAdded(withTitle: title)
+                Banner.calendarEventAddedWithTitle(title)
                 
                 if let channel = self.channel {
                     AnalyticsEvent.calendarEventAdd(channel: channel).send()

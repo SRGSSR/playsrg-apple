@@ -12,7 +12,6 @@
 #import "PlaySRG-Swift.h"
 #import "SongTableViewCell.h"
 #import "SRGLetterboxController+PlaySRG.h"
-#import "TableView.h"
 #import "UITableView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 

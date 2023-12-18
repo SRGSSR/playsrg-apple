@@ -792,7 +792,7 @@ private extension PageViewController {
             case .mediaList:
                 PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
             default:
-                PlaySRG.MediaCell(media: media, style: .show, layout: .vertical)
+                PlaySRG.MediaCell(media: media, style: section.properties.displayedShow != nil ? .date : .show, layout: .vertical)
             }
         }
     }

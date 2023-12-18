@@ -21,14 +21,6 @@ clean:
 	@xcodebuild clean
 	@echo "... done.\n"
 
-.PHONY: ruby-setup
-ruby-setup:
-	@echo "Installing needed ruby version if missing..."
-	@Scripts/rbenv-install.sh "./"
-	@echo "Running bundle install..."
-	@bundle install > /dev/null
-	@echo "... done.\n"
-
 .PHONY: check-quality
 check-quality:
 	@echo "Checking quality..."
@@ -65,24 +57,46 @@ spm-outdated:
 	@Scripts/spm-outdated.sh
 	@echo "... done.\n"
 
+.PHONY: ruby-setup
+ruby-setup:
+	@echo "Installing needed ruby version if missing..."
+	@Scripts/rbenv-install.sh "./"
+	@echo "Running bundle install..."
+	@bundle install > /dev/null
+	@echo "... done.\n"
+
+.PHONY: appstore-status
+appstore-status: ruby-setup
+	@echo "Running fastlane ios appStoreAppStatus..."
+	@bundle exec fastlane ios appStoreAppStatus
+	@echo "... done.\n"
+
+.PHONY: appstore-testflight-status
+appstore-testflight-status: ruby-setup
+	@echo "Running fastlane ios appStoreAppStatus..."
+	@bundle exec fastlane ios appStoreTestFlightAppStatus
+	@echo "... done.\n"
+
 .PHONY: help
 help:
 	@echo "The following targets are available:"
 	@echo ""
-	@echo "   all                 Run setup"
-	@echo "   setup               Setup project"
-	@echo "   clean               Clean the project and its dependencies"
+	@echo "   all                        Run setup"
+	@echo "   setup                      Setup project"
+	@echo "   clean                      Clean the project and its dependencies"
 	@echo ""
-	@echo "   ruby-setup          Install needed ruby version with rbenv if missing and run bundle install"
+	@echo "   check-quality              Run quality checks"
+	@echo "   fix-quality                Fix quality automatically (if possible)"
 	@echo ""
-	@echo "   check-quality       Run quality checks"
-	@echo "   fix-quality         Fix quality automatically (if possible)"
+	@echo "   pull-translations          Pull new translations from Crowdin"
 	@echo ""
-	@echo "   pull-translations   Pull new translations from Crowdin"
+	@echo "   git-hook-install           Use hooks located in ./hooks"
+	@echo "   git-hook-uninstall         Use default hooks located in .git/hooks"
 	@echo ""
-	@echo "   git-hook-install    Use hooks located in ./hooks"
-	@echo "   git-hook-uninstall  Use default hooks located in .git/hooks"
+	@echo "   spm-outdated               Run outdated Swift package dependencies check"
 	@echo ""
-	@echo "   spm-outdated        Run outdated Swift package dependencies check"
+	@echo "   ruby-setup                 Install needed ruby version with rbenv if missing and run bundle install"
+	@echo "   appstore-status            Get AppStore review status"
+	@echo "   appstore-testflight-status Get public TestFlight review status"
 	@echo ""
-	@echo "   help                Display this message"
+	@echo "   help                       Display this message"

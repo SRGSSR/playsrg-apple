@@ -69,8 +69,16 @@
 	- Play RTS tvOS: `fastlane ios tvOSrtsScreenshots`
 	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots` (No upload to ASC, due to some marketing images)
 	- Play SWI tvOS: `fastlane ios tvOSswiScreenshots`
-- Application status (Ready for sale, In review, etc…)
-	- All published apps: `fastlane ios appStoreAppStatus`
+
+# AppStore and TestFlight review status
+
+- Get AppStore review status (Ready for sale, In review, etc…)
+	- `fastlane ios appStoreAppStatus`
+	- or `make appstore-status`
+- Get public TestFlight review status (In beta testing, In review, etc…)
+	- `fastlane ios appStoreTestFlightAppStatus`
+	- or `make appstore-testflight-status`
+
 
 # Release notes on Github pages
 

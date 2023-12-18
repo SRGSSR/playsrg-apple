@@ -197,7 +197,7 @@ extension UIViewController {
                 .receive(on: DispatchQueue.main)
                 .sink { result in
                     if case let .failure(error) = result {
-                        Banner.showError(error)
+                        Banner.showError(error as NSError)
                         UserConsentHelper.waitCollectingConsentRelease()
                     }
                 } receiveValue: { [weak self] media in
@@ -219,7 +219,7 @@ extension UIViewController {
                 .receive(on: DispatchQueue.main)
                 .sink { result in
                     if case let .failure(error) = result {
-                        Banner.showError(error)
+                        Banner.showError(error as NSError)
                         UserConsentHelper.waitCollectingConsentRelease()
                     }
                 } receiveValue: { [weak self] show in

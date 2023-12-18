@@ -6,7 +6,6 @@
 
 #import "GoogleCastMiniPlayerView.h"
 
-#import "AccessibilityView.h"
 #import "AnalyticsConstants.h"
 #import "GoogleCastPlaybackButton.h"
 #import "NSBundle+PlaySRG.h"
