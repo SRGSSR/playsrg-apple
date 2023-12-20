@@ -3991,8 +3991,9 @@
 				08AF947E217D27E40028B082 /* SharingItem.h */,
 				08AF947F217D27E40028B082 /* SharingItem.m */,
 				6F74293C265BE52E0000538D /* Signals.swift */,
-				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
 				04395F262B1BC44200F6A634 /* StoreReview.swift */,
+				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
+				0490B9F82A3789F500B6FB7B /* UserConsentHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -4497,7 +4498,6 @@
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6F72E60626BA6B16001A890C /* SceneDelegate.h */,
 				6F72E60526BA6B16001A890C /* SceneDelegate.m */,
-				0490B9F82A3789F500B6FB7B /* UserConsentHelper.swift */,
 			);
 			name = Appplication;
 			path = Application;
