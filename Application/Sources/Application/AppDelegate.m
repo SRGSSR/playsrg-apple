@@ -125,7 +125,6 @@ static void *s_kvoContext = &s_kvoContext;
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     [defaults addObserver:self forKeyPath:PlaySRGSettingServiceIdentifier options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld  context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
-    [defaults addObserver:self forKeyPath:PlaySRGSettingForceSamEnabled options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
 #endif
     
     // Various setups
@@ -388,7 +387,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (s_kvoContext == context) {
-        if ([keyPath isEqualToString:PlaySRGSettingServiceIdentifier] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingForceSamEnabled]) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceIdentifier] || [keyPath isEqualToString:PlaySRGSettingUserLocation]) {
             id oldValue = change[NSKeyValueChangeOldKey];
             id newValue = change[NSKeyValueChangeNewKey];
             

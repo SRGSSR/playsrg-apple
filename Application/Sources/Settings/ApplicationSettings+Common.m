@@ -127,7 +127,7 @@ NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
         globalParameters[@"forceLocation"] = location;
     }
     
-    BOOL forceSAM = [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingForceSamEnabled];
+    BOOL forceSAM = [ApplicationSettingServiceIdentifier().lowercaseString containsString:@"sam"];
     if (forceSAM) {
         globalParameters[@"forceSAM"] = @"true";
     }

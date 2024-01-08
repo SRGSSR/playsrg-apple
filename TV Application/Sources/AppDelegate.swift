@@ -98,10 +98,9 @@ extension AppDelegate: UIApplicationDelegate {
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, dataSource: self, identityService: SRGIdentityService.current)
         
 #if DEBUG || NIGHTLY || BETA
-        Publishers.Merge3(
+        Publishers.Merge(
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation),
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingForceSamEnabled)
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
         )
         .receive(on: DispatchQueue.main)
         .sink { [weak self] _ in

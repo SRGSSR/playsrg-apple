@@ -507,7 +507,6 @@ struct SettingsView: View {
     private struct AdvancedFeaturesSection: View {
         @ObservedObject var model: SettingsViewModel
         
-        @AppStorage(PlaySRGSettingForceSamEnabled) var isForceSamEnabled = false
         @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
         @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
@@ -523,7 +522,6 @@ struct SettingsView: View {
                 } label: {
                     ServiceSelectionCell()
                 }
-                Toggle(NSLocalizedString("Force SAM data", comment: "Force SAM data setting label"), isOn: $isForceSamEnabled)
                 NextLink {
                     UserLocationSelectionView()
 #if os(iOS)

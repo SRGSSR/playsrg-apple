@@ -25,10 +25,6 @@ extension UserDefaults {
         return string(forKey: PlaySRG.PlaySRGSettingUserLocation)
     }
     
-    @objc dynamic var PlaySRGSettingForceSamEnabled: String? {
-        return string(forKey: PlaySRG.PlaySRGSettingForceSamEnabled)
-    }
-    
 #if DEBUG || NIGHTLY || BETA
     @objc dynamic var PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled: Bool {
         return bool(forKey: PlaySRG.PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled)
