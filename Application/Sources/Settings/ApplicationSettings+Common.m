@@ -112,6 +112,8 @@ SettingPosterImages ApplicationSettingPosterImages(void)
 NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSMutableDictionary<NSString *, NSString *> *globalParameters = [NSMutableDictionary dictionary];
+    
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSNumber *, NSString *> *s_locations;
     dispatch_once(&s_onceToken, ^{
@@ -121,7 +123,16 @@ NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
     
     SettingUserLocation userLocation = [[SettingUserLocationTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingUserLocation]] integerValue];
     NSString *location = s_locations[@(userLocation)];
-    return location ? @{ @"forceLocation" : location } : nil;
+    if (location) {
+        globalParameters[@"forceLocation"] = location;
+    }
+    
+    BOOL forceSAM = [ApplicationSettingServiceIdentifier().lowercaseString containsString:@"sam"];
+    if (forceSAM) {
+        globalParameters[@"forceSAM"] = @"true";
+    }
+    
+    return globalParameters.count > 0 ? globalParameters.copy : nil;
 #else
     return nil;
 #endif
