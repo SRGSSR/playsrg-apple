@@ -782,18 +782,26 @@ private extension PageViewController {
             case .heroStage:
                 HeroMediaCell(media: media, label: section.properties.label)
             case .headline:
-                FeaturedContentCell(media: media, label: section.properties.label, layout: .headline)
+                FeaturedContentCell(media: media, style: areRedundant(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .headline)
             case .element, .elementSwimlane:
-                FeaturedContentCell(media: media, label: section.properties.label, layout: .element)
+                FeaturedContentCell(media: media, style: areRedundant(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .element)
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                PlaySRG.MediaCell(media: media, style: section.properties.displayedShow != nil ? .date : .show)
+                PlaySRG.MediaCell(media: media, style: areRedundant(media: media, in: section) ? .date : .show)
             case .mediaList:
                 PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
             default:
-                PlaySRG.MediaCell(media: media, style: section.properties.displayedShow != nil ? .date : .show, layout: .vertical)
+                PlaySRG.MediaCell(media: media, style: areRedundant(media: media, in: section) ? .date : .show, layout: .vertical)
             }
+        }
+        
+        private func areRedundant(media: SRGMedia?, in section: PageViewModel.Section) -> Bool {
+            guard let displayedShow = section.properties.displayedShow,
+                  let mediaShow = media?.show
+            else { return false }
+            
+            return displayedShow.isEqual(mediaShow)
         }
     }
     

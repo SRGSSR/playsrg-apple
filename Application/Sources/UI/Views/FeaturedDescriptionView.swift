@@ -74,8 +74,8 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
 // MARK: Initializers
 
 extension FeaturedDescriptionView where Content == FeaturedMediaContent {
-    init(media: SRGMedia?, label: String? = nil, alignment: Alignment, detailed: Bool) {
-        self.init(content: FeaturedMediaContent(media: media, label: label), alignment: alignment, detailed: detailed)
+    init(media: SRGMedia?, style: MediaDescription.Style, label: String? = nil, alignment: Alignment, detailed: Bool) {
+        self.init(content: FeaturedMediaContent(media: media, style: style, label: label), alignment: alignment, detailed: detailed)
     }
 }
 
@@ -99,9 +99,9 @@ struct FeaturedDescriptionView_Previews: PreviewProvider {
         .previewLayout(.fixed(width: 800, height: 300))
         
         Group {
-            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .leading, detailed: true)
-            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .topLeading, detailed: true)
-            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .center, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .leading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .topLeading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .center, detailed: true)
         }
         .previewLayout(.fixed(width: 800, height: 300))
     }

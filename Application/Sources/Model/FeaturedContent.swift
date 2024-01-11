@@ -29,6 +29,7 @@ protocol FeaturedContent {
 
 struct FeaturedMediaContent: FeaturedContent {
     let media: SRGMedia?
+    let style: MediaDescription.Style
     let label: String?
     
     var isPlaceholder: Bool {
@@ -37,12 +38,12 @@ struct FeaturedMediaContent: FeaturedContent {
     
     var introduction: String? {
         guard let media else { return nil }
-        return MediaDescription.subtitle(for: media, style: .show)
+        return MediaDescription.subtitle(for: media, style: style)
     }
     
     var title: String? {
         guard let media else { return nil }
-        return MediaDescription.title(for: media, style: .show)
+        return MediaDescription.title(for: media, style: style)
     }
     
     var summary: String? {
