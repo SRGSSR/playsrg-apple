@@ -311,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "a7380a80cab17b9c3f84e1b32d6c403b0bedc2be",
-        "version" : "18.1.0"
+        "branch" : "feature/scheduled-livestreams",
+        "revision" : "ce0c03aaba7e5ba043af031eedb2233d02da8b6d"
       }
     },
     {
