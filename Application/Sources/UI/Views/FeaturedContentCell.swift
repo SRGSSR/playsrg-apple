@@ -9,15 +9,22 @@ import SwiftUI
 
 // MARK: View
 
-enum FeaturedContentLayout {
-    case headline
-    case element
-}
-
 struct FeaturedContentCell<Content: FeaturedContent>: View {
+    public enum Layout {
+        case headline
+        case element
+    }
+    
+    enum Style {
+        /// Show information emphasis
+        case show
+        /// Date information emphasis
+        case date
+    }
+    
     let content: Content
-    let layout: FeaturedContentLayout
-    let style: MediaDescription.Style
+    let layout: Layout
+    let style: Style
     
     @Environment(\.isSelected) private var isSelected
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
@@ -87,13 +94,13 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
 // MARK: Initializers
 
 extension FeaturedContentCell where Content == FeaturedMediaContent {
-    init(media: SRGMedia?, style: MediaDescription.Style, label: String? = nil, layout: FeaturedContentLayout) {
+    init(media: SRGMedia?, style: Style, label: String? = nil, layout: Layout) {
         self.init(content: FeaturedMediaContent(media: media, style: style, label: label), layout: layout, style: style)
     }
 }
 
 extension FeaturedContentCell where Content == FeaturedShowContent {
-    init(show: SRGShow?, label: String? = nil, layout: FeaturedContentLayout) {
+    init(show: SRGShow?, label: String? = nil, layout: Layout) {
         self.init(content: FeaturedShowContent(show: show, label: label), layout: layout, style: .show)
     }
 }
@@ -137,7 +144,7 @@ enum FeaturedContentCellSize {
 // MARK: Preview
 
 private extension View {
-    func previewLayout(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
+    func previewLayout(for layout: FeaturedContentCell<FeaturedMediaContent>.Layout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
         let size: CGSize = {
             if layout == .headline {
                 return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize

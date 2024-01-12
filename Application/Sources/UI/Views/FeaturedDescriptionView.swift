@@ -74,7 +74,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
 // MARK: Initializers
 
 extension FeaturedDescriptionView where Content == FeaturedMediaContent {
-    init(media: SRGMedia?, style: MediaDescription.Style, label: String? = nil, alignment: Alignment, detailed: Bool) {
+    init(media: SRGMedia?, style: FeaturedContentCell<FeaturedMediaContent>.Style, label: String? = nil, alignment: Alignment, detailed: Bool) {
         self.init(content: FeaturedMediaContent(media: media, style: style, label: label), alignment: alignment, detailed: detailed)
     }
 }
