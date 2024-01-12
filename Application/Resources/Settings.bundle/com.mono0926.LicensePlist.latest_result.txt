@@ -185,7 +185,7 @@ name: swift-collections, nameSpecified: swift-collections, owner: apple, version
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.23.0, source: https://github.com/apple/swift-protobuf
 
-name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.6, source: https://github.com/SwiftKickMobile/SwiftMessages
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.9, source: https://github.com/SwiftKickMobile/SwiftMessages
 
 name: SwiftUI-Introspect, nameSpecified: Introspect, owner: siteline, version: 0.12.0, source: https://github.com/siteline/SwiftUI-Introspect
 
