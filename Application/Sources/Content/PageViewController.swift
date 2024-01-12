@@ -797,9 +797,7 @@ private extension PageViewController {
         }
         
         private func haveSameShow(media: SRGMedia?, in section: PageViewModel.Section) -> Bool {
-            guard let displayedShow = section.properties.displayedShow,
-                  let mediaShow = media?.show
-            else { return false }
+            guard let displayedShow = section.properties.displayedShow, let mediaShow = media?.show else { return false }
             
             return displayedShow.isEqual(mediaShow)
         }
