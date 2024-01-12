@@ -477,7 +477,7 @@
 "Overview" = "Home";
 
 /* Title label used to present on demand medias from live center (Sport manager) */
-"Past sport livestreams" = "Sport livestreams passati";
+"Past sport livestreams" = "Sport in replay";
 
 /* Search setting */
 "Period" = "Periodo";
@@ -658,7 +658,7 @@
 "Source code" = "Codice sorgente";
 
 /* Title label used to present scheduled livestreams medias from live center (Sport manager) */
-"Sport livestreams" = "Sport livestreams";
+"Sport livestreams" = "Sport in diretta";
 
 /* Server setting name */
 "Stage" = "Stage";
