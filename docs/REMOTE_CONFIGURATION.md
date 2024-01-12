@@ -120,8 +120,8 @@ Feeds
 * `tvLiveCenterEpisodes`: Past sport livestreams (with result). ([video/scheduledLivestreams/livecenter](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams/livecenter?types=episode))
 * `tvLiveCenterEpisodesAll`: Past sport livestreams (all). ([video/scheduledLivestreams/livecenter](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams/livecenter?types=episode&onlyEventsWithResult=false))
 * `tvScheduledLivestreams`: Scheduled livestreams. ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams))
-* `tvScheduledLivestreamsNews`: Scheduled livestreams. ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams?eventType=news))
-* `tvScheduledLivestreamsSport`: Scheduled livestreams. ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams?eventType=sport))
+* `tvScheduledLivestreamsNews`: News scheduled livestreams. ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams?eventType=news))
+* `tvScheduledLivestreamsSport`: Sport scheduled livestreams (without highlight segments). ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams?eventType=sport))
 * `tvScheduledLivestreamsSignLanguage`: Sign language livestreams. ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams?signLanguageOnly=true))
 
 ## Search
