@@ -83,5 +83,6 @@
     "1.7.8-437": "Branch beta\n- TV show pages are now editorialized.\n- Display page status (empty, network error, …) in show pages.",
     "1.8.0-439": "- Discover programs from all SRG channels in the TV Guide. [RSI, RTR, RTS, SRF]\n- Video show pages can be editorialized, like series or documentaries pages. [RSI, RTR, RTS, SRF]",
     "1.8.0-440": "- Shorter wording to \"add to favorites\" buttons. [RSI, SRF]\n- Switch version button for all iOS and tvOS TestFlight buids (private and public).",
-    "1.8.1-441": "- Improve show pages: do not repeat show title in items.\n- UX: remove placeholders in show pages if errors."
+    "1.8.1-441": "- Improve show pages: do not repeat show title in items.\n- UX: remove placeholders in show pages if errors.",
+    "1.8.2-442": "- Improve show pages: do not repeat show title in items. Fix.\n- Update Italian translations. [RSI]\n- Maintenance release.\n- Update new server PAC requests. [Internal]"
 }

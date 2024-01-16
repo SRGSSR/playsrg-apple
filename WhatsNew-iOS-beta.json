@@ -217,5 +217,6 @@
     "3.7.10-438": "Beta from a branch\n\n- TV show pages are now editorialized.\n- Fix iOS 17 layout on iPad.",
     "3.8.0-439": "- Discover programs from all SRG channels in the TV Guide. [RSI, RTR, RTS, SRF]\n- Video show pages can be editorialized, like series or documentaries pages. [RSI, RTR, RTS, SRF]",
     "3.8.0-440": "- Shorter wording to \"add to favorites\" buttons. [RSI, SRF]\n- Switch version button for all iOS and tvOS TestFlight buids (private and public).",
-    "3.8.1-441": "- Improve show pages: do not repeat show title in items.\n- UX: remove placeholders in show pages if errors.\n- Enable search subtitles available option. [RTS]"
+    "3.8.1-441": "- Improve show pages: do not repeat show title in items.\n- UX: remove placeholders in show pages if errors.\n- Enable search subtitles available option. [RTS]",
+    "3.8.2-442": "- Improve show pages: do not repeat show title in items. Fix.\n- Update Italian translations. [RSI]\n- Maintenance release.\n- Update new server PAC requests. [Internal]"
 }
