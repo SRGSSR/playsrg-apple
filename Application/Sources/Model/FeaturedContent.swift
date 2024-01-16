@@ -29,6 +29,7 @@ protocol FeaturedContent {
 
 struct FeaturedMediaContent: FeaturedContent {
     let media: SRGMedia?
+    let style: FeaturedContentCell<Self>.Style
     let label: String?
     
     var isPlaceholder: Bool {
@@ -37,12 +38,12 @@ struct FeaturedMediaContent: FeaturedContent {
     
     var introduction: String? {
         guard let media else { return nil }
-        return MediaDescription.subtitle(for: media, style: .show)
+        return MediaDescription.subtitle(for: media, style: mediaDescriptionStyle)
     }
     
     var title: String? {
         guard let media else { return nil }
-        return MediaDescription.title(for: media, style: .show)
+        return MediaDescription.title(for: media, style: mediaDescriptionStyle)
     }
     
     var summary: String? {
@@ -57,6 +58,15 @@ struct FeaturedMediaContent: FeaturedContent {
     
     var accessibilityHint: String? {
         return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Featured media hint")
+    }
+    
+    private var mediaDescriptionStyle: MediaDescription.Style {
+        switch style {
+        case .show:
+            return .show
+        case .date:
+            return .date
+        }
     }
     
     func visualView() -> some View {
