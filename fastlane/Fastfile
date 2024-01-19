@@ -1884,7 +1884,7 @@ def skip_pull_translations
 end
 
 def pull_translations
-  Dir.chdir('..') { sh 'Scripts/pullCrowdin.sh --skip-copies' }
+  Dir.chdir('..') { sh 'Scripts/crowdin.sh --skip-copies' }
   ENV['CROWDIN_TRANSLATIONS_PULLLED'] = '1'
 end
 

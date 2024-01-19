@@ -36,7 +36,7 @@ fix-quality:
 .PHONY: pull-translations
 pull-translations:
 	@echo "Pulling translations..."
-	@Scripts/pullCrowdin.sh
+	@Scripts/crowdin.sh
 	@echo "... done.\n"
 
 .PHONY: git-hook-install
