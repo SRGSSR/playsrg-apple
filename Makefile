@@ -33,6 +33,18 @@ fix-quality:
 	@Scripts/fix-quality.sh
 	@echo "... done.\n"
 
+.PHONY: generate-translations
+generate-translations:
+	@echo "Building source translation files..."
+	@Scripts/generate-translations.sh
+	@echo "... done.\n"
+
+.PHONY: push-translations
+push-translations:
+	@echo "Pushing translations..."
+	@Scripts/crowdin.sh push
+	@echo "... done.\n"
+
 .PHONY: pull-translations
 pull-translations:
 	@echo "Pulling translations..."
@@ -88,6 +100,8 @@ help:
 	@echo "   check-quality              Run quality checks"
 	@echo "   fix-quality                Fix quality automatically (if possible)"
 	@echo ""
+	@echo "   generate-translations      Generate source translation files in Translations folder"
+	@echo "   push-translations          Push new translations to Crowdin"
 	@echo "   pull-translations          Pull new translations from Crowdin"
 	@echo ""
 	@echo "   git-hook-install           Use hooks located in ./hooks"

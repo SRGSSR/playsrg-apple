@@ -91,15 +91,25 @@ Simply open the project with Xcode and wait until all dependencies have been ret
 
 ## Translations
 
-Pushing new translations needs to upload source files on [crowdin.com](https://crowdin.com/project/play-srg/sources/files).
+Translation tool is [crowdin.com](https://crowdin.com/project/play-srg). The following scripts need [Crowdin CLI](https://crowdin.github.io/crowdin-cli/).
 
-Pulling new translations:
+- Review new source translation files in `Translations` folder:
 
-```
-make pull-translations
-```
+	```
+	make generate-translations
+	```
 
-The script needs [Crowdin CLI](https://crowdin.github.io/crowdin-cli/).
+- Pushing new source translations from `Translations` folder:
+
+	```
+	make push-translations
+	```
+
+- Pulling new translated translations:
+
+	```
+	make pull-translations
+	```
 
 ## Releasing binaries
 
