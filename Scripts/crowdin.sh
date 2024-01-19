@@ -30,9 +30,21 @@ CROWDIN_CONFIG_FILE="$script_dir/../crowdin.yml"
 echo "Downloading sources from Crowdin..."
 crowdin pull sources -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
 
+if [ -z "$CROWDIN_PLAY_PATH" ]; then
+	CROWDIN_PLAY_PATH="."
+	echo "Use default CROWDIN_PLAY_PATH variable: \".\""
+fi
+
 for i in "$@"
 do
-	if [ "$i" = "pull" ]; then
+	if [ "$i" = "push" ]; then
+		echo "Update source files."
+		cp -f "$CROWDIN_PLAY_PATH/Translations/Localizable.strings" "/tmp/playsrg-crowdin/Apple/Play App/"
+		cp -f "$CROWDIN_PLAY_PATH/Translations/Accessibility.strings" "/tmp/playsrg-crowdin/Apple/Play App/"
+
+		echo "Uploading sources to Crowdin..."
+		crowdin push sources -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
+	elif [ "$i" = "pull" ]; then
 		# crowdin CLI builds ZIP archive with the latest translations automatically.
 		echo "Downloading the latest translations..."
 		crowdin pull -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
@@ -43,11 +55,6 @@ do
 		        exit 0
 			fi
 		done
-
-		if [ -z "$CROWDIN_PLAY_PATH" ]; then
-			CROWDIN_PLAY_PATH="."
-			echo "Use default CROWDIN_PLAY_PATH variable: \".\""
-		fi
 
 		if [ -z "$CROWDIN_MEDIA_PLAYER_PATH" ]; then
 			CROWDIN_MEDIA_PLAYER_PATH="../srgmediaplayer-apple"
