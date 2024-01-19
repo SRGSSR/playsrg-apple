@@ -83,6 +83,9 @@ fi
 
 # Play applications
 echo "Update Play SRG translations files."
+cp -f "/tmp/playsrg-crowdin/Apple/Play App/Localizable.strings" "$CROWDIN_PLAY_PATH/Translations/"
+cp -f "/tmp/playsrg-crowdin/Apple/Play App/Accessibility.strings" "$CROWDIN_PLAY_PATH/Translations/"
+
 cp -f "/tmp/playsrg-crowdin/de-CH/Apple/Play App/Localizable.strings" "$CROWDIN_PLAY_PATH/Application/Resources/Apps/Play SRF/de.lproj/"
 cp -f "/tmp/playsrg-crowdin/fr-CH/Apple/Play App/Localizable.strings" "$CROWDIN_PLAY_PATH/Application/Resources/Apps/Play RTS/fr.lproj/"
 cp -f "/tmp/playsrg-crowdin/it-CH/Apple/Play App/Localizable.strings" "$CROWDIN_PLAY_PATH/Application/Resources/Apps/Play RSI/it.lproj/"
