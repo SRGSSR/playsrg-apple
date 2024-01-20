@@ -102,7 +102,7 @@ help:
 	@echo ""
 	@echo "   generate-translations      Generate source translation files in Translations folder"
 	@echo "   push-translations          Push new translations to Crowdin"
-	@echo "   pull-translations          Pull new translations from Crowdin"
+	@echo "   pull-translations          Pull latest translations from Crowdin"
 	@echo ""
 	@echo "   git-hook-install           Use hooks located in ./hooks"
 	@echo "   git-hook-uninstall         Use default hooks located in .git/hooks"

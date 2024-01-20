@@ -105,7 +105,7 @@ Translation tool is [crowdin.com](https://crowdin.com/project/play-srg). The fol
 	make push-translations
 	```
 
-- Pulling new translated translations:
+- Pulling latest translated translations:
 
 	```
 	make pull-translations
