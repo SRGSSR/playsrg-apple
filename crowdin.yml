@@ -14,7 +14,9 @@ files: [
   },
   {
     "source": "/Apple/Play App/*.csv",
-    "translation": "/%locale%/Apple/Play App/%original_file_name%"
+    "translation": "/%locale%/Apple/Play App/%original_file_name%",
+    "first_line_contains_header": false,
+    "scheme": "identifier,source_phrase"
   },
   {
     "source": "/Apple/SRGContentProtection Library/*.strings",
