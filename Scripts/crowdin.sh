@@ -24,12 +24,11 @@ rm -rf /tmp/playsrg-crowdin
 mkdir /tmp/playsrg-crowdin
 
 # Use the repository configuration file
-CROWDIN_PULL_CONFIG_FILE="$script_dir/../crowdin_pull.yml"
-CROWDIN_PUSH_CONFIG_FILE="$script_dir/../crowdin_push.yml"
+CROWDIN_CONFIG_FILE="$script_dir/../crowdin.yml"
 
 # crowdin CLI needs sources in a directory to work with translations.
 echo "Downloading sources from Crowdin..."
-crowdin pull sources -c "$CROWDIN_PULL_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
+crowdin pull sources -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
 
 if [ -z "$CROWDIN_PLAY_PATH" ]; then
 	CROWDIN_PLAY_PATH="."
@@ -44,11 +43,11 @@ do
 		cp -f "$CROWDIN_PLAY_PATH/Translations/Accessibility.strings" "/tmp/playsrg-crowdin/Apple/Play App/"
 
 		echo "Uploading sources to Crowdin..."
-		crowdin push sources -c "$CROWDIN_PUSH_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
+		crowdin push sources -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
 	elif [ "$i" = "pull" ]; then
 		# crowdin CLI builds ZIP archive with the latest translations automatically.
 		echo "Downloading the latest translations..."
-		crowdin pull -c "$CROWDIN_PULL_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
+		crowdin pull -c "$CROWDIN_CONFIG_FILE" --token "$CROWDIN_API_TOKEN" --no-progress
 
 		for j in "$@"
 		do
