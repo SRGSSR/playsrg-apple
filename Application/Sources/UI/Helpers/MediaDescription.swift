@@ -162,13 +162,13 @@ enum MediaDescription {
                 if allowsDateDisplay, let startDate = media.startDate {
                     return BadgeProperties(
                         text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate),
-                        color: .play_green
+                        color: .black.withAlphaComponent(0.8)
                     )
                 }
                 else {
                     return BadgeProperties(
                         text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
-                        color: .play_green
+                        color: .black.withAlphaComponent(0.8)
                     )
                 }
             case .notAvailableAnymore:
@@ -186,7 +186,7 @@ enum MediaDescription {
                 else if media.play_isWebFirst {
                     return BadgeProperties(
                         text: NSLocalizedString("Web first", comment: "Short label identifying a web first content."),
-                        color: .srgBlue
+                        color: .srgDarkRed
                     )
                 }
                 else if let endDate = media.endDate, media.contentType == .episode || media.contentType == .clip,

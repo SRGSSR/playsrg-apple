@@ -96,7 +96,7 @@ struct HeroMediaCell: View {
             VStack {
                 HStack(spacing: constant(iOS: 8, tvOS: 12)) {
                     if let label {
-                        Badge(text: label, color: Color(.play_green))
+                        Badge(text: label, color: Color(.srgDarkRed))
                     }
                     if let subtitle {
                         Text(subtitle)

@@ -11,10 +11,6 @@ extension UIColor {
         return play_hexadecimal("#ed3323")
     }
     
-    @objc static var play_green: UIColor {
-        return play_hexadecimal("#347368")
-    }
-    
     @objc static var play_orange: UIColor {
         return play_hexadecimal("#df5200")
     }

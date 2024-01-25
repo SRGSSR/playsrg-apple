@@ -86,7 +86,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     NSDate *nowDate = NSDate.date;
     SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
-        self.backgroundColor = UIColor.play_green;
+        self.backgroundColor = [UIColor.blackColor colorWithAlphaComponent:.8];
         
         text = NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.");
     }
@@ -118,7 +118,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_setWebFirstBadge
 {
-    self.backgroundColor = UIColor.srg_blueColor;
+    self.backgroundColor = UIColor.srg_darkRedColor;
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
