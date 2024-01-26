@@ -284,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "45343b66e5bc2626197d314dfff88d50f9a96388",
-        "version" : "9.0.2"
+        "revision" : "0e48e8e36951bc474ef80f29192759ea93d8009d",
+        "version" : "9.1.0"
       }
     },
     {
@@ -311,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "a7380a80cab17b9c3f84e1b32d6c403b0bedc2be",
-        "version" : "18.1.0"
+        "revision" : "ae92436f7861651e66de5d33d2c0d1cf7d73345e",
+        "version" : "19.0.0"
       }
     },
     {
@@ -338,8 +338,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "6fd631014a39074d4fec1dce00804fa468d833fd",
-        "version" : "9.2.1"
+        "revision" : "4b9cf8f31eeccfa583aaf895f5307c9fe471b326",
+        "version" : "9.3.0"
       }
     },
     {
