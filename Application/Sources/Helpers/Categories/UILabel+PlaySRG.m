@@ -34,15 +34,6 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 #pragma mark Public
 
-- (void)play_displayDurationLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
-{
-    BOOL isLivestreamOrScheduledLivestream = (mediaMetadata.contentType == SRGContentTypeLivestream || mediaMetadata.contentType == SRGContentTypeScheduledLivestream);
-    [self play_displayDurationLabelWithTimeAvailability:[mediaMetadata timeAvailabilityAtDate:NSDate.date]
-                                               duration:mediaMetadata.duration
-                      isLivestreamOrScheduledLivestream:isLivestreamOrScheduledLivestream
-                                            isLiveEvent:[SRGMedia PlayIsSwissTXTURN:mediaMetadata.URN]];
-}
-
 - (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
 {
     if (mediaMetadata.date) {
@@ -125,48 +116,6 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.text = [NSString stringWithFormat:@"%@    ", NSLocalizedString(@"Web first", @"Short label identifying a web first content.")].uppercaseString;
     self.textAlignment = NSTextAlignmentCenter;
     self.textColor = UIColor.whiteColor;
-}
-
-#pragma mark Private
-
-- (void)play_displayDurationLabelWithTimeAvailability:(SRGTimeAvailability)timeAvailability duration:(NSTimeInterval)duration isLivestreamOrScheduledLivestream:(BOOL)isLivestreamOrScheduledLivestream isLiveEvent:(BOOL)isLiveEvent
-{
-    self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-    
-    if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
-        [self play_displayDurationLabelWithName:NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.") isLive:NO];
-    }
-    else if (timeAvailability == SRGTimeAvailabilityNotAvailableAnymore) {
-        [self play_displayDurationLabelWithName:NSLocalizedString(@"Expired", @"Short label identifying content which has expired.") isLive:NO];
-    }
-    else if (isLivestreamOrScheduledLivestream) {
-        [self play_displayDurationLabelWithName:NSLocalizedString(@"Live", @"Short label identifying a livestream. Display in uppercase.") isLive:YES];
-    }
-    else if (isLiveEvent) {
-        [self play_displayDurationLabelWithName:NSLocalizedString(@"Replay", @"Short label identifying a replay sport event. Display in uppercase.") isLive:NO];
-    }
-    else if (duration != 0.) {
-        NSString *durationString = PlayFormattedDuration(duration / 1000.);
-        [self play_displayDurationLabelWithName:durationString isLive:NO];
-    }
-    else {
-        self.text = nil;
-        self.hidden = YES;
-    }
-}
-
-- (void)play_displayDurationLabelWithName:(NSString *)name isLive:(BOOL)isLive
-{
-    self.backgroundColor = isLive ? UIColor.srg_lightRedColor : UIColor.play_blackDurationLabelBackground;
-    self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
-    self.layer.masksToBounds = YES;
-    
-    NSString *labelString = isLive ? name.uppercaseString : name;
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", labelString]
-                                                                                       attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleCaption],
-                                                                                                     NSForegroundColorAttributeName : UIColor.whiteColor }];
-    self.attributedText = attributedText.copy;
-    self.hidden = NO;
 }
 
 @end
