@@ -413,6 +413,9 @@
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Mai";
 
+/* Title label used to present news scheduled livestream medias */
+"News livestreams" = "Info livestreams";
+
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Prossimo";
 
@@ -657,7 +660,8 @@
 /* Label of the button to access the source code */
 "Source code" = "Codice sorgente";
 
-/* Title label used to present scheduled livestreams medias from live center (Sport manager) */
+/* Title label used to present scheduled livestreams medias from live center (Sport manager)
+   Title label used to present sport scheduled livestream medias */
 "Sport livestreams" = "Sport in diretta";
 
 /* Server setting name */

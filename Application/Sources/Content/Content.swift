@@ -572,6 +572,10 @@ private extension Content {
                 return NSLocalizedString("Past sport livestreams", comment: "Title label used to present on demand medias from live center (Sport manager)")
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Play livestreams", comment: "Title label used to present scheduled livestream medias")
+            case .tvScheduledLivestreamsNews:
+                return NSLocalizedString("News livestreams", comment: "Title label used to present news scheduled livestream medias")
+            case .tvScheduledLivestreamsSport:
+                return NSLocalizedString("Sport livestreams", comment: "Title label used to present sport scheduled livestream medias")
             case .tvScheduledLivestreamsSignLanguage:
                 return NSLocalizedString("Sign language livestreams", comment: "Title label used to present sign language scheduled livestream medias")
 #if os(iOS)
@@ -703,7 +707,7 @@ private extension Content {
                 return AnalyticsPageTitle.watchLater.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
                 return AnalyticsPageTitle.sports.rawValue
-            case .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage:
+            case .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
                 return AnalyticsPageTitle.scheduledLivestreams.rawValue
 #if os(iOS)
             case .downloads:
@@ -720,7 +724,9 @@ private extension Content {
             switch configuredSection {
             case .radioAllShows, .tvAllShows:
                 return AnalyticsPageType.overview.rawValue
-            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage, .tvLive, .radioLive, .radioLiveSatellite:
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll,
+                    .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage,
+                    .tvLive, .radioLive, .radioLiveSatellite:
                 return AnalyticsPageType.live.rawValue
             default:
                 return AnalyticsPageType.detail.rawValue
@@ -752,6 +758,10 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.episode.rawValue]
             case .tvScheduledLivestreams:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .tvScheduledLivestreamsNews:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.news.rawValue]
+            case .tvScheduledLivestreamsSport:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.sport.rawValue]
             case .tvScheduledLivestreamsSignLanguage:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.signLanguage.rawValue]
             case .favoriteShows, .history, .watchLater:
@@ -790,7 +800,7 @@ private extension Content {
             switch configuredSection {
             case .availableEpisodes, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
                     .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
-                    .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage:
+                    .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
                 return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -912,6 +922,14 @@ private extension Content {
                     .eraseToAnyPublisher()
             case .tvScheduledLivestreams:
                 return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .tvScheduledLivestreamsNews:
+                return dataProvider.tvScheduledLivestreams(for: vendor, eventType: .news, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .tvScheduledLivestreamsSport:
+                return dataProvider.tvScheduledLivestreams(for: vendor, eventType: .sport, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvScheduledLivestreamsSignLanguage:
