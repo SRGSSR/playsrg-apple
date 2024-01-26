@@ -414,7 +414,7 @@
 "Never" = "Mai";
 
 /* Title label used to present news scheduled livestream medias */
-"News livestreams" = "Info";
+"News livestreams" = "Info livestreams";
 
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Prossimo";
