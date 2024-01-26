@@ -145,7 +145,7 @@ enum MediaDescription {
     
     static func liveBadgeProperties() -> BadgeProperties {
         return BadgeProperties(
-            text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
+            text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(),
             color: .srgLightRed
         )
     }
@@ -179,7 +179,7 @@ enum MediaDescription {
             case .available:
                 if media.contentType == .scheduledLivestream {
                     return BadgeProperties(
-                        text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
+                        text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(),
                         color: .srgLightRed
                     )
                 }

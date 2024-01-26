@@ -161,7 +161,8 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", name].uppercaseString
+    NSString *labelString = isLive ? name.uppercaseString : name;
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", labelString]
                                                                                        attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleCaption],
                                                                                                      NSForegroundColorAttributeName : UIColor.whiteColor }];
     self.attributedText = attributedText.copy;
