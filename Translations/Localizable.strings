@@ -1,0 +1,872 @@
+/* Speed factor with current value if different from desired one */
+"%1$@× (Currently: %2$@×)" = "%1$@× (Currently: %2$@×)";
+
+/* Seek backward shortcut label */
+"%@ backward" = "%@ backward";
+
+/* Seek forward shortcut label */
+"%@ forward" = "%@ forward";
+
+/* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been added to \"Later\"" = "%@ has been added to \"Later\"";
+
+/* Message displayed at the top of the screen when adding a program to Calendar. Quotes are managed by the application. */
+"%@ has been added to calendar" = "%@ has been added to calendar";
+
+/* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
+"%@ has been added to downloads" = "%@ has been added to downloads";
+
+/* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
+"%@ has been added to favorites" = "%@ has been added to favorites";
+
+/* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
+"%@ has been deleted from \"Later\"" = "%@ has been deleted from \"Later\"";
+
+/* Message displayed at the top of the screen when removing a media from downloads. Quotes are managed by the application. */
+"%@ has been deleted from downloads" = "%@ has been deleted from downloads";
+
+/* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
+"%@ has been deleted from favorites" = "%@ has been deleted from favorites";
+
+/* Title displayed when no media is being played on the connected Google Cast receiver (placeholder is the device name) */
+"%@ is idle." = "%@ is idle.";
+
+/* Short label displayed on a media expiring soon */
+"%@ left" = "%@ left";
+
+/* Label displaying the number of listenings on the player */
+"%@ listenings" = "%@ listenings";
+
+/* Title displayed on the radio home button */
+"%@ overview" = "%@ overview";
+
+/* Text displayed on live cells telling how much time remains for a program currently on air */
+"%@ remaining" = "%@ remaining";
+
+/* Label displaying the number of views on the player */
+"%@ views" = "%@ views";
+
+/* Speed factor */
+"%@×" = "%@×";
+
+/* Title displayed when several items have been selected */
+"%d items" = "%d items";
+
+/* Title displayed when 1 item has been selected */
+"1 item" = "1 item";
+
+/* Search setting option */
+"< 5 min" = "< 5 min";
+
+/* Search setting option */
+"> 30 min" = "> 30 min";
+
+/* Show A-Z short button title */
+"A to Z" = "A to Z";
+
+/* Button to add an event to Calendar application */
+"Add to Calendar" = "Add to Calendar";
+
+/* Context menu action to add a media to the downloads */
+"Add to downloads" = "Add to downloads";
+
+/* Context menu action to add a show to favorites
+   Label displayed in the show view when a show can be favorited */
+"Add to favorites" = "Add to favorites";
+
+/* Advanced features section header */
+"Advanced features" = "Advanced features";
+
+/* Search setting option */
+"All" = "All";
+
+/* Always ask user consent at launch setting label */
+"Always ask user consent at launch" = "Always ask user consent at launch";
+
+/* Subtitle availability setting section footer */
+"Always visible when VoiceOver is active." = "Always visible when VoiceOver is active.";
+
+/* Search setting option */
+"Any" = "Any";
+
+/* Search setting option */
+"Anytime" = "Anytime";
+
+/* Audio description availability setting label */
+"Audio description availability" = "Audio description availability";
+
+/* Audios tab title
+   Header for audio search results
+   Search setting option
+   Title displayed at the top of the audio view */
+"Audios" = "Audios";
+
+/* Autoplay setting label */
+"Autoplay" = "Autoplay";
+
+/* Availability until date, specified as parameter */
+"Available until %@" = "Available until %@";
+
+/* Back to live shortcut label */
+"Back to live" = "Back to live";
+
+/* Background video playback setting label */
+"Background video playback" = "Background video playback";
+
+/* Label of the button to become beta tester */
+"Become a beta tester" = "Become a beta tester";
+
+/* Show by date short button title */
+"By date" = "By date";
+
+/* Calendar button in program guide */
+"Calendar" = "Calendar";
+
+/* Label of the button to close the media sharing menu
+   Title of a cancel button
+   Title of the cancel button in the alert view when deleting a download in the player view */
+"Cancel" = "Cancel";
+
+/* Information message of the action view to choose a regional radio
+   Title displayed on the regional radio selection button */
+"Choose a regional radio" = "Choose a regional radio";
+
+/* Label of the button to clear all contents */
+"Clear all contents" = "Clear all contents";
+
+/* Label of the button to clear the vector image cache */
+"Clear vector image cache" = "Clear vector image cache";
+
+/* Label of the button to clear the web cache */
+"Clear web cache" = "Clear web cache";
+
+/* Content settings section header
+   Search setting */
+"Content" = "Content";
+
+/* Message displayed when the user is about to delete content saved for later */
+"Content saved for later will be deleted on all devices connected to your account." = "Content saved for later will be deleted on all devices connected to your account.";
+
+/* Label of the button to copy support email to the pasteboard */
+"Copy %@" = "Copy %@";
+
+/* Label of the button to copy support information to the pasteboard */
+"Copy support information" = "Copy support information";
+
+/* Label of the button to display the data protection policy */
+"Data protection" = "Data protection";
+
+/* Search setting */
+"Date" = "Date";
+
+/* Poster images setting state */
+"Default (current configuration)" = "Default (current configuration)";
+
+/* User location setting state */
+"Default (IP-based location)" = "Default (IP-based location)";
+
+/* Title of a delete button
+   Title of the confirmation pop-up displayed when the user is about to delete items
+   Title of the delete button in the alert view when deleting a download in the player view */
+"Delete" = "Delete";
+
+/* Title of the button to delete content saved for later
+   Title of the message displayed when the user is about to delete content saved for later */
+"Delete content saved for later" = "Delete content saved for later";
+
+/* Title of the confirmation pop-up displayed when the user is about to delete a download */
+"Delete download" = "Delete download";
+
+/* Delete favorites button title
+   Title of the message displayed when the user is about to delete all favorites */
+"Delete favorites" = "Delete favorites";
+
+/* Context menu action to delete a media from the later list */
+"Delete from \"Later\"" = "Delete from \"Later\"";
+
+/* Context menu action to delete a media from the downloads */
+"Delete from downloads" = "Delete from downloads";
+
+/* Context menu action to delete a show from favorites
+   Title of the confirmation pop-up displayed when the user is about to delete a favorite */
+"Delete from favorites" = "Delete from favorites";
+
+/* Context menu action to delete a media from the history */
+"Delete from history" = "Delete from history";
+
+/* Delete history button title
+   Title of the message displayed when the user is about to delete the history */
+"Delete history" = "Delete history";
+
+/* Developer section header */
+"Developer" = "Developer";
+
+/* Label for the button disabling autoplay */
+"Disable" = "Disable";
+
+/* Display settings section header */
+"Display" = "Display";
+
+/* User activity title when displaying a show page */
+"Display %@ episodes" = "Display %@ episodes";
+
+/* Done button title */
+"Done" = "Done";
+
+/* Search setting */
+"Downloadable" = "Downloadable";
+
+/* Label to present downloads */
+"Downloads" = "Downloads";
+
+/* Search setting */
+"Duration" = "Duration";
+
+/* Label for the button keeping autoplay enabled */
+"Enable" = "Enable";
+
+/* Label of the button to toggle FLEX */
+"Enable / disable FLEX" = "Enable / disable FLEX";
+
+/* Title of the alert view to opt-in for background video playback */
+"Enable background video playback?" = "Enable background video playback?";
+
+/* Title of a button to propose the user to enable notifications in the system settings */
+"Enable in system settings" = "Enable in system settings";
+
+/* Question displayed at the top of an alert asking the user to enable notifications */
+"Enable notifications?" = "Enable notifications?";
+
+/* Episode of a serie */
+"Episode" = "Episode";
+
+/* Label to present the rate the application AppStore view */
+"Evaluate the application" = "Evaluate the application";
+
+/* Short label identifying content which has expired. */
+"Expired" = "Expired";
+
+/* Label to present FAQs */
+"FAQs" = "FAQs";
+
+/* Label displayed in the show view when a show has been favorited
+   Label to present Favorites
+   Tab title to present the latest episodes from favorite shows on CarPlay
+   Title label used to present the radio favorite shows
+   Title label used to present the TV or radio favorite shows */
+"Favorites" = "Favorites";
+
+/* Message displayed when the user is about to delete all favorites */
+"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Favorites and notification subscriptions will be deleted on all devices connected to your account.";
+
+/* Label of the button display the features
+   Title displayed at the top of the Features view */
+"Features" = "Features";
+
+/* Filters button title
+   Search filters page title */
+"Filters" = "Filters";
+
+/* Explanation displayed in the alert asking the user to enable notifications */
+"For the application to inform you when a new episode is available, notifications must be enabled." = "For the application to inform you when a new episode is available, notifications must be enabled.";
+
+/* Poster images setting state */
+"Force" = "Force";
+
+/* Total free space size displayed as a list footer */
+"Free space: %@" = "Free space: %@";
+
+/* Full screen shortcut label */
+"Full screen" = "Full screen";
+
+/* HD setting label */
+"HD over cellular networks" = "HD over cellular networks";
+
+/* Help and contact header title
+   Help and contact section header */
+"Help and contact" = "Help and contact";
+
+/* Label of the button to display help and impressum */
+"Help and impressum" = "Help and impressum";
+
+/* Label to present feedback form */
+"Help us to improve the application" = "Help us to improve the application";
+
+/* Label to present history
+   Title label used to present the history */
+"History" = "History";
+
+/* Home tab title */
+"Home" = "Home";
+
+/* Poster images setting state */
+"Ignore" = "Ignore";
+
+/* User location setting state */
+"Ignore location" = "Ignore location";
+
+/* Image copyright introductory label */
+"Image credit: %@" = "Image credit: %@";
+
+/* Information section header */
+"Information" = "Information";
+
+/* Label for the button keeping autoplay enabled */
+"Keep" = "Keep";
+
+/* Title of the alert view to keep autoplay permanently */
+"Keep autoplay?" = "Keep autoplay?";
+
+/* Introductory text for the most recent data synchronization date */
+"Last synchronization: %@" = "Last synchronization: %@";
+
+/* Search setting option */
+"Last week" = "Last week";
+
+/* Label for the button for deciding to opt-in for background video playback at a later time
+   Label to present the later list
+   Title Label used to present the audio later list
+   Title Label used to present the video later list
+   Watch later or listen later button label in media detail view when a media is in the later list
+   Watch later or listen later button label in program detail view when a media is in the later list */
+"Later" = "Later";
+
+/* Title label used to present the latest episodes from radio favorite shows
+   Title label used to present the latest episodes from TV favorite shows */
+"Latest episodes from your favorites" = "Latest episodes from your favorites";
+
+/* Title label used to present the radio latest videos */
+"Latest videos" = "Latest videos";
+
+/* Play button label for audio in media detail view */
+"Listen" = "Listen";
+
+/* Button label in media detail view to add an audio to the later list
+   Button label in program detail view to add an audio to the later list
+   Context menu action to add an audio to the later list */
+"Listen later" = "Listen later";
+
+/* Suggested invocation phrase to listen to a show
+   Suggested invocation phrase to listen to an audio
+   User activity title when listening to an audio */
+"Listen to %@" = "Listen to %@";
+
+/* Introductory text for what is currently on air, displayed on the mini player
+   Short label identifying a livestream. Display in uppercase. */
+"Live" = "Live";
+
+/* Label to present the Livestreams view
+   Livestreams tab bar title
+   Livestreams tab title
+   Tab title to present the livestreams on CarPlay
+   Title displayed at the top of the livestreams view */
+"Livestreams" = "Livestreams";
+
+/* Default text displayed when loading */
+"Loading…" = "Loading…";
+
+/* Permissions settings section footer */
+"Local network access must be allowed for Google Cast receiver discovery." = "Local network access must be allowed for Google Cast receiver discovery.";
+
+/* Login button on Apple TV */
+"Login" = "Login";
+
+/* Logout alert view title on Apple TV
+   Logout button on Apple TV */
+"Logout" = "Logout";
+
+/* Message title displayed when the user is forced to update the application. */
+"Mandatory update" = "Mandatory update";
+
+/* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
+"Media not available yet" = "Media not available yet";
+
+/* More label on truncatable text view */
+"More" = "More";
+
+/* Autoplay setting section footer */
+"More content is automatically played after playback of the current content ends." = "More content is automatically played after playback of the current content ends.";
+
+/* Button to access more episodes
+   Button to access more episodes from the media detail view
+   Context menu action to open more episodes associated with a media */
+"More episodes" = "More episodes";
+
+/* Title of the related content player section */
+"More on this subject" = "More on this subject";
+
+/* Title label used to present the radio most popular audio medias */
+"Most listened to" = "Most listened to";
+
+/* Most searched shows header */
+"Most searched shows" = "Most searched shows";
+
+/* Song list title */
+"Music" = "Music";
+
+/* Title label to present musical Swiss satellite radios */
+"Music radios" = "Music radios";
+
+/* Text displayed when a user is logged in but no information has been retrieved yet */
+"My account" = "My account";
+
+/* Text displayed when no data synchronization has been made yet */
+"Never" = "Never";
+
+/* Title of the button to proceed to the next onboarding page */
+"Next" = "Next";
+
+/* Introductory time for next program information */
+"Next, at %@" = "Next, at %@";
+
+/* Default text displayed when no content is available */
+"No content" = "No content";
+
+/* Text displayed when no downloads are available */
+"No downloads" = "No downloads";
+
+/* Text displayed when no favorites are available */
+"No favorites" = "No favorites";
+
+/* Message displayed if no Google Cast receiver is available */
+"No Google Cast receiver is available." = "No Google Cast receiver is available.";
+
+/* Text displayed when no history is available */
+"No history" = "No history";
+
+/* Missing mail application alert title */
+"No mail application found" = "No mail application found";
+
+/* Text displayed when no notifications are available */
+"No notifications" = "No notifications";
+
+/* Default text displayed when no results are available */
+"No results" = "No results";
+
+/* Label to present Notifications
+   Title label used to present notifications */
+"Notifications" = "Notifications";
+
+/* Message at the top of the screen displayed when disabling push notifications. Quotes around the content placeholder are managed by the application. */
+"Notifications have been disabled for %@" = "Notifications have been disabled for %@";
+
+/* Message displayed at the top of the screen when enabling push notifications. Quotes around the content placeholder managed by the application. */
+"Notifications have been enabled for %@" = "Notifications have been enabled for %@";
+
+/* Subscription label when notification enabled in the show view */
+"Notified" = "Notified";
+
+/* Subscription label to be notified in the show view */
+"Notify me" = "Notify me";
+
+/* Now button in program guide */
+"Now" = "Now";
+
+/* Title of the button displayed at the end of an onboarding
+   Title of the button to validate date settings
+   Title of the search settings button to apply settings */
+"OK" = "OK";
+
+/* Label of the button opening system settings */
+"Open system settings" = "Open system settings";
+
+/* User location setting state */
+"Outside Switzerland" = "Outside Switzerland";
+
+/* Label to present the main Videos / Audios views */
+"Overview" = "Overview";
+
+/* Title label used to present on demand medias from live center (Sport manager) */
+"Past sport livestreams" = "Past sport livestreams";
+
+/* Search setting */
+"Period" = "Period";
+
+/* Permissions settings section header */
+"Permissions" = "Permissions";
+
+/* Play / Pause shortcut label */
+"Play / Pause" = "Play / Pause";
+
+/* Play / Stop shortcut label */
+"Play / Stop" = "Play / Stop";
+
+/* Title label used to present scheduled livestream medias */
+"Play livestreams" = "Play livestreams";
+
+/* Search setting */
+"Playable abroad" = "Playable abroad";
+
+/* Playback settings section header */
+"Playback" = "Playback";
+
+/* Message displayed when the user is about to log out */
+"Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Playback history, favorites and content saved for later will be deleted from this Apple TV.";
+
+/* Playback speed screen title */
+"Playback speed" = "Playback speed";
+
+/* Apple TV header when displayed support information
+   Missing mail application description */
+"Please contact us at %@" = "Please contact us at %@";
+
+/* Mail body header to declare a technical issue */
+"Please describe the issue below:" = "Please describe the issue below:";
+
+/* Most poular shows on Play SRG, displayed in the tvOS top shelf */
+"Popular on Play SRG" = "Popular on Play SRG";
+
+/* Label of the button for poster image format selection
+   Poster image format selection view title */
+"Poster images" = "Poster images";
+
+/* Presenter mode setting label */
+"Presenter mode" = "Presenter mode";
+
+/* Title of the button to proceed to the previous onboarding page */
+"Previous" = "Previous";
+
+/* Button title on CarPlay player for livestream previous programs
+   Livestream previous programs screen title */
+"Previous shows" = "Previous shows";
+
+/* Privacy section header */
+"Privacy" = "Privacy";
+
+/* Label of the button to display the privacy settings */
+"Privacy settings" = "Privacy settings";
+
+/* Server setting name */
+"Production" = "Production";
+
+/* Profile section header
+   Profile tab bar title
+   Title displayed at the top of the profile view */
+"Profile" = "Profile";
+
+/* Text displayed to inform the user she can pull a list to reload it */
+"Pull to reload" = "Pull to reload";
+
+/* Quality settings section header */
+"Quality" = "Quality";
+
+/* Title label to present main radio livestreams */
+"Radio channels" = "Radio channels";
+
+/* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
+"Receiver is idle." = "Receiver is idle.";
+
+/* Message title displayed when the user is recommended to update the application. */
+"Recommended update" = "Recommended update";
+
+/* Title of the action view to choose a regional radio */
+"Regional radios" = "Regional radios";
+
+/* Search setting */
+"Relevance" = "Relevance";
+
+/* Short label identifying a replay sport event. Display in uppercase. */
+"Replay" = "Replay";
+
+/* Label of the button to present technical issue report instructions
+   Label to present technical issue report instructions
+   Subject of the technical issue mail */
+"Report a technical issue" = "Report a technical issue";
+
+/* Reset section header
+   Title of the reset search settings button */
+"Reset" = "Reset";
+
+/* Alert choice to resume playback
+   Resume playback button label */
+"Resume" = "Resume";
+
+/* Title label used to present medias whose playback can be resumed */
+"Resume playback" = "Resume playback";
+
+/* Label to present the search view
+   Search shortcut label
+   Search tab bar title
+   Search tab title */
+"Search" = "Search";
+
+/* Season of a serie */
+"Season" = "Season";
+
+/* Section wide support setting label */
+"Section wide support" = "Section wide support";
+
+/* Select button title */
+"Select" = "Select";
+
+/* Title displayed when no item has been selected */
+"Select items" = "Select items";
+
+/* Label of the button to access server selection
+   Server selection view title */
+"Server" = "Server";
+
+/* Notification message when the server URL changed due to a custom URL. */
+"Server changed to '%@'" = "Server changed to '%@'";
+
+/* Settings view title */
+"Settings" = "Settings";
+
+/* Context menu action to share a media
+   Context menu action to share a show
+   Title of the action view to choose a sharing action */
+"Share" = "Share";
+
+/* Program list header in livestream view
+   Search setting
+   Show list view in search settings
+   Show search result header
+   Shows tab title
+   Title label used to present radio associated shows
+   Title label used to present the radio shows AZ and radio shows by date access buttons
+   Title label used to present the TV shows AZ and TV shows by date access buttons */
+"Shows" = "Shows";
+
+/* Label to present shows A to Z (radio or TV) */
+"Shows A to Z" = "Shows A to Z";
+
+/* Label to present shows (episodes) by date (radio or TV) */
+"Shows by date" = "Shows by date";
+
+/* Search placeholder text */
+"Shows, topics and more" = "Shows, topics and more";
+
+/* Text displayed within the sign in profile header when no user is logged in */
+"Sign in" = "Sign in";
+
+/* Title label used to present sign language scheduled livestream medias */
+"Sign language livestreams" = "Sign language livestreams";
+
+/* Label of the button to simulate a memory warning */
+"Simulate memory warning" = "Simulate memory warning";
+
+/* Title of the button to skip updating the application */
+"Skip" = "Skip";
+
+/* Short label identifying content which will be available soon. */
+"Soon" = "Soon";
+
+/* Search setting */
+"Sort by" = "Sort by";
+
+/* Label of the button to access the source code */
+"Source code" = "Source code";
+
+/* Title label used to present scheduled livestreams medias from live center (Sport manager) */
+"Sport livestreams" = "Sport livestreams";
+
+/* Server setting name */
+"Stage" = "Stage";
+
+/* Standalone playback setting label */
+"Standalone playback" = "Standalone playback";
+
+/* Start over shortcut label */
+"Start over" = "Start over";
+
+/* Subtitle availability setting label */
+"Subtitle availability" = "Subtitle availability";
+
+/* Search setting */
+"Subtitled" = "Subtitled";
+
+/* Information message displayed when support information has been copied to the pasteboard */
+"Support email has been copied to the pasteboard" = "Support email has been copied to the pasteboard";
+
+/* Information message displayed when support information has been copied to the pasteboard */
+"Support information has been copied to the pasteboard" = "Support information has been copied to the pasteboard";
+
+/* Label of the button to open Apple TestFlight application and see other testable builds */
+"Switch version" = "Switch version";
+
+/* Login benefits description footer */
+"Synchronize favorites, playback history and content saved for later on all devices connected to your account." = "Synchronize favorites, playback history and content saved for later on all devices connected to your account.";
+
+/* Label of the button to display terms and conditions */
+"Terms and conditions" = "Terms and conditions";
+
+/* Server setting name */
+"Test" = "Test";
+
+/* Add to Calendar alert explanation */
+"The application uses the calendar to add TV programs." = "The application uses the calendar to add TV programs.";
+
+/* Button label to share the content being played. */
+"The content" = "The content";
+
+/* Button label to share the content being played at time (hours / minutes / seconds). */
+"The content at %@" = "The content at %@";
+
+/* Message displayed when some content (media, show, etc.) has been copied to the clipboard
+   Message displayed when song title and artist name have been copied to the pasteboard */
+"The content has been copied to the clipboard." = "The content has been copied to the clipboard.";
+
+/* Confirmation message displayed when the user is about to delete a download */
+"The downloaded content will be deleted." = "The downloaded content will be deleted.";
+
+/* Button label to share the entire episode being played. */
+"The entire episode" = "The entire episode";
+
+/* Button label to share the entire episode being played at time (hours / minutes / seconds). */
+"The episode at %@" = "The episode at %@";
+
+/* Confirmation message displayed when a logged in user is about to delete a favorite */
+"The favorite and notification subscription will be deleted on all devices connected to your account." = "The favorite and notification subscription will be deleted on all devices connected to your account.";
+
+/* Message displayed if the Google Cast receiver cannot play audios */
+"The Google Cast receiver cannot play audios." = "The Google Cast receiver cannot play audios.";
+
+/* Message displayed if the Google Cast receiver cannot play videos */
+"The Google Cast receiver cannot play videos." = "The Google Cast receiver cannot play videos.";
+
+/* Message displayed when the user is about to delete the history */
+"The history will be deleted on all devices connected to your account." = "The history will be deleted on all devices connected to your account.";
+
+/* Title label used to present the radio latest audios */
+"The latest audios" = "The latest audios";
+
+/* Title label used to present the radio latest audio episodes */
+"The latest episodes" = "The latest episodes";
+
+/* Error message when a media cannot be opened via Handoff
+   Error message when a media cannot be opened via Handoff, deep linking or a push notification */
+"The media cannot be opened." = "The media cannot be opened.";
+
+/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
+"The page cannot be opened." = "The page cannot be opened.";
+
+/* Error message when a section cannot be opened via Handoff, deep linking or a push notification */
+"The section cannot be opened." = "The section cannot be opened.";
+
+/* Name of the download item, if no title or name to display
+   Name of the favorite item, if no title or name to display
+   Name of the later list item, if no title or name to display
+   Name of the subscription item, if no title or name to display */
+"The selected content" = "The selected content";
+
+/* Confirmation message displayed when the user is about to delete selected entries */
+"The selected items will be deleted." = "The selected items will be deleted.";
+
+/* Error message when a show cannot be opened via Handoff
+   Error message when a show cannot be opened via Handoff, deep linking or a push notification */
+"The show cannot be opened." = "The show cannot be opened.";
+
+/* Message displayed when attempting to play some content not allowed to be played with Google Cast */
+"This content is not allowed to be played with Google Cast." = "This content is not allowed to be played with Google Cast.";
+
+/* Related content media list title */
+"This might interest you" = "This might interest you";
+
+/* Advanced features section footer
+   Bottom additional information section footer
+   Reset section footer */
+"This section is only available in nightly and beta versions, and won't appear in the production version." = "This section is only available in nightly and beta versions, and won't appear in the production version.";
+
+/* Search setting option */
+"This week" = "This week";
+
+/* Introductory text for live content played with timeshift, displayed on the mini player */
+"Time-shifted" = "Time-shifted";
+
+/* Quality settings section footer */
+"To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.";
+
+/* Search setting option
+   Title of the button to go back to the current date */
+"Today" = "Today";
+
+/* Tonight button in program guide */
+"Tonight" = "Tonight";
+
+/* Search setting
+   Title label used to present the topic list
+   Topic list view in search settings
+   Topics header */
+"Topics" = "Topics";
+
+/* Tab title to present the most popular medias by channel on CarPlay */
+"Trends" = "Trends";
+
+/* Title label to present main TV livestreams */
+"TV channels" = "TV channels";
+
+/* TV guide short button title
+   TV program guide view title */
+"TV guide" = "TV guide";
+
+/* Message displayed when there is no search criterium entered */
+"Type to start searching" = "Type to start searching";
+
+/* Title of the button to update the application */
+"Update" = "Update";
+
+/* Label of the button for user location selection
+   User location selection view title */
+"User location" = "User location";
+
+/* Version label in settings */
+"Version" = "Version";
+
+/* Label of the button to access release notes and download internal builds (App Center) */
+"Versions and release notes" = "Versions and release notes";
+
+/* Background video playback setting section footer */
+"Video playback continues even when you leave the application." = "Video playback continues even when you leave the application.";
+
+/* Header for video search results
+   Search setting option
+   Title displayed at the top of the video view
+   Videos tab title */
+"Videos" = "Videos";
+
+/* Header for video and audio search results */
+"Videos and audios" = "Videos and audios";
+
+/* Play button label for video in media detail view */
+"Watch" = "Watch";
+
+/* Suggested invocation phrase to watch a show
+   Suggested invocation phrase to watch a video
+   User activity title when watching a video */
+"Watch %@" = "Watch %@";
+
+/* Alert choice to watch content from start
+   Button to watch some program from the start */
+"Watch from start" = "Watch from start";
+
+/* Resume playback alert title */
+"Watch from start?" = "Watch from start?";
+
+/* Button label in media detail view to add a video to the later list
+   Button label in program detail view to add a video to the later list
+   Context menu action to add a video to the later list */
+"Watch later" = "Watch later";
+
+/* Short label identifying a web first content. */
+"Web first" = "Web first";
+
+/* Label of the button to display what's new information
+   Title displayed at the top of the What's new view */
+"What's new" = "What's new";
+
+/* Search setting option */
+"Yesterday" = "Yesterday";
+
+/* Resume playback alert explanation */
+"You already played this content." = "You already played this content.";
+
+/* Description of the alert view to keep autoplay permanently
+   Description of the alert view to opt-in for background video playback */
+"You can manage this feature in the settings at any time." = "You can manage this feature in the settings at any time.";
+
+/* Notification displayed when the user has been logged out unexpectedly. */
+"You have been automatically logged out. Login again to keep your data synchronized across devices." = "You have been automatically logged out. Login again to keep your data synchronized across devices.";
+
+/* Add to Calendar alert title */
+"“%@” would like to access to your calendar" = "“%@” would like to access to your calendar";
+
