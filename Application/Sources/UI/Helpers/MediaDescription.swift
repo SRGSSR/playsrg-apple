@@ -162,13 +162,13 @@ enum MediaDescription {
                 if allowsDateDisplay, let startDate = media.startDate {
                     return BadgeProperties(
                         text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate),
-                        color: .black.withAlphaComponent(0.8)
+                        color: .play_black80a
                     )
                 }
                 else {
                     return BadgeProperties(
                         text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
-                        color: .black.withAlphaComponent(0.8)
+                        color: .play_black80a
                     )
                 }
             case .notAvailableAnymore:

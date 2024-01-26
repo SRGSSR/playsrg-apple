@@ -7,6 +7,10 @@
 import SRGAppearance
 
 extension UIColor {
+    @objc static var play_black80a: UIColor {
+        return .black.withAlphaComponent(0.8)
+    }
+    
     @objc static var play_notificationRed: UIColor {
         return play_hexadecimal("#ed3323")
     }
