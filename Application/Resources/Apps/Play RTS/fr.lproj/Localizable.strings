@@ -568,9 +568,6 @@
 /* Search setting */
 "Relevance" = "Pertinence";
 
-/* Short label identifying a replay sport event. Display in uppercase. */
-"Replay" = "Rediffusion";
-
 /* Label of the button to present technical issue report instructions
    Label to present technical issue report instructions
    Subject of the technical issue mail */
