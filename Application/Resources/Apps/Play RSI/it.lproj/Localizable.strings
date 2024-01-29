@@ -413,6 +413,9 @@
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Mai";
 
+/* Title label used to present news scheduled livestream medias */
+"News livestreams" = "Info livestreams";
+
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Prossimo";
 
@@ -477,7 +480,7 @@
 "Overview" = "Home";
 
 /* Title label used to present on demand medias from live center (Sport manager) */
-"Past sport livestreams" = "Sport livestreams passati";
+"Past sport livestreams" = "Sport in replay";
 
 /* Search setting */
 "Period" = "Periodo";
@@ -657,8 +660,9 @@
 /* Label of the button to access the source code */
 "Source code" = "Codice sorgente";
 
-/* Title label used to present scheduled livestreams medias from live center (Sport manager) */
-"Sport livestreams" = "Sport livestreams";
+/* Title label used to present scheduled livestreams medias from live center (Sport manager)
+   Title label used to present sport scheduled livestream medias */
+"Sport livestreams" = "Sport in diretta";
 
 /* Server setting name */
 "Stage" = "Stage";

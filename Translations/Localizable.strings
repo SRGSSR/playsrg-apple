@@ -208,7 +208,7 @@
 "Display" = "Display";
 
 /* User activity title when displaying a show page */
-"Display %@ episodes" = "Display %@ videos";
+"Display %@ episodes" = "Display %@ episodes";
 
 /* Done button title */
 "Done" = "Done";
@@ -333,7 +333,7 @@
 
 /* Title label used to present the latest episodes from radio favorite shows
    Title label used to present the latest episodes from TV favorite shows */
-"Latest episodes from your favorites" = "Latest videos from your favorites";
+"Latest episodes from your favorites" = "Latest episodes from your favorites";
 
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Latest videos";
@@ -360,7 +360,7 @@
    Livestreams tab title
    Tab title to present the livestreams on CarPlay
    Title displayed at the top of the livestreams view */
-"Livestreams" = "Live";
+"Livestreams" = "Livestreams";
 
 /* Default text displayed when loading */
 "Loading…" = "Loading…";
@@ -399,7 +399,7 @@
 "Most listened to" = "Most listened to";
 
 /* Most searched shows header */
-"Most searched shows" = "Most searched topics";
+"Most searched shows" = "Most searched shows";
 
 /* Song list title */
 "Music" = "Music";
@@ -495,7 +495,7 @@
 "Play / Stop" = "Play / Stop";
 
 /* Title label used to present scheduled livestream medias */
-"Play livestreams" = "SWI livestreams";
+"Play livestreams" = "Play livestreams";
 
 /* Search setting */
 "Playable abroad" = "Playable abroad";
@@ -517,7 +517,7 @@
 "Please describe the issue below:" = "Please describe the issue below:";
 
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
-"Popular on Play SRG" = "Popular on Play SWI";
+"Popular on Play SRG" = "Popular on Play SRG";
 
 /* Label of the button for poster image format selection
    Poster image format selection view title */
@@ -548,7 +548,7 @@
 "Profile" = "Profile";
 
 /* Text displayed to inform the user she can pull a list to reload it */
-"Pull to reload" = "Pull to refresh";
+"Pull to reload" = "Pull to reload";
 
 /* Quality settings section header */
 "Quality" = "Quality";
@@ -628,16 +628,16 @@
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
    Title label used to present the TV shows AZ and TV shows by date access buttons */
-"Shows" = "Topics";
+"Shows" = "Shows";
 
 /* Label to present shows A to Z (radio or TV) */
-"Shows A to Z" = "Topics A to Z";
+"Shows A to Z" = "Shows A to Z";
 
 /* Label to present shows (episodes) by date (radio or TV) */
-"Shows by date" = "Topics by date";
+"Shows by date" = "Shows by date";
 
 /* Search placeholder text */
-"Shows, topics and more" = "Topics and more";
+"Shows, topics and more" = "Shows, topics and more";
 
 /* Text displayed within the sign in profile header when no user is logged in */
 "Sign in" = "Sign in";
@@ -701,10 +701,10 @@
 "The application uses the calendar to add TV programs." = "The application uses the calendar to add TV programs.";
 
 /* Button label to share the content being played. */
-"The content" = "The video";
+"The content" = "The content";
 
 /* Button label to share the content being played at time (hours / minutes / seconds). */
-"The content at %@" = "The video at %@";
+"The content at %@" = "The content at %@";
 
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard
    Message displayed when song title and artist name have been copied to the pasteboard */
@@ -714,10 +714,10 @@
 "The downloaded content will be deleted." = "The downloaded content will be deleted.";
 
 /* Button label to share the entire episode being played. */
-"The entire episode" = "The entire video";
+"The entire episode" = "The entire episode";
 
 /* Button label to share the entire episode being played at time (hours / minutes / seconds). */
-"The episode at %@" = "The video at %@";
+"The episode at %@" = "The episode at %@";
 
 /* Confirmation message displayed when a logged in user is about to delete a favorite */
 "The favorite and notification subscription will be deleted on all devices connected to your account." = "The favorite and notification subscription will be deleted on all devices connected to your account.";
@@ -758,7 +758,7 @@
 
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
-"The show cannot be opened." = "The topic cannot be opened.";
+"The show cannot be opened." = "The show cannot be opened.";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "This content is not allowed to be played with Google Cast.";
@@ -873,3 +873,4 @@
 
 /* Add to Calendar alert title */
 "“%@” would like to access to your calendar" = "“%@” would like to access to your calendar";
+

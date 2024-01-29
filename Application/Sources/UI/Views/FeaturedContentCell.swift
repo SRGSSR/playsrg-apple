@@ -9,14 +9,22 @@ import SwiftUI
 
 // MARK: View
 
-enum FeaturedContentLayout {
-    case headline
-    case element
-}
-
 struct FeaturedContentCell<Content: FeaturedContent>: View {
+    public enum Layout {
+        case headline
+        case element
+    }
+    
+    enum Style {
+        /// Show information emphasis
+        case show
+        /// Date information emphasis
+        case date
+    }
+    
     let content: Content
-    let layout: FeaturedContentLayout
+    let layout: Layout
+    let style: Style
     
     @Environment(\.isSelected) private var isSelected
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
@@ -86,14 +94,14 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
 // MARK: Initializers
 
 extension FeaturedContentCell where Content == FeaturedMediaContent {
-    init(media: SRGMedia?, label: String? = nil, layout: FeaturedContentLayout) {
-        self.init(content: FeaturedMediaContent(media: media, label: label), layout: layout)
+    init(media: SRGMedia?, style: Style, label: String? = nil, layout: Layout) {
+        self.init(content: FeaturedMediaContent(media: media, style: style, label: label), layout: layout, style: style)
     }
 }
 
 extension FeaturedContentCell where Content == FeaturedShowContent {
-    init(show: SRGShow?, label: String? = nil, layout: FeaturedContentLayout) {
-        self.init(content: FeaturedShowContent(show: show, label: label), layout: layout)
+    init(show: SRGShow?, label: String? = nil, layout: Layout) {
+        self.init(content: FeaturedShowContent(show: show, label: label), layout: layout, style: .show)
     }
 }
 
@@ -136,7 +144,7 @@ enum FeaturedContentCellSize {
 // MARK: Preview
 
 private extension View {
-    func previewLayout(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
+    func previewLayout(for layout: FeaturedContentCell<FeaturedMediaContent>.Layout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
         let size: CGSize = {
             if layout == .headline {
                 return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
@@ -156,25 +164,25 @@ struct FeaturedContentCell_Previews: PreviewProvider {
     
     static var previews: some View {
 #if os(tvOS)
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
+        FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .headline)
             .previewLayout(for: .headline, layoutWidth: 1800, horizontalSizeClass: .regular)
         
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .element)
+        FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .element)
             .previewLayout(for: .headline, layoutWidth: 1800, horizontalSizeClass: .regular)
 #else
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
+        FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .headline)
             .previewLayout(for: .headline, layoutWidth: 1200, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
+        FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .headline)
             .previewLayout(for: .headline, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .element)
+        FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .element)
             .previewLayout(for: .element, layoutWidth: 1200, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .element)
+        FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .element)
             .previewLayout(for: .element, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         #endif

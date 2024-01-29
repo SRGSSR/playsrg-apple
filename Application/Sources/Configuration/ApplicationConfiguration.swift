@@ -23,6 +23,10 @@ extension ApplicationConfiguration {
             return .tvLiveCenterEpisodesAll
         case .tvScheduledLivestreams:
             return .tvScheduledLivestreams
+        case .tvScheduledLivestreamsNews:
+            return .tvScheduledLivestreamsNews
+        case .tvScheduledLivestreamsSport:
+            return .tvScheduledLivestreamsSport
         case .tvScheduledLivestreamsSignLanguage:
             return .tvScheduledLivestreamsSignLanguage
         default:
@@ -50,7 +54,15 @@ extension ApplicationConfiguration {
     }
     
     private static var type: String {
-        return UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "phone"
+        if ProcessInfo.processInfo.isMacCatalystApp || ProcessInfo.processInfo.isiOSAppOnMac {
+            return "desktop"
+        }
+        else if UIDevice.current.userInterfaceIdiom == .pad {
+            return "tablet"
+        }
+        else {
+            return "phone"
+        }
     }
     
     private static var identifier: String? {
@@ -119,6 +131,8 @@ enum ConfiguredSection: Hashable {
     case tvLiveCenterEpisodes
     case tvLiveCenterEpisodesAll
     case tvScheduledLivestreams
+    case tvScheduledLivestreamsNews
+    case tvScheduledLivestreamsSport
     case tvScheduledLivestreamsSignLanguage
     
 #if os(iOS)

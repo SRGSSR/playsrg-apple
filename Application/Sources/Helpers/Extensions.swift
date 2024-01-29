@@ -9,7 +9,6 @@ import Foundation
 import SRGAppearanceSwift
 import SRGDataProviderCombine
 import SwiftUI
-import TCServerSide_noIDFA
 
 func constant<T>(iOS: T, tvOS: T) -> T {
 #if os(tvOS)
@@ -578,19 +577,5 @@ extension SRGAnalyticsLabels {
         
         analyticsLabels.customInfo = customInfo
         return analyticsLabels
-    }
-}
-
-extension SRGAnalyticsTracker {
-    @objc class func applySetupAnalyticsWorkaround() {
-        // Workaround for Commanders Act migration from v4 to v5
-        
-        // 1. Use the TC unique id value for new `device.sdk_id` property.
-        if let tcUniqueID = TCPredefinedVariables.sharedInstance().uniqueIdentifier(), !tcUniqueID.isEmpty {
-            TCDevice.sharedInstance().sdkID = tcUniqueID
-        }
-        
-        // 2. Use the TC unique id value for the new `user.consistent_anonymous_id` property.
-        TCPredefinedVariables.sharedInstance().useLegacyUniqueIDForAnonymousID()
     }
 }

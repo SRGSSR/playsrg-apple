@@ -1,0 +1,227 @@
+/* Date at time label to spell a date and time value. */
+"%1$@ at %2$@" = "%1$@ at %2$@";
+
+/* Song description. First placeholder is song title, second is artist name */
+"%1$@, by %2$@" = "%1$@, by %2$@";
+
+/* Label displaying the number of listenings on the player */
+"%@ listenings" = "%@ listenings";
+
+/* Live content label, with a channel title */
+"%@ live" = "%@ live";
+
+/* Number of results aggregated in search */
+"%@ results" = "%@ results";
+
+/* Label displaying the number of views on the player */
+"%@ views" = "%@ views";
+
+/* Accessibility label for the 360 badge */
+"360-degree content" = "360-degree content";
+
+/* Show A-Z button label */
+"A to Z shows" = "A to Z shows";
+
+/* Favorite label in the player view when a show can be favorited
+   Favorite label in the show view when a show can be favorited */
+"Add to favorites" = "Add to favorites";
+
+/* Accessibility hint for the profile header when user is not logged in */
+"allows to log in or create an account in order to synchronize data." = "allows to log in or create an account in order to synchronize data.";
+
+/* Accessibility label for the audio description badge */
+"Audio described" = "Audio described";
+
+/* Close button label
+   Close button label on handle view
+   Close button label on player view */
+"Close" = "Close";
+
+/* Player close button hint */
+"Closes the player and continue playing audio." = "Closes the player and continue playing audio.";
+
+/* Player close button hint */
+"Closes the player and continue playing in the background." = "Closes the player and continue playing in the background.";
+
+/* Player close button hint */
+"Closes the player and continue playing video with AirPlay." = "Closes the player and continue playing video with AirPlay.";
+
+/* Delete button label */
+"Delete" = "Delete";
+
+/* A download button label */
+"Delete download" = "Delete download";
+
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
+"Delete from \"Later\" list" = "Delete from \"Later\" list";
+
+/* Favorite label in the player view when a show has been favorited
+   Favorite label in the show view when a show has been favorited */
+"Delete from favorites" = "Delete from favorites";
+
+/* Show unsubscription label */
+"Disable notifications for show" = "Disable notifications for show";
+
+/* Label of the search bar button to close the keyboard */
+"Dismiss keyboard" = "Dismiss keyboard";
+
+/* Button to display the TV guide as a grid */
+"Display grid" = "Display grid";
+
+/* Button to display the TV guide as a list */
+"Display list" = "Display list";
+
+/* Accessibility label for the Dolby Digital sound badge */
+"Dolby Digital sound" = "Dolby Digital sound";
+
+/* A download button label */
+"Download" = "Download";
+
+/* Show subscription label */
+"Enable notifications for show" = "Enable notifications for show";
+
+/* Introductory title for error notifications */
+"Error" = "Error";
+
+/* Text providing program time information. First placeholder is the start time, second is the end time. */
+"From %1$@ to %2$@" = "From %1$@ to %2$@";
+
+/* Accessibility label of the song list handle when opened */
+"Hide music list" = "Hide music list";
+
+/* Introductory title for information notifications */
+"Information" = "Information";
+
+/* Media addition for an audio to later list label
+   Media addition to later list label in media detail view to add an audio to the later list */
+"Listen later" = "Listen later";
+
+/* Accessibility introductory text for the logged in user */
+"Logged in user: %@" = "Logged in user: %@";
+
+/* Accessibility hint for the profile header when user is logged in */
+"Manages account information" = "Manages account information";
+
+/* More button label
+   More label on truncatable text view */
+"More" = "More";
+
+/* A more episode button label
+   Button to access more episodes */
+"More episodes" = "More episodes";
+
+/* Next day button label in program guide */
+"Next day" = "Next day";
+
+/* Text providing next program time information. */
+"Next, at %@" = "Next, at %@";
+
+/* Mini player label */
+"Now playing: %@" = "Now playing: %@";
+
+/* Text providing a channel information. Placeholder is the channel on which it's broadcasted. */
+"on %@" = "on %@";
+
+/* Highlight cell hint
+   More button hint
+   Program cell hint */
+"Opens details." = "Opens details.";
+
+/* Hint for content opened in Safari */
+"Opens in Safari." = "Opens in Safari.";
+
+/* Featured show hint
+   Show button hint
+   Show cell hint */
+"Opens show details." = "Opens show details.";
+
+/* Mini player action hint */
+"Opens the full screen player" = "Opens the full screen player";
+
+/* Show cell hint */
+"Opens topic details." = "Opens topic details.";
+
+/* Accessibility label for the multi audio badge */
+"Original version" = "Original version";
+
+/* Pause button label */
+"Pause" = "Pause";
+
+/* Play button label */
+"Play" = "Play";
+
+/* Program cell hint */
+"Plays from the beginning." = "Plays from the beginning.";
+
+/* Download cell hint
+   Featured media hint
+   Media cell hint */
+"Plays the content." = "Plays the content.";
+
+/* Song cell hint */
+"Plays the music." = "Plays the music.";
+
+/* Previous day button label in program guide */
+"Previous day" = "Previous day";
+
+/* Profile button label on home view */
+"Profile" = "Profile";
+
+/* Mini player label */
+"Recently played: %@" = "Recently played: %@";
+
+/* A download button label */
+"Retry download" = "Retry download";
+
+/* Regional livestream selection hint */
+"Select regional radio" = "Select regional radio";
+
+/* Settings button label on home view */
+"Settings" = "Settings";
+
+/* Share button label on content page view
+   Share button label on player view
+   Share button label on section detail view */
+"Share" = "Share";
+
+/* Accessibility label of the song list handle when closed */
+"Show music list" = "Show music list";
+
+/* Homepage header action hint */
+"Shows all contents." = "Shows all contents.";
+
+/* Show by date button label */
+"Shows by date" = "Shows by date";
+
+/* Channel selector button hint */
+"Shows the channel programs" = "Shows the channel programs";
+
+/* Accessibility label for the sign Language badge */
+"Sign Language" = "Sign Language";
+
+/* Stop button label */
+"Stop" = "Stop";
+
+/* A download button label */
+"Stop downloading" = "Stop downloading";
+
+/* Accessibility label for the subtitled badge */
+"Subtitled" = "Subtitled";
+
+/* Download cell hint in edit mode
+   Media cell hint in edit mode
+   Notification cell hint in edit mode
+   Show cell hint in edit mode */
+"Toggles selection." = "Toggles selection.";
+
+/* Unreads state button */
+"Unreads" = "Unreads";
+
+/* Introductory title for warning notifications */
+"Warning" = "Warning";
+
+/* Media addition for a video to later list label
+   Media addition to later list label in media detail view to add a video to the later list */
+"Watch later" = "Watch later";
+
