@@ -42,6 +42,18 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         
         NSDate *nowDate = NSDate.date;
         SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
+        
+        BOOL isWebFirst = mediaMetadata.date > nowDate && timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.contentType == SRGContentTypeEpisode;
+        
+        if (isWebFirst && [ApplicationConfiguration sharedApplicationConfiguration].isWebFirstBadgeHidden) {
+            NSString *webFirst = NSLocalizedString(@"Web first", @"Short label identifying a web first content.");
+            
+            // Unbreakable spaces before / after the separator
+            text = [webFirst stringByAppendingFormat:@" · %@", text];
+            
+            accessibilityLabel = [webFirst stringByAppendingFormat:@", %@", accessibilityLabel];
+        }
+        
         if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
                 && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
             NSDateComponents *remainingDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];

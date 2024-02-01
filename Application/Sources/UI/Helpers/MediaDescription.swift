@@ -39,7 +39,21 @@ enum MediaDescription {
     }
     
     private static func formattedDate(for media: SRGMedia) -> String {
-        return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+        if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
+            return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
+        }
+        else {
+            return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+        }
+    }
+    
+    private static func formattedShortDate(for media: SRGMedia) -> String {
+        if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
+            return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
+        }
+        else {
+            return DateFormatter.play_relativeShortDate.string(from: media.date)
+        }
     }
     
     private static func formattedTime(for media: SRGMedia) -> String {
@@ -75,7 +89,7 @@ enum MediaDescription {
                 }
                 else {
                     // Unbreakable spaces before / after the separator
-                    return "\(show.title) · \(DateFormatter.play_relativeShortDate.string(from: media.date))"
+                    return "\(show.title) · \(formattedShortDate(for: media))"
                 }
             }
             else {
@@ -116,14 +130,20 @@ enum MediaDescription {
     }
     
     static func availability(for media: SRGMedia) -> String {
-        let publication = publication(for: media)
+        var values: [String] = []
+        
+        if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
+            values.append(NSLocalizedString("Web first", comment: "Short label identifying a web first content."))
+        }
+        
+        values.append(publication(for: media))
+        
         if shouldDisplayExpiration(for: media), let expiration = expiration(for: media) {
-            // Unbreakable spaces before / after the separator
-            return "\(publication) - \(expiration)"
+            values.append(expiration)
         }
-        else {
-            return publication
-        }
+        
+        // Unbreakable spaces before / after the separator
+        return values.joined(separator: " - ")
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {
