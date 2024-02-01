@@ -77,7 +77,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     NSDate *nowDate = NSDate.date;
     SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
-        self.backgroundColor = UIColor.play_black80a;
+        self.backgroundColor = UIColor.srg_darkRedColor;
         
         text = NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.");
     }
@@ -98,7 +98,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
     
     if (text) {
-        self.text = [NSString stringWithFormat:@"%@    ", text].uppercaseString;
+        self.text = [NSString stringWithFormat:@"%@    ", text];
         self.hidden = NO;
     }
     else {

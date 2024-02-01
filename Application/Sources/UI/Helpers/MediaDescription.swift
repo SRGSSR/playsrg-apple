@@ -168,7 +168,7 @@ enum MediaDescription {
                 else {
                     return BadgeProperties(
                         text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
-                        color: .play_black80a
+                        color: .srgDarkRed
                     )
                 }
             case .notAvailableAnymore:
