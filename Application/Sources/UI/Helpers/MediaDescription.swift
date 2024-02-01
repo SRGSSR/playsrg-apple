@@ -183,7 +183,7 @@ enum MediaDescription {
                         color: .srgLightRed
                     )
                 }
-                else if media.play_isWebFirst {
+                else if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeHidden {
                     return BadgeProperties(
                         text: NSLocalizedString("Web first", comment: "Short label identifying a web first content."),
                         color: .srgDarkRed

@@ -61,6 +61,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+@property (nonatomic, readonly, getter=isWebFirstBadgeHidden) BOOL webFirstBadgeHidden;
 
 @property (nonatomic, readonly, copy, nullable) NSString *discoverySubtitleOptionLanguage;
 

@@ -28,5 +28,6 @@
   "audioDescriptionAvailabilityHidden": true,
   "posterImagesEnabled": true,
   "tvGuideOtherBouquets": "thirdparty,rts,rsi",
-  "userConsentDefaultLanguage": "de"
+  "userConsentDefaultLanguage": "de",
+  "webFirstBadgeHidden": true
 }
