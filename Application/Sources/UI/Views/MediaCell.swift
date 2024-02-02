@@ -148,7 +148,7 @@ struct MediaCell: View {
             return MediaDescription.subtitle(for: media, style: mediaDescriptionStyle)
         }
         
-        private var title: String {
+        private var title: String? {
             guard let media else { return .placeholder(length: 8) }
             return MediaDescription.title(for: media, style: mediaDescriptionStyle)
         }
@@ -192,11 +192,13 @@ struct MediaCell: View {
                         .lineLimit(2)
                         .foregroundColor(.srgGray96)
                 }
-                Text(title)
-                    .srgFont(.H4)
-                    .lineLimit(titleLineLimit)
-                    .foregroundColor(.srgGrayC7)
-                    .layoutPriority(1)
+                if let title {
+                    Text(title)
+                        .srgFont(.H4)
+                        .lineLimit(titleLineLimit)
+                        .foregroundColor(.srgGrayC7)
+                        .layoutPriority(1)
+                }
                 if let summary {
                     Text(summary)
                         .srgFont(.body)

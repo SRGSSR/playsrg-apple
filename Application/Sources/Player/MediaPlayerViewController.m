@@ -109,7 +109,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *viewCountStackView;
@@ -815,6 +816,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
         [self.dateLabel play_displayDateLabelForMediaMetadata:media];
+        
+        if (self.dateLabel.text.length == 0) {
+            [self.dateLabel removeFromSuperview];
+        }
+        else if (self.dateLabel.superview == nil) {
+            [self.dateStackView insertSubview:self.dateLabel atIndex:1];
+        }
         
         [self removeSongPanel];
         

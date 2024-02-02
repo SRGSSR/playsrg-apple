@@ -103,10 +103,12 @@ struct MediaDetailView: View {
         
         var body: some View {
             HStack(spacing: 20) {
-                Text(availabilityInformation)
-                    .srgFont(.subtitle2)
-                    .foregroundColor(.white)
-                    .padding(.vertical, 5)
+                if !availabilityInformation.isEmpty {
+                    Text(availabilityInformation)
+                        .srgFont(.subtitle2)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 5)
+                }
                 if let properties = availabilityBadgeProperties {
                     Badge(text: properties.text, color: Color(properties.color))
                 }

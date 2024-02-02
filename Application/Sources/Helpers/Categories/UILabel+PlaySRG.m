@@ -36,12 +36,12 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
 {
-    if (mediaMetadata.date) {
+    NSDate *nowDate = NSDate.date;
+    SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
+    
+    if (mediaMetadata.date && timeAvailability != SRGTimeAvailabilityNotYetAvailable) {
         NSString *text = [NSDateFormatter.play_shortDateAndTime stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
         NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(mediaMetadata.date);
-        
-        NSDate *nowDate = NSDate.date;
-        SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
         
         BOOL isWebFirst = mediaMetadata.date > nowDate && timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.contentType == SRGContentTypeEpisode;
         

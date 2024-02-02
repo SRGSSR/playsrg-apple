@@ -38,21 +38,27 @@ enum MediaDescription {
         }
     }
     
-    private static func formattedDate(for media: SRGMedia) -> String {
+    private static func formattedDate(for media: SRGMedia) -> String? {
         if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
             return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
         }
-        else {
+        else if shouldDisplayPublication(for: media) {
             return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+        }
+        else {
+            return nil
         }
     }
     
-    private static func formattedShortDate(for media: SRGMedia) -> String {
+    private static func formattedShortDate(for media: SRGMedia) -> String? {
         if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
             return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
         }
-        else {
+        else if shouldDisplayPublication(for: media) {
             return DateFormatter.play_relativeShortDate.string(from: media.date)
+        }
+        else {
+            return nil
         }
     }
     
@@ -64,7 +70,7 @@ enum MediaDescription {
         return media.title.lowercased() == show.title.lowercased()
     }
     
-    static func title(for media: SRGMedia, style: Style) -> String {
+    static func title(for media: SRGMedia, style: Style) -> String? {
         switch style {
         case .show:
             if let show = media.show, areRedundant(media: media, show: show) {
@@ -87,9 +93,12 @@ enum MediaDescription {
                 if areRedundant(media: media, show: show) {
                     return show.title
                 }
-                else {
+                else if let publicationDate = formattedShortDate(for: media) {
                     // Unbreakable spaces before / after the separator
-                    return "\(show.title) · \(formattedShortDate(for: media))"
+                    return "\(show.title) · \(publicationDate)"
+                }
+                else {
+                    return show.title
                 }
             }
             else {
@@ -120,6 +129,11 @@ enum MediaDescription {
         return remainingDateComponents.day! > 3
     }
     
+    private static func shouldDisplayPublication(for media: SRGMedia) -> Bool {
+        let now = Date()
+        return media.timeAvailability(at: now) != .notYetAvailable
+    }
+    
     private static func publication(for media: SRGMedia) -> String {
         return DateFormatter.play_shortDateAndTime.string(from: media.date)
     }
@@ -136,7 +150,9 @@ enum MediaDescription {
             values.append(NSLocalizedString("Web first", comment: "Short label identifying a web first content."))
         }
         
-        values.append(publication(for: media))
+        if shouldDisplayPublication(for: media) {
+            values.append(publication(for: media))
+        }
         
         if shouldDisplayExpiration(for: media), let expiration = expiration(for: media) {
             values.append(expiration)
@@ -180,10 +196,10 @@ enum MediaDescription {
             switch availability {
             case .notYetAvailable:
                 let startDate = media.startDate ?? media.date
-                    return BadgeProperties(
+                return BadgeProperties(
                     text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate).capitalizedFirstLetter,
-                        color: .play_black80a
-                    )
+                    color: .play_black80a
+                )
             case .notAvailableAnymore:
                 return BadgeProperties(
                     text: NSLocalizedString("Expired", comment: "Short label identifying content which has expired."),
