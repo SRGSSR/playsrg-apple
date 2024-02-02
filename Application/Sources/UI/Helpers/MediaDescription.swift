@@ -158,7 +158,7 @@ enum MediaDescription {
         }
         
         // Unbreakable spaces before / after the separator
-        return values.joined(separator: " - ")
+        return values.joined(separator: " · ")
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {
