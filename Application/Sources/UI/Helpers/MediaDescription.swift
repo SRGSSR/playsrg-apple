@@ -181,7 +181,7 @@ enum MediaDescription {
             case .notYetAvailable:
                 if allowsDateDisplay, let startDate = media.startDate {
                     return BadgeProperties(
-                        text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate),
+                    text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate).capitalizedFirstLetter,
                         color: .play_black80a
                     )
                 }
