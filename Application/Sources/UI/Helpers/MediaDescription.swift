@@ -149,8 +149,7 @@ enum MediaDescription {
         if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
             values.append(NSLocalizedString("Web first", comment: "Short label identifying a web first content."))
         }
-        
-        if shouldDisplayPublication(for: media) {
+        else if shouldDisplayPublication(for: media) {
             values.append(publication(for: media))
         }
         

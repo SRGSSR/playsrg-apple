@@ -49,9 +49,9 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
             NSString *webFirst = NSLocalizedString(@"Web first", @"Short label identifying a web first content.");
             
             // Unbreakable spaces before / after the separator
-            text = [webFirst stringByAppendingFormat:@" · %@", text];
+            text = webFirst;
             
-            accessibilityLabel = [webFirst stringByAppendingFormat:@", %@", accessibilityLabel];
+            accessibilityLabel = webFirst;
         }
         
         if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
