@@ -92,7 +92,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     NSDate *nowDate = NSDate.date;
     SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
-        self.backgroundColor = UIColor.srg_darkRedColor;
+        self.backgroundColor = UIColor.play_black80a;
         
         NSDate *startDate = mediaMetadata.startDate != nil ? mediaMetadata.startDate : mediaMetadata.date;
         text = [[NSDateFormatter play_relativeShortDateAndTime] stringFromDate:startDate].play_localizedUppercaseFirstLetterString;
