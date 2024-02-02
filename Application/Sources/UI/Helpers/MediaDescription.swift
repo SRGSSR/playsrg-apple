@@ -132,6 +132,8 @@ enum MediaDescription {
     private static func shouldDisplayPublication(for media: SRGMedia) -> Bool {
         let now = Date()
         return media.timeAvailability(at: now) != .notYetAvailable
+        && media.contentType != .livestream
+        && !(media.contentType == .scheduledLivestream && media.timeAvailability(at: now) == .available)
     }
     
     private static func publication(for media: SRGMedia) -> String {

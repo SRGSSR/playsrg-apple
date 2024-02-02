@@ -39,7 +39,10 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     NSDate *nowDate = NSDate.date;
     SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
     
-    if (mediaMetadata.date && timeAvailability != SRGTimeAvailabilityNotYetAvailable) {
+    if (mediaMetadata.date
+        && timeAvailability != SRGTimeAvailabilityNotYetAvailable
+        && mediaMetadata.contentType != SRGContentTypeLivestream
+        && !(mediaMetadata.contentType == SRGContentTypeScheduledLivestream && timeAvailability == SRGTimeAvailabilityAvailable)) {
         NSString *text = [NSDateFormatter.play_shortDateAndTime stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
         NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(mediaMetadata.date);
         
@@ -108,6 +111,12 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
             NSTimeInterval timeIntervalBeforeEnd = [mediaMetadata.endDate timeIntervalSinceDate:nowDate];
             text = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), LabelFormattedDuration(timeIntervalBeforeEnd)];
         }
+    }
+    else if (mediaMetadata.contentType == SRGContentTypeLivestream
+             || (mediaMetadata.contentType == SRGContentTypeScheduledLivestream && timeAvailability == SRGTimeAvailabilityAvailable)) {
+        self.backgroundColor = UIColor.srg_lightRedColor;
+        
+        text = NSLocalizedString(@"Live", @"Short label identifying a livestream. Display in uppercase.").uppercaseString;
     }
     
     if (text) {
