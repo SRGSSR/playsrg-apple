@@ -39,8 +39,8 @@ enum MediaDescription {
     }
     
     private static func formattedDate(for media: SRGMedia) -> String? {
-        if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
-            return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
+        if media.play_isWebFirst {
+            return NSLocalizedString("In advance", comment: "Short text identifying a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
             return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
@@ -51,11 +51,23 @@ enum MediaDescription {
     }
     
     private static func formattedShortDate(for media: SRGMedia) -> String? {
-        if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
-            return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
+        if media.play_isWebFirst {
+            return NSLocalizedString("In advance", comment: "Short text identifying a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
             return DateFormatter.play_relativeShortDate.string(from: media.date)
+        }
+        else {
+            return nil
+        }
+    }
+    
+    private static func formattedShortDateAndTime(for media: SRGMedia) -> String? {
+        if media.play_isWebFirst {
+            return NSLocalizedString("In advance", comment: "Short text identifying a web first content.")
+        }
+        else if shouldDisplayPublication(for: media) {
+            return DateFormatter.play_shortDateAndTime.string(from: media.date)
         }
         else {
             return nil
@@ -136,8 +148,8 @@ enum MediaDescription {
         && !(media.contentType == .scheduledLivestream && media.timeAvailability(at: now) == .available)
     }
     
-    private static func publication(for media: SRGMedia) -> String {
-        return DateFormatter.play_shortDateAndTime.string(from: media.date)
+    private static func publication(for media: SRGMedia) -> String? {
+        return formattedShortDateAndTime(for: media)
     }
     
     private static func expiration(for media: SRGMedia) -> String? {
@@ -148,11 +160,8 @@ enum MediaDescription {
     static func availability(for media: SRGMedia) -> String {
         var values: [String] = []
         
-        if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
-            values.append(NSLocalizedString("Web first", comment: "Short label identifying a web first content."))
-        }
-        else if shouldDisplayPublication(for: media) {
-            values.append(publication(for: media))
+        if let publication = publication(for: media) {
+            values.append(publication)
         }
         
         if shouldDisplayExpiration(for: media), let expiration = expiration(for: media) {

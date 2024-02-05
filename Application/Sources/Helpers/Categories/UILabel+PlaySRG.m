@@ -48,8 +48,8 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         
         BOOL isWebFirst = mediaMetadata.date > nowDate && timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.contentType == SRGContentTypeEpisode;
         
-        if (isWebFirst && ![ApplicationConfiguration sharedApplicationConfiguration].isWebFirstBadgeEnabled) {
-            NSString *webFirst = NSLocalizedString(@"Web first", @"Short label identifying a web first content.");
+        if (isWebFirst) {
+            NSString *webFirst = NSLocalizedString(@"In advance", @"Short text identifying a web first content.");
             
             // Unbreakable spaces before / after the separator
             text = webFirst;
