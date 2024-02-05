@@ -40,7 +40,7 @@ enum MediaDescription {
     
     private static func formattedDate(for media: SRGMedia) -> String? {
         if media.play_isWebFirst {
-            return NSLocalizedString("In advance", comment: "Short text identifying a web first content.")
+            return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
             return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
@@ -52,7 +52,7 @@ enum MediaDescription {
     
     private static func formattedShortDate(for media: SRGMedia) -> String? {
         if media.play_isWebFirst {
-            return NSLocalizedString("In advance", comment: "Short text identifying a web first content.")
+            return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
             return DateFormatter.play_relativeShortDate.string(from: media.date)
@@ -64,7 +64,7 @@ enum MediaDescription {
     
     private static func formattedShortDateAndTime(for media: SRGMedia) -> String? {
         if media.play_isWebFirst {
-            return NSLocalizedString("In advance", comment: "Short text identifying a web first content.")
+            return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
             return DateFormatter.play_shortDateAndTime.string(from: media.date)

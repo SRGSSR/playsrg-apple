@@ -308,6 +308,9 @@
 /* Image copyright introductory label */
 "Image credit: %@" = "Bild: %@";
 
+/* Short text replacing date for a web first content. */
+"In advance" = "Vorab";
+
 /* Information section header */
 "Information" = "Informationen";
 

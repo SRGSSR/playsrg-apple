@@ -49,7 +49,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         BOOL isWebFirst = [mediaMetadata.date compare:nowDate] == NSOrderedDescending && timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.contentType == SRGContentTypeEpisode;
         
         if (isWebFirst) {
-            NSString *webFirst = NSLocalizedString(@"In advance", @"Short text identifying a web first content.");
+            NSString *webFirst = NSLocalizedString(@"In advance", @"Short text replacing date for a web first content.");
             
             // Unbreakable spaces before / after the separator
             text = webFirst;
