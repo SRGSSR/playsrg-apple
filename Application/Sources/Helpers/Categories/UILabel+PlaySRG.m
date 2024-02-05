@@ -46,7 +46,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         NSString *text = [NSDateFormatter.play_shortDateAndTime stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
         NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(mediaMetadata.date);
         
-        BOOL isWebFirst = mediaMetadata.date > nowDate && timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.contentType == SRGContentTypeEpisode;
+        BOOL isWebFirst = [mediaMetadata.date compare:nowDate] == NSOrderedDescending && timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.contentType == SRGContentTypeEpisode;
         
         if (isWebFirst) {
             NSString *webFirst = NSLocalizedString(@"In advance", @"Short text identifying a web first content.");
