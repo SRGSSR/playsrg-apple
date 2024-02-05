@@ -39,7 +39,7 @@ enum MediaDescription {
     }
     
     private static func formattedDate(for media: SRGMedia) -> String? {
-        if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
+        if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
             return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
@@ -51,7 +51,7 @@ enum MediaDescription {
     }
     
     private static func formattedShortDate(for media: SRGMedia) -> String? {
-        if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
+        if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
             return NSLocalizedString("Web first", comment: "Short label identifying a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
@@ -148,7 +148,7 @@ enum MediaDescription {
     static func availability(for media: SRGMedia) -> String {
         var values: [String] = []
         
-        if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeHidden {
+        if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
             values.append(NSLocalizedString("Web first", comment: "Short label identifying a web first content."))
         }
         else if shouldDisplayPublication(for: media) {
@@ -213,7 +213,7 @@ enum MediaDescription {
                         color: .srgLightRed
                     )
                 }
-                else if media.play_isWebFirst && !ApplicationConfiguration.shared.isWebFirstBadgeHidden {
+                else if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
                     return BadgeProperties(
                         text: NSLocalizedString("Web first", comment: "Short label identifying a web first content."),
                         color: .srgDarkRed

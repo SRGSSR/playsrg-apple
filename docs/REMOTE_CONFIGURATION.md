@@ -156,4 +156,4 @@ Feeds
 * `showsUnavailable` (optional, boolean): If set to `true`, all features related to shows are removed.
 * `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.
 * `discoverySubtitleOptionLanguage` (optional, string): Set system subtitle language to this value once and at the beginning to help user discover that content is subtitled in that language.
-* `webFirstBadgeHidden` (optional, boolean): Set to `true` to hide the web first badge on media. Only display the label as a text.
+* `webFirstBadgeEnabled` (optional, boolean): Set to `true` to display the web first badge on media. Only display the label as a text.

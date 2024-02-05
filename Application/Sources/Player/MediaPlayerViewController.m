@@ -864,7 +864,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.summaryLabel.text = media.play_fullSummary;
         
         BOOL downloaded = (mainChapterMedia != nil) ? [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded : NO;
-        BOOL isWebFirst = mainChapterMedia.play_isWebFirst && ![ApplicationConfiguration sharedApplicationConfiguration].isWebFirstBadgeHidden;
+        BOOL isWebFirst = mainChapterMedia.play_isWebFirst && [ApplicationConfiguration sharedApplicationConfiguration].isWebFirstBadgeEnabled;
         BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
         BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
         BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;
