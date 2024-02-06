@@ -180,6 +180,11 @@ struct MediaCell: View {
             }
         }
         
+        private var bottomPadding: CGFloat {
+            // Allow 3 lines for titles, badges and no subtitles
+            return embeddedDirection == .horizontal ? -2 : 0
+        }
+        
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 if embeddedDirection == .horizontal, let properties = availabilityBadgeProperties {
@@ -207,6 +212,7 @@ struct MediaCell: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(.bottom, bottomPadding)
         }
     }
 }
