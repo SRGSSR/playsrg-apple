@@ -38,36 +38,25 @@ enum MediaDescription {
         }
     }
     
-    private static func formattedDate(for media: SRGMedia) -> String? {
-        if media.play_isWebFirst {
-            return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
-        }
-        else if shouldDisplayPublication(for: media) {
-            return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
-        }
-        else {
-            return nil
-        }
+    private enum DateStyle {
+        case date
+        case shortDate
+        case shortDateAndTime
     }
     
-    private static func formattedShortDate(for media: SRGMedia) -> String? {
+    private static func formattedDate(for media: SRGMedia, style: DateStyle = .date) -> String? {
         if media.play_isWebFirst {
             return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
         }
         else if shouldDisplayPublication(for: media) {
-            return DateFormatter.play_relativeShortDate.string(from: media.date)
-        }
-        else {
-            return nil
-        }
-    }
-    
-    private static func formattedShortDateAndTime(for media: SRGMedia) -> String? {
-        if media.play_isWebFirst {
-            return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
-        }
-        else if shouldDisplayPublication(for: media) {
-            return DateFormatter.play_shortDateAndTime.string(from: media.date)
+            switch style {
+            case .date:
+                return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+            case .shortDate:
+                return DateFormatter.play_relativeShortDate.string(from: media.date)
+            case .shortDateAndTime:
+                return DateFormatter.play_shortDateAndTime.string(from: media.date)
+            }
         }
         else {
             return nil
@@ -105,7 +94,7 @@ enum MediaDescription {
                 if areRedundant(media: media, show: show) {
                     return show.title
                 }
-                else if let publicationDate = formattedShortDate(for: media) {
+                else if let publicationDate = formattedDate(for: media, style: .shortDate) {
                     // Unbreakable spaces before / after the separator
                     return "\(show.title) · \(publicationDate)"
                 }
@@ -149,7 +138,7 @@ enum MediaDescription {
     }
     
     private static func publication(for media: SRGMedia) -> String? {
-        return formattedShortDateAndTime(for: media)
+        return formattedDate(for: media, style: .shortDateAndTime)
     }
     
     private static func expiration(for media: SRGMedia) -> String? {
