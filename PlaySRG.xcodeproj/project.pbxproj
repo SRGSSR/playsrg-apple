@@ -202,6 +202,11 @@
 		046F8DC22B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC32B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC42B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
+		046F8DC62B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
+		046F8DC72B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
+		046F8DC82B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
+		046F8DC92B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
+		046F8DCA2B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
 		04708C0F2B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C102B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C112B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
@@ -1178,11 +1183,6 @@
 		6F475FCF1EB37BC6003021EA /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F971EB37BC6003021EA /* NavigationController.m */; };
 		6F475FD01EB37BC6003021EA /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F971EB37BC6003021EA /* NavigationController.m */; };
 		6F475FD11EB37BC6003021EA /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F971EB37BC6003021EA /* NavigationController.m */; };
-		6F475FD21EB37BC6003021EA /* PageContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */; };
-		6F475FD31EB37BC6003021EA /* PageContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */; };
-		6F475FD41EB37BC6003021EA /* PageContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */; };
-		6F475FD51EB37BC6003021EA /* PageContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */; };
-		6F475FD61EB37BC6003021EA /* PageContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */; };
 		6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9D1EB37BC6003021EA /* RequestViewController.m */; };
 		6F475FDD1EB37BC6003021EA /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9D1EB37BC6003021EA /* RequestViewController.m */; };
 		6F475FDE1EB37BC6003021EA /* RequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F9D1EB37BC6003021EA /* RequestViewController.m */; };
@@ -2797,6 +2797,7 @@
 		0456C4A02976EE460088508A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
 		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
+		046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContainerViewController.swift; sourceTree = "<group>"; };
 		04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityView.swift; sourceTree = "<group>"; };
 		0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGMedia+PlaySRG.swift"; sourceTree = "<group>"; };
 		0481D5A329F44D4D00D174B3 /* SRGProgram+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGProgram+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3135,8 +3136,6 @@
 		6F475F931EB37BC6003021EA /* ListRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListRequestViewController.m; sourceTree = "<group>"; };
 		6F475F961EB37BC6003021EA /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		6F475F971EB37BC6003021EA /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
-		6F475F991EB37BC6003021EA /* PageContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContainerViewController.h; sourceTree = "<group>"; };
-		6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContainerViewController.m; sourceTree = "<group>"; };
 		6F475F9C1EB37BC6003021EA /* RequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestViewController.h; sourceTree = "<group>"; };
 		6F475F9D1EB37BC6003021EA /* RequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestViewController.m; sourceTree = "<group>"; };
 		6F475F9F1EB37BC6003021EA /* ModalTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalTransition.h; sourceTree = "<group>"; };
@@ -4727,8 +4726,7 @@
 				6F475F931EB37BC6003021EA /* ListRequestViewController.m */,
 				6F475F961EB37BC6003021EA /* NavigationController.h */,
 				6F475F971EB37BC6003021EA /* NavigationController.m */,
-				6F475F991EB37BC6003021EA /* PageContainerViewController.h */,
-				6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */,
+				046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */,
 				6F475F9C1EB37BC6003021EA /* RequestViewController.h */,
 				6F475F9D1EB37BC6003021EA /* RequestViewController.m */,
 				6F0506E5245468EE0053253E /* SplitViewController.h */,
@@ -8374,7 +8372,6 @@
 				6F0E374C2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
-				6F475FD21EB37BC6003021EA /* PageContainerViewController.m in Sources */,
 				6F6C7AD42820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F1EE835268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F9ABCDB2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
@@ -8384,6 +8381,7 @@
 				6F340F52220DA99B00778CA3 /* History.m in Sources */,
 				0481D5AF29F460C500D174B3 /* SRGProgramComposition+PlaySRG.swift in Sources */,
 				6FF65C5A28360EB100AF0768 /* Onboarding.swift in Sources */,
+				046F8DC62B779E9B00A71091 /* PageContainerViewController.swift in Sources */,
 				0875852223A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				04FB9CB32A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				6FB2C10B2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
@@ -8843,6 +8841,7 @@
 				6F5E99EF283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
+				046F8DC72B779E9B00A71091 /* PageContainerViewController.swift in Sources */,
 				04708C102B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F091D5C270DE4FE00210713 /* Publishers.swift in Sources */,
 				0490B9FA2A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
@@ -8862,7 +8861,6 @@
 				6FDF70012682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FD9595526989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
-				6F475FD31EB37BC6003021EA /* PageContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9108,6 +9106,7 @@
 				6F5E99F0283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
+				046F8DC82B779E9B00A71091 /* PageContainerViewController.swift in Sources */,
 				04708C112B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F091D5D270DE4FE00210713 /* Publishers.swift in Sources */,
 				0490B9FB2A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
@@ -9127,7 +9126,6 @@
 				6FDF70022682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FD9595626989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
-				6F475FD41EB37BC6003021EA /* PageContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9373,6 +9371,7 @@
 				6F5E99F1283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
+				046F8DC92B779E9B00A71091 /* PageContainerViewController.swift in Sources */,
 				04708C122B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
 				6F091D5E270DE4FE00210713 /* Publishers.swift in Sources */,
 				0490B9FC2A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
@@ -9392,7 +9391,6 @@
 				6FDF70032682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FD9595726989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
-				6F475FD51EB37BC6003021EA /* PageContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9561,6 +9559,7 @@
 				6F5F4FC81DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F475FC21EB37BC6003021EA /* DataViewController.m in Sources */,
 				0801E07F1D4A4A810008021E /* RadioChannel.m in Sources */,
+				046F8DCA2B779E9B00A71091 /* PageContainerViewController.swift in Sources */,
 				6FB0AF00217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				048FD2512A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F6C7ACD2820576000BC3EA5 /* UserLocation.swift in Sources */,
@@ -9649,7 +9648,6 @@
 				6FDF70042682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FD9595826989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
-				6F475FD61EB37BC6003021EA /* PageContainerViewController.m in Sources */,
 				0481D5B329F460C500D174B3 /* SRGProgramComposition+PlaySRG.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

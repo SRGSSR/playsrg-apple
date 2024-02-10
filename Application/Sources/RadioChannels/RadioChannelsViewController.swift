@@ -24,7 +24,7 @@ import UIKit
         let lastOpenedRadioChannel = ApplicationSettingLastOpenedRadioChannel()
         let initialPage = lastOpenedRadioChannel != nil ? radioChannels.firstIndex(of: lastOpenedRadioChannel!) : nil
         
-        super.init(viewControllers: viewControllers, initialPage: UInt(initialPage != nil ? initialPage! : NSNotFound))
+        super.init(viewControllers: viewControllers, initialPage: initialPage != nil ? initialPage! : NSNotFound)
         updateTitle()
     }
     
@@ -72,7 +72,7 @@ import UIKit
         
         if let radioChannelViewController = viewControllers.first(where: { ($0 as? PageViewController)?.radioChannel == radioChannel }) as? UIViewController & PlayApplicationNavigation {
             let pageIndex = viewControllers.firstIndex(of: radioChannelViewController)!
-            self.switch(to: UInt(pageIndex), animated: false)
+            _ = self.switchToIndex(pageIndex, animated: false)
             
             return radioChannelViewController.open(applicationSectionInfo)
         }
@@ -85,11 +85,5 @@ import UIKit
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    // MARK: - Designated Initializer
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 }
