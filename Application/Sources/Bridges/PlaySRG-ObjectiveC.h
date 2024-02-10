@@ -26,6 +26,7 @@
 #import "NavigationController.h"
 #import "NSString+PlaySRG.h"
 #import "Orientation.h"
+#import "PageContainerViewController.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayApplication.h"
 #import "PlayApplicationNavigation.h"

@@ -197,6 +197,11 @@
 		0463DA172A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA182A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA192A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
+		046F8DC02B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
+		046F8DC12B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
+		046F8DC22B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
+		046F8DC32B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
+		046F8DC42B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		04708C0F2B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C102B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C112B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
@@ -477,11 +482,6 @@
 		082910B0239E90D200D168F4 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910AD239E90D200D168F4 /* TabBarController.m */; };
 		082910B1239E90D200D168F4 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910AD239E90D200D168F4 /* TabBarController.m */; };
 		082910B2239E90D200D168F4 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910AD239E90D200D168F4 /* TabBarController.m */; };
-		082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
-		082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
-		082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
-		082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
-		082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
 		084EF77D26035BB10058A567 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
 		084EF77E26035BB10058A567 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
 		084EF77F26035BB30058A567 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
@@ -2796,6 +2796,7 @@
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
+		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
 		04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityView.swift; sourceTree = "<group>"; };
 		0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGMedia+PlaySRG.swift"; sourceTree = "<group>"; };
 		0481D5A329F44D4D00D174B3 /* SRGProgram+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGProgram+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -2841,8 +2842,6 @@
 		0828BB3922E62831009617A7 /* parsePlayUrl.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = parsePlayUrl.js; sourceTree = "<group>"; };
 		082910AC239E90D200D168F4 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		082910AD239E90D200D168F4 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
-		082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannelsViewController.m; sourceTree = "<group>"; };
-		082910B4239EA69C00D168F4 /* RadioChannelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannelsViewController.h; sourceTree = "<group>"; };
 		0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+PlaySRG.h"; sourceTree = "<group>"; };
 		0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+PlaySRG.m"; sourceTree = "<group>"; };
 		0858CA5A271084A000EE36EA /* ProgramGuideGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramGuideGridViewController.swift; sourceTree = "<group>"; };
@@ -4053,8 +4052,7 @@
 		0875853323A3DDB800FA7207 /* RadioChannels */ = {
 			isa = PBXGroup;
 			children = (
-				082910B4239EA69C00D168F4 /* RadioChannelsViewController.h */,
-				082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */,
+				046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */,
 			);
 			path = RadioChannels;
 			sourceTree = "<group>";
@@ -8437,7 +8435,6 @@
 				0456C4A12976EE460088508A /* AnalyticsEvent.swift in Sources */,
 				6FD633EA1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				0451ECE328742D8000E89975 /* UIWindow+PlaySRG.swift in Sources */,
-				082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6FF65C542835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				0407308528635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */,
 				6FE38A21270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
@@ -8455,6 +8452,7 @@
 				08F5DBC1262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FD4C2E1268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				0407EFE62A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */,
+				046F8DC02B778E5300A71091 /* RadioChannelsViewController.swift in Sources */,
 				6F488ACB22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				086BDE151EA63D3800965F45 /* PlayMiniPlayerView.m in Sources */,
 				6F72E60726BA6B16001A890C /* SceneDelegate.m in Sources */,
@@ -8635,6 +8633,7 @@
 				6F1A77842643CAB600A00EFC /* EmptyContentView.swift in Sources */,
 				0481D59A29F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */,
 				6FD633EB1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
+				046F8DC12B778E5300A71091 /* RadioChannelsViewController.swift in Sources */,
 				08F4683B26C6CAE400CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6FDAAD8F2832824E008E2806 /* WhatsNewView.swift in Sources */,
 				6F33E6132860AF0000724E76 /* Navigation.swift in Sources */,
@@ -8784,7 +8783,6 @@
 				6F33443528642A8B00E664F1 /* MediaSearchSettings.swift in Sources */,
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC726B98C44007A34F8 /* ProgramView.swift in Sources */,
-				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				048FD24E2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F362A8526A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -8900,6 +8898,7 @@
 				6F1A77852643CAB600A00EFC /* EmptyContentView.swift in Sources */,
 				0481D59B29F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */,
 				6FD633EC1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
+				046F8DC22B778E5300A71091 /* RadioChannelsViewController.swift in Sources */,
 				08F4683C26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6FDAAD902832824E008E2806 /* WhatsNewView.swift in Sources */,
 				6F33E6152860AF0200724E76 /* Navigation.swift in Sources */,
@@ -9049,7 +9048,6 @@
 				6F33443628642A8B00E664F1 /* MediaSearchSettings.swift in Sources */,
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC826B98C44007A34F8 /* ProgramView.swift in Sources */,
-				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				048FD24F2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F362A8626A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -9165,6 +9163,7 @@
 				6F1A77862643CAB600A00EFC /* EmptyContentView.swift in Sources */,
 				0481D59C29F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */,
 				6FD633ED1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
+				046F8DC32B778E5300A71091 /* RadioChannelsViewController.swift in Sources */,
 				08F4683D26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6FDAAD912832824E008E2806 /* WhatsNewView.swift in Sources */,
 				6F33E6162860AF0200724E76 /* Navigation.swift in Sources */,
@@ -9314,7 +9313,6 @@
 				6F33443728642A8B00E664F1 /* MediaSearchSettings.swift in Sources */,
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC926B98C44007A34F8 /* ProgramView.swift in Sources */,
-				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				048FD2502A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
 				6F362A8726A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -9416,6 +9414,7 @@
 				6FE287712481687B00358CFF /* SongTableViewCell.m in Sources */,
 				08280F1A2258F02400AC978D /* WatchLater.m in Sources */,
 				04D5478127BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
+				046F8DC42B778E5300A71091 /* RadioChannelsViewController.swift in Sources */,
 				0825914427285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
 				088899492077628500242654 /* TVChannel.m in Sources */,
 				04395F312B1BF38B00F6A634 /* GoogleCastBarButtonItem.swift in Sources */,
@@ -9582,7 +9581,6 @@
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FCA26B98C44007A34F8 /* ProgramView.swift in Sources */,
-				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				0481D5A829F44D4D00D174B3 /* SRGProgram+PlaySRG.swift in Sources */,
 				6F362A8826A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
