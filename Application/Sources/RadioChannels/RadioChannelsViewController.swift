@@ -6,7 +6,7 @@
 
 import UIKit
 
-@objc class RadioChannelsViewController: PageContainerViewController, PlayApplicationNavigation {
+@objc class RadioChannelsViewController: PageContainerViewController {
     private var radioChannelName: String?
     
     // MARK: - Object lifecycle
@@ -65,8 +65,17 @@ import UIKit
         navigationItem.title = radioChannelName ?? NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
     }
     
-    // MARK: - PlayApplicationNavigation protocol
+    // MARK: - Unavailable
     
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: Protocols
+
+extension RadioChannelsViewController: PlayApplicationNavigation {
     func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {
         guard let radioChannel = applicationSectionInfo.radioChannel else { return false }
         
@@ -78,12 +87,5 @@ import UIKit
         }
         
         return false
-    }
-    
-    // MARK: - Unavailable
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
