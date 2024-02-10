@@ -100,7 +100,7 @@ class PageContainerViewController: UIViewController {
             tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let blurView = UIVisualEffectView.play_blur
+        let blurView = UIVisualEffectView.play_blurView
         blurView.alpha = 0.0
         view.insertSubview(blurView, belowSubview: tabBar)
         self.blurView = blurView

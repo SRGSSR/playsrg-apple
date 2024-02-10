@@ -207,6 +207,11 @@
 		046F8DC82B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
 		046F8DC92B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
 		046F8DCA2B779E9B00A71091 /* PageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */; };
+		046F8DCC2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
+		046F8DCD2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
+		046F8DCE2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
+		046F8DCF2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
+		046F8DD02B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
 		04708C0F2B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C102B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C112B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
@@ -2392,11 +2397,6 @@
 		6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A73256C58BB0042F446 /* SRGLoggerSwift */; };
 		6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A75256C58C40042F446 /* SRGLoggerSwift */; };
 		6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */; };
-		6FF4D4E023D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
-		6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
-		6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
-		6FF4D4E323D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
-		6FF4D4E423D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
 		6FF5D1F52746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
 		6FF5D1F62746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
 		6FF5D1F72746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
@@ -2798,6 +2798,7 @@
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
 		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
 		046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContainerViewController.swift; sourceTree = "<group>"; };
+		046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+PlaySRG.swift"; sourceTree = "<group>"; };
 		04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityView.swift; sourceTree = "<group>"; };
 		0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGMedia+PlaySRG.swift"; sourceTree = "<group>"; };
 		0481D5A329F44D4D00D174B3 /* SRGProgram+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGProgram+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3360,8 +3361,6 @@
 		6FEF23662732C2410098C639 /* ChannelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelHeaderView.swift; sourceTree = "<group>"; };
 		6FEF23712732C2D40098C639 /* TimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineView.swift; sourceTree = "<group>"; };
 		6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
-		6FF4D4DE23D5B07E008B981A /* UIVisualEffectView+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIVisualEffectView+PlaySRG.h"; sourceTree = "<group>"; };
-		6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIVisualEffectView+PlaySRG.m"; sourceTree = "<group>"; };
 		6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramPreviewModel.swift; sourceTree = "<group>"; };
 		6FF5D1FA2747A69900460F70 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
 		6FF65C532835FFA400AF0768 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -4755,8 +4754,7 @@
 				6FE9048526F3466800502077 /* UICollectionView+PlaySRG.m */,
 				6FE9049026F3475A00502077 /* UITableView+PlaySRG.h */,
 				6FE9049126F3475A00502077 /* UITableView+PlaySRG.m */,
-				6FF4D4DE23D5B07E008B981A /* UIVisualEffectView+PlaySRG.h */,
-				6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */,
+				046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -8415,7 +8413,6 @@
 				6FE1B9191FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6FF9EC4E2626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				6F2363192833D57F00A1127C /* MailComposeView.swift in Sources */,
-				6FF4D4E023D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				6F2E160926A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				6FAAF78820CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6F861AF81DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
@@ -8529,6 +8526,7 @@
 				6F40B7792726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
 				6FE9049226F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
+				046F8DCC2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				04395F1B2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */,
 				6FC2F7DF2628F23600BF6B19 /* ResponderChain.swift in Sources */,
 				6F33E6122860AEFF00724E76 /* Navigation.swift in Sources */,
@@ -8603,6 +8601,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046F8DCD2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210E826AEDDD200291CA9 /* Environment.swift in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760801EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
@@ -8748,7 +8747,6 @@
 				6F7F2B07249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7F92628F23700BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AF91DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
-				6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				044E392129B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				082910AF239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981312622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -8868,6 +8866,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046F8DCE2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EA26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760871EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
@@ -9013,7 +9012,6 @@
 				6F7F2B08249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7FA2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AFA1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
-				6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				044E392229B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				082910B0239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981322622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -9133,6 +9131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046F8DCF2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EB26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
 				6F47608E1EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
@@ -9278,7 +9277,6 @@
 				6F7F2B09249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7FB2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F861AFB1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
-				6FF4D4E323D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				044E392329B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				082910B1239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981332622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -9398,6 +9396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046F8DD02B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EC26AEDDD800291CA9 /* Environment.swift in Sources */,
 				6F80106D20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760951EB37DF2003021EA /* UIDevice+PlaySRG.m in Sources */,
@@ -9547,7 +9546,6 @@
 				04F184EC28F097E900B1207C /* BadgeList.swift in Sources */,
 				6FF5D1FF2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F861AFC1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
-				6FF4D4E423D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				082910B2239E90D200D168F4 /* TabBarController.m in Sources */,
 				080981342622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCD42813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
