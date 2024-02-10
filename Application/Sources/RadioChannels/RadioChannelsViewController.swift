@@ -9,8 +9,6 @@ import UIKit
 @objc class RadioChannelsViewController: PageContainerViewController {
     private var radioChannelName: String?
     
-    // MARK: - Object lifecycle
-    
     @objc init(radioChannels: [RadioChannel]) {
         assert(!radioChannels.isEmpty, "At least 1 radio channel expected")
         
@@ -33,7 +31,9 @@ import UIKit
         updateTitle()
     }
     
-    // MARK: - View lifecycle
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,8 +44,6 @@ import UIKit
             navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
         }
     }
-    
-    // MARK: - Overrides
     
     override func didDisplayViewController(_ viewController: UIViewController, animated: Bool) {
         super.didDisplayViewController(viewController, animated: animated)
@@ -64,17 +62,8 @@ import UIKit
         updateTitle()
     }
     
-    // MARK: - Navigation bar
-    
     private func updateTitle() {
         navigationItem.title = radioChannelName ?? NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
-    }
-    
-    // MARK: - Unavailable
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 

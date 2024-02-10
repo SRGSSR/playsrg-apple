@@ -46,6 +46,10 @@ class PageContainerViewController: UIViewController {
         self.init(viewControllers: viewControllers, initialPage: 0)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
@@ -154,8 +158,6 @@ class PageContainerViewController: UIViewController {
         }
     }
     
-    // MARK: - Actions
-    
     func switchToIndex(_ index: Int, animated: Bool) -> Bool {
         guard displayPage(at: index, animated: animated) else { return false }
         
@@ -171,14 +173,12 @@ class PageContainerViewController: UIViewController {
         let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
         
         let newViewController = viewControllers[index]
-        pageViewController.setViewControllers([newViewController], direction: direction, animated: animated, completion: nil)
+        pageViewController.setViewControllers([newViewController], direction: direction, animated: animated)
         self.play_setNeedsScrollableViewUpdate()
         
         didDisplayViewController(newViewController, animated: animated)
         return true
     }
-    
-    // MARK: - UI
     
     func updateFonts() {
         let tabBarFont = SRGFont.font(.body) as UIFont
@@ -190,16 +190,7 @@ class PageContainerViewController: UIViewController {
         updateFonts()
     }
     
-    // MARK: - Stubs
-    
     func didDisplayViewController(_ viewController: UIViewController, animated: Bool) {}
-    
-    // MARK: - Unavailable
-    
-    @available(*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 // MARK: - Protocols
