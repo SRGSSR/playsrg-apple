@@ -375,6 +375,10 @@ extension PageViewController {
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> PageViewController {
         return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
     }
+    
+    @objc static func pageViewController(for page: SRGContentPage) -> PageViewController {
+        return PageViewController(id: .page(page))
+    }
 }
 
 // MARK: Protocols

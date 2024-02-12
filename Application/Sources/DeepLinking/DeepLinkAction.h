@@ -19,6 +19,7 @@ typedef NSString * DeepLinkType NS_STRING_ENUM;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeMedia;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeShow;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeTopic;
+OBJC_EXPORT DeepLinkType const DeepLinkTypePage;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeHome;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeAZ;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeByDate;
@@ -34,6 +35,7 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
  *    [scheme]://media/[media_urn] (optional query parameters: channel_id=[channel_id], start_time=[start_position_seconds])
  *    [scheme]://show/[show_urn] (optional query parameter: channel_id=[channel_id])
  *    [scheme]://topic/[topic_urn]
+ *    [scheme]://page/[page_id]
  *    [scheme]://home (optional query parameters: channel_id=[channel_id])
  *    [scheme]://az (optional query parameters: channel_id=[channel_id], index=[index_letter])
  *    [scheme]://bydate (optional query parameters: channel_id=[channel_id], date=[date] with format yyyy-MM-dd)
