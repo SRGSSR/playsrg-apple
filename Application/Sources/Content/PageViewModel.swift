@@ -232,17 +232,36 @@ extension PageViewModel {
             return displayedShow != nil
         }
         
-        var displayedTitle: String? {
-#if os(tvOS)
+        var displayedCenterTitle: String? {
             if case .topic = self {
+#if os(tvOS)
+                return title
+#else
+                return nil
+#endif
+            }
+            else {
+                return nil
+            }
+        }
+        
+        var displayedLeadingTitle: String? {
+            if case .page = self {
                 return title
             }
             else {
                 return nil
             }
-#else
-            return nil
-#endif
+        }
+        
+        var displayedLeadingSummary: String? {
+            if case .page = self {
+                // FIXME: Use page summary when available
+                return title
+            }
+            else {
+                return nil
+            }
         }
         
         var analyticsPageViewTitle: String {
