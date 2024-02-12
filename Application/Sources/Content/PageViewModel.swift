@@ -150,6 +150,7 @@ extension PageViewModel {
         case live
         case topic(_ topic: SRGTopic)
         case show(_ show: SRGShow)
+        case page(_ page: SRGContentPage)
         
 #if os(iOS)
         var isLargeTitleDisplayMode: Bool {
@@ -213,6 +214,8 @@ extension PageViewModel {
                 return topic.title
             case let .show(show):
                 return show.title
+            case let .page(page):
+                return page.title
             }
         }
         
@@ -250,6 +253,8 @@ extension PageViewModel {
                 return topic.title
             case let .show(show):
                 return show.title
+            case let .page(page):
+                return page.title
             }
         }
         
@@ -259,7 +264,7 @@ extension PageViewModel {
                 return AnalyticsPageType.landingPage.rawValue
             case  .live:
                 return AnalyticsPageType.live.rawValue
-            case .topic, .show:
+            case .topic, .show, .page:
                 return AnalyticsPageType.overview.rawValue
             }
         }
@@ -277,6 +282,9 @@ extension PageViewModel {
             case let .show(show):
                 let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
                 return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
+            case .page:
+                // To be defined
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             }
         }
         
@@ -479,6 +487,10 @@ private extension PageViewModel {
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
+        case let .page(page):
+            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: page.uid)
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                .eraseToAnyPublisher()
         case let .audio(channel: channel):
             return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
