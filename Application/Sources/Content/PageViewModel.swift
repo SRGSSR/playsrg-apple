@@ -255,9 +255,8 @@ extension PageViewModel {
         }
         
         var displayedLeadingSummary: String? {
-            if case .page = self {
-                // FIXME: Use page summary when available
-                return title
+            if case let .page(page) = self {
+                return page.summary
             }
             else {
                 return nil
