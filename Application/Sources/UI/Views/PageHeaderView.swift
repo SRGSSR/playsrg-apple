@@ -8,14 +8,13 @@ import SwiftUI
 
 // MARK: View
 
-/// Behavior: h-exp, v-exp
+/// Behavior: h-hug, v-hug
 struct PageHeaderView: View {
-    let title: String?
-    let summary: String?
+    let page: SRGContentPage?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if let title {
+            if let title = page?.title {
                 HStack(spacing: 0) {
                     Text(title)
                         .srgFont(.H1)
@@ -28,8 +27,8 @@ struct PageHeaderView: View {
                     Spacer()
                 }
             }
-            if let summary {
-                Text(summary)
+            if let description = page?.summary {
+                Text(description)
                     .srgFont(.body)
                     .foregroundColor(.srgGrayC7)
                 // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
@@ -47,10 +46,10 @@ struct PageHeaderView: View {
 // MARK: Size
 
 enum PageHeaderViewSize {
-    static func recommended(forTitle title: String?, summary: String?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        if let title, !title.isEmpty {
+    static func recommended(for page: SRGContentPage?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        if let page {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
-            let size = PageHeaderView(title: title, summary: summary).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+            let size = PageHeaderView(page: page).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
         }
         else {
@@ -64,22 +63,20 @@ enum PageHeaderViewSize {
 struct PageHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PageHeaderView(title: "Title", summary: nil)
-            PageHeaderView(title: "Title", summary: "Description")
-            PageHeaderView(title: .loremIpsum, summary: nil)
-            PageHeaderView(title: .loremIpsum, summary: .loremIpsum)
-            PageHeaderView(title: nil, summary: nil)
+            PageHeaderView(page: Mock.page())
+            PageHeaderView(page: Mock.page(.short))
+            PageHeaderView(page: Mock.page(.overflow))
+            PageHeaderView(page: nil)
         }
         .previewLayout(.sizeThatFits)
         .frame(width: 1000)
         .environment(\.horizontalSizeClass, .regular)
         
         Group {
-            PageHeaderView(title: "Title", summary: nil)
-            PageHeaderView(title: "Title", summary: "Description")
-            PageHeaderView(title: .loremIpsum, summary: nil)
-            PageHeaderView(title: .loremIpsum, summary: .loremIpsum)
-            PageHeaderView(title: nil, summary: nil)
+            PageHeaderView(page: Mock.page())
+            PageHeaderView(page: Mock.page(.short))
+            PageHeaderView(page: Mock.page(.overflow))
+            PageHeaderView(page: nil)
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)

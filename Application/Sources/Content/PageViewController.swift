@@ -148,12 +148,12 @@ final class PageViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: model.id.displayedCenterTitle)
+            view.content = TitleView(text: model.id.displayedGlobalTitle)
         }
         
         let pageHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageHeaderView>>(elementKind: Header.pageHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = PageHeaderView(title: model.id.displayedLeadingTitle, summary: model.id.displayedLeadingSummary)
+            view.content = PageHeaderView(page: model.id.displayedPage)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
@@ -649,12 +649,12 @@ private extension PageViewController {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
         }
-        else if let title = model.id.displayedCenterTitle {
-            let globalHeaderSize = TitleViewSize.recommended(forText: title)
+        else if let globalTitle = model.id.displayedGlobalTitle {
+            let globalHeaderSize = TitleViewSize.recommended(forText: globalTitle)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
-        else if let title = model.id.displayedLeadingTitle {
-            let globalHeaderSize = PageHeaderViewSize.recommended(forTitle: title, summary: model.id.displayedLeadingSummary, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+        else if let page = model.id.displayedPage {
+            let globalHeaderSize = PageHeaderViewSize.recommended(for: page, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.pageHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         

@@ -232,7 +232,7 @@ extension PageViewModel {
             return displayedShow != nil
         }
         
-        var displayedCenterTitle: String? {
+        var displayedGlobalTitle: String? {
             if case .topic = self {
 #if os(tvOS)
                 return title
@@ -245,22 +245,17 @@ extension PageViewModel {
             }
         }
         
-        var displayedLeadingTitle: String? {
-            if case .page = self {
-                return title
+        var displayedPage: SRGContentPage? {
+            if case let .page(page) = self {
+                return page
             }
             else {
                 return nil
             }
         }
         
-        var displayedLeadingSummary: String? {
-            if case let .page(page) = self {
-                return page.summary
-            }
-            else {
-                return nil
-            }
+        var hasPageHeaderView: Bool {
+            return displayedPage != nil
         }
         
         var analyticsPageViewTitle: String {
