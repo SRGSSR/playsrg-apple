@@ -35,7 +35,7 @@ final class PageViewController: UIViewController {
     }
     
     private var refreshTriggered = false
-    private var showHeaderVisible = false
+    private var headerWithTitleVisible = false
 #endif
     
     private var analyticsPageViewTracked = false
@@ -135,7 +135,7 @@ final class PageViewController: UIViewController {
         
 #if os(iOS)
         navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
-        showHeaderVisible = model.id.hasShowHeaderView
+        headerWithTitleVisible = model.id.isHeaderWithTitle
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
@@ -293,7 +293,7 @@ final class PageViewController: UIViewController {
             self.googleCastButton?.removeFromSuperview()
         }
         
-        navigationItem.title = !showHeaderVisible ? title : nil
+        navigationItem.title = !headerWithTitleVisible ? title : nil
         navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
         
         if model.id.sharingItem != nil {
@@ -399,7 +399,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = (isNavigationBarHidden || model.id.hasShowHeaderView) ? 0 : Self.layoutVerticalMargin
+        let top = (isNavigationBarHidden || model.id.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif
@@ -489,8 +489,8 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue:
-            showHeaderVisible = true
+        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
+            headerWithTitleVisible = true
             updateNavigationBar(animated: true)
         default:
             break
@@ -499,8 +499,8 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue:
-                showHeaderVisible = false
+        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
+                headerWithTitleVisible = false
                 updateNavigationBar(animated: true)
         default:
             break

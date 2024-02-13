@@ -153,8 +153,12 @@ extension PageViewModel {
         case page(_ page: SRGContentPage)
         
 #if os(iOS)
+        var isHeaderWithTitle: Bool {
+            return hasShowHeaderView || hasPageHeaderView
+        }
+        
         var isLargeTitleDisplayMode: Bool {
-            if case .show = self {
+            if isHeaderWithTitle {
                 return false
             }
             else {
