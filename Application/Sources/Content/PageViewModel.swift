@@ -182,6 +182,8 @@ extension PageViewModel {
             switch self {
             case let .show(show):
                 return SharingItem(for: show)
+            case let .page(page):
+                return SharingItem(for: page)
             default:
                 return nil
             }

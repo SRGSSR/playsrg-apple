@@ -454,6 +454,7 @@ struct AnalyticsEvent {
 @objc enum AnalyticsSharingAction: UInt {
     case media
     case show
+    case page
     case section
     
     fileprivate var name: String {
@@ -462,6 +463,8 @@ struct AnalyticsEvent {
             return "media_share"
         case .show:
             return "show_share"
+        case .page:
+            return "page_share"
         case .section:
             return "section_share"
         }
