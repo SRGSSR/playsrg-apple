@@ -19,6 +19,7 @@ typedef NSString * DeepLinkType NS_STRING_ENUM;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeMedia;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeShow;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeTopic;
+OBJC_EXPORT DeepLinkType const DeepLinkTypeMicroPage;
 OBJC_EXPORT DeepLinkType const DeepLinkTypePage;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeHome;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeAZ;

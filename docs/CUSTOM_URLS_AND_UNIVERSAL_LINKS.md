@@ -16,6 +16,8 @@ The host name (first item after the `//` in the URL) describes the action which 
 * Open a show page: `[scheme]://show/[show_urn]`.
 * Open a topic page: `[scheme]://topic/[topic_urn]`.
 * Open a section page: `[scheme]://section/[section_id]`.
+* Open a micro page: `[scheme]://micropage/[page_id]`.
+* Open a content page: `[scheme]://page/[page_id]`.
 * Open a home page: `[scheme]://home`.
 * Open shows A to Z page: `[scheme]://az`. An optional `index` single lowercase character parameter can be provided to open the page at the specified index.
 * Open program guide page (videos), or shows by date page (audios): `[scheme]://bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.

@@ -17,6 +17,7 @@
 DeepLinkType const DeepLinkTypeMedia = @"media";
 DeepLinkType const DeepLinkTypeShow = @"show";
 DeepLinkType const DeepLinkTypeTopic = @"topic";
+DeepLinkType const DeepLinkTypeMicroPage = @"micropage";
 DeepLinkType const DeepLinkTypePage = @"page";
 DeepLinkType const DeepLinkTypeHome = @"home";
 DeepLinkType const DeepLinkTypeAZ = @"az";
@@ -111,7 +112,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
                      analyticsEvent:hiddenEvent
                                queryItems:URLComponents.queryItems];
     }
-    else if ([type isEqualToString:DeepLinkTypePage]) {
+    else if ([type isEqualToString:DeepLinkTypePage] || [type isEqualToString:DeepLinkTypeMicroPage]) {
         NSString *pageUid = URLComponents.path.lastPathComponent;
         if (! pageUid) {
             return [self unsupportedActionWithSource:source];

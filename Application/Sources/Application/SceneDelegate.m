@@ -133,7 +133,7 @@ static void *s_kvoContext = &s_kvoContext;
             [action.analyticsEvent send];
         }];
     }
-    else if ([action.type isEqualToString:DeepLinkTypePage]) {
+    else if ([action.type isEqualToString:DeepLinkTypePage] || [action.type isEqualToString:DeepLinkTypeMicroPage]) {
         [self openPageWithUid:action.identifier completionBlock:^{
             [action.analyticsEvent send];
         }];
