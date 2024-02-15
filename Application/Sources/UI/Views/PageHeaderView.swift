@@ -39,8 +39,8 @@ struct PageHeaderView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, constant(iOS: 16, tvOS: 80))
-        .padding(.bottom, constant(iOS: 12, tvOS: 30))
+        .padding(.horizontal, constant(iOS: 16, tvOS: 0))
+        .padding(.bottom, constant(iOS: 12, tvOS: 80))
     }
 }
 
