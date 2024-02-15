@@ -20,6 +20,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEpisode;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelGoogleCast;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelMicroPage;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelMostPopular;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelNews;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;

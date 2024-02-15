@@ -279,11 +279,11 @@ extension PageViewModel {
         
         var analyticsPageViewType: String {
             switch self {
-            case .video, .audio:
+            case .video, .audio, .page:
                 return AnalyticsPageType.landingPage.rawValue
             case  .live:
                 return AnalyticsPageType.live.rawValue
-            case .topic, .show, .page:
+            case .topic, .show:
                 return AnalyticsPageType.overview.rawValue
             }
         }
@@ -302,8 +302,7 @@ extension PageViewModel {
                 let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
                 return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
             case .page:
-                // To be defined
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.microPage.rawValue]
             }
         }
         

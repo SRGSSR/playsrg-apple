@@ -15,6 +15,7 @@ AnalyticsPageLevel const AnalyticsPageLevelEpisode = @"episode";
 AnalyticsPageLevel const AnalyticsPageLevelFeature = @"feature";
 AnalyticsPageLevel const AnalyticsPageLevelGoogleCast = @"google cast";
 AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
+AnalyticsPageLevel const AnalyticsPageLevelMicroPage = @"micropage";
 AnalyticsPageLevel const AnalyticsPageLevelMostPopular = @"most popular";
 AnalyticsPageLevel const AnalyticsPageLevelNews = @"news";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
