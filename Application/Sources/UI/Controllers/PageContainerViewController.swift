@@ -136,7 +136,7 @@ class PageContainerViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         coordinator.animate(alongsideTransition: { _ in
-            // viewWillTransition(to:with:) could be called before controller view is laoded.
+            // viewWillTransition(to:with:) could be called before controller view is loaded.
             if self.tabBar != nil {
                 // Force a refresh of the tab bar so that the alignment is correct after rotation
                 self.tabBar.alignment = .leading
