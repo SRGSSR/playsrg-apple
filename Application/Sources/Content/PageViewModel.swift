@@ -301,8 +301,9 @@ extension PageViewModel {
             case let .show(show):
                 let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
                 return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
-            case .page:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.microPage.rawValue]
+            case let .page(page):
+                let level1 = page.type == .microPage ? AnalyticsPageLevel.microPage.rawValue : AnalyticsPageLevel.pacPage.rawValue
+                return [AnalyticsPageLevel.play.rawValue, level1]
             }
         }
         

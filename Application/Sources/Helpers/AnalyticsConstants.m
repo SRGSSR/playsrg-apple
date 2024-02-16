@@ -18,6 +18,7 @@ AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
 AnalyticsPageLevel const AnalyticsPageLevelMicroPage = @"micropage";
 AnalyticsPageLevel const AnalyticsPageLevelMostPopular = @"most popular";
 AnalyticsPageLevel const AnalyticsPageLevelNews = @"news";
+AnalyticsPageLevel const AnalyticsPageLevelPacPage = @"pac page";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
 AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
 AnalyticsPageLevel const AnalyticsPageLevelScheduledLivestream = @"scheduled livestream";

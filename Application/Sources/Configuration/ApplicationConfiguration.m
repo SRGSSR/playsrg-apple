@@ -629,7 +629,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSURL *)sharingURLForContentPage:(SRGContentPage *)contentPage
 {
-    if (! contentPage || ! [self playURLForVendor:contentPage.vendor]) {
+    if (! contentPage || ! [self playURLForVendor:contentPage.vendor] || contentPage.type != SRGContentPageTypeMicroPage) {
         return nil;
     }
     

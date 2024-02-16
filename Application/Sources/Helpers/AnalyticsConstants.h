@@ -23,6 +23,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelMicroPage;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelMostPopular;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelNews;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPacPage;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelScheduledLivestream;
