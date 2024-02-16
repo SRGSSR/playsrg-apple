@@ -13,9 +13,9 @@ class PageContainerViewController: UIViewController {
     
     private var pageViewController: UIPageViewController
     
-    private var tabBar: MDCTabBar!
-    private var blurView: UIVisualEffectView!
-    private var tabBarTopConstraint: NSLayoutConstraint!
+    private weak var tabBar: MDCTabBar!
+    private weak var blurView: UIVisualEffectView!
+    private weak var tabBarTopConstraint: NSLayoutConstraint!
     
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
