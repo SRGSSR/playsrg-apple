@@ -9,8 +9,8 @@
 #import "ApplicationConfiguration.h"
 #import "MediaPlayerViewController.h"
 #import "PlayMiniPlayerView.h"
+#import "PlaySRG-Swift.h"
 #import "GoogleCastMiniPlayerView.h"
-#import "UIVisualEffectView+PlaySRG.h"
 
 @import GoogleCast;
 @import libextobjc;

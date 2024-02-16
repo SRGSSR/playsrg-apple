@@ -14,7 +14,6 @@
 #import "PlaySRG-Swift.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
-#import "UIVisualEffectView+PlaySRG.h"
 
 @import libextobjc;
 @import MAKVONotificationCenter;

@@ -20,6 +20,7 @@
 #import "Favorites.h"
 #import "History.h"
 #import "Layout.h"
+#import "MaterialTabs.h"
 #import "MediaPlayerViewController.h"
 #import "MediaPlayerViewController+Private.h"
 #import "MediaPreviewViewController.h"
