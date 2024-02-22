@@ -69,7 +69,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForContentPage:contentPage];
     return [[self alloc] initWithURL:URL
                                title:contentPage.title
-                     analyticsAction:AnalyticsSharingActionPage
+                     analyticsAction:contentPage.type == SRGContentPageTypeMicroPage ? AnalyticsSharingActionMicroPage : AnalyticsSharingActionPage
                         analyticsUid:contentPage.uid
                     mediaContentType:AnalyticsSharingMediaContentTypeNone];
 }

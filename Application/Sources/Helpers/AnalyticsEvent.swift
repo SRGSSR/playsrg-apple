@@ -455,6 +455,7 @@ struct AnalyticsEvent {
     case media
     case show
     case page
+    case microPage
     case section
     
     fileprivate var name: String {
@@ -465,6 +466,8 @@ struct AnalyticsEvent {
             return "show_share"
         case .page:
             return "page_share"
+        case .microPage:
+            return "micro_page_share"
         case .section:
             return "section_share"
         }
