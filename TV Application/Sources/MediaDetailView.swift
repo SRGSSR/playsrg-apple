@@ -96,6 +96,11 @@ struct MediaDetailView: View {
             return MediaDescription.availability(for: media)
         }
         
+        private var availabilityInformationAccessibilityLabel: String? {
+            guard let media = model.media else { return nil }
+            return MediaDescription.availabilityAccessibilityLabel(for: media)
+        }
+        
         private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
             guard let media = model.media else { return nil }
             return MediaDescription.availabilityBadgeProperties(for: media)
@@ -108,6 +113,7 @@ struct MediaDetailView: View {
                         .srgFont(.subtitle2)
                         .foregroundColor(.white)
                         .padding(.vertical, 5)
+                        .accessibilityElement(label: availabilityInformationAccessibilityLabel)
                 }
                 if let properties = availabilityBadgeProperties {
                     Badge(text: properties.text, color: Color(properties.color))

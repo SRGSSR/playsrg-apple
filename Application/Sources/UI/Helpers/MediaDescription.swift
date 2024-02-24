@@ -6,7 +6,12 @@
 
 import SRGAppearanceSwift
 
-enum MediaDescription {
+@objcMembers
+class MediaDescription: NSObject {
+    override init() {
+        fatalError("init() is not available")
+    }
+    
     // MARK: - Title and subtitle
     
     enum Style {
@@ -102,6 +107,21 @@ enum MediaDescription {
         }
     }
     
+    static func availabilityAccessibilityLabel(for media: SRGMedia) -> String {
+        var values: [String] = []
+        
+        if let date = formattedDate(for: media, style: .shortDateAndTime, accessiblityLabel: true) {
+            values.append(date)
+        }
+        
+        if let expirationDate = formattedExpirationDate(for: media, accessiblityLabel: true) {
+            values.append(expirationDate)
+        }
+        
+        // Unbreakable spaces before / after the separator
+        return values.joined(separator: " · ")
+    }
+    
     // MARK: - Badges
     
     struct BadgeProperties {
@@ -189,18 +209,24 @@ enum MediaDescription {
         case shortDateAndTime
     }
     
-    private static func formattedDate(for media: SRGMedia, style: DateStyle = .date) -> String? {
+    private static func formattedDate(for media: SRGMedia, style: DateStyle = .date, accessiblityLabel: Bool = false) -> String? {
         if media.play_isWebFirst {
             return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
         }
         else if shouldDisplayDate(for: media) {
             switch style {
             case .date:
-                return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+                return accessiblityLabel
+                ? PlayAccessibilityRelativeDateFromDate(media.date)
+                : DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
             case .shortDate:
-                return DateFormatter.play_relativeShortDate.string(from: media.date)
+                return accessiblityLabel
+                ? PlayAccessibilityRelativeDateFromDate(media.date)
+                : DateFormatter.play_relativeShortDate.string(from: media.date)
             case .shortDateAndTime:
-                return DateFormatter.play_shortDateAndTime.string(from: media.date)
+                return accessiblityLabel
+                ? PlayAccessibilityDateAndTimeFromDate(media.date)
+                : DateFormatter.play_shortDateAndTime.string(from: media.date)
             }
         }
         else {
@@ -208,9 +234,12 @@ enum MediaDescription {
         }
     }
     
-    private static func formattedExpirationDate(for media: SRGMedia) -> String? {
+    private static func formattedExpirationDate(for media: SRGMedia, accessiblityLabel: Bool = false) -> String? {
         guard let endDate = media.endDate, shouldDisplayExpirationDate(for: media) else { return nil }
-        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), DateFormatter.play_shortDate.string(from: endDate))
+        let dateString = accessiblityLabel
+        ? PlayAccessibilityDateFromDate(endDate)
+        : DateFormatter.play_shortDate.string(from: endDate)
+        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), dateString)
     }
     
     private static func formattedTime(for media: SRGMedia) -> String {

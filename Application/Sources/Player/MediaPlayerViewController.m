@@ -20,7 +20,6 @@
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayApplication.h"
-#import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
 #import "PlaySRG-Swift.h"
@@ -815,7 +814,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.titleLabel.text = media.title;
         
         self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-        [self.dateLabel play_displayDateLabelForMedia:media];
+        self.dateLabel.text = [MediaDescription availabilityFor:media];
+        self.dateLabel.accessibilityLabel = [MediaDescription availabilityAccessibilityLabelFor:media];
         
         if (self.dateLabel.text.length == 0) {
             [self.dateLabel removeFromSuperview];
