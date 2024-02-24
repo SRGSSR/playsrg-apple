@@ -852,7 +852,7 @@
 "Watch later" = "Regarder plus tard";
 
 /* Short label identifying a web first content. */
-"Web first" = "Nouveau";
+"Web first" = "Exclu";
 
 /* Label of the button to display what's new information
    Title displayed at the top of the What's new view */
