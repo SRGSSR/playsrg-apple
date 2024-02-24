@@ -6,8 +6,7 @@
 
 import SRGAppearanceSwift
 
-@objcMembers
-class MediaDescription: NSObject {
+@objc class MediaDescription: NSObject {
     override init() {
         fatalError("init() is not available")
     }
@@ -73,7 +72,7 @@ class MediaDescription: NSObject {
         return media.duration / 1000
     }
     
-    static func availability(for media: SRGMedia) -> String {
+    @objc static func availability(for media: SRGMedia) -> String {
         var values: [String] = []
         
         if let date = formattedDate(for: media, style: .shortDateAndTime) {
@@ -107,7 +106,7 @@ class MediaDescription: NSObject {
         }
     }
     
-    static func availabilityAccessibilityLabel(for media: SRGMedia) -> String {
+    @objc static func availabilityAccessibilityLabel(for media: SRGMedia) -> String {
         var values: [String] = []
         
         if let date = formattedDate(for: media, style: .shortDateAndTime, accessiblityLabel: true) {
