@@ -181,7 +181,7 @@ struct MediaCell: View {
         }
         
         private var bottomPadding: CGFloat {
-            // Allow 3 lines for titles, with a badge and no subtitles
+            // Allow 3 lines for title, with a badge and no subtitles
             return embeddedDirection == .horizontal ? -2 : 0
         }
         
