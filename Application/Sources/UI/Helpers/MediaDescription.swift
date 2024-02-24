@@ -48,7 +48,7 @@ enum MediaDescription {
         if media.play_isWebFirst {
             return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
         }
-        else if shouldDisplayPublication(for: media) {
+        else if shouldDisplayDate(for: media) {
             switch style {
             case .date:
                 return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
@@ -121,7 +121,7 @@ enum MediaDescription {
         return media.duration / 1000
     }
     
-    private static func shouldDisplayExpiration(for media: SRGMedia) -> Bool {
+    private static func shouldDisplayExpirationDate(for media: SRGMedia) -> Bool {
         let now = Date()
         guard media.timeAvailability(at: now) == .available,
               media.contentType != .scheduledLivestream, media.contentType != .trailer,
@@ -130,31 +130,27 @@ enum MediaDescription {
         return remainingDateComponents.day! > 3
     }
     
-    private static func shouldDisplayPublication(for media: SRGMedia) -> Bool {
+    private static func shouldDisplayDate(for media: SRGMedia) -> Bool {
         let now = Date()
         return media.timeAvailability(at: now) != .notYetAvailable
         && media.contentType != .livestream
         && !(media.contentType == .scheduledLivestream && media.timeAvailability(at: now) == .available)
     }
     
-    private static func publication(for media: SRGMedia) -> String? {
-        return formattedDate(for: media, style: .shortDateAndTime)
-    }
-    
-    private static func expiration(for media: SRGMedia) -> String? {
-        guard let endDate = media.endDate else { return nil }
+    private static func expirationDate(for media: SRGMedia) -> String? {
+        guard let endDate = media.endDate, shouldDisplayExpirationDate(for: media) else { return nil }
         return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), DateFormatter.play_shortDate.string(from: endDate))
     }
     
     static func availability(for media: SRGMedia) -> String {
         var values: [String] = []
         
-        if let publication = publication(for: media) {
-            values.append(publication)
+        if let date = formattedDate(for: media, style: .shortDateAndTime) {
+            values.append(date)
         }
         
-        if shouldDisplayExpiration(for: media), let expiration = expiration(for: media) {
-            values.append(expiration)
+        if let expirationDate = expirationDate(for: media) {
+            values.append(expirationDate)
         }
         
         // Unbreakable spaces before / after the separator
