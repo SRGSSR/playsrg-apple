@@ -156,10 +156,7 @@ import SRGAppearanceSwift
                 )
             case .available:
                 if media.contentType == .scheduledLivestream {
-                    return BadgeProperties(
-                        text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(),
-                        color: .srgLightRed
-                    )
+                    return liveBadgeProperties()
                 }
                 else if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
                     return BadgeProperties(
