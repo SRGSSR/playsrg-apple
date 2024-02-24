@@ -31,6 +31,5 @@
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
   "showLeadPreferred": true,
   "tvGuideOtherBouquets": "srf,rsi",
-  "userConsentDefaultLanguage": "fr",
-  "webFirstBadgeEnabled": true
+  "userConsentDefaultLanguage": "fr"
 }
