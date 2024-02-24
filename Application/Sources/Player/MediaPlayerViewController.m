@@ -809,13 +809,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.scrollView.hidden = NO;
         self.channelView.hidden = YES;
         
-        [self.availabilityLabel play_displayAvailabilityBadgeForMediaMetadata:mainChapterMedia];
+        [self.availabilityLabel play_displayAvailabilityBadgeForMedia:mainChapterMedia];
         
         self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
         self.titleLabel.text = media.title;
         
         self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-        [self.dateLabel play_displayDateLabelForMediaMetadata:media];
+        [self.dateLabel play_displayDateLabelForMedia:media];
         
         if (self.dateLabel.text.length == 0) {
             [self.dateLabel removeFromSuperview];

@@ -34,19 +34,19 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 #pragma mark Public
 
-- (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
+- (void)play_displayDateLabelForMedia:(SRGMedia *)media
 {
     NSDate *nowDate = NSDate.date;
-    SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
+    SRGTimeAvailability timeAvailability = [media timeAvailabilityAtDate:nowDate];
     
-    if (mediaMetadata.date
+    if (media.date
         && timeAvailability != SRGTimeAvailabilityNotYetAvailable
-        && mediaMetadata.contentType != SRGContentTypeLivestream
-        && !(mediaMetadata.contentType == SRGContentTypeScheduledLivestream && timeAvailability == SRGTimeAvailabilityAvailable)) {
-        NSString *text = [NSDateFormatter.play_shortDateAndTime stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
-        NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(mediaMetadata.date);
+        && media.contentType != SRGContentTypeLivestream
+        && !(media.contentType == SRGContentTypeScheduledLivestream && timeAvailability == SRGTimeAvailabilityAvailable)) {
+        NSString *text = [NSDateFormatter.play_shortDateAndTime stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
+        NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(media.date);
         
-        BOOL isWebFirst = [mediaMetadata.date compare:nowDate] == NSOrderedDescending && timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.contentType == SRGContentTypeEpisode;
+        BOOL isWebFirst = [media.date compare:nowDate] == NSOrderedDescending && timeAvailability == SRGTimeAvailabilityAvailable && media.contentType == SRGContentTypeEpisode;
         
         if (isWebFirst) {
             NSString *webFirst = NSLocalizedString(@"In advance", @"Short text replacing date for a web first content.");
@@ -57,15 +57,15 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
             accessibilityLabel = webFirst;
         }
         
-        if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
-                && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
-            NSDateComponents *remainingDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
+        if (timeAvailability == SRGTimeAvailabilityAvailable && media.endDate
+                && media.contentType != SRGContentTypeScheduledLivestream && media.contentType != SRGContentTypeLivestream && media.contentType != SRGContentTypeTrailer) {
+            NSDateComponents *remainingDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:media.endDate options:0];
             if (remainingDateComponents.day > kDayNearExpirationThreshold) {
-                NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDate stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
+                NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDate stringFromDate:media.endDate].play_localizedUppercaseFirstLetterString];
                 // Unbreakable spaces before / after the separator
                 text = [text stringByAppendingFormat:@" · %@", expiration];
                 
-                NSString *expirationAccessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), PlayAccessibilityDateFromDate(mediaMetadata.endDate)];
+                NSString *expirationAccessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), PlayAccessibilityDateFromDate(media.endDate)];
                 accessibilityLabel = [accessibilityLabel stringByAppendingFormat:@", %@", expirationAccessibilityLabel];
             }
         }
@@ -79,7 +79,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
 }
 
-- (void)play_displayAvailabilityBadgeForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
+- (void)play_displayAvailabilityBadgeForMedia:(SRGMedia *)media
 {
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
@@ -90,11 +90,11 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     NSString *text = nil;
     
     NSDate *nowDate = NSDate.date;
-    SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
+    SRGTimeAvailability timeAvailability = [media timeAvailabilityAtDate:nowDate];
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
         self.backgroundColor = UIColor.play_black80a;
         
-        NSDate *startDate = mediaMetadata.startDate != nil ? mediaMetadata.startDate : mediaMetadata.date;
+        NSDate *startDate = media.startDate != nil ? media.startDate : media.date;
         text = [[NSDateFormatter play_relativeShortDateAndTime] stringFromDate:startDate].play_localizedUppercaseFirstLetterString;
     }
     else if (timeAvailability == SRGTimeAvailabilityNotAvailableAnymore) {
@@ -102,18 +102,18 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         
         text = NSLocalizedString(@"Expired", @"Short label identifying content which has expired.");
     }
-    else if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
-             && (mediaMetadata.contentType == SRGContentTypeEpisode || mediaMetadata.contentType == SRGContentTypeClip)) {
+    else if (timeAvailability == SRGTimeAvailabilityAvailable && media.endDate
+             && (media.contentType == SRGContentTypeEpisode || media.contentType == SRGContentTypeClip)) {
         self.backgroundColor = UIColor.play_orange;
         
-        NSDateComponents *monthsDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
+        NSDateComponents *monthsDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:media.endDate options:0];
         if (monthsDateComponents.day <= kDayNearExpirationThreshold) {
-            NSTimeInterval timeIntervalBeforeEnd = [mediaMetadata.endDate timeIntervalSinceDate:nowDate];
+            NSTimeInterval timeIntervalBeforeEnd = [media.endDate timeIntervalSinceDate:nowDate];
             text = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), LabelFormattedDuration(timeIntervalBeforeEnd)];
         }
     }
-    else if (mediaMetadata.contentType == SRGContentTypeLivestream
-             || (mediaMetadata.contentType == SRGContentTypeScheduledLivestream && timeAvailability == SRGTimeAvailabilityAvailable)) {
+    else if (media.contentType == SRGContentTypeLivestream
+             || (media.contentType == SRGContentTypeScheduledLivestream && timeAvailability == SRGTimeAvailabilityAvailable)) {
         self.backgroundColor = UIColor.srg_lightRedColor;
         
         text = NSLocalizedString(@"Live", @"Short label identifying a livestream. Display in uppercase.").uppercaseString;
