@@ -89,7 +89,7 @@ import SRGAppearanceSwift
     
     // MARK: - Accessibility
     
-    static func accessibilityLabel(for media: SRGMedia) -> String? {
+    static func cellAccessibilityLabel(for media: SRGMedia) -> String? {
         let accessibilityLabel: String
         if let show = media.show, !areRedundant(media: media, show: show) {
             accessibilityLabel = show.title.appending(", \(media.title)")

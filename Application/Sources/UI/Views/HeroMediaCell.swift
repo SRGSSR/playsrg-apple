@@ -124,7 +124,7 @@ struct HeroMediaCell: View {
 private extension HeroMediaCell {
     var accessibilityLabel: String? {
         guard let media else { return nil }
-        return MediaDescription.accessibilityLabel(for: media)
+        return MediaDescription.cellAccessibilityLabel(for: media)
     }
     
     var accessibilityHint: String? {

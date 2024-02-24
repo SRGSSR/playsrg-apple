@@ -118,7 +118,7 @@ extension LiveMediaCellViewModel {
             return label
         }
         else if let media {
-            return MediaDescription.accessibilityLabel(for: media)
+            return MediaDescription.cellAccessibilityLabel(for: media)
         }
         else {
             return nil
