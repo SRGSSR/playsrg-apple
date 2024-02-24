@@ -45,9 +45,9 @@ import SRGAppearanceSwift
                 if areRedundant(media: media, show: show) {
                     return show.title
                 }
-                else if let publicationDate = formattedDate(for: media, style: .shortDate) {
+                else if let formattedDate = formattedDate(for: media, style: .shortDate) {
                     // Unbreakable spaces before / after the separator
-                    return "\(show.title) · \(publicationDate)"
+                    return "\(show.title) · \(formattedDate)"
                 }
                 else {
                     return show.title
