@@ -41,6 +41,24 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 #pragma mark Class methods
 
++ (NSArray<DeepLinkType> *)supportedTypes
+{
+    return @[
+        DeepLinkTypeMedia,
+        DeepLinkTypeShow,
+        DeepLinkTypeTopic,
+        DeepLinkTypeMicroPage,
+        DeepLinkTypePage,
+        DeepLinkTypeHome,
+        DeepLinkTypeAZ,
+        DeepLinkTypeByDate,
+        DeepLinkTypeSection,
+        DeepLinkTypeLivestreams,
+        DeepLinkTypeSearch,
+        DeepLinkTypeLink
+    ];
+}
+
 + (instancetype)unsupportedActionWithSource:(AnalyticsOpenUrlSource)source
 {
     AnalyticsEventObjC *hiddenEvent = [AnalyticsEventObjC openUrlWithAction:AnalyticsOpenUrlActionOpenPlayApp

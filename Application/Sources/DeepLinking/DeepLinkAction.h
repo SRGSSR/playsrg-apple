@@ -67,6 +67,8 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
 @property (nonatomic, readonly, copy) NSString *identifier;
 @property (nonatomic, readonly) AnalyticsEventObjC *analyticsEvent;
 
+@property (class, nonatomic, readonly) NSArray<DeepLinkType> *supportedTypes;
+
 /**
  *  Return the parameter matching the specified name, if any.
  */

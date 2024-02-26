@@ -6,6 +6,7 @@
 
 #import "DeepLinkService.h"
 
+#import "DeepLinkAction.h"
 #import "PlayLogger.h"
 #import "PlaySRG-Swift.h"
 #import "Reachability.h"
@@ -97,7 +98,8 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
                                                      URLComponents.host ?: NSNull.null,
                                                      URLComponents.path ?: NSNull.null,
                                                      queryItems.copy,
-                                                     URLComponents.fragment ?: NSNull.null ]];
+                                                     URLComponents.fragment ?: NSNull.null,
+                                                     DeepLinkAction.supportedTypes ]];
     NSString *resultString = result.toString;
     if ([resultString isEqualToString:@"null"]) {
         return nil;
