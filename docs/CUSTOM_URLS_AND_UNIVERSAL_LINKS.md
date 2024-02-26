@@ -1,16 +1,20 @@
 # Custom URL and Universal Link support
 
-Play applications can be opened with custom URLs starting with a URL scheme defined for each app. They can also be opened with universal links, provided the associated business unit website has enabled support for it.
+Play applications can be opened with custom URLs starting with a URL scheme defined for each app. They can also be opened with universal links on iOS, provided the associated business unit website has enabled support for it.
 
 ## Custom URLs
 
-The Play iOS application can be started using [custom URLs](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) having a reserved scheme. The scheme to use depends on the business unit and build variant to use, and has the following format:
+The Play iOS and tvOS applications can be started using [custom URLs](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) having a reserved scheme. The scheme to use depends on the business unit and build variant to use, and has the following format:
 
 `play(srf|rts|rsi|rtr|swi)(-beta|-nightly|-debug)`
 
-For example Play RTS can be opened with URLs starting with `playrts://...`, while Play SRF debug can be opened with URLs starting with `playsrf-debug://...`.
+For example Play RTS can be opened with URLs starting with `playrts://...`, while Play SRF debug build can be opened with URLs starting with `playsrf-debug://...`.
 
-The host name (first item after the `//` in the URL) describes the action which must be performed. Following actions are currently available:
+The hostname (first item after the `//` in the URL) describes the action which must be performed.
+
+#### iOS application
+
+Following actions are currently available for iOS application:
 
 * Open a media within the player: `[scheme]://media/[media_urn]`. An optional `start_time=[start_time]` parameter can be added to start VOD / AOD playback at the specified position in second.
 * Open a show page: `[scheme]://show/[show_urn]`.
@@ -29,14 +33,19 @@ For media, show and page links, an optional `channel_id=[channel_id]` parameter 
 
 For a debug, nightly or beta build, a `server=[server_title]` parameter can also be added to force a server selection update. The available server list can be found in the application under *Settings* > *Advanced features* > *Server*.
 
-The Play iOS application also supports pseudo-universal link URLs, obtained by replacing the URL scheme in the original portal URL with the application custom URL scheme.
+The Play iOS application also supports pseudo-universal link URLs, obtained by replacing the URL scheme in the original portal URL with the application custom URL scheme:
+
+* Open a Play web page: `[scheme]://[play_website_url]`. It uses the [parsePlayUrl.js](https://github.com/SRGSSR/playsrg-playfff/blob/main/docs/DEEPLINK.md) file with the related function to attempt transforming the URL.
 
 For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply replace `https` with `playrts-debug`, as follows: [playrts-debug://www.rts.ch/play/tv/emissions?index=l](playrts-debug://www.rts.ch/play/tv/emissions?index=l)
+
+#### tvOS application
 
 The Play tvOS application supports only those custom URLs:
 
 * Open a media page: `[scheme]://media/[media_urn]`. If it's a 24/7 livestream, the player page is open instead.
 * Open a show page: `[scheme]://show/[show_urn]`.
+* Open a micro page: `[scheme]://micropage/[page_id]`.
 
 Refer to the _Testing_ section for more information about how custom URLs can be supplied to an application during tests.
 
@@ -65,6 +74,7 @@ The [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool
 
 ## Changelog
 
+- Version iOS 3.8.3: New micropage action. Share supported hostnames to the JS script.
 - Version iOS 3.6.8: New livestreams page action.
 - Version iOS 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
 - Version iOS 2.9.6: Version 2 of universal link support.
