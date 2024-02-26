@@ -30,7 +30,7 @@ struct PageHeaderView: View {
             if let description = page?.summary {
                 Text(description)
                     .srgFont(.body)
-                    .foregroundColor(.srgGrayC7)
+                    .foregroundColor(.white)
                 // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                 // when calculated with a `UIHostingController`, but without this the text does not occupy
                 // all lines it could.
