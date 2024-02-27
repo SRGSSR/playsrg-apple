@@ -629,6 +629,20 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return URLComponents.URL;
 }
 
+- (NSURL *)sharingURLForContentPage:(SRGContentPage *)contentPage
+{
+    if (! contentPage || ! [self playURLForVendor:contentPage.vendor] || contentPage.type != SRGContentPageTypeMicroPage) {
+        return nil;
+    }
+    
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:contentPage.vendor] resolvingAgainstBaseURL:NO];
+    URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:@"tv"]
+                           stringByAppendingPathComponent:@"micropages"]
+                          stringByAppendingPathComponent:@"micropage"];
+    URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageId" value:contentPage.uid] ];
+    return URLComponents.URL;
+}
+
 - (NSURL *)sharingURLForContentSection:(SRGContentSection *)contentSection
 {
     if (! contentSection || ! [self playURLForVendor:contentSection.vendor]) {

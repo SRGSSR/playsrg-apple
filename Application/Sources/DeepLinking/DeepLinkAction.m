@@ -17,6 +17,8 @@
 DeepLinkType const DeepLinkTypeMedia = @"media";
 DeepLinkType const DeepLinkTypeShow = @"show";
 DeepLinkType const DeepLinkTypeTopic = @"topic";
+DeepLinkType const DeepLinkTypeMicroPage = @"micropage";
+DeepLinkType const DeepLinkTypePage = @"page";
 DeepLinkType const DeepLinkTypeHome = @"home";
 DeepLinkType const DeepLinkTypeAZ = @"az";
 DeepLinkType const DeepLinkTypeByDate = @"bydate";
@@ -38,6 +40,24 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 @implementation DeepLinkAction
 
 #pragma mark Class methods
+
++ (NSArray<DeepLinkType> *)supportedTypes
+{
+    return @[
+        DeepLinkTypeMedia,
+        DeepLinkTypeShow,
+        DeepLinkTypeTopic,
+        DeepLinkTypeMicroPage,
+        DeepLinkTypePage,
+        DeepLinkTypeHome,
+        DeepLinkTypeAZ,
+        DeepLinkTypeByDate,
+        DeepLinkTypeSection,
+        DeepLinkTypeLivestreams,
+        DeepLinkTypeSearch,
+        DeepLinkTypeLink
+    ];
+}
 
 + (instancetype)unsupportedActionWithSource:(AnalyticsOpenUrlSource)source
 {
@@ -108,6 +128,21 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         return [[self alloc] initWithType:type
                                identifier:topicURN
                      analyticsEvent:hiddenEvent
+                               queryItems:URLComponents.queryItems];
+    }
+    else if ([type isEqualToString:DeepLinkTypePage] || [type isEqualToString:DeepLinkTypeMicroPage]) {
+        NSString *pageUid = URLComponents.path.lastPathComponent;
+        if (! pageUid) {
+            return [self unsupportedActionWithSource:source];
+        }
+        
+        AnalyticsEventObjC *hiddenEvent = [AnalyticsEventObjC openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
+                                                                         source:source
+                                                                            urn:pageUid];
+        
+        return [[self alloc] initWithType:type
+                               identifier:pageUid
+                           analyticsEvent:hiddenEvent
                                queryItems:URLComponents.queryItems];
     }
     else if ([@[ DeepLinkTypeHome, DeepLinkTypeAZ, DeepLinkTypeByDate, DeepLinkTypeSearch, DeepLinkTypeLivestreams ] containsObject:type]) {

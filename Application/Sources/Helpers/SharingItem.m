@@ -64,6 +64,16 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                     mediaContentType:AnalyticsSharingMediaContentTypeNone];
 }
 
++ (instancetype)sharingItemForContentPage:(SRGContentPage *)contentPage
+{
+    NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForContentPage:contentPage];
+    return [[self alloc] initWithURL:URL
+                               title:contentPage.title
+                     analyticsAction:contentPage.type == SRGContentPageTypeMicroPage ? AnalyticsSharingActionMicroPage : AnalyticsSharingActionPage
+                        analyticsUid:contentPage.uid
+                    mediaContentType:AnalyticsSharingMediaContentTypeNone];
+}
+
 + (instancetype)sharingItemForContentSection:(SRGContentSection *)contentSection
 {
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForContentSection:contentSection];

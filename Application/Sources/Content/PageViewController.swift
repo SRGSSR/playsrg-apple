@@ -35,7 +35,7 @@ final class PageViewController: UIViewController {
     }
     
     private var refreshTriggered = false
-    private var showHeaderVisible = false
+    private var headerWithTitleVisible = false
 #endif
     
     private var analyticsPageViewTracked = false
@@ -135,7 +135,7 @@ final class PageViewController: UIViewController {
         
 #if os(iOS)
         navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
-        showHeaderVisible = model.id.hasShowHeaderView
+        headerWithTitleVisible = model.id.isHeaderWithTitle
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
@@ -148,7 +148,12 @@ final class PageViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: model.id.displayedTitle)
+            view.content = TitleView(text: model.id.displayedGlobalTitle)
+        }
+        
+        let pageHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageHeaderView>>(elementKind: Header.pageHeader.rawValue) { [weak self] view, _, _ in
+            guard let self else { return }
+            view.content = PageHeaderView(page: model.id.displayedPage)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
@@ -166,6 +171,9 @@ final class PageViewController: UIViewController {
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == Header.global.rawValue {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            }
+            if kind == Header.pageHeader.rawValue {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: pageHeaderViewRegistration, for: indexPath)
             }
             if kind == Header.showHeader.rawValue {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
@@ -285,7 +293,7 @@ final class PageViewController: UIViewController {
             self.googleCastButton?.removeFromSuperview()
         }
         
-        navigationItem.title = !showHeaderVisible ? title : nil
+        navigationItem.title = !headerWithTitleVisible ? title : nil
         navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
         
         if model.id.sharingItem != nil {
@@ -343,6 +351,7 @@ final class PageViewController: UIViewController {
 private extension PageViewController {
     enum Header: String {
         case global
+        case pageHeader
         case showHeader
     }
     
@@ -375,6 +384,10 @@ extension PageViewController {
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> PageViewController {
         return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
     }
+    
+    @objc static func pageViewController(for page: SRGContentPage) -> PageViewController {
+        return PageViewController(id: .page(page))
+    }
 }
 
 // MARK: Protocols
@@ -386,7 +399,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = (isNavigationBarHidden || model.id.hasShowHeaderView) ? 0 : Self.layoutVerticalMargin
+        let top = (isNavigationBarHidden || model.id.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif
@@ -476,8 +489,8 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue:
-            showHeaderVisible = true
+        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
+            headerWithTitleVisible = true
             updateNavigationBar(animated: true)
         default:
             break
@@ -486,8 +499,8 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue:
-                showHeaderVisible = false
+        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
+                headerWithTitleVisible = false
                 updateNavigationBar(animated: true)
         default:
             break
@@ -636,9 +649,13 @@ private extension PageViewController {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
         }
-        else if let title = model.id.displayedTitle {
-            let globalHeaderSize = TitleViewSize.recommended(forText: title)
+        else if let globalTitle = model.id.displayedGlobalTitle {
+            let globalHeaderSize = TitleViewSize.recommended(forText: globalTitle)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
+        }
+        else if let page = model.id.displayedPage {
+            let globalHeaderSize = PageHeaderViewSize.recommended(for: page, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.pageHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         
         return configuration

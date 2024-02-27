@@ -147,6 +147,20 @@ final class SceneDelegate: UIResponder {
                     UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)
+        case .page, .microPage:
+            UserConsentHelper.waitCollectingConsentRetain()
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: action.identifier)
+                .receive(on: DispatchQueue.main)
+                .sink { result in
+                    if case .failure = result {
+                        UserConsentHelper.waitCollectingConsentRelease()
+                    }
+                } receiveValue: { page in
+                    navigateToPage(page)
+                    action.analyticsEvent.send()
+                    UserConsentHelper.waitCollectingConsentRelease()
+                }
+                .store(in: &cancellables)
         default:
             break
         }

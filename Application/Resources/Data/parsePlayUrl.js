@@ -1,25 +1,55 @@
 // parsePlayUrl
 
-var parsePlayUrlVersion = 29;
+var parsePlayUrlVersion = 40;
 var parsePlayUrlBuild = "mmf";
 
-if(! console) {
-    var console = {
-        log:function(){}
-    }
+if (!console) {
+	var console = {
+		log: function () { }
+	}
 }
 
-function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
+var hostnameAz = "az";
+var hostnameByDate = "bydate";
+var hostnameHome = "home";
+var hostnameLink = "link";
+var hostnameLivestreams = "livestreams";
+var hostnameMedia = "media";
+var hostnameMicropage = "micropage";
+var hostnameSearch = "search";
+var hostnameSection = "section";
+var hostnameShow = "show"; 
+var hostnameTopic = "topic";
+
+function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor, supportedAppHostnames) {
+	if (!supportedAppHostnames) {
+		supportedAppHostnames = [hostnameAz, hostnameByDate, hostnameHome, hostnameLink, hostnameLivestreams, hostnameMedia, hostnameSearch, hostnameSection, hostnameShow, hostnameTopic];
+	}
+	originalUrl = {
+		"scheme": scheme,
+		"hostname": hostname,
+		"pathname": pathname,
+		"queryParams": queryParams,
+		"anchor": anchor,
+		"supportedAppHostnames": supportedAppHostnames
+	};
+
 	// fix path issue
 	pathname = pathname.replace("//", "/");
+
+	// Remove last slash if any
+	slashCount = pathname.split("/").length - 1;
+	if (slashCount > 2 && pathname.endsWith("/")) {
+		pathname = pathname.slice(0, -1)
+	}
 
 	// Case insensitive
 	hostname = hostname.toLowerCase();
 	pathname = pathname.toLowerCase();
 
 	// Get BU
-	var bu = getBuFromHostname(hostname,pathname);
-	if (! bu) {
+	var bu = getBuFromHostname(hostname, pathname);
+	if (!bu) {
 		console.log("This URL is not a Play SRG URL.");
 		return null;
 	}
@@ -89,7 +119,7 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 				break;
 		}
 		if (redirectBu) {
-			return openURL(server, redirectBu, scheme, hostname, pathname, queryParams, anchor);
+			return openURL(server, redirectBu, originalUrl);
 		}
 	}
 
@@ -109,7 +139,7 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 		return openTvHomePage(server, bu);
 	}
 
-	if (hostname.includes("play-mmf") && ! pathname.startsWith("/mmf/")) {
+	if (hostname.includes("play-mmf") && !pathname.startsWith("/mmf/")) {
 		pathname = pathname.substring(4);
 	}
 
@@ -167,8 +197,8 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 		}
 	}
 
-	if (! pathname.startsWith("/play")) {
-		console.log("No /play path in url.");
+	if (!(pathname == "/play" || pathname.startsWith("/play/"))) {
+		console.log("No /play path component in url.");
 		return null;
 	}
 
@@ -195,7 +225,7 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 		if (mediaUrn) {
 			return openMediaUrn(server, bu, mediaUrn, startTime);
 		}
-		else if (mediaId) {	
+		else if (mediaId) {
 			return openMedia(server, bu, mediaType, mediaId, startTime);
 		}
 		else {
@@ -208,6 +238,7 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 	 *
 	 *  Ex: https://www.rts.ch/play/tv/redirect/detail/9938530
 	 *  Ex: https://www.srf.ch/play/tv/redirect/Detail/99f040e9-b1e6-4d7a-bc08-d5639d600aa1
+	 *  Ex: https://www.srf.ch/play/tv/redirect/detail/99f040e9-b1e6-4d7a-bc08-d5639d600aa1/
 	 */
 	switch (true) {
 		case pathname.includes("/tv/redirect/detail/"):
@@ -230,9 +261,38 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 	}
 
 	/**
+	 *  Catch redirect livestream urls
+	 *
+	 *  Ex: https://www.srf.ch/play/tv/redirect/live/rsi?id=livestream_La1&title=LA+1
+	 *  Ex: https://www.rsi.ch/play/tv/redirect/live/rts?id=3608506&title=RTS+1
+	 *  Ex: https://www.rts.ch/play/tv/redirect/live/srf?id=c4927fcf-e1a0-0001-7edd-1ef01d441651&title=SRF+1
+	 */
+	switch (true) {
+		case pathname.includes("/tv/redirect/live/"):
+			mediaType = "video";
+			break;
+		case pathname.includes("/radio/redirect/live/"):
+			mediaType = "audio";
+			break;
+	}
+
+	if (mediaType) {
+		var mediaBu = getBuFromPathname(pathname);
+		var mediaId = queryParams["id"];
+		if (mediaBu && mediaId) {
+			var mediaUrn = "urn:" + mediaBu + ":" + mediaType + ":" + mediaId;
+			return openMediaUrn(server, bu, mediaUrn, null);
+		}
+		else {
+			mediaType = null;
+		}
+	}
+
+	/**
 	 *  Catch embed media urls
 	 *
 	 *  Ex: https://www.rts.ch/play/embed?urn=urn:rts:video:580545
+	 *  Ex: https://www.rts.ch/play/embed?urn=urn:rts:video:580545/
 	 *  Ex: https://www.rts.ch/play/embed?urn=urn:rts:video:580545&startTime=60
 	 */
 	if (pathname.endsWith("/embed")) {
@@ -260,8 +320,8 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 			return openMedia(server, bu, "video", mediaId, null);
 		}
 		else {
-			// Returns default TV homepage
-			return openTvHomePage(server, bu);
+			// Returns livestreams homepage
+			return openLivestreamsHomePage(server, bu);
 		}
 	}
 
@@ -273,31 +333,8 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 	 *  Ex: https://www.rsi.ch/play/radio/legacy-livepopup/rete-uno
 	 */
 	if (pathname.endsWith("/radio/livepopup") || pathname.endsWith("/radio/legacy-livepopup") || pathname.endsWith("/radio/livepopup/") || pathname.endsWith("/radio/legacy-livepopup/")) {
-		var mediaId = null;
-
-		switch (bu) {
-			case "srf":
-				mediaId = "69e8ac16-4327-4af4-b873-fd5cd6e895a7";
-				break;
-			case "rts":
-				mediaId = "3262320";
-				break;
-			case "rsi":
-				mediaId = "livestream_ReteUno";
-				break;
-			case "rtr":
-				mediaId = "a029e818-77a5-4c2e-ad70-d573bb865e31";
-				break;
-			default:
-		}
-
-		if (mediaId) {
-			return openMedia(server, bu, "audio", mediaId, null);
-		}
-		else {
-			// Returns default radio homepage
-			return openRadioHomePage(server, bu, null);
-		}
+		// Returns livestreams homepage
+		return openLivestreamsHomePage(server, bu);
 	}
 	else if (pathname.includes("/radio/livepopup/") || pathname.includes("/radio/legacy-livepopup/")) {
 		var mediaBu = null;
@@ -365,8 +402,8 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 			return openMedia(server, mediaBu, "audio", mediaId, null);
 		}
 		else {
-			// Returns default radio homepage
-			return openRadioHomePage(server, bu, null);
+			// Returns livestreams homepage
+			return openLivestreamsHomePage(server, bu);
 		}
 	}
 
@@ -400,6 +437,18 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 			// Returns default radio homepage
 			return openRadioHomePage(server, bu, null);
 		}
+	}
+
+	/**
+	 *  Catch BU livestreams urls
+	 *
+	 *  Ex: https://www.rtr.ch/play/tv/rtr-livestreams
+	 *  Ex: https://www.rts.ch/play/tv/rts-livestreams
+	 *  Ex: https://www.srf.ch/play/tv/sport-livestreams
+	 */
+	if (pathname.endsWith("-livestreams")) {
+		// Returns livestreams homepage
+		return openLivestreamsHomePage(server, bu);
 	}
 
 	/**
@@ -528,9 +577,8 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 	 *  Ex: https://www.rts.ch/play/tv/emissions-par-dates/2021-06-21
 	 *  Ex: https://www.srf.ch/play/tv/programm/2021-07-03
 	 */
-	 if (pathname.includes("/tv/sendungen-nach-datum/") || pathname.includes("/tv/emissions-par-dates/") || pathname.includes("/tv/programmi-per-data/") || pathname.includes("/tv/emissiuns-tenor-data/") ||
-	 	pathname.endsWith("/tv/programm") || pathname.includes("/tv/programme") || pathname.includes("/tv/program") ||
-	 	pathname.includes("/tv/programm/") || pathname.includes("/tv/programme/") || pathname.includes("/tv/program/")) {
+	if (pathname.includes("/tv/sendungen-nach-datum") || pathname.includes("/tv/emissions-par-dates") || pathname.includes("/tv/programmi-per-data") || pathname.includes("/tv/emissiuns-tenor-data") ||
+		pathname.includes("/tv/programm") || pathname.includes("/tv/programme") || pathname.includes("/tv/guida-programmi") || pathname.includes("/tv/program")) {
 		var lastPathComponent = pathname.split("/").slice(-1)[0];
 
 		var date = null;
@@ -611,31 +659,13 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 	}
 
 	/**
-	 *  Catch TV event urls
+	 *  Catch TV event urls (support removed - URLs switched to section page urls)
 	 *
 	 *  Ex: https://www.srf.ch/play/tv/event/10-jahre-auf-und-davon
 	 *  Ex: https://www.rsi.ch/play/tv/event/event-playrsi-8858482
 	 */
-	if (pathname.endsWith("/tv/event")) {
+	if (pathname.endsWith("/tv/event") || pathname.includes("/tv/event")) {
 		return openTvHomePage(server, bu);
-	}
-	else if (pathname.includes("/tv/event")) {
-		var lastPathComponent = pathname.split("/").slice(-1)[0];
-
-		var eventId = null;
-
-		/* INJECT TVEVENTS OBJECT */
-
-		if (typeof tvEvents !== 'undefined' && lastPathComponent.length > 0) {
-			eventId = tvEvents[server][bu][lastPathComponent];
-		}
-
-		if (eventId) {
-			return openModule(server, bu, "event", eventId);
-		}
-		else {
-			return openTvHomePage(server, bu);
-		}
 	}
 
 	/**
@@ -652,6 +682,24 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 
 		if (sectionId) {
 			return openSection(server, bu, sectionId);
+		}
+		else {
+			return openTvHomePage(server, bu);
+		}
+	}
+
+	/**
+	 * Catch micro page urls
+	 *
+	 * Ex: https://www.srf.ch/play/tv/micropages/test-?pageId=3c2674b9-37a7-4e76-9398-bb710bd135ee
+	 *
+	 * Ex: playsrf://www.srf.ch/play/tv/micropages/test-?pageId=3c2674b9-37a7-4e76-9398-bb710bd135ee
+	 */
+	if (pathname.includes("/micropages/")) {
+		var pageId = queryParams["pageId"];
+
+		if (pageId) {
+			return openMicropage(server, bu, pageId, originalUrl);
 		}
 		else {
 			return openTvHomePage(server, bu);
@@ -679,7 +727,17 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 	}
 
 	/**
-	 *  Catch play help urls
+	 *  Catch sitemap urls
+	 *
+	 *  Ex: https://www.srf.ch/play/sitemap/tv/pages
+	 *. Ex: https://www.rts.ch/play/sitemap/tv/pages
+	 */
+	if (pathname.includes("/play/sitemap/")) {
+		return openTvHomePage(server, bu);
+	}
+
+	/**
+	 *  Catch help page urls
 	 *
 	 *  Ex: https://www.srf.ch/play/tv/hilfe
 	 *  Ex: https://www.srf.ch/play/tv/hilfe/geoblock
@@ -690,9 +748,25 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 	 *  Ex: https://www.rtr.ch/play/tv/agid
 	 *  Ex: https://www.rtr.ch/play/tv/agid/geo-blocking
 	 *  Ex: https://play.swissinfo.ch/play/tv/help
+	 *  Ex: https://play-mmf.herokuapp.com/srf/play/tv/hilfe
+	 *
+	 *  Ex: playsrf://www.srf.ch/play/tv/hilfe
 	 */
 	if (pathname.endsWith("/hilfe") || pathname.includes("/hilfe/") || pathname.endsWith("/aide") || pathname.includes("/aide/") || pathname.endsWith("/guida") || pathname.includes("/guida/") || pathname.endsWith("/agid") || pathname.includes("/agid/") || pathname.endsWith("/help") || pathname.includes("/help/")) {
-		return openURL(server, bu, scheme, hostname, pathname, queryParams, anchor);
+		return openURL(server, bu, originalUrl);
+	}
+
+	/**
+	 *  Catch parameters page urls
+	 *
+	 *  Ex: https://www.srf.ch/play/tv/einstellungen
+	 *  Ex: https://www.rts.ch/play/tv/parametres
+	 *  Ex: https://www.rsi.ch/play/tv/impostazioni
+	 *  Ex: https://www.rtr.ch/play/tv/configuraziuns
+	 *  Ex: https://play.swissinfo.ch/play/tv/settings
+	 */
+	if (pathname.endsWith("/einstellungen") || pathname.endsWith("/parametres") || pathname.endsWith("/impostazioni") || pathname.endsWith("/configuraziuns") || pathname.endsWith("/settings")) {
+		return openTvHomePage(server, bu);
 	}
 
 	// Redirect fallback.
@@ -703,162 +777,186 @@ function parseForPlayApp(scheme, hostname, pathname, queryParams, anchor) {
 // ---- Open functions
 
 function openMedia(server, bu, mediaType, mediaId, startTime) {
-    var urn="urn:" + bu + ":" + mediaType + ":" + mediaId;
-    return openMediaUrn(server, bu, urn, startTime);
+	var urn = "urn:" + bu + ":" + mediaType + ":" + mediaId;
+	return openMediaUrn(server, bu, urn, startTime);
 }
 
 function openMediaUrn(server, bu, mediaUrn, startTime) {
 	var options = {};
 	if (startTime) {
-	    options['start_time'] = startTime;
+		options['start_time'] = startTime;
 	}
 	if (server) {
-	    options['server'] = server;
+		options['server'] = server;
 	}
-    return buildBuUri(bu,"media",mediaUrn,options);
+	return buildBuUri(bu, hostnameMedia, mediaUrn, options);
 }
 
 function openShow(server, bu, showTransmission, showId) {
-    var showUrn="urn:" + bu + ":show:" + showTransmission + ":" + showId;
-    var options = {};
+	var showUrn = "urn:" + bu + ":show:" + showTransmission + ":" + showId;
+	var options = {};
 	if (server) {
-	    options['server'] = server;
+		options['server'] = server;
 	}
-    return buildBuUri(bu,"show",showUrn,options);
+	return buildBuUri(bu, hostnameShow, showUrn, options);
 }
 
 function openTopic(server, bu, topicTransmission, topicId) {
-    var topicUrn="urn:" + bu + ":topic:" + topicTransmission + ":" + topicId;
-    var options = {};
+	var topicUrn = "urn:" + bu + ":topic:" + topicTransmission + ":" + topicId;
+	var options = {};
 	if (server) {
-	    options['server'] = server;
+		options['server'] = server;
 	}
-    return buildBuUri(bu,"topic",topicUrn,options);
+	return buildBuUri(bu, hostnameTopic, topicUrn, options);
 }
 
 function openModule(server, bu, moduleType, moduleId) {
-    var topicUrn="urn:" + bu + ":module:" + moduleType + ":" + moduleId;
-    var options = {};
+	var topicUrn = "urn:" + bu + ":module:" + moduleType + ":" + moduleId;
+	var options = {};
 	if (server) {
-	    options['server'] = server;
+		options['server'] = server;
 	}
-    return buildBuUri(bu,"module",topicUrn,options);
+	return buildBuUri(bu, "module", topicUrn, options);
 }
 
 function openSection(server, bu, sectionId) {
-    var options = {};
+	var options = {};
 	if (server) {
-	    options['server'] = server;
+		options['server'] = server;
 	}
-    return buildBuUri(bu,"section",sectionId,options);
+	return buildBuUri(bu, hostnameSection, sectionId, options);
 }
 
-function openTvHomePage(server,bu){
-    var options = {};
-    if (server) {
-        options['server'] = server;
-    }
-    return buildBuUri(bu,"home",null,options);
+function openMicropage(server, bu, pageId, originalUrl) {
+	if (!originalUrl.supportedAppHostnames.includes(hostnameMicropage)) {
+		return openURL(server, bu, originalUrl);
+	}
+
+	var options = {};
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameMicropage, pageId, options);
 }
 
-function openRadioHomePage(server,bu,channelId){
-    if (!channelId) {
-        channelId = primaryChannelUidForBu(bu);
-    }
-    var options={};
-    if(channelId){
-        options["channel_id"] = channelId;
-    }
-    if (server) {
-        options['server'] = server;
-    }
-    return buildBuUri(bu,"home",null,options);
+function openTvHomePage(server, bu) {
+	var options = {};
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameHome, null, options);
 }
 
-function openAtoZ(server,bu,channelId,index){
-   var options = {};
-   if(channelId) {
-       options['channel_id'] = channelId;
-   }
-   if(index) {
-        options['index'] = index;
-   }
-   if (server) {
-        options['server'] = server;
-   }
-   return buildBuUri(bu,"az",null,options);
+function openLivestreamsHomePage(server, bu) {
+	var options = {};
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameLivestreams, null, options);
 }
 
-function openRadioAtoZ(server,bu,channelId,index){
-    if (!channelId) {
-    	channelId = primaryChannelUidForBu(bu);
-    }
-    return openAtoZ(server,bu,channelId,index);
+function openRadioHomePage(server, bu, channelId) {
+	if (!channelId) {
+		channelId = primaryChannelUidForBu(bu);
+	}
+	var options = {};
+	if (channelId) {
+		options["channel_id"] = channelId;
+	}
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameHome, null, options);
 }
 
-function openByDate(server,bu,channelId,date){
-    var options = {};
-    if(channelId) {
-        options['channel_id'] = channelId;
-    }
-
-    if(date) {
-            options['date'] = date;
-        }
-    if (server) {
-        options['server'] = server;
-    }
-    return buildBuUri(bu, "bydate", null, options);
+function openAtoZ(server, bu, channelId, index) {
+	var options = {};
+	if (channelId) {
+		options['channel_id'] = channelId;
+	}
+	if (index) {
+		options['index'] = index;
+	}
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameAz, null, options);
 }
 
-function openRadioByDate(server,bu,channelId,date) {
-    if (!channelId) {
-        channelId = primaryChannelUidForBu(bu);
-    }
-    return openByDate(server,bu,channelId,date);
+function openRadioAtoZ(server, bu, channelId, index) {
+	if (!channelId) {
+		channelId = primaryChannelUidForBu(bu);
+	}
+	return openAtoZ(server, bu, channelId, index);
 }
 
-function openSearch(server, bu, query, mediaType){
-    var options = {};
-    if(query) {
-        options['query'] = query;
-    }
-    if(mediaType) {
-        options['media_type'] = mediaType;
-    }
-    if (server) {
-        options['server'] = server;
-    }
-    return buildBuUri(bu,"search", null, options);
+function openByDate(server, bu, channelId, date) {
+	var options = {};
+	if (channelId) {
+		options['channel_id'] = channelId;
+	}
+
+	if (date) {
+		options['date'] = date;
+	}
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameByDate, null, options);
 }
 
-function openURL(server, bu, scheme, hostname, pathname, queryParams, anchor) {
-	if (! scheme) {
+function openRadioByDate(server, bu, channelId, date) {
+	if (!channelId) {
+		channelId = primaryChannelUidForBu(bu);
+	}
+	return openByDate(server, bu, channelId, date);
+}
+
+function openSearch(server, bu, query, mediaType) {
+	var options = {};
+	if (query) {
+		options['query'] = query;
+	}
+	if (mediaType) {
+		options['media_type'] = mediaType;
+	}
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameSearch, null, options);
+}
+
+function openURL(server, bu, originalUrl) {
+	var scheme = originalUrl.scheme;
+	if (!scheme) {
 		scheme = "http";
+	}
+	else if (isBuScheme(scheme)) {
+		scheme = "https";
 	}
 
 	var queryParamsString = "";
-	if (queryParams) {
-		for (var key in queryParams) {
-			queryParamsString = queryParamsString + "&" + key + "=" + encodeURIComponent(queryParams[key]);
+	if (originalUrl.queryParams) {
+		for (var key in originalUrl.queryParams) {
+			queryParamsString = queryParamsString + "&" + key + "=" + encodeURIComponent(originalUrl.queryParams[key]);
 		}
 	}
 	if (queryParamsString.length > 0) {
-		queryParamsString = queryParamsString.replace('&','?');
+		queryParamsString = queryParamsString.replace('&', '?');
 	}
 
 	var anchorString = "";
-	if (anchor) {
-		anchorString = "#" + anchor;
+	if (originalUrl.anchor) {
+		anchorString = "#" + originalUrl.anchor;
 	}
 
-	var url = scheme + "://" + hostname + pathname + queryParamsString + anchorString;
-    var options = {};
-    options['url'] = url;
-    if (server) {
-        options['server'] = server;
-    }
-    return buildBuUri(bu,"link",null,options)
+	var url = scheme + "://" + originalUrl.hostname + originalUrl.pathname + queryParamsString + anchorString;
+	var options = {};
+	options['url'] = url;
+	if (server) {
+		options['server'] = server;
+	}
+	return buildBuUri(bu, hostnameLink, null, options)
 }
 
 // --- parsing functions
@@ -906,6 +1004,10 @@ function schemeForBu(bu) {
 		default:
 			return null;
 	}
+}
+
+function isBuScheme(scheme) {
+	return scheme.includes("playsrf") || scheme.includes("playrts") || scheme.includes("playrsi") || scheme.includes("playrtr") || scheme.includes("playswi") || scheme.includes("letterbox");
 }
 
 function serverForUrl(hostname, pathname, queryParams) {
@@ -963,26 +1065,42 @@ function serverForUrl(hostname, pathname, queryParams) {
 }
 
 function getBuFromHostname(hostname, pathname) {
-    switch (true) {
-    	case hostname.endsWith("tp.srgssr.ch") || hostname.endsWith("player.rts.ch") || hostname.endsWith("player.rsi.ch") || hostname.endsWith("player.rtr.ch") || hostname.endsWith("player.swissinfo.ch") || hostname.endsWith("player.srf.ch") || (hostname.includes("srgssr") && pathname.startsWith("/srgletterbox-web")):
-    		return "lb";
-    	case (hostname.includes("rts.ch") && !hostname.includes("play-staging")) || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/rts/")):
-    		return  "rts";
-    	case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi") || (hostname.includes("play-mmf") && pathname.startsWith("/rsi/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/rsi/")):
-    		return  "rsi";
-    	case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr") || (hostname.includes("play-mmf") && pathname.startsWith("/rtr/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/rtr/")):
-    		return "rtr";
-    	case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi") || (hostname.includes("play-mmf") && pathname.startsWith("/swi/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/swi/")):
-    		return "swi";
-    	case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf") || (hostname.includes("play-mmf") && pathname.startsWith("/srf/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/srf/")):
-    		return "srf";
-    	case hostname.includes("play-mmf") && pathname.startsWith("/mmf/"):
-    		return "mmf";
-    	case hostname.includes("radioswisspop.ch") || hostname.includes("radioswissclassic.ch") || hostname.includes("radioswissjazz.ch"):
-    		  return "radioswiss";
-    }
-    return null;
- }
+	switch (true) {
+		case hostname.endsWith("tp.srgssr.ch") || hostname.endsWith("player.rts.ch") || hostname.endsWith("player.rsi.ch") || hostname.endsWith("player.rtr.ch") || hostname.endsWith("player.swissinfo.ch") || hostname.endsWith("player.srf.ch") || (hostname.includes("srgssr") && pathname.startsWith("/srgletterbox-web")):
+			return "lb";
+		case (hostname.includes("rts.ch") && !hostname.includes("play-staging")) || hostname.includes("srgplayer-rts") || (hostname.includes("play-mmf") && pathname.startsWith("/rts/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/rts/")):
+			return "rts";
+		case hostname.includes("rsi.ch") || hostname.includes("srgplayer-rsi") || (hostname.includes("play-mmf") && pathname.startsWith("/rsi/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/rsi/")):
+			return "rsi";
+		case hostname.includes("rtr.ch") || hostname.includes("srgplayer-rtr") || (hostname.includes("play-mmf") && pathname.startsWith("/rtr/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/rtr/")):
+			return "rtr";
+		case hostname.includes("swissinfo.ch") || hostname.includes("srgplayer-swi") || (hostname.includes("play-mmf") && pathname.startsWith("/swi/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/swi/")):
+			return "swi";
+		case hostname.includes("srf.ch") || hostname.includes("srgplayer-srf") || (hostname.includes("play-mmf") && pathname.startsWith("/srf/")) || ((hostname.includes("play-web") || hostname.includes("play-staging")) && pathname.startsWith("/srf/")):
+			return "srf";
+		case hostname.includes("play-mmf") && pathname.startsWith("/mmf/"):
+			return "mmf";
+		case hostname.includes("radioswisspop.ch") || hostname.includes("radioswissclassic.ch") || hostname.includes("radioswissjazz.ch"):
+			return "radioswiss";
+	}
+	return null;
+}
+
+function getBuFromPathname(pathname) {
+	switch (true) {
+		case pathname.endsWith("rsi"):
+			return "rsi";
+		case pathname.endsWith("rtr"):
+			return "rtr";
+		case pathname.endsWith("rts"):
+			return "rts";
+		case pathname.endsWith("srf"):
+			return "srf";
+		case pathname.endsWith("swi"):
+			return "swi";
+	}
+	return null;
+}
 
 /**
 * Build scheme://host[/path][?queryParams[0]&...&queryParams[n-1]]
@@ -990,26 +1108,26 @@ function getBuFromHostname(hostname, pathname) {
 *   playrts://media/urn:xxx?position=0&server=mmf
 */
 function buildUri(scheme, host, path, queryParams) {
-    var uri = scheme + "://" + host;
-    if (path) {
-        uri = uri + "/" + path;
-    }
-    if (queryParams && queryParams !== {}) {
-        uri = uri + "?";
-        var optionIndex = 0;
-        for (var option in queryParams) {
-            if(queryParams[option]) {
-               if(optionIndex > 0) {
-                    uri = uri + "&";
-               }
-               uri = uri + option + "=" + encodeURIComponent(queryParams[option]);
-               optionIndex++;
-            }
-        }
-    }
-    return uri;
+	var uri = scheme + "://" + host;
+	if (path) {
+		uri = uri + "/" + path;
+	}
+	if (queryParams && queryParams !== {}) {
+		uri = uri + "?";
+		var optionIndex = 0;
+		for (var option in queryParams) {
+			if (queryParams[option]) {
+				if (optionIndex > 0) {
+					uri = uri + "&";
+				}
+				uri = uri + option + "=" + encodeURIComponent(queryParams[option]);
+				optionIndex++;
+			}
+		}
+	}
+	return uri;
 }
 
 function buildBuUri(bu, host, path, queryParams) {
-    return buildUri(schemeForBu(bu), host, path, queryParams);
+	return buildUri(schemeForBu(bu), host, path, queryParams);
 }

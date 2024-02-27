@@ -91,6 +91,11 @@ extension UIViewController {
             }
     }
     
+    func navigateToPage(_ page: SRGContentPage, animated: Bool = true, completion: (() -> Void)? = nil) {
+        let pageViewController = PageViewController(id: .page(page))
+        present(pageViewController, animated: animated, completion: completion)
+    }
+    
     func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true, completion: (() -> Void)? = nil) {
         let sectionViewController = SectionViewController(section: section, filter: filter)
         present(sectionViewController, animated: animated, completion: completion)
@@ -148,6 +153,14 @@ func navigateToShow(_ show: SRGShow, animated: Bool = true) {
     guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
     isPresenting = true
     topViewController.navigateToShow(show, animated: animated) {
+        isPresenting = false
+    }
+}
+
+func navigateToPage(_ page: SRGContentPage, animated: Bool = true) {
+    guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
+    isPresenting = true
+    topViewController.navigateToPage(page, animated: animated) {
         isPresenting = false
     }
 }

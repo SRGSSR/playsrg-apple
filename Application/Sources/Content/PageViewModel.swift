@@ -150,10 +150,15 @@ extension PageViewModel {
         case live
         case topic(_ topic: SRGTopic)
         case show(_ show: SRGShow)
+        case page(_ page: SRGContentPage)
         
 #if os(iOS)
+        var isHeaderWithTitle: Bool {
+            return hasShowHeaderView || hasPageHeaderView
+        }
+        
         var isLargeTitleDisplayMode: Bool {
-            if case .show = self {
+            if isHeaderWithTitle {
                 return false
             }
             else {
@@ -177,6 +182,8 @@ extension PageViewModel {
             switch self {
             case let .show(show):
                 return SharingItem(for: show)
+            case let .page(page):
+                return SharingItem(for: page)
             default:
                 return nil
             }
@@ -213,6 +220,8 @@ extension PageViewModel {
                 return topic.title
             case let .show(show):
                 return show.title
+            case let .page(page):
+                return page.title
             }
         }
         
@@ -229,17 +238,30 @@ extension PageViewModel {
             return displayedShow != nil
         }
         
-        var displayedTitle: String? {
-#if os(tvOS)
+        var displayedGlobalTitle: String? {
             if case .topic = self {
+#if os(tvOS)
                 return title
+#else
+                return nil
+#endif
             }
             else {
                 return nil
             }
-#else
-            return nil
-#endif
+        }
+        
+        var displayedPage: SRGContentPage? {
+            if case let .page(page) = self {
+                return page
+            }
+            else {
+                return nil
+            }
+        }
+        
+        var hasPageHeaderView: Bool {
+            return displayedPage != nil
         }
         
         var analyticsPageViewTitle: String {
@@ -250,12 +272,14 @@ extension PageViewModel {
                 return topic.title
             case let .show(show):
                 return show.title
+            case let .page(page):
+                return page.title
             }
         }
         
         var analyticsPageViewType: String {
             switch self {
-            case .video, .audio:
+            case .video, .audio, .page:
                 return AnalyticsPageType.landingPage.rawValue
             case  .live:
                 return AnalyticsPageType.live.rawValue
@@ -275,8 +299,11 @@ extension PageViewModel {
             case .topic:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
             case let .show(show):
-                let level1 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
-                return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
+                let level2 = show.transmission == .radio ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
+                return [AnalyticsPageLevel.play.rawValue, level2, AnalyticsPageLevel.show.rawValue]
+            case let .page(page):
+                let level3 = page.type == .microPage ? AnalyticsPageLevel.microPage.rawValue : AnalyticsPageLevel.pacPage.rawValue
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, level3]
             }
         }
         
@@ -479,6 +506,10 @@ private extension PageViewModel {
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
+        case let .page(page):
+            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: page.uid)
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                .eraseToAnyPublisher()
         case let .audio(channel: channel):
             return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
