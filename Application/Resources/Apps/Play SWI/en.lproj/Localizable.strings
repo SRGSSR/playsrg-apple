@@ -651,9 +651,6 @@
 /* Title of the button to skip updating the application */
 "Skip" = "Skip";
 
-/* Short label identifying content which will be available soon. */
-"Soon" = "Soon";
-
 /* Search setting */
 "Sort by" = "Sort by";
 

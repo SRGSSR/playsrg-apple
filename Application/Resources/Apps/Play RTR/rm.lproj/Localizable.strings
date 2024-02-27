@@ -651,9 +651,6 @@
 /* Title of the button to skip updating the application */
 "Skip" = "Finir";
 
-/* Short label identifying content which will be available soon. */
-"Soon" = "Proximamain";
-
 /* Search setting */
 "Sort by" = "Sortar tenor";
 
