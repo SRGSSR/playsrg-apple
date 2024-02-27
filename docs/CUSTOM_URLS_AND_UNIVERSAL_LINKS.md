@@ -46,6 +46,7 @@ The Play tvOS application supports only those custom URLs:
 * Open a media page: `[scheme]://media/[media_urn]`. If it's a 24/7 livestream, the player page is open instead.
 * Open a show page: `[scheme]://show/[show_urn]`.
 * Open a micro page: `[scheme]://micropage/[page_id]`.
+* Open a content page: `[scheme]://page/[page_id]`.
 
 Refer to the _Testing_ section for more information about how custom URLs can be supplied to an application during tests.
 
@@ -74,10 +75,17 @@ The [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool
 
 ## Changelog
 
-- Version iOS 3.8.3: New micropage action. Share supported hostnames to the JS script.
-- Version iOS 3.6.8: New livestreams page action.
-- Version iOS 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
-- Version iOS 2.9.6: Version 2 of universal link support.
+#### iOS application
+
+- 3.8.3 version: New micropage action. Share supported hostnames to the JS script.
+- 3.6.8 version: New livestreams page action.
+- 3.2.0 version: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
+- 2.9.6 version: Universal link version 2 support.
+
+#### tvOS application
+
+- 1.8.3 version: New micropage action.
+- 1.0.0 version: New media and show actions.
 
 ## Examples
 
