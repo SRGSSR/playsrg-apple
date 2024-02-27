@@ -96,7 +96,7 @@ struct HeroMediaCell: View {
             VStack {
                 HStack(spacing: constant(iOS: 8, tvOS: 12)) {
                     if let label {
-                        Badge(text: label, color: Color(.play_green))
+                        Badge(text: label, color: Color(.srgDarkRed))
                     }
                     if let subtitle {
                         Text(subtitle)
@@ -124,7 +124,7 @@ struct HeroMediaCell: View {
 private extension HeroMediaCell {
     var accessibilityLabel: String? {
         guard let media else { return nil }
-        return MediaDescription.accessibilityLabel(for: media)
+        return MediaDescription.cellAccessibilityLabel(for: media)
     }
     
     var accessibilityHint: String? {

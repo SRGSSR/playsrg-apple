@@ -308,6 +308,9 @@
 /* Image copyright introductory label */
 "Image credit: %@" = "Crédit image : %@";
 
+/* Short text replacing date for a web first content. */
+"In advance" = "Avant-première";
+
 /* Information section header */
 "Information" = "Information";
 
@@ -568,9 +571,6 @@
 /* Search setting */
 "Relevance" = "Pertinence";
 
-/* Short label identifying a replay sport event. Display in uppercase. */
-"Replay" = "Rediffusion";
-
 /* Label of the button to present technical issue report instructions
    Label to present technical issue report instructions
    Subject of the technical issue mail */
@@ -650,9 +650,6 @@
 
 /* Title of the button to skip updating the application */
 "Skip" = "Ignorer";
-
-/* Short label identifying content which will be available soon. */
-"Soon" = "Prochainement";
 
 /* Search setting */
 "Sort by" = "Trier par";

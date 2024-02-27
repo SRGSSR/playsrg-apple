@@ -6,7 +6,13 @@
 
 import SRGAppearanceSwift
 
-enum MediaDescription {
+@objc class MediaDescription: NSObject {
+    override init() {
+        fatalError("init() is not available")
+    }
+    
+    // MARK: - Title and subtitle
+    
     enum Style {
         /// Show information emphasis
         case show
@@ -16,41 +22,7 @@ enum MediaDescription {
         case time
     }
     
-    struct BadgeProperties {
-        let text: String
-        let color: UIColor
-    }
-    
-    private static func formattedDuration(from: Date, to: Date) -> String? {
-        let components = Calendar.current.dateComponents([.day, .minute], from: from, to: to)
-        switch components.day! {
-        case 0:
-            switch components.minute! {
-            case 0..<60:
-                return PlayFormattedMinutes(to.timeIntervalSince(from))
-            default:
-                return PlayFormattedHours(to.timeIntervalSince(from))
-            }
-        case 1...3:
-            return PlayFormattedDays(to.timeIntervalSince(from))
-        default:
-            return nil
-        }
-    }
-    
-    private static func formattedDate(for media: SRGMedia) -> String {
-        return DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
-    }
-    
-    private static func formattedTime(for media: SRGMedia) -> String {
-        return DateFormatter.play_time.string(from: media.date)
-    }
-    
-    private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {
-        return media.title.lowercased() == show.title.lowercased()
-    }
-    
-    static func title(for media: SRGMedia, style: Style) -> String {
+    static func title(for media: SRGMedia, style: Style) -> String? {
         switch style {
         case .show:
             if let show = media.show, areRedundant(media: media, show: show) {
@@ -73,9 +45,12 @@ enum MediaDescription {
                 if areRedundant(media: media, show: show) {
                     return show.title
                 }
-                else {
+                else if let formattedDate = formattedDate(for: media, style: .shortDate) {
                     // Unbreakable spaces before / after the separator
-                    return "\(show.title) · \(DateFormatter.play_relativeShortDate.string(from: media.date))"
+                    return "\(show.title) · \(formattedDate)"
+                }
+                else {
+                    return show.title
                 }
             }
             else {
@@ -97,36 +72,24 @@ enum MediaDescription {
         return media.duration / 1000
     }
     
-    private static func shouldDisplayExpiration(for media: SRGMedia) -> Bool {
-        let now = Date()
-        guard media.timeAvailability(at: now) == .available,
-              media.contentType != .scheduledLivestream, media.contentType != .trailer,
-              let endDate = media.endDate, media.contentType != .livestream else { return false }
-        let remainingDateComponents = Calendar.current.dateComponents([.day], from: now, to: endDate)
-        return remainingDateComponents.day! > 3
-    }
-    
-    private static func publication(for media: SRGMedia) -> String {
-        return DateFormatter.play_shortDateAndTime.string(from: media.date)
-    }
-    
-    private static func expiration(for media: SRGMedia) -> String? {
-        guard let endDate = media.endDate else { return nil }
-        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), DateFormatter.play_shortDate.string(from: endDate))
-    }
-    
-    static func availability(for media: SRGMedia) -> String {
-        let publication = publication(for: media)
-        if shouldDisplayExpiration(for: media), let expiration = expiration(for: media) {
-            // Unbreakable spaces before / after the separator
-            return "\(publication) - \(expiration)"
+    @objc static func availability(for media: SRGMedia) -> String {
+        var values: [String] = []
+        
+        if let date = formattedDate(for: media, style: .shortDateAndTime) {
+            values.append(date)
         }
-        else {
-            return publication
+        
+        if let expirationDate = formattedExpirationDate(for: media) {
+            values.append(expirationDate)
         }
+        
+        // Unbreakable spaces before / after the separator
+        return values.joined(separator: " · ")
     }
     
-    static func accessibilityLabel(for media: SRGMedia) -> String? {
+    // MARK: - Accessibility
+    
+    static func cellAccessibilityLabel(for media: SRGMedia) -> String? {
         let accessibilityLabel: String
         if let show = media.show, !areRedundant(media: media, show: show) {
             accessibilityLabel = show.title.appending(", \(media.title)")
@@ -143,14 +106,36 @@ enum MediaDescription {
         }
     }
     
+    @objc static func availabilityAccessibilityLabel(for media: SRGMedia) -> String {
+        var values: [String] = []
+        
+        if let date = formattedDate(for: media, style: .shortDateAndTime, accessibilityLabel: true) {
+            values.append(date)
+        }
+        
+        if let expirationDate = formattedExpirationDate(for: media, accessibilityLabel: true) {
+            values.append(expirationDate)
+        }
+        
+        // Unbreakable spaces before / after the separator
+        return values.joined(separator: " · ")
+    }
+    
+    // MARK: - Badges
+    
+    struct BadgeProperties {
+        let text: String
+        let color: UIColor
+    }
+    
     static func liveBadgeProperties() -> BadgeProperties {
         return BadgeProperties(
-            text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
+            text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(),
             color: .srgLightRed
         )
     }
     
-    static func availabilityBadgeProperties(for media: SRGMedia, allowsDateDisplay: Bool = true) -> BadgeProperties? {
+    static func availabilityBadgeProperties(for media: SRGMedia) -> BadgeProperties? {
         if media.contentType == .livestream {
             return liveBadgeProperties()
         }
@@ -159,18 +144,11 @@ enum MediaDescription {
             let availability = media.timeAvailability(at: now)
             switch availability {
             case .notYetAvailable:
-                if allowsDateDisplay, let startDate = media.startDate {
-                    return BadgeProperties(
-                        text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate),
-                        color: .play_green
-                    )
-                }
-                else {
-                    return BadgeProperties(
-                        text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
-                        color: .play_green
-                    )
-                }
+                let startDate = media.startDate ?? media.date
+                return BadgeProperties(
+                    text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate).capitalizedFirstLetter,
+                    color: .play_black80a
+                )
             case .notAvailableAnymore:
                 return BadgeProperties(
                     text: NSLocalizedString("Expired", comment: "Short label identifying content which has expired."),
@@ -178,15 +156,12 @@ enum MediaDescription {
                 )
             case .available:
                 if media.contentType == .scheduledLivestream {
-                    return BadgeProperties(
-                        text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
-                        color: .srgLightRed
-                    )
+                    return liveBadgeProperties()
                 }
-                else if media.play_isWebFirst {
+                else if media.play_isWebFirst && ApplicationConfiguration.shared.isWebFirstBadgeEnabled {
                     return BadgeProperties(
                         text: NSLocalizedString("Web first", comment: "Short label identifying a web first content."),
-                        color: .srgBlue
+                        color: .srgDarkRed
                     )
                 }
                 else if let endDate = media.endDate, media.contentType == .episode || media.contentType == .clip,
@@ -203,5 +178,87 @@ enum MediaDescription {
                 return nil
             }
         }
+    }
+    
+    // MARK: - Private methods
+    
+    private static func formattedDuration(from: Date, to: Date) -> String? {
+        let components = Calendar.current.dateComponents([.day, .minute], from: from, to: to)
+        switch components.day! {
+        case 0:
+            switch components.minute! {
+            case 0..<60:
+                return PlayFormattedMinutes(to.timeIntervalSince(from))
+            default:
+                return PlayFormattedHours(to.timeIntervalSince(from))
+            }
+        case 1...3:
+            return PlayFormattedDays(to.timeIntervalSince(from))
+        default:
+            return nil
+        }
+    }
+    
+    private enum DateStyle {
+        case date
+        case shortDate
+        case shortDateAndTime
+    }
+    
+    private static func formattedDate(for media: SRGMedia, style: DateStyle = .date, accessibilityLabel: Bool = false) -> String? {
+        if media.play_isWebFirst {
+            return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
+        }
+        else if shouldDisplayDate(for: media) {
+            switch style {
+            case .date:
+                return accessibilityLabel
+                ? PlayAccessibilityRelativeDateFromDate(media.date)
+                : DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+            case .shortDate:
+                return accessibilityLabel
+                ? PlayAccessibilityRelativeDateFromDate(media.date)
+                : DateFormatter.play_relativeShortDate.string(from: media.date)
+            case .shortDateAndTime:
+                return accessibilityLabel
+                ? PlayAccessibilityDateAndTimeFromDate(media.date)
+                : DateFormatter.play_shortDateAndTime.string(from: media.date)
+            }
+        }
+        else {
+            return nil
+        }
+    }
+    
+    private static func formattedExpirationDate(for media: SRGMedia, accessibilityLabel: Bool = false) -> String? {
+        guard let endDate = media.endDate, shouldDisplayExpirationDate(for: media) else { return nil }
+        let dateString = accessibilityLabel
+        ? PlayAccessibilityDateFromDate(endDate)
+        : DateFormatter.play_shortDate.string(from: endDate)
+        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), dateString)
+    }
+    
+    private static func formattedTime(for media: SRGMedia) -> String {
+        return DateFormatter.play_time.string(from: media.date)
+    }
+    
+    private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {
+        return media.title.lowercased() == show.title.lowercased()
+    }
+    
+    private static func shouldDisplayExpirationDate(for media: SRGMedia) -> Bool {
+        let now = Date()
+        guard media.timeAvailability(at: now) == .available,
+              media.contentType != .scheduledLivestream, media.contentType != .trailer,
+              let endDate = media.endDate, media.contentType != .livestream else { return false }
+        let remainingDateComponents = Calendar.current.dateComponents([.day], from: now, to: endDate)
+        return remainingDateComponents.day! > 3
+    }
+    
+    private static func shouldDisplayDate(for media: SRGMedia) -> Bool {
+        let now = Date()
+        return media.timeAvailability(at: now) != .notYetAvailable
+        && media.contentType != .livestream
+        && !(media.contentType == .scheduledLivestream && media.timeAvailability(at: now) == .available)
     }
 }

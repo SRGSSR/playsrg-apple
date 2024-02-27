@@ -163,7 +163,7 @@ private extension DownloadCell {
     var accessibilityLabel: String? {
         guard let download else { return nil }
         if let media = download.media {
-            return MediaDescription.accessibilityLabel(for: media)
+            return MediaDescription.cellAccessibilityLabel(for: media)
         }
         else {
             return download.title

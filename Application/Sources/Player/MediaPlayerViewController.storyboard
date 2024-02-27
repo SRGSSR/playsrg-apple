@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -662,6 +662,7 @@
                         <outlet property="currentProgramTitleLabel" destination="G8U-yX-Q0a" id="kSk-dP-6ET"/>
                         <outlet property="currentProgramView" destination="jXJ-O2-0II" id="9EU-sl-htH"/>
                         <outlet property="dateLabel" destination="eaZ-CL-kRu" id="akM-kX-bBk"/>
+                        <outlet property="dateStackView" destination="p9y-d4-l6T" id="nj2-g8-2ld"/>
                         <outlet property="detailsButton" destination="PuO-1V-zBs" id="0Ac-AM-WVb"/>
                         <outlet property="detailsGestureRecognizer" destination="mqd-VT-g2Z" id="sbb-Cs-wWm"/>
                         <outlet property="downloadButton" destination="nnp-1j-BhQ" id="H26-HB-WST"/>

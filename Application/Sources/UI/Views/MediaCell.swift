@@ -148,7 +148,7 @@ struct MediaCell: View {
             return MediaDescription.subtitle(for: media, style: mediaDescriptionStyle)
         }
         
-        private var title: String {
+        private var title: String? {
             guard let media else { return .placeholder(length: 8) }
             return MediaDescription.title(for: media, style: mediaDescriptionStyle)
         }
@@ -180,6 +180,11 @@ struct MediaCell: View {
             }
         }
         
+        private var bottomPadding: CGFloat {
+            // Allow 3 lines for title, with a badge and no subtitles
+            return embeddedDirection == .horizontal ? -2 : 0
+        }
+        
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 if embeddedDirection == .horizontal, let properties = availabilityBadgeProperties {
@@ -192,11 +197,13 @@ struct MediaCell: View {
                         .lineLimit(2)
                         .foregroundColor(.srgGray96)
                 }
-                Text(title)
-                    .srgFont(.H4)
-                    .lineLimit(titleLineLimit)
-                    .foregroundColor(.srgGrayC7)
-                    .layoutPriority(1)
+                if let title {
+                    Text(title)
+                        .srgFont(.H4)
+                        .lineLimit(titleLineLimit)
+                        .foregroundColor(.srgGrayC7)
+                        .layoutPriority(1)
+                }
                 if let summary {
                     Text(summary)
                         .srgFont(.body)
@@ -205,6 +212,7 @@ struct MediaCell: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .padding(.bottom, bottomPadding)
         }
     }
 }
@@ -224,7 +232,7 @@ extension MediaCell {
 private extension MediaCell {
     var accessibilityLabel: String? {
         guard let media else { return nil }
-        return MediaDescription.accessibilityLabel(for: media)
+        return MediaDescription.cellAccessibilityLabel(for: media)
     }
     
     var accessibilityHint: String? {

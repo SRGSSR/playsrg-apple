@@ -146,6 +146,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+@property (nonatomic, getter=isWebFirstBadgeEnabled) BOOL webFirstBadgeEnabled;
 
 @property (nonatomic, copy) NSString *discoverySubtitleOptionLanguage;
 
@@ -439,6 +440,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
+    self.webFirstBadgeEnabled = [firebaseConfiguration boolForKey:@"webFirstBadgeEnabled"];
     
     self.discoverySubtitleOptionLanguage = [firebaseConfiguration stringForKey:@"discoverySubtitleOptionLanguage"];
     
