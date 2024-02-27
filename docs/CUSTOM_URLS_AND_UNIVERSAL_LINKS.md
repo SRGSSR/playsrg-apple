@@ -35,7 +35,7 @@ For a debug, nightly or beta build, a `server=[server_title]` parameter can also
 
 The Play iOS application also supports pseudo-universal link URLs, obtained by replacing the URL scheme in the original portal URL with the application custom URL scheme:
 
-* Open a Play web page: `[scheme]://[play_website_url]`. It uses the [parsePlayUrl.js](https://github.com/SRGSSR/playsrg-playfff/blob/main/docs/DEEPLINK.md) file with the related function to attempt transforming the URL.
+* Open a Play web page: `[scheme]://[play_website_url]`. It uses the [parsePlayUrl.js](https://github.com/SRGSSR/playsrg-playfff/blob/main/docs/DEEP_LINK.md) file with the related function to attempt transforming the URL.
 
 For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply replace `https` with `playrts-debug`, as follows: [playrts-debug://www.rts.ch/play/tv/emissions?index=l](playrts-debug://www.rts.ch/play/tv/emissions?index=l)
 
