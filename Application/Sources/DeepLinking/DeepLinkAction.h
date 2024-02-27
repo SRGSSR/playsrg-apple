@@ -36,6 +36,7 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
  *    [scheme]://media/[media_urn] (optional query parameters: channel_id=[channel_id], start_time=[start_position_seconds])
  *    [scheme]://show/[show_urn] (optional query parameter: channel_id=[channel_id])
  *    [scheme]://topic/[topic_urn]
+ *    [scheme]://micropage/[page_id]
  *    [scheme]://page/[page_id]
  *    [scheme]://home (optional query parameters: channel_id=[channel_id])
  *    [scheme]://az (optional query parameters: channel_id=[channel_id], index=[index_letter])
