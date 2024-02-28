@@ -492,12 +492,12 @@ private extension PageViewModel {
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .topic(topic):
-            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
+            return SRGDataProvider.current!.contentPage(for: topic.vendor, topicWithUrn: topic.urn)
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .show(show):
             if show.transmission == .TV && !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
-                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
+                return SRGDataProvider.current!.contentPage(for: show.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, show: show), index: $1) }) }
                     .eraseToAnyPublisher()
             }
@@ -507,7 +507,7 @@ private extension PageViewModel {
                     .eraseToAnyPublisher()
             }
         case let .page(page):
-            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: page.uid)
+            return SRGDataProvider.current!.contentPage(for: page.vendor, uid: page.uid)
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
