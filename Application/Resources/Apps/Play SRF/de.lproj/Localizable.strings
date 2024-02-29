@@ -738,7 +738,8 @@
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
 "The media cannot be opened." = "Der Inhalt kann nicht geöffnet werden.";
 
-/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
+/* Error message when a page cannot be opened via Handoff, deep linking or a push notification
+   Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
 "The page cannot be opened." = "Seite konnte nicht geöffnet werden.";
 
 /* Error message when a section cannot be opened via Handoff, deep linking or a push notification */

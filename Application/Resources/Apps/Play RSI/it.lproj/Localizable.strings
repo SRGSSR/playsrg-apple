@@ -309,7 +309,7 @@
 "Image credit: %@" = "Immagine: %@";
 
 /* Short text replacing date for a web first content. */
-"In advance" = "In advance";
+"In advance" = "In anteprima";
 
 /* Information section header */
 "Information" = "Informazioni";
@@ -738,7 +738,8 @@
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
 "The media cannot be opened." = "Il media non può essere riprodotto.";
 
-/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
+/* Error message when a page cannot be opened via Handoff, deep linking or a push notification
+   Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
 "The page cannot be opened." = "La pagina non può essere aperta.";
 
 /* Error message when a section cannot be opened via Handoff, deep linking or a push notification */
