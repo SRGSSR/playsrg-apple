@@ -164,6 +164,16 @@ enum Mock {
         return mockObject(kind.rawValue, type: SRGShow.self)
     }
     
+    enum Page: String {
+        case standard
+        case overflow
+        case short
+    }
+    
+    static func page(_ kind: Page = .standard) -> SRGContentPage {
+        return mockObject(kind.rawValue, type: SRGContentPage.self)
+    }
+    
     enum Topic: String {
         case standard
         case overflow

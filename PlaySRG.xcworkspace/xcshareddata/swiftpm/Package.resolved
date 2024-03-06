@@ -311,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "ae92436f7861651e66de5d33d2c0d1cf7d73345e",
-        "version" : "19.0.0"
+        "revision" : "9be423f396f61104976c251852a15610c281ec4d",
+        "version" : "19.0.1"
       }
     },
     {
@@ -428,8 +428,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-sdk",
       "state" : {
-        "revision" : "a0987154857d372be3e90458296825fa594e1b0c",
-        "version" : "2.11.1"
+        "revision" : "c2b0202dcaaf7e81c32c4fb715f31a4984752c83",
+        "version" : "2.12.0"
       }
     },
     {

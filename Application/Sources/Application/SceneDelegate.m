@@ -133,6 +133,11 @@ static void *s_kvoContext = &s_kvoContext;
             [action.analyticsEvent send];
         }];
     }
+    else if ([action.type isEqualToString:DeepLinkTypePage] || [action.type isEqualToString:DeepLinkTypeMicroPage]) {
+        [self openPageWithUid:action.identifier completionBlock:^{
+            [action.analyticsEvent send];
+        }];
+    }
     else if ([action.type isEqualToString:DeepLinkTypeHome]) {
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openHomeWithChannelUid:channelUid completionBlock:^{
@@ -283,6 +288,17 @@ static void *s_kvoContext = &s_kvoContext;
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
         [self openTopicURN:topicURN];
+        completionBlock ? completionBlock() : nil;
+    }];
+}
+
+- (void)openPageWithUid:(NSString *)pageUid completionBlock:(void (^)(void))completionBlock
+{
+    NSParameterAssert(pageUid);
+    
+    ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
+    [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
+        [self openPageUid:pageUid];
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -492,6 +508,24 @@ static void *s_kvoContext = &s_kvoContext;
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
                                              userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification") }];
+            [Banner showError:error];
+        }
+        [UserConsentHelper waitCollectingConsentRelease];
+    }] resume];
+}
+
+- (void)openPageUid:(NSString *)pageUid
+{
+    [UserConsentHelper waitCollectingConsentRetain];
+    [[SRGDataProvider.currentDataProvider contentPageForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:pageUid published:YES atDate:nil withCompletionBlock:^(SRGContentPage * _Nullable contentPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        if (contentPage) {
+            PageViewController *pageViewController = [PageViewController pageViewControllerFor:contentPage];
+            [self.rootTabBarController pushViewController:pageViewController animated:YES];
+        }
+        else {
+            NSError *error = [NSError errorWithDomain:PlayErrorDomain
+                                                 code:PlayErrorCodeNotFound
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when a page cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error];
         }
         [UserConsentHelper waitCollectingConsentRelease];

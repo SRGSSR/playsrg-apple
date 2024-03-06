@@ -7,7 +7,7 @@ BU__BUNDLE_IDENTIFIER_PREFIX[config=Nightly] = ch.srgssr.
 BU__BUNDLE_IDENTIFIER_PREFIX[config=Debug] = ch.srgssr.
 BU__CODE_SIGN_ENTITLEMENTS_IOS_APP_FILE_NAME = Application.entitlements
 BU__DOMAIN = *.rsi.ch
-BU__DOMAIN[config=Beta] = srgplayer-rsi.stage.srf.ch
+BU__DOMAIN[config=Beta] = play-mmf.herokuapp.com
 BU__DOMAIN[config=Beta_AppCenter] = srgplayer-rsi.stage.srf.ch
 BU__DOMAIN[config=Nightly] = play-mmf.herokuapp.com
 BU__DOMAIN[config=Nightly_AppCenter] = srgplayer-rsi.test.srf.ch

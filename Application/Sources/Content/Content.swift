@@ -393,15 +393,14 @@ private extension Content {
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
-            let vendor = ApplicationConfiguration.shared.vendor
             
             switch contentSection.type {
             case .medias:
-                return dataProvider.medias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
+                return dataProvider.medias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
                     .map { self.filterItems($0).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAndMedias:
-                return dataProvider.showAndMedias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
+                return dataProvider.showAndMedias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
                     .map {
                         var items = [Content.Item]()
                         if let show = $0.show {
@@ -412,7 +411,7 @@ private extension Content {
                     }
                     .eraseToAnyPublisher()
             case .shows:
-                return dataProvider.shows(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
+                return dataProvider.shows(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
                     .map { self.filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
@@ -428,11 +427,11 @@ private extension Content {
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .livestreams:
-                    return dataProvider.tvLivestreams(for: vendor)
+                    return dataProvider.tvLivestreams(for: contentSection.vendor)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .topicSelector:
-                    return dataProvider.tvTopics(for: vendor)
+                    return dataProvider.tvTopics(for: contentSection.vendor)
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
                 case .continueWatching:

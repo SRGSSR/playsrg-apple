@@ -308,6 +308,9 @@
 /* Image copyright introductory label */
 "Image credit: %@" = "Maletg:%@";
 
+/* Short text replacing date for a web first content. */
+"In advance" = "prepublicaziun";
+
 /* Information section header */
 "Information" = "Infurmaziun";
 
@@ -568,9 +571,6 @@
 /* Search setting */
 "Relevance" = "Relevanza";
 
-/* Short label identifying a replay sport event. Display in uppercase. */
-"Replay" = "Replay";
-
 /* Label of the button to present technical issue report instructions
    Label to present technical issue report instructions
    Subject of the technical issue mail */
@@ -650,9 +650,6 @@
 
 /* Title of the button to skip updating the application */
 "Skip" = "Finir";
-
-/* Short label identifying content which will be available soon. */
-"Soon" = "Proximamain";
 
 /* Search setting */
 "Sort by" = "Sortar tenor";
@@ -741,7 +738,8 @@
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
 "The media cannot be opened." = "Il medium na po betg vegnir avert.";
 
-/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
+/* Error message when a page cannot be opened via Handoff, deep linking or a push notification
+   Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
 "The page cannot be opened." = "La preschentaziun na po betg vegnir averta.";
 
 /* Error message when a section cannot be opened via Handoff, deep linking or a push notification */

@@ -111,7 +111,7 @@ extension DateFormatter {
      *
      *  @discussion Use `PlayAccessibilityRelativeDateFromDate` for accessibility-oriented formatting.
      */
-    static var play_relativeShortDateAndTime: DateFormatter = {
+    @objc static var play_relativeShortDateAndTime: DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone.srgTimeZone
         dateFormatter.dateStyle = .short

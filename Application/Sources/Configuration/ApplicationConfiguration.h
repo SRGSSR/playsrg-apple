@@ -61,6 +61,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+@property (nonatomic, readonly, getter=isWebFirstBadgeEnabled) BOOL webFirstBadgeEnabled;
 
 @property (nonatomic, readonly, copy, nullable) NSString *discoverySubtitleOptionLanguage;
 
@@ -113,6 +114,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
  */
 - (nullable NSURL *)sharingURLForMedia:(nullable SRGMedia *)media atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
 - (nullable NSURL *)sharingURLForShow:(nullable SRGShow *)show;
+- (nullable NSURL *)sharingURLForContentPage:(nullable SRGContentPage *)contentPage;
 - (nullable NSURL *)sharingURLForContentSection:(nullable SRGContentSection *)contentSection;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)

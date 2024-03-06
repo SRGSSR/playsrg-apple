@@ -146,6 +146,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+@property (nonatomic, getter=isWebFirstBadgeEnabled) BOOL webFirstBadgeEnabled;
 
 @property (nonatomic, copy) NSString *discoverySubtitleOptionLanguage;
 
@@ -439,6 +440,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
+    self.webFirstBadgeEnabled = [firebaseConfiguration boolForKey:@"webFirstBadgeEnabled"];
     
     self.discoverySubtitleOptionLanguage = [firebaseConfiguration stringForKey:@"discoverySubtitleOptionLanguage"];
     
@@ -624,6 +626,20 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:showTypeName]
                            stringByAppendingPathComponent:@"quicklink"]
                           stringByAppendingPathComponent:show.uid];
+    return URLComponents.URL;
+}
+
+- (NSURL *)sharingURLForContentPage:(SRGContentPage *)contentPage
+{
+    if (! contentPage || ! [self playURLForVendor:contentPage.vendor] || contentPage.type != SRGContentPageTypeMicroPage) {
+        return nil;
+    }
+    
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:contentPage.vendor] resolvingAgainstBaseURL:NO];
+    URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:@"tv"]
+                           stringByAppendingPathComponent:@"micropages"]
+                          stringByAppendingPathComponent:@"micropage"];
+    URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"pageId" value:contentPage.uid] ];
     return URLComponents.URL;
 }
 

@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (nullable instancetype)sharingItemForMedia:(SRGMedia *)media atTime:(CMTime)time;
 + (nullable instancetype)sharingItemForCurrentClip:(SRGMedia *)media;
 + (nullable instancetype)sharingItemForShow:(SRGShow *)show;
++ (nullable instancetype)sharingItemForContentPage:(SRGContentPage *)contentPage;
 + (nullable instancetype)sharingItemForContentSection:(SRGContentSection *)contentSection;
 
 @end

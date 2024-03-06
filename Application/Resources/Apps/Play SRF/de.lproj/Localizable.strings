@@ -308,6 +308,9 @@
 /* Image copyright introductory label */
 "Image credit: %@" = "Bild: %@";
 
+/* Short text replacing date for a web first content. */
+"In advance" = "Vorab";
+
 /* Information section header */
 "Information" = "Informationen";
 
@@ -568,9 +571,6 @@
 /* Search setting */
 "Relevance" = "Relevanz";
 
-/* Short label identifying a replay sport event. Display in uppercase. */
-"Replay" = "Replay";
-
 /* Label of the button to present technical issue report instructions
    Label to present technical issue report instructions
    Subject of the technical issue mail */
@@ -650,9 +650,6 @@
 
 /* Title of the button to skip updating the application */
 "Skip" = "Abbrechen";
-
-/* Short label identifying content which will be available soon. */
-"Soon" = "In Kürze";
 
 /* Search setting */
 "Sort by" = "Sortieren nach";
@@ -741,7 +738,8 @@
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
 "The media cannot be opened." = "Der Inhalt kann nicht geöffnet werden.";
 
-/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
+/* Error message when a page cannot be opened via Handoff, deep linking or a push notification
+   Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
 "The page cannot be opened." = "Seite konnte nicht geöffnet werden.";
 
 /* Error message when a section cannot be opened via Handoff, deep linking or a push notification */

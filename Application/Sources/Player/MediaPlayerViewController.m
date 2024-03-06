@@ -20,7 +20,6 @@
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayApplication.h"
-#import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
 #import "PlaySRG-Swift.h"
@@ -109,7 +108,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *viewCountStackView;
@@ -808,13 +808,21 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.scrollView.hidden = NO;
         self.channelView.hidden = YES;
         
-        [self.availabilityLabel play_displayAvailabilityBadgeForMediaMetadata:mainChapterMedia];
+        [self.availabilityLabel play_displayAvailabilityBadgeForMedia:mainChapterMedia];
         
         self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
         self.titleLabel.text = media.title;
         
         self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-        [self.dateLabel play_displayDateLabelForMediaMetadata:media];
+        self.dateLabel.text = [MediaDescription availabilityFor:media];
+        self.dateLabel.accessibilityLabel = [MediaDescription availabilityAccessibilityLabelFor:media];
+        
+        if (self.dateLabel.text.length == 0) {
+            [self.dateLabel removeFromSuperview];
+        }
+        else if (self.dateLabel.superview == nil) {
+            [self.dateStackView insertSubview:self.dateLabel atIndex:1];
+        }
         
         [self removeSongPanel];
         
@@ -856,7 +864,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.summaryLabel.text = media.play_fullSummary;
         
         BOOL downloaded = (mainChapterMedia != nil) ? [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded : NO;
-        BOOL isWebFirst = mainChapterMedia.play_isWebFirst;
+        BOOL isWebFirst = mainChapterMedia.play_isWebFirst && [ApplicationConfiguration sharedApplicationConfiguration].isWebFirstBadgeEnabled;
         BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
         BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
         BOOL hasMultiAudio = resource.play_multiAudioAvailable && ! downloaded;

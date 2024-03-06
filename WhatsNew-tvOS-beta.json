@@ -85,5 +85,8 @@
     "1.8.0-440": "- Shorter wording to \"add to favorites\" buttons. [RSI, SRF]\n- Switch version button for all iOS and tvOS TestFlight buids (private and public).",
     "1.8.1-441": "- Improve show pages: do not repeat show title in items.\n- UX: remove placeholders in show pages if errors.",
     "1.8.2-442": "- Improve show pages: do not repeat show title in items. Fix.\n- Update Italian translations. [RSI]\n- Maintenance release.\n- Update new server SAM requests. [Internal]",
-    "1.8.2-443": "- Remove unexpected playback stops (like RSI Telegiornale, RTS 19h30).\n- Add sport livestream events in livestreams page. [RSI]"
+    "1.8.2-443": "- Remove unexpected playback stops (like RSI Telegiornale, RTS 19h30).\n- Add sport livestream events in livestreams page. [RSI]",
+    "1.8.3-444": "Branch beta\n- Web first UI updated on pages.\n- Updated brand colors.\n- Removed duplicate date and time, like with sport events.",
+    "1.8.3-445": "- In advance published content UI updated.\n- Brand colors on labels updated.\n- Displayed user consent banner reduced if traveling between Switzerland and rest of the world.\n- Promotion micro page support (from external shared links).",
+    "1.8.3-446": "- Prepare AppStore release with official SRG library releases.\nSee previous build release notes."
 }
