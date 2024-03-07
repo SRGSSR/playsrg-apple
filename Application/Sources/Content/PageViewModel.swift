@@ -160,7 +160,7 @@ final class PageViewModel: Identifiable, ObservableObject {
 extension PageViewModel {
     enum Id: SectionFiltering {
         case video
-        case audio(channel: RadioChannel)
+        case audio(channel: RadioChannel?)
         case live
         case topic(_ topic: SRGTopic)
         case show(_ show: SRGShow)
@@ -243,7 +243,12 @@ extension PageViewModel {
             case .video:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case let .audio(channel: channel):
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+                if let channel {
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+                }
+                else {
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
+                }
             case .live:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .topic:
@@ -270,7 +275,12 @@ extension PageViewModel {
             case .video:
                 return show.transmission == .TV
             case let .audio(channel: channel):
-                return show.transmission == .radio && show.primaryChannelUid == channel.uid
+                if let channel {
+                    return show.transmission == .radio && show.primaryChannelUid == channel.uid
+                }
+                else {
+                    return show.transmission == .radio
+                }
             default:
                 return false
             }
@@ -285,7 +295,12 @@ extension PageViewModel {
             case .video:
                 return medias.filter { $0.mediaType == .video }
             case let .audio(channel: channel):
-                return medias.filter { $0.mediaType == .audio && ($0.channel?.uid == channel.uid || $0.show?.primaryChannelUid == channel.uid) }
+                if let channel {
+                    return medias.filter { $0.mediaType == .audio && ($0.channel?.uid == channel.uid || $0.show?.primaryChannelUid == channel.uid) }
+                }
+                else {
+                    return medias.filter { $0.mediaType == .audio }
+                }
             default:
                 return medias
             }
@@ -421,6 +436,8 @@ extension PageViewModel {
         switch id {
         case .video:
             return true
+        case let .audio(channel: channel):
+            return channel == nil
         default:
             return false
         }
@@ -569,14 +586,19 @@ private extension PageViewModel {
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            if let uid = channel.contentPageid {
+            if let channel, let uid = channel.contentPageid {
                 return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: uid)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                     .eraseToAnyPublisher()
             }
-            else {
+            else if let channel {
                 return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
                     .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
+            else {
+                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playAudio)
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                     .eraseToAnyPublisher()
             }
         case .live:

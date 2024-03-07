@@ -428,6 +428,10 @@ extension PageViewController {
         return PageViewController(id: .video)
     }
     
+    @objc static func audiosViewController() -> PageViewController {
+        return PageViewController(id: .audio(channel: nil))
+    }
+    
     @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> PageViewController {
         return PageViewController(id: .audio(channel: channel))
     }

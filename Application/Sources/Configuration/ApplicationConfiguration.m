@@ -156,6 +156,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSInteger minimumSocialViewCount;
 
+@property (nonatomic, getter=isAudioContentHomePagePreferred) BOOL audioContentHomePagePreferred;
+
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
 
@@ -455,6 +457,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
     
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
+    
+    self.audioContentHomePagePreferred = [firebaseConfiguration boolForKey:@"audioContentHomePagePreferred"];
     
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];

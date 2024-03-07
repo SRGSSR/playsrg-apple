@@ -71,6 +71,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) NSInteger minimumSocialViewCount;                       // minimum value to display social view count
 
+@property (nonatomic, readonly, getter=isAudioContentHomePagePreferred) BOOL audioContentHomePagePreferred;
+
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioHomepageChannels;         // radio channels having a corresponding homepage
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;

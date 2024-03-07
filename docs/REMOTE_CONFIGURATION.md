@@ -88,7 +88,8 @@ The radio channel JSON dictionaries have one more key:
 
 ## Audio homepage
 
-`audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.
+* `audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.
+* `audioContentHomePagePreferred` (optional, boolean): Set to `true` iff audio tab only needs one content homepage to be displayed and ignores radio channel homepages. If omitted, `false`.
 
 ### Home sections:
 
