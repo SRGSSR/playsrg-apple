@@ -569,9 +569,16 @@ private extension PageViewModel {
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
+            if let uid = channel.contentPageid {
+                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: uid)
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                    .eraseToAnyPublisher()
+            }
+            else {
+                return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
         case .live:
             return Just(Page(uid: nil, sections: ApplicationConfiguration.shared.liveConfiguredSections.enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
