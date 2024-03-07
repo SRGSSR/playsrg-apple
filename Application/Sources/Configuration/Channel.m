@@ -30,6 +30,7 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
 @property (nonatomic) UIColor *titleColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
 @property (nonatomic) SongsViewStyle songsViewStyle;
+@property (nonatomic, copy) NSString *contentPageid;
 
 @end
 
@@ -87,6 +88,11 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
         id songsViewStyleValue = dictionary[@"songsViewStyle"];
         if ([songsViewStyleValue isKindOfClass:NSString.class]) {
             self.songsViewStyle = SongsViewStyleWithString(songsViewStyleValue);
+        }
+        
+        id contentPageIdValue = dictionary[@"contentPageid"];
+        if ([contentPageIdValue isKindOfClass:NSString.class]) {
+            self.contentPageid = contentPageIdValue;
         }
     }
     return self;
