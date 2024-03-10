@@ -40,6 +40,13 @@ extension ShowCellViewModel {
     }
     
     func imageUrl(with imageVariant: SRGImageVariant) -> URL? {
-        return imageVariant == .poster ? url(for: show?.posterImage, size: .small) : url(for: show?.image, size: .small)
+        switch imageVariant {
+        case .poster:
+            return url(for: show?.posterImage, size: .small)
+        case .podcast:
+            return url(for: show?.podcastImage, size: .small)
+        case .default:
+            return url(for: show?.image, size: .small)
+        }
     }
 }

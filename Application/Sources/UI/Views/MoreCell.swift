@@ -16,7 +16,14 @@ struct MoreCell: View {
     static let iconHeight: CGFloat = constant(iOS: 60, tvOS: 100)
     
     fileprivate static func aspectRatio(for imageVariant: SRGImageVariant) -> CGFloat {
-        return imageVariant == .poster ? 2 / 3 : 16 / 9
+        switch imageVariant {
+        case .poster:
+            return 2 / 3
+        case .podcast:
+            return 1
+        case .default:
+            return 16 / 9
+        }
     }
     
     var body: some View {
