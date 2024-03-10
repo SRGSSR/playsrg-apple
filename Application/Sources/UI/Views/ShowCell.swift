@@ -160,11 +160,14 @@ enum ShowCellSize {
 struct ShowCell_Previews: PreviewProvider {
     private static let defaultSize = ShowCellSize.swimlane(for: .default).previewSize
     private static let posterSize = ShowCellSize.swimlane(for: .poster).previewSize
+    private static let podcastSize = ShowCellSize.swimlane(for: .podcast).previewSize
     
     static var previews: some View {
         ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .default)
             .previewLayout(.fixed(width: defaultSize.width, height: defaultSize.height))
         ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .poster)
             .previewLayout(.fixed(width: posterSize.width, height: posterSize.height))
+        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .podcast)
+            .previewLayout(.fixed(width: posterSize.width, height: podcastSize.height))
     }
 }

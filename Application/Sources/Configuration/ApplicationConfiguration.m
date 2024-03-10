@@ -151,6 +151,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSString *discoverySubtitleOptionLanguage;
 
 @property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
+@property (nonatomic, getter=areSquareImagesEnabled) BOOL squareImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
@@ -265,6 +266,28 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
 #else
     return _posterImagesEnabled;
+#endif
+}
+
+- (BOOL)areSquareImagesEnabled
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    switch (ApplicationSettingSquareImages()) {
+        case SettingSquareImagesForced: {
+            return YES;
+            break;
+        }
+        case SettingSquareImagesIgnored: {
+            return NO;
+            break;
+        }
+        default: {
+            return _squareImagesEnabled;
+            break;
+        }
+    }
+#else
+    return _squareImagesEnabled;
 #endif
 }
 
@@ -449,6 +472,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.discoverySubtitleOptionLanguage = [firebaseConfiguration stringForKey:@"discoverySubtitleOptionLanguage"];
     
     self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
+    self.squareImagesEnabled = [firebaseConfiguration boolForKey:@"squareImagesEnabled"];
     
 #if TARGET_OS_IOS
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];

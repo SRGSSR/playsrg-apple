@@ -109,6 +109,28 @@ SettingPosterImages ApplicationSettingPosterImages(void)
 #endif
 }
 
+NSValueTransformer *SettingSquareImagesTransformer(void)
+{
+    static NSValueTransformer *s_transformer;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"forced" : @(SettingSquareImagesForced),
+                                                                                         @"ignored" : @(SettingSquareImagesIgnored) }
+                                                                         defaultValue:@(SettingSquareImagesDefault)
+                                                                  reverseDefaultValue:nil];
+    });
+    return s_transformer;
+}
+
+SettingSquareImages ApplicationSettingSquareImages(void)
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    return [[SettingSquareImagesTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingSquareImages]] integerValue];
+#else
+    return SettingSquareImagesDefault;
+#endif
+}
+
 NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)

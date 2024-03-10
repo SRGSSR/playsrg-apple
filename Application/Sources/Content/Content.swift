@@ -221,14 +221,16 @@ private extension Content {
         }
         
         var imageVariant: SRGImageVariant {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            let arePosterImagesEnabled = ApplicationConfiguration.shared.arePosterImagesEnabled
+            // FIXME: How can we preferd square, poster or default 16 / 9 ratio for content show(s) sections?
+            // let areSquareImagesEnabled = ApplicationConfiguration.shared.areSquareImagesEnabled
             switch contentSection.type {
             case .shows:
-                return .poster
+                return arePosterImagesEnabled ? .poster : .default
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return .poster
+                    return arePosterImagesEnabled ? .poster : .default
                 default:
                     return .default
                 }
@@ -612,10 +614,11 @@ private extension Content {
         }
         
         var imageVariant: SRGImageVariant {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
             switch configuredSection {
             case .tvAllShows:
-                return .poster
+                return ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
+            case .radioAllShows:
+                return ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
             default:
                 return .default
             }

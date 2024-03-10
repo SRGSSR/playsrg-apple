@@ -630,6 +630,21 @@ struct SettingsView: View {
             }
         }
         
+        private struct SquareImagesSelectionCell: View {
+            @AppStorage(PlaySRGSettingSquareImages) private var selectedSquareImages = SquareImages.default
+            
+            var body: some View {
+                HStack {
+                    Text(NSLocalizedString("Square images", comment: "Label of the button for square image format selection"))
+                    Spacer()
+                    Text(selectedSquareImages.description)
+                        .foregroundColor(Color.play_sectionSecondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
+                }
+            }
+        }
+        
         private struct ServiceSelectionView: View {
             var body: some View {
                 List {
