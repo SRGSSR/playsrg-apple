@@ -53,7 +53,7 @@ struct ShowCell: View, PrimaryColorSettable {
             VStack(spacing: 0) {
                 ShowVisualView(show: model.show, size: .small, imageVariant: imageVariant)
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
-                if imageVariant != .poster {
+                if imageVariant == .default {
                     DescriptionView(model: model, style: style)
                         .primaryColor(primaryColor)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)
@@ -135,11 +135,18 @@ enum ShowCellSize {
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
     private static func heightOffset(for imageVariant: SRGImageVariant) -> CGFloat {
-        return imageVariant != .poster ? constant(iOS: 32, tvOS: 45) : 0
+        return imageVariant == .default ? constant(iOS: 32, tvOS: 45) : 0
     }
     
     fileprivate static func aspectRatio(for imageVariant: SRGImageVariant) -> CGFloat {
-        return imageVariant != .poster ? 16 / 9 : 2 / 3
+        switch imageVariant {
+        case .poster:
+            return 2 / 3
+        case .podcast:
+            return 1
+        case .default:
+            return 16 / 9
+        }
     }
     
     fileprivate static func itemWidth(for imageVariant: SRGImageVariant) -> CGFloat {
@@ -168,6 +175,6 @@ struct ShowCell_Previews: PreviewProvider {
         ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .poster)
             .previewLayout(.fixed(width: posterSize.width, height: posterSize.height))
         ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .podcast)
-            .previewLayout(.fixed(width: posterSize.width, height: podcastSize.height))
+            .previewLayout(.fixed(width: podcastSize.width, height: podcastSize.height))
     }
 }
