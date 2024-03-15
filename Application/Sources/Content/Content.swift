@@ -9,17 +9,36 @@ import SRGDataProviderCombine
 private let kDefaultNumberOfPlaceholders = 10
 private let kDefaultNumberOfLivestreamPlaceholders = 4
 
+// MARK: Content types
+
+@objc enum ContentType: Int {
+    case videoOrTV
+    case audioOrRadio
+    case mixed
+    
+    var imageVariant: SRGImageVariant {
+        switch self {
+        case .videoOrTV:
+            return ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
+        case .audioOrRadio:
+            return ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
+        case .mixed:
+            return .default
+        }
+    }
+}
+
 // MARK: Types
 
 enum Content {
     enum Section: Hashable {
-        case content(SRGContentSection, show: SRGShow? = nil)
+        case content(SRGContentSection, type: ContentType, show: SRGShow? = nil)
         case configured(ConfiguredSection)
         
         var properties: SectionProperties {
             switch self {
-            case let .content(section, show):
-                return ContentSectionProperties(contentSection: section, show: show)
+            case let .content(section, type, show):
+                return ContentSectionProperties(contentSection: section, contentType: type, show: show)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
             }
@@ -176,6 +195,7 @@ protocol SectionProperties {
 private extension Content {
     struct ContentSectionProperties: SectionProperties {
         let contentSection: SRGContentSection
+        let contentType: ContentType
         let show: SRGShow?
         
         private var presentation: SRGContentPresentation {
@@ -221,16 +241,13 @@ private extension Content {
         }
         
         var imageVariant: SRGImageVariant {
-            let arePosterImagesEnabled = ApplicationConfiguration.shared.arePosterImagesEnabled
-            // FIXME: How can we preferd square, poster or default 16 / 9 ratio for content show(s) sections?
-            // let areSquareImagesEnabled = ApplicationConfiguration.shared.areSquareImagesEnabled
             switch contentSection.type {
             case .shows:
-                return arePosterImagesEnabled ? .poster : .default
+                return contentType.imageVariant
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return arePosterImagesEnabled ? .poster : .default
+                    return contentType.imageVariant
                 default:
                     return .default
                 }
@@ -616,11 +633,11 @@ private extension Content {
         var imageVariant: SRGImageVariant {
             switch configuredSection {
             case .tvAllShows:
-                return ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
+                return ContentType.videoOrTV.imageVariant
             case .radioAllShows:
-                return ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
+                return ContentType.audioOrRadio.imageVariant
             default:
-                return .default
+                return ContentType.mixed.imageVariant
             }
         }
         

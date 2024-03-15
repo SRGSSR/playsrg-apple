@@ -404,8 +404,8 @@ extension SectionViewController: DailyMediasViewController {
 }
 
 extension SectionViewController {
-    @objc static func viewController(forContentSection contentSection: SRGContentSection) -> SectionViewController {
-        return SectionViewController(section: .content(contentSection))
+    @objc static func viewController(forContentSection contentSection: SRGContentSection, contentType: ContentType) -> SectionViewController {
+        return SectionViewController(section: .content(contentSection, type: contentType))
     }
     
 #if os(iOS)
@@ -419,7 +419,7 @@ extension SectionViewController {
 #endif
     
     @objc static func favoriteShowsViewController() -> SectionViewController {
-        return SectionViewController(section: .configured(.favoriteShows))
+        return SectionViewController(section: .configured(.favoriteShows(contentType: .mixed)))
     }
     
     @objc static func historyViewController() -> SectionViewController {
@@ -731,7 +731,7 @@ private extension SectionViewController {
             switch item {
             case let .media(media):
                 switch configuration.wrappedValue {
-                case let .content(contentSection, _):
+                case let .content(contentSection, _, _):
                     switch contentSection.type {
                     case .predefined:
                         switch contentSection.presentation.type {
@@ -766,7 +766,7 @@ private extension SectionViewController {
             case let .show(show):
                 let imageVariant = configuration.properties.imageVariant
                 switch configuration.wrappedValue {
-                case let .content(contentSection, _):
+                case let .content(contentSection, _, _):
                     switch contentSection.type {
                     case .predefined:
                         switch contentSection.presentation.type {

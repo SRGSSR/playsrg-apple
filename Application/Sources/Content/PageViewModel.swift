@@ -380,7 +380,7 @@ extension PageViewModel {
         
         var viewModelProperties: PageViewModelProperties {
             switch wrappedValue {
-            case let .content(section, _):
+            case let .content(section, _, _):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section, index: index)
@@ -564,16 +564,17 @@ private extension PageViewModel {
         switch id {
         case .video:
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .topic(topic):
             return SRGDataProvider.current!.contentPage(for: topic.vendor, topicWithUrn: topic.urn)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+            // FIXME: is topic page always videoOrTV content type?
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .show(show):
             if show.transmission == .TV && !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
                 return SRGDataProvider.current!.contentPage(for: show.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
-                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, show: show), index: $1) }) }
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: show.play_contentType, show: show), index: $1) }) }
                     .eraseToAnyPublisher()
             }
             else {
@@ -583,12 +584,13 @@ private extension PageViewModel {
             }
         case let .page(page):
             return SRGDataProvider.current!.contentPage(for: page.vendor, uid: page.uid)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+            // FIXME: is page always videoOrTV content type?
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
             if let channel, let uid = channel.contentPageid {
                 return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: uid)
-                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .audioOrRadio), index: $1) }) }
                     .eraseToAnyPublisher()
             }
             else if let channel {
@@ -598,7 +600,7 @@ private extension PageViewModel {
             }
             else {
                 return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playAudio)
-                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .audioOrRadio), index: $1) }) }
                     .eraseToAnyPublisher()
             }
         case .live:

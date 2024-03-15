@@ -166,15 +166,15 @@ enum SectionShowHeaderViewSize {
 struct SectionShowHeaderView_Previews: PreviewProvider {
     static var previews: some View {
 #if os(tvOS)
-        SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
+        SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
             .previewLayout(.sizeThatFits)
 #else
-        SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
+        SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
             .frame(width: 1000)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .regular)
         
-        SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
+        SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
             .frame(width: 375)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .compact)
