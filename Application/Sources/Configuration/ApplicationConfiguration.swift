@@ -104,7 +104,7 @@ extension ApplicationConfiguration {
 enum ConfiguredSection: Hashable {
     case availableEpisodes(SRGShow)
     
-    case favoriteShows
+    case favoriteShows(contentType: ContentType)
     case history
     case watchLater
     

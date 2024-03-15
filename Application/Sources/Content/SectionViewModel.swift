@@ -142,8 +142,8 @@ extension SectionViewModel {
         
         var viewModelProperties: SectionViewModelProperties {
             switch wrappedValue {
-            case let .content(section, _):
-                return ContentSectionProperties(contentSection: section)
+            case let .content(section, type, _):
+                return ContentSectionProperties(contentSection: section, contentType: type)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
             }
@@ -310,6 +310,7 @@ protocol SectionViewModelProperties {
 private extension SectionViewModel {
     struct ContentSectionProperties: SectionViewModelProperties {
         let contentSection: SRGContentSection
+        let contentType: ContentType
         
         var layout: SectionViewModel.SectionLayout {
             switch contentSection.type {

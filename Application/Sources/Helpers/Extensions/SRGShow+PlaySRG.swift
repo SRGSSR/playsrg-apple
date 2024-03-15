@@ -7,6 +7,17 @@
 import SRGDataProviderModel
 
 extension SRGShow {
+    var play_contentType: ContentType {
+        switch self.transmission {
+        case .TV:
+            return .videoOrTV
+        case .radio:
+            return .audioOrRadio
+        default:
+            return .mixed
+        }
+    }
+    
     var play_summary: String? {
         return ApplicationConfiguration.shared.isShowLeadPreferred ? leadOrSummary : summaryOrLead
     }
