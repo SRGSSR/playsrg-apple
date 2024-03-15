@@ -73,8 +73,8 @@ extension RadioChannelsViewController: PlayApplicationNavigation {
     func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {
         guard let radioChannel = applicationSectionInfo.radioChannel else { return false }
         
-        if let radioChannelViewController = viewControllers.first(where: { ($0 as? PageViewController)?.radioChannel == radioChannel }) as? UIViewController & PlayApplicationNavigation {
-            let pageIndex = viewControllers.firstIndex(of: radioChannelViewController)!
+        if let radioChannelViewController = viewControllers.first(where: { ($0 as? PageViewController)?.radioChannel == radioChannel }) as? UIViewController & PlayApplicationNavigation,
+           let pageIndex = viewControllers.firstIndex(of: radioChannelViewController) {
             _ = self.switchToIndex(pageIndex, animated: false)
             
             return radioChannelViewController.open(applicationSectionInfo)

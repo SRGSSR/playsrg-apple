@@ -9,7 +9,8 @@ import SRGAppearance
 
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
-    let initialPage: Int
+    
+    private(set) var initialPage: Int
     
     private var pageViewController: UIPageViewController
     
@@ -137,7 +138,7 @@ class PageContainerViewController: UIViewController {
         
         coordinator.animate(alongsideTransition: { _ in
             // viewWillTransition(to:with:) could be called before controller view is loaded.
-            if self.tabBar != nil {
+            if self.isViewLoaded {
                 // Force a refresh of the tab bar so that the alignment is correct after rotation
                 self.tabBar.alignment = .leading
                 self.tabBar.alignment = .center
@@ -162,28 +163,44 @@ class PageContainerViewController: UIViewController {
     }
     
     func switchToIndex(_ index: Int, animated: Bool) -> Bool {
-        guard displayPage(at: index, animated: animated) else { return false }
-        
-        tabBar.setSelectedItem(tabBar.items[index], animated: animated)
-        return true
-    }
-    
-    func displayPage(at index: Int, animated: Bool) -> Bool {
         guard index < viewControllers.count else { return false }
         
-        let currentViewController = pageViewController.viewControllers!.first!
-        let currentIndex = viewControllers.firstIndex(of: currentViewController)!
-        let direction: UIPageViewController.NavigationDirection = index > currentIndex ? .forward : .reverse
-        
-        let newViewController = viewControllers[index]
-        pageViewController.setViewControllers([newViewController], direction: direction, animated: animated)
-        self.play_setNeedsScrollableViewUpdate()
-        
-        didDisplayViewController(newViewController, animated: animated)
-        return true
+        if self.isViewLoaded {
+            guard displayPage(at: index, animated: animated) else { return false }
+            
+            tabBar.setSelectedItem(tabBar.items[index], animated: animated)
+            return true
+        }
+        else {
+            initialPage = index
+            return true
+        }
     }
     
-    func updateFonts() {
+    private func displayPage(at index: Int, animated: Bool) -> Bool {
+        guard index < viewControllers.count else { return false }
+        
+        if self.isViewLoaded {
+            var direction: UIPageViewController.NavigationDirection = .forward
+            if let currentViewController = pageViewController.viewControllers?.first {
+                let currentIndex = viewControllers.firstIndex(of: currentViewController)!
+                direction = index > currentIndex ? .forward : .reverse
+            }
+            
+            let newViewController = viewControllers[index]
+            pageViewController.setViewControllers([newViewController], direction: direction, animated: animated)
+            self.play_setNeedsScrollableViewUpdate()
+            
+            didDisplayViewController(newViewController, animated: animated)
+            return true
+        }
+        else {
+            initialPage = index
+            return true
+        }
+    }
+    
+    private func updateFonts() {
         let tabBarFont = SRGFont.font(.body) as UIFont
         tabBar.unselectedItemTitleFont = tabBarFont
         tabBar.selectedItemTitleFont = tabBarFont
