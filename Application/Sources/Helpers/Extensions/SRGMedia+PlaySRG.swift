@@ -72,4 +72,8 @@ extension SRGMedia {
     private var play_audioVariants: [SRGVariant] {
         return audioVariants(for: recommendedAudioVariantSource) ?? []
     }
+    
+    var publicationDate: Date {
+        return startDate ?? date
+    }
 }

@@ -33,7 +33,7 @@ extension SRGDataProvider {
             }
             .reduce([]) { $0 + $1 }
             .map { medias in
-                return Array(medias.sorted(by: { $0.date > $1.date }).prefix(Int(pageSize)))
+                return Array(medias.sorted(by: { $0.publicationDate > $1.publicationDate }).prefix(Int(pageSize)))
             }
             .eraseToAnyPublisher()
     }
