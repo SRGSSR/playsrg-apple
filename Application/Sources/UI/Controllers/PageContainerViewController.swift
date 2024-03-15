@@ -177,7 +177,7 @@ class PageContainerViewController: UIViewController {
         }
     }
     
-    func displayPage(at index: Int, animated: Bool) -> Bool {
+    private func displayPage(at index: Int, animated: Bool) -> Bool {
         guard index < viewControllers.count else { return false }
         
         if self.isViewLoaded {
@@ -200,7 +200,7 @@ class PageContainerViewController: UIViewController {
         }
     }
     
-    func updateFonts() {
+    private func updateFonts() {
         let tabBarFont = SRGFont.font(.body) as UIFont
         tabBar.unselectedItemTitleFont = tabBarFont
         tabBar.selectedItemTitleFont = tabBarFont
