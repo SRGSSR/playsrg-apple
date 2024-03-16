@@ -207,7 +207,7 @@ struct MediaCell: View {
                 if let summary {
                     Text(summary)
                         .srgFont(.body)
-                        .lineLimit(2)
+                        .lineLimit(3)
                         .foregroundColor(.srgGrayC7)
                 }
             }
