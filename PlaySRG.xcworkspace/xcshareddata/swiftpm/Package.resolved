@@ -428,8 +428,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-sdk",
       "state" : {
-        "revision" : "c2b0202dcaaf7e81c32c4fb715f31a4984752c83",
-        "version" : "2.12.0"
+        "revision" : "2f8d6f52ffb0772a8c24f58868be34fbe5822167",
+        "version" : "2.13.2"
       }
     },
     {
@@ -437,8 +437,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://bitbucket.org/usercentricscode/usercentrics-spm-ui",
       "state" : {
-        "revision" : "cd8ec3bec6295483aa81ca2b8af85eabe59772f9",
-        "version" : "2.11.1"
+        "revision" : "4387f8a9efdb0339f11ec22de50adbd66473e3d7",
+        "version" : "2.13.2"
       }
     },
     {
