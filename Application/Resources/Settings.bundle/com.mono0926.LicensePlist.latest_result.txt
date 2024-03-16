@@ -103,11 +103,11 @@ body:
                    …
 version: 2.0.1
 
-name: abseil-cpp-binary, nameSpecified: abseil, owner: google, version: 1.2022062300.0, source: https://github.com/google/abseil-cpp-binary
+name: abseil-cpp-binary, nameSpecified: abseil, owner: google, version: 1.2022062300.1, source: https://github.com/google/abseil-cpp-binary
 
 name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 1.9.8, source: https://github.com/IdeasOnCanvas/Aiolos
 
-name: app-check, nameSpecified: AppCheck, owner: google, version: 10.18.0, source: https://github.com/google/app-check
+name: app-check, nameSpecified: AppCheck, owner: google, version: 10.18.1, source: https://github.com/google/app-check
 
 name: appcenter-sdk-apple, nameSpecified: AppCenter, owner: microsoft, version: 5.0.4, source: https://github.com/microsoft/appcenter-sdk-apple
 
@@ -115,7 +115,7 @@ name: Comscore-Swift-Package-Manager, nameSpecified: Comscore-Swift-Package-Mana
 
 name: DZNEmptyDataSet, nameSpecified: DZNEmptyDataSet, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.19.1, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.22.1, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FSCalendar, nameSpecified: FSCalendar, owner: WenchaoD, version: 2.8.4, source: https://github.com/WenchaoD/FSCalendar
 
@@ -123,17 +123,17 @@ name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3
 
 name: Gifu, nameSpecified: Gifu, owner: kaishin, version: 3.4.1, source: https://github.com/kaishin/Gifu
 
-name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 10.17.0, source: https://github.com/google/GoogleAppMeasurement
+name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 10.22.1, source: https://github.com/google/GoogleAppMeasurement
 
 name: GoogleCastSDK-no-bluetooth, nameSpecified: GoogleCastSDK-no-bluetooth, owner: SRGSSR, version: 4.8.0, source: https://github.com/SRGSSR/GoogleCastSDK-no-bluetooth
 
-name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.3.0, source: https://github.com/google/GoogleDataTransport
+name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.4.0, source: https://github.com/google/GoogleDataTransport
 
-name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.12.1, source: https://github.com/google/GoogleUtilities
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.13.1, source: https://github.com/google/GoogleUtilities
 
-name: grpc-binary, nameSpecified: gRPC, owner: google, version: 1.49.1, source: https://github.com/google/grpc-binary
+name: grpc-binary, nameSpecified: gRPC, owner: google, version: 1.49.2, source: https://github.com/google/grpc-binary
 
-name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 3.2.0, source: https://github.com/google/gtm-session-fetcher
+name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 3.3.1, source: https://github.com/google/gtm-session-fetcher
 
 name: interop-ios-for-google-sdks, nameSpecified: InteropForGoogle, owner: google, version: 100.0.0, source: https://github.com/google/interop-ios-for-google-sdks
 
@@ -149,7 +149,7 @@ name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SR
 
 name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.2.0, source: https://github.com/Mantle/Mantle
 
-name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30909.0, source: https://github.com/firebase/nanopb
+name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30910.0, source: https://github.com/firebase/nanopb
 
 name: Nuke, nameSpecified: Nuke, owner: kean, version: 10.11.2, source: https://github.com/kean/Nuke
 
@@ -159,7 +159,7 @@ name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version
 
 name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.11.1, source: https://github.com/microsoft/PLCrashReporter
 
-name: promises, nameSpecified: Promises, owner: google, version: 2.3.1, source: https://github.com/google/promises
+name: promises, nameSpecified: Promises, owner: google, version: 2.4.0, source: https://github.com/google/promises
 
 name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 9.1.0, source: https://github.com/SRGSSR/srganalytics-apple
 
