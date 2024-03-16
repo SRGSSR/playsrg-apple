@@ -139,9 +139,9 @@ name: interop-ios-for-google-sdks, nameSpecified: InteropForGoogle, owner: googl
 
 name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.12.6, source: https://github.com/urbanairship/ios-library
 
-name: iOSV5, nameSpecified: TagCommander SDK V5, owner: CommandersAct, version: 5.4.4, source: https://github.com/CommandersAct/iOSV5
+name: iOSV5, nameSpecified: TagCommander SDK V5, owner: CommandersAct, version: 5.4.6, source: https://github.com/CommandersAct/iOSV5
 
-name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.3, source: https://github.com/firebase/leveldb
+name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.4, source: https://github.com/firebase/leveldb
 
 name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg4, source: https://github.com/SRGSSR/libextobjc
 
