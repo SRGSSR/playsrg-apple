@@ -91,7 +91,7 @@ struct MediaDetailView: View {
     private struct AvailabilityView: View {
         @ObservedObject var model: MediaDetailViewModel
         
-        private var availabilityInformation: String? {
+        private var availabilityInformation: String {
             guard let media = model.media else { return .placeholder(length: 15) }
             return MediaDescription.availability(for: media)
         }
@@ -108,7 +108,7 @@ struct MediaDetailView: View {
         
         var body: some View {
             HStack(spacing: 20) {
-                if let availabilityInformation, !availabilityInformation.isEmpty {
+                if !availabilityInformation.isEmpty {
                     Text(availabilityInformation)
                         .srgFont(.subtitle2)
                         .foregroundColor(.white)

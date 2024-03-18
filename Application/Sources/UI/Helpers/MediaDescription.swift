@@ -72,8 +72,8 @@ import SRGAppearanceSwift
         return media.duration / 1000
     }
     
-    @objc static func availability(for media: SRGMedia?) -> String? {
-        guard let media else { return nil }
+    @objc static func availability(for media: SRGMedia?) -> String {
+        guard let media else { return "" }
         
         var values: [String] = []
         
