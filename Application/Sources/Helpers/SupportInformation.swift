@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import MediaAccessibility
 import SRGIdentity
 import UIKit
 
@@ -12,35 +13,35 @@ import UIKit
     private static func status(for bool: Bool) -> String {
         return bool ? "Yes" : "No"
     }
-    
+
     private static var dateAndTime: String {
         return DateFormatter.play_shortDateAndTime.string(from: Date())
     }
-    
+
     private static var applicationName: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     }
-    
+
     private static var applicationIdentifier: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
     }
-    
+
     private static var applicationVersion: String {
         return Bundle.main.play_friendlyVersionNumber
     }
-    
+
     private static var operatingSystem: String {
         return UIDevice.current.systemName
     }
-    
+
     private static var operatingSystemVersion: String {
         return ProcessInfo.processInfo.operatingSystemVersionString
     }
-    
+
     private static var model: String {
         return UIDevice.current.model
     }
-    
+
     private static var modelIdentifier: String {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -48,16 +49,43 @@ import UIKit
             return String(cString: p)
         }
     }
-    
+
     private static var loginStatus: String {
         guard let identityService = SRGIdentityService.current else { return "N/A" }
         return status(for: identityService.isLoggedIn)
     }
-    
+
     private static var continuousAutoplayStatus: String {
         return status(for: ApplicationSettingAutoplayEnabled())
     }
-    
+
+    private static var audioSettings: String {
+        guard let code = ApplicationSettingLastSelectedAudioLanguageCode() else { return "None" }
+        return code
+    }
+
+    private static var subtitleSettings: String {
+        let displayType = MACaptionAppearanceGetDisplayType(.user)
+        switch displayType {
+        case .automatic:
+            return "Automatic"
+        case .alwaysOn:
+            let languages = MACaptionAppearanceCopySelectedLanguages(.user).takeUnretainedValue() as? [String] ?? []
+            guard !languages.isEmpty else { return "On" }
+            return "On (preferred languages: \(languages.joined(separator: ", ")))"
+        default:
+            return "Off"
+        }
+    }
+
+    private static var subtitleAccessibilitySettings: String {
+        guard let characteristics = MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(.user).takeRetainedValue() as? [AVMediaCharacteristic],
+              !characteristics.isEmpty else {
+            return "None"
+        }
+        return characteristics.map(\.rawValue).joined(separator: ", ")
+    }
+
     private static var subtitleAvailabilityDisplayed: String {
         return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingSubtitleAvailabilityDisplayed))
     }
@@ -131,6 +159,9 @@ import UIKit
         if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
             components.append("Audio description availability displayed: \(audioDescriptionAvailabilityDisplayed)")
         }
+        components.append("Most recent audio selection: \(audioSettings)")
+        components.append("Subtitle settings (MediaAccessibility): \(subtitleSettings)")
+        components.append("Subtitle accessibility settings (MediaAccessibility): \(subtitleAccessibilitySettings)")
         components.append("VoiceOver enabled: \(voiceOverEnabled)")
         if SRGIdentityService.current != nil {
             components.append("Logged in: \(loginStatus)")
