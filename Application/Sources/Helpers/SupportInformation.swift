@@ -60,13 +60,11 @@ import UIKit
     }
 
     private static var audioSettings: String {
-        guard let code = ApplicationSettingLastSelectedAudioLanguageCode() else { return "None" }
-        return code
+        ApplicationSettingLastSelectedAudioLanguageCode() ?? "None"
     }
 
     private static var subtitleSettings: String {
-        let displayType = MACaptionAppearanceGetDisplayType(.user)
-        switch displayType {
+        switch MACaptionAppearanceGetDisplayType(.user) {
         case .automatic:
             return "Automatic"
         case .alwaysOn:
