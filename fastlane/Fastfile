@@ -60,7 +60,7 @@ platform :ios do
     tag_version = tag_version(platform)
     branch_name = git_branch_name
 
-    # Build number overrided
+    # Update CI information because of build number overrided
     notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
@@ -1647,19 +1647,6 @@ def upload_appcenter_dsyms(appcenter_appname)
   lane_context.delete(SharedValues::DSYM_OUTPUT_PATH)
 end
 
-# Share build version and number to the continuous integration
-def notify_version_to_ci(platform, tag_version, build_name)
-  return unless ENV['TEAMCITY_VERSION']
-
-  platform ||= iOS
-  tag_version ||= tag_version(platform)
-  build_name ||= ''
-
-  displayed_build_number = tag_version
-  displayed_build_number += "+#{build_name}" unless build_name.empty?
-  puts "##teamcity[buildNumber '#{displayed_build_number}']"
-end
-
 # Returns current build number on App Center
 def latest_appcenter_build_number(app_names)
   build_number = 0
@@ -1689,6 +1676,19 @@ def srg_latest_testflight_build_number(app_identifiers, platform)
     build_number = number unless build_number >= number
   end
   build_number
+end
+
+# Share build version and number to the continuous integration
+def notify_version_to_ci(platform, tag_version, build_name)
+  return unless ENV['TEAMCITY_VERSION']
+
+  platform ||= iOS
+  tag_version ||= tag_version(platform)
+  build_name ||= ''
+
+  displayed_build_number = tag_version
+  displayed_build_number += "+#{build_name}" unless build_name.empty?
+  puts "##teamcity[buildNumber '#{displayed_build_number}']"
 end
 
 # Create screenshots for App Store Connect.
