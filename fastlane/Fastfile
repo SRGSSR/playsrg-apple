@@ -841,8 +841,6 @@ platform :ios do
       UI.success "#{schemes[index]} (#{platform} Nightly #{tag_version}) distributed. ✅"
     end
 
-    # GH Deployments investigation
-
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
@@ -1754,7 +1752,7 @@ def srg_github_create_deployment(environment)
     body: srg_github_create_deployment_body(environment),
     error_handlers: {
       '*' => proc do |result|
-        UI.important 'Something went wrong with Github token and deployments API creation ⚠️'
+        UI.important 'Something went wrong with Github token and deployments API creation. ⚠️'
         UI.important result.to_s
       end
     }
@@ -1763,7 +1761,6 @@ end
 
 def srg_github_create_deployment_body(environment)
   {
-    # Don't use branch name, use last commit hash instead to snychronize with the repository state.
     ref: last_git_commit[:commit_hash],
     auto_merge: false,
     required_contexts: [],
@@ -1804,7 +1801,7 @@ def srg_github_update_deployment(deployment_id, state, environment)
     body: srg_github_update_deployment_body(state, environment),
     error_handlers: {
       '*' => proc do |result|
-        UI.important 'Something went wrong with Github token and deployments API state update ⚠️'
+        UI.important 'Something went wrong with Github token and deployments API state update. ⚠️'
         UI.important result.to_s
       end
     }
