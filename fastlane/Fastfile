@@ -1748,6 +1748,18 @@ def srg_github_create_deployment_body(environment)
   }
 end
 
+def update_github_deployment_in_progress(platform, build_configuration)
+  update_github_deployment('in_progress', platform, build_configuration)
+end
+
+def update_github_deployment_success(platform, build_configuration)
+  update_github_deployment('success', platform, build_configuration)
+end
+
+def update_github_deployment_error(platform, build_configuration)
+  update_github_deployment('error', platform, build_configuration)
+end
+
 def update_github_deployment(state, platform, build_configuration)
   deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
   environment = github_environment(platform, build_configuration)
