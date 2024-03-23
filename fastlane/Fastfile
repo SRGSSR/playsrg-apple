@@ -1715,8 +1715,6 @@ def create_github_deployment(platform, build_configuration)
 
   result = srg_github_create_deployment(platform, build_configuration)
   deployment_id = result[:json]['id']
-
-  UI.important result.to_s unless deployment_id
   return unless deployment_id
 
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment_id.to_s
@@ -1730,8 +1728,9 @@ def srg_github_create_deployment(platform, build_configuration)
     path: github_api_deployments_path,
     body: srg_github_create_deployment_body(platform, build_configuration),
     error_handlers: {
-      '*' => proc do
-        UI.important 'Something went wrong with Github token and deployments API ⚠️'
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API creation ⚠️'
+        UI.important result.to_s
       end
     }
   )
@@ -1746,6 +1745,40 @@ def srg_github_create_deployment_body(platform, build_configuration)
     required_contexts: [],
     environment: github_environment(platform, build_configuration),
     description: "Start Play #{platform} #{build_configuration} deployment"
+  }
+end
+
+def update_github_deployment(state, platform, build_configuration)
+  return unless ENV['GITHUB_DEPLOYMENT_ID'] && ENV['GITHUB_TOKEN']
+
+  deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
+  result = srg_github_update_deployment(deployment_id, state, platform, build_configuration)
+  deployment_state = result[:json]['state']
+  return unless deployment_state
+
+  UI.message "Github deployment state updated: #{deployment_state}"
+end
+
+def srg_github_update_deployment(deployment_id, state, platform, build_configuration)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'POST',
+    path: "#{github_api_deployments_path}/#{deployment_id}/statuses",
+    body: srg_github_update_deployment_body(state, platform, build_configuration),
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API state update ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
+end
+
+def srg_github_update_deployment_body(state, platform, build_configuration)
+  {
+    state:,
+    environment: github_environment(platform, build_configuration),
+    description: "Building Play #{platform} #{build_configuration}: #{state}"
   }
 end
 
