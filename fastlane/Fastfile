@@ -25,6 +25,9 @@ platform :ios do
 
     notify_version_to_ci(platform, tag_version, build_name(branch_name))
 
+    create_github_deployment(lane)
+    update_github_deployment_in_progress(lane)
+
     if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
@@ -1062,6 +1065,8 @@ platform :ios do
   end
 
   after_all do |lane|
+    update_github_deployment_success(lane)
+
     if cleaned_lane_condition(lane)
       ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true)
@@ -1069,6 +1074,8 @@ platform :ios do
   end
 
   error do |lane|
+    update_github_deployment_error(lane)
+
     if cleaned_lane_condition(lane)
       clean_build_artifacts
       ENV.delete('DERIVED_DATA_CLEANED')
@@ -1695,7 +1702,20 @@ def github_api_deployments_path
   '/repos/SRGSSR/playsrg-apple/deployments'
 end
 
-def github_environment(platform, build_configuration)
+def github_environment(lane)
+  case lane.to_s
+  when 'iOSnightlies'
+    github_environment_map('iOS', 'Nightly')
+  when 'tvOSnightlies'
+    github_environment_map('tvOS', 'Nightly')
+  when 'iOSbetas'
+    github_environment_map('iOS', 'Beta')
+  when 'tvOSbetas'
+    github_environment_map('tvOS', 'Beta')
+  end
+end
+
+def github_environment_map(platform, build_configuration)
   environments = {
     'iOS' => {
       'Nightly' => 'Play SRG iOS Nightlies',
@@ -1709,9 +1729,9 @@ def github_environment(platform, build_configuration)
   environments[platform][build_configuration]
 end
 
-def create_github_deployment(platform, build_configuration)
+def create_github_deployment(lane)
   ENV.delete('GITHUB_DEPLOYMENT_ID')
-  environment = github_environment(platform, build_configuration)
+  environment = github_environment(lane)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
   result = srg_github_create_deployment(environment)
@@ -1748,21 +1768,21 @@ def srg_github_create_deployment_body(environment)
   }
 end
 
-def update_github_deployment_in_progress(platform, build_configuration)
-  update_github_deployment('in_progress', platform, build_configuration)
+def update_github_deployment_in_progress(lane)
+  update_github_deployment('in_progress', lane)
 end
 
-def update_github_deployment_success(platform, build_configuration)
-  update_github_deployment('success', platform, build_configuration)
+def update_github_deployment_success(lane)
+  update_github_deployment('success', lane)
 end
 
-def update_github_deployment_error(platform, build_configuration)
-  update_github_deployment('error', platform, build_configuration)
+def update_github_deployment_error(lane)
+  update_github_deployment('error', lane)
 end
 
-def update_github_deployment(state, platform, build_configuration)
+def update_github_deployment(state, lane)
   deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
-  environment = github_environment(platform, build_configuration)
+  environment = github_environment(lane)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
 
   result = srg_github_update_deployment(deployment_id, state, environment)
