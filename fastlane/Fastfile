@@ -1711,9 +1711,10 @@ end
 
 def create_github_deployment(platform, build_configuration)
   ENV.delete('GITHUB_DEPLOYMENT_ID')
-  return unless ENV['GITHUB_TOKEN'] && github_environment(platform, build_configuration)
+  environment = github_environment(platform, build_configuration)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
-  result = srg_github_create_deployment(platform, build_configuration)
+  result = srg_github_create_deployment(environment)
   deployment_id = result[:json]['id']
   return unless deployment_id
 
@@ -1721,12 +1722,12 @@ def create_github_deployment(platform, build_configuration)
   UI.message "Github deployment created: #{deployment_id}"
 end
 
-def srg_github_create_deployment(platform, build_configuration)
+def srg_github_create_deployment(environment)
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
     path: github_api_deployments_path,
-    body: srg_github_create_deployment_body(platform, build_configuration),
+    body: srg_github_create_deployment_body(environment),
     error_handlers: {
       '*' => proc do |result|
         UI.important 'Something went wrong with Github token and deployments API creation ⚠️'
@@ -1736,35 +1737,35 @@ def srg_github_create_deployment(platform, build_configuration)
   )
 end
 
-def srg_github_create_deployment_body(platform, build_configuration)
+def srg_github_create_deployment_body(environment)
   {
-    # ref: git_branch_name,
-    # sha: last_git_commit[:commit_hash],
+    # Don't use branch name, use last commit hash instead to snychronize with the repository state.
     ref: last_git_commit[:commit_hash],
     auto_merge: false,
     required_contexts: [],
-    environment: github_environment(platform, build_configuration),
-    description: "Start Play #{platform} #{build_configuration} deployment"
+    environment:,
+    description: "Start #{environment} deployment"
   }
 end
 
 def update_github_deployment(state, platform, build_configuration)
-  return unless ENV['GITHUB_DEPLOYMENT_ID'] && ENV['GITHUB_TOKEN']
-
   deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
-  result = srg_github_update_deployment(deployment_id, state, platform, build_configuration)
+  environment = github_environment(platform, build_configuration)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
+
+  result = srg_github_update_deployment(deployment_id, state, environment)
   deployment_state = result[:json]['state']
   return unless deployment_state
 
   UI.message "Github deployment state updated: #{deployment_state}"
 end
 
-def srg_github_update_deployment(deployment_id, state, platform, build_configuration)
+def srg_github_update_deployment(deployment_id, state, environment)
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
     path: "#{github_api_deployments_path}/#{deployment_id}/statuses",
-    body: srg_github_update_deployment_body(state, platform, build_configuration),
+    body: srg_github_update_deployment_body(state, environment),
     error_handlers: {
       '*' => proc do |result|
         UI.important 'Something went wrong with Github token and deployments API state update ⚠️'
@@ -1774,11 +1775,11 @@ def srg_github_update_deployment(deployment_id, state, platform, build_configura
   )
 end
 
-def srg_github_update_deployment_body(state, platform, build_configuration)
+def srg_github_update_deployment_body(state, environment)
   {
     state:,
-    environment: github_environment(platform, build_configuration),
-    description: "Building Play #{platform} #{build_configuration}: #{state}"
+    environment:,
+    description: "Building #{environment}: #{state}"
   }
 end
 
