@@ -838,6 +838,8 @@ platform :ios do
       UI.success "#{schemes[index]} (#{platform} Nightly #{tag_version}) distributed. ✅"
     end
 
+    # GH Deployments investigation
+
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
