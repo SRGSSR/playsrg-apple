@@ -1948,7 +1948,8 @@ def cherrypick_beta_on_develop(commits)
 end
 
 def git_branch_name
-  sh "git branch | grep \\* | cut -d ' ' -f2"
+  branch_name = `git branch | grep \\* | cut -d ' ' -f2`
+  branch_name.strip
 end
 
 def git_status_clean
