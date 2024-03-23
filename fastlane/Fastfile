@@ -1698,6 +1698,10 @@ def notify_version_to_ci(platform, tag_version, build_name)
   puts "##teamcity[buildNumber '#{displayed_build_number}']"
 end
 
+def build_log_url
+  ENV.fetch('BUILD_URL', nil)
+end
+
 def github_api_deployments_path
   '/repos/SRGSSR/playsrg-apple/deployments'
 end
@@ -1811,7 +1815,8 @@ def srg_github_update_deployment_body(state, environment)
   {
     state:,
     environment:,
-    description: "Building #{environment}: #{state}"
+    description: "Building #{environment}: #{state}",
+    log_url: build_log_url
   }
 end
 
