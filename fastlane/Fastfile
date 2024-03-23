@@ -1691,6 +1691,64 @@ def notify_version_to_ci(platform, tag_version, build_name)
   puts "##teamcity[buildNumber '#{displayed_build_number}']"
 end
 
+def github_api_deployments_path
+  '/repos/SRGSSR/playsrg-apple/deployments'
+end
+
+def github_environment(platform, build_configuration)
+  environments = {
+    'iOS' => {
+      'Nightly' => 'Play SRG iOS Nightlies',
+      'Beta' => 'Play SRG iOS Betas'
+    },
+    'tvOS' => {
+      'Nightly' => 'Play SRG tvOS Nightlies',
+      'Beta' => 'Play SRG tvOS Betas'
+    }
+  }
+  environments[platform][build_configuration]
+end
+
+def create_github_deployment(platform, build_configuration)
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  return unless ENV['GITHUB_TOKEN'] && github_environment(platform, build_configuration)
+
+  result = srg_github_create_deployment(platform, build_configuration)
+  deployment_id = result[:json]['id']
+
+  UI.important result.to_s unless deployment_id
+  return unless deployment_id
+
+  ENV['GITHUB_DEPLOYMENT_ID'] = deployment_id.to_s
+  UI.message "Github deployment created: #{deployment_id}"
+end
+
+def srg_github_create_deployment(platform, build_configuration)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'POST',
+    path: github_api_deployments_path,
+    body: srg_github_create_deployment_body(platform, build_configuration),
+    error_handlers: {
+      '*' => proc do
+        UI.important 'Something went wrong with Github token and deployments API ⚠️'
+      end
+    }
+  )
+end
+
+def srg_github_create_deployment_body(platform, build_configuration)
+  {
+    # ref: git_branch_name,
+    # sha: last_git_commit[:commit_hash],
+    ref: last_git_commit[:commit_hash],
+    auto_merge: false,
+    required_contexts: [],
+    environment: github_environment(platform, build_configuration),
+    description: "Start Play #{platform} #{build_configuration} deployment"
+  }
+end
+
 # Create screenshots for App Store Connect.
 def screenshots(platform, business_unit)
   platform ||= 'iOS'
