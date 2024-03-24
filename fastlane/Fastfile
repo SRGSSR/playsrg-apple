@@ -375,11 +375,11 @@ platform :ios do
   lane :publishReleaseNotes do
     output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
     Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+
+    copy_static_github_pages_files(output_directory)
+
     releases_directory = "#{output_directory}/releases"
     Dir.chdir('..') { FileUtils.mkdir_p(releases_directory) }
-
-    index_html_file = 'fastlane/gh-pages/index.html'
-    Dir.chdir('..') { FileUtils.cp(index_html_file, output_directory) }
 
     ['iOS', 'tvOS'].map do |platform|
       UI.message "Preparing Play #{platform} beta release notes. 📝"
@@ -2337,6 +2337,20 @@ def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
   { state:, message: }
 end
 
+def copy_static_github_pages_files(output_directory)
+  source_index_html_file = 'fastlane/gh-pages/index.html'
+  Dir.chdir('..') { FileUtils.cp(source_index_html_file, output_directory) }
+
+  source_deployments_directory = 'fastlane/gh-pages/deployments'
+  deployments_directory = "#{output_directory}/deployments"
+  Dir.chdir('..') do
+    FileUtils.mkdir_p(deployments_directory)
+    Dir.glob("#{source_deployments_directory}/*.{png,html}").each do |file|
+      FileUtils.cp(file, deployments_directory)
+    end
+  end
+end
+
 def publish_on_github_pages(output_directory, releases_directory)
   branch_name = git_branch_name
 
@@ -2345,9 +2359,9 @@ def publish_on_github_pages(output_directory, releases_directory)
     sh 'git checkout --orphan gh-pages'
     sh 'git reset --hard'
     sh "mv \"#{output_directory}/index.html\" ./"
-    sh 'git add index.html'
+    sh "mv \"#{output_directory}/deployments\" ./"
     sh "mv \"#{releases_directory}\" ./"
-    sh 'git add releases/*'
+    sh 'git add index.html releases/* deployments/*'
     sh 'git commit -m "Publish release notes"'
     sh 'git push origin gh-pages --force'
     sh "git checkout #{branch_name}"
