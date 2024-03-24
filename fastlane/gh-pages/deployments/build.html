@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Play SRG Apple build</title>
+<meta charset="UTF-8" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<style>
+@font-face {
+  font-family: "SRG SSR Configuration Regular";
+  src: url("https://www.rsi.ch/play/v3/fonts/SRGSSRTypeVF_Text_W_Wght.woff2") format("woff2"); 
+}
+body {
+  font-family: "SRG SSR Configuration Regular";
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+  color: #ffffff;
+  background-color: #161616;
+}
+a {
+  color: white;
+}
+img {
+    border-radius: 10pt;
+}
+</style>
+<script>
+  const Platform = {
+    iOS: 'ios',
+    tvOS: 'tvos',
+    none: 'none'
+  };
+
+  const Configuration = {
+    nightly: 'nightly',
+    beta: 'beta',
+    none: 'none'
+  };
+
+  function getPlatform() {
+    const platformParam = getQueryParameter('platform');
+    const platform = platformParam ? platformParam.toLowerCase() : null;
+    if (platform === 'ios') {
+      return Platform.iOS;
+    } else if (platform === 'tvos') {
+      return Platform.tvOS;
+    }
+    return Platform.none;
+  }
+
+  function platformName() {
+    switch (getPlatform()) {
+      case Platform.iOS:
+        return 'iOS';
+      case Platform.tvOS:
+        return 'tvOS';
+      default:
+        return 'SRG';
+    }
+  }
+
+  function getConfiguration() {
+    const configurationParam = getQueryParameter('configuration');
+    const configuration = configurationParam ? configurationParam.toLowerCase() : null;
+    if (configuration === 'nightly') {
+      return Configuration.nightly;
+    } else if (configuration === 'beta') {
+      return Configuration.beta;
+    }
+    return Configuration.none;
+  }
+
+  function configurationName() {
+    switch (getConfiguration()) {
+      case Configuration.nightly:
+        return 'nightly';
+      case Configuration.beta:
+        return 'beta';
+      default:
+        return 'nightly and beta';
+    }
+  }
+
+  function configurationNames() {
+    switch (getConfiguration()) {
+      case Configuration.nightly:
+        return 'nightlies';
+      case Configuration.beta:
+        return 'betas';
+      default:
+        return 'nightlies and betas';
+    }
+  }
+
+  function getVersion() {
+    return getQueryParameter('version');
+  }
+
+  function getQueryParameter(name) {
+    const url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    const results = regex.exec(url);
+    if (!results) {
+      return null;
+    }
+    if (!results[2]) {
+      return '';
+    }
+    return decodeURIComponent(results[2]);
+;
+  }
+</script>
+</head>
+<body>
+<div style="text-align: center;">
+  <h2>Play <script> document.write(platformName());</script> <script> document.write(configurationNames());</script></h2>
+<p>
+  The private <script> document.write(configurationName());</script> versions are only intended for internal SRG SSR use and should not be distributed outside the company.
+  <br/>
+  Only the developer team can send a private invitation with <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank">Apple TestFlight</a> access link.
+</p>
+<script>
+  var version = getVersion();
+  var platform = getPlatform();
+  var configuration = getConfiguration();
+
+  if (platform === Platform.iOS) {
+    document.write('<p>📱 🚗 💻</p><p>Available on iPhone, iPad, with CarPlay<br/>and on Mac with Apple Silicon (MacOS running the iPad version).</p>');
+  } else if (platform === Platform.tvOS) {
+    document.write('<p>📺</p><p>Available on Apple TV.</p>');
+  }
+
+  if (version && platform !== Platform.none && configuration !== Configuration.none) {
+    document.write('<p>Search in Apple TestFlight application and install this <b>Play ' + platformName() + ' ' + configurationName() + ' version</b>:</p>');
+    document.write('<h1>' + version + '</h1>');
+  }
+
+  if (platform !== Platform.none && configuration !== Configuration.non) {
+    if (platform === Platform.tvOS) {
+      document.write('<p>Help TestFlight links:<br/>(tvOS builds are only displayed on TV)</p>');
+    }
+    else {
+      document.write('<p>Help TestFlight links:</p>');
+    }
+
+    if (configuration === Configuration.nightly) {
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999232" target="_blank"><img src="./icon_rsi-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999511" target="_blank"><img src="./icon_rtr-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999108" target="_blank"><img src="./icon_rts-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999251" target="_blank"><img src="./icon_srf-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525912081" target="_blank"><img src="./icon_swi-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
+    }
+    else if (platform !== Platform.none && configuration === Configuration.beta) {
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523749" target="_blank"><img src="./icon_rsi-' + getPlatform() + '-beta.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523913" target="_blank"><img src="./icon_rtr-' + getPlatform() + '-beta.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541524094" target="_blank"><img src="./icon_rts-' + getPlatform() + '-beta.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523775" target="_blank"><img src="./icon_srf-' + getPlatform() + '-beta.png" height="60"/></a></p>');
+      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523969" target="_blank"><img src="./icon_swi-' + getPlatform() + '-beta.png" height="60"/></a></p>');
+    }
+  }
+</script>
+</div>
+</body>
+</html>
