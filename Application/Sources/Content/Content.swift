@@ -530,17 +530,27 @@ private extension Content {
             }
         }
         
-        private func filterItems<T>(_ items: [T]) -> [T] {
-            guard presentation.type == .mediaElement || presentation.type == .showElement else { return items }
-            
-            if presentation.isRandomized, let item = items.randomElement() {
-                return [item]
+        private func filterItems<T: NSObject>(_ items: [T]) -> [T] {
+            if presentation.type == .mediaElement || presentation.type == .showElement {
+                if presentation.isRandomized, let item = items.randomElement() {
+                    return [item]
+                }
+                else if !presentation.isRandomized, let item = items.first {
+                    return [item]
+                }
+                else {
+                    return []
+                }
             }
-            else if !presentation.isRandomized, let item = items.first {
-                return [item]
+            else if let show = displayedShow {
+                return items.filter {
+                    guard $0.isKind(of: SRGShow.self) else { return true }
+
+                    return ($0 as! SRGShow).urn != show.urn
+                }
             }
             else {
-                return []
+                return items
             }
         }
     }
