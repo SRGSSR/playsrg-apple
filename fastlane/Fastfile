@@ -25,6 +25,7 @@ platform :ios do
 
     notify_version_to_ci(platform, tag_version, branch_name)
 
+    create_or_update_github_environment(lane)
     create_github_deployment(lane)
     update_github_deployment_in_progress(lane)
 
@@ -1723,21 +1724,51 @@ def github_environment(lane)
   environment_data = github_environment_data(lane)
   return unless environment_data
 
-  github_environment_map(environment_data[:platform], environment_data[:configuration])
+  environment = github_environments(environment_data[:platform], environment_data[:configuration])
+  return unless environment
+
+  build_name = build_name(git_branch_name)
+  environment += "+#{build_name}" unless build_name.empty?
+  environment
 end
 
-def github_environment_map(platform, build_configuration)
+def github_environments(platform, build_configuration)
   environments = {
     'iOS' => {
-      'Nightly' => 'Play SRG iOS Nightlies',
-      'Beta' => 'Play SRG iOS Betas'
+      'Nightly' => 'playsrg-ios-nightly',
+      'Beta' => 'playsrg-ios-beta'
     },
     'tvOS' => {
-      'Nightly' => 'Play SRG tvOS Nightlies',
-      'Beta' => 'Play SRG tvOS Betas'
+      'Nightly' => 'playsrg-tvos-nightly',
+      'Beta' => 'playsrg-tvos-beta'
     }
   }
   environments[platform][build_configuration]
+end
+
+def create_or_update_github_environment(lane)
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
+
+  result = srg_github_create_or_update_environment(environment)
+  name = result[:json]['name']
+  return unless name
+
+  UI.message "Github used environment: #{name}"
+end
+
+def srg_github_create_or_update_environment(environment)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'PUT',
+    path: "#{github_api_path}/environments/#{environment}",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and environments API creation. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
 end
 
 def create_github_deployment(lane)
