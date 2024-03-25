@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -57,7 +59,7 @@
                                                 <rect key="frame" x="308" y="0.0" width="64" height="54"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="waveform_animation-0" translatesAutoresizingMaskIntoConstraints="NO" id="Msg-dq-g9i">
-                                                        <rect key="frame" x="8" y="-37" width="34" height="128"/>
+                                                        <rect key="frame" x="8" y="10" width="34" height="34"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="34" id="tO5-GP-UH3"/>
@@ -105,6 +107,9 @@
                 <outlet property="titleLabel" destination="9i6-JI-bLq" id="x3p-6c-WAo"/>
                 <outlet property="waveformImageView" destination="Msg-dq-g9i" id="IvZ-9k-vrd"/>
                 <outlet property="waveformView" destination="1rh-f6-w0B" id="Tqz-b6-4i9"/>
+                <outlet property="waveformViewLeadingConstraint" destination="PKd-eI-pPX" id="ZRc-V2-bXi"/>
+                <outlet property="waveformViewTrailingConstraint" destination="6in-QA-oke" id="IYx-TE-4AN"/>
+                <outlet property="waveformViewWidthConstraint" destination="tO5-GP-UH3" id="Jnj-4k-CK9"/>
                 <outletCollection property="marginWidthConstraints" destination="MyP-WU-aUc" id="Igq-wL-KUN"/>
                 <outletCollection property="marginWidthConstraints" destination="y7s-P1-YZs" id="tOb-db-jQg"/>
             </connections>
@@ -112,6 +117,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="waveform_animation-0" width="128" height="128"/>
+        <image name="waveform_animation-0" width="34" height="34"/>
     </resources>
 </document>

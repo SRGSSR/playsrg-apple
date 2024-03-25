@@ -13,6 +13,9 @@
 @import SRGAppearance;
 
 static const CGFloat SongTableViewMargin = 42.f;
+static const CGFloat SongTableViewWaveformViewWidth = 34.f;
+static const CGFloat SongTableViewWaveformViewLeading = 8.f;
+static const CGFloat SongTableViewWaveformViewTrailing = 22.f;
 
 @interface SongTableViewCell ()
 
@@ -29,6 +32,10 @@ static const CGFloat SongTableViewMargin = 42.f;
 @property (nonatomic, weak) IBOutlet UIView *waveformView;
 
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray<NSLayoutConstraint *> *marginWidthConstraints;
+
+@property (nonatomic) IBOutlet NSLayoutConstraint *waveformViewWidthConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *waveformViewLeadingConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *waveformViewTrailingConstraint;
 
 @end
 
@@ -55,11 +62,10 @@ static const CGFloat SongTableViewMargin = 42.f;
 {
     // Add variable contribution depending on the number of lines required to properly display a song title
     // (maximum of 2 lines)
-    // Remark: We do not take the waveform into account. We namely do not want to change the height of the
-    //         cell whether or not the waveform is displayed. We therefore calculate the layout in the nominal
-    //         case, i.e. without waveform.
+    // Remark: We take the waveform into account. We namely do not want to change the height of the cell whether or not
+    //         the waveform is displayed. We therefore calculate the layout in the nominal case, i.e. without waveform.
     UIFont *font = [self titleLabelFont];
-    CGFloat textWidth = fmaxf(width - 2 * SongTableViewMargin, 0.f);
+    CGFloat textWidth = fmaxf(width - SongTableViewMargin - SongTableViewWaveformViewLeading - SongTableViewWaveformViewWidth - SongTableViewWaveformViewTrailing, 0.f);
     CGRect boundingRect = [song.title boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX)
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:@{ NSFontAttributeName : font }
@@ -85,6 +91,10 @@ static const CGFloat SongTableViewMargin = 42.f;
     [self.marginWidthConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
         constraint.constant = SongTableViewMargin;
     }];
+    
+    self.waveformViewWidthConstraint.constant = SongTableViewWaveformViewWidth;
+    self.waveformViewLeadingConstraint.constant = SongTableViewWaveformViewLeading;
+    self.waveformViewTrailingConstraint.constant = SongTableViewWaveformViewTrailing;
     
     self.waveformView.hidden = YES;
     self.rightMarginView.hidden = NO;
