@@ -1705,8 +1705,8 @@ def build_log_url
   ENV.fetch('BUILD_URL', nil)
 end
 
-def github_api_deployments_path
-  '/repos/SRGSSR/playsrg-apple/deployments'
+def github_api_path
+  '/repos/SRGSSR/playsrg-apple'
 end
 
 def github_environment_data(lane)
@@ -1771,7 +1771,7 @@ def srg_github_create_deployment(environment, ref)
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
-    path: github_api_deployments_path,
+    path: "#{github_api_path}/deployments",
     body: srg_github_create_deployment_body(environment, ref),
     error_handlers: {
       '*' => proc do |result|
@@ -1813,7 +1813,7 @@ def srg_github_delete_deployment(deployment_id)
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'DELETE',
-    path: "#{github_api_deployments_path}/#{deployment_id}",
+    path: "#{github_api_path}/deployments/#{deployment_id}",
     error_handlers: {
       '*' => proc do |result|
         UI.important 'Something went wrong with Github token and deployments API deletion. ⚠️'
@@ -1840,19 +1840,19 @@ def update_github_deployment(state, lane)
   environment = github_environment(lane)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
 
-  result = srg_github_update_deployment(deployment_id, state, lane)
+  result = srg_github_update_deployment(environment, deployment_id, state, lane)
   deployment_state = result[:json]['state']
   return unless deployment_state
 
   UI.message "Github deployment state updated: #{deployment_state}"
 end
 
-def srg_github_update_deployment(deployment_id, state, lane)
+def srg_github_update_deployment(environment, deployment_id, state, lane)
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
-    path: "#{github_api_deployments_path}/#{deployment_id}/statuses",
-    body: srg_github_update_deployment_body(state, lane),
+    path: "#{github_api_path}/deployments/#{deployment_id}/statuses",
+    body: srg_github_update_deployment_body(environment, state, lane),
     error_handlers: {
       '*' => proc do |result|
         UI.important 'Something went wrong with Github token and deployments API state update. ⚠️'
@@ -1862,9 +1862,7 @@ def srg_github_update_deployment(deployment_id, state, lane)
   )
 end
 
-def srg_github_update_deployment_body(state, lane)
-  environment = github_environment(lane)
-
+def srg_github_update_deployment_body(environment, state, lane)
   {
     state:,
     environment:,
