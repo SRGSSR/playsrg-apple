@@ -1745,20 +1745,34 @@ def create_github_deployment(lane)
   environment = github_environment(lane)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
-  result = srg_github_create_deployment(environment)
+  # Try to create a deployment with the branch name.
+  result = create_github_deployment_ref(environment, git_branch_name)
+  return unless result[:json]['id']
+
+  # Check the commit sha is the same as the last commit.
+  return if github_deployment_sha_correct(result)
+
+  delete_github_deployment(lane)
+  # Try to create a deployment with the last commit instead.
+  create_github_deployment_ref(environment, last_git_commit[:commit_hash])
+end
+
+def create_github_deployment_ref(environment, ref)
+  result = srg_github_create_deployment(environment, ref)
   deployment_id = result[:json]['id']
   return unless deployment_id
 
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment_id.to_s
   UI.message "Github deployment created: #{deployment_id}"
+  result
 end
 
-def srg_github_create_deployment(environment)
+def srg_github_create_deployment(environment, ref)
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
     path: github_api_deployments_path,
-    body: srg_github_create_deployment_body(environment),
+    body: srg_github_create_deployment_body(environment, ref),
     error_handlers: {
       '*' => proc do |result|
         UI.important 'Something went wrong with Github token and deployments API creation. ⚠️'
@@ -1768,14 +1782,45 @@ def srg_github_create_deployment(environment)
   )
 end
 
-def srg_github_create_deployment_body(environment)
+def srg_github_create_deployment_body(environment, ref)
   {
-    ref: last_git_commit[:commit_hash],
+    ref:,
     auto_merge: false,
     required_contexts: [],
     environment:,
     description: "Start #{environment} deployment"
   }
+end
+
+def github_deployment_sha_correct(result)
+  last_git_commit[:commit_hash] == result[:json]['sha']
+end
+
+def delete_github_deployment(lane)
+  deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
+
+  result = srg_github_delete_deployment(deployment_id)
+  status = result[:status]
+  return unless status == 204
+
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  UI.message "Github deployment deleted: #{deployment_id}"
+end
+
+def srg_github_delete_deployment(deployment_id)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'DELETE',
+    path: "#{github_api_deployments_path}/#{deployment_id}",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API deletion. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
 end
 
 def update_github_deployment_in_progress(lane)
