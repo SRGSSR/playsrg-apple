@@ -60,15 +60,13 @@ struct ShowHeaderView: View {
         
         @State private var isLandscape: Bool
         
-        private let compactDescriptionOffet: CGFloat = -12
-        
         init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
             self.horizontalPadding = horizontalPadding
             self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
         }
         
-        private var descriptionHorizontalPadding: CGFloat {
+        private var descriptionPadding: CGFloat {
             return horizontalSizeClass == .compact ? horizontalPadding : horizontalPadding * 2
         }
         
@@ -78,23 +76,22 @@ struct ShowHeaderView: View {
                     VStack(alignment: .leading, spacing: 0) {
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
-                            .overlay(ImageOverlay(isHorizontal: false))
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
-                            .padding(.horizontal, descriptionHorizontalPadding)
-                            .offset(y: compactDescriptionOffet)
+                            .padding(.top, descriptionPadding)
+                            .padding(.horizontal, descriptionPadding)
                     }
-                    .padding(.bottom, 24 + compactDescriptionOffet)
+                    .padding(.bottom, 24)
                     .focusable()
                 }
                 else {
                     HStack(spacing: 0) {
                         DescriptionView(model: model, compactLayout: false)
-                            .padding(.leading, descriptionHorizontalPadding)
+                            .padding(.top, descriptionPadding)
+                            .padding(.leading, descriptionPadding)
                             .padding(.trailing, 16)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
-                            .overlay(ImageOverlay(isHorizontal: true))
                     }
                     .padding(.bottom, constant(iOS: 40, tvOS: 50))
                     .focusable()
@@ -102,23 +99,6 @@ struct ShowHeaderView: View {
             }
             .readSize { _ in
                 isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
-            }
-        }
-    }
-    
-    /// Behavior: h-exp, v-exp
-    private struct ImageOverlay: View {
-        let isHorizontal: Bool
-        
-        var body: some View {
-            if isHorizontal {
-                Group {
-                    LinearGradient(colors: [.clear, .srgGray16], startPoint: UnitPoint(x: 0.1, y: 0.5), endPoint: .leading)
-                    LinearGradient(colors: [.clear, .srgGray16], startPoint: UnitPoint(x: 0.5, y: 0.95), endPoint: .bottom)
-                }
-            }
-            else {
-                LinearGradient(colors: [.clear, .srgGray16], startPoint: UnitPoint(x: 0.5, y: 0.9), endPoint: .bottom)
             }
         }
     }
