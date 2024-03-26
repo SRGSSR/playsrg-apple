@@ -75,12 +75,12 @@ struct ShowHeaderView: View {
         var body: some View {
             Group {
                 if horizontalSizeClass == .compact || !isLandscape {
-                    VStack(alignment: .center, spacing: 0) {
+                    VStack(alignment: .leading, spacing: 0) {
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
                             .overlay(ImageOverlay(isHorizontal: false))
                             .layoutPriority(1)
-                        DescriptionView(model: model, centerLayout: horizontalSizeClass == .compact)
+                        DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
                             .padding(.horizontal, descriptionHorizontalPadding)
                             .offset(y: compactDescriptionOffet)
                     }
@@ -89,7 +89,7 @@ struct ShowHeaderView: View {
                 }
                 else {
                     HStack(spacing: 0) {
-                        DescriptionView(model: model, centerLayout: false)
+                        DescriptionView(model: model, compactLayout: false)
                             .padding(.leading, descriptionHorizontalPadding)
                             .padding(.trailing, 16)
                         ImageView(source: model.imageUrl)
@@ -126,18 +126,10 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
-        let centerLayout: Bool
-        
-        private var stackAlignment: HorizontalAlignment {
-            return centerLayout ? .center : .leading
-        }
-        
-        private var titleAlignment: TextAlignment {
-            return centerLayout ? .center : .leading
-        }
+        let compactLayout: Bool
         
         var body: some View {
-            VStack(alignment: stackAlignment, spacing: ShowHeaderView.verticalSpacing) {
+            VStack(alignment: .leading, spacing: ShowHeaderView.verticalSpacing) {
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)
@@ -145,10 +137,10 @@ struct ShowHeaderView: View {
                 // when calculated with a `UIHostingController`, but without this the text does not occupy
                 // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(titleAlignment)
+                    .multilineTextAlignment(.leading)
                     .foregroundColor(.white)
                 HStack(spacing: 8) {
-                    if centerLayout {
+                    if compactLayout {
                         ExpandingButton(icon: model.favoriteIcon,
                                         label: model.favoriteLabel,
                                         accessibilityLabel: model.favoriteAccessibilityLabel,
