@@ -33,7 +33,8 @@ img {
   const Configuration = {
     nightly: 'nightly',
     beta: 'beta',
-    none: 'none'
+    testFlight: 'testflight',
+    none: 'appstore'
   };
 
   function getPlatform() {
@@ -65,8 +66,9 @@ img {
       return Configuration.nightly;
     } else if (configuration === 'beta') {
       return Configuration.beta;
-    }
-    return Configuration.none;
+    } else if (configuration === 'testflight') {
+      return Configuration.testFlight;
+    } else return Configuration.none;
   }
 
   function configurationName() {
@@ -75,8 +77,10 @@ img {
         return 'nightly';
       case Configuration.beta:
         return 'beta';
+      case Configuration.testFlight:
+        return 'public TestFlight beta';
       default:
-        return 'nightly and beta';
+        return 'AppStore';
     }
   }
 
@@ -86,8 +90,10 @@ img {
         return 'nightlies';
       case Configuration.beta:
         return 'betas';
+      case Configuration.testFlight:
+        return 'public TestFlight betas';
       default:
-        return 'nightlies and betas';
+        return '';
     }
   }
 
@@ -107,22 +113,78 @@ img {
       return '';
     }
     return decodeURIComponent(results[2]);
-;
+  }
+
+  function applicationId(configuration, bu) {
+    applicationIds = {
+      'nightly': {
+        'rsi': '1525999232',
+        'rtr': '1525999511',
+        'rts': '1525999108',
+        'srf': '1525999251',
+        'swi': '1525912081'
+      },
+      'beta': {
+        'rsi': '1541523749',
+        'rtr': '1541523913',
+        'rts': '1541524094',
+        'srf': '1541523775',
+        'swi': '1541523969'
+      },
+      'testflight': {
+        'rsi': '920753497',
+        'rtr': '920754925',
+        'rts': '920754415',
+        'srf': '638194352',
+        'swi': '920785201'
+      },
+      'appstore': {
+        'rsi': '920753497',
+        'rtr': '920754925',
+        'rts': '920754415',
+        'srf': '638194352',
+        'swi': '920785201'
+      }
+    };
+    return applicationIds[configuration][bu];
+  }
+
+  function getApplicationLink(configuration, bu) {
+    switch (configuration) {
+      case Configuration.nightly:
+      case Configuration.beta:
+      case Configuration.testFlight:
+        return 'https://beta.itunes.apple.com/v1/app/' + applicationId(configuration, bu);
+      default:
+        return 'https://apps.apple.com/ch/app/' + applicationId(configuration, bu);
+    }
   }
 </script>
 </head>
 <body>
 <div style="text-align: center;">
-  <h2>Play <script> document.write(platformName());</script> <script> document.write(configurationNames());</script></h2>
-<p>
-  The private <script> document.write(configurationName());</script> versions are only intended for internal SRG SSR use and should not be distributed outside the company.
-  <br/>
-  Only the developer team can send a private invitation with <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank">Apple TestFlight</a> access link.
-</p>
 <script>
   var version = getVersion();
   var platform = getPlatform();
   var configuration = getConfiguration();
+
+  switch (configuration) {
+    case Configuration.nightly:
+    case Configuration.beta:
+      document.write('<h2>Play ' + platformName() + ' ' + configurationNames() + '</h2>');
+      document.write('<p>The ' + configurationName() + ' versions are only intended for internal SRG SSR use and should not be distributed outside the company.</p>');
+      document.write('<p>Only the developer team can send a private invitation with <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank">Apple TestFlight</a> access link.</p>');
+      break;
+    case Configuration.testFlight:
+      document.write('<h2>Play ' + platformName() + ' ' + configurationNames() + '</h2>');
+      document.write('<p>The ' + configurationName() + ' versions are available for all with an anonymous subscription.</p>');
+      document.write('<p>Find the <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank">Apple TestFlight</a> invitation link in the iOS application from the AppStore, in Profile tab, in Settings view.</p>');
+      break;
+    default:
+      document.write('<h2>Play ' + platformName() + '</h2>');
+      document.write('<p>The ' + configurationName() + ' versions are available for all on the AppStore.</p>');
+      break;
+  }
 
   if (platform === Platform.iOS) {
     document.write('<p>📱 🚗 💻</p><p>Available on iPhone, iPad, with CarPlay<br/>and on Mac with Apple Silicon (MacOS running the iPad version).</p>');
@@ -136,26 +198,22 @@ img {
   }
 
   if (platform !== Platform.none && configuration !== Configuration.non) {
-    if (platform === Platform.tvOS) {
-      document.write('<p>Help TestFlight links:<br/>(tvOS builds are only displayed on TV)</p>');
-    }
-    else {
-      document.write('<p>Help TestFlight links:</p>');
+    tvInfo = (platform === Platform.tvOS) ? '<br/>(tvOS builds are only displayed on TV)' : '';
+    
+    switch (configuration) {
+      case Configuration.nightly:
+      case Configuration.beta:
+      case Configuration.testFlight:
+        document.write('<p>Help TestFlight links:' + tvInfo + '</p>');
+        break;
+      default:
+        document.write('<p>AppStore links:</p>');
+        break;
     }
 
-    if (configuration === Configuration.nightly) {
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999232" target="_blank"><img src="./icon_rsi-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999511" target="_blank"><img src="./icon_rtr-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999108" target="_blank"><img src="./icon_rts-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525999251" target="_blank"><img src="./icon_srf-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1525912081" target="_blank"><img src="./icon_swi-' + getPlatform() + '-nightly.png" height="60"/></a></p>');
-    }
-    else if (platform !== Platform.none && configuration === Configuration.beta) {
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523749" target="_blank"><img src="./icon_rsi-' + getPlatform() + '-beta.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523913" target="_blank"><img src="./icon_rtr-' + getPlatform() + '-beta.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541524094" target="_blank"><img src="./icon_rts-' + getPlatform() + '-beta.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523775" target="_blank"><img src="./icon_srf-' + getPlatform() + '-beta.png" height="60"/></a></p>');
-      document.write('<p><a href="https://beta.itunes.apple.com/v1/app/1541523969" target="_blank"><img src="./icon_swi-' + getPlatform() + '-beta.png" height="60"/></a></p>');
+    bus = ['rsi', 'rtr', 'rts', 'srf', 'swi'];
+    for (bu of bus) {
+      document.write('<p><a href="' + getApplicationLink(configuration, bu) + '" target="_blank"><img src="./icon_' + bu + '-' + getPlatform() + '-' + configuration + '.png" height="60"/></a></p>');
     }
   }
 </script>

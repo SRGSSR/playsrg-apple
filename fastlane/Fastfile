@@ -1716,8 +1716,8 @@ def github_environment_data(lane)
     'tvOSnightlies' => { platform: 'tvOS', configuration: 'Nightly' },
     'iOSbetas' => { platform: 'iOS', configuration: 'Beta' },
     'tvOSbetas' => { platform: 'tvOS', configuration: 'Beta' },
-    'iOSappstorebuilds' => { platform: 'iOS', configuration: 'AppStore' },
-    'tvOSappstorebuilds' => { platform: 'tvOS', configuration: 'AppStore' }
+    'iOSAppStoreBuilds' => { platform: 'iOS', configuration: 'TestFlight' },
+    'tvOSAppStoreBuilds' => { platform: 'tvOS', configuration: 'TestFlight' }
   }
   environment_datas[lane.to_s]
 end
@@ -1739,12 +1739,12 @@ def github_environments(platform, build_configuration)
     'iOS' => {
       'Nightly' => 'playsrg-ios-nightly',
       'Beta' => 'playsrg-ios-beta',
-      'AppStore' => 'playsrg-ios-appstore'
+      'TestFlight' => 'playsrg-ios-testflight'
     },
     'tvOS' => {
       'Nightly' => 'playsrg-tvos-nightly',
       'Beta' => 'playsrg-tvos-beta',
-      'AppStore' => 'playsrg-tvos-appstore'
+      'TestFlight' => 'playsrg-tvos-testflight'
     }
   }
   environments[platform][build_configuration]
