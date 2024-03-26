@@ -119,6 +119,9 @@ struct ShowHeaderView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.white)
+                if let broadcastInformation = model.broadcastInformation {
+                    Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
+                }
                 HStack(spacing: 8) {
                     if compactLayout {
                         ExpandingButton(icon: model.favoriteIcon,
@@ -157,9 +160,6 @@ struct ShowHeaderView: View {
                     SummaryView(summary)
                     // See above
                         .fixedSize(horizontal: false, vertical: true)
-                }
-                if let broadcastInformation = model.broadcastInformation {
-                    Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
