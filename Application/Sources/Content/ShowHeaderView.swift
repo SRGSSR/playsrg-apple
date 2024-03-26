@@ -122,6 +122,11 @@ struct ShowHeaderView: View {
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.srgDarkRed))
                 }
+                if let summary = model.show?.play_summary {
+                    SummaryView(summary)
+                    // See above
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 HStack(spacing: 8) {
                     if compactLayout {
                         ExpandingButton(icon: model.favoriteIcon,
@@ -156,11 +161,6 @@ struct ShowHeaderView: View {
                 }
                 .frame(height: constant(iOS: 40, tvOS: 70))
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
-                if let summary = model.show?.play_summary {
-                    SummaryView(summary)
-                    // See above
-                        .fixedSize(horizontal: false, vertical: true)
-                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
