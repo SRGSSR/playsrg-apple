@@ -120,7 +120,7 @@ struct ShowHeaderView: View {
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.white)
                 if let broadcastInformation = model.broadcastInformation {
-                    Badge(text: broadcastInformation, color: Color(.srgGray96), textColor: Color(.srgGray16))
+                    Badge(text: broadcastInformation, color: Color(.srgDarkRed))
                 }
                 HStack(spacing: 8) {
                     if compactLayout {
