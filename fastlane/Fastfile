@@ -23,7 +23,11 @@ platform :ios do
     tag_version = options[:tag_version] || tag_version(platform)
     branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
+    notify_version_to_ci(platform, tag_version, branch_name)
+
+    create_or_update_github_environment(lane)
+    create_github_deployment(lane)
+    update_github_deployment_in_progress(lane)
 
     if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
@@ -60,8 +64,8 @@ platform :ios do
     tag_version = tag_version(platform)
     branch_name = git_branch_name
 
-    # Build number overrided
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
+    # Update CI information because of build number overrided
+    notify_version_to_ci(platform, tag_version, branch_name)
 
     ios_application_schemes.each_index do |index|
       build_lane(
@@ -372,11 +376,11 @@ platform :ios do
   lane :publishReleaseNotes do
     output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
     Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+
+    copy_static_github_pages_files(output_directory)
+
     releases_directory = "#{output_directory}/releases"
     Dir.chdir('..') { FileUtils.mkdir_p(releases_directory) }
-
-    index_html_file = 'fastlane/gh-pages/index.html'
-    Dir.chdir('..') { FileUtils.cp(index_html_file, output_directory) }
 
     ['iOS', 'tvOS'].map do |platform|
       UI.message "Preparing Play #{platform} beta release notes. 📝"
@@ -799,8 +803,8 @@ platform :ios do
     tag_version = tag_version(platform)
     branch_name = git_branch_name
 
-    # Build number overrided
-    notify_version_to_ci(platform, tag_version, build_name(branch_name))
+    # Update CI information because of build number overrided
+    notify_version_to_ci(platform, tag_version, branch_name)
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
@@ -1060,6 +1064,8 @@ platform :ios do
   end
 
   after_all do |lane|
+    update_github_deployment_success(lane)
+
     if cleaned_lane_condition(lane)
       ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true)
@@ -1067,6 +1073,8 @@ platform :ios do
   end
 
   error do |lane|
+    update_github_deployment_error(lane)
+
     if cleaned_lane_condition(lane)
       clean_build_artifacts
       ENV.delete('DERIVED_DATA_CLEANED')
@@ -1645,19 +1653,6 @@ def upload_appcenter_dsyms(appcenter_appname)
   lane_context.delete(SharedValues::DSYM_OUTPUT_PATH)
 end
 
-# Share build version and number to the continuous integration
-def notify_version_to_ci(platform, tag_version, build_name)
-  return unless ENV['TEAMCITY_VERSION']
-
-  platform ||= iOS
-  tag_version ||= tag_version(platform)
-  build_name ||= ''
-
-  displayed_build_number = tag_version
-  displayed_build_number += "+#{build_name}" unless build_name.empty?
-  puts "##teamcity[buildNumber '#{displayed_build_number}']"
-end
-
 # Returns current build number on App Center
 def latest_appcenter_build_number(app_names)
   build_number = 0
@@ -1687,6 +1682,241 @@ def srg_latest_testflight_build_number(app_identifiers, platform)
     build_number = number unless build_number >= number
   end
   build_number
+end
+
+# Share build version and number to the continuous integration
+def notify_version_to_ci(platform, tag_version, branch_name)
+  return unless ENV['TEAMCITY_VERSION']
+
+  platform ||= iOS
+  tag_version ||= tag_version(platform)
+
+  displayed_build_number = build_friendly_name(tag_version, branch_name)
+  puts "##teamcity[buildNumber '#{displayed_build_number}']"
+end
+
+def build_friendly_name(tag_version, branch_name)
+  build_name = build_name(branch_name)
+  return tag_version if build_name.empty?
+
+  "#{tag_version}+#{build_name}"
+end
+
+def build_log_url
+  ENV.fetch('BUILD_URL', nil)
+end
+
+def github_api_path
+  '/repos/SRGSSR/playsrg-apple'
+end
+
+def github_environment_data(lane)
+  environment_datas = {
+    'iOSnightlies' => { platform: 'iOS', configuration: 'Nightly' },
+    'tvOSnightlies' => { platform: 'tvOS', configuration: 'Nightly' },
+    'iOSbetas' => { platform: 'iOS', configuration: 'Beta' },
+    'tvOSbetas' => { platform: 'tvOS', configuration: 'Beta' },
+    'iOSAppStoreBuilds' => { platform: 'iOS', configuration: 'TestFlight' },
+    'tvOSAppStoreBuilds' => { platform: 'tvOS', configuration: 'TestFlight' }
+  }
+  environment_datas[lane.to_s]
+end
+
+def github_environment(lane)
+  environment_data = github_environment_data(lane)
+  return unless environment_data
+
+  environment = github_environments(environment_data[:platform], environment_data[:configuration])
+  return unless environment
+
+  build_name = build_name(git_branch_name)
+  environment += "+#{build_name}" unless build_name.empty?
+  environment
+end
+
+def github_environments(platform, build_configuration)
+  environments = {
+    'iOS' => {
+      'Nightly' => 'playsrg-ios-nightly',
+      'Beta' => 'playsrg-ios-beta',
+      'TestFlight' => 'playsrg-ios-testflight'
+    },
+    'tvOS' => {
+      'Nightly' => 'playsrg-tvos-nightly',
+      'Beta' => 'playsrg-tvos-beta',
+      'TestFlight' => 'playsrg-tvos-testflight'
+    }
+  }
+  environments[platform][build_configuration]
+end
+
+def create_or_update_github_environment(lane)
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
+
+  result = srg_github_create_or_update_environment(environment)
+  name = result[:json]['name']
+  return unless name
+
+  UI.message "Github used environment: #{name}"
+end
+
+def srg_github_create_or_update_environment(environment)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'PUT',
+    path: "#{github_api_path}/environments/#{environment}",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and environments API creation. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
+end
+
+def create_github_deployment(lane)
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
+
+  # Try to create a deployment with the branch name.
+  result = create_github_deployment_ref(environment, git_branch_name)
+  return unless result[:json]['id']
+
+  # Check the commit sha is the same as the last commit.
+  return if github_deployment_sha_correct(result)
+
+  delete_github_deployment(lane)
+  # Try to create a deployment with the last commit instead.
+  create_github_deployment_ref(environment, last_git_commit[:commit_hash])
+end
+
+def create_github_deployment_ref(environment, ref)
+  result = srg_github_create_deployment(environment, ref)
+  deployment_id = result[:json]['id']
+  return unless deployment_id
+
+  ENV['GITHUB_DEPLOYMENT_ID'] = deployment_id.to_s
+  UI.message "Github created deployment: #{deployment_id}"
+  result
+end
+
+def srg_github_create_deployment(environment, ref)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'POST',
+    path: "#{github_api_path}/deployments",
+    body: srg_github_create_deployment_body(environment, ref),
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API creation. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
+end
+
+def srg_github_create_deployment_body(environment, ref)
+  {
+    ref:,
+    auto_merge: false,
+    required_contexts: [],
+    environment:,
+    description: "Start #{environment} deployment"
+  }
+end
+
+def github_deployment_sha_correct(result)
+  last_git_commit[:commit_hash] == result[:json]['sha']
+end
+
+def delete_github_deployment(lane)
+  deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
+
+  result = srg_github_delete_deployment(deployment_id)
+  status = result[:status]
+  return unless status == 204
+
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  UI.message "Github deleted deployment: #{deployment_id}"
+end
+
+def srg_github_delete_deployment(deployment_id)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'DELETE',
+    path: "#{github_api_path}/deployments/#{deployment_id}",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API deletion. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
+end
+
+def update_github_deployment_in_progress(lane)
+  update_github_deployment('in_progress', lane)
+end
+
+def update_github_deployment_success(lane)
+  update_github_deployment('success', lane)
+end
+
+def update_github_deployment_error(lane)
+  update_github_deployment('error', lane)
+end
+
+def update_github_deployment(state, lane)
+  deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
+
+  result = srg_github_update_deployment(environment, deployment_id, state, lane)
+  deployment_state = result[:json]['state']
+  return unless deployment_state
+
+  UI.message "Github updated deployment state: #{deployment_state}"
+end
+
+def srg_github_update_deployment(environment, deployment_id, state, lane)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'POST',
+    path: "#{github_api_path}/deployments/#{deployment_id}/statuses",
+    body: srg_github_update_deployment_body(environment, state, lane),
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API state update. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
+end
+
+def srg_github_update_deployment_body(environment, state, lane)
+  {
+    state:,
+    environment:,
+    description: "Building #{environment}: #{state}",
+    log_url: build_log_url,
+    environment_url: environment_url(state, lane)
+  }
+end
+
+def environment_url(state, lane)
+  environment_data = github_environment_data(lane)
+  return unless state == 'success' && environment_data
+
+  version = build_friendly_name(tag_version(environment_data[:platform]), git_branch_name)
+
+  'https://srgssr.github.io/playsrg-apple/deployments/build.html' \
+    "?configuration=#{environment_data[:configuration]}" \
+    "&platform=#{environment_data[:platform]}" \
+    "&version=#{version}"
 end
 
 # Create screenshots for App Store Connect.
@@ -1946,7 +2176,8 @@ def cherrypick_beta_on_develop(commits)
 end
 
 def git_branch_name
-  sh "git branch | grep \\* | cut -d ' ' -f2"
+  branch_name = `git branch | grep \\* | cut -d ' ' -f2`
+  branch_name.strip
 end
 
 def git_status_clean
@@ -2208,6 +2439,20 @@ def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
   { state:, message: }
 end
 
+def copy_static_github_pages_files(output_directory)
+  source_index_html_file = 'fastlane/gh-pages/index.html'
+  Dir.chdir('..') { FileUtils.cp(source_index_html_file, output_directory) }
+
+  source_deployments_directory = 'fastlane/gh-pages/deployments'
+  deployments_directory = "#{output_directory}/deployments"
+  Dir.chdir('..') do
+    FileUtils.mkdir_p(deployments_directory)
+    Dir.glob("#{source_deployments_directory}/*.{png,html}").each do |file|
+      FileUtils.cp(file, deployments_directory)
+    end
+  end
+end
+
 def publish_on_github_pages(output_directory, releases_directory)
   branch_name = git_branch_name
 
@@ -2216,9 +2461,9 @@ def publish_on_github_pages(output_directory, releases_directory)
     sh 'git checkout --orphan gh-pages'
     sh 'git reset --hard'
     sh "mv \"#{output_directory}/index.html\" ./"
-    sh 'git add index.html'
+    sh "mv \"#{output_directory}/deployments\" ./"
     sh "mv \"#{releases_directory}\" ./"
-    sh 'git add releases/*'
+    sh 'git add index.html releases/* deployments/*'
     sh 'git commit -m "Publish release notes"'
     sh 'git push origin gh-pages --force'
     sh "git checkout #{branch_name}"
