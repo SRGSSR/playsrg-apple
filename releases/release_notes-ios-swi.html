@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Play SWI (iPhone & iPad)</title>
+</head>
+<meta charset="UTF-8" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<style>
+@font-face {
+  font-family: "SRG SSR Type Regular";
+  src: url("https://play.swissinfo.ch/play/v3/fonts/SRGSSRTypeVF_Text_W_Wght.woff2") format("woff2"); 
+}
+body {
+  font-family: "SRG SSR Type Regular";
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+  color: #ffffff;
+  background-color: #161616;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #9d0018; /* Red */
+    margin: 1em 0;
+    padding: 0; 
+}
+.button {
+    background-color: #0f5acb; /* Blue */
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+<script>
+function Hide (elements, exceptItem) {
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    if (elements[index] != exceptItem) {
+      elements[index].style.display = 'none';
+    }
+  }
+}
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+
+function highlightElement () {
+  var build = getUrlVars()['build'];
+  console.log('build='+build);
+
+  var divs = document.querySelectorAll('[id^="build_"]');
+  var highlightDiv;
+  var firstDiv;
+  var hiddenDivs = new Array();
+
+  regex = /build_([0-9]*)/;
+  for (var i=0; i < divs.length; i++) {
+    var div = divs[i];
+    var div_id = div.id;
+    var div_build = div_id.match(regex)[1];
+    var hideDiv = div.hasAttribute('preprod');
+
+    if (!firstDiv && !hideDiv) {
+      firstDiv = div;
+    }
+
+    if (build && (parseInt(div_build) >= parseInt(build))) {
+      highlightDiv = div;
+      console.log('Select highlight ' + div_id);
+    }
+
+    if (hideDiv && (!build || (parseInt(div_build) >= parseInt(build)))) {
+      hiddenDivs.push(div);
+    }
+  }
+
+  if (hiddenDivs.includes(highlightDiv)) {
+    firstDiv = highlightDiv;
+  }
+
+  if (hiddenDivs.length) {
+    Hide(hiddenDivs, highlightDiv);
+  }
+
+  if (highlightDiv) {
+    addHighlightHeader(highlightDiv, highlightDiv != firstDiv);
+    addHighlightFooter(highlightDiv);
+  }
+}
+
+function addHighlightHeader (highlightDiv, withUpdateButton) {
+  var highlightHeader = '<div id="version"><hr /><h2 style="text-align: center">Installed version</h2></div>';
+  if (withUpdateButton) {
+      var button = '<p style="text-align: center"><button class="button" onclick="window.location.href=\'https://itunes.apple.com/ch/app/play-swi/id920785201?mt=8\'">Update</button></p>';
+    highlightHeader = button + '\n' + highlightHeader;
+  }
+  highlightDiv.insertAdjacentHTML('beforeBegin', highlightHeader);
+}
+
+function addHighlightFooter (highlightDiv) {
+  var highlightFooter = '<div id="version"><hr /></div>';
+  highlightDiv.insertAdjacentHTML('afterend', highlightFooter);
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+<body onload="highlightElement()">
+<div style="text-align: center;">
+<h2 style="line-height: 0;">Play SWI</h2>
+<p style="line-height: 2;">iPhone & iPad</p>
+</div>
+<div id="build_448">
+<h2 id="3.8.4">3.8.4</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_446">
+<h2 id="3.8.3">3.8.3</h2>
+<ul>
+<li>Displayed user consent banner reduced if traveling between Switzerland and rest of the world.</li>
+</ul>
+</div>
+<div id="build_443">
+<h2 id="3.8.2">3.8.2</h2>
+<ul>
+<li>Minor bug fixes.</li>
+<li>Fix unexpected video playback stops.</li>
+</ul>
+</div>
+<div id="build_441">
+<h2 id="3.8.1">3.8.1</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+<p>Merry Christmas and Happy New Year!</p>
+</div>
+<div id="build_440">
+<h2 id="3.8.0">3.8.0</h2>
+<ul>
+<li>Maintenance release for show pages.</li>
+</ul>
+</div>
+<div id="build_435">
+<h2 id="3.7.9">3.7.9</h2>
+<ul>
+<li>Improve player experience.</li>
+</ul>
+</div>
+<div id="build_431">
+<h2 id="3.7.8">3.7.8</h2>
+<ul>
+<li>Improve iOS 17 compatibility.</li>
+</ul>
+</div>
+<div id="build_429">
+<h2 id="3.7.7">3.7.7</h2>
+<ul>
+<li>Improve iOS 17 compatibility.</li>
+</ul>
+</div>
+<div id="build_428">
+<h2 id="3.7.6">3.7.6</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_426">
+<h2 id="3.7.5">3.7.5</h2>
+<ul>
+<li>Implementation of a consent banner for the personal data usage.</li>
+</ul>
+</div>
+<div id="build_424">
+<h2 id="3.7.4">3.7.4</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_423">
+<h2 id="3.7.3">3.7.3</h2>
+<ul>
+<li>The control center images updated.</li>
+<li>Fix some crashes in the player.</li>
+</ul>
+</div>
+<div id="build_419">
+<h2 id="3.7.2">3.7.2</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+<p>Thank you for your feedbacks via the Profile tab.</p>
+</div>
+<div id="build_415">
+<h2 id="3.7.1">3.7.1</h2>
+<ul>
+<li>Minor bug fixes</li>
+</ul>
+</div>
+<div id="build_414">
+<h2 id="3.7.0">3.7.0</h2>
+<ul>
+<li>Add help and contact in Profile tab.</li>
+</ul>
+</div>
+<div id="build_412">
+<h2 id="3.6.13">3.6.13</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_411">
+<h2 id="3.6.12">3.6.12</h2>
+<ul>
+<li>Improved readability on show pages with a vertical list on iPad (pages where subcription is available).</li>
+</ul>
+</div>
+<div id="build_409">
+<h2 id="3.6.11">3.6.11</h2>
+<ul>
+<li>Improved readability in vertical list on iPhone.</li>
+</ul>
+</div>
+<div id="build_406">
+<h2 id="3.6.10">3.6.10</h2>
+<ul>
+<li>Improve content presentation.</li>
+</ul>
+</div>
+<div id="build_404">
+<h2 id="3.6.9">3.6.9</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_402">
+<h2 id="3.6.8">3.6.8</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_399">
+<h2 id="3.6.7">3.6.7</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_397">
+<h2 id="3.6.6">3.6.6</h2>
+<ul>
+<li>Improve iOS 16 compatibility.</li>
+</ul>
+</div>
+<div id="build_396">
+<h2 id="3.6.5">3.6.5</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_393">
+<h2 id="3.6.4">3.6.4</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_391">
+<h2 id="3.6.3">3.6.3</h2>
+<ul>
+<li>A freshened look and feel.</li>
+</ul>
+</div>
+<div id="build_389">
+<h2 id="3.6.2">3.6.2</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_386">
+<h2 id="3.6.1">3.6.1</h2>
+<ul>
+<li>New double tap gesture on player to move forward or backward.</li>
+</ul>
+</div>
+<div id="build_382">
+<h2 id="3.6.0">3.6.0</h2>
+<ul>
+<li>Add playback speed option in the video player.</li>
+</ul>
+</div>
+<div id="build_378">
+<h2 id="3.5.1">3.5.1</h2>
+<ul>
+<li>Fix issue which could prevent new episode notifications from being delivered.</li>
+<li>Bug fixes.</li>
+</ul>
+</div>
+<div id="build_373">
+<h2 id="3.5.0">3.5.0</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_371">
+<h2 id="3.4.0">3.4.0</h2>
+<ul>
+<li>You can add a show to your favorite list even when no episodes are available.</li>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_368">
+<h2 id="3.3.0">3.3.0</h2>
+<ul>
+<li>Improve content presentation.</li>
+<li>Improve iOS 15 compatibility.</li>
+</ul>
+</div>
+<div id="build_363">
+<h2 id="3.2.1">3.2.1</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_362">
+<h2 id="3.2.0">3.2.0</h2>
+<ul>
+<li>Playback can be resumed directly from the ‘Videos‘ homepage.</li>
+<li>Overall performance has been improved.</li>
+</ul>
+</div>
+<div id="build_361">
+<h2 id="3.1.10">3.1.10</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_359">
+<h2 id="3.1.9">3.1.9</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_357">
+<h2 id="3.1.8">3.1.8</h2>
+<ul>
+<li>Playback can be controlled using an external keyboard.</li>
+</ul>
+</div>
+<div id="build_353">
+<h2 id="3.1.7">3.1.7</h2>
+<ul>
+<li>Fix AirPlay instabilities, especially on older devices (Apple TV).</li>
+</ul>
+</div>
+<div id="build_352">
+<h2 id="3.1.6">3.1.6</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_350">
+<h2 id="3.1.5">3.1.5</h2>
+<ul>
+<li>Minor bug fixes.</li>
+</ul>
+</div>
+<div id="build_346">
+<h2 id="3.1.4">3.1.4</h2>
+<ul>
+<li>Improve iOS 14 compatibility for Google Cast.</li>
+<li>Fix playback incorrectly restarting in background without user interaction.</li>
+</ul>
+</div>
+<div id="build_343">
+<h2 id="3.1.3">3.1.3</h2>
+<ul>
+<li>Improve iOS 14 compatibility.</li>
+</ul>
+</div>
+<div id="build_342">
+<h2 id="3.1.2">3.1.2</h2>
+<ul>
+<li>Improve iOS 14 compatibility.</li>
+</ul>
+</div>
+<div id="build_341">
+<h2 id="3.1.1">3.1.1</h2>
+<ul>
+<li>Fix screen incorrectly turning off when watching videos with sound over AirPlay.</li>
+</ul>
+</div>
+<div id="build_338">
+<h2 id="3.1.0">3.1.0</h2>
+<ul>
+<li>Fixed an issue preventing the device from sleeping when playing a video in background.</li>
+</ul>
+</div>
+<div id="build_332">
+<h2 id="3.0.2">3.0.2</h2>
+<ul>
+<li>Horizontal content navigation has been improved.</li>
+<li>The profile view has been consolidated on iPad.</li>
+</ul>
+</div>
+<div id="build_329">
+<h2 id="3.0.1">3.0.1</h2>
+<ul>
+<li>Performance improvements.</li>
+<li>Fixes an issue preventing the first item in lists to be accessed with VoiceOver.</li>
+</ul>
+</div>
+<div id="build_326">
+<h2 id="3.0.0">3.0.0</h2>
+<p>Dear users,</p>
+<p>We are happy to release version 3.0 of Play SWI, which contains several usability and feature improvements. We strive to continuously improve our products to deliver the best possible user experience.</p>
+<p>We hope you will enjoy this new version and future updates. Here are the changes made in this version:</p>
+<p>BOTTOM NAVIGATION</p>
+<p>Tab-based navigation provides for easier navigation throughout the content:</p>
+<ul>
+<li>Videos and TV shows are located under the ‘Videos’ tab.</li>
+<li>The search is accessible at any time through a dedicated ‘Search’ tab.</li>
+<li>Personalized features (history, favorites, notifications and downloads) and application settings are available from the ‘Profile’ tab.</li>
+</ul>
+<p>IMPROVEMENTS</p>
+<p>A few improvements have been made:</p>
+<ul>
+<li>Subtitle selection is more intuitive and better takes into account device settings.</li>
+<li>The mini player can be dismissed when not needed.</li>
+<li>Long-pressing items on devices running iOS 13 displays a preview and available actions.</li>
+<li>Presentation has been improved to better make use of the available screen space, no matter the chosen font size.</li>
+<li>Chromecast can be directly enabled with the dedicated button at the top of the videos, audios and livestreams homepages.</li>
+</ul>
+<p>FIXES</p>
+<p>The following issues reported by our users have been fixed:</p>
+<ul>
+<li>The subtitle choice is correctly preserved when enabling AirPlay.</li>
+<li>Playback is not paused anymore when using Handoff. This change fixes an issue affecting users having a Mac (running macOS Catalina) and iOS devices registered with the same Apple ID, and for which using Safari on macOS would trigger unexpected playback interruptions on iOS via Handoff.</li>
+</ul>
+</div>
+</body>
+</html>
