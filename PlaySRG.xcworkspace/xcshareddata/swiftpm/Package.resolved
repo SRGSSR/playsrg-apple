@@ -311,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "branch" : "feature/47-use-play-srg-image-service-for-rts",
-        "revision" : "29098c75804346abd03f4d0f361ed0cc5ee20673"
+        "branch" : "develop",
+        "revision" : "64b2e3a7767e53e832beadbf4ae9a80234cdcd93"
       }
     },
     {

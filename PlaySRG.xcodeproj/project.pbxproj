@@ -19306,7 +19306,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/47-use-play-srg-image-service-for-rts";
+				branch = develop;
 				kind = branch;
 			};
 		};
