@@ -35,7 +35,7 @@
 
 ### \*Fastlane on PlayCity CI:
 
-- Build Betas with current version number
+- Build private Betas with current version number
 	- **Play SRG iOS Betas**: `fastlane ios iOSbetas`
 	- **Play SRG tvOS Betas**: `fastlane ios tvOSbetas`
 - Build App Store builds with current version number
@@ -69,6 +69,16 @@
 	- Play RTS tvOS: `fastlane ios tvOSrtsScreenshots`
 	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots` (No upload to ASC, due to some marketing images)
 	- Play SWI tvOS: `fastlane ios tvOSswiScreenshots`
+
+# Private nightlies
+
+During developments, some internal builds can be done for internal testers.
+
+### Fastlane on PlayCity CI:
+
+- Build private Nighties with a new version number from the lastest build
+	- **Play SRG iOS Nightlies**: `fastlane ios iOSnightlies`
+	- **Play SRG tvOS Nightlies**: `fastlane ios tvOSnightlies`
 
 # AppStore and TestFlight review status
 
