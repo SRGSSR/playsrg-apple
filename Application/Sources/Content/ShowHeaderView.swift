@@ -85,9 +85,8 @@ struct ShowHeaderView: View {
                     .focusable()
                 }
                 else {
-                    HStack(spacing: 0) {
+                    HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
-                            .padding(.trailing, 16)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
                     }
