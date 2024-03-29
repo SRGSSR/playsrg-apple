@@ -66,7 +66,7 @@ struct ShowHeaderView: View {
             self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
         }
         
-        private var descriptionPadding: CGFloat {
+        private var padding: CGFloat {
             return horizontalSizeClass == .compact ? horizontalPadding : horizontalPadding * 2
         }
         
@@ -78,8 +78,8 @@ struct ShowHeaderView: View {
                             .aspectRatio(16 / 9, contentMode: .fit)
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
-                            .padding(.top, descriptionPadding)
-                            .padding(.horizontal, descriptionPadding)
+                            .padding(.top, padding)
+                            .padding(.horizontal, padding)
                     }
                     .padding(.bottom, 24)
                     .focusable()
@@ -87,12 +87,12 @@ struct ShowHeaderView: View {
                 else {
                     HStack(spacing: 0) {
                         DescriptionView(model: model, compactLayout: false)
-                            .padding(.top, descriptionPadding)
-                            .padding(.leading, descriptionPadding)
                             .padding(.trailing, 16)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
                     }
+                    .padding(.top, padding)
+                    .padding(.horizontal, padding)
                     .padding(.bottom, constant(iOS: 40, tvOS: 50))
                     .focusable()
                 }
