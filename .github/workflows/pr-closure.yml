@@ -1,5 +1,5 @@
 ---
-name: Update deployment status after PR closure
+name: Deployment status after PR closure
 
 on:
   pull_request:
