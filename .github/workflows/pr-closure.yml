@@ -26,6 +26,8 @@ jobs:
           PR_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_PR_NUMBER}"
           DEPLOYMENTS_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments"
 
+          echo "Working with PR URL: $PR_URL"
+
           # Get the pull request head branch
           HEAD_BRANCH=$(curl -s -H "$AUTHORIZATION" "$PR_URL" | jq -r '.head.ref')
 
@@ -48,6 +50,9 @@ jobs:
           IOS_ENVIRONMENT=$(echo "playsrg-ios-nightly+$BUILD_NAME" | jq -R -r @uri)
           TVOS_ENVIRONMENT=$(echo "playsrg-tvos-nightly+$BUILD_NAME" | jq -R -r @uri)
 
+          echo "Working with iOS environment: $IOS_ENVIRONMENT"
+          echo "Working with tvOS environment: $TVOS_ENVIRONMENT"
+
           # Get the latest active deployment for iOS
           IOS_DEPLOYMENT=$(curl -s -H "$AUTHORIZATION" "$DEPLOYMENTS_URL?environment=$IOS_ENVIRONMENT" | jq '.[0]')
 
@@ -67,6 +72,9 @@ jobs:
           if [ "$IOS_DEPLOYMENT" != "null" ]; then
             DEPLOYMENT_ID=$(echo "$IOS_DEPLOYMENT" | jq -r '.id')
             STATUSES_URL=$(echo "$IOS_DEPLOYMENT" | jq -r '.statuses_url')
+
+            echo "Working with iOS deployment ID: $DEPLOYMENT_ID"
+
             URLS=$(fetch_status_urls "$STATUSES_URL")
             IFS=',' read -r LOG_URL ENVIRONMENT_URL <<< "$URLS"
 
@@ -81,15 +89,18 @@ jobs:
             RESPONSE_ENVIRONMENT=$(echo "$RESPONSE" | jq -r '.environment')
 
             # Output the information
-            echo "Update $RESPONSE_ENVIRONMENT latest deployment to $RESPONSE_STATE state."
+            echo "-> Update $RESPONSE_ENVIRONMENT latest deployment to $RESPONSE_STATE state."
           else
             IOS_ENVIRONMENT=$(printf '%b' "${IOS_ENVIRONMENT//%/\\x}")
-            echo "No deployment for $IOS_ENVIRONMENT environment. No update."
+            echo "-> No deployment for $IOS_ENVIRONMENT environment. No update."
           fi
 
           if [ "$TVOS_DEPLOYMENT" != "null" ]; then
             DEPLOYMENT_ID=$(echo "$TVOS_DEPLOYMENT" | jq -r '.id')
             STATUSES_URL=$(echo "$TVOS_DEPLOYMENT" | jq -r '.statuses_url')
+
+            echo "Working with tvOS deployment ID: $DEPLOYMENT_ID"
+
             URLS=$(fetch_status_urls "$STATUSES_URL")
             IFS=',' read -r LOG_URL ENVIRONMENT_URL <<< "$URLS"
 
@@ -104,8 +115,8 @@ jobs:
             RESPONSE_ENVIRONMENT=$(echo "$RESPONSE" | jq -r '.environment')
 
             # Output the information
-            echo "Update $RESPONSE_ENVIRONMENT latest deployment to $RESPONSE_STATE state."
+            echo "-> Update $RESPONSE_ENVIRONMENT latest deployment to $RESPONSE_STATE state."
           else
             TVOS_ENVIRONMENT=$(printf '%b' "${TVOS_ENVIRONMENT//%/\\x}")
-            echo "No deployment for $TVOS_ENVIRONMENT environment. No update."
+            echo "-> No deployment for $TVOS_ENVIRONMENT environment. No update."
           fi
