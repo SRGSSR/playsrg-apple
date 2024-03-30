@@ -12,9 +12,6 @@ jobs:
       deployments: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Update deployment status to Inactive
         env:
           GITHUB_TOKEN: ${{ github.token }}
