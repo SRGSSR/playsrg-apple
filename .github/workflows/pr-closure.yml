@@ -1,5 +1,5 @@
 ---
-name: Deployment status after PR closure
+name: Deployments after PR closure
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ jobs:
       deployments: write
 
     steps:
-      - name: Update deployment status to Inactive
+      - name: Update deployment statuses to Inactive
         env:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
