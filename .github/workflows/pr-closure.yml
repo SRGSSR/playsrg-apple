@@ -23,8 +23,8 @@ jobs:
         run: |
           AUTHORIZATION="Authorization: token $GITHUB_TOKEN"
           ACCEPT="Accept: application/vnd.github.ant-man-preview+json"
-          PR_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${GITHUB_PR_NUMBER}"
-          DEPLOYMENTS_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/deployments"
+          PR_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/pulls/$GITHUB_PR_NUMBER"
+          DEPLOYMENTS_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/deployments"
 
           echo "Working with PR URL: $PR_URL"
 
