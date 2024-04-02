@@ -14,7 +14,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/abseil-cpp-binary</string>
 			<key>Title</key>
-			<string>abseil (1.2022062300.1)</string>
+			<string>abseil (1.2024011601.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>Firebase (10.22.1)</string>
+			<string>Firebase (10.23.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>GoogleAppMeasurement (10.22.1)</string>
+			<string>GoogleAppMeasurement (10.23.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/grpc-binary</string>
 			<key>Title</key>
-			<string>gRPC (1.49.2)</string>
+			<string>gRPC (1.62.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -142,7 +142,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/gtm-session-fetcher</string>
 			<key>Title</key>
-			<string>gtm-session-fetcher (3.3.1)</string>
+			<string>gtm-session-fetcher (3.3.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -374,7 +374,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-protobuf</string>
 			<key>Title</key>
-			<string>SwiftProtobuf (1.25.2)</string>
+			<string>SwiftProtobuf (1.26.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
