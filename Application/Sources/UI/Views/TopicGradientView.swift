@@ -13,12 +13,8 @@ struct TopicGradientView: View {
     let topic: SRGTopic
     let radialOpacity: Double
     
-    let topicsColors = [
-        "urn:rts:topic:tv:623": (Color.yellow, Color.orange)
-    ]
-    
     var body: some View {
-        if let topicColors = topicsColors[topic.urn] {
+        if let topicColors = ApplicationConfiguration.shared.topicColors(for: topic) {
             ZStack {
                 RadialColorGradient(
                     topicColors: topicColors,

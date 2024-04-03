@@ -9,6 +9,7 @@
 #import "PlayLogger.h"
 
 @import Firebase;
+@import SRGAppearance;
 @import UIKit;
 
 static HomeSection HomeSectionWithString(NSString *string)
@@ -297,6 +298,31 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
         }
     }
     return tvChannels.copy;
+}
+
+- (NSDictionary *)topicColorsForKey:(NSString *)key
+{
+    NSMutableDictionary *topicColors = [NSMutableDictionary dictionary];
+    
+    NSDictionary *topicColorsDictionary = [self JSONDictionaryForKey:key];
+    for (NSString *key in topicColorsDictionary) {
+        NSDictionary *colors = topicColorsDictionary[key];
+        if ([colors isKindOfClass:NSDictionary.class]) {
+            UIColor *firstColor = [UIColor srg_colorFromHexadecimalString:colors[@"firstColor"]];
+            UIColor *secondColor = [UIColor srg_colorFromHexadecimalString:colors[@"secondColor"]];
+            if (firstColor && secondColor) {
+                topicColors[key] = @[firstColor, secondColor];
+            }
+            else {
+                PlayLogWarning(@"configuration", @"Topic colors dictionnary is missing valid colors. The content of %@ is not valid.", key);
+            }
+        }
+        else {
+            PlayLogWarning(@"configuration", @"Topic colors dictionnary is not valid. The content of %@ is not valid.", key);
+        }
+    }
+    
+    return topicColors.copy;
 }
 
 - (NSArray<NSNumber *> *)tvGuideOtherBouquetsForKey:(NSString *)key vendor:(SRGVendor)vendor
