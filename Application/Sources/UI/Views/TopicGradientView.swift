@@ -41,7 +41,7 @@ struct TopicGradientView: View {
                     ]),
                     center: UnitPoint(x: 0.5, y: 0),
                     startRadius: 0,
-                    endRadius: geometry.size.height
+                    endRadius: geometry.size.height * 0.8
                 )
             }
         }
