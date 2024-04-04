@@ -13,35 +13,35 @@ import UIKit
     private static func status(for bool: Bool) -> String {
         return bool ? "Yes" : "No"
     }
-
+    
     private static var dateAndTime: String {
         return DateFormatter.play_shortDateAndTime.string(from: Date())
     }
-
+    
     private static var applicationName: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     }
-
+    
     private static var applicationIdentifier: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
     }
-
+    
     private static var applicationVersion: String {
         return Bundle.main.play_friendlyVersionNumber
     }
-
+    
     private static var operatingSystem: String {
         return UIDevice.current.systemName
     }
-
+    
     private static var operatingSystemVersion: String {
         return ProcessInfo.processInfo.operatingSystemVersionString
     }
-
+    
     private static var model: String {
         return UIDevice.current.model
     }
-
+    
     private static var modelIdentifier: String {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -49,20 +49,20 @@ import UIKit
             return String(cString: p)
         }
     }
-
+    
     private static var loginStatus: String {
         guard let identityService = SRGIdentityService.current else { return "N/A" }
         return status(for: identityService.isLoggedIn)
     }
-
+    
     private static var continuousAutoplayStatus: String {
         return status(for: ApplicationSettingAutoplayEnabled())
     }
-
+    
     private static var audioSettings: String {
         ApplicationSettingLastSelectedAudioLanguageCode() ?? "None"
     }
-
+    
     private static var subtitleSettings: String {
         switch MACaptionAppearanceGetDisplayType(.user) {
         case .automatic:
@@ -75,7 +75,7 @@ import UIKit
             return "Off"
         }
     }
-
+    
     private static var subtitleAccessibilitySettings: String {
         guard let characteristics = MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(.user).takeRetainedValue() as? [AVMediaCharacteristic],
               !characteristics.isEmpty else {
@@ -83,7 +83,7 @@ import UIKit
         }
         return characteristics.map(\.rawValue).joined(separator: ", ")
     }
-
+    
     private static var subtitleAvailabilityDisplayed: String {
         return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingSubtitleAvailabilityDisplayed))
     }
