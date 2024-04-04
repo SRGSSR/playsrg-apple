@@ -13,4 +13,4 @@ bundle exec rubocop --format quiet
 echo "... checking Shell scripts..."
 shellcheck Scripts/*.sh hooks/*
 echo "... checking YAML files..."
-yamllint .*.yml .github
+yamllint .*.yml .github .jira
