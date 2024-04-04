@@ -1,0 +1,17 @@
+---
+
+deployments:
+  environmentMapping:
+    testing:
+      - "playsrg-ios-nightly*"
+      - "playsrg-tvos-nightly*"
+    staging:
+      - "playsrg-ios-beta*"
+      - "playsrg-tvos-beta*"
+      - "playsrg-ios-testflight*"
+      - "playsrg-tvos-testflight*"
+    production:
+      - "playsrg-ios"
+      - "playsrg-tvos"
+      - "playsrg-ios-appstore"
+      - "playsrg-tvos-appstore"
