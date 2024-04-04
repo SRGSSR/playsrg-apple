@@ -145,7 +145,7 @@ import UIKit
         components.append("Model identifier: \(modelIdentifier)")
         components.append("")
         
-        components.append("User settings")
+        components.append("App settings")
         components.append( "-------------------")
         components.append("Autoplay enabled: \(continuousAutoplayStatus)")
 #if os(iOS)
@@ -158,12 +158,16 @@ import UIKit
             components.append("Audio description availability displayed: \(audioDescriptionAvailabilityDisplayed)")
         }
         components.append("Most recent audio selection: \(audioSettings)")
-        components.append("Subtitle settings (MediaAccessibility): \(subtitleSettings)")
-        components.append("Subtitle accessibility settings (MediaAccessibility): \(subtitleAccessibilitySettings)")
-        components.append("VoiceOver enabled: \(voiceOverEnabled)")
         if SRGIdentityService.current != nil {
             components.append("Logged in: \(loginStatus)")
         }
+        components.append("")
+        
+        components.append("Device settings")
+        components.append( "-------------------")
+        components.append("Subtitle settings: \(subtitleSettings)")
+        components.append("Subtitle accessibility settings: \(subtitleAccessibilitySettings)")
+        components.append("VoiceOver enabled: \(voiceOverEnabled)")
         components.append("")
         
 #if os(iOS)
