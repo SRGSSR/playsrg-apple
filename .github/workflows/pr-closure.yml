@@ -1,4 +1,3 @@
----
 name: Deployments after PR closure
 
 on:
