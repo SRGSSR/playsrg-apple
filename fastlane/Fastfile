@@ -19,7 +19,7 @@ default_platform :ios
 
 platform :ios do
   before_all do |lane, options|
-    platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
+    platform = platform(lane)
     tag_version = options[:tag_version] || tag_version(platform)
     branch_name = git_branch_name
 
@@ -1132,6 +1132,10 @@ def app_config
   CredentialsManager::AppfileConfig
 end
 
+def platform(lane)
+  lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
+end
+
 def what_s_new_condition(lane)
   included_lanes = ['appstorebuild', 'beta']
   (!lane.to_s.downcase.include? 'tester') &&
@@ -1780,9 +1784,16 @@ def create_github_deployment(lane)
   environment = github_environment(lane)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
-  # Try to create a deployment with the branch name.
-  result = create_github_deployment_ref(environment, git_branch_name)
-  return unless result[:json]['id']
+  git_tag = github_deployment_ref_tag(lane)
+
+  result = if git_tag && !git_tag.empty?
+             # Try to create a deployment with the tag.
+             create_github_deployment_ref(environment, git_tag)
+           else
+             # Try to create a deployment with the branch name.
+             create_github_deployment_ref(environment, git_branch_name)
+           end
+  return unless result
 
   # Check the commit sha is the same as the last commit.
   return if github_deployment_sha_correct(result)
@@ -1803,6 +1814,7 @@ def create_github_deployment_ref(environment, ref)
 end
 
 def srg_github_create_deployment(environment, ref)
+  UI.message "Github deployment creation with ref: #{ref}"
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
@@ -1829,6 +1841,16 @@ end
 
 def github_deployment_sha_correct(result)
   last_git_commit[:commit_hash] == result[:json]['sha']
+end
+
+def github_deployment_ref_tag(lane)
+  tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
+  tag_commit = sh("git rev-list -n 1 tags/#{tag}")
+  return unless tag_commit && !tag_commit.empty?
+
+  return unless last_git_commit[:commit_hash] == tag_commit
+
+  tag
 end
 
 def delete_github_deployment(lane)
