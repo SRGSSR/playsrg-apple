@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import MediaAccessibility
 import SRGIdentity
 import UIKit
 
@@ -56,6 +57,31 @@ import UIKit
     
     private static var continuousAutoplayStatus: String {
         return status(for: ApplicationSettingAutoplayEnabled())
+    }
+    
+    private static var audioSettings: String {
+        ApplicationSettingLastSelectedAudioLanguageCode() ?? "None"
+    }
+    
+    private static var subtitleSettings: String {
+        switch MACaptionAppearanceGetDisplayType(.user) {
+        case .automatic:
+            return "Automatic"
+        case .alwaysOn:
+            let languages = MACaptionAppearanceCopySelectedLanguages(.user).takeUnretainedValue() as? [String] ?? []
+            guard !languages.isEmpty else { return "On" }
+            return "On (preferred languages: \(languages.joined(separator: ", ")))"
+        default:
+            return "Off"
+        }
+    }
+    
+    private static var subtitleAccessibilitySettings: String {
+        guard let characteristics = MACaptionAppearanceCopyPreferredCaptioningMediaCharacteristics(.user).takeRetainedValue() as? [AVMediaCharacteristic],
+              !characteristics.isEmpty else {
+            return "None"
+        }
+        return characteristics.map(\.rawValue).joined(separator: ", ")
     }
     
     private static var subtitleAvailabilityDisplayed: String {
@@ -119,7 +145,7 @@ import UIKit
         components.append("Model identifier: \(modelIdentifier)")
         components.append("")
         
-        components.append("User settings")
+        components.append("App settings")
         components.append( "-------------------")
         components.append("Autoplay enabled: \(continuousAutoplayStatus)")
 #if os(iOS)
@@ -131,10 +157,17 @@ import UIKit
         if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
             components.append("Audio description availability displayed: \(audioDescriptionAvailabilityDisplayed)")
         }
-        components.append("VoiceOver enabled: \(voiceOverEnabled)")
+        components.append("Most recent audio selection: \(audioSettings)")
         if SRGIdentityService.current != nil {
             components.append("Logged in: \(loginStatus)")
         }
+        components.append("")
+        
+        components.append("Device settings")
+        components.append( "-------------------")
+        components.append("Subtitle settings: \(subtitleSettings)")
+        components.append("Subtitle accessibility settings: \(subtitleAccessibilitySettings)")
+        components.append("VoiceOver enabled: \(voiceOverEnabled)")
         components.append("")
         
 #if os(iOS)
