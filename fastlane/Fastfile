@@ -1844,6 +1844,8 @@ def github_deployment_sha_correct(result)
 end
 
 def github_deployment_ref_tag(lane)
+  git_pull(only_tags: true)
+
   tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
   tag_commit = sh("git rev-list -n 1 tags/#{tag}")
   return unless tag_commit && !tag_commit.empty?
