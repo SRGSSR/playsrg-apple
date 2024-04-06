@@ -432,9 +432,9 @@ platform :ios do
       UI.user_error! 'After AppStore validation git flow must runs on \'release/*\' branch.'
     end
 
-    # Tag only platfoms which not have already a tag and have a what's new for beta.
+    # Tag only platforms which not have already a tag and have a what's new for beta.
     git_pull(only_tags: true)
-    platforms = ['tvOS', 'iOS'].reject do |platform|
+    platforms = srg_platforms.reject do |platform|
       tag = srg_tag(platform)
       tag_version = tag_version(platform)
       git_tag_exists(tag:) || what_s_new_for_beta(platform, tag_version).empty?
@@ -1101,6 +1101,10 @@ end
 
 def tvos_application_schemes
   business_units.map { |business_unit| "Play #{business_unit} TV" }
+end
+
+def srg_platforms
+  ['iOS', 'tvOS']
 end
 
 def application_schemes(platform)
