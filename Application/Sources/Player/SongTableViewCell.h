@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, getter=isPlayable) BOOL playable;
 
-- (void)setSong:(nullable SRGSong *)song playing:(BOOL)playing;
+- (void)setSong:(nullable SRGSong *)song playing:(BOOL)playing withCellWidth:(CGFloat)width;
 - (void)updateProgressForDateInterval:(nullable NSDateInterval *)dateInterval;
 
 @end
