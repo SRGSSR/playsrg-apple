@@ -193,7 +193,11 @@ extension Collection {
                 return "#"
             }
         }
-        return dictionary.sorted { $0.key < $1.key }
+        let hashGroup = dictionary["#"]
+        return dictionary
+            .filter { $0.key != "#" }
+            .sorted { $0.key < $1.key }
+            .appending(contentsOf: hashGroup.map { [(Character("#"), $0)] } ?? [])
     }
 }
 
