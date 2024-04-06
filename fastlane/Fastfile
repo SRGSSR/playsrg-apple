@@ -1285,6 +1285,14 @@ def srg_tag(platform)
   "#{platform.downcase}/#{tag_version(platform)}"
 end
 
+def platform_from_tag(tag)
+  tag.split('/').first
+end
+
+def tag_version_from_tag(tag)
+  tag.split('/').last
+end
+
 def build_number_from_tag_version(tag_version)
   tag_version.split('-').last
 end
@@ -1939,11 +1947,18 @@ def environment_url(state, lane)
   environment_data = github_environment_data(lane)
   return unless state == 'success' && environment_data
 
-  version = build_friendly_name(tag_version(environment_data[:platform]), git_branch_name)
+  # Use the new tag if available.
+  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+
+  platform = platform_from_tag(new_tag) if new_tag
+  platform ||= environment_data[:platform]
+
+  version = tag_version_from_tag(new_tag) if new_tag
+  version ||= build_friendly_name(tag_version(environment_data[:platform]), git_branch_name)
 
   'https://srgssr.github.io/playsrg-apple/deployments/build.html' \
     "?configuration=#{environment_data[:configuration]}" \
-    "&platform=#{environment_data[:platform]}" \
+    "&platform=#{platform}" \
     "&version=#{version}"
 end
 
@@ -2174,6 +2189,7 @@ def tag_beta(platform)
     UI.message "Tag \"#{tag}\" created. ✅"
     push_git_tags
   end
+  ENV['NEW_PLAY_TAG'] = tag
 end
 
 # Beta workflow: bump build number and push to the repository only if we are on the develop
