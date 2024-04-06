@@ -1906,6 +1906,10 @@ end
 def add_github_deployment_tag_success(lane)
   return unless ENV.fetch('NEW_PLAY_TAG', nil)
 
+  # Avoid having twice deployments.
+  update_github_deployment_inactive(lane)
+  delete_github_deployment(lane)
+
   create_github_deployment(lane)
   update_github_deployment_success(lane)
   ENV.delete('NEW_PLAY_TAG')
@@ -1921,6 +1925,10 @@ end
 
 def update_github_deployment_error(lane)
   update_github_deployment('error', lane)
+end
+
+def update_github_deployment_inactive(lane)
+  update_github_deployment('inactive', lane)
 end
 
 def update_github_deployment(state, lane)
