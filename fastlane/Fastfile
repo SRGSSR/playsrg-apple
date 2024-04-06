@@ -1066,6 +1066,8 @@ platform :ios do
   after_all do |lane|
     update_github_deployment_success(lane)
 
+    add_github_deployment_tag_success(lane)
+
     if cleaned_lane_condition(lane)
       ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true)
@@ -1852,11 +1854,17 @@ def srg_github_create_deployment_body(environment, ref)
 end
 
 def github_deployment_sha_correct(result)
+  # Tag commit can be different from the last commit.
+  return true if ENV.fetch('NEW_PLAY_TAG', nil)
+
   last_git_commit[:commit_hash] == result[:json]['sha']
 end
 
 def github_deployment_ref_tag(lane)
   git_pull(only_tags: true)
+
+  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+  return new_tag if new_tag && !new_tag.empty?
 
   tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
   tag_commit = sh("git rev-list -n 1 tags/#{tag}")
@@ -1892,6 +1900,15 @@ def srg_github_delete_deployment(deployment_id)
       end
     }
   )
+end
+
+# Beta workflow creates a new tag. Try to add a Github deployment with tag ref.
+def add_github_deployment_tag_success(lane)
+  return unless ENV.fetch('NEW_PLAY_TAG', nil)
+
+  create_github_deployment(lane)
+  update_github_deployment_success(lane)
+  ENV.delete('NEW_PLAY_TAG')
 end
 
 def update_github_deployment_in_progress(lane)
@@ -2188,8 +2205,8 @@ def tag_beta(platform)
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
     push_git_tags
+    ENV['NEW_PLAY_TAG'] = tag
   end
-  ENV['NEW_PLAY_TAG'] = tag
 end
 
 # Beta workflow: bump build number and push to the repository only if we are on the develop
