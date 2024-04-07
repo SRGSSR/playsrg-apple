@@ -100,7 +100,8 @@ img {
   }
 
   function getVersion() {
-    return getQueryParameter('version');
+    var version = getQueryParameter('version');
+    return version ? version : '';
   }
 
   function getQueryParameter(name) {
@@ -161,6 +162,8 @@ img {
         return 'https://apps.apple.com/ch/app/' + applicationId(configuration, bu);
     }
   }
+
+  document.title = 'Play ' + platformName() + ' ' + configurationNames() + ' ' + getVersion() + ' - SRG SSR';
 </script>
 </head>
 <body>
@@ -169,8 +172,6 @@ img {
   var version = getVersion();
   var platform = getPlatform();
   var configuration = getConfiguration();
-
-  document.title = 'Play ' + platformName() + ' ' + configurationNames() + (version ? ' ' + version : '') + ' - SRG SSR';
 
   switch (configuration) {
     case Configuration.nightly:
