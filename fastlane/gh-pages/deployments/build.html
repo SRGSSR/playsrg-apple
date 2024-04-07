@@ -163,33 +163,7 @@ img {
     }
   }
 
-  function getConfigurationDescription() {
-    return getDescription(getConfiguration());
-  }
-
-  function getDescription(configuration) {
-    switch (configuration) {
-      case Configuration.nightly:
-      case Configuration.beta:
-        return 'The ' + configurationName() + ' versions are only intended for internal SRG SSR use and should not be distributed outside the company.';
-      case Configuration.testFlight:
-        return 'The ' + configurationName() + ' versions are available for all with an anonymous subscription.';
-        default:
-        return 'The ' + configurationName() + ' versions are available for all on the AppStore.';
-    }
-  }
-
   document.title = 'Play ' + platformName() + ' ' + configurationNames() + ' ' + getVersion() + ' - SRG SSR';
-
-  var metaTitle = document.createElement('meta');
-  metaTitle.setAttribute('property', 'og:title');
-  metaTitle.content = document.title;
-  document.getElementsByTagName('head')[0].appendChild(metaTitle);
-
-  var metaDescription = document.createElement('meta');
-  metaDescription.setAttribute('property', 'og:description');
-  metaDescription.content = getConfigurationDescription();
-  document.getElementsByTagName('head')[0].appendChild(metaDescription);
 </script>
 </head>
 <body>
@@ -203,17 +177,17 @@ img {
     case Configuration.nightly:
     case Configuration.beta:
       document.write('<h2>Play ' + platformName() + ' ' + configurationNames() + '</h2>');
-      document.write('<p>' + getConfigurationDescription() + '</p>');
+      document.write('<p>The ' + configurationName() + ' versions are only intended for internal SRG SSR use and should not be distributed outside the company.</p>');
       document.write('<p>Only the developer team can send a private invitation with <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank">Apple TestFlight</a> access link.</p>');
       break;
     case Configuration.testFlight:
       document.write('<h2>Play ' + platformName() + ' ' + configurationNames() + '</h2>');
-      document.write('<p>' + getConfigurationDescription() + '</p>');
+      document.write('<p>The ' + configurationName() + ' versions are available for all with an anonymous subscription.</p>');
       document.write('<p>Find the <a href="https://apps.apple.com/app/testflight/id899247664" target="_blank">Apple TestFlight</a> invitation link in the iOS application from the AppStore, in Profile tab, in Settings view.</p>');
       break;
     default:
       document.write('<h2>Play ' + platformName() + '</h2>');
-      document.write('<p>' + getConfigurationDescription() + '</p>');
+      document.write('<p>The ' + configurationName() + ' versions are available for all on the AppStore.</p>');
       break;
   }
 
