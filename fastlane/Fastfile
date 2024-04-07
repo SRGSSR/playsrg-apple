@@ -375,7 +375,6 @@ platform :ios do
   desc 'Publish release notes for iOS and tvOS on Github pages'
   lane :publishReleaseNotes do
     output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
-    Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
     copy_static_github_pages_files(output_directory)
 
@@ -2440,15 +2439,19 @@ def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
 end
 
 def copy_static_github_pages_files(output_directory)
-  source_index_html_file = 'fastlane/gh-pages/index.html'
-  Dir.chdir('..') { FileUtils.cp(source_index_html_file, output_directory) }
+  source_directory = 'fastlane/gh-pages'
+  copy_static_github_pages_files_from_to(source_directory, output_directory)
 
-  source_deployments_directory = 'fastlane/gh-pages/deployments'
-  deployments_directory = "#{output_directory}/deployments"
+  source_deployments_directory = "#{source_directory}/deployments"
+  output_deployments_directory = "#{output_directory}/deployments"
+  copy_static_github_pages_files_from_to(source_deployments_directory, output_deployments_directory)
+end
+
+def copy_static_github_pages_files_from_to(source_directory, output_directory)
   Dir.chdir('..') do
-    FileUtils.mkdir_p(deployments_directory)
-    Dir.glob("#{source_deployments_directory}/*.{png,html}").each do |file|
-      FileUtils.cp(file, deployments_directory)
+    FileUtils.mkdir_p(output_directory)
+    Dir.glob("#{source_directory}/*.{png,html}").each do |file|
+      FileUtils.cp(file, output_directory)
     end
   end
 end
@@ -2461,9 +2464,10 @@ def publish_on_github_pages(output_directory, releases_directory)
     sh 'git checkout --orphan gh-pages'
     sh 'git reset --hard'
     sh "mv \"#{output_directory}/index.html\" ./"
+    sh "mv \"#{output_directory}/preview.png\" ./"
     sh "mv \"#{output_directory}/deployments\" ./"
     sh "mv \"#{releases_directory}\" ./"
-    sh 'git add index.html releases/* deployments/*'
+    sh 'git add index.html preview.png releases/* deployments/*'
     sh 'git commit -m "Publish release notes"'
     sh 'git push origin gh-pages --force'
     sh "git checkout #{branch_name}"
