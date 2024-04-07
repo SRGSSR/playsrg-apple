@@ -19,7 +19,7 @@ default_platform :ios
 
 platform :ios do
   before_all do |lane, options|
-    platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
+    platform = platform(lane)
     tag_version = options[:tag_version] || tag_version(platform)
     branch_name = git_branch_name
 
@@ -431,9 +431,9 @@ platform :ios do
       UI.user_error! 'After AppStore validation git flow must runs on \'release/*\' branch.'
     end
 
-    # Tag only platfoms which not have already a tag and have a what's new for beta.
+    # Tag only platforms which not have already a tag and have a what's new for beta.
     git_pull(only_tags: true)
-    platforms = ['tvOS', 'iOS'].reject do |platform|
+    platforms = srg_platforms.reject do |platform|
       tag = srg_tag(platform)
       tag_version = tag_version(platform)
       git_tag_exists(tag:) || what_s_new_for_beta(platform, tag_version).empty?
@@ -1065,6 +1065,8 @@ platform :ios do
   after_all do |lane|
     update_github_deployment_success(lane)
 
+    add_github_deployment_tag_success(lane)
+
     if cleaned_lane_condition(lane)
       ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true)
@@ -1102,6 +1104,10 @@ def tvos_application_schemes
   business_units.map { |business_unit| "Play #{business_unit} TV" }
 end
 
+def srg_platforms
+  ['iOS', 'tvOS']
+end
+
 def application_schemes(platform)
   platform ||= 'iOS'
 
@@ -1129,6 +1135,10 @@ end
 
 def app_config
   CredentialsManager::AppfileConfig
+end
+
+def platform(lane)
+  lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
 end
 
 def what_s_new_condition(lane)
@@ -1274,6 +1284,14 @@ end
 
 def srg_tag(platform)
   "#{platform.downcase}/#{tag_version(platform)}"
+end
+
+def platform_from_tag(tag)
+  tag.split('/').first
+end
+
+def tag_version_from_tag(tag)
+  tag.split('/').last
 end
 
 def build_number_from_tag_version(tag_version)
@@ -1779,9 +1797,16 @@ def create_github_deployment(lane)
   environment = github_environment(lane)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
-  # Try to create a deployment with the branch name.
-  result = create_github_deployment_ref(environment, git_branch_name)
-  return unless result[:json]['id']
+  git_tag = github_deployment_ref_tag(lane)
+
+  result = if git_tag && !git_tag.empty?
+             # Try to create a deployment with the tag.
+             create_github_deployment_ref(environment, git_tag)
+           else
+             # Try to create a deployment with the branch name.
+             create_github_deployment_ref(environment, git_branch_name)
+           end
+  return unless result
 
   # Check the commit sha is the same as the last commit.
   return if github_deployment_sha_correct(result)
@@ -1802,6 +1827,7 @@ def create_github_deployment_ref(environment, ref)
 end
 
 def srg_github_create_deployment(environment, ref)
+  UI.message "Github deployment creation with ref: #{ref}"
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
@@ -1827,7 +1853,25 @@ def srg_github_create_deployment_body(environment, ref)
 end
 
 def github_deployment_sha_correct(result)
+  # Tag commit can be different from the last commit.
+  return true if ENV.fetch('NEW_PLAY_TAG', nil)
+
   last_git_commit[:commit_hash] == result[:json]['sha']
+end
+
+def github_deployment_ref_tag(lane)
+  git_pull(only_tags: true)
+
+  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+  return new_tag if new_tag && !new_tag.empty?
+
+  tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
+  tag_commit = sh("git rev-list -n 1 tags/#{tag}")
+  return unless tag_commit && !tag_commit.empty?
+
+  return unless last_git_commit[:commit_hash] == tag_commit
+
+  tag
 end
 
 def delete_github_deployment(lane)
@@ -1857,6 +1901,19 @@ def srg_github_delete_deployment(deployment_id)
   )
 end
 
+# Beta workflow creates a new tag. Try to add a Github deployment with tag ref.
+def add_github_deployment_tag_success(lane)
+  return unless ENV.fetch('NEW_PLAY_TAG', nil)
+
+  # Avoid having twice deployments.
+  update_github_deployment_inactive(lane)
+  delete_github_deployment(lane)
+
+  create_github_deployment(lane)
+  update_github_deployment_success(lane)
+  ENV.delete('NEW_PLAY_TAG')
+end
+
 def update_github_deployment_in_progress(lane)
   update_github_deployment('in_progress', lane)
 end
@@ -1867,6 +1924,10 @@ end
 
 def update_github_deployment_error(lane)
   update_github_deployment('error', lane)
+end
+
+def update_github_deployment_inactive(lane)
+  update_github_deployment('inactive', lane)
 end
 
 def update_github_deployment(state, lane)
@@ -1910,11 +1971,18 @@ def environment_url(state, lane)
   environment_data = github_environment_data(lane)
   return unless state == 'success' && environment_data
 
-  version = build_friendly_name(tag_version(environment_data[:platform]), git_branch_name)
+  # Use the new tag if available.
+  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+
+  platform = platform_from_tag(new_tag) if new_tag
+  platform ||= environment_data[:platform]
+
+  version = tag_version_from_tag(new_tag) if new_tag
+  version ||= build_friendly_name(tag_version(environment_data[:platform]), git_branch_name)
 
   'https://srgssr.github.io/playsrg-apple/deployments/build.html' \
     "?configuration=#{environment_data[:configuration]}" \
-    "&platform=#{environment_data[:platform]}" \
+    "&platform=#{platform}" \
     "&version=#{version}"
 end
 
@@ -2144,6 +2212,7 @@ def tag_beta(platform)
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
     push_git_tags
+    ENV['NEW_PLAY_TAG'] = tag
   end
 end
 
