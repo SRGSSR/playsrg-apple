@@ -264,6 +264,29 @@ extension PageViewModel {
             return displayedPage != nil
         }
         
+        var displayedGradientTopic: SRGTopic? {
+            switch self {
+            case let .topic(topic):
+                return topic
+            case let .show(show):
+                guard let topic = show.topics?.first else { return nil }
+                return topic
+            default:
+                return nil
+            }
+        }
+        
+        var displayedGradientTopicRadialOpacity: Double? {
+            switch self {
+            case .topic:
+                return 0.7
+            case .show:
+                return 0.2
+            default:
+                return nil
+            }
+        }
+        
         var analyticsPageViewTitle: String {
             switch self {
             case .video, .audio, .live:

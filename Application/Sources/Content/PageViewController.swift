@@ -131,17 +131,6 @@ final class PageViewController: UIViewController {
             topicGradientView.heightAnchor.constraint(equalToConstant: 572)
         ])
         
-        switch id {
-        case let .topic(topic):
-            topicGradientView.content = TopicGradientView(topic, radialOpacity: 0.7)
-        case let .show(show):
-            if let topic = show.topics?.first {
-                topicGradientView.content = TopicGradientView(topic, radialOpacity: 0.2)
-            }
-        default:
-            break
-        }
-        
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
 #else
@@ -275,6 +264,13 @@ final class PageViewController: UIViewController {
             emptyContentView.content = EmptyContentView(state: .failed(error: error), insets: emptyViewEdgeInsets())
         case let .loaded(rows: rows, _):
             emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic), insets: emptyViewEdgeInsets()) : nil
+        }
+        
+        if let topic = model.id.displayedGradientTopic, let radialOpacity = model.id.displayedGradientTopicRadialOpacity {
+            self.topicGradientView.content = TopicGradientView(topic, radialOpacity: radialOpacity)
+        }
+        else {
+            self.topicGradientView.content = nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
