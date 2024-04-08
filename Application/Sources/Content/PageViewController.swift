@@ -126,7 +126,7 @@ final class PageViewController: UIViewController {
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            topicGradientView.topAnchor.constraint(equalTo: view.topAnchor),
+            topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor),
             topicGradientView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
             topicGradientView.heightAnchor.constraint(equalToConstant: 572)
         ])
