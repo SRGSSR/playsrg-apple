@@ -25,6 +25,7 @@ final class PageViewController: UIViewController {
     
     private weak var collectionView: UICollectionView!
     private weak var emptyContentView: HostView<EmptyContentView>!
+    private weak var topicGradientView: HostView<TopicGradientView>!
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
@@ -118,6 +119,28 @@ final class PageViewController: UIViewController {
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyContentView
         self.emptyContentView = emptyContentView
+        
+        let topicGradientView = HostView<TopicGradientView>(frame: .zero)
+        collectionView.addSubview(topicGradientView)
+        self.topicGradientView = topicGradientView
+        
+        topicGradientView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topicGradientView.topAnchor.constraint(equalTo: view.topAnchor),
+            topicGradientView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
+            topicGradientView.heightAnchor.constraint(equalToConstant: 572)
+        ])
+        
+        switch id {
+        case let .topic(topic):
+            topicGradientView.content = TopicGradientView(topic: topic, radialOpacity: 0.7)
+        case let .show(show):
+            if let topic = show.topics?.first {
+                topicGradientView.content = TopicGradientView(topic: topic, radialOpacity: 0.2)
+            }
+        default:
+            break
+        }
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
@@ -257,6 +280,7 @@ final class PageViewController: UIViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
+                self.collectionView.sendSubviewToBack(self.topicGradientView)
 #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
