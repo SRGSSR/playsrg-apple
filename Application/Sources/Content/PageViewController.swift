@@ -133,10 +133,10 @@ final class PageViewController: UIViewController {
         
         switch id {
         case let .topic(topic):
-            topicGradientView.content = TopicGradientView(topic: topic, radialOpacity: 0.7)
+            topicGradientView.content = TopicGradientView(topic, radialOpacity: 0.7)
         case let .show(show):
             if let topic = show.topics?.first {
-                topicGradientView.content = TopicGradientView(topic: topic, radialOpacity: 0.2)
+                topicGradientView.content = TopicGradientView(topic, radialOpacity: 0.2)
             }
         default:
             break

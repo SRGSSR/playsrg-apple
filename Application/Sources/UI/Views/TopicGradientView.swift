@@ -13,6 +13,11 @@ struct TopicGradientView: View {
     let topic: SRGTopic
     let radialOpacity: Double
     
+    init(_ topic: SRGTopic, radialOpacity: Double) {
+        self.topic = topic
+        self.radialOpacity = radialOpacity
+    }
+    
     var body: some View {
         if let topicColors = ApplicationConfiguration.shared.topicColors(for: topic) {
             ZStack {
@@ -77,26 +82,26 @@ struct TopicGradientView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             PreviewView {
-                TopicGradientView(topic: Mock.topic(), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(), radialOpacity: 0.7)
             }
             PreviewView {
-                TopicGradientView(topic: Mock.topic(), radialOpacity: 0.2)
+                TopicGradientView(Mock.topic(), radialOpacity: 0.2)
             }
             PreviewView {
-                TopicGradientView(topic: Mock.topic(.overflow), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(.overflow), radialOpacity: 0.7)
             }
         }
         .previewLayout(.fixed(width: 400, height: 572))
         
         Group {
             PreviewView {
-                TopicGradientView(topic: Mock.topic(), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(), radialOpacity: 0.7)
             }
             PreviewView {
-                TopicGradientView(topic: Mock.topic(), radialOpacity: 0.2)
+                TopicGradientView(Mock.topic(), radialOpacity: 0.2)
             }
             PreviewView {
-                TopicGradientView(topic: Mock.topic(.overflow), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(.overflow), radialOpacity: 0.7)
             }
         }
         .previewLayout(.fixed(width: 1080, height: 572))
