@@ -132,14 +132,22 @@ final class PageViewController: UIViewController {
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            topicGradientView.topAnchor.constraint(equalTo: view.topAnchor),
-            topicGradientView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
+            topicGradientView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor),
             topicGradientView.heightAnchor.constraint(equalToConstant: 572)
         ])
         
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         backgroundView.addSubview(emptyContentView)
         self.emptyContentView = emptyContentView
+        
+        emptyContentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyContentView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
+            emptyContentView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
+            emptyContentView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor),
+            emptyContentView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor)
+        ])
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
