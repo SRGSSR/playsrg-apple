@@ -115,21 +115,31 @@ final class PageViewController: UIViewController {
             }
         }
 #endif
+        let backgroundView = UIView(frame: .zero)
+        collectionView.backgroundView = backgroundView
         
-        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
-        collectionView.backgroundView = emptyContentView
-        self.emptyContentView = emptyContentView
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         
         let topicGradientView = HostView<TopicGradientView>(frame: .zero)
-        collectionView.addSubview(topicGradientView)
+        backgroundView.addSubview(topicGradientView)
         self.topicGradientView = topicGradientView
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             topicGradientView.topAnchor.constraint(equalTo: view.topAnchor),
-            topicGradientView.widthAnchor.constraint(equalTo: collectionView.widthAnchor),
+            topicGradientView.widthAnchor.constraint(equalTo: view.widthAnchor),
             topicGradientView.heightAnchor.constraint(equalToConstant: 572)
         ])
+        
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        backgroundView.addSubview(emptyContentView)
+        self.emptyContentView = emptyContentView
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
@@ -276,7 +286,6 @@ final class PageViewController: UIViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
-                self.collectionView.sendSubviewToBack(self.topicGradientView)
 #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
