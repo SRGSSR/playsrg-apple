@@ -169,7 +169,6 @@ struct MediaDetailView: View {
                     TruncatableTextView(content: summary, lineLimit: 3) {
                         navigateToText(summary)
                     }
-                    .foregroundColor(.white)
                 }
             }
         }

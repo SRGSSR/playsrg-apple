@@ -22,7 +22,7 @@ struct TruncatableTextView: View {
     
     let showMore: () -> Void
     
-    var foregroundColor: Color = .srgGray96
+    var foregroundColor: Color = .white
     var secondaryColor: Color = .white
     
     @State private var isTruncated = false
