@@ -89,7 +89,7 @@ struct ShowHeaderView: View {
                         DescriptionView(model: model, compactLayout: false)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(16 / 9, contentMode: .fit)
-                            .frame(width: UIScreen.main.bounds.width * 2 / 5)
+                            .frame(width: UIScreen.main.bounds.width * 0.35)
                     }
                     .padding(.top, padding)
                     .padding(.horizontal, padding)
