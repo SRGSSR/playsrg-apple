@@ -11,11 +11,20 @@ import SwiftUI
 /// Behavior: h-hug, v-hug
 struct PageHeaderView: View {
     let page: SRGContentPage?
+    let titleTextAlignment: TextAlignment
+    
+    init(page: SRGContentPage?, titleTextAlignment: TextAlignment = .leading) {
+        self.page = page
+        self.titleTextAlignment = titleTextAlignment
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if let title = page?.title {
                 HStack(spacing: 0) {
+                    if titleTextAlignment != .leading {
+                        Spacer(minLength: 0)
+                    }
                     Text(title)
                         .srgFont(.H1)
                         .foregroundColor(.white)
@@ -23,8 +32,10 @@ struct PageHeaderView: View {
                     // when calculated with a `UIHostingController`, but without this the text does not occupy
                     // all lines it could.
                         .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.leading)
-                    Spacer()
+                        .multilineTextAlignment(titleTextAlignment)
+                    if titleTextAlignment != .trailing {
+                        Spacer(minLength: 0)
+                    }
                 }
             }
             if let description = page?.summary {
@@ -66,6 +77,8 @@ struct PageHeaderView_Previews: PreviewProvider {
         Group {
             PageHeaderView(page: Mock.page())
             PageHeaderView(page: Mock.page(.short))
+            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .center)
+            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .trailing)
             PageHeaderView(page: Mock.page(.overflow))
             PageHeaderView(page: nil)
         }
@@ -76,6 +89,8 @@ struct PageHeaderView_Previews: PreviewProvider {
         Group {
             PageHeaderView(page: Mock.page())
             PageHeaderView(page: Mock.page(.short))
+            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .center)
+            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .trailing)
             PageHeaderView(page: Mock.page(.overflow))
             PageHeaderView(page: nil)
         }
