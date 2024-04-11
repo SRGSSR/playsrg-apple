@@ -18,6 +18,15 @@ struct PageHeaderView: View {
         self.titleTextAlignment = titleTextAlignment
     }
     
+    var foregroundColor: Color = .white
+    
+    func foregroundColor(_ color: Color) -> Self {
+        var pageHeaderView = self
+        
+        pageHeaderView.foregroundColor = color
+        return pageHeaderView
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if let title = page?.title {
@@ -27,7 +36,7 @@ struct PageHeaderView: View {
                     }
                     Text(title)
                         .srgFont(.H1)
-                        .foregroundColor(.white)
+                        .foregroundColor(foregroundColor)
                     // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                     // when calculated with a `UIHostingController`, but without this the text does not occupy
                     // all lines it could.
@@ -41,7 +50,7 @@ struct PageHeaderView: View {
             if let description = page?.summary {
                 Text(description)
                     .srgFont(.body)
-                    .foregroundColor(.white)
+                    .foregroundColor(foregroundColor)
                 // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                 // when calculated with a `UIHostingController`, but without this the text does not occupy
                 // all lines it could.
