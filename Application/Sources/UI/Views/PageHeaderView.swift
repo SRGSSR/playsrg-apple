@@ -10,11 +10,13 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct PageHeaderView: View {
-    let page: SRGContentPage?
+    let title: String?
+    let description: String?
     let titleTextAlignment: TextAlignment
     
-    init(page: SRGContentPage?, titleTextAlignment: TextAlignment = .leading) {
-        self.page = page
+    init(title: String?, description: String?, titleTextAlignment: TextAlignment = .leading) {
+        self.title = title
+        self.description = description
         self.titleTextAlignment = titleTextAlignment
     }
     
@@ -29,7 +31,7 @@ struct PageHeaderView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            if let title = page?.title {
+            if let title {
                 HStack(spacing: 0) {
                     if titleTextAlignment != .leading {
                         Spacer(minLength: 0)
@@ -46,16 +48,16 @@ struct PageHeaderView: View {
                         Spacer(minLength: 0)
                     }
                 }
-            }
-            if let description = page?.summary {
-                Text(description)
-                    .srgFont(.body)
-                    .foregroundColor(foregroundColor)
-                // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
-                // when calculated with a `UIHostingController`, but without this the text does not occupy
-                // all lines it could.
-                    .fixedSize(horizontal: false, vertical: true)
-                    .multilineTextAlignment(.leading)
+                if let description {
+                    Text(description)
+                        .srgFont(.body)
+                        .foregroundColor(foregroundColor)
+                    // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
+                    // when calculated with a `UIHostingController`, but without this the text does not occupy
+                    // all lines it could.
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.leading)
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -67,10 +69,10 @@ struct PageHeaderView: View {
 // MARK: Size
 
 enum PageHeaderViewSize {
-    static func recommended(for page: SRGContentPage?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        if let page {
+    static func recommended(title: String?, description: String?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        if let title {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
-            let size = PageHeaderView(page: page).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+            let size = PageHeaderView(title: title, description: description).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
         }
         else {
@@ -84,24 +86,26 @@ enum PageHeaderViewSize {
 struct PageHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PageHeaderView(page: Mock.page())
-            PageHeaderView(page: Mock.page(.short))
-            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .center)
-            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .trailing)
-            PageHeaderView(page: Mock.page(.overflow))
-            PageHeaderView(page: nil)
+            PageHeaderView(title: "Title", description: "description")
+            PageHeaderView(title: .loremIpsum, description: .loremIpsum)
+            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
+            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
+            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
+            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
+            PageHeaderView(title: nil, description: nil)
         }
         .previewLayout(.sizeThatFits)
         .frame(width: 1000)
         .environment(\.horizontalSizeClass, .regular)
         
         Group {
-            PageHeaderView(page: Mock.page())
-            PageHeaderView(page: Mock.page(.short))
-            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .center)
-            PageHeaderView(page: Mock.page(.short), titleTextAlignment: .trailing)
-            PageHeaderView(page: Mock.page(.overflow))
-            PageHeaderView(page: nil)
+            PageHeaderView(title: "Title", description: "description")
+            PageHeaderView(title: .loremIpsum, description: .loremIpsum)
+            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
+            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
+            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
+            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
+            PageHeaderView(title: nil, description: nil)
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)

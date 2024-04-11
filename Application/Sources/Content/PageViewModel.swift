@@ -5,6 +5,7 @@
 //
 
 import SRGDataProviderCombine
+import SwiftUI
 
 // MARK: View model
 
@@ -238,30 +239,37 @@ extension PageViewModel {
             return displayedShow != nil
         }
         
-        var displayedGlobalTitle: String? {
-            if case .topic = self {
-#if os(tvOS)
-                return title
-#else
+        var displayedTitle: String? {
+            switch self {
+            case let .page(page):
+                return page.title
+            case let .topic(topic):
+                return topic.title
+            default:
                 return nil
-#endif
+            }
+        }
+        
+        var displayedDescription: String? {
+            if case let .page(page) = self {
+                return page.summary
             }
             else {
                 return nil
             }
         }
         
-        var displayedPage: SRGContentPage? {
-            if case let .page(page) = self {
-                return page
+        var displayedTitleTextAlignment: TextAlignment {
+            if case .topic = self {
+                return constant(iOS: .leading, tvOS: .center)
             }
             else {
-                return nil
+                return .leading
             }
         }
         
         var hasPageHeaderView: Bool {
-            return displayedPage != nil
+            return displayedTitle != nil
         }
         
         var displayedGradientTopic: SRGTopic? {
