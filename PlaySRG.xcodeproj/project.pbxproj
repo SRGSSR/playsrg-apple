@@ -19290,8 +19290,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.2.0;
+				branch = "feature/font-update";
+				kind = branch;
 			};
 		};
 		6F3B5638283B903C009A2D7D /* XCRemoteSwiftPackageReference "ShowTime" */ = {
