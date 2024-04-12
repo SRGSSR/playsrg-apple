@@ -155,7 +155,7 @@ extension PageViewModel {
         
 #if os(iOS)
         var isHeaderWithTitle: Bool {
-            return hasShowHeaderView || hasPageHeaderView
+            return displayedTitle != nil || displayedShow != nil
         }
         
         var isLargeTitleDisplayMode: Bool {
@@ -235,10 +235,6 @@ extension PageViewModel {
             }
         }
         
-        var hasShowHeaderView: Bool {
-            return displayedShow != nil
-        }
-        
         var displayedTitle: String? {
             switch self {
             case let .page(page):
@@ -266,10 +262,6 @@ extension PageViewModel {
             else {
                 return .leading
             }
-        }
-        
-        var hasPageHeaderView: Bool {
-            return displayedTitle != nil
         }
         
         var displayedGradientTopic: SRGTopic? {

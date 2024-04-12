@@ -37,7 +37,7 @@ final class SectionViewController: UIViewController {
     private var contentInsets: UIEdgeInsets
     private var leftBarButtonItem: UIBarButtonItem?
     
-    private var pageHeaderTitle: String? {
+    private var headerTitle: String? {
 #if os(tvOS)
         return (tabBarController == nil && model.displaysTitle) ? model.title : nil
 #else
@@ -137,9 +137,9 @@ final class SectionViewController: UIViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
-        let pageHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageHeaderView>>(elementKind: Header.pageHeader.rawValue) { [weak self] view, _, _ in
+        let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = PageHeaderView(title: pageHeaderTitle, titleTextAlignment: .center)
+            view.content = TitleHeaderView(title: headerTitle, titleTextAlignment: .center)
             if let hostController = view.hostController {
                 addChild(hostController)
             }
@@ -167,8 +167,8 @@ final class SectionViewController: UIViewController {
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             switch kind {
-            case Header.pageHeader.rawValue:
-                return collectionView.dequeueConfiguredReusableSupplementary(using: pageHeaderViewRegistration, for: indexPath)
+            case Header.titleHeader.rawValue:
+                return collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
             case UICollectionView.elementKindSectionHeader:
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             case UICollectionView.elementKindSectionFooter:
@@ -198,7 +198,7 @@ final class SectionViewController: UIViewController {
     
     private func updateLayoutConfiguration() {
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
-            collectionViewLayout.configuration = Self.layoutConfiguration(title: pageHeaderTitle, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass)
+            collectionViewLayout.configuration = Self.layoutConfiguration(title: headerTitle, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass)
         }
     }
     
@@ -376,7 +376,7 @@ final class SectionViewController: UIViewController {
 
 private extension SectionViewController {
     enum Header: String {
-        case pageHeader
+        case titleHeader
     }
 }
 
@@ -623,8 +623,8 @@ private extension SectionViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         configuration.interSectionSpacing = constant(iOS: 15, tvOS: 100)
         
-        let pageHeaderSize = PageHeaderViewSize.recommended(title: title, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-        configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: pageHeaderSize, elementKind: Header.pageHeader.rawValue, alignment: .topLeading) ]
+        let titleHeaderSize = TitleHeaderViewSize.recommended(title: title, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+        configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading) ]
         
         return configuration
     }
@@ -715,7 +715,7 @@ private extension SectionViewController {
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
             layoutSection.supplementariesFollowContentInsets = false
             return layoutSection
-        }, configuration: Self.layoutConfiguration(title: pageHeaderTitle, layoutWidth: 0, horizontalSizeClass: .unspecified))
+        }, configuration: Self.layoutConfiguration(title: headerTitle, layoutWidth: 0, horizontalSizeClass: .unspecified))
     }
 }
 

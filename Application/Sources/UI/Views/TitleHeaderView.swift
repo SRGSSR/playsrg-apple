@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-hug, v-hug
-struct PageHeaderView: View {
+struct TitleHeaderView: View {
     let title: String?
     let description: String?
     let titleTextAlignment: TextAlignment
@@ -23,10 +23,10 @@ struct PageHeaderView: View {
     var foregroundColor: Color = .white
     
     func foregroundColor(_ color: Color) -> Self {
-        var pageHeaderView = self
+        var titleHeaderView = self
         
-        pageHeaderView.foregroundColor = color
-        return pageHeaderView
+        titleHeaderView.foregroundColor = color
+        return titleHeaderView
     }
     
     var body: some View {
@@ -68,11 +68,11 @@ struct PageHeaderView: View {
 
 // MARK: Size
 
-enum PageHeaderViewSize {
+enum TitleHeaderViewSize {
     static func recommended(title: String?, description: String? = nil, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let title {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
-            let size = PageHeaderView(title: title, description: description).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+            let size = TitleHeaderView(title: title, description: description).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
         }
         else {
@@ -83,29 +83,29 @@ enum PageHeaderViewSize {
 
 // MARK: Preview
 
-struct PageHeaderView_Previews: PreviewProvider {
+struct TitleHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            PageHeaderView(title: "Title", description: "description")
-            PageHeaderView(title: .loremIpsum, description: .loremIpsum)
-            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
-            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
-            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
-            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
-            PageHeaderView(title: nil, description: nil)
+            TitleHeaderView(title: "Title", description: "description")
+            TitleHeaderView(title: .loremIpsum, description: .loremIpsum)
+            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
+            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
+            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
+            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
+            TitleHeaderView(title: nil, description: nil)
         }
         .previewLayout(.sizeThatFits)
         .frame(width: 1000)
         .environment(\.horizontalSizeClass, .regular)
         
         Group {
-            PageHeaderView(title: "Title", description: "description")
-            PageHeaderView(title: .loremIpsum, description: .loremIpsum)
-            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
-            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
-            PageHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
-            PageHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
-            PageHeaderView(title: nil, description: nil)
+            TitleHeaderView(title: "Title", description: "description")
+            TitleHeaderView(title: .loremIpsum, description: .loremIpsum)
+            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
+            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
+            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
+            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
+            TitleHeaderView(title: nil, description: nil)
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)

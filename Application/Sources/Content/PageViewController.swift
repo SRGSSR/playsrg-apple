@@ -176,9 +176,9 @@ final class PageViewController: UIViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
-        let pageHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageHeaderView>>(elementKind: Header.pageHeader.rawValue) { [weak self] view, _, _ in
+        let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = PageHeaderView(title: model.id.displayedTitle, description: model.id.displayedDescription, titleTextAlignment: model.id.displayedTitleTextAlignment)
+            view.content = TitleHeaderView(title: model.id.displayedTitle, description: model.id.displayedDescription, titleTextAlignment: model.id.displayedTitleTextAlignment)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
@@ -194,8 +194,8 @@ final class PageViewController: UIViewController {
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            if kind == Header.pageHeader.rawValue {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: pageHeaderViewRegistration, for: indexPath)
+            if kind == Header.titleHeader.rawValue {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
             }
             else if kind == Header.showHeader.rawValue {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
@@ -379,7 +379,7 @@ final class PageViewController: UIViewController {
 
 private extension PageViewController {
     enum Header: String {
-        case pageHeader
+        case titleHeader
         case showHeader
     }
     
@@ -517,7 +517,7 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
+        case Header.showHeader.rawValue, Header.titleHeader.rawValue:
             headerWithTitleVisible = true
             updateNavigationBar(animated: true)
         default:
@@ -527,7 +527,7 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
+        case Header.showHeader.rawValue, Header.titleHeader.rawValue:
                 headerWithTitleVisible = false
                 updateNavigationBar(animated: true)
         default:
@@ -674,8 +674,8 @@ private extension PageViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         if let title = model.id.displayedTitle {
-            let pageHeaderSize = PageHeaderViewSize.recommended(title: title, description: model.id.displayedDescription, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: pageHeaderSize, elementKind: Header.pageHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
+            let titleHeaderSize = TitleHeaderViewSize.recommended(title: title, description: model.id.displayedDescription, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         else if let show = model.id.displayedShow {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
