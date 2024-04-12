@@ -139,7 +139,7 @@ final class SectionViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(title: headerTitle, titleTextAlignment: .center)
+            view.content = TitleHeaderView(headerTitle, titleTextAlignment: constant(iOS: .leading, tvOS: .center))
             if let hostController = view.hostController {
                 addChild(hostController)
             }
@@ -623,7 +623,7 @@ private extension SectionViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         configuration.interSectionSpacing = constant(iOS: 15, tvOS: 100)
         
-        let titleHeaderSize = TitleHeaderViewSize.recommended(title: title, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+        let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
         configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading) ]
         
         return configuration

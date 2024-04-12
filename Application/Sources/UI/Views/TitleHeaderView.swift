@@ -14,7 +14,7 @@ struct TitleHeaderView: View {
     let description: String?
     let titleTextAlignment: TextAlignment
     
-    init(title: String?, description: String? = nil, titleTextAlignment: TextAlignment = .leading) {
+    init(_ title: String?, description: String? = nil, titleTextAlignment: TextAlignment = .leading) {
         self.title = title
         self.description = description
         self.titleTextAlignment = titleTextAlignment
@@ -69,10 +69,10 @@ struct TitleHeaderView: View {
 // MARK: Size
 
 enum TitleHeaderViewSize {
-    static func recommended(title: String?, description: String? = nil, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func recommended(for title: String?, description: String? = nil, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let title {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
-            let size = TitleHeaderView(title: title, description: description).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+            let size = TitleHeaderView(title, description: description).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
         }
         else {
@@ -86,26 +86,26 @@ enum TitleHeaderViewSize {
 struct TitleHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            TitleHeaderView(title: "Title", description: "description")
-            TitleHeaderView(title: .loremIpsum, description: .loremIpsum)
-            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
-            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
-            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
-            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
-            TitleHeaderView(title: nil, description: nil)
+            TitleHeaderView("Title", description: "description")
+            TitleHeaderView(.loremIpsum, description: .loremIpsum)
+            TitleHeaderView("Title", description: "description", titleTextAlignment: .center)
+            TitleHeaderView("Title", description: nil, titleTextAlignment: .center)
+            TitleHeaderView("Title", description: "description", titleTextAlignment: .trailing)
+            TitleHeaderView("Title", description: nil, titleTextAlignment: .trailing)
+            TitleHeaderView(nil, description: nil)
         }
         .previewLayout(.sizeThatFits)
         .frame(width: 1000)
         .environment(\.horizontalSizeClass, .regular)
         
         Group {
-            TitleHeaderView(title: "Title", description: "description")
-            TitleHeaderView(title: .loremIpsum, description: .loremIpsum)
-            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .center)
-            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .center)
-            TitleHeaderView(title: "Title", description: "description", titleTextAlignment: .trailing)
-            TitleHeaderView(title: "Title", description: nil, titleTextAlignment: .trailing)
-            TitleHeaderView(title: nil, description: nil)
+            TitleHeaderView("Title", description: "description")
+            TitleHeaderView(.loremIpsum, description: .loremIpsum)
+            TitleHeaderView("Title", description: "description", titleTextAlignment: .center)
+            TitleHeaderView("Title", description: nil, titleTextAlignment: .center)
+            TitleHeaderView("Title", description: "description", titleTextAlignment: .trailing)
+            TitleHeaderView("Title", description: nil, titleTextAlignment: .trailing)
+            TitleHeaderView(nil, description: nil)
         }
         .frame(width: 375)
         .previewLayout(.sizeThatFits)

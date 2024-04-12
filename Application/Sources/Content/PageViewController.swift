@@ -178,7 +178,7 @@ final class PageViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(title: model.id.displayedTitle, description: model.id.displayedDescription, titleTextAlignment: model.id.displayedTitleTextAlignment)
+            view.content = TitleHeaderView(model.id.displayedTitle, description: model.id.displayedTitleDescription, titleTextAlignment: model.id.displayedTitleTextAlignment)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
@@ -674,7 +674,7 @@ private extension PageViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         if let title = model.id.displayedTitle {
-            let titleHeaderSize = TitleHeaderViewSize.recommended(title: title, description: model.id.displayedDescription, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.id.displayedTitleDescription, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         else if let show = model.id.displayedShow {

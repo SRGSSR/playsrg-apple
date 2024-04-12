@@ -246,7 +246,7 @@ extension PageViewModel {
             }
         }
         
-        var displayedDescription: String? {
+        var displayedTitleDescription: String? {
             if case let .page(page) = self {
                 return page.summary
             }
