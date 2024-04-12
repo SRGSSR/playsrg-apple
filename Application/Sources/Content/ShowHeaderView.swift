@@ -37,7 +37,7 @@ struct ShowHeaderView: View {
     
     fileprivate static let verticalSpacing: CGFloat = 24
     
-    init(show: SRGShow?, horizontalPadding: CGFloat) {
+    init(_ show: SRGShow?, horizontalPadding: CGFloat) {
         _show = .constant(show)
         self.horizontalPadding = horizontalPadding
     }
