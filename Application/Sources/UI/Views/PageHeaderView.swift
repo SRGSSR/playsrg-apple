@@ -14,7 +14,7 @@ struct PageHeaderView: View {
     let description: String?
     let titleTextAlignment: TextAlignment
     
-    init(title: String?, description: String?, titleTextAlignment: TextAlignment = .leading) {
+    init(title: String?, description: String? = nil, titleTextAlignment: TextAlignment = .leading) {
         self.title = title
         self.description = description
         self.titleTextAlignment = titleTextAlignment
@@ -69,7 +69,7 @@ struct PageHeaderView: View {
 // MARK: Size
 
 enum PageHeaderViewSize {
-    static func recommended(title: String?, description: String?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func recommended(title: String?, description: String? = nil, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let title {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
             let size = PageHeaderView(title: title, description: description).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
