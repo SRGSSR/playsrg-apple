@@ -13,11 +13,13 @@ struct TitleHeaderView: View {
     let title: String?
     let description: String?
     let titleTextAlignment: TextAlignment
+    let topPadding: CGFloat
     
-    init(_ title: String?, description: String? = nil, titleTextAlignment: TextAlignment = .leading) {
+    init(_ title: String?, description: String? = nil, titleTextAlignment: TextAlignment = .leading, topPadding: CGFloat = 0) {
         self.title = title
         self.description = description
         self.titleTextAlignment = titleTextAlignment
+        self.topPadding = topPadding
     }
     
     var foregroundColor: Color = .white
@@ -62,6 +64,7 @@ struct TitleHeaderView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, constant(iOS: 16, tvOS: 0))
+        .padding(.top, topPadding)
         .padding(.bottom, constant(iOS: 12, tvOS: 80))
     }
 }
@@ -69,10 +72,10 @@ struct TitleHeaderView: View {
 // MARK: Size
 
 enum TitleHeaderViewSize {
-    static func recommended(for title: String?, description: String? = nil, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func recommended(for title: String?, description: String? = nil, topPadding: CGFloat = 0, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let title {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
-            let size = TitleHeaderView(title, description: description).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+            let size = TitleHeaderView(title, description: description, topPadding: topPadding).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
         }
         else {
