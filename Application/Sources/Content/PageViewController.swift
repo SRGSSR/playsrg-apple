@@ -26,6 +26,8 @@ final class PageViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyContentView: HostView<EmptyContentView>!
     private weak var topicGradientView: HostView<TopicGradientView>!
+    private weak var topicGradientViewTopAnchor: NSLayoutConstraint!
+    private weak var topicGradientViewHeightAnchor: NSLayoutConstraint!
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
@@ -132,11 +134,15 @@ final class PageViewController: UIViewController {
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
         let topAnchorConstant = constant(iOS: 0, tvOS: -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
+        let topicGradientViewTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: topAnchorConstant)
+        let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: Self.layoutTopicGradientViewHeight)
         NSLayoutConstraint.activate([
-            topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: topAnchorConstant),
+            topicGradientViewTopAnchor,
             topicGradientView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor),
-            topicGradientView.heightAnchor.constraint(equalToConstant: 572)
+            topicGradientViewHeightAnchor
         ])
+        self.topicGradientViewTopAnchor = topicGradientViewTopAnchor
+        self.topicGradientViewHeightAnchor = topicGradientViewHeightAnchor
         
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         backgroundView.addSubview(emptyContentView)
@@ -228,6 +234,7 @@ final class PageViewController: UIViewController {
             }
             .store(in: &cancellables)
 #endif
+        updateTopicGradientLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -251,6 +258,7 @@ final class PageViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         updateLayoutConfiguration()
+        updateTopicGradientLayout()
     }
     
     private func updateLayoutConfiguration() {
@@ -668,6 +676,8 @@ private extension PageViewController {
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
+    private static let layoutTopicGradientViewHeight: CGFloat = 572
+    private static let layoutTopicGradientViewCompactHeight: CGFloat = 314
     
     private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
         return required ? layoutVerticalMargin : 0
@@ -814,6 +824,20 @@ private extension PageViewController {
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, horizontalMargin: horizontalMargin(for: section))
             return layoutSection
         }, configuration: Self.layoutConfiguration(model: model, layoutWidth: 0, horizontalSizeClass: .unspecified, offsetX: 0))
+    }
+    
+    private func updateTopicGradientLayout() {
+#if os(iOS)
+        // Move the gradient view below the show image when displayed in compact mode
+        if case .show = model.id, traitCollection.horizontalSizeClass == .compact || !(UIApplication.shared.mainWindow?.isLandscape ?? false) {
+            topicGradientViewTopAnchor.constant = UIScreen.main.bounds.width / ShowHeaderView.imageAspectRatio
+            topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewCompactHeight
+        }
+        else {
+            topicGradientViewTopAnchor.constant = 0
+            topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
+        }
+#endif
     }
 }
 

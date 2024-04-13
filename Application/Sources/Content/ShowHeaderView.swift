@@ -33,6 +33,8 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
     
+    static let imageAspectRatio: CGFloat = 16 / 9
+    
     @StateObject private var model = ShowHeaderViewModel()
     
     fileprivate static let verticalSpacing: CGFloat = 24
@@ -75,7 +77,7 @@ struct ShowHeaderView: View {
                 if horizontalSizeClass == .compact || !isLandscape {
                     VStack(alignment: .leading, spacing: 0) {
                         ImageView(source: model.imageUrl)
-                            .aspectRatio(16 / 9, contentMode: .fit)
+                            .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
                             .padding(.top, padding)
@@ -88,7 +90,7 @@ struct ShowHeaderView: View {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
                         ImageView(source: model.imageUrl)
-                            .aspectRatio(16 / 9, contentMode: .fit)
+                            .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .frame(width: UIScreen.main.bounds.width * 0.35)
                     }
                     .padding(.top, padding)
