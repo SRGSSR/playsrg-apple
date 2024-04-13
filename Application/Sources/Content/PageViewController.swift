@@ -131,8 +131,9 @@ final class PageViewController: UIViewController {
         self.topicGradientView = topicGradientView
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
+        let topAnchorConstant = constant(iOS: 0, tvOS: -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
         NSLayoutConstraint.activate([
-            topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
+            topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: topAnchorConstant),
             topicGradientView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor),
             topicGradientView.heightAnchor.constraint(equalToConstant: 572)
         ])
@@ -178,7 +179,7 @@ final class PageViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(model.id.displayedTitle, description: model.id.displayedTitleDescription, titleTextAlignment: model.id.displayedTitleTextAlignment)
+            view.content = TitleHeaderView(model.id.displayedTitle, description: model.id.displayedTitleDescription, titleTextAlignment: model.id.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.id.displayedTitleNeedsTopPadding))
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
@@ -668,13 +669,18 @@ private extension PageViewController {
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
     
+    private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
+        return required ? layoutVerticalMargin : 0
+    }
+    
     private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         if let title = model.id.displayedTitle {
-            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.id.displayedTitleDescription, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.id.displayedTitleDescription,
+                                                                  topPadding: layoutDisplayedTitleTopPadding(model.id.displayedTitleNeedsTopPadding), layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         else if let show = model.id.displayedShow {
