@@ -1074,6 +1074,8 @@ platform :ios do
   end
 
   error do |lane|
+    UI.important 'An action has triggered an error. End of lane execution. ⚠️'
+
     update_github_deployment_error(lane)
 
     if cleaned_lane_condition(lane)
