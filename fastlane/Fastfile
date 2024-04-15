@@ -1794,6 +1794,33 @@ def srg_github_create_or_update_environment(environment)
   )
 end
 
+def get_github_deployments(lane)
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
+
+  result = srg_github_get_deployments(environment)
+  deployments = result[:json]
+  return unless deployments.is_a?(Array)
+
+  UI.message "#{deployments.count} Github deployments for #{environment}"
+  deployments
+end
+
+def srg_github_get_deployments(environment)
+  encoded_environment = environment.gsub('+', '%2B')
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'GET',
+    path: "#{github_api_path}/deployments?environment=#{encoded_environment}",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API get. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
+end
+
 def create_github_deployment(lane)
   ENV.delete('GITHUB_DEPLOYMENT_ID')
   environment = github_environment(lane)
@@ -1914,6 +1941,56 @@ def add_github_deployment_tag_success(lane)
   create_github_deployment(lane)
   update_github_deployment_success(lane)
   ENV.delete('NEW_PLAY_TAG')
+end
+
+def end_unfinished_github_deployments(lane)
+  deployments = get_github_deployments(lane)
+
+  return unless deployments
+
+  deployments.reverse.each do |deployment|
+    statuses = get_github_deployment_statuses(deployment['id'])
+    next unless statuses
+
+    last_status = statuses.first
+    next unless last_status.nil? || !['success', 'inactive', 'error'].include?(last_status['state'])
+
+    lane_name = lane.to_s
+    UI.message "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
+    end_unfinished_github_deployment(lane, deployment)
+  end
+end
+
+def end_unfinished_github_deployment(lane, deployment)
+  ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
+  ENV['BUILD_URL'] = deployment['log_url']
+
+  update_github_deployment_error(lane)
+
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  ENV.delete('BUILD_URL')
+end
+
+def get_github_deployment_statuses(deployment_id)
+  result = srg_github_get_deployment_statuses(deployment_id)
+  statuses = result[:json]
+  return unless statuses.is_a?(Array)
+
+  statuses
+end
+
+def srg_github_get_deployment_statuses(deployment_id)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'GET',
+    path: "#{github_api_path}/deployments/#{deployment_id}/statuses",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API statuses get. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
 end
 
 def update_github_deployment_in_progress(lane)
