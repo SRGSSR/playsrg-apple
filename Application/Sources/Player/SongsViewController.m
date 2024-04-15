@@ -263,7 +263,7 @@
 {
     SRGSong *song = self.items[indexPath.row];
     BOOL playing = (self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying);
-    [cell setSong:song playing:playing];
+    [cell setSong:song playing:playing withCellWidth:CGRectGetWidth(tableView.frame)];
     [cell updateProgressForDateInterval:self.letterboxController.play_dateInterval];
 }
 

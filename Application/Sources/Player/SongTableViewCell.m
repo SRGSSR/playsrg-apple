@@ -13,6 +13,9 @@
 @import SRGAppearance;
 
 static const CGFloat SongTableViewMargin = 42.f;
+static const CGFloat SongTableViewWaveformViewWidth = 34.f;
+static const CGFloat SongTableViewWaveformViewLeading = 8.f;
+static const CGFloat SongTableViewWaveformViewTrailing = 22.f;
 
 @interface SongTableViewCell ()
 
@@ -29,6 +32,10 @@ static const CGFloat SongTableViewMargin = 42.f;
 @property (nonatomic, weak) IBOutlet UIView *waveformView;
 
 @property (nonatomic) IBOutletCollection(NSLayoutConstraint) NSArray<NSLayoutConstraint *> *marginWidthConstraints;
+
+@property (nonatomic) IBOutlet NSLayoutConstraint *waveformViewWidthConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *waveformViewLeadingConstraint;
+@property (nonatomic) IBOutlet NSLayoutConstraint *waveformViewTrailingConstraint;
 
 @end
 
@@ -55,11 +62,16 @@ static const CGFloat SongTableViewMargin = 42.f;
 {
     // Add variable contribution depending on the number of lines required to properly display a song title
     // (maximum of 2 lines)
-    // Remark: We do not take the waveform into account. We namely do not want to change the height of the
-    //         cell whether or not the waveform is displayed. We therefore calculate the layout in the nominal
-    //         case, i.e. without waveform.
+    // Remark: We namely do not want to change the height of the cell whether or not the waveform is displayed. We
+    //         therefore calculate the layout in the nominal case, i.e. without waveform.
+    return [self heightForSong:song withCellWidth:width waveformDisplayed:NO];
+}
+
++ (CGFloat)heightForSong:(SRGSong *)song withCellWidth:(CGFloat)width waveformDisplayed:(BOOL)waveformDisplayed
+{
     UIFont *font = [self titleLabelFont];
-    CGFloat textWidth = fmaxf(width - 2 * SongTableViewMargin, 0.f);
+    CGFloat textMargins = waveformDisplayed ? SongTableViewMargin + SongTableViewWaveformViewLeading + SongTableViewWaveformViewWidth + SongTableViewWaveformViewTrailing : 2 * SongTableViewMargin;
+    CGFloat textWidth = fmaxf(width - textMargins, 0.f);
     CGRect boundingRect = [song.title boundingRectWithSize:CGSizeMake(textWidth, CGFLOAT_MAX)
                                                    options:NSStringDrawingUsesLineFragmentOrigin
                                                 attributes:@{ NSFontAttributeName : font }
@@ -71,6 +83,11 @@ static const CGFloat SongTableViewMargin = 42.f;
     
     // Time and artist fields are mandatory, a contribution is therefore added for each
     return [self timeLabelFont].lineHeight + [self artistLabelFont].lineHeight + titleHeight;
+}
+
++ (NSInteger)titleNumberOfLinesForSong:(SRGSong *)song withCellWidth:(CGFloat)width
+{
+    return [self heightForSong:song withCellWidth:width waveformDisplayed:NO] == [self heightForSong:song withCellWidth:width waveformDisplayed:YES] ? 2 : 1;
 }
 
 #pragma mark Overrides
@@ -85,6 +102,10 @@ static const CGFloat SongTableViewMargin = 42.f;
     [self.marginWidthConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
         constraint.constant = SongTableViewMargin;
     }];
+    
+    self.waveformViewWidthConstraint.constant = SongTableViewWaveformViewWidth;
+    self.waveformViewLeadingConstraint.constant = SongTableViewWaveformViewLeading;
+    self.waveformViewTrailingConstraint.constant = SongTableViewWaveformViewTrailing;
     
     self.waveformView.hidden = YES;
     self.rightMarginView.hidden = NO;
@@ -107,7 +128,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 #pragma mark Attached data
 
-- (void)setSong:(SRGSong *)song playing:(BOOL)playing
+- (void)setSong:(SRGSong *)song playing:(BOOL)playing withCellWidth:(CGFloat)width
 {
     self.song = song;
     self.playing = playing;
@@ -115,6 +136,7 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.timeLabel.text = [NSDateFormatter.play_time stringFromDate:song.date];
     self.timeLabel.font = [SongTableViewCell timeLabelFont];
     
+    self.titleLabel.numberOfLines = [SongTableViewCell titleNumberOfLinesForSong:song withCellWidth:width];
     self.titleLabel.text = song.title;
     self.titleLabel.font = [SongTableViewCell titleLabelFont];
     
