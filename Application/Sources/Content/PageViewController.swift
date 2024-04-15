@@ -34,7 +34,7 @@ final class PageViewController: UIViewController {
     private weak var googleCastButton: GoogleCastFloatingButton?
     
     private var isNavigationBarHidden: Bool {
-        return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+        return model.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
     }
     
     private var refreshTriggered = false
@@ -79,8 +79,8 @@ final class PageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var id: PageViewModel.Id {
-        return model.id
+    var displayedShow: SRGShow? {
+        return model.displayedShow
     }
     
     @objc var radioChannel: RadioChannel? {
@@ -171,8 +171,8 @@ final class PageViewController: UIViewController {
         super.viewDidLoad()
         
 #if os(iOS)
-        navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
-        headerWithTitleVisible = model.id.isHeaderWithTitle
+        navigationItem.largeTitleDisplayMode = model.isLargeTitleDisplayMode ? .always : .never
+        headerWithTitleVisible = model.isHeaderWithTitle
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
@@ -185,12 +185,12 @@ final class PageViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(model.id.displayedTitle, description: model.id.displayedTitleDescription, titleTextAlignment: model.id.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.id.displayedTitleNeedsTopPadding))
+            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding))
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = ShowHeaderView(model.id.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
+            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -216,6 +216,15 @@ final class PageViewController: UIViewController {
             .sink { [weak self] state in
                 self?.trackPageView(state: state)
                 self?.reloadData(for: state)
+            }
+            .store(in: &cancellables)
+        
+        model.$displayedShow
+            .dropFirst()
+            .sink { [weak self] _ in
+                if let self, self.isViewLoaded {
+                    self.updateLayoutConfiguration()
+                }
             }
             .store(in: &cancellables)
         
@@ -285,7 +294,7 @@ final class PageViewController: UIViewController {
             emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic), insets: emptyViewEdgeInsets()) : nil
         }
         
-        if let topic = model.id.displayedGradientTopic, let radialOpacity = model.id.displayedGradientTopicRadialOpacity {
+        if let topic = model.displayedGradientTopic, let radialOpacity = model.displayedGradientTopicRadialOpacity {
             self.topicGradientView.content = TopicGradientView(topic, radialOpacity: radialOpacity)
         }
         else {
@@ -436,7 +445,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = (isNavigationBarHidden || model.id.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
+        let top = (isNavigationBarHidden || model.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif
@@ -688,12 +697,12 @@ private extension PageViewController {
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
-        if let title = model.id.displayedTitle {
-            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.id.displayedTitleDescription,
-                                                                  topPadding: layoutDisplayedTitleTopPadding(model.id.displayedTitleNeedsTopPadding), layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+        if let title = model.displayedTitle {
+            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.displayedTitleDescription,
+                                                                  topPadding: layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding), layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
-        else if let show = model.id.displayedShow {
+        else if let show = model.displayedShow {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
         }

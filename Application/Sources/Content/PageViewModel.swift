@@ -15,6 +15,8 @@ final class PageViewModel: Identifiable, ObservableObject {
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
     
+    @Published private(set) var displayedShow: SRGShow?
+    
     private let trigger = Trigger()
     
     init(id: Id) {
@@ -59,6 +61,17 @@ final class PageViewModel: Identifiable, ObservableObject {
         .removeDuplicates()
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceMessage)
+        
+        if case let .show(show) = id {
+            self.displayedShow = show
+            
+            // The show page needs `topics` which could be available only in the show request.
+            SRGDataProvider.current!.show(withUrn: show.urn)
+                .map { $0 }
+                .replaceError(with: show)
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$displayedShow)
+        }
     }
     
     func loadMore() {
@@ -154,31 +167,6 @@ extension PageViewModel {
         case page(_ page: SRGContentPage)
         
 #if os(iOS)
-        var isHeaderWithTitle: Bool {
-            return displayedTitle != nil || displayedShow != nil
-        }
-        
-        var isLargeTitleDisplayMode: Bool {
-            if isHeaderWithTitle {
-                return false
-            }
-            else {
-                // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
-                // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
-                // be incorrect at the top.
-                return !isNavigationBarHidden
-            }
-        }
-        
-        var isNavigationBarHidden: Bool {
-            switch self {
-            case .video:
-                return true
-            default:
-                return false
-            }
-        }
-        
         var sharingItem: SharingItem? {
             switch self {
             case let .show(show):
@@ -223,76 +211,6 @@ extension PageViewModel {
                 return show.title
             case let .page(page):
                 return page.title
-            }
-        }
-        
-        var displayedShow: SRGShow? {
-            if case let .show(show) = self {
-                return show
-            }
-            else {
-                return nil
-            }
-        }
-        
-        var displayedTitle: String? {
-            switch self {
-            case let .page(page):
-                return page.title
-            case let .topic(topic):
-                return topic.title
-            default:
-                return nil
-            }
-        }
-        
-        var displayedTitleDescription: String? {
-            if case let .page(page) = self {
-                return page.summary
-            }
-            else {
-                return nil
-            }
-        }
-        
-        var displayedTitleTextAlignment: TextAlignment {
-            if case .topic = self {
-                return constant(iOS: .leading, tvOS: .center)
-            }
-            else {
-                return .leading
-            }
-        }
-        
-        var displayedTitleNeedsTopPadding: Bool {
-            if case let .topic(topic) = self, ApplicationConfiguration.shared.topicColors(for: topic) != nil {
-                return constant(iOS: true, tvOS: false)
-            }
-            else {
-                return false
-            }
-        }
-        
-        var displayedGradientTopic: SRGTopic? {
-            switch self {
-            case let .topic(topic):
-                return topic
-            case let .show(show):
-                guard let topic = show.topics?.first else { return nil }
-                return topic
-            default:
-                return nil
-            }
-        }
-        
-        var displayedGradientTopicRadialOpacity: Double? {
-            switch self {
-            case .topic:
-                return 0.7
-            case .show:
-                return 0.2
-            default:
-                return nil
             }
         }
         
@@ -476,6 +394,98 @@ extension PageViewModel {
         case reload
         case reloadSection(Section)
         case loadMore(section: Section)
+    }
+}
+
+// MARK: Header and navigation
+
+extension PageViewModel {
+#if os(iOS)
+    var isHeaderWithTitle: Bool {
+        return displayedTitle != nil || displayedShow != nil
+    }
+    
+    var isLargeTitleDisplayMode: Bool {
+        if isHeaderWithTitle {
+            return false
+        }
+        else {
+            // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
+            // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
+            // be incorrect at the top.
+            return !isNavigationBarHidden
+        }
+    }
+    
+    var isNavigationBarHidden: Bool {
+        switch id {
+        case .video:
+            return true
+        default:
+            return false
+        }
+    }
+#endif
+    
+    var displayedTitle: String? {
+        switch id {
+        case let .page(page):
+            return page.title
+        case let .topic(topic):
+            return topic.title
+        default:
+            return nil
+        }
+    }
+    
+    var displayedGradientTopic: SRGTopic? {
+        switch id {
+        case let .topic(topic):
+            return topic
+        case .show:
+            guard let topic = displayedShow?.topics?.first else { return nil }
+            return topic
+        default:
+            return nil
+        }
+    }
+    
+    var displayedTitleDescription: String? {
+        if case let .page(page) = id {
+            return page.summary
+        }
+        else {
+            return nil
+        }
+    }
+    
+    var displayedTitleTextAlignment: TextAlignment {
+        if case .topic = id {
+            return constant(iOS: .leading, tvOS: .center)
+        }
+        else {
+            return .leading
+        }
+    }
+    
+    var displayedTitleNeedsTopPadding: Bool {
+        if case let .topic(topic) = id, ApplicationConfiguration.shared.topicColors(for: topic) != nil {
+            return constant(iOS: true, tvOS: false)
+        }
+        else {
+            return false
+        }
+    }
+    
+    var displayedGradientTopicRadialOpacity: Double? {
+        switch id {
+        case .topic:
+            return 0.7
+        case .show:
+            return 0.2
+        default:
+            return nil
+        }
     }
 }
 
