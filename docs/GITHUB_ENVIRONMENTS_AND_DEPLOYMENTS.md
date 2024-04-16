@@ -37,7 +37,12 @@ During a fastlane lane execution:
 
 If the fastlane execution finished with an error, the Github deployment state should be set to `error`. But if the fastlane execution is killed with an exit signal, no state is applied and the Github deployment could stay in `in_progress` state.
 
-An independant fastlane lane can help to **stop all unfinished** deployments for a lane which have a Github environement, applying the `error` state.
+An independant fastlane lane can help to **stop all unfinished** deployments for a lane which have a Github environement. It's applying the `error` state.
 
 - `fastlane ios stopUnfinishedGithubDeployments lane:[LANE_NAME]`
+
+### Inactive state
+
+- [By default](https://docs.github.com/en/rest/deployments/deployments?apiVersion=2022-11-28#inactive-deployments), the non-transient, non-production environment deployments created by fastlane scripts have `auto_inactive` = `true`. So that a new `success` deployment sets all previous `success` deployments to `inactive` state.
+- When closing a PR, a [Github action](https://github.com/SRGSSR/playsrg-apple/actions) (pr-closure.yml) is updating state to `inactive` to lastest `success` deployment for nighty branch environnements.
 
