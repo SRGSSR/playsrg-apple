@@ -266,7 +266,7 @@ platform :ios do
     UI.message 'Github environment is deducted from the lane name and the current git branch name.' unless lane_name
     lane_name ||= prompt(text: 'lane: ')
 
-    end_unfinished_github_deployments(lane_name)
+    stop_unfinished_github_deployments(lane_name)
   end
 
   # App Store reviews and releases
@@ -1964,7 +1964,7 @@ def add_github_deployment_tag_success(lane)
   ENV.delete('NEW_PLAY_TAG')
 end
 
-def end_unfinished_github_deployments(lane)
+def stop_unfinished_github_deployments(lane)
   deployments = get_github_deployments(lane)
 
   return unless deployments
@@ -1978,11 +1978,11 @@ def end_unfinished_github_deployments(lane)
 
     lane_name = lane.to_s
     UI.message "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
-    end_unfinished_github_deployment(lane, deployment)
+    stop_unfinished_github_deployment(lane, deployment)
   end
 end
 
-def end_unfinished_github_deployment(lane, deployment)
+def stop_unfinished_github_deployment(lane, deployment)
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
   ENV['BUILD_URL'] = deployment['log_url']
 
