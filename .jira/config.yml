@@ -3,11 +3,15 @@ deployments:
     testing:
       - "playsrg-ios-nightly*"
       - "playsrg-tvos-nightly*"
+      - "playsrg-ios-beta+*"
+      - "playsrg-tvos-beta+*"
+      - "playsrg-ios-testflight+*"
+      - "playsrg-tvos-testflight+*"
     staging:
-      - "playsrg-ios-beta*"
-      - "playsrg-tvos-beta*"
-      - "playsrg-ios-testflight*"
-      - "playsrg-tvos-testflight*"
+      - "playsrg-ios-beta"
+      - "playsrg-tvos-beta"
+      - "playsrg-ios-testflight"
+      - "playsrg-tvos-testflight"
     production:
       - "playsrg-ios"
       - "playsrg-tvos"

@@ -15,15 +15,34 @@ When building binaries with the [fastlane lanes](RELEASE_CHECKLIST.md#fastlane-o
 
 ## Deployments
 
+### Creation
+
 When one of the listed fastlane lane above is executed, a new deployment is created:
 
 - The reference (`ref`) is the git branch name, only if the deployment `sha` is same as the last commit hash on the branch, to be sure that it's link to the correct commit. If it's not the case, the deployment is deleted and a new deployment is created with the last commit hash as the reference.
 - No `auto_merge` option.
 - No `required_contexts` option.
 
+
+### Update state
+
 During a fastlane lane execution:
 
-- the script can update the current Github deployment state to `in_progess`, `success` or `error`.
+- the script can update the current Github deployment state to `in_progress`, `success` or `error`.
 -  if the `BUILD_URL` environment variable is set, it's added to Github deployment information as `log_url`.
 - if the deployment state switched to `success`, an help page url is added to Github deployment information as `environment_url`. The help page url for builds is like:
   - `https://srgssr.github.io/playsrg-apple/deployments/build.html?configuration=[nightly|beta|testflight|appstore]&platform=[ios|tvos]&version=[version_friendly_name]`.
+
+### Unfinished issue
+
+If the fastlane execution finished with an error, the Github deployment state should be set to `error`. But if the fastlane execution is killed with an exit signal, no state is applied and the Github deployment could stay in `in_progress` state.
+
+An independant fastlane lane can help to **stop all unfinished** deployments for a lane which have a Github environement. It's applying the `error` state.
+
+- `fastlane ios stopUnfinishedGithubDeployments lane:[LANE_NAME]`
+
+### Inactive state
+
+- [By default](https://docs.github.com/en/rest/deployments/deployments?apiVersion=2022-11-28#inactive-deployments), the non-transient, non-production environment deployments created by fastlane scripts have `auto_inactive` = `true`. So that a new `success` deployment sets all previous `success` deployments to `inactive` state.
+- When closing a PR, a [Github action](https://github.com/SRGSSR/playsrg-apple/actions) (pr-closure.yml) is updating state to `inactive` to lastest `success` deployment for nighty branch environnements.
+

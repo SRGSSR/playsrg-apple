@@ -213,21 +213,6 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
-  lane :iOSPrepareAppStoreReleases do |options|
-    tag_version = options[:tag_version]
-    submit_for_review = options[:submit_for_review]
-
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-    options += " submit_for_review:#{submit_for_review}" if submit_for_review
-
-    business_units.map do |business_unit|
-      business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{options}"
-    end
-  end
-
   desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributePrivateAppStoreBuilds (or tvOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.'
   lane :tvOSAppStoreBuilds do |options|
     public_testflight_distribution = options[:public_testflight_distribution] || false
@@ -269,6 +254,35 @@ platform :ios do
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
       sh "bundle exec fastlane ios tvOS#{business_unit}DistributePublicAppStoreBuild#{options}"
+    end
+  end
+
+  # Github deployments
+
+  desc 'Stop unfinished Github deployments for a lane on the current git branch. Recommended `lane` parameter.'
+  lane :stopUnfinishedGithubDeployments do |options|
+    lane_name = options[:lane]
+
+    UI.message 'Github environment is deducted from the lane name and the current git branch name.' unless lane_name
+    lane_name ||= prompt(text: 'lane: ')
+
+    stop_unfinished_github_deployments(lane_name)
+  end
+
+  # App Store reviews and releases
+
+  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
+  lane :iOSPrepareAppStoreReleases do |options|
+    tag_version = options[:tag_version]
+    submit_for_review = options[:submit_for_review]
+
+    options = ''
+    options += " tag_version:#{tag_version}" if tag_version
+    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{options}"
     end
   end
 
@@ -1074,6 +1088,8 @@ platform :ios do
   end
 
   error do |lane|
+    UI.important 'An action has triggered an error. End of lane execution. ⚠️'
+
     update_github_deployment_error(lane)
 
     if cleaned_lane_condition(lane)
@@ -1148,7 +1164,14 @@ def what_s_new_condition(lane)
 end
 
 def cleaned_lane_condition(lane)
-  excluded_lanes = ['distribute', 'screenshots', 'appstorerelease', 'status', 'tester']
+  excluded_lanes = [
+    'distribute',
+    'screenshots',
+    'appstorerelease',
+    'status',
+    'tester',
+    'githubdeployments'
+  ]
   (lane.to_s != 'devLane') &&
     excluded_lanes.all? { |i| !lane.to_s.downcase.include? i }
 end
@@ -1792,6 +1815,33 @@ def srg_github_create_or_update_environment(environment)
   )
 end
 
+def get_github_deployments(lane)
+  environment = github_environment(lane)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
+
+  result = srg_github_get_deployments(environment)
+  deployments = result[:json]
+  return unless deployments.is_a?(Array)
+
+  UI.message "#{deployments.count} Github deployments for #{environment}"
+  deployments
+end
+
+def srg_github_get_deployments(environment)
+  encoded_environment = environment.gsub('+', '%2B')
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'GET',
+    path: "#{github_api_path}/deployments?environment=#{encoded_environment}",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API get. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
+end
+
 def create_github_deployment(lane)
   ENV.delete('GITHUB_DEPLOYMENT_ID')
   environment = github_environment(lane)
@@ -1912,6 +1962,56 @@ def add_github_deployment_tag_success(lane)
   create_github_deployment(lane)
   update_github_deployment_success(lane)
   ENV.delete('NEW_PLAY_TAG')
+end
+
+def stop_unfinished_github_deployments(lane)
+  deployments = get_github_deployments(lane)
+
+  return unless deployments
+
+  deployments.reverse.each do |deployment|
+    statuses = get_github_deployment_statuses(deployment['id'])
+    next unless statuses
+
+    last_status = statuses.first
+    next unless last_status.nil? || !['success', 'inactive', 'error'].include?(last_status['state'])
+
+    lane_name = lane.to_s
+    UI.message "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
+    stop_unfinished_github_deployment(lane, deployment, last_status)
+  end
+end
+
+def stop_unfinished_github_deployment(lane, deployment, last_status)
+  ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
+  ENV['BUILD_URL'] = last_status['log_url'] if last_status
+
+  update_github_deployment_error(lane)
+
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  ENV.delete('BUILD_URL')
+end
+
+def get_github_deployment_statuses(deployment_id)
+  result = srg_github_get_deployment_statuses(deployment_id)
+  statuses = result[:json]
+  return unless statuses.is_a?(Array)
+
+  statuses
+end
+
+def srg_github_get_deployment_statuses(deployment_id)
+  github_api(
+    api_token: ENV.fetch('GITHUB_TOKEN', nil),
+    http_method: 'GET',
+    path: "#{github_api_path}/deployments/#{deployment_id}/statuses",
+    error_handlers: {
+      '*' => proc do |result|
+        UI.important 'Something went wrong with Github token and deployments API statuses get. ⚠️'
+        UI.important result.to_s
+      end
+    }
+  )
 end
 
 def update_github_deployment_in_progress(lane)
