@@ -213,21 +213,6 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
-  lane :iOSPrepareAppStoreReleases do |options|
-    tag_version = options[:tag_version]
-    submit_for_review = options[:submit_for_review]
-
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-    options += " submit_for_review:#{submit_for_review}" if submit_for_review
-
-    business_units.map do |business_unit|
-      business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{options}"
-    end
-  end
-
   desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributePrivateAppStoreBuilds (or tvOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.'
   lane :tvOSAppStoreBuilds do |options|
     public_testflight_distribution = options[:public_testflight_distribution] || false
@@ -269,6 +254,23 @@ platform :ios do
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
       sh "bundle exec fastlane ios tvOS#{business_unit}DistributePublicAppStoreBuild#{options}"
+    end
+  end
+
+  # App Store reviews and releases
+
+  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
+  lane :iOSPrepareAppStoreReleases do |options|
+    tag_version = options[:tag_version]
+    submit_for_review = options[:submit_for_review]
+
+    options = ''
+    options += " tag_version:#{tag_version}" if tag_version
+    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{options}"
     end
   end
 

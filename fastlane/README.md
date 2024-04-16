@@ -111,14 +111,6 @@ Distributes to private groups an iOS App Store build on App Store Connect with t
 
 Distributes to public groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
 
-### ios iOSPrepareAppStoreReleases
-
-```sh
-[bundle exec] fastlane ios iOSPrepareAppStoreReleases
-```
-
-Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.
-
 ### ios tvOSAppStoreBuilds
 
 ```sh
@@ -150,6 +142,14 @@ Distributes to private groups a tvOS App Store build on App Store Connect with t
 ```
 
 Distributes to public groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
+
+### ios iOSPrepareAppStoreReleases
+
+```sh
+[bundle exec] fastlane ios iOSPrepareAppStoreReleases
+```
+
+Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.
 
 ### ios tvOSPrepareAppStoreReleases
 
