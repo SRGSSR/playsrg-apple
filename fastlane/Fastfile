@@ -1898,7 +1898,8 @@ def srg_github_create_deployment_body(environment, ref)
     auto_merge: false,
     required_contexts: [],
     environment:,
-    description: "Start #{environment} deployment"
+    task: 'Build and distribute',
+    description: "Build and distribute for #{environment} environment."
   }
 end
 
