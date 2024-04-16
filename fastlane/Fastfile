@@ -257,6 +257,18 @@ platform :ios do
     end
   end
 
+  # Github deployments
+
+  desc 'Stop unfinished Github deployments for a lane on the current git branch. Recommended `lane` parameter.'
+  lane :stopUnfinishedGithubDeployments do |options|
+    lane_name = options[:lane]
+
+    UI.message 'Github environment is deducted from the lane name and the current git branch name.' unless lane_name
+    lane_name ||= prompt(text: 'lane: ')
+
+    end_unfinished_github_deployments(lane_name)
+  end
+
   # App Store reviews and releases
 
   desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
@@ -1152,7 +1164,14 @@ def what_s_new_condition(lane)
 end
 
 def cleaned_lane_condition(lane)
-  excluded_lanes = ['distribute', 'screenshots', 'appstorerelease', 'status', 'tester']
+  excluded_lanes = [
+    'distribute',
+    'screenshots',
+    'appstorerelease',
+    'status',
+    'tester',
+    'githubdeployments'
+  ]
   (lane.to_s != 'devLane') &&
     excluded_lanes.all? { |i| !lane.to_s.downcase.include? i }
 end

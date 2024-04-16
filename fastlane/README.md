@@ -143,6 +143,14 @@ Distributes to private groups a tvOS App Store build on App Store Connect with t
 
 Distributes to public groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
 
+### ios stopUnfinishedGithubDeployments
+
+```sh
+[bundle exec] fastlane ios stopUnfinishedGithubDeployments
+```
+
+Stop unfinished Github deployments for a lane on the current git branch. Recommended `lane` parameter.
+
 ### ios iOSPrepareAppStoreReleases
 
 ```sh
