@@ -1978,13 +1978,13 @@ def stop_unfinished_github_deployments(lane)
 
     lane_name = lane.to_s
     UI.message "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
-    stop_unfinished_github_deployment(lane, deployment)
+    stop_unfinished_github_deployment(lane, deployment, last_status)
   end
 end
 
-def stop_unfinished_github_deployment(lane, deployment)
+def stop_unfinished_github_deployment(lane, deployment, last_status)
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
-  ENV['BUILD_URL'] = deployment['log_url']
+  ENV['BUILD_URL'] = last_status['log_url'] if last_status
 
   update_github_deployment_error(lane)
 
