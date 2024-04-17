@@ -23,7 +23,7 @@ platform :ios do
     tag_version = options[:tag_version] || tag_version(platform)
     branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, branch_name)
+    notify_version_to_ci(platform, tag_version, branch_name) if notify_ci_condition(lane)
 
     create_or_update_github_environment(lane)
     create_github_deployment(lane)
@@ -1187,6 +1187,10 @@ end
 
 def derived_data_path
   'build/DerivedData'
+end
+
+def notify_ci_condition(lane)
+  !lane.to_s.downcase.include?('githubdeployments')
 end
 
 def appcenter_ios_nightly_appcenter_names
