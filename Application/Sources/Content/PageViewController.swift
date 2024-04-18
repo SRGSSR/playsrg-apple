@@ -224,6 +224,7 @@ final class PageViewController: UIViewController {
             .sink { [weak self] _ in
                 if let self, isViewLoaded {
                     updateLayoutConfiguration()
+                    updateTopicGradientLayout()
                 }
             }
             .store(in: &cancellables)
@@ -243,13 +244,13 @@ final class PageViewController: UIViewController {
             }
             .store(in: &cancellables)
 #endif
-        updateTopicGradientLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         updateLayoutConfiguration()
+        updateTopicGradientLayout()
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
