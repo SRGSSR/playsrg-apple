@@ -295,8 +295,8 @@ final class PageViewController: UIViewController {
             emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic), insets: emptyViewEdgeInsets()) : nil
         }
         
-        if let topic = model.displayedGradientTopic, let radialOpacity = model.displayedGradientTopicRadialOpacity {
-            self.topicGradientView.content = TopicGradientView(topic, radialOpacity: radialOpacity)
+        if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
+            self.topicGradientView.content = TopicGradientView(topic, style: style)
         }
         else {
             self.topicGradientView.content = nil

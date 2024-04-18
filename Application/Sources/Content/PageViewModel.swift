@@ -468,12 +468,12 @@ extension PageViewModel {
         }
     }
     
-    var displayedGradientTopicRadialOpacity: Double? {
+    var displayedGradientTopicStyle: TopicGradientView.Style? {
         switch id {
         case .topic:
-            return 0.7
+            return .topicPage
         case .show:
-            return 0.2
+            return .showPage
         default:
             return nil
         }

@@ -10,12 +10,17 @@ import SwiftUI
 
 /// Behavior: h-exp, v-exp
 struct TopicGradientView: View {
-    let topic: SRGTopic
-    let radialOpacity: Double
+    enum Style {
+    case topicPage
+    case showPage
+    }
     
-    init(_ topic: SRGTopic, radialOpacity: Double) {
+    let topic: SRGTopic
+    let style: Style
+    
+    init(_ topic: SRGTopic, style: Style) {
         self.topic = topic
-        self.radialOpacity = radialOpacity
+        self.style = style
     }
     
     var body: some View {
@@ -23,7 +28,7 @@ struct TopicGradientView: View {
             ZStack {
                 RadialColorGradient(
                     topicColors: topicColors,
-                    opacity: radialOpacity
+                    opacity: opacity
                 )
                 LinearGreyGradient()
             }
@@ -62,6 +67,15 @@ struct TopicGradientView: View {
             )
         }
     }
+    
+    private var opacity: Double {
+        switch style {
+        case .topicPage:
+            return 0.7
+        case .showPage:
+            return 0.2
+        }
+    }
 }
 
 // MARK: Preview
@@ -82,26 +96,26 @@ struct TopicGradientView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             PreviewView {
-                TopicGradientView(Mock.topic(), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(), style: .topicPage)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(), radialOpacity: 0.2)
+                TopicGradientView(Mock.topic(), style: .showPage)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(.overflow), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(.overflow), style: .topicPage)
             }
         }
         .previewLayout(.fixed(width: 400, height: 572))
         
         Group {
             PreviewView {
-                TopicGradientView(Mock.topic(), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(), style: .topicPage)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(), radialOpacity: 0.2)
+                TopicGradientView(Mock.topic(), style: .showPage)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(.overflow), radialOpacity: 0.7)
+                TopicGradientView(Mock.topic(.overflow), style: .topicPage)
             }
         }
         .previewLayout(.fixed(width: 1080, height: 572))
