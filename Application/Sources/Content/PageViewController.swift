@@ -687,7 +687,6 @@ private extension PageViewController {
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
     private static let layoutTopicGradientViewHeight: CGFloat = 572
-    private static let layoutTopicGradientViewCompactHeight: CGFloat = 314
     
     private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
         return required ? layoutVerticalMargin : 0
@@ -837,13 +836,24 @@ private extension PageViewController {
     
     private func updateTopicGradientLayout() {
 #if os(iOS)
-        // Move the gradient view below the show image when displayed in compact mode
-        if case .show = model.id, traitCollection.horizontalSizeClass == .compact || !(UIApplication.shared.mainWindow?.isLandscape ?? false) {
-            topicGradientViewTopAnchor.constant = UIScreen.main.bounds.width / ShowHeaderView.imageAspectRatio
-            topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewCompactHeight
+        let topScreenOffset = -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) - (self.navigationController?.navigationBar.frame.height ?? 0)
+        if case .show = model.id {
+            let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
+            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+            let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
+            
+            if traitCollection.horizontalSizeClass == .compact || !(UIApplication.shared.mainWindow?.isLandscape ?? false) {
+                let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
+                topicGradientViewTopAnchor.constant = showImageOffset
+                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - showImageOffset + mediaCellHeight
+            }
+            else {
+                topicGradientViewTopAnchor.constant = topScreenOffset
+                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - topScreenOffset + mediaCellHeight
+            }
         }
         else {
-            topicGradientViewTopAnchor.constant = -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) - (self.navigationController?.navigationBar.frame.height ?? 0)
+            topicGradientViewTopAnchor.constant = topScreenOffset
             topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
         }
 #endif

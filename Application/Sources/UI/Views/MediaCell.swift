@@ -265,8 +265,12 @@ final class MediaCellSize: NSObject {
     }
     
     static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact) -> NSCollectionLayoutSize {
-        let height = horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
+        let height = height(horizontalSizeClass: horizontalSizeClass)
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
+    }
+    
+    static func height(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
+        return horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
     }
 }
 
