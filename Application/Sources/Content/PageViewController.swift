@@ -222,8 +222,8 @@ final class PageViewController: UIViewController {
         model.$displayedShow
             .dropFirst()
             .sink { [weak self] _ in
-                if let self, self.isViewLoaded {
-                    self.updateLayoutConfiguration()
+                if let self, isViewLoaded {
+                    updateLayoutConfiguration()
                 }
             }
             .store(in: &cancellables)
