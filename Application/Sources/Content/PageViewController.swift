@@ -114,6 +114,9 @@ final class PageViewController: UIViewController {
         if #available(iOS 17.0, *) {
             collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: CollectionView, _) in
                 collectionView.collectionViewLayout.invalidateLayout()
+                
+                self.updateLayoutConfiguration()
+                self.updateTopicGradientLayout()
             }
         }
 #endif
