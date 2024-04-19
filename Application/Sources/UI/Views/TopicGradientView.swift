@@ -71,7 +71,7 @@ struct TopicGradientView: View {
     private var opacity: Double {
         switch style {
         case .topicPage:
-            return 0.7
+            return 0.1 /* Official 0.7 needs work on font colors for contrast */
         case .showPage:
             return 0.2
         }
