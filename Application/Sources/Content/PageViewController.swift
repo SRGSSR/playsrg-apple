@@ -133,9 +133,8 @@ final class PageViewController: UIViewController {
         self.topicGradientView = topicGradientView
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
-        let topAnchorConstant = constant(iOS: 0, tvOS: -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
-        let topicGradientViewTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: topAnchorConstant)
-        let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: Self.layoutTopicGradientViewHeight)
+        let topicGradientViewTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
+        let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: 0 /* set in updateTopicGradientLayout() */)
         NSLayoutConstraint.activate([
             topicGradientViewTopAnchor,
             topicGradientView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor),
@@ -835,13 +834,14 @@ private extension PageViewController {
     }
     
     private func updateTopicGradientLayout() {
-#if os(iOS)
         let topScreenOffset = -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) - (self.navigationController?.navigationBar.frame.height ?? 0)
+        
         if case .show = model.id {
             let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
             let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
             let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
             
+            // Move the gradient view below the show image when displayed in compact horizontal size class
             if traitCollection.horizontalSizeClass == .compact || !(UIApplication.shared.mainWindow?.isLandscape ?? false) {
                 let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
                 topicGradientViewTopAnchor.constant = showImageOffset
@@ -856,7 +856,6 @@ private extension PageViewController {
             topicGradientViewTopAnchor.constant = topScreenOffset
             topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
         }
-#endif
     }
 }
 
