@@ -438,18 +438,6 @@ extension PageViewModel {
         }
     }
     
-    var displayedGradientTopic: SRGTopic? {
-        switch id {
-        case let .topic(topic):
-            return topic
-        case .show:
-            guard let topic = displayedShow?.topics?.first else { return nil }
-            return topic
-        default:
-            return nil
-        }
-    }
-    
     var displayedTitleDescription: String? {
         if case let .page(page) = id {
             return page.summary
@@ -465,6 +453,27 @@ extension PageViewModel {
         }
         else {
             return .leading
+        }
+    }
+    
+    var displayedTitleForegroundColor: Color {
+        if case .page = id {
+            return .white
+        }
+        else {
+            return .srgGrayC7
+        }
+    }
+    
+    var displayedGradientTopic: SRGTopic? {
+        switch id {
+        case let .topic(topic):
+            return topic
+        case .show:
+            guard let topic = displayedShow?.topics?.first else { return nil }
+            return topic
+        default:
+            return nil
         }
     }
     
