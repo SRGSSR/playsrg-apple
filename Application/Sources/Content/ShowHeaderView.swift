@@ -135,6 +135,7 @@ struct ShowHeaderView: View {
                                         label: model.favoriteLabel,
                                         accessibilityLabel: model.favoriteAccessibilityLabel,
                                         action: favoriteAction)
+                        .foregroundColor(.white)
                         .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
 #if os(iOS)
                         if model.isSubscriptionPossible {
@@ -142,6 +143,7 @@ struct ShowHeaderView: View {
                                             label: model.subscriptionLabel,
                                             accessibilityLabel: model.subscriptionAccessibilityLabel,
                                             action: subscriptionAction)
+                            .foregroundColor(.white)
                         }
 #endif
                     }
@@ -151,12 +153,14 @@ struct ShowHeaderView: View {
                                      labelMinimumScaleFactor: 1,
                                      accessibilityLabel: model.favoriteAccessibilityLabel,
                                      action: favoriteAction)
+                        .foregroundColor(.white)
 #if os(iOS)
                         if model.isSubscriptionPossible {
                             SimpleButton(icon: model.subscriptionIcon,
                                          label: model.subscriptionLabel,
                                          accessibilityLabel: model.subscriptionAccessibilityLabel,
                                          action: subscriptionAction)
+                            .foregroundColor(.white)
                         }
 #endif
                     }

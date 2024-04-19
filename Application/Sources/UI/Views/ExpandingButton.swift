@@ -17,6 +17,9 @@ struct ExpandingButton: View {
     private let accessibilityHint: String?
     private let action: () -> Void
     
+    var foregroundColor: Color = .srgGrayC7
+    var foregroundFocusedColor: Color = .srgGray16
+    
     @State private var isFocused = false
     
     init(icon: ImageResource, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
@@ -43,6 +46,20 @@ struct ExpandingButton: View {
         self.action = action
     }
     
+    func foregroundColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundColor = color
+        return view
+    }
+    
+    func foregroundFocusedColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundFocusedColor = color
+        return view
+    }
+    
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -58,7 +75,7 @@ struct ExpandingButton: View {
             }
             .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundColor(isFocused ? .srgGray16 : .srgGrayD2)
+            .foregroundColor(isFocused ? foregroundFocusedColor : foregroundColor)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
@@ -82,6 +99,10 @@ struct ExpandingButton_Previews: PreviewProvider {
             ExpandingButton(icon: .watchLater, action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 120))
+            ExpandingButton(label: "White foreground", action: {})
+                .foregroundColor(.white)
+                .padding()
+                .previewLayout(.fixed(width: 240, height: 120))
         }
     }
 }

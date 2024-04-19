@@ -18,6 +18,9 @@ struct SimpleButton: View {
     private let accessibilityHint: String?
     private let action: () -> Void
     
+    var foregroundColor: Color = .srgGrayC7
+    var foregroundFocusedColor: Color = .srgGray16
+    
     @State private var isFocused = false
     
     init(icon: ImageResource, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
@@ -38,6 +41,20 @@ struct SimpleButton: View {
         self.action = action
     }
     
+    func foregroundColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundColor = color
+        return view
+    }
+    
+    func foregroundFocusedColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundFocusedColor = color
+        return view
+    }
+    
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -50,7 +67,7 @@ struct SimpleButton: View {
                 }
             }
             .onParentFocusChange { isFocused = $0 }
-            .foregroundColor(isFocused ? .srgGray16 : .srgGrayD2)
+            .foregroundColor(isFocused ? foregroundFocusedColor : foregroundColor)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
@@ -64,6 +81,7 @@ struct SimpleButton_Previews: PreviewProvider {
         Group {
             SimpleButton(icon: .favorite, label: "Add to favorites", action: {})
             SimpleButton(icon: .favorite, accessibilityLabel: "Add to favorites", action: {})
+            SimpleButton(icon: .favorite, label: "White foreground", action: {}).foregroundColor(.white)
         }
         .padding()
         .previewLayout(.sizeThatFits)
