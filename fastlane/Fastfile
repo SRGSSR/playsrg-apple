@@ -1979,10 +1979,11 @@ def stop_unfinished_github_deployments(lane)
     next unless statuses
 
     last_status = statuses.first
-    next unless last_status.nil? || !['success', 'inactive', 'error'].include?(last_status['state'])
+    next unless github_deployment_is_unfinished(last_status)
 
     lane_name = lane.to_s
-    UI.important "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
+    last_state = last_status ? last_status['state'] : 'NaN'
+    UI.important "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_state}"
     stop_unfinished_github_deployment(lane, deployment, last_status)
   end
 end
@@ -1995,6 +1996,10 @@ def stop_unfinished_github_deployment(lane, deployment, last_status)
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
   ENV.delete('BUILD_URL')
+end
+
+def github_deployment_is_unfinished(status)
+  status.nil? || !['success', 'inactive', 'error'].include?(status['state'])
 end
 
 def get_github_deployment_statuses(deployment_id)
