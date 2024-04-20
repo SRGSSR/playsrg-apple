@@ -1885,7 +1885,7 @@ def create_github_deployment(lane)
   return unless result
 
   # Check the commit sha is the same as the last commit.
-  return if github_deployment_sha_correct(result)
+  return result if github_deployment_sha_correct(result)
 
   delete_github_deployment(lane)
   # Try to create a deployment with the last commit instead.
