@@ -35,6 +35,10 @@ struct ShowHeaderView: View {
     
     static let imageAspectRatio: CGFloat = 16 / 9
     
+    static func isVerticalLayout(horizontalSizeClass: UIUserInterfaceSizeClass, isLandscape: Bool) -> Bool {
+        return horizontalSizeClass == .compact || !isLandscape
+    }
+    
     @StateObject private var model = ShowHeaderViewModel()
     
     fileprivate static let verticalSpacing: CGFloat = 24
@@ -74,7 +78,7 @@ struct ShowHeaderView: View {
         
         var body: some View {
             Group {
-                if horizontalSizeClass == .compact || !isLandscape {
+                if isVerticalLayout(horizontalSizeClass: horizontalSizeClass, isLandscape: isLandscape) {
                     VStack(alignment: .leading, spacing: 0) {
                         ImageView(source: model.imageUrl)
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)

@@ -298,7 +298,7 @@ final class PageViewController: UIViewController {
         }
         
         if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
-            self.topicGradientView.content = TopicGradientView(topic, style: style)
+            self.topicGradientView.content = TopicGradientView(topic, style: style, verticallyCentered: isTopicGradienIncludedInTopSafeArea)
         }
         else {
             self.topicGradientView.content = nil
@@ -549,8 +549,8 @@ extension PageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
         case Header.showHeader.rawValue, Header.titleHeader.rawValue:
-                headerWithTitleVisible = false
-                updateNavigationBar(animated: true)
+            headerWithTitleVisible = false
+            updateNavigationBar(animated: true)
         default:
             break
         }
@@ -844,8 +844,7 @@ private extension PageViewController {
             let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
             let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
             
-            // Move the gradient view below the show image when displayed in compact horizontal size class
-            if traitCollection.horizontalSizeClass == .compact || !(UIApplication.shared.mainWindow?.isLandscape ?? false) {
+            if isShowHeaderVerticalLayout {
                 let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
                 topicGradientViewTopAnchor.constant = showImageOffset
                 topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - showImageOffset + mediaCellHeight
@@ -858,6 +857,28 @@ private extension PageViewController {
         else {
             topicGradientViewTopAnchor.constant = topScreenOffset
             topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
+        }
+        
+        // Double the gradient view height to include it above the top safe area.
+        if isTopicGradienIncludedInTopSafeArea {
+            topicGradientViewTopAnchor.constant -= topicGradientViewHeightAnchor.constant
+            topicGradientViewHeightAnchor.constant *= 2
+        }
+    }
+    
+    private var isShowHeaderVerticalLayout: Bool {
+        return ShowHeaderView.isVerticalLayout(
+            horizontalSizeClass: traitCollection.horizontalSizeClass,
+            isLandscape: UIApplication.shared.mainWindow?.isLandscape ?? false
+        )
+    }
+    
+    private var isTopicGradienIncludedInTopSafeArea: Bool {
+        if case .show = model.id {
+            return !isShowHeaderVerticalLayout
+        }
+        else {
+            return true
         }
     }
 }

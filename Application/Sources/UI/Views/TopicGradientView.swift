@@ -17,10 +17,12 @@ struct TopicGradientView: View {
     
     let topic: SRGTopic
     let style: Style
+    let verticallyCentered: Bool
     
-    init(_ topic: SRGTopic, style: Style) {
+    init(_ topic: SRGTopic, style: Style, verticallyCentered: Bool = false) {
         self.topic = topic
         self.style = style
+        self.verticallyCentered = verticallyCentered
     }
     
     var body: some View {
@@ -28,9 +30,12 @@ struct TopicGradientView: View {
             ZStack {
                 RadialColorGradient(
                     topicColors: topicColors,
-                    opacity: opacity
+                    opacity: opacity,
+                    verticallyCentered: verticallyCentered
                 )
-                LinearGreyGradient()
+                LinearGreyGradient(
+                    verticallyCentered: verticallyCentered
+                )
             }
         } else {
             Color.clear
@@ -41,6 +46,11 @@ struct TopicGradientView: View {
     private struct RadialColorGradient: View {
         let topicColors: (Color, Color)
         let opacity: Double
+        let verticallyCentered: Bool
+        
+        private var centerY: CGFloat {
+            return verticallyCentered ? 0.5 : 0
+        }
         
         var body: some View {
             GeometryReader { geometry in
@@ -49,7 +59,7 @@ struct TopicGradientView: View {
                         Gradient.Stop(color: topicColors.0.opacity(opacity), location: 0),
                         Gradient.Stop(color: topicColors.1.opacity(opacity), location: 0.8)
                     ]),
-                    center: UnitPoint(x: 0.5, y: 0),
+                    center: UnitPoint(x: 0.5, y: centerY),
                     startRadius: 0,
                     endRadius: geometry.size.width
                 )
@@ -59,10 +69,16 @@ struct TopicGradientView: View {
     
     /// Behavior: h-exp, v-exp
     private struct LinearGreyGradient: View {
+        let verticallyCentered: Bool
+        
+        private var startPointY: CGFloat {
+            return verticallyCentered ? 0.5 : 0
+        }
+        
         var body: some View {
             LinearGradient(
                 colors: [.clear, .srgGray16],
-                startPoint: UnitPoint(x: 0.5, y: 0),
+                startPoint: UnitPoint(x: 0.5, y: startPointY),
                 endPoint: .bottom
             )
         }
@@ -102,6 +118,9 @@ struct TopicGradientView_Previews: PreviewProvider {
                 TopicGradientView(Mock.topic(), style: .showPage)
             }
             PreviewView {
+                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true)
+            }
+            PreviewView {
                 TopicGradientView(Mock.topic(.overflow), style: .topicPage)
             }
         }
@@ -113,6 +132,9 @@ struct TopicGradientView_Previews: PreviewProvider {
             }
             PreviewView {
                 TopicGradientView(Mock.topic(), style: .showPage)
+            }
+            PreviewView {
+                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true)
             }
             PreviewView {
                 TopicGradientView(Mock.topic(.overflow), style: .topicPage)
