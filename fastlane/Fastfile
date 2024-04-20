@@ -1934,7 +1934,7 @@ end
 
 def github_deployment_sha_correct(result)
   # Tag commit can be different from the last commit.
-  return true if ENV.fetch('NEW_PLAY_TAG', nil)
+  return true if ENV.fetch('OVERRIDE_PLAY_TAG', nil)
 
   last_git_commit[:commit_hash] == result[:json]['sha']
 end
@@ -1942,7 +1942,7 @@ end
 def github_deployment_ref_tag(lane)
   git_pull(only_tags: true)
 
-  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+  new_tag = ENV.fetch('OVERRIDE_PLAY_TAG', nil)
   return new_tag if new_tag && !new_tag.empty?
 
   tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
@@ -1983,7 +1983,7 @@ end
 
 # Beta workflow creates a new tag. Try to add a Github deployment with tag ref.
 def add_github_deployment_tag_success(lane)
-  return unless ENV.fetch('NEW_PLAY_TAG', nil)
+  return unless ENV.fetch('OVERRIDE_PLAY_TAG', nil)
 
   # Avoid having twice deployments.
   update_github_deployment_inactive(lane)
@@ -1991,7 +1991,7 @@ def add_github_deployment_tag_success(lane)
 
   create_github_deployment(lane)
   update_github_deployment_success(lane)
-  ENV.delete('NEW_PLAY_TAG')
+  ENV.delete('OVERRIDE_PLAY_TAG')
 end
 
 def appstore_github_deployment(business_unit, platform, app_version)
@@ -2043,13 +2043,13 @@ end
 def update_github_appstore_deployment(lane, business_unit, deployment, state, last_status)
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
   ENV['BUILD_URL'] = last_status['log_url'] if last_status
-  ENV['NEW_PLAY_TAG'] = deployment['ref']
+  ENV['OVERRIDE_PLAY_TAG'] = deployment['ref']
 
   update_github_deployment(state, lane, business_unit)
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
   ENV.delete('BUILD_URL')
-  ENV.delete('NEW_PLAY_TAG')
+  ENV.delete('OVERRIDE_PLAY_TAG')
 end
 
 def github_deployment_state_from_app_version(app_version)
@@ -2180,8 +2180,8 @@ def environment_url(state, lane)
   environment_data = github_environment_data(lane)
   return unless state == 'success' && environment_data
 
-  # Use the new tag if available.
-  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+  # Use override tag if available.
+  new_tag = ENV.fetch('OVERRIDE_PLAY_TAG', nil)
 
   platform = platform_from_tag(new_tag) if new_tag
   platform ||= environment_data[:platform]
@@ -2421,7 +2421,7 @@ def tag_beta(platform)
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
     push_git_tags
-    ENV['NEW_PLAY_TAG'] = tag
+    ENV['OVERRIDE_PLAY_TAG'] = tag
   end
 end
 
