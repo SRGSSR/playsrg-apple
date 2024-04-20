@@ -271,7 +271,7 @@ platform :ios do
 
   # App Store reviews and releases
 
-  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
+  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` (boolean) parameters.'
   lane :iOSPrepareAppStoreReleases do |options|
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
@@ -286,7 +286,7 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
+  desc 'Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` (boolean) parameters.'
   lane :tvOSPrepareAppStoreReleases do |options|
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
