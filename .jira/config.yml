@@ -13,7 +13,5 @@ deployments:
       - "playsrg-ios-testflight"
       - "playsrg-tvos-testflight"
     production:
-      - "playsrg-ios"
-      - "playsrg-tvos"
-      - "playsrg-ios-appstore"
-      - "playsrg-tvos-appstore"
+      - "playsrg-ios-appstore*"
+      - "playsrg-tvos-appstore*"
