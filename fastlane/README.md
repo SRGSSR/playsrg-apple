@@ -173,7 +173,7 @@ Prepare AppStore tvOS releases on App Store Connect with the current version and
 [bundle exec] fastlane ios appStoreAppStatus
 ```
 
-Get AppStore App status for iOS and tvOS
+Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) parameter.
 
 ### ios appStoreTestFlightAppStatus
 
