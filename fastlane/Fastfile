@@ -1802,7 +1802,7 @@ def create_or_update_github_environment(lane)
   name = result[:json]['name']
   return unless name
 
-  UI.message "Github used environment: #{name}"
+  UI.command "Github used environment: #{name}"
 end
 
 def srg_github_create_or_update_environment(environment)
@@ -1876,7 +1876,7 @@ def create_github_deployment_ref(environment, ref)
   return unless deployment_id
 
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment_id.to_s
-  UI.message "Github created deployment: #{deployment_id}"
+  UI.command_output "Github created deployment: #{deployment_id}"
   result
 end
 
@@ -1939,7 +1939,7 @@ def delete_github_deployment(lane)
   return unless status == 204
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
-  UI.message "Github deleted deployment: #{deployment_id}"
+  UI.command_output "Github deleted deployment: #{deployment_id}"
 end
 
 def srg_github_delete_deployment(deployment_id)
@@ -1982,7 +1982,7 @@ def stop_unfinished_github_deployments(lane)
     next unless last_status.nil? || !['success', 'inactive', 'error'].include?(last_status['state'])
 
     lane_name = lane.to_s
-    UI.message "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
+    UI.important "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
     stop_unfinished_github_deployment(lane, deployment, last_status)
   end
 end
@@ -2044,7 +2044,7 @@ def update_github_deployment(state, lane)
   deployment_state = result[:json]['state']
   return unless deployment_state
 
-  UI.message "Github updated deployment state: #{deployment_state}"
+  UI.command_output "Github updated deployment state: #{deployment_state}"
 end
 
 def srg_github_update_deployment(environment, deployment_id, state, lane)
