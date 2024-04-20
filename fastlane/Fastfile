@@ -2000,15 +2000,72 @@ def appstore_github_deployment(business_unit, platform, app_version)
   lane_name = "#{platform}AppStoreReleases"
   tag = srg_tag_from_spaceship_app_version(platform, app_version)
 
-  UI.message "Github production deployment will work on Play #{business_unit} tag #{tag} and #{app_version.app_store_state} state."
+  tag_deployment = get_github_appstore_tag_deployment(tag, lane_name, business_unit)
+  return unless tag_deployment
 
+  check_appstore_github_deployment(lane_name, business_unit, app_version, tag_deployment)
+end
+
+def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_deployment)
+  last_status = get_github_appstore_deployment_last_status(tag_deployment)
+  return if github_appstore_deployment_state_is_correct(last_status, app_version)
+
+  state = github_deployment_state_from_app_version(app_version)
+  update_github_appstore_deployment(lane_name, business_unit, tag_deployment, state, last_status)
+end
+
+def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
   create_or_update_github_environment(lane_name, business_unit)
   deployments = get_github_deployments(lane_name, business_unit)
-  UI.message "Find #{tag} in Github deployments: #{deployments}"
 
-  # stop_unfinished_github_deployments(lane_name, business_unit)
+  tag_deployment = deployments&.find { |deployment| deployment['ref'] == tag }
+  return tag_deployment if tag_deployment
 
-  # create_github_deployment_ref(github_environment(lane_name, business_unit), tag, true)
+  environment = github_environment(lane_name, business_unit)
+  result = create_github_deployment_ref(environment, tag, true)
+
+  result ? result[:json] : nil
+end
+
+def get_github_appstore_deployment_last_status(tag_deployment)
+  return unless tag_deployment
+
+  statuses = get_github_deployment_statuses(tag_deployment['id'])
+  statuses&.first
+end
+
+def github_appstore_deployment_state_is_correct(last_status, app_version)
+  return false unless last_status
+
+  last_status['state'] == github_deployment_state_from_app_version(app_version)
+end
+
+def update_github_appstore_deployment(lane, business_unit, deployment, state, last_status)
+  ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
+  ENV['BUILD_URL'] = last_status['log_url'] if last_status
+  ENV['NEW_PLAY_TAG'] = deployment['ref']
+
+  update_github_deployment(state, lane, business_unit)
+
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  ENV.delete('BUILD_URL')
+  ENV.delete('NEW_PLAY_TAG')
+end
+
+def github_deployment_state_from_app_version(app_version)
+  app__store_state = Spaceship::ConnectAPI::AppInfo::AppStoreState
+  case app_version.app_store_state
+  when app__store_state::WAITING_FOR_REVIEW,
+       app__store_state::READY_FOR_REVIEW then 'queued'
+  when app__store_state::IN_REVIEW then 'in_progress'
+  when app__store_state::PENDING_DEVELOPER_RELEASE,
+       app__store_state::PENDING_APPLE_RELEASE then 'pending'
+  when app__store_state::READY_FOR_SALE then 'success'
+  when app__store_state::REMOVED_FROM_SALE,
+       app__store_state::DEVELOPER_REMOVED_FROM_SALE then 'inactive'
+  else
+    'error'
+  end
 end
 
 def stop_unfinished_github_deployments(lane, business_unit = nil)
@@ -2082,9 +2139,9 @@ def update_github_deployment_inactive(lane)
   update_github_deployment('inactive', lane)
 end
 
-def update_github_deployment(state, lane)
+def update_github_deployment(state, lane, business_unit = nil)
   deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
-  environment = github_environment(lane)
+  environment = github_environment(lane, business_unit)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
 
   result = srg_github_update_deployment(environment, deployment_id, state, lane)
