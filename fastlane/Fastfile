@@ -1824,7 +1824,7 @@ def create_or_update_github_environment(lane, business_unit = nil)
   name = result[:json]['name']
   return unless name
 
-  UI.command "Github used environment: #{name}"
+  UI.command_output "Github environment: #{name}"
 end
 
 def srg_github_create_or_update_environment(environment)
@@ -1903,7 +1903,7 @@ def create_github_deployment_ref(environment, ref, production_environment = nil)
 end
 
 def srg_github_create_deployment(environment, ref, production_environment = nil)
-  UI.message "Github deployment creation with ref: #{ref}"
+  UI.command "Github deployment creation with ref: #{ref}"
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
@@ -2008,7 +2008,9 @@ end
 
 def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_deployment)
   last_status = get_github_appstore_deployment_last_status(tag_deployment)
-  return if github_appstore_deployment_state_is_correct(last_status, app_version)
+  is_correct = github_appstore_deployment_state_is_correct(last_status, app_version)
+  UI.message "Github deployment state for tag #{tag_deployment['ref']} is already synchronized. ✅" if is_correct
+  return if is_correct
 
   state = github_deployment_state_from_app_version(app_version)
   update_github_appstore_deployment(lane_name, business_unit, tag_deployment, state, last_status)
@@ -2019,6 +2021,7 @@ def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
   deployments = get_github_deployments(lane_name, business_unit)
 
   tag_deployment = deployments&.find { |deployment| deployment['ref'] == tag }
+  UI.command_output "Github deployment: #{tag_deployment['id']}" if tag_deployment
   return tag_deployment if tag_deployment
 
   environment = github_environment(lane_name, business_unit)
@@ -2045,6 +2048,7 @@ def update_github_appstore_deployment(lane, business_unit, deployment, state, la
   ENV['BUILD_URL'] = last_status['log_url'] if last_status
   ENV['OVERRIDE_PLAY_TAG'] = deployment['ref']
 
+  UI.message "Github deployment state for tag #{deployment['ref']} needs synchronization. 🔄"
   update_github_deployment(state, lane, business_unit)
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
