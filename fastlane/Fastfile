@@ -2065,7 +2065,8 @@ def github_deployment_state_from_app_version(app_version)
   when app__store_state::PENDING_DEVELOPER_RELEASE,
        app__store_state::PENDING_APPLE_RELEASE then 'pending'
   when app__store_state::READY_FOR_SALE then 'success'
-  when app__store_state::REMOVED_FROM_SALE,
+  when app__store_state::PREPARE_FOR_SUBMISSION,
+       app__store_state::REMOVED_FROM_SALE,
        app__store_state::DEVELOPER_REMOVED_FROM_SALE then 'inactive'
   else
     'error'
