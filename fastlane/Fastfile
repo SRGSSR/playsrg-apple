@@ -1107,6 +1107,12 @@ platform :ios do
 end
 
 #
+# Constants
+#
+
+APP_STORE_STATE = Spaceship::ConnectAPI::AppInfo::AppStoreState
+
+#
 # Functions
 #
 
@@ -2057,17 +2063,16 @@ def update_github_appstore_deployment(lane, business_unit, deployment, state, la
 end
 
 def github_deployment_state_from_app_version(app_version)
-  app__store_state = Spaceship::ConnectAPI::AppInfo::AppStoreState
   case app_version.app_store_state
-  when app__store_state::WAITING_FOR_REVIEW,
-       app__store_state::READY_FOR_REVIEW then 'queued'
-  when app__store_state::IN_REVIEW then 'in_progress'
-  when app__store_state::PENDING_DEVELOPER_RELEASE,
-       app__store_state::PENDING_APPLE_RELEASE then 'pending'
-  when app__store_state::READY_FOR_SALE then 'success'
-  when app__store_state::PREPARE_FOR_SUBMISSION,
-       app__store_state::REMOVED_FROM_SALE,
-       app__store_state::DEVELOPER_REMOVED_FROM_SALE then 'inactive'
+  when APP_STORE_STATE::WAITING_FOR_REVIEW,
+       APP_STORE_STATE::READY_FOR_REVIEW then 'queued'
+  when APP_STORE_STATE::IN_REVIEW then 'in_progress'
+  when APP_STORE_STATE::PENDING_DEVELOPER_RELEASE,
+       APP_STORE_STATE::PENDING_APPLE_RELEASE then 'pending'
+  when APP_STORE_STATE::READY_FOR_SALE then 'success'
+  when APP_STORE_STATE::PREPARE_FOR_SUBMISSION,
+       APP_STORE_STATE::REMOVED_FROM_SALE,
+       APP_STORE_STATE::DEVELOPER_REMOVED_FROM_SALE then 'inactive'
   else
     'error'
   end
@@ -2669,8 +2674,7 @@ def can_run_deliver(business_unit, platform)
   app_store_state = latest_version.app_store_state
   UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is #{app_store_state}."
 
-  app__store_state = Spaceship::ConnectAPI::AppInfo::AppStoreState
-  review_states = [app__store_state::WAITING_FOR_REVIEW, app__store_state::IN_REVIEW]
+  review_states = [APP_STORE_STATE::WAITING_FOR_REVIEW, APP_STORE_STATE::IN_REVIEW]
   return true unless review_states.include? app_store_state
 
   UI.success "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is already submitted. ✅"
