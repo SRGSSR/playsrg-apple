@@ -38,7 +38,8 @@ img {
     nightly: 'nightly',
     beta: 'beta',
     testFlight: 'testflight',
-    none: 'appstore'
+    appstore: 'appstore',
+    none: 'none'
   };
 
   function getPlatform() {
@@ -72,6 +73,8 @@ img {
       return Configuration.beta;
     } else if (configuration === 'testflight') {
       return Configuration.testFlight;
+    } else if (configuration === 'appstore') {
+      return Configuration.appstore;
     } else return Configuration.none;
   }
 
@@ -149,6 +152,13 @@ img {
         'rts': '920754415',
         'srf': '638194352',
         'swi': '920785201'
+      },
+      'none': {
+        'rsi': '920753497',
+        'rtr': '920754925',
+        'rts': '920754415',
+        'srf': '638194352',
+        'swi': '920785201'
       }
     };
     return applicationIds[configuration][bu];
@@ -200,11 +210,16 @@ img {
   }
 
   if (version && platform !== Platform.none && configuration !== Configuration.none) {
-    document.write('<p>Search in Apple TestFlight application and install this <b>Play ' + platformName() + ' ' + configurationName() + ' version</b>:</p>');
+    if (configuration === Configuration.appstore) {
+      document.write('<p>Search in Apple Store application and install <b>Play ' + platformName() + ' version</b>.<br />The latest version could be:</p>');
+    }
+    else {
+      document.write('<p>Search in Apple TestFlight application and install this <b>Play ' + platformName() + ' ' + configurationName() + ' version</b>:</p>');
+    }
     document.write('<h1>' + version + '</h1>');
   }
 
-  if (platform !== Platform.none && configuration !== Configuration.non) {
+  if (platform !== Platform.none) {
     tvInfo = (platform === Platform.tvOS) ? '<br/>(tvOS builds are only displayed on TV)' : '';
     
     switch (configuration) {
