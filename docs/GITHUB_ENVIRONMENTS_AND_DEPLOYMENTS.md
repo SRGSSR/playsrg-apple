@@ -39,6 +39,7 @@ When one of the listed fastlane lane above is executed, a new deployment is crea
 	- the last git tag name, only if the deployment `sha` is same as the last commit hash on the branch, to be sure that it's link to the correct commit.
 	- the git branch name, only if the deployment `sha` is same as the last commit hash on the branch, to be sure that it's link to the correct commit.
 	- If it's not the same commit `sha`, the new deployment is deleted and a new deployment is created with the last commit hash as the reference.
+- `task` = `Build and distribute`.
 - `production_environment` = `false`.
 
 #### Production
@@ -46,6 +47,7 @@ For each App Store version information, if a build number is associated to a ver
 
 - The reference (`ref`) is only this option:
 	- the git tag name of the App Store version. No deployment is created if the git tag does not exist.
+- `task` = `Distribute`.
 - `production_environment` = `true`.
 
 ### Update state
