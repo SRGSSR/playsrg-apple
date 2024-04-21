@@ -2182,7 +2182,8 @@ def srg_github_update_deployment_body(environment, state, lane)
     environment:,
     description: "Building #{environment}: #{state}",
     log_url: build_log_url,
-    environment_url: environment_url(state, lane)
+    environment_url: environment_url(state, lane),
+    auto_inactive: true
   }
 end
 
