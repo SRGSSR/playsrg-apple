@@ -140,6 +140,7 @@ final class PageViewController: UIViewController {
         let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: 0 /* set in updateTopicGradientLayout() */)
         NSLayoutConstraint.activate([
             topicGradientViewTopAnchor,
+            topicGradientView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor),
             topicGradientView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor),
             topicGradientViewHeightAnchor
         ])
