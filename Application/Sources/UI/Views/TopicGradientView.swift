@@ -51,21 +51,25 @@ struct TopicGradientView: View {
         let opacity: Double
         let verticallyCentered: Bool
         
+        @State private var endRadius: CGFloat = 0
+        
         private var centerY: CGFloat {
             return verticallyCentered ? 0.5 : 0
         }
         
         var body: some View {
-            GeometryReader { geometry in
-                RadialGradient(
-                    gradient: Gradient(stops: [
-                        Gradient.Stop(color: topicColors.0.opacity(opacity), location: 0),
-                        Gradient.Stop(color: topicColors.1.opacity(opacity), location: 0.8)
-                    ]),
-                    center: UnitPoint(x: 0.5, y: centerY),
-                    startRadius: 0,
-                    endRadius: geometry.size.width
-                )
+            RadialGradient(
+                gradient: Gradient(stops: [
+                    Gradient.Stop(color: topicColors.0.opacity(opacity), location: 0),
+                    Gradient.Stop(color: topicColors.1.opacity(opacity), location: 0.8)
+                ]),
+                center: UnitPoint(x: 0.5, y: centerY),
+                startRadius: 0,
+                endRadius: endRadius
+            )
+            .readSize { size in
+                let isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
+                endRadius = isLandscape ? size.width : size.height
             }
         }
     }
