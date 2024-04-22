@@ -457,10 +457,10 @@ extension PageViewModel {
     }
     
     var displayedTitleForegroundColor: Color {
-        if case .page = id {
+        switch id {
+        case .page, .topic:
             return .white
-        }
-        else {
+        default:
             return .srgGrayC7
         }
     }

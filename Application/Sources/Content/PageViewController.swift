@@ -199,7 +199,7 @@ final class PageViewController: UIViewController {
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: model.id)
+            view.content = SectionHeaderView(section: section, pageId: model.id, rowPosition: indexPath.section)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -984,6 +984,7 @@ private extension PageViewController {
     private struct SectionHeaderView: View {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
+        let rowPosition: Int
         
         @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
@@ -1000,6 +1001,15 @@ private extension PageViewController {
             return section.viewModelProperties.canOpenDetailPage || isSectionWideSupportEnabled
         }
         
+        private var foregroundColor: Color {
+            if case .topic = pageId, rowPosition == 0 {
+                return .white
+            }
+            else {
+                return .srgGrayC7
+            }
+        }
+        
         var accessibilityLabel: String? {
             return Self.title(for: section)
         }
@@ -1011,12 +1021,12 @@ private extension PageViewController {
         var body: some View {
             if section.properties.displaysRowHeader, let title = Self.title(for: section) {
 #if os(tvOS)
-                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
+                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false, foregroundColor: foregroundColor)
 #else
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
+                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure, foregroundColor: foregroundColor)
                 }
                 .disabled(!hasDetailDisclosure)
                 .responderChain(from: firstResponder)
