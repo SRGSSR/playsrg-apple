@@ -298,7 +298,7 @@ final class PageViewController: UIViewController {
         }
         
         if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
-            self.topicGradientView.content = TopicGradientView(topic, style: style, verticallyCentered: isTopicGradienIncludedInTopSafeArea, bottomFadeOutReduced: isShowHeaderVerticalLayout)
+            self.topicGradientView.content = TopicGradientView(topic, style: style, bottomFadeOutReduced: isShowHeaderVerticalLayout)
         }
         else {
             self.topicGradientView.content = nil
@@ -837,26 +837,21 @@ private extension PageViewController {
     }
     
     private func updateTopicGradientLayout() {
-        let topScreenOffset = -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) - (self.navigationController?.navigationBar.frame.height ?? 0)
+        let topScreenOffset = (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) + (self.navigationController?.navigationBar.frame.height ?? 0)
+        
+        var heightAnchorConstant = Self.layoutTopicGradientViewHeight
         
         if case .show = model.id {
             let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
             let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
             let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
             
-            topicGradientViewTopAnchor.constant = topScreenOffset
-            topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - topScreenOffset + mediaCellHeight
-        }
-        else {
-            topicGradientViewTopAnchor.constant = topScreenOffset
-            topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
+            heightAnchorConstant = topScreenOffset + supplementaryItemsHeight + mediaCellHeight
         }
         
-        // Double the gradient view height to include it above the top safe area.
-        if isTopicGradienIncludedInTopSafeArea {
-            topicGradientViewTopAnchor.constant -= topicGradientViewHeightAnchor.constant
-            topicGradientViewHeightAnchor.constant *= 2
-        }
+        // Double the gradient view height to include it above the top safe area (displayed when pull to refresh).
+        topicGradientViewTopAnchor.constant = -topScreenOffset - heightAnchorConstant
+        topicGradientViewHeightAnchor.constant = heightAnchorConstant * 2
     }
     
     private var isShowHeaderVerticalLayout: Bool {
@@ -864,10 +859,6 @@ private extension PageViewController {
             horizontalSizeClass: traitCollection.horizontalSizeClass,
             isLandscape: UIApplication.shared.mainWindow?.isLandscape ?? false
         )
-    }
-    
-    private var isTopicGradienIncludedInTopSafeArea: Bool {
-        return true
     }
 }
 

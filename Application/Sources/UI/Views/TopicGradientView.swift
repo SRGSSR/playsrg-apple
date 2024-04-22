@@ -20,7 +20,7 @@ struct TopicGradientView: View {
     let verticallyCentered: Bool
     let bottomFadeOutReduced: Bool
     
-    init(_ topic: SRGTopic, style: Style, verticallyCentered: Bool = false, bottomFadeOutReduced: Bool = false) {
+    init(_ topic: SRGTopic, style: Style, verticallyCentered: Bool = true, bottomFadeOutReduced: Bool = false) {
         self.topic = topic
         self.style = style
         self.verticallyCentered = verticallyCentered
@@ -130,10 +130,10 @@ struct TopicGradientView_Previews: PreviewProvider {
                 TopicGradientView(Mock.topic(), style: .showPage)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true)
+                TopicGradientView(Mock.topic(), style: .showPage, bottomFadeOutReduced: true)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true, bottomFadeOutReduced: true)
+                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: false)
             }
             PreviewView {
                 TopicGradientView(Mock.topic(.overflow), style: .topicPage)
@@ -149,10 +149,10 @@ struct TopicGradientView_Previews: PreviewProvider {
                 TopicGradientView(Mock.topic(), style: .showPage)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true)
+                TopicGradientView(Mock.topic(), style: .showPage, bottomFadeOutReduced: true)
             }
             PreviewView {
-                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true, bottomFadeOutReduced: true)
+                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: false)
             }
             PreviewView {
                 TopicGradientView(Mock.topic(.overflow), style: .topicPage)
