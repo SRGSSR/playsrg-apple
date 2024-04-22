@@ -688,7 +688,6 @@ private extension PageViewController {
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
-    private static let layoutTopicGradientViewHeight: CGFloat = 572
     
     private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
         return required ? layoutVerticalMargin : 0
@@ -838,15 +837,18 @@ private extension PageViewController {
     
     private func updateTopicGradientLayout() {
         let topScreenOffset = (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) + (self.navigationController?.navigationBar.frame.height ?? 0)
+       
+        let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
+        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+        let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
         
-        var heightAnchorConstant = Self.layoutTopicGradientViewHeight
+        var heightAnchorConstant = topScreenOffset + supplementaryItemsHeight
         
-        if case .show = model.id {
-            let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
-            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
-            let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
-            
-            heightAnchorConstant = topScreenOffset + supplementaryItemsHeight + mediaCellHeight
+        switch model.id {
+        case .topic:
+            heightAnchorConstant += mediaCellHeight * 2
+        default:
+            heightAnchorConstant += mediaCellHeight
         }
         
         // Double the gradient view height to include it above the top safe area (displayed when pull to refresh).
