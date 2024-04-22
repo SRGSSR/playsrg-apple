@@ -298,7 +298,7 @@ final class PageViewController: UIViewController {
         }
         
         if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
-            self.topicGradientView.content = TopicGradientView(topic, style: style, bottomFadeOutReduced: isShowHeaderVerticalLayout)
+            self.topicGradientView.content = TopicGradientView(topic, style: style, verticallyCentered: constant(iOS: true, tvOS: false), bottomFadeOutReduced: isShowHeaderVerticalLayout)
         }
         else {
             self.topicGradientView.content = nil
@@ -851,9 +851,14 @@ private extension PageViewController {
             heightAnchorConstant += mediaCellHeight
         }
         
+#if os(iOS)
         // Double the gradient view height to include it above the top safe area (displayed when pull to refresh).
         topicGradientViewTopAnchor.constant = -topScreenOffset - heightAnchorConstant
         topicGradientViewHeightAnchor.constant = heightAnchorConstant * 2
+#else
+        topicGradientViewTopAnchor.constant = -topScreenOffset
+        topicGradientViewHeightAnchor.constant = heightAnchorConstant
+#endif
     }
     
     private var isShowHeaderVerticalLayout: Bool {
