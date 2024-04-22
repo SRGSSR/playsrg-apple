@@ -76,7 +76,7 @@ struct TopicGradientView: View {
         let bottomFadeOutReduced: Bool
         
         private var startPointY: CGFloat {
-            // Define: "top" is the center of the radial
+            // Define: "top" is the radial gradient center
             if bottomFadeOutReduced {
                 // From 50 % of height to down
                 return verticallyCentered ? 0.75 : 0.5
@@ -99,7 +99,7 @@ struct TopicGradientView: View {
     private var opacity: Double {
         switch style {
         case .topicPage:
-            return 0.1 /* Official 0.7 needs work on font colors for contrast */
+            return 0.3 /* Official 0.7 needs work on font colors for contrast */
         case .showPage:
             return 0.2
         }
