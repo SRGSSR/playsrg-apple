@@ -18,11 +18,13 @@ struct TopicGradientView: View {
     let topic: SRGTopic
     let style: Style
     let verticallyCentered: Bool
+    let bottomFadeOutReduced: Bool
     
-    init(_ topic: SRGTopic, style: Style, verticallyCentered: Bool = false) {
+    init(_ topic: SRGTopic, style: Style, verticallyCentered: Bool = false, bottomFadeOutReduced: Bool = false) {
         self.topic = topic
         self.style = style
         self.verticallyCentered = verticallyCentered
+        self.bottomFadeOutReduced = bottomFadeOutReduced
     }
     
     var body: some View {
@@ -34,7 +36,8 @@ struct TopicGradientView: View {
                     verticallyCentered: verticallyCentered
                 )
                 LinearGreyGradient(
-                    verticallyCentered: verticallyCentered
+                    verticallyCentered: verticallyCentered,
+                    bottomFadeOutReduced: bottomFadeOutReduced
                 )
             }
         } else {
@@ -70,9 +73,18 @@ struct TopicGradientView: View {
     /// Behavior: h-exp, v-exp
     private struct LinearGreyGradient: View {
         let verticallyCentered: Bool
+        let bottomFadeOutReduced: Bool
         
         private var startPointY: CGFloat {
-            return verticallyCentered ? 0.5 : 0
+            // Define: "top" is the center of the radial
+            if bottomFadeOutReduced {
+                // From 50 % of height to down
+                return verticallyCentered ? 0.75 : 0.5
+            }
+            else {
+                // From top to down
+                return verticallyCentered ? 0.5 : 0
+            }
         }
         
         var body: some View {
@@ -121,6 +133,9 @@ struct TopicGradientView_Previews: PreviewProvider {
                 TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true)
             }
             PreviewView {
+                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true, bottomFadeOutReduced: true)
+            }
+            PreviewView {
                 TopicGradientView(Mock.topic(.overflow), style: .topicPage)
             }
         }
@@ -135,6 +150,9 @@ struct TopicGradientView_Previews: PreviewProvider {
             }
             PreviewView {
                 TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true)
+            }
+            PreviewView {
+                TopicGradientView(Mock.topic(), style: .showPage, verticallyCentered: true, bottomFadeOutReduced: true)
             }
             PreviewView {
                 TopicGradientView(Mock.topic(.overflow), style: .topicPage)

@@ -298,7 +298,7 @@ final class PageViewController: UIViewController {
         }
         
         if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
-            self.topicGradientView.content = TopicGradientView(topic, style: style, verticallyCentered: isTopicGradienIncludedInTopSafeArea)
+            self.topicGradientView.content = TopicGradientView(topic, style: style, verticallyCentered: isTopicGradienIncludedInTopSafeArea, bottomFadeOutReduced: isShowHeaderVerticalLayout)
         }
         else {
             self.topicGradientView.content = nil
@@ -844,15 +844,8 @@ private extension PageViewController {
             let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
             let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
             
-            if isShowHeaderVerticalLayout {
-                let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
-                topicGradientViewTopAnchor.constant = showImageOffset
-                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - showImageOffset + mediaCellHeight
-            }
-            else {
-                topicGradientViewTopAnchor.constant = topScreenOffset
-                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - topScreenOffset + mediaCellHeight
-            }
+            topicGradientViewTopAnchor.constant = topScreenOffset
+            topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - topScreenOffset + mediaCellHeight
         }
         else {
             topicGradientViewTopAnchor.constant = topScreenOffset
@@ -874,12 +867,7 @@ private extension PageViewController {
     }
     
     private var isTopicGradienIncludedInTopSafeArea: Bool {
-        if case .show = model.id {
-            return !isShowHeaderVerticalLayout
-        }
-        else {
-            return true
-        }
+        return true
     }
 }
 
