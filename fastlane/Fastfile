@@ -1851,20 +1851,21 @@ def get_github_deployments(lane, business_unit = nil)
   environment = github_environment(lane, business_unit)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
-  result = srg_github_get_deployments(environment)
+  max = 10
+  result = srg_github_get_deployments(environment, max)
   deployments = result[:json]
   return unless deployments.is_a?(Array)
 
-  UI.message "#{deployments.count} Github deployments for #{environment}"
+  UI.message "#{deployments.count}/#{max} Github deployments found for #{environment}"
   deployments
 end
 
-def srg_github_get_deployments(environment)
+def srg_github_get_deployments(environment, max)
   encoded_environment = environment.gsub('+', '%2B')
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'GET',
-    path: "#{github_api_path}/deployments?environment=#{encoded_environment}",
+    path: "#{github_api_path}/deployments?environment=#{encoded_environment}&per_page=#{max}",
     error_handlers: {
       '*' => proc do |result|
         UI.important 'Something went wrong with Github token and deployments API get. ⚠️'
