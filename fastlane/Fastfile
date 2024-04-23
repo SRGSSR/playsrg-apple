@@ -271,7 +271,7 @@ platform :ios do
 
   # App Store reviews and releases
 
-  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
+  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` (boolean) parameters.'
   lane :iOSPrepareAppStoreReleases do |options|
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
@@ -286,7 +286,7 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
+  desc 'Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` (boolean) parameters.'
   lane :tvOSPrepareAppStoreReleases do |options|
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
@@ -303,8 +303,10 @@ platform :ios do
 
   # App Store App status
 
-  desc 'Get AppStore App status for iOS and tvOS'
-  lane :appStoreAppStatus do
+  desc 'Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) parameter.'
+  lane :appStoreAppStatus do |options|
+    github_deployments = options[:github_deployments] || false
+
     UI.message '-----'
     business_units.map do |business_unit|
       spaceship_login_with_api_key(business_unit)
@@ -320,12 +322,16 @@ platform :ios do
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
         UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
 
+        appstore_github_deployment(business_unit, platform, live_version) if github_deployments
+
         latest_version = spaceship_app_latest_known_version(platform, app)
         if !latest_version || latest_version.version_string == live_version.version_string
           UI.success "Play #{business_unit} #{platform} version #{live_version.version_string} (#{live_version.build.version}) is the latest one."
         else
           build_version = latest_version.build ? latest_version.build.version : 'NaN'
           UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is #{latest_version.app_store_state}."
+
+          appstore_github_deployment(business_unit, platform, latest_version) if github_deployments
         end
         version_localization = spaceship_app_version_localization(latest_version)
         UI.message "What's new (#{version_localization.locale}):\n#{version_localization.whats_new}"
@@ -1101,6 +1107,12 @@ platform :ios do
 end
 
 #
+# Constants
+#
+
+APP_STORE_STATE = Spaceship::ConnectAPI::AppInfo::AppStoreState
+
+#
 # Functions
 #
 
@@ -1310,7 +1322,16 @@ def tag_version(platform)
 end
 
 def srg_tag(platform)
-  "#{platform.downcase}/#{tag_version(platform)}"
+  srg_tag_from_tag_version(platform, tag_version(platform))
+end
+
+def srg_tag_from_tag_version(platform, tag_version)
+  "#{platform.downcase}/#{tag_version}"
+end
+
+def srg_tag_from_spaceship_app_version(platform, spaceship_app_version)
+  tag_version = "#{spaceship_app_version.version_string}-#{spaceship_app_version.build.version}"
+  srg_tag_from_tag_version(platform, tag_version)
 end
 
 def platform_from_tag(tag)
@@ -1754,24 +1775,29 @@ def github_api_path
   '/repos/SRGSSR/playsrg-apple'
 end
 
-def github_environment_data(lane)
+def github_environment_data(lane, business_unit = nil)
   environment_datas = {
-    'iOSnightlies' => { platform: 'iOS', configuration: 'Nightly' },
-    'tvOSnightlies' => { platform: 'tvOS', configuration: 'Nightly' },
-    'iOSbetas' => { platform: 'iOS', configuration: 'Beta' },
-    'tvOSbetas' => { platform: 'tvOS', configuration: 'Beta' },
-    'iOSAppStoreBuilds' => { platform: 'iOS', configuration: 'TestFlight' },
-    'tvOSAppStoreBuilds' => { platform: 'tvOS', configuration: 'TestFlight' }
+    'iOSnightlies' => { platform: 'iOS', configuration: 'Nightly', business_unit: },
+    'tvOSnightlies' => { platform: 'tvOS', configuration: 'Nightly', business_unit: },
+    'iOSbetas' => { platform: 'iOS', configuration: 'Beta', business_unit: },
+    'tvOSbetas' => { platform: 'tvOS', configuration: 'Beta', business_unit: },
+    'iOSAppStoreBuilds' => { platform: 'iOS', configuration: 'TestFlight', business_unit: },
+    'tvOSAppStoreBuilds' => { platform: 'tvOS', configuration: 'TestFlight', business_unit: },
+    'iOSAppStoreReleases' => { platform: 'iOS', configuration: 'AppStore' },
+    'tvOSAppStoreReleases' => { platform: 'tvOS', configuration: 'AppStore', business_unit: }
   }
   environment_datas[lane.to_s]
 end
 
-def github_environment(lane)
-  environment_data = github_environment_data(lane)
+def github_environment(lane, business_unit = nil)
+  environment_data = github_environment_data(lane, business_unit)
   return unless environment_data
 
   environment = github_environments(environment_data[:platform], environment_data[:configuration])
   return unless environment
+
+  environment += "-#{business_unit.downcase}" if business_unit
+  return environment if business_unit
 
   build_name = build_name(git_branch_name)
   environment += "+#{build_name}" unless build_name.empty?
@@ -1783,26 +1809,28 @@ def github_environments(platform, build_configuration)
     'iOS' => {
       'Nightly' => 'playsrg-ios-nightly',
       'Beta' => 'playsrg-ios-beta',
-      'TestFlight' => 'playsrg-ios-testflight'
+      'TestFlight' => 'playsrg-ios-testflight',
+      'AppStore' => 'playsrg-ios-appstore'
     },
     'tvOS' => {
       'Nightly' => 'playsrg-tvos-nightly',
       'Beta' => 'playsrg-tvos-beta',
-      'TestFlight' => 'playsrg-tvos-testflight'
+      'TestFlight' => 'playsrg-tvos-testflight',
+      'AppStore' => 'playsrg-tvos-appstore'
     }
   }
   environments[platform][build_configuration]
 end
 
-def create_or_update_github_environment(lane)
-  environment = github_environment(lane)
+def create_or_update_github_environment(lane, business_unit = nil)
+  environment = github_environment(lane, business_unit)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
   result = srg_github_create_or_update_environment(environment)
   name = result[:json]['name']
   return unless name
 
-  UI.message "Github used environment: #{name}"
+  UI.command_output "Github environment: #{name}"
 end
 
 def srg_github_create_or_update_environment(environment)
@@ -1819,8 +1847,8 @@ def srg_github_create_or_update_environment(environment)
   )
 end
 
-def get_github_deployments(lane)
-  environment = github_environment(lane)
+def get_github_deployments(lane, business_unit = nil)
+  environment = github_environment(lane, business_unit)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment
 
   result = srg_github_get_deployments(environment)
@@ -1863,30 +1891,30 @@ def create_github_deployment(lane)
   return unless result
 
   # Check the commit sha is the same as the last commit.
-  return if github_deployment_sha_correct(result)
+  return result if github_deployment_sha_correct(result)
 
   delete_github_deployment(lane)
   # Try to create a deployment with the last commit instead.
   create_github_deployment_ref(environment, last_git_commit[:commit_hash])
 end
 
-def create_github_deployment_ref(environment, ref)
-  result = srg_github_create_deployment(environment, ref)
+def create_github_deployment_ref(environment, ref, production_environment = nil)
+  result = srg_github_create_deployment(environment, ref, production_environment)
   deployment_id = result[:json]['id']
   return unless deployment_id
 
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment_id.to_s
-  UI.message "Github created deployment: #{deployment_id}"
+  UI.command_output "Github created deployment: #{deployment_id}"
   result
 end
 
-def srg_github_create_deployment(environment, ref)
-  UI.message "Github deployment creation with ref: #{ref}"
+def srg_github_create_deployment(environment, ref, production_environment = nil)
+  UI.command "Github deployment creation with ref: #{ref}"
   github_api(
     api_token: ENV.fetch('GITHUB_TOKEN', nil),
     http_method: 'POST',
     path: "#{github_api_path}/deployments",
-    body: srg_github_create_deployment_body(environment, ref),
+    body: srg_github_create_deployment_body(environment, ref, production_environment),
     error_handlers: {
       '*' => proc do |result|
         UI.important 'Something went wrong with Github token and deployments API creation. ⚠️'
@@ -1896,20 +1924,23 @@ def srg_github_create_deployment(environment, ref)
   )
 end
 
-def srg_github_create_deployment_body(environment, ref)
+def srg_github_create_deployment_body(environment, ref, production_environment = nil)
+  production_environment ||= false
+  task = production_environment ? 'Distribute' : 'Build and distribute'
   {
     ref:,
     auto_merge: false,
     required_contexts: [],
     environment:,
-    task: 'Build and distribute',
-    description: "Build and distribute for #{environment} environment."
+    production_environment:,
+    task:,
+    description: "#{task} for #{environment} environment."
   }
 end
 
 def github_deployment_sha_correct(result)
   # Tag commit can be different from the last commit.
-  return true if ENV.fetch('NEW_PLAY_TAG', nil)
+  return true if ENV.fetch('OVERRIDE_PLAY_TAG', nil)
 
   last_git_commit[:commit_hash] == result[:json]['sha']
 end
@@ -1917,7 +1948,7 @@ end
 def github_deployment_ref_tag(lane)
   git_pull(only_tags: true)
 
-  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+  new_tag = ENV.fetch('OVERRIDE_PLAY_TAG', nil)
   return new_tag if new_tag && !new_tag.empty?
 
   tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
@@ -1939,7 +1970,7 @@ def delete_github_deployment(lane)
   return unless status == 204
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
-  UI.message "Github deleted deployment: #{deployment_id}"
+  UI.command_output "Github deleted deployment: #{deployment_id}"
 end
 
 def srg_github_delete_deployment(deployment_id)
@@ -1958,7 +1989,7 @@ end
 
 # Beta workflow creates a new tag. Try to add a Github deployment with tag ref.
 def add_github_deployment_tag_success(lane)
-  return unless ENV.fetch('NEW_PLAY_TAG', nil)
+  return unless ENV.fetch('OVERRIDE_PLAY_TAG', nil)
 
   # Avoid having twice deployments.
   update_github_deployment_inactive(lane)
@@ -1966,11 +1997,87 @@ def add_github_deployment_tag_success(lane)
 
   create_github_deployment(lane)
   update_github_deployment_success(lane)
-  ENV.delete('NEW_PLAY_TAG')
+  ENV.delete('OVERRIDE_PLAY_TAG')
 end
 
-def stop_unfinished_github_deployments(lane)
-  deployments = get_github_deployments(lane)
+def appstore_github_deployment(business_unit, platform, app_version)
+  return unless ENV.fetch('GITHUB_TOKEN', nil) && business_unit && platform && app_version&.build
+
+  lane_name = "#{platform}AppStoreReleases"
+  tag = srg_tag_from_spaceship_app_version(platform, app_version)
+
+  tag_deployment = get_github_appstore_tag_deployment(tag, lane_name, business_unit)
+  return unless tag_deployment
+
+  check_appstore_github_deployment(lane_name, business_unit, app_version, tag_deployment)
+end
+
+def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_deployment)
+  last_status = get_github_appstore_deployment_last_status(tag_deployment)
+  is_correct = github_appstore_deployment_state_is_correct(last_status, app_version)
+  UI.message "Github deployment state for tag #{tag_deployment['ref']} is already synchronized. ✅" if is_correct
+  return if is_correct
+
+  state = github_deployment_state_from_app_version(app_version)
+  update_github_appstore_deployment(lane_name, business_unit, tag_deployment, state)
+end
+
+def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
+  create_or_update_github_environment(lane_name, business_unit)
+  deployments = get_github_deployments(lane_name, business_unit)
+
+  tag_deployment = deployments&.find { |deployment| deployment['ref'] == tag }
+  UI.command_output "Github deployment: #{tag_deployment['id']}" if tag_deployment
+  return tag_deployment if tag_deployment
+
+  environment = github_environment(lane_name, business_unit)
+  result = create_github_deployment_ref(environment, tag, true)
+
+  result ? result[:json] : nil
+end
+
+def get_github_appstore_deployment_last_status(tag_deployment)
+  return unless tag_deployment
+
+  statuses = get_github_deployment_statuses(tag_deployment['id'])
+  statuses&.first
+end
+
+def github_appstore_deployment_state_is_correct(last_status, app_version)
+  return false unless last_status
+
+  last_status['state'] == github_deployment_state_from_app_version(app_version)
+end
+
+def update_github_appstore_deployment(lane, business_unit, deployment, state)
+  ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
+  ENV['OVERRIDE_PLAY_TAG'] = deployment['ref']
+
+  UI.message "Github deployment state for tag #{deployment['ref']} needs synchronization. 🔄"
+  update_github_deployment(state, lane, business_unit)
+
+  ENV.delete('GITHUB_DEPLOYMENT_ID')
+  ENV.delete('OVERRIDE_PLAY_TAG')
+end
+
+def github_deployment_state_from_app_version(app_version)
+  case app_version.app_store_state
+  when APP_STORE_STATE::WAITING_FOR_REVIEW,
+       APP_STORE_STATE::READY_FOR_REVIEW then 'queued'
+  when APP_STORE_STATE::IN_REVIEW then 'in_progress'
+  when APP_STORE_STATE::PENDING_DEVELOPER_RELEASE,
+       APP_STORE_STATE::PENDING_APPLE_RELEASE then 'pending'
+  when APP_STORE_STATE::READY_FOR_SALE then 'success'
+  when APP_STORE_STATE::PREPARE_FOR_SUBMISSION,
+       APP_STORE_STATE::REMOVED_FROM_SALE,
+       APP_STORE_STATE::DEVELOPER_REMOVED_FROM_SALE then 'inactive'
+  else
+    'error'
+  end
+end
+
+def stop_unfinished_github_deployments(lane, business_unit = nil)
+  deployments = get_github_deployments(lane, business_unit)
 
   return unless deployments
 
@@ -1979,22 +2086,28 @@ def stop_unfinished_github_deployments(lane)
     next unless statuses
 
     last_status = statuses.first
-    next unless last_status.nil? || !['success', 'inactive', 'error'].include?(last_status['state'])
+    next unless github_deployment_is_unfinished(last_status)
 
     lane_name = lane.to_s
-    UI.message "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_status['state']}"
+    last_state = last_status ? last_status['state'] : 'NaN'
+    UI.important "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_state}"
     stop_unfinished_github_deployment(lane, deployment, last_status)
   end
 end
 
 def stop_unfinished_github_deployment(lane, deployment, last_status)
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
-  ENV['BUILD_URL'] = last_status['log_url'] if last_status
+  original_build_url = ENV.fetch('BUILD_URL', nil)
+  ENV['BUILD_URL'] = last_status['log_url']
 
   update_github_deployment_error(lane)
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
-  ENV.delete('BUILD_URL')
+  ENV['BUILD_URL'] = original_build_url
+end
+
+def github_deployment_is_unfinished(status)
+  status.nil? || !['success', 'inactive', 'error'].include?(status['state'])
 end
 
 def get_github_deployment_statuses(deployment_id)
@@ -2035,16 +2148,16 @@ def update_github_deployment_inactive(lane)
   update_github_deployment('inactive', lane)
 end
 
-def update_github_deployment(state, lane)
+def update_github_deployment(state, lane, business_unit = nil)
   deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
-  environment = github_environment(lane)
+  environment = github_environment(lane, business_unit)
   return unless ENV.fetch('GITHUB_TOKEN', nil) && environment && deployment_id
 
   result = srg_github_update_deployment(environment, deployment_id, state, lane)
   deployment_state = result[:json]['state']
   return unless deployment_state
 
-  UI.message "Github updated deployment state: #{deployment_state}"
+  UI.command_output "Github updated deployment state: #{deployment_state}"
 end
 
 def srg_github_update_deployment(environment, deployment_id, state, lane)
@@ -2068,7 +2181,8 @@ def srg_github_update_deployment_body(environment, state, lane)
     environment:,
     description: "Building #{environment}: #{state}",
     log_url: build_log_url,
-    environment_url: environment_url(state, lane)
+    environment_url: environment_url(state, lane),
+    auto_inactive: true
   }
 end
 
@@ -2076,8 +2190,8 @@ def environment_url(state, lane)
   environment_data = github_environment_data(lane)
   return unless state == 'success' && environment_data
 
-  # Use the new tag if available.
-  new_tag = ENV.fetch('NEW_PLAY_TAG', nil)
+  # Use override tag if available.
+  new_tag = ENV.fetch('OVERRIDE_PLAY_TAG', nil)
 
   platform = platform_from_tag(new_tag) if new_tag
   platform ||= environment_data[:platform]
@@ -2317,7 +2431,7 @@ def tag_beta(platform)
     add_git_tag(tag:, sign: true)
     UI.message "Tag \"#{tag}\" created. ✅"
     push_git_tags
-    ENV['NEW_PLAY_TAG'] = tag
+    ENV['OVERRIDE_PLAY_TAG'] = tag
   end
 end
 
@@ -2560,8 +2674,7 @@ def can_run_deliver(business_unit, platform)
   app_store_state = latest_version.app_store_state
   UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is #{app_store_state}."
 
-  app__store_state = Spaceship::ConnectAPI::AppInfo::AppStoreState
-  review_states = [app__store_state::WAITING_FOR_REVIEW, app__store_state::IN_REVIEW]
+  review_states = [APP_STORE_STATE::WAITING_FOR_REVIEW, APP_STORE_STATE::IN_REVIEW]
   return true unless review_states.include? app_store_state
 
   UI.success "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is already submitted. ✅"

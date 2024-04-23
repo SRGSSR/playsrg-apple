@@ -157,7 +157,7 @@ Stop unfinished Github deployments for a lane on the current git branch. Recomme
 [bundle exec] fastlane ios iOSPrepareAppStoreReleases
 ```
 
-Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.
+Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` (boolean) parameters.
 
 ### ios tvOSPrepareAppStoreReleases
 
@@ -165,7 +165,7 @@ Prepare AppStore iOS releases on App Store Connect with the current version and 
 [bundle exec] fastlane ios tvOSPrepareAppStoreReleases
 ```
 
-Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.
+Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` (boolean) parameters.
 
 ### ios appStoreAppStatus
 
@@ -173,7 +173,7 @@ Prepare AppStore tvOS releases on App Store Connect with the current version and
 [bundle exec] fastlane ios appStoreAppStatus
 ```
 
-Get AppStore App status for iOS and tvOS
+Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) parameter.
 
 ### ios appStoreTestFlightAppStatus
 
