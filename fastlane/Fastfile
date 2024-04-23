@@ -1169,6 +1169,11 @@ def platform(lane)
   lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
 end
 
+def tag_condition(lane)
+  included_lanes = ['appstorebuild', 'beta']
+  included_lanes.one? { |i| lane.to_s.downcase.include? i }
+end
+
 def what_s_new_condition(lane)
   included_lanes = ['appstorebuild', 'beta']
   (!lane.to_s.downcase.include? 'tester') &&
@@ -1875,6 +1880,15 @@ def srg_github_get_deployments(environment, max)
   )
 end
 
+def get_github_tag_deployment(tag, lane, business_unit = nil)
+  return unless tag && !tag.empty?
+
+  deployments = get_github_deployments(lane, business_unit)
+  return unless deployments
+
+  deployments.find { |deployment| deployment['ref'] == tag }
+end
+
 def create_github_deployment(lane)
   ENV.delete('GITHUB_DEPLOYMENT_ID')
   environment = github_environment(lane)
@@ -1882,13 +1896,14 @@ def create_github_deployment(lane)
 
   git_tag = github_deployment_ref_tag(lane)
 
-  result = if git_tag && !git_tag.empty?
-             # Try to create a deployment with the tag.
-             create_github_deployment_ref(environment, git_tag)
-           else
-             # Try to create a deployment with the branch name.
-             create_github_deployment_ref(environment, git_branch_name)
-           end
+  # Create only one time a tag deployment for Beta and TestFlight builds.
+  # Use it if not finished successfully. Otherwise, Don't create a new deployment.
+  # This can happen if the lane is re-run to update TestFlight distribution.
+  tag_deployment = get_github_tag_deployment(git_tag, lane)
+  return return_github_tag_deployment(tag_deployment) if tag_deployment && tag_condition(lane)
+
+  # Try to create a deployment with the tag or the branch name.
+  result = create_github_deployment_tag_or_branch(environment, git_tag)
   return unless result
 
   # Check the commit sha is the same as the last commit.
@@ -1897,6 +1912,24 @@ def create_github_deployment(lane)
   delete_github_deployment(lane)
   # Try to create a deployment with the last commit instead.
   create_github_deployment_ref(environment, last_git_commit[:commit_hash])
+end
+
+def return_github_tag_deployment(tag_deployment)
+  return if github_tag_deployment_is_success(tag_deployment)
+
+  ENV['GITHUB_DEPLOYMENT_ID'] = tag_deployment['id'].to_s
+  UI.command_output "Github deployment: #{tag_deployment['id']}"
+  tag_deployment
+end
+
+def create_github_deployment_tag_or_branch(environment, git_tag)
+  if git_tag && !git_tag.empty?
+    # Try to create a deployment with the tag.
+    create_github_deployment_ref(environment, git_tag)
+  else
+    # Try to create a deployment with the branch name.
+    create_github_deployment_ref(environment, git_branch_name)
+  end
 end
 
 def create_github_deployment_ref(environment, ref, production_environment = nil)
@@ -1961,6 +1994,15 @@ def github_deployment_ref_tag(lane)
   tag
 end
 
+def github_tag_deployment_is_success(tag_deployment)
+  last_status = get_github_deployment_last_status(tag_deployment)
+  return false unless last_status
+
+  is_success = last_status['state'] == 'success'
+  UI.message "Github deployment state for tag #{tag_deployment['ref']} is already in success. ✅" if is_success
+  is_success
+end
+
 def delete_github_deployment(lane)
   deployment_id = ENV.fetch('GITHUB_DEPLOYMENT_ID', nil)
   environment = github_environment(lane)
@@ -2014,7 +2056,7 @@ def appstore_github_deployment(business_unit, platform, app_version)
 end
 
 def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_deployment)
-  last_status = get_github_appstore_deployment_last_status(tag_deployment)
+  last_status = get_github_deployment_last_status(tag_deployment)
   is_correct = github_appstore_deployment_state_is_correct(last_status, app_version)
   UI.message "Github deployment state for tag #{tag_deployment['ref']} is already synchronized. ✅" if is_correct
   return if is_correct
@@ -2025,9 +2067,8 @@ end
 
 def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
   create_or_update_github_environment(lane_name, business_unit)
-  deployments = get_github_deployments(lane_name, business_unit)
 
-  tag_deployment = deployments&.find { |deployment| deployment['ref'] == tag }
+  tag_deployment = get_github_tag_deployment(tag, lane_name, business_unit)
   UI.command_output "Github deployment: #{tag_deployment['id']}" if tag_deployment
   return tag_deployment if tag_deployment
 
@@ -2035,13 +2076,6 @@ def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
   result = create_github_deployment_ref(environment, tag, true)
 
   result ? result[:json] : nil
-end
-
-def get_github_appstore_deployment_last_status(tag_deployment)
-  return unless tag_deployment
-
-  statuses = get_github_deployment_statuses(tag_deployment['id'])
-  statuses&.first
 end
 
 def github_appstore_deployment_state_is_correct(last_status, app_version)
@@ -2083,13 +2117,11 @@ def stop_unfinished_github_deployments(lane, business_unit = nil)
   return unless deployments
 
   deployments.reverse.each do |deployment|
-    statuses = get_github_deployment_statuses(deployment['id'])
-    next unless statuses
-
-    last_status = statuses.first
+    lane_name = lane.to_s
+    UI.message "Checking Github deployment #{deployment['id']} for #{lane_name}"
+    last_status = get_github_deployment_last_status(deployment)
     next unless github_deployment_is_unfinished(last_status)
 
-    lane_name = lane.to_s
     last_state = last_status ? last_status['state'] : 'NaN'
     UI.important "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_state}"
     stop_unfinished_github_deployment(lane, deployment, last_status)
@@ -2131,6 +2163,13 @@ def srg_github_get_deployment_statuses(deployment_id)
       end
     }
   )
+end
+
+def get_github_deployment_last_status(deployment)
+  return unless deployment
+
+  statuses = get_github_deployment_statuses(deployment['id'])
+  statuses&.first
 end
 
 def update_github_deployment_in_progress(lane)
