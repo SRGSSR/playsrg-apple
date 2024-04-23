@@ -2019,7 +2019,7 @@ def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_
   return if is_correct
 
   state = github_deployment_state_from_app_version(app_version)
-  update_github_appstore_deployment(lane_name, business_unit, tag_deployment, state, last_status)
+  update_github_appstore_deployment(lane_name, business_unit, tag_deployment, state)
 end
 
 def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
@@ -2049,16 +2049,14 @@ def github_appstore_deployment_state_is_correct(last_status, app_version)
   last_status['state'] == github_deployment_state_from_app_version(app_version)
 end
 
-def update_github_appstore_deployment(lane, business_unit, deployment, state, last_status)
+def update_github_appstore_deployment(lane, business_unit, deployment, state)
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
-  ENV['BUILD_URL'] = last_status['log_url'] if last_status
   ENV['OVERRIDE_PLAY_TAG'] = deployment['ref']
 
   UI.message "Github deployment state for tag #{deployment['ref']} needs synchronization. 🔄"
   update_github_deployment(state, lane, business_unit)
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
-  ENV.delete('BUILD_URL')
   ENV.delete('OVERRIDE_PLAY_TAG')
 end
 
@@ -2099,12 +2097,13 @@ end
 
 def stop_unfinished_github_deployment(lane, deployment, last_status)
   ENV['GITHUB_DEPLOYMENT_ID'] = deployment['id'].to_s
-  ENV['BUILD_URL'] = last_status['log_url'] if last_status
+  original_build_url = ENV.fetch('BUILD_URL', nil)
+  ENV['BUILD_URL'] = last_status['log_url']
 
   update_github_deployment_error(lane)
 
   ENV.delete('GITHUB_DEPLOYMENT_ID')
-  ENV.delete('BUILD_URL')
+  ENV['BUILD_URL'] = original_build_url
 end
 
 def github_deployment_is_unfinished(status)
