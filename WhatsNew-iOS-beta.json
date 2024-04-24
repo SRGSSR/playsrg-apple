@@ -225,5 +225,6 @@
     "3.8.3-446": "- Prepare AppStore release with official SRG library releases.\nSee previous build release notes.",
     "3.8.4-447": "- Sort latest episodes from my favorites by web publication date to help mixing web first content and regular new content.\n- Update deeplink domain for private builds. ",
     "3.8.4-448": "- Fixed a crash when opening radio channel page or audio show page from media player view.",
-    "3.8.5-449": "- Maintenance build.\n- Add audio and subtitle selections in email support information. \n- Image service maintnance. [RTS]"
+    "3.8.5-449": "- Maintenance build.\n- Add audio and subtitle selections in email support information. \n- Image service maintnance. [RTS]",
+    "3.8.5-450": "- Fix song list layout in radio player.\n- Move # section to end of AZ show list (TV and radios)."
 }
