@@ -206,7 +206,7 @@ final class PageViewController: UIViewController {
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: model.id, rowPosition: indexPath.section)
+            view.content = SectionHeaderView(section: section, pageId: model.id)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -1021,7 +1021,6 @@ private extension PageViewController {
     private struct SectionHeaderView: View {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
-        let rowPosition: Int
         
         @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
@@ -1039,10 +1038,10 @@ private extension PageViewController {
         }
         
         private var foregroundColor: Color {
-            if case .topic = pageId, rowPosition == 0 {
+            switch pageId {
+            case .topic, .show:
                 return .white
-            }
-            else {
+            default:
                 return .srgGrayC7
             }
         }
