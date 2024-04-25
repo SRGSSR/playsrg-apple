@@ -465,6 +465,15 @@ extension PageViewModel {
         }
     }
     
+    var displayedTitleNeedsTopPadding: Bool {
+        if case let .topic(topic) = id, ApplicationConfiguration.shared.topicColors(for: topic) != nil {
+            return constant(iOS: true, tvOS: false)
+        }
+        else {
+            return false
+        }
+    }
+    
     var displayedGradientTopic: SRGTopic? {
         switch id {
         case let .topic(topic):

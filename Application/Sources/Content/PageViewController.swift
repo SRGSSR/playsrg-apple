@@ -299,7 +299,7 @@ final class PageViewController: UIViewController {
         }
         
         if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
-            self.topicGradientView.content = TopicGradientView(topic, style: style, verticallyCentered: constant(iOS: true, tvOS: false), bottomFadeOutReduced: isShowHeaderVerticalLayout)
+            self.topicGradientView.content = TopicGradientView(topic, style: style)
         }
         else {
             self.topicGradientView.content = nil
@@ -689,9 +689,10 @@ private extension PageViewController {
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
+    private static let layoutTopicGradientViewHeight: CGFloat = 572
     
     private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
-        return required ? layoutVerticalMargin : 0
+        return required ? layoutVerticalMargin * 2 : 0
     }
     
     private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
@@ -700,7 +701,8 @@ private extension PageViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         if let title = model.displayedTitle {
-            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.displayedTitleDescription, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.displayedTitleDescription,
+                                                                  topPadding: layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding), layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         else if let show = model.displayedShow {
@@ -837,29 +839,28 @@ private extension PageViewController {
     }
     
     private func updateTopicGradientLayout() {
-        let topScreenOffset = (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) + (self.navigationController?.navigationBar.frame.height ?? 0)
-       
-        let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
-        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
-        let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
-        
-        var heightAnchorConstant = topScreenOffset + supplementaryItemsHeight
-        
-        switch model.id {
-        case .topic:
-            heightAnchorConstant += mediaCellHeight * 2
-        default:
-            heightAnchorConstant += mediaCellHeight
+        let topScreenOffset = constant(iOS: 0, tvOS: -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
+
+        if case .show = model.id {
+            let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
+            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+            let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
+            
+            // Move the gradient view below the show image when displayed in compact horizontal size class
+            if isShowHeaderVerticalLayout {
+                let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
+                topicGradientViewTopAnchor.constant = showImageOffset
+                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - showImageOffset + mediaCellHeight
+            }
+            else {
+                topicGradientViewTopAnchor.constant = topScreenOffset
+                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight + mediaCellHeight
+            }
         }
-        
-#if os(iOS)
-        // Double the gradient view height to include it above the top safe area (displayed when pull to refresh).
-        topicGradientViewTopAnchor.constant = -topScreenOffset - heightAnchorConstant
-        topicGradientViewHeightAnchor.constant = heightAnchorConstant * 2
-#else
-        topicGradientViewTopAnchor.constant = -topScreenOffset
-        topicGradientViewHeightAnchor.constant = heightAnchorConstant
-#endif
+        else {
+            topicGradientViewTopAnchor.constant = topScreenOffset
+            topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
+        }
     }
     
     private var isShowHeaderVerticalLayout: Bool {
