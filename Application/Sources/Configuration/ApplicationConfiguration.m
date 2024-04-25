@@ -163,7 +163,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSArray<RadioChannel *> *satelliteRadioChannels;
 
-@property (nonatomic) NSDictionary *topicColors;
+@property (nonatomic) NSDictionary<NSString*, NSArray<UIColor *> *> *topicColors;
 
 @property (nonatomic) NSArray<NSNumber *> *tvGuideOtherBouquetsObjc;
 

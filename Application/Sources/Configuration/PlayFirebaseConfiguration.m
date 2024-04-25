@@ -310,8 +310,10 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
         if ([colors isKindOfClass:NSDictionary.class]) {
             UIColor *firstColor = [UIColor srg_colorFromHexadecimalString:colors[@"firstColor"]];
             UIColor *secondColor = [UIColor srg_colorFromHexadecimalString:colors[@"secondColor"]];
+            Boolean reduceColorBrightness = [colors[@"reduceColorBrightness"] boolValue];
             if (firstColor && secondColor) {
-                topicColors[key] = @[firstColor, secondColor];
+                CGFloat opacity = reduceColorBrightness ? 0.65 : 1.;
+                topicColors[key] = @[[firstColor colorWithAlphaComponent:opacity], [secondColor colorWithAlphaComponent:opacity]];
             }
             else {
                 PlayLogWarning(@"configuration", @"Topic colors dictionnary is missing valid colors. The content of %@ is not valid.", key);

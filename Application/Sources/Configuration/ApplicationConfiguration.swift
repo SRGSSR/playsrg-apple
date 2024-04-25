@@ -52,7 +52,7 @@ extension ApplicationConfiguration {
     }
     
     func topicColors(for topic: SRGTopic) -> (Color, Color)? {
-        guard let topicColorsArray = self.topicColors[topic.urn] as? [UIColor], topicColorsArray.count == 2 else { return nil }
+        guard let topicColorsArray = self.topicColors[topic.urn], topicColorsArray.count == 2 else { return nil }
         
         let colors = topicColorsArray.map { Color($0) }
         return (colors.first!, colors.last!)
