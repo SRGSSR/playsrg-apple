@@ -21,6 +21,8 @@ struct ShowCell: View {
     let style: Style
     let imageVariant: SRGImageVariant
     
+    var foregroundColor: Color = .srgGrayC7
+    
     @StateObject private var model = ShowCellViewModel()
     
     @Environment(\.isEditing) private var isEditing
@@ -30,6 +32,13 @@ struct ShowCell: View {
         _show = .constant(show)
         self.style = style
         self.imageVariant = imageVariant
+    }
+    
+    func foregroundColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundColor = color
+        return view
     }
     
     var body: some View {
@@ -42,6 +51,7 @@ struct ShowCell: View {
             } label: {
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
+                        .foregroundColor(foregroundColor)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .padding(.top, ShowCellSize.verticalPadding)
                 }
@@ -52,6 +62,7 @@ struct ShowCell: View {
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
+                        .foregroundColor(foregroundColor)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)
                         .padding(.vertical, ShowCellSize.verticalPadding)
                 }
@@ -86,6 +97,15 @@ struct ShowCell: View {
         @ObservedObject var model: ShowCellViewModel
         let style: Style
         
+        var foregroundColor: Color = .srgGrayC7
+        
+        func foregroundColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.foregroundColor = color
+            return view
+        }
+        
         var body: some View {
             HStack {
                 Text(model.title ?? "")
@@ -101,7 +121,7 @@ struct ShowCell: View {
                 }
 #endif
             }
-            .foregroundColor(.srgGrayD2)
+            .foregroundColor(foregroundColor)
         }
     }
 }

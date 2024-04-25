@@ -20,6 +20,23 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     let alignment: Alignment
     let detailed: Bool
     
+    var foregroundColor: Color = .srgGrayC7
+    var secondaryColor: Color = .srgGray96
+    
+    func foregroundColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundColor = color
+        return view
+    }
+    
+    func secondaryColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.secondaryColor = color
+        return view
+    }
+    
     private var stackAlignment: HorizontalAlignment {
         return alignment == .center ? .center : .leading
     }

@@ -37,17 +37,17 @@ struct TruncatableTextView: View {
     }
     
     func foregroundColor(_ color: Color) -> Self {
-        var truncatableTextView = self
+        var view = self
         
-        truncatableTextView.foregroundColor = color
-        return truncatableTextView
+        view.foregroundColor = color
+        return view
     }
     
     func secondaryColor(_ color: Color) -> Self {
-        var truncatableTextView = self
+        var view = self
         
-        truncatableTextView.secondaryColor = color
-        return truncatableTextView
+        view.secondaryColor = color
+        return view
     }
     
     var body: some View {

@@ -32,6 +32,9 @@ struct MediaCell: View {
     let layout: Layout
     let action: (() -> Void)?
     
+    var foregroundColor: Color = .srgGrayC7
+    var secondaryColor: Color = .srgGray96
+    
     fileprivate var onFocusAction: ((Bool) -> Void)?
     
     @State private var isFocused = false
@@ -68,6 +71,20 @@ struct MediaCell: View {
         self.action = action
     }
     
+    func foregroundColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundColor = color
+        return view
+    }
+    
+    func secondaryColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.secondaryColor = color
+        return view
+    }
+    
     var body: some View {
         Group {
 #if os(tvOS)
@@ -78,6 +95,8 @@ struct MediaCell: View {
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             } label: {
                 DescriptionView(media: media, style: style)
+                    .foregroundColor(foregroundColor)
+                    .secondaryColor(secondaryColor)
                     .padding(.top, verticalPadding)
             }
 #else
@@ -90,6 +109,8 @@ struct MediaCell: View {
                         .redactable()
                         .layoutPriority(1)
                     DescriptionView(media: media, style: style, embeddedDirection: direction)
+                        .foregroundColor(foregroundColor)
+                        .secondaryColor(secondaryColor)
                         .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                         .padding(.leading, horizontalPadding)
                         .padding(.top, verticalPadding)
@@ -126,6 +147,9 @@ struct MediaCell: View {
         let style: MediaCell.Style
         let embeddedDirection: StackDirection
         
+        var foregroundColor: Color = .srgGrayC7
+        var secondaryColor: Color = .srgGray96
+        
         init(
             media: SRGMedia?,
             style: MediaCell.Style,
@@ -134,6 +158,20 @@ struct MediaCell: View {
             self.media = media
             self.style = style
             self.embeddedDirection = embeddedDirection
+        }
+        
+        func foregroundColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.foregroundColor = color
+            return view
+        }
+        
+        func secondaryColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.secondaryColor = color
+            return view
         }
         
         private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
@@ -195,20 +233,20 @@ struct MediaCell: View {
                     Text(subtitle)
                         .srgFont(.subtitle1)
                         .lineLimit(2)
-                        .foregroundColor(.srgGray96)
+                        .foregroundColor(secondaryColor)
                 }
                 if let title {
                     Text(title)
                         .srgFont(.H4)
                         .lineLimit(titleLineLimit)
-                        .foregroundColor(.srgGrayD2)
+                        .foregroundColor(foregroundColor)
                         .layoutPriority(1)
                 }
                 if let summary {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(2)
-                        .foregroundColor(.srgGrayD2)
+                        .foregroundColor(foregroundColor)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

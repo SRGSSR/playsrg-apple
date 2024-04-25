@@ -25,10 +25,10 @@ struct TitleHeaderView: View {
     var foregroundColor: Color = .white
     
     func foregroundColor(_ color: Color) -> Self {
-        var titleHeaderView = self
+        var view = self
         
-        titleHeaderView.foregroundColor = color
-        return titleHeaderView
+        view.foregroundColor = color
+        return view
     }
     
     var body: some View {

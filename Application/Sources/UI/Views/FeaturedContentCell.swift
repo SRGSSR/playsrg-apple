@@ -26,6 +26,23 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     let layout: Layout
     let style: Style
     
+    var foregroundColor: Color = .srgGrayC7
+    var secondaryColor: Color = .srgGray96
+    
+    func foregroundColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundColor = color
+        return view
+    }
+    
+    func secondaryColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.secondaryColor = color
+        return view
+    }
+    
     @Environment(\.isSelected) private var isSelected
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     
@@ -63,6 +80,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                         .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                         .layoutPriority(1)
                     FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)
+                        .foregroundColor(foregroundColor)
+                        .secondaryColor(secondaryColor)
                         .padding(.horizontal, horizontalPadding)
                         .padding(.vertical, verticalPadding)
                 }
@@ -77,6 +96,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .layoutPriority(1)
                 FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)
+                    .foregroundColor(foregroundColor)
+                    .secondaryColor(secondaryColor)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.vertical, verticalPadding)
             }

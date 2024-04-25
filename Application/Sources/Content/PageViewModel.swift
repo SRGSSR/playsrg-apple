@@ -427,6 +427,24 @@ extension PageViewModel {
     }
 #endif
     
+    var foregroundColor: Color {
+        switch id {
+        case .page, .topic:
+            return .white
+        default:
+            return .srgGrayC7
+        }
+    }
+    
+    var secondaryColor: Color {
+        switch id {
+        case .page, .topic:
+            return .srgGrayC7
+        default:
+            return .srgGray96
+        }
+    }
+    
     var displayedTitle: String? {
         switch id {
         case let .page(page):
@@ -453,15 +471,6 @@ extension PageViewModel {
         }
         else {
             return .leading
-        }
-    }
-    
-    var displayedTitleForegroundColor: Color {
-        switch id {
-        case .page, .topic:
-            return .white
-        default:
-            return .srgGrayC7
         }
     }
     

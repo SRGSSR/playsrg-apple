@@ -185,7 +185,7 @@ final class PageViewController: UIViewController {
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
-            cell.content = ItemCell(item: item, id: model.id)
+            cell.content = ItemCell(item: item, id: model.id, foregroundColor: model.foregroundColor, secondaryColor: model.secondaryColor)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -194,7 +194,7 @@ final class PageViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment).foregroundColor(model.displayedTitleForegroundColor)
+            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment).foregroundColor(model.foregroundColor)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
@@ -907,23 +907,25 @@ private extension PageViewController {
     struct MediaCell: View {
         let media: SRGMedia?
         let section: PageViewModel.Section
+        let foregroundColor: Color
+        let secondaryColor: Color
         
         var body: some View {
             switch section.viewModelProperties.layout {
             case .heroStage:
                 HeroMediaCell(media: media, label: section.properties.label)
             case .headline:
-                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .headline)
+                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .headline).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
             case .element, .elementSwimlane:
-                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .element)
+                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .element).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
             case .mediaList:
-                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
             }
         }
         
@@ -937,15 +939,17 @@ private extension PageViewController {
     struct ShowCell: View {
         let show: SRGShow?
         let section: PageViewModel.Section
+        let foregroundColor: Color
+        let secondaryColor: Color
         
         var body: some View {
             switch section.viewModelProperties.layout {
             case .heroStage, .headline:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
             case .element:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .element)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .element).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant)
+                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant).foregroundColor(foregroundColor)
             }
         }
     }
@@ -953,19 +957,21 @@ private extension PageViewController {
     struct ItemCell: View {
         let item: PageViewModel.Item
         let id: PageViewModel.Id
+        let foregroundColor: Color
+        let secondaryColor: Color
         
         var body: some View {
             switch item.wrappedValue {
             case let .item(wrappedItem):
                 switch wrappedItem {
                 case .mediaPlaceholder:
-                    MediaCell(media: nil, section: item.section)
+                    MediaCell(media: nil, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
                 case let .media(media):
-                    MediaCell(media: media, section: item.section)
+                    MediaCell(media: media, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
                 case .showPlaceholder:
-                    ShowCell(show: nil, section: item.section)
+                    ShowCell(show: nil, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
                 case let .show(show):
-                    ShowCell(show: show, section: item.section)
+                    ShowCell(show: show, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
                 case .topicPlaceholder:
                     TopicCell(topic: nil)
                 case let .topic(topic):
