@@ -26,7 +26,8 @@ final class PageViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyContentView: HostView<EmptyContentView>!
     private weak var topicGradientView: HostView<TopicGradientView>!
-    private weak var topicGradientViewTopAnchor: NSLayoutConstraint!
+    private weak var topicGradientViewFixTopAnchor: NSLayoutConstraint!
+    private weak var topicGradientViewStickyTopAnchor: NSLayoutConstraint!
     private weak var topicGradientViewHeightAnchor: NSLayoutConstraint!
     
 #if os(iOS)
@@ -136,15 +137,20 @@ final class PageViewController: UIViewController {
         self.topicGradientView = topicGradientView
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
-        let topicGradientViewTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
+        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */) // Fix top anchor when scrolling
+        topicGradientViewFixTopAnchor.priority = .defaultHigh
+        let topicGradientViewStickyTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
+        topicGradientViewStickyTopAnchor.priority = .defaultLow
         let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: 0 /* set in updateTopicGradientLayout() */)
         NSLayoutConstraint.activate([
-            topicGradientViewTopAnchor,
+            topicGradientViewFixTopAnchor,
+            topicGradientViewStickyTopAnchor,
             topicGradientView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor),
             topicGradientView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor),
             topicGradientViewHeightAnchor
         ])
-        self.topicGradientViewTopAnchor = topicGradientViewTopAnchor
+        self.topicGradientViewFixTopAnchor = topicGradientViewFixTopAnchor
+        self.topicGradientViewStickyTopAnchor = topicGradientViewStickyTopAnchor
         self.topicGradientViewHeightAnchor = topicGradientViewHeightAnchor
         
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
@@ -596,6 +602,12 @@ extension PageViewController: UIScrollViewDelegate {
         if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
             model.loadMore()
         }
+        
+#if os(iOS)
+        if isShowHeaderVerticalLayout {
+            topicGradientViewStickyTopAnchor.constant = showPageStickyTopAnchorConstant
+        }
+#endif
     }
 }
 
@@ -839,8 +851,8 @@ private extension PageViewController {
     }
     
     private func updateTopicGradientLayout() {
-        let topScreenOffset = constant(iOS: 0, tvOS: -(UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
-
+        let topScreenOffset = constant(iOS: (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) + (self.navigationController?.navigationBar.frame.height ?? 0), tvOS: 0)
+        
         if case .show = model.id {
             let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
             let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
@@ -848,22 +860,40 @@ private extension PageViewController {
             
             // Move the gradient view below the show image when displayed in compact horizontal size class
             if isShowHeaderVerticalLayout {
+                topicGradientViewFixTopAnchor.priority = .defaultLow
+                topicGradientViewStickyTopAnchor.priority = .defaultHigh
+                
+                topicGradientViewStickyTopAnchor.constant = showPageStickyTopAnchorConstant
                 let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
-                topicGradientViewTopAnchor.constant = showImageOffset
                 topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - showImageOffset + mediaCellHeight
             }
             else {
-                topicGradientViewTopAnchor.constant = topScreenOffset
+                topicGradientViewStickyTopAnchor.priority = .defaultLow
+                topicGradientViewFixTopAnchor.priority = .defaultHigh
+                
+                topicGradientViewFixTopAnchor.constant = topScreenOffset
                 topicGradientViewHeightAnchor.constant = supplementaryItemsHeight + mediaCellHeight
             }
         }
         else {
-            topicGradientViewTopAnchor.constant = topScreenOffset
+            topicGradientViewStickyTopAnchor.priority = .defaultLow
+            topicGradientViewFixTopAnchor.priority = .defaultHigh
+            
+            topicGradientViewFixTopAnchor.constant = topScreenOffset
             topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
         }
     }
     
+    private var showPageStickyTopAnchorConstant: CGFloat {
+        let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
+        let topScreenOffset = constant(iOS: (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) + (self.navigationController?.navigationBar.frame.height ?? 0), tvOS: 0)
+        let offset = topScreenOffset + collectionView.contentOffset.y
+        return (offset < showImageOffset) ? showImageOffset : offset
+    }
+    
     private var isShowHeaderVerticalLayout: Bool {
+        guard case .show = model.id else { return false }
+        
         return ShowHeaderView.isVerticalLayout(
             horizontalSizeClass: traitCollection.horizontalSizeClass,
             isLandscape: UIApplication.shared.mainWindow?.isLandscape ?? false
