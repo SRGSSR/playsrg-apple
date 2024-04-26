@@ -194,7 +194,7 @@ final class PageViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment).foregroundColor(model.foregroundColor)
+            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).foregroundColor(model.foregroundColor)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in

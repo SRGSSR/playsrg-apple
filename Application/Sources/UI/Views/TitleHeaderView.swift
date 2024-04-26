@@ -108,6 +108,7 @@ struct TitleHeaderView_Previews: PreviewProvider {
             TitleHeaderView("Title", description: nil, titleTextAlignment: .center)
             TitleHeaderView("Title", description: "description", titleTextAlignment: .trailing)
             TitleHeaderView("Title", description: nil, titleTextAlignment: .trailing)
+            TitleHeaderView("Title", description: nil, titleTextAlignment: .leading, topPadding: 16)
             TitleHeaderView(nil, description: nil)
         }
         .frame(width: 375)
