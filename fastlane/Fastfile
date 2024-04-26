@@ -1986,7 +1986,7 @@ def github_deployment_ref_tag(lane)
   return new_tag if new_tag && !new_tag.empty?
 
   tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
-  tag_commit = sh("git rev-list -n 1 tags/#{tag}")
+  tag_commit = sh("git rev-list -n 1 tags/#{tag}").strip
   return unless tag_commit && !tag_commit.empty?
 
   return unless last_git_commit[:commit_hash] == tag_commit
