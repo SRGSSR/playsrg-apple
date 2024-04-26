@@ -206,7 +206,7 @@ final class PageViewController: UIViewController {
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: model.id)
+            view.content = SectionHeaderView(section: section, pageId: model.id).foregroundColor(model.foregroundColor)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -1028,8 +1028,17 @@ private extension PageViewController {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
         
+        var foregroundColor: Color = .srgGrayD2
+        
         @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
+        
+        func foregroundColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.foregroundColor = color
+            return view
+        }
         
         private static func title(for section: PageViewModel.Section) -> String? {
             return section.properties.title
@@ -1041,15 +1050,6 @@ private extension PageViewController {
         
         private var hasDetailDisclosure: Bool {
             return section.viewModelProperties.canOpenDetailPage || isSectionWideSupportEnabled
-        }
-        
-        private var foregroundColor: Color {
-            switch pageId {
-            case .topic, .show:
-                return .white
-            default:
-                return .srgGrayD2
-            }
         }
         
         var accessibilityLabel: String? {
