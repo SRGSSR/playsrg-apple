@@ -19290,7 +19290,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
-				branch = "feature/font-update";
+				branch = "feature/design-system-update";
 				kind = branch;
 			};
 		};
