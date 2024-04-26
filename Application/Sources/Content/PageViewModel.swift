@@ -429,7 +429,7 @@ extension PageViewModel {
     
     var foregroundColor: Color {
         switch id {
-        case .page, .topic:
+        case .page, .topic, .show:
             return .white
         default:
             return .srgGrayD2
