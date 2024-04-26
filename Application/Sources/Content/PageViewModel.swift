@@ -429,8 +429,11 @@ extension PageViewModel {
     
     var foregroundColor: Color {
         switch id {
-        case .topic, .show:
-            return .white
+        case let .topic(topic):
+            return ApplicationConfiguration.shared.topicColors(for: topic) != nil ? .white : .srgGrayD2
+        case .show:
+            guard let topic = displayedShow?.topics?.first else { return .srgGrayD2 }
+            return ApplicationConfiguration.shared.topicColors(for: topic) != nil ? .white : .srgGrayD2
         default:
             return .srgGrayD2
         }
@@ -442,7 +445,11 @@ extension PageViewModel {
     
     var titlesColor: Color {
         switch id {
-        case .page, .topic, .show:
+        case .page:
+            return .white
+        case let .topic(topic):
+            return ApplicationConfiguration.shared.topicColors(for: topic) != nil ? .white : .srgGrayD2
+        case .show:
             return .white
         default:
             return .srgGrayD2
