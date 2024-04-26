@@ -33,6 +33,7 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
     
+    var titleColor: Color = .white
     var foregroundColor: Color = .srgGrayD2
     
     static let imageAspectRatio: CGFloat = 16 / 9
@@ -50,6 +51,13 @@ struct ShowHeaderView: View {
         self.horizontalPadding = horizontalPadding
     }
     
+    func titleColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.titleColor = color
+        return view
+    }
+    
     func foregroundColor(_ color: Color) -> Self {
         var view = self
         
@@ -59,6 +67,7 @@ struct ShowHeaderView: View {
     
     var body: some View {
         MainView(model: model, horizontalPadding: horizontalPadding)
+            .titleColor(titleColor)
             .foregroundColor(foregroundColor)
             .onAppear {
                 model.show = show
@@ -76,12 +85,20 @@ struct ShowHeaderView: View {
         
         @State private var isLandscape: Bool
         
+        var titleColor: Color = .white
         var foregroundColor: Color = .srgGrayD2
         
         init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
             self.horizontalPadding = horizontalPadding
             self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
+        }
+        
+        func titleColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.titleColor = color
+            return view
         }
         
         func foregroundColor(_ color: Color) -> Self {
@@ -103,6 +120,7 @@ struct ShowHeaderView: View {
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
+                            .titleColor(titleColor)
                             .foregroundColor(foregroundColor)
                             .padding(.top, padding)
                             .padding(.horizontal, padding)
@@ -113,6 +131,7 @@ struct ShowHeaderView: View {
                 else {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
+                            .titleColor(titleColor)
                             .foregroundColor(foregroundColor)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
@@ -135,7 +154,15 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         let compactLayout: Bool
         
+        var titleColor: Color = .white
         var foregroundColor: Color = .srgGrayD2
+        
+        func titleColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.titleColor = color
+            return view
+        }
         
         func foregroundColor(_ color: Color) -> Self {
             var view = self
@@ -154,7 +181,7 @@ struct ShowHeaderView: View {
                 // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(.white)
+                    .foregroundColor(titleColor)
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.srgDarkRed))
                 }
