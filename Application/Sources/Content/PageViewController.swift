@@ -137,7 +137,7 @@ final class PageViewController: UIViewController {
         self.topicGradientView = topicGradientView
         
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
-        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */) // Fix top anchor when scrolling
+        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
         topicGradientViewFixTopAnchor.priority = .defaultHigh
         let topicGradientViewStickyTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
         topicGradientViewStickyTopAnchor.priority = .defaultLow
@@ -851,7 +851,7 @@ private extension PageViewController {
     }
     
     private func updateTopicGradientLayout() {
-        let topScreenOffset = constant(iOS: (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) + (self.navigationController?.navigationBar.frame.height ?? 0), tvOS: 0)
+        let topScreenOffset = constant(iOS: collectionView.safeAreaInsets.top, tvOS: 0)
         
         if case .show = model.id {
             let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
@@ -886,7 +886,7 @@ private extension PageViewController {
     
     private var showPageStickyTopAnchorConstant: CGFloat {
         let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
-        let topScreenOffset = constant(iOS: (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) + (self.navigationController?.navigationBar.frame.height ?? 0), tvOS: 0)
+        let topScreenOffset = constant(iOS: collectionView.safeAreaInsets.top, tvOS: 0)
         let offset = topScreenOffset + collectionView.contentOffset.y
         return (offset < showImageOffset) ? showImageOffset : offset
     }
