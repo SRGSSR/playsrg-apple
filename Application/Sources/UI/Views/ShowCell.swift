@@ -21,7 +21,7 @@ struct ShowCell: View {
     let style: Style
     let imageVariant: SRGImageVariant
     
-    var foregroundColor: Color = .srgGrayC7
+    var foregroundColor: Color = .srgGrayD2
     
     @StateObject private var model = ShowCellViewModel()
     
@@ -97,7 +97,7 @@ struct ShowCell: View {
         @ObservedObject var model: ShowCellViewModel
         let style: Style
         
-        var foregroundColor: Color = .srgGrayC7
+        var foregroundColor: Color = .srgGrayD2
         
         func foregroundColor(_ color: Color) -> Self {
             var view = self

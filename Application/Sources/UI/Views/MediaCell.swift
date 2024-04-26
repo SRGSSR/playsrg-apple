@@ -32,7 +32,7 @@ struct MediaCell: View {
     let layout: Layout
     let action: (() -> Void)?
     
-    var foregroundColor: Color = .srgGrayC7
+    var foregroundColor: Color = .srgGrayD2
     var secondaryColor: Color = .srgGray96
     
     fileprivate var onFocusAction: ((Bool) -> Void)?
@@ -147,7 +147,7 @@ struct MediaCell: View {
         let style: MediaCell.Style
         let embeddedDirection: StackDirection
         
-        var foregroundColor: Color = .srgGrayC7
+        var foregroundColor: Color = .srgGrayD2
         var secondaryColor: Color = .srgGray96
         
         init(

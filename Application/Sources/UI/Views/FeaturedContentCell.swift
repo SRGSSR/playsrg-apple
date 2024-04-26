@@ -26,7 +26,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     let layout: Layout
     let style: Style
     
-    var foregroundColor: Color = .srgGrayC7
+    var foregroundColor: Color = .srgGrayD2
     var secondaryColor: Color = .srgGray96
     
     func foregroundColor(_ color: Color) -> Self {

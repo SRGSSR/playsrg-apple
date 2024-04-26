@@ -432,14 +432,14 @@ extension PageViewModel {
         case .page, .topic:
             return .white
         default:
-            return .srgGrayC7
+            return .srgGrayD2
         }
     }
     
     var secondaryColor: Color {
         switch id {
         case .page, .topic:
-            return .srgGrayC7
+            return .srgGrayD2
         default:
             return .srgGray96
         }

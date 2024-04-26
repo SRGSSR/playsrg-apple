@@ -1048,7 +1048,7 @@ private extension PageViewController {
             case .topic, .show:
                 return .white
             default:
-                return .srgGrayC7
+                return .srgGrayD2
             }
         }
         

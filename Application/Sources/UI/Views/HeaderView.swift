@@ -19,7 +19,7 @@ struct HeaderView: View {
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     @Environment(\.sizeCategory) private var sizeCategory
     
-    init(title: String, subtitle: String?, hasDetailDisclosure: Bool, foregroundColor: Color = .srgGrayC7) {
+    init(title: String, subtitle: String?, hasDetailDisclosure: Bool, foregroundColor: Color = .srgGrayD2) {
         self.title = title
         self.subtitle = subtitle
         self.hasDetailDisclosure = hasDetailDisclosure

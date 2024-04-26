@@ -18,7 +18,7 @@ struct SimpleButton: View {
     private let accessibilityHint: String?
     private let action: () -> Void
     
-    var foregroundColor: Color = .srgGrayC7
+    var foregroundColor: Color = .srgGrayD2
     var foregroundFocusedColor: Color = .srgGray16
     
     @State private var isFocused = false
