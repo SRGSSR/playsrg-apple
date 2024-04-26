@@ -66,7 +66,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                     Text(introduction)
                         .srgFont(.subtitle1)
                         .lineLimit(1)
-                        .foregroundColor(.srgGray96)
+                        .foregroundColor(secondaryColor)
                 }
             }
             
@@ -74,12 +74,12 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                 Text(content.title ?? "")
                     .srgFont(.H3)
                     .lineLimit(2)
-                    .foregroundColor(.srgGrayD2)
+                    .foregroundColor(foregroundColor)
                 if detailed, let summary = content.summary {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(3)
-                        .foregroundColor(.srgGray96)
+                        .foregroundColor(secondaryColor)
                 }
             }
             .multilineTextAlignment(textAlignment)
