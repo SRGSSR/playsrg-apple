@@ -985,9 +985,9 @@ private extension PageViewController {
                     switch id {
                     case .video:
                         let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
-                        ShowAccessCell(style: style)
+                        ShowAccessCell(style: style).foregroundColor(foregroundColor)
                     default:
-                        ShowAccessCell(style: .calendar)
+                        ShowAccessCell(style: .calendar).foregroundColor(foregroundColor)
                     }
 #endif
                 case .highlightPlaceholder:
