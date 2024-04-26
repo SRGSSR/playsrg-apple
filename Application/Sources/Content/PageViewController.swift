@@ -199,7 +199,7 @@ final class PageViewController: UIViewController {
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
+            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).foregroundColor(model.foregroundColor)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in

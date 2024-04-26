@@ -33,6 +33,8 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
     
+    var foregroundColor: Color = .srgGrayD2
+    
     static let imageAspectRatio: CGFloat = 16 / 9
     
     static func isVerticalLayout(horizontalSizeClass: UIUserInterfaceSizeClass, isLandscape: Bool) -> Bool {
@@ -48,8 +50,16 @@ struct ShowHeaderView: View {
         self.horizontalPadding = horizontalPadding
     }
     
+    func foregroundColor(_ color: Color) -> Self {
+        var view = self
+        
+        view.foregroundColor = color
+        return view
+    }
+    
     var body: some View {
         MainView(model: model, horizontalPadding: horizontalPadding)
+            .foregroundColor(foregroundColor)
             .onAppear {
                 model.show = show
             }
@@ -66,10 +76,19 @@ struct ShowHeaderView: View {
         
         @State private var isLandscape: Bool
         
+        var foregroundColor: Color = .srgGrayD2
+        
         init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
             self.horizontalPadding = horizontalPadding
             self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
+        }
+        
+        func foregroundColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.foregroundColor = color
+            return view
         }
         
         private var padding: CGFloat {
@@ -84,6 +103,7 @@ struct ShowHeaderView: View {
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
+                            .foregroundColor(foregroundColor)
                             .padding(.top, padding)
                             .padding(.horizontal, padding)
                     }
@@ -93,6 +113,7 @@ struct ShowHeaderView: View {
                 else {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
+                            .foregroundColor(foregroundColor)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .frame(width: UIScreen.main.bounds.width * 0.35)
@@ -114,6 +135,15 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         let compactLayout: Bool
         
+        var foregroundColor: Color = .srgGrayD2
+        
+        func foregroundColor(_ color: Color) -> Self {
+            var view = self
+            
+            view.foregroundColor = color
+            return view
+        }
+        
         var body: some View {
             VStack(alignment: .leading, spacing: ShowHeaderView.verticalSpacing) {
                 Text(model.title ?? "")
@@ -130,6 +160,7 @@ struct ShowHeaderView: View {
                 }
                 if let summary = model.show?.play_summary {
                     SummaryView(summary)
+                        .foregroundColor(foregroundColor)
                     // See above
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -139,7 +170,7 @@ struct ShowHeaderView: View {
                                         label: model.favoriteLabel,
                                         accessibilityLabel: model.favoriteAccessibilityLabel,
                                         action: favoriteAction)
-                        .foregroundColor(.white)
+                        .foregroundColor(foregroundColor)
                         .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
 #if os(iOS)
                         if model.isSubscriptionPossible {
@@ -147,7 +178,7 @@ struct ShowHeaderView: View {
                                             label: model.subscriptionLabel,
                                             accessibilityLabel: model.subscriptionAccessibilityLabel,
                                             action: subscriptionAction)
-                            .foregroundColor(.white)
+                            .foregroundColor(foregroundColor)
                         }
 #endif
                     }
@@ -157,14 +188,14 @@ struct ShowHeaderView: View {
                                      labelMinimumScaleFactor: 1,
                                      accessibilityLabel: model.favoriteAccessibilityLabel,
                                      action: favoriteAction)
-                        .foregroundColor(.white)
+                        .foregroundColor(foregroundColor)
 #if os(iOS)
                         if model.isSubscriptionPossible {
                             SimpleButton(icon: model.subscriptionIcon,
                                          label: model.subscriptionLabel,
                                          accessibilityLabel: model.subscriptionAccessibilityLabel,
                                          action: subscriptionAction)
-                            .foregroundColor(.white)
+                            .foregroundColor(foregroundColor)
                         }
 #endif
                     }
@@ -205,17 +236,27 @@ struct ShowHeaderView: View {
         private struct SummaryView: View {
             let content: String
             
+            var foregroundColor: Color = .srgGrayD2
+            
             @FirstResponder private var firstResponder
+            
+            init(_ content: String) {
+                self.content = content
+            }
+            
+            func foregroundColor(_ color: Color) -> Self {
+                var view = self
+                
+                view.foregroundColor = color
+                return view
+            }
             
             var body: some View {
                 TruncatableTextView(content: content, lineLimit: 3) {
                     firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
                 }
+                .foregroundColor(foregroundColor)
                 .responderChain(from: firstResponder)
-            }
-            
-            init(_ content: String) {
-                self.content = content
             }
         }
     }
