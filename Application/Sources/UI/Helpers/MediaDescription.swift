@@ -72,7 +72,9 @@ import SRGAppearanceSwift
         return media.duration / 1000
     }
     
-    @objc static func availability(for media: SRGMedia) -> String {
+    @objc static func availability(for media: SRGMedia?) -> String {
+        guard let media else { return "" }
+        
         var values: [String] = []
         
         if let date = formattedDate(for: media, style: .shortDateAndTime) {
@@ -106,7 +108,9 @@ import SRGAppearanceSwift
         }
     }
     
-    @objc static func availabilityAccessibilityLabel(for media: SRGMedia) -> String {
+    @objc static func availabilityAccessibilityLabel(for media: SRGMedia?) -> String? {
+        guard let media else { return nil }
+        
         var values: [String] = []
         
         if let date = formattedDate(for: media, style: .shortDateAndTime, accessibilityLabel: true) {

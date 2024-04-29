@@ -14,7 +14,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/abseil-cpp-binary</string>
 			<key>Title</key>
-			<string>abseil (1.2022062300.0)</string>
+			<string>abseil (1.2024011601.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -30,7 +30,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/app-check</string>
 			<key>Title</key>
-			<string>AppCheck (10.18.0)</string>
+			<string>AppCheck (10.18.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>Firebase (10.19.1)</string>
+			<string>Firebase (10.23.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>GoogleAppMeasurement (10.17.0)</string>
+			<string>GoogleAppMeasurement (10.23.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -118,7 +118,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleDataTransport</string>
 			<key>Title</key>
-			<string>GoogleDataTransport (9.3.0)</string>
+			<string>GoogleDataTransport (9.4.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -126,7 +126,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleUtilities</string>
 			<key>Title</key>
-			<string>GoogleUtilities (7.12.1)</string>
+			<string>GoogleUtilities (7.13.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/grpc-binary</string>
 			<key>Title</key>
-			<string>gRPC (1.49.1)</string>
+			<string>gRPC (1.62.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -142,7 +142,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/gtm-session-fetcher</string>
 			<key>Title</key>
-			<string>gtm-session-fetcher (3.2.0)</string>
+			<string>gtm-session-fetcher (3.3.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -158,7 +158,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>Airship (16.12.5)</string>
+			<string>Airship (16.12.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -166,7 +166,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/iOSV5</string>
 			<key>Title</key>
-			<string>TagCommander SDK V5 (5.4.4)</string>
+			<string>TagCommander SDK V5 (5.4.6)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -174,7 +174,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/leveldb</string>
 			<key>Title</key>
-			<string>leveldb (1.22.3)</string>
+			<string>leveldb (1.22.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -230,7 +230,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/nanopb</string>
 			<key>Title</key>
-			<string>nanopb (2.30909.0)</string>
+			<string>nanopb (2.30910.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -270,7 +270,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/promises</string>
 			<key>Title</key>
-			<string>Promises (2.3.1)</string>
+			<string>Promises (2.4.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -302,7 +302,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>SRGDataProvider (19.0.1)</string>
+			<string>SRGDataProvider (19.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -366,7 +366,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (1.0.6)</string>
+			<string>swift-collections (1.1.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -374,7 +374,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-protobuf</string>
 			<key>Title</key>
-			<string>SwiftProtobuf (1.25.2)</string>
+			<string>SwiftProtobuf (1.26.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

@@ -197,6 +197,16 @@
 		0458A5222B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
 		0458A5232B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
 		0458A5242B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
+		045F8A042BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A052BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A062BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A072BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A082BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A0F2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A102BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A112BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A122BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */; };
+		045F8A132BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */; };
 		0463DA102A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA112A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA122A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
@@ -2806,6 +2816,8 @@
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHeaderView.swift; sourceTree = "<group>"; };
+		045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
 		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
 		046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContainerViewController.swift; sourceTree = "<group>"; };
@@ -4448,6 +4460,7 @@
 				0865F616223C7684007DE03B /* Data */,
 				08C691121D3907E500BB8AAA /* Images */,
 				6F7C89CD20AAFC4F00255A54 /* Onboardings */,
+				045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */,
 				6F5866491DD226EE005DAFE4 /* Settings.bundle */,
 			);
 			path = Resources;
@@ -4899,6 +4912,7 @@
 				6FB053E524D42021004B0CE1 /* Play RTS */,
 				6FB053E824D42022004B0CE1 /* Play SRF */,
 				6FB053E724D42022004B0CE1 /* Play SWI */,
+				045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -6468,6 +6482,7 @@
 				6F2961FC2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				0828BB3A22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				6F5F4FC91DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
+				045F8A042BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				086BDE161EA63D3800965F45 /* PlayMiniPlayerView.xib in Resources */,
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
@@ -6502,6 +6517,7 @@
 				E66BEC221DA7FCED00AD4450 /* MediaPlayerViewController.storyboard in Resources */,
 				6F5F4FCA1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				086BDE181EA63D5A00965F45 /* PlayMiniPlayerView.xib in Resources */,
+				045F8A052BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				08754F48201BB00400458F3A /* InfoPlist.strings in Resources */,
 				08C6901D1D38E08C00BB8AAA /* LaunchScreen.xib in Resources */,
 				6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */,
@@ -6536,6 +6552,7 @@
 				08C68FA51D38DF8300BB8AAA /* Localizable.strings in Resources */,
 				6F5F4FCB1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				086BDE1A1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
+				045F8A062BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				0828BB3C22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				08C68FAA1D38DF8300BB8AAA /* iTunesArtwork in Resources */,
 				6FD2CBC51DD19B0200B44958 /* placeholder_media.pdf in Resources */,
@@ -6570,6 +6587,7 @@
 				08DADF8F20D92D6500291AD1 /* placeholder_notification.pdf in Resources */,
 				08754F44201BAFF500458F3A /* InfoPlist.strings in Resources */,
 				086BDE1C1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
+				045F8A072BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				6F2961FF2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				08C68FE81D38E04B00BB8AAA /* LaunchScreen.xib in Resources */,
 				6FA7EC3C20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
@@ -6604,6 +6622,7 @@
 				6F5F4FCD1DB10CFD0011CCA3 /* RelatedContentView.xib in Resources */,
 				08C690811D38E3E600BB8AAA /* Localizable.strings in Resources */,
 				086BDE1E1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
+				045F8A082BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				6FD2CBC71DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */,
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
@@ -6659,6 +6678,7 @@
 				6FB89A1026336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
+				045F8A0F2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
 				6F3F1AB125027CB5000FF4DD /* SRFResources.xcassets in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
@@ -6674,6 +6694,7 @@
 				6FB89A1126336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
 				6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */,
+				045F8A102BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */,
@@ -6689,6 +6710,7 @@
 				6FB89A1226336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
+				045F8A112BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */,
 				08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -6704,6 +6726,7 @@
 				6FB89A1326336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */,
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
+				045F8A122BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
 				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
@@ -6719,6 +6742,7 @@
 				6FB89A1426336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
+				045F8A132BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
 				6F3F1AB225027CBA000FF4DD /* SWIResources.xcassets in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
@@ -19307,7 +19331,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 19.0.1;
+				minimumVersion = 19.0.2;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {

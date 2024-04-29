@@ -35,21 +35,21 @@
 
 ### \*Fastlane on PlayCity CI:
 
-- Build Betas with current version number
+- Build private Betas with current version number
 	- **Play SRG iOS Betas**: `fastlane ios iOSbetas`
 	- **Play SRG tvOS Betas**: `fastlane ios tvOSbetas`
 - Build App Store builds with current version number
 	- **Play SRG iOS AppStore builds**: `fastlane ios iOSAppStoreBuilds`
 	- **Play SRG tvOS AppStore builds**: `fastlane ios tvOSAppStoreBuilds`
 - Distribute App Store builds to public TestFlight with the current version number
-	- **Play SRG iOS AppStore builds** (with `true` to `public_testflight_distribution` parameter): `fastlane ios iOSAppStoreBuilds public_testflight_distribution:true`
-	- **Play SRG tvOS AppStore builds** (with `true` to `public_testflight_distribution` parameter): `fastlane ios tvOSAppStoreBuilds public_testflight_distribution:true`
+	- **Play SRG iOS AppStore builds**: `fastlane ios iOSAppStoreBuilds public_testflight_distribution:true`
+	- **Play SRG tvOS AppStore builds**: `fastlane ios tvOSAppStoreBuilds public_testflight_distribution:true`
 - Prepare AppStore releases on AppStore Connect with the current version number
 	- **Play SRG iOS AppStore releases**: `fastlane ios iOSPrepareAppStoreReleases`
 	- **Play SRG tvOS AppStore releases**: `fastlane ios tvOSPrepareAppStoreReleases`
 - Submit to Apple review the releases with the current version number
-	- **Play SRG iOS AppStore releases** (with `true` to `submit_for_review` parameter): `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
-	- **Play SRG tvOS AppStore releases** (with `true` to `submit_for_review` parameter):  `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
+	- **Play SRG iOS AppStore releases**: `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
+	- **Play SRG tvOS AppStore releases**:  `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
 - Publish release notes on Github pages with correct released status (AppStore and TestFlight release notes)
  	- **Play SRG Publish release notes**: `fastlane ios publishReleaseNotes`
 - After AppStore validation, finish git-flow release, bump build version numbers, push master, develop and tag.
@@ -70,6 +70,16 @@
 	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots` (No upload to ASC, due to some marketing images)
 	- Play SWI tvOS: `fastlane ios tvOSswiScreenshots`
 
+# Private nightlies
+
+During developments, some internal builds can be done for internal testers.
+
+### Fastlane on PlayCity CI:
+
+- Build private Nighties with a new version number from the lastest build
+	- **Play SRG iOS Nightlies**: `fastlane ios iOSnightlies`
+	- **Play SRG tvOS Nightlies**: `fastlane ios tvOSnightlies`
+
 # AppStore and TestFlight review status
 
 - Get AppStore review status (Ready for sale, In review, etc…)
@@ -78,6 +88,8 @@
 - Get public TestFlight review status (In beta testing, In review, etc…)
 	- `fastlane ios appStoreTestFlightAppStatus`
 	- or `make appstore-testflight-status`
+- Synchronise AppStore status with Github production deployment states
+	- `fastlane ios appStoreAppStatus github_deployments:true`
 
 
 # Release notes on Github pages
