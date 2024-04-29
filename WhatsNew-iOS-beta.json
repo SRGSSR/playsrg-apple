@@ -227,5 +227,6 @@
     "3.8.4-448": "- Fixed a crash when opening radio channel page or audio show page from media player view.",
     "3.8.5-449": "- Maintenance build.\n- Add audio and subtitle selections in email support information. \n- Image service maintnance. [RTS]",
     "3.8.5-450": "- Fix song list layout in radio player.\n- Move # section to end of AZ show list (TV and radios).",
-    "3.8.5-451": "- AppStore release."
+    "3.8.5-451": "- AppStore release.",
+    "3.8.6-452": "Branch beta\n- Show page header updated.\n- Topic colors added.\n- Some font weights and gray colors updated for better readability."
 }
