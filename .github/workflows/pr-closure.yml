@@ -42,19 +42,6 @@ jobs:
           # Remove "feature/" from the head branch
           BUILD_NAME=$(echo "$HEAD_BRANCH" | sed 's/feature\///g')
 
-          # Define environment names
-          IOS_ENVIRONMENT=$(echo "playsrg-ios-nightly+$BUILD_NAME" | jq -R -r @uri)
-          TVOS_ENVIRONMENT=$(echo "playsrg-tvos-nightly+$BUILD_NAME" | jq -R -r @uri)
-
-          echo "Working with iOS environment: $IOS_ENVIRONMENT"
-          echo "Working with tvOS environment: $TVOS_ENVIRONMENT"
-
-          # Get the latest active deployment for iOS
-          IOS_DEPLOYMENT=$(curl -s -H "$AUTHORIZATION" "$DEPLOYMENTS_URL?environment=$IOS_ENVIRONMENT" | jq '.[0]')
-
-          # Get the latest active deployment for tvOS
-          TVOS_DEPLOYMENT=$(curl -s -H "$AUTHORIZATION" "$DEPLOYMENTS_URL?environment=$TVOS_ENVIRONMENT" | jq '.[0]')
-
           # Function to fetch log and environment URLs from status URL
           fetch_status_urls() {
             STATUS_URL=$1
@@ -65,54 +52,43 @@ jobs:
             echo "$LOG_URL,$ENVIRONMENT_URL"
           }
 
-          if [ "$IOS_DEPLOYMENT" != "null" ]; then
-            DEPLOYMENT_ID=$(echo "$IOS_DEPLOYMENT" | jq -r '.id')
-            STATUSES_URL=$(echo "$IOS_DEPLOYMENT" | jq -r '.statuses_url')
+          # Function to set inactive state to the latest deployment
+          set_inactive_latest_deployment() {
+              local ENVIRONMENT=$1
+              local ENVIRONMENT_ENCODED=$(echo "$ENVIRONMENT" | jq -R -r @uri)
 
-            echo "Working with iOS deployment ID: $DEPLOYMENT_ID"
+              # Get the latest active deployment
+              local DEPLOYMENTS_FULL_URL="$DEPLOYMENTS_URL?environment=$ENVIRONMENT_ENCODED"
+              local DEPLOYMENT_DATA=$(curl -s -H "$AUTHORIZATION" "$DEPLOYMENTS_FULL_URL" | jq '.[0]')
 
-            URLS=$(fetch_status_urls "$STATUSES_URL")
-            IFS=',' read -r LOG_URL ENVIRONMENT_URL <<< "$URLS"
+              if [ "$DEPLOYMENT_DATA" != "null" ]; then
+                  local DEPLOYMENT_ID=$(echo "$DEPLOYMENT_DATA" | jq -r '.id')
+                  local STATUSES_URL=$(echo "$DEPLOYMENT_DATA" | jq -r '.statuses_url')
 
-            # Mark the latest deployment for iOS nightly as inactive
-            DEPLOYMENT_URL="$DEPLOYMENTS_URL/$DEPLOYMENT_ID/statuses"
-            BODY="{\"state\": \"inactive\", \"description\": \"The PR is closed.\", \
-              \"log_url\": \"$LOG_URL\", \"environment_url\": \"$ENVIRONMENT_URL\"}"
-            RESPONSE=$(curl -s -X POST -H "$AUTHORIZATION" -H "$ACCEPT" "$DEPLOYMENT_URL" -d "$BODY")
+                  echo "Working with $ENVIRONMENT deployment ID: $DEPLOYMENT_ID"
 
-            # Extract information from the response
-            RESPONSE_STATE=$(echo "$RESPONSE" | jq -r '.state')
-            RESPONSE_ENVIRONMENT=$(echo "$RESPONSE" | jq -r '.environment')
+                  local URLS=$(fetch_status_urls "$STATUSES_URL")
+                  IFS=',' read -r LOG_URL ENVIRONMENT_URL <<< "$URLS"
 
-            # Output the information
-            echo "-> Update $RESPONSE_ENVIRONMENT latest deployment to $RESPONSE_STATE state."
-          else
-            IOS_ENVIRONMENT=$(printf '%b' "${IOS_ENVIRONMENT//%/\\x}")
-            echo "-> No deployment for $IOS_ENVIRONMENT environment. No update."
-          fi
+                  # Mark the latest deployment as inactive
+                  local DEPLOYMENT_URL="$DEPLOYMENTS_URL/$DEPLOYMENT_ID/statuses"
+                  local BODY="{\"state\": \"inactive\", \"description\": \"The PR is closed.\", \
+                    \"log_url\": \"$LOG_URL\", \"environment_url\": \"$ENVIRONMENT_URL\"}"
+                  local RESPONSE=$(curl -s -X POST -H "$AUTHORIZATION" -H "$ACCEPT" "$DEPLOYMENT_URL" -d "$BODY")
 
-          if [ "$TVOS_DEPLOYMENT" != "null" ]; then
-            DEPLOYMENT_ID=$(echo "$TVOS_DEPLOYMENT" | jq -r '.id')
-            STATUSES_URL=$(echo "$TVOS_DEPLOYMENT" | jq -r '.statuses_url')
+                  # Extract information from the response
+                  local RESPONSE_STATE=$(echo "$RESPONSE" | jq -r '.state')
+                  local RESPONSE_ENVIRONMENT=$(echo "$RESPONSE" | jq -r '.environment')
 
-            echo "Working with tvOS deployment ID: $DEPLOYMENT_ID"
+                  # Output the information
+                  echo "-> Update $RESPONSE_ENVIRONMENT latest deployment to $RESPONSE_STATE state."
+              else
+                  echo "-> No deployment for $ENVIRONMENT environment. No update."
+              fi
+          }
 
-            URLS=$(fetch_status_urls "$STATUSES_URL")
-            IFS=',' read -r LOG_URL ENVIRONMENT_URL <<< "$URLS"
-
-            # Mark the latest deployment for tvOS nightly as inactive
-            DEPLOYMENT_URL="$DEPLOYMENTS_URL/$DEPLOYMENT_ID/statuses"
-            BODY="{\"state\": \"inactive\", \"description\": \"The PR is closed.\", \
-              \"log_url\": \"$LOG_URL\", \"environment_url\": \"$ENVIRONMENT_URL\"}"
-            RESPONSE=$(curl -s -X POST -H "$AUTHORIZATION" -H "$ACCEPT" "$DEPLOYMENT_URL" -d "$BODY")
-
-            # Extract information from the response
-            RESPONSE_STATE=$(echo "$RESPONSE" | jq -r '.state')
-            RESPONSE_ENVIRONMENT=$(echo "$RESPONSE" | jq -r '.environment')
-
-            # Output the information
-            echo "-> Update $RESPONSE_ENVIRONMENT latest deployment to $RESPONSE_STATE state."
-          else
-            TVOS_ENVIRONMENT=$(printf '%b' "${TVOS_ENVIRONMENT//%/\\x}")
-            echo "-> No deployment for $TVOS_ENVIRONMENT environment. No update."
-          fi
+          # Set inactive state to the latest deployment of branch environments
+          set_inactive_latest_deployment "playsrg-ios-nightly+$BUILD_NAME"
+          set_inactive_latest_deployment "playsrg-tvos-nightly+$BUILD_NAME"
+          set_inactive_latest_deployment "playsrg-ios-beta+$BUILD_NAME"
+          set_inactive_latest_deployment "playsrg-tvos-beta+$BUILD_NAME"
