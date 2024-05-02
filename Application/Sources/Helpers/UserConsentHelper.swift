@@ -189,7 +189,7 @@ enum UCService: Hashable, CaseIterable {
 #if os(iOS)
         let backgroundColor = UIColor.srgGray23
         let foregroundColor = UIColor.white
-        let textColor = UIColor.srgGrayC7
+        let textColor = UIColor.srgGrayD2
         
         var settings = GeneralStyleSettings()
         
@@ -252,7 +252,7 @@ enum UCService: Hashable, CaseIterable {
     private static func button(type: UsercentricsUI.ButtonType, isPrimary: Bool) -> ButtonSettings {
         return ButtonSettings(type: type,
                               textColor: isPrimary ? .white : .srgGray23,
-                              backgroundColor: isPrimary ? .srgRed : .srgGrayC7,
+                              backgroundColor: isPrimary ? .srgRed : .srgGrayD2,
                               cornerRadius: 8)
     }
 #endif

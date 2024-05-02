@@ -128,14 +128,14 @@ struct ProgramCell: View {
             HStack(spacing: 10) {
                 if !compact && model.canPlay {
                     Image(.playCircle)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                         .frame(height: canPlayHeight)
                 }
                 if let title = model.data?.program.title {
                     Text(title)
                         .srgFont(.body)
                         .lineLimit(1)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                 }
             }
             .frame(minHeight: canPlayHeight)

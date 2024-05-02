@@ -95,7 +95,7 @@ struct SectionShowHeaderView: View {
                         // all lines it could.
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                 }
                 if let summary = section.properties.summary {
                     Text(summary)

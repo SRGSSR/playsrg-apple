@@ -52,7 +52,7 @@
         // Unbreakable spaces before / after the separator
         [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" - %@", text]
                                                                                attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
-                                                                                             NSForegroundColorAttributeName : UIColor.srg_grayC7Color }]];
+                                                                                             NSForegroundColorAttributeName : UIColor.srg_grayD2Color }]];
     }
     
     self.textLabel.attributedText = attributedText.copy;

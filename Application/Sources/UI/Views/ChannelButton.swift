@@ -42,7 +42,7 @@ struct ChannelButton: View {
         .fixedSize(horizontal: true, vertical: false)
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
-        .foregroundColor(.srgGrayC7)
+        .foregroundColor(.srgGrayD2)
         .background(isSelected ? Color.srgGray4A : Color.srgGray23)
         .cornerRadius(100)
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)

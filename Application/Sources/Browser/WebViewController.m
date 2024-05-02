@@ -91,7 +91,7 @@ static void *s_kvoContext = &s_kvoContext;
         self.customizationBlock(webView);
     }
     
-    UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayC7Color];
+    UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayD2Color];
     loadingImageView.hidden = YES;
     [view insertSubview:loadingImageView atIndex:0];
     self.loadingImageView = loadingImageView;

@@ -76,7 +76,7 @@ struct ProfileCell: View {
                         .frame(height: 16)
                 }
             }
-            .foregroundColor(.srgGrayC7)
+            .foregroundColor(.srgGrayD2)
             .padding(.horizontal, 16)
             .padding(.vertical, 4)
             .frame(maxHeight: .infinity)

@@ -17,7 +17,7 @@ struct TransluscentHeaderView: View {
         Text(title)
             .srgFont(.H3)
             .lineLimit(1)
-            .foregroundColor(.srgGrayC7)
+            .foregroundColor(.srgGrayD2)
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, constant(iOS: 3, tvOS: 15))
             .frame(maxWidth: .infinity, alignment: .leading)

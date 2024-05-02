@@ -58,7 +58,7 @@ struct ExpandingButton: View {
             }
             .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundColor(isFocused ? .srgGray16 : .srgGrayC7)
+            .foregroundColor(isFocused ? .srgGray16 : .srgGrayD2)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)

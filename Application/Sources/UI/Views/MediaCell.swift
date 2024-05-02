@@ -201,14 +201,14 @@ struct MediaCell: View {
                     Text(title)
                         .srgFont(.H4)
                         .lineLimit(titleLineLimit)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                         .layoutPriority(1)
                 }
                 if let summary {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(2)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

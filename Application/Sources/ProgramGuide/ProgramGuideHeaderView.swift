@@ -146,7 +146,7 @@ struct ProgramGuideHeaderView: View {
                 Text(model.dateString)
                     .srgFont(.H2)
                     .minimumScaleFactor(0.8)
-                    .foregroundColor(.srgGrayC7)
+                    .foregroundColor(.srgGrayD2)
                     .frame(maxWidth: .infinity)
             }
         }
