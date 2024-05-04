@@ -53,21 +53,25 @@ typedef NS_ENUM(NSInteger, SettingSquareImages) {
 };
 
 /**
- *  Audio content home page setting.
+ *  Audio homepage option setting.
  */
-typedef NS_ENUM(NSInteger, SettingAudioContentHomePage) {
+typedef NS_ENUM(NSInteger, SettingAudioHomepageOption) {
     /**
      *  Default (Firebase configuration).
      */
-    SettingAudioContentHomePageDefault,
+    SettingAudioHomepageOptionDefault,
     /**
-     *  Force audio content home page usage.
+     *  Force one audio content home page usage.
      */
-    SettingAudioContentHomePageForced,
+    SettingAudioHomepageOptionContentOne,
     /**
-     *  Ignore audio content home page usage.
+     *  Force many audio content home pages usage.
      */
-    SettingAudioContentHomePageIgnored
+    SettingAudioHomepageOptionContentMany,
+    /**
+     *  Force many audio predefined home pages usage.
+     */
+    SettingAudioHomepageOptionPredefinedMany
 };
 
 OBJC_EXPORT ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(BOOL isCompactHorizontalSizeClass);
@@ -76,7 +80,7 @@ OBJC_EXPORT void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuid
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);
 OBJC_EXPORT SettingSquareImages ApplicationSettingSquareImages(void);
-OBJC_EXPORT SettingAudioContentHomePage ApplicationSettingAudioContentHomePage(void);
+OBJC_EXPORT SettingAudioHomepageOption ApplicationSettingAudioHomepageOption(void);
 
 OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 

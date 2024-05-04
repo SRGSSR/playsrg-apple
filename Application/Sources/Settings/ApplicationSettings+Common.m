@@ -131,25 +131,26 @@ SettingSquareImages ApplicationSettingSquareImages(void)
 #endif
 }
 
-NSValueTransformer *SettingAudioContentHomePageTransformer(void)
+NSValueTransformer *SettingAudioHomepageOptionTransformer(void)
 {
     static NSValueTransformer *s_transformer;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"forced" : @(SettingAudioContentHomePageForced),
-                                                                                         @"ignored" : @(SettingAudioContentHomePageIgnored) }
-                                                                         defaultValue:@(SettingAudioContentHomePageDefault)
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"contentOne" : @(SettingAudioHomepageOptionContentOne),
+                                                                                         @"contentMany" : @(SettingAudioHomepageOptionContentMany),
+                                                                                         @"predefinedMany" : @(SettingAudioHomepageOptionPredefinedMany) }
+                                                                         defaultValue:@(SettingAudioHomepageOptionDefault)
                                                                   reverseDefaultValue:nil];
     });
     return s_transformer;
 }
 
-SettingAudioContentHomePage ApplicationSettingAudioContentHomePage(void)
+SettingAudioHomepageOption ApplicationSettingAudioHomepageOption(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    return [[SettingAudioContentHomePageTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingAudioContentHomePageOption]] integerValue];
+    return [[SettingAudioHomepageOptionTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingAudioHomepageOption]] integerValue];
 #else
-    return SettingAudioContentHomePageDefault;
+    return SettingAudioHomepageOptionDefault;
 #endif
 }
 

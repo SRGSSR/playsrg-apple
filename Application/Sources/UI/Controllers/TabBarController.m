@@ -290,7 +290,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
-    if (applicationConfiguration.audioContentHomePagePreferred) {
+    if (applicationConfiguration.audioContentHomepagePreferred) {
         PageViewController *pageViewController = [PageViewController audiosViewController];
         NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:pageViewController];
         audiosNavigationController.tabBarItem = [self audiosTabBarItem];

@@ -157,7 +157,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSInteger minimumSocialViewCount;
 
-@property (nonatomic, getter=isAudioContentHomePagePreferred) BOOL audioContentHomePagePreferred;
+@property (nonatomic, getter=isAudioContentHomepagePreferred) BOOL audioContentHomepagePreferred;
 
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
@@ -291,25 +291,26 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
 }
 
-- (BOOL)isAudioContentHomePagePreferred
+- (BOOL)isAudioContentHomepagePreferred
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    switch (ApplicationSettingAudioContentHomePage()) {
-        case SettingAudioContentHomePageForced: {
+    switch (ApplicationSettingAudioHomepageOption()) {
+        case SettingAudioHomepageOptionContentOne: {
             return YES;
             break;
         }
-        case SettingAudioContentHomePageIgnored: {
+        case SettingAudioHomepageOptionContentMany:
+        case SettingAudioHomepageOptionPredefinedMany: {
             return NO;
             break;
         }
         default: {
-            return _audioContentHomePagePreferred;
+            return _audioContentHomepagePreferred;
             break;
         }
     }
 #else
-    return _audioContentHomePagePreferred;
+    return _audioContentHomepagePreferred;
 #endif
 }
 
@@ -505,7 +506,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
     
 #if DEBUG || NIGHTLY || BETA
-    self.audioContentHomePagePreferred = [firebaseConfiguration boolForKey:@"audioContentHomePagePreferred"];
+    self.audioContentHomepagePreferred = [firebaseConfiguration boolForKey:@"audioContentHomepagePreferred"];
 #endif
     
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];

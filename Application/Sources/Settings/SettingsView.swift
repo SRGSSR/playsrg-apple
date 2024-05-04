@@ -550,12 +550,12 @@ struct SettingsView: View {
                     SquareImagesSelectionCell()
                 }
                 NextLink {
-                    AudioContentHomePageSelectionView()
+                    AudioHomepageSelectionView()
 #if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
 #endif
                 } label: {
-                    AudioContentHomePageOptionSelectionCell()
+                    AudioHomepageOptionSelectionCell()
                 }
                 Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
 #if os(iOS) && APPCENTER
@@ -661,14 +661,14 @@ struct SettingsView: View {
             }
         }
         
-        private struct AudioContentHomePageOptionSelectionCell: View {
-            @AppStorage(PlaySRGSettingAudioContentHomePageOption) private var selectedAudioContentHomePageOption = AudioContentHomePageOption.default
+        private struct AudioHomepageOptionSelectionCell: View {
+            @AppStorage(PlaySRGSettingAudioHomepageOption) private var selectedAudioHomepageOption = AudioHomepageOption.default
             
             var body: some View {
                 HStack {
-                    Text(NSLocalizedString("Audio content home page", comment: "Label of the button for audio content page option selection"))
+                    Text(NSLocalizedString("Audio home page", comment: "Label of the button for audio homepage option selection"))
                     Spacer()
-                    Text(selectedAudioContentHomePageOption.description)
+                    Text(selectedAudioHomepageOption.description)
                         .foregroundColor(Color.play_sectionSecondary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
@@ -849,13 +849,13 @@ struct SettingsView: View {
             }
         }
         
-        // MARK: Audio content home page option selection
+        // MARK: Audio homepage option selection
         
-        private struct AudioContentHomePageSelectionView: View {
+        private struct AudioHomepageSelectionView: View {
             var body: some View {
                 List {
-                    ForEach(AudioContentHomePageOption.allCases) { audioContentHomePageOption in
-                        AudioContentHomePageOptionCell(audioContentHomePageOption: audioContentHomePageOption)
+                    ForEach(AudioHomepageOption.allCases) { audioHomepageOption in
+                        AudioHomepageOptionCell(audioHomepageOption: audioHomepageOption)
                     }
                 }
                 .srgFont(.body)
@@ -868,17 +868,17 @@ struct SettingsView: View {
             }
         }
         
-        private struct AudioContentHomePageOptionCell: View {
-            let audioContentHomePageOption: AudioContentHomePageOption
+        private struct AudioHomepageOptionCell: View {
+            let audioHomepageOption: AudioHomepageOption
             
-            @AppStorage(PlaySRGSettingAudioContentHomePageOption) private var selectedAudioContentHomePageOption = AudioContentHomePageOption.default
+            @AppStorage(PlaySRGSettingAudioHomepageOption) private var selectedAudioHomepageOption = AudioHomepageOption.default
             
             var body: some View {
                 Button(action: select) {
                     HStack {
-                        Text(audioContentHomePageOption.description)
+                        Text(audioHomepageOption.description)
                         Spacer()
-                        if audioContentHomePageOption == selectedAudioContentHomePageOption {
+                        if audioHomepageOption == selectedAudioHomepageOption {
                             Image(systemName: "checkmark")
                         }
                     }
@@ -887,7 +887,7 @@ struct SettingsView: View {
             }
             
             private func select() {
-                selectedAudioContentHomePageOption = audioContentHomePageOption
+                selectedAudioHomepageOption = audioHomepageOption
             }
         }
     }
