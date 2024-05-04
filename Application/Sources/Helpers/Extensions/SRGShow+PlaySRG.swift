@@ -7,7 +7,7 @@
 import SRGDataProviderModel
 
 extension SRGShow {
-    var play_contentType: ContentType {
+    @objc var play_contentType: ContentType {
         switch self.transmission {
         case .TV:
             return .videoOrTV

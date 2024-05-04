@@ -167,6 +167,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *availabilityLabelHeightConstraint;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *showThumbnailImageViewAspectRatio16_9Constraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *showThumbnailImageViewAspectRatio1_1Constraint;
+
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerBottomConstraint;
@@ -922,7 +925,16 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)reloadDetailsWithShow:(SRGShow *)show
 {
     if (show) {
-        [self.showThumbnailImageView play_requestImage:show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
+        BOOL prefersSquareImage = show.play_contentType == ContentTypeAudioOrRadio && [ApplicationConfiguration sharedApplicationConfiguration].squareImagesEnabled;
+        if (prefersSquareImage) {
+            self.showThumbnailImageViewAspectRatio16_9Constraint.priority = MediaPlayerDetailsLabelExpandedPriority;
+            self.showThumbnailImageViewAspectRatio1_1Constraint.priority = MediaPlayerDetailsLabelNormalPriority;
+        }
+        else {
+            self.showThumbnailImageViewAspectRatio1_1Constraint.priority = MediaPlayerDetailsLabelExpandedPriority;
+            self.showThumbnailImageViewAspectRatio16_9Constraint.priority = MediaPlayerDetailsLabelNormalPriority;
+        }
+        [self.showThumbnailImageView play_requestImage:prefersSquareImage ? show.podcastImage : show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
         
         self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
         self.showLabel.text = show.title;
