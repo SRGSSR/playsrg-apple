@@ -31,7 +31,6 @@
   "endToleranceRatio": 0.02,
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
   "showLeadPreferred": true,
-  "squareImagesEnabled": true,
   "tvGuideOtherBouquets": "srf,rsi",
   "userConsentDefaultLanguage": "fr"
 }
