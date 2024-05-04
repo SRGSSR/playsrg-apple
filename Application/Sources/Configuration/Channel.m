@@ -93,10 +93,12 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
             self.songsViewStyle = SongsViewStyleWithString(songsViewStyleValue);
         }
         
+#if DEBUG || NIGHTLY || BETA
         id contentPageIdValue = dictionary[@"contentPageId"];
         if ([contentPageIdValue isKindOfClass:NSString.class]) {
             self.contentPageId = contentPageIdValue;
         }
+#endif
     }
     return self;
 }

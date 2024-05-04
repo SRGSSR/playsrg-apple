@@ -68,7 +68,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
 * `shareURL` (optional, string): The URL used to share the channel website.
-* `contentPageId` (optional, string): The page identifier of the content page to use for the channel page. If omitted, the preconfigured page is used with the related sections for this channel.
+* `contentPageId` (optional, string) - BETA ONLY: The page identifier of the content page to use for the channel page. If omitted, the preconfigured page is used with the related sections for this channel.
 
 The radio channel JSON dictionaries have one more key:
 
@@ -89,7 +89,7 @@ The radio channel JSON dictionaries have one more key:
 ## Audio homepage
 
 * `audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.
-* `audioContentHomePagePreferred` (optional, boolean): Set to `true` iff audio tab only needs one content homepage to be displayed and ignores radio channel homepages. If omitted, `false`.
+* `audioContentHomePagePreferred` (optional, boolean) - BETA ONLY: Set to `true` iff audio tab only needs one content homepage to be displayed and ignores radio channel homepages. If omitted, `false`.
 
 ### Home sections:
 
