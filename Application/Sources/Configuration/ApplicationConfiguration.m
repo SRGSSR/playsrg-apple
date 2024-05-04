@@ -291,6 +291,28 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
 }
 
+- (BOOL)isAudioContentHomePagePreferred
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    switch (ApplicationSettingAudioContentHomePage()) {
+        case SettingAudioContentHomePageForced: {
+            return YES;
+            break;
+        }
+        case SettingAudioContentHomePageIgnored: {
+            return NO;
+            break;
+        }
+        default: {
+            return _audioContentHomePagePreferred;
+            break;
+        }
+    }
+#else
+    return _audioContentHomePagePreferred;
+#endif
+}
+
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 - (void)setOverridePlayURLForVendorBasedOnServiceURL:(NSURL *)serviceURL
 {

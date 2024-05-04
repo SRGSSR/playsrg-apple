@@ -131,6 +131,28 @@ SettingSquareImages ApplicationSettingSquareImages(void)
 #endif
 }
 
+NSValueTransformer *SettingAudioContentHomePageTransformer(void)
+{
+    static NSValueTransformer *s_transformer;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"forced" : @(SettingAudioContentHomePageForced),
+                                                                                         @"ignored" : @(SettingAudioContentHomePageIgnored) }
+                                                                         defaultValue:@(SettingAudioContentHomePageDefault)
+                                                                  reverseDefaultValue:nil];
+    });
+    return s_transformer;
+}
+
+SettingAudioContentHomePage ApplicationSettingAudioContentHomePage(void)
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    return [[SettingAudioContentHomePageTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingAudioContentHomePageOption]] integerValue];
+#else
+    return SettingAudioContentHomePageDefault;
+#endif
+}
+
 NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)

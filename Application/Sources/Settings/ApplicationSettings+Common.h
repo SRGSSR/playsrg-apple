@@ -52,12 +52,31 @@ typedef NS_ENUM(NSInteger, SettingSquareImages) {
     SettingSquareImagesIgnored
 };
 
+/**
+ *  Audio content home page setting.
+ */
+typedef NS_ENUM(NSInteger, SettingAudioContentHomePage) {
+    /**
+     *  Default (Firebase configuration).
+     */
+    SettingAudioContentHomePageDefault,
+    /**
+     *  Force audio content home page usage.
+     */
+    SettingAudioContentHomePageForced,
+    /**
+     *  Ignore audio content home page usage.
+     */
+    SettingAudioContentHomePageIgnored
+};
+
 OBJC_EXPORT ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(BOOL isCompactHorizontalSizeClass);
 OBJC_EXPORT void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuideLayout layout);
 
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);
 OBJC_EXPORT SettingSquareImages ApplicationSettingSquareImages(void);
+OBJC_EXPORT SettingAudioContentHomePage ApplicationSettingAudioContentHomePage(void);
 
 OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 

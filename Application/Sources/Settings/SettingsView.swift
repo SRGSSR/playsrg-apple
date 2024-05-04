@@ -549,6 +549,14 @@ struct SettingsView: View {
                 } label: {
                     SquareImagesSelectionCell()
                 }
+                NextLink {
+                    AudioContentHomePageSelectionView()
+#if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+#endif
+                } label: {
+                    AudioContentHomePageOptionSelectionCell()
+                }
                 Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
 #if os(iOS) && APPCENTER
                 VersionsAndReleaseNotesButton()
@@ -646,6 +654,21 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Podcast square images", comment: "Label of the button for Podcast square image format selection"))
                     Spacer()
                     Text(selectedSquareImages.description)
+                        .foregroundColor(Color.play_sectionSecondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
+                }
+            }
+        }
+        
+        private struct AudioContentHomePageOptionSelectionCell: View {
+            @AppStorage(PlaySRGSettingAudioContentHomePageOption) private var selectedAudioContentHomePageOption = AudioContentHomePageOption.default
+            
+            var body: some View {
+                HStack {
+                    Text(NSLocalizedString("Audio content home page", comment: "Label of the button for audio content page option selection"))
+                    Spacer()
+                    Text(selectedAudioContentHomePageOption.description)
                         .foregroundColor(Color.play_sectionSecondary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
@@ -823,6 +846,48 @@ struct SettingsView: View {
             
             private func select() {
                 selectedSquareImages = squareImages
+            }
+        }
+        
+        // MARK: Audio content home page option selection
+        
+        private struct AudioContentHomePageSelectionView: View {
+            var body: some View {
+                List {
+                    ForEach(AudioContentHomePageOption.allCases) { audioContentHomePageOption in
+                        AudioContentHomePageOptionCell(audioContentHomePageOption: audioContentHomePageOption)
+                    }
+                }
+                .srgFont(.body)
+#if os(tvOS)
+                .listStyle(GroupedListStyle())
+                .play_scrollClipDisabled()
+                .frame(maxWidth: LayoutMaxListWidth)
+#endif
+                .navigationTitle(NSLocalizedString("Audio content home page", comment: "Audio content home page selection view title"))
+            }
+        }
+        
+        private struct AudioContentHomePageOptionCell: View {
+            let audioContentHomePageOption: AudioContentHomePageOption
+            
+            @AppStorage(PlaySRGSettingAudioContentHomePageOption) private var selectedAudioContentHomePageOption = AudioContentHomePageOption.default
+            
+            var body: some View {
+                Button(action: select) {
+                    HStack {
+                        Text(audioContentHomePageOption.description)
+                        Spacer()
+                        if audioContentHomePageOption == selectedAudioContentHomePageOption {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+                .foregroundColor(.primary)
+            }
+            
+            private func select() {
+                selectedAudioContentHomePageOption = audioContentHomePageOption
             }
         }
     }
