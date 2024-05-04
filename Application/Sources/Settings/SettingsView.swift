@@ -653,7 +653,7 @@ struct SettingsView: View {
             
             var body: some View {
                 HStack {
-                    Text(NSLocalizedString("Podcast square images", comment: "Label of the button for Podcast square image format selection"))
+                    Text("🎧 \(NSLocalizedString("Podcast square images", comment: "Label of the button for Podcast square image format selection"))")
                     Spacer()
                     Text(selectedSquareImages.description)
                         .foregroundColor(Color.play_sectionSecondary)
@@ -668,7 +668,7 @@ struct SettingsView: View {
             
             var body: some View {
                 HStack {
-                    Text(NSLocalizedString("Audio home page", comment: "Label of the button for audio homepage option selection"))
+                    Text("🎧 \(NSLocalizedString("Audio home page", comment: "Label of the button for audio homepage option selection"))")
                     Spacer()
                     Text(selectedAudioHomepageOption.description)
                         .foregroundColor(Color.play_sectionSecondary)
@@ -824,7 +824,7 @@ struct SettingsView: View {
                 .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle(NSLocalizedString("Podcast square images", comment: "Podcast square image format selection view title"))
+                .navigationTitle("🎧 \(NSLocalizedString("Podcast square images", comment: "Podcast square image format selection view title"))")
             }
         }
         
@@ -866,7 +866,7 @@ struct SettingsView: View {
                 .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle(NSLocalizedString("Audio content home page", comment: "Audio content home page selection view title"))
+                .navigationTitle("🎧 \(NSLocalizedString("Audio home page", comment: "Audio home page selection view title"))")
             }
         }
         

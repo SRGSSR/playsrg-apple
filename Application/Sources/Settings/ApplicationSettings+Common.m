@@ -136,8 +136,8 @@ NSValueTransformer *SettingAudioHomepageOptionTransformer(void)
     static NSValueTransformer *s_transformer;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"contentOne" : @(SettingAudioHomepageOptionContentOne),
-                                                                                         @"contentMany" : @(SettingAudioHomepageOptionContentMany),
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"curatedOne" : @(SettingAudioHomepageOptionCuratedOne),
+                                                                                         @"curatedMany" : @(SettingAudioHomepageOptionCuratedMany),
                                                                                          @"predefinedMany" : @(SettingAudioHomepageOptionPredefinedMany) }
                                                                          defaultValue:@(SettingAudioHomepageOptionDefault)
                                                                   reverseDefaultValue:nil];

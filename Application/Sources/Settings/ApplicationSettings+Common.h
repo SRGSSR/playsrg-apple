@@ -61,13 +61,13 @@ typedef NS_ENUM(NSInteger, SettingAudioHomepageOption) {
      */
     SettingAudioHomepageOptionDefault,
     /**
-     *  Force one audio content home page usage.
+     *  Force one audio curated home page usage.
      */
-    SettingAudioHomepageOptionContentOne,
+    SettingAudioHomepageOptionCuratedOne,
     /**
-     *  Force many audio content home pages usage.
+     *  Force many audio curated home pages usage.
      */
-    SettingAudioHomepageOptionContentMany,
+    SettingAudioHomepageOptionCuratedMany,
     /**
      *  Force many audio predefined home pages usage.
      */

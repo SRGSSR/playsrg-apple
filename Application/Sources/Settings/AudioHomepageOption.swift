@@ -8,8 +8,8 @@ import Foundation
 
 enum AudioHomepageOption: String, CaseIterable, Identifiable {
     case `default`
-    case contentOne
-    case contentMany
+    case curatedOne
+    case curatedMany
     case predefinedMany
     
     var id: Self {
@@ -17,19 +17,19 @@ enum AudioHomepageOption: String, CaseIterable, Identifiable {
     }
     
     var useChannelContenId: Bool {
-        return self == .contentMany
+        return self == .curatedMany
     }
     
     var description: String {
         switch self {
-        case .contentOne:
-            return NSLocalizedString("One content page", comment: "One audio content home page option setting state")
-        case .contentMany:
-            return NSLocalizedString("Many content pages", comment: "Many audio content home pages option setting state")
+        case .curatedOne:
+            return NSLocalizedString("One curated page", comment: "One curated audio homepage option setting state")
+        case .curatedMany:
+            return NSLocalizedString("Many curated pages", comment: "Many curated audio homepages option setting state")
         case .predefinedMany:
-            return NSLocalizedString("Many predefined pages", comment: "Many predefined audio home page option setting state")
+            return NSLocalizedString("Many predefined pages", comment: "Many predefined audio homepage option setting state")
         case .`default`:
-            return NSLocalizedString("Default (current configuration)", comment: "Audio content home page option setting state")
+            return NSLocalizedString("Default (current configuration)", comment: "Audio homepage option setting state")
         }
     }
 }

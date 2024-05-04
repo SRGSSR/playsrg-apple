@@ -295,11 +295,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     switch (ApplicationSettingAudioHomepageOption()) {
-        case SettingAudioHomepageOptionContentOne: {
+        case SettingAudioHomepageOptionCuratedOne: {
             return YES;
             break;
         }
-        case SettingAudioHomepageOptionContentMany:
+        case SettingAudioHomepageOptionCuratedMany:
         case SettingAudioHomepageOptionPredefinedMany: {
             return NO;
             break;

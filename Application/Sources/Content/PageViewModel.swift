@@ -588,7 +588,7 @@ private extension PageViewModel {
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            if let channel, let uid = channel.contentPageId, ApplicationSettingAudioHomepageOption() == .contentMany {
+            if let channel, let uid = channel.contentPageId, ApplicationSettingAudioHomepageOption() == .curatedMany {
                 return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: uid)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .audioOrRadio), index: $1) }) }
                     .eraseToAnyPublisher()
