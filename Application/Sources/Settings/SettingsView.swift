@@ -541,6 +541,7 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
+#if os(iOS) || (os(tvOS) && DEBUG)
                 NextLink {
                     SquareImagesSelectionView()
 #if os(iOS)
@@ -557,6 +558,7 @@ struct SettingsView: View {
                 } label: {
                     AudioHomepageOptionSelectionCell()
                 }
+#endif
                 Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
 #if os(iOS) && APPCENTER
                 VersionsAndReleaseNotesButton()

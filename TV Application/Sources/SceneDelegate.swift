@@ -62,7 +62,13 @@ final class SceneDelegate: UIResponder {
         let configuration = ApplicationConfiguration.shared
         
 #if DEBUG
-        if let firstChannel = configuration.radioHomepageChannels.first {
+        if ApplicationConfiguration.shared.isAudioContentHomepagePreferred {
+            let pageViewController = PageViewController(id: .audio(channel: nil))
+            pageViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
+            pageViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.value
+            viewControllers.append(pageViewController)
+        }
+        else if let firstChannel = configuration.radioHomepageChannels.first {
             let pageViewController = PageViewController(id: .audio(channel: firstChannel))
             pageViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             pageViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.value
@@ -179,8 +185,10 @@ extension SceneDelegate: UIWindowSceneDelegate {
         handleURLContexts(connectionOptions.urlContexts)
         
 #if DEBUG || NIGHTLY || BETA
-        Publishers.Merge3(
+        Publishers.MergeMany(
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSquareImages),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingAudioHomepageOption),
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
         )
