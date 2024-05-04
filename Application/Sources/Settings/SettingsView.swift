@@ -541,6 +541,14 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
+                NextLink {
+                    SquareImagesSelectionView()
+#if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+#endif
+                } label: {
+                    SquareImagesSelectionCell()
+                }
                 Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
 #if os(iOS) && APPCENTER
                 VersionsAndReleaseNotesButton()
@@ -635,7 +643,7 @@ struct SettingsView: View {
             
             var body: some View {
                 HStack {
-                    Text(NSLocalizedString("Square images", comment: "Label of the button for square image format selection"))
+                    Text(NSLocalizedString("Podcast square images", comment: "Label of the button for Podcast square image format selection"))
                     Spacer()
                     Text(selectedSquareImages.description)
                         .foregroundColor(Color.play_sectionSecondary)
@@ -773,6 +781,48 @@ struct SettingsView: View {
             
             private func select() {
                 selectedPosterImages = posterImages
+            }
+        }
+        
+        // MARK: Podcast square images selection
+        
+        private struct SquareImagesSelectionView: View {
+            var body: some View {
+                List {
+                    ForEach(SquareImages.allCases) { squareImages in
+                        SquareImagesCell(squareImages: squareImages)
+                    }
+                }
+                .srgFont(.body)
+#if os(tvOS)
+                .listStyle(GroupedListStyle())
+                .play_scrollClipDisabled()
+                .frame(maxWidth: LayoutMaxListWidth)
+#endif
+                .navigationTitle(NSLocalizedString("Podcast square images", comment: "Podcast square image format selection view title"))
+            }
+        }
+        
+        private struct SquareImagesCell: View {
+            let squareImages: SquareImages
+            
+            @AppStorage(PlaySRGSettingSquareImages) private var selectedSquareImages = SquareImages.default
+            
+            var body: some View {
+                Button(action: select) {
+                    HStack {
+                        Text(squareImages.description)
+                        Spacer()
+                        if squareImages == selectedSquareImages {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+                .foregroundColor(.primary)
+            }
+            
+            private func select() {
+                selectedSquareImages = squareImages
             }
         }
     }
