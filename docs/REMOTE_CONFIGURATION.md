@@ -68,7 +68,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
 * `shareURL` (optional, string): The URL used to share the channel website.
-* `contentPageid` (optional, string): The page identifier of the content page to use for the channel page. If omitted, the preconfigured page is used with the related sections for this channel.
+* `contentPageId` (optional, string): The page identifier of the content page to use for the channel page. If omitted, the preconfigured page is used with the related sections for this channel.
 
 The radio channel JSON dictionaries have one more key:
 

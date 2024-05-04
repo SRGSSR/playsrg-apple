@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
 /**
  *  The channel content page identifier.
  */
-@property (nonatomic, readonly, copy, nullable) NSString *contentPageid;
+@property (nonatomic, readonly, copy, nullable) NSString *contentPageId;
 
 @end
 
