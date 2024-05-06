@@ -1,0 +1,11 @@
+# Integration with Issue Tracker
+#
+# (note that '\' need to be escaped).
+
+[issuetracker "GitHub Rule"]
+  regex = "#(\\d+)"
+  url = "https://github.com/srgssr/playsrg-apple/issues/$1"
+
+[issuetracker "Jira Rule"]
+  regex = "(PLAYSRG|PLAY|PLAYRTS|SMAC|ADI)-(\\d+)"
+  url = "https://srgssr-ch.atlassian.net/browse/$1-$2"
