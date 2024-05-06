@@ -261,7 +261,7 @@ struct ProgramView: View {
                             .srgFont(.H2)
                             .lineLimit(2)
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.srgGrayC7)
+                            .foregroundColor(.srgGrayD2)
                     }
                     if let subtitle = model.subtitle {
                         Text(subtitle)

@@ -15,7 +15,7 @@ struct DiskInfoFooterView: View {
     var body: some View {
         Text(model.formattedFreeSpace)
             .srgFont(.caption)
-            .foregroundColor(.srgGrayC7)
+            .foregroundColor(.srgGrayD2)
     }
 }
 

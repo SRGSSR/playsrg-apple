@@ -46,7 +46,7 @@ struct ShowButton: View {
                         .lineLimit(2)
                     Text(NSLocalizedString("More episodes", comment: "Button to access more episodes"))
                         .srgFont(.subtitle1)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                     Spacer()
                 }
                 .padding(.vertical, 2)

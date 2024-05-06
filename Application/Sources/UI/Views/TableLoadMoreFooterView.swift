@@ -13,7 +13,7 @@ class TableLoadMoreFooterView: UIView {
         
         backgroundColor = .clear
         
-        let loadingImageView = UIImageView.play_loadingImageView(withTintColor: .srgGrayC7)
+        let loadingImageView = UIImageView.play_loadingImageView(withTintColor: .srgGrayD2)
         addSubview(loadingImageView)
         
         loadingImageView.translatesAutoresizingMaskIntoConstraints = false

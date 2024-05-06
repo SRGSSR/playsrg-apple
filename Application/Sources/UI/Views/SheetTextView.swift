@@ -23,7 +23,7 @@ struct SheetTextView: View {
                 HStack(spacing: 0) {
                     Text(content)
                         .srgFont(.body)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                         .multilineTextAlignment(.leading)
                         .padding(.horizontal, 28)
                     Spacer(minLength: 0)

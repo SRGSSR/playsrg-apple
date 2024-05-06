@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgappearance-apple.git",
       "state" : {
-        "revision" : "37858eb83365f498d3861cc546ba86a51e061293",
-        "version" : "5.2.1"
+        "revision" : "17415ec82264d47d882c19a5db33e1be31fb1de5",
+        "version" : "5.2.2"
       }
     },
     {

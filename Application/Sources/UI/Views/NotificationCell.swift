@@ -65,7 +65,7 @@ struct NotificationCell: View {
                 Text(notification.body)
                     .srgFont(.H4)
                     .lineLimit(2)
-                    .foregroundColor(.srgGrayC7)
+                    .foregroundColor(.srgGrayD2)
                     .layoutPriority(1)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

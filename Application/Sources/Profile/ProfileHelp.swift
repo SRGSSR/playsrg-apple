@@ -59,7 +59,7 @@ import SwiftUI
         
         let safariViewController = SFSafariViewController(url: url)
         safariViewController.preferredBarTintColor = UIColor.srgGray16
-        safariViewController.preferredControlTintColor = UIColor.srgGrayC7
+        safariViewController.preferredControlTintColor = UIColor.srgGrayD2
         safariViewController.modalPresentationStyle = .pageSheet
         
         tabBarController.play_top.present(safariViewController, animated: true, completion: completion)

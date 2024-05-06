@@ -163,7 +163,7 @@ name: promises, nameSpecified: Promises, owner: google, version: 2.4.0, source: 
 
 name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 9.1.0, source: https://github.com/SRGSSR/srganalytics-apple
 
-name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.2.1, source: https://github.com/SRGSSR/srgappearance-apple
+name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.2.2, source: https://github.com/SRGSSR/srgappearance-apple
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgcontentprotection-apple
 

@@ -371,7 +371,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackground;
     
-    self.moreEpisodesLabel.textColor = UIColor.srg_grayC7Color;
+    self.moreEpisodesLabel.textColor = UIColor.srg_grayD2Color;
     
     self.pullDownGestureRecognizer.delegate = self;
     

@@ -35,7 +35,7 @@ struct Handle: View {
         var body: some View {
             RoundedRectangle(cornerRadius: grabberHeight / 2)
                 .frame(width: grabberWidth, height: grabberHeight)
-                .foregroundColor(.srgGrayC7)
+                .foregroundColor(.srgGrayD2)
         }
     }
 }

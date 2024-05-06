@@ -111,7 +111,7 @@ struct DownloadCell: View {
                         Text(subtitle)
                             .srgFont(.subtitle1)
                             .lineLimit(1)
-                            .foregroundColor(.srgGrayC7)
+                            .foregroundColor(.srgGrayD2)
                             .layoutPriority(1)
                     }
                 }
@@ -147,7 +147,7 @@ struct DownloadCell: View {
         
         private struct DownloadImageView: UIViewRepresentable {
             func makeUIView(context: Context) -> UIImageView {
-                return UIImageView.play_smallDownloadingImageView(withTintColor: .srgGrayC7)
+                return UIImageView.play_smallDownloadingImageView(withTintColor: .srgGrayD2)
             }
             
             func updateUIView(_ uiView: UIImageView, context: Context) {

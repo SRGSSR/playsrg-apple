@@ -58,7 +58,7 @@ struct ProfileAccountHeaderView: View {
                                         )
                                         .overlay(
                                             Circle()
-                                                .stroke(Color.srgGrayC7, lineWidth: lineWidth)
+                                                .stroke(Color.srgGrayD2, lineWidth: lineWidth)
                                                 .frame(maxWidth: iconHeight - lineWidth, maxHeight: iconHeight - lineWidth)
                                         )
                                         .opacity(1)
@@ -88,7 +88,7 @@ struct ProfileAccountHeaderView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 16)
                 }
-                .foregroundColor(.srgGrayC7)
+                .foregroundColor(.srgGrayD2)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 4)
                 .frame(maxHeight: .infinity)

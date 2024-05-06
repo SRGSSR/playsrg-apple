@@ -101,7 +101,7 @@ struct ShowCell: View {
                 }
 #endif
             }
-            .foregroundColor(.srgGrayC7)
+            .foregroundColor(.srgGrayD2)
         }
     }
 }
