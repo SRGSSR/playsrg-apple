@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
 @property (nonatomic, readonly, copy) NSString *name;
 
 /**
- * The URL used to share the livestream of a channel.
+ * The URL used to share the channel website.
  */
 @property (nonatomic, readonly, copy, nullable) NSURL *shareURL;
 
