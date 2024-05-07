@@ -67,6 +67,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
+* `shareURL` (optional, string): The URL used to share the livestream of a channel.
 
 The radio channel JSON dictionaries have one more key:
 
