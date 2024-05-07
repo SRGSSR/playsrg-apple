@@ -232,8 +232,11 @@ final class PageViewController: UIViewController {
             .dropFirst()
             .sink { [weak self] _ in
                 if let self, isViewLoaded {
-                    updateLayoutConfiguration()
-                    updateTopicGradientLayout()
+                    // Dispatch on next main thread loop to have new model.displayedShow for ShowHeaderView supplementary view
+                    DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+                        self.updateLayoutConfiguration()
+                        self.updateTopicGradientLayout()
+                    }
                 }
             }
             .store(in: &cancellables)
