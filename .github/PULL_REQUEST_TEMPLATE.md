@@ -15,5 +15,5 @@
 - [ ] I have performed a self-review of my own changes.
 - [ ] I have made corresponding changes to the documentation.
 - [ ] My changes do not generate new warnings.
-- [ ] I have added tests that prove my fix is effective or that my feature works.
+- [ ] I have tested my changes and I am confident that it works as expected and doesn't introduce any known regressions.
 - [ ] I have reviewed the contribution guidelines.
