@@ -126,7 +126,6 @@ struct ShowHeaderView: View {
                             .padding(.horizontal, padding)
                     }
                     .padding(.bottom, 24)
-                    .focusable()
                 }
                 else {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
@@ -140,7 +139,6 @@ struct ShowHeaderView: View {
                     .padding(.top, padding)
                     .padding(.horizontal, padding)
                     .padding(.bottom, constant(iOS: 40, tvOS: 50))
-                    .focusable()
                 }
             }
             .readSize { _ in
@@ -191,6 +189,56 @@ struct ShowHeaderView: View {
                     // See above
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                ActionsView(model: model, compactLayout: compactLayout)
+                    .foregroundColor(foregroundColor)
+                    .frame(height: constant(iOS: 40, tvOS: 70))
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .focusable()
+        }
+        
+        /// Behavior: h-exp, v-hug
+        private struct SummaryView: View {
+            let content: String
+            
+            var foregroundColor: Color = .srgGrayD2
+            
+            @FirstResponder private var firstResponder
+            
+            init(_ content: String) {
+                self.content = content
+            }
+            
+            func foregroundColor(_ color: Color) -> Self {
+                var view = self
+                
+                view.foregroundColor = color
+                return view
+            }
+            
+            var body: some View {
+                TruncatableTextView(content: content, lineLimit: 3) {
+                    firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
+                }
+                .foregroundColor(foregroundColor)
+                .responderChain(from: firstResponder)
+            }
+        }
+        
+        private struct ActionsView: View {
+            @ObservedObject var model: ShowHeaderViewModel
+            let compactLayout: Bool
+            
+            var foregroundColor: Color = .srgGrayD2
+            
+            func foregroundColor(_ color: Color) -> Self {
+                var view = self
+                
+                view.foregroundColor = color
+                return view
+            }
+            
+            var body: some View {
                 HStack(spacing: 8) {
                     if compactLayout {
                         ExpandingButton(icon: model.favoriteIcon,
@@ -227,64 +275,34 @@ struct ShowHeaderView: View {
 #endif
                     }
                 }
-                .frame(height: constant(iOS: 40, tvOS: 70))
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-        
-        private func favoriteAction() {
-            if model.shouldDisplayFavoriteRemovalAlert {
-                model.isFavoriteRemovalAlertDisplayed = true
-            }
-            else {
-                model.toggleFavorite()
-            }
-        }
-        
-        private func favoriteRemovalAlert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-                model.toggleFavorite()
-            }
-            return Alert(title: Text(NSLocalizedString("Delete from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete a favorite")),
-                         message: Text(NSLocalizedString("The favorite and notification subscription will be deleted on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete a favorite")),
-                         primaryButton: primaryButton,
-                         secondaryButton: secondaryButton)
-        }
-        
-#if os(iOS)
-        private func subscriptionAction() {
-            model.toggleSubscription()
-        }
-#endif
-        
-        /// Behavior: h-exp, v-hug
-        private struct SummaryView: View {
-            let content: String
             
-            var foregroundColor: Color = .srgGrayD2
-            
-            @FirstResponder private var firstResponder
-            
-            init(_ content: String) {
-                self.content = content
-            }
-            
-            func foregroundColor(_ color: Color) -> Self {
-                var view = self
-                
-                view.foregroundColor = color
-                return view
-            }
-            
-            var body: some View {
-                TruncatableTextView(content: content, lineLimit: 3) {
-                    firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
+            private func favoriteAction() {
+                if model.shouldDisplayFavoriteRemovalAlert {
+                    model.isFavoriteRemovalAlertDisplayed = true
                 }
-                .foregroundColor(foregroundColor)
-                .responderChain(from: firstResponder)
+                else {
+                    model.toggleFavorite()
+                }
             }
+            
+            private func favoriteRemovalAlert() -> Alert {
+                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                    model.toggleFavorite()
+                }
+                return Alert(title: Text(NSLocalizedString("Delete from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete a favorite")),
+                             message: Text(NSLocalizedString("The favorite and notification subscription will be deleted on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete a favorite")),
+                             primaryButton: primaryButton,
+                             secondaryButton: secondaryButton)
+            }
+            
+#if os(iOS)
+            private func subscriptionAction() {
+                model.toggleSubscription()
+            }
+#endif
         }
     }
 }
