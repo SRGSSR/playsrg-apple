@@ -41,6 +41,7 @@ struct MediaVisualView<Content: View>: View {
     var body: some View {
         ZStack {
             ImageView(source: model.imageUrl(for: size), contentMode: contentMode)
+                .background(Color.black)
             content(media)
             BlockingOverlay(media: media)
             
