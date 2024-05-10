@@ -345,6 +345,12 @@ extension PageViewModel {
 #endif
     }
     
+    enum SectionLink: Equatable {
+        case none
+        case configuredLink
+        case contentLink(SRGContentLink)
+    }
+    
     fileprivate struct Page: Hashable {
         let uid: String?
         let sections: [Section]
@@ -612,7 +618,7 @@ private extension PageViewModel {
         var rowItems = items.map { Item(.item($0), in: section) }
 #if os(tvOS)
         if !rowItems.isEmpty
-            && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
+            && (section.viewModelProperties.link != .none || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasMoreRowItem {
             rowItems.append(Item(.more, in: section))
         }
@@ -625,7 +631,7 @@ private extension PageViewModel {
 
 protocol PageViewModelProperties {
     var layout: PageViewModel.SectionLayout { get }
-    var canOpenDetailPage: Bool { get }
+    var link: PageViewModel.SectionLink { get }
 }
 
 extension PageViewModelProperties {
@@ -695,12 +701,16 @@ private extension PageViewModel {
             }
         }
         
-        var canOpenDetailPage: Bool {
+        var link: SectionLink {
             switch presentation.type {
             case .favoriteShows, .myProgram, .continueWatching, .topicSelector, .watchLater:
-                return true
+                return .configuredLink
             default:
-                return presentation.hasDetailPage
+                if let contentLink = presentation.contentLink {
+                    return .contentLink(contentLink)
+                } else {
+                    return .none
+                }
             }
         }
     }
@@ -738,8 +748,8 @@ private extension PageViewModel {
             }
         }
         
-        var canOpenDetailPage: Bool {
-            return layout == .mediaSwimlane || layout == .showSwimlane
+        var link: PageViewModel.SectionLink {
+            return layout == .mediaSwimlane || layout == .showSwimlane ? .configuredLink : .none
         }
     }
 }

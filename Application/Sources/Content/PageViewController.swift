@@ -1045,7 +1045,7 @@ private extension PageViewController {
         }
         
         private var hasDetailDisclosure: Bool {
-            return section.viewModelProperties.canOpenDetailPage || isSectionWideSupportEnabled
+            return section.viewModelProperties.link != .none || isSectionWideSupportEnabled
         }
         
         var accessibilityLabel: String? {
