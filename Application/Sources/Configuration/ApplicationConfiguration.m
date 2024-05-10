@@ -568,10 +568,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return URLComponents.URL;
     }
     else if (media.channel.vendor == SRGVendorSSATR) {
-        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:media.vendor] resolvingAgainstBaseURL:NO];
-        URLComponents.path = [URLComponents.path stringByAppendingPathComponent:@"embed"];
-        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:media.URN] ];
-        return URLComponents.URL;
+        return [[self channelForUid:media.uid] shareURL];
     }
     else {
         static NSDictionary<NSNumber *, NSString *> *s_mediaTypeNames;
