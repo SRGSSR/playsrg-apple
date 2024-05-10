@@ -206,7 +206,7 @@ final class PageViewController: UIViewController {
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.primaryColor)
+            view.content = SectionHeaderView(section: section, pageId: model.id, link: section.viewModelProperties.link).primaryColor(model.primaryColor)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -664,10 +664,48 @@ extension PageViewController: ShowAccessCellActions {
 
 extension PageViewController: SectionHeaderViewAction {
     fileprivate func openSection(sender: Any?, event: OpenSectionEvent?) {
-        if let event, let navigationController {
-            let sectionViewController = SectionViewController(section: event.section.wrappedValue, filter: model.id)
-            navigationController.pushViewController(sectionViewController, animated: true)
+        if let event {
+            switch event.link {
+            case .none:
+                break
+            case .configuredLink:
+                openSectionPage(section: event.section, filter: model.id)
+            case .contentLink(let link):
+                switch link.type {
+                case .detailPage:
+                    openSectionPage(section: event.section, filter: model.id)
+                case .microPage:
+                    if let pageId = link.target {
+                        openContentPage(id: pageId)
+                    }
+                case .none:
+                    break
+                }
+            }
         }
+    }
+
+    private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
+        guard let navigationController else { return }
+
+        let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
+        navigationController.pushViewController(sectionViewController, animated: true)
+    }
+
+    private func openContentPage(id: String) {
+        guard let navigationController else { return }
+        
+        SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                if case .failure(let failure) = error {
+                    Banner.showError(failure as NSError)
+                }
+            } receiveValue: { contentPage in
+                let pageViewController = PageViewController.pageViewController(for: contentPage)
+                navigationController.pushViewController(pageViewController, animated: true)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -1015,9 +1053,11 @@ private extension PageViewController {
 
 private class OpenSectionEvent: UIEvent {
     let section: PageViewModel.Section
+    let link: PageViewModel.SectionLink
     
-    init(section: PageViewModel.Section) {
+    init(section: PageViewModel.Section, link: PageViewModel.SectionLink) {
         self.section = section
+        self.link = link
         super.init()
     }
     
@@ -1030,6 +1070,7 @@ private extension PageViewController {
     private struct SectionHeaderView: View, PrimaryColorSettable {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
+        let link: PageViewModel.SectionLink
         
         internal var primaryColor: Color = .srgGrayD2
         
@@ -1062,7 +1103,7 @@ private extension PageViewController {
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false, primaryColor: primaryColor)
 #else
                 Button {
-                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section, link: link))
                 } label: {
                     HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure, primaryColor: primaryColor)
                 }
