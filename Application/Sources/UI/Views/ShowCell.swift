@@ -39,6 +39,7 @@ struct ShowCell: View, PrimaryColorSettable {
 #if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageVariant), action: action) {
                 ImageView(source: model.imageUrl(with: imageVariant))
+                    .background(Color.srgGray23)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
