@@ -1,0 +1,21 @@
+#!/bin/sh
+
+#================================================================
+# Append Jira issue id into commit message
+#================================================================
+
+# Inspired from: https://community.atlassian.com/t5/Bitbucket-questions/automatically-append-JIRA-issue-ID-into-commit-message/qaq-p/605991
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+
+# Search jira issue id from the branch name in a pattern such a "feature/ABC-123-description"
+JIRA_ISSUE=$(echo "$BRANCH_NAME" | sed -nr 's,[a-z]+/([A-Z0-9]+-[0-9]+)-.+,\1,p')
+
+# A developer may have already prepended the commit message with the branch jira issue id
+JIRA_ISSUE_IN_COMMIT=$(grep -c "$JIRA_ISSUE" "$1")
+
+# Only amend commit message if jira issue id was found and not already in commit message
+if [ -n "$JIRA_ISSUE" ]  && ! [ "$JIRA_ISSUE_IN_COMMIT" -ge 1 ]; then
+ echo "📝 Prepending jira issue $JIRA_ISSUE to commit message"
+ sed -i.bak -e "1s/^/$JIRA_ISSUE /" "$1"
+fi
