@@ -38,29 +38,13 @@ Templates are available when you want to contribute:
 
 Quality checks can be run using:
 
-```shell
+```
 make check-quality
 ```
 
 This ensures that Swift files, and scripts conform to common best practices.
 
 Objective-C files currently have no formal code conventions, but we try to keep our codebase consistent. In general, having a look at the code itself should be enough for you to discover how you should write your changes.
-
-### Git hooks installation
-
-Project git hooks can be installed to help quality checks by running the following command:
-
-```shell
-make git-hook-install
-```
-
-### Git hooks uninstallation
-
-Project git hooks can be uninstalled by running the following command:
-
-```shell
-make git-hook-uninstall
-```
 
 ## Code review
 

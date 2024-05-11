@@ -125,6 +125,18 @@ In the iOS application settings, licenses of libraries used in the project can b
 brew install licenseplist
 ```
 
+### SRGSSR project
+
+Some links to [internal Jira SRGSSR instance](https://srgssr-ch.atlassian.net) can be found in commit messages, branch names or pull request titles.
+
+### Git hooks installation
+
+Project git hooks can be installed to help quality checks and commit messages for internal SRGSSR project. Install its by running the following command:
+
+```
+make git-hook-install
+```
+
 ## Translations
 
 Translation tool is [crowdin.com](https://crowdin.com/project/play-srg). The following scripts need [Crowdin CLI](https://crowdin.github.io/crowdin-cli/).
