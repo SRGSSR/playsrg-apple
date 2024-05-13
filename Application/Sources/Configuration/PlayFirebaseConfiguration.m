@@ -300,7 +300,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
     return tvChannels.copy;
 }
 
-- (NSDictionary *)topicColorsForKey:(NSString *)key
+- (NSDictionary<NSString*, NSArray<UIColor *> *> *)topicColorsForKey:(NSString *)key
 {
     NSMutableDictionary *topicColors = [NSMutableDictionary dictionary];
     
