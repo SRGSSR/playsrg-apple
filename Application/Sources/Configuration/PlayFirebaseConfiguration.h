@@ -60,7 +60,7 @@ OBJC_EXPORT NSArray<NSNumber * /* HomeSection */> * _Nullable FirebaseConfigurat
 /**
  *  Topic colors accessors. Return an empty dictionnary if no valid data is found under the specified key.
  */
-- (NSDictionary<NSString*, NSArray<UIColor *> *> *)topicColorsForKey:(NSString *)key;
+- (NSDictionary<NSString *, NSArray<UIColor *> *> *)topicColorsForKey:(NSString *)key;
 
 /**
  *  TV guide other bouquets accessor, main bouquet excluded. Return an empty array if no valid data is found under the specified key.
