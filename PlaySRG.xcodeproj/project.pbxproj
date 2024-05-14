@@ -19352,7 +19352,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/content-page-update";
+				branch = develop;
 				kind = branch;
 			};
 		};
