@@ -166,20 +166,10 @@ func navigateToPage(_ page: SRGContentPage, animated: Bool = true) {
 }
 
 func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true) {
-    switch section {
-    case .configured:
+    if let microPageId = section.microPageId {
+        openContentPage(id: microPageId, animated: animated)
+    } else {
         openSectionPage(section: section, filter: filter, animated: animated)
-    case .content(let innerSection, show: _):
-        switch innerSection.presentation.contentLink?.type {
-        case .detailPage:
-            openSectionPage(section: section, filter: filter, animated: animated)
-        case .microPage:
-            if let pageId = innerSection.presentation.contentLink?.target {
-                openContentPage(id: pageId, animated: animated)
-            }
-        case nil, .none?:
-            break
-        }
     }
 }
 

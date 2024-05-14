@@ -24,6 +24,14 @@ enum Content {
                 return ConfiguredSectionProperties(configuredSection: section)
             }
         }
+        
+        var microPageId: String? {
+            guard case .content(let section, show: _) = self, let link = section.presentation.contentLink, link.type == .microPage, let id = link.target else {
+                return nil
+            }
+            
+            return id
+        }
     }
     
     indirect enum Item: Hashable {
