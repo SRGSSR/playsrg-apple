@@ -310,7 +310,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
         if ([colors isKindOfClass:NSDictionary.class]) {
             UIColor *firstColor = [UIColor srg_colorFromHexadecimalString:colors[@"firstColor"]];
             UIColor *secondColor = [UIColor srg_colorFromHexadecimalString:colors[@"secondColor"]];
-            Boolean reduceBrightness = [colors[@"reduceBrightness"] boolValue];
+            BOOL reduceBrightness = [colors[@"reduceBrightness"] boolValue];
             if (firstColor && secondColor) {
                 CGFloat alpha = reduceBrightness ? 0.65 : 1.;
                 topicColors[key] = @[[firstColor colorWithAlphaComponent:alpha], [secondColor colorWithAlphaComponent:alpha]];
