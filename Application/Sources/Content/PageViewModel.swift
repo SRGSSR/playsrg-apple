@@ -618,7 +618,7 @@ private extension PageViewModel {
         var rowItems = items.map { Item(.item($0), in: section) }
 #if os(tvOS)
         if !rowItems.isEmpty
-            && (section.viewModelProperties.link != .none || ApplicationSettingSectionWideSupportEnabled())
+            && (section.viewModelProperties.canOpenPage || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasMoreRowItem {
             rowItems.append(Item(.more, in: section))
         }
@@ -631,7 +631,7 @@ private extension PageViewModel {
 
 protocol PageViewModelProperties {
     var layout: PageViewModel.SectionLayout { get }
-    var link: PageViewModel.SectionLink { get }
+    var canOpenPage: Bool { get }
 }
 
 extension PageViewModelProperties {
@@ -701,15 +701,15 @@ private extension PageViewModel {
             }
         }
         
-        var link: SectionLink {
+        var canOpenPage: Bool {
             switch presentation.type {
             case .favoriteShows, .myProgram, .continueWatching, .topicSelector, .watchLater:
-                return .configuredLink
+                return true
             default:
-                if let contentLink = presentation.contentLink {
-                    return .contentLink(contentLink)
+                if presentation.contentLink != nil {
+                    return true
                 } else {
-                    return .none
+                    return false
                 }
             }
         }
@@ -748,8 +748,8 @@ private extension PageViewModel {
             }
         }
         
-        var link: PageViewModel.SectionLink {
-            return layout == .mediaSwimlane || layout == .showSwimlane ? .configuredLink : .none
+        var canOpenPage: Bool {
+            return layout == .mediaSwimlane || layout == .showSwimlane
         }
     }
 }
