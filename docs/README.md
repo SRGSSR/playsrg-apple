@@ -131,7 +131,7 @@ Some links to [internal Jira SRGSSR instance](https://srgssr-ch.atlassian.net) c
 
 ### Git hooks installation
 
-Project git hooks can be installed to help quality checks and commit messages for internal SRGSSR project. Install its by running the following command:
+Project git hooks can be installed to help quality checks and commit messages for internal SRGSSR project. Install them by running the following command:
 
 ```
 make git-hook-install
