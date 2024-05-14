@@ -35,10 +35,6 @@ Depending on the business unit some functionalities might not be available (e.g.
 
 The project runs on iOS 14.1, tvOS 14 and above and must be opened with the latest Xcode version.
 
-## Contributing
-
-If you want to contribute to the project, have a look at our [contributing guide](CONTRIBUTING.md).
-
 ## Required tools
 
 - Building the project requires command-line tools for icon generation, easily installed with [Homebrew](https://brew.sh/):
@@ -52,6 +48,12 @@ If you want to contribute to the project, have a look at our [contributing guide
 	```
 	which pod
 	pod --version
+	```
+	
+	If not, install it:
+	
+	```
+	brew install cocoapods
 	```
 
 ## Building the project
@@ -88,6 +90,52 @@ The project can be built without private settings but some features might not be
 ### Running the project
 
 Simply open the project with Xcode and wait until all dependencies have been retrieved. Then build and run the project.
+
+## Contributing
+
+If you want to contribute to the project as an external contributor, have a look at our [contributing guide](CONTRIBUTING.md).
+
+### Quality checks
+
+Checking quality, the project requires command-line tools:
+
+```
+brew install swiftlint shellcheck yamllint
+```
+
+For `rubocop`, be sure that this tool is available on your system, or execute:
+
+```
+bundle install --path vendor/bundle
+```
+
+When all command-line tools are installed, check code quality can be done using:
+
+```
+make check-quality
+```
+
+This ensures that Swift files, and scripts are conform to common best practices.
+
+### Licenses for libraries used in the project
+
+In the iOS application settings, licenses of libraries used in the project can be consulted. To build the list, running an iOS target requires [LicensePlist](https://github.com/mono0926/LicensePlist).
+
+```
+brew install licenseplist
+```
+
+### SRGSSR project
+
+Some links to [internal Jira SRGSSR instance](https://srgssr-ch.atlassian.net) can be found in commit messages, branch names or pull request titles.
+
+### Git hooks installation
+
+Project git hooks can be installed to help quality checks and commit messages for internal SRGSSR project. Install them by running the following command:
+
+```
+make git-hook-install
+```
 
 ## Translations
 

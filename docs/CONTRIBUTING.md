@@ -29,8 +29,8 @@ If you are not sure about the likelihood of a change you propose to be accepted,
 
 Templates are available when you want to contribute:
 
-* [Issues](https://github.com/SRGSSR/playsrg-ios/issues/new): Please follow our issue template. You can omit information which does not make sense but, in general, the more details you can provide, the better. This ensures we can quickly reproduce the problem you are facing, increasing the likelihood we can fix it. 
-* [Pull requests](https://github.com/SRGSSR/playsrg-ios/compare): Please follow our code conventions, test your code well, and write unit tests when this makes sense. We will review your work and, if successful, merge it back into the main development branch.
+* [Issues](https://github.com/SRGSSR/playsrg-apple/issues): Please follow our issue template. You can omit information which does not make sense but, in general, the more details you can provide, the better. This ensures we can quickly reproduce the problem you are facing, increasing the likelihood we can fix it. 
+* [Pull requests](https://github.com/SRGSSR/playsrg-apple/pulls): Please follow our code conventions, test your code well, and write unit tests when this makes sense. We will review your work and, if successful, merge it back into the main development branch.
 
 ## Code conventions
 
@@ -38,29 +38,13 @@ Templates are available when you want to contribute:
 
 Quality checks can be run using:
 
-```shell
+```
 make check-quality
 ```
 
 This ensures that Swift files, and scripts conform to common best practices.
 
 Objective-C files currently have no formal code conventions, but we try to keep our codebase consistent. In general, having a look at the code itself should be enough for you to discover how you should write your changes.
-
-### Git hooks installation
-
-Project git hooks can be installed to help quality checks by running the following command:
-
-```shell
-make git-hook-install
-```
-
-### Git hooks uninstallation
-
-Project git hooks can be uninstalled by running the following command:
-
-```shell
-make git-hook-uninstall
-```
 
 ## Code review
 
