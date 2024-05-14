@@ -119,7 +119,7 @@ This ensures that Swift files, and scripts are conform to common best practices.
 
 ### Licenses for libraries used in the project
 
-In the iOS application settings, licenses of libraries used in the project can be consulted. To build the list, running an iOS target required [LicensePlist](https://github.com/mono0926/LicensePlist).
+In the iOS application settings, licenses of libraries used in the project can be consulted. To build the list, running an iOS target requires [LicensePlist](https://github.com/mono0926/LicensePlist).
 
 ```
 brew install licenseplist
