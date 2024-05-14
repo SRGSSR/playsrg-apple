@@ -305,22 +305,22 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
     NSMutableDictionary *topicColors = [NSMutableDictionary dictionary];
     
     NSDictionary *topicColorsDictionary = [self JSONDictionaryForKey:key];
-    for (NSString *key in topicColorsDictionary) {
-        NSDictionary *colors = topicColorsDictionary[key];
+    for (NSString *topicUrn in topicColorsDictionary) {
+        NSDictionary *colors = topicColorsDictionary[topicUrn];
         if ([colors isKindOfClass:NSDictionary.class]) {
             UIColor *firstColor = [UIColor srg_colorFromHexadecimalString:colors[@"firstColor"]];
             UIColor *secondColor = [UIColor srg_colorFromHexadecimalString:colors[@"secondColor"]];
             BOOL reduceBrightness = [colors[@"reduceBrightness"] boolValue];
             if (firstColor && secondColor) {
                 CGFloat alpha = reduceBrightness ? 0.65 : 1.;
-                topicColors[key] = @[[firstColor colorWithAlphaComponent:alpha], [secondColor colorWithAlphaComponent:alpha]];
+                topicColors[topicUrn] = @[[firstColor colorWithAlphaComponent:alpha], [secondColor colorWithAlphaComponent:alpha]];
             }
             else {
-                PlayLogWarning(@"configuration", @"Topic colors dictionnary is missing valid colors. The content of %@ is not valid.", key);
+                PlayLogWarning(@"configuration", @"Topic colors dictionnary is missing valid colors. The content of %@ is not valid.", topicUrn);
             }
         }
         else {
-            PlayLogWarning(@"configuration", @"Topic colors dictionnary is not valid. The content of %@ is not valid.", key);
+            PlayLogWarning(@"configuration", @"Topic colors dictionnary is not valid. The content of %@ is not valid.", topicUrn);
         }
     }
     
