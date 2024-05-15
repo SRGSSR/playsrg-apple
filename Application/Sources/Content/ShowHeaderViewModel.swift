@@ -75,10 +75,6 @@ final class ShowHeaderViewModel: ObservableObject {
         return show?.broadcastInformation?.message
     }
     
-    var imageUrl: URL? {
-        return url(for: show?.image, size: .large)
-    }
-    
     var favoriteIcon: ImageResource {
         return isFavorite ? .favoriteFull : .favorite
     }

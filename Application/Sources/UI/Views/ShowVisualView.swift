@@ -4,39 +4,48 @@
 //  License information is available from the LICENSE file.
 //
 
-import Nuke
 import SwiftUI
 
 // MARK: View
 
 /// Behavior: h-exp, v-exp
 struct ShowVisualView: View {
-    let source: ImageRequestConvertible?
+    let show: SRGShow?
+    let size: SRGImageSize
+    let imageVariant: SRGImageVariant
     let contentMode: ImageView.ContentMode
     
-    init(source: ImageRequestConvertible?, contentMode: ImageView.ContentMode = .aspectFit) {
-        self.source = source
+    init(
+        show: SRGShow?,
+        size: SRGImageSize,
+        imageVariant: SRGImageVariant = .default,
+        contentMode: ImageView.ContentMode = .aspectFit
+    ) {
+        self.show = show
+        self.size = size
+        self.imageVariant = imageVariant
         self.contentMode = contentMode
     }
     
     var body: some View {
-        ImageView(source: source, contentMode: contentMode)
+        ImageView(source: imageUrl, contentMode: contentMode)
             .background(Color.black)
+    }
+    
+    private var imageUrl: URL? {
+        return imageVariant == .poster ? url(for: show?.posterImage, size: size) : url(for: show?.image, size: size)
     }
 }
 
 // MARK: Preview
 
 struct ShowVisualView_Previews: PreviewProvider {
-    private static func showImageUrl(for show: SRGShow) -> URL? {
-        return SRGDataProvider.current!.url(for: show.image, size: .medium)
-    }
-    
     static var previews: some View {
         Group {
-            ShowVisualView(source: showImageUrl(for: Mock.show(.standard)))
-            ShowVisualView(source: showImageUrl(for: Mock.show(.overflow)))
-            ShowVisualView(source: showImageUrl(for: Mock.show(.short)))
+            ShowVisualView(show: Mock.show(.standard), size: .small)
+            ShowVisualView(show: Mock.show(.standard), size: .small, imageVariant: .poster)
+            ShowVisualView(show: Mock.show(.overflow), size: .small)
+            ShowVisualView(show: Mock.show(.short), size: .small)
         }
         .frame(width: 600, height: 500)
         .previewLayout(.sizeThatFits)
