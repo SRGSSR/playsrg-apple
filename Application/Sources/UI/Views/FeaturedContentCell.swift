@@ -63,7 +63,6 @@ struct FeaturedContentCell<Content: FeaturedContent>: View, PrimaryColorSettable
             ExpandingCardButton(action: content.action) {
                 HStack(spacing: 0) {
                     content.visualView()
-                        .background(Color.black)
                         .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                         .layoutPriority(1)
                     FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)
@@ -80,7 +79,6 @@ struct FeaturedContentCell<Content: FeaturedContent>: View, PrimaryColorSettable
 #else
             Stack(direction: direction, spacing: 0) {
                 content.visualView()
-                    .background(Color.black)
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .layoutPriority(1)
                 FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)

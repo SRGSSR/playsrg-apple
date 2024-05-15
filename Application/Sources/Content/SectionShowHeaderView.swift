@@ -52,8 +52,7 @@ struct SectionShowHeaderView: View {
     
     var body: some View {
         Stack(direction: direction, alignment: alignment, spacing: 0) {
-            ImageView(source: imageUrl)
-                .background(Color.black)
+            ShowVisualView(source: imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .overlay(ImageOverlay(horizontalSizeClass: horizontalSizeClass))
                 .adaptiveMainFrame(for: horizontalSizeClass)

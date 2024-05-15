@@ -38,7 +38,7 @@ struct ShowButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                ImageView(source: imageUrl)
+                ShowVisualView(source: imageUrl)
                     .aspectRatio(16 / 9, contentMode: .fit)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(show.title)

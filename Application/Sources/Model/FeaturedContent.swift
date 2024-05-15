@@ -111,7 +111,7 @@ struct FeaturedShowContent: FeaturedContent {
     }
     
     func visualView() -> some View {
-        return ImageView(source: url(for: show?.image, size: .medium))
+        return ShowVisualView(source: url(for: show?.image, size: .medium))
     }
     
 #if os(tvOS)

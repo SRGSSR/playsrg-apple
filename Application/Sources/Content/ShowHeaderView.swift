@@ -85,8 +85,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
             Group {
                 if isVerticalLayout(horizontalSizeClass: horizontalSizeClass, isLandscape: isLandscape) {
                     VStack(alignment: .leading, spacing: 0) {
-                        ImageView(source: model.imageUrl)
-                            .background(Color.black)
+                        ShowVisualView(source: model.imageUrl)
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
@@ -100,8 +99,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
                             .primaryColor(primaryColor)
-                        ImageView(source: model.imageUrl)
-                            .background(Color.black)
+                        ShowVisualView(source: model.imageUrl)
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .frame(width: UIScreen.main.bounds.width * 0.35)
                     }
