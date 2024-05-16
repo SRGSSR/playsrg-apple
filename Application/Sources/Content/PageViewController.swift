@@ -672,14 +672,14 @@ extension PageViewController: SectionHeaderViewAction {
             }
         }
     }
-
+    
     private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
         guard let navigationController else { return }
-
+        
         let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
         navigationController.pushViewController(sectionViewController, animated: true)
     }
-
+    
     private func openContentPage(id: String) {
         guard let navigationController else { return }
         
@@ -1041,7 +1041,7 @@ private extension PageViewController {
 
 private class OpenSectionEvent: UIEvent {
     let section: PageViewModel.Section
-
+    
     init(section: PageViewModel.Section) {
         self.section = section
         super.init()
