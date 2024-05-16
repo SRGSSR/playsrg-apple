@@ -443,19 +443,6 @@ extension PageViewModel {
         return .srgGray96
     }
     
-    var titlesColor: Color {
-        switch id {
-        case .page:
-            return .white
-        case let .topic(topic):
-            return ApplicationConfiguration.shared.topicColors(for: topic) != nil ? .white : .srgGrayD2
-        case .show:
-            return .white
-        default:
-            return .srgGrayD2
-        }
-    }
-    
     var displayedTitle: String? {
         switch id {
         case let .page(page):

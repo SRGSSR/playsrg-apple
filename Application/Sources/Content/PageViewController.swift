@@ -194,19 +194,19 @@ final class PageViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).primaryColor(model.titlesColor)
+            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).primaryColor(model.primaryColor)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).primaryColor(model.titlesColor).secondaryColor(model.titlesColor)
+            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).primaryColor(model.primaryColor)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.titlesColor)
+            view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.primaryColor)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in

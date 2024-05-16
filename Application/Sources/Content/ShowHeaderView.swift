@@ -33,8 +33,9 @@ struct ShowHeaderView: View, ColorsSettable {
     @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
     
-    internal var primaryColor: Color = .white
-    internal var secondaryColor: Color = .srgGrayD2
+    internal var primaryColor: Color = .srgGrayD2
+    // FIXME: Not needed
+    internal var secondaryColor: Color = .srgGray96
     
     static let imageAspectRatio: CGFloat = 16 / 9
     
@@ -54,7 +55,6 @@ struct ShowHeaderView: View, ColorsSettable {
     var body: some View {
         MainView(model: model, horizontalPadding: horizontalPadding)
             .primaryColor(primaryColor)
-            .secondaryColor(secondaryColor)
             .onAppear {
                 model.show = show
             }
@@ -71,8 +71,9 @@ struct ShowHeaderView: View, ColorsSettable {
         
         @State private var isLandscape: Bool
         
-        internal var primaryColor: Color = .white
-        internal var secondaryColor: Color = .srgGrayD2
+        internal var primaryColor: Color = .srgGrayD2
+        // FIXME: Not needed
+        internal var secondaryColor: Color = .srgGray96
         
         init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
@@ -93,7 +94,6 @@ struct ShowHeaderView: View, ColorsSettable {
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
                             .primaryColor(primaryColor)
-                            .secondaryColor(secondaryColor)
                             .padding(.top, padding)
                             .padding(.horizontal, padding)
                     }
@@ -124,8 +124,9 @@ struct ShowHeaderView: View, ColorsSettable {
         @ObservedObject var model: ShowHeaderViewModel
         let compactLayout: Bool
         
-        internal var primaryColor: Color = .white
-        internal var secondaryColor: Color = .srgGrayD2
+        internal var primaryColor: Color = .srgGrayD2
+        // FIXME: Not needed
+        internal var secondaryColor: Color = .srgGray96
         
         var body: some View {
             VStack(alignment: .leading, spacing: ShowHeaderView.verticalSpacing) {
@@ -143,12 +144,12 @@ struct ShowHeaderView: View, ColorsSettable {
                 }
                 if let summary = model.show?.play_summary {
                     SummaryView(summary)
-                        .primaryColor(secondaryColor)
+                        .primaryColor(primaryColor)
                     // See above
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 ActionsView(model: model, compactLayout: compactLayout)
-                    .primaryColor(secondaryColor)
+                    .primaryColor(primaryColor)
                     .frame(height: constant(iOS: 40, tvOS: 70))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
