@@ -16,7 +16,7 @@ import SwiftUI
  */
 
 /// Behavior: h-exp, v-hug
-struct TruncatableTextView: View, ColorsSettable {
+struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
     let content: String
     let lineLimit: Int?
     

@@ -17,12 +17,10 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct ShowAccessCell: View, ColorsSettable {
+struct ShowAccessCell: View, PrimaryColorSettable {
     let style: Style
     
     internal var primaryColor: Color = .srgGrayD2
-    // FIXME: Not needed
-    internal var secondaryColor: Color = .srgGray96
     
     @FirstResponder private var firstResponder
     

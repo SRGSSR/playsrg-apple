@@ -990,7 +990,7 @@ private extension PageViewController {
                         let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
                         ShowAccessCell(style: style).primaryColor(primaryColor)
                     default:
-                        ShowAccessCell(style: .calendar).secondaryColor(secondaryColor)
+                        ShowAccessCell(style: .calendar).primaryColor(primaryColor)
                     }
 #endif
                 case .highlightPlaceholder:
@@ -1027,13 +1027,11 @@ private class OpenSectionEvent: UIEvent {
 }
 
 private extension PageViewController {
-    private struct SectionHeaderView: View, ColorsSettable {
+    private struct SectionHeaderView: View, PrimaryColorSettable {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
         
         internal var primaryColor: Color = .srgGrayD2
-        // FIXME: Not needed
-        internal var secondaryColor: Color = .srgGray96
         
         @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false

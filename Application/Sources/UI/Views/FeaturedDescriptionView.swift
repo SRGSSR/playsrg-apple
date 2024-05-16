@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct FeaturedDescriptionView<Content: FeaturedContent>: View, ColorsSettable {
+struct FeaturedDescriptionView<Content: FeaturedContent>: View, PrimaryColorSettable, SecondaryColorSettable {
     enum Alignment {
         case leading
         case topLeading

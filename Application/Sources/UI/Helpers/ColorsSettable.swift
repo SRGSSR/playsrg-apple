@@ -6,21 +6,25 @@
 
 import SwiftUI
 
-protocol ColorsSettable: View {
+protocol PrimaryColorSettable: View {
     var primaryColor: Color { get set }
     func primaryColor(_ color: Color) -> Self
-
-    var secondaryColor: Color { get set }
-    func secondaryColor(_ color: Color) -> Self
 }
 
-extension ColorsSettable {
+extension PrimaryColorSettable {
     func primaryColor(_ color: Color) -> Self {
         var view = self
         view.primaryColor = color
         return view
     }
-    
+}
+
+protocol SecondaryColorSettable: View {
+    var secondaryColor: Color { get set }
+    func secondaryColor(_ color: Color) -> Self
+}
+
+extension SecondaryColorSettable {
     func secondaryColor(_ color: Color) -> Self {
         var view = self
         view.secondaryColor = color

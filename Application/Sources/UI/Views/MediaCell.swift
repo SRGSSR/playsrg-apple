@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: View
 
-struct MediaCell: View, ColorsSettable {
+struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     enum Layout {
         case vertical
         case horizontal
@@ -128,7 +128,7 @@ struct MediaCell: View, ColorsSettable {
 #endif
     
     /// Behavior: h-exp, v-exp
-    private struct DescriptionView: View, ColorsSettable {
+    private struct DescriptionView: View, PrimaryColorSettable, SecondaryColorSettable {
         let media: SRGMedia?
         let style: MediaCell.Style
         let embeddedDirection: StackDirection

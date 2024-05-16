@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: View
 
-struct ShowCell: View, ColorsSettable {
+struct ShowCell: View, PrimaryColorSettable {
     enum Style {
         case standard
         case favorite
@@ -22,8 +22,6 @@ struct ShowCell: View, ColorsSettable {
     let imageVariant: SRGImageVariant
     
     internal var primaryColor: Color = .srgGrayD2
-    // FIXME: Not needed
-    internal var secondaryColor: Color = .srgGray96
     
     @StateObject private var model = ShowCellViewModel()
     
@@ -88,13 +86,11 @@ struct ShowCell: View, ColorsSettable {
 #endif
     
     /// Behavior: h-exp, v-hug
-    private struct DescriptionView: View, ColorsSettable {
+    private struct DescriptionView: View, PrimaryColorSettable {
         @ObservedObject var model: ShowCellViewModel
         let style: Style
         
         internal var primaryColor: Color = .srgGrayD2
-        // FIXME: Not needed
-        internal var secondaryColor: Color = .srgGray96
         
         var body: some View {
             HStack {

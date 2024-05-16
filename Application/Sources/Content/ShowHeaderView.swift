@@ -29,13 +29,11 @@ class ShowMoreEvent: UIEvent {
 // MARK: View
 
 /// Behavior: h-hug, v-hug
-struct ShowHeaderView: View, ColorsSettable {
+struct ShowHeaderView: View, PrimaryColorSettable {
     @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
     
     internal var primaryColor: Color = .srgGrayD2
-    // FIXME: Not needed
-    internal var secondaryColor: Color = .srgGray96
     
     static let imageAspectRatio: CGFloat = 16 / 9
     
@@ -64,7 +62,7 @@ struct ShowHeaderView: View, ColorsSettable {
     }
     
     /// Behavior: h-hug, v-hug.
-    fileprivate struct MainView: View, ColorsSettable {
+    fileprivate struct MainView: View, PrimaryColorSettable {
         @ObservedObject var model: ShowHeaderViewModel
         let horizontalPadding: CGFloat
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
@@ -72,8 +70,6 @@ struct ShowHeaderView: View, ColorsSettable {
         @State private var isLandscape: Bool
         
         internal var primaryColor: Color = .srgGrayD2
-        // FIXME: Not needed
-        internal var secondaryColor: Color = .srgGray96
         
         init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
@@ -103,7 +99,6 @@ struct ShowHeaderView: View, ColorsSettable {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
                             .primaryColor(primaryColor)
-                            .secondaryColor(secondaryColor)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .frame(width: UIScreen.main.bounds.width * 0.35)
@@ -120,13 +115,11 @@ struct ShowHeaderView: View, ColorsSettable {
     }
     
     /// Behavior: h-hug, v-hug
-    private struct DescriptionView: View, ColorsSettable {
+    private struct DescriptionView: View, PrimaryColorSettable {
         @ObservedObject var model: ShowHeaderViewModel
         let compactLayout: Bool
         
         internal var primaryColor: Color = .srgGrayD2
-        // FIXME: Not needed
-        internal var secondaryColor: Color = .srgGray96
         
         var body: some View {
             VStack(alignment: .leading, spacing: ShowHeaderView.verticalSpacing) {
@@ -157,12 +150,10 @@ struct ShowHeaderView: View, ColorsSettable {
         }
         
         /// Behavior: h-exp, v-hug
-        private struct SummaryView: View, ColorsSettable {
+        private struct SummaryView: View, PrimaryColorSettable {
             let content: String
             
             internal var primaryColor: Color = .srgGrayD2
-            // FIXME: Not needed
-            internal var secondaryColor: Color = .srgGray96
             
             @FirstResponder private var firstResponder
             
@@ -179,12 +170,11 @@ struct ShowHeaderView: View, ColorsSettable {
             }
         }
         
-        private struct ActionsView: View, ColorsSettable {
+        private struct ActionsView: View, PrimaryColorSettable {
             @ObservedObject var model: ShowHeaderViewModel
             let compactLayout: Bool
             
             internal var primaryColor: Color = .srgGrayD2
-            internal var secondaryColor: Color = .srgGray96
             
             var body: some View {
                 HStack(spacing: 8) {

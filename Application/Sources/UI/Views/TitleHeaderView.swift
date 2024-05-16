@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-hug, v-hug
-struct TitleHeaderView: View, ColorsSettable {
+struct TitleHeaderView: View, PrimaryColorSettable {
     let title: String?
     let description: String?
     let titleTextAlignment: TextAlignment
@@ -23,8 +23,6 @@ struct TitleHeaderView: View, ColorsSettable {
     }
     
     internal var primaryColor: Color = .white
-    // FIXME: Not needed
-    internal var secondaryColor: Color = .white
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
