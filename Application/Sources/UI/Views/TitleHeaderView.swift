@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-hug, v-hug
-struct TitleHeaderView: View {
+struct TitleHeaderView: View, ColorsSettable {
     let title: String?
     let description: String?
     let titleTextAlignment: TextAlignment
@@ -22,14 +22,9 @@ struct TitleHeaderView: View {
         self.topPadding = topPadding
     }
     
-    var foregroundColor: Color = .white
-    
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
+    internal var primaryColor: Color = .white
+    // FIXME: Not needed
+    internal var secondaryColor: Color = .white
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -40,7 +35,7 @@ struct TitleHeaderView: View {
                     }
                     Text(title)
                         .srgFont(.H1)
-                        .foregroundColor(foregroundColor)
+                        .foregroundColor(primaryColor)
                     // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                     // when calculated with a `UIHostingController`, but without this the text does not occupy
                     // all lines it could.
@@ -53,7 +48,7 @@ struct TitleHeaderView: View {
                 if let description {
                     Text(description)
                         .srgFont(.body)
-                        .foregroundColor(foregroundColor)
+                        .foregroundColor(primaryColor)
                     // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                     // when calculated with a `UIHostingController`, but without this the text does not occupy
                     // all lines it could.

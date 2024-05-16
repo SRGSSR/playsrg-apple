@@ -17,19 +17,14 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct ShowAccessCell: View {
+struct ShowAccessCell: View, ColorsSettable {
     let style: Style
     
-    var foregroundColor: Color = .srgGrayD2
+    internal var primaryColor: Color = .srgGrayD2
+    // FIXME: Not needed
+    internal var secondaryColor: Color = .srgGray96
     
     @FirstResponder private var firstResponder
-    
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
     
     private var showAZButtonProperties: ButtonProperties {
         return ButtonProperties(
@@ -60,11 +55,11 @@ struct ShowAccessCell: View {
             ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
                 firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
             }
-            .foregroundColor(foregroundColor)
+            .foregroundColor(primaryColor)
             ExpandingButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
                 firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
             }
-            .foregroundColor(foregroundColor)
+            .foregroundColor(primaryColor)
         }
         .responderChain(from: firstResponder)
     }

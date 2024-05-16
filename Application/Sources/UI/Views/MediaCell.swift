@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: View
 
-struct MediaCell: View {
+struct MediaCell: View, ColorsSettable {
     enum Layout {
         case vertical
         case horizontal
@@ -32,8 +32,8 @@ struct MediaCell: View {
     let layout: Layout
     let action: (() -> Void)?
     
-    var foregroundColor: Color = .srgGrayD2
-    var secondaryColor: Color = .srgGray96
+    internal var primaryColor: Color = .srgGrayD2
+    internal var secondaryColor: Color = .srgGray96
     
     fileprivate var onFocusAction: ((Bool) -> Void)?
     
@@ -71,20 +71,6 @@ struct MediaCell: View {
         self.action = action
     }
     
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
-    
-    func secondaryColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.secondaryColor = color
-        return view
-    }
-    
     var body: some View {
         Group {
 #if os(tvOS)
@@ -95,7 +81,7 @@ struct MediaCell: View {
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             } label: {
                 DescriptionView(media: media, style: style)
-                    .foregroundColor(foregroundColor)
+                    .primaryColor(primaryColor)
                     .secondaryColor(secondaryColor)
                     .padding(.top, verticalPadding)
             }
@@ -109,7 +95,7 @@ struct MediaCell: View {
                         .redactable()
                         .layoutPriority(1)
                     DescriptionView(media: media, style: style, embeddedDirection: direction)
-                        .foregroundColor(foregroundColor)
+                        .primaryColor(primaryColor)
                         .secondaryColor(secondaryColor)
                         .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                         .padding(.leading, horizontalPadding)
@@ -142,13 +128,13 @@ struct MediaCell: View {
 #endif
     
     /// Behavior: h-exp, v-exp
-    private struct DescriptionView: View {
+    private struct DescriptionView: View, ColorsSettable {
         let media: SRGMedia?
         let style: MediaCell.Style
         let embeddedDirection: StackDirection
         
-        var foregroundColor: Color = .srgGrayD2
-        var secondaryColor: Color = .srgGray96
+        internal var primaryColor: Color = .srgGrayD2
+        internal var secondaryColor: Color = .srgGray96
         
         init(
             media: SRGMedia?,
@@ -158,20 +144,6 @@ struct MediaCell: View {
             self.media = media
             self.style = style
             self.embeddedDirection = embeddedDirection
-        }
-        
-        func foregroundColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.foregroundColor = color
-            return view
-        }
-        
-        func secondaryColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.secondaryColor = color
-            return view
         }
         
         private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
@@ -239,14 +211,14 @@ struct MediaCell: View {
                     Text(title)
                         .srgFont(.H4)
                         .lineLimit(titleLineLimit)
-                        .foregroundColor(foregroundColor)
+                        .foregroundColor(primaryColor)
                         .layoutPriority(1)
                 }
                 if let summary {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(2)
-                        .foregroundColor(foregroundColor)
+                        .foregroundColor(primaryColor)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

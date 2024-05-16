@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: View
 
-struct ShowCell: View {
+struct ShowCell: View, ColorsSettable {
     enum Style {
         case standard
         case favorite
@@ -21,7 +21,9 @@ struct ShowCell: View {
     let style: Style
     let imageVariant: SRGImageVariant
     
-    var foregroundColor: Color = .srgGrayD2
+    internal var primaryColor: Color = .srgGrayD2
+    // FIXME: Not needed
+    internal var secondaryColor: Color = .srgGray96
     
     @StateObject private var model = ShowCellViewModel()
     
@@ -34,13 +36,6 @@ struct ShowCell: View {
         self.imageVariant = imageVariant
     }
     
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
-    
     var body: some View {
         Group {
 #if os(tvOS)
@@ -51,7 +46,7 @@ struct ShowCell: View {
             } label: {
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
-                        .foregroundColor(foregroundColor)
+                        .primaryColor(primaryColor)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .padding(.top, ShowCellSize.verticalPadding)
                 }
@@ -62,7 +57,7 @@ struct ShowCell: View {
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
-                        .foregroundColor(foregroundColor)
+                        .primaryColor(primaryColor)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)
                         .padding(.vertical, ShowCellSize.verticalPadding)
                 }
@@ -93,18 +88,13 @@ struct ShowCell: View {
 #endif
     
     /// Behavior: h-exp, v-hug
-    private struct DescriptionView: View {
+    private struct DescriptionView: View, ColorsSettable {
         @ObservedObject var model: ShowCellViewModel
         let style: Style
         
-        var foregroundColor: Color = .srgGrayD2
-        
-        func foregroundColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.foregroundColor = color
-            return view
-        }
+        internal var primaryColor: Color = .srgGrayD2
+        // FIXME: Not needed
+        internal var secondaryColor: Color = .srgGray96
         
         var body: some View {
             HStack {
@@ -121,7 +111,7 @@ struct ShowCell: View {
                 }
 #endif
             }
-            .foregroundColor(foregroundColor)
+            .foregroundColor(primaryColor)
         }
     }
 }

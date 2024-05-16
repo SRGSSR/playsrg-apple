@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct FeaturedDescriptionView<Content: FeaturedContent>: View {
+struct FeaturedDescriptionView<Content: FeaturedContent>: View, ColorsSettable {
     enum Alignment {
         case leading
         case topLeading
@@ -20,22 +20,8 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     let alignment: Alignment
     let detailed: Bool
     
-    var foregroundColor: Color = .srgGrayD2
-    var secondaryColor: Color = .srgGray96
-    
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
-    
-    func secondaryColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.secondaryColor = color
-        return view
-    }
+    internal var primaryColor: Color = .srgGrayD2
+    internal var secondaryColor: Color = .srgGray96
     
     private var stackAlignment: HorizontalAlignment {
         return alignment == .center ? .center : .leading
@@ -74,7 +60,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                 Text(content.title ?? "")
                     .srgFont(.H3)
                     .lineLimit(2)
-                    .foregroundColor(foregroundColor)
+                    .foregroundColor(primaryColor)
                 if detailed, let summary = content.summary {
                     Text(summary)
                         .srgFont(.body)

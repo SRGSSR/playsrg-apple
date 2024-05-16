@@ -427,7 +427,7 @@ extension PageViewModel {
     }
 #endif
     
-    var foregroundColor: Color {
+    var primaryColor: Color {
         switch id {
         case let .topic(topic):
             return ApplicationConfiguration.shared.topicColors(for: topic) != nil ? .white : .srgGrayD2

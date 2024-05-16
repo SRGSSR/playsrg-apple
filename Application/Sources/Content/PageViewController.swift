@@ -185,7 +185,7 @@ final class PageViewController: UIViewController {
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
-            cell.content = ItemCell(item: item, id: model.id, foregroundColor: model.foregroundColor, secondaryColor: model.secondaryColor)
+            cell.content = ItemCell(item: item, id: model.id, primaryColor: model.primaryColor, secondaryColor: model.secondaryColor)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -194,19 +194,19 @@ final class PageViewController: UIViewController {
         
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).foregroundColor(model.titlesColor)
+            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).primaryColor(model.titlesColor)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).titleColor(model.titlesColor).foregroundColor(model.titlesColor)
+            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).primaryColor(model.titlesColor).secondaryColor(model.titlesColor)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: model.id).foregroundColor(model.titlesColor)
+            view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.titlesColor)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -910,7 +910,7 @@ private extension PageViewController {
     struct MediaCell: View {
         let media: SRGMedia?
         let section: PageViewModel.Section
-        let foregroundColor: Color
+        let primaryColor: Color
         let secondaryColor: Color
         
         var body: some View {
@@ -918,17 +918,17 @@ private extension PageViewController {
             case .heroStage:
                 HeroMediaCell(media: media, label: section.properties.label)
             case .headline:
-                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .headline).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
+                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .headline).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .element, .elementSwimlane:
-                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .element).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
+                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .element).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .mediaList:
-                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
+                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal).primaryColor(primaryColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical).primaryColor(primaryColor).secondaryColor(secondaryColor)
             }
         }
         
@@ -942,17 +942,17 @@ private extension PageViewController {
     struct ShowCell: View {
         let show: SRGShow?
         let section: PageViewModel.Section
-        let foregroundColor: Color
+        let primaryColor: Color
         let secondaryColor: Color
         
         var body: some View {
             switch section.viewModelProperties.layout {
             case .heroStage, .headline:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .element:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .element).foregroundColor(foregroundColor).secondaryColor(secondaryColor)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .element).primaryColor(primaryColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant).foregroundColor(foregroundColor)
+                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant).primaryColor(primaryColor)
             }
         }
     }
@@ -960,7 +960,7 @@ private extension PageViewController {
     struct ItemCell: View {
         let item: PageViewModel.Item
         let id: PageViewModel.Id
-        let foregroundColor: Color
+        let primaryColor: Color
         let secondaryColor: Color
         
         var body: some View {
@@ -968,13 +968,13 @@ private extension PageViewController {
             case let .item(wrappedItem):
                 switch wrappedItem {
                 case .mediaPlaceholder:
-                    MediaCell(media: nil, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
+                    MediaCell(media: nil, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case let .media(media):
-                    MediaCell(media: media, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
+                    MediaCell(media: media, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case .showPlaceholder:
-                    ShowCell(show: nil, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
+                    ShowCell(show: nil, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case let .show(show):
-                    ShowCell(show: show, section: item.section, foregroundColor: foregroundColor, secondaryColor: secondaryColor)
+                    ShowCell(show: show, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case .topicPlaceholder:
                     TopicCell(topic: nil)
                 case let .topic(topic):
@@ -988,9 +988,9 @@ private extension PageViewController {
                     switch id {
                     case .video:
                         let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
-                        ShowAccessCell(style: style).foregroundColor(foregroundColor)
+                        ShowAccessCell(style: style).primaryColor(primaryColor)
                     default:
-                        ShowAccessCell(style: .calendar).foregroundColor(foregroundColor)
+                        ShowAccessCell(style: .calendar).secondaryColor(secondaryColor)
                     }
 #endif
                 case .highlightPlaceholder:
@@ -1027,21 +1027,16 @@ private class OpenSectionEvent: UIEvent {
 }
 
 private extension PageViewController {
-    private struct SectionHeaderView: View {
+    private struct SectionHeaderView: View, ColorsSettable {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
         
-        var foregroundColor: Color = .srgGrayD2
+        internal var primaryColor: Color = .srgGrayD2
+        // FIXME: Not needed
+        internal var secondaryColor: Color = .srgGray96
         
         @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
-        
-        func foregroundColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.foregroundColor = color
-            return view
-        }
         
         private static func title(for section: PageViewModel.Section) -> String? {
             return section.properties.title
@@ -1066,12 +1061,12 @@ private extension PageViewController {
         var body: some View {
             if section.properties.displaysRowHeader, let title = Self.title(for: section) {
 #if os(tvOS)
-                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false, foregroundColor: foregroundColor)
+                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false, primaryColor: primaryColor)
 #else
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure, foregroundColor: foregroundColor)
+                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure, primaryColor: primaryColor)
                 }
                 .disabled(!hasDetailDisclosure)
                 .responderChain(from: firstResponder)

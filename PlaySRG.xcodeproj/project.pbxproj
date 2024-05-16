@@ -217,6 +217,16 @@
 		0463DA172A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA182A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA192A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
+		046845A62BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A72BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A82BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A92BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AB2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AC2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AD2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AE2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AF2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
 		046F8DC02B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC12B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC22B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
@@ -2819,6 +2829,7 @@
 		045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
+		046845A52BF56A13003A0073 /* ColorsSettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsSettable.swift; sourceTree = "<group>"; };
 		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
 		046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContainerViewController.swift; sourceTree = "<group>"; };
 		046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -4766,6 +4777,7 @@
 			isa = PBXGroup;
 			children = (
 				6FF5D1FA2747A69900460F70 /* ButtonStyles.swift */,
+				046845A52BF56A13003A0073 /* ColorsSettable.swift */,
 				6F0E374B2680B139008FC923 /* ContextMenu.swift */,
 				6F58903326AED4CD00553C24 /* Environment.swift */,
 				6FF8F155250609CF009A741F /* MediaDescription.swift */,
@@ -8536,6 +8548,7 @@
 				048FD2092A122BF100929AE5 /* ProfileAccountHeaderView+UIKit.swift in Sources */,
 				6F73BFB026563ABD0032D742 /* DampedCollectionView.swift in Sources */,
 				6FEF23722732C2D40098C639 /* TimelineView.swift in Sources */,
+				046845A62BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F74293D265BE52E0000538D /* Signals.swift in Sources */,
 				6FDF70002682022C0004437E /* ApplicationSettings+Common.m in Sources */,
@@ -8680,6 +8693,7 @@
 				6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FCA5BD727D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACA2820576000BC3EA5 /* UserLocation.swift in Sources */,
+				046845A72BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753626D3786F00667298 /* HeroMediaCell.swift in Sources */,
 				6FE9048726F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
@@ -8946,6 +8960,7 @@
 				6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FCA5BD827D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACB2820576000BC3EA5 /* UserLocation.swift in Sources */,
+				046845A82BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753726D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -9212,6 +9227,7 @@
 				6F0E374F2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FCA5BD927D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACC2820576000BC3EA5 /* UserLocation.swift in Sources */,
+				046845A92BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753826D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -9607,6 +9623,7 @@
 				6FB89A0326335B090012F1B0 /* Stack.swift in Sources */,
 				08AF9484217D27E40028B082 /* SharingItem.m in Sources */,
 				04708C132B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
+				046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6F8D54462639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
@@ -9938,6 +9955,7 @@
 				085C0DD3261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6A2710927B00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABA25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AB2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70052682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				084EF77D26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4E261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -10093,6 +10111,7 @@
 				085C0DD4261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6B2710927C00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABB25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AC2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70062682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				084EF77E26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4F261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -10248,6 +10267,7 @@
 				085C0DD5261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6C2710927E00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABC25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AD2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70072682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				084EF77F26035BB30058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB50261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -10403,6 +10423,7 @@
 				085C0DD6261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6D2710927F00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABD25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AE2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70082682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				084EF78026035BB40058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB51261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -10501,6 +10522,7 @@
 				6FB03F6525DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FD4C2EA268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F8D544B2639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
+				046845AF2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FEF23702732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F702719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981392622195900AA586B /* LiveMediaCell.swift in Sources */,

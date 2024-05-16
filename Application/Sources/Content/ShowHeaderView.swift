@@ -29,12 +29,12 @@ class ShowMoreEvent: UIEvent {
 // MARK: View
 
 /// Behavior: h-hug, v-hug
-struct ShowHeaderView: View {
+struct ShowHeaderView: View, ColorsSettable {
     @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
     
-    var titleColor: Color = .white
-    var foregroundColor: Color = .srgGrayD2
+    internal var primaryColor: Color = .white
+    internal var secondaryColor: Color = .srgGrayD2
     
     static let imageAspectRatio: CGFloat = 16 / 9
     
@@ -51,24 +51,10 @@ struct ShowHeaderView: View {
         self.horizontalPadding = horizontalPadding
     }
     
-    func titleColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.titleColor = color
-        return view
-    }
-    
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
-    
     var body: some View {
         MainView(model: model, horizontalPadding: horizontalPadding)
-            .titleColor(titleColor)
-            .foregroundColor(foregroundColor)
+            .primaryColor(primaryColor)
+            .secondaryColor(secondaryColor)
             .onAppear {
                 model.show = show
             }
@@ -78,34 +64,20 @@ struct ShowHeaderView: View {
     }
     
     /// Behavior: h-hug, v-hug.
-    fileprivate struct MainView: View {
+    fileprivate struct MainView: View, ColorsSettable {
         @ObservedObject var model: ShowHeaderViewModel
         let horizontalPadding: CGFloat
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
         @State private var isLandscape: Bool
         
-        var titleColor: Color = .white
-        var foregroundColor: Color = .srgGrayD2
+        internal var primaryColor: Color = .white
+        internal var secondaryColor: Color = .srgGrayD2
         
         init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
             self.horizontalPadding = horizontalPadding
             self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
-        }
-        
-        func titleColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.titleColor = color
-            return view
-        }
-        
-        func foregroundColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.foregroundColor = color
-            return view
         }
         
         private var padding: CGFloat {
@@ -120,8 +92,8 @@ struct ShowHeaderView: View {
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .layoutPriority(1)
                         DescriptionView(model: model, compactLayout: horizontalSizeClass == .compact)
-                            .titleColor(titleColor)
-                            .foregroundColor(foregroundColor)
+                            .primaryColor(primaryColor)
+                            .secondaryColor(secondaryColor)
                             .padding(.top, padding)
                             .padding(.horizontal, padding)
                     }
@@ -130,8 +102,8 @@ struct ShowHeaderView: View {
                 else {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
-                            .titleColor(titleColor)
-                            .foregroundColor(foregroundColor)
+                            .primaryColor(primaryColor)
+                            .secondaryColor(secondaryColor)
                         ImageView(source: model.imageUrl)
                             .aspectRatio(ShowHeaderView.imageAspectRatio, contentMode: .fit)
                             .frame(width: UIScreen.main.bounds.width * 0.35)
@@ -148,26 +120,12 @@ struct ShowHeaderView: View {
     }
     
     /// Behavior: h-hug, v-hug
-    private struct DescriptionView: View {
+    private struct DescriptionView: View, ColorsSettable {
         @ObservedObject var model: ShowHeaderViewModel
         let compactLayout: Bool
         
-        var titleColor: Color = .white
-        var foregroundColor: Color = .srgGrayD2
-        
-        func titleColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.titleColor = color
-            return view
-        }
-        
-        func foregroundColor(_ color: Color) -> Self {
-            var view = self
-            
-            view.foregroundColor = color
-            return view
-        }
+        internal var primaryColor: Color = .white
+        internal var secondaryColor: Color = .srgGrayD2
         
         var body: some View {
             VStack(alignment: .leading, spacing: ShowHeaderView.verticalSpacing) {
@@ -179,18 +137,18 @@ struct ShowHeaderView: View {
                 // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(titleColor)
+                    .foregroundColor(primaryColor)
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.srgDarkRed))
                 }
                 if let summary = model.show?.play_summary {
                     SummaryView(summary)
-                        .foregroundColor(foregroundColor)
+                        .primaryColor(secondaryColor)
                     // See above
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 ActionsView(model: model, compactLayout: compactLayout)
-                    .foregroundColor(foregroundColor)
+                    .primaryColor(secondaryColor)
                     .frame(height: constant(iOS: 40, tvOS: 70))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -198,10 +156,12 @@ struct ShowHeaderView: View {
         }
         
         /// Behavior: h-exp, v-hug
-        private struct SummaryView: View {
+        private struct SummaryView: View, ColorsSettable {
             let content: String
             
-            var foregroundColor: Color = .srgGrayD2
+            internal var primaryColor: Color = .srgGrayD2
+            // FIXME: Not needed
+            internal var secondaryColor: Color = .srgGray96
             
             @FirstResponder private var firstResponder
             
@@ -209,34 +169,21 @@ struct ShowHeaderView: View {
                 self.content = content
             }
             
-            func foregroundColor(_ color: Color) -> Self {
-                var view = self
-                
-                view.foregroundColor = color
-                return view
-            }
-            
             var body: some View {
                 TruncatableTextView(content: content, lineLimit: 3) {
                     firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
                 }
-                .foregroundColor(foregroundColor)
+                .primaryColor(primaryColor)
                 .responderChain(from: firstResponder)
             }
         }
         
-        private struct ActionsView: View {
+        private struct ActionsView: View, ColorsSettable {
             @ObservedObject var model: ShowHeaderViewModel
             let compactLayout: Bool
             
-            var foregroundColor: Color = .srgGrayD2
-            
-            func foregroundColor(_ color: Color) -> Self {
-                var view = self
-                
-                view.foregroundColor = color
-                return view
-            }
+            internal var primaryColor: Color = .srgGrayD2
+            internal var secondaryColor: Color = .srgGray96
             
             var body: some View {
                 HStack(spacing: 8) {
@@ -245,7 +192,7 @@ struct ShowHeaderView: View {
                                         label: model.favoriteLabel,
                                         accessibilityLabel: model.favoriteAccessibilityLabel,
                                         action: favoriteAction)
-                        .foregroundColor(foregroundColor)
+                        .foregroundColor(primaryColor)
                         .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
 #if os(iOS)
                         if model.isSubscriptionPossible {
@@ -253,7 +200,7 @@ struct ShowHeaderView: View {
                                             label: model.subscriptionLabel,
                                             accessibilityLabel: model.subscriptionAccessibilityLabel,
                                             action: subscriptionAction)
-                            .foregroundColor(foregroundColor)
+                            .foregroundColor(primaryColor)
                         }
 #endif
                     }
@@ -263,14 +210,14 @@ struct ShowHeaderView: View {
                                      labelMinimumScaleFactor: 1,
                                      accessibilityLabel: model.favoriteAccessibilityLabel,
                                      action: favoriteAction)
-                        .foregroundColor(foregroundColor)
+                        .foregroundColor(primaryColor)
 #if os(iOS)
                         if model.isSubscriptionPossible {
                             SimpleButton(icon: model.subscriptionIcon,
                                          label: model.subscriptionLabel,
                                          accessibilityLabel: model.subscriptionAccessibilityLabel,
                                          action: subscriptionAction)
-                            .foregroundColor(foregroundColor)
+                            .foregroundColor(primaryColor)
                         }
 #endif
                     }
