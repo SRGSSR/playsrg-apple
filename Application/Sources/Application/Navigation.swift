@@ -166,7 +166,7 @@ func navigateToPage(_ page: SRGContentPage, animated: Bool = true) {
 }
 
 func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true) {
-    if let microPageId = section.microPageId {
+    if let microPageId = section.properties.openContentPageId {
         openContentPage(id: microPageId, animated: animated)
     } else {
         openSectionPage(section: section, filter: filter, animated: animated)
