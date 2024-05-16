@@ -665,7 +665,7 @@ extension PageViewController: ShowAccessCellActions {
 extension PageViewController: SectionHeaderViewAction {
     fileprivate func openSection(sender: Any?, event: OpenSectionEvent?) {
         if let event {
-            if let microPageId = event.section.wrappedValue.microPageId {
+            if let microPageId = event.section.wrappedValue.properties.openContentPageId {
                 openContentPage(id: microPageId)
             } else {
                 openSectionPage(section: event.section, filter: model.id)
