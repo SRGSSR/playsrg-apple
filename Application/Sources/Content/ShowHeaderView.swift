@@ -183,7 +183,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                                         label: model.favoriteLabel,
                                         accessibilityLabel: model.favoriteAccessibilityLabel,
                                         action: favoriteAction)
-                        .foregroundColor(primaryColor)
+                        .primaryColor(primaryColor)
                         .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
 #if os(iOS)
                         if model.isSubscriptionPossible {
@@ -191,7 +191,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                                             label: model.subscriptionLabel,
                                             accessibilityLabel: model.subscriptionAccessibilityLabel,
                                             action: subscriptionAction)
-                            .foregroundColor(primaryColor)
+                            .primaryColor(primaryColor)
                         }
 #endif
                     }
@@ -201,14 +201,14 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                                      labelMinimumScaleFactor: 1,
                                      accessibilityLabel: model.favoriteAccessibilityLabel,
                                      action: favoriteAction)
-                        .foregroundColor(primaryColor)
+                        .primaryColor(primaryColor)
 #if os(iOS)
                         if model.isSubscriptionPossible {
                             SimpleButton(icon: model.subscriptionIcon,
                                          label: model.subscriptionLabel,
                                          accessibilityLabel: model.subscriptionAccessibilityLabel,
                                          action: subscriptionAction)
-                            .foregroundColor(primaryColor)
+                            .primaryColor(primaryColor)
                         }
 #endif
                     }

@@ -10,15 +10,15 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct ExpandingButton: View {
+struct ExpandingButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable {
     private let icon: ImageResource?
     private let label: String?
     private let accessibilityLabel: String
     private let accessibilityHint: String?
     private let action: () -> Void
     
-    var foregroundColor: Color = .srgGrayD2
-    var foregroundFocusedColor: Color = .srgGray16
+    internal var primaryColor: Color = .srgGrayD2
+    internal var primaryFocusedColor: Color = .srgGray16
     
     @State private var isFocused = false
     
@@ -46,20 +46,6 @@ struct ExpandingButton: View {
         self.action = action
     }
     
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
-    
-    func foregroundFocusedColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundFocusedColor = color
-        return view
-    }
-    
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -75,7 +61,7 @@ struct ExpandingButton: View {
             }
             .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundColor(isFocused ? foregroundFocusedColor : foregroundColor)
+            .foregroundColor(isFocused ? primaryFocusedColor : primaryColor)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
@@ -100,7 +86,7 @@ struct ExpandingButton_Previews: PreviewProvider {
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 120))
             ExpandingButton(label: "White foreground", action: {})
-                .foregroundColor(.white)
+                .primaryColor(.white)
                 .padding()
                 .previewLayout(.fixed(width: 240, height: 120))
         }

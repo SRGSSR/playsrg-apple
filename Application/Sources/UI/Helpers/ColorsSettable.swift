@@ -19,6 +19,19 @@ extension PrimaryColorSettable {
     }
 }
 
+protocol PrimaryFocusedColorSettable: View {
+    var primaryFocusedColor: Color { get set }
+    func primaryFocusedColor(_ color: Color) -> Self
+}
+
+extension PrimaryFocusedColorSettable {
+    func primaryFocusedColor(_ color: Color) -> Self {
+        var view = self
+        view.primaryFocusedColor = color
+        return view
+    }
+}
+
 protocol SecondaryColorSettable: View {
     var secondaryColor: Color { get set }
     func secondaryColor(_ color: Color) -> Self

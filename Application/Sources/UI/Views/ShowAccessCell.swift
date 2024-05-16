@@ -53,11 +53,11 @@ struct ShowAccessCell: View, PrimaryColorSettable {
             ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
                 firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
             }
-            .foregroundColor(primaryColor)
+            .primaryColor(primaryColor)
             ExpandingButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
                 firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
             }
-            .foregroundColor(primaryColor)
+            .primaryColor(primaryColor)
         }
         .responderChain(from: firstResponder)
     }

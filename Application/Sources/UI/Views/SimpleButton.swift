@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-hug, v-hug
-struct SimpleButton: View {
+struct SimpleButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable {
     private let icon: ImageResource
     private let label: String?
     private let labelMinimumScaleFactor: CGFloat?
@@ -18,8 +18,8 @@ struct SimpleButton: View {
     private let accessibilityHint: String?
     private let action: () -> Void
     
-    var foregroundColor: Color = .srgGrayD2
-    var foregroundFocusedColor: Color = .srgGray16
+    internal var primaryColor: Color = .srgGrayD2
+    internal var primaryFocusedColor: Color = .srgGray16
     
     @State private var isFocused = false
     
@@ -41,20 +41,6 @@ struct SimpleButton: View {
         self.action = action
     }
     
-    func foregroundColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundColor = color
-        return view
-    }
-    
-    func foregroundFocusedColor(_ color: Color) -> Self {
-        var view = self
-        
-        view.foregroundFocusedColor = color
-        return view
-    }
-    
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
@@ -67,7 +53,7 @@ struct SimpleButton: View {
                 }
             }
             .onParentFocusChange { isFocused = $0 }
-            .foregroundColor(isFocused ? foregroundFocusedColor : foregroundColor)
+            .foregroundColor(isFocused ? primaryFocusedColor : primaryColor)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
@@ -81,7 +67,7 @@ struct SimpleButton_Previews: PreviewProvider {
         Group {
             SimpleButton(icon: .favorite, label: "Add to favorites", action: {})
             SimpleButton(icon: .favorite, accessibilityLabel: "Add to favorites", action: {})
-            SimpleButton(icon: .favorite, label: "White foreground", action: {}).foregroundColor(.white)
+            SimpleButton(icon: .favorite, label: "White foreground", action: {}).primaryColor(.white)
         }
         .padding()
         .previewLayout(.sizeThatFits)
