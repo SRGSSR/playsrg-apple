@@ -345,12 +345,6 @@ extension PageViewModel {
 #endif
     }
     
-    enum SectionLink: Equatable {
-        case none
-        case configuredLink
-        case contentLink(SRGContentLink)
-    }
-    
     fileprivate struct Page: Hashable {
         let uid: String?
         let sections: [Section]
