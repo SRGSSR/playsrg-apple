@@ -37,7 +37,7 @@ final class SectionViewController: UIViewController {
     private var contentInsets: UIEdgeInsets
     private var leftBarButtonItem: UIBarButtonItem?
     
-    private var globalHeaderTitle: String? {
+    private var headerTitle: String? {
 #if os(tvOS)
         return (tabBarController == nil && model.displaysTitle) ? model.title : nil
 #else
@@ -137,9 +137,9 @@ final class SectionViewController: UIViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
-        let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
+        let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: globalHeaderTitle)
+            view.content = TitleHeaderView(headerTitle, titleTextAlignment: constant(iOS: .leading, tvOS: .center))
             if let hostController = view.hostController {
                 addChild(hostController)
             }
@@ -167,8 +167,8 @@ final class SectionViewController: UIViewController {
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             switch kind {
-            case Header.global.rawValue:
-                return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            case Header.titleHeader.rawValue:
+                return collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
             case UICollectionView.elementKindSectionHeader:
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             case UICollectionView.elementKindSectionFooter:
@@ -187,10 +187,19 @@ final class SectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        updateLayoutConfiguration()
+        
         model.resetApplicationBadgeIfNeeded()
         model.reload()
         deselectItems(in: collectionView, animated: animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    private func updateLayoutConfiguration() {
+        if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
+            collectionViewLayout.configuration = Self.layoutConfiguration(title: headerTitle, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass)
+        }
     }
     
 #if os(iOS)
@@ -367,7 +376,7 @@ final class SectionViewController: UIViewController {
 
 private extension SectionViewController {
     enum Header: String {
-        case global
+        case titleHeader
     }
 }
 
@@ -609,14 +618,13 @@ extension SectionViewController: TabBarActionable {
 // MARK: Layout
 
 private extension SectionViewController {
-    private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
+    private static func layoutConfiguration(title: String?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         configuration.interSectionSpacing = constant(iOS: 15, tvOS: 100)
         
-        let headerSize = TitleViewSize.recommended(forText: globalHeaderTitle)
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
-        configuration.boundarySupplementaryItems = [header]
+        let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+        configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading) ]
         
         return configuration
     }
@@ -707,7 +715,7 @@ private extension SectionViewController {
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
             layoutSection.supplementariesFollowContentInsets = false
             return layoutSection
-        }, configuration: layoutConfiguration())
+        }, configuration: Self.layoutConfiguration(title: headerTitle, layoutWidth: 0, horizontalSizeClass: .unspecified))
     }
 }
 

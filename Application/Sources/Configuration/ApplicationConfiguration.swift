@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+import SwiftUI
+
 extension ApplicationConfiguration {
     private static func configuredSection(from homeSection: HomeSection) -> ConfiguredSection? {
         switch homeSection {
@@ -47,6 +49,13 @@ extension ApplicationConfiguration {
     
     func relatedContentUrl(for media: SRGMedia) -> URL {
         return URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: self.middlewareURL)!
+    }
+    
+    func topicColors(for topic: SRGTopic) -> (Color, Color)? {
+        guard let topicColorsArray = self.topicColors[topic.urn], topicColorsArray.count == 2 else { return nil }
+        
+        let colors = topicColorsArray.map { Color($0) }
+        return (colors.first!, colors.last!)
     }
     
     private static var version: String {

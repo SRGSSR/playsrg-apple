@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: View
 
-struct MediaCell: View {
+struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     enum Layout {
         case vertical
         case horizontal
@@ -31,6 +31,9 @@ struct MediaCell: View {
     let style: Style
     let layout: Layout
     let action: (() -> Void)?
+    
+    internal var primaryColor: Color = .srgGrayD2
+    internal var secondaryColor: Color = .srgGray96
     
     fileprivate var onFocusAction: ((Bool) -> Void)?
     
@@ -78,6 +81,8 @@ struct MediaCell: View {
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             } label: {
                 DescriptionView(media: media, style: style)
+                    .primaryColor(primaryColor)
+                    .secondaryColor(secondaryColor)
                     .padding(.top, verticalPadding)
             }
 #else
@@ -90,6 +95,8 @@ struct MediaCell: View {
                         .redactable()
                         .layoutPriority(1)
                     DescriptionView(media: media, style: style, embeddedDirection: direction)
+                        .primaryColor(primaryColor)
+                        .secondaryColor(secondaryColor)
                         .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                         .padding(.leading, horizontalPadding)
                         .padding(.top, verticalPadding)
@@ -121,10 +128,13 @@ struct MediaCell: View {
 #endif
     
     /// Behavior: h-exp, v-exp
-    private struct DescriptionView: View {
+    private struct DescriptionView: View, PrimaryColorSettable, SecondaryColorSettable {
         let media: SRGMedia?
         let style: MediaCell.Style
         let embeddedDirection: StackDirection
+        
+        internal var primaryColor: Color = .srgGrayD2
+        internal var secondaryColor: Color = .srgGray96
         
         init(
             media: SRGMedia?,
@@ -195,20 +205,20 @@ struct MediaCell: View {
                     Text(subtitle)
                         .srgFont(.subtitle1)
                         .lineLimit(2)
-                        .foregroundColor(.srgGray96)
+                        .foregroundColor(secondaryColor)
                 }
                 if let title {
                     Text(title)
                         .srgFont(.H4)
                         .lineLimit(titleLineLimit)
-                        .foregroundColor(.srgGrayD2)
+                        .foregroundColor(primaryColor)
                         .layoutPriority(1)
                 }
                 if let summary {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(2)
-                        .foregroundColor(.srgGrayD2)
+                        .foregroundColor(primaryColor)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -265,8 +275,12 @@ final class MediaCellSize: NSObject {
     }
     
     static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact) -> NSCollectionLayoutSize {
-        let height = horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
+        let height = height(horizontalSizeClass: horizontalSizeClass)
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
+    }
+    
+    static func height(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
+        return horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
     }
 }
 

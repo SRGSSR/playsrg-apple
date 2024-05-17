@@ -73,6 +73,13 @@ The radio channel JSON dictionaries have one more key:
 
 * `homepageHidden` (optional, boolean): Set to `true` iff a homepage does not have to be displayed for the radio channel. If omitted, `false`.
 
+## Topics
+
+* `topicColors` (optional, JSON): A JSON dictionary describing all topic colors. Key (string) is the topic `urn` (the topic unique identifier), value (a JSON dictionary) has two properties:
+	* `firstColor` (mandatory, string): The first topic gradient primary hex color. Used in background in topic and show pages.
+	* `secondColor` (mandatory, string): The second topic gradient primary hex color. Used in background in topic and show pages.
+    * `reduceBrightness` (optional, boolean): Set to `true` if the brightness of the colors should be reduced for contrast purpose. If omitted, `false`.
+
 ## Shows
 
 * `predefinedShowPagePreferred` (optional, boolean): Set to `true` iff show pages need to be displayed with the predefined layout (ie: only one predefined section with available episodes). If omitted, `false`.

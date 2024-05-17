@@ -17,8 +17,10 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct ShowAccessCell: View {
+struct ShowAccessCell: View, PrimaryColorSettable {
     let style: Style
+    
+    internal var primaryColor: Color = .srgGrayD2
     
     @FirstResponder private var firstResponder
     
@@ -51,9 +53,11 @@ struct ShowAccessCell: View {
             ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
                 firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
             }
+            .primaryColor(primaryColor)
             ExpandingButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
                 firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
             }
+            .primaryColor(primaryColor)
         }
         .responderChain(from: firstResponder)
     }

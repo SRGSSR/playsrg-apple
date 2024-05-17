@@ -14,9 +14,17 @@ struct HeaderView: View {
     let title: String
     let subtitle: String?
     let hasDetailDisclosure: Bool
+    let primaryColor: Color
     
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     @Environment(\.sizeCategory) private var sizeCategory
+    
+    init(title: String, subtitle: String?, hasDetailDisclosure: Bool, primaryColor: Color = .srgGrayD2) {
+        self.title = title
+        self.subtitle = subtitle
+        self.hasDetailDisclosure = hasDetailDisclosure
+        self.primaryColor = primaryColor
+    }
     
     private var displayableSubtitle: String? {
         if horizontalSizeClass == .regular, let subtitle, !subtitle.isEmpty {
@@ -47,7 +55,7 @@ struct HeaderView: View {
                     .lineLimit(1)
             }
         }
-        .foregroundColor(.srgGrayD2)
+        .foregroundColor(primaryColor)
         .padding(.vertical, constant(iOS: 3, tvOS: 15))
         .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityElement(label: title, traits: .isHeader)
@@ -76,10 +84,13 @@ struct HeaderView_Previews: PreviewProvider {
         Group {
             HeaderView(title: "Title", subtitle: nil, hasDetailDisclosure: false)
             HeaderView(title: "Title", subtitle: nil, hasDetailDisclosure: true)
+            HeaderView(title: "Title", subtitle: nil, hasDetailDisclosure: true, primaryColor: .white)
             HeaderView(title: "Title", subtitle: "Subtitle", hasDetailDisclosure: false)
             HeaderView(title: "Title", subtitle: "Subtitle", hasDetailDisclosure: true)
+            HeaderView(title: "Title", subtitle: "Subtitle", hasDetailDisclosure: true, primaryColor: .white)
             HeaderView(title: .loremIpsum, subtitle: .loremIpsum, hasDetailDisclosure: false)
             HeaderView(title: .loremIpsum, subtitle: .loremIpsum, hasDetailDisclosure: true)
+            HeaderView(title: .loremIpsum, subtitle: .loremIpsum, hasDetailDisclosure: true, primaryColor: .white)
         }
         .frame(width: 800)
         .previewLayout(.sizeThatFits)

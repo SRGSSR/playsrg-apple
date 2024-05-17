@@ -48,7 +48,7 @@ struct LabeledCardButton<Content: View, Label: View>: View {
             .layoutPriority(1)
                 
             label()
-                .opacity(isFocused ? 1 : 0.5)
+                .opacity(isFocused ? 1 : 0.8)
                 .offset(x: 0, y: isFocused ? 10 : 0)
                 .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
                 .animation(.easeInOut(duration: 0.1))

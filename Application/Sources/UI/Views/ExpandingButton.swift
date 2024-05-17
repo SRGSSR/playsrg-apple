@@ -10,12 +10,15 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct ExpandingButton: View {
+struct ExpandingButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable {
     private let icon: ImageResource?
     private let label: String?
     private let accessibilityLabel: String
     private let accessibilityHint: String?
     private let action: () -> Void
+    
+    internal var primaryColor: Color = .srgGrayD2
+    internal var primaryFocusedColor: Color = .srgGray16
     
     @State private var isFocused = false
     
@@ -58,7 +61,7 @@ struct ExpandingButton: View {
             }
             .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundColor(isFocused ? .srgGray16 : .srgGrayD2)
+            .foregroundColor(isFocused ? primaryFocusedColor : primaryColor)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
@@ -82,6 +85,10 @@ struct ExpandingButton_Previews: PreviewProvider {
             ExpandingButton(icon: .watchLater, action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 120))
+            ExpandingButton(label: "White foreground", action: {})
+                .primaryColor(.white)
+                .padding()
+                .previewLayout(.fixed(width: 240, height: 120))
         }
     }
 }

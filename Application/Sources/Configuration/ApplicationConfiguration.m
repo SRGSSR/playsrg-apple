@@ -163,6 +163,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSArray<RadioChannel *> *satelliteRadioChannels;
 
+@property (nonatomic) NSDictionary<NSString*, NSArray<UIColor *> *> *topicColors;
+
 @property (nonatomic) NSArray<NSNumber *> *tvGuideOtherBouquetsObjc;
 
 @property (nonatomic) NSUInteger pageSize;
@@ -457,6 +459,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];
     self.satelliteRadioChannels = [firebaseConfiguration radioChannelsForKey:@"satelliteRadioChannels" defaultHomeSections:nil];
+    
+    self.topicColors = [firebaseConfiguration topicColorsForKey:@"topicColors"];
     
     self.tvGuideOtherBouquetsObjc = [firebaseConfiguration tvGuideOtherBouquetsForKey:@"tvGuideOtherBouquets" vendor:vendor];
     

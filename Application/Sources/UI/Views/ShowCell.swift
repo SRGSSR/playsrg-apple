@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: View
 
-struct ShowCell: View {
+struct ShowCell: View, PrimaryColorSettable {
     enum Style {
         case standard
         case favorite
@@ -20,6 +20,8 @@ struct ShowCell: View {
     
     let style: Style
     let imageVariant: SRGImageVariant
+    
+    internal var primaryColor: Color = .srgGrayD2
     
     @StateObject private var model = ShowCellViewModel()
     
@@ -42,6 +44,7 @@ struct ShowCell: View {
             } label: {
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
+                        .primaryColor(primaryColor)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .padding(.top, ShowCellSize.verticalPadding)
                 }
@@ -52,6 +55,7 @@ struct ShowCell: View {
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
+                        .primaryColor(primaryColor)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)
                         .padding(.vertical, ShowCellSize.verticalPadding)
                 }
@@ -82,9 +86,11 @@ struct ShowCell: View {
 #endif
     
     /// Behavior: h-exp, v-hug
-    private struct DescriptionView: View {
+    private struct DescriptionView: View, PrimaryColorSettable {
         @ObservedObject var model: ShowCellViewModel
         let style: Style
+        
+        internal var primaryColor: Color = .srgGrayD2
         
         var body: some View {
             HStack {
@@ -101,7 +107,7 @@ struct ShowCell: View {
                 }
 #endif
             }
-            .foregroundColor(.srgGrayD2)
+            .foregroundColor(primaryColor)
         }
     }
 }
