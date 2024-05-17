@@ -1,4 +1,4 @@
-/* Speed factor with current value if different from desired one */
+﻿/* Speed factor with current value if different from desired one */
 "%1$@× (Currently: %2$@×)" = "%1$@× (Currently: %2$@×)";
 
 /* Seek backward shortcut label */

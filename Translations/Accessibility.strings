@@ -1,4 +1,4 @@
-/* Date at time label to spell a date and time value. */
+﻿/* Date at time label to spell a date and time value. */
 "%1$@ at %2$@" = "%1$@ at %2$@";
 
 /* Song description. First placeholder is song title, second is artist name */
