@@ -157,6 +157,7 @@ protocol SectionProperties {
     var rowHighlight: Highlight? { get }
     var placeholderRowItems: [Content.Item] { get }
     var displaysRowHeader: Bool { get }
+    var openContentPageId: String? { get }
     
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
@@ -389,6 +390,14 @@ private extension Content {
         
         var displaysRowHeader: Bool {
             return contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
+        }
+        
+        var openContentPageId: String? {
+            guard let link = contentSection.presentation.contentLink, link.type == .microPage, let id = link.target else {
+                return nil
+            }
+            
+            return id
         }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
@@ -816,6 +825,10 @@ private extension Content {
         
         var displaysRowHeader: Bool {
             return true
+        }
+        
+        var openContentPageId: String? {
+            nil
         }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {

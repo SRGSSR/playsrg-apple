@@ -664,10 +664,36 @@ extension PageViewController: ShowAccessCellActions {
 
 extension PageViewController: SectionHeaderViewAction {
     fileprivate func openSection(sender: Any?, event: OpenSectionEvent?) {
-        if let event, let navigationController {
-            let sectionViewController = SectionViewController(section: event.section.wrappedValue, filter: model.id)
-            navigationController.pushViewController(sectionViewController, animated: true)
+        if let event {
+            if let microPageId = event.section.wrappedValue.properties.openContentPageId {
+                openContentPage(id: microPageId)
+            } else {
+                openSectionPage(section: event.section, filter: model.id)
+            }
         }
+    }
+    
+    private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
+        guard let navigationController else { return }
+        
+        let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
+        navigationController.pushViewController(sectionViewController, animated: true)
+    }
+    
+    private func openContentPage(id: String) {
+        guard let navigationController else { return }
+        
+        SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+            .receive(on: DispatchQueue.main)
+            .sink { error in
+                if case .failure(let failure) = error {
+                    Banner.showError(failure as NSError)
+                }
+            } receiveValue: { contentPage in
+                let pageViewController = PageViewController.pageViewController(for: contentPage)
+                navigationController.pushViewController(pageViewController, animated: true)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -1045,7 +1071,7 @@ private extension PageViewController {
         }
         
         private var hasDetailDisclosure: Bool {
-            return section.viewModelProperties.canOpenDetailPage || isSectionWideSupportEnabled
+            return section.viewModelProperties.canOpenPage || isSectionWideSupportEnabled
         }
         
         var accessibilityLabel: String? {
