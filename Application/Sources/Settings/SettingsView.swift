@@ -638,7 +638,7 @@ struct SettingsView: View {
             
             var body: some View {
                 HStack {
-                    Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
+                    Text("📺 \(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))")
                     Spacer()
                     Text(selectedPosterImages.description)
                         .foregroundColor(Color.play_sectionSecondary)
@@ -653,7 +653,7 @@ struct SettingsView: View {
             
             var body: some View {
                 HStack {
-                    Text("🎧 \(NSLocalizedString("Podcast square images", comment: "Label of the button for Podcast square image format selection"))")
+                    Text("🎧 \(NSLocalizedString("Square images", comment: "Label of the button for Podcast square image format selection"))")
                     Spacer()
                     Text(selectedSquareImages.description)
                         .foregroundColor(Color.play_sectionSecondary)
@@ -782,7 +782,7 @@ struct SettingsView: View {
                 .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
+                .navigationTitle("📺 \(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))")
             }
         }
         
@@ -824,7 +824,7 @@ struct SettingsView: View {
                 .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle("🎧 \(NSLocalizedString("Podcast square images", comment: "Podcast square image format selection view title"))")
+                .navigationTitle("🎧 \(NSLocalizedString("Square images", comment: "Podcast square image format selection view title"))")
             }
         }
         

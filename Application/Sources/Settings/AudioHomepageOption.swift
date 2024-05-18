@@ -23,9 +23,9 @@ enum AudioHomepageOption: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .curatedOne:
-            return NSLocalizedString("One curated page", comment: "One curated audio homepage option setting state")
+            return NSLocalizedString("One curated page (PAC Audio)", comment: "One curated audio homepage option setting state")
         case .curatedMany:
-            return NSLocalizedString("Many curated pages", comment: "Many curated audio homepages option setting state")
+            return NSLocalizedString("Many curated pages (PAC landing pages)", comment: "Many curated audio homepages option setting state")
         case .predefinedMany:
             return NSLocalizedString("Many predefined pages", comment: "Many predefined audio homepage option setting state")
         case .`default`:
