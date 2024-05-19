@@ -227,6 +227,16 @@
 		046845AD2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
 		046845AE2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
 		046845AF2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		0468459B2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459C2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459D2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459E2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459F2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A02BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A12BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A22BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A32BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A42BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
 		046F8DC02B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC12B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC22B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
@@ -2830,6 +2840,7 @@
 		045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
 		046845A52BF56A13003A0073 /* ColorsSettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsSettable.swift; sourceTree = "<group>"; };
+		0468459A2BF513E2003A0073 /* ShowVisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVisualView.swift; sourceTree = "<group>"; };
 		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
 		046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContainerViewController.swift; sourceTree = "<group>"; };
 		046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -4851,6 +4862,7 @@
 				04F184CD28EC5EE500B1207C /* ShowButton.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */,
+				0468459A2BF513E2003A0073 /* ShowVisualView.swift */,
 				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
 				6FB899FE26335B090012F1B0 /* Stack.swift */,
 				04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */,
@@ -8583,6 +8595,7 @@
 				0451D7EE2B1CEDAD005A2150 /* Banner.swift in Sources */,
 				04395F272B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
+				0468459B2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6F362A8A26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
 				6FE38A27270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
 				047030E72BBD51340032FA74 /* TopicGradientView.swift in Sources */,
@@ -8771,6 +8784,7 @@
 				042F6F2A29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F3CCE9A26CAC7A2004039E2 /* Blur.swift in Sources */,
 				6F73BFB726563C830032D742 /* Content.swift in Sources */,
+				0468459C2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FD1EF432861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545B2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */,
@@ -9038,6 +9052,7 @@
 				042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F3CCE9B26CAC7A2004039E2 /* Blur.swift in Sources */,
 				6F73BFB826563C830032D742 /* Content.swift in Sources */,
+				0468459D2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FD1EF442861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545C2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */,
@@ -9305,6 +9320,7 @@
 				042F6F2C29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F3CCE9C26CAC7A2004039E2 /* Blur.swift in Sources */,
 				6F73BFB926563C830032D742 /* Content.swift in Sources */,
+				0468459E2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FD1EF452861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545D2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C21DC8708400725EEB /* PlayErrors.m in Sources */,
@@ -9657,6 +9673,7 @@
 				6F4CF73A281341B7006AFE6D /* ImageView.swift in Sources */,
 				048FD2132A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift in Sources */,
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
+				0468459F2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				041DD1832B1BA8B100C9368A /* TableView.swift in Sources */,
 				04395F1F2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
@@ -9856,6 +9873,7 @@
 				6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */,
 				08F5DB15262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E72638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A02BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8326395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0426335B090012F1B0 /* Stack.swift in Sources */,
@@ -10012,6 +10030,7 @@
 				6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB16262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E82638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A12BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8426395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0526335B090012F1B0 /* Stack.swift in Sources */,
@@ -10168,6 +10187,7 @@
 				6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB17262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E92638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A22BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8526395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0626335B090012F1B0 /* Stack.swift in Sources */,
@@ -10324,6 +10344,7 @@
 				6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB18262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125EA2638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A32BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8626395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0726335B090012F1B0 /* Stack.swift in Sources */,
@@ -10545,6 +10566,7 @@
 				6F1EE83E268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D64270DE4FE00210713 /* Publishers.swift in Sources */,
 				6FFFB9BB252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
+				046845A42BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */,
 				6F8A54632655100500AE78FD /* SectionViewController.swift in Sources */,
 				6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */,

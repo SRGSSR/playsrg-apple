@@ -38,8 +38,4 @@ extension ShowCellViewModel {
     var title: String? {
         return show?.title
     }
-    
-    func imageUrl(with imageVariant: SRGImageVariant) -> URL? {
-        return imageVariant == .poster ? url(for: show?.posterImage, size: .small) : url(for: show?.image, size: .small)
-    }
 }

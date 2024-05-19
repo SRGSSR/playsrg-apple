@@ -4,9 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-import NukeUI
-import SRGDataProviderModel
-import SRGUserData
 import SwiftUI
 
 // MARK: View
@@ -41,6 +38,7 @@ struct MediaVisualView<Content: View>: View {
     var body: some View {
         ZStack {
             ImageView(source: model.imageUrl(for: size), contentMode: contentMode)
+                .background(Color.thumbnailBackground)
             content(media)
             BlockingOverlay(media: media)
             

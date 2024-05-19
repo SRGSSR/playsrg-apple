@@ -38,7 +38,7 @@ struct ShowCell: View, PrimaryColorSettable {
         Group {
 #if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageVariant), action: action) {
-                ImageView(source: model.imageUrl(with: imageVariant))
+                ShowVisualView(show: model.show, size: .small, imageVariant: imageVariant)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
@@ -51,7 +51,7 @@ struct ShowCell: View, PrimaryColorSettable {
             }
 #else
             VStack(spacing: 0) {
-                ImageView(source: model.imageUrl(with: imageVariant))
+                ShowVisualView(show: model.show, size: .small, imageVariant: imageVariant)
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
