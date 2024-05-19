@@ -685,9 +685,15 @@ extension PageViewController: SectionHeaderViewAction {
         
         SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
             .receive(on: DispatchQueue.main)
-            .sink { error in
-                if case .failure(let failure) = error {
-                    Banner.showError(failure as NSError)
+            .sink { result in
+                if case .failure = result {
+                    let error = NSError(
+                        domain: PlayErrorDomain,
+                        code: PlayErrorCode.notFound.rawValue,
+                        userInfo: [
+                            NSLocalizedDescriptionKey: NSLocalizedString("The page cannot be opened.", comment: "Error message when a page cannot be opened from a page section title")
+                        ])
+                    Banner.showError(error)
                 }
             } receiveValue: { contentPage in
                 let pageViewController = PageViewController.pageViewController(for: contentPage)
