@@ -92,6 +92,7 @@ struct ProgramView: View {
         var body: some View {
             ZStack {
                 ImageView(source: model.imageUrl)
+                    .background(Color.black)
                 BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
                 
                 if let progress = model.progress {
