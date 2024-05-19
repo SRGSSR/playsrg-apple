@@ -369,7 +369,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showWrapperView.layer.masksToBounds = YES;
     
-    self.showThumbnailImageView.backgroundColor = UIColor.blackColor;
+    self.showThumbnailImageView.backgroundColor = UIColor.thumbnailBackground;
     
     self.moreEpisodesLabel.textColor = UIColor.srg_grayD2Color;
     

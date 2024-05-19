@@ -29,7 +29,7 @@ struct ShowVisualView: View {
     
     var body: some View {
         ImageView(source: imageUrl, contentMode: contentMode)
-            .background(Color.black)
+            .background(Color.thumbnailBackground)
     }
     
     private var imageUrl: URL? {
