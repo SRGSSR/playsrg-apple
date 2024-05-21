@@ -94,5 +94,6 @@
     "1.8.5-449": "- Maintenance build.\n- Image service maintnance. [RTS]",
     "1.8.5-450": "- Move # section to end of AZ show list.",
     "1.8.5-451": "- AppStore release.",
-    "1.8.6-452": "Branch beta\n- Show page header updated.\n- Topic colors added.\n- Some font weights and gray colors updated for better readability."
+    "1.8.6-452": "Branch beta\n- Show page header updated.\n- Topic colors added.\n- Some font weights and gray colors updated for better readability.",
+    "1.8.6-453": "- Show page header updated.\n- Topic colors added.\n- Page section headers can open an other content page."
 }
