@@ -155,6 +155,8 @@ name: Nuke, nameSpecified: Nuke, owner: kean, version: 10.11.2, source: https://
 
 name: NukeUI, nameSpecified: NukeUI, owner: kean, version: 0.8.3, source: https://github.com/kean/NukeUI
 
+name: Pageboy, nameSpecified: Pageboy, owner: uias, version: 4.2.0, source: https://github.com/uias/Pageboy
+
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5, source: https://github.com/Ramotion/paper-onboarding
 
 name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.11.1, source: https://github.com/microsoft/PLCrashReporter
@@ -190,6 +192,8 @@ name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.26.
 name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.9, source: https://github.com/SwiftKickMobile/SwiftMessages
 
 name: SwiftUI-Introspect, nameSpecified: Introspect, owner: siteline, version: 0.12.0, source: https://github.com/siteline/SwiftUI-Introspect
+
+name: Tabman, nameSpecified: Tabman, owner: uias, version: 3.2.0, source: https://github.com/uias/Tabman
 
 name: UICKeyChainStore, nameSpecified: UICKeyChainStore, owner: kishikawakatsumi, version: 2.2.1, source: https://github.com/kishikawakatsumi/UICKeyChainStore
 
