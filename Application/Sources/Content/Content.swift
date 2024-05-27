@@ -406,7 +406,7 @@ private extension Content {
             switch contentSection.type {
             case .medias:
                 return dataProvider.medias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { self.filterItems($0).map { .media($0) } }
+                    .map { filterItems($0).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAndMedias:
                 return dataProvider.showAndMedias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
@@ -421,7 +421,7 @@ private extension Content {
                     .eraseToAnyPublisher()
             case .shows:
                 return dataProvider.shows(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { self.filterItems($0).map { .show($0) } }
+                    .map { filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
                 switch presentation.type {
