@@ -92,7 +92,7 @@ class PageContainerViewController: UIViewController {
         guard index < viewControllers.count else { return false }
         
         if self.isViewLoaded {
-            tabManVC.pageboyParent?.scrollToPage(.at(index: index), animated: animated)
+            tabManVC.scrollToPage(.at(index: index), animated: animated)
             return true
         }
         else {
