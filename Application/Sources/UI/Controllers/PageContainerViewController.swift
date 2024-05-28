@@ -106,6 +106,12 @@ class PageContainerViewController: UIViewController {
 
 // MARK: - Protocols
 
+extension PageContainerViewController: ContainerContentInsets {
+    var play_additionalContentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 60.0, left: 0.0, bottom: 0.0, right: 0.0)
+    }
+}
+
 extension PageContainerViewController: Oriented {
     var play_supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .all
@@ -118,7 +124,14 @@ extension PageContainerViewController: Oriented {
 
 extension PageContainerViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
-        return viewControllers.first
+        return tabManVC.currentViewController
+    }
+    
+    func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
+        #warning("Todo, when adding back the blur view, make it more intense in the following lines")
+//        let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
+//        tabBarTopConstraint.constant = max(-adjustedOffset, 0.0)
+//        blurView.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
     }
 }
 
