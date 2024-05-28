@@ -28,15 +28,7 @@ class PageContainerViewController: UIViewController {
             self.initialPage = 0
         }
         
-        var tabs: [TMBarItem] = []
-        viewControllers.forEach { viewController in
-            if let tabBarItem = viewController.tabBarItem, let image = tabBarItem.image {
-                let tab = TMBarItem(image: image)
-                tabs.append(tab)
-            }
-        }
-        
-        self.tabBarItems = tabs
+        self.tabBarItems = viewControllers.compactMap { $0.tabBarItem.image }.map { TMBarItem(image: $0) }
         
         super.init(nibName: nil, bundle: nil)
         let bar = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
