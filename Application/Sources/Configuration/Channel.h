@@ -49,6 +49,11 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
 @property (nonatomic, readonly, copy) NSString *name;
 
 /**
+ * The URL used to share the channel website.
+ */
+@property (nonatomic, readonly, copy, nullable) NSURL *shareURL;
+
+/**
  *  The channel primary color.
  */
 @property (nonatomic, readonly) UIColor *color;

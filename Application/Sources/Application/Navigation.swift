@@ -166,11 +166,36 @@ func navigateToPage(_ page: SRGContentPage, animated: Bool = true) {
 }
 
 func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true) {
+    if let microPageId = section.properties.openContentPageId {
+        openContentPage(id: microPageId, animated: animated)
+    } else {
+        openSectionPage(section: section, filter: filter, animated: animated)
+    }
+}
+
+private func openSectionPage(section: Content.Section, filter: SectionFiltering?, animated: Bool) {
     guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
     isPresenting = true
     topViewController.navigateToSection(section, filter: filter, animated: animated) {
         isPresenting = false
     }
+}
+
+private func openContentPage(id: String, animated: Bool) {
+    guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
+    isPresenting = true
+
+    SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+        .receive(on: DispatchQueue.main)
+        .sink { _ in
+            // No error banners displayed on tvOS yet
+            isPresenting = false
+        } receiveValue: { contentPage in
+            topViewController.navigateToPage(contentPage, animated: animated) {
+                isPresenting = false
+            }
+        }
+        .store(in: &cancellables)
 }
 
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {

@@ -189,7 +189,7 @@ enum UCService: Hashable, CaseIterable {
 #if os(iOS)
         let backgroundColor = UIColor.srgGray23
         let foregroundColor = UIColor.white
-        let textColor = UIColor.srgGrayC7
+        let textColor = UIColor.srgGrayD2
         
         var settings = GeneralStyleSettings()
         
@@ -230,7 +230,7 @@ enum UCService: Hashable, CaseIterable {
     
 #if os(iOS)
     private static func firstLayerButtonSettings(cmpData: UsercentricsCMPData) -> [ButtonSettings] {
-        var buttons: [ButtonSettings] = [ButtonSettings]()
+        var buttons = [ButtonSettings]()
         buttons.append(button(type: .acceptAll, isPrimary: true))
         if !(cmpData.settings.firstLayer?.hideButtonDeny?.boolValue ?? false) {
             buttons.append(button(type: .denyAll, isPrimary: true))
@@ -240,7 +240,7 @@ enum UCService: Hashable, CaseIterable {
     }
     
     private static func secondLayerButtonSettings(cmpData: UsercentricsCMPData) -> [ButtonSettings] {
-        var buttons: [ButtonSettings] = [ButtonSettings]()
+        var buttons = [ButtonSettings]()
         buttons.append(button(type: .acceptAll, isPrimary: false))
         if !(cmpData.settings.secondLayer.hideButtonDeny?.boolValue ?? false) {
             buttons.append(button(type: .denyAll, isPrimary: false))
@@ -252,7 +252,7 @@ enum UCService: Hashable, CaseIterable {
     private static func button(type: UsercentricsUI.ButtonType, isPrimary: Bool) -> ButtonSettings {
         return ButtonSettings(type: type,
                               textColor: isPrimary ? .white : .srgGray23,
-                              backgroundColor: isPrimary ? .srgRed : .srgGrayC7,
+                              backgroundColor: isPrimary ? .srgRed : .srgGrayD2,
                               cornerRadius: 8)
     }
 #endif

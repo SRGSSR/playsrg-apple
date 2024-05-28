@@ -157,6 +157,7 @@ protocol SectionProperties {
     var rowHighlight: Highlight? { get }
     var placeholderRowItems: [Content.Item] { get }
     var displaysRowHeader: Bool { get }
+    var openContentPageId: String? { get }
     
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
@@ -391,13 +392,21 @@ private extension Content {
             return contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
         }
         
+        var openContentPageId: String? {
+            guard let link = contentSection.presentation.contentLink, link.type == .microPage, let id = link.target else {
+                return nil
+            }
+            
+            return id
+        }
+        
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
             
             switch contentSection.type {
             case .medias:
                 return dataProvider.medias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { self.filterItems($0).map { .media($0) } }
+                    .map { filterItems($0).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAndMedias:
                 return dataProvider.showAndMedias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
@@ -412,7 +421,7 @@ private extension Content {
                     .eraseToAnyPublisher()
             case .shows:
                 return dataProvider.shows(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { self.filterItems($0).map { .show($0) } }
+                    .map { filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
                 switch presentation.type {
@@ -816,6 +825,10 @@ private extension Content {
         
         var displaysRowHeader: Bool {
             return true
+        }
+        
+        var openContentPageId: String? {
+            nil
         }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {

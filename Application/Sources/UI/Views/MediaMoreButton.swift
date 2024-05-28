@@ -14,7 +14,7 @@ struct MediaMoreButton: UIViewRepresentable {
     func makeUIView(context: Context) -> UIButton {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(resource: .ellipsis), for: .normal)
-        button.tintColor = .srgGrayC7
+        button.tintColor = .srgGrayD2
         
         button.showsMenuAsPrimaryAction = true
         button.menu = UIMenu()

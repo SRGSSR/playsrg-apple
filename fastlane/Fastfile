@@ -1101,7 +1101,7 @@ platform :ios do
     if cleaned_lane_condition(lane)
       clean_build_artifacts
       ENV.delete('DERIVED_DATA_CLEANED')
-      reset_git_repo(skip_clean: true, force: true)
+      reset_git_repo(force: true)
     end
   end
 end

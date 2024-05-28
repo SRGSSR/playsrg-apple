@@ -76,6 +76,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;
 @property (nonatomic, readonly) NSArray<RadioChannel *> *satelliteRadioChannels;
 
+@property (nonatomic, readonly) NSDictionary<NSString *, NSArray<UIColor*> *> *topicColors;
+
 @property (nonatomic, readonly) NSArray<NSNumber *> *tvGuideOtherBouquetsObjc;
 
 @property (nonatomic, readonly) NSUInteger pageSize;                                    // page size to be used in general throughout the app

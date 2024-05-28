@@ -46,13 +46,9 @@ struct SectionShowHeaderView: View {
         return (horizontalSizeClass == .compact) ? .center : .leading
     }
     
-    private var imageUrl: URL? {
-        return url(for: show.image, size: .medium)
-    }
-    
     var body: some View {
         Stack(direction: direction, alignment: alignment, spacing: 0) {
-            ImageView(source: imageUrl)
+            ShowVisualView(show: show, size: .medium)
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .overlay(ImageOverlay(horizontalSizeClass: horizontalSizeClass))
                 .adaptiveMainFrame(for: horizontalSizeClass)
@@ -95,7 +91,7 @@ struct SectionShowHeaderView: View {
                         // all lines it could.
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                 }
                 if let summary = section.properties.summary {
                     Text(summary)

@@ -10,13 +10,16 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-hug, v-hug
-struct SimpleButton: View {
+struct SimpleButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable {
     private let icon: ImageResource
     private let label: String?
     private let labelMinimumScaleFactor: CGFloat?
     private let accessibilityLabel: String
     private let accessibilityHint: String?
     private let action: () -> Void
+    
+    internal var primaryColor: Color = .srgGrayD2
+    internal var primaryFocusedColor: Color = .srgGray16
     
     @State private var isFocused = false
     
@@ -50,7 +53,7 @@ struct SimpleButton: View {
                 }
             }
             .onParentFocusChange { isFocused = $0 }
-            .foregroundColor(isFocused ? .srgGray16 : .srgGrayC7)
+            .foregroundColor(isFocused ? primaryFocusedColor : primaryColor)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
@@ -64,6 +67,7 @@ struct SimpleButton_Previews: PreviewProvider {
         Group {
             SimpleButton(icon: .favorite, label: "Add to favorites", action: {})
             SimpleButton(icon: .favorite, accessibilityLabel: "Add to favorites", action: {})
+            SimpleButton(icon: .favorite, label: "White foreground", action: {}).primaryColor(.white)
         }
         .padding()
         .previewLayout(.sizeThatFits)

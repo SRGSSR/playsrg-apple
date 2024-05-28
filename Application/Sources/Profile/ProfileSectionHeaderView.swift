@@ -17,7 +17,7 @@ struct ProfileSectionHeaderView: View {
                 .lineLimit(1)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .foregroundColor(.srgGrayC7)
+        .foregroundColor(.srgGrayD2)
         .padding(.all, 16)
     }
 }

@@ -325,7 +325,7 @@
     NSDate *startDate = [self minimumDateForCalendar:calendar];
     NSDate *endDate = [self maximumDateForCalendar:calendar];
     NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
-    return [dateInterval containsDate:date] ? UIColor.srg_grayC7Color : [UIColor.srg_grayC7Color colorWithAlphaComponent:0.4f];
+    return [dateInterval containsDate:date] ? UIColor.srg_grayD2Color : [UIColor.srg_grayD2Color colorWithAlphaComponent:0.4f];
 }
 
 #pragma mark ContainerContentInsets protocol

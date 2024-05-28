@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: View
 
-struct FeaturedContentCell<Content: FeaturedContent>: View {
+struct FeaturedContentCell<Content: FeaturedContent>: View, PrimaryColorSettable, SecondaryColorSettable {
     public enum Layout {
         case headline
         case element
@@ -25,6 +25,9 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     let content: Content
     let layout: Layout
     let style: Style
+    
+    internal var primaryColor: Color = .srgGrayD2
+    internal var secondaryColor: Color = .srgGray96
     
     @Environment(\.isSelected) private var isSelected
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
@@ -63,6 +66,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                         .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                         .layoutPriority(1)
                     FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)
+                        .primaryColor(primaryColor)
+                        .secondaryColor(secondaryColor)
                         .padding(.horizontal, horizontalPadding)
                         .padding(.vertical, verticalPadding)
                 }
@@ -77,6 +82,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .layoutPriority(1)
                 FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)
+                    .primaryColor(primaryColor)
+                    .secondaryColor(secondaryColor)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.vertical, verticalPadding)
             }

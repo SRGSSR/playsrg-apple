@@ -92,6 +92,7 @@ struct ProgramView: View {
         var body: some View {
             ZStack {
                 ImageView(source: model.imageUrl)
+                    .background(Color.thumbnailBackground)
                 BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
                 
                 if let progress = model.progress {
@@ -261,7 +262,7 @@ struct ProgramView: View {
                             .srgFont(.H2)
                             .lineLimit(2)
                             .multilineTextAlignment(.center)
-                            .foregroundColor(.srgGrayC7)
+                            .foregroundColor(.srgGrayD2)
                     }
                     if let subtitle = model.subtitle {
                         Text(subtitle)

@@ -101,7 +101,7 @@
     // Remove the separator (looks nicer)
     appearance.shadowColor = UIColor.clearColor;
     
-    UIColor *foregroundColor = tintColor ?: UIColor.srg_grayC7Color;
+    UIColor *foregroundColor = tintColor ?: UIColor.srg_grayD2Color;
     appearance.titleTextAttributes = @{
         NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:UIFontWeightSemibold fixedSize:17.f],
         NSForegroundColorAttributeName : foregroundColor

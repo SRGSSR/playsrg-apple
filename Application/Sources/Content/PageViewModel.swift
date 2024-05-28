@@ -5,6 +5,7 @@
 //
 
 import SRGDataProviderCombine
+import SwiftUI
 
 // MARK: View model
 
@@ -13,6 +14,8 @@ final class PageViewModel: Identifiable, ObservableObject {
     
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
+    
+    @Published private(set) var displayedShow: SRGShow?
     
     private let trigger = Trigger()
     
@@ -58,6 +61,17 @@ final class PageViewModel: Identifiable, ObservableObject {
         .removeDuplicates()
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceMessage)
+        
+        if case let .show(show) = id {
+            self.displayedShow = show
+            
+            // The show page needs `topics` which could be available only in the show request.
+            SRGDataProvider.current!.show(withUrn: show.urn)
+                .map { $0 }
+                .replaceError(with: show)
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$displayedShow)
+        }
     }
     
     func loadMore() {
@@ -153,31 +167,6 @@ extension PageViewModel {
         case page(_ page: SRGContentPage)
         
 #if os(iOS)
-        var isHeaderWithTitle: Bool {
-            return hasShowHeaderView || hasPageHeaderView
-        }
-        
-        var isLargeTitleDisplayMode: Bool {
-            if isHeaderWithTitle {
-                return false
-            }
-            else {
-                // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
-                // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
-                // be incorrect at the top.
-                return !isNavigationBarHidden
-            }
-        }
-        
-        var isNavigationBarHidden: Bool {
-            switch self {
-            case .video:
-                return true
-            default:
-                return false
-            }
-        }
-        
         var sharingItem: SharingItem? {
             switch self {
             case let .show(show):
@@ -223,45 +212,6 @@ extension PageViewModel {
             case let .page(page):
                 return page.title
             }
-        }
-        
-        var displayedShow: SRGShow? {
-            if case let .show(show) = self {
-                return show
-            }
-            else {
-                return nil
-            }
-        }
-        
-        var hasShowHeaderView: Bool {
-            return displayedShow != nil
-        }
-        
-        var displayedGlobalTitle: String? {
-            if case .topic = self {
-#if os(tvOS)
-                return title
-#else
-                return nil
-#endif
-            }
-            else {
-                return nil
-            }
-        }
-        
-        var displayedPage: SRGContentPage? {
-            if case let .page(page) = self {
-                return page
-            }
-            else {
-                return nil
-            }
-        }
-        
-        var hasPageHeaderView: Bool {
-            return displayedPage != nil
         }
         
         var analyticsPageViewTitle: String {
@@ -447,6 +397,114 @@ extension PageViewModel {
     }
 }
 
+// MARK: Header and navigation
+
+extension PageViewModel {
+#if os(iOS)
+    var isHeaderWithTitle: Bool {
+        return displayedTitle != nil || displayedShow != nil
+    }
+    
+    var isLargeTitleDisplayMode: Bool {
+        if isHeaderWithTitle {
+            return false
+        }
+        else {
+            // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
+            // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
+            // be incorrect at the top.
+            return !isNavigationBarHidden
+        }
+    }
+    
+    var isNavigationBarHidden: Bool {
+        switch id {
+        case .video:
+            return true
+        default:
+            return false
+        }
+    }
+#endif
+    
+    var primaryColor: Color {
+        switch id {
+        case let .topic(topic):
+            return ApplicationConfiguration.shared.topicColors(for: topic) != nil ? .white : .srgGrayD2
+        case .show:
+            guard let topic = displayedShow?.topics?.first else { return .srgGrayD2 }
+            return ApplicationConfiguration.shared.topicColors(for: topic) != nil ? .white : .srgGrayD2
+        default:
+            return .srgGrayD2
+        }
+    }
+    
+    var secondaryColor: Color {
+        return .srgGray96
+    }
+    
+    var displayedTitle: String? {
+        switch id {
+        case let .page(page):
+            return page.title
+        case let .topic(topic):
+            return topic.title
+        default:
+            return nil
+        }
+    }
+    
+    var displayedTitleDescription: String? {
+        if case let .page(page) = id {
+            return page.summary
+        }
+        else {
+            return nil
+        }
+    }
+    
+    var displayedTitleTextAlignment: TextAlignment {
+        if case .topic = id {
+            return constant(iOS: .leading, tvOS: .center)
+        }
+        else {
+            return .leading
+        }
+    }
+    
+    var displayedTitleNeedsTopPadding: Bool {
+        if case let .topic(topic) = id, ApplicationConfiguration.shared.topicColors(for: topic) != nil {
+            return constant(iOS: true, tvOS: false)
+        }
+        else {
+            return false
+        }
+    }
+    
+    var displayedGradientTopic: SRGTopic? {
+        switch id {
+        case let .topic(topic):
+            return topic
+        case .show:
+            guard let topic = displayedShow?.topics?.first else { return nil }
+            return topic
+        default:
+            return nil
+        }
+    }
+    
+    var displayedGradientTopicStyle: TopicGradientView.Style? {
+        switch id {
+        case .topic:
+            return .topicPage
+        case .show:
+            return .showPage
+        default:
+            return nil
+        }
+    }
+}
+
 // MARK: User activity
 
 extension PageViewModel {
@@ -554,7 +612,7 @@ private extension PageViewModel {
         var rowItems = items.map { Item(.item($0), in: section) }
 #if os(tvOS)
         if !rowItems.isEmpty
-            && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
+            && (section.viewModelProperties.canOpenPage || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasMoreRowItem {
             rowItems.append(Item(.more, in: section))
         }
@@ -567,7 +625,7 @@ private extension PageViewModel {
 
 protocol PageViewModelProperties {
     var layout: PageViewModel.SectionLayout { get }
-    var canOpenDetailPage: Bool { get }
+    var canOpenPage: Bool { get }
 }
 
 extension PageViewModelProperties {
@@ -637,12 +695,16 @@ private extension PageViewModel {
             }
         }
         
-        var canOpenDetailPage: Bool {
+        var canOpenPage: Bool {
             switch presentation.type {
             case .favoriteShows, .myProgram, .continueWatching, .topicSelector, .watchLater:
                 return true
             default:
-                return presentation.hasDetailPage
+                if presentation.contentLink != nil {
+                    return true
+                } else {
+                    return false
+                }
             }
         }
     }
@@ -680,7 +742,7 @@ private extension PageViewModel {
             }
         }
         
-        var canOpenDetailPage: Bool {
+        var canOpenPage: Bool {
             return layout == .mediaSwimlane || layout == .showSwimlane
         }
     }

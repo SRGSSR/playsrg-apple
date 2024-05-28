@@ -187,16 +187,16 @@
 		0456C4A82976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
 		0456C4A92976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
 		0456C4AA2976EE460088508A /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0456C4A02976EE460088508A /* AnalyticsEvent.swift */; };
-		0458A51B2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A51C2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A51D2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A51E2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A51F2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A5202B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A5212B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A5222B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A5232B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
-		0458A5242B7AC10A0007BA10 /* PageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */; };
+		0458A51B2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A51C2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A51D2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A51E2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A51F2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A5202B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A5212B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A5222B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A5232B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
+		0458A5242B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */; };
 		045F8A042BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
 		045F8A052BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
 		045F8A062BA5A001005DDCEE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */; };
@@ -217,6 +217,26 @@
 		0463DA172A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA182A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA192A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
+		046845A62BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A72BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A82BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A92BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AB2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AC2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AD2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AE2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AF2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		0468459B2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459C2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459D2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459E2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		0468459F2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A02BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A12BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A22BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A32BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A42BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
 		046F8DC02B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC12B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC22B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
@@ -232,6 +252,16 @@
 		046F8DCE2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
 		046F8DCF2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
 		046F8DD02B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */; };
+		047030E72BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030E82BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030E92BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030EA2BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030EB2BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030EC2BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030ED2BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030EE2BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030EF2BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
+		047030F02BBD51340032FA74 /* TopicGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047030E62BBD51340032FA74 /* TopicGradientView.swift */; };
 		04708C0F2B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C102B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
 		04708C112B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */; };
@@ -2234,16 +2264,6 @@
 		6FE14E67263EA83C004AD913 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E5F263EA83C004AD913 /* HeaderView.swift */; };
 		6FE14E68263EA83C004AD913 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E5F263EA83C004AD913 /* HeaderView.swift */; };
 		6FE14E69263EA83C004AD913 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E5F263EA83C004AD913 /* HeaderView.swift */; };
-		6FE14E6B263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E6C263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E6D263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E6E263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E6F263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E70263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E71263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E72263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E73263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
-		6FE14E74263EA9B5004AD913 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE14E6A263EA9B5004AD913 /* TitleView.swift */; };
 		6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4981DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
 		6FE1B4991DCB84F00094D5BA /* AnalyticsConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */; };
@@ -2815,13 +2835,16 @@
 		0451D7ED2B1CEDAD005A2150 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindow+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+PlaySRG.swift"; sourceTree = "<group>"; };
 		0456C4A02976EE460088508A /* AnalyticsEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
-		0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageHeaderView.swift; sourceTree = "<group>"; };
+		0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleHeaderView.swift; sourceTree = "<group>"; };
 		045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
+		046845A52BF56A13003A0073 /* ColorsSettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsSettable.swift; sourceTree = "<group>"; };
+		0468459A2BF513E2003A0073 /* ShowVisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVisualView.swift; sourceTree = "<group>"; };
 		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
 		046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContainerViewController.swift; sourceTree = "<group>"; };
 		046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+PlaySRG.swift"; sourceTree = "<group>"; };
+		047030E62BBD51340032FA74 /* TopicGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicGradientView.swift; sourceTree = "<group>"; };
 		04708C0E2B1CAF3E000D43C5 /* AccessibilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityView.swift; sourceTree = "<group>"; };
 		0481D59829F41D5B00D174B3 /* SRGMedia+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGMedia+PlaySRG.swift"; sourceTree = "<group>"; };
 		0481D5A329F44D4D00D174B3 /* SRGProgram+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SRGProgram+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -3360,7 +3383,6 @@
 		6FDF6FFF2682022C0004437E /* ApplicationSettings+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ApplicationSettings+Common.m"; sourceTree = "<group>"; };
 		6FDFD88B24E6BC9200F20382 /* TopicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicCell.swift; sourceTree = "<group>"; };
 		6FE14E5F263EA83C004AD913 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
-		6FE14E6A263EA9B5004AD913 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyticsConstants.h; sourceTree = "<group>"; };
 		6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyticsConstants.m; sourceTree = "<group>"; };
 		6FE1B9171FAC34D600A58F3B /* ContentInsets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContentInsets.h; sourceTree = "<group>"; };
@@ -4766,6 +4788,7 @@
 			isa = PBXGroup;
 			children = (
 				6FF5D1FA2747A69900460F70 /* ButtonStyles.swift */,
+				046845A52BF56A13003A0073 /* ColorsSettable.swift */,
 				6F0E374B2680B139008FC923 /* ContextMenu.swift */,
 				6F58903326AED4CD00553C24 /* Environment.swift */,
 				6FF8F155250609CF009A741F /* MediaDescription.swift */,
@@ -4826,7 +4849,6 @@
 				6FD9595326989FD900739FAE /* MediaVisualViewModel.swift */,
 				6FE8626B2657C5F30061D3F0 /* MoreCell.swift */,
 				6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */,
-				0458A51A2B7AC1090007BA10 /* PageHeaderView.swift */,
 				6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */,
 				6FD1EF362861A39400BCBF19 /* PlaySection.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
@@ -4840,12 +4862,14 @@
 				04F184CD28EC5EE500B1207C /* ShowButton.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */,
+				0468459A2BF513E2003A0073 /* ShowVisualView.swift */,
 				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
 				6FB899FE26335B090012F1B0 /* Stack.swift */,
 				04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */,
 				041DD17E2B1BA8B100C9368A /* TableView.swift */,
-				6FE14E6A263EA9B5004AD913 /* TitleView.swift */,
+				0458A51A2B7AC1090007BA10 /* TitleHeaderView.swift */,
 				6FDFD88B24E6BC9200F20382 /* TopicCell.swift */,
+				047030E62BBD51340032FA74 /* TopicGradientView.swift */,
 				6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */,
 				04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */,
 				6FDAAD93283283EB008E2806 /* WebView.swift */,
@@ -6961,7 +6985,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C6E266BDC5000FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6980,7 +7004,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C6F266BDC6D00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -6999,7 +7023,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C70266BDC7B00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7018,7 +7042,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C71266BDC8D00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7037,7 +7061,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C72266BDCA100FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7056,7 +7080,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C73266BDCBB00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7075,7 +7099,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C74266BDCC800FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7094,7 +7118,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C75266BDCD400FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7113,7 +7137,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08AD6C76266BDCDE00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7132,7 +7156,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n  swiftlint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8459,7 +8483,6 @@
 				0490B9F92A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
 				6F054FC626B98C44007A34F8 /* ProgramView.swift in Sources */,
 				6F676851281C0F7F00D61211 /* SupportInformation.swift in Sources */,
-				6FE14E6B263EA9B5004AD913 /* TitleView.swift in Sources */,
 				6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */,
 				6F573D0426D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -8537,6 +8560,7 @@
 				048FD2092A122BF100929AE5 /* ProfileAccountHeaderView+UIKit.swift in Sources */,
 				6F73BFB026563ABD0032D742 /* DampedCollectionView.swift in Sources */,
 				6FEF23722732C2D40098C639 /* TimelineView.swift in Sources */,
+				046845A62BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F74293D265BE52E0000538D /* Signals.swift in Sources */,
 				6FDF70002682022C0004437E /* ApplicationSettings+Common.m in Sources */,
@@ -8567,12 +8591,14 @@
 				6FC2F7DF2628F23600BF6B19 /* ResponderChain.swift in Sources */,
 				6F33E6122860AEFF00724E76 /* Navigation.swift in Sources */,
 				6F8A545A2655100400AE78FD /* SectionViewController.swift in Sources */,
-				0458A51B2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A51B2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				0451D7EE2B1CEDAD005A2150 /* Banner.swift in Sources */,
 				04395F272B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
+				0468459B2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6F362A8A26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
 				6FE38A27270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
+				047030E72BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				042F6F6029E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				041DD17F2B1BA8B100C9368A /* TableView.swift in Sources */,
@@ -8643,6 +8669,7 @@
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760801EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				04FB9CB42A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
+				047030E82BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				044B405C2A01764900A10DB7 /* ProfileCell.swift in Sources */,
 				6FC2A21D265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				0809813B2622195900AA586B /* Badges.swift in Sources */,
@@ -8679,6 +8706,7 @@
 				6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FCA5BD727D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACA2820576000BC3EA5 /* UserLocation.swift in Sources */,
+				046845A72BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753626D3786F00667298 /* HeroMediaCell.swift in Sources */,
 				6FE9048726F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
@@ -8739,7 +8767,6 @@
 				6FA5D15E1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				6F566E9624EEC40A0024B4CA /* ApplicationSection.m in Sources */,
 				6F72E60826BA6B16001A890C /* SceneDelegate.m in Sources */,
-				6FE14E6C263EA9B5004AD913 /* TitleView.swift in Sources */,
 				04395F222B1BBA6600F6A634 /* RefreshControl.swift in Sources */,
 				6F0A7F0020AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				085C0DC426132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
@@ -8757,6 +8784,7 @@
 				042F6F2A29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F3CCE9A26CAC7A2004039E2 /* Blur.swift in Sources */,
 				6F73BFB726563C830032D742 /* Content.swift in Sources */,
+				0468459C2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FD1EF432861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545B2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */,
@@ -8861,7 +8889,7 @@
 				08669676273E63D1005AF2BA /* NowLineView.swift in Sources */,
 				6FFA68342637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FCB65F126F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
-				0458A51C2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A51C2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6FF0C84826B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F010E12286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				0463DA112A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
@@ -8909,6 +8937,7 @@
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
 				6F4760871EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				04FB9CB52A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
+				047030E92BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				044B405D2A01764900A10DB7 /* ProfileCell.swift in Sources */,
 				6FC2A21E265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				0809813C2622195900AA586B /* Badges.swift in Sources */,
@@ -8945,6 +8974,7 @@
 				6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FCA5BD827D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACB2820576000BC3EA5 /* UserLocation.swift in Sources */,
+				046845A82BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753726D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -9007,7 +9037,6 @@
 				6F566E9724EEC40A0024B4CA /* ApplicationSection.m in Sources */,
 				6F72E60926BA6B16001A890C /* SceneDelegate.m in Sources */,
 				04395F232B1BBA6600F6A634 /* RefreshControl.swift in Sources */,
-				6FE14E6D263EA9B5004AD913 /* TitleView.swift in Sources */,
 				6F0A7F0120AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				085C0DC526132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6F475FCF1EB37BC6003021EA /* NavigationController.m in Sources */,
@@ -9023,6 +9052,7 @@
 				042F6F2B29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F3CCE9B26CAC7A2004039E2 /* Blur.swift in Sources */,
 				6F73BFB826563C830032D742 /* Content.swift in Sources */,
+				0468459D2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FD1EF442861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545C2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */,
@@ -9127,7 +9157,7 @@
 				08669677273E63D1005AF2BA /* NowLineView.swift in Sources */,
 				6FFA68352637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FCB65F226F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
-				0458A51D2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A51D2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6FF0C84926B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F010E13286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				0463DA122A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
@@ -9175,6 +9205,7 @@
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
 				6F47608E1EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				04FB9CB62A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
+				047030EA2BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				044B405E2A01764900A10DB7 /* ProfileCell.swift in Sources */,
 				6FC2A21F265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				0809813D2622195900AA586B /* Badges.swift in Sources */,
@@ -9211,6 +9242,7 @@
 				6F0E374F2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FCA5BD927D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACC2820576000BC3EA5 /* UserLocation.swift in Sources */,
+				046845A92BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753826D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -9273,7 +9305,6 @@
 				6F566E9824EEC40A0024B4CA /* ApplicationSection.m in Sources */,
 				6F72E60A26BA6B16001A890C /* SceneDelegate.m in Sources */,
 				04395F242B1BBA6600F6A634 /* RefreshControl.swift in Sources */,
-				6FE14E6E263EA9B5004AD913 /* TitleView.swift in Sources */,
 				6F0A7F0220AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				085C0DC626132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6F475FD01EB37BC6003021EA /* NavigationController.m in Sources */,
@@ -9289,6 +9320,7 @@
 				042F6F2C29E0710C003F46AA /* UIStackView+PlaySRG.swift in Sources */,
 				6F3CCE9C26CAC7A2004039E2 /* Blur.swift in Sources */,
 				6F73BFB926563C830032D742 /* Content.swift in Sources */,
+				0468459E2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FD1EF452861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F8A545D2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C21DC8708400725EEB /* PlayErrors.m in Sources */,
@@ -9393,7 +9425,7 @@
 				08669678273E63D1005AF2BA /* NowLineView.swift in Sources */,
 				6FFA68362637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FCB65F326F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
-				0458A51E2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A51E2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6FF0C84A26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F010E14286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				0463DA132A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
@@ -9506,6 +9538,7 @@
 				6F2E160D26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				6FB79BF2287E81790091D157 /* Orientation.m in Sources */,
 				081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
+				047030EB2BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				6F3B0225245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6FD686232460670600B8018A /* Channel.m in Sources */,
 				6F475FE01EB37BC6003021EA /* RequestViewController.m in Sources */,
@@ -9537,7 +9570,6 @@
 				0456C4A52976EE460088508A /* AnalyticsEvent.swift in Sources */,
 				6F72E60B26BA6B16001A890C /* SceneDelegate.m in Sources */,
 				6F11BADF27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
-				6FE14E6F263EA9B5004AD913 /* TitleView.swift in Sources */,
 				6F0A7F0320AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				0490B9FD2A3789F500B6FB7B /* UserConsentHelper.swift in Sources */,
 				085C0DC726132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
@@ -9607,6 +9639,7 @@
 				6FB89A0326335B090012F1B0 /* Stack.swift in Sources */,
 				08AF9484217D27E40028B082 /* SharingItem.m in Sources */,
 				04708C132B1CAF3E000D43C5 /* AccessibilityView.swift in Sources */,
+				046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6F8D54462639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
@@ -9640,6 +9673,7 @@
 				6F4CF73A281341B7006AFE6D /* ImageView.swift in Sources */,
 				048FD2132A124CB300929AE5 /* ProfileAccountHeaderViewModel.swift in Sources */,
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
+				0468459F2BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				041DD1832B1BA8B100C9368A /* TableView.swift in Sources */,
 				04395F1F2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
@@ -9653,7 +9687,7 @@
 				6FFA68372637E99C00BCDA06 /* Mock.swift in Sources */,
 				0481D59D29F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */,
 				6FCB65F426F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
-				0458A51F2B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A51F2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6FF0C84B26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0850F826256A7700B4E410 /* Reachability.m in Sources */,
 				6FB89E2B283DEA12006F9C6C /* HighlightCell.swift in Sources */,
@@ -9839,6 +9873,7 @@
 				6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */,
 				08F5DB15262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E72638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A02BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8326395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0426335B090012F1B0 /* Stack.swift in Sources */,
@@ -9904,10 +9939,11 @@
 				6F8A545F2655100400AE78FD /* SectionViewController.swift in Sources */,
 				0463DA152A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
 				6FC44B4A25DE552300DE6E6F /* Recommendation.m in Sources */,
+				047030EC2BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CB2721786B00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7AD92820578900BC3EA5 /* PosterImages.swift in Sources */,
-				0458A5202B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A5202B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7B2719C5CF0082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2002747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -9937,8 +9973,8 @@
 				085C0DD3261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6A2710927B00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABA25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AB2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70052682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				6FE14E70263EA9B5004AD913 /* TitleView.swift in Sources */,
 				084EF77D26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4E261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562126C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -9994,6 +10030,7 @@
 				6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB16262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E82638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A12BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8426395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0526335B090012F1B0 /* Stack.swift in Sources */,
@@ -10059,10 +10096,11 @@
 				6F8A54602655100400AE78FD /* SectionViewController.swift in Sources */,
 				0463DA162A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
 				6FC44B4B25DE552400DE6E6F /* Recommendation.m in Sources */,
+				047030ED2BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CC2721786D00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7ADA2820578900BC3EA5 /* PosterImages.swift in Sources */,
-				0458A5212B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A5212B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7C2719C5D00082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2012747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -10092,8 +10130,8 @@
 				085C0DD4261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6B2710927C00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABB25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AC2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70062682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				6FE14E71263EA9B5004AD913 /* TitleView.swift in Sources */,
 				084EF77E26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4F261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562226C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -10149,6 +10187,7 @@
 				6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB17262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125E92638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A22BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8526395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0626335B090012F1B0 /* Stack.swift in Sources */,
@@ -10214,10 +10253,11 @@
 				6F8A54612655100500AE78FD /* SectionViewController.swift in Sources */,
 				0463DA172A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
 				6FC44B4C25DE552400DE6E6F /* Recommendation.m in Sources */,
+				047030EE2BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CD2721786D00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7ADB2820578900BC3EA5 /* PosterImages.swift in Sources */,
-				0458A5222B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A5222B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7D2719C5D10082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2022747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -10247,8 +10287,8 @@
 				085C0DD5261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6C2710927E00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABC25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AD2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70072682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				6FE14E72263EA9B5004AD913 /* TitleView.swift in Sources */,
 				084EF77F26035BB30058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB50261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562326C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -10304,6 +10344,7 @@
 				6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB18262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F8125EA2638C37900EB029E /* LabeledCardButton.swift in Sources */,
+				046845A32BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8626395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0726335B090012F1B0 /* Stack.swift in Sources */,
@@ -10369,10 +10410,11 @@
 				6F8A54622655100500AE78FD /* SectionViewController.swift in Sources */,
 				0463DA182A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
 				6FC44B4D25DE552400DE6E6F /* Recommendation.m in Sources */,
+				047030EF2BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CE2721786E00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7ADC2820578900BC3EA5 /* PosterImages.swift in Sources */,
-				0458A5232B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A5232B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7E2719C5D20082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2032747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -10402,8 +10444,8 @@
 				085C0DD6261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6D2710927F00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABD25060496000FF4DD /* MediaVisualView.swift in Sources */,
+				046845AE2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FDF70082682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				6FE14E73263EA9B5004AD913 /* TitleView.swift in Sources */,
 				084EF78026035BB40058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB51261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562426C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -10416,12 +10458,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FE86F752719C4CD0082CAE9 /* ProgramCell.swift in Sources */,
+				047030F02BBD51340032FA74 /* TopicGradientView.swift in Sources */,
 				04D174EB29AA8D6D00CF2F09 /* ApplicationSectionInfo.m in Sources */,
 				086499B624F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AE2541647400A28E79 /* Colors.swift in Sources */,
 				6FC413F524EEEDCB00FDF806 /* ApplicationConfiguration.m in Sources */,
 				6FA8E5B5261CB794003FFDCF /* DataViewController.m in Sources */,
-				0458A5242B7AC10A0007BA10 /* PageHeaderView.swift in Sources */,
+				0458A5242B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6F026EF1250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
 				6F6C0FC0257AAF270077322C /* NSBundle+PlaySRG.m in Sources */,
 				042F6F6929E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */,
@@ -10500,6 +10543,7 @@
 				6FB03F6525DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FD4C2EA268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F8D544B2639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
+				046845AF2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6FEF23702732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F702719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981392622195900AA586B /* LiveMediaCell.swift in Sources */,
@@ -10522,6 +10566,7 @@
 				6F1EE83E268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F091D64270DE4FE00210713 /* Publishers.swift in Sources */,
 				6FFFB9BB252CA310004E40AE /* MediaDetailViewModel.swift in Sources */,
+				046845A42BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */,
 				6F8A54632655100500AE78FD /* SectionViewController.swift in Sources */,
 				6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */,
@@ -10557,7 +10602,6 @@
 				0407EFEF2A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */,
 				6FDF70092682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				043ECDC829F2ADC600D2EFC8 /* SRGChannel+PlaySRG.swift in Sources */,
-				6FE14E74263EA9B5004AD913 /* TitleView.swift in Sources */,
 				0481D5A229F41D5B00D174B3 /* SRGMedia+PlaySRG.swift in Sources */,
 				084EF78126035BB50058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB52261662D900CDDC26 /* CollectionRow.swift in Sources */,
@@ -19291,7 +19335,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.2.0;
+				minimumVersion = 5.2.2;
 			};
 		};
 		6F3B5638283B903C009A2D7D /* XCRemoteSwiftPackageReference "ShowTime" */ = {
@@ -19331,7 +19375,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 19.0.2;
+				minimumVersion = 19.0.3;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {

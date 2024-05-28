@@ -85,5 +85,5 @@ If the fastlane execution finished with an error, or killed with an exit signal,
 ### Inactive state
 
 - [By default](https://docs.github.com/en/rest/deployments/deployments?apiVersion=2022-11-28#inactive-deployments), the non-transient, non-production environment deployments created by fastlane scripts have `auto_inactive` = `true`. So that a new `success` deployment sets all previous `success` deployments to `inactive` state. It's also activated to production environment deployments because the App Store distribution only allows the latest version of the application.
-- When closing a PR, a [Github action](https://github.com/SRGSSR/playsrg-apple/actions) (pr-closure.yml) is updating state to `inactive` to lastest `success` deployment for nighty branch environnements.
+- When closing a PR, a [Github action](https://github.com/SRGSSR/playsrg-apple/actions) (pr-closure.yml) is updating state to `inactive` to lastest `success` deployment for nighty branch environnements and beta branch environnements.
 

@@ -40,7 +40,7 @@
     self.backgroundColor = UIColor.clearColor;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.thumbnailWrapperView.backgroundColor = UIColor.play_grayThumbnailImageViewBackground;
+    self.thumbnailWrapperView.backgroundColor = UIColor.thumbnailBackground;
     self.thumbnailWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     

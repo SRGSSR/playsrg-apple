@@ -9,6 +9,7 @@
 #import "PlayLogger.h"
 
 @import Firebase;
+@import SRGAppearance;
 @import UIKit;
 
 static HomeSection HomeSectionWithString(NSString *string)
@@ -297,6 +298,33 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
         }
     }
     return tvChannels.copy;
+}
+
+- (NSDictionary<NSString *, NSArray<UIColor *> *> *)topicColorsForKey:(NSString *)key
+{
+    NSMutableDictionary *topicColors = [NSMutableDictionary dictionary];
+    
+    NSDictionary *topicColorsDictionary = [self JSONDictionaryForKey:key];
+    for (NSString *topicUrn in topicColorsDictionary) {
+        NSDictionary *colors = topicColorsDictionary[topicUrn];
+        if ([colors isKindOfClass:NSDictionary.class]) {
+            UIColor *firstColor = [UIColor srg_colorFromHexadecimalString:colors[@"firstColor"]];
+            UIColor *secondColor = [UIColor srg_colorFromHexadecimalString:colors[@"secondColor"]];
+            BOOL reduceBrightness = [colors[@"reduceBrightness"] boolValue];
+            if (firstColor && secondColor) {
+                CGFloat alpha = reduceBrightness ? 0.65 : 1.;
+                topicColors[topicUrn] = @[[firstColor colorWithAlphaComponent:alpha], [secondColor colorWithAlphaComponent:alpha]];
+            }
+            else {
+                PlayLogWarning(@"configuration", @"Topic colors dictionnary is missing valid colors. The content of %@ is not valid.", topicUrn);
+            }
+        }
+        else {
+            PlayLogWarning(@"configuration", @"Topic colors dictionnary is not valid. The content of %@ is not valid.", topicUrn);
+        }
+    }
+    
+    return topicColors.copy;
 }
 
 - (NSArray<NSNumber *> *)tvGuideOtherBouquetsForKey:(NSString *)key vendor:(SRGVendor)vendor

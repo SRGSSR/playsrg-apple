@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgappearance-apple.git",
       "state" : {
-        "revision" : "37858eb83365f498d3861cc546ba86a51e061293",
-        "version" : "5.2.1"
+        "revision" : "17415ec82264d47d882c19a5db33e1be31fb1de5",
+        "version" : "5.2.2"
       }
     },
     {
@@ -312,8 +312,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "b29c4e796d0c1dbe4bb05b1f79834f4560ee6347",
-        "version" : "19.0.2"
+        "revision" : "a447e5fa50cd7e4eed1b26e65e45c8e386e9151b",
+        "version" : "19.0.3"
       }
     },
     {

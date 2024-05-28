@@ -25,13 +25,17 @@ final class PageViewController: UIViewController {
     
     private weak var collectionView: UICollectionView!
     private weak var emptyContentView: HostView<EmptyContentView>!
+    private weak var topicGradientView: HostView<TopicGradientView>!
+    private weak var topicGradientViewFixTopAnchor: NSLayoutConstraint!
+    private weak var topicGradientViewStickyTopAnchor: NSLayoutConstraint!
+    private weak var topicGradientViewHeightAnchor: NSLayoutConstraint!
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
     private weak var googleCastButton: GoogleCastFloatingButton?
     
     private var isNavigationBarHidden: Bool {
-        return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+        return model.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
     }
     
     private var refreshTriggered = false
@@ -76,8 +80,8 @@ final class PageViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var id: PageViewModel.Id {
-        return model.id
+    var displayedShow: SRGShow? {
+        return model.displayedShow
     }
     
     @objc var radioChannel: RadioChannel? {
@@ -111,13 +115,55 @@ final class PageViewController: UIViewController {
         if #available(iOS 17.0, *) {
             collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: CollectionView, _) in
                 collectionView.collectionViewLayout.invalidateLayout()
+                
+                self.updateLayoutConfiguration()
+                self.updateTopicGradientLayout()
             }
         }
 #endif
+        let backgroundView = UIView(frame: .zero)
+        collectionView.backgroundView = backgroundView
+        
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        let topicGradientView = HostView<TopicGradientView>(frame: .zero)
+        backgroundView.addSubview(topicGradientView)
+        self.topicGradientView = topicGradientView
+        
+        topicGradientView.translatesAutoresizingMaskIntoConstraints = false
+        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
+        topicGradientViewFixTopAnchor.priority = .defaultHigh
+        let topicGradientViewStickyTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
+        topicGradientViewStickyTopAnchor.priority = .defaultLow
+        let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: 0 /* set in updateTopicGradientLayout() */)
+        NSLayoutConstraint.activate([
+            topicGradientViewFixTopAnchor,
+            topicGradientViewStickyTopAnchor,
+            topicGradientView.leftAnchor.constraint(equalTo: backgroundView.leftAnchor),
+            topicGradientView.widthAnchor.constraint(equalTo: backgroundView.widthAnchor),
+            topicGradientViewHeightAnchor
+        ])
+        self.topicGradientViewFixTopAnchor = topicGradientViewFixTopAnchor
+        self.topicGradientViewStickyTopAnchor = topicGradientViewStickyTopAnchor
+        self.topicGradientViewHeightAnchor = topicGradientViewHeightAnchor
         
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
-        collectionView.backgroundView = emptyContentView
+        backgroundView.addSubview(emptyContentView)
         self.emptyContentView = emptyContentView
+        
+        emptyContentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyContentView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
+            emptyContentView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor),
+            emptyContentView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor),
+            emptyContentView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor)
+        ])
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
@@ -134,48 +180,40 @@ final class PageViewController: UIViewController {
         super.viewDidLoad()
         
 #if os(iOS)
-        navigationItem.largeTitleDisplayMode = model.id.isLargeTitleDisplayMode ? .always : .never
-        headerWithTitleVisible = model.id.isHeaderWithTitle
+        navigationItem.largeTitleDisplayMode = model.isLargeTitleDisplayMode ? .always : .never
+        headerWithTitleVisible = model.isHeaderWithTitle
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
-            cell.content = ItemCell(item: item, id: model.id)
+            cell.content = ItemCell(item: item, id: model.id, primaryColor: model.primaryColor, secondaryColor: model.secondaryColor)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
-        let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
+        let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = TitleView(text: model.id.displayedGlobalTitle)
-        }
-        
-        let pageHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageHeaderView>>(elementKind: Header.pageHeader.rawValue) { [weak self] view, _, _ in
-            guard let self else { return }
-            view.content = PageHeaderView(page: model.id.displayedPage)
+            view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).primaryColor(model.primaryColor)
         }
         
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
-            view.content = ShowHeaderView(show: model.id.displayedShow, horizontalPadding: Self.layoutHorizontalMargin)
+            view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).primaryColor(model.primaryColor)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, pageId: model.id)
+            view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.primaryColor)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            if kind == Header.global.rawValue {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            if kind == Header.titleHeader.rawValue {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
             }
-            if kind == Header.pageHeader.rawValue {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: pageHeaderViewRegistration, for: indexPath)
-            }
-            if kind == Header.showHeader.rawValue {
+            else if kind == Header.showHeader.rawValue {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
             }
             else {
@@ -187,6 +225,19 @@ final class PageViewController: UIViewController {
             .sink { [weak self] state in
                 self?.trackPageView(state: state)
                 self?.reloadData(for: state)
+            }
+            .store(in: &cancellables)
+        
+        model.$displayedShow
+            .dropFirst()
+            .sink { [weak self] _ in
+                if let self, isViewLoaded {
+                    // Dispatch on next main thread loop to have new model.displayedShow for ShowHeaderView supplementary view
+                    DispatchQueue.main.asyncAfter(deadline: .now() + DispatchTimeInterval.seconds(1)) {
+                        self.updateLayoutConfiguration()
+                        self.updateTopicGradientLayout()
+                    }
+                }
             }
             .store(in: &cancellables)
         
@@ -211,6 +262,7 @@ final class PageViewController: UIViewController {
         super.viewWillAppear(animated)
         
         updateLayoutConfiguration()
+        updateTopicGradientLayout()
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
@@ -228,6 +280,7 @@ final class PageViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         updateLayoutConfiguration()
+        updateTopicGradientLayout()
     }
     
     private func updateLayoutConfiguration() {
@@ -252,6 +305,13 @@ final class PageViewController: UIViewController {
             emptyContentView.content = EmptyContentView(state: .failed(error: error), insets: emptyViewEdgeInsets())
         case let .loaded(rows: rows, _):
             emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic), insets: emptyViewEdgeInsets()) : nil
+        }
+        
+        if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
+            self.topicGradientView.content = TopicGradientView(topic, style: style)
+        }
+        else {
+            self.topicGradientView.content = nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -350,8 +410,7 @@ final class PageViewController: UIViewController {
 
 private extension PageViewController {
     enum Header: String {
-        case global
-        case pageHeader
+        case titleHeader
         case showHeader
     }
     
@@ -399,7 +458,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
 #if os(iOS)
-        let top = (isNavigationBarHidden || model.id.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
+        let top = (isNavigationBarHidden || model.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
 #else
         let top = Self.layoutVerticalMargin
 #endif
@@ -489,7 +548,7 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
+        case Header.showHeader.rawValue, Header.titleHeader.rawValue:
             headerWithTitleVisible = true
             updateNavigationBar(animated: true)
         default:
@@ -499,9 +558,9 @@ extension PageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         switch elementKind {
-        case Header.showHeader.rawValue, Header.pageHeader.rawValue:
-                headerWithTitleVisible = false
-                updateNavigationBar(animated: true)
+        case Header.showHeader.rawValue, Header.titleHeader.rawValue:
+            headerWithTitleVisible = false
+            updateNavigationBar(animated: true)
         default:
             break
         }
@@ -546,6 +605,12 @@ extension PageViewController: UIScrollViewDelegate {
         if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
             model.loadMore()
         }
+        
+#if os(iOS)
+        if isShowHeaderVerticalLayout {
+            topicGradientViewStickyTopAnchor.constant = showPageStickyTopAnchorConstant
+        }
+#endif
     }
 }
 
@@ -599,10 +664,42 @@ extension PageViewController: ShowAccessCellActions {
 
 extension PageViewController: SectionHeaderViewAction {
     fileprivate func openSection(sender: Any?, event: OpenSectionEvent?) {
-        if let event, let navigationController {
-            let sectionViewController = SectionViewController(section: event.section.wrappedValue, filter: model.id)
-            navigationController.pushViewController(sectionViewController, animated: true)
+        if let event {
+            if let microPageId = event.section.wrappedValue.properties.openContentPageId {
+                openContentPage(id: microPageId)
+            } else {
+                openSectionPage(section: event.section, filter: model.id)
+            }
         }
+    }
+    
+    private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
+        guard let navigationController else { return }
+        
+        let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
+        navigationController.pushViewController(sectionViewController, animated: true)
+    }
+    
+    private func openContentPage(id: String) {
+        guard let navigationController else { return }
+        
+        SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+            .receive(on: DispatchQueue.main)
+            .sink { result in
+                if case .failure = result {
+                    let error = NSError(
+                        domain: PlayErrorDomain,
+                        code: PlayErrorCode.notFound.rawValue,
+                        userInfo: [
+                            NSLocalizedDescriptionKey: NSLocalizedString("The page cannot be opened.", comment: "Error message when a page cannot be opened from a page section title")
+                        ])
+                    Banner.showError(error)
+                }
+            } receiveValue: { contentPage in
+                let pageViewController = PageViewController.pageViewController(for: contentPage)
+                navigationController.pushViewController(pageViewController, animated: true)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -639,23 +736,25 @@ private extension PageViewController {
     private static let layoutHorizontalMargin: CGFloat = constant(iOS: 16, tvOS: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
+    private static let layoutTopicGradientViewHeight: CGFloat = 572
+    
+    private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
+        return required ? layoutVerticalMargin * 2 : 0
+    }
     
     private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
-        if let show = model.id.displayedShow {
+        if let title = model.displayedTitle {
+            let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.displayedTitleDescription,
+                                                                  topPadding: layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding), layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
+            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
+        }
+        else if let show = model.displayedShow {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
             configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
-        }
-        else if let globalTitle = model.id.displayedGlobalTitle {
-            let globalHeaderSize = TitleViewSize.recommended(forText: globalTitle)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.global.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
-        }
-        else if let page = model.id.displayedPage {
-            let globalHeaderSize = PageHeaderViewSize.recommended(for: page, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: globalHeaderSize, elementKind: Header.pageHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
         }
         
         return configuration
@@ -785,6 +884,56 @@ private extension PageViewController {
             return layoutSection
         }, configuration: Self.layoutConfiguration(model: model, layoutWidth: 0, horizontalSizeClass: .unspecified, offsetX: 0))
     }
+    
+    private func updateTopicGradientLayout() {
+        let topScreenOffset = constant(iOS: collectionView.safeAreaInsets.top, tvOS: 0)
+        
+        if case .show = model.id {
+            let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
+            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+            let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
+            
+            // Move the gradient view below the show image when displayed in compact horizontal size class
+            if isShowHeaderVerticalLayout {
+                topicGradientViewFixTopAnchor.priority = .defaultLow
+                topicGradientViewStickyTopAnchor.priority = .defaultHigh
+                
+                topicGradientViewStickyTopAnchor.constant = showPageStickyTopAnchorConstant
+                let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
+                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - showImageOffset + mediaCellHeight
+            }
+            else {
+                topicGradientViewStickyTopAnchor.priority = .defaultLow
+                topicGradientViewFixTopAnchor.priority = .defaultHigh
+                
+                topicGradientViewFixTopAnchor.constant = topScreenOffset
+                topicGradientViewHeightAnchor.constant = supplementaryItemsHeight + mediaCellHeight
+            }
+        }
+        else {
+            topicGradientViewStickyTopAnchor.priority = .defaultLow
+            topicGradientViewFixTopAnchor.priority = .defaultHigh
+            
+            topicGradientViewFixTopAnchor.constant = topScreenOffset
+            topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
+        }
+    }
+    
+    private var showPageStickyTopAnchorConstant: CGFloat {
+        let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
+        let topScreenOffset = constant(iOS: collectionView.safeAreaInsets.top, tvOS: 0)
+        let offset = topScreenOffset + collectionView.contentOffset.y
+        return (offset < showImageOffset) ? showImageOffset : offset
+    }
+    
+    private var isShowHeaderVerticalLayout: Bool {
+        guard case .show = model.id else { return false }
+        
+        return ShowHeaderView.isVerticalLayout(
+            horizontalSizeClass: traitCollection.horizontalSizeClass,
+            isLandscape: UIApplication.shared.mainWindow?.isLandscape ?? false
+        )
+    }
 }
 
 // MARK: Cells
@@ -793,23 +942,25 @@ private extension PageViewController {
     struct MediaCell: View {
         let media: SRGMedia?
         let section: PageViewModel.Section
+        let primaryColor: Color
+        let secondaryColor: Color
         
         var body: some View {
             switch section.viewModelProperties.layout {
             case .heroStage:
                 HeroMediaCell(media: media, label: section.properties.label)
             case .headline:
-                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .headline)
+                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .headline).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .element, .elementSwimlane:
-                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .element)
+                FeaturedContentCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, label: section.properties.label, layout: .element).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .mediaList:
-                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
+                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal).primaryColor(primaryColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical).primaryColor(primaryColor).secondaryColor(secondaryColor)
             }
         }
         
@@ -823,15 +974,17 @@ private extension PageViewController {
     struct ShowCell: View {
         let show: SRGShow?
         let section: PageViewModel.Section
+        let primaryColor: Color
+        let secondaryColor: Color
         
         var body: some View {
             switch section.viewModelProperties.layout {
             case .heroStage, .headline:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .element:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .element)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .element).primaryColor(primaryColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant)
+                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant).primaryColor(primaryColor)
             }
         }
     }
@@ -839,19 +992,21 @@ private extension PageViewController {
     struct ItemCell: View {
         let item: PageViewModel.Item
         let id: PageViewModel.Id
+        let primaryColor: Color
+        let secondaryColor: Color
         
         var body: some View {
             switch item.wrappedValue {
             case let .item(wrappedItem):
                 switch wrappedItem {
                 case .mediaPlaceholder:
-                    MediaCell(media: nil, section: item.section)
+                    MediaCell(media: nil, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case let .media(media):
-                    MediaCell(media: media, section: item.section)
+                    MediaCell(media: media, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case .showPlaceholder:
-                    ShowCell(show: nil, section: item.section)
+                    ShowCell(show: nil, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case let .show(show):
-                    ShowCell(show: show, section: item.section)
+                    ShowCell(show: show, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case .topicPlaceholder:
                     TopicCell(topic: nil)
                 case let .topic(topic):
@@ -865,9 +1020,9 @@ private extension PageViewController {
                     switch id {
                     case .video:
                         let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
-                        ShowAccessCell(style: style)
+                        ShowAccessCell(style: style).primaryColor(primaryColor)
                     default:
-                        ShowAccessCell(style: .calendar)
+                        ShowAccessCell(style: .calendar).primaryColor(primaryColor)
                     }
 #endif
                 case .highlightPlaceholder:
@@ -904,9 +1059,11 @@ private class OpenSectionEvent: UIEvent {
 }
 
 private extension PageViewController {
-    private struct SectionHeaderView: View {
+    private struct SectionHeaderView: View, PrimaryColorSettable {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
+        
+        internal var primaryColor: Color = .srgGrayD2
         
         @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
@@ -920,7 +1077,7 @@ private extension PageViewController {
         }
         
         private var hasDetailDisclosure: Bool {
-            return section.viewModelProperties.canOpenDetailPage || isSectionWideSupportEnabled
+            return section.viewModelProperties.canOpenPage || isSectionWideSupportEnabled
         }
         
         var accessibilityLabel: String? {
@@ -934,12 +1091,12 @@ private extension PageViewController {
         var body: some View {
             if section.properties.displaysRowHeader, let title = Self.title(for: section) {
 #if os(tvOS)
-                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
+                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false, primaryColor: primaryColor)
 #else
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
+                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure, primaryColor: primaryColor)
                 }
                 .disabled(!hasDetailDisclosure)
                 .responderChain(from: firstResponder)

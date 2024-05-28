@@ -25,6 +25,7 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
 @property (nonatomic, copy) NSString *uid;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *resourceUid;
+@property (nonatomic, copy) NSURL *shareURL;
 @property (nonatomic) UIColor *color;
 @property (nonatomic) UIColor *secondColor;
 @property (nonatomic) UIColor *titleColor;
@@ -54,6 +55,8 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
         if (! [self.resourceUid isKindOfClass:NSString.class]) {
             return nil;
         }
+        
+        self.shareURL = [NSURL URLWithString:dictionary[@"shareURL"]];
         
         id colorValue = dictionary[@"color"];
         if ([colorValue isKindOfClass:NSString.class]) {

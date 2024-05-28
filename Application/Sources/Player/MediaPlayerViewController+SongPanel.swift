@@ -161,7 +161,7 @@ private extension MediaPlayerViewController {
         configuration.supportedModes = [.compact, .expanded, .fullHeight]
         configuration.mode = mode
         
-        configuration.appearance.resizeHandle = .visible(foregroundColor: .srgGrayC7, backgroundColor: .srgGray23)
+        configuration.appearance.resizeHandle = .visible(foregroundColor: .srgGrayD2, backgroundColor: .srgGray23)
         configuration.appearance.separatorColor = .clear
         configuration.appearance.borderColor = .clear
         

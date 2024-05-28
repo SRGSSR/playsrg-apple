@@ -23,10 +23,6 @@ struct ShowButton: View {
         self.action = action
     }
     
-    private var imageUrl: URL? {
-        return url(for: show.image, size: .small)
-    }
-    
     private var favoriteIcon: ImageResource {
         return isFavorite ? .favoriteFull : .favorite
     }
@@ -38,7 +34,7 @@ struct ShowButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                ImageView(source: imageUrl)
+                ShowVisualView(show: show, size: .small)
                     .aspectRatio(16 / 9, contentMode: .fit)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(show.title)
@@ -46,7 +42,7 @@ struct ShowButton: View {
                         .lineLimit(2)
                     Text(NSLocalizedString("More episodes", comment: "Button to access more episodes"))
                         .srgFont(.subtitle1)
-                        .foregroundColor(.srgGrayC7)
+                        .foregroundColor(.srgGrayD2)
                     Spacer()
                 }
                 .padding(.vertical, 2)

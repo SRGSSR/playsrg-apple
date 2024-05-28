@@ -1,18 +1,19 @@
+## Description
 
-### Motivation and Context
+> Please provide a brief summary of the changes made. Please explain why
+> this change was necessary. Was there a problem or an issue this change
+> will address? What will be improved with this change?
 
-> Why is this change required? What problem does it solve?
+## Changes Made
 
-### Description
+> Please detail the modifications made. This could include areas such as
+> code, documentation, structure, or formatting.
 
-> Please describe the changes and how to test.
+## Checklist
 
-### Checklist
-
-- The branch should be rebased onto the `develop` branch for whole tests with nighties, but it's not required.*
-- The code followed the code style as `make quality` passes with a green tick on the last commit.
-- [ ] Remote configuration properties have been properly documented (if relevant).
-- [ ] The documentation has been updated (if relevant).
-- [ ] Issues are linked to the PR, if any.
-
-\* The project uses Github merge queue feature, which rebases onto the `develop` branch before squashing and merging the PR. 
+- [ ] I have followed the project's style guidelines.
+- [ ] I have performed a self-review of my own changes.
+- [ ] I have made corresponding changes to the documentation.
+- [ ] My changes do not generate new warnings.
+- [ ] I have tested my changes and I am confident that it works as expected and doesn't introduce any known regressions.
+- [ ] I have reviewed the contribution guidelines.

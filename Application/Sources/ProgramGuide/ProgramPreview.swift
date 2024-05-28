@@ -64,7 +64,7 @@ struct ProgramPreview: View {
                 Text(model.title)
                     .srgFont(.H2)
                     .lineLimit(2)
-                    .foregroundColor(.srgGrayC7)
+                    .foregroundColor(.srgGrayD2)
                 Text(model.timeInformation)
                     .srgFont(.H4)
                     .lineLimit(1)

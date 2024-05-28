@@ -163,6 +163,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSArray<RadioChannel *> *satelliteRadioChannels;
 
+@property (nonatomic) NSDictionary<NSString*, NSArray<UIColor *> *> *topicColors;
+
 @property (nonatomic) NSArray<NSNumber *> *tvGuideOtherBouquetsObjc;
 
 @property (nonatomic) NSUInteger pageSize;
@@ -458,6 +460,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];
     self.satelliteRadioChannels = [firebaseConfiguration radioChannelsForKey:@"satelliteRadioChannels" defaultHomeSections:nil];
     
+    self.topicColors = [firebaseConfiguration topicColorsForKey:@"topicColors"];
+    
     self.tvGuideOtherBouquetsObjc = [firebaseConfiguration tvGuideOtherBouquetsForKey:@"tvGuideOtherBouquets" vendor:vendor];
     
     NSNumber *pageSize = [firebaseConfiguration numberForKey:@"pageSize"];
@@ -568,10 +572,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return URLComponents.URL;
     }
     else if (media.channel.vendor == SRGVendorSSATR) {
-        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:[self playURLForVendor:media.vendor] resolvingAgainstBaseURL:NO];
-        URLComponents.path = [URLComponents.path stringByAppendingPathComponent:@"embed"];
-        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:media.URN] ];
-        return URLComponents.URL;
+        return [[self channelForUid:media.uid] shareURL];
     }
     else {
         static NSDictionary<NSNumber *, NSString *> *s_mediaTypeNames;

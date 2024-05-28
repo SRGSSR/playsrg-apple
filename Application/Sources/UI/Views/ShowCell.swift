@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: View
 
-struct ShowCell: View {
+struct ShowCell: View, PrimaryColorSettable {
     enum Style {
         case standard
         case favorite
@@ -20,6 +20,8 @@ struct ShowCell: View {
     
     let style: Style
     let imageVariant: SRGImageVariant
+    
+    internal var primaryColor: Color = .srgGrayD2
     
     @StateObject private var model = ShowCellViewModel()
     
@@ -36,22 +38,24 @@ struct ShowCell: View {
         Group {
 #if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageVariant), action: action) {
-                ImageView(source: model.imageUrl(with: imageVariant))
+                ShowVisualView(show: model.show, size: .small, imageVariant: imageVariant)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
+                        .primaryColor(primaryColor)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .padding(.top, ShowCellSize.verticalPadding)
                 }
             }
 #else
             VStack(spacing: 0) {
-                ImageView(source: model.imageUrl(with: imageVariant))
+                ShowVisualView(show: model.show, size: .small, imageVariant: imageVariant)
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
+                        .primaryColor(primaryColor)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)
                         .padding(.vertical, ShowCellSize.verticalPadding)
                 }
@@ -82,9 +86,11 @@ struct ShowCell: View {
 #endif
     
     /// Behavior: h-exp, v-hug
-    private struct DescriptionView: View {
+    private struct DescriptionView: View, PrimaryColorSettable {
         @ObservedObject var model: ShowCellViewModel
         let style: Style
+        
+        internal var primaryColor: Color = .srgGrayD2
         
         var body: some View {
             HStack {
@@ -101,7 +107,7 @@ struct ShowCell: View {
                 }
 #endif
             }
-            .foregroundColor(.srgGrayC7)
+            .foregroundColor(primaryColor)
         }
     }
 }

@@ -1,4 +1,4 @@
-/* Speed factor with current value if different from desired one */
+﻿/* Speed factor with current value if different from desired one */
 "%1$@× (Currently: %2$@×)" = "%1$@× (Currently: %2$@×)";
 
 /* Seek backward shortcut label */
@@ -738,7 +738,8 @@
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
 "The media cannot be opened." = "The media cannot be opened.";
 
-/* Error message when a page cannot be opened via Handoff, deep linking or a push notification
+/* Error message when a page cannot be opened from a page section title
+   Error message when a page cannot be opened via Handoff, deep linking or a push notification
    Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
 "The page cannot be opened." = "The page cannot be opened.";
 

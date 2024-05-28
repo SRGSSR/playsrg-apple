@@ -52,31 +52,46 @@ Refer to the _Testing_ section for more information about how custom URLs can be
 
 ## Universal Links
 
-The Play iOS application supports Apple universal links, provided that the associated business unit website declares a corresponding [association file](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html). If this is the case you can open most of URLs of a Play business unit portal in the associated Play application.
+#### iOS application
 
-For test purposes, and since this feature requires support from the portal which is not always available (e.g. for internal builds or business units which have not deployed an association file), there is a way to have universal link URLs for `Debug` configuration builds using the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool to get an associated `https://play-mmf.herokuapp.com/[BU]/[…]` URL.
+The Play iOS application supports Apple universal links, provided that the associated business unit website declares a corresponding [association file](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html). If this is the case, you can open most of URLs of a Play business unit portal in the associated Play iOS application.
 
-For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply decode this URL with the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool and get the Play MMF associated URL: [https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l](https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l).
+For test purposes, `Debug`, `Nightly` and `Beta` builds are associated to [play-web-staging web portal](https://play-web-staging.herokuapp.com/srf/play/tv). The first path component is the business unit. The [apple-app-site-association](https://play-web-staging.herokuapp.com/.well-known/apple-app-site-association) sorted arrays determine which build to open if more that one build for a BU are installed.
 
-The Play tvOS application does not support Apple universal links.
+For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, switch the BU domain to `play-web-staging.herokuapp.com/[BU]`: [https://play-web-staging.herokuapp.com/rts/play/tv/emissions?index=l](https://play-web-staging.herokuapp.com/rts/play/tv/emissions?index=l).
 
 Refer to the _Testing_ section for more information about how universal URLs can be supplied to an application during tests.
+
+#### tvOS application
+
+The Play tvOS application does not support Apple universal links.
 
 ## Testing
 
 To test custom or universal links, you can either:
 
-- Use Safari (mobile or simulator) and copy / paste the URL in the address bar.
-- Start the app in the simulator and send the URL to it from the command line with `xcrun simctl openurl booted <url>`.
+- Use Safari (mobile or simulator):
+  - Copy / paste the `url` in the address bar.
+  - Load the page.
+  - For universal links, scroll to the top and see a banner to open the app. 
+- Use a text application, like Notes or Messages:
+  - Copy / paste the `url` in the application.
+  - Tap on the link to open it.
+- Use the Simulator and the command line:
+  - Open a simulator.
+  - Run `xcrun simctl openurl booted <url>`.
 
-## URL generation
+The `Debug` builds can be associated to Play MMF portal if needed, by changing `BU__DOMAIN[config=Debug]` configuration value. [See MMF documentation](https://github.com/sRGSSR/playsrg-mmf?tab=readme-ov-file#associated-domains).
 
-The [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool is available for QR code generation of custom URLs with supported custom schemes. It can also generate universal links for the `Debug` configuration builds (associated with `https://play-mmf.herokuapp.com/[BU]/[…]` URLs).
+## Custom URL generation
+
+The [Play MMF Deeplink tool](https://play-mmf.herokuapp.com/deeplink/index.html) is available for QR code generation of custom URLs with application supported custom schemes.
 
 ## Changelog
 
 #### iOS application
 
+- 3.8.4 version: Non-production builds are connected to Play web staging domain.
 - 3.8.3 version: New micropage action. Share supported hostnames to the JS script.
 - 3.6.8 version: New livestreams page action.
 - 3.2.0 version: New section page action and module page action removal (modules not available on the web portal and in applications anymore).

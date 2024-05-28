@@ -27,10 +27,6 @@ extension UIColor {
         }
     }
     
-    @objc static var play_grayThumbnailImageViewBackground: UIColor {
-        return play_hexadecimal("#202020")
-    }
-    
     @objc static var play_blackDurationLabelBackground: UIColor {
         return UIColor(white: 0.0, alpha: 0.5)
     }
