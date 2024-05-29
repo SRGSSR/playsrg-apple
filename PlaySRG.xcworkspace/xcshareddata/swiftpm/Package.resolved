@@ -312,8 +312,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "branch" : "feature/square-images",
-        "revision" : "1159d531fd2ae3009c31e68753b363222e0fc936"
+        "branch" : "develop",
+        "revision" : "1e346457e07eb9a1745c7c823169f56984b2c9a0"
       }
     },
     {
