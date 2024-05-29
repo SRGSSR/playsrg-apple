@@ -16,6 +16,7 @@ class PageContainerViewController: UIViewController {
     private(set) var initialPage: Int
     private weak var tabBarTopConstraint: NSLayoutConstraint!
     private let tabBarItems: [TMBarItem]
+    private let blurView: UIVisualEffectView
     
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
@@ -30,14 +31,17 @@ class PageContainerViewController: UIViewController {
         
         self.tabBarItems = viewControllers.compactMap { $0.tabBarItem.image }.map { TMBarItem(image: $0) }
         
+        self.blurView = UIVisualEffectView.play_blurView
+        blurView.alpha = 0.0
+
         super.init(nibName: nil, bundle: nil)
-        let bar = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
-        bar.backgroundView.style = .flat(color: .srgGray16)
-        bar.layout.alignment = .centerDistributed
-        bar.indicator.tintColor = .white
+        let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
+        barView.backgroundView.style = .custom(view: blurView)
+        barView.layout.alignment = .centerDistributed
+        barView.indicator.tintColor = .white
         tabManVC.dataSource = self
-        tabManVC.addBar(bar, dataSource: self, at: .top)
-        bar.buttons.customize { button in
+        tabManVC.addBar(barView, dataSource: self, at: .top)
+        barView.buttons.customize { button in
             button.contentMode = .scaleAspectFit
             button.imageContentMode = .scaleAspectFit
         }
@@ -61,8 +65,9 @@ class PageContainerViewController: UIViewController {
         view.insertSubview(pageView, at: 0)
         
         pageView.translatesAutoresizingMaskIntoConstraints = false
+        tabBarTopConstraint = pageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         NSLayoutConstraint.activate([
-            pageView.topAnchor.constraint(equalTo: view.topAnchor),
+            tabBarTopConstraint,
             pageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             pageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             pageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -108,7 +113,7 @@ class PageContainerViewController: UIViewController {
 
 extension PageContainerViewController: ContainerContentInsets {
     var play_additionalContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 60.0, left: 0.0, bottom: 0.0, right: 0.0)
+        return UIEdgeInsets(top: tabManVC.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
     }
 }
 
@@ -128,10 +133,9 @@ extension PageContainerViewController: ScrollableContentContainer {
     }
     
     func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
-        #warning("Todo, when adding back the blur view, make it more intense in the following lines")
-//        let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
-//        tabBarTopConstraint.constant = max(-adjustedOffset, 0.0)
-//        blurView.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
+        let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
+        tabBarTopConstraint.constant = max(-adjustedOffset, 0.0)
+        blurView.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
     }
 }
 
