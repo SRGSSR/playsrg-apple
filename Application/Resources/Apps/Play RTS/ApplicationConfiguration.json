@@ -28,7 +28,7 @@
   "continuousPlaybackPlayerViewTransitionDuration": 10,
   "continuousPlaybackForegroundTransitionDuration": 0,
   "continuousPlaybackBackgroundTransitionDuration": 0,
-  "endToleranceRatio": 0.02,
+  "endToleranceRatio": 0.07,
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
   "showLeadPreferred": true,
   "tvGuideOtherBouquets": "srf,rsi",

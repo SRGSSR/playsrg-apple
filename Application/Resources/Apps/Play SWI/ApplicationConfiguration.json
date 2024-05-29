@@ -20,7 +20,7 @@
   "continuousPlaybackPlayerViewTransitionDuration": 10,
   "continuousPlaybackForegroundTransitionDuration": 0,
   "continuousPlaybackBackgroundTransitionDuration": 0,
-  "endToleranceRatio": 0.02,
+  "endToleranceRatio": 0.07,
   "searchSettingsHidden": true,
   "showsSearchHidden": true,
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
