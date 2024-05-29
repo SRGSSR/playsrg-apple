@@ -4,15 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
+import Pageboy
 import UIKit
 import SRGAppearance
 import Tabman
-import Pageboy
 
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
     
-    private let tabManVC = TabmanViewController()
+    private var tabContainerViewController: TabContainerViewController!
     private(set) var initialPage: Int
     private weak var tabBarTopConstraint: NSLayoutConstraint!
     private let tabBarItems: [TMBarItem]
@@ -20,7 +20,6 @@ class PageContainerViewController: UIViewController {
     
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
-        
         self.viewControllers = viewControllers
         if initialPage >= 0 && initialPage < viewControllers.count {
             self.initialPage = initialPage
@@ -30,23 +29,14 @@ class PageContainerViewController: UIViewController {
         }
         
         self.tabBarItems = viewControllers.compactMap { $0.tabBarItem.image }.map { TMBarItem(image: $0) }
-        
         self.blurView = UIVisualEffectView.play_blurView
         blurView.alpha = 0.0
 
         super.init(nibName: nil, bundle: nil)
-        let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
-        barView.backgroundView.style = .custom(view: blurView)
-        barView.layout.alignment = .centerDistributed
-        barView.indicator.tintColor = .white
-        tabManVC.dataSource = self
-        tabManVC.addBar(barView, dataSource: self, at: .top)
-        barView.buttons.customize { button in
-            button.contentMode = .scaleAspectFit
-            button.imageContentMode = .scaleAspectFit
-        }
-
-        self.addChild(tabManVC)
+        
+        self.tabContainerViewController = TabContainerViewController(pageContainerViewController: self)
+        configureBar()
+        self.addChild(tabContainerViewController)
     }
     
     convenience init(viewControllers: [UIViewController]) {
@@ -57,29 +47,42 @@ class PageContainerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func configureBar() {
+        let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
+        barView.backgroundView.style = .custom(view: blurView)
+        barView.layout.alignment = .centerDistributed
+        barView.indicator.tintColor = .white
+        tabContainerViewController.dataSource = self
+        tabContainerViewController.addBar(barView, dataSource: self, at: .top)
+        barView.buttons.customize { button in
+            button.contentMode = .scaleAspectFit
+            button.imageContentMode = .scaleAspectFit
+        }
+    }
+    
     override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let pageView = tabManVC.view!
-        view.insertSubview(pageView, at: 0)
+        let tabView = tabContainerViewController.view!
+        view.insertSubview(tabView, at: 0)
         
-        pageView.translatesAutoresizingMaskIntoConstraints = false
-        tabBarTopConstraint = pageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        tabView.translatesAutoresizingMaskIntoConstraints = false
+        tabBarTopConstraint = tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         NSLayoutConstraint.activate([
             tabBarTopConstraint,
-            pageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            pageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tabView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tabView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        tabManVC.didMove(toParent: self)
+        tabContainerViewController.didMove(toParent: self)
         self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        didDisplayViewController(tabManVC.currentViewController, animated: false)
+        didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -102,8 +105,8 @@ class PageContainerViewController: UIViewController {
         guard index < viewControllers.count else { return false }
         
         if self.isViewLoaded {
-            tabManVC.scrollToPage(.at(index: index), animated: animated)
-            didDisplayViewController(tabManVC.currentViewController, animated: animated)
+            tabContainerViewController.scrollToPage(.at(index: index), animated: animated)
+            didDisplayViewController(tabContainerViewController.currentViewController, animated: animated)
             return true
         }
         else {
@@ -119,7 +122,7 @@ class PageContainerViewController: UIViewController {
 
 extension PageContainerViewController: ContainerContentInsets {
     var play_additionalContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: tabManVC.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
+        return UIEdgeInsets(top: tabContainerViewController.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
     }
 }
 
@@ -135,7 +138,7 @@ extension PageContainerViewController: Oriented {
 
 extension PageContainerViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
-        return tabManVC.currentViewController
+        return tabContainerViewController.currentViewController
     }
     
     func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
@@ -147,13 +150,13 @@ extension PageContainerViewController: ScrollableContentContainer {
 
 extension PageContainerViewController: SRGAnalyticsContainerViewTracking {
     var srg_activeChildViewControllers: [UIViewController] {
-        return [tabManVC]
+        return [tabContainerViewController]
     }
 }
 
 extension PageContainerViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
-        if let currentViewController = tabManVC.currentViewController,
+        if let currentViewController = tabContainerViewController.currentViewController,
            let actionableCurrentViewController = currentViewController as? TabBarActionable {
             actionableCurrentViewController.performActiveTabAction(animated: animated)
         }
