@@ -154,22 +154,6 @@ extension PageContainerViewController: TabBarActionable {
     }
 }
 
-extension PageContainerViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let index = viewControllers.firstIndex(of: viewController), index > 0 {
-            return viewControllers[index - 1]
-        }
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let index = viewControllers.firstIndex(of: viewController), index < viewControllers.count - 1 {
-            return viewControllers[index + 1]
-        }
-        return nil
-    }
-}
-
 extension UIViewController {
     var play_pageContainerViewController: PageContainerViewController? {
         var parentViewController = self.parent
