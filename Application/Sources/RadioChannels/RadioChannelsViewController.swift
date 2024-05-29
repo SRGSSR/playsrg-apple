@@ -45,11 +45,10 @@ import UIKit
         }
     }
     
-    override func didDisplayViewController(_ viewController: UIViewController, animated: Bool) {
+    override func didDisplayViewController(_ viewController: UIViewController?, animated: Bool) {
         super.didDisplayViewController(viewController, animated: animated)
         
-        guard let pageViewController = viewController as? PageViewController,
-              let radioChannel = pageViewController.radioChannel else { return }
+        guard let radioChannel = (viewController as? PageViewController)?.radioChannel else { return }
         
         radioChannelName = radioChannel.name
         

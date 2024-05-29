@@ -77,6 +77,11 @@ class PageContainerViewController: UIViewController {
         self.view = view
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        didDisplayViewController(tabManVC.currentViewController, animated: false)
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -98,6 +103,7 @@ class PageContainerViewController: UIViewController {
         
         if self.isViewLoaded {
             tabManVC.scrollToPage(.at(index: index), animated: animated)
+            didDisplayViewController(tabManVC.currentViewController, animated: animated)
             return true
         }
         else {
@@ -106,7 +112,7 @@ class PageContainerViewController: UIViewController {
         }
     }
     
-    func didDisplayViewController(_ viewController: UIViewController, animated: Bool) {}
+    func didDisplayViewController(_ viewController: UIViewController?, animated: Bool) {}
 }
 
 // MARK: - Protocols
