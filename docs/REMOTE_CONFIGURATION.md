@@ -138,6 +138,11 @@ Feeds
 * `searchSettingSubtitledHidden` (optional, boolean): Set to `true` to hide the subtitled option in the search settings.
 * `showsSearchHidden ` (optional, boolean): Set to `true` to hide show search results.
 
+## Resume playback
+
+* `endTolerance` (optional, number): Duration tolerance in seconds at the end of a media to consider it as finished and does not resume from last position, but from the beginning. If empty, the default value is 0 seconds.
+* `endToleranceRatio` (optional, number): Pourcentage tolerance as float at the end of a media to consider it as finished and does not resume from last position, but from the beginning. If empty, the default value is 0.0.
+
 ## Continuous playback
 
 * `continuousPlaybackPlayerViewTransitionDuration` (optional, number): Duration in seconds for continuous playback when the player view is displayed. If empty, continuous playback is disabled; if equal to 0, upcoming media playback starts immediately.
