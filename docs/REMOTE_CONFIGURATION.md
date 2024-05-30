@@ -140,7 +140,7 @@ Feeds
 
 ## Resume playback
 
-* `endTolerance` (optional, number): Duration tolerance in seconds at the end of a media to consider it as finished and does not resume from last position, but from the beginning. If empty, the default value is 0 seconds.
+* `endTolerance` (optional, number): Duration tolerance in seconds at the end of a media to consider it as finished and then subsequently not resume it from last position, but from the beginning. If empty, the default value is 0 seconds.
 * `endToleranceRatio` (optional, number): Pourcentage tolerance as float at the end of a media to consider it as finished and does not resume from last position, but from the beginning. If empty, the default value is 0.0.
 
 ## Continuous playback
