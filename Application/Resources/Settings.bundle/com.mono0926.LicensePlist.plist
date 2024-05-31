@@ -204,30 +204,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/MaterialComponents</string>
-			<key>Title</key>
-			<string>MaterialComponents (118.2.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/MDFInternationalization</string>
-			<key>Title</key>
-			<string>MDFInternationalization (3.0.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/MDFTextAccessibility</string>
-			<key>Title</key>
-			<string>MDFTextAccessibility (2.0.1)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/nanopb</string>
 			<key>Title</key>
 			<string>nanopb (2.30910.0)</string>
