@@ -95,6 +95,10 @@
 /* Audio description availability setting label */
 "Audio description availability" = "Disponibilitad dad audio description";
 
+/* Audio home page selection view title
+   Label of the button for audio homepage option selection */
+"Audio home page" = "Audio home page";
+
 /* Audios tab title
    Header for audio search results
    Search setting option
@@ -159,7 +163,9 @@
 /* Search setting */
 "Date" = "Data";
 
-/* Poster images setting state */
+/* Audio homepage option setting state
+   Poster images setting state
+   Square images setting state */
 "Default (current configuration)" = "Standard (configuraziun actuala)";
 
 /* User location setting state */
@@ -270,7 +276,8 @@
 /* Explanation displayed in the alert asking the user to enable notifications */
 "For the application to inform you when a new episode is available, notifications must be enabled." = "Vegn utilisa da la applicaziun per infurmar vus cura che novas episodas stattan a disposiziun, la funcziunalitad da notificaziun sto esser activada.";
 
-/* Poster images setting state */
+/* Poster images setting state
+   Square images setting state */
 "Force" = "Sfurzar";
 
 /* Total free space size displayed as a list footer */
@@ -299,7 +306,8 @@
 /* Home tab title */
 "Home" = "Home";
 
-/* Poster images setting state */
+/* Poster images setting state
+   Square images setting state */
 "Ignore" = "Ignorar";
 
 /* User location setting state */
@@ -380,6 +388,12 @@
 
 /* Message title displayed when the user is forced to update the application. */
 "Mandatory update" = "Dovra update";
+
+/* Many curated audio homepages option setting state */
+"Many curated pages (PAC landing pages)" = "Many curated pages (PAC landing pages)";
+
+/* Many predefined audio homepage option setting state */
+"Many predefined pages" = "Many predefined pages";
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media betg disponibel";
@@ -472,6 +486,9 @@
    Title of the button to validate date settings
    Title of the search settings button to apply settings */
 "OK" = "OK";
+
+/* One curated audio homepage option setting state */
+"One curated page (PAC Audio)" = "One curated page (PAC Audio)";
 
 /* Label of the button opening system settings */
 "Open system settings" = "Avrir las preferenzas dal sistem";
@@ -660,6 +677,10 @@
 /* Title label used to present scheduled livestreams medias from live center (Sport manager)
    Title label used to present sport scheduled livestream medias */
 "Sport livestreams" = "RTR livestreams";
+
+/* Label of the button for Podcast square image format selection
+   Podcast square image format selection view title */
+"Square images" = "Square images";
 
 /* Server setting name */
 "Stage" = "Stage";
