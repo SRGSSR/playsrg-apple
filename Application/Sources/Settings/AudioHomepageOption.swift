@@ -16,10 +16,6 @@ enum AudioHomepageOption: String, CaseIterable, Identifiable {
         return self
     }
     
-    var useChannelContenId: Bool {
-        return self == .curatedMany
-    }
-    
     var description: String {
         switch self {
         case .curatedOne:
