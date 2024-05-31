@@ -19418,8 +19418,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 19.0.4;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
