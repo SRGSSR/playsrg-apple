@@ -14,7 +14,7 @@ class PageContainerViewController: UIViewController {
     
     private var tabContainerViewController: TabContainerViewController!
     private(set) var initialPage: Int
-    private weak var tabBarTopConstraint: NSLayoutConstraint!
+    private weak var tabBarTopConstraint: NSLayoutConstraint?
     private let tabBarItems: [TMBarItem]
     private let blurView: UIVisualEffectView
     
@@ -70,7 +70,7 @@ class PageContainerViewController: UIViewController {
         tabView.translatesAutoresizingMaskIntoConstraints = false
         tabBarTopConstraint = tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         NSLayoutConstraint.activate([
-            tabBarTopConstraint,
+            tabBarTopConstraint!,
             tabView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tabView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -138,12 +138,12 @@ extension PageContainerViewController: Oriented {
 
 extension PageContainerViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
-        return tabContainerViewController.currentViewController
+        tabContainerViewController.currentViewController
     }
     
     func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
         let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
-        tabBarTopConstraint.constant = max(-adjustedOffset, 0.0)
+        tabBarTopConstraint?.constant = max(-adjustedOffset, 0.0)
         blurView.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
     }
 }
