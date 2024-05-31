@@ -243,12 +243,7 @@ extension PageViewModel {
             case .video:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case let .audio(channel: channel):
-                if let channel {
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
-                }
-                else {
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
-                }
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel?.name].compactMap { $0 }
             case .live:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .topic:
