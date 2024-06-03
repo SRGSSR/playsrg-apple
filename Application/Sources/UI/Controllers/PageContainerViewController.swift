@@ -36,7 +36,7 @@ class PageContainerViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         self.tabContainerViewController = TabContainerViewController(pageContainerViewController: self)
-        configureBar()
+        configureBarView()
         self.addChild(tabContainerViewController)
     }
     
@@ -48,17 +48,16 @@ class PageContainerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureBar() {
+    private func configureBarView() {
         let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
         barView.backgroundView.style = .custom(view: blurView)
         barView.layout.alignment = .centerDistributed
         barView.indicator.tintColor = .white
-        tabContainerViewController.dataSource = self
-        tabContainerViewController.addBar(barView, dataSource: self, at: .top)
         barView.buttons.customize { button in
             button.contentMode = .scaleAspectFit
             button.imageContentMode = .scaleAspectFit
         }
+        tabContainerViewController.addBar(barView, dataSource: self, at: .top)
     }
     
     override func loadView() {
@@ -84,6 +83,7 @@ class PageContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tabContainerViewController.dataSource = self
         didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
     }
     
