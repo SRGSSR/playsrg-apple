@@ -20,6 +20,7 @@ class PageContainerViewController: UIViewController {
     
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
+        
         self.viewControllers = viewControllers
         if initialPage >= 0 && initialPage < viewControllers.count {
             self.initialPage = initialPage
