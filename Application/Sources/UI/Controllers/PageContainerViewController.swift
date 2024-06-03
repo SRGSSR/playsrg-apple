@@ -69,9 +69,10 @@ class PageContainerViewController: UIViewController {
         view.insertSubview(tabView, at: 0)
         
         tabView.translatesAutoresizingMaskIntoConstraints = false
-        tabBarTopConstraint = tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        let topConstraint = tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        tabBarTopConstraint = topConstraint
         NSLayoutConstraint.activate([
-            tabBarTopConstraint!,
+            topConstraint,
             tabView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tabView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
