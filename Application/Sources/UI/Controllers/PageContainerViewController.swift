@@ -18,7 +18,7 @@ class PageContainerViewController: UIViewController {
     private let tabBarItems: [TMBarItem]
     private let blurView: UIVisualEffectView
     
-    init(viewControllers: [UIViewController], initialPage: Int) {
+    init(viewControllers: [UIViewController], radioChannels: [RadioChannel], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
         
         self.viewControllers = viewControllers
@@ -29,7 +29,11 @@ class PageContainerViewController: UIViewController {
             self.initialPage = 0
         }
         
-        self.tabBarItems = viewControllers.compactMap { $0.tabBarItem.image }.map { TMBarItem(image: $0) }
+        self.tabBarItems = radioChannels.map {
+            let item = TMBarItem(image: RadioChannelLogoImage($0))
+            item.accessibilityLabel = $0.name
+            return item
+        }
         self.blurView = UIVisualEffectView.play_blurView
         blurView.alpha = 0.0
 
@@ -40,8 +44,8 @@ class PageContainerViewController: UIViewController {
         self.addChild(tabContainerViewController)
     }
     
-    convenience init(viewControllers: [UIViewController]) {
-        self.init(viewControllers: viewControllers, initialPage: 0)
+    convenience init(viewControllers: [UIViewController], radioChannels: [RadioChannel]) {
+        self.init(viewControllers: viewControllers, radioChannels: radioChannels, initialPage: 0)
     }
     
     required init?(coder: NSCoder) {

@@ -13,9 +13,8 @@ import UIKit
         assert(!radioChannels.isEmpty, "At least 1 radio channel expected")
         
         var viewControllers = [UIViewController]()
-        for (index, radioChannel) in radioChannels.enumerated() {
+        for radioChannel in radioChannels {
             let pageViewController = PageViewController.audiosViewController(forRadioChannel: radioChannel)
-            pageViewController.tabBarItem = UITabBarItem(title: radioChannel.name, image: RadioChannelLogoImage(radioChannel), tag: index)
             viewControllers.append(pageViewController)
         }
         
@@ -27,7 +26,7 @@ import UIKit
             initialPage = NSNotFound
         }
         
-        super.init(viewControllers: viewControllers, initialPage: initialPage)
+        super.init(viewControllers: viewControllers, radioChannels: radioChannels, initialPage: initialPage)
         updateTitle()
     }
     
