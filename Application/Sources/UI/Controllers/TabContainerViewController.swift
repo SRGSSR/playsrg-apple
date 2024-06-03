@@ -4,8 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
-import UIKit
 import Pageboy
+import UIKit
 import Tabman
 
 final class TabContainerViewController: TabmanViewController {
