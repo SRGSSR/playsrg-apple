@@ -9,12 +9,7 @@ import UIKit
 import Tabman
 
 final class TabContainerViewController: TabmanViewController {
-    private weak var pageContainerViewController: PageContainerViewController?
-    
-    convenience init(pageContainerViewController: PageContainerViewController) {
-        self.init()
-        self.pageContainerViewController = pageContainerViewController
-    }
+    weak var pageContainerViewController: PageContainerViewController?
     
     override func pageboyViewController(_ pageboyViewController: Pageboy.PageboyViewController, didScrollTo position: CGPoint, direction: Pageboy.PageboyViewController.NavigationDirection, animated: Bool) {
         super.pageboyViewController(pageboyViewController, didScrollTo: position, direction: direction, animated: animated)

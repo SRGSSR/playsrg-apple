@@ -12,7 +12,7 @@ import Tabman
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
     
-    private var tabContainerViewController: TabContainerViewController!
+    private var tabContainerViewController: TabContainerViewController
     private(set) var initialPage: Int
     private let tabBarItems: [TMBarItem]
     private weak var tabBarTopConstraint: NSLayoutConstraint?
@@ -41,10 +41,12 @@ class PageContainerViewController: UIViewController {
                 return item
             }
         }
+        
+        self.tabContainerViewController = TabContainerViewController()
 
         super.init(nibName: nil, bundle: nil)
         
-        self.tabContainerViewController = TabContainerViewController(pageContainerViewController: self)
+        self.tabContainerViewController.pageContainerViewController = self
         self.addChild(tabContainerViewController)
     }
     
