@@ -14,9 +14,9 @@ class PageContainerViewController: UIViewController {
     
     private var tabContainerViewController: TabContainerViewController!
     private(set) var initialPage: Int
-    private weak var tabBarTopConstraint: NSLayoutConstraint?
     private let tabBarItems: [TMBarItem]
-    private let blurView: UIVisualEffectView
+    private weak var tabBarTopConstraint: NSLayoutConstraint?
+    private weak var blurView: UIVisualEffectView?
     
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
@@ -41,9 +41,6 @@ class PageContainerViewController: UIViewController {
                 return item
             }
         }
-        
-        self.blurView = UIVisualEffectView.play_blurView
-        blurView.alpha = 0.0
 
         super.init(nibName: nil, bundle: nil)
         
@@ -61,6 +58,10 @@ class PageContainerViewController: UIViewController {
     }
     
     private func configureBarView() {
+        let blurView = UIVisualEffectView.play_blurView
+        blurView.alpha = 0.0
+        self.blurView = blurView
+        
         let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
         barView.backgroundView.style = .custom(view: blurView)
         barView.layout.alignment = .centerDistributed
@@ -159,7 +160,7 @@ extension PageContainerViewController: ScrollableContentContainer {
     func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
         let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
         tabBarTopConstraint?.constant = max(-adjustedOffset, 0.0)
-        blurView.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
+        blurView?.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
     }
 }
 
