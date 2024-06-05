@@ -75,26 +75,27 @@ class PageContainerViewController: UIViewController {
     override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
-        
-        let tabView = tabContainerViewController.view!
-        view.insertSubview(tabView, at: 0)
-        
-        tabView.translatesAutoresizingMaskIntoConstraints = false
-        let tabBarTopConstraint = tabView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        NSLayoutConstraint.activate([
-            tabBarTopConstraint,
-            tabView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tabView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tabView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        self.tabBarTopConstraint = tabBarTopConstraint
-        
-        tabContainerViewController.didMove(toParent: self)
         self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let tabContainerView = tabContainerViewController.view {
+            view.insertSubview(tabContainerView, at: 0)
+            
+            tabContainerView.translatesAutoresizingMaskIntoConstraints = false
+            let tabBarTopConstraint = tabContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            NSLayoutConstraint.activate([
+                tabBarTopConstraint,
+                tabContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                tabContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                tabContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
+            self.tabBarTopConstraint = tabBarTopConstraint
+        }
+        tabContainerViewController.didMove(toParent: self)
+        
         tabContainerViewController.dataSource = self
         didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
     }
