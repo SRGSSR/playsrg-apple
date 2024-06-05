@@ -45,7 +45,6 @@ class PageContainerViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         self.tabContainerViewController = TabContainerViewController(pageContainerViewController: self)
-        configureBarView()
         self.addChild(tabContainerViewController)
     }
     
@@ -82,6 +81,7 @@ class PageContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        configureBarView()
         if let tabContainerView = tabContainerViewController.view {
             view.insertSubview(tabContainerView, at: 0)
             
