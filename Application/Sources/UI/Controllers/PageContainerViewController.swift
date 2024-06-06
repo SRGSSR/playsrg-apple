@@ -4,10 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import Pageboy
-import UIKit
 import SRGAppearance
 import Tabman
+import UIKit
 
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
@@ -17,7 +18,8 @@ class PageContainerViewController: UIViewController {
     private let tabBarItems: [TMBarItem]
     private weak var tabBarTopConstraint: NSLayoutConstraint?
     private weak var blurView: UIVisualEffectView?
-    
+    private var cancellables: Set<AnyCancellable> = []
+
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
         
@@ -101,6 +103,15 @@ class PageContainerViewController: UIViewController {
         
         tabContainerViewController.dataSource = self
         didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
+        
+        tabContainerViewController
+            .updateSignal()
+            .debounce(for: 0.1, scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.didDisplayViewController(self.tabContainerViewController.currentViewController, animated: false)
+            }
+            .store(in: &cancellables)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -133,7 +144,9 @@ class PageContainerViewController: UIViewController {
         }
     }
     
-    func didDisplayViewController(_ viewController: UIViewController?, animated: Bool) {}
+    func didDisplayViewController(_ viewController: UIViewController?, animated: Bool) {
+        play_setNeedsScrollableViewUpdate()
+    }
 }
 
 // MARK: - Protocols
