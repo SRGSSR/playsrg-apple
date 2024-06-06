@@ -290,23 +290,31 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
-    NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioHomepageChannels;
-    if (radioChannels.count > 1) {
-        UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
-        NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:radioChannelsViewController];
-        audiosNavigationController.tabBarItem = [self audiosTabBarItem];
-        return audiosNavigationController;
-    }
-    else if (radioChannels.count == 1) {
-        RadioChannel *radioChannel = radioChannels.firstObject;
-        PageViewController *pageViewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
+    if (applicationConfiguration.audioContentHomepagePreferred) {
+        PageViewController *pageViewController = [PageViewController audiosViewController];
         NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:pageViewController];
         audiosNavigationController.tabBarItem = [self audiosTabBarItem];
-        [audiosNavigationController updateWithRadioChannel:radioChannel animated:NO];
         return audiosNavigationController;
     }
     else {
-        return nil;
+        NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioHomepageChannels;
+        if (radioChannels.count > 1) {
+            UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
+            NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:radioChannelsViewController];
+            audiosNavigationController.tabBarItem = [self audiosTabBarItem];
+            return audiosNavigationController;
+        }
+        else if (radioChannels.count == 1) {
+            RadioChannel *radioChannel = radioChannels.firstObject;
+            PageViewController *pageViewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
+            NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:pageViewController];
+            audiosNavigationController.tabBarItem = [self audiosTabBarItem];
+            [audiosNavigationController updateWithRadioChannel:radioChannel animated:NO];
+            return audiosNavigationController;
+        }
+        else {
+            return nil;
+        }
     }
 }
 

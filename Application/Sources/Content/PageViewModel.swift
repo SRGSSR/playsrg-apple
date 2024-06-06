@@ -160,7 +160,7 @@ final class PageViewModel: Identifiable, ObservableObject {
 extension PageViewModel {
     enum Id: SectionFiltering {
         case video
-        case audio(channel: RadioChannel)
+        case audio(channel: RadioChannel?)
         case live
         case topic(_ topic: SRGTopic)
         case show(_ show: SRGShow)
@@ -243,7 +243,7 @@ extension PageViewModel {
             case .video:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case let .audio(channel: channel):
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel?.name].compactMap { $0 }
             case .live:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .topic:
@@ -270,7 +270,12 @@ extension PageViewModel {
             case .video:
                 return show.transmission == .TV
             case let .audio(channel: channel):
-                return show.transmission == .radio && show.primaryChannelUid == channel.uid
+                if let channel {
+                    return show.transmission == .radio && show.primaryChannelUid == channel.uid
+                }
+                else {
+                    return show.transmission == .radio
+                }
             default:
                 return false
             }
@@ -285,7 +290,12 @@ extension PageViewModel {
             case .video:
                 return medias.filter { $0.mediaType == .video }
             case let .audio(channel: channel):
-                return medias.filter { $0.mediaType == .audio && ($0.channel?.uid == channel.uid || $0.show?.primaryChannelUid == channel.uid) }
+                if let channel {
+                    return medias.filter { $0.mediaType == .audio && ($0.channel?.uid == channel.uid || $0.show?.primaryChannelUid == channel.uid) }
+                }
+                else {
+                    return medias.filter { $0.mediaType == .audio }
+                }
             default:
                 return medias
             }
@@ -365,7 +375,7 @@ extension PageViewModel {
         
         var viewModelProperties: PageViewModelProperties {
             switch wrappedValue {
-            case let .content(section, _):
+            case let .content(section, _, _):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section, index: index)
@@ -421,6 +431,8 @@ extension PageViewModel {
         switch id {
         case .video:
             return true
+        case let .audio(channel: channel):
+            return channel == nil
         default:
             return false
         }
@@ -547,16 +559,17 @@ private extension PageViewModel {
         switch id {
         case .video:
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .topic(topic):
             return SRGDataProvider.current!.contentPage(for: topic.vendor, topicWithUrn: topic.urn)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+            // FIXME: is topic page always videoOrTV content type?
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .show(show):
             if show.transmission == .TV && !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
                 return SRGDataProvider.current!.contentPage(for: show.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
-                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, show: show), index: $1) }) }
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: show.play_contentType, show: show), index: $1) }) }
                     .eraseToAnyPublisher()
             }
             else {
@@ -566,12 +579,25 @@ private extension PageViewModel {
             }
         case let .page(page):
             return SRGDataProvider.current!.contentPage(for: page.vendor, uid: page.uid)
-                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
+            // FIXME: is page always videoOrTV content type?
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
+            if let channel, let uid = channel.contentPageId, ApplicationSettingAudioHomepageOption() == .curatedMany {
+                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: uid)
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .audioOrRadio), index: $1) }) }
+                    .eraseToAnyPublisher()
+            }
+            else if let channel {
+                return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            }
+            else {
+                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playAudio)
+                    .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .audioOrRadio), index: $1) }) }
+                    .eraseToAnyPublisher()
+            }
         case .live:
             return Just(Page(uid: nil, sections: ApplicationConfiguration.shared.liveConfiguredSections.enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)

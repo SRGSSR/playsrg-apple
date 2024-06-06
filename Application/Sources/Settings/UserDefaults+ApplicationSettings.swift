@@ -17,6 +17,14 @@ extension UserDefaults {
         return string(forKey: PlaySRG.PlaySRGSettingPosterImages)
     }
     
+    @objc dynamic var PlaySRGSettingSquareImages: String? {
+        return string(forKey: PlaySRG.PlaySRGSettingSquareImages)
+    }
+    
+    @objc dynamic var PlaySRGSettingAudioHomepageOption: String? {
+        return string(forKey: PlaySRG.PlaySRGSettingAudioHomepageOption)
+    }
+    
     @objc dynamic var PlaySRGSettingServiceIdentifier: String? {
         return string(forKey: PlaySRG.PlaySRGSettingServiceIdentifier)
     }

@@ -541,6 +541,24 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
+#if os(iOS) || (os(tvOS) && DEBUG)
+                NextLink {
+                    SquareImagesSelectionView()
+#if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+#endif
+                } label: {
+                    SquareImagesSelectionCell()
+                }
+                NextLink {
+                    AudioHomepageSelectionView()
+#if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+#endif
+                } label: {
+                    AudioHomepageOptionSelectionCell()
+                }
+#endif
                 Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
 #if os(iOS) && APPCENTER
                 VersionsAndReleaseNotesButton()
@@ -620,9 +638,39 @@ struct SettingsView: View {
             
             var body: some View {
                 HStack {
-                    Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
+                    Text("📺 \(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))")
                     Spacer()
                     Text(selectedPosterImages.description)
+                        .foregroundColor(Color.play_sectionSecondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
+                }
+            }
+        }
+        
+        private struct SquareImagesSelectionCell: View {
+            @AppStorage(PlaySRGSettingSquareImages) private var selectedSquareImages = SquareImages.default
+            
+            var body: some View {
+                HStack {
+                    Text("🎧 \(NSLocalizedString("Square images", comment: "Label of the button for Podcast square image format selection"))")
+                    Spacer()
+                    Text(selectedSquareImages.description)
+                        .foregroundColor(Color.play_sectionSecondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
+                }
+            }
+        }
+        
+        private struct AudioHomepageOptionSelectionCell: View {
+            @AppStorage(PlaySRGSettingAudioHomepageOption) private var selectedAudioHomepageOption = AudioHomepageOption.default
+            
+            var body: some View {
+                HStack {
+                    Text("🎧 \(NSLocalizedString("Audio home page", comment: "Label of the button for audio homepage option selection"))")
+                    Spacer()
+                    Text(selectedAudioHomepageOption.description)
                         .foregroundColor(Color.play_sectionSecondary)
                         .multilineTextAlignment(.trailing)
                         .lineLimit(2)
@@ -734,7 +782,7 @@ struct SettingsView: View {
                 .play_scrollClipDisabled()
                 .frame(maxWidth: LayoutMaxListWidth)
 #endif
-                .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
+                .navigationTitle("📺 \(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))")
             }
         }
         
@@ -758,6 +806,90 @@ struct SettingsView: View {
             
             private func select() {
                 selectedPosterImages = posterImages
+            }
+        }
+        
+        // MARK: Podcast square images selection
+        
+        private struct SquareImagesSelectionView: View {
+            var body: some View {
+                List {
+                    ForEach(SquareImages.allCases) { squareImages in
+                        SquareImagesCell(squareImages: squareImages)
+                    }
+                }
+                .srgFont(.body)
+#if os(tvOS)
+                .listStyle(GroupedListStyle())
+                .play_scrollClipDisabled()
+                .frame(maxWidth: LayoutMaxListWidth)
+#endif
+                .navigationTitle("🎧 \(NSLocalizedString("Square images", comment: "Podcast square image format selection view title"))")
+            }
+        }
+        
+        private struct SquareImagesCell: View {
+            let squareImages: SquareImages
+            
+            @AppStorage(PlaySRGSettingSquareImages) private var selectedSquareImages = SquareImages.default
+            
+            var body: some View {
+                Button(action: select) {
+                    HStack {
+                        Text(squareImages.description)
+                        Spacer()
+                        if squareImages == selectedSquareImages {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+                .foregroundColor(.primary)
+            }
+            
+            private func select() {
+                selectedSquareImages = squareImages
+            }
+        }
+        
+        // MARK: Audio homepage option selection
+        
+        private struct AudioHomepageSelectionView: View {
+            var body: some View {
+                List {
+                    ForEach(AudioHomepageOption.allCases) { audioHomepageOption in
+                        AudioHomepageOptionCell(audioHomepageOption: audioHomepageOption)
+                    }
+                }
+                .srgFont(.body)
+#if os(tvOS)
+                .listStyle(GroupedListStyle())
+                .play_scrollClipDisabled()
+                .frame(maxWidth: LayoutMaxListWidth)
+#endif
+                .navigationTitle("🎧 \(NSLocalizedString("Audio home page", comment: "Audio home page selection view title"))")
+            }
+        }
+        
+        private struct AudioHomepageOptionCell: View {
+            let audioHomepageOption: AudioHomepageOption
+            
+            @AppStorage(PlaySRGSettingAudioHomepageOption) private var selectedAudioHomepageOption = AudioHomepageOption.default
+            
+            var body: some View {
+                Button(action: select) {
+                    HStack {
+                        Text(audioHomepageOption.description)
+                        Spacer()
+                        if audioHomepageOption == selectedAudioHomepageOption {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+                .foregroundColor(.primary)
+            }
+            
+            private func select() {
+                selectedAudioHomepageOption = audioHomepageOption
             }
         }
     }

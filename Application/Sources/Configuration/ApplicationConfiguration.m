@@ -151,10 +151,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSString *discoverySubtitleOptionLanguage;
 
 @property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
+@property (nonatomic, getter=areSquareImagesEnabled) BOOL squareImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
 @property (nonatomic) NSInteger minimumSocialViewCount;
+
+@property (nonatomic, getter=isAudioContentHomepagePreferred) BOOL audioContentHomepagePreferred;
 
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
@@ -263,6 +266,51 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
 #else
     return _posterImagesEnabled;
+#endif
+}
+
+- (BOOL)areSquareImagesEnabled
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    switch (ApplicationSettingSquareImages()) {
+        case SettingSquareImagesForced: {
+            return YES;
+            break;
+        }
+        case SettingSquareImagesIgnored: {
+            return NO;
+            break;
+        }
+        default: {
+            return _squareImagesEnabled;
+            break;
+        }
+    }
+#else
+    return _squareImagesEnabled;
+#endif
+}
+
+- (BOOL)isAudioContentHomepagePreferred
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    switch (ApplicationSettingAudioHomepageOption()) {
+        case SettingAudioHomepageOptionCuratedOne: {
+            return YES;
+            break;
+        }
+        case SettingAudioHomepageOptionCuratedMany:
+        case SettingAudioHomepageOptionPredefinedMany: {
+            return NO;
+            break;
+        }
+        default: {
+            return _audioContentHomepagePreferred;
+            break;
+        }
+    }
+#else
+    return _audioContentHomepagePreferred;
 #endif
 }
 
@@ -447,6 +495,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.discoverySubtitleOptionLanguage = [firebaseConfiguration stringForKey:@"discoverySubtitleOptionLanguage"];
     
     self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
+    self.squareImagesEnabled = [firebaseConfiguration boolForKey:@"squareImagesEnabled"];
     
 #if TARGET_OS_IOS
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];
@@ -455,6 +504,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
     
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
+    
+#if DEBUG || NIGHTLY || BETA
+    self.audioContentHomepagePreferred = [firebaseConfiguration boolForKey:@"audioContentHomepagePreferred"];
+#endif
     
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];

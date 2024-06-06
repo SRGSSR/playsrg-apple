@@ -9,17 +9,36 @@ import SRGDataProviderCombine
 private let kDefaultNumberOfPlaceholders = 10
 private let kDefaultNumberOfLivestreamPlaceholders = 4
 
+// MARK: Content types
+
+@objc enum ContentType: Int {
+    case videoOrTV
+    case audioOrRadio
+    case mixed
+    
+    var imageVariant: SRGImageVariant {
+        switch self {
+        case .videoOrTV:
+            return ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
+        case .audioOrRadio:
+            return ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
+        case .mixed:
+            return .default
+        }
+    }
+}
+
 // MARK: Types
 
 enum Content {
     enum Section: Hashable {
-        case content(SRGContentSection, show: SRGShow? = nil)
+        case content(SRGContentSection, type: ContentType, show: SRGShow? = nil)
         case configured(ConfiguredSection)
         
         var properties: SectionProperties {
             switch self {
-            case let .content(section, show):
-                return ContentSectionProperties(contentSection: section, show: show)
+            case let .content(section, type, show):
+                return ContentSectionProperties(contentSection: section, contentType: type, show: show)
             case let .configured(section):
                 return ConfiguredSectionProperties(configuredSection: section)
             }
@@ -176,6 +195,7 @@ protocol SectionProperties {
 private extension Content {
     struct ContentSectionProperties: SectionProperties {
         let contentSection: SRGContentSection
+        let contentType: ContentType
         let show: SRGShow?
         
         private var presentation: SRGContentPresentation {
@@ -221,14 +241,13 @@ private extension Content {
         }
         
         var imageVariant: SRGImageVariant {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
             switch contentSection.type {
             case .shows:
-                return .poster
+                return contentType.imageVariant
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return .poster
+                    return contentType.imageVariant
                 default:
                     return .default
                 }
@@ -612,12 +631,13 @@ private extension Content {
         }
         
         var imageVariant: SRGImageVariant {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
             switch configuredSection {
             case .tvAllShows:
-                return .poster
+                return ContentType.videoOrTV.imageVariant
+            case .radioAllShows:
+                return ContentType.audioOrRadio.imageVariant
             default:
-                return .default
+                return ContentType.mixed.imageVariant
             }
         }
         

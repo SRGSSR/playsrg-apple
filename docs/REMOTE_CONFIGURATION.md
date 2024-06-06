@@ -68,6 +68,7 @@ The keys common to both TV and radio channels JSON dictionaries are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
 * `shareURL` (optional, string): The URL used to share the channel website.
+* `contentPageId` (optional, string) - BETA ONLY: The page identifier of the content page to use for the channel page. If omitted, the preconfigured page is used with the related sections for this channel.
 
 The radio channel JSON dictionaries have one more key:
 
@@ -87,7 +88,8 @@ The radio channel JSON dictionaries have one more key:
 
 ## Audio homepage
 
-`audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.
+* `audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.
+* `audioContentHomepagePreferred` (optional, boolean) - BETA ONLY: Set to `true` iff audio tab only needs one content homepage to be displayed and ignores radio channel homepages. If omitted, `false`.
 
 ### Home sections:
 
@@ -165,7 +167,8 @@ Feeds
 * `hiddenOnboardings` (optional, string, multiple): Identifier list of onboardings which must be hidden.
 * `historySynchronizationInterval` (optional, number): Duration in seconds for history synchronization. If omitted, defaults to 30 seconds. Miminum value is 10 seconds.
 * `minimumSocialViewCount` (optional, number): The threshold under which social view counts will not be displayed. If omitted, 0.
-* `posterImagesEnabled` (optional, boolean): If set to `true`, poster images are displayed where appropriate. 
+* `posterImagesEnabled` (optional, boolean): If set to `true`, show poster images are displayed where appropriate.
+* `squareImagesEnabled` (optional, boolean): If set to `true`, show square images are displayed where appropriate.
 * `showsUnavailable` (optional, boolean): If set to `true`, all features related to shows are removed.
 * `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.
 * `discoverySubtitleOptionLanguage` (optional, string): Set system subtitle language to this value once and at the beginning to help user discover that content is subtitled in that language.

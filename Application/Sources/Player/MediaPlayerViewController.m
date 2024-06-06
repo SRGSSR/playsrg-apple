@@ -60,8 +60,8 @@ static const UILayoutPriority MediaPlayerBottomConstraintFullScreenPriority = 95
 static const CGFloat MediaPlayerDetailsLabelExpansionThresholdFactor = 1.4f;
 static const CGFloat MediaPlayerDetailsLabelCollapsedHeight = 90.f;
 
-static const UILayoutPriority MediaPlayerDetailsLabelNormalPriority = 999;       // Cannot mutate priority of required installed constraints (throws an exception at runtime), so use lower priority
-static const UILayoutPriority MediaPlayerDetailsLabelExpandedPriority = 300;
+static const UILayoutPriority MediaPlayerViewHighLayoutPriority = 999;          // Cannot mutate priority of required installed constraints (throws an exception at runtime), so use lower priority
+static const UILayoutPriority MediaPlayerViewLowLayoutPriority = 300;
 
 static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibilityFormatter(void)
 {
@@ -166,6 +166,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *availabilityLabelHeightConstraint;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *showThumbnailImageViewAspectRatio16_9Constraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *showThumbnailImageViewAspectRatio1_1Constraint;
 
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
@@ -399,7 +402,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.playerBottomConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
     self.metadataHeightConstraint.priority = MediaPlayerBottomConstraintNormalPriority;
     
-    self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
+    self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerViewHighLayoutPriority;
     
     self.livestreamButton.backgroundColor = UIColor.srg_gray23Color;
     self.livestreamButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
@@ -922,7 +925,16 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)reloadDetailsWithShow:(SRGShow *)show
 {
     if (show) {
-        [self.showThumbnailImageView play_requestImage:show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
+        BOOL prefersSquareImage = show.play_contentType == ContentTypeAudioOrRadio && [ApplicationConfiguration sharedApplicationConfiguration].squareImagesEnabled;
+        if (prefersSquareImage) {
+            self.showThumbnailImageViewAspectRatio16_9Constraint.priority = MediaPlayerViewLowLayoutPriority;
+            self.showThumbnailImageViewAspectRatio1_1Constraint.priority = MediaPlayerViewHighLayoutPriority;
+        }
+        else {
+            self.showThumbnailImageViewAspectRatio1_1Constraint.priority = MediaPlayerViewLowLayoutPriority;
+            self.showThumbnailImageViewAspectRatio16_9Constraint.priority = MediaPlayerViewHighLayoutPriority;
+        }
+        [self.showThumbnailImageView play_requestImage:prefersSquareImage ? show.podcastImage : show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
         
         self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
         self.showLabel.text = show.title;
@@ -1114,13 +1126,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     // Change to expanded mode (set low priority for height restriction, so that vertical content hugging dominates)
     if (expanded) {
-        self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelExpandedPriority;
+        self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerViewLowLayoutPriority;
         
         self.detailsButton.transform = CGAffineTransformMakeRotation(M_PI);
     }
     // Change to collapsed mode (set high priority for height restriction)
     else {
-        self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
+        self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerViewHighLayoutPriority;
         
         // Use small value so that the arrow always rotates in the inverse direction
         self.detailsButton.transform = CGAffineTransformMakeRotation(0.00001);
