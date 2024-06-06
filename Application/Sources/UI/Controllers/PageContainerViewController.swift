@@ -109,7 +109,7 @@ class PageContainerViewController: UIViewController {
             .debounce(for: 0.1, scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.didDisplayViewController(self.tabContainerViewController.currentViewController, animated: false)
+                didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
             }
             .store(in: &cancellables)
     }
