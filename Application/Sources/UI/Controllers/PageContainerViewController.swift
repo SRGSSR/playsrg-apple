@@ -70,8 +70,7 @@ class PageContainerViewController: UIViewController {
         barView.layout.alignment = .centerDistributed
         barView.indicator.tintColor = .white
         barView.buttons.customize { button in
-            button.contentMode = .scaleAspectFit
-            button.imageContentMode = .scaleAspectFit
+            button.imageContentMode = .center
         }
         tabContainerViewController.addBar(barView, dataSource: self, at: .top)
     }
