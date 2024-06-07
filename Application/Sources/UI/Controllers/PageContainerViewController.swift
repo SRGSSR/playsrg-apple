@@ -143,9 +143,7 @@ class PageContainerViewController: UIViewController {
         }
     }
     
-    func didDisplayViewController(_ viewController: UIViewController?, animated: Bool) {
-        play_setNeedsScrollableViewUpdate()
-    }
+    func didDisplayViewController(_ viewController: UIViewController?, animated: Bool) {}
 }
 
 // MARK: - Protocols

@@ -23,6 +23,7 @@ final class TabContainerViewController: TabmanViewController {
     }
     override func pageboyViewController(_ pageboyViewController: PageboyViewController, didScrollToPageAt index: PageboyViewController.PageIndex, direction: PageboyViewController.NavigationDirection, animated: Bool) {
         super.pageboyViewController(pageboyViewController, didScrollToPageAt: index, direction: direction, animated: animated)
+        pageContainerViewController?.play_setNeedsScrollableViewUpdate()
         updatePublisher.send(())
     }
     
