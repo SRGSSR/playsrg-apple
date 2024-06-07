@@ -48,7 +48,6 @@ class PageContainerViewController: UIViewController {
 
         super.init(nibName: nil, bundle: nil)
         
-        self.tabContainerViewController.pageContainerViewController = self
         self.addChild(tabContainerViewController)
     }
     

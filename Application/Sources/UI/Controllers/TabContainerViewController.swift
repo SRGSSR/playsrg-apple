@@ -10,7 +10,6 @@ import Tabman
 import UIKit
 
 final class TabContainerViewController: TabmanViewController {
-    weak var pageContainerViewController: PageContainerViewController?
     private let updatePublisher = PassthroughSubject<Void, Never>()
     
     func updateSignal() -> AnyPublisher<Void, Never> {
