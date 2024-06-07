@@ -1,5 +1,5 @@
 {
-  "originHash" : "80cc5a529f66e851ef52b937b7cb21381c7ec29b972f617c0d477118a0ac3311",
+  "originHash" : "75d50617ff4a439adbeebc3e2d4183dcbcc7d8f6d67362af3f661f231f7d23a7",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -245,6 +245,15 @@
       }
     },
     {
+      "identity" : "pageboy",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uias/Pageboy",
+      "state" : {
+        "revision" : "be0c1f6f1964cfb07f9d819b0863f2c3f255f612",
+        "version" : "4.2.0"
+      }
+    },
+    {
       "identity" : "paper-onboarding",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Ramotion/paper-onboarding.git",
@@ -413,6 +422,15 @@
       "state" : {
         "revision" : "121c146fe591b1320238d054ae35c81ffa45f45a",
         "version" : "0.12.0"
+      }
+    },
+    {
+      "identity" : "tabman",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uias/Tabman",
+      "state" : {
+        "revision" : "3b2213290eb93e55bb50b49d1a179033005c11ab",
+        "version" : "3.2.0"
       }
     },
     {

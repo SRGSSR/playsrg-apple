@@ -204,30 +204,6 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/MaterialComponents</string>
-			<key>Title</key>
-			<string>MaterialComponents (118.2.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/MDFInternationalization</string>
-			<key>Title</key>
-			<string>MDFInternationalization (3.0.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/MDFTextAccessibility</string>
-			<key>Title</key>
-			<string>MDFTextAccessibility (2.0.1)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/nanopb</string>
 			<key>Title</key>
 			<string>nanopb (2.30910.0)</string>
@@ -247,6 +223,14 @@
 			<string>com.mono0926.LicensePlist/NukeUI</string>
 			<key>Title</key>
 			<string>NukeUI (0.8.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/Pageboy</string>
+			<key>Title</key>
+			<string>Pageboy (4.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -391,6 +375,14 @@
 			<string>com.mono0926.LicensePlist/SwiftUI-Introspect</string>
 			<key>Title</key>
 			<string>Introspect (0.12.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/Tabman</string>
+			<key>Title</key>
+			<string>Tabman (3.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
