@@ -61,7 +61,6 @@ class PageContainerViewController: UIViewController {
     
     private func configureBarView() {
         let blurView = UIVisualEffectView.play_blurView
-        blurView.alpha = 1.0
         self.blurView = blurView
         
         let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
