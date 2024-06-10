@@ -61,7 +61,6 @@ class PageContainerViewController: UIViewController {
     
     private func configureBarView() {
         let blurView = UIVisualEffectView.play_blurView
-        blurView.alpha = 0.0
         self.blurView = blurView
         
         let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
@@ -168,12 +167,6 @@ extension PageContainerViewController: Oriented {
 extension PageContainerViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
         tabContainerViewController.currentViewController
-    }
-    
-    func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
-        let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
-        tabBarTopConstraint?.constant = max(-adjustedOffset, 0.0)
-        blurView?.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
     }
 }
 
