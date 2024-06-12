@@ -177,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CommandersAct/iOSV5.git",
       "state" : {
-        "revision" : "3b5c3167d10bf009d1cd4aa9076600a1bde584d0",
-        "version" : "5.4.6"
+        "revision" : "b65eb27cde41d3c40b05520f8713d55a52821553",
+        "version" : "5.4.9"
       }
     },
     {
