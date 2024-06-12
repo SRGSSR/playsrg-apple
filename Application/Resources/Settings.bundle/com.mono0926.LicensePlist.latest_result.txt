@@ -62,7 +62,7 @@ name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, ve
 
 name: interop-ios-for-google-sdks, nameSpecified: InteropForGoogle, owner: google, version: 100.0.0, source: https://github.com/google/interop-ios-for-google-sdks
 
-name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.12.6, source: https://github.com/urbanairship/ios-library
+name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.12.7, source: https://github.com/urbanairship/ios-library
 
 name: iOSV5, nameSpecified: TagCommander SDK V5, owner: CommandersAct, version: 5.4.6, source: https://github.com/CommandersAct/iOSV5
 
