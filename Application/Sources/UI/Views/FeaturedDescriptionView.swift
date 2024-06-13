@@ -47,6 +47,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View, PrimaryColorSett
             HStack(spacing: constant(iOS: 8, tvOS: 12)) {
                 if let label = content.label {
                     Badge(text: label, color: Color(.srgDarkRed))
+                        .layoutPriority(1)
                 }
                 if let introduction = content.introduction {
                     Text(introduction)

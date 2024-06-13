@@ -167,7 +167,7 @@ private extension View {
 
 struct FeaturedContentCell_Previews: PreviewProvider {
     private static let kind: Mock.Media = .standard
-    private static let label = "New"
+    private static let label = "New label with long text, quite long"
     
     static var previews: some View {
 #if os(tvOS)
@@ -192,6 +192,10 @@ struct FeaturedContentCell_Previews: PreviewProvider {
         FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .element)
             .previewLayout(for: .element, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
-        #endif
+
+        FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .element)
+            .previewLayout(for: .element, layoutWidth: 320, horizontalSizeClass: .compact)
+            .environment(\.horizontalSizeClass, .compact)
+#endif
     }
 }
