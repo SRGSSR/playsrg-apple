@@ -192,7 +192,7 @@ struct FeaturedContentCell_Previews: PreviewProvider {
         FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .element)
             .previewLayout(for: .element, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
-
+        
         FeaturedContentCell(media: Mock.media(kind), style: .show, label: label, layout: .element)
             .previewLayout(for: .element, layoutWidth: 320, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
