@@ -633,7 +633,7 @@ private extension Content {
         var imageVariant: SRGImageVariant {
             switch configuredSection {
             case .tvAllShows:
-                return ContentType.videoOrTV.imageVariant
+                return .default
             case .radioAllShows:
                 return ContentType.audioOrRadio.imageVariant
             default:
