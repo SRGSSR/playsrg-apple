@@ -92,7 +92,7 @@ extension FeaturedDescriptionView where Content == FeaturedShowContent {
 // MARK: Preview
 
 struct FeaturedDescriptionView_Previews: PreviewProvider {
-    private static let label = "New"
+    private static let label = "New label with long text, quite long"
     
     static var previews: some View {
         Group {
