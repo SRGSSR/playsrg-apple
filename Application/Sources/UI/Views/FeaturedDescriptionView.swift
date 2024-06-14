@@ -47,6 +47,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View, PrimaryColorSett
             HStack(spacing: constant(iOS: 8, tvOS: 12)) {
                 if let label = content.label {
                     Badge(text: label, color: Color(.srgDarkRed))
+                        .layoutPriority(1)
                 }
                 if let introduction = content.introduction {
                     Text(introduction)
@@ -107,5 +108,12 @@ struct FeaturedDescriptionView_Previews: PreviewProvider {
             FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .center, detailed: true)
         }
         .previewLayout(.fixed(width: 800, height: 300))
+        
+        Group {
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .leading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .topLeading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .center, detailed: true)
+        }
+        .previewLayout(.fixed(width: 300, height: 300))
     }
 }
