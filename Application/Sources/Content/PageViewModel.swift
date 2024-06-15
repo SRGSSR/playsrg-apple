@@ -596,7 +596,9 @@ private extension PageViewModel {
                 .map { items in
                     guard let firstItem = items.first else { return Row(section: section, items: []) }
 
-                    let highlightedItem = section.properties.hasHighlightedItem ? firstItem : nil
+                    let highlightedItem = section.properties.hasHighlightedItem ? firstItem :
+                        section.properties.couldHaveHighlightedItem && items.count == 1 ? firstItem : nil
+
                     let item = Item(.item(.highlight(highlight, item: highlightedItem)), in: section)
                     return Row(section: section, items: [item])
                 }
