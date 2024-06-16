@@ -339,7 +339,7 @@ static void *s_kvoContext = &s_kvoContext;
     SRGMedia *media = notification.userInfo[SRGLetterboxMediaKey];
     if (media) {
         [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
-                                                       mediaUrn:media.URN]
+                                                 mediaUrn:media.URN]
          send];
     }
 }

@@ -68,9 +68,9 @@ static NSNumber * TVGuideBouquetWithString(NSString *string)
     static NSDictionary<NSString *, NSNumber *> *s_bouqets;
     dispatch_once(&s_onceToken, ^{
         s_bouqets = @{ @"thirdparty" : @(TVGuideBouquetThirdParty),
-                        @"rsi" : @(TVGuideBouquetRSI),
-                        @"rts" : @(TVGuideBouquetRTS),
-                        @"srf" : @(TVGuideBouquetSRF)
+                       @"rsi" : @(TVGuideBouquetRSI),
+                       @"rts" : @(TVGuideBouquetRTS),
+                       @"srf" : @(TVGuideBouquetSRF)
         };
     });
     return s_bouqets[string];

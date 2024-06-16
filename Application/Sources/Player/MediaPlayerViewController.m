@@ -311,7 +311,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         if (letterboxController.continuousPlaybackUpcomingMedia) {
             [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionDisplay
-                                                           mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN]
+                                                     mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN]
              send];
         }
     }];
@@ -544,7 +544,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     if (self.letterboxController.continuousPlaybackUpcomingMedia) {
         [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
-                                                       mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN]
+                                                 mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN]
          send];
     }
     
@@ -1669,7 +1669,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didEngageInContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
 {
     [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlay
-                                                   mediaUrn:upcomingMedia.URN]
+                                             mediaUrn:upcomingMedia.URN]
      send];
 }
 
@@ -1692,7 +1692,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }, @"DisableAutoplayAsked");
     
     [[AnalyticsEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
-                                                   mediaUrn:upcomingMedia.URN]
+                                             mediaUrn:upcomingMedia.URN]
      send];
 }
 

@@ -240,8 +240,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 {
 #if TARGET_OS_IOS
     return self.continuousPlaybackBackgroundTransitionDuration != SRGLetterboxContinuousPlaybackDisabled
-        || self.continuousPlaybackForegroundTransitionDuration != SRGLetterboxContinuousPlaybackDisabled
-        || self.continuousPlaybackPlayerViewTransitionDuration != SRGLetterboxContinuousPlaybackDisabled;
+    || self.continuousPlaybackForegroundTransitionDuration != SRGLetterboxContinuousPlaybackDisabled
+    || self.continuousPlaybackPlayerViewTransitionDuration != SRGLetterboxContinuousPlaybackDisabled;
 #else
     return self.continuousPlaybackPlayerViewTransitionDuration != SRGLetterboxContinuousPlaybackDisabled;
 #endif
@@ -376,7 +376,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     if (! analyticsBusinessUnitIdentifier) {
         return NO;
     }
-
+    
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSString *analyticsSourceKey = @"39ae8f94-595c-4ca4-81f7-fb7748bd3f04";
 #else
@@ -469,7 +469,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *betaTestingURLString = [firebaseConfiguration stringForKey:@"betaTestingURL"];
     self.betaTestingURL = betaTestingURLString ? [NSURL URLWithString:betaTestingURLString] : nil;
-
+    
     NSString *sourceCodeURLString = [firebaseConfiguration stringForKey:@"sourceCodeURL"];
     self.sourceCodeURL = sourceCodeURLString ? [NSURL URLWithString:sourceCodeURLString] : nil;
     

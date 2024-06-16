@@ -155,7 +155,7 @@
             opened = [ProfileHelp showFaqs];
             break;
         }
-        
+            
         case ApplicationSectionTechnicaIssue: {
             opened = [ProfileHelp showSupporByEmail];
             break;

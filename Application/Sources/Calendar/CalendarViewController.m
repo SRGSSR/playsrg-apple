@@ -314,7 +314,7 @@
     
     // Hidden if in the same page as today and current date is not today
     BOOL hidden = [NSCalendar.srg_defaultCalendar compareDate:calendar.currentPage toDate:calendar.today toUnitGranularity:unitGranularity] == NSOrderedSame
-        && [calendar.today isEqualToDate:dailyMediasViewController.date];
+    && [calendar.today isEqualToDate:dailyMediasViewController.date];
     [self setNavigationBarItemsHidden:hidden];
 }
 
