@@ -100,7 +100,7 @@ If you want to contribute to the project as an external contributor, have a look
 Checking quality, the project requires command-line tools:
 
 ```
-brew install swiftlint shellcheck yamllint
+brew install swiftlint swiftformat shellcheck yamllint
 ```
 
 For `rubocop`, be sure that this tool is available on your system, or execute:
