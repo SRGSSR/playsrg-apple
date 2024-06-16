@@ -63,26 +63,26 @@ final class ShowHeaderViewModel: ObservableObject {
     }
 
     var title: String? {
-        return show?.title
+        show?.title
     }
 
     var summary: String? {
-        return show?.play_summary
+        show?.play_summary
     }
 
     var broadcastInformation: String? {
-        return show?.broadcastInformation?.message
+        show?.broadcastInformation?.message
     }
 
     var favoriteIcon: ImageResource {
-        return isFavorite ? .favoriteFull : .favorite
+        isFavorite ? .favoriteFull : .favorite
     }
 
     var favoriteLabel: String {
         if isFavorite {
-            return NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
+            NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
         } else {
-            return NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")
+            NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")
         }
     }
 
@@ -93,24 +93,24 @@ final class ShowHeaderViewModel: ObservableObject {
 
     #if os(iOS)
         var isSubscriptionPossible: Bool {
-            return PushService.shared != nil
+            PushService.shared != nil
         }
 
         var subscriptionIcon: ImageResource {
             switch subscriptionStatus {
             case .unavailable, .unsubscribed:
-                return .subscription
+                .subscription
             case .subscribed:
-                return .subscriptionFull
+                .subscriptionFull
             }
         }
 
         var subscriptionLabel: String {
             switch subscriptionStatus {
             case .unavailable, .unsubscribed:
-                return NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
+                NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
             case .subscribed:
-                return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
+                NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
             }
         }
     #endif
@@ -149,9 +149,9 @@ final class ShowHeaderViewModel: ObservableObject {
 extension ShowHeaderViewModel {
     var favoriteAccessibilityLabel: String {
         if isFavorite {
-            return PlaySRGAccessibilityLocalizedString("Delete from favorites", comment: "Favorite label in the show view when a show has been favorited")
+            PlaySRGAccessibilityLocalizedString("Delete from favorites", comment: "Favorite label in the show view when a show has been favorited")
         } else {
-            return PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
+            PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
         }
     }
 
@@ -159,9 +159,9 @@ extension ShowHeaderViewModel {
         var subscriptionAccessibilityLabel: String {
             switch subscriptionStatus {
             case .unavailable, .unsubscribed:
-                return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
+                PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
             case .subscribed:
-                return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
+                PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
             }
         }
     #endif

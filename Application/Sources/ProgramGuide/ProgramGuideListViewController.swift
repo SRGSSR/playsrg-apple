@@ -89,21 +89,21 @@ final class ProgramGuideListViewController: UIViewController {
 
 extension ProgramGuideListViewController: ProgramGuideChildViewController {
     var programGuideLayout: ProgramGuideLayout {
-        return .list
+        .list
     }
 
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         if let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
-            return currentViewController.programGuideDailyViewModel
+            currentViewController.programGuideDailyViewModel
         } else {
-            return nil
+            nil
         }
     }
 }
 
 extension ProgramGuideListViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
-        return pageViewController.viewControllers?.first
+        pageViewController.viewControllers?.first
     }
 }
 

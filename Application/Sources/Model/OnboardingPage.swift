@@ -20,14 +20,14 @@ struct OnboardingPage: Codable, Identifiable {
     }
 
     func imageName(for onboarding: Onboarding) -> String {
-        return "\(onboarding.id)_\(id)"
+        "\(onboarding.id)_\(id)"
     }
 
     func iconName(for onboarding: Onboarding) -> String {
-        return "\(onboarding.id)_\(id)-small"
+        "\(onboarding.id)_\(id)-small"
     }
 
     var color: UIColor {
-        return .hexadecimal(colorHex) ?? .white
+        .hexadecimal(colorHex) ?? .white
     }
 }

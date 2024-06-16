@@ -40,19 +40,19 @@ final class ProgramViewModel: ObservableObject {
     }
 
     private var program: SRGProgram? {
-        return data?.program
+        data?.program
     }
 
     private var media: SRGMedia? {
-        return mediaData.media
+        mediaData.media
     }
 
     private var show: SRGShow? {
-        return media?.show ?? program?.show
+        media?.show ?? program?.show
     }
 
     private var channel: SRGChannel? {
-        return data?.channel.wrappedValue
+        data?.channel.wrappedValue
     }
 
     private var isLive: Bool {
@@ -61,19 +61,19 @@ final class ProgramViewModel: ObservableObject {
     }
 
     var title: String? {
-        return program?.title
+        program?.title
     }
 
     var subtitle: String? {
-        return program?.subtitle
+        program?.subtitle
     }
 
     var lead: String? {
-        return program?.lead
+        program?.lead
     }
 
     var summary: String? {
-        return program?.summary
+        program?.summary
     }
 
     var timeAndDate: String? {
@@ -116,7 +116,7 @@ final class ProgramViewModel: ObservableObject {
     }
 
     var imageUrl: URL? {
-        return data?.programGuideImageUrl(size: .medium)
+        data?.programGuideImageUrl(size: .medium)
     }
 
     private var duration: Double? {
@@ -169,23 +169,23 @@ final class ProgramViewModel: ObservableObject {
     }
 
     var currentMedia: SRGMedia? {
-        return isLive ? livestreamMedia : media
+        isLive ? livestreamMedia : media
     }
 
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
         if isLive {
-            return MediaDescription.liveBadgeProperties()
+            MediaDescription.liveBadgeProperties()
         } else if let media = currentMedia {
-            return MediaDescription.availabilityBadgeProperties(for: media)
+            MediaDescription.availabilityBadgeProperties(for: media)
         } else {
-            return nil
+            nil
         }
     }
 
     var playAction: (() -> Void)? {
         if let media = currentMedia, media.blockingReason(at: Date()) == .none,
            let tabBarController = UIApplication.shared.mainTabBarController {
-            return { [self] in
+            { [self] in
                 if let data {
                     if media.contentType == .livestream {
                         AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel.wrappedValue).send()
@@ -197,18 +197,18 @@ final class ProgramViewModel: ObservableObject {
                 tabBarController.dismissAndPresentMediaPlayer(with: media, position: nil)
             }
         } else {
-            return nil
+            nil
         }
     }
 
     var hasActions: Bool {
-        return watchFromStartButtonProperties != nil || watchLaterButtonProperties != nil || calendarButtonProperties != nil
+        watchFromStartButtonProperties != nil || watchLaterButtonProperties != nil || calendarButtonProperties != nil
     }
 
     var watchFromStartButtonProperties: ButtonProperties? {
         guard isLive, let media, media.blockingReason(at: Date()) == .none else { return nil }
 
-        let data = self.data
+        let data = data
         let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel.wrappedValue) : nil
         return ButtonProperties(
             icon: .startOver,
@@ -241,7 +241,7 @@ final class ProgramViewModel: ObservableObject {
     }
 
     private var watchLaterAllowedAction: WatchLaterAction {
-        return mediaData.watchLaterAllowedAction
+        mediaData.watchLaterAllowedAction
     }
 
     var watchLaterButtonProperties: ButtonProperties? {
@@ -286,7 +286,7 @@ final class ProgramViewModel: ObservableObject {
     }
 
     var calendarButtonProperties: ButtonProperties? {
-        return ButtonProperties(
+        ButtonProperties(
             icon: .calendar,
             label: NSLocalizedString("Add to Calendar", comment: "Button to add an event to Calendar application"),
             action: {
@@ -351,14 +351,14 @@ final class ProgramViewModel: ObservableObject {
     }
 
     private var calendarUrl: URL? {
-        if let media = media {
-            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+        if let media {
+            ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
         } else if let media = livestreamMedia, program?.timeAvailability(at: Date()) == .notYetAvailable {
-            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+            ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
         } else if let show {
-            return ApplicationConfiguration.shared.sharingURL(for: show)
+            ApplicationConfiguration.shared.sharingURL(for: show)
         } else {
-            return ApplicationConfiguration.shared.playURL(for: channel?.vendor ?? ApplicationConfiguration.shared.vendor)
+            ApplicationConfiguration.shared.playURL(for: channel?.vendor ?? ApplicationConfiguration.shared.vendor)
         }
     }
 
@@ -384,7 +384,7 @@ final class ProgramViewModel: ObservableObject {
 extension ProgramViewModel {
     private static func mediaDataPublisher(for program: SRGProgram?) -> AnyPublisher<MediaData, Never> {
         if let mediaUrn = program?.mediaURN {
-            return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
+            Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
                 SRGDataProvider.current!.media(withUrn: mediaUrn)
                     .catch { _ in
                         Empty()
@@ -401,14 +401,14 @@ extension ProgramViewModel {
             .prepend(.empty)
             .eraseToAnyPublisher()
         } else {
-            return Just(.empty)
+            Just(.empty)
                 .eraseToAnyPublisher()
         }
     }
 
     private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
         if let channel {
-            return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
+            Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
                 SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
                     .catch { _ in
                         Empty()
@@ -418,7 +418,7 @@ extension ProgramViewModel {
             .prepend(nil)
             .eraseToAnyPublisher()
         } else {
-            return Just(nil)
+            Just(nil)
                 .eraseToAnyPublisher()
         }
     }
@@ -433,22 +433,22 @@ extension ProgramViewModel {
         let names: [String]
 
         var id: String? {
-            return role
+            role
         }
 
         init(role: String?, crewMembers: [SRGCrewMember]) {
             self.role = role
             names = crewMembers.map { crewMember in
                 if let characterName = crewMember.characterName {
-                    return "\(crewMember.name) (\(characterName))"
+                    "\(crewMember.name) (\(characterName))"
                 } else {
-                    return crewMember.name
+                    crewMember.name
                 }
             }
         }
 
         var accessibilityLabel: String {
-            return "\(role ?? "") \(names.joined(separator: ", "))".trimmingCharacters(in: .whitespaces)
+            "\(role ?? "") \(names.joined(separator: ", "))".trimmingCharacters(in: .whitespaces)
         }
     }
 
@@ -480,7 +480,7 @@ private extension TabBarController {
     func dismissAndPresentMediaPlayer(with media: SRGMedia, position: SRGPosition?) {
         var presentMediaPlayer: Void { play_presentMediaPlayer(with: media, position: position, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil) }
 
-        if let presentedViewController = presentedViewController {
+        if let presentedViewController {
             presentedViewController.dismiss(animated: true) {
                 presentMediaPlayer
             }

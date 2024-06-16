@@ -16,7 +16,7 @@ extension View {
      *  Behavior: h-neu, v-neu
      */
     func responderChain(from firstResponder: FirstResponder) -> some View {
-        return background(ResponderChain(firstResponder: firstResponder))
+        background(ResponderChain(firstResponder: firstResponder))
     }
 }
 
@@ -29,7 +29,7 @@ private struct ResponderChain: UIViewRepresentable {
     let firstResponder: FirstResponder
 
     func makeUIView(context _: Context) -> UIView {
-        return UIView()
+        UIView()
     }
 
     func updateUIView(_ uiView: UIView, context _: Context) {
@@ -49,11 +49,11 @@ private struct ResponderChain: UIViewRepresentable {
     fileprivate weak var view: UIView?
 
     var wrappedValue: FirstResponder {
-        return self
+        self
     }
 
     @discardableResult
     func sendAction(_ action: Selector, for event: UIEvent? = nil) -> Bool {
-        return UIApplication.shared.sendAction(action, to: nil, from: view, for: event)
+        UIApplication.shared.sendAction(action, to: nil, from: view, for: event)
     }
 }

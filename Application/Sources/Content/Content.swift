@@ -19,11 +19,11 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
     var imageVariant: SRGImageVariant {
         switch self {
         case .videoOrTV:
-            return ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
+            ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
         case .audioOrRadio:
-            return ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
+            ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
         case .mixed:
-            return .default
+            .default
         }
     }
 }
@@ -38,9 +38,9 @@ enum Content {
         var properties: SectionProperties {
             switch self {
             case let .content(section, type, show):
-                return ContentSectionProperties(contentSection: section, contentType: type, show: show)
+                ContentSectionProperties(contentSection: section, contentType: type, show: show)
             case let .configured(section):
-                return ConfiguredSectionProperties(configuredSection: section)
+                ConfiguredSectionProperties(configuredSection: section)
             }
         }
     }
@@ -88,48 +88,48 @@ enum Content {
         }
 
         static func groupAlphabetically(_ items: [Self]) -> [(key: Character, value: [Self])] {
-            return items.groupedAlphabetically { $0.title }
+            items.groupedAlphabetically { $0.title }
         }
     }
 
     static func medias(from items: [Self.Item]) -> [SRGMedia] {
-        return items.compactMap { item in
+        items.compactMap { item in
             if case let .media(media) = item {
-                return media
+                media
             } else {
-                return nil
+                nil
             }
         }
     }
 
     #if os(iOS)
         static func downloads(from items: [Self.Item]) -> [Download] {
-            return items.compactMap { item in
+            items.compactMap { item in
                 if case let .download(download) = item {
-                    return download
+                    download
                 } else {
-                    return nil
+                    nil
                 }
             }
         }
 
         static func notifications(from items: [Self.Item]) -> [UserNotification] {
-            return items.compactMap { item in
+            items.compactMap { item in
                 if case let .notification(notification) = item {
-                    return notification
+                    notification
                 } else {
-                    return nil
+                    nil
                 }
             }
         }
     #endif
 
     static func shows(from items: [Self.Item]) -> [SRGShow] {
-        return items.compactMap { item in
+        items.compactMap { item in
             if case let .show(show) = item {
-                return show
+                show
             } else {
-                return nil
+                nil
             }
         }
     }
@@ -195,68 +195,68 @@ private extension Content {
         let show: SRGShow?
 
         private var presentation: SRGContentPresentation {
-            return contentSection.presentation
+            contentSection.presentation
         }
 
         var title: String? {
             if let title = presentation.title {
-                return title
+                title
             } else {
                 switch presentation.type {
                 case .favoriteShows:
-                    return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
+                    NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
                 case .myProgram:
-                    return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
+                    NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
                 case .livestreams:
-                    return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+                    NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
                 case .continueWatching:
-                    return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
+                    NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
                 case .watchLater:
-                    return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
+                    NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case .showAccess:
-                    return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+                    NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
                 case .topicSelector:
-                    return NSLocalizedString("Topics", comment: "Title label used to present the topic list")
+                    NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
-                    return nil
+                    nil
                 }
             }
         }
 
         var summary: String? {
-            return presentation.summary
+            presentation.summary
         }
 
         var label: String? {
-            return presentation.label
+            presentation.label
         }
 
         var image: SRGImage? {
-            return presentation.image
+            presentation.image
         }
 
         var imageVariant: SRGImageVariant {
             switch contentSection.type {
             case .shows:
-                return contentType.imageVariant
+                contentType.imageVariant
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return contentType.imageVariant
+                    contentType.imageVariant
                 default:
-                    return .default
+                    .default
                 }
             default:
-                return .default
+                .default
             }
         }
 
         var displaysTitle: Bool {
             switch contentSection.type {
             case .showAndMedias:
-                return false
+                false
             default:
-                return true
+                true
             }
         }
 
@@ -265,12 +265,12 @@ private extension Content {
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows, .continueWatching, .watchLater:
-                    return true
+                    true
                 default:
-                    return false
+                    false
                 }
             default:
-                return false
+                false
             }
         }
 
@@ -279,93 +279,93 @@ private extension Content {
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows:
-                    return .favoriteShows
+                    .favoriteShows
                 case .myProgram:
-                    return .episodesFromFavorites
+                    .episodesFromFavorites
                 case .continueWatching:
-                    return .resumePlayback
+                    .resumePlayback
                 case .watchLater:
-                    return .watchLater
+                    .watchLater
                 default:
-                    return .generic
+                    .generic
                 }
             default:
-                return .generic
+                .generic
             }
         }
 
         var hasHighlightedItem: Bool {
-            return presentation.type == .showPromotion
+            presentation.type == .showPromotion
         }
 
         var displayedShow: SRGShow? {
-            return show
+            show
         }
 
         #if os(iOS)
             var sharingItem: SharingItem? {
-                return SharingItem(for: contentSection)
+                SharingItem(for: contentSection)
             }
 
             var canResetApplicationBadge: Bool {
-                return false
+                false
             }
         #endif
 
         var analyticsTitle: String? {
             switch contentSection.type {
             case .medias, .showAndMedias, .shows:
-                return contentSection.presentation.title ?? contentSection.uid
+                contentSection.presentation.title ?? contentSection.uid
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return AnalyticsPageTitle.favorites.rawValue
+                    AnalyticsPageTitle.favorites.rawValue
                 case .myProgram:
-                    return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
+                    AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
                 case .continueWatching:
-                    return AnalyticsPageTitle.resumePlayback.rawValue
+                    AnalyticsPageTitle.resumePlayback.rawValue
                 case .watchLater:
-                    return AnalyticsPageTitle.watchLater.rawValue
+                    AnalyticsPageTitle.watchLater.rawValue
                 case .topicSelector:
-                    return AnalyticsPageTitle.topics.rawValue
+                    AnalyticsPageTitle.topics.rawValue
                 default:
-                    return nil
+                    nil
                 }
             case .none:
-                return nil
+                nil
             }
         }
 
         var analyticsType: String? {
             switch contentSection.type {
             case .none:
-                return nil
+                nil
             default:
-                return AnalyticsPageType.detail.rawValue
+                AnalyticsPageType.detail.rawValue
             }
         }
 
         var analyticsLevels: [String]? {
             switch contentSection.type {
             case .medias, .showAndMedias, .shows:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
             case .predefined:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .none:
-                return nil
+                nil
             }
         }
 
         func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
             switch presentation.type {
             case .favoriteShows:
-                return AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
+                AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
-                return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
+                AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsEvent.historyRemove(source: source, urn: nil)
+                AnalyticsEvent.historyRemove(source: source, urn: nil)
             default:
-                return nil
+                nil
             }
         }
 
@@ -404,7 +404,7 @@ private extension Content {
         }
 
         var displaysRowHeader: Bool {
-            return contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
+            contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
         }
 
         var openContentPageId: String? {
@@ -499,29 +499,29 @@ private extension Content {
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows, .myProgram:
-                    return UserInteractionSignal.favoriteUpdates()
+                    UserInteractionSignal.favoriteUpdates()
                 case .continueWatching:
-                    return UserInteractionSignal.historyUpdates()
+                    UserInteractionSignal.historyUpdates()
                 case .watchLater:
-                    return UserInteractionSignal.watchLaterUpdates()
+                    UserInteractionSignal.watchLaterUpdates()
                 default:
-                    return Just([]).eraseToAnyPublisher()
+                    Just([]).eraseToAnyPublisher()
                 }
             default:
-                return Just([]).eraseToAnyPublisher()
+                Just([]).eraseToAnyPublisher()
             }
         }
 
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch presentation.type {
             case .favoriteShows, .myProgram:
-                return ThrottledSignal.preferenceUpdates()
+                ThrottledSignal.preferenceUpdates()
             case .watchLater:
-                return ThrottledSignal.watchLaterUpdates()
+                ThrottledSignal.watchLaterUpdates()
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
-                return nil
+                nil
             }
         }
 
@@ -612,30 +612,30 @@ private extension Content {
         }
 
         var summary: String? {
-            return nil
+            nil
         }
 
         var label: String? {
-            return nil
+            nil
         }
 
         var image: SRGImage? {
-            return nil
+            nil
         }
 
         var imageVariant: SRGImageVariant {
             switch configuredSection {
             case .tvAllShows:
-                return .default
+                .default
             case .radioAllShows:
-                return ContentType.audioOrRadio.imageVariant
+                ContentType.audioOrRadio.imageVariant
             default:
-                return ContentType.mixed.imageVariant
+                ContentType.mixed.imageVariant
             }
         }
 
         var displaysTitle: Bool {
-            return true
+            true
         }
 
         var supportsEdition: Bool {
@@ -675,14 +675,14 @@ private extension Content {
         }
 
         var hasHighlightedItem: Bool {
-            return false
+            false
         }
 
         var displayedShow: SRGShow? {
             if case let .availableEpisodes(show) = configuredSection {
-                return show
+                show
             } else {
-                return nil
+                nil
             }
         }
 
@@ -690,18 +690,18 @@ private extension Content {
             var sharingItem: SharingItem? {
                 switch configuredSection {
                 case let .availableEpisodes(show):
-                    return SharingItem(for: show)
+                    SharingItem(for: show)
                 default:
-                    return nil
+                    nil
                 }
             }
 
             var canResetApplicationBadge: Bool {
                 switch configuredSection {
                 case .notifications:
-                    return true
+                    true
                 default:
-                    return false
+                    false
                 }
             }
         #endif
@@ -744,13 +744,13 @@ private extension Content {
         var analyticsType: String? {
             switch configuredSection {
             case .radioAllShows, .tvAllShows:
-                return AnalyticsPageType.overview.rawValue
+                AnalyticsPageType.overview.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll,
                  .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage,
                  .tvLive, .radioLive, .radioLiveSatellite:
-                return AnalyticsPageType.live.rawValue
+                AnalyticsPageType.live.rawValue
             default:
-                return AnalyticsPageType.detail.rawValue
+                AnalyticsPageType.detail.rawValue
             }
         }
 
@@ -813,7 +813,7 @@ private extension Content {
         }
 
         var rowHighlight: Highlight? {
-            return nil
+            nil
         }
 
         var placeholderRowItems: [Content.Item] {
@@ -836,7 +836,7 @@ private extension Content {
         }
 
         var displaysRowHeader: Bool {
-            return true
+            true
         }
 
         var openContentPageId: String? {

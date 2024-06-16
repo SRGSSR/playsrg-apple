@@ -33,7 +33,7 @@ struct FeaturedMediaContent: FeaturedContent {
     let label: String?
 
     var isPlaceholder: Bool {
-        return media == nil
+        media == nil
     }
 
     var introduction: String? {
@@ -57,20 +57,20 @@ struct FeaturedMediaContent: FeaturedContent {
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Featured media hint")
+        PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Featured media hint")
     }
 
     private var mediaDescriptionStyle: MediaDescription.Style {
         switch style {
         case .show:
-            return .show
+            .show
         case .date:
-            return .date
+            .date
         }
     }
 
     func visualView() -> some View {
-        return MediaVisualView(media: media, size: .medium)
+        MediaVisualView(media: media, size: .medium)
     }
 
     #if os(tvOS)
@@ -87,31 +87,31 @@ struct FeaturedShowContent: FeaturedContent {
     let label: String?
 
     var isPlaceholder: Bool {
-        return show == nil
+        show == nil
     }
 
     var introduction: String? {
-        return nil
+        nil
     }
 
     var title: String? {
-        return show?.title
+        show?.title
     }
 
     var summary: String? {
-        return show?.play_summary?.compacted
+        show?.play_summary?.compacted
     }
 
     var accessibilityLabel: String? {
-        return show?.title
+        show?.title
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Featured show hint")
+        PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Featured show hint")
     }
 
     func visualView() -> some View {
-        return ShowVisualView(show: show, size: .medium)
+        ShowVisualView(show: show, size: .medium)
     }
 
     #if os(tvOS)

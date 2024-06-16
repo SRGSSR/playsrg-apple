@@ -54,7 +54,7 @@ struct FlatButtonStyle: ButtonStyle {
         @State private var unfocusedSize: CGSize = .zero
 
         private var shadowColor: Color {
-            return focused ? Color(white: 0, opacity: 0.8) : .clear
+            focused ? Color(white: 0, opacity: 0.8) : .clear
         }
 
         func makeBody(configuration: Configuration) -> some View {

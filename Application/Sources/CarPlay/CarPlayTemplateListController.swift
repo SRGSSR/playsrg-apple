@@ -44,7 +44,7 @@ final class CarPlayTemplateListController {
     }
 
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        Publishers.Merge(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp(.scene(filter: notificationFilter.self))
         )
@@ -53,7 +53,7 @@ final class CarPlayTemplateListController {
     }
 
     private func notificationFilter(notification: Notification) -> Bool {
-        return notification.object is CPTemplateApplicationScene
+        notification.object is CPTemplateApplicationScene
     }
 }
 

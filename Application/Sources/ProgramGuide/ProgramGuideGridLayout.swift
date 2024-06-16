@@ -157,11 +157,11 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
 
     private static func xPosition(at date: Date, in dateInterval: DateInterval) -> CGFloat {
-        return channelHeaderWidth + horizontalSpacing + date.timeIntervalSince(dateInterval.start) * scale
+        channelHeaderWidth + horizontalSpacing + date.timeIntervalSince(dateInterval.start) * scale
     }
 
     private static func nowXPosition(at date: Date, in dateInterval: DateInterval) -> CGFloat {
-        return xPosition(at: date, in: dateInterval) - NowArrowView.size.width / 2
+        xPosition(at: date, in: dateInterval) - NowArrowView.size.width / 2
     }
 
     private static func nowArrowAttr(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
@@ -225,7 +225,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
 
     override func shouldInvalidateLayout(forBoundsChange _: CGRect) -> Bool {
-        return true
+        true
     }
 
     override var collectionViewContentSize: CGSize {
@@ -245,15 +245,15 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
 
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return layoutData?.layoutAttrs.first { $0.indexPath == indexPath }
+        layoutData?.layoutAttrs.first { $0.indexPath == indexPath }
     }
 
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return layoutData?.supplementaryAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
+        layoutData?.supplementaryAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
 
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return layoutData?.decorationAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
+        layoutData?.decorationAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
 }
 
@@ -285,7 +285,7 @@ extension ProgramGuideGridLayout {
     }
 
     static func sectionIndex(atYOffset yOffset: CGFloat, in collectionView: UICollectionView) -> Int {
-        return Int(safeYOffset(yOffset, in: collectionView) / (sectionHeight + verticalSpacing))
+        Int(safeYOffset(yOffset, in: collectionView) / (sectionHeight + verticalSpacing))
     }
 
     static func xOffset(centeringDate date: Date, in collectionView: UICollectionView, day: SRGDay) -> CGFloat? {

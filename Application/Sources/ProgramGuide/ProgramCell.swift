@@ -50,35 +50,35 @@ struct ProgramCell: View {
         @Environment(\.isUIKitFocused) private var isFocused
 
         private var timeRangeWidth: CGFloat {
-            return direction == .horizontal ? timeRangeFixedWidth : .infinity
+            direction == .horizontal ? timeRangeFixedWidth : .infinity
         }
 
         private var timeRangeLineLimit: Int {
-            return direction == .horizontal ? 2 : 1
+            direction == .horizontal ? 2 : 1
         }
 
         private var alignment: StackAlignment {
-            return direction == .horizontal ? .center : .leading
+            direction == .horizontal ? .center : .leading
         }
 
         private var horizontalPadding: CGFloat {
-            return direction == .horizontal ? 16 : 12
+            direction == .horizontal ? 16 : 12
         }
 
         private var verticalPadding: CGFloat {
-            return direction == .horizontal ? 0 : constant(iOS: 4, tvOS: 8)
+            direction == .horizontal ? 0 : constant(iOS: 4, tvOS: 8)
         }
 
         private var spacing: CGFloat {
-            return direction == .horizontal ? 10 : constant(iOS: 4, tvOS: 0)
+            direction == .horizontal ? 10 : constant(iOS: 4, tvOS: 0)
         }
 
         private var isCompact: Bool {
-            return availableSize.width < 100
+            availableSize.width < 100
         }
 
         private var isDisplayable: Bool {
-            return availableSize.width > 2 * horizontalPadding + 5
+            availableSize.width > 2 * horizontalPadding + 5
         }
 
         var body: some View {
@@ -125,7 +125,7 @@ struct ProgramCell: View {
 
         var body: some View {
             HStack(spacing: 10) {
-                if !compact && model.canPlay {
+                if !compact, model.canPlay {
                     Image(.playCircle)
                         .foregroundColor(.srgGrayD2)
                         .frame(height: canPlayHeight)
@@ -146,11 +146,11 @@ struct ProgramCell: View {
 
 private extension ProgramCell {
     var accessibilityLabel: String? {
-        return model.accessibilityLabel
+        model.accessibilityLabel
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
+        PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
     }
 }
 
@@ -158,7 +158,7 @@ private extension ProgramCell {
 
 enum ProgramCellSize {
     static func fullWidth() -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
+        NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
     }
 }
 

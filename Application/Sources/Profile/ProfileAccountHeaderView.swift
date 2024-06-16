@@ -32,7 +32,7 @@ struct ProfileAccountHeaderView: View {
         private let serviceLogoOffsetY: CGFloat = -3
 
         private var trailingImagePadding: CGFloat {
-            return UIImage(named: "identity_service_logo") != nil ? serviceLogoOffsetX : 0
+            UIImage(named: "identity_service_logo") != nil ? serviceLogoOffsetX : 0
         }
 
         var body: some View {
@@ -103,7 +103,7 @@ struct ProfileAccountHeaderView: View {
 
 extension ProfileAccountHeaderView {
     static func size() -> CGSize {
-        return CGSize(width: .zero, height: 66)
+        CGSize(width: .zero, height: 66)
     }
 }
 

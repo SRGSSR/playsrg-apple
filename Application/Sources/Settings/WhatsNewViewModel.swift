@@ -44,7 +44,7 @@ final class WhatsNewViewModel: ObservableObject {
     }
 
     private static var build: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
     }
 
     private static var version: String {
@@ -53,7 +53,7 @@ final class WhatsNewViewModel: ObservableObject {
     }
 
     private static var ios: String {
-        return UIDevice.current.systemVersion
+        UIDevice.current.systemVersion
     }
 }
 

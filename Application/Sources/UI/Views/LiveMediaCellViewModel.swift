@@ -49,24 +49,24 @@ final class LiveMediaCellViewModel: ObservableObject {
 
 extension LiveMediaCellViewModel {
     var channel: SRGChannel? {
-        return programComposition?.channel ?? media?.channel
+        programComposition?.channel ?? media?.channel
     }
 
     var logoImage: UIImage? {
-        return channel?.play_largeLogoImage
+        channel?.play_largeLogoImage
     }
 
     var program: SRGProgram? {
-        return programComposition?.play_program(at: date)
+        programComposition?.play_program(at: date)
     }
 
     var title: String? {
         if let channel {
-            return program?.title ?? channel.title
+            program?.title ?? channel.title
         } else if let media {
-            return MediaDescription.title(for: media, style: .date)
+            MediaDescription.title(for: media, style: .date)
         } else {
-            return nil
+            nil
         }
     }
 
@@ -97,7 +97,7 @@ extension LiveMediaCellViewModel {
     }
 
     var imageUrl: URL? {
-        return url(for: program?.image, size: .small) ?? url(for: media?.image, size: .small)
+        url(for: program?.image, size: .small) ?? url(for: media?.image, size: .small)
     }
 }
 

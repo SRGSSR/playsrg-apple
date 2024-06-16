@@ -11,35 +11,35 @@ import UIKit
 
 @objc final class SupportInformation: NSObject {
     private static func status(for bool: Bool) -> String {
-        return bool ? "Yes" : "No"
+        bool ? "Yes" : "No"
     }
 
     private static var dateAndTime: String {
-        return DateFormatter.play_shortDateAndTime.string(from: Date())
+        DateFormatter.play_shortDateAndTime.string(from: Date())
     }
 
     private static var applicationName: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     }
 
     private static var applicationIdentifier: String {
-        return Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
     }
 
     private static var applicationVersion: String {
-        return Bundle.main.play_friendlyVersionNumber
+        Bundle.main.play_friendlyVersionNumber
     }
 
     private static var operatingSystem: String {
-        return UIDevice.current.systemName
+        UIDevice.current.systemName
     }
 
     private static var operatingSystemVersion: String {
-        return ProcessInfo.processInfo.operatingSystemVersionString
+        ProcessInfo.processInfo.operatingSystemVersionString
     }
 
     private static var model: String {
-        return UIDevice.current.model
+        UIDevice.current.model
     }
 
     private static var modelIdentifier: String {
@@ -56,7 +56,7 @@ import UIKit
     }
 
     private static var continuousAutoplayStatus: String {
-        return status(for: ApplicationSettingAutoplayEnabled())
+        status(for: ApplicationSettingAutoplayEnabled())
     }
 
     private static var audioSettings: String {
@@ -86,20 +86,20 @@ import UIKit
     }
 
     private static var subtitleAvailabilityDisplayed: String {
-        return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingSubtitleAvailabilityDisplayed))
+        status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingSubtitleAvailabilityDisplayed))
     }
 
     private static var audioDescriptionAvailabilityDisplayed: String {
-        return status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed))
+        status(for: UserDefaults.standard.bool(forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed))
     }
 
     private static var voiceOverEnabled: String {
-        return status(for: UIAccessibility.isVoiceOverRunning)
+        status(for: UIAccessibility.isVoiceOverRunning)
     }
 
     #if os(iOS)
         private static var backgroundVideoPlaybackStatus: String {
-            return status(for: ApplicationSettingBackgroundVideoPlaybackEnabled())
+            status(for: ApplicationSettingBackgroundVideoPlaybackEnabled())
         }
 
         private static var pushNotificationStatus: String {

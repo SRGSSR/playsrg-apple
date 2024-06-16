@@ -40,11 +40,11 @@ struct WhatsNewView: View {
 
 private extension WhatsNewView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.whatsNew.rawValue
+        AnalyticsPageTitle.whatsNew.rawValue
     }
 
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
     }
 }
 

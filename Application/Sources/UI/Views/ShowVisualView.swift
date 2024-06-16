@@ -35,11 +35,11 @@ struct ShowVisualView: View {
     private var imageUrl: URL? {
         switch imageVariant {
         case .poster:
-            return url(for: show?.posterImage, size: size)
+            url(for: show?.posterImage, size: size)
         case .podcast:
-            return url(for: show?.podcastImage, size: size)
+            url(for: show?.podcastImage, size: size)
         case .default:
-            return url(for: show?.image, size: size)
+            url(for: show?.image, size: size)
         }
     }
 }

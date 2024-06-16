@@ -18,11 +18,11 @@ struct MoreCell: View {
     fileprivate static func aspectRatio(for imageVariant: SRGImageVariant) -> CGFloat {
         switch imageVariant {
         case .poster:
-            return 2 / 3
+            2 / 3
         case .podcast:
-            return 1
+            1
         case .default:
-            return 16 / 9
+            16 / 9
         }
     }
 
@@ -67,11 +67,11 @@ struct MoreCell: View {
 
 private extension MoreCell {
     var accessibilityLabel: String? {
-        return PlaySRGAccessibilityLocalizedString("More", comment: "More button label")
+        PlaySRGAccessibilityLocalizedString("More", comment: "More button label")
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "More button hint")
+        PlaySRGAccessibilityLocalizedString("Opens details.", comment: "More button hint")
     }
 }
 

@@ -16,23 +16,23 @@ enum ContextMenu {
     static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         switch item {
         case let .media(media):
-            return configuration(for: media, identifier: identifier, in: viewController)
+            configuration(for: media, identifier: identifier, in: viewController)
         case let .show(show):
-            return configuration(for: show, identifier: identifier, in: viewController)
+            configuration(for: show, identifier: identifier, in: viewController)
         case let .download(download):
             if let media = download.media {
-                return configuration(for: media, identifier: identifier, in: viewController)
+                configuration(for: media, identifier: identifier, in: viewController)
             } else {
-                return nil
+                nil
             }
         default:
-            return nil
+            nil
         }
     }
 
     static func configuration(for item: Content.Item, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
-        return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
+        configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
 
     static func interactionView(in tableView: UITableView, with configuration: UIContextMenuConfiguration) -> UIView? {
@@ -64,7 +64,7 @@ enum ContextMenu {
 private extension ContextMenu {
     private class ActivityPopoverPresentationDelegate: NSObject, UIPopoverPresentationControllerDelegate {
         func adaptivePresentationStyle(for _: UIPresentationController, traitCollection _: UITraitCollection) -> UIModalPresentationStyle {
-            return .formSheet
+            .formSheet
         }
     }
 
@@ -86,7 +86,7 @@ private extension ContextMenu {
 
 extension ContextMenu {
     static func configuration(for media: SRGMedia, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: identifier) {
+        UIContextMenuConfiguration(identifier: identifier) {
             MediaPreviewViewController(media: media)
         } actionProvider: { _ in
             menu(for: media, in: viewController)
@@ -95,11 +95,11 @@ extension ContextMenu {
 
     static func configuration(for media: SRGMedia, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
-        return configuration(for: media, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
+        configuration(for: media, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
 
     static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
-        return UIMenu(title: "", children: [
+        UIMenu(title: "", children: [
             watchLaterAction(for: media),
             historyAction(for: media),
             downloadAction(for: media),
@@ -112,17 +112,17 @@ extension ContextMenu {
         func title(for action: WatchLaterAction) -> String {
             if action == .add {
                 if media.mediaType == .audio {
-                    return NSLocalizedString("Listen later", comment: "Context menu action to add an audio to the later list")
+                    NSLocalizedString("Listen later", comment: "Context menu action to add an audio to the later list")
                 } else {
-                    return NSLocalizedString("Watch later", comment: "Context menu action to add a video to the later list")
+                    NSLocalizedString("Watch later", comment: "Context menu action to add a video to the later list")
                 }
             } else {
-                return NSLocalizedString("Delete from \"Later\"", comment: "Context menu action to delete a media from the later list")
+                NSLocalizedString("Delete from \"Later\"", comment: "Context menu action to delete a media from the later list")
             }
         }
 
         func image(for action: WatchLaterAction) -> UIImage {
-            return (action == .add) ? UIImage(resource: .watchLater) : UIImage(resource: .watchLaterFull)
+            (action == .add) ? UIImage(resource: .watchLater) : UIImage(resource: .watchLaterFull)
         }
 
         let action = WatchLaterAllowedActionForMedia(media)
@@ -168,14 +168,14 @@ extension ContextMenu {
 
         func title(for download: Download?) -> String {
             if download != nil {
-                return NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads")
+                NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads")
             } else {
-                return NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads")
+                NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads")
             }
         }
 
         func image(for download: Download?) -> UIImage {
-            return download != nil ? UIImage(resource: .downloadRemove) : UIImage(resource: .download)
+            download != nil ? UIImage(resource: .downloadRemove) : UIImage(resource: .download)
         }
 
         let download = Download(for: media)
@@ -227,7 +227,7 @@ extension ContextMenu {
 
 extension ContextMenu {
     static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: identifier) {
+        UIContextMenuConfiguration(identifier: identifier) {
             PageViewController(id: .show(show))
         } actionProvider: { _ in
             menu(for: show, in: viewController)
@@ -236,11 +236,11 @@ extension ContextMenu {
 
     static func configuration(for show: SRGShow, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
-        return configuration(for: show, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
+        configuration(for: show, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
 
     private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
-        return UIMenu(title: "", children: [
+        UIMenu(title: "", children: [
             favoriteAction(for: show),
             sharingAction(for: show, in: viewController)
         ].compactMap { $0 })
@@ -249,14 +249,14 @@ extension ContextMenu {
     private static func favoriteAction(for show: SRGShow) -> UIAction? {
         func title(isFavorite: Bool) -> String {
             if isFavorite {
-                return NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites")
+                NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites")
             } else {
-                return NSLocalizedString("Add to favorites", comment: "Context menu action to add a show to favorites")
+                NSLocalizedString("Add to favorites", comment: "Context menu action to add a show to favorites")
             }
         }
 
         func image(isFavorite: Bool) -> UIImage {
-            return isFavorite ? UIImage(resource: .favoriteFull) : UIImage(resource: .favorite)
+            isFavorite ? UIImage(resource: .favoriteFull) : UIImage(resource: .favorite)
         }
 
         let isFavorite = FavoritesContainsShow(show)
@@ -291,26 +291,26 @@ extension ContextMenu {
     @objc static func configuration(for object: AnyObject, at indexPath: NSIndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         switch object {
         case let media as SRGMedia:
-            return ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
+            ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
         case let show as SRGShow:
-            return ContextMenu.configuration(for: show, identifier: indexPath, in: viewController)
+            ContextMenu.configuration(for: show, identifier: indexPath, in: viewController)
         case let download as Download:
             if let media = download.media {
-                return ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
+                ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
             } else {
-                return nil
+                nil
             }
         default:
-            return nil
+            nil
         }
     }
 
     @objc static func interactionView(inTableView tableView: UITableView, with configuration: UIContextMenuConfiguration) -> UIView? {
-        return ContextMenu.interactionView(in: tableView, with: configuration)
+        ContextMenu.interactionView(in: tableView, with: configuration)
     }
 
     @objc static func interactionView(inCollectionView collectionView: UICollectionView, with configuration: UIContextMenuConfiguration) -> UIView? {
-        return ContextMenu.interactionView(in: collectionView, with: configuration)
+        ContextMenu.interactionView(in: collectionView, with: configuration)
     }
 
     @objc static func commitPreview(in viewController: UIViewController, animator: UIContextMenuInteractionCommitAnimating) {

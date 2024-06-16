@@ -12,7 +12,7 @@ import SRGDataProviderCombine
 import SRGUserData
 import UIKit
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder {
     var window: UIWindow?
 
@@ -112,7 +112,7 @@ extension AppDelegate: UIApplicationDelegate {
     }
 
     func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        return UISceneConfiguration(name: "Default", sessionRole: connectingSceneSession.role)
+        UISceneConfiguration(name: "Default", sessionRole: connectingSceneSession.role)
     }
 
     private func setupDataProvider() {

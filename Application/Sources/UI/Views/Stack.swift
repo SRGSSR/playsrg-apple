@@ -29,22 +29,22 @@ struct Stack<Content: View>: View {
     private static func horizontalAlignment(for alignment: StackAlignment) -> HorizontalAlignment {
         switch alignment {
         case .leading:
-            return .leading
+            .leading
         case .center:
-            return .center
+            .center
         case .trailing:
-            return .trailing
+            .trailing
         }
     }
 
     private static func verticalAlignment(for alignment: StackAlignment) -> VerticalAlignment {
         switch alignment {
         case .leading:
-            return .top
+            .top
         case .center:
-            return .center
+            .center
         case .trailing:
-            return .bottom
+            .bottom
         }
     }
 

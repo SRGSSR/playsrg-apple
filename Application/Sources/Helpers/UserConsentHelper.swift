@@ -59,7 +59,7 @@ enum UCService: Hashable, CaseIterable {
     @objc private(set) static var isShowingBanner = false
 
     static func serviceConsents() -> [UsercentricsServiceConsent] {
-        return UsercentricsCore.shared.getConsents()
+        UsercentricsCore.shared.getConsents()
     }
 
     // Retain potiential collecting consent banner to be displayed as modal on top of each views.
@@ -74,7 +74,7 @@ enum UCService: Hashable, CaseIterable {
 
         waitCollectingConsentPool -= 1
 
-        if waitCollectingConsentPool == 0 && shouldCollectConsent {
+        if waitCollectingConsentPool == 0, shouldCollectConsent {
             shouldCollectConsent = false
 
             // Dispatch on next main thread loop, with a tiny delay.
@@ -93,7 +93,7 @@ enum UCService: Hashable, CaseIterable {
 
     private static var acceptedServiceIds: [String]? {
         get {
-            return UserDefaults.standard.stringArray(forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
+            UserDefaults.standard.stringArray(forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
         }
         set {
             UserDefaults.standard.set(newValue, forKey: PlaySRGSettingUserConsentAcceptedServiceIds)
@@ -137,7 +137,7 @@ enum UCService: Hashable, CaseIterable {
             #else
                 shouldCollectConsent = status.shouldCollectConsent
             #endif
-            if shouldCollectConsent && waitCollectingConsentPool == 0 {
+            if shouldCollectConsent, waitCollectingConsentPool == 0 {
                 shouldCollectConsent = false
                 showFirstLayer()
             } else {
@@ -177,11 +177,11 @@ enum UCService: Hashable, CaseIterable {
     }
 
     private static var banner: UsercentricsBanner {
-        return UsercentricsBanner(bannerSettings: bannerSettings)
+        UsercentricsBanner(bannerSettings: bannerSettings)
     }
 
     private static var bannerLogoImage: UIImage? {
-        return UIImage(named: "logo_bu_\(ApplicationConfiguration.shared.businessUnitIdentifier)")
+        UIImage(named: "logo_bu_\(ApplicationConfiguration.shared.businessUnitIdentifier)")
     }
 
     private static var bannerSettings: BannerSettings? {
@@ -249,17 +249,17 @@ enum UCService: Hashable, CaseIterable {
         }
 
         private static func button(type: UsercentricsUI.ButtonType, isPrimary: Bool) -> ButtonSettings {
-            return ButtonSettings(type: type,
-                                  textColor: isPrimary ? .white : .srgGray23,
-                                  backgroundColor: isPrimary ? .srgRed : .srgGrayD2,
-                                  cornerRadius: 8)
+            ButtonSettings(type: type,
+                           textColor: isPrimary ? .white : .srgGray23,
+                           backgroundColor: isPrimary ? .srgRed : .srgGrayD2,
+                           cornerRadius: 8)
         }
     #endif
 
     // MARK: Apply consent
 
     private static func applyConsent(with serviceConsents: [UsercentricsServiceConsent]) {
-        applyConsent(with: serviceConsents.filter { $0.status == true }.map { $0.templateId })
+        applyConsent(with: serviceConsents.filter { $0.status == true }.map(\.templateId))
 
         NotificationCenter.default.post(name: userConsentDidChangeNotification, object: nil, userInfo: [userConsentServiceConsentsKey: serviceConsents])
         #if DEBUG

@@ -34,14 +34,14 @@ final class ProfileCellModel: ObservableObject {
 
 extension ProfileCellModel {
     var image: UIImage? {
-        return applicationSectioninfo?.image
+        applicationSectioninfo?.image
     }
 
     var title: String? {
-        return applicationSectioninfo?.title
+        applicationSectioninfo?.title
     }
 
     var isModalPresentation: Bool {
-        return applicationSectioninfo?.isModalPresentation ?? false
+        applicationSectioninfo?.isModalPresentation ?? false
     }
 }

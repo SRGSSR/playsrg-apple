@@ -18,21 +18,21 @@ import Foundation
     var value: String {
         switch self {
         case .videosTabBarItem:
-            return "videosTabBarItem"
+            "videosTabBarItem"
         case .audiosTabBarItem:
-            return "audiosTabBarItem"
+            "audiosTabBarItem"
         case .livestreamsTabBarItem:
-            return "livestreamsTabBarItem"
+            "livestreamsTabBarItem"
         case .tvGuideTabBarItem:
-            return "tvGuideTabBarItem"
+            "tvGuideTabBarItem"
         case .showsTabBarItem:
-            return "showsTabBarItem"
+            "showsTabBarItem"
         case .searchTabBarItem:
-            return "searchTabBarItem"
+            "searchTabBarItem"
         case .profileTabBarItem:
-            return "profileTabBarItem"
+            "profileTabBarItem"
         case .closeButton:
-            return "closeButton"
+            "closeButton"
         }
     }
 }
@@ -44,11 +44,11 @@ import Foundation
     private let identifier: AccessibilityIdentifier
 
     @objc class func identifier(_ identifier: AccessibilityIdentifier) -> AccessibilityIdentifierObjC {
-        return Self(identifier: identifier)
+        Self(identifier: identifier)
     }
 
     @objc var value: String {
-        return identifier.value
+        identifier.value
     }
 
     required init(identifier: AccessibilityIdentifier) {

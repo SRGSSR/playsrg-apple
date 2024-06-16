@@ -58,32 +58,32 @@ struct ImageView: View {
     private static func alignment(for contentMode: Self.ContentMode) -> Alignment {
         switch contentMode {
         case .aspectFit, .aspectFill, .center, .fill, .aspectFillFocused:
-            return .center
+            .center
         case .top, .aspectFitTop, .aspectFillTop:
-            return .top
+            .top
         case .bottom, .aspectFitBottom, .aspectFillBottom:
-            return .bottom
+            .bottom
         case .left, .aspectFitLeft, .aspectFillLeft:
-            return .leading
+            .leading
         case .right, .aspectFitRight, .aspectFillRight:
-            return .trailing
+            .trailing
         case .topLeft, .aspectFitTopLeft, .aspectFillTopLeft:
-            return .topLeading
+            .topLeading
         case .topRight, .aspectFitTopRight, .aspectFillTopRight:
-            return .topTrailing
+            .topTrailing
         case .bottomLeft, .aspectFitBottomLeft, .aspectFillBottomLeft:
-            return .bottomLeading
+            .bottomLeading
         case .bottomRight, .aspectFitBottomRight, .aspectFillBottomRight:
-            return .bottomTrailing
+            .bottomTrailing
         }
     }
 
     private static func fitSize(for imageContainer: ImageContainer, in geometry: GeometryProxy) -> CGSize {
         let imageSize = imageContainer.image.size
-        guard imageSize.width != 0 && imageSize.height != 0 else { return .zero }
+        guard imageSize.width != 0, imageSize.height != 0 else { return .zero }
 
         let targetSize = geometry.size
-        guard targetSize.width != 0 && targetSize.height != 0 else { return .zero }
+        guard targetSize.width != 0, targetSize.height != 0 else { return .zero }
 
         let imageAspectRatio = imageSize.width / imageSize.height
         let targetAspectRatio = targetSize.width / targetSize.height
@@ -97,10 +97,10 @@ struct ImageView: View {
 
     private static func fillSize(for imageContainer: ImageContainer, in geometry: GeometryProxy) -> CGSize {
         let imageSize = imageContainer.image.size
-        guard imageSize.width != 0 && imageSize.height != 0 else { return .zero }
+        guard imageSize.width != 0, imageSize.height != 0 else { return .zero }
 
         let targetSize = geometry.size
-        guard targetSize.width != 0 && targetSize.height != 0 else { return .zero }
+        guard targetSize.width != 0, targetSize.height != 0 else { return .zero }
 
         let imageAspectRatio = imageSize.width / imageSize.height
         let targetAspectRatio = targetSize.width / targetSize.height

@@ -49,14 +49,14 @@ final class ProfileAccountHeaderViewModel: ObservableObject {
 extension ProfileAccountHeaderViewModel {
     var accessibilityLabel: String {
         if let accountDescription = data.accountDescription {
-            return String(format: PlaySRGAccessibilityLocalizedString("Logged in user: %@", comment: "Accessibility introductory text for the logged in user"), accountDescription)
+            String(format: PlaySRGAccessibilityLocalizedString("Logged in user: %@", comment: "Accessibility introductory text for the logged in user"), accountDescription)
         } else {
-            return data.text
+            data.text
         }
     }
 
     var accessibilityHint: String {
-        return data.isLoggedIn ?
+        data.isLoggedIn ?
             PlaySRGAccessibilityLocalizedString("Manages account information", comment: "Accessibility hint for the profile header when user is logged in") :
             PlaySRGAccessibilityLocalizedString("allows to log in or create an account in order to synchronize data.", comment: "Accessibility hint for the profile header when user is not logged in")
     }
@@ -71,7 +71,7 @@ extension ProfileAccountHeaderViewModel {
         let account: SRGAccount?
 
         var icon: ImageResource {
-            return isLoggedIn ? .accountLoggedInIcon : .accountLoggedOutIcon
+            isLoggedIn ? .accountLoggedInIcon : .accountLoggedOutIcon
         }
 
         var accountDescription: String? {
@@ -88,12 +88,12 @@ extension ProfileAccountHeaderViewModel {
         var text: String {
             if isLoggedIn {
                 if let accountDescription {
-                    return accountDescription
+                    accountDescription
                 } else {
-                    return NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet")
+                    NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet")
                 }
             } else {
-                return NSLocalizedString("Sign in", comment: "Text displayed within the sign in profile header when no user is logged in")
+                NSLocalizedString("Sign in", comment: "Text displayed within the sign in profile header when no user is logged in")
             }
         }
 

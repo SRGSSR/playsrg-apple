@@ -79,10 +79,10 @@ struct Service: Identifiable, Equatable {
 
 @objc class ServiceObjC: NSObject {
     @objc static func name(forServiceId serviceId: String) -> String {
-        return Service.service(forId: serviceId).name
+        Service.service(forId: serviceId).name
     }
 
     @objc static func url(forServiceId serviceId: String) -> URL {
-        return Service.service(forId: serviceId).url
+        Service.service(forId: serviceId).url
     }
 }

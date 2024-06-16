@@ -35,7 +35,7 @@ class IndexedCollectionViewDiffableDataSource<Section, Item>: UICollectionViewDi
     }
 
     override func collectionView(_: UICollectionView, indexPathForIndexTitle _: String, at index: Int) -> IndexPath {
-        return IndexPath(row: 0, section: index)
+        IndexPath(row: 0, section: index)
     }
 }
 
@@ -53,7 +53,7 @@ class IndexedCollectionViewDiffableDataSource<Section, Item>: UICollectionViewDi
      */
     extension UICollectionView {
         private func sectionIndexBar() -> UIView? {
-            return subviews.first { view in
+            subviews.first { view in
                 NSStringFromClass(type(of: view)).contains("I24n4d23ex5Bar7A6cc86ess98oryV6i6ew".unobfuscated())
             }
         }

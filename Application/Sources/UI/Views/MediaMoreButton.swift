@@ -39,7 +39,7 @@ struct MediaMoreButton: UIViewRepresentable {
 
 private extension MediaMoreButton {
     var accessibilityLabel: String? {
-        return PlaySRGAccessibilityLocalizedString("More", comment: "More button label")
+        PlaySRGAccessibilityLocalizedString("More", comment: "More button label")
     }
 }
 

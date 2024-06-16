@@ -18,7 +18,7 @@ final class DownloadCellViewModel: ObservableObject {
     }
 
     var title: String? {
-        return download?.title
+        download?.title
     }
 
     var subtitle: String? {
@@ -67,10 +67,10 @@ extension DownloadCellViewModel {
 
     private static func progress(for download: Download?) -> Progress {
         if let download, let progress = Download.currentlyKnownProgress(for: download) {
-            return progress
+            progress
         } else {
             // Display 0% if nothing
-            return Progress(totalUnitCount: 10)
+            Progress(totalUnitCount: 10)
         }
     }
 

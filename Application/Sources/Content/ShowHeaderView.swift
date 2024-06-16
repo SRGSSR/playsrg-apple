@@ -38,7 +38,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
     static let imageAspectRatio: CGFloat = 16 / 9
 
     static func isVerticalLayout(horizontalSizeClass: UIUserInterfaceSizeClass, isLandscape: Bool) -> Bool {
-        return horizontalSizeClass == .compact || !isLandscape
+        horizontalSizeClass == .compact || !isLandscape
     }
 
     @StateObject private var model = ShowHeaderViewModel()
@@ -78,7 +78,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
         }
 
         private var padding: CGFloat {
-            return horizontalSizeClass == .compact ? horizontalPadding : horizontalPadding * 2
+            horizontalSizeClass == .compact ? horizontalPadding : horizontalPadding * 2
         }
 
         var body: some View {

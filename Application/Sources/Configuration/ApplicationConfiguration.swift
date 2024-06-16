@@ -10,45 +10,45 @@ extension ApplicationConfiguration {
     private static func configuredSection(from homeSection: HomeSection) -> ConfiguredSection? {
         switch homeSection {
         case .tvLive:
-            return .tvLive
+            .tvLive
         case .radioLive:
-            return .radioLive
+            .radioLive
         case .radioLiveSatellite:
-            return .radioLiveSatellite
+            .radioLiveSatellite
         case .tvLiveCenterScheduledLivestreams:
-            return .tvLiveCenterScheduledLivestreams
+            .tvLiveCenterScheduledLivestreams
         case .tvLiveCenterScheduledLivestreamsAll:
-            return .tvLiveCenterScheduledLivestreamsAll
+            .tvLiveCenterScheduledLivestreamsAll
         case .tvLiveCenterEpisodes:
-            return .tvLiveCenterEpisodes
+            .tvLiveCenterEpisodes
         case .tvLiveCenterEpisodesAll:
-            return .tvLiveCenterEpisodesAll
+            .tvLiveCenterEpisodesAll
         case .tvScheduledLivestreams:
-            return .tvScheduledLivestreams
+            .tvScheduledLivestreams
         case .tvScheduledLivestreamsNews:
-            return .tvScheduledLivestreamsNews
+            .tvScheduledLivestreamsNews
         case .tvScheduledLivestreamsSport:
-            return .tvScheduledLivestreamsSport
+            .tvScheduledLivestreamsSport
         case .tvScheduledLivestreamsSignLanguage:
-            return .tvScheduledLivestreamsSignLanguage
+            .tvScheduledLivestreamsSignLanguage
         default:
-            return nil
+            nil
         }
     }
 
     var liveConfiguredSections: [ConfiguredSection] {
-        return liveHomeSections.compactMap { homeSection in
+        liveHomeSections.compactMap { homeSection in
             guard let homeSection = HomeSection(rawValue: homeSection.intValue) else { return nil }
             return Self.configuredSection(from: homeSection)
         }
     }
 
     var serviceMessageUrl: URL {
-        return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
+        URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
     }
 
     func relatedContentUrl(for media: SRGMedia) -> URL {
-        return URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: middlewareURL)!
+        URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: middlewareURL)!
     }
 
     func topicColors(for topic: SRGTopic) -> (Color, Color)? {
@@ -59,21 +59,21 @@ extension ApplicationConfiguration {
     }
 
     private static var version: String {
-        return Bundle.main.play_friendlyVersionNumber
+        Bundle.main.play_friendlyVersionNumber
     }
 
     private static var type: String {
         if ProcessInfo.processInfo.isMacCatalystApp || ProcessInfo.processInfo.isiOSAppOnMac {
-            return "desktop"
+            "desktop"
         } else if UIDevice.current.userInterfaceIdiom == .pad {
-            return "tablet"
+            "tablet"
         } else {
-            return "phone"
+            "phone"
         }
     }
 
     private static var identifier: String? {
-        return UserDefaults.standard.string(forKey: "tc_unique_id")
+        UserDefaults.standard.string(forKey: "tc_unique_id")
     }
 
     private static func typeformUrlWithParameters(_ url: URL) -> URL {
@@ -101,7 +101,7 @@ extension ApplicationConfiguration {
     }
 
     var tvGuideOtherBouquets: [TVGuideBouquet] {
-        return tvGuideOtherBouquetsObjc.map { number in
+        tvGuideOtherBouquetsObjc.map { number in
             TVGuideBouquet(rawValue: number.intValue)!
         }
     }

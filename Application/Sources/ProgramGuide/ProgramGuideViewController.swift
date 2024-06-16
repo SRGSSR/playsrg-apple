@@ -127,12 +127,12 @@ final class ProgramGuideViewController: UIViewController {
     #endif
 
     private static func layout(for traitCollection: UITraitCollection) -> ProgramGuideLayout {
-        return constant(iOS: ApplicationSettingProgramGuideRecentlyUsedLayout(traitCollection.horizontalSizeClass == .compact), tvOS: .grid)
+        constant(iOS: ApplicationSettingProgramGuideRecentlyUsedLayout(traitCollection.horizontalSizeClass == .compact), tvOS: .grid)
     }
 
     #if os(tvOS)
         override var preferredFocusEnvironments: [UIFocusEnvironment] {
-            return [headerView]
+            [headerView]
         }
 
         @objc private func menuPressed(_: UIGestureRecognizer) {
@@ -152,7 +152,7 @@ extension ProgramGuideViewController {
 
     private var layout: ProgramGuideLayout {
         get {
-            return _layout
+            _layout
         }
         set {
             setLayout(newValue, animated: false)
@@ -276,7 +276,7 @@ extension ProgramGuideViewController {
 
 extension ProgramGuideViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
-        return children.first
+        children.first
     }
 
     func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
@@ -295,14 +295,14 @@ extension ProgramGuideViewController: ScrollableContentContainer {
 
 extension ProgramGuideViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
-        return AnalyticsPageTitle.programGuide.rawValue
+        AnalyticsPageTitle.programGuide.rawValue
     }
 
     var srg_pageViewType: String {
-        return AnalyticsPageType.overview.rawValue
+        AnalyticsPageType.overview.rawValue
     }
 
     var srg_pageViewLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
     }
 }

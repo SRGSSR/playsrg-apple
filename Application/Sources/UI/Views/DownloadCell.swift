@@ -27,26 +27,26 @@ struct DownloadCell: View {
 
     private var direction: StackDirection {
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
-            return .horizontal
+            .horizontal
         } else {
-            return .vertical
+            .vertical
         }
     }
 
     private var horizontalPadding: CGFloat {
-        return direction == .vertical ? 0 : 10
+        direction == .vertical ? 0 : 10
     }
 
     private var verticalPadding: CGFloat {
-        return direction == .vertical ? 5 : 0
+        direction == .vertical ? 5 : 0
     }
 
     private var hasSelectionAppearance: Bool {
-        return isSelected && download != nil
+        isSelected && download != nil
     }
 
     private var imageUrl: URL? {
-        return url(for: download?.image, size: .small)
+        url(for: download?.image, size: .small)
     }
 
     init(download: Download?, layout: Layout = .adaptive) {
@@ -91,7 +91,7 @@ struct DownloadCell: View {
         let embeddedDirection: StackDirection
 
         private var title: String {
-            return model.title ?? .placeholder(length: 10)
+            model.title ?? .placeholder(length: 10)
         }
 
         var body: some View {
@@ -145,7 +145,7 @@ struct DownloadCell: View {
 
         private struct DownloadImageView: UIViewRepresentable {
             func makeUIView(context _: Context) -> UIImageView {
-                return UIImageView.play_smallDownloadingImageView(withTintColor: .srgGrayD2)
+                UIImageView.play_smallDownloadingImageView(withTintColor: .srgGrayD2)
             }
 
             func updateUIView(_: UIImageView, context _: Context) {
@@ -168,11 +168,11 @@ private extension DownloadCell {
     }
 
     var accessibilityHint: String? {
-        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Download cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Download cell hint in edit mode")
+        !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Download cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Download cell hint in edit mode")
     }
 
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? .isSelected : []
+        isSelected ? .isSelected : []
     }
 }
 
@@ -185,11 +185,11 @@ enum DownloadCellSize {
     private static let heightOffset: CGFloat = 70
 
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
+        LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
 
     static func fullWidth() -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
+        NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }
 

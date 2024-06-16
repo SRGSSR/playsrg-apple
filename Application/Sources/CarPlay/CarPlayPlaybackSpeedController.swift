@@ -49,7 +49,7 @@ final class CarPlayPlaybackSpeedController {
 
     private static func text(forPlaybackRate playbackRate: Float, controller: SRGLetterboxController) -> String {
         let effectivePlaybackRate = controller.effectivePlaybackRate
-        if playbackRate == controller.playbackRate && playbackRate != effectivePlaybackRate {
+        if playbackRate == controller.playbackRate, playbackRate != effectivePlaybackRate {
             return String(format: NSLocalizedString("%1$@× (Currently: %2$@×)", comment: "Speed factor with current value if different from desired one"), playbackRate.minimalRepresentation, effectivePlaybackRate.minimalRepresentation)
         } else {
             return String(format: NSLocalizedString("%@×", comment: "Speed factor"), playbackRate.minimalRepresentation)
@@ -57,11 +57,11 @@ final class CarPlayPlaybackSpeedController {
     }
 
     private static func accessoryImage(forPlaybackRate playbackRate: Float, controller: SRGLetterboxController) -> UIImage? {
-        return playbackRate == controller.playbackRate ? UIImage(systemName: "checkmark") : nil
+        playbackRate == controller.playbackRate ? UIImage(systemName: "checkmark") : nil
     }
 
     private static func playbackRateChangeSignal(for controller: SRGLetterboxController) -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        Publishers.Merge(
             controller.publisher(for: \.playbackRate),
             controller.publisher(for: \.effectivePlaybackRate)
         )

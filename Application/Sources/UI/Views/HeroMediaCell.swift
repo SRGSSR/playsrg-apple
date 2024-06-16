@@ -43,7 +43,7 @@ struct HeroMediaCell: View {
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
 
         private var regularWidthContentMode: ImageView.ContentMode {
-            return .aspectFillFocused(relativeWidth: 0.5, relativeHeight: 0.55)
+            .aspectFillFocused(relativeWidth: 0.5, relativeHeight: 0.55)
         }
 
         private var contentMode: ImageView.ContentMode {
@@ -126,7 +126,7 @@ private extension HeroMediaCell {
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
+        PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
     }
 }
 
@@ -144,11 +144,11 @@ enum HeroMediaCellSize {
 
     private static func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
         if horizontalSizeClass == .compact {
-            return 9 / 11
+            9 / 11
         } else if let isLandscape = UIApplication.shared.mainWindow?.isLandscape, isLandscape {
-            return 2 / 5
+            2 / 5
         } else {
-            return 1 / 2
+            1 / 2
         }
     }
 }

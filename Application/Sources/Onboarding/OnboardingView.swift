@@ -12,7 +12,7 @@ struct OnboardingView: UIViewControllerRepresentable {
     let onboarding: Onboarding
 
     func makeUIViewController(context _: Context) -> OnboardingViewController {
-        return .viewController(for: onboarding)
+        .viewController(for: onboarding)
     }
 
     func updateUIViewController(_: OnboardingViewController, context _: Context) {

@@ -39,11 +39,11 @@ struct SectionShowHeaderView: View {
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
 
     private var direction: StackDirection {
-        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+        (horizontalSizeClass == .compact) ? .vertical : .horizontal
     }
 
     private var alignment: StackAlignment {
-        return (horizontalSizeClass == .compact) ? .center : .leading
+        (horizontalSizeClass == .compact) ? .center : .leading
     }
 
     var body: some View {
@@ -114,11 +114,11 @@ struct SectionShowHeaderView: View {
         @FirstResponder private var firstResponder
 
         var accessibilityLabel: String? {
-            return show.title
+            show.title
         }
 
         var accessibilityHint: String? {
-            return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show button hint")
+            PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show button hint")
         }
 
         var body: some View {
@@ -135,7 +135,7 @@ struct SectionShowHeaderView: View {
 
 private extension View {
     func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
-        return Group {
+        Group {
             if horizontalSizeClass == .compact {
                 self
             } else {

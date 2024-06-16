@@ -18,11 +18,11 @@ final class SectionViewModel: ObservableObject {
     private var selectedItems = Set<Content.Item>()
 
     var title: String? {
-        return configuration.properties.title
+        configuration.properties.title
     }
 
     var displaysTitle: Bool {
-        return configuration.properties.displaysTitle
+        configuration.properties.displaysTitle
     }
 
     var numberOfSelectedItems: Int {
@@ -112,7 +112,7 @@ final class SectionViewModel: ObservableObject {
     }
 
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge3(
+        Publishers.Merge3(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
@@ -137,15 +137,15 @@ extension SectionViewModel {
         }
 
         var properties: SectionProperties {
-            return wrappedValue.properties
+            wrappedValue.properties
         }
 
         var viewModelProperties: SectionViewModelProperties {
             switch wrappedValue {
             case let .content(section, type, _):
-                return ContentSectionProperties(contentSection: section, contentType: type)
+                ContentSectionProperties(contentSection: section, contentType: type)
             case let .configured(section):
-                return ConfiguredSectionProperties(configuredSection: section)
+                ConfiguredSectionProperties(configuredSection: section)
             }
         }
     }
@@ -164,20 +164,20 @@ extension SectionViewModel {
         var sectionTopInset: CGFloat {
             switch self {
             case .title:
-                return constant(iOS: 8, tvOS: 12)
+                constant(iOS: 8, tvOS: 12)
             default:
-                return 0
+                0
             }
         }
 
         var size: Size {
             switch self {
             case .title:
-                return .small
+                .small
             case .item:
-                return .large
+                .large
             case .none:
-                return .zero
+                .zero
             }
         }
     }
@@ -195,7 +195,7 @@ extension SectionViewModel {
         let footer: Footer
 
         var indexTitle: String {
-            return id.uppercased()
+            id.uppercased()
         }
 
         func hash(into hasher: inout Hasher) {
@@ -226,14 +226,14 @@ extension SectionViewModel {
 
         var headerSize: Header.Size {
             if case let .loaded(rows: rows) = self, let firstSection = rows.first?.section {
-                return firstSection.header.size
+                firstSection.header.size
             } else {
-                return .zero
+                .zero
             }
         }
 
         var displaysEmptyContentView: Bool {
-            return headerSize != .large && !hasContent
+            headerSize != .large && !hasContent
         }
     }
 
@@ -264,7 +264,7 @@ extension SectionViewModel {
     }
 
     private static func alphabeticalRows(from groups: [(key: Character, value: [Item])]) -> [Row] {
-        return groups.compactMap { character, items in
+        groups.compactMap { character, items in
             Row(
                 section: Section(id: String(character), header: .title(String(character).uppercased()), footer: .none),
                 items: items
@@ -357,9 +357,9 @@ private extension SectionViewModel {
         var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
             switch contentSection.type {
             case .showAndMedias:
-                return .never
+                .never
             default:
-                return .always
+                .always
             }
         }
 
@@ -367,20 +367,20 @@ private extension SectionViewModel {
             switch contentSection.type {
             case .showAndMedias:
                 if let firstItem = items.first, case .show = firstItem {
-                    return SectionViewModel.consolidatedRows(with: Array(items.suffix(from: 1)), header: .item(firstItem))
+                    SectionViewModel.consolidatedRows(with: Array(items.suffix(from: 1)), header: .item(firstItem))
                 } else {
-                    return SectionViewModel.consolidatedRows(with: items)
+                    SectionViewModel.consolidatedRows(with: items)
                 }
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows:
-                    return SectionViewModel.alphabeticalRows(from: items, smart: true)
+                    SectionViewModel.alphabeticalRows(from: items, smart: true)
                 default:
-                    return SectionViewModel.consolidatedRows(with: items)
+                    SectionViewModel.consolidatedRows(with: items)
                 }
             default:
                 // Remark: `.shows` results cannot be arranged alphabetically because of pagination.
-                return SectionViewModel.consolidatedRows(with: items)
+                SectionViewModel.consolidatedRows(with: items)
             }
         }
     }
@@ -425,7 +425,7 @@ private extension SectionViewModel {
         }
 
         var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
-            return .always
+            .always
         }
 
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {

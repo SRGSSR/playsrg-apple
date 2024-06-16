@@ -10,14 +10,14 @@ import Foundation
  *  Return an accessibility-oriented localized string from the main bundle.
  */
 func PlaySRGAccessibilityLocalizedString(_ key: String, comment _: String?) -> String {
-    return Bundle.main.localizedString(forKey: key, value: "", table: "Accessibility")
+    Bundle.main.localizedString(forKey: key, value: "", table: "Accessibility")
 }
 
 /**
  *  Return an onboarding localized string from the main bundle.
  */
 func PlaySRGOnboardingLocalizedString(_ key: String, comment _: String?) -> String {
-    return Bundle.main.localizedString(forKey: key, value: "", table: "Onboarding")
+    Bundle.main.localizedString(forKey: key, value: "", table: "Onboarding")
 }
 
 /**
@@ -26,12 +26,12 @@ func PlaySRGOnboardingLocalizedString(_ key: String, comment _: String?) -> Stri
  *  See https://clang-analyzer.llvm.org/faq.html.
  */
 func PlaySRGNonLocalizedString(_ string: String) -> String {
-    return string
+    string
 }
 
 extension Bundle {
     @objc static func PlaySRGAccessibilityLocalizedString(_ key: String, _ comment: String?) -> String {
-        return PlaySRG.PlaySRGAccessibilityLocalizedString(key, comment: comment)
+        PlaySRG.PlaySRGAccessibilityLocalizedString(key, comment: comment)
     }
 
     var play_friendlyVersionNumber: String {

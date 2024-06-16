@@ -13,7 +13,7 @@ enum Mock {
     }
 
     static func bucket(_ kind: Bucket = .standard) -> SRGItemBucket {
-        return mockObject(kind.rawValue, type: SRGItemBucket.self)
+        mockObject(kind.rawValue, type: SRGItemBucket.self)
     }
 
     enum Channel: String {
@@ -25,11 +25,11 @@ enum Mock {
     }
 
     static func channel(_ kind: Channel = .standard) -> SRGChannel {
-        return mockObject(kind.rawValue, type: SRGChannel.self)
+        mockObject(kind.rawValue, type: SRGChannel.self)
     }
 
     static func playChannel(_ kind: Channel = .standard) -> PlayChannel {
-        return PlayChannel(wrappedValue: mockObject(kind.rawValue, type: SRGChannel.self), external: false)
+        PlayChannel(wrappedValue: mockObject(kind.rawValue, type: SRGChannel.self), external: false)
     }
 
     enum ContentSection: String {
@@ -38,7 +38,7 @@ enum Mock {
     }
 
     static func contentSection(_ kind: ContentSection = .standard) -> SRGContentSection {
-        return mockObject(kind.rawValue, type: SRGContentSection.self)
+        mockObject(kind.rawValue, type: SRGContentSection.self)
     }
 
     enum FocalPoint: String {
@@ -56,9 +56,9 @@ enum Mock {
     static func focalPoint(_ kind: FocalPoint = .none) -> SRGFocalPoint? {
         switch kind {
         case .none:
-            return nil
+            nil
         default:
-            return mockObject(kind.rawValue, type: SRGFocalPoint.self)
+            mockObject(kind.rawValue, type: SRGFocalPoint.self)
         }
     }
 
@@ -73,35 +73,35 @@ enum Mock {
     static func highlight(_ kind: Highlight = .standard) -> PlaySRG.Highlight {
         switch kind {
         case .standard:
-            return PlaySRG.Highlight(
+            PlaySRG.Highlight(
                 title: "Jeune et Golri - Saison 1 inédite!",
                 summary: "Prune, stand-uppeuse jeune et golri, rencontre Francis, vieux et dépité.  Elle qui devait bosser son premier spectacle s'embarque dans cette love story inattendue!",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
                 imageFocalPoint: nil
             )
         case .overflow:
-            return PlaySRG.Highlight(
+            PlaySRG.Highlight(
                 title: .loremIpsum,
                 summary: .loremIpsum,
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
                 imageFocalPoint: nil
             )
         case .short:
-            return PlaySRG.Highlight(
+            PlaySRG.Highlight(
                 title: "Title",
                 summary: "Description",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/b75b85ed-5fbd-4f1f-983b-80ac0d92764b.jpeg"), variant: .default),
                 imageFocalPoint: nil
             )
         case .topLeftAligned:
-            return PlaySRG.Highlight(
+            PlaySRG.Highlight(
                 title: "Top left",
                 summary: "Summary",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
                 imageFocalPoint: focalPoint(.topLeft)
             )
         case .bottomRightAligned:
-            return PlaySRG.Highlight(
+            PlaySRG.Highlight(
                 title: "Bottom right",
                 summary: "Summary",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
@@ -125,7 +125,7 @@ enum Mock {
     }
 
     static func media(_ kind: Media = .standard) -> SRGMedia {
-        return mockObject(kind.rawValue, type: SRGMedia.self)
+        mockObject(kind.rawValue, type: SRGMedia.self)
     }
 
     #if os(iOS)
@@ -151,7 +151,7 @@ enum Mock {
     }
 
     static func program(_ kind: Program = .standard) -> SRGProgram {
-        return mockObject(kind.rawValue, type: SRGProgram.self)
+        mockObject(kind.rawValue, type: SRGProgram.self)
     }
 
     enum Show: String {
@@ -161,7 +161,7 @@ enum Mock {
     }
 
     static func show(_ kind: Show = .standard) -> SRGShow {
-        return mockObject(kind.rawValue, type: SRGShow.self)
+        mockObject(kind.rawValue, type: SRGShow.self)
     }
 
     enum Page: String {
@@ -171,7 +171,7 @@ enum Mock {
     }
 
     static func page(_ kind: Page = .standard) -> SRGContentPage {
-        return mockObject(kind.rawValue, type: SRGContentPage.self)
+        mockObject(kind.rawValue, type: SRGContentPage.self)
     }
 
     enum Topic: String {
@@ -180,7 +180,7 @@ enum Mock {
     }
 
     static func topic(_ kind: Topic = .standard) -> SRGTopic {
-        return mockObject(kind.rawValue, type: SRGTopic.self)
+        mockObject(kind.rawValue, type: SRGTopic.self)
     }
 
     private static func mockObject<T>(_ name: String, type: T.Type) -> T {

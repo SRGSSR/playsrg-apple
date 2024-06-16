@@ -26,24 +26,24 @@ final class ProgramGuideViewModel: ObservableObject {
     private(set) var time: TimeInterval // Position in day (distance from midnight)
 
     static func time(from date: Date, relativeTo day: SRGDay) -> TimeInterval {
-        return date.timeIntervalSince(day.date)
+        date.timeIntervalSince(day.date)
     }
 
     var channels: [PlayChannel] {
-        return data.channels
+        data.channels
     }
 
     var mainPartyChannels: [PlayChannel] {
-        return data.mainPartyChannels
+        data.mainPartyChannels
     }
 
     var otherPartyChannels: [PlayChannel] {
-        return data.otherPartyChannels
+        data.otherPartyChannels
     }
 
     var selectedChannel: PlayChannel? {
         get {
-            return data.selectedChannel
+            data.selectedChannel
         }
         set {
             if let newValue, channels.contains(newValue), newValue != data.selectedChannel {
@@ -54,11 +54,11 @@ final class ProgramGuideViewModel: ObservableObject {
     }
 
     func date(for time: TimeInterval) -> Date {
-        return day.date.addingTimeInterval(time)
+        day.date.addingTimeInterval(time)
     }
 
     var dateString: String {
-        return DateFormatter.play_relativeFullDate.string(from: day.date).capitalizedFirstLetter
+        DateFormatter.play_relativeFullDate.string(from: day.date).capitalizedFirstLetter
     }
 
     init(date: Date) {
@@ -80,7 +80,7 @@ final class ProgramGuideViewModel: ObservableObject {
         self.day = day
         self.time = time ?? self.time
 
-        if self.day != previousDay && self.time != previousTime {
+        if self.day != previousDay, self.time != previousTime {
             change = .dayAndTime(day: self.day, time: self.time)
         } else if self.day != previousDay {
             change = .day(self.day)
@@ -129,11 +129,11 @@ extension ProgramGuideViewModel {
         let selectedChannel: PlayChannel?
 
         static var empty: Self {
-            return Self(mainPartyChannels: [], otherPartyChannels: [], selectedChannel: nil)
+            Self(mainPartyChannels: [], otherPartyChannels: [], selectedChannel: nil)
         }
 
         var channels: [PlayChannel] {
-            return mainPartyChannels + otherPartyChannels
+            mainPartyChannels + otherPartyChannels
         }
     }
 
@@ -151,16 +151,16 @@ extension ProgramGuideViewModel {
 private extension ProgramGuideViewModel {
     static func matchingChannel(_ channel: PlayChannel?, in channels: [PlayChannel]) -> PlayChannel? {
         if let channel, channels.contains(channel) {
-            return channel
+            channel
         } else {
-            return channels.first
+            channels.first
         }
     }
 
     // TODO: Once an IL request is available to get the channel list without any day, use this request and
     //       remove the day parameter.
     static func channels(for _: SRGVendor, mainProvider: Bool, day: SRGDay) -> AnyPublisher<[PlayChannel], Error> {
-        return SRGDataProvider.current!.tvProgramsPublisher(day: day, mainProvider: mainProvider, minimal: true)
+        SRGDataProvider.current!.tvProgramsPublisher(day: day, mainProvider: mainProvider, minimal: true)
             .map { $0.map(\.channel) }
             .eraseToAnyPublisher()
     }

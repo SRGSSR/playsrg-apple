@@ -34,7 +34,7 @@ struct SettingsNavigationView: View {
 
 final class SettingsNavigationViewController: NSObject {
     @objc static func viewController() -> UIViewController {
-        return SettingsNavigationHostViewController()
+        SettingsNavigationHostViewController()
     }
 }
 

@@ -24,22 +24,22 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View, PrimaryColorSett
     var secondaryColor: Color = .srgGray96
 
     private var stackAlignment: HorizontalAlignment {
-        return alignment == .center ? .center : .leading
+        alignment == .center ? .center : .leading
     }
 
     private var frameAlignment: SwiftUI.Alignment {
         switch alignment {
         case .leading:
-            return .leading
+            .leading
         case .topLeading:
-            return .topLeading
+            .topLeading
         case .center:
-            return .center
+            .center
         }
     }
 
     private var textAlignment: TextAlignment {
-        return alignment == .center ? .center : .leading
+        alignment == .center ? .center : .leading
     }
 
     var body: some View {

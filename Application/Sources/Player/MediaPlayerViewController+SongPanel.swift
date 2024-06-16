@@ -93,7 +93,7 @@ extension MediaPlayerViewController {
 private extension MediaPlayerViewController {
     var panel: Panel? {
         get {
-            return objc_getAssociatedObject(self, &panelKey) as? Panel
+            objc_getAssociatedObject(self, &panelKey) as? Panel
         }
         set {
             objc_setAssociatedObject(self, &panelKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -102,7 +102,7 @@ private extension MediaPlayerViewController {
 
     var tapGestureRecognizer: UITapGestureRecognizer? {
         get {
-            return objc_getAssociatedObject(self, &tapGestureRecognizerKey) as? UITapGestureRecognizer
+            objc_getAssociatedObject(self, &tapGestureRecognizerKey) as? UITapGestureRecognizer
         }
         set {
             objc_setAssociatedObject(self, &tapGestureRecognizerKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -111,9 +111,9 @@ private extension MediaPlayerViewController {
 
     var compactHeight: CGFloat {
         if let window = UIApplication.shared.mainWindow {
-            return MediaPlayerViewController.contentHeight + window.safeAreaInsets.bottom
+            MediaPlayerViewController.contentHeight + window.safeAreaInsets.bottom
         } else {
-            return MediaPlayerViewController.contentHeight
+            MediaPlayerViewController.contentHeight
         }
     }
 
@@ -144,7 +144,7 @@ private extension MediaPlayerViewController {
     func configuration(for traitCollection: UITraitCollection, mode: Panel.Configuration.Mode) -> Panel.Configuration {
         var configuration = Panel.Configuration.default
 
-        if traitCollection.userInterfaceIdiom == .pad && traitCollection.horizontalSizeClass == .regular {
+        if traitCollection.userInterfaceIdiom == .pad, traitCollection.horizontalSizeClass == .regular {
             configuration.position = .leadingBottom
             configuration.positionLogic[.bottom] = .respectSafeArea
             configuration.margins = NSDirectionalEdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 10.0)
@@ -251,9 +251,9 @@ extension MediaPlayerViewController: PanelResizeDelegate {
 extension MediaPlayerViewController: PanelAccessibilityDelegate {
     public func panel(_ panel: Panel, accessibilityLabelForResizeHandle _: ResizeHandle) -> String {
         if panel.configuration.mode == .compact {
-            return PlaySRGAccessibilityLocalizedString("Show music list", comment: "Accessibility label of the song list handle when closed")
+            PlaySRGAccessibilityLocalizedString("Show music list", comment: "Accessibility label of the song list handle when closed")
         } else {
-            return PlaySRGAccessibilityLocalizedString("Hide music list", comment: "Accessibility label of the song list handle when opened")
+            PlaySRGAccessibilityLocalizedString("Hide music list", comment: "Accessibility label of the song list handle when opened")
         }
     }
 

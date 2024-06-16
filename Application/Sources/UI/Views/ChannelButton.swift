@@ -18,7 +18,7 @@ struct ChannelButton: View {
     @Environment(\.isSelected) var isSelected
 
     private var imageUrl: URL? {
-        return url(for: channel?.rawImage, size: .small)
+        url(for: channel?.rawImage, size: .small)
     }
 
     var body: some View {
@@ -63,11 +63,11 @@ struct ChannelButton: View {
 
 private extension ChannelButton {
     var accessibilityLabel: String? {
-        return channel?.title
+        channel?.title
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Shows the channel programs", comment: "Channel selector button hint")
+        PlaySRGAccessibilityLocalizedString("Shows the channel programs", comment: "Channel selector button hint")
     }
 }
 

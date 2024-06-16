@@ -49,11 +49,11 @@ struct FeaturesView: View {
 
 private extension FeaturesView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.features.rawValue
+        AnalyticsPageTitle.features.rawValue
     }
 
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
     }
 }
 

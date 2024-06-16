@@ -127,13 +127,13 @@ private var cancellable: AnyCancellable?
 
         private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {
             if program.play_containsDate(Date()) {
-                return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
+                SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
                     .compactMap { $0.first(where: { $0.channel == channel }) }
                     .eraseToAnyPublisher()
             } else if let mediaUrn = program.mediaURN {
-                return SRGDataProvider.current!.media(withUrn: mediaUrn)
+                SRGDataProvider.current!.media(withUrn: mediaUrn)
             } else {
-                return nil
+                nil
             }
         }
     }
@@ -237,7 +237,7 @@ private var cancellable: AnyCancellable?
                         }
                     } receiveValue: { [weak self] media in
                         guard let self else { return }
-                        self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
+                        play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
                             AnalyticsEvent.notification(action: .playMedia,
                                                         from: .application,
                                                         uid: mediaUrn,

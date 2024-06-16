@@ -55,7 +55,7 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
 
     private static func url(for image: SRGImage?, width: SRGImageWidth) -> URL? {
-        return dataProvider.url(for: image, width: width)
+        dataProvider.url(for: image, width: width)
     }
 
     private static func contentPublisher() -> AnyPublisher<[SRGShow], Error> {
@@ -93,7 +93,7 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
 
     private static func contentPublisher() -> AnyPublisher<TVTopShelfContent?, Never> {
-        return contentPublisher()
+        contentPublisher()
             .map { Optional(content(from: $0)) }
             .replaceError(with: nil)
             .eraseToAnyPublisher()

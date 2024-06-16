@@ -19,6 +19,6 @@ struct Onboarding: Codable, Identifiable {
     let pages: [OnboardingPage]
 
     var iconName: String {
-        return "\(id)_icon"
+        "\(id)_icon"
     }
 }

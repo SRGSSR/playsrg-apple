@@ -21,7 +21,7 @@ struct WebView: UIViewControllerRepresentable {
     }
 
     func makeUIViewController(context _: Context) -> WebViewController {
-        return WebViewController(request: request, customizationBlock: customization, decisionHandler: decisionHandler)
+        WebViewController(request: request, customizationBlock: customization, decisionHandler: decisionHandler)
     }
 
     func updateUIViewController(_: WebViewController, context _: Context) {

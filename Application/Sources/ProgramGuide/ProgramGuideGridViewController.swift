@@ -193,11 +193,11 @@ private extension ProgramGuideGridViewController {
 
     func offset(for target: ScrollTarget) -> CGPoint? {
         if let x = xOffset(for: target.time) {
-            return CGPoint(x: x, y: yOffset(for: target.channel) ?? collectionView.contentOffset.y)
+            CGPoint(x: x, y: yOffset(for: target.channel) ?? collectionView.contentOffset.y)
         } else if let y = yOffset(for: target.channel) {
-            return CGPoint(x: collectionView.contentOffset.x, y: y)
+            CGPoint(x: collectionView.contentOffset.x, y: y)
         } else {
-            return nil
+            nil
         }
     }
 
@@ -240,28 +240,28 @@ private extension ProgramGuideGridViewController {
 
 extension ProgramGuideGridViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
-        return collectionView != nil ? [collectionView] : nil
+        collectionView != nil ? [collectionView] : nil
     }
 
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: ProgramGuideGridLayout.verticalSpacing, right: 0)
+        UIEdgeInsets(top: 0, left: 0, bottom: ProgramGuideGridLayout.verticalSpacing, right: 0)
     }
 }
 
 extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     var programGuideLayout: ProgramGuideLayout {
-        return .grid
+        .grid
     }
 
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
-        return dailyModel
+        dailyModel
     }
 }
 
 #if os(iOS)
     extension ProgramGuideGridViewController: ScrollableContent {
         var play_scrollableView: UIScrollView? {
-            return collectionView
+            collectionView
         }
     }
 #endif

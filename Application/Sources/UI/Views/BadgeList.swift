@@ -60,7 +60,7 @@ extension BadgeList {
         let hasDolbyDigital: Bool
 
         var hasBadges: Bool {
-            return hasSubtitles
+            hasSubtitles
                 || hasMultiAudio
                 || hasAudioDescription
                 || hasSignLanguage

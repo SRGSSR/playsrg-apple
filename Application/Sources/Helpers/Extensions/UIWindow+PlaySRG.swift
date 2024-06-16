@@ -19,7 +19,7 @@ extension UIWindow {
      *  Return the topmost view controller (either root view controller or presented modally)
      */
     @objc var play_topViewController: UIViewController? {
-        return rootViewController?.play_top
+        rootViewController?.play_top
     }
 
     /**

@@ -28,7 +28,7 @@ final class MediaVisualViewModel: ObservableObject {
     }
 
     func imageUrl(for size: SRGImageSize) -> URL? {
-        return url(for: media?.image, size: size)
+        url(for: media?.image, size: size)
     }
 
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
@@ -37,7 +37,7 @@ final class MediaVisualViewModel: ObservableObject {
     }
 
     var is360: Bool {
-        return media?.presentation == .presentation360
+        media?.presentation == .presentation360
     }
 
     var isMultiAudioAvailable: Bool {

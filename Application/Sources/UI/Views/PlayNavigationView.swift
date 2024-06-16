@@ -8,8 +8,8 @@ import SRGAppearanceSwift
 import SwiftUI
 import SwiftUIIntrospect
 
-func PlayNavigationView<Content: View>(@ViewBuilder content: () -> Content) -> AnyView {
-    return NavigationView(content: content)
+func PlayNavigationView(@ViewBuilder content: () -> some View) -> AnyView {
+    NavigationView(content: content)
         .navigationViewStyle(.stack)
         .introspect(.navigationView(style: .stack), on: .iOS(.v14, .v15, .v16, .v17), .tvOS(.v14, .v15, .v16, .v17)) {
             let navigationBar = $0.navigationBar

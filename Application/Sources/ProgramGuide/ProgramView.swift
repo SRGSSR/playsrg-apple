@@ -15,7 +15,7 @@ struct ProgramView: View {
     @StateObject private var model = ProgramViewModel()
 
     static func viewController(for program: SRGProgram, channel: PlayChannel) -> UIViewController {
-        return ProgramViewController(program: program, channel: channel)
+        ProgramViewController(program: program, channel: channel)
     }
 
     init(program: SRGProgram, channel: PlayChannel) {
@@ -111,7 +111,7 @@ struct ProgramView: View {
         static let buttonHeight: CGFloat = 40
 
         private var direction: StackDirection {
-            return horizontalSizeClass == .compact ? .vertical : .horizontal
+            horizontalSizeClass == .compact ? .vertical : .horizontal
         }
 
         var body: some View {
@@ -299,11 +299,11 @@ private final class ProgramViewController: UIHostingController<ProgramView> {
 
 private extension ProgramView {
     var accessibilityLabel: String? {
-        return model.playAction != nil ? PlaySRGAccessibilityLocalizedString("Play", comment: "Play button label") : nil
+        model.playAction != nil ? PlaySRGAccessibilityLocalizedString("Play", comment: "Play button label") : nil
     }
 
     var accessibilityTraits: AccessibilityTraits {
-        return .isButton
+        .isButton
     }
 }
 

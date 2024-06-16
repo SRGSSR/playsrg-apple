@@ -25,7 +25,7 @@ struct ShowAccessCell: View, PrimaryColorSettable {
     @FirstResponder private var firstResponder
 
     private var showAZButtonProperties: ButtonProperties {
-        return ButtonProperties(
+        ButtonProperties(
             icon: .aToZ,
             label: NSLocalizedString("A to Z", comment: "Show A-Z short button title"),
             accessibilityLabel: PlaySRGAccessibilityLocalizedString("A to Z shows", comment: "Show A-Z button label")
@@ -35,13 +35,13 @@ struct ShowAccessCell: View, PrimaryColorSettable {
     private var showByDateButtonProperties: ButtonProperties {
         switch style {
         case .calendar:
-            return ButtonProperties(
+            ButtonProperties(
                 icon: .calendar,
                 label: NSLocalizedString("By date", comment: "Show by date short button title"),
                 accessibilityLabel: PlaySRGAccessibilityLocalizedString("Shows by date", comment: "Show by date button label")
             )
         case .programGuide:
-            return ButtonProperties(
+            ButtonProperties(
                 icon: .tvGuide,
                 label: NSLocalizedString("TV guide", comment: "TV guide short button title")
             )
@@ -88,7 +88,7 @@ extension ShowAccessCell {
 
 enum ShowAccessCellSize {
     static func fullWidth() -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
+        NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
     }
 }
 

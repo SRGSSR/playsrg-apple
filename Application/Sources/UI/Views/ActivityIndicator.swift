@@ -18,7 +18,7 @@ struct ActivityIndicator: View {
 
     private struct LoadingImageView: UIViewRepresentable {
         func makeUIView(context _: Context) -> UIImageView {
-            return UIImageView.play_largeLoadingImageView(withTintColor: .srgGrayD2)
+            UIImageView.play_largeLoadingImageView(withTintColor: .srgGrayD2)
         }
 
         func updateUIView(_: UIImageView, context _: Context) {

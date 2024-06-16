@@ -55,7 +55,7 @@ struct ProgramGuideHeaderView: View {
         private static let spacing: CGFloat = constant(iOS: 42, tvOS: 40)
 
         private var direction: StackDirection {
-            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+            (horizontalSizeClass == .compact) ? .vertical : .horizontal
         }
 
         var body: some View {

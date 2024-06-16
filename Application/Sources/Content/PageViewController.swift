@@ -35,7 +35,7 @@ final class PageViewController: UIViewController {
         private weak var googleCastButton: GoogleCastFloatingButton?
 
         private var isNavigationBarHidden: Bool {
-            return model.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+            model.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
         }
 
         private var refreshTriggered = false
@@ -58,11 +58,11 @@ final class PageViewController: UIViewController {
     #if os(iOS)
         private static func showByDateViewController(radioChannel: RadioChannel?, date: Date?) -> UIViewController {
             if let radioChannel {
-                return CalendarViewController(radioChannel: radioChannel, date: date)
+                CalendarViewController(radioChannel: radioChannel, date: date)
             } else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
-                return ProgramGuideViewController(date: date)
+                ProgramGuideViewController(date: date)
             } else {
-                return CalendarViewController(radioChannel: nil, date: date)
+                CalendarViewController(radioChannel: nil, date: date)
             }
         }
     #endif
@@ -80,14 +80,14 @@ final class PageViewController: UIViewController {
     }
 
     var displayedShow: SRGShow? {
-        return model.displayedShow
+        model.displayedShow
     }
 
     @objc var radioChannel: RadioChannel? {
         if case let .audio(channel: channel) = model.id {
-            return channel
+            channel
         } else {
-            return nil
+            nil
         }
     }
 
@@ -209,11 +209,11 @@ final class PageViewController: UIViewController {
 
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == Header.titleHeader.rawValue {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
             } else if kind == Header.showHeader.rawValue {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
             } else {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             }
         }
 
@@ -289,7 +289,7 @@ final class PageViewController: UIViewController {
 
     private func emptyViewEdgeInsets() -> EdgeInsets {
         let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
-        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map(\.layoutSize.heightDimension.dimension).reduce(0, +)
         return EdgeInsets(top: supplementaryItemsHeight, leading: 0, bottom: 0, trailing: 0)
     }
 
@@ -417,31 +417,31 @@ private extension PageViewController {
 
 extension PageViewController {
     @objc static func videosViewController() -> PageViewController {
-        return PageViewController(id: .video)
+        PageViewController(id: .video)
     }
 
     @objc static func audiosViewController() -> PageViewController {
-        return PageViewController(id: .audio(channel: nil))
+        PageViewController(id: .audio(channel: nil))
     }
 
     @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> PageViewController {
-        return PageViewController(id: .audio(channel: channel))
+        PageViewController(id: .audio(channel: channel))
     }
 
     @objc static func liveViewController() -> PageViewController {
-        return PageViewController(id: .live)
+        PageViewController(id: .live)
     }
 
     @objc static func topicViewController(for topic: SRGTopic) -> PageViewController {
-        return PageViewController(id: .topic(topic))
+        PageViewController(id: .topic(topic))
     }
 
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> PageViewController {
-        return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
+        PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
     }
 
     @objc static func pageViewController(for page: SRGContentPage) -> PageViewController {
-        return PageViewController(id: .page(page))
+        PageViewController(id: .page(page))
     }
 }
 
@@ -449,7 +449,7 @@ extension PageViewController {
 
 extension PageViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
-        return collectionView != nil ? [collectionView] : nil
+        collectionView != nil ? [collectionView] : nil
     }
 
     var play_paddingContentInsets: UIEdgeInsets {
@@ -468,7 +468,7 @@ extension PageViewController: ContentInsets {
 
 extension PageViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
-        return collectionView
+        collectionView
     }
 }
 
@@ -533,11 +533,11 @@ extension PageViewController: UICollectionViewDelegate {
         }
 
         func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-            return preview(for: configuration, in: collectionView)
+            preview(for: configuration, in: collectionView)
         }
 
         func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-            return preview(for: configuration, in: collectionView)
+            preview(for: configuration, in: collectionView)
         }
 
         func collectionView(_: UICollectionView, willDisplaySupplementaryView _: UICollectionReusableView, forElementKind elementKind: String, at _: IndexPath) {
@@ -570,7 +570,7 @@ extension PageViewController: UICollectionViewDelegate {
 
     #if os(tvOS)
         func collectionView(_: UICollectionView, canFocusItemAt _: IndexPath) -> Bool {
-            return false
+            false
         }
     #endif
 }
@@ -734,7 +734,7 @@ private extension PageViewController {
     private static let layoutTopicGradientViewHeight: CGFloat = 572
 
     private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
-        return required ? layoutVerticalMargin * 2 : 0
+        required ? layoutVerticalMargin * 2 : 0
     }
 
     private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
@@ -755,7 +755,7 @@ private extension PageViewController {
     }
 
     private func layout(for model: PageViewModel) -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
+        UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
 
@@ -869,7 +869,7 @@ private extension PageViewController {
 
             guard let self else { return nil }
 
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
 
             let layoutSection = layoutSection(for: section)
@@ -883,7 +883,7 @@ private extension PageViewController {
 
         if case .show = model.id {
             let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
-            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map(\.layoutSize.heightDimension.dimension).reduce(0, +)
             let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
 
             // Move the gradient view below the show image when displayed in compact horizontal size class
@@ -1060,23 +1060,23 @@ private extension PageViewController {
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
 
         private static func title(for section: PageViewModel.Section) -> String? {
-            return section.properties.title
+            section.properties.title
         }
 
         private static func subtitle(for section: PageViewModel.Section) -> String? {
-            return section.properties.summary
+            section.properties.summary
         }
 
         private var hasDetailDisclosure: Bool {
-            return section.viewModelProperties.canOpenPage || isSectionWideSupportEnabled
+            section.viewModelProperties.canOpenPage || isSectionWideSupportEnabled
         }
 
         var accessibilityLabel: String? {
-            return Self.title(for: section)
+            Self.title(for: section)
         }
 
         var accessibilityHint: String? {
-            return hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", comment: "Homepage header action hint") : nil
+            hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", comment: "Homepage header action hint") : nil
         }
 
         var body: some View {
@@ -1097,9 +1097,9 @@ private extension PageViewController {
 
         static func size(section: PageViewModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             if section.properties.displaysRowHeader {
-                return HeaderViewSize.recommended(forTitle: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
+                HeaderViewSize.recommended(forTitle: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
             } else {
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
     }

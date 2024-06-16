@@ -69,7 +69,7 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
         private let showMoreButtonStringAccessibilityLabel = PlaySRGAccessibilityLocalizedString("More", comment: "More label on truncatable text view")
 
         private func text(lineLimit: Int?) -> some View {
-            return Text(content)
+            Text(content)
                 .srgFont(fontStyle)
                 .lineLimit(lineLimit)
                 .foregroundColor(primaryColor)

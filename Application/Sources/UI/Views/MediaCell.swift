@@ -45,22 +45,22 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
 
     private var direction: StackDirection {
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
-            return .horizontal
+            .horizontal
         } else {
-            return .vertical
+            .vertical
         }
     }
 
     private var horizontalPadding: CGFloat {
-        return direction == .vertical ? 0 : constant(iOS: 10, tvOS: 20)
+        direction == .vertical ? 0 : constant(iOS: 10, tvOS: 20)
     }
 
     private var verticalPadding: CGFloat {
-        return direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
+        direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
     }
 
     private var hasSelectionAppearance: Bool {
-        return isSelected && media != nil
+        isSelected && media != nil
     }
 
     init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
@@ -172,25 +172,25 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         private var mediaDescriptionStyle: MediaDescription.Style {
             switch style {
             case .show:
-                return .show
+                .show
             case .date, .dateAndSummary:
-                return .date
+                .date
             case .time:
-                return .time
+                .time
             }
         }
 
         private var titleLineLimit: Int {
-            if horizontalSizeClass == .regular && style == .dateAndSummary {
-                return 1
+            if horizontalSizeClass == .regular, style == .dateAndSummary {
+                1
             } else {
-                return embeddedDirection == .horizontal ? 3 : 2
+                embeddedDirection == .horizontal ? 3 : 2
             }
         }
 
         private var bottomPadding: CGFloat {
             // Allow 3 lines for title, with a badge and no subtitles
-            return embeddedDirection == .horizontal ? -2 : 0
+            embeddedDirection == .horizontal ? -2 : 0
         }
 
         var body: some View {
@@ -244,7 +244,7 @@ private extension MediaCell {
     }
 
     var accessibilityHint: String? {
-        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Media cell hint in edit mode")
+        !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Media cell hint in edit mode")
     }
 
     var accessibilityTraits: AccessibilityTraits {
@@ -265,11 +265,11 @@ final class MediaCellSize: NSObject {
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
 
     static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
+        LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
     }
 
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
+        LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
 
     static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact) -> NSCollectionLayoutSize {
@@ -278,7 +278,7 @@ final class MediaCellSize: NSObject {
     }
 
     static func height(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
-        return horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
+        horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
     }
 }
 
@@ -293,30 +293,30 @@ struct MediaCell_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            MediaCell(media: Mock.media(), style: Self.style, layout: .vertical)
-            MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .vertical)
-            MediaCell(media: Mock.media(.rich), style: Self.style, layout: .vertical)
-            MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .vertical)
-            MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .vertical)
+            MediaCell(media: Mock.media(), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.noShow), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.rich), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.overflow), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.nineSixteen), style: style, layout: .vertical)
         }
         .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
 
         #if os(iOS)
             Group {
-                MediaCell(media: Mock.media(), style: Self.style, layout: .horizontal)
-                MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .horizontal)
-                MediaCell(media: Mock.media(.rich), style: Self.style, layout: .horizontal)
-                MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .horizontal)
-                MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)
+                MediaCell(media: Mock.media(), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.noShow), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.rich), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.overflow), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.nineSixteen), style: style, layout: .horizontal)
             }
             .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
 
             Group {
-                MediaCell(media: Mock.media(), style: Self.largeListStyle, layout: .horizontal)
-                MediaCell(media: Mock.media(.noShow), style: Self.largeListStyle, layout: .horizontal)
-                MediaCell(media: Mock.media(.rich), style: Self.largeListStyle, layout: .horizontal)
-                MediaCell(media: Mock.media(.overflow), style: Self.largeListStyle, layout: .horizontal)
-                MediaCell(media: Mock.media(.nineSixteen), style: Self.largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.noShow), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.rich), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.overflow), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.nineSixteen), style: largeListStyle, layout: .horizontal)
             }
             .previewLayout(.fixed(width: horizontalLargeListLayoutSize.width, height: horizontalLargeListLayoutSize.height))
         #endif

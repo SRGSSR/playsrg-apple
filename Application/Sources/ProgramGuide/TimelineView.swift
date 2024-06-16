@@ -15,7 +15,7 @@ struct TimelineView: View {
     let dateInterval: DateInterval?
 
     private static func label(for date: Date) -> String {
-        return DateFormatter.play_time.string(from: date)
+        DateFormatter.play_time.string(from: date)
     }
 
     private func xPosition(for date: Date, width: CGFloat) -> CGFloat {

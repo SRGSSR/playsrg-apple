@@ -14,7 +14,7 @@ final class ProgramPreviewModel: ObservableObject {
     @Published private(set) var date = Date()
 
     private var program: SRGProgram? {
-        return data?.program
+        data?.program
     }
 
     private var isLive: Bool {
@@ -24,29 +24,29 @@ final class ProgramPreviewModel: ObservableObject {
 
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
         if isLive {
-            return MediaDescription.liveBadgeProperties()
+            MediaDescription.liveBadgeProperties()
         } else {
-            return nil
+            nil
         }
     }
 
     private var primaryTitle: String {
-        return program?.title ?? .placeholder(length: 16)
+        program?.title ?? .placeholder(length: 16)
     }
 
     private var secondaryTitle: String? {
-        return program?.subtitle ?? program?.lead
+        program?.subtitle ?? program?.lead
     }
 
     var subtitle: String? {
-        return secondaryTitle != nil ? primaryTitle : nil
+        secondaryTitle != nil ? primaryTitle : nil
     }
 
     var title: String {
         if let secondaryTitle {
-            return secondaryTitle
+            secondaryTitle
         } else {
-            return primaryTitle
+            primaryTitle
         }
     }
 
@@ -66,7 +66,7 @@ final class ProgramPreviewModel: ObservableObject {
     }
 
     var imageUrl: URL? {
-        return data?.programGuideImageUrl(size: .large)
+        data?.programGuideImageUrl(size: .large)
     }
 
     init() {

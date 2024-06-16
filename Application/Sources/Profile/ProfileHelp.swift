@@ -66,7 +66,7 @@ import SwiftUI
     }
 
     private static var supportEmailAdress: String? {
-        return ApplicationConfiguration.shared.supportEmailAddress
+        ApplicationConfiguration.shared.supportEmailAddress
     }
 
     private static func copySupportMailAdress() {

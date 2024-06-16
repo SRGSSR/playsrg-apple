@@ -80,7 +80,7 @@ struct LiveMediaCell: View {
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
 
         private var padding: CGFloat {
-            return (horizontalSizeClass == .compact) ? 8 : constant(iOS: 10, tvOS: 16)
+            (horizontalSizeClass == .compact) ? 8 : constant(iOS: 10, tvOS: 16)
         }
 
         var body: some View {
@@ -113,11 +113,11 @@ struct LiveMediaCell: View {
 
 private extension LiveMediaCell {
     var accessibilityLabel: String? {
-        return model.accessibilityLabel
+        model.accessibilityLabel
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
+        PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
     }
 }
 
@@ -129,11 +129,11 @@ enum LiveMediaCellSize {
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
 
     static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
+        LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
 
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(defaultItemWidth, aspectRatio, 0, layoutWidth, spacing, 2)
+        LayoutGridCellSize(defaultItemWidth, aspectRatio, 0, layoutWidth, spacing, 2)
     }
 }
 

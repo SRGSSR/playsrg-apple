@@ -20,11 +20,10 @@ import UIKit
         }
 
         let lastOpenedRadioChannel = ApplicationSettingLastOpenedRadioChannel()
-        let initialPage: Int
-        if let lastOpenedRadioChannel {
-            initialPage = radioChannels.firstIndex(of: lastOpenedRadioChannel) ?? NSNotFound
+        let initialPage: Int = if let lastOpenedRadioChannel {
+            radioChannels.firstIndex(of: lastOpenedRadioChannel) ?? NSNotFound
         } else {
-            initialPage = NSNotFound
+            NSNotFound
         }
 
         super.init(viewControllers: viewControllers, initialPage: initialPage)

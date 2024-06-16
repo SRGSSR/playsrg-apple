@@ -116,15 +116,15 @@ struct ShowCell: View, PrimaryColorSettable {
 
 private extension ShowCell {
     var accessibilityLabel: String? {
-        return model.title
+        model.title
     }
 
     var accessibilityHint: String? {
-        return !isEditing ? PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Show cell hint in edit mode")
+        !isEditing ? PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Show cell hint in edit mode")
     }
 
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? .isSelected : []
+        isSelected ? .isSelected : []
     }
 }
 
@@ -135,30 +135,30 @@ enum ShowCellSize {
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
 
     private static func heightOffset(for imageVariant: SRGImageVariant) -> CGFloat {
-        return imageVariant == .default ? constant(iOS: 32, tvOS: 45) : 0
+        imageVariant == .default ? constant(iOS: 32, tvOS: 45) : 0
     }
 
     fileprivate static func aspectRatio(for imageVariant: SRGImageVariant) -> CGFloat {
         switch imageVariant {
         case .poster:
-            return 2 / 3
+            2 / 3
         case .podcast:
-            return 1
+            1
         case .default:
-            return 16 / 9
+            16 / 9
         }
     }
 
     fileprivate static func itemWidth(for imageVariant: SRGImageVariant) -> CGFloat {
-        return imageVariant != .poster ? constant(iOS: 210, tvOS: 375) : constant(iOS: 158, tvOS: 276)
+        imageVariant != .poster ? constant(iOS: 210, tvOS: 375) : constant(iOS: 158, tvOS: 276)
     }
 
     static func swimlane(for imageVariant: SRGImageVariant) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant))
+        LayoutSwimlaneCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant))
     }
 
     static func grid(for imageVariant: SRGImageVariant, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant), layoutWidth, spacing, 2)
+        LayoutGridCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant), layoutWidth, spacing, 2)
     }
 }
 

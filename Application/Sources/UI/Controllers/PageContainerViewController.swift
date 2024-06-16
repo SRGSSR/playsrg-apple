@@ -24,7 +24,7 @@ class PageContainerViewController: UIViewController {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
 
         self.viewControllers = viewControllers
-        if initialPage >= 0 && initialPage < viewControllers.count {
+        if initialPage >= 0, initialPage < viewControllers.count {
             self.initialPage = initialPage
         } else {
             PlayLogWarning(category: "pageViewController", message: "Invalid page. Fixed to 0")
@@ -112,11 +112,11 @@ class PageContainerViewController: UIViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
 
     override func accessibilityPerformEscape() -> Bool {
-        if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
+        if let navigationController, navigationController.viewControllers.count > 1 {
             navigationController.popViewController(animated: true)
             return true
         } else if presentingViewController != nil {
@@ -149,17 +149,17 @@ class PageContainerViewController: UIViewController {
 
 extension PageContainerViewController: ContainerContentInsets {
     var play_additionalContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: tabContainerViewController.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
+        UIEdgeInsets(top: tabContainerViewController.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
     }
 }
 
 extension PageContainerViewController: Oriented {
     var play_supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        .all
     }
 
     var play_orientingChildViewControllers: [UIViewController] {
-        return viewControllers
+        viewControllers
     }
 }
 
@@ -171,7 +171,7 @@ extension PageContainerViewController: ScrollableContentContainer {
 
 extension PageContainerViewController: SRGAnalyticsContainerViewTracking {
     var srg_activeChildViewControllers: [UIViewController] {
-        return [tabContainerViewController]
+        [tabContainerViewController]
     }
 }
 

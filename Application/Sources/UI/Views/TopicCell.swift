@@ -47,7 +47,7 @@ struct TopicCell: View {
         let topic: SRGTopic?
 
         private var imageUrl: URL? {
-            return url(for: topic?.image, size: .small)
+            url(for: topic?.image, size: .small)
         }
 
         var body: some View {
@@ -72,11 +72,11 @@ struct TopicCell: View {
 
 private extension TopicCell {
     var accessibilityLabel: String? {
-        return topic?.title
+        topic?.title
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens topic details.", comment: "Show cell hint")
+        PlaySRGAccessibilityLocalizedString("Opens topic details.", comment: "Show cell hint")
     }
 }
 
@@ -88,11 +88,11 @@ enum TopicCellSize {
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 300)
 
     static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
+        LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
 
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(defaultItemWidth, aspectRatio, 0, layoutWidth, spacing, 2)
+        LayoutGridCellSize(defaultItemWidth, aspectRatio, 0, layoutWidth, spacing, 2)
     }
 }
 

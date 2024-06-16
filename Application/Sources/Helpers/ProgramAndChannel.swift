@@ -12,13 +12,13 @@ struct ProgramAndChannel: Hashable {
 
     func programGuideImageUrl(size: SRGImageSize) -> URL? {
         if let image = program.image {
-            return PlaySRG.url(for: image, size: size)
+            PlaySRG.url(for: image, size: size)
         }
         // Couldn't use channel image in Play SRG image service. Use raw image.
         else if let channelRawImage = channel.wrappedValue.rawImage {
-            return PlaySRG.url(for: channelRawImage, size: size)
+            PlaySRG.url(for: channelRawImage, size: size)
         } else {
-            return nil
+            nil
         }
     }
 }

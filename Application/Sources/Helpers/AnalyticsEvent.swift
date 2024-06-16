@@ -23,7 +23,7 @@ struct AnalyticsEvent {
     }
 
     static func calendarEventAdd(channel: SRGChannel) -> Self {
-        return Self(
+        Self(
             name: "calendar_add",
             source: "button",
             value: channel.urn,
@@ -32,7 +32,7 @@ struct AnalyticsEvent {
     }
 
     static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> Self {
-        return Self(
+        Self(
             name: "continuous_playback",
             source: action.source,
             type: action.type,
@@ -41,7 +41,7 @@ struct AnalyticsEvent {
     }
 
     static func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
-        return Self(
+        Self(
             name: action.downloadName,
             source: source.value,
             value: urn
@@ -49,7 +49,7 @@ struct AnalyticsEvent {
     }
 
     static func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
-        return Self(
+        Self(
             name: action.favoriteName,
             source: source.value,
             value: urn
@@ -57,14 +57,14 @@ struct AnalyticsEvent {
     }
 
     static func googleGast(urn: String) -> Self {
-        return Self(
+        Self(
             name: "google_cast",
             value: urn
         )
     }
 
     static func historyRemove(source: AnalyticsListSource, urn: String?) -> Self {
-        return Self(
+        Self(
             name: "history_remove",
             source: source.value,
             value: urn
@@ -72,14 +72,14 @@ struct AnalyticsEvent {
     }
 
     static func identity(action: AnalyticsIdentityAction) -> Self {
-        return Self(
+        Self(
             name: "identity",
             labels: action.labels
         )
     }
 
     static func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> Self {
-        return Self(
+        Self(
             name: from.name,
             source: overrideSource ?? from.source,
             type: overrideType ?? action.type,
@@ -88,7 +88,7 @@ struct AnalyticsEvent {
     }
 
     static func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> Self {
-        return Self(
+        Self(
             name: "open_url",
             source: source.value,
             type: action.type,
@@ -97,21 +97,21 @@ struct AnalyticsEvent {
     }
 
     static func openHelp(action: AnalyticsOpenHelpAction) -> Self {
-        return Self(
+        Self(
             name: action.name,
             source: "button"
         )
     }
 
     static func pictureInPicture(urn: String?) -> Self {
-        return Self(
+        Self(
             name: "picture_in_picture",
             value: urn
         )
     }
 
     static func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> Self {
-        return Self(
+        Self(
             name: action.name,
             source: source.value,
             type: type,
@@ -121,14 +121,14 @@ struct AnalyticsEvent {
     }
 
     static func shortcutItem(action: AnalyticsShortcutItemAction) -> Self {
-        return Self(
+        Self(
             name: "quick_actions",
             type: action.type
         )
     }
 
     static func subscription(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
-        return Self(
+        Self(
             name: action.subscriptionName,
             source: source.value,
             value: urn
@@ -136,7 +136,7 @@ struct AnalyticsEvent {
     }
 
     static func userActivity(action: AnalyticsUserActivityAction, urn: String) -> Self {
-        return Self(
+        Self(
             name: "user_activity_ios",
             source: "handoff",
             type: action.type,
@@ -145,7 +145,7 @@ struct AnalyticsEvent {
     }
 
     static func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
-        return Self(
+        Self(
             name: action.watchLaterName,
             source: source.value,
             value: urn
@@ -188,51 +188,51 @@ struct AnalyticsEvent {
     }
 
     @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.continuousPlayback(action: action, mediaUrn: mediaUrn))
+        Self(event: AnalyticsEvent.continuousPlayback(action: action, mediaUrn: mediaUrn))
     }
 
     @objc class func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.download(action: action, source: source, urn: urn))
+        Self(event: AnalyticsEvent.download(action: action, source: source, urn: urn))
     }
 
     @objc class func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.favorite(action: action, source: source, urn: urn))
+        Self(event: AnalyticsEvent.favorite(action: action, source: source, urn: urn))
     }
 
     @objc class func googleGast(urn: String) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.googleGast(urn: urn))
+        Self(event: AnalyticsEvent.googleGast(urn: urn))
     }
 
     @objc class func identity(action: AnalyticsIdentityAction) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.identity(action: action))
+        Self(event: AnalyticsEvent.identity(action: action))
     }
 
     @objc class func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
+        Self(event: AnalyticsEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
 
     @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.openUrl(action: action, source: source, urn: urn))
+        Self(event: AnalyticsEvent.openUrl(action: action, source: source, urn: urn))
     }
 
     @objc class func pictureInPicture(urn: String?) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.pictureInPicture(urn: urn))
+        Self(event: AnalyticsEvent.pictureInPicture(urn: urn))
     }
 
     @objc class func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.sharing(action: action, uid: uid, mediaContentType: mediaContentType, source: source, type: type))
+        Self(event: AnalyticsEvent.sharing(action: action, uid: uid, mediaContentType: mediaContentType, source: source, type: type))
     }
 
     @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.shortcutItem(action: action))
+        Self(event: AnalyticsEvent.shortcutItem(action: action))
     }
 
     @objc class func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.userActivity(action: action, urn: urn))
+        Self(event: AnalyticsEvent.userActivity(action: action, urn: urn))
     }
 
     @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
-        return Self(event: AnalyticsEvent.watchLater(action: action, source: source, urn: urn))
+        Self(event: AnalyticsEvent.watchLater(action: action, source: source, urn: urn))
     }
 
     required init(event: AnalyticsEvent) {
@@ -247,36 +247,36 @@ struct AnalyticsEvent {
     fileprivate var downloadName: String {
         switch self {
         case .add:
-            return "download_add"
+            "download_add"
         case .remove:
-            return "download_remove"
+            "download_remove"
         }
     }
 
     fileprivate var favoriteName: String {
         switch self {
         case .add:
-            return "favorite_add"
+            "favorite_add"
         case .remove:
-            return "favorite_remove"
+            "favorite_remove"
         }
     }
 
     fileprivate var subscriptionName: String {
         switch self {
         case .add:
-            return "subscription_add"
+            "subscription_add"
         case .remove:
-            return "subscription_remove"
+            "subscription_remove"
         }
     }
 
     fileprivate var watchLaterName: String {
         switch self {
         case .add:
-            return "watch_later_add"
+            "watch_later_add"
         case .remove:
-            return "watch_later_remove"
+            "watch_later_remove"
         }
     }
 }
@@ -289,11 +289,11 @@ struct AnalyticsEvent {
     fileprivate var value: String {
         switch self {
         case .button:
-            return "button"
+            "button"
         case .contextMenu:
-            return "context_menu"
+            "context_menu"
         case .selection:
-            return "selection"
+            "selection"
         }
     }
 }
@@ -307,20 +307,20 @@ struct AnalyticsEvent {
     fileprivate var source: String {
         switch self {
         case .display, .playAutomatic:
-            return "automatic"
+            "automatic"
         case .play, .cancel:
-            return "button"
+            "button"
         }
     }
 
     fileprivate var type: String {
         switch self {
         case .display:
-            return "display"
+            "display"
         case .playAutomatic, .play:
-            return "play_media"
+            "play_media"
         case .cancel:
-            return "cancel"
+            "cancel"
         }
     }
 }
@@ -333,11 +333,11 @@ struct AnalyticsEvent {
     fileprivate var type: String {
         switch self {
         case .playMedia:
-            return "play_media"
+            "play_media"
         case .displayShow:
-            return "display_show"
+            "display_show"
         case .alert:
-            return "notification_alert"
+            "notification_alert"
         }
     }
 }
@@ -352,15 +352,15 @@ struct AnalyticsEvent {
     fileprivate var type: String {
         switch self {
         case .openPlayApp:
-            return "open_play_app"
+            "open_play_app"
         case .playMedia:
-            return "play_media"
+            "play_media"
         case .displayShow:
-            return "display_show"
+            "display_show"
         case .displayPage:
-            return "display_page"
+            "display_page"
         case .displayUrl:
-            return "display_url"
+            "display_url"
         }
     }
 }
@@ -372,9 +372,9 @@ struct AnalyticsEvent {
     fileprivate var value: String {
         switch self {
         case .customURL:
-            return "scheme_url"
+            "scheme_url"
         case .universalLink:
-            return "deep_link"
+            "deep_link"
         }
     }
 }
@@ -388,13 +388,13 @@ struct AnalyticsEvent {
     fileprivate var name: String {
         switch self {
         case .faq:
-            return "faq_open"
+            "faq_open"
         case .technicalIssue:
-            return "technical_issue_open"
+            "technical_issue_open"
         case .feedbackApp:
-            return "feedback_app_open"
+            "feedback_app_open"
         case .evaluateApp:
-            return "evaluate_app_open"
+            "evaluate_app_open"
         }
     }
 }
@@ -435,18 +435,18 @@ struct AnalyticsEvent {
     fileprivate var name: String {
         switch self {
         case .application:
-            return "notification_open"
+            "notification_open"
         case .operatingSystem:
-            return "push_notification_open"
+            "push_notification_open"
         }
     }
 
     fileprivate var source: String {
         switch self {
         case .application:
-            return "notification"
+            "notification"
         case .operatingSystem:
-            return "push_notification"
+            "push_notification"
         }
     }
 }
@@ -461,15 +461,15 @@ struct AnalyticsEvent {
     fileprivate var name: String {
         switch self {
         case .media:
-            return "media_share"
+            "media_share"
         case .show:
-            return "show_share"
+            "show_share"
         case .page:
-            return "page_share"
+            "page_share"
         case .microPage:
-            return "micro_page_share"
+            "micro_page_share"
         case .section:
-            return "section_share"
+            "section_share"
         }
     }
 }
@@ -483,13 +483,13 @@ struct AnalyticsEvent {
     fileprivate var value: String? {
         switch self {
         case .content:
-            return "content"
+            "content"
         case .contentAtTime:
-            return "content_at_time"
+            "content_at_time"
         case .currentClip:
-            return "current_clip"
+            "current_clip"
         default:
-            return nil
+            nil
         }
     }
 }
@@ -501,9 +501,9 @@ struct AnalyticsEvent {
     fileprivate var value: String {
         switch self {
         case .button:
-            return "button"
+            "button"
         case .contextMenu:
-            return "context_menu"
+            "context_menu"
         }
     }
 }
@@ -517,13 +517,13 @@ struct AnalyticsEvent {
     fileprivate var type: String {
         switch self {
         case .favorites:
-            return "openfavorites"
+            "openfavorites"
         case .downloads:
-            return "opendownloads"
+            "opendownloads"
         case .history:
-            return "openhistory"
+            "openhistory"
         case .search:
-            return "opensearch"
+            "opensearch"
         }
     }
 }
@@ -535,9 +535,9 @@ struct AnalyticsEvent {
     fileprivate var type: String {
         switch self {
         case .playMedia:
-            return "play_media"
+            "play_media"
         case .displayShow:
-            return "display_show"
+            "display_show"
         }
     }
 }

@@ -17,7 +17,7 @@ import SwiftUI
     }
 
     public var wrappedValue: T {
-        return settings[keyPath: keyPath]
+        settings[keyPath: keyPath]
     }
 }
 

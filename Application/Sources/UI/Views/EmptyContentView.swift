@@ -129,7 +129,7 @@ struct EmptyContentView_Previews: PreviewProvider {
         var errorDescription: String? {
             switch self {
             case .kernel32:
-                return "Error loading kernel32.dll. The specified module could not be found."
+                "Error loading kernel32.dll. The specified module could not be found."
             }
         }
     }

@@ -7,13 +7,11 @@
 import XCTest
 
 class ApplicationScreenshots: XCTestCase {
-    private static let configuration: NSDictionary = {
-        if let path = Bundle(for: ApplicationScreenshots.self).path(forResource: "Configuration", ofType: "plist") {
-            return NSDictionary(contentsOfFile: path) ?? [:]
-        } else {
-            return [:]
-        }
-    }()
+    private static let configuration: NSDictionary = if let path = Bundle(for: ApplicationScreenshots.self).path(forResource: "Configuration", ofType: "plist") {
+        NSDictionary(contentsOfFile: path) ?? [:]
+    } else {
+        [:]
+    }
 
     override func setUp() {
         super.setUp()

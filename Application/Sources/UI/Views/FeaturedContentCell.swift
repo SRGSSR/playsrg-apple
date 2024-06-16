@@ -33,27 +33,27 @@ struct FeaturedContentCell<Content: FeaturedContent>: View, PrimaryColorSettable
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
 
     private var direction: StackDirection {
-        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+        (horizontalSizeClass == .compact) ? .vertical : .horizontal
     }
 
     private var horizontalPadding: CGFloat {
-        return (horizontalSizeClass == .compact) ? 8 : constant(iOS: 54, tvOS: 50)
+        (horizontalSizeClass == .compact) ? 8 : constant(iOS: 54, tvOS: 50)
     }
 
     private var verticalPadding: CGFloat {
-        return (horizontalSizeClass == .compact) ? 12 : constant(iOS: 16, tvOS: 16)
+        (horizontalSizeClass == .compact) ? 12 : constant(iOS: 16, tvOS: 16)
     }
 
     private var descriptionAlignment: FeaturedDescriptionView<Content>.Alignment {
         if direction == .vertical {
-            return .topLeading
+            .topLeading
         } else {
-            return layout == .headline ? .center : .leading
+            layout == .headline ? .center : .leading
         }
     }
 
     private var detailed: Bool {
-        return horizontalSizeClass == .regular
+        horizontalSizeClass == .regular
     }
 
     var body: some View {
@@ -115,11 +115,11 @@ extension FeaturedContentCell where Content == FeaturedShowContent {
 
 private extension FeaturedContentCell {
     var accessibilityLabel: String? {
-        return content.accessibilityLabel
+        content.accessibilityLabel
     }
 
     var accessibilityHint: String? {
-        return content.accessibilityHint
+        content.accessibilityHint
     }
 }
 
@@ -130,17 +130,17 @@ enum FeaturedContentCellSize {
 
     static func headline(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 100)
+            LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 100)
         } else {
-            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.6)
+            LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.6)
         }
     }
 
     static func element(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 80)
+            LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 80)
         } else {
-            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4)
+            LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4)
         }
     }
 }
@@ -149,13 +149,11 @@ enum FeaturedContentCellSize {
 
 private extension View {
     func previewLayout(for layout: FeaturedContentCell<FeaturedMediaContent>.Layout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
-        let size: CGSize = {
-            if layout == .headline {
-                return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
-            } else {
-                return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
-            }
-        }()
+        let size: CGSize = if layout == .headline {
+            FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
+        } else {
+            FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
+        }
         return previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
     }

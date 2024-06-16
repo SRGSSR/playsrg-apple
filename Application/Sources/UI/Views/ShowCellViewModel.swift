@@ -36,6 +36,6 @@ class ShowCellViewModel: ObservableObject {
 
 extension ShowCellViewModel {
     var title: String? {
-        return show?.title
+        show?.title
     }
 }

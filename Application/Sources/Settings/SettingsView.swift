@@ -98,7 +98,7 @@ struct SettingsView: View {
             }
 
             private func navigateTo(_ applicationSection: ApplicationSection) -> (() -> Void) {
-                return {
+                {
                     navigateToApplicationSection(applicationSection)
                 }
             }
@@ -571,7 +571,7 @@ struct SettingsView: View {
                 @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
 
                 private var selectedService: Service {
-                    return Service.service(forId: selectedServiceId)
+                    Service.service(forId: selectedServiceId)
                 }
 
                 var body: some View {
@@ -712,9 +712,9 @@ struct SettingsView: View {
 
                 private func isSelected() -> Bool {
                     if let selectedServiceId {
-                        return service.id == selectedServiceId
+                        service.id == selectedServiceId
                     } else {
-                        return service == .production
+                        service == .production
                     }
                 }
 
@@ -1008,11 +1008,11 @@ struct SettingsView: View {
 
 private extension SettingsView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.settings.rawValue
+        AnalyticsPageTitle.settings.rawValue
     }
 
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
     }
 }
 

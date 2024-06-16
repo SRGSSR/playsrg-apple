@@ -28,9 +28,9 @@ struct HeaderView: View {
 
     private var displayableSubtitle: String? {
         if horizontalSizeClass == .regular, let subtitle, !subtitle.isEmpty {
-            return subtitle
+            subtitle
         } else {
-            return nil
+            nil
         }
     }
 

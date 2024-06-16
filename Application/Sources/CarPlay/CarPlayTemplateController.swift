@@ -30,7 +30,7 @@ extension CPTemplate {
      */
     var controller: CarPlayTemplateController? {
         get {
-            return objc_getAssociatedObject(self, &controllerKey) as? CarPlayTemplateController
+            objc_getAssociatedObject(self, &controllerKey) as? CarPlayTemplateController
         }
         set {
             objc_setAssociatedObject(self, &controllerKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -39,7 +39,7 @@ extension CPTemplate {
 
     private var appearedOnce: Bool {
         get {
-            return objc_getAssociatedObject(self, &appearedOnceKey) as? Bool ?? false
+            objc_getAssociatedObject(self, &appearedOnceKey) as? Bool ?? false
         }
         set {
             objc_setAssociatedObject(self, &appearedOnceKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -62,7 +62,7 @@ extension CPTemplate {
         notifyDidDisappear(animated: animated, recursive: false)
     }
 
-    fileprivate func notifyWillAppear(animated: Bool, recursive: Bool) {
+    private func notifyWillAppear(animated: Bool, recursive: Bool) {
         if recursive, let container = self as? CarPlayTemplateContainer, let activeChildTemplate = container.activeChildTemplate {
             activeChildTemplate.notifyWillAppear(animated: animated, recursive: recursive)
         }
@@ -72,7 +72,7 @@ extension CPTemplate {
         }
     }
 
-    fileprivate func notifyDidAppear(animated: Bool, recursive: Bool) {
+    private func notifyDidAppear(animated: Bool, recursive: Bool) {
         if recursive, let container = self as? CarPlayTemplateContainer, let activeChildTemplate = container.activeChildTemplate {
             activeChildTemplate.notifyDidAppear(animated: animated, recursive: recursive)
         }
@@ -84,14 +84,14 @@ extension CPTemplate {
         appearedOnce = true
     }
 
-    fileprivate func notifyWillDisappear(animated: Bool, recursive: Bool) {
+    private func notifyWillDisappear(animated: Bool, recursive: Bool) {
         if recursive, let container = self as? CarPlayTemplateContainer, let activeChildTemplate = container.activeChildTemplate {
             activeChildTemplate.notifyWillDisappear(animated: animated, recursive: recursive)
         }
         controller?.willDisappear(animated: animated)
     }
 
-    fileprivate func notifyDidDisappear(animated: Bool, recursive: Bool) {
+    private func notifyDidDisappear(animated: Bool, recursive: Bool) {
         if recursive, let container = self as? CarPlayTemplateContainer, let activeChildTemplate = container.activeChildTemplate {
             activeChildTemplate.notifyDidDisappear(animated: animated, recursive: recursive)
         }
@@ -101,6 +101,6 @@ extension CPTemplate {
 
 extension CPTabBarTemplate: CarPlayTemplateContainer {
     var activeChildTemplate: CPTemplate? {
-        return selectedTemplate
+        selectedTemplate
     }
 }

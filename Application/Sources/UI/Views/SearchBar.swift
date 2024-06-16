@@ -11,7 +11,7 @@ import UIKit
  */
 final class SearchBar: UISearchBar {
     var textField: UITextField? {
-        return Self.textField(in: self)
+        Self.textField(in: self)
     }
 
     override func layoutSubviews() {

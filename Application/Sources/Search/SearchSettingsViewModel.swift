@@ -54,53 +54,53 @@ final class SearchSettingsViewModel: ObservableObject {
     var isLoadingFilters: Bool {
         switch state {
         case .loading:
-            return true
+            true
         default:
-            return false
+            false
         }
     }
 
     private var aggregations: SRGMediaAggregations? {
         switch state {
         case let .loading(aggregations: aggregations):
-            return aggregations
+            aggregations
         case let .loaded(aggregations: aggregations):
-            return aggregations
+            aggregations
         case .failed:
-            return nil
+            nil
         }
     }
 
     var hasTopicFilter: Bool {
-        return !topicBuckets.isEmpty
+        !topicBuckets.isEmpty
     }
 
     var topicBuckets: [SRGItemBucket] {
-        return aggregations?.topicBuckets ?? []
+        aggregations?.topicBuckets ?? []
     }
 
     var selectedTopics: String? {
-        return Self.description(forSelectedUrns: settings?.topicUrns, in: topicBuckets)
+        Self.description(forSelectedUrns: settings?.topicUrns, in: topicBuckets)
     }
 
     var hasShowFilter: Bool {
-        return !showBuckets.isEmpty
+        !showBuckets.isEmpty
     }
 
     var showBuckets: [SRGItemBucket] {
-        return aggregations?.showBuckets ?? []
+        aggregations?.showBuckets ?? []
     }
 
     var selectedShows: String? {
-        return Self.description(forSelectedUrns: settings?.showUrns, in: showBuckets)
+        Self.description(forSelectedUrns: settings?.showUrns, in: showBuckets)
     }
 
     var hasSubtitledFilter: Bool {
-        return !ApplicationConfiguration.shared.isSearchSettingSubtitledHidden
+        !ApplicationConfiguration.shared.isSearchSettingSubtitledHidden
     }
 
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return ApplicationSignal.wokenUp()
+        ApplicationSignal.wokenUp()
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
             .eraseToAnyPublisher()
     }

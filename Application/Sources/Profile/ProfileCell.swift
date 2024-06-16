@@ -39,14 +39,14 @@ struct ProfileCell: View {
 
         private var accessibilityLabel: String? {
             if model.unreads {
-                return "\(model.title ?? ""), \(PlaySRGAccessibilityLocalizedString("Unreads", comment: "Unreads state button"))"
+                "\(model.title ?? ""), \(PlaySRGAccessibilityLocalizedString("Unreads", comment: "Unreads state button"))"
             } else {
-                return model.title
+                model.title
             }
         }
 
         private var accessibilityTraits: AccessibilityTraits {
-            return isSelected ? [.isButton, .isSelected] : .isButton
+            isSelected ? [.isButton, .isSelected] : .isButton
         }
 
         var body: some View {
@@ -90,7 +90,7 @@ struct ProfileCell: View {
 
 class ProfileCellSize: NSObject {
     @objc static func height() -> CGFloat {
-        return 50
+        50
     }
 }
 

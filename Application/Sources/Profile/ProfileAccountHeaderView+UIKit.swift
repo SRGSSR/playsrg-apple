@@ -14,7 +14,7 @@ extension UITableView {
     }
 
     @objc func profileAccountHeaderView() -> UIView {
-        return ProfileAccountTableViewHeaderView(
+        ProfileAccountTableViewHeaderView(
             frame: CGRect(origin: .zero, size: ProfileAccountHeaderView.size()),
             leadingAnchorConstant: LayoutMargin * 2,
             trailingAnchorConstant: -LayoutMargin * 2

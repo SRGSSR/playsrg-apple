@@ -41,9 +41,9 @@ final class MediaDetailViewModel: ObservableObject {
 
     var showTitle: String? {
         if let showTitle = media?.show?.title, showTitle.lowercased() != media?.title.lowercased() {
-            return showTitle
+            showTitle
         } else {
-            return nil
+            nil
         }
     }
 
@@ -53,15 +53,15 @@ final class MediaDetailViewModel: ObservableObject {
     }
 
     var imageUrl: URL? {
-        return url(for: media?.image, size: .large)
+        url(for: media?.image, size: .large)
     }
 
     var watchLaterAllowedAction: WatchLaterAction {
-        return mediaData.watchLaterAllowedAction
+        mediaData.watchLaterAllowedAction
     }
 
     var relatedMedias: [SRGMedia] {
-        return mediaData.relatedMedias
+        mediaData.relatedMedias
     }
 
     func toggleWatchLater() {

@@ -19,7 +19,7 @@ private struct FocusableRegion<Content: View>: UIViewRepresentable {
     }
 
     func makeCoordinator() -> UIHostingController<Content> {
-        return UIHostingController(rootView: content(), ignoreSafeArea: true)
+        UIHostingController(rootView: content(), ignoreSafeArea: true)
     }
 
     func makeUIView(context: Context) -> UIView {
@@ -61,15 +61,15 @@ extension FocusableRegion {
         }
 
         var preferredFocusEnvironments: [UIFocusEnvironment] {
-            return wrappedEnvironment?.preferredFocusEnvironments ?? []
+            wrappedEnvironment?.preferredFocusEnvironments ?? []
         }
 
         var parentFocusEnvironment: UIFocusEnvironment? {
-            return wrappedEnvironment?.parentFocusEnvironment
+            wrappedEnvironment?.parentFocusEnvironment
         }
 
         var focusItemContainer: UIFocusItemContainer? {
-            return wrappedEnvironment?.focusItemContainer
+            wrappedEnvironment?.focusItemContainer
         }
 
         func setNeedsFocusUpdate() {
@@ -81,7 +81,7 @@ extension FocusableRegion {
         }
 
         func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
-            return wrappedEnvironment?.shouldUpdateFocus(in: context) ?? false
+            wrappedEnvironment?.shouldUpdateFocus(in: context) ?? false
         }
 
         func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {

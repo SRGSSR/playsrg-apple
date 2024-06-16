@@ -132,11 +132,11 @@ struct SearchSettingsView: View {
 
 private extension SearchSettingsView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.settings.rawValue
+        AnalyticsPageTitle.settings.rawValue
     }
 
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
     }
 }
 

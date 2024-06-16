@@ -90,7 +90,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
 
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge4(
+        Publishers.Merge4(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
@@ -109,7 +109,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
 
     private static func rowReloadSignal(for section: Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        Publishers.Merge(
             section.properties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
             trigger?.signal(activatedBy: TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
         )
@@ -117,10 +117,10 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
 
     private static func hasLoadMore(for section: Section, in sections: [Section]) -> Bool {
-        if section == sections.last && section.viewModelProperties.hasLoadMore {
-            return true
+        if section == sections.last, section.viewModelProperties.hasLoadMore {
+            true
         } else {
-            return false
+            false
         }
     }
 
@@ -131,22 +131,22 @@ final class PageViewModel: Identifiable, ObservableObject {
 
     private static func placeholderRow(for section: Section, state: State?) -> Row {
         if let row = state?.rows.first(where: { $0.section == section }) {
-            return row
+            row
         } else {
-            return Row(section: section, items: Self.placeholderRowItems(for: section))
+            Row(section: section, items: Self.placeholderRowItems(for: section))
         }
     }
 
     private static func fallbackRow(for section: Section, state: State?) -> Row {
         if let row = state?.rows.first(where: { $0.section == section }) {
-            return row
+            row
         } else {
-            return Row(section: section, items: [])
+            Row(section: section, items: [])
         }
     }
 
     private static func placeholderRowItems(for section: Section) -> [Item] {
-        return section.properties.placeholderRowItems.map { Item(.item($0), in: section) }
+        section.properties.placeholderRowItems.map { Item(.item($0), in: section) }
     }
 }
 
@@ -165,11 +165,11 @@ extension PageViewModel {
             var sharingItem: SharingItem? {
                 switch self {
                 case let .show(show):
-                    return SharingItem(for: show)
+                    SharingItem(for: show)
                 case let .page(page):
-                    return SharingItem(for: page)
+                    SharingItem(for: page)
                 default:
-                    return nil
+                    nil
                 }
             }
         #endif
@@ -177,59 +177,59 @@ extension PageViewModel {
         var supportsCastButton: Bool {
             switch self {
             case .video, .audio, .live:
-                return true
+                true
             default:
-                return false
+                false
             }
         }
 
         var isConfigured: Bool {
             switch self {
             case .audio, .live:
-                return true
+                true
             default:
-                return false
+                false
             }
         }
 
         var title: String? {
             switch self {
             case .video:
-                return NSLocalizedString("Videos", comment: "Title displayed at the top of the video view")
+                NSLocalizedString("Videos", comment: "Title displayed at the top of the video view")
             case .audio:
-                return NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
+                NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
             case .live:
-                return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
+                NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
             case let .topic(topic):
-                return topic.title
+                topic.title
             case let .show(show):
-                return show.title
+                show.title
             case let .page(page):
-                return page.title
+                page.title
             }
         }
 
         var analyticsPageViewTitle: String {
             switch self {
             case .video, .audio, .live:
-                return AnalyticsPageTitle.home.rawValue
+                AnalyticsPageTitle.home.rawValue
             case let .topic(topic):
-                return topic.title
+                topic.title
             case let .show(show):
-                return show.title
+                show.title
             case let .page(page):
-                return page.title
+                page.title
             }
         }
 
         var analyticsPageViewType: String {
             switch self {
             case .video, .audio, .page:
-                return AnalyticsPageType.landingPage.rawValue
+                AnalyticsPageType.landingPage.rawValue
             case .live:
-                return AnalyticsPageType.live.rawValue
+                AnalyticsPageType.live.rawValue
             case .topic, .show:
-                return AnalyticsPageType.overview.rawValue
+                AnalyticsPageType.overview.rawValue
             }
         }
 
@@ -263,34 +263,34 @@ extension PageViewModel {
         func canContain(show: SRGShow) -> Bool {
             switch self {
             case .video:
-                return show.transmission == .TV
+                show.transmission == .TV
             case let .audio(channel: channel):
                 if let channel {
-                    return show.transmission == .radio && show.primaryChannelUid == channel.uid
+                    show.transmission == .radio && show.primaryChannelUid == channel.uid
                 } else {
-                    return show.transmission == .radio
+                    show.transmission == .radio
                 }
             default:
-                return false
+                false
             }
         }
 
         func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
-            return shows.filter { canContain(show: $0) }
+            shows.filter { canContain(show: $0) }
         }
 
         func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
             switch self {
             case .video:
-                return medias.filter { $0.mediaType == .video }
+                medias.filter { $0.mediaType == .video }
             case let .audio(channel: channel):
                 if let channel {
-                    return medias.filter { $0.mediaType == .audio && ($0.channel?.uid == channel.uid || $0.show?.primaryChannelUid == channel.uid) }
+                    medias.filter { $0.mediaType == .audio && ($0.channel?.uid == channel.uid || $0.show?.primaryChannelUid == channel.uid) }
                 } else {
-                    return medias.filter { $0.mediaType == .audio }
+                    medias.filter { $0.mediaType == .audio }
                 }
             default:
-                return medias
+                medias
             }
         }
     }
@@ -302,28 +302,28 @@ extension PageViewModel {
 
         var rows: [Row] {
             if case let .loaded(rows: rows, _) = self {
-                return rows
+                rows
             } else {
-                return []
+                []
             }
         }
 
         var sections: [Section] {
-            return rows.map(\.section)
+            rows.map(\.section)
         }
 
         var isEmpty: Bool {
-            return rows.isEmpty
+            rows.isEmpty
         }
 
         var pageUid: String? {
             switch self {
             case .loading:
-                return nil
+                nil
             case let .failed(_, pageUid: pageUid):
-                return pageUid
+                pageUid
             case let .loaded(_, pageUid: pageUid):
-                return pageUid
+                pageUid
             }
         }
     }
@@ -362,15 +362,15 @@ extension PageViewModel {
         }
 
         var properties: SectionProperties {
-            return wrappedValue.properties
+            wrappedValue.properties
         }
 
         var viewModelProperties: PageViewModelProperties {
             switch wrappedValue {
             case let .content(section, _, _):
-                return ContentSectionProperties(contentSection: section)
+                ContentSectionProperties(contentSection: section)
             case let .configured(section):
-                return ConfiguredSectionProperties(configuredSection: section, index: index)
+                ConfiguredSectionProperties(configuredSection: section, index: index)
             }
         }
     }
@@ -404,28 +404,28 @@ extension PageViewModel {
 extension PageViewModel {
     #if os(iOS)
         var isHeaderWithTitle: Bool {
-            return displayedTitle != nil || displayedShow != nil
+            displayedTitle != nil || displayedShow != nil
         }
 
         var isLargeTitleDisplayMode: Bool {
             if isHeaderWithTitle {
-                return false
+                false
             } else {
                 // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
                 // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
                 // be incorrect at the top.
-                return !isNavigationBarHidden
+                !isNavigationBarHidden
             }
         }
 
         var isNavigationBarHidden: Bool {
             switch id {
             case .video:
-                return true
+                true
             case let .audio(channel: channel):
-                return channel == nil
+                channel == nil
             default:
-                return false
+                false
             }
         }
     #endif
@@ -443,41 +443,41 @@ extension PageViewModel {
     }
 
     var secondaryColor: Color {
-        return .srgGray96
+        .srgGray96
     }
 
     var displayedTitle: String? {
         switch id {
         case let .page(page):
-            return page.title
+            page.title
         case let .topic(topic):
-            return topic.title
+            topic.title
         default:
-            return nil
+            nil
         }
     }
 
     var displayedTitleDescription: String? {
         if case let .page(page) = id {
-            return page.summary
+            page.summary
         } else {
-            return nil
+            nil
         }
     }
 
     var displayedTitleTextAlignment: TextAlignment {
         if case .topic = id {
-            return constant(iOS: .leading, tvOS: .center)
+            constant(iOS: .leading, tvOS: .center)
         } else {
-            return .leading
+            .leading
         }
     }
 
     var displayedTitleNeedsTopPadding: Bool {
         if case let .topic(topic) = id, ApplicationConfiguration.shared.topicColors(for: topic) != nil {
-            return constant(iOS: true, tvOS: false)
+            constant(iOS: true, tvOS: false)
         } else {
-            return false
+            false
         }
     }
 
@@ -496,11 +496,11 @@ extension PageViewModel {
     var displayedGradientTopicStyle: TopicGradientView.Style? {
         switch id {
         case .topic:
-            return .topicPage
+            .topicPage
         case .show:
-            return .showPage
+            .showPage
         default:
-            return nil
+            nil
         }
     }
 }
@@ -546,45 +546,45 @@ private extension PageViewModel {
     static func pagePublisher(id: Id) -> AnyPublisher<Page, Error> {
         switch id {
         case .video:
-            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .topic(topic):
-            return SRGDataProvider.current!.contentPage(for: topic.vendor, topicWithUrn: topic.urn)
+            SRGDataProvider.current!.contentPage(for: topic.vendor, topicWithUrn: topic.urn)
                 // FIXME: is topic page always videoOrTV content type?
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .show(show):
-            if show.transmission == .TV && !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
-                return SRGDataProvider.current!.contentPage(for: show.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
+            if show.transmission == .TV, !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
+                SRGDataProvider.current!.contentPage(for: show.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: show.play_contentType, show: show), index: $1) }) }
                     .eraseToAnyPublisher()
             } else {
-                return Just(Page(uid: nil, sections: [Section(.configured(.availableEpisodes(show)), index: 0)]))
+                Just(Page(uid: nil, sections: [Section(.configured(.availableEpisodes(show)), index: 0)]))
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             }
         case let .page(page):
-            return SRGDataProvider.current!.contentPage(for: page.vendor, uid: page.uid)
+            SRGDataProvider.current!.contentPage(for: page.vendor, uid: page.uid)
                 // FIXME: is page always videoOrTV content type?
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
             if let channel, let uid = channel.contentPageId, ApplicationSettingAudioHomepageOption() == .curatedMany {
-                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: uid)
+                SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: uid)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .audioOrRadio), index: $1) }) }
                     .eraseToAnyPublisher()
             } else if let channel {
-                return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
+                Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
             } else {
-                return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playAudio)
+                SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playAudio)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .audioOrRadio), index: $1) }) }
                     .eraseToAnyPublisher()
             }
         case .live:
-            return Just(Page(uid: nil, sections: ApplicationConfiguration.shared.liveConfiguredSections.enumeratedMap { Section(.configured($0), index: $1) }))
+            Just(Page(uid: nil, sections: ApplicationConfiguration.shared.liveConfiguredSections.enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
@@ -592,7 +592,7 @@ private extension PageViewModel {
 
     static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
         if let highlight = section.properties.rowHighlight {
-            return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                 .map { items in
                     guard let firstItem = items.first else { return Row(section: section, items: []) }
 
@@ -602,7 +602,7 @@ private extension PageViewModel {
                 }
                 .eraseToAnyPublisher()
         } else {
-            return Publishers.CombineLatest(
+            Publishers.CombineLatest(
                 section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                     .scan([]) { $0 + $1 },
                 section.properties.interactiveUpdatesPublisher()
@@ -643,9 +643,9 @@ extension PageViewModelProperties {
         var hasMoreRowItem: Bool {
             switch layout {
             case .mediaSwimlane, .showSwimlane, .elementSwimlane:
-                return true
+                true
             default:
-                return false
+                false
             }
         }
     #endif
@@ -653,9 +653,9 @@ extension PageViewModelProperties {
     var hasLoadMore: Bool {
         switch layout {
         case .mediaGrid, .mediaList, .showGrid, .liveMediaGrid:
-            return true
+            true
         default:
-            return false
+            false
         }
     }
 }
@@ -665,7 +665,7 @@ private extension PageViewModel {
         let contentSection: SRGContentSection
 
         private var presentation: SRGContentPresentation {
-            return contentSection.presentation
+            contentSection.presentation
         }
 
         var layout: PageViewModel.SectionLayout {
@@ -708,12 +708,12 @@ private extension PageViewModel {
         var canOpenPage: Bool {
             switch presentation.type {
             case .favoriteShows, .myProgram, .continueWatching, .topicSelector, .watchLater:
-                return true
+                true
             default:
                 if presentation.contentLink != nil {
-                    return true
+                    true
                 } else {
-                    return false
+                    false
                 }
             }
         }
@@ -753,7 +753,7 @@ private extension PageViewModel {
         }
 
         var canOpenPage: Bool {
-            return layout == .mediaSwimlane || layout == .showSwimlane
+            layout == .mediaSwimlane || layout == .showSwimlane
         }
     }
 }

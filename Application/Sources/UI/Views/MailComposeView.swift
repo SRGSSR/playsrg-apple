@@ -18,7 +18,7 @@ struct MailComposeView: UIViewControllerRepresentable {
     fileprivate var messageBody: String?
 
     static func canSendMail() -> Bool {
-        return MFMailComposeViewController.canSendMail()
+        MFMailComposeViewController.canSendMail()
     }
 
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
@@ -34,11 +34,11 @@ struct MailComposeView: UIViewControllerRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        return Coordinator(presentation: presentationMode)
+        Coordinator(presentation: presentationMode)
     }
 
     func makeUIViewController(context: Context) -> MFMailComposeViewController {
-        return viewController(context: context)
+        viewController(context: context)
     }
 
     func viewController(context: Context?) -> MFMailComposeViewController {

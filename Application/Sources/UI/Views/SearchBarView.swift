@@ -32,7 +32,7 @@ struct SearchBarView: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Cordinator {
-        return Cordinator(text: $text)
+        Cordinator(text: $text)
     }
 
     func makeUIView(context: Context) -> UISearchBar {

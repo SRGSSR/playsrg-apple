@@ -36,25 +36,25 @@ func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
 }
 
 func url(for image: SRGImage?, size: SRGImageSize) -> URL? {
-    return SRGDataProvider.current!.url(for: image, size: size)
+    SRGDataProvider.current!.url(for: image, size: size)
 }
 
 extension Comparable {
     func clamped(to range: ClosedRange<Self>) -> Self {
-        return min(max(self, range.lowerBound), range.upperBound)
+        min(max(self, range.lowerBound), range.upperBound)
     }
 }
 
 extension Float {
     // See https://stackoverflow.com/a/31390678/760435
     var minimalRepresentation: String {
-        return truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+        truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
 
 extension String {
     static func placeholder(length: Int) -> String {
-        return String(repeating: " ", count: length)
+        String(repeating: " ", count: length)
     }
 
     static let loremIpsum: String = """
@@ -90,32 +90,32 @@ extension String {
     """
 
     func unobfuscated() -> String {
-        return components(separatedBy: .decimalDigits).joined()
+        components(separatedBy: .decimalDigits).joined()
     }
 
     var capitalizedFirstLetter: String {
-        return prefix(1).capitalized + dropFirst()
+        prefix(1).capitalized + dropFirst()
     }
 
     func heightOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
         let font = SRGFont.font(fontStyle) as UIFont
         let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = self.size(withAttributes: fontAttributes)
-        return size.height
+        let fontSize = self.size(withAttributes: fontAttributes)
+        return fontSize.height
     }
 
     func widthOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
         let font = SRGFont.font(fontStyle) as UIFont
         let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = self.size(withAttributes: fontAttributes)
-        return size.width
+        let fontSize = self.size(withAttributes: fontAttributes)
+        return fontSize.width
     }
 
     /*
      * Compact the string to not contain any empty lines or white spaces.
      */
     var compacted: String {
-        return replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
+        replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
     }
 }
 
@@ -182,13 +182,13 @@ extension Collection {
      *  and collects items starting with non-letter characters under '#'. If a group is present in the returned
      *  array the array of associated items is guaranteed to contain at least 1 item.
      */
-    func groupedAlphabetically<S>(by keyForElement: (Self.Element) throws -> S?) rethrows -> [(key: Character, value: [Self.Element])] where S: StringProtocol {
+    func groupedAlphabetically(by keyForElement: (Self.Element) throws -> (some StringProtocol)?) rethrows -> [(key: Character, value: [Self.Element])] {
         let dictionary = try [Character: [Self.Element]](grouping: self) { element in
             if let key = try keyForElement(element),
                let character = key.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).first, character.isLetter {
-                return character
+                character
             } else {
-                return "#"
+                "#"
             }
         }
         let hashGroup = dictionary["#"]
@@ -308,7 +308,7 @@ extension View {
      *  Adjust the selection appearance of the receiver, applying one of the available styles.
      */
     func selectionAppearance(_ appearance: SelectionAppearance = .dimmed, when selected: Bool, while editing: Bool = false) -> some View {
-        return Group {
+        Group {
             if (!editing && selected) || (editing && !selected) {
                 switch appearance {
                 case .dimmed:
@@ -396,11 +396,11 @@ extension NSCollectionLayoutSection {
 extension NSCollectionLayoutDimension {
     func constrained(to size: CGSize) -> CGFloat {
         if isFractionalWidth {
-            return size.width * dimension
+            size.width * dimension
         } else if isFractionalHeight {
-            return size.height * dimension
+            size.height * dimension
         } else {
-            return dimension
+            dimension
         }
     }
 }
@@ -415,11 +415,11 @@ extension NSCollectionLayoutSize {
     }
 
     @objc func constrained(by view: UIView) -> CGSize {
-        return constrained(to: view.frame.size)
+        constrained(to: view.frame.size)
     }
 
     var previewSize: CGSize {
-        return constrained(to: Self.defaultSize)
+        constrained(to: Self.defaultSize)
     }
 }
 
@@ -443,7 +443,7 @@ extension UIView {
     }
 
     /// Probe some hosting controller to determine the behavior of its SwiftUI view in some direction.
-    private func sizingBehavior<T>(of hostingController: UIHostingController<T>, for axis: NSLayoutConstraint.Axis) -> SizingBehavior {
+    private func sizingBehavior(of hostingController: UIHostingController<some Any>, for axis: NSLayoutConstraint.Axis) -> SizingBehavior {
         // Fit into the maximal allowed layout size to check which boundaries are adopted by the associated view
         let size = hostingController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
         if axis == .vertical {
@@ -472,12 +472,12 @@ extension UIView {
     }
 
     /// Apply the same sizing behavior as the provided hosting controller in some directions (layout neutrality).
-    func applySizingBehavior<T>(of hostingController: UIHostingController<T>, for axis: NSLayoutConstraint.Axis) {
+    func applySizingBehavior(of hostingController: UIHostingController<some Any>, for axis: NSLayoutConstraint.Axis) {
         applySizingBehavior(sizingBehavior(of: hostingController, for: axis), for: axis)
     }
 
     /// Apply the same sizing behavior as the provided hosting controller in all directions (layout neutrality).
-    func applySizingBehavior<T>(of hostingController: UIHostingController<T>) {
+    func applySizingBehavior(of hostingController: UIHostingController<some Any>) {
         applySizingBehavior(of: hostingController, for: .horizontal)
         applySizingBehavior(of: hostingController, for: .vertical)
     }
@@ -524,7 +524,7 @@ extension View {
 extension UIApplication {
     /// Return the main window scene among all connected scenes, if any.
     @objc var mainWindowScene: UIWindowScene? {
-        return connectedScenes
+        connectedScenes
             .filter { $0.delegate is SceneDelegate }
             .compactMap { $0 as? UIWindowScene }
             .first
@@ -532,36 +532,34 @@ extension UIApplication {
 
     /// Return the main key window among all connected scenes, if any.
     @objc var mainWindow: UIWindow? {
-        return mainWindowScene?.windows
+        mainWindowScene?.windows
             .first { $0.isKeyWindow }
     }
 
     /// Return the main scene delegate, if any.
     @objc var mainSceneDelegate: SceneDelegate? {
-        return mainWindowScene?.delegate as? SceneDelegate
+        mainWindowScene?.delegate as? SceneDelegate
     }
 
     /// Return the main top view controller, if any.
     @objc var mainTopViewController: UIViewController? {
-        return mainWindow?.play_topViewController
+        mainWindow?.play_topViewController
     }
 
     #if os(iOS)
         /// Return the main tab bar root controller, if any.
         @objc var mainTabBarController: TabBarController? {
-            return mainWindow?.rootViewController as? TabBarController
+            mainWindow?.rootViewController as? TabBarController
         }
     #endif
 }
 
 extension Locale {
-    static let currentLanguageIdentifier: String = {
-        if #available(iOS 16, tvOS 16, *) {
-            return Locale.current.identifier(.bcp47)
-        } else {
-            return Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
-        }
-    }()
+    static let currentLanguageIdentifier: String = if #available(iOS 16, tvOS 16, *) {
+        Locale.current.identifier(.bcp47)
+    } else {
+        Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
+    }
 }
 
 extension SRGAnalyticsLabels {

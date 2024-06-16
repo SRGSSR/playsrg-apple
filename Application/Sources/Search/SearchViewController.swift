@@ -127,7 +127,7 @@ final class SearchViewController: UIViewController {
                 guard let self else { return }
                 reloadData(for: state)
                 #if os(tvOS)
-                    guard let searchController = searchController else { return }
+                    guard let searchController else { return }
                     if case let .loaded(rows: _, suggestions: suggestions) = state {
                         if let suggestions {
                             searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
@@ -352,7 +352,7 @@ extension SearchViewController {
         }
 
         override var keyCommands: [UIKeyCommand]? {
-            return [searchKeyCommand]
+            [searchKeyCommand]
         }
     }
 #endif
@@ -361,11 +361,11 @@ extension SearchViewController {
 
 extension SearchViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
-        return collectionView != nil ? [collectionView] : nil
+        collectionView != nil ? [collectionView] : nil
     }
 
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
@@ -375,21 +375,21 @@ extension SearchViewController: ContentInsets {
 
 extension SearchViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
-        return collectionView
+        collectionView
     }
 }
 
 extension SearchViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
-        return AnalyticsPageTitle.home.rawValue
+        AnalyticsPageTitle.home.rawValue
     }
 
     var srg_pageViewType: String {
-        return AnalyticsPageType.navigationPage.rawValue
+        AnalyticsPageType.navigationPage.rawValue
     }
 
     var srg_pageViewLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
     }
 }
 
@@ -464,11 +464,11 @@ extension SearchViewController: UICollectionViewDelegate {
         }
 
         func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-            return preview(for: configuration, in: collectionView)
+            preview(for: configuration, in: collectionView)
         }
 
         func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-            return preview(for: configuration, in: collectionView)
+            preview(for: configuration, in: collectionView)
         }
 
         private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
@@ -481,7 +481,7 @@ extension SearchViewController: UICollectionViewDelegate {
 
     #if os(tvOS)
         func collectionView(_: UICollectionView, canFocusItemAt _: IndexPath) -> Bool {
-            return false
+            false
         }
     #endif
 }
@@ -591,7 +591,7 @@ private extension SearchViewController {
     }
 
     private func layout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
+        UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             guard let self else { return nil }
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
 
@@ -632,7 +632,7 @@ private extension SearchViewController {
                 }
             }
 
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
 
             let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
@@ -702,7 +702,7 @@ private extension SearchViewController {
         }
 
         static func size(section: SearchViewModel.Section, settings: MediaSearchSettings, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-            return HeaderViewSize.recommended(forTitle: title(for: section, settings: settings), subtitle: nil, layoutWidth: layoutWidth)
+            HeaderViewSize.recommended(forTitle: title(for: section, settings: settings), subtitle: nil, layoutWidth: layoutWidth)
         }
     }
 }

@@ -18,7 +18,7 @@ final class SearchViewModel: ObservableObject {
     private let trigger = Trigger()
 
     var hasDefaultSettings: Bool {
-        return Self.areDefaultSettings(settings)
+        Self.areDefaultSettings(settings)
     }
 
     init() {
@@ -40,7 +40,7 @@ final class SearchViewModel: ObservableObject {
     }
 
     var isSearching: Bool {
-        return Self.isSearching(with: query, settings: settings)
+        Self.isSearching(with: query, settings: settings)
     }
 
     func reload(deep: Bool = false) {
@@ -58,7 +58,7 @@ final class SearchViewModel: ObservableObject {
     }
 
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge3(
+        Publishers.Merge3(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
@@ -72,11 +72,11 @@ final class SearchViewModel: ObservableObject {
     }
 
     static func areDefaultSettings(_ settings: MediaSearchSettings) -> Bool {
-        return optimalSettings(from: settings) == optimalSettings()
+        optimalSettings(from: settings) == optimalSettings()
     }
 
     private static func isSearching(with query: String, settings: MediaSearchSettings) -> Bool {
-        return !query.isEmpty || !areDefaultSettings(settings)
+        !query.isEmpty || !areDefaultSettings(settings)
     }
 
     private static func optimalSettings(from settings: MediaSearchSettings = MediaSearchSettings()) -> MediaSearchSettings {
@@ -100,9 +100,9 @@ extension SearchViewModel {
 
         var hasContent: Bool {
             if case let .loaded(rows: rows, suggestions: _) = self {
-                return !rows.isEmpty
+                !rows.isEmpty
             } else {
-                return false
+                false
             }
         }
     }
@@ -135,14 +135,14 @@ extension SearchViewModel {
 private extension SearchViewModel {
     static func searchSuggestion() -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if !ApplicationConfiguration.shared.areShowsUnavailable {
-            return Publishers.CombineLatest(
+            Publishers.CombineLatest(
                 mostSearchedShows(),
                 topics()
             )
             .map { (rows: [$0, $1], suggestions: nil) }
             .eraseToAnyPublisher()
         } else {
-            return Just([])
+            Just([])
                 .map { (rows: $0, suggestions: nil) }
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
@@ -152,19 +152,19 @@ private extension SearchViewModel {
     static func searchResults(matchingQuery query: String, with settings: MediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if !ApplicationConfiguration.shared.areShowsUnavailable {
             if !query.isEmpty {
-                return Publishers.CombineLatest(
+                Publishers.CombineLatest(
                     shows(matchingQuery: query, with: settings),
                     medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
                 )
                 .map { (rows: [$0, $1.row], suggestions: $1.suggestions) }
                 .eraseToAnyPublisher()
             } else {
-                return medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+                medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
                     .map { (rows: [$0.row], suggestions: $0.suggestions) }
                     .eraseToAnyPublisher()
             }
         } else {
-            return medias(matchingQuery: query, with: nil /* Case of SWI; settings not supported */, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+            medias(matchingQuery: query, with: nil /* Case of SWI; settings not supported */, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
                 .map { (rows: [$0.row], suggestions: $0.suggestions) }
                 .eraseToAnyPublisher()
         }
@@ -221,14 +221,14 @@ private extension SearchViewModel {
 
     static func rows(matchingQuery query: String, with settings: MediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if isSearching(with: query, settings: settings) {
-            return searchResults(matchingQuery: query, with: settings, trigger: trigger)
+            searchResults(matchingQuery: query, with: settings, trigger: trigger)
         } else {
-            return searchSuggestion()
+            searchSuggestion()
         }
     }
 
     static func isLoading(row: Row) -> Bool {
-        return row.items.contains { $0 == .loading }
+        row.items.contains { $0 == .loading }
     }
 
     static func state(from rows: [Row], suggestions: [SRGSearchSuggestion]?) -> State {

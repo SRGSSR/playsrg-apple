@@ -30,6 +30,6 @@ extension UITableView {
     }
 
     @objc func dequeueReusableProfileSectionHeader() -> UITableViewHeaderFooterView & ProfileSectionSettable {
-        return dequeueReusableHeaderFooterView(withIdentifier: UITableView.reuseIdentifier) as! ProfileSectionTableViewHeaderView
+        dequeueReusableHeaderFooterView(withIdentifier: UITableView.reuseIdentifier) as! ProfileSectionTableViewHeaderView
     }
 }

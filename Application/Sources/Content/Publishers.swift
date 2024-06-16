@@ -15,7 +15,7 @@ extension NotificationCenter {
     func weakPublisher(for name: Notification.Name, object: AnyObject? = nil) -> AnyPublisher<Notification, Never> {
         publisher(for: name)
             .filter { [weak object] notification in
-                guard let object = object else { return true }
+                guard let object else { return true }
                 guard let notificationObject = notification.object as? AnyObject else { return false }
                 return notificationObject === object
             }
@@ -26,7 +26,7 @@ extension NotificationCenter {
 extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
     func latestMediasForShowsPublisher(withUrns urns: [String], pageSize: UInt = SRGDataProviderDefaultPageSize) -> AnyPublisher<[SRGMedia], Error> {
-        return urns.publisher
+        urns.publisher
             .collect(3)
             .flatMap { urns in
                 self.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
@@ -44,18 +44,18 @@ extension SRGDataProvider {
             if let channelUid = media.channel?.uid,
                let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
                media.urn != selectedLivestreamUrn {
-                return radioLivestreams(for: media.vendor, channelUid: channelUid)
+                radioLivestreams(for: media.vendor, channelUid: channelUid)
                     .map { medias in
                         if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
-                            return selectedMedia
+                            selectedMedia
                         } else {
-                            return media
+                            media
                         }
                     }
                     .replaceError(with: media)
                     .eraseToAnyPublisher()
             } else {
-                return Just(media)
+                Just(media)
                     .eraseToAnyPublisher()
             }
         }
@@ -84,7 +84,7 @@ extension SRGDataProvider {
     func historyEntriesPublisher() -> AnyPublisher<[String], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
-        return Deferred {
+        Deferred {
             Future<[String], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
@@ -100,7 +100,7 @@ extension SRGDataProvider {
     }
 
     func historyPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
-        return historyEntriesPublisher()
+        historyEntriesPublisher()
             .map { urns in
                 self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
                     .map { filter?.compatibleMedias($0) ?? $0 }
@@ -153,7 +153,7 @@ extension SRGDataProvider {
     func laterEntriesPublisher() -> AnyPublisher<[String], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
-        return Deferred {
+        Deferred {
             Future<[String], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
                 SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
@@ -169,7 +169,7 @@ extension SRGDataProvider {
     }
 
     func laterPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
-        return laterEntriesPublisher()
+        laterEntriesPublisher()
             .map { urns in
                 self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
                     .map { filter?.compatibleMedias($0) ?? $0 }
@@ -194,7 +194,7 @@ extension SRGDataProvider {
     }
 
     func favoritesPublisher(filter: SectionFiltering?) -> AnyPublisher<[SRGShow], Error> {
-        return showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
+        showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
             .map { filter?.compatibleShows($0) ?? $0 }
             .eraseToAnyPublisher()
     }
@@ -217,19 +217,19 @@ extension SRGDataProvider {
     private func tvOtherPartyProgramsPublisher(day: SRGDay? = nil, bouquet: TVGuideBouquet, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
         switch bouquet {
         case .RSI:
-            return SRGDataProvider.current!.tvPrograms(for: .RSI, day: day, minimal: minimal)
+            SRGDataProvider.current!.tvPrograms(for: .RSI, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) }) }
                 .eraseToAnyPublisher()
         case .RTS:
-            return SRGDataProvider.current!.tvPrograms(for: .RTS, day: day, minimal: minimal)
+            SRGDataProvider.current!.tvPrograms(for: .RTS, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) }) }
                 .eraseToAnyPublisher()
         case .SRF:
-            return SRGDataProvider.current!.tvPrograms(for: .SRF, day: day, minimal: minimal)
+            SRGDataProvider.current!.tvPrograms(for: .SRF, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) }) }
                 .eraseToAnyPublisher()
         case .thirdParty:
-            return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal)
+            SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: true) }) }
                 .eraseToAnyPublisher()
         }
@@ -254,7 +254,7 @@ struct PlayChannel: Hashable {
 
 extension Publishers {
     static func concatenateMany<Output, Failure>(_ publishers: [AnyPublisher<Output, Failure>]) -> AnyPublisher<Output, Failure> {
-        return publishers.reduce(Empty().eraseToAnyPublisher()) { acc, elem in
+        publishers.reduce(Empty().eraseToAnyPublisher()) { acc, elem in
             Publishers.Concatenate(prefix: acc, suffix: elem).eraseToAnyPublisher()
         }
     }
@@ -268,7 +268,7 @@ enum UserDataPublishers {
     }
 
     static func playbackProgressPublisher(for media: SRGMedia) -> AnyPublisher<Double?, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.historyUpdates(for: media.urn)) {
+        Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.historyUpdates(for: media.urn)) {
             Deferred {
                 Future<Double?, Never> { promise in
                     HistoryPlaybackProgressForMediaAsync(media) { progress, completed in
@@ -284,7 +284,7 @@ enum UserDataPublishers {
     }
 
     static func favoritePublisher(for show: SRGShow) -> AnyPublisher<Bool, Never> {
-        return ThrottledSignal.preferenceUpdates(interval: 0)
+        ThrottledSignal.preferenceUpdates(interval: 0)
             .prepend(())
             .map { _ in
                 FavoritesContainsShow(show)
@@ -293,7 +293,7 @@ enum UserDataPublishers {
     }
 
     static func laterAllowedActionPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
+        Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
             Deferred {
                 Future<WatchLaterAction, Never> { promise in
                     WatchLaterAllowedActionForMediaAsync(media) { action in
@@ -308,7 +308,7 @@ enum UserDataPublishers {
 
     #if os(iOS)
         static func subscriptionStatusPublisher(for show: SRGShow) -> AnyPublisher<SubscriptionStatus, Never> {
-            return Publishers.Merge(
+            Publishers.Merge(
                 ThrottledSignal.preferenceUpdates(interval: 0),
                 ApplicationSignal.pushServiceStatusUpdate()
             )

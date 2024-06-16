@@ -16,7 +16,7 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
     let items: [Item]
 
     var isEmpty: Bool {
-        return items.isEmpty
+        items.isEmpty
     }
 }
 

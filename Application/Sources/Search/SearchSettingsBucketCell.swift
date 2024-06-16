@@ -32,11 +32,11 @@ struct SearchSettingsBucketCell: View {
     }
 
     private var title: String {
-        return "\(bucket.title) (\(NumberFormatter.localizedString(from: bucket.count as NSNumber, number: .decimal)))"
+        "\(bucket.title) (\(NumberFormatter.localizedString(from: bucket.count as NSNumber, number: .decimal)))"
     }
 
     private var isSelected: Bool {
-        return selectedUrns.contains(bucket.urn)
+        selectedUrns.contains(bucket.urn)
     }
 
     private func toggleSelection() {
@@ -57,7 +57,7 @@ private extension SearchSettingsBucketCell {
     }
 
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? [.isButton, .isSelected] : .isButton
+        isSelected ? [.isButton, .isSelected] : .isButton
     }
 }
 

@@ -19,7 +19,7 @@ struct BlockingOverlay: View {
     }
 
     private var blockingReason: SRGBlockingReason? {
-        return media?.blockingReason(at: Date())
+        media?.blockingReason(at: Date())
     }
 
     var body: some View {

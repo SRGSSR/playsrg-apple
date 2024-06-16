@@ -19,7 +19,7 @@ final class OnboardingViewController: BaseViewController {
     @IBOutlet private var buttonBottomConstraint: NSLayoutConstraint!
 
     private var isTall: Bool {
-        return view.frame.height >= 600.0
+        view.frame.height >= 600.0
     }
 
     static func viewController(for onboarding: Onboarding!) -> OnboardingViewController {
@@ -70,7 +70,7 @@ final class OnboardingViewController: BaseViewController {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
 
     override func viewWillLayoutSubviews() {
@@ -131,7 +131,7 @@ extension OnboardingViewController: Oriented {}
 
 extension OnboardingViewController: PaperOnboardingDataSource {
     func onboardingItemsCount() -> Int {
-        return onboarding.pages.count
+        onboarding.pages.count
     }
 
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
@@ -177,14 +177,14 @@ extension OnboardingViewController: PaperOnboardingDelegate {
 
 extension OnboardingViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
-        return onboarding.title
+        onboarding.title
     }
 
     var srg_pageViewType: String {
-        return AnalyticsPageType.help.rawValue
+        AnalyticsPageType.help.rawValue
     }
 
     var srg_pageViewLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.feature.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.feature.rawValue]
     }
 }

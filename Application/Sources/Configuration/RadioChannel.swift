@@ -35,7 +35,7 @@ extension RadioChannel {
     }
 
     func configuredSections() -> [ConfiguredSection] {
-        return homeSections.compactMap { homeSection in
+        homeSections.compactMap { homeSection in
             guard let homeSection = HomeSection(rawValue: homeSection.intValue) else { return nil }
             return Self.configuredSection(from: homeSection, withChannelUid: uid)
         }

@@ -25,7 +25,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     private static let verticalSpacing: CGFloat = 3
 
     var day: SRGDay {
-        return model.day
+        model.day
     }
 
     private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: PlayChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
@@ -193,27 +193,27 @@ extension ProgramGuideDailyViewController {
 
 extension ProgramGuideDailyViewController: ProgramGuideChildViewController {
     var programGuideLayout: ProgramGuideLayout {
-        return .list
+        .list
     }
 
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
-        return model
+        model
     }
 }
 
 extension ProgramGuideDailyViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
-        return collectionView != nil ? [collectionView] : nil
+        collectionView != nil ? [collectionView] : nil
     }
 
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: Self.verticalSpacing, right: 0)
+        UIEdgeInsets(top: 0, left: 0, bottom: Self.verticalSpacing, right: 0)
     }
 }
 
 extension ProgramGuideDailyViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
-        return collectionView
+        collectionView
     }
 }
 
@@ -269,7 +269,7 @@ private extension ProgramGuideDailyViewController {
 
 private extension ProgramGuideDailyViewController {
     private func layout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { _, layoutEnvironment in
+        UICollectionViewCompositionalLayout { _, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             let section = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
                 ProgramCellSize.fullWidth()

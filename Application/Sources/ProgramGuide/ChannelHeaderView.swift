@@ -14,7 +14,7 @@ struct ChannelHeaderView: View {
     let channel: SRGChannel
 
     private var imageUrl: URL? {
-        return url(for: channel.rawImage, size: .small)
+        url(for: channel.rawImage, size: .small)
     }
 
     var body: some View {

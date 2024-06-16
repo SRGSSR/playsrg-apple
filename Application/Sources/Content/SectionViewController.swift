@@ -169,13 +169,13 @@ final class SectionViewController: UIViewController {
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             switch kind {
             case Header.titleHeader.rawValue:
-                return collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
             case UICollectionView.elementKindSectionHeader:
-                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             case UICollectionView.elementKindSectionFooter:
-                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionFooterViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: sectionFooterViewRegistration, for: indexPath)
             default:
-                return nil
+                nil
             }
         }
 
@@ -269,11 +269,11 @@ final class SectionViewController: UIViewController {
             //       See https://developer.apple.com/documentation/xcode/localizing-strings-that-contain-plurals
             switch numberOfSelectedItems {
             case 0:
-                return NSLocalizedString("Select items", comment: "Title displayed when no item has been selected")
+                NSLocalizedString("Select items", comment: "Title displayed when no item has been selected")
             case 1:
-                return NSLocalizedString("1 item", comment: "Title displayed when 1 item has been selected")
+                NSLocalizedString("1 item", comment: "Title displayed when 1 item has been selected")
             default:
-                return String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
+                String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
             }
         }
     #endif
@@ -396,55 +396,55 @@ extension SectionViewController: DailyMediasViewController {
     }
 
     var scrollView: UIScrollView {
-        return collectionView
+        collectionView
     }
 }
 
 extension SectionViewController {
     @objc static func viewController(forContentSection contentSection: SRGContentSection, contentType: ContentType) -> SectionViewController {
-        return SectionViewController(section: .content(contentSection, type: contentType))
+        SectionViewController(section: .content(contentSection, type: contentType))
     }
 
     #if os(iOS)
         @objc static func downloadsViewController() -> SectionViewController {
-            return SectionViewController(section: .configured(.downloads))
+            SectionViewController(section: .configured(.downloads))
         }
 
         @objc static func notificationsViewController() -> SectionViewController {
-            return SectionViewController(section: .configured(.notifications))
+            SectionViewController(section: .configured(.notifications))
         }
     #endif
 
     @objc static func favoriteShowsViewController() -> SectionViewController {
-        return SectionViewController(section: .configured(.favoriteShows(contentType: .mixed)))
+        SectionViewController(section: .configured(.favoriteShows(contentType: .mixed)))
     }
 
     @objc static func historyViewController() -> SectionViewController {
-        return SectionViewController(section: .configured(.history))
+        SectionViewController(section: .configured(.history))
     }
 
     @objc static func watchLaterViewController() -> SectionViewController {
-        return SectionViewController(section: .configured(.watchLater))
+        SectionViewController(section: .configured(.watchLater))
     }
 
     @objc static func mediasViewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
         if let channelUid {
-            return SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
+            SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
         } else {
-            return SectionViewController(section: .configured(.tvEpisodesForDay(day)))
+            SectionViewController(section: .configured(.tvEpisodesForDay(day)))
         }
     }
 
     @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
         if let channelUid {
-            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
+            SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         } else {
-            return SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
+            SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
     }
 
     @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
-        return showsViewController(forChannelUid: channelUid, initialSectionId: nil)
+        showsViewController(forChannelUid: channelUid, initialSectionId: nil)
     }
 }
 
@@ -452,11 +452,11 @@ extension SectionViewController {
 
 extension SectionViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
-        return collectionView != nil ? [collectionView] : nil
+        collectionView != nil ? [collectionView] : nil
     }
 
     var play_paddingContentInsets: UIEdgeInsets {
-        return contentInsets
+        contentInsets
     }
 }
 
@@ -466,7 +466,7 @@ extension SectionViewController: ContentInsets {
 
 extension SectionViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
-        return collectionView
+        collectionView
     }
 }
 
@@ -495,7 +495,7 @@ extension SectionViewController: UICollectionViewDelegate {
         }
 
         func collectionView(_: UICollectionView, shouldBeginMultipleSelectionInteractionAt _: IndexPath) -> Bool {
-            return model.configuration.properties.supportsEdition
+            model.configuration.properties.supportsEdition
         }
 
         func collectionView(_: UICollectionView, didBeginMultipleSelectionInteractionAt _: IndexPath) {
@@ -518,11 +518,11 @@ extension SectionViewController: UICollectionViewDelegate {
         }
 
         func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-            return preview(for: configuration, in: collectionView)
+            preview(for: configuration, in: collectionView)
         }
 
         func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-            return preview(for: configuration, in: collectionView)
+            preview(for: configuration, in: collectionView)
         }
 
         private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
@@ -535,7 +535,7 @@ extension SectionViewController: UICollectionViewDelegate {
 
     #if os(tvOS)
         func collectionView(_: UICollectionView, canFocusItemAt _: IndexPath) -> Bool {
-            return false
+            false
         }
     #endif
 }
@@ -569,19 +569,19 @@ extension SectionViewController: UIScrollViewDelegate {
 
 extension SectionViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
-        return model.configuration.properties.analyticsTitle ?? ""
+        model.configuration.properties.analyticsTitle ?? ""
     }
 
     var srg_pageViewType: String {
-        return model.configuration.properties.analyticsType ?? ""
+        model.configuration.properties.analyticsType ?? ""
     }
 
     var srg_pageViewLevels: [String]? {
-        return model.configuration.properties.analyticsLevels
+        model.configuration.properties.analyticsLevels
     }
 
     var srg_isOpenedFromPushNotification: Bool {
-        return fromPushNotification
+        fromPushNotification
     }
 }
 
@@ -623,7 +623,7 @@ private extension SectionViewController {
     }
 
     private func layout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
+        UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section,
                                                         configuration: configuration,
@@ -698,9 +698,9 @@ private extension SectionViewController {
 
             guard let self else { return nil }
 
-            let snapshot = self.dataSource.snapshot()
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
-            let configuration = self.model.configuration
+            let configuration = model.configuration
 
             let layoutSection = layoutSection(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
@@ -818,16 +818,16 @@ private extension SectionViewController {
         static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch section.header {
             case let .title(title):
-                return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: SectionViewController.layoutHorizontalMargin, layoutWidth: layoutWidth)
+                TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: SectionViewController.layoutHorizontalMargin, layoutWidth: layoutWidth)
             case let .item(item):
                 switch item {
                 case let .show(show):
-                    return SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                 default:
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                    NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
                 }
             case .none:
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
     }

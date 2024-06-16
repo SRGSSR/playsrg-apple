@@ -60,18 +60,18 @@ extension ProgramGuideDailyViewModel {
         var program: SRGProgram? {
             switch wrappedValue {
             case let .program(program):
-                return program
+                program
             default:
-                return nil
+                nil
             }
         }
 
         func endsAfter(_ date: Date) -> Bool {
             switch wrappedValue {
             case let .program(program):
-                return program.endDate > date
+                program.endDate > date
             default:
-                return false
+                false
             }
         }
     }
@@ -81,33 +81,33 @@ extension ProgramGuideDailyViewModel {
         case content(programCompositions: [PlayProgramComposition])
 
         fileprivate static var empty: Self {
-            return .content(programCompositions: [])
+            .content(programCompositions: [])
         }
 
         fileprivate var isLoading: Bool {
             switch self {
             case .loading:
-                return true
+                true
             case .content:
-                return false
+                false
             }
         }
 
         fileprivate var isEmpty: Bool {
             switch self {
             case .loading:
-                return false
+                false
             case let .content(programCompositions: programCompositions):
-                return programCompositions.allSatisfy { $0.programs?.isEmpty ?? true }
+                programCompositions.allSatisfy { $0.programs?.isEmpty ?? true }
             }
         }
 
         fileprivate var hasPrograms: Bool {
             switch self {
             case .loading:
-                return false
+                false
             case let .content(programCompositions: programCompositions):
-                return programCompositions.contains { programComposition in
+                programCompositions.contains { programComposition in
                     guard let programs = programComposition.programs else { return false }
                     return !programs.isEmpty
                 }
@@ -117,26 +117,26 @@ extension ProgramGuideDailyViewModel {
         fileprivate var channels: [PlayChannel] {
             switch self {
             case let .loading(channels: channels):
-                return channels
+                channels
             case let .content(programCompositions: programCompositions):
-                return programCompositions.map(\.channel)
+                programCompositions.map(\.channel)
             }
         }
 
         fileprivate func contains(channel: PlayChannel) -> Bool {
-            return channels.contains(channel)
+            channels.contains(channel)
         }
 
         private static func programs(for channel: PlayChannel, in programCompositions: [PlayProgramComposition]) -> [SRGProgram] {
-            return programCompositions.first(where: { $0.channel == channel })?.programs ?? []
+            programCompositions.first(where: { $0.channel == channel })?.programs ?? []
         }
 
         fileprivate func isEmpty(for channel: PlayChannel) -> Bool {
             switch self {
             case .loading:
-                return false
+                false
             case let .content(programCompositions: programCompositions):
-                return Self.programs(for: channel, in: programCompositions).isEmpty
+                Self.programs(for: channel, in: programCompositions).isEmpty
             }
         }
 
@@ -160,43 +160,43 @@ extension ProgramGuideDailyViewModel {
         case failed(error: Error)
 
         fileprivate static func loading(mainPartyChannels: [PlayChannel], otherPartyChannels: [PlayChannel], day: SRGDay) -> Self {
-            return .content(mainPartyBouquet: .loading(channels: mainPartyChannels), otherPartyBouquet: .loading(channels: otherPartyChannels), day: day)
+            .content(mainPartyBouquet: .loading(channels: mainPartyChannels), otherPartyBouquet: .loading(channels: otherPartyChannels), day: day)
         }
 
         private var day: SRGDay? {
             switch self {
             case let .content(mainPartyBouquet: _, otherPartyBouquet: _, day: day):
-                return day
+                day
             case .failed:
-                return nil
+                nil
             }
         }
 
         private var bouquets: [Bouquet] {
             switch self {
             case let .content(mainPartyBouquet: mainPartyBouquet, otherPartyBouquet: otherPartyBouquet, day: _):
-                return [mainPartyBouquet, otherPartyBouquet]
+                [mainPartyBouquet, otherPartyBouquet]
             case .failed:
-                return []
+                []
             }
         }
 
         var sections: [Section] {
-            return bouquets.flatMap(\.channels)
+            bouquets.flatMap(\.channels)
         }
 
         private func bouquet(for section: Section) -> Bouquet? {
             switch self {
             case let .content(mainPartyBouquet: mainPartyBouquet, otherPartyBouquet: otherPartyBouquet, day: _):
                 if mainPartyBouquet.contains(channel: section) {
-                    return mainPartyBouquet
+                    mainPartyBouquet
                 } else if otherPartyBouquet.contains(channel: section) {
-                    return otherPartyBouquet
+                    otherPartyBouquet
                 } else {
-                    return nil
+                    nil
                 }
             case .failed:
-                return nil
+                nil
             }
         }
 
@@ -216,7 +216,7 @@ extension ProgramGuideDailyViewModel {
         }
 
         var isLoading: Bool {
-            return isLoading(in: nil)
+            isLoading(in: nil)
         }
 
         func isEmpty(in section: Section?) -> Bool {
@@ -224,12 +224,12 @@ extension ProgramGuideDailyViewModel {
                 guard let bouquet = bouquet(for: section) else { return false }
                 return bouquet.isEmpty(for: section)
             } else {
-                return bouquets.allSatisfy { $0.isEmpty }
+                return bouquets.allSatisfy(\.isEmpty)
             }
         }
 
         var isEmpty: Bool {
-            return isEmpty(in: nil)
+            isEmpty(in: nil)
         }
     }
 }

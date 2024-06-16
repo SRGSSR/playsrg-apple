@@ -71,9 +71,9 @@ struct TopicGradientView: View {
     private var opacity: Double {
         switch style {
         case .topicPage:
-            return 0.6
+            0.6
         case .showPage:
-            return 0.4
+            0.4
         }
     }
 }

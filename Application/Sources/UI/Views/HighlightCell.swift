@@ -49,11 +49,11 @@ struct HighlightCell: View {
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
 
         private var direction: StackDirection {
-            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+            (horizontalSizeClass == .compact) ? .vertical : .horizontal
         }
 
         private var isCompact: Bool {
-            return horizontalSizeClass == .compact
+            horizontalSizeClass == .compact
         }
 
         private var imageUrl: URL? {
@@ -63,9 +63,9 @@ struct HighlightCell: View {
 
         private var contentMode: ImageView.ContentMode {
             if let focalPoint = highlight?.imageFocalPoint {
-                return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
+                .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
             } else {
-                return .aspectFillRight
+                .aspectFillRight
             }
         }
 
@@ -126,11 +126,11 @@ struct HighlightCell: View {
 
 private extension HighlightCell {
     var accessibilityLabel: String? {
-        return highlight?.title
+        highlight?.title
     }
 
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Highlight cell hint")
+        PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Highlight cell hint")
     }
 }
 
@@ -138,11 +138,11 @@ private extension HighlightCell {
 
 enum HighlightCellSize {
     private static func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
-        return horizontalSizeClass == .compact ? 16 / 9 : 4
+        horizontalSizeClass == .compact ? 16 / 9 : 4
     }
 
     static func fullWidth(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(layoutWidth, aspectRatio(horizontalSizeClass: horizontalSizeClass), 0)
+        LayoutSwimlaneCellSize(layoutWidth, aspectRatio(horizontalSizeClass: horizontalSizeClass), 0)
     }
 }
 

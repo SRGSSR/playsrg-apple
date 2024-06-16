@@ -15,7 +15,7 @@ struct NotificationCell: View {
     @Environment(\.isSelected) private var isSelected
 
     private var imageUrl: URL? {
-        return url(for: notification.image, size: .small)
+        url(for: notification.image, size: .small)
     }
 
     var body: some View {
@@ -85,11 +85,11 @@ private extension NotificationCell {
     }
 
     var accessibilityHint: String? {
-        return isEditing ? PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Notification cell hint in edit mode") : nil
+        isEditing ? PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Notification cell hint in edit mode") : nil
     }
 
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? .isSelected : []
+        isSelected ? .isSelected : []
     }
 }
 
@@ -97,7 +97,7 @@ private extension NotificationCell {
 
 class NotificationCellSize: NSObject {
     @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
+        NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }
 

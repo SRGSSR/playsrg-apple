@@ -56,7 +56,7 @@ final class SearchSettingsNavigationViewController: UIHostingController<SearchSe
 
     override var preferredContentSize: CGSize {
         get {
-            return CGSize(width: 375, height: 800)
+            CGSize(width: 375, height: 800)
         }
         set {}
     }

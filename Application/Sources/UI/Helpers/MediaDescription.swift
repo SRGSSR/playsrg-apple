@@ -26,12 +26,12 @@ import SRGAppearanceSwift
         switch style {
         case .show:
             if let show = media.show, areRedundant(media: media, show: show) {
-                return formattedDate(for: media)
+                formattedDate(for: media)
             } else {
-                return media.title
+                media.title
             }
         case .date, .time:
-            return media.title
+            media.title
         }
     }
 
@@ -60,11 +60,11 @@ import SRGAppearanceSwift
     }
 
     static func summary(for media: SRGMedia) -> String? {
-        return media.play_summary?.compacted
+        media.play_summary?.compacted
     }
 
     static func duration(for media: SRGMedia) -> Double? {
-        guard media.contentType != .livestream && media.contentType != .scheduledLivestream else { return nil }
+        guard media.contentType != .livestream, media.contentType != .scheduledLivestream else { return nil }
         return media.duration / 1000
     }
 
@@ -88,11 +88,10 @@ import SRGAppearanceSwift
     // MARK: - Accessibility
 
     static func cellAccessibilityLabel(for media: SRGMedia) -> String? {
-        let accessibilityLabel: String
-        if let show = media.show, !areRedundant(media: media, show: show) {
-            accessibilityLabel = show.title.appending(", \(media.title)")
+        let accessibilityLabel: String = if let show = media.show, !areRedundant(media: media, show: show) {
+            show.title.appending(", \(media.title)")
         } else {
-            accessibilityLabel = media.title
+            media.title
         }
 
         if let youthProtectionLabel = SRGAccessibilityLabelForYouthProtectionColor(media.youthProtectionColor) {
@@ -127,7 +126,7 @@ import SRGAppearanceSwift
     }
 
     static func liveBadgeProperties() -> BadgeProperties {
-        return BadgeProperties(
+        BadgeProperties(
             text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(),
             color: .srgLightRed
         )
@@ -201,24 +200,30 @@ import SRGAppearanceSwift
 
     private static func formattedDate(for media: SRGMedia, style: DateStyle = .date, accessibilityLabel: Bool = false) -> String? {
         if media.play_isWebFirst {
-            return NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
+            NSLocalizedString("In advance", comment: "Short text replacing date for a web first content.")
         } else if shouldDisplayDate(for: media) {
             switch style {
             case .date:
-                return accessibilityLabel
-                    ? PlayAccessibilityRelativeDateFromDate(media.date)
-                    : DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+                if accessibilityLabel {
+                    PlayAccessibilityRelativeDateFromDate(media.date)
+                } else {
+                    DateFormatter.play_relativeDate.string(from: media.date).capitalizedFirstLetter
+                }
             case .shortDate:
-                return accessibilityLabel
-                    ? PlayAccessibilityRelativeDateFromDate(media.date)
-                    : DateFormatter.play_relativeShortDate.string(from: media.date)
+                if accessibilityLabel {
+                    PlayAccessibilityRelativeDateFromDate(media.date)
+                } else {
+                    DateFormatter.play_relativeShortDate.string(from: media.date)
+                }
             case .shortDateAndTime:
-                return accessibilityLabel
-                    ? PlayAccessibilityDateAndTimeFromDate(media.date)
-                    : DateFormatter.play_shortDateAndTime.string(from: media.date)
+                if accessibilityLabel {
+                    PlayAccessibilityDateAndTimeFromDate(media.date)
+                } else {
+                    DateFormatter.play_shortDateAndTime.string(from: media.date)
+                }
             }
         } else {
-            return nil
+            nil
         }
     }
 
@@ -231,11 +236,11 @@ import SRGAppearanceSwift
     }
 
     private static func formattedTime(for media: SRGMedia) -> String {
-        return DateFormatter.play_time.string(from: media.date)
+        DateFormatter.play_time.string(from: media.date)
     }
 
     private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {
-        return media.title.lowercased() == show.title.lowercased()
+        media.title.lowercased() == show.title.lowercased()
     }
 
     private static func shouldDisplayExpirationDate(for media: SRGMedia) -> Bool {

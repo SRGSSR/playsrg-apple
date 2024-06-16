@@ -11,7 +11,7 @@ extension SRGProgramComposition {
      *  Return the program at the specified date, if any.
      */
     @objc func play_program(at date: Date) -> SRGProgram? {
-        return programs?.first(where: { $0.play_containsDate(date) })
+        programs?.first(where: { $0.play_containsDate(date) })
     }
 
     /**
@@ -19,7 +19,7 @@ extension SRGProgramComposition {
      *  are provided, only matching programs will be returned.
      */
     @objc func play_programs(from fromDate: Date?, to toDate: Date?, withMediaURNs mediaURNs: [String]?) -> [SRGProgram] {
-        return programs?.filter { program in
+        programs?.filter { program in
             if let fromDate, program.startDate < fromDate {
                 return false
             }

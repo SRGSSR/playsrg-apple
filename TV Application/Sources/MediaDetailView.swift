@@ -267,11 +267,11 @@ struct MediaDetailView: View {
 
 extension MediaDetailView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.media.rawValue
+        AnalyticsPageTitle.media.rawValue
     }
 
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue]
+        [AnalyticsPageLevel.play.rawValue]
     }
 }
 

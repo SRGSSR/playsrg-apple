@@ -29,6 +29,6 @@ extension UITableView {
     }
 
     @objc func dequeueReusableProfileCell(for indexPath: IndexPath) -> UITableViewCell & ApplicationSectionInfoSettable {
-        return dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as! ProfileTableViewCell
+        dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as! ProfileTableViewCell
     }
 }

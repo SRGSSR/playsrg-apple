@@ -24,11 +24,11 @@ struct ShowButton: View {
     }
 
     private var favoriteIcon: ImageResource {
-        return isFavorite ? .favoriteFull : .favorite
+        isFavorite ? .favoriteFull : .favorite
     }
 
     private var accessibilityLabel: String {
-        return "\(show.title), \(PlaySRGAccessibilityLocalizedString("More episodes", comment: "Button to access more episodes"))"
+        "\(show.title), \(PlaySRGAccessibilityLocalizedString("More episodes", comment: "Button to access more episodes"))"
     }
 
     var body: some View {

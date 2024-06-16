@@ -44,9 +44,9 @@ enum SnapshotError: Error, CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case .cannotFindSimulatorHomeDirectory:
-            return "Couldn't find simulator home location. Please, check SIMULATOR_HOST_HOME env variable."
+            "Couldn't find simulator home location. Please, check SIMULATOR_HOST_HOME env variable."
         case .cannotRunOnPhysicalDevice:
-            return "Can't use Snapshot on a physical device."
+            "Can't use Snapshot on a physical device."
         }
     }
 }
@@ -58,7 +58,7 @@ open class Snapshot: NSObject {
     static var waitForAnimations = true
     static var cacheDirectory: URL?
     static var screenshotsDirectory: URL? {
-        return cacheDirectory?.appendingPathComponent("screenshots", isDirectory: true)
+        cacheDirectory?.appendingPathComponent("screenshots", isDirectory: true)
     }
 
     static var deviceLanguage = ""
@@ -80,7 +80,7 @@ open class Snapshot: NSObject {
     }
 
     class func setLanguage(_ app: XCUIApplication) {
-        guard let cacheDirectory = cacheDirectory else {
+        guard let cacheDirectory else {
             NSLog("CacheDirectory is not set - probably running on a physical device?")
             return
         }
@@ -97,7 +97,7 @@ open class Snapshot: NSObject {
     }
 
     class func setLocale(_ app: XCUIApplication) {
-        guard let cacheDirectory = cacheDirectory else {
+        guard let cacheDirectory else {
             NSLog("CacheDirectory is not set - probably running on a physical device?")
             return
         }
@@ -111,7 +111,7 @@ open class Snapshot: NSObject {
             NSLog("Couldn't detect/set locale...")
         }
 
-        if currentLocale.isEmpty && !deviceLanguage.isEmpty {
+        if currentLocale.isEmpty, !deviceLanguage.isEmpty {
             currentLocale = Locale(identifier: deviceLanguage).identifier
         }
 
@@ -121,7 +121,7 @@ open class Snapshot: NSObject {
     }
 
     class func setLaunchArguments(_ app: XCUIApplication) {
-        guard let cacheDirectory = cacheDirectory else {
+        guard let cacheDirectory else {
             NSLog("CacheDirectory is not set - probably running on a physical device?")
             return
         }
@@ -154,7 +154,7 @@ open class Snapshot: NSObject {
         }
 
         #if os(OSX)
-            guard let app = app else {
+            guard let app else {
                 NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
                 return
             }
@@ -217,7 +217,7 @@ open class Snapshot: NSObject {
             return
         #endif
 
-        guard let app = app else {
+        guard let app else {
             NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
             return
         }
@@ -304,7 +304,7 @@ private extension XCUIElementQuery {
 
 private extension CGFloat {
     func isBetween(_ numberA: CGFloat, and numberB: CGFloat) -> Bool {
-        return numberA ... numberB ~= self
+        numberA ... numberB ~= self
     }
 }
 

@@ -20,11 +20,11 @@ final class ProgramCellViewModel: ObservableObject {
     }
 
     var title: String? {
-        return data?.program.title
+        data?.program.title
     }
 
     var accessibilityLabel: String? {
-        return data?.program.play_accessibilityLabel(with: data?.channel.wrappedValue)
+        data?.program.play_accessibilityLabel(with: data?.channel.wrappedValue)
     }
 
     var timeRange: String? {

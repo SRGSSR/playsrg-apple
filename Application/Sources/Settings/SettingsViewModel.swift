@@ -74,7 +74,7 @@ final class SettingsViewModel: ObservableObject {
     }
 
     private static func loggedInReloadSignal(for identityService: SRGIdentityService) -> AnyPublisher<Void, Never> {
-        return Publishers.Merge3(
+        Publishers.Merge3(
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidCancelLogin, object: identityService),
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogout, object: identityService)
@@ -86,19 +86,19 @@ final class SettingsViewModel: ObservableObject {
 
     private static func string(for date: Date?) -> String {
         if let date {
-            return DateFormatter.play_relativeDateAndTime.string(from: date)
+            DateFormatter.play_relativeDateAndTime.string(from: date)
         } else {
-            return NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
+            NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
         }
     }
 
     #if os(tvOS)
         var supportsLogin: Bool {
-            return SRGIdentityService.current != nil
+            SRGIdentityService.current != nil
         }
 
         var username: String? {
-            return account?.displayName ?? SRGIdentityService.current?.emailAddress
+            account?.displayName ?? SRGIdentityService.current?.emailAddress
         }
 
         func login() {
@@ -120,11 +120,11 @@ final class SettingsViewModel: ObservableObject {
     }
 
     var version: String {
-        return Bundle.main.play_friendlyVersionNumber
+        Bundle.main.play_friendlyVersionNumber
     }
 
     var whatsNewURL: URL {
-        return ApplicationConfiguration.shared.whatsNewURL
+        ApplicationConfiguration.shared.whatsNewURL
     }
 
     #if os(iOS)
@@ -161,7 +161,7 @@ final class SettingsViewModel: ObservableObject {
         }
     #else
         var canDisplayHelpAndContactSection: Bool {
-            return supportEmailAdress != nil
+            supportEmailAdress != nil
         }
 
         var showSupportInformation: (() -> Void)? {
@@ -175,12 +175,12 @@ final class SettingsViewModel: ObservableObject {
         }
 
         private var supportEmailAdress: String? {
-            return ApplicationConfiguration.shared.supportEmailAddress
+            ApplicationConfiguration.shared.supportEmailAddress
         }
     #endif
 
     var canDisplayPrivacySection: Bool {
-        return showDataProtection != nil || showPrivacySettings != nil
+        showDataProtection != nil || showPrivacySettings != nil
     }
 
     var showDataProtection: (() -> Void)? {

@@ -40,7 +40,7 @@ enum ThrottledSignal {
      *  Emits a signal when the history is updated for some uid or, if omitted, when any history update occurs.
      */
     static func historyUpdates(for uid: String? = nil, interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+        NotificationCenter.default.weakPublisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .filter { notification in
                 guard let uid else { return true }
                 if let updatedUids = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>, updatedUids.contains(uid) {
@@ -58,7 +58,7 @@ enum ThrottledSignal {
      *  Emits a signal when the watch later playlist is updated for some uid or, if omitted, when any watch later update occurs.
      */
     static func watchLaterUpdates(for uid: String? = nil, interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+        NotificationCenter.default.weakPublisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .filter { notification in
                 if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
                     guard let uid else { return true }
@@ -80,12 +80,12 @@ enum ThrottledSignal {
      *  Emits a signal when the user preferences are updated.
      */
     static func preferenceUpdates(interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+        NotificationCenter.default.weakPublisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
-                    return true
+                    true
                 } else {
-                    return false
+                    false
                 }
             }
             .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
@@ -98,7 +98,7 @@ enum ThrottledSignal {
          *  Emits a signal when downloads are updated.
          */
         static func downloadUpdates(interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
-            return NotificationCenter.default.weakPublisher(for: .DownloadStateDidChange, object: nil)
+            NotificationCenter.default.weakPublisher(for: .DownloadStateDidChange, object: nil)
                 .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
                 .map { _ in }
                 .eraseToAnyPublisher()
@@ -116,27 +116,27 @@ enum ApplicationSignal {
         fileprivate var foregroundNotificationName: NSNotification.Name {
             switch self {
             case .application:
-                return UIApplication.willEnterForegroundNotification
+                UIApplication.willEnterForegroundNotification
             case .scene:
-                return UIScene.willEnterForegroundNotification
+                UIScene.willEnterForegroundNotification
             }
         }
 
         fileprivate var backgroundNotificationName: NSNotification.Name {
             switch self {
             case .application:
-                return UIApplication.didEnterBackgroundNotification
+                UIApplication.didEnterBackgroundNotification
             case .scene:
-                return UIScene.didEnterBackgroundNotification
+                UIScene.didEnterBackgroundNotification
             }
         }
 
         fileprivate func filter(notification: Notification) -> Bool {
             switch self {
             case .application:
-                return true
+                true
             case let .scene(filter: filter):
-                return filter(notification)
+                filter(notification)
             }
         }
     }
@@ -145,7 +145,7 @@ enum ApplicationSignal {
      *  Emits a signal when the application (or scene) is woken up (network reachable again or will move to the foreground).
      */
     static func wokenUp(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(reachable(), foreground(type))
+        Publishers.Merge(reachable(), foreground(type))
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
             .eraseToAnyPublisher()
     }
@@ -154,7 +154,7 @@ enum ApplicationSignal {
      *  Emits a signal when the application (or scene) will move to the foreground after some  time in background.
      */
     static func foregroundAfterTimeInBackground(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
-        return Publishers.Zip(
+        Publishers.Zip(
             background(type)
                 .map { _ in Date() },
             foreground(type)
@@ -173,7 +173,7 @@ enum ApplicationSignal {
      *  Emits a signal when the application (or scene) will move to the foreground.
      */
     static func foreground(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: type.foregroundNotificationName)
+        NotificationCenter.default.weakPublisher(for: type.foregroundNotificationName)
             .filter { type.filter(notification: $0) }
             .map { _ in }
             .eraseToAnyPublisher()
@@ -183,7 +183,7 @@ enum ApplicationSignal {
      *  Emits a signal when the application (or scene) moved to the background.
      */
     static func background(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: type.backgroundNotificationName)
+        NotificationCenter.default.weakPublisher(for: type.backgroundNotificationName)
             .filter { type.filter(notification: $0) }
             .map { _ in }
             .eraseToAnyPublisher()
@@ -193,7 +193,7 @@ enum ApplicationSignal {
      *  Emits a signal when the network is reachable again.
      */
     static func reachable() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: .FXReachabilityStatusDidChange)
+        NotificationCenter.default.weakPublisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
             .map { _ in }
             .eraseToAnyPublisher()
@@ -214,7 +214,7 @@ enum ApplicationSignal {
 
     #if os(iOS)
         static func isPushServiceBadgeDisplayed() -> AnyPublisher<Bool, Never> {
-            return NotificationCenter.default.weakPublisher(for: .PushServiceBadgeDidChange)
+            NotificationCenter.default.weakPublisher(for: .PushServiceBadgeDidChange)
                 .map { _ in
                     UIApplication.shared.applicationIconBadgeNumber != 0
                 }
@@ -223,7 +223,7 @@ enum ApplicationSignal {
         }
 
         static func hasUserUnreadNotifications() -> AnyPublisher<Bool, Never> {
-            return NotificationCenter.default.weakPublisher(for: .UserNotificationsDidChange)
+            NotificationCenter.default.weakPublisher(for: .UserNotificationsDidChange)
                 .map { _ in
                     !UserNotification.unreadNotifications.isEmpty
                 }
@@ -236,8 +236,8 @@ enum ApplicationSignal {
      *  Emits a signal when the user default setting at the specified key path changes. The key path must bear
      *  the exact same name as the setting key. Key paths should be defined in `UserDefaults+ApplicationSettings.swift`.
      */
-    static func settingUpdates<Value>(at keyPath: KeyPath<UserDefaults, Value>) -> AnyPublisher<Void, Never> {
-        return UserDefaults.standard.publisher(for: keyPath)
+    static func settingUpdates(at keyPath: KeyPath<UserDefaults, some Any>) -> AnyPublisher<Void, Never> {
+        UserDefaults.standard.publisher(for: keyPath)
             .dropFirst()
             .map { _ in }
             .eraseToAnyPublisher()
@@ -247,7 +247,7 @@ enum ApplicationSignal {
      *  Emits a signal when the application configuration is updated.
      */
     static func applicationConfigurationUpdate() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: NSNotification.Name.ApplicationConfigurationDidChange)
+        NotificationCenter.default.weakPublisher(for: NSNotification.Name.ApplicationConfigurationDidChange)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -280,17 +280,17 @@ private enum UserInteractionUpdateKey {
 enum UserInteractionSignal {
     private static func consolidate(items: [Content.Item], with notification: Notification) -> [Content.Item] {
         if let addedItems = notification.userInfo?[UserInteractionUpdateKey.removedItems] as? [Content.Item] {
-            return Array(Set(items).union(addedItems))
+            Array(Set(items).union(addedItems))
         } else if let removedItems = notification.userInfo?[UserInteractionUpdateKey.addedItems] as? [Content.Item] {
-            return Array(Set(items).subtracting(removedItems))
+            Array(Set(items).subtracting(removedItems))
         } else {
-            return items
+            items
         }
     }
 
     #if os(iOS)
         static func downloadUpdates() -> AnyPublisher<[Content.Item], Never> {
-            return NotificationCenter.default.weakPublisher(for: .didUpdateDownloads)
+            NotificationCenter.default.weakPublisher(for: .didUpdateDownloads)
                 .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
                 .removeDuplicates()
                 .eraseToAnyPublisher()
@@ -298,14 +298,14 @@ enum UserInteractionSignal {
     #endif
 
     static func favoriteUpdates() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.weakPublisher(for: .didUpdateFavorites)
+        NotificationCenter.default.weakPublisher(for: .didUpdateFavorites)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
 
     static func historyUpdates() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.weakPublisher(for: .didUpdateHistoryEntries)
+        NotificationCenter.default.weakPublisher(for: .didUpdateHistoryEntries)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -313,7 +313,7 @@ enum UserInteractionSignal {
 
     #if os(iOS)
         static func notificationUpdates() -> AnyPublisher<[Content.Item], Never> {
-            return NotificationCenter.default.weakPublisher(for: .didUpdateNotifications)
+            NotificationCenter.default.weakPublisher(for: .didUpdateNotifications)
                 .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
                 .removeDuplicates()
                 .eraseToAnyPublisher()
@@ -321,7 +321,7 @@ enum UserInteractionSignal {
     #endif
 
     static func watchLaterUpdates() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.weakPublisher(for: .didUpdateWatchLaterEntries)
+        NotificationCenter.default.weakPublisher(for: .didUpdateWatchLaterEntries)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
             .removeDuplicates()
             .eraseToAnyPublisher()
