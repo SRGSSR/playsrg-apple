@@ -198,9 +198,9 @@ private extension CarPlayList {
 
     private static func nowPlayingMediaPublisher() -> AnyPublisher<[SRGMedia], Never> {
         SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { controller in
+            .map { controller -> AnyPublisher<[SRGMedia], Never> in
                 if let controller {
-                    return NotificationCenter.default.weakPublisher(for: .SRGLetterboxMetadataDidChange, object: controller)
+                    NotificationCenter.default.weakPublisher(for: .SRGLetterboxMetadataDidChange, object: controller)
                         .map { notification in
                             let controller = notification.object as? SRGLetterboxController
                             return nowPlayingMedia(for: controller)
@@ -208,7 +208,7 @@ private extension CarPlayList {
                         .prepend(nowPlayingMedia(for: controller))
                         .eraseToAnyPublisher()
                 } else {
-                    return Just([])
+                    Just([])
                         .eraseToAnyPublisher()
                 }
             }

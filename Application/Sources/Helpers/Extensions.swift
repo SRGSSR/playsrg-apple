@@ -98,17 +98,18 @@ extension String {
     }
 
     func heightOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
-        let font = SRGFont.font(fontStyle) as UIFont
-        let fontAttributes = [NSAttributedString.Key.font: font]
-        let fontSize = self.size(withAttributes: fontAttributes)
-        return fontSize.height
+        sizeOfString(usingFontStyle: fontStyle).height
     }
 
     func widthOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
+        sizeOfString(usingFontStyle: fontStyle).width
+    }
+
+    private func sizeOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGSize {
         let font = SRGFont.font(fontStyle) as UIFont
-        let fontAttributes = [NSAttributedString.Key.font: font]
-        let fontSize = self.size(withAttributes: fontAttributes)
-        return fontSize.width
+        let attributes = [NSAttributedString.Key.font: font]
+        let attributedString = NSAttributedString(string: self, attributes: attributes)
+        return attributedString.size()
     }
 
     /*
