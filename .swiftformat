@@ -5,4 +5,4 @@
 --exclude Pods,Generated
 
 # rules
---disable trailingCommas,wrapConditionalBodies,wrapMultilineStatementBraces
+--disable trailingCommas,wrapMultilineStatementBraces
