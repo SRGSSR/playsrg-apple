@@ -12,7 +12,7 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct SheetTextView: View {
     let content: String
-    
+
     var body: some View {
         VStack(spacing: 18) {
             Handle {

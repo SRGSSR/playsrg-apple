@@ -17,13 +17,13 @@ struct Badge: View {
     let text: String
     let color: Color
     let textColor: Color
-    
+
     init(text: String, color: Color, textColor: Color = .white) {
         self.text = text
         self.color = color
         self.textColor = textColor
     }
-    
+
     var body: some View {
         Text(text)
             .srgFont(.label)
@@ -41,7 +41,7 @@ struct Badge: View {
 /// Behavior: h-hug, v-hug
 struct DurationBadge: View {
     let duration: Double
-    
+
     var body: some View {
         Text(PlayShortFormattedMinutes(duration))
             .srgFont(.caption)
@@ -122,7 +122,7 @@ struct ThreeSixtyBadge: View {
 /// Behhavior: h-hug, v-hug
 struct YouthProtectionBadge: View {
     let color: SRGYouthProtectionColor
-    
+
     var body: some View {
         if let image = UIImage.image(for: color) {
             Image(uiImage: image)
@@ -149,7 +149,7 @@ struct Badges_Previews: PreviewProvider {
         .padding()
         .background(Color.white)
         .previewLayout(.sizeThatFits)
-        
+
         HStack {
             YouthProtectionBadge(color: .yellow)
             YouthProtectionBadge(color: .red)

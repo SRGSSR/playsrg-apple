@@ -12,15 +12,15 @@ import SRGDataProviderCombine
 final class SearchSettingsViewModel: ObservableObject {
     @Published var query: String?
     @Published var settings: MediaSearchSettings?
-    
+
     @Published private(set) var state: State = .loading(aggregations: nil)
-    
+
     private static func enrichedSettings(from settings: MediaSearchSettings?) -> MediaSearchSettings {
         var enrichedSettings = settings ?? MediaSearchSettings()
         enrichedSettings.aggregationsEnabled = true
         return enrichedSettings
     }
-    
+
     private static func description(forSelectedUrns selectedUrns: Set<String>?, in buckets: [SRGItemBucket]) -> String? {
         guard let selectedUrns else { return nil }
         let selectedBuckets = buckets
@@ -29,7 +29,7 @@ final class SearchSettingsViewModel: ObservableObject {
         guard !selectedBuckets.isEmpty else { return nil }
         return selectedBuckets.map(\.title).joined(separator: ", ")
     }
-    
+
     init() {
         // Drop initial values; relevant values are first assigned when the view appears
         Publishers.CombineLatest($query.dropFirst(), $settings.dropFirst())
@@ -40,7 +40,7 @@ final class SearchSettingsViewModel: ObservableObject {
                     return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: enrichedSettings.requestSettings)
                         .map { State.loaded(aggregations: $0.aggregations) }
                         .catch { error in
-                            return Just(State.failed(error: error))
+                            Just(State.failed(error: error))
                         }
                         .prepend(State.loading(aggregations: self?.aggregations))
                         .eraseToAnyPublisher()
@@ -50,7 +50,7 @@ final class SearchSettingsViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .assign(to: &$state)
     }
-    
+
     var isLoadingFilters: Bool {
         switch state {
         case .loading:
@@ -59,7 +59,7 @@ final class SearchSettingsViewModel: ObservableObject {
             return false
         }
     }
-    
+
     private var aggregations: SRGMediaAggregations? {
         switch state {
         case let .loading(aggregations: aggregations):
@@ -70,35 +70,35 @@ final class SearchSettingsViewModel: ObservableObject {
             return nil
         }
     }
-    
+
     var hasTopicFilter: Bool {
         return !topicBuckets.isEmpty
     }
-    
+
     var topicBuckets: [SRGItemBucket] {
         return aggregations?.topicBuckets ?? []
     }
-    
+
     var selectedTopics: String? {
         return Self.description(forSelectedUrns: settings?.topicUrns, in: topicBuckets)
     }
-    
+
     var hasShowFilter: Bool {
         return !showBuckets.isEmpty
     }
-    
+
     var showBuckets: [SRGItemBucket] {
         return aggregations?.showBuckets ?? []
     }
-    
+
     var selectedShows: String? {
         return Self.description(forSelectedUrns: settings?.showUrns, in: showBuckets)
     }
-    
+
     var hasSubtitledFilter: Bool {
         return !ApplicationConfiguration.shared.isSearchSettingSubtitledHidden
     }
-    
+
     private func reloadSignal() -> AnyPublisher<Void, Never> {
         return ApplicationSignal.wokenUp()
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)

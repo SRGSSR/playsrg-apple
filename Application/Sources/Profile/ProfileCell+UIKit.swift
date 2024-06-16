@@ -15,20 +15,19 @@ extension UITableView {
             didSet {
                 if let applicationSectionInfo {
                     content = ProfileCell(applicationSectioninfo: applicationSectionInfo)
-                }
-                else {
+                } else {
                     content = nil
                 }
             }
         }
     }
-    
+
     private static let reuseIdentifier = "ProfileCell"
-    
+
     @objc func registerReusableProfileCell() {
         register(ProfileTableViewCell.self, forCellReuseIdentifier: Self.reuseIdentifier)
     }
-    
+
     @objc func dequeueReusableProfileCell(for indexPath: IndexPath) -> UITableViewCell & ApplicationSectionInfoSettable {
         return dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as! ProfileTableViewCell
     }

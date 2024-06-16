@@ -13,11 +13,11 @@ struct Onboarding: Codable, Identifiable {
         return try! JSONDecoder().decode([Self].self, from: data)
             .filter { !ApplicationConfiguration.shared.hiddenOnboardingUids.contains($0.id) }
     }()
-    
+
     let id: String
     let title: String
     let pages: [OnboardingPage]
-    
+
     var iconName: String {
         return "\(id)_icon"
     }

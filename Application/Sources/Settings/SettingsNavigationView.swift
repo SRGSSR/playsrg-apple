@@ -11,7 +11,7 @@ import SwiftUI
 
 struct SettingsNavigationView: View {
     @FirstResponder private var firstResponder
-    
+
     var body: some View {
         PlayNavigationView {
             SettingsView()
@@ -42,12 +42,13 @@ private final class SettingsNavigationHostViewController: UIHostingController<Se
     init() {
         super.init(rootView: SettingsNavigationView())
     }
-    
-    @MainActor dynamic required init?(coder aDecoder: NSCoder) {
+
+    @available(*, unavailable)
+    @MainActor dynamic required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    @objc fileprivate func close(_ sender: UIBarButtonItem) {
+
+    @objc fileprivate func close(_: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 }

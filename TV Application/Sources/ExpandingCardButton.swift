@@ -15,16 +15,16 @@ import SwiftUI
 struct ExpandingCardButton<Content: View>: View {
     private let action: () -> Void
     @Binding private var content: () -> Content
-    
+
     fileprivate var onFocusChangeAction: ((Bool) -> Void)?
-    
+
     @State private var isFocused = false
-    
+
     init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
         self.action = action
         _content = .constant(content)
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             Button(action: action) {
@@ -59,7 +59,7 @@ struct ExpandingCardButton_Previews: PreviewProvider {
             ExpandingCardButton(action: {}) {
                 Color.red
             }
-            
+
             ExpandingCardButton(action: {}) {
                 Text("Button")
                     .background(Color.blue)

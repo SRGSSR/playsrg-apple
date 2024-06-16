@@ -17,21 +17,21 @@ struct SimpleButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable {
     private let accessibilityLabel: String
     private let accessibilityHint: String?
     private let action: () -> Void
-    
-    internal var primaryColor: Color = .srgGrayD2
-    internal var primaryFocusedColor: Color = .srgGray16
-    
+
+    var primaryColor: Color = .srgGrayD2
+    var primaryFocusedColor: Color = .srgGray16
+
     @State private var isFocused = false
-    
+
     init(icon: ImageResource, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
-        self.label = nil
-        self.labelMinimumScaleFactor = nil
+        label = nil
+        labelMinimumScaleFactor = nil
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
-    
+
     init(icon: ImageResource, label: String, labelMinimumScaleFactor: CGFloat = 0.8, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
@@ -40,7 +40,7 @@ struct SimpleButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable {
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
-    
+
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {

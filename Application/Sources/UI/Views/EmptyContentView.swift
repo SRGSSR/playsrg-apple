@@ -13,18 +13,18 @@ struct EmptyContentView: View {
         case standard
         case text
     }
-    
+
     let state: State
     let layout: Layout
     let insets: EdgeInsets
-    
+
     init(state: State, layout: Layout = .standard, insets: EdgeInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)) {
         self.state = state
         self.layout = layout
         self.insets = insets
     }
-    
-    private func largeImage(for type: `Type`) -> ImageResource {
+
+    private func largeImage(for type: Type) -> ImageResource {
         switch type {
         case .episodesFromFavorites, .favoriteShows:
             return .favoriteBackground
@@ -36,16 +36,16 @@ struct EmptyContentView: View {
             return .searchBackground
         case .watchLater:
             return .watchLaterBackground
-#if os(iOS)
-        case .notifications:
-            return .subscriptionBackground
-        case .downloads:
-            return .downloadBackground
-#endif
+        #if os(iOS)
+            case .notifications:
+                return .subscriptionBackground
+            case .downloads:
+                return .downloadBackground
+        #endif
         }
     }
-    
-    private func emptyTitle(for type: `Type`) -> String {
+
+    private func emptyTitle(for type: Type) -> String {
         switch type {
         case .favoriteShows:
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
@@ -55,17 +55,17 @@ struct EmptyContentView: View {
             return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         case .searchTutorial:
             return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
-#if os(iOS)
-        case .notifications:
-            return NSLocalizedString("No notifications", comment: "Text displayed when no notifications are available")
-        case .downloads:
-            return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
-#endif
+        #if os(iOS)
+            case .notifications:
+                return NSLocalizedString("No notifications", comment: "Text displayed when no notifications are available")
+            case .downloads:
+                return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
+        #endif
         default:
             return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
         }
     }
-    
+
     var body: some View {
         Group {
             switch state {
@@ -100,10 +100,10 @@ struct EmptyContentView: View {
 extension EmptyContentView {
     enum State {
         case loading
-        case empty(type: `Type`)
+        case empty(type: Type)
         case failed(error: Error)
     }
-    
+
     enum `Type`: Hashable {
         case episodesFromFavorites
         case favoriteShows
@@ -113,10 +113,10 @@ extension EmptyContentView {
         case search
         case searchTutorial
         case watchLater
-#if os(iOS)
-        case notifications
-        case downloads
-#endif
+        #if os(iOS)
+            case notifications
+            case downloads
+        #endif
     }
 }
 
@@ -125,7 +125,7 @@ extension EmptyContentView {
 struct EmptyContentView_Previews: PreviewProvider {
     enum PreviewError: LocalizedError {
         case kernel32
-        
+
         var errorDescription: String? {
             switch self {
             case .kernel32:
@@ -133,7 +133,7 @@ struct EmptyContentView_Previews: PreviewProvider {
             }
         }
     }
-    
+
     static var previews: some View {
         Group {
             Group {
@@ -141,9 +141,9 @@ struct EmptyContentView_Previews: PreviewProvider {
                 EmptyContentView(state: .empty(type: .favoriteShows))
                 EmptyContentView(state: .empty(type: .generic))
                 EmptyContentView(state: .empty(type: .history))
-#if os(iOS)
-                EmptyContentView(state: .empty(type: .downloads))
-#endif
+                #if os(iOS)
+                    EmptyContentView(state: .empty(type: .downloads))
+                #endif
             }
             Group {
                 EmptyContentView(state: .empty(type: .resumePlayback))

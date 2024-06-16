@@ -12,29 +12,29 @@ struct SearchBarView: UIViewRepresentable {
     @Binding var text: String
     let placeholder: String
     let autocapitalizationType: UITextAutocapitalizationType
-    
+
     init(text: Binding<String>, placeholder: String = "", autocapitalizationType: UITextAutocapitalizationType = .sentences) {
         _text = text
         self.placeholder = placeholder
         self.autocapitalizationType = autocapitalizationType
     }
-    
+
     final class Cordinator: NSObject, UISearchBarDelegate {
         @Binding var text: String
-        
+
         init(text: Binding<String>) {
             _text = text
         }
-        
-        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+        func searchBar(_: UISearchBar, textDidChange searchText: String) {
             text = searchText
         }
     }
-    
+
     func makeCoordinator() -> Cordinator {
         return Cordinator(text: $text)
     }
-    
+
     func makeUIView(context: Context) -> UISearchBar {
         let searchBar = UISearchBar()
         searchBar.backgroundImage = UIImage()
@@ -43,8 +43,8 @@ struct SearchBarView: UIViewRepresentable {
         searchBar.delegate = context.coordinator
         return searchBar
     }
-    
-    func updateUIView(_ uiView: UISearchBar, context: Context) {
+
+    func updateUIView(_ uiView: UISearchBar, context _: Context) {
         uiView.text = text
     }
 }

@@ -11,59 +11,57 @@ import SwiftUI
 struct HeroMediaCell: View {
     let media: SRGMedia?
     let label: String?
-    
+
     @Environment(\.isSelected) private var isSelected
-    
+
     var body: some View {
-#if os(tvOS)
-        ExpandingCardButton(action: action) {
+        #if os(tvOS)
+            ExpandingCardButton(action: action) {
+                MainView(media: media, label: label)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+            }
+        #else
             MainView(media: media, label: label)
-                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
-        }
-#else
-        MainView(media: media, label: label)
-            .cornerRadius(LayoutStandardViewCornerRadius)
-            .selectionAppearance(when: isSelected)
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
-#endif
+                .cornerRadius(LayoutStandardViewCornerRadius)
+                .selectionAppearance(when: isSelected)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+        #endif
     }
-    
-#if os(tvOS)
-    private func action() {
-        if let media {
-            navigateToMedia(media)
+
+    #if os(tvOS)
+        private func action() {
+            if let media {
+                navigateToMedia(media)
+            }
         }
-    }
-#endif
-    
+    #endif
+
     private struct MainView: View {
         let media: SRGMedia?
         let label: String?
-        
+
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-        
+
         private var regularWidthContentMode: ImageView.ContentMode {
             return .aspectFillFocused(relativeWidth: 0.5, relativeHeight: 0.55)
         }
-        
+
         private var contentMode: ImageView.ContentMode {
             if let focalPoint = media?.imageFocalPoint {
                 return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
-            }
-            else {
-#if os(tvOS)
-                return regularWidthContentMode
-#else
-                if horizontalSizeClass == .compact {
-                    return .aspectFillTop
-                }
-                else {
+            } else {
+                #if os(tvOS)
                     return regularWidthContentMode
-                }
-#endif
+                #else
+                    if horizontalSizeClass == .compact {
+                        return .aspectFillTop
+                    } else {
+                        return regularWidthContentMode
+                    }
+                #endif
             }
         }
-        
+
         var body: some View {
             ZStack {
                 MediaVisualView(media: media, size: .large, contentMode: contentMode) { media in
@@ -76,22 +74,22 @@ struct HeroMediaCell: View {
             }
         }
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
         let media: SRGMedia?
         let label: String?
-        
+
         private var subtitle: String? {
             guard let media else { return nil }
             return MediaDescription.subtitle(for: media, style: .show)
         }
-        
+
         private var title: String? {
             guard let media else { return nil }
             return MediaDescription.title(for: media, style: .show)
         }
-        
+
         var body: some View {
             VStack {
                 HStack(spacing: constant(iOS: 8, tvOS: 12)) {
@@ -126,7 +124,7 @@ private extension HeroMediaCell {
         guard let media else { return nil }
         return MediaDescription.cellAccessibilityLabel(for: media)
     }
-    
+
     var accessibilityHint: String? {
         return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
     }
@@ -136,22 +134,20 @@ private extension HeroMediaCell {
 
 enum HeroMediaCellSize {
     static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-#if os(tvOS)
-        let height: CGFloat = 700
-#else
-        let height = layoutWidth * aspectRatio(horizontalSizeClass: horizontalSizeClass)
-#endif
+        #if os(tvOS)
+            let height: CGFloat = 700
+        #else
+            let height = layoutWidth * aspectRatio(horizontalSizeClass: horizontalSizeClass)
+        #endif
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
     }
-    
+
     private static func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
         if horizontalSizeClass == .compact {
             return 9 / 11
-        }
-        else if let isLandscape = UIApplication.shared.mainWindow?.isLandscape, isLandscape {
+        } else if let isLandscape = UIApplication.shared.mainWindow?.isLandscape, isLandscape {
             return 2 / 5
-        }
-        else {
+        } else {
             return 1 / 2
         }
     }
@@ -169,14 +165,14 @@ private extension View {
 
 struct HeroMediaCell_Previews: PreviewProvider {
     static var previews: some View {
-#if os(tvOS)
-        HeroMediaCell(media: Mock.media(), label: "New")
-            .previewLayout(forLayoutWidth: 1920, horizontalSizeClass: .regular)
-#else
-        HeroMediaCell(media: Mock.media(), label: "New")
-            .previewLayout(forLayoutWidth: 375, horizontalSizeClass: .compact)
-        HeroMediaCell(media: Mock.media(), label: "New")
-            .previewLayout(forLayoutWidth: 800, horizontalSizeClass: .regular)
-#endif
+        #if os(tvOS)
+            HeroMediaCell(media: Mock.media(), label: "New")
+                .previewLayout(forLayoutWidth: 1920, horizontalSizeClass: .regular)
+        #else
+            HeroMediaCell(media: Mock.media(), label: "New")
+                .previewLayout(forLayoutWidth: 375, horizontalSizeClass: .compact)
+            HeroMediaCell(media: Mock.media(), label: "New")
+                .previewLayout(forLayoutWidth: 800, horizontalSizeClass: .regular)
+        #endif
     }
 }

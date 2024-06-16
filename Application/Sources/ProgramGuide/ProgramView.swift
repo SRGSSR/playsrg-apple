@@ -13,15 +13,15 @@ import SwiftUI
 struct ProgramView: View {
     @Binding var data: ProgramAndChannel
     @StateObject private var model = ProgramViewModel()
-    
+
     static func viewController(for program: SRGProgram, channel: PlayChannel) -> UIViewController {
         return ProgramViewController(program: program, channel: channel)
     }
-    
+
     init(program: SRGProgram, channel: PlayChannel) {
         _data = .constant(.init(program: program, channel: channel))
     }
-    
+
     var body: some View {
         VStack(spacing: 18) {
             Handle {
@@ -59,11 +59,11 @@ struct ProgramView: View {
             model.data = newValue
         }
     }
-    
+
     // Behavior: h-exp, v-exp
     private struct InteractiveVisualView: View {
         @ObservedObject var model: ProgramViewModel
-        
+
         var body: some View {
             Group {
                 if let action = model.playAction {
@@ -75,26 +75,25 @@ struct ProgramView: View {
                                 .foregroundColor(.white)
                         }
                     }
-                }
-                else {
+                } else {
                     VisualView(model: model)
                 }
             }
         }
     }
-    
+
     // Behavior: h-exp, v-exp
     private struct VisualView: View {
         @ObservedObject var model: ProgramViewModel
-        
+
         static let padding: CGFloat = 6
-        
+
         var body: some View {
             ZStack {
                 ImageView(source: model.imageUrl)
                     .background(Color.thumbnailBackground)
                 BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
-                
+
                 if let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
@@ -103,18 +102,18 @@ struct ProgramView: View {
             }
         }
     }
-    
+
     // Behavior: h-exp, v-hug
     private struct ActionsView: View {
         @ObservedObject var model: ProgramViewModel
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-        
+
         static let buttonHeight: CGFloat = 40
-        
+
         private var direction: StackDirection {
             return horizontalSizeClass == .compact ? .vertical : .horizontal
         }
-        
+
         var body: some View {
             Stack(direction: direction, spacing: 8) {
                 if let properties = model.watchLaterButtonProperties {
@@ -132,15 +131,15 @@ struct ProgramView: View {
             }
         }
     }
-    
+
     // Behavior: h-exp, v-hug
     private struct YouthProtectionView: View {
         let color: SRGYouthProtectionColor
-        
+
         init(color: SRGYouthProtectionColor) {
             self.color = color
         }
-        
+
         var body: some View {
             HStack(spacing: 8) {
                 YouthProtectionBadge(color: color)
@@ -155,11 +154,11 @@ struct ProgramView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
-    
+
     // Behavior: h-exp, v-hug
     private struct AdditionnalInformationView: View {
         @ObservedObject var model: ProgramViewModel
-        
+
         var body: some View {
             VStack(spacing: 8) {
                 if let durationAndProduction = model.durationAndProduction {
@@ -175,15 +174,15 @@ struct ProgramView: View {
             }
         }
     }
-    
+
     // Behavior: h-exp, v-hug
     private struct CrewMembersView: View {
         let crewMembersDatas: [ProgramViewModel.CrewMembersData]
-        
+
         init(datas: [ProgramViewModel.CrewMembersData]) {
             crewMembersDatas = datas
         }
-        
+
         var body: some View {
             VStack(alignment: .leading, spacing: 18) {
                 ForEach(crewMembersDatas) { crewMembersData in
@@ -208,11 +207,11 @@ struct ProgramView: View {
             }
         }
     }
-    
+
     // Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ProgramViewModel
-        
+
         var body: some View {
             VStack(spacing: 8) {
                 if let lead = model.lead {
@@ -239,11 +238,11 @@ struct ProgramView: View {
             }
         }
     }
-    
+
     // Behavior: h-hug, v-hug
     private struct TitleView: View {
         @ObservedObject var model: ProgramViewModel
-        
+
         var body: some View {
             VStack(spacing: 8) {
                 if let properties = model.availabilityBadgeProperties {
@@ -289,8 +288,9 @@ private final class ProgramViewController: UIHostingController<ProgramView> {
     init(program: SRGProgram, channel: PlayChannel) {
         super.init(rootView: ProgramView(program: program, channel: channel))
     }
-    
-    @MainActor dynamic required init?(coder aDecoder: NSCoder) {
+
+    @available(*, unavailable)
+    @MainActor dynamic required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -301,7 +301,7 @@ private extension ProgramView {
     var accessibilityLabel: String? {
         return model.playAction != nil ? PlaySRGAccessibilityLocalizedString("Play", comment: "Play button label") : nil
     }
-    
+
     var accessibilityTraits: AccessibilityTraits {
         return .isButton
     }
@@ -311,7 +311,7 @@ private extension ProgramView {
 
 struct ProgramView_Previews: PreviewProvider {
     private static let size = CGSize(width: 320, height: 1200)
-    
+
     static var previews: some View {
         Group {
             ProgramView(program: Mock.program(), channel: Mock.playChannel())

@@ -11,24 +11,24 @@ import Combine
 class ShowCellViewModel: ObservableObject {
     @Published var show: SRGShow?
     @Published private(set) var isSubscribed = false
-    
+
     init() {
-#if os(iOS)
-        // Drop initial value; a relevant value is first assigned when the view appears
-        $show
-            .dropFirst()
-            .map { show in
-                guard let show else {
-                    return Just(false).eraseToAnyPublisher()
+        #if os(iOS)
+            // Drop initial value; a relevant value is first assigned when the view appears
+            $show
+                .dropFirst()
+                .map { show in
+                    guard let show else {
+                        return Just(false).eraseToAnyPublisher()
+                    }
+                    return UserDataPublishers.subscriptionStatusPublisher(for: show)
+                        .map { $0 == .subscribed }
+                        .eraseToAnyPublisher()
                 }
-                return UserDataPublishers.subscriptionStatusPublisher(for: show)
-                    .map { $0 == .subscribed }
-                    .eraseToAnyPublisher()
-            }
-            .switchToLatest()
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$isSubscribed)
-#endif
+                .switchToLatest()
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$isSubscribed)
+        #endif
     }
 }
 

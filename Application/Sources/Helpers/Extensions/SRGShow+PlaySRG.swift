@@ -8,7 +8,7 @@ import SRGDataProviderModel
 
 extension SRGShow {
     @objc var play_contentType: ContentType {
-        switch self.transmission {
+        switch transmission {
         case .TV:
             return .videoOrTV
         case .radio:
@@ -17,15 +17,15 @@ extension SRGShow {
             return .mixed
         }
     }
-    
+
     var play_summary: String? {
         return ApplicationConfiguration.shared.isShowLeadPreferred ? leadOrSummary : summaryOrLead
     }
-    
+
     private var leadOrSummary: String? {
         return lead?.isEmpty ?? true ? summary : lead
     }
-    
+
     private var summaryOrLead: String? {
         return summary?.isEmpty ?? true ? lead : summary
     }

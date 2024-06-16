@@ -12,15 +12,15 @@ import SwiftUI
 struct MediaVisualView<Content: View>: View {
     @Binding private(set) var media: SRGMedia?
     @StateObject private var model = MediaVisualViewModel()
-    
+
     let size: SRGImageSize
     let contentMode: ImageView.ContentMode
     let embeddedDirection: StackDirection
-    
+
     @Binding private var content: (SRGMedia?) -> Content
-    
+
     let padding: CGFloat = constant(iOS: 6, tvOS: 16)
-    
+
     init(
         media: SRGMedia?,
         size: SRGImageSize,
@@ -34,24 +34,24 @@ struct MediaVisualView<Content: View>: View {
         self.embeddedDirection = embeddedDirection
         _content = .constant(content)
     }
-    
+
     var body: some View {
         ZStack {
             ImageView(source: model.imageUrl(for: size), contentMode: contentMode)
                 .background(Color.thumbnailBackground)
             content(media)
             BlockingOverlay(media: media)
-            
+
             if embeddedDirection == .vertical, let properties = model.availabilityBadgeProperties {
                 Badge(text: properties.text, color: Color(properties.color))
                     .padding([.top, .leading], padding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
-            
+
             AttributesView(model: model)
                 .padding([.bottom, .horizontal], padding)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            
+
             if let progress = model.progress {
                 ProgressBar(value: progress)
                     .opacity(progress != 0 ? 1 : 0)
@@ -66,26 +66,26 @@ struct MediaVisualView<Content: View>: View {
             model.media = newValue
         }
     }
-    
+
     /// Behavior: h-exp, v-hug
     private struct AttributesView: View {
         @ObservedObject var model: MediaVisualViewModel
-        
+
         @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
         @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
-        
+
         @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
-        
+
         private var canDisplaySubtitleAvailability: Bool {
             guard !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden else { return false }
             return isVoiceOverRunning || isSubtitleAvailabilityDisplayed
         }
-        
+
         private var canDisplayAudioDescriptionAvailability: Bool {
             guard !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden else { return false }
             return isVoiceOverRunning || isAudioDescriptionAvailabilityDisplayed
         }
-        
+
         var body: some View {
             HStack(spacing: 6) {
                 Spacer()
@@ -131,7 +131,7 @@ struct MediaVisualView_Previews: PreviewProvider {
         userDefaults.setValue(true, forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed)
         return userDefaults
     }()
-    
+
     static var previews: some View {
         Group {
             MediaVisualView(media: Mock.media(.standard), size: .small)

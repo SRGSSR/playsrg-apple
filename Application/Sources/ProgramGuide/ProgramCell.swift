@@ -12,25 +12,25 @@ import SwiftUI
 struct ProgramCell: View {
     @Binding var data: ProgramAndChannel
     let direction: StackDirection
-    
+
     @StateObject private var model = ProgramCellViewModel()
-    
+
     @Environment(\.isSelected) private var isSelected
-    
+
     init(program: SRGProgram, channel: PlayChannel, direction: StackDirection) {
         _data = .constant(.init(program: program, channel: channel))
         self.direction = direction
     }
-    
+
     var body: some View {
         Group {
-#if os(tvOS)
-            MainView(model: model, direction: direction)
-#else
-            MainView(model: model, direction: direction)
-                .selectionAppearance(.dimmed, when: isSelected)
-                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
-#endif
+            #if os(tvOS)
+                MainView(model: model, direction: direction)
+            #else
+                MainView(model: model, direction: direction)
+                    .selectionAppearance(.dimmed, when: isSelected)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+            #endif
         }
         .onAppear {
             model.data = data
@@ -39,48 +39,48 @@ struct ProgramCell: View {
             model.data = newValue
         }
     }
-        
+
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
         @ObservedObject var model: ProgramCellViewModel
         let direction: StackDirection
-        
+
         @SRGScaledMetric var timeRangeFixedWidth: CGFloat = 90
         @State private var availableSize: CGSize = .zero
         @Environment(\.isUIKitFocused) private var isFocused
-        
+
         private var timeRangeWidth: CGFloat {
             return direction == .horizontal ? timeRangeFixedWidth : .infinity
         }
-        
+
         private var timeRangeLineLimit: Int {
             return direction == .horizontal ? 2 : 1
         }
-        
+
         private var alignment: StackAlignment {
             return direction == .horizontal ? .center : .leading
         }
-        
+
         private var horizontalPadding: CGFloat {
             return direction == .horizontal ? 16 : 12
         }
-        
+
         private var verticalPadding: CGFloat {
             return direction == .horizontal ? 0 : constant(iOS: 4, tvOS: 8)
         }
-        
+
         private var spacing: CGFloat {
             return direction == .horizontal ? 10 : constant(iOS: 4, tvOS: 0)
         }
-        
+
         private var isCompact: Bool {
             return availableSize.width < 100
         }
-        
+
         private var isDisplayable: Bool {
             return availableSize.width > 2 * horizontalPadding + 5
         }
-        
+
         var body: some View {
             ZStack {
                 Stack(direction: direction, alignment: alignment, spacing: spacing) {
@@ -94,8 +94,7 @@ struct ProgramCell: View {
                         }
                         TitleView(model: model, compact: isCompact)
                             .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                    else {
+                    } else {
                         Color.clear
                     }
                 }
@@ -103,7 +102,7 @@ struct ProgramCell: View {
                 .padding(.vertical, verticalPadding)
                 .frame(maxHeight: .infinity)
                 .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
-                
+
                 if direction == .horizontal, let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
@@ -116,14 +115,14 @@ struct ProgramCell: View {
             }
         }
     }
-    
+
     /// Behavior: h-hug, v-hug
     private struct TitleView: View {
         @ObservedObject var model: ProgramCellViewModel
         let compact: Bool
-        
+
         private let canPlayHeight: CGFloat = 24
-        
+
         var body: some View {
             HStack(spacing: 10) {
                 if !compact && model.canPlay {
@@ -149,7 +148,7 @@ private extension ProgramCell {
     var accessibilityLabel: String? {
         return model.accessibilityLabel
     }
-    
+
     var accessibilityHint: String? {
         return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
     }
@@ -168,7 +167,7 @@ enum ProgramCellSize {
 struct ProgramCell_Previews: PreviewProvider {
     private static let size = ProgramCellSize.fullWidth().previewSize
     private static let height: CGFloat = constant(iOS: 80, tvOS: 120)
-    
+
     static var previews: some View {
         ProgramCell(program: Mock.program(), channel: Mock.playChannel(), direction: .horizontal)
             .previewLayout(.fixed(width: size.width, height: size.height))

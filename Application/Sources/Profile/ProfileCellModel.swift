@@ -10,9 +10,9 @@ import Combine
 
 final class ProfileCellModel: ObservableObject {
     @Published var applicationSectioninfo: ApplicationSectionInfo?
-    
+
     @Published private(set) var unreads = false
-    
+
     init() {
         $applicationSectioninfo
             .dropFirst()
@@ -21,7 +21,7 @@ final class ProfileCellModel: ObservableObject {
                     return Just(false).eraseToAnyPublisher()
                 }
                 return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
-                    return ApplicationSignal.hasUserUnreadNotifications()
+                    ApplicationSignal.hasUserUnreadNotifications()
                 }
             }
             .switchToLatest()
@@ -36,11 +36,11 @@ extension ProfileCellModel {
     var image: UIImage? {
         return applicationSectioninfo?.image
     }
-    
+
     var title: String? {
         return applicationSectioninfo?.title
     }
-    
+
     var isModalPresentation: Bool {
         return applicationSectioninfo?.isModalPresentation ?? false
     }

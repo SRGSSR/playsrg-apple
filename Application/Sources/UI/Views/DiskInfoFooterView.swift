@@ -11,7 +11,7 @@ import SwiftUI
 
 struct DiskInfoFooterView: View {
     @StateObject private var model = DiskInfoFooterViewModel()
-    
+
     var body: some View {
         Text(model.formattedFreeSpace)
             .srgFont(.caption)

@@ -13,19 +13,19 @@ import SRGDataProviderCombine
 final class CarPlayTemplateListController {
     private let list: CarPlayList
     private var cancellables = Set<AnyCancellable>()
-    
+
     private let trigger = Trigger()
-    
+
     init(list: CarPlayList, template: CPListTemplate, interfaceController: CPInterfaceController) {
         self.list = list
-        
+
         template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Default text displayed when loading")]
-        
+
         Publishers.Publish(onOutputFrom: reloadSignal()) {
             list.publisher(with: interfaceController)
                 .map { State.loaded(sections: $0) }
                 .catch { error in
-                    return Just(State.failed(error: error))
+                    Just(State.failed(error: error))
                 }
         }
         .receive(on: DispatchQueue.main)
@@ -42,7 +42,7 @@ final class CarPlayTemplateListController {
         }
         .store(in: &cancellables)
     }
-    
+
     private func reloadSignal() -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
             trigger.signal(activatedBy: TriggerId.reload),
@@ -51,7 +51,7 @@ final class CarPlayTemplateListController {
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
-    
+
     private func notificationFilter(notification: Notification) -> Bool {
         return notification.object is CPTemplateApplicationScene
     }
@@ -60,19 +60,19 @@ final class CarPlayTemplateListController {
 // MARK: Protocols
 
 extension CarPlayTemplateListController: CarPlayTemplateController {
-    func willAppear(animated: Bool) {
+    func willAppear(animated _: Bool) {
         trigger.activate(for: TriggerId.reload)
     }
-    
-    func didAppear(animated: Bool) {
+
+    func didAppear(animated _: Bool) {
         if let pageViewTitle = list.pageViewTitle, let pageViewType = list.pageViewType {
             SRGAnalyticsTracker.shared.uncheckedTrackPageView(withTitle: pageViewTitle, type: pageViewType, levels: list.pageViewLevels)
         }
     }
-    
-    func willDisappear(animated: Bool) {}
-    
-    func didDisappear(animated: Bool) {}
+
+    func willDisappear(animated _: Bool) {}
+
+    func didDisappear(animated _: Bool) {}
 }
 
 // MARK: Types
@@ -82,7 +82,7 @@ extension CarPlayTemplateListController {
         case failed(error: Error)
         case loaded(sections: [CPListSection])
     }
-    
+
     enum TriggerId {
         case reload
     }

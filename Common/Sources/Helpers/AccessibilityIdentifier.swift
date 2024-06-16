@@ -14,7 +14,7 @@ import Foundation
     case searchTabBarItem
     case profileTabBarItem
     case closeButton
-    
+
     var value: String {
         switch self {
         case .videosTabBarItem:
@@ -42,15 +42,15 @@ import Foundation
  */
 @objc class AccessibilityIdentifierObjC: NSObject {
     private let identifier: AccessibilityIdentifier
-    
+
     @objc class func identifier(_ identifier: AccessibilityIdentifier) -> AccessibilityIdentifierObjC {
         return Self(identifier: identifier)
     }
-    
+
     @objc var value: String {
         return identifier.value
     }
-    
+
     required init(identifier: AccessibilityIdentifier) {
         self.identifier = identifier
     }

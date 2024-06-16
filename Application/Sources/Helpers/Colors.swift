@@ -19,13 +19,13 @@ extension UIColor {
             context.fill(CGRect(origin: .zero, size: size))
         }
     }
-    
+
     static var placeholder = UIColor(white: 1, alpha: 0.1)
     @objc static var thumbnailBackground = UIColor.black
-    
-#if DEBUG
-    static func random(alpha: CGFloat = 1) -> UIColor {
-        return UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: alpha)
-    }
-#endif
+
+    #if DEBUG
+        static func random(alpha: CGFloat = 1) -> UIColor {
+            return UIColor(red: .random(in: 0 ... 1), green: .random(in: 0 ... 1), blue: .random(in: 0 ... 1), alpha: alpha)
+        }
+    #endif
 }

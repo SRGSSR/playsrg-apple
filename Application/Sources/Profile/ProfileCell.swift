@@ -11,13 +11,13 @@ import SwiftUI
 
 struct ProfileCell: View {
     @Binding private(set) var applicationSectioninfo: ApplicationSectionInfo?
-    
+
     @StateObject private var model = ProfileCellModel()
-    
+
     init(applicationSectioninfo: ApplicationSectionInfo?) {
         _applicationSectioninfo = .constant(applicationSectioninfo)
     }
-    
+
     var body: some View {
         MainView(model: model)
             .onAppear {
@@ -27,29 +27,28 @@ struct ProfileCell: View {
                 model.applicationSectioninfo = newValue
             }
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
         @ObservedObject var model: ProfileCellModel
-        
+
         @Environment(\.isSelected) private var isSelected
         @Environment(\.isUIKitFocused) private var isFocused
-        
+
         private let iconHeight: CGFloat = 24
-        
+
         private var accessibilityLabel: String? {
             if model.unreads {
                 return "\(model.title ?? ""), \(PlaySRGAccessibilityLocalizedString("Unreads", comment: "Unreads state button"))"
-            }
-            else {
+            } else {
                 return model.title
             }
         }
-        
+
         private var accessibilityTraits: AccessibilityTraits {
             return isSelected ? [.isButton, .isSelected] : .isButton
         }
-        
+
         var body: some View {
             HStack(spacing: LayoutMargin) {
                 if let image = model.image {

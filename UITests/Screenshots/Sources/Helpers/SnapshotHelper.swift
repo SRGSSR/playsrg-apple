@@ -60,6 +60,7 @@ open class Snapshot: NSObject {
     static var screenshotsDirectory: URL? {
         return cacheDirectory?.appendingPathComponent("screenshots", isDirectory: true)
     }
+
     static var deviceLanguage = ""
     static var currentLocale = ""
 
@@ -79,7 +80,7 @@ open class Snapshot: NSObject {
     }
 
     class func setLanguage(_ app: XCUIApplication) {
-        guard let cacheDirectory = self.cacheDirectory else {
+        guard let cacheDirectory = cacheDirectory else {
             NSLog("CacheDirectory is not set - probably running on a physical device?")
             return
         }
@@ -96,7 +97,7 @@ open class Snapshot: NSObject {
     }
 
     class func setLocale(_ app: XCUIApplication) {
-        guard let cacheDirectory = self.cacheDirectory else {
+        guard let cacheDirectory = cacheDirectory else {
             NSLog("CacheDirectory is not set - probably running on a physical device?")
             return
         }
@@ -120,7 +121,7 @@ open class Snapshot: NSObject {
     }
 
     class func setLaunchArguments(_ app: XCUIApplication) {
-        guard let cacheDirectory = self.cacheDirectory else {
+        guard let cacheDirectory = cacheDirectory else {
             NSLog("CacheDirectory is not set - probably running on a physical device?")
             return
         }
@@ -148,12 +149,12 @@ open class Snapshot: NSObject {
 
         NSLog("snapshot: \(name)") // more information about this, check out https://docs.fastlane.tools/actions/snapshot/#how-does-it-work
 
-        if Self.waitForAnimations {
+        if waitForAnimations {
             sleep(1) // Waiting for the animation to be finished (kind of)
         }
 
         #if os(OSX)
-            guard let app = self.app else {
+            guard let app = app else {
                 NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
                 return
             }
@@ -168,9 +169,9 @@ open class Snapshot: NSObject {
 
             let screenshot = XCUIScreen.main.screenshot()
             #if os(iOS) && !targetEnvironment(macCatalyst)
-            let image = XCUIDevice.shared.orientation.isLandscape ? fixLandscapeOrientation(image: screenshot.image) : screenshot.image
+                let image = XCUIDevice.shared.orientation.isLandscape ? fixLandscapeOrientation(image: screenshot.image) : screenshot.image
             #else
-            let image = screenshot.image
+                let image = screenshot.image
             #endif
 
             guard var simulator = ProcessInfo().environment["SIMULATOR_DEVICE_NAME"], let screenshotsDir = screenshotsDirectory else { return }
@@ -216,7 +217,7 @@ open class Snapshot: NSObject {
             return
         #endif
 
-        guard let app = self.app else {
+        guard let app = app else {
             NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
             return
         }
@@ -280,7 +281,7 @@ private extension XCUIElementQuery {
             return element.isNetworkLoadingIndicator
         }
 
-        return self.containing(isNetworkLoadingIndicator)
+        return containing(isNetworkLoadingIndicator)
     }
 
     @MainActor
@@ -297,13 +298,13 @@ private extension XCUIElementQuery {
             return element.isStatusBar(deviceWidth)
         }
 
-        return self.containing(isStatusBar)
+        return containing(isStatusBar)
     }
 }
 
 private extension CGFloat {
     func isBetween(_ numberA: CGFloat, and numberB: CGFloat) -> Bool {
-        return numberA...numberB ~= self
+        return numberA ... numberB ~= self
     }
 }
 

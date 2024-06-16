@@ -9,13 +9,13 @@ import SwiftUI
 
 @propertyWrapper struct Accessibility<T>: DynamicProperty {
     @ObservedObject private var settings = AccessibilitySettings.shared
-    
+
     private let keyPath: KeyPath<AccessibilitySettings, T>
-    
+
     public init(_ keyPath: KeyPath<AccessibilitySettings, T>) {
         self.keyPath = keyPath
     }
-    
+
     public var wrappedValue: T {
         return settings[keyPath: keyPath]
     }
@@ -23,13 +23,13 @@ import SwiftUI
 
 final class AccessibilitySettings: ObservableObject {
     static let shared = AccessibilitySettings()
-    
+
     // Remark: Some of these are readily accessible as environment values from SwiftUI:
     //           - `accessibilityDifferentiateWithoutColor`,
     //           - `accessibilityReduceTransparency`
     //           - `accessibilityReduceMotion`
     //           - `accessibilityInvertColors`
-    
+
     @Published var isVoiceOverRunning = UIAccessibility.isVoiceOverRunning
     @Published var isMonoAudioEnabled = UIAccessibility.isMonoAudioEnabled
     @Published var isClosedCaptioningEnabled = UIAccessibility.isClosedCaptioningEnabled
@@ -50,7 +50,7 @@ final class AccessibilitySettings: ObservableObject {
     @Published var isAssistiveTouchRunning = UIAccessibility.isAssistiveTouchRunning
     @Published var shouldDifferentiateWithoutColor = UIAccessibility.shouldDifferentiateWithoutColor
     @Published var isOnOffSwitchLabelsEnabled = UIAccessibility.isOnOffSwitchLabelsEnabled
-    
+
     private init() {
         NotificationCenter.default.weakPublisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .map { _ in UIAccessibility.isVoiceOverRunning }

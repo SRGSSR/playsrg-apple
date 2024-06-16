@@ -11,16 +11,16 @@ import Combine
 final class DownloadCellViewModel: ObservableObject {
     @Published var download: Download?
     @Published private(set) var state: State = .unknown
-    
+
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
         guard let media = download?.media else { return nil }
         return MediaDescription.availabilityBadgeProperties(for: media)
     }
-    
+
     var title: String? {
         return download?.title
     }
-    
+
     var subtitle: String? {
         switch state {
         case let .downloading(progress: progress):
@@ -30,11 +30,11 @@ final class DownloadCellViewModel: ObservableObject {
             return ByteCountFormatter.string(fromByteCount: size, countStyle: .file)
         }
     }
-    
+
     init() {
         $download
             .map { download in
-                return Publishers.Merge(
+                Publishers.Merge(
                     NotificationCenter.default.weakPublisher(for: NSNotification.Name.DownloadStateDidChange, object: download)
                         .compactMap { $0.userInfo?[DownloadStateKey] as? Int }
                         .map { Self.state(from: DownloadState(rawValue: $0), for: download) },
@@ -64,17 +64,16 @@ extension DownloadCellViewModel {
         case suspended
         case downloaded
     }
-    
+
     private static func progress(for download: Download?) -> Progress {
         if let download, let progress = Download.currentlyKnownProgress(for: download) {
             return progress
-        }
-        else {
+        } else {
             // Display 0% if nothing
             return Progress(totalUnitCount: 10)
         }
     }
-    
+
     private static func state(from downloadState: DownloadState?, for download: Download?) -> State {
         guard let downloadState else { return .unknown }
         switch downloadState {

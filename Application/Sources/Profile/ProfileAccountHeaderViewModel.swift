@@ -11,10 +11,10 @@ import SRGIdentity
 
 final class ProfileAccountHeaderViewModel: ObservableObject {
     @Published var data: Data
-    
+
     func manageAccount() {
         guard let identityService = SRGIdentityService.current else { return }
-        
+
         if identityService.isLoggedIn {
             identityService.showAccountView()
         } else {
@@ -24,12 +24,12 @@ final class ProfileAccountHeaderViewModel: ObservableObject {
             }
         }
     }
-    
+
     init() {
         guard let identityService = SRGIdentityService.current else { data = .notLogged; return }
-        
+
         data = Data(isLoggedIn: identityService.isLoggedIn, account: identityService.account)
-        
+
         Publishers.Merge3(
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceDidUpdateAccount, object: identityService),
@@ -50,16 +50,15 @@ extension ProfileAccountHeaderViewModel {
     var accessibilityLabel: String {
         if let accountDescription = data.accountDescription {
             return String(format: PlaySRGAccessibilityLocalizedString("Logged in user: %@", comment: "Accessibility introductory text for the logged in user"), accountDescription)
-        }
-        else {
+        } else {
             return data.text
         }
     }
-    
+
     var accessibilityHint: String {
         return data.isLoggedIn ?
-        PlaySRGAccessibilityLocalizedString("Manages account information", comment: "Accessibility hint for the profile header when user is logged in") :
-        PlaySRGAccessibilityLocalizedString("allows to log in or create an account in order to synchronize data.", comment: "Accessibility hint for the profile header when user is not logged in")
+            PlaySRGAccessibilityLocalizedString("Manages account information", comment: "Accessibility hint for the profile header when user is logged in") :
+            PlaySRGAccessibilityLocalizedString("allows to log in or create an account in order to synchronize data.", comment: "Accessibility hint for the profile header when user is not logged in")
     }
 }
 
@@ -70,38 +69,34 @@ extension ProfileAccountHeaderViewModel {
     struct Data: Hashable {
         let isLoggedIn: Bool
         let account: SRGAccount?
-        
+
         var icon: ImageResource {
             return isLoggedIn ? .accountLoggedInIcon : .accountLoggedOutIcon
         }
-        
+
         var accountDescription: String? {
             guard isLoggedIn else { return nil }
             if let displayName = account?.displayName {
                 return displayName
-            }
-            else if let emmailAddress = account?.emailAddress {
+            } else if let emmailAddress = account?.emailAddress {
                 return emmailAddress
-            }
-            else {
+            } else {
                 return nil
             }
         }
-        
+
         var text: String {
             if isLoggedIn {
                 if let accountDescription {
                     return accountDescription
-                }
-                else {
+                } else {
                     return NSLocalizedString("My account", comment: "Text displayed when a user is logged in but no information has been retrieved yet")
                 }
-            }
-            else {
+            } else {
                 return NSLocalizedString("Sign in", comment: "Text displayed within the sign in profile header when no user is logged in")
             }
         }
-        
+
         static var notLogged = Self(isLoggedIn: false, account: nil)
     }
 }

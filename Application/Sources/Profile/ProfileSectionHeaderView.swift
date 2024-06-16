@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ProfileSectionHeaderView: View {
     let title: String
-    
+
     var body: some View {
         VStack(spacing: 0) {
             Spacer(minLength: 0)

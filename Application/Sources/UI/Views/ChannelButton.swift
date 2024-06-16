@@ -14,13 +14,13 @@ import SwiftUI
 struct ChannelButton: View {
     let channel: SRGChannel?
     let action: () -> Void
-    
+
     @Environment(\.isSelected) var isSelected
-    
+
     private var imageUrl: URL? {
         return url(for: channel?.rawImage, size: .small)
     }
-    
+
     var body: some View {
         Button(action: action) {
             if let imageUrl {
@@ -28,13 +28,11 @@ struct ChannelButton: View {
                     if let image = state.image {
                         image
                             .resizingMode(.aspectFit)
-                    }
-                    else {
+                    } else {
                         TitleView(channel: channel)
                     }
                 }
-            }
-            else {
+            } else {
                 TitleView(channel: channel)
             }
         }
@@ -47,10 +45,10 @@ struct ChannelButton: View {
         .cornerRadius(100)
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
     }
-    
+
     private struct TitleView: View {
         let channel: SRGChannel?
-        
+
         var body: some View {
             if let title = channel?.title {
                 Text(title)
@@ -67,7 +65,7 @@ private extension ChannelButton {
     var accessibilityLabel: String? {
         return channel?.title
     }
-    
+
     var accessibilityHint: String? {
         return PlaySRGAccessibilityLocalizedString("Shows the channel programs", comment: "Channel selector button hint")
     }

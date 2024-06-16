@@ -51,10 +51,10 @@ struct ImageView: View {
         case aspectFillBottomRight
         case aspectFillFocused(relativeWidth: CGFloat, relativeHeight: CGFloat)
     }
-    
+
     let source: ImageRequestConvertible?
     let contentMode: ContentMode
-    
+
     private static func alignment(for contentMode: Self.ContentMode) -> Alignment {
         switch contentMode {
         case .aspectFit, .aspectFill, .center, .fill, .aspectFillFocused:
@@ -77,43 +77,41 @@ struct ImageView: View {
             return .bottomTrailing
         }
     }
-    
+
     private static func fitSize(for imageContainer: ImageContainer, in geometry: GeometryProxy) -> CGSize {
         let imageSize = imageContainer.image.size
         guard imageSize.width != 0 && imageSize.height != 0 else { return .zero }
-        
+
         let targetSize = geometry.size
         guard targetSize.width != 0 && targetSize.height != 0 else { return .zero }
-        
+
         let imageAspectRatio = imageSize.width / imageSize.height
         let targetAspectRatio = targetSize.width / targetSize.height
-        
+
         if targetAspectRatio > imageAspectRatio {
             return CGSize(width: targetSize.height * imageAspectRatio, height: targetSize.height)
-        }
-        else {
+        } else {
             return CGSize(width: targetSize.width, height: targetSize.width / imageAspectRatio)
         }
     }
-    
+
     private static func fillSize(for imageContainer: ImageContainer, in geometry: GeometryProxy) -> CGSize {
         let imageSize = imageContainer.image.size
         guard imageSize.width != 0 && imageSize.height != 0 else { return .zero }
-        
+
         let targetSize = geometry.size
         guard targetSize.width != 0 && targetSize.height != 0 else { return .zero }
-        
+
         let imageAspectRatio = imageSize.width / imageSize.height
         let targetAspectRatio = targetSize.width / targetSize.height
-        
+
         if targetAspectRatio > imageAspectRatio {
             return CGSize(width: targetSize.width, height: targetSize.width / imageAspectRatio)
-        }
-        else {
+        } else {
             return CGSize(width: targetSize.height * imageAspectRatio, height: targetSize.height)
         }
     }
-    
+
     /**
      *  Calculate the offset to apply so that the focal point P approaches the center C of the target frame as close as
      *  possible while ensuring the resized filling image entirely covers the target frame.
@@ -149,16 +147,16 @@ struct ImageView: View {
             height: (fillSize.height - targetSize.height) / 2
         )
         return CGSize(
-            width: -(focalPoint.x - fillSize.width / 2).clamped(to: -margins.width...margins.width),
-            height: (focalPoint.y - fillSize.height / 2).clamped(to: -margins.height...margins.height)
+            width: -(focalPoint.x - fillSize.width / 2).clamped(to: -margins.width ... margins.width),
+            height: (focalPoint.y - fillSize.height / 2).clamped(to: -margins.height ... margins.height)
         )
     }
-    
+
     init(source: ImageRequestConvertible?, contentMode: ContentMode = .aspectFit) {
         self.source = source
         self.contentMode = contentMode
     }
-    
+
     var body: some View {
         GeometryReader { geometry in
             LazyImage(source: source) { state in
@@ -177,18 +175,18 @@ struct ImageView: View {
                         image
                             .resizingMode(.fill)
                     case .top, .bottom, .left, .right,
-                            .topLeft, .topRight, .bottomLeft, .bottomRight:
+                         .topLeft, .topRight, .bottomLeft, .bottomRight:
                         image
                             .frame(size: imageContainer.image.size)
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
                     case .aspectFitTop, .aspectFitBottom, .aspectFitLeft, .aspectFitRight,
-                            .aspectFitTopLeft, .aspectFitTopRight, .aspectFitBottomLeft, .aspectFitBottomRight:
+                         .aspectFitTopLeft, .aspectFitTopRight, .aspectFitBottomLeft, .aspectFitBottomRight:
                         image
                             .resizingMode(.fill)
                             .frame(size: Self.fitSize(for: imageContainer, in: geometry))
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
                     case .aspectFillTop, .aspectFillBottom, .aspectFillLeft, .aspectFillRight,
-                            .aspectFillTopLeft, .aspectFillTopRight, .aspectFillBottomLeft, .aspectFillBottomRight:
+                         .aspectFillTopLeft, .aspectFillTopRight, .aspectFillBottomLeft, .aspectFillBottomRight:
                         image
                             .resizingMode(.fill)
                             .frame(size: Self.fillSize(for: imageContainer, in: geometry))
@@ -203,8 +201,7 @@ struct ImageView: View {
                             .frame(size: targetSize, alignment: Self.alignment(for: contentMode))
                             .offset(Self.offset(forFocalPoint: focalPoint, targetSize: targetSize, fillSize: fillSize))
                     }
-                }
-                else {
+                } else {
                     Color.placeholder
                 }
             }

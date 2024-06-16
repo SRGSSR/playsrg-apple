@@ -15,7 +15,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         case horizontal
         case adaptive
     }
-    
+
     enum Style {
         /// Show information emphasis
         case show
@@ -26,116 +26,115 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         /// Time information emphasis
         case time
     }
-    
+
     let media: SRGMedia?
     let style: Style
     let layout: Layout
     let action: (() -> Void)?
-    
-    internal var primaryColor: Color = .srgGrayD2
-    internal var secondaryColor: Color = .srgGray96
-    
+
+    var primaryColor: Color = .srgGrayD2
+    var secondaryColor: Color = .srgGray96
+
     fileprivate var onFocusAction: ((Bool) -> Void)?
-    
+
     @State private var isFocused = false
-    
+
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-    
+
     private var direction: StackDirection {
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
             return .horizontal
-        }
-        else {
+        } else {
             return .vertical
         }
     }
-    
+
     private var horizontalPadding: CGFloat {
         return direction == .vertical ? 0 : constant(iOS: 10, tvOS: 20)
     }
-    
+
     private var verticalPadding: CGFloat {
         return direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
     }
-    
+
     private var hasSelectionAppearance: Bool {
         return isSelected && media != nil
     }
-    
+
     init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
         self.layout = layout
         self.action = action
     }
-    
+
     var body: some View {
         Group {
-#if os(tvOS)
-            LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
-                MediaVisualView(media: media, size: .small)
-                    .onParentFocusChange(perform: onFocusChange)
-                    .unredactable()
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
-            } label: {
-                DescriptionView(media: media, style: style)
-                    .primaryColor(primaryColor)
-                    .secondaryColor(secondaryColor)
-                    .padding(.top, verticalPadding)
-            }
-#else
-            Stack(direction: .vertical, spacing: 0) {
-                Stack(direction: direction, spacing: 0) {
-                    MediaVisualView(media: media, size: .small, embeddedDirection: direction)
-                        .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
-                        .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
-                        .cornerRadius(LayoutStandardViewCornerRadius)
-                        .redactable()
-                        .layoutPriority(1)
-                    DescriptionView(media: media, style: style, embeddedDirection: direction)
+            #if os(tvOS)
+                LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
+                    MediaVisualView(media: media, size: .small)
+                        .onParentFocusChange(perform: onFocusChange)
+                        .unredactable()
+                        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
+                } label: {
+                    DescriptionView(media: media, style: style)
                         .primaryColor(primaryColor)
                         .secondaryColor(secondaryColor)
-                        .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
-                        .padding(.leading, horizontalPadding)
                         .padding(.top, verticalPadding)
-                    if direction == .horizontal, style == .dateAndSummary, horizontalSizeClass == .regular, let media {
-                        MediaMoreButton(media: media)
+                }
+            #else
+                Stack(direction: .vertical, spacing: 0) {
+                    Stack(direction: direction, spacing: 0) {
+                        MediaVisualView(media: media, size: .small, embeddedDirection: direction)
+                            .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
+                            .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
+                            .cornerRadius(LayoutStandardViewCornerRadius)
+                            .redactable()
+                            .layoutPriority(1)
+                        DescriptionView(media: media, style: style, embeddedDirection: direction)
+                            .primaryColor(primaryColor)
+                            .secondaryColor(secondaryColor)
+                            .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
+                            .padding(.leading, horizontalPadding)
+                            .padding(.top, verticalPadding)
+                        if direction == .horizontal, style == .dateAndSummary, horizontalSizeClass == .regular, let media {
+                            MediaMoreButton(media: media)
+                        }
                     }
                 }
-            }
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
-#endif
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
+            #endif
         }
         .redactedIfNil(media)
     }
-    
-#if os(tvOS)
-    private func defaultAction() {
-        if let media {
-            navigateToMedia(media)
+
+    #if os(tvOS)
+        private func defaultAction() {
+            if let media {
+                navigateToMedia(media)
+            }
         }
-    }
-    
-    private func onFocusChange(focused: Bool) {
-        isFocused = focused
-        
-        if let onFocusAction {
-            onFocusAction(focused)
+
+        private func onFocusChange(focused: Bool) {
+            isFocused = focused
+
+            if let onFocusAction {
+                onFocusAction(focused)
+            }
         }
-    }
-#endif
-    
+    #endif
+
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View, PrimaryColorSettable, SecondaryColorSettable {
         let media: SRGMedia?
         let style: MediaCell.Style
         let embeddedDirection: StackDirection
-        
-        internal var primaryColor: Color = .srgGrayD2
-        internal var secondaryColor: Color = .srgGray96
-        
+
+        var primaryColor: Color = .srgGrayD2
+        var secondaryColor: Color = .srgGray96
+
         init(
             media: SRGMedia?,
             style: MediaCell.Style,
@@ -145,31 +144,31 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
             self.style = style
             self.embeddedDirection = embeddedDirection
         }
-        
+
         private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
             guard let media else { return nil }
             return MediaDescription.availabilityBadgeProperties(for: media)
         }
-        
+
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-        
+
         private var subtitle: String? {
             guard let media else { return .placeholder(length: 15) }
             return MediaDescription.subtitle(for: media, style: mediaDescriptionStyle)
         }
-        
+
         private var title: String? {
             guard let media else { return .placeholder(length: 8) }
             return MediaDescription.title(for: media, style: mediaDescriptionStyle)
         }
-        
+
         private var summary: String? {
             guard horizontalSizeClass == .regular, style == .dateAndSummary else { return nil }
-            
+
             guard let media else { return .placeholder(length: 15) }
             return MediaDescription.summary(for: media)
         }
-        
+
         private var mediaDescriptionStyle: MediaDescription.Style {
             switch style {
             case .show:
@@ -180,21 +179,20 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
                 return .time
             }
         }
-        
+
         private var titleLineLimit: Int {
             if horizontalSizeClass == .regular && style == .dateAndSummary {
                 return 1
-            }
-            else {
+            } else {
                 return embeddedDirection == .horizontal ? 3 : 2
             }
         }
-        
+
         private var bottomPadding: CGFloat {
             // Allow 3 lines for title, with a badge and no subtitles
             return embeddedDirection == .horizontal ? -2 : 0
         }
-        
+
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 if embeddedDirection == .horizontal, let properties = availabilityBadgeProperties {
@@ -244,17 +242,17 @@ private extension MediaCell {
         guard let media else { return nil }
         return MediaDescription.cellAccessibilityLabel(for: media)
     }
-    
+
     var accessibilityHint: String? {
         return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Media cell hint in edit mode")
     }
-    
+
     var accessibilityTraits: AccessibilityTraits {
-#if os(tvOS)
-        return .isButton
-#else
-        return isSelected ? .isSelected : []
-#endif
+        #if os(tvOS)
+            return .isButton
+        #else
+            return isSelected ? .isSelected : []
+        #endif
     }
 }
 
@@ -262,23 +260,23 @@ private extension MediaCell {
 
 final class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
-    
+
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
-    
+
     static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
     }
-    
+
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
-    
+
     static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact) -> NSCollectionLayoutSize {
         let height = height(horizontalSizeClass: horizontalSizeClass)
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
     }
-    
+
     static func height(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
         return horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
     }
@@ -292,7 +290,7 @@ struct MediaCell_Previews: PreviewProvider {
     private static let horizontalLargeListLayoutSize = MediaCellSize.fullWidth(horizontalSizeClass: .regular).previewSize
     private static let style = MediaCell.Style.show
     private static let largeListStyle = MediaCell.Style.dateAndSummary
-    
+
     static var previews: some View {
         Group {
             MediaCell(media: Mock.media(), style: Self.style, layout: .vertical)
@@ -302,25 +300,25 @@ struct MediaCell_Previews: PreviewProvider {
             MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .vertical)
         }
         .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
-        
-#if os(iOS)
-        Group {
-            MediaCell(media: Mock.media(), style: Self.style, layout: .horizontal)
-            MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .horizontal)
-            MediaCell(media: Mock.media(.rich), style: Self.style, layout: .horizontal)
-            MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .horizontal)
-            MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)
-        }
-        .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-        
-        Group {
-            MediaCell(media: Mock.media(), style: Self.largeListStyle, layout: .horizontal)
-            MediaCell(media: Mock.media(.noShow), style: Self.largeListStyle, layout: .horizontal)
-            MediaCell(media: Mock.media(.rich), style: Self.largeListStyle, layout: .horizontal)
-            MediaCell(media: Mock.media(.overflow), style: Self.largeListStyle, layout: .horizontal)
-            MediaCell(media: Mock.media(.nineSixteen), style: Self.largeListStyle, layout: .horizontal)
-        }
-        .previewLayout(.fixed(width: horizontalLargeListLayoutSize.width, height: horizontalLargeListLayoutSize.height))
-#endif
+
+        #if os(iOS)
+            Group {
+                MediaCell(media: Mock.media(), style: Self.style, layout: .horizontal)
+                MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .horizontal)
+                MediaCell(media: Mock.media(.rich), style: Self.style, layout: .horizontal)
+                MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .horizontal)
+                MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)
+            }
+            .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
+
+            Group {
+                MediaCell(media: Mock.media(), style: Self.largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.noShow), style: Self.largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.rich), style: Self.largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.overflow), style: Self.largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.nineSixteen), style: Self.largeListStyle, layout: .horizontal)
+            }
+            .previewLayout(.fixed(width: horizontalLargeListLayoutSize.width, height: horizontalLargeListLayoutSize.height))
+        #endif
     }
 }

@@ -11,11 +11,11 @@ enum Mock {
         case standard
         case overflow
     }
-    
+
     static func bucket(_ kind: Bucket = .standard) -> SRGItemBucket {
         return mockObject(kind.rawValue, type: SRGItemBucket.self)
     }
-    
+
     enum Channel: String {
         case unknown
         case standard
@@ -23,24 +23,24 @@ enum Mock {
         case standardWithoutLogo
         case overflowWithoutLogo
     }
-    
+
     static func channel(_ kind: Channel = .standard) -> SRGChannel {
         return mockObject(kind.rawValue, type: SRGChannel.self)
     }
-    
+
     static func playChannel(_ kind: Channel = .standard) -> PlayChannel {
         return PlayChannel(wrappedValue: mockObject(kind.rawValue, type: SRGChannel.self), external: false)
     }
-    
+
     enum ContentSection: String {
         case standard
         case overflow
     }
-    
+
     static func contentSection(_ kind: ContentSection = .standard) -> SRGContentSection {
         return mockObject(kind.rawValue, type: SRGContentSection.self)
     }
-    
+
     enum FocalPoint: String {
         case none
         case left
@@ -52,7 +52,7 @@ enum Mock {
         case bottomLeft
         case bottomRight
     }
-    
+
     static func focalPoint(_ kind: FocalPoint = .none) -> SRGFocalPoint? {
         switch kind {
         case .none:
@@ -61,7 +61,7 @@ enum Mock {
             return mockObject(kind.rawValue, type: SRGFocalPoint.self)
         }
     }
-    
+
     enum Highlight {
         case standard
         case overflow
@@ -69,7 +69,7 @@ enum Mock {
         case topLeftAligned
         case bottomRightAligned
     }
-    
+
     static func highlight(_ kind: Highlight = .standard) -> PlaySRG.Highlight {
         switch kind {
         case .standard:
@@ -98,18 +98,18 @@ enum Mock {
                 title: "Top left",
                 summary: "Summary",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
-                imageFocalPoint: Self.focalPoint(.topLeft)
+                imageFocalPoint: focalPoint(.topLeft)
             )
         case .bottomRightAligned:
             return PlaySRG.Highlight(
                 title: "Bottom right",
                 summary: "Summary",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
-                imageFocalPoint: Self.focalPoint(.bottomRight)
+                imageFocalPoint: focalPoint(.bottomRight)
             )
         }
     }
-    
+
     enum Media: String {
         case standard
         case minimal
@@ -123,66 +123,66 @@ enum Mock {
         case nineSixteen
         case square
     }
-    
+
     static func media(_ kind: Media = .standard) -> SRGMedia {
         return mockObject(kind.rawValue, type: SRGMedia.self)
     }
-    
-#if os(iOS)
-    static func download(_ kind: Media = .standard) -> Download? {
-        let media = mockObject(kind.rawValue, type: SRGMedia.self)
-        return Download.add(for: media)
-    }
-    
-    enum Notification: String {
-        case standard
-        case overflow
-    }
-    
-    static func notification(_ kind: Notification = .standard) -> UserNotification {
-        mockObject(kind.rawValue, type: UserNotification.self)
-    }
-#endif
-    
+
+    #if os(iOS)
+        static func download(_ kind: Media = .standard) -> Download? {
+            let media = mockObject(kind.rawValue, type: SRGMedia.self)
+            return Download.add(for: media)
+        }
+
+        enum Notification: String {
+            case standard
+            case overflow
+        }
+
+        static func notification(_ kind: Notification = .standard) -> UserNotification {
+            mockObject(kind.rawValue, type: UserNotification.self)
+        }
+    #endif
+
     enum Program: String {
         case standard
         case overflow
         case fallbackImageUrl
     }
-    
+
     static func program(_ kind: Program = .standard) -> SRGProgram {
         return mockObject(kind.rawValue, type: SRGProgram.self)
     }
-    
+
     enum Show: String {
         case standard
         case overflow
         case short
     }
-    
+
     static func show(_ kind: Show = .standard) -> SRGShow {
         return mockObject(kind.rawValue, type: SRGShow.self)
     }
-    
+
     enum Page: String {
         case standard
         case overflow
         case short
     }
-    
+
     static func page(_ kind: Page = .standard) -> SRGContentPage {
         return mockObject(kind.rawValue, type: SRGContentPage.self)
     }
-    
+
     enum Topic: String {
         case standard
         case overflow
     }
-    
+
     static func topic(_ kind: Topic = .standard) -> SRGTopic {
         return mockObject(kind.rawValue, type: SRGTopic.self)
     }
-    
+
     private static func mockObject<T>(_ name: String, type: T.Type) -> T {
         let clazz: AnyClass = type as! AnyClass
         let asset = NSDataAsset(name: "\(NSStringFromClass(clazz))_\(name)")!

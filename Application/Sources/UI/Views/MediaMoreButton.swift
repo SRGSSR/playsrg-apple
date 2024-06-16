@@ -8,14 +8,14 @@ import SwiftUI
 
 struct MediaMoreButton: UIViewRepresentable {
     typealias UIViewType = UIButton
-    
+
     let media: SRGMedia
-    
-    func makeUIView(context: Context) -> UIButton {
+
+    func makeUIView(context _: Context) -> UIButton {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(resource: .ellipsis), for: .normal)
         button.tintColor = .srgGrayD2
-        
+
         button.showsMenuAsPrimaryAction = true
         button.menu = UIMenu()
         button.addAction(UIAction(handler: { _ in
@@ -23,14 +23,14 @@ struct MediaMoreButton: UIViewRepresentable {
                 button.menu = ContextMenu.menu(for: media, in: viewController)
             }
         }), for: .menuActionTriggered)
-        
+
         button.setContentHuggingPriority(.required, for: .horizontal)
         button.setContentHuggingPriority(.required, for: .vertical)
-        
+
         return button
     }
-    
-    func updateUIView(_ uiView: UIButton, context: Context) {
+
+    func updateUIView(_: UIButton, context _: Context) {
         // No update logic required
     }
 }

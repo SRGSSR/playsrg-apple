@@ -14,13 +14,13 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct ProgramPreview: View {
     @Binding var data: ProgramAndChannel?
-    
+
     @StateObject private var model = ProgramPreviewModel()
-    
+
     init(data: ProgramAndChannel?) {
         _data = .constant(data)
     }
-    
+
     var body: some View {
         ZStack {
             ImageView(source: model.imageUrl)
@@ -29,7 +29,7 @@ struct ProgramPreview: View {
                 .layoutPriority(1)
                 .overlay(ImageOverlay())
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-            
+
             // Use stack with competing views to have a 50/50 horizontal split
             HStack {
                 DescriptionView(model: model)
@@ -44,11 +44,11 @@ struct ProgramPreview: View {
             model.data = newValue
         }
     }
-    
+
     /// Behavior: h-exp, v-exp
     struct DescriptionView: View {
         @ObservedObject var model: ProgramPreviewModel
-        
+
         var body: some View {
             VStack(alignment: .leading, spacing: 4) {
                 if let properties = model.availabilityBadgeProperties {
@@ -74,7 +74,7 @@ struct ProgramPreview: View {
             .padding(.horizontal, 56)
         }
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
         var body: some View {

@@ -15,53 +15,51 @@ struct DownloadCell: View {
         case horizontal
         case adaptive
     }
-    
+
     @Binding private(set) var download: Download?
     @StateObject private var model = DownloadCellViewModel()
-    
+
     let layout: Layout
-    
+
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-    
+
     private var direction: StackDirection {
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
             return .horizontal
-        }
-        else {
+        } else {
             return .vertical
         }
     }
-    
+
     private var horizontalPadding: CGFloat {
         return direction == .vertical ? 0 : 10
     }
-    
+
     private var verticalPadding: CGFloat {
         return direction == .vertical ? 5 : 0
     }
-    
+
     private var hasSelectionAppearance: Bool {
         return isSelected && download != nil
     }
-    
+
     private var imageUrl: URL? {
         return url(for: download?.image, size: .small)
     }
-    
+
     init(download: Download?, layout: Layout = .adaptive) {
         _download = .constant(download)
         self.layout = layout
     }
-    
+
     var body: some View {
         Stack(direction: direction, spacing: 0) {
             Group {
                 if let media = download?.media {
                     MediaVisualView(media: media, size: .small, embeddedDirection: direction)
-                }
-                else {
+                } else {
                     ImageView(source: imageUrl)
                 }
             }
@@ -71,7 +69,7 @@ struct DownloadCell: View {
             .cornerRadius(LayoutStandardViewCornerRadius)
             .redactable()
             .layoutPriority(1)
-            
+
             DescriptionView(model: model, embeddedDirection: direction)
                 .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                 .padding(.leading, horizontalPadding)
@@ -85,17 +83,17 @@ struct DownloadCell: View {
             model.download = newValue
         }
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
         @ObservedObject var model: DownloadCellViewModel
-        
+
         let embeddedDirection: StackDirection
-        
+
         private var title: String {
             return model.title ?? .placeholder(length: 10)
         }
-        
+
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 if embeddedDirection == .horizontal, let properties = model.availabilityBadgeProperties {
@@ -119,11 +117,11 @@ struct DownloadCell: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
-    
+
     /// Behavior: h-hug, v-hug
     private struct Icon: View {
         @ObservedObject var model: DownloadCellViewModel
-        
+
         var body: some View {
             switch model.state {
             case .added, .suspended, .unknown:
@@ -137,20 +135,20 @@ struct DownloadCell: View {
             }
         }
     }
-    
+
     /// Behavior: h-hug, v-hug
     private struct AnimatedDownloadIcon: View {
         var body: some View {
             DownloadImageView()
                 .frame(width: 16, height: 16)
         }
-        
+
         private struct DownloadImageView: UIViewRepresentable {
-            func makeUIView(context: Context) -> UIImageView {
+            func makeUIView(context _: Context) -> UIImageView {
                 return UIImageView.play_smallDownloadingImageView(withTintColor: .srgGrayD2)
             }
-            
-            func updateUIView(_ uiView: UIImageView, context: Context) {
+
+            func updateUIView(_: UIImageView, context _: Context) {
                 // No update logic required
             }
         }
@@ -164,16 +162,15 @@ private extension DownloadCell {
         guard let download else { return nil }
         if let media = download.media {
             return MediaDescription.cellAccessibilityLabel(for: media)
-        }
-        else {
+        } else {
             return download.title
         }
     }
-    
+
     var accessibilityHint: String? {
         return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Download cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Download cell hint in edit mode")
     }
-    
+
     var accessibilityTraits: AccessibilityTraits {
         return isSelected ? .isSelected : []
     }
@@ -183,14 +180,14 @@ private extension DownloadCell {
 
 enum DownloadCellSize {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
-    
+
     private static let defaultItemWidth: CGFloat = 210
     private static let heightOffset: CGFloat = 70
-    
+
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
-    
+
     static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
@@ -201,7 +198,7 @@ enum DownloadCellSize {
 struct DownloadCell_Previews: PreviewProvider {
     private static let verticalLayoutSize = DownloadCellSize.grid(layoutWidth: 1024, spacing: 16).previewSize
     private static let horizontalLayoutSize = DownloadCellSize.fullWidth().previewSize
-    
+
     static var previews: some View {
         Group {
             DownloadCell(download: Mock.download(), layout: .vertical)
@@ -211,7 +208,7 @@ struct DownloadCell_Previews: PreviewProvider {
             DownloadCell(download: Mock.download(.nineSixteen), layout: .vertical)
         }
         .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
-        
+
         Group {
             DownloadCell(download: Mock.download(), layout: .horizontal)
             DownloadCell(download: Mock.download(.noShow), layout: .horizontal)

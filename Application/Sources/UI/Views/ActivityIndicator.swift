@@ -15,13 +15,13 @@ struct ActivityIndicator: View {
         LoadingImageView()
             .frame(width: 90, height: 90)
     }
-    
+
     private struct LoadingImageView: UIViewRepresentable {
-        func makeUIView(context: Context) -> UIImageView {
+        func makeUIView(context _: Context) -> UIImageView {
             return UIImageView.play_largeLoadingImageView(withTintColor: .srgGrayD2)
         }
-        
-        func updateUIView(_ uiView: UIImageView, context: Context) {
+
+        func updateUIView(_: UIImageView, context _: Context) {
             // No update logic required
         }
     }

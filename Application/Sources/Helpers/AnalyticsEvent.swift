@@ -13,7 +13,7 @@ import SRGDataProviderModel
 struct AnalyticsEvent {
     private let name: String
     private let labels: SRGAnalyticsEventLabels
-    
+
     /**
      *  Each struct created have expected values.
      *  Use this method to send the event when needed.
@@ -21,7 +21,7 @@ struct AnalyticsEvent {
     func send() {
         SRGAnalyticsTracker.shared.trackEvent(withName: name, labels: labels)
     }
-    
+
     static func calendarEventAdd(channel: SRGChannel) -> Self {
         return Self(
             name: "calendar_add",
@@ -30,7 +30,7 @@ struct AnalyticsEvent {
             value1: channel.title
         )
     }
-    
+
     static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> Self {
         return Self(
             name: "continuous_playback",
@@ -39,7 +39,7 @@ struct AnalyticsEvent {
             value: mediaUrn
         )
     }
-    
+
     static func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.downloadName,
@@ -47,7 +47,7 @@ struct AnalyticsEvent {
             value: urn
         )
     }
-    
+
     static func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.favoriteName,
@@ -55,14 +55,14 @@ struct AnalyticsEvent {
             value: urn
         )
     }
-    
+
     static func googleGast(urn: String) -> Self {
         return Self(
             name: "google_cast",
             value: urn
         )
     }
-    
+
     static func historyRemove(source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: "history_remove",
@@ -70,14 +70,14 @@ struct AnalyticsEvent {
             value: urn
         )
     }
-    
+
     static func identity(action: AnalyticsIdentityAction) -> Self {
         return Self(
             name: "identity",
             labels: action.labels
         )
     }
-    
+
     static func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> Self {
         return Self(
             name: from.name,
@@ -86,7 +86,7 @@ struct AnalyticsEvent {
             value: uid
         )
     }
-    
+
     static func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> Self {
         return Self(
             name: "open_url",
@@ -95,21 +95,21 @@ struct AnalyticsEvent {
             value: urn
         )
     }
-    
+
     static func openHelp(action: AnalyticsOpenHelpAction) -> Self {
         return Self(
             name: action.name,
             source: "button"
         )
     }
-    
+
     static func pictureInPicture(urn: String?) -> Self {
         return Self(
             name: "picture_in_picture",
             value: urn
         )
     }
-    
+
     static func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> Self {
         return Self(
             name: action.name,
@@ -119,14 +119,14 @@ struct AnalyticsEvent {
             value1: mediaContentType.value
         )
     }
-    
+
     static func shortcutItem(action: AnalyticsShortcutItemAction) -> Self {
         return Self(
             name: "quick_actions",
             type: action.type
         )
     }
-    
+
     static func subscription(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.subscriptionName,
@@ -134,7 +134,7 @@ struct AnalyticsEvent {
             value: urn
         )
     }
-    
+
     static func userActivity(action: AnalyticsUserActivityAction, urn: String) -> Self {
         return Self(
             name: "user_activity_ios",
@@ -143,7 +143,7 @@ struct AnalyticsEvent {
             value: urn
         )
     }
-    
+
     static func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> Self {
         return Self(
             name: action.watchLaterName,
@@ -151,10 +151,10 @@ struct AnalyticsEvent {
             value: urn
         )
     }
-    
+
     private init(name: String, source: String? = nil, type: String? = nil, value: String? = nil, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
         self.name = name
-        
+
         let labels = SRGAnalyticsEventLabels()
         labels.source = source
         labels.type = type
@@ -166,7 +166,7 @@ struct AnalyticsEvent {
         labels.extraValue5 = value5
         self.labels = labels
     }
-    
+
     private init(name: String, labels: SRGAnalyticsEventLabels) {
         self.name = name
         self.labels = labels
@@ -178,63 +178,63 @@ struct AnalyticsEvent {
  */
 @objc class AnalyticsEventObjC: NSObject {
     private let event: AnalyticsEvent
-    
+
     /**
      *  Each object created have expected values.
      *  Use this method to send the event when needed.
      */
     @objc func send() {
-        self.event.send()
+        event.send()
     }
-    
+
     @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.continuousPlayback(action: action, mediaUrn: mediaUrn))
     }
-    
+
     @objc class func download(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.download(action: action, source: source, urn: urn))
     }
-    
+
     @objc class func favorite(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.favorite(action: action, source: source, urn: urn))
     }
-    
+
     @objc class func googleGast(urn: String) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.googleGast(urn: urn))
     }
-    
+
     @objc class func identity(action: AnalyticsIdentityAction) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.identity(action: action))
     }
-    
+
     @objc class func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
-    
+
     @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsOpenUrlSource, urn: String?) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.openUrl(action: action, source: source, urn: urn))
     }
-    
+
     @objc class func pictureInPicture(urn: String?) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.pictureInPicture(urn: urn))
     }
-    
+
     @objc class func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.sharing(action: action, uid: uid, mediaContentType: mediaContentType, source: source, type: type))
     }
-    
+
     @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.shortcutItem(action: action))
     }
-    
+
     @objc class func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.userActivity(action: action, urn: urn))
     }
-    
+
     @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsListSource, urn: String?) -> AnalyticsEventObjC {
         return Self(event: AnalyticsEvent.watchLater(action: action, source: source, urn: urn))
     }
-    
+
     required init(event: AnalyticsEvent) {
         self.event = event
     }
@@ -243,7 +243,7 @@ struct AnalyticsEvent {
 @objc enum AnalyticsListAction: UInt {
     case add
     case remove
-    
+
     fileprivate var downloadName: String {
         switch self {
         case .add:
@@ -252,7 +252,7 @@ struct AnalyticsEvent {
             return "download_remove"
         }
     }
-    
+
     fileprivate var favoriteName: String {
         switch self {
         case .add:
@@ -261,7 +261,7 @@ struct AnalyticsEvent {
             return "favorite_remove"
         }
     }
-    
+
     fileprivate var subscriptionName: String {
         switch self {
         case .add:
@@ -270,7 +270,7 @@ struct AnalyticsEvent {
             return "subscription_remove"
         }
     }
-    
+
     fileprivate var watchLaterName: String {
         switch self {
         case .add:
@@ -285,7 +285,7 @@ struct AnalyticsEvent {
     case button
     case contextMenu
     case selection
-    
+
     fileprivate var value: String {
         switch self {
         case .button:
@@ -303,7 +303,7 @@ struct AnalyticsEvent {
     case playAutomatic
     case play
     case cancel
-    
+
     fileprivate var source: String {
         switch self {
         case .display, .playAutomatic:
@@ -312,7 +312,7 @@ struct AnalyticsEvent {
             return "button"
         }
     }
-    
+
     fileprivate var type: String {
         switch self {
         case .display:
@@ -329,7 +329,7 @@ struct AnalyticsEvent {
     case playMedia
     case displayShow
     case alert
-    
+
     fileprivate var type: String {
         switch self {
         case .playMedia:
@@ -348,7 +348,7 @@ struct AnalyticsEvent {
     case displayShow
     case displayPage
     case displayUrl
-    
+
     fileprivate var type: String {
         switch self {
         case .openPlayApp:
@@ -368,7 +368,7 @@ struct AnalyticsEvent {
 @objc enum AnalyticsOpenUrlSource: UInt {
     case customURL
     case universalLink
-    
+
     fileprivate var value: String {
         switch self {
         case .customURL:
@@ -384,7 +384,7 @@ struct AnalyticsEvent {
     case technicalIssue
     case feedbackApp
     case evaluateApp
-    
+
     fileprivate var name: String {
         switch self {
         case .faq:
@@ -405,7 +405,7 @@ struct AnalyticsEvent {
     case login
     case logout
     case unexpectedLogout
-    
+
     fileprivate var labels: SRGAnalyticsEventLabels {
         let labels = SRGAnalyticsEventLabels()
         switch self {
@@ -431,7 +431,7 @@ struct AnalyticsEvent {
 @objc enum AnalyticsNotificationFrom: UInt {
     case application
     case operatingSystem
-    
+
     fileprivate var name: String {
         switch self {
         case .application:
@@ -440,7 +440,7 @@ struct AnalyticsEvent {
             return "push_notification_open"
         }
     }
-    
+
     fileprivate var source: String {
         switch self {
         case .application:
@@ -457,7 +457,7 @@ struct AnalyticsEvent {
     case page
     case microPage
     case section
-    
+
     fileprivate var name: String {
         switch self {
         case .media:
@@ -479,7 +479,7 @@ struct AnalyticsEvent {
     case content
     case contentAtTime
     case currentClip
-    
+
     fileprivate var value: String? {
         switch self {
         case .content:
@@ -497,7 +497,7 @@ struct AnalyticsEvent {
 @objc enum AnalyticsSharingSource: UInt {
     case button
     case contextMenu
-    
+
     fileprivate var value: String {
         switch self {
         case .button:
@@ -513,7 +513,7 @@ struct AnalyticsEvent {
     case downloads
     case history
     case search
-    
+
     fileprivate var type: String {
         switch self {
         case .favorites:
@@ -531,7 +531,7 @@ struct AnalyticsEvent {
 @objc enum AnalyticsUserActivityAction: UInt {
     case playMedia
     case displayShow
-    
+
     fileprivate var type: String {
         switch self {
         case .playMedia:

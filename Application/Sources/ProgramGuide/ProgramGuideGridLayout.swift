@@ -45,45 +45,45 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         case nowArrow
         case nowLine
     }
-    
+
     static let decorationIndexPath = IndexPath(item: 0, section: 0)
     static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
     static let timelinePadding: CGFloat = 1000
     static let channelHeaderWidth: CGFloat = 82
     static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
     static let verticalSpacing: CGFloat = constant(iOS: 3, tvOS: 6)
-    
+
     private struct LayoutData {
         let layoutAttrs: [UICollectionViewLayoutAttributes]
         let supplementaryAttrs: [UICollectionViewLayoutAttributes]
         let decorationAttrs: [UICollectionViewLayoutAttributes]
         let dateInterval: DateInterval
     }
-    
+
     private static let scale: CGFloat = constant(iOS: 430, tvOS: 900) / (60 * 60)
     private static let sectionHeight: CGFloat = constant(iOS: 80, tvOS: 120)
     private static let trailingMargin: CGFloat = 10
-    
+
     private var layoutData: LayoutData?
     private var cancellables = Set<AnyCancellable>()
-    
+
     private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>) -> Date? {
         guard let section = snapshot.sectionIdentifiers.first(where: { section in
-            return !snapshot.itemIdentifiers(inSection: section).isEmpty
+            !snapshot.itemIdentifiers(inSection: section).isEmpty
         }) else { return nil }
         return snapshot.itemIdentifiers(inSection: section).first?.day.date
     }
-    
+
     private static func endDate(from startDate: Date) -> Date {
         let dateComponent = DateComponents(day: 1, hour: 3)
         return Calendar.srgDefault.date(byAdding: dateComponent, to: startDate)!
     }
-    
+
     private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>) -> DateInterval? {
         guard let startDate = startDate(from: snapshot) else { return nil }
         return DateInterval(start: startDate, end: endDate(from: startDate))
     }
-    
+
     private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int, collectionView: UICollectionView) -> CGRect {
         // Adjust the frame of items which would be partially visible otherwise. Two different behaviors are implemented
         // for iOS and tvOS:
@@ -108,16 +108,15 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         )
         return frame.intersects(visibleFrame) ? frame.intersection(visibleFrame) : frame
     }
-    
+
     private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>, in collectionView: UICollectionView) -> LayoutData? {
         guard let dateInterval = dateInterval(from: snapshot) else { return nil }
         let layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
-            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index in
+            snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index in
                 let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: section))
                 if let program = item.program {
                     attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section, collectionView: collectionView)
-                }
-                else {
+                } else {
                     attrs.frame = frame(from: dateInterval.start, to: dateInterval.end, in: dateInterval, forSection: section, collectionView: collectionView)
                 }
                 return attrs
@@ -134,7 +133,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             attrs.zIndex = 2
             return attrs
         }
-        
+
         let timelineAttr = TimelineLayoutAttributes(forDecorationViewOfKind: ElementKind.timeline.rawValue, with: IndexPath(item: 0, section: 0))
         timelineAttr.frame = CGRect(
             x: -timelinePadding,
@@ -144,27 +143,27 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         )
         timelineAttr.dateInterval = dateInterval
         timelineAttr.zIndex = 3
-        
+
         let nowDate = Date()
         var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
         if !snapshot.sectionIdentifiers.isEmpty, dateInterval.contains(nowDate) {
             let nowHeadAttr = nowArrowAttr(at: nowDate, in: dateInterval, collectionView: collectionView)
             decorationAttrs.append(nowHeadAttr)
-            
+
             let nowLineAttr = nowLineAttr(at: nowDate, in: dateInterval, collectionView: collectionView)
             decorationAttrs.append(nowLineAttr)
         }
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
-    
+
     private static func xPosition(at date: Date, in dateInterval: DateInterval) -> CGFloat {
         return channelHeaderWidth + horizontalSpacing + date.timeIntervalSince(dateInterval.start) * scale
     }
-    
+
     private static func nowXPosition(at date: Date, in dateInterval: DateInterval) -> CGFloat {
         return xPosition(at: date, in: dateInterval) - NowArrowView.size.width / 2
     }
-    
+
     private static func nowArrowAttr(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowArrow.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
@@ -176,7 +175,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         attr.zIndex = 4
         return attr
     }
-    
+
     private static func nowLineAttr(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowLine.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
@@ -188,18 +187,18 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         attr.zIndex = 1
         return attr
     }
-    
+
     /// Content offset with contribution of vertical bouncing taken into account
     private static func yElasticContentOffset(for collectionView: UICollectionView) -> CGFloat {
         let yBouncingOffset = max(-collectionView.contentOffset.y - collectionView.adjustedContentInset.top, 0)
         return collectionView.contentOffset.y + yBouncingOffset
     }
-    
+
     private var focusedIndexPath: IndexPath? {
         guard let focusedCell = UIScreen.main.focusedView as? UICollectionViewCell else { return nil }
         return collectionView?.indexPath(for: focusedCell)
     }
-    
+
     override init() {
         super.init()
         Timer.publish(every: 10, on: .main, in: .common)
@@ -209,26 +208,26 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             }
             .store(in: &cancellables)
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func prepare() {
         super.prepare()
-        
+
         if let collectionView, let dataSource = collectionView.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
             layoutData = Self.layoutData(from: dataSource.snapshot(), in: collectionView)
-        }
-        else {
+        } else {
             layoutData = nil
         }
     }
-    
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+
+    override func shouldInvalidateLayout(forBoundsChange _: CGRect) -> Bool {
         return true
     }
-    
+
     override var collectionViewContentSize: CGSize {
         guard let collectionView, let layoutData else { return .zero }
         return CGSize(
@@ -236,7 +235,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             height: Self.timelineHeight + CGFloat(collectionView.numberOfSections) * Self.sectionHeight + max(CGFloat(collectionView.numberOfSections - 1), 0) * Self.verticalSpacing
         )
     }
-    
+
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         guard let layoutData else { return nil }
         let layoutAttrs = layoutData.layoutAttrs.filter { $0.frame.intersects(rect) }
@@ -244,15 +243,15 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let decorationAttrs = layoutData.decorationAttrs.filter { $0.frame.intersects(rect) }
         return layoutAttrs + supplementaryAttrs + decorationAttrs
     }
-    
+
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutData?.layoutAttrs.first { $0.indexPath == indexPath }
     }
-    
+
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutData?.supplementaryAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
-    
+
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutData?.decorationAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
@@ -265,30 +264,30 @@ extension ProgramGuideGridLayout {
         let startDate = day.date
         return DateInterval(start: startDate, end: endDate(from: startDate))
     }
-    
+
     private static func safeXOffset(_ xOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
         let maxXOffset = max(collectionView.contentSize.width - collectionView.frame.width
             + collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right, 0)
-        return xOffset.clamped(to: 0...maxXOffset)
+        return xOffset.clamped(to: 0 ... maxXOffset)
     }
-    
+
     private static func safeYOffset(_ yOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
         let maxYOffset = max(collectionView.contentSize.height - collectionView.frame.height
             + collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom, 0)
-        return yOffset.clamped(to: 0...maxYOffset)
+        return yOffset.clamped(to: 0 ... maxYOffset)
     }
-    
+
     static func date(centeredAtXOffset xOffset: CGFloat, in collectionView: UICollectionView, day: SRGDay) -> Date? {
         let dateInterval = dateInterval(for: day)
         let gridWidth = max(collectionView.frame.width - channelHeaderWidth, 0)
         let date = dateInterval.start.addingTimeInterval(safeXOffset(xOffset + gridWidth / 2.0, in: collectionView) / scale)
         return dateInterval.contains(date) ? date : nil
     }
-    
+
     static func sectionIndex(atYOffset yOffset: CGFloat, in collectionView: UICollectionView) -> Int {
         return Int(safeYOffset(yOffset, in: collectionView) / (sectionHeight + verticalSpacing))
     }
-    
+
     static func xOffset(centeringDate date: Date, in collectionView: UICollectionView, day: SRGDay) -> CGFloat? {
         guard collectionView.contentSize != .zero else { return nil }
         let dateInterval = dateInterval(for: day)
@@ -296,7 +295,7 @@ extension ProgramGuideGridLayout {
         let gridWidth = max(collectionView.frame.width - channelHeaderWidth, 0)
         return safeXOffset(date.timeIntervalSince(dateInterval.start) * scale - gridWidth / 2.0, in: collectionView)
     }
-    
+
     static func yOffset(forSectionIndex sectionIndex: Int, in collectionView: UICollectionView) -> CGFloat? {
         guard collectionView.contentSize != .zero else { return nil }
         return safeYOffset(CGFloat(sectionIndex) * (sectionHeight + verticalSpacing), in: collectionView)

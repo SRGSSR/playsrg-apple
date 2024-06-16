@@ -20,18 +20,18 @@ struct LabeledCardButton<Content: View, Label: View>: View {
     private let action: () -> Void
     @Binding private var content: () -> Content
     @Binding private var label: () -> Label
-    
+
     fileprivate var onFocusChangeAction: ((Bool) -> Void)?
-    
+
     @State private var isFocused = false
-    
+
     init(aspectRatio: CGFloat? = nil, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content, @ViewBuilder label: @escaping () -> Label) {
         self.aspectRatio = aspectRatio
         self.action = action
         _content = .constant(content)
         _label = .constant(label)
     }
-    
+
     var body: some View {
         VStack(spacing: 0) {
             ExpandingCardButton(action: action) {
@@ -39,14 +39,14 @@ struct LabeledCardButton<Content: View, Label: View>: View {
             }
             .onFocusChange { focused in
                 isFocused = focused
-                
+
                 if let onFocusAction = onFocusChangeAction {
                     onFocusAction(focused)
                 }
             }
             .aspectRatio(aspectRatio, contentMode: .fit)
             .layoutPriority(1)
-                
+
             label()
                 .opacity(isFocused ? 1 : 0.8)
                 .offset(x: 0, y: isFocused ? 10 : 0)
@@ -67,7 +67,7 @@ extension LabeledCardButton {
 
 struct LabeledCardButton_Previews: PreviewProvider {
     private static let aspectRatio: CGFloat? = 16 / 9
-    
+
     static var previews: some View {
         Group {
             LabeledCardButton(aspectRatio: aspectRatio, action: {}) {
@@ -75,19 +75,19 @@ struct LabeledCardButton_Previews: PreviewProvider {
             } label: {
                 Color.blue
             }
-            
+
             LabeledCardButton(aspectRatio: aspectRatio, action: {}) {
                 Color.red
             } label: {
                 Text("Label")
             }
-            
+
             LabeledCardButton(aspectRatio: aspectRatio, action: {}) {
                 Text("Button")
             } label: {
                 Color.blue
             }
-            
+
             LabeledCardButton(aspectRatio: aspectRatio, action: {}) {
                 Text("Button")
             } label: {

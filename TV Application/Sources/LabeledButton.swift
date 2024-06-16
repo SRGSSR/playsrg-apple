@@ -12,9 +12,9 @@ struct LabeledButton: View {
     let accessibilityLabel: String
     let accessibilityHint: String?
     let action: () -> Void
-    
+
     @State private var isFocused = false
-    
+
     init(icon: ImageResource, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
@@ -22,7 +22,7 @@ struct LabeledButton: View {
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
-    
+
     var body: some View {
         VStack {
             Button(action: action) {
@@ -49,7 +49,7 @@ struct LabeledButton_Previews: PreviewProvider {
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Short label")
-            
+
             LabeledButton(icon: .favorite, label: "Watch later", action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()

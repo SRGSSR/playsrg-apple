@@ -19,23 +19,23 @@ import SwiftUI
 struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
     let content: String
     let lineLimit: Int?
-    
+
     let showMore: () -> Void
-    
-    internal var primaryColor: Color = .srgGrayD2
-    internal var secondaryColor: Color = .white
-    
+
+    var primaryColor: Color = .srgGrayD2
+    var secondaryColor: Color = .white
+
     @State private var isTruncated = false
     @State private var isFocused = false
-    
+
     init(content: String, lineLimit: Int?, showMore: @escaping () -> Void) {
         // Compact the content to not have "show more" button floating alone at bottom right.
         self.content = content.compacted
-        
+
         self.lineLimit = lineLimit
         self.showMore = showMore
     }
-    
+
     var body: some View {
         Button {
             showMore()
@@ -45,12 +45,12 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
             }
             .onParentFocusChange { isFocused = $0 }
         }
-#if os(tvOS)
+        #if os(tvOS)
         .buttonStyle(TextButtonStyle(focused: isFocused))
-#endif
+        #endif
         .disabled(!isTruncated)
     }
-    
+
     /// Behavior: h-exp, v-hug
     fileprivate struct MainView: View {
         let content: String
@@ -58,16 +58,16 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
         let primaryColor: Color
         let secondaryColor: Color
         @Binding private(set) var isTruncated: Bool
-        
+
         let showMore: () -> Void
-        
+
         @State private var intrinsicSize: CGSize = .zero
         @State private var truncatedSize: CGSize = .zero
-        
+
         private let fontStyle: SRGFont.Style = .body
         private let showMoreButtonString = NSLocalizedString("More", comment: "More label on truncatable text view")
         private let showMoreButtonStringAccessibilityLabel = PlaySRGAccessibilityLocalizedString("More", comment: "More label on truncatable text view")
-        
+
         private func text(lineLimit: Int?) -> some View {
             return Text(content)
                 .srgFont(fontStyle)
@@ -75,7 +75,7 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
                 .foregroundColor(primaryColor)
                 .multilineTextAlignment(.leading)
         }
-        
+
         var body: some View {
             HStack(spacing: 0) {
                 ZStack(alignment: .bottomTrailing) {
@@ -95,7 +95,7 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
                                 }
                             }
                         )
-                    
+
                     if isTruncated {
                         Text(showMoreButtonString)
                             .srgFont(fontStyle)
@@ -117,20 +117,20 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
                 Spacer(minLength: 0)
             }
         }
-        
+
         /// Behavior: h-exp, v-hug
         struct BottomMask: View {
             let fontStyle: SRGFont.Style
             let showMoreButtonString: String
-            
+
             // Content size changes are tracked to update mask.
             @Environment(\.sizeCategory) private var sizeCategory
-            
+
             var body: some View {
                 HStack(alignment: .bottom, spacing: 0) {
                     Rectangle()
                         .foregroundColor(.black)
-                    
+
                     LinearGradient(
                         gradient: Gradient(stops: [
                             Gradient.Stop(color: .black, location: 0),
@@ -140,7 +140,7 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
                         endPoint: .trailing
                     )
                     .frame(width: constant(iOS: 32, tvOS: 60), height: showMoreButtonString.heightOfString(usingFontStyle: fontStyle))
-                    
+
                     Rectangle()
                         .foregroundColor(.clear)
                         .frame(width: showMoreButtonString.widthOfString(usingFontStyle: fontStyle), alignment: .center)

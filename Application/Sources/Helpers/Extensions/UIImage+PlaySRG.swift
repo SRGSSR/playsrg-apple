@@ -21,7 +21,7 @@ extension UIImage {
             return nil
         }
     }
-    
+
     /**
      *  Return the standard image to be used for a given blocking reason, if any.
      */

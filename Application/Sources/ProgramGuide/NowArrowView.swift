@@ -11,13 +11,13 @@ import SwiftUI
 /// Behavior: h-hug, v-hug
 struct NowArrowView: View {
     static let size = CGSize(width: 13, height: 8)
-    
+
     var body: some View {
         Triangle()
             .fill(.white)
             .frame(width: Self.size.width, height: Self.size.height)
     }
-    
+
     private struct Triangle: Shape {
         func path(in rect: CGRect) -> Path {
             var path = Path()

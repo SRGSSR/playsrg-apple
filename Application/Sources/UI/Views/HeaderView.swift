@@ -15,26 +15,25 @@ struct HeaderView: View {
     let subtitle: String?
     let hasDetailDisclosure: Bool
     let primaryColor: Color
-    
+
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     @Environment(\.sizeCategory) private var sizeCategory
-    
+
     init(title: String, subtitle: String?, hasDetailDisclosure: Bool, primaryColor: Color = .srgGrayD2) {
         self.title = title
         self.subtitle = subtitle
         self.hasDetailDisclosure = hasDetailDisclosure
         self.primaryColor = primaryColor
     }
-    
+
     private var displayableSubtitle: String? {
         if horizontalSizeClass == .regular, let subtitle, !subtitle.isEmpty {
             return subtitle
-        }
-        else {
+        } else {
             return nil
         }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 0) {
@@ -70,8 +69,7 @@ enum HeaderViewSize {
             let hostController = UIHostingController(rootView: HeaderView(title: title, subtitle: subtitle, hasDetailDisclosure: true))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
-        }
-        else {
+        } else {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
         }
     }

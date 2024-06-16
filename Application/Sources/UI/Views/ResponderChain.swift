@@ -27,12 +27,12 @@ extension View {
  */
 private struct ResponderChain: UIViewRepresentable {
     let firstResponder: FirstResponder
-    
-    func makeUIView(context: Context) -> UIView {
+
+    func makeUIView(context _: Context) -> UIView {
         return UIView()
     }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {
+
+    func updateUIView(_ uiView: UIView, context _: Context) {
         firstResponder.view = uiView
     }
 }
@@ -47,11 +47,11 @@ private struct ResponderChain: UIViewRepresentable {
     // (which would lead to undefined behavior). Declaring it as a property wrapper is only syntactic sugar to provide
     // for a more expressive formalism with no need to call the default constructor.
     fileprivate weak var view: UIView?
-    
+
     var wrappedValue: FirstResponder {
         return self
     }
-    
+
     @discardableResult
     func sendAction(_ action: Selector, for event: UIEvent? = nil) -> Bool {
         return UIApplication.shared.sendAction(action, to: nil, from: view, for: event)
