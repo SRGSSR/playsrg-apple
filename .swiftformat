@@ -2,7 +2,7 @@
 --swiftversion 5.10
 
 # file options
---exclude Pods,Generated
+--exclude Pods,Generated,build
 
 # rules
 --disable trailingCommas,wrapMultilineStatementBraces
