@@ -5431,7 +5431,7 @@
 				08B836951FBDC07100D849D8 /* Restore original icons if needed */,
 				0806E7A71D4BA4ED002ED406 /* Make custom icons */,
 				08C68D851D38D6F400BB8AAA /* Sources */,
-				08AD6C6E266BDC5000FAF1FA /* Swift Lint */,
+				08AD6C6E266BDC5000FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C21F74EC5C00D57D29 /* Update License Information */,
 				08C68D861D38D6F400BB8AAA /* Frameworks */,
 				08C68D871D38D6F400BB8AAA /* Resources */,
@@ -5489,7 +5489,7 @@
 				08B836941FBDBEAB00D849D8 /* Restore original icons if needed */,
 				0806E7A61D4BA4DF002ED406 /* Make custom icons */,
 				08C68DBC1D38D70D00BB8AAA /* Sources */,
-				08A1C3BF2636E77900276A5E /* Swift Lint */,
+				08A1C3BF2636E77900276A5E /* Swift Lint and Swift Format */,
 				6FE3C7C31F74EEA500D57D29 /* Update License Information */,
 				08C68DBD1D38D70D00BB8AAA /* Frameworks */,
 				08C68DBE1D38D70D00BB8AAA /* Resources */,
@@ -5546,7 +5546,7 @@
 				08B836961FBDC08400D849D8 /* Restore original icons if needed */,
 				0806E7A51D4BA4CF002ED406 /* Make custom icons */,
 				08C68DF31D38D72000BB8AAA /* Sources */,
-				08AD6C6F266BDC6D00FAF1FA /* Swift Lint */,
+				08AD6C6F266BDC6D00FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C41F74EEBE00D57D29 /* Update License Information */,
 				08C68DF41D38D72000BB8AAA /* Frameworks */,
 				08C68DF51D38D72000BB8AAA /* Resources */,
@@ -5603,7 +5603,7 @@
 				08B836971FBDC09500D849D8 /* Restore original icons if needed */,
 				0806E7A41D4BA4BA002ED406 /* Make custom icons */,
 				08C68E2A1D38D73000BB8AAA /* Sources */,
-				08AD6C70266BDC7B00FAF1FA /* Swift Lint */,
+				08AD6C70266BDC7B00FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C61F74EECF00D57D29 /* Update License Information */,
 				08C68E2B1D38D73000BB8AAA /* Frameworks */,
 				08C68E2C1D38D73000BB8AAA /* Resources */,
@@ -5660,7 +5660,7 @@
 				08B836981FBDC0A100D849D8 /* Restore original icons if needed */,
 				0806E7A31D4BA494002ED406 /* Make custom icons */,
 				08C68E611D38D73C00BB8AAA /* Sources */,
-				08AD6C71266BDC8D00FAF1FA /* Swift Lint */,
+				08AD6C71266BDC8D00FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C71F74EEDB00D57D29 /* Update License Information */,
 				08C68E621D38D73C00BB8AAA /* Frameworks */,
 				08C68E631D38D73C00BB8AAA /* Resources */,
@@ -5902,7 +5902,7 @@
 				08C13555256B2746002F67B8 /* Restore original icons if needed */,
 				08C13557256B277B002F67B8 /* Make custom icons */,
 				6F331CE024D06B8200C096AB /* Sources */,
-				08AD6C72266BDCA100FAF1FA /* Swift Lint */,
+				08AD6C72266BDCA100FAF1FA /* Swift Lint and Swift Format */,
 				6F331CE124D06B8200C096AB /* Frameworks */,
 				6F331CE224D06B8200C096AB /* Resources */,
 				08C13558256B27AC002F67B8 /* Restore original icons */,
@@ -5946,7 +5946,7 @@
 				08C1356D256B28C0002F67B8 /* Restore original icons if needed */,
 				08C13571256B291D002F67B8 /* Make custom icons */,
 				6F331CF824D06BA200C096AB /* Sources */,
-				08AD6C73266BDCBB00FAF1FA /* Swift Lint */,
+				08AD6C73266BDCBB00FAF1FA /* Swift Lint and Swift Format */,
 				6F331CF924D06BA200C096AB /* Frameworks */,
 				6F331CFA24D06BA200C096AB /* Resources */,
 				08C13575256B2977002F67B8 /* Restore original icons */,
@@ -5990,7 +5990,7 @@
 				08C1356E256B28C7002F67B8 /* Restore original icons if needed */,
 				08C13572256B2922002F67B8 /* Make custom icons */,
 				6F331D1024D06BB800C096AB /* Sources */,
-				08AD6C74266BDCC800FAF1FA /* Swift Lint */,
+				08AD6C74266BDCC800FAF1FA /* Swift Lint and Swift Format */,
 				6F331D1124D06BB800C096AB /* Frameworks */,
 				6F331D1224D06BB800C096AB /* Resources */,
 				08C13576256B297E002F67B8 /* Restore original icons */,
@@ -6034,7 +6034,7 @@
 				08C1356F256B28CF002F67B8 /* Restore original icons if needed */,
 				08C13573256B2927002F67B8 /* Make custom icons */,
 				6F331D2824D06BC600C096AB /* Sources */,
-				08AD6C75266BDCD400FAF1FA /* Swift Lint */,
+				08AD6C75266BDCD400FAF1FA /* Swift Lint and Swift Format */,
 				6F331D2924D06BC600C096AB /* Frameworks */,
 				6F331D2A24D06BC600C096AB /* Resources */,
 				08C13577256B2983002F67B8 /* Restore original icons */,
@@ -6078,7 +6078,7 @@
 				08C13570256B28D7002F67B8 /* Restore original icons if needed */,
 				08C13574256B292C002F67B8 /* Make custom icons */,
 				6F331D4024D06C2600C096AB /* Sources */,
-				08AD6C76266BDCDE00FAF1FA /* Swift Lint */,
+				08AD6C76266BDCDE00FAF1FA /* Swift Lint and Swift Format */,
 				6F331D4124D06C2600C096AB /* Frameworks */,
 				6F331D4224D06C2600C096AB /* Resources */,
 				08C13578256B2989002F67B8 /* Restore original icons */,
@@ -7015,7 +7015,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
-		08A1C3BF2636E77900276A5E /* Swift Lint */ = {
+		08A1C3BF2636E77900276A5E /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7025,16 +7025,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C6E266BDC5000FAF1FA /* Swift Lint */ = {
+		08AD6C6E266BDC5000FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7044,16 +7044,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C6F266BDC6D00FAF1FA /* Swift Lint */ = {
+		08AD6C6F266BDC6D00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7063,16 +7063,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C70266BDC7B00FAF1FA /* Swift Lint */ = {
+		08AD6C70266BDC7B00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7082,16 +7082,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C71266BDC8D00FAF1FA /* Swift Lint */ = {
+		08AD6C71266BDC8D00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7101,16 +7101,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C72266BDCA100FAF1FA /* Swift Lint */ = {
+		08AD6C72266BDCA100FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7120,16 +7120,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C73266BDCBB00FAF1FA /* Swift Lint */ = {
+		08AD6C73266BDCBB00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7139,16 +7139,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C74266BDCC800FAF1FA /* Swift Lint */ = {
+		08AD6C74266BDCC800FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7158,16 +7158,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C75266BDCD400FAF1FA /* Swift Lint */ = {
+		08AD6C75266BDCD400FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7177,16 +7177,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C76266BDCDE00FAF1FA /* Swift Lint */ = {
+		08AD6C76266BDCDE00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7196,14 +7196,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
