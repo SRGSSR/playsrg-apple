@@ -9,9 +9,9 @@ elif [[ "$1" == "only-changes" ]]; then
   git diff --staged --name-only | grep ".swift$" | xargs swiftlint lint --quiet --strict
 fi
 if [ $# -eq 0 ]; then
-  swiftformat --lint .
+  swiftformat --lint --quiet . 
 elif [[ "$1" == "only-changes" ]]; then
-  git diff --staged --name-only | grep ".swift$" | xargs swiftformat --lint
+  git diff --staged --name-only | grep ".swift$" | xargs swiftformat --lint --quiet
 fi
 echo "... checking Ruby scripts..."
 bundle exec rubocop --format quiet
