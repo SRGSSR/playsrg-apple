@@ -14,7 +14,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/abseil-cpp-binary</string>
 			<key>Title</key>
-			<string>abseil (1.2024011601.0)</string>
+			<string>abseil (1.2024011601.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -30,7 +30,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/app-check</string>
 			<key>Title</key>
-			<string>AppCheck (10.18.1)</string>
+			<string>AppCheck (10.19.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -38,7 +38,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
-			<string>AppCenter (5.0.4)</string>
+			<string>AppCenter (5.0.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>Firebase (10.23.1)</string>
+			<string>Firebase (10.27.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>GoogleAppMeasurement (10.23.1)</string>
+			<string>GoogleAppMeasurement (10.27.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -126,7 +126,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleUtilities</string>
 			<key>Title</key>
-			<string>GoogleUtilities (7.13.1)</string>
+			<string>GoogleUtilities (7.13.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/grpc-binary</string>
 			<key>Title</key>
-			<string>gRPC (1.62.1)</string>
+			<string>gRPC (1.62.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -142,7 +142,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/gtm-session-fetcher</string>
 			<key>Title</key>
-			<string>gtm-session-fetcher (3.3.2)</string>
+			<string>gtm-session-fetcher (3.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -158,7 +158,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>Airship (16.12.6)</string>
+			<string>Airship (16.12.7)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -166,7 +166,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/iOSV5</string>
 			<key>Title</key>
-			<string>TagCommander SDK V5 (5.4.6)</string>
+			<string>TagCommander SDK V5 (5.4.9)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -174,7 +174,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/leveldb</string>
 			<key>Title</key>
-			<string>leveldb (1.22.4)</string>
+			<string>leveldb (1.22.5)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -246,7 +246,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/PLCrashReporter</string>
 			<key>Title</key>
-			<string>PLCrashReporter (1.11.1)</string>
+			<string>PLCrashReporter (1.11.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -310,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>SRGLetterbox (9.3.0)</string>
+			<string>SRGLetterbox (9.3.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -350,7 +350,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (1.1.0)</string>
+			<string>swift-collections (1.1.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
