@@ -10,14 +10,14 @@ import SwiftUI
 
 struct NotificationCell: View {
     let notification: UserNotification
-    
+
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
-    
+
     private var imageUrl: URL? {
-        return url(for: notification.image, size: .small)
+        url(for: notification.image, size: .small)
     }
-    
+
     var body: some View {
         HStack(spacing: 0) {
             ImageView(source: imageUrl)
@@ -30,24 +30,23 @@ struct NotificationCell: View {
         }
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
         let notification: UserNotification
-        
+
         private var title: String {
             let date = DateFormatter.play_relativeShortDate.string(from: notification.date)
-            
+
             let title = notification.title
             if !title.isEmpty {
                 // Unbreakable spaces before / after the separator
                 return "\(title) · \(date)"
-            }
-            else {
+            } else {
                 return date
             }
         }
-        
+
         var body: some View {
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
@@ -61,7 +60,7 @@ struct NotificationCell: View {
                     }
                 }
                 .srgFont(.subtitle1)
-                
+
                 Text(notification.body)
                     .srgFont(.H4)
                     .lineLimit(2)
@@ -80,18 +79,17 @@ private extension NotificationCell {
         let title = notification.title
         if !title.isEmpty {
             return "\(title), \(notification.body)"
-        }
-        else {
+        } else {
             return notification.body
         }
     }
-    
+
     var accessibilityHint: String? {
-        return isEditing ? PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Notification cell hint in edit mode") : nil
+        isEditing ? PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Notification cell hint in edit mode") : nil
     }
-    
+
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? .isSelected : []
+        isSelected ? .isSelected : []
     }
 }
 
@@ -99,7 +97,7 @@ private extension NotificationCell {
 
 class NotificationCellSize: NSObject {
     @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
+        NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }
 

@@ -19,35 +19,35 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct ShowAccessCell: View, PrimaryColorSettable {
     let style: Style
-    
-    internal var primaryColor: Color = .srgGrayD2
-    
+
+    var primaryColor: Color = .srgGrayD2
+
     @FirstResponder private var firstResponder
-    
+
     private var showAZButtonProperties: ButtonProperties {
-        return ButtonProperties(
+        ButtonProperties(
             icon: .aToZ,
             label: NSLocalizedString("A to Z", comment: "Show A-Z short button title"),
             accessibilityLabel: PlaySRGAccessibilityLocalizedString("A to Z shows", comment: "Show A-Z button label")
         )
     }
-    
+
     private var showByDateButtonProperties: ButtonProperties {
         switch style {
         case .calendar:
-            return ButtonProperties(
+            ButtonProperties(
                 icon: .calendar,
                 label: NSLocalizedString("By date", comment: "Show by date short button title"),
                 accessibilityLabel: PlaySRGAccessibilityLocalizedString("Shows by date", comment: "Show by date button label")
             )
         case .programGuide:
-            return ButtonProperties(
+            ButtonProperties(
                 icon: .tvGuide,
                 label: NSLocalizedString("TV guide", comment: "TV guide short button title")
             )
         }
     }
-    
+
     var body: some View {
         HStack {
             ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
@@ -70,12 +70,12 @@ extension ShowAccessCell {
         case calendar
         case programGuide
     }
-    
+
     private struct ButtonProperties {
         let icon: ImageResource
         let label: String
         let accessibilityLabel: String?
-        
+
         init(icon: ImageResource, label: String, accessibilityLabel: String? = nil) {
             self.icon = icon
             self.label = label
@@ -88,7 +88,7 @@ extension ShowAccessCell {
 
 enum ShowAccessCellSize {
     static func fullWidth() -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
+        NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
     }
 }
 
@@ -96,7 +96,7 @@ enum ShowAccessCellSize {
 
 struct ShowAccessCell_Previews: PreviewProvider {
     private static let size = ShowAccessCellSize.fullWidth().previewSize
-    
+
     static var previews: some View {
         Group {
             ShowAccessCell(style: .calendar)

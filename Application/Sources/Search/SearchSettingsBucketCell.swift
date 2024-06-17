@@ -12,9 +12,9 @@ import SwiftUI
 
 struct SearchSettingsBucketCell: View {
     let bucket: SRGItemBucket
-    
+
     @Binding var selectedUrns: Set<String>
-    
+
     var body: some View {
         Button(action: toggleSelection) {
             HStack {
@@ -30,20 +30,19 @@ struct SearchSettingsBucketCell: View {
         .foregroundColor(.primary)
         .accessibilityElement(label: accessibilityLabel, hint: nil, traits: accessibilityTraits)
     }
-    
+
     private var title: String {
-        return "\(bucket.title) (\(NumberFormatter.localizedString(from: bucket.count as NSNumber, number: .decimal)))"
+        "\(bucket.title) (\(NumberFormatter.localizedString(from: bucket.count as NSNumber, number: .decimal)))"
     }
-    
+
     private var isSelected: Bool {
-        return selectedUrns.contains(bucket.urn)
+        selectedUrns.contains(bucket.urn)
     }
-    
+
     private func toggleSelection() {
         if isSelected {
             selectedUrns.remove(bucket.urn)
-        }
-        else {
+        } else {
             selectedUrns.update(with: bucket.urn)
         }
     }
@@ -56,9 +55,9 @@ private extension SearchSettingsBucketCell {
         let contents = String(format: PlaySRGAccessibilityLocalizedString("%@ results", comment: "Number of results aggregated in search"), PlayAccessibilityNumberFormatter(bucket.count as NSNumber))
         return "\(bucket.title) (\(contents))"
     }
-    
+
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? [.isButton, .isSelected] : .isButton
+        isSelected ? [.isButton, .isSelected] : .isButton
     }
 }
 
@@ -66,7 +65,7 @@ private extension SearchSettingsBucketCell {
 
 struct SearchSettingsBucketCell_Previews: PreviewProvider {
     private static let size = CGSize(width: 320, height: 36)
-    
+
     static var previews: some View {
         Group {
             SearchSettingsBucketCell(bucket: Mock.bucket(.standard), selectedUrns: .constant([]))

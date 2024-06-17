@@ -67,7 +67,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.srg_gray16Color;
-    
+
     // WKWebView cannot be instantiated in storyboards, do it programmatically
     WKWebView *webView = [[WKWebView alloc] init];
     webView.opaque = NO;
@@ -77,7 +77,7 @@ static void *s_kvoContext = &s_kvoContext;
     webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     webView.scrollView.delegate = self;
     [view insertSubview:webView atIndex:0];
-    
+
     webView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [webView.topAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.topAnchor],
@@ -86,56 +86,56 @@ static void *s_kvoContext = &s_kvoContext;
         [webView.trailingAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.trailingAnchor]
     ]];
     self.webView = webView;
-    
+
     if (self.customizationBlock) {
         self.customizationBlock(webView);
     }
-    
+
     UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayD2Color];
     loadingImageView.hidden = YES;
     [view insertSubview:loadingImageView atIndex:0];
     self.loadingImageView = loadingImageView;
-    
+
     loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [loadingImageView.centerXAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.centerXAnchor],
         [loadingImageView.centerYAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.centerYAnchor]
     ]];
-    
+
     UILabel *errorLabel = [[UILabel alloc] init];
     errorLabel.textColor = UIColor.whiteColor;
     errorLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     [view addSubview:errorLabel];
     self.errorLabel = errorLabel;
-    
+
     errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [errorLabel.leadingAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.leadingAnchor constant:40.f],
         [errorLabel.trailingAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.trailingAnchor constant:-40.f],
         [errorLabel.centerYAnchor constraintEqualToAnchor:view.centerYAnchor]
     ]];
-    
+
     UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     progressView.progressTintColor = UIColor.srg_redColor;
     [view addSubview:progressView];
     self.progressView = progressView;
-    
+
     progressView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [progressView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor],
         [progressView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor],
         self.progressTopConstraint = [progressView.topAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.topAnchor]
     ]];
-    
+
     self.view = view;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     [self.webView loadRequest:self.request];
-    
+
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(webViewController_reachabilityDidChange:)
                                                name:FXReachabilityStatusDidChangeNotification
@@ -213,7 +213,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     self.loadingImageView.hidden = NO;
     self.errorLabel.text = nil;
-    
+
     [UIView animateWithDuration:0.3 animations:^{
         self.progressView.alpha = 1.f;
     }];
@@ -223,7 +223,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     self.loadingImageView.hidden = YES;
     self.errorLabel.text = nil;
-    
+
     [UIView animateWithDuration:0.3 animations:^{
         self.webView.alpha = 1.f;
         self.progressView.alpha = 0.f;
@@ -234,7 +234,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     self.loadingImageView.hidden = YES;
     NSError *updatedError = error;
-    
+
     NSURL *failingURL = ([error.domain isEqualToString:NSURLErrorDomain]) ? error.userInfo[NSURLErrorFailingURLErrorKey] : nil;
     if (failingURL && ! [failingURL.scheme isEqualToString:@"http"] && ! [failingURL.scheme isEqualToString:@"https"] && ! [failingURL.scheme isEqualToString:@"file"]) {
         updatedError = nil;
@@ -242,7 +242,7 @@ static void *s_kvoContext = &s_kvoContext;
 
     if ([updatedError.domain isEqualToString:NSURLErrorDomain]) {
         self.errorLabel.text = [NSHTTPURLResponse srg_localizedStringForURLErrorCode:updatedError.code];
-        
+
         [UIView animateWithDuration:0.3 animations:^{
             self.progressView.alpha = 0.f;
             self.webView.alpha = 0.f;
@@ -250,9 +250,9 @@ static void *s_kvoContext = &s_kvoContext;
     }
     else {
         self.errorLabel.text = nil;
-        
+
         [webView goBack];
-        
+
         [UIView animateWithDuration:0.3 animations:^{
             self.progressView.alpha = 0.f;
         }];

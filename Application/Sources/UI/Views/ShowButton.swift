@@ -14,23 +14,23 @@ struct ShowButton: View {
     private let show: SRGShow
     private let isFavorite: Bool
     private let action: () -> Void
-    
+
     @State private var isFocused = false
-    
+
     init(show: SRGShow, isFavorite: Bool, action: @escaping () -> Void) {
         self.show = show
         self.isFavorite = isFavorite
         self.action = action
     }
-    
+
     private var favoriteIcon: ImageResource {
-        return isFavorite ? .favoriteFull : .favorite
+        isFavorite ? .favoriteFull : .favorite
     }
-    
+
     private var accessibilityLabel: String {
-        return "\(show.title), \(PlaySRGAccessibilityLocalizedString("More episodes", comment: "Button to access more episodes"))"
+        "\(show.title), \(PlaySRGAccessibilityLocalizedString("More episodes", comment: "Button to access more episodes"))"
     }
-    
+
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {

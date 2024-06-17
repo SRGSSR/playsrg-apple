@@ -170,10 +170,10 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
             }
             
             [[AnalyticsEventObjC sharingWithAction:sharingItem.analyticsAction
-                                                     uid:sharingItem.analyticsUid
-                                        mediaContentType:sharingItem.mediaContentType
-                                                  source:SharingItemSourceFrom(sharingItemFrom)
-                                                    type:activityType] send];
+                                               uid:sharingItem.analyticsUid
+                                  mediaContentType:sharingItem.mediaContentType
+                                            source:SharingItemSourceFrom(sharingItemFrom)
+                                              type:activityType] send];
             
             if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
                 [Banner showWith:BannerStyleInfo

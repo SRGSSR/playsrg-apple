@@ -5,7 +5,7 @@
 #================================================================
 
 eval "$(rbenv init -)"
-PATH="$(which swiftlint):$(which ruby):$(which shellcheck):$(which yamllint):$(which pod):$PATH"
+PATH="$(which swiftlint):$(which swiftformat):$(which ruby):$(which shellcheck):$(which yamllint):$(which pod):$PATH"
 
 if Scripts/check-quality.sh only-changes; then
 	echo "✅ Quality checked"

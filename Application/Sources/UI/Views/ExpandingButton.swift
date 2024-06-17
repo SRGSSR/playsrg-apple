@@ -16,12 +16,12 @@ struct ExpandingButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable 
     private let accessibilityLabel: String
     private let accessibilityHint: String?
     private let action: () -> Void
-    
-    internal var primaryColor: Color = .srgGrayD2
-    internal var primaryFocusedColor: Color = .srgGray16
-    
+
+    var primaryColor: Color = .srgGrayD2
+    var primaryFocusedColor: Color = .srgGray16
+
     @State private var isFocused = false
-    
+
     init(icon: ImageResource, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
@@ -29,23 +29,23 @@ struct ExpandingButton: View, PrimaryColorSettable, PrimaryFocusedColorSettable 
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
-    
+
     init(label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
-        self.icon = nil
+        icon = nil
         self.label = label
         self.accessibilityLabel = accessibilityLabel ?? label
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
-    
+
     init(icon: ImageResource, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
-        self.label = nil
+        label = nil
         self.accessibilityLabel = accessibilityLabel ?? ""
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
-    
+
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {

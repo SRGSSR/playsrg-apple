@@ -16,7 +16,7 @@ struct MediaSearchSettings: Equatable {
         case lessThanFiveMinutes
         case moreThanThirtyMinutes
     }
-    
+
     enum Period {
         case anytime
         case today
@@ -24,7 +24,7 @@ struct MediaSearchSettings: Equatable {
         case thisWeek
         case lastWeek
     }
-    
+
     var aggregationsEnabled = true
     var suggestionsEnabled = false
     var showUrns = Set<String>()
@@ -52,7 +52,7 @@ extension MediaSearchSettings {
             settings.maximumDurationInMinutes = nil
         }
     }
-    
+
     func applyPeriod(to settings: SRGMediaSearchSettings) {
         switch period {
         case .anytime:
@@ -77,7 +77,7 @@ extension MediaSearchSettings {
             settings.toDay = SRGDay(byAddingDays: 6, months: 0, years: 0, to: firstDayOfLastWeek)
         }
     }
-    
+
     var requestSettings: SRGMediaSearchSettings {
         let settings = SRGMediaSearchSettings()
         settings.aggregationsEnabled = aggregationsEnabled

@@ -8,7 +8,7 @@ import SwiftUI
 
 struct ImageViewLandscapeCommon_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
-    
+
     static var previews: some View {
         Group {
             ImageView(source: source, contentMode: .aspectFit)
@@ -26,7 +26,7 @@ struct ImageViewLandscapeCommon_Previews: PreviewProvider {
 
 struct ImageViewLandscapeAlignment_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
-    
+
     static var previews: some View {
         Group {
             ImageView(source: source, contentMode: .top)
@@ -52,7 +52,7 @@ struct ImageViewLandscapeAlignment_Previews: PreviewProvider {
 
 struct ImageViewLandscapeAspectFit_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
-    
+
     static var previews: some View {
         Group {
             ImageView(source: source, contentMode: .aspectFitTop)
@@ -78,7 +78,7 @@ struct ImageViewLandscapeAspectFit_Previews: PreviewProvider {
 
 struct ImageViewLandscapeAspectFill_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
-    
+
     static var previews: some View {
         Group {
             ImageView(source: source, contentMode: .aspectFillTop)
@@ -104,7 +104,7 @@ struct ImageViewLandscapeAspectFill_Previews: PreviewProvider {
 
 struct ImageViewLandscapeAspectFillFocused_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
-    
+
     static var previews: some View {
         Group {
             ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 0, relativeHeight: 0))

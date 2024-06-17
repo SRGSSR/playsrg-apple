@@ -10,9 +10,9 @@ import SwiftUI
 
 struct SearchSettingsNavigationView: View {
     @ObservedObject var model: SearchViewModel
-    
+
     @FirstResponder private var firstResponder
-    
+
     var body: some View {
         PlayNavigationView {
             SearchSettingsView(query: $model.query, settings: $model.settings)
@@ -27,7 +27,7 @@ struct SearchSettingsNavigationView: View {
                             }
                         }
                     }
-                    
+
                     ToolbarItem {
                         Button {
                             firstResponder.sendAction(#selector(SearchSettingsNavigationViewController.close(_:)))
@@ -48,19 +48,20 @@ final class SearchSettingsNavigationViewController: UIHostingController<SearchSe
     init(model: SearchViewModel) {
         super.init(rootView: SearchSettingsNavigationView(model: model))
     }
-    
-    @MainActor dynamic required init?(coder aDecoder: NSCoder) {
+
+    @available(*, unavailable)
+    @MainActor dynamic required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override var preferredContentSize: CGSize {
         get {
-            return CGSize(width: 375, height: 800)
+            CGSize(width: 375, height: 800)
         }
         set {}
     }
-    
-    @objc fileprivate func close(_ sender: UIBarButtonItem) {
+
+    @objc fileprivate func close(_: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 }

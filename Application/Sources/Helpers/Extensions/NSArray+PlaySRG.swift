@@ -9,9 +9,9 @@ import Foundation
 extension NSArray {
     /**
      Returns a new array which is the receiver with objects from the specified array removed.
-     
+
      - parameter array: The array of objects to remove from the receiver.
-     
+
      - returns: A new array with objects from the specified array removed.
      */
     @objc func arrayByRemovingObjects(in array: [AnyHashable]) -> NSArray {

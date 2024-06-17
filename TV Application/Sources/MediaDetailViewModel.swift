@@ -11,12 +11,12 @@ import SRGUserData
 
 final class MediaDetailViewModel: ObservableObject {
     @Published var media: SRGMedia?
-    
+
     var playAnalyticsClickEvent: AnalyticsClickEvent?
     var playAnalyticsClickEventMediaUrn: String?
-    
+
     @Published private var mediaData: MediaData = .empty
-    
+
     init() {
         // Drop initial values; relevant values are first assigned when the view appears
         $media
@@ -30,7 +30,7 @@ final class MediaDetailViewModel: ObservableObject {
                     Self.relatedMediasPublisher(for: media, from: self?.mediaData ?? .empty)
                 )
                 .map { action, relatedMedias in
-                    return MediaData(media: media, watchLaterAllowedAction: action, relatedMedias: relatedMedias)
+                    MediaData(media: media, watchLaterAllowedAction: action, relatedMedias: relatedMedias)
                 }
                 .eraseToAnyPublisher()
             }
@@ -38,41 +38,40 @@ final class MediaDetailViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .assign(to: &$mediaData)
     }
-    
+
     var showTitle: String? {
         if let showTitle = media?.show?.title, showTitle.lowercased() != media?.title.lowercased() {
-            return showTitle
-        }
-        else {
-            return nil
+            showTitle
+        } else {
+            nil
         }
     }
-    
+
     var youthProtectionColor: SRGYouthProtectionColor? {
         let youthProtectionColor = media?.youthProtectionColor
         return youthProtectionColor != SRGYouthProtectionColor.none ? youthProtectionColor : nil
     }
-    
+
     var imageUrl: URL? {
-        return url(for: media?.image, size: .large)
+        url(for: media?.image, size: .large)
     }
-    
+
     var watchLaterAllowedAction: WatchLaterAction {
-        return mediaData.watchLaterAllowedAction
+        mediaData.watchLaterAllowedAction
     }
-    
+
     var relatedMedias: [SRGMedia] {
-        return mediaData.relatedMedias
+        mediaData.relatedMedias
     }
-    
+
     func toggleWatchLater() {
         guard let media else { return }
         WatchLaterToggleMedia(media) { added, error in
             guard error == nil else { return }
-            
+
             let action = added ? .add : .remove as AnalyticsListAction
             AnalyticsEvent.watchLater(action: action, source: .button, urn: media.urn).send()
-            
+
             self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, relatedMedias: self.mediaData.relatedMedias)
         }
     }
@@ -89,7 +88,7 @@ extension MediaDetailViewModel {
             .map(\.data)
             .decode(type: Recommendation.self, decoder: JSONDecoder())
             .map { recommendation in
-                return SRGDataProvider.current!.medias(withUrns: recommendation.urns)
+                SRGDataProvider.current!.medias(withUrns: recommendation.urns)
             }
             .switchToLatest()
             .replaceError(with: [])
@@ -105,7 +104,7 @@ extension MediaDetailViewModel {
         let media: SRGMedia?
         let watchLaterAllowedAction: WatchLaterAction
         let relatedMedias: [SRGMedia]
-        
+
         static var empty = Self(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
     }
 }

@@ -14,9 +14,9 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
     let section: Section
     /// Items contained within the section.
     let items: [Item]
-    
+
     var isEmpty: Bool {
-        return items.isEmpty
+        items.isEmpty
     }
 }
 
@@ -28,7 +28,7 @@ struct NonEmptyCollectionRow<Section: Hashable, Item: Hashable>: Hashable {
     let section: Section
     /// Items contained within the section.
     let items: [Item]
-    
+
     init?(section: Section, items: [Item]) {
         guard !items.isEmpty else { return nil }
         self.section = section

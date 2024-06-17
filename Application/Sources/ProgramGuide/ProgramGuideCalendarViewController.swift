@@ -10,25 +10,26 @@ import Foundation
 
 final class ProgramGuideCalendarViewController: UIViewController {
     private let model: ProgramGuideViewModel
-    
+
     private weak var calendarView: HostView<CalendarView>!
-    
+
     init(model: ProgramGuideViewModel) {
         self.model = model
         super.init(nibName: nil, bundle: nil)
-        
+
         modalPresentationStyle = .overFullScreen
         modalTransitionStyle = .crossDissolve
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .clear
-        
+
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         view.addSubview(blurEffectView)
@@ -40,11 +41,11 @@ final class ProgramGuideCalendarViewController: UIViewController {
             blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
+
         let calendarView = HostView<CalendarView>()
         view.addSubview(calendarView)
         self.calendarView = calendarView
-        
+
         calendarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -52,10 +53,10 @@ final class ProgramGuideCalendarViewController: UIViewController {
             calendarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             calendarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-        
+
         self.view = view
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         calendarView.content = CalendarView(model: model)

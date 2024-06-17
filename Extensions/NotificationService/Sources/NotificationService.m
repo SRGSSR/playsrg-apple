@@ -44,14 +44,14 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler
 {
     UNNotificationContent *notificationContent = request.content;
-    
+
     // Keep references for expiration method implementation
     self.notificationContent = notificationContent;
     self.contentHandler = contentHandler;
-    
+
     UserNotification *notification = [[UserNotification alloc] initWithRequest:request];
     [UserNotification saveNotification:notification read:NO];
-    
+
     self.downloadTask = [self imageDownloadTaskForNotification:notification content:notificationContent withContentHandler:contentHandler];
     [self.downloadTask resume];
 }
@@ -69,38 +69,38 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
                                             withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler
 {
     NSParameterAssert(contentHandler);
-    
+
     NSURL *scaledImageURL = [self.dataProvider URLForImage:notification.image withSize:SRGImageSizeMedium];
     if (! scaledImageURL) {
         contentHandler(content);
         return nil;
     }
-    
+
     return [[NSURLSession sharedSession] downloadTaskWithURL:scaledImageURL completionHandler:^(NSURL *temporaryFileURL, NSURLResponse *response, NSError *error) {
         if (error) {
             contentHandler(content);
             return;
         }
-        
+
         NSString *MIMEType = response.MIMEType;
         if (! MIMEType) {
             contentHandler(content);
             return;
         }
-        
+
         NSString *UTI = NotificationServiceUTIFromMIMEType(MIMEType);
         if (! UTI) {
             contentHandler(content);
             return;
         }
-        
+
         NSDictionary *options = @{ UNNotificationAttachmentOptionsTypeHintKey : UTI };
         UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:@"" URL:temporaryFileURL options:options error:NULL];
         if (! attachment) {
             contentHandler(content);
             return;
         }
-        
+
         UNMutableNotificationContent *mutableContent = content.mutableCopy;
         mutableContent.attachments = @[attachment];
         contentHandler(mutableContent.copy);

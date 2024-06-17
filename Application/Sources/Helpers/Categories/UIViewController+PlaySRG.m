@@ -202,8 +202,8 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
         letterboxController.playbackTransitionDelegate = playlist;
         
         if ([letterboxController.media isEqual:media] && letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
-                && letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
-                && letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
+            && letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
+            && letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             [letterboxController seekToPosition:position withCompletionHandler:^(BOOL finished) {
                 [letterboxController play];
             }];

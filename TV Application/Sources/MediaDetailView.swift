@@ -13,14 +13,14 @@ import SwiftUI
 struct MediaDetailView: View {
     @Binding var media: SRGMedia?
     @StateObject private var model = MediaDetailViewModel()
-    
+
     private let playAnalyticsClickEvent: AnalyticsClickEvent?
-    
+
     init(media: SRGMedia?, playAnalyticsClickEvent: AnalyticsClickEvent? = nil) {
         _media = .constant(media)
         self.playAnalyticsClickEvent = playAnalyticsClickEvent
     }
-    
+
     var body: some View {
         ZStack {
             ImageView(source: model.imageUrl)
@@ -49,11 +49,11 @@ struct MediaDetailView: View {
         .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.detail.rawValue, levels: analyticsPageLevels)
         .redactedIfNil(media)
     }
-    
+
     private struct DescriptionView: View {
         @ObservedObject var model: MediaDetailViewModel
         @Namespace private var namespace
-        
+
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
@@ -87,25 +87,25 @@ struct MediaDetailView: View {
             .focusable()
         }
     }
-    
+
     private struct AvailabilityView: View {
         @ObservedObject var model: MediaDetailViewModel
-        
+
         private var availabilityInformation: String {
             guard let media = model.media else { return .placeholder(length: 15) }
             return MediaDescription.availability(for: media)
         }
-        
+
         private var availabilityInformationAccessibilityLabel: String? {
             guard let media = model.media else { return nil }
             return MediaDescription.availabilityAccessibilityLabel(for: media)
         }
-        
+
         private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
             guard let media = model.media else { return nil }
             return MediaDescription.availabilityBadgeProperties(for: media)
         }
-        
+
         var body: some View {
             HStack(spacing: 20) {
                 if !availabilityInformation.isEmpty {
@@ -121,11 +121,11 @@ struct MediaDetailView: View {
             }
         }
     }
-    
+
     private struct AttributeView: View {
         let icon: ImageResource
         let values: [String]
-        
+
         var body: some View {
             HStack(spacing: 10) {
                 Image(icon)
@@ -136,10 +136,10 @@ struct MediaDetailView: View {
             }
         }
     }
-    
+
     private struct AttributesView: View {
         @ObservedObject var model: MediaDetailViewModel
-        
+
         var body: some View {
             HStack(spacing: 30) {
                 HStack(spacing: 4) {
@@ -159,10 +159,10 @@ struct MediaDetailView: View {
             }
         }
     }
-    
+
     private struct SummaryView: View {
         @ObservedObject var model: MediaDetailViewModel
-        
+
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
                 if let summary = model.media?.play_fullSummary {
@@ -174,20 +174,19 @@ struct MediaDetailView: View {
             }
         }
     }
-    
+
     private struct ActionsView: View {
         @ObservedObject var model: MediaDetailViewModel
-        
+
         var playButtonLabel: String {
             let progress = HistoryPlaybackProgressForMedia(model.media)
             if progress == 0 || progress == 1 {
                 return model.media?.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
-            }
-            else {
+            } else {
                 return NSLocalizedString("Resume", comment: "Resume playback button label")
             }
         }
-        
+
         var body: some View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
@@ -202,15 +201,15 @@ struct MediaDetailView: View {
                     let isRemoval = (model.watchLaterAllowedAction == .remove)
                     LabeledButton(icon: isRemoval ? .watchLaterFull : .watchLater,
                                   label: isRemoval
-                                    ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list")
-                                    : model.media?.mediaType == .audio
-                                    ? NSLocalizedString("Listen later", comment: "Button label in media detail view to add an audio to the later list")
-                                    : NSLocalizedString("Watch later", comment: "Button label in media detail view to add a video to the later list"),
+                                      ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list")
+                                      : model.media?.mediaType == .audio
+                                      ? NSLocalizedString("Listen later", comment: "Button label in media detail view to add an audio to the later list")
+                                      : NSLocalizedString("Watch later", comment: "Button label in media detail view to add a video to the later list"),
                                   accessibilityLabel: isRemoval
-                                    ? PlaySRGAccessibilityLocalizedString("Delete from \"Later\" list", comment: "Media deletion from later list label in the media detail view when a media is in the later list")
-                                    : model.media?.mediaType == .audio
-                                    ? PlaySRGAccessibilityLocalizedString("Listen later", comment: "Media addition to later list label in media detail view to add an audio to the later list")
-                                    : PlaySRGAccessibilityLocalizedString("Watch later", comment: "Media addition to later list label in media detail view to add a video to the later list")) {
+                                      ? PlaySRGAccessibilityLocalizedString("Delete from \"Later\" list", comment: "Media deletion from later list label in the media detail view when a media is in the later list")
+                                      : model.media?.mediaType == .audio
+                                      ? PlaySRGAccessibilityLocalizedString("Listen later", comment: "Media addition to later list label in media detail view to add an audio to the later list")
+                                      : PlaySRGAccessibilityLocalizedString("Watch later", comment: "Media addition to later list label in media detail view to add a video to the later list")) {
                         model.toggleWatchLater()
                     }
                 }
@@ -222,10 +221,10 @@ struct MediaDetailView: View {
             }
         }
     }
-    
+
     private struct RelatedMediasView: View {
         @ObservedObject var model: MediaDetailViewModel
-        
+
         var body: some View {
             ZStack {
                 if !model.relatedMedias.isEmpty {
@@ -258,8 +257,7 @@ struct MediaDetailView: View {
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     Color.clear
                 }
             }
@@ -269,11 +267,11 @@ struct MediaDetailView: View {
 
 extension MediaDetailView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.media.rawValue
+        AnalyticsPageTitle.media.rawValue
     }
-    
+
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue]
+        [AnalyticsPageLevel.play.rawValue]
     }
 }
 

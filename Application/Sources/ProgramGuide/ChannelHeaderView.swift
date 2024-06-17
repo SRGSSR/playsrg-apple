@@ -12,11 +12,11 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct ChannelHeaderView: View {
     let channel: SRGChannel
-    
+
     private var imageUrl: URL? {
-        return url(for: channel.rawImage, size: .small)
+        url(for: channel.rawImage, size: .small)
     }
-    
+
     var body: some View {
         Group {
             if let imageUrl {
@@ -25,13 +25,11 @@ struct ChannelHeaderView: View {
                         image
                             .resizingMode(.aspectFit)
                             .frame(maxWidth: 50, maxHeight: 50)
-                    }
-                    else {
+                    } else {
                         TitleView(channel: channel)
                     }
                 }
-            }
-            else {
+            } else {
                 TitleView(channel: channel)
             }
         }
@@ -45,10 +43,10 @@ struct ChannelHeaderView: View {
         )
         .accessibilityHidden(true)
     }
-    
+
     private struct TitleView: View {
         let channel: SRGChannel
-        
+
         var body: some View {
             Text(channel.title)
                 .srgFont(.body)

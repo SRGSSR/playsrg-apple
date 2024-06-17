@@ -19,7 +19,7 @@ extension DateFormatter {
         dateFormatter.timeStyle = .short
         return dateFormatter
     }()
-    
+
     /**
      *  Absolute short date formatting.
      *
@@ -32,7 +32,7 @@ extension DateFormatter {
         dateFormatter.timeStyle = .none
         return dateFormatter
     }()
-    
+
     /**
      *  Absolute date and time short formatting.
      *
@@ -45,7 +45,7 @@ extension DateFormatter {
         dateFormatter.timeStyle = .short
         return dateFormatter
     }()
-    
+
     /**
      *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
      *
@@ -59,7 +59,7 @@ extension DateFormatter {
         dateFormatter.doesRelativeDateFormatting = true
         return dateFormatter
     }()
-    
+
     /**
      *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
      *  the date in a long format.
@@ -74,7 +74,7 @@ extension DateFormatter {
         dateFormatter.doesRelativeDateFormatting = true
         return dateFormatter
     }()
-    
+
     /**
      *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
      *  the date in a full format.
@@ -89,7 +89,7 @@ extension DateFormatter {
         dateFormatter.doesRelativeDateFormatting = true
         return dateFormatter
     }()
-    
+
     /**
      *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
      *  the date in a short format.
@@ -104,7 +104,7 @@ extension DateFormatter {
         dateFormatter.doesRelativeDateFormatting = true
         return dateFormatter
     }()
-    
+
     /**
      *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
      *  the date in a short format and time in a short format.
@@ -119,7 +119,7 @@ extension DateFormatter {
         dateFormatter.doesRelativeDateFormatting = true
         return dateFormatter
     }()
-    
+
     /**
      *  ISO 8601 calendar date formatter.
      */
@@ -129,7 +129,7 @@ extension DateFormatter {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter
     }()
-    
+
     /**
      *  RFC 3339 date formatter.
      */

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Call to display the standard "web first" badge.
-*/
+ */
 - (void)play_setWebFirstBadge;
 
 @end

@@ -12,7 +12,7 @@ import SRGLetterbox
 
 final class CarPlayPlaybackSpeedController {
     private var cancellables = Set<AnyCancellable>()
-    
+
     private static func sections(template: CPListTemplate?) -> [CPListSection] {
         guard let controller = SRGLetterboxService.shared.controller else { return [] }
         let items = controller.supportedPlaybackRates
@@ -34,10 +34,10 @@ final class CarPlayPlaybackSpeedController {
             }
         return [CPListSection(items: items)]
     }
-    
+
     init(template: CPListTemplate) {
         template.emptyViewSubtitleVariants = [NSLocalizedString("No content", comment: "Default text displayed when no content is available")]
-        
+
         if let controller = SRGLetterboxService.shared.controller {
             Self.playbackRateChangeSignal(for: controller)
                 .sink { [weak template] _ in
@@ -46,23 +46,22 @@ final class CarPlayPlaybackSpeedController {
                 .store(in: &cancellables)
         }
     }
-    
+
     private static func text(forPlaybackRate playbackRate: Float, controller: SRGLetterboxController) -> String {
         let effectivePlaybackRate = controller.effectivePlaybackRate
-        if playbackRate == controller.playbackRate && playbackRate != effectivePlaybackRate {
+        if playbackRate == controller.playbackRate, playbackRate != effectivePlaybackRate {
             return String(format: NSLocalizedString("%1$@× (Currently: %2$@×)", comment: "Speed factor with current value if different from desired one"), playbackRate.minimalRepresentation, effectivePlaybackRate.minimalRepresentation)
-        }
-        else {
+        } else {
             return String(format: NSLocalizedString("%@×", comment: "Speed factor"), playbackRate.minimalRepresentation)
         }
     }
-    
+
     private static func accessoryImage(forPlaybackRate playbackRate: Float, controller: SRGLetterboxController) -> UIImage? {
-        return playbackRate == controller.playbackRate ? UIImage(systemName: "checkmark") : nil
+        playbackRate == controller.playbackRate ? UIImage(systemName: "checkmark") : nil
     }
-    
+
     private static func playbackRateChangeSignal(for controller: SRGLetterboxController) -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        Publishers.Merge(
             controller.publisher(for: \.playbackRate),
             controller.publisher(for: \.effectivePlaybackRate)
         )
@@ -74,11 +73,11 @@ final class CarPlayPlaybackSpeedController {
 // MARK: Protocols
 
 extension CarPlayPlaybackSpeedController: CarPlayTemplateController {
-    func willAppear(animated: Bool) {}
-    
-    func didAppear(animated: Bool) {}
-    
-    func willDisappear(animated: Bool) {}
-    
-    func didDisappear(animated: Bool) {}
+    func willAppear(animated _: Bool) {}
+
+    func didAppear(animated _: Bool) {}
+
+    func willDisappear(animated _: Bool) {}
+
+    func didDisappear(animated _: Bool) {}
 }

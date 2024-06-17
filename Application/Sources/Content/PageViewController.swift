@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 #if os(iOS)
-import GoogleCast
+    import GoogleCast
 #endif
 
 // MARK: View controller
@@ -18,32 +18,32 @@ import GoogleCast
 final class PageViewController: UIViewController {
     private let model: PageViewModel
     private let fromPushNotification: Bool
-    
+
     private var cancellables = Set<AnyCancellable>()
-    
+
     private var dataSource: UICollectionViewDiffableDataSource<PageViewModel.Section, PageViewModel.Item>!
-    
+
     private weak var collectionView: UICollectionView!
     private weak var emptyContentView: HostView<EmptyContentView>!
     private weak var topicGradientView: HostView<TopicGradientView>!
     private weak var topicGradientViewFixTopAnchor: NSLayoutConstraint!
     private weak var topicGradientViewStickyTopAnchor: NSLayoutConstraint!
     private weak var topicGradientViewHeightAnchor: NSLayoutConstraint!
-    
-#if os(iOS)
-    private weak var refreshControl: UIRefreshControl!
-    private weak var googleCastButton: GoogleCastFloatingButton?
-    
-    private var isNavigationBarHidden: Bool {
-        return model.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
-    }
-    
-    private var refreshTriggered = false
-    private var headerWithTitleVisible = false
-#endif
-    
+
+    #if os(iOS)
+        private weak var refreshControl: UIRefreshControl!
+        private weak var googleCastButton: GoogleCastFloatingButton?
+
+        private var isNavigationBarHidden: Bool {
+            model.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+        }
+
+        private var refreshTriggered = false
+        private var headerWithTitleVisible = false
+    #endif
+
     private var analyticsPageViewTracked = false
-    
+
     private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item>()
         if case let .loaded(rows: rows, _) = state {
@@ -54,55 +54,53 @@ final class PageViewController: UIViewController {
         }
         return snapshot
     }
-    
-#if os(iOS)
-    private static func showByDateViewController(radioChannel: RadioChannel?, date: Date?) -> UIViewController {
-        if let radioChannel {
-            return CalendarViewController(radioChannel: radioChannel, date: date)
+
+    #if os(iOS)
+        private static func showByDateViewController(radioChannel: RadioChannel?, date: Date?) -> UIViewController {
+            if let radioChannel {
+                CalendarViewController(radioChannel: radioChannel, date: date)
+            } else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
+                ProgramGuideViewController(date: date)
+            } else {
+                CalendarViewController(radioChannel: nil, date: date)
+            }
         }
-        else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
-            return ProgramGuideViewController(date: date)
-        }
-        else {
-            return CalendarViewController(radioChannel: nil, date: date)
-        }
-    }
-#endif
-    
+    #endif
+
     init(id: PageViewModel.Id, fromPushNotification: Bool = false) {
         model = PageViewModel(id: id)
         self.fromPushNotification = fromPushNotification
         super.init(nibName: nil, bundle: nil)
         title = id.title
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     var displayedShow: SRGShow? {
-        return model.displayedShow
+        model.displayedShow
     }
-    
+
     @objc var radioChannel: RadioChannel? {
         if case let .audio(channel: channel) = model.id {
-            return channel
-        }
-        else {
-            return nil
+            channel
+        } else {
+            nil
         }
     }
-    
+
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
-        
+
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout(for: model))
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
         self.collectionView = collectionView
-        
+
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -110,20 +108,20 @@ final class PageViewController: UIViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
-#if os(iOS)
-        if #available(iOS 17.0, *) {
-            collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: CollectionView, _) in
-                collectionView.collectionViewLayout.invalidateLayout()
-                
-                self.updateLayoutConfiguration()
-                self.updateTopicGradientLayout()
+
+        #if os(iOS)
+            if #available(iOS 17.0, *) {
+                collectionView.registerForTraitChanges([UITraitHorizontalSizeClass.self]) { (collectionView: CollectionView, _) in
+                    collectionView.collectionViewLayout.invalidateLayout()
+
+                    self.updateLayoutConfiguration()
+                    self.updateTopicGradientLayout()
+                }
             }
-        }
-#endif
+        #endif
         let backgroundView = UIView(frame: .zero)
         collectionView.backgroundView = backgroundView
-        
+
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -131,17 +129,17 @@ final class PageViewController: UIViewController {
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
+
         let topicGradientView = HostView<TopicGradientView>(frame: .zero)
         backgroundView.addSubview(topicGradientView)
         self.topicGradientView = topicGradientView
-        
+
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
-        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
+        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */ )
         topicGradientViewFixTopAnchor.priority = .defaultHigh
-        let topicGradientViewStickyTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */)
+        let topicGradientViewStickyTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */ )
         topicGradientViewStickyTopAnchor.priority = .defaultLow
-        let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: 0 /* set in updateTopicGradientLayout() */)
+        let topicGradientViewHeightAnchor = topicGradientView.heightAnchor.constraint(equalToConstant: 0 /* set in updateTopicGradientLayout() */ )
         NSLayoutConstraint.activate([
             topicGradientViewFixTopAnchor,
             topicGradientViewStickyTopAnchor,
@@ -152,11 +150,11 @@ final class PageViewController: UIViewController {
         self.topicGradientViewFixTopAnchor = topicGradientViewFixTopAnchor
         self.topicGradientViewStickyTopAnchor = topicGradientViewStickyTopAnchor
         self.topicGradientViewHeightAnchor = topicGradientViewHeightAnchor
-        
+
         let emptyContentView = HostView<EmptyContentView>(frame: .zero)
         backgroundView.addSubview(emptyContentView)
         self.emptyContentView = emptyContentView
-        
+
         emptyContentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             emptyContentView.topAnchor.constraint(equalTo: backgroundView.topAnchor),
@@ -164,70 +162,68 @@ final class PageViewController: UIViewController {
             emptyContentView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor),
             emptyContentView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor)
         ])
-        
-#if os(tvOS)
-        tabBarObservedScrollView = collectionView
-#else
-        let refreshControl = RefreshControl()
-        refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
-        collectionView.insertSubview(refreshControl, at: 0)
-        self.refreshControl = refreshControl
-#endif
+
+        #if os(tvOS)
+            tabBarObservedScrollView = collectionView
+        #else
+            let refreshControl = RefreshControl()
+            refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+            collectionView.insertSubview(refreshControl, at: 0)
+            self.refreshControl = refreshControl
+        #endif
         self.view = view
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-#if os(iOS)
-        navigationItem.largeTitleDisplayMode = model.isLargeTitleDisplayMode ? .always : .never
-        headerWithTitleVisible = model.isHeaderWithTitle
-#endif
-        
+
+        #if os(iOS)
+            navigationItem.largeTitleDisplayMode = model.isLargeTitleDisplayMode ? .always : .never
+            headerWithTitleVisible = model.isHeaderWithTitle
+        #endif
+
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
             cell.content = ItemCell(item: item, id: model.id, primaryColor: model.primaryColor, secondaryColor: model.secondaryColor)
         }
-        
+
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
-        
+
         let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
             view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).primaryColor(model.primaryColor)
         }
-        
+
         let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
             view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).primaryColor(model.primaryColor)
         }
-        
+
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self else { return }
             let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.primaryColor)
         }
-        
+
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == Header.titleHeader.rawValue {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
-            }
-            else if kind == Header.showHeader.rawValue {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
-            }
-            else {
-                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
+            } else if kind == Header.showHeader.rawValue {
+                collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
+            } else {
+                collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             }
         }
-        
+
         model.$state
             .sink { [weak self] state in
                 self?.trackPageView(state: state)
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
-        
+
         model.$displayedShow
             .dropFirst()
             .sink { [weak self] _ in
@@ -240,63 +236,63 @@ final class PageViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
-        
-#if os(iOS)
-        model.$serviceMessage
-            .sink { serviceMessage in
-                guard let serviceMessage else { return }
-                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true)
-            }
-            .store(in: &cancellables)
-        
-        NotificationCenter.default.weakPublisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
-            .sink { [weak self] _ in
-                guard let self, play_isViewCurrent else { return }
-                updateNavigationBar(animated: true)
-            }
-            .store(in: &cancellables)
-#endif
+
+        #if os(iOS)
+            model.$serviceMessage
+                .sink { serviceMessage in
+                    guard let serviceMessage else { return }
+                    Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true)
+                }
+                .store(in: &cancellables)
+
+            NotificationCenter.default.weakPublisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+                .sink { [weak self] _ in
+                    guard let self, play_isViewCurrent else { return }
+                    updateNavigationBar(animated: true)
+                }
+                .store(in: &cancellables)
+        #endif
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         updateLayoutConfiguration()
         updateTopicGradientLayout()
         model.reload()
         deselectItems(in: collectionView, animated: animated)
-#if os(iOS)
-        updateNavigationBar(animated: animated)
-#endif
+        #if os(iOS)
+            updateNavigationBar(animated: animated)
+        #endif
         userActivity = model.userActivity
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         userActivity = nil
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
+
         updateLayoutConfiguration()
         updateTopicGradientLayout()
     }
-    
+
     private func updateLayoutConfiguration() {
         // Update configuration supplementary views layouts (ie: show header layout).
         // Update configuration forces a collection view layout refresh. Updating only configuration.boundarySupplementaryItems does not.
-        if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
+        if let collectionViewLayout = collectionView.collectionViewLayout as? UICollectionViewCompositionalLayout {
             collectionViewLayout.configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
         }
     }
-    
+
     private func emptyViewEdgeInsets() -> EdgeInsets {
         let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
-        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+        let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map(\.layoutSize.heightDimension.dimension).reduce(0, +)
         return EdgeInsets(top: supplementaryItemsHeight, leading: 0, bottom: 0, trailing: 0)
     }
-    
+
     private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
@@ -306,97 +302,93 @@ final class PageViewController: UIViewController {
         case let .loaded(rows: rows, _):
             emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic), insets: emptyViewEdgeInsets()) : nil
         }
-        
+
         if let topic = model.displayedGradientTopic, let style = model.displayedGradientTopicStyle {
-            self.topicGradientView.content = TopicGradientView(topic, style: style)
+            topicGradientView.content = TopicGradientView(topic, style: style)
+        } else {
+            topicGradientView.content = nil
         }
-        else {
-            self.topicGradientView.content = nil
-        }
-        
+
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
-#if os(iOS)
-                // Avoid stopping scrolling
-                // See http://stackoverflow.com/a/31681037/760435
-                if self.refreshControl.isRefreshing {
-                    self.refreshControl.endRefreshing()
+                #if os(iOS)
+                    // Avoid stopping scrolling
+                    // See http://stackoverflow.com/a/31681037/760435
+                    if self.refreshControl.isRefreshing {
+                        self.refreshControl.endRefreshing()
+                    }
+                #endif
+            }
+        }
+    }
+
+    #if os(iOS)
+        private func updateNavigationBar(animated: Bool) {
+            if model.id.supportsCastButton {
+                if !isNavigationBarHidden, let navigationBar = navigationController?.navigationBar {
+                    googleCastButton?.removeFromSuperview()
+                    navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
+                } else if googleCastButton == nil {
+                    let googleCastButton = GoogleCastFloatingButton(frame: .zero)
+                    view.addSubview(googleCastButton)
+                    self.googleCastButton = googleCastButton
+
+                    // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
+                    // result (might be fragile but should be enough).
+                    let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
+                    NSLayoutConstraint.activate([
+                        googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
+                        googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+                    ])
                 }
-#endif
+            } else {
+                googleCastButton?.removeFromSuperview()
+            }
+
+            navigationItem.title = !headerWithTitleVisible ? title : nil
+            navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
+
+            if model.id.sharingItem != nil {
+                let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
+                                                      style: .plain,
+                                                      target: self,
+                                                      action: #selector(shareContent(_:)))
+                shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on content page view")
+                navigationItem.rightBarButtonItem = shareButtonItem
+            } else {
+                navigationItem.rightBarButtonItem = nil
             }
         }
-    }
-    
-#if os(iOS)
-    private func updateNavigationBar(animated: Bool) {
-        if model.id.supportsCastButton {
-            if !isNavigationBarHidden, let navigationBar = navigationController?.navigationBar {
-                self.googleCastButton?.removeFromSuperview()
-                navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
+
+        @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
+            if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
             }
-            else if self.googleCastButton == nil {
-                let googleCastButton = GoogleCastFloatingButton(frame: .zero)
-                view.addSubview(googleCastButton)
-                self.googleCastButton = googleCastButton
-                
-                // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
-                // result (might be fragile but should be enough).
-                let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
-                NSLayoutConstraint.activate([
-                    googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
-                    googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
-                ])
-            }
+            refreshTriggered = true
         }
-        else {
-            self.googleCastButton?.removeFromSuperview()
+
+        @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
+            guard let sharingItem = model.id.sharingItem else { return }
+
+            let activityViewController = UIActivityViewController(sharingItem: sharingItem, from: .button)
+            activityViewController.modalPresentationStyle = .popover
+
+            let popoverPresentationController = activityViewController.popoverPresentationController
+            popoverPresentationController?.barButtonItem = barButtonItem
+
+            present(activityViewController, animated: true, completion: nil)
         }
-        
-        navigationItem.title = !headerWithTitleVisible ? title : nil
-        navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
-        
-        if model.id.sharingItem != nil {
-            let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
-                                                  style: .plain,
-                                                  target: self,
-                                                  action: #selector(self.shareContent(_:)))
-            shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on content page view")
-            navigationItem.rightBarButtonItem = shareButtonItem
-        }
-        else {
-            navigationItem.rightBarButtonItem = nil
-        }
-    }
-    
-    @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
-        if refreshControl.isRefreshing {
-            refreshControl.endRefreshing()
-        }
-        refreshTriggered = true
-    }
-    
-    @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
-        guard let sharingItem = model.id.sharingItem else { return }
-        
-        let activityViewController = UIActivityViewController(sharingItem: sharingItem, from: .button)
-        activityViewController.modalPresentationStyle = .popover
-        
-        let popoverPresentationController = activityViewController.popoverPresentationController
-        popoverPresentationController?.barButtonItem = barButtonItem
-        
-        self.present(activityViewController, animated: true, completion: nil)
-    }
-#endif
-    
+    #endif
+
     private func trackPageView(state: PageViewModel.State) {
         switch state {
         case .loading:
             break
         case let .failed(_, pageUid), let .loaded(_, pageUid):
-            guard !self.analyticsPageViewTracked else { return }
-            self.analyticsPageViewTracked = true
-            
+            guard !analyticsPageViewTracked else { return }
+            analyticsPageViewTracked = true
+
             SRGAnalyticsTracker.shared.trackPageView(withTitle: model.id.analyticsPageViewTitle,
                                                      type: model.id.analyticsPageViewType,
                                                      levels: model.id.analyticsPageViewLevels,
@@ -413,43 +405,43 @@ private extension PageViewController {
         case titleHeader
         case showHeader
     }
-    
-#if os(iOS)
-    private typealias CollectionView = DampedCollectionView
-#else
-    private typealias CollectionView = UICollectionView
-#endif
+
+    #if os(iOS)
+        private typealias CollectionView = DampedCollectionView
+    #else
+        private typealias CollectionView = UICollectionView
+    #endif
 }
 
 // MARK: Objective-C API
 
 extension PageViewController {
     @objc static func videosViewController() -> PageViewController {
-        return PageViewController(id: .video)
+        PageViewController(id: .video)
     }
-    
+
     @objc static func audiosViewController() -> PageViewController {
-        return PageViewController(id: .audio(channel: nil))
+        PageViewController(id: .audio(channel: nil))
     }
-    
+
     @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> PageViewController {
-        return PageViewController(id: .audio(channel: channel))
+        PageViewController(id: .audio(channel: channel))
     }
-    
+
     @objc static func liveViewController() -> PageViewController {
-        return PageViewController(id: .live)
+        PageViewController(id: .live)
     }
-    
+
     @objc static func topicViewController(for topic: SRGTopic) -> PageViewController {
-        return PageViewController(id: .topic(topic))
+        PageViewController(id: .topic(topic))
     }
-    
+
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> PageViewController {
-        return PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
+        PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
     }
-    
+
     @objc static func pageViewController(for page: SRGContentPage) -> PageViewController {
-        return PageViewController(id: .page(page))
+        PageViewController(id: .page(page))
     }
 }
 
@@ -457,279 +449,278 @@ extension PageViewController {
 
 extension PageViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
-        return collectionView != nil ? [collectionView] : nil
+        collectionView != nil ? [collectionView] : nil
     }
-    
+
     var play_paddingContentInsets: UIEdgeInsets {
-#if os(iOS)
-        let top = (isNavigationBarHidden || model.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
-#else
-        let top = Self.layoutVerticalMargin
-#endif
+        #if os(iOS)
+            let top = (isNavigationBarHidden || model.isHeaderWithTitle) ? 0 : Self.layoutVerticalMargin
+        #else
+            let top = Self.layoutVerticalMargin
+        #endif
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
 #if os(iOS)
-extension PageViewController: Oriented {
-}
+    extension PageViewController: Oriented {}
 #endif
 
 extension PageViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
-        return collectionView
+        collectionView
     }
 }
 
 extension PageViewController: UICollectionViewDelegate {
-#if os(iOS)
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let snapshot = dataSource.snapshot()
-        let section = snapshot.sectionIdentifiers[indexPath.section]
-        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
-        
-        switch item.wrappedValue {
-        case let .item(wrappedItem):
-            switch wrappedItem {
-            case let .media(media):
-                play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            case let .show(show):
-                if let navigationController {
-                    let pageViewController = PageViewController(id: .show(show))
-                    navigationController.pushViewController(pageViewController, animated: true)
-                }
-            case let .topic(topic):
-                if let navigationController {
-                    let pageViewController = PageViewController(id: .topic(topic))
-                    navigationController.pushViewController(pageViewController, animated: true)
-                }
-            case let .highlight(_, highlightedItem):
-                if let navigationController {
-                    if case let .show(show) = highlightedItem {
+    #if os(iOS)
+        func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let snapshot = dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+
+            switch item.wrappedValue {
+            case let .item(wrappedItem):
+                switch wrappedItem {
+                case let .media(media):
+                    play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                case let .show(show):
+                    if let navigationController {
                         let pageViewController = PageViewController(id: .show(show))
                         navigationController.pushViewController(pageViewController, animated: true)
                     }
-                    else {
-                        let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
-                        navigationController.pushViewController(sectionViewController, animated: true)
+                case let .topic(topic):
+                    if let navigationController {
+                        let pageViewController = PageViewController(id: .topic(topic))
+                        navigationController.pushViewController(pageViewController, animated: true)
                     }
+                case let .highlight(_, highlightedItem):
+                    if let navigationController {
+                        if case let .show(show) = highlightedItem {
+                            let pageViewController = PageViewController(id: .show(show))
+                            navigationController.pushViewController(pageViewController, animated: true)
+                        } else {
+                            let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                            navigationController.pushViewController(sectionViewController, animated: true)
+                        }
+                    }
+                default:
+                    ()
                 }
+            case .more:
+                if let navigationController {
+                    let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                    navigationController.pushViewController(sectionViewController, animated: true)
+                }
+            }
+        }
+
+        func collectionView(_: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point _: CGPoint) -> UIContextMenuConfiguration? {
+            let snapshot = dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+
+            switch item.wrappedValue {
+            case let .item(wrappedItem):
+                return ContextMenu.configuration(for: wrappedItem, at: indexPath, in: self)
             default:
-                ()
-            }
-        case .more:
-            if let navigationController {
-                let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
-                navigationController.pushViewController(sectionViewController, animated: true)
+                return nil
             }
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let snapshot = dataSource.snapshot()
-        let section = snapshot.sectionIdentifiers[indexPath.section]
-        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
-        
-        switch item.wrappedValue {
-        case let .item(wrappedItem):
-            return ContextMenu.configuration(for: wrappedItem, at: indexPath, in: self)
-        default:
-            return nil
+
+        func collectionView(_: UICollectionView, willPerformPreviewActionForMenuWith _: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+            ContextMenu.commitPreview(in: self, animator: animator)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
-        ContextMenu.commitPreview(in: self, animator: animator)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return preview(for: configuration, in: collectionView)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        return preview(for: configuration, in: collectionView)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        switch elementKind {
-        case Header.showHeader.rawValue, Header.titleHeader.rawValue:
-            headerWithTitleVisible = true
-            updateNavigationBar(animated: true)
-        default:
-            break
+
+        func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+            preview(for: configuration, in: collectionView)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
-        switch elementKind {
-        case Header.showHeader.rawValue, Header.titleHeader.rawValue:
-            headerWithTitleVisible = false
-            updateNavigationBar(animated: true)
-        default:
-            break
+
+        func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+            preview(for: configuration, in: collectionView)
         }
-    }
-    
-    private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
-        guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
-        let parameters = UIPreviewParameters()
-        parameters.backgroundColor = view.backgroundColor
-        return UITargetedPreview(view: interactionView, parameters: parameters)
-    }
-#endif
-    
-#if os(tvOS)
-    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-#endif
+
+        func collectionView(_: UICollectionView, willDisplaySupplementaryView _: UICollectionReusableView, forElementKind elementKind: String, at _: IndexPath) {
+            switch elementKind {
+            case Header.showHeader.rawValue, Header.titleHeader.rawValue:
+                headerWithTitleVisible = true
+                updateNavigationBar(animated: true)
+            default:
+                break
+            }
+        }
+
+        func collectionView(_: UICollectionView, didEndDisplayingSupplementaryView _: UICollectionReusableView, forElementOfKind elementKind: String, at _: IndexPath) {
+            switch elementKind {
+            case Header.showHeader.rawValue, Header.titleHeader.rawValue:
+                headerWithTitleVisible = false
+                updateNavigationBar(animated: true)
+            default:
+                break
+            }
+        }
+
+        private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
+            guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
+            let parameters = UIPreviewParameters()
+            parameters.backgroundColor = view.backgroundColor
+            return UITargetedPreview(view: interactionView, parameters: parameters)
+        }
+    #endif
+
+    #if os(tvOS)
+        func collectionView(_: UICollectionView, canFocusItemAt _: IndexPath) -> Bool {
+            false
+        }
+    #endif
 }
 
 extension PageViewController: UIScrollViewDelegate {
-#if os(iOS)
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
-        if refreshTriggered {
-            model.reload(deep: true)
-            refreshTriggered = false
+    #if os(iOS)
+        func scrollViewDidEndDecelerating(_: UIScrollView) {
+            // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
+            if refreshTriggered {
+                model.reload(deep: true)
+                refreshTriggered = false
+            }
         }
-    }
-    
-    // The system default behavior does not lead to correct results when large titles are displayed. Override.
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        scrollView.play_scrollToTop(animated: true)
-        return false
-    }
-#endif
-    
+
+        // The system default behavior does not lead to correct results when large titles are displayed. Override.
+        func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+            scrollView.play_scrollToTop(animated: true)
+            return false
+        }
+    #endif
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.contentSize.height > 0 else { return }
-        
+
         let numberOfScreens = 4
         if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
             model.loadMore()
         }
-        
-#if os(iOS)
-        if isShowHeaderVerticalLayout {
-            topicGradientViewStickyTopAnchor.constant = showPageStickyTopAnchorConstant
-        }
-#endif
+
+        #if os(iOS)
+            if isShowHeaderVerticalLayout {
+                topicGradientViewStickyTopAnchor.constant = showPageStickyTopAnchorConstant
+            }
+        #endif
     }
 }
 
 #if os(iOS)
 
-extension PageViewController: PlayApplicationNavigation {
-    func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {
-        guard radioChannel === applicationSectionInfo.radioChannel || radioChannel == applicationSectionInfo.radioChannel else { return false }
-        
-        switch applicationSectionInfo.applicationSection {
-        case .showByDate:
-            let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
-            if let navigationController {
-                let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: date)
-                navigationController.pushViewController(showByDateViewController, animated: false)
-            }
-            return true
-        case .showAZ:
-            if let navigationController {
-                let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid, initialSectionId: initialSectionId)
-                navigationController.pushViewController(showsViewController, animated: false)
-            }
-            return true
-        default:
-            switch self.model.id {
-            case .live:
-                return applicationSectionInfo.applicationSection == .live
-            default:
-                return applicationSectionInfo.applicationSection == .overview
-            }
-        }
-    }
-}
+    extension PageViewController: PlayApplicationNavigation {
+        func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {
+            guard radioChannel === applicationSectionInfo.radioChannel || radioChannel == applicationSectionInfo.radioChannel else { return false }
 
-extension PageViewController: ShowAccessCellActions {
-    func openShowAZ() {
-        if let navigationController {
-            let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
-            navigationController.pushViewController(showsViewController, animated: true)
-        }
-    }
-    
-    func openShowByDate() {
-        if let navigationController {
-            let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: nil)
-            navigationController.pushViewController(showByDateViewController, animated: true)
-        }
-    }
-}
-
-extension PageViewController: SectionHeaderViewAction {
-    fileprivate func openSection(sender: Any?, event: OpenSectionEvent?) {
-        if let event {
-            if let microPageId = event.section.wrappedValue.properties.openContentPageId {
-                openContentPage(id: microPageId)
-            } else {
-                openSectionPage(section: event.section, filter: model.id)
-            }
-        }
-    }
-    
-    private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
-        guard let navigationController else { return }
-        
-        let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
-        navigationController.pushViewController(sectionViewController, animated: true)
-    }
-    
-    private func openContentPage(id: String) {
-        guard let navigationController else { return }
-        
-        SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
-            .receive(on: DispatchQueue.main)
-            .sink { result in
-                if case .failure = result {
-                    let error = NSError(
-                        domain: PlayErrorDomain,
-                        code: PlayErrorCode.notFound.rawValue,
-                        userInfo: [
-                            NSLocalizedDescriptionKey: NSLocalizedString("The page cannot be opened.", comment: "Error message when a page cannot be opened from a page section title")
-                        ])
-                    Banner.showError(error)
+            switch applicationSectionInfo.applicationSection {
+            case .showByDate:
+                let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
+                if let navigationController {
+                    let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: date)
+                    navigationController.pushViewController(showByDateViewController, animated: false)
                 }
-            } receiveValue: { contentPage in
-                let pageViewController = PageViewController.pageViewController(for: contentPage)
-                navigationController.pushViewController(pageViewController, animated: true)
+                return true
+            case .showAZ:
+                if let navigationController {
+                    let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
+                    let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid, initialSectionId: initialSectionId)
+                    navigationController.pushViewController(showsViewController, animated: false)
+                }
+                return true
+            default:
+                switch model.id {
+                case .live:
+                    return applicationSectionInfo.applicationSection == .live
+                default:
+                    return applicationSectionInfo.applicationSection == .overview
+                }
             }
-            .store(in: &cancellables)
+        }
     }
-}
 
-extension PageViewController: TabBarActionable {
-    func performActiveTabAction(animated: Bool) {
-        collectionView?.play_scrollToTop(animated: animated)
+    extension PageViewController: ShowAccessCellActions {
+        func openShowAZ() {
+            if let navigationController {
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
+                navigationController.pushViewController(showsViewController, animated: true)
+            }
+        }
+
+        func openShowByDate() {
+            if let navigationController {
+                let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: nil)
+                navigationController.pushViewController(showByDateViewController, animated: true)
+            }
+        }
     }
-}
+
+    extension PageViewController: SectionHeaderViewAction {
+        fileprivate func openSection(sender _: Any?, event: OpenSectionEvent?) {
+            if let event {
+                if let microPageId = event.section.wrappedValue.properties.openContentPageId {
+                    openContentPage(id: microPageId)
+                } else {
+                    openSectionPage(section: event.section, filter: model.id)
+                }
+            }
+        }
+
+        private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
+            guard let navigationController else { return }
+
+            let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
+            navigationController.pushViewController(sectionViewController, animated: true)
+        }
+
+        private func openContentPage(id: String) {
+            guard let navigationController else { return }
+
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+                .receive(on: DispatchQueue.main)
+                .sink { result in
+                    if case .failure = result {
+                        let error = NSError(
+                            domain: PlayErrorDomain,
+                            code: PlayErrorCode.notFound.rawValue,
+                            userInfo: [
+                                NSLocalizedDescriptionKey: NSLocalizedString("The page cannot be opened.", comment: "Error message when a page cannot be opened from a page section title")
+                            ]
+                        )
+                        Banner.showError(error)
+                    }
+                } receiveValue: { contentPage in
+                    let pageViewController = PageViewController.pageViewController(for: contentPage)
+                    navigationController.pushViewController(pageViewController, animated: true)
+                }
+                .store(in: &cancellables)
+        }
+    }
+
+    extension PageViewController: TabBarActionable {
+        func performActiveTabAction(animated: Bool) {
+            collectionView?.play_scrollToTop(animated: animated)
+        }
+    }
 
 #endif
 
 extension PageViewController: ShowHeaderViewAction {
-    func showMore(sender: Any?, event: ShowMoreEvent?) {
+    func showMore(sender _: Any?, event: ShowMoreEvent?) {
         guard let event else { return }
-        
-#if os(iOS)
-        let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
-        if #available(iOS 15.0, *) {
-            if let sheet = sheetTextViewController.sheetPresentationController {
-                sheet.detents = [.medium()]
+
+        #if os(iOS)
+            let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
+            if #available(iOS 15.0, *) {
+                if let sheet = sheetTextViewController.sheetPresentationController {
+                    sheet.detents = [.medium()]
+                }
             }
-        }
-        present(sheetTextViewController, animated: true, completion: nil)
-#else
-        navigateToText(event.content)
-#endif
+            present(sheetTextViewController, animated: true, completion: nil)
+        #else
+            navigateToText(event.content)
+        #endif
     }
 }
 
@@ -741,198 +732,194 @@ private extension PageViewController {
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     private static let layoutHorizontalConfigurationViewMargin: CGFloat = constant(iOS: 0, tvOS: 8)
     private static let layoutTopicGradientViewHeight: CGFloat = 572
-    
+
     private static func layoutDisplayedTitleTopPadding(_ required: Bool) -> CGFloat {
-        return required ? layoutVerticalMargin * 2 : 0
+        required ? layoutVerticalMargin * 2 : 0
     }
-    
+
     private static func layoutConfiguration(model: PageViewModel, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass, offsetX: CGFloat) -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
-        
+
         if let title = model.displayedTitle {
             let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.displayedTitleDescription,
                                                                   topPadding: layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding), layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0)) ]
-        }
-        else if let show = model.displayedShow {
+            configuration.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0))]
+        } else if let show = model.displayedShow {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [ NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0)) ]
+            configuration.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0))]
         }
-        
+
         return configuration
     }
-    
+
     private func layout(for model: PageViewModel) -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
+        UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
-            
-            func sectionSupplementaryItems(for section: PageViewModel.Section, horizontalMargin: CGFloat) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+
+            func sectionSupplementaryItems(for section: PageViewModel.Section, horizontalMargin _: CGFloat) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
             }
-            
+
             func horizontalMargin(for section: PageViewModel.Section) -> CGFloat {
                 switch section.viewModelProperties.layout {
                 case .mediaList:
-#if os(iOS)
-                    return horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
-#else
-                    return Self.layoutHorizontalMargin
-#endif
+                    #if os(iOS)
+                        return horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
+                    #else
+                        return Self.layoutHorizontalMargin
+                    #endif
                 default:
                     return Self.layoutHorizontalMargin
                 }
             }
-            
+
             func layoutSection(for section: PageViewModel.Section) -> NSCollectionLayoutSection {
                 switch section.viewModelProperties.layout {
                 case .heroStage:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .highlight:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .headline:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .element:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .elementSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        return MediaCellSize.swimlane()
+                        MediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .liveMediaSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        return LiveMediaCellSize.swimlane()
+                        LiveMediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .showSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        return ShowCellSize.swimlane(for: section.properties.imageVariant)
+                        ShowCellSize.swimlane(for: section.properties.imageVariant)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .topicSelector:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        return TopicCellSize.swimlane()
+                        TopicCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                            return MediaCellSize.fullWidth()
+                            MediaCellSize.fullWidth()
                         }
-                    }
-                    else {
+                    } else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
+                            MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
+                        LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: section.properties.imageVariant, layoutWidth: layoutWidth, spacing: spacing)
+                        ShowCellSize.grid(for: section.properties.imageVariant, layoutWidth: layoutWidth, spacing: spacing)
                     }
-#if os(iOS)
-                case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        return ShowAccessCellSize.fullWidth()
-                    }
-#endif
+                #if os(iOS)
+                    case .showAccess:
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
+                            ShowAccessCellSize.fullWidth()
+                        }
+                #endif
                 case .mediaList:
-#if os(iOS)
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        return MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
-                    }
-#else
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
-                    }
-#endif
+                    #if os(iOS)
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
+                            MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                        }
+                    #else
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
+                            MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
+                        }
+                    #endif
                 }
             }
-            
+
             guard let self else { return nil }
-            
-            let snapshot = self.dataSource.snapshot()
+
+            let snapshot = dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
-            
+
             let layoutSection = layoutSection(for: section)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, horizontalMargin: horizontalMargin(for: section))
             return layoutSection
         }, configuration: Self.layoutConfiguration(model: model, layoutWidth: 0, horizontalSizeClass: .unspecified, offsetX: 0))
     }
-    
+
     private func updateTopicGradientLayout() {
         let topScreenOffset = constant(iOS: collectionView.safeAreaInsets.top, tvOS: 0)
-        
+
         if case .show = model.id {
             let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
-            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map { $0.layoutSize.heightDimension.dimension }.reduce(0, +)
+            let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map(\.layoutSize.heightDimension.dimension).reduce(0, +)
             let mediaCellHeight = MediaCellSize.height(horizontalSizeClass: traitCollection.horizontalSizeClass)
-            
+
             // Move the gradient view below the show image when displayed in compact horizontal size class
             if isShowHeaderVerticalLayout {
                 topicGradientViewFixTopAnchor.priority = .defaultLow
                 topicGradientViewStickyTopAnchor.priority = .defaultHigh
-                
+
                 topicGradientViewStickyTopAnchor.constant = showPageStickyTopAnchorConstant
                 let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
                 topicGradientViewHeightAnchor.constant = supplementaryItemsHeight - showImageOffset + mediaCellHeight
-            }
-            else {
+            } else {
                 topicGradientViewStickyTopAnchor.priority = .defaultLow
                 topicGradientViewFixTopAnchor.priority = .defaultHigh
-                
+
                 topicGradientViewFixTopAnchor.constant = topScreenOffset
                 topicGradientViewHeightAnchor.constant = supplementaryItemsHeight + mediaCellHeight
             }
-        }
-        else {
+        } else {
             topicGradientViewStickyTopAnchor.priority = .defaultLow
             topicGradientViewFixTopAnchor.priority = .defaultHigh
-            
+
             topicGradientViewFixTopAnchor.constant = topScreenOffset
             topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
         }
     }
-    
+
     private var showPageStickyTopAnchorConstant: CGFloat {
         let showImageOffset = view.safeAreaLayoutGuide.layoutFrame.width / ShowHeaderView.imageAspectRatio
         let topScreenOffset = constant(iOS: collectionView.safeAreaInsets.top, tvOS: 0)
         let offset = topScreenOffset + collectionView.contentOffset.y
         return (offset < showImageOffset) ? showImageOffset : offset
     }
-    
+
     private var isShowHeaderVerticalLayout: Bool {
         guard case .show = model.id else { return false }
-        
+
         return ShowHeaderView.isVerticalLayout(
             horizontalSizeClass: traitCollection.horizontalSizeClass,
             isLandscape: UIApplication.shared.mainWindow?.isLandscape ?? false
@@ -948,7 +935,7 @@ private extension PageViewController {
         let section: PageViewModel.Section
         let primaryColor: Color
         let secondaryColor: Color
-        
+
         var body: some View {
             switch section.viewModelProperties.layout {
             case .heroStage:
@@ -967,20 +954,20 @@ private extension PageViewController {
                 PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical).primaryColor(primaryColor).secondaryColor(secondaryColor)
             }
         }
-        
+
         private func haveSameShow(media: SRGMedia?, in section: PageViewModel.Section) -> Bool {
             guard let displayedShow = section.properties.displayedShow, let mediaShow = media?.show else { return false }
-            
+
             return displayedShow.isEqual(mediaShow)
         }
     }
-    
+
     struct ShowCell: View {
         let show: SRGShow?
         let section: PageViewModel.Section
         let primaryColor: Color
         let secondaryColor: Color
-        
+
         var body: some View {
             switch section.viewModelProperties.layout {
             case .heroStage, .headline:
@@ -992,13 +979,13 @@ private extension PageViewController {
             }
         }
     }
-    
+
     struct ItemCell: View {
         let item: PageViewModel.Item
         let id: PageViewModel.Id
         let primaryColor: Color
         let secondaryColor: Color
-        
+
         var body: some View {
             switch item.wrappedValue {
             case let .item(wrappedItem):
@@ -1015,20 +1002,20 @@ private extension PageViewController {
                     TopicCell(topic: nil)
                 case let .topic(topic):
                     TopicCell(topic: topic)
-#if os(iOS)
-                case let .download(download):
-                    DownloadCell(download: download)
-                case let .notification(notification):
-                    NotificationCell(notification: notification)
-                case .showAccess:
-                    switch id {
-                    case .video:
-                        let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
-                        ShowAccessCell(style: style).primaryColor(primaryColor)
-                    default:
-                        ShowAccessCell(style: .calendar).primaryColor(primaryColor)
-                    }
-#endif
+                #if os(iOS)
+                    case let .download(download):
+                        DownloadCell(download: download)
+                    case let .notification(notification):
+                        NotificationCell(notification: notification)
+                    case .showAccess:
+                        switch id {
+                        case .video:
+                            let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
+                            ShowAccessCell(style: style).primaryColor(primaryColor)
+                        default:
+                            ShowAccessCell(style: .calendar).primaryColor(primaryColor)
+                        }
+                #endif
                 case .highlightPlaceholder:
                     HighlightCell(highlight: nil, section: item.section.wrappedValue, item: nil, filter: id)
                 case let .highlight(highlight, highlightedItem):
@@ -1051,12 +1038,12 @@ private extension PageViewController {
 
 private class OpenSectionEvent: UIEvent {
     let section: PageViewModel.Section
-    
+
     init(section: PageViewModel.Section) {
         self.section = section
         super.init()
     }
-    
+
     override init() {
         fatalError("init() is not available")
     }
@@ -1066,54 +1053,53 @@ private extension PageViewController {
     private struct SectionHeaderView: View, PrimaryColorSettable {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
-        
-        internal var primaryColor: Color = .srgGrayD2
-        
+
+        var primaryColor: Color = .srgGrayD2
+
         @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
-        
+
         private static func title(for section: PageViewModel.Section) -> String? {
-            return section.properties.title
+            section.properties.title
         }
-        
+
         private static func subtitle(for section: PageViewModel.Section) -> String? {
-            return section.properties.summary
+            section.properties.summary
         }
-        
+
         private var hasDetailDisclosure: Bool {
-            return section.viewModelProperties.canOpenPage || isSectionWideSupportEnabled
+            section.viewModelProperties.canOpenPage || isSectionWideSupportEnabled
         }
-        
+
         var accessibilityLabel: String? {
-            return Self.title(for: section)
+            Self.title(for: section)
         }
-        
+
         var accessibilityHint: String? {
-            return hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", comment: "Homepage header action hint") : nil
+            hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", comment: "Homepage header action hint") : nil
         }
-        
+
         var body: some View {
             if section.properties.displaysRowHeader, let title = Self.title(for: section) {
-#if os(tvOS)
-                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false, primaryColor: primaryColor)
-#else
-                Button {
-                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
-                } label: {
-                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure, primaryColor: primaryColor)
-                }
-                .disabled(!hasDetailDisclosure)
-                .responderChain(from: firstResponder)
-#endif
+                #if os(tvOS)
+                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false, primaryColor: primaryColor)
+                #else
+                    Button {
+                        firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
+                    } label: {
+                        HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure, primaryColor: primaryColor)
+                    }
+                    .disabled(!hasDetailDisclosure)
+                    .responderChain(from: firstResponder)
+                #endif
             }
         }
-        
+
         static func size(section: PageViewModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             if section.properties.displaysRowHeader {
-                return HeaderViewSize.recommended(forTitle: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
-            }
-            else {
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                HeaderViewSize.recommended(forTitle: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
+            } else {
+                NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
     }

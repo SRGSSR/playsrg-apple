@@ -15,15 +15,15 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
     case videoOrTV
     case audioOrRadio
     case mixed
-    
+
     var imageVariant: SRGImageVariant {
         switch self {
         case .videoOrTV:
-            return ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
+            ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
         case .audioOrRadio:
-            return ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
+            ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
         case .mixed:
-            return .default
+            .default
         }
     }
 }
@@ -34,38 +34,38 @@ enum Content {
     enum Section: Hashable {
         case content(SRGContentSection, type: ContentType, show: SRGShow? = nil)
         case configured(ConfiguredSection)
-        
+
         var properties: SectionProperties {
             switch self {
             case let .content(section, type, show):
-                return ContentSectionProperties(contentSection: section, contentType: type, show: show)
+                ContentSectionProperties(contentSection: section, contentType: type, show: show)
             case let .configured(section):
-                return ConfiguredSectionProperties(configuredSection: section)
+                ConfiguredSectionProperties(configuredSection: section)
             }
         }
     }
-    
+
     indirect enum Item: Hashable {
         case mediaPlaceholder(index: Int)
         case media(_ media: SRGMedia)
-        
+
         case showPlaceholder(index: Int)
         case show(_ show: SRGShow)
-        
+
         case topicPlaceholder(index: Int)
         case topic(_ topic: SRGTopic)
-        
-#if os(iOS)
-        case download(_ download: Download)
-        case notification(_ notification: UserNotification)
-        case showAccess(radioChannel: RadioChannel?)
-#endif
-        
+
+        #if os(iOS)
+            case download(_ download: Download)
+            case notification(_ notification: UserNotification)
+            case showAccess(radioChannel: RadioChannel?)
+        #endif
+
         case highlightPlaceholder(index: Int)
         case highlight(_ highlight: Highlight, item: Self?)
-        
+
         case transparent
-        
+
         private var title: String? {
             switch self {
             case let .media(media):
@@ -74,66 +74,62 @@ enum Content {
                 return show.title
             case let .topic(topic):
                 return topic.title
-#if os(iOS)
-            case let .download(download):
-                return download.title
-            case let .notification(notification):
-                return notification.title
-#endif
+            #if os(iOS)
+                case let .download(download):
+                    return download.title
+                case let .notification(notification):
+                    return notification.title
+            #endif
             case let .highlight(highlight, _):
                 return highlight.title
             default:
                 return nil
             }
         }
-        
+
         static func groupAlphabetically(_ items: [Self]) -> [(key: Character, value: [Self])] {
-            return items.groupedAlphabetically { $0.title }
+            items.groupedAlphabetically { $0.title }
         }
     }
-    
+
     static func medias(from items: [Self.Item]) -> [SRGMedia] {
-        return items.compactMap { item in
+        items.compactMap { item in
             if case let .media(media) = item {
-                return media
-            }
-            else {
-                return nil
-            }
-        }
-    }
-    
-#if os(iOS)
-    static func downloads(from items: [Self.Item]) -> [Download] {
-        return items.compactMap { item in
-            if case let .download(download) = item {
-                return download
-            }
-            else {
-                return nil
+                media
+            } else {
+                nil
             }
         }
     }
-    
-    static func notifications(from items: [Self.Item]) -> [UserNotification] {
-        return items.compactMap { item in
-            if case let .notification(notification) = item {
-                return notification
-            }
-            else {
-                return nil
+
+    #if os(iOS)
+        static func downloads(from items: [Self.Item]) -> [Download] {
+            items.compactMap { item in
+                if case let .download(download) = item {
+                    download
+                } else {
+                    nil
+                }
             }
         }
-    }
-#endif
-    
+
+        static func notifications(from items: [Self.Item]) -> [UserNotification] {
+            items.compactMap { item in
+                if case let .notification(notification) = item {
+                    notification
+                } else {
+                    nil
+                }
+            }
+        }
+    #endif
+
     static func shows(from items: [Self.Item]) -> [SRGShow] {
-        return items.compactMap { item in
+        items.compactMap { item in
             if case let .show(show) = item {
-                return show
-            }
-            else {
-                return nil
+                show
+            } else {
+                nil
             }
         }
     }
@@ -153,41 +149,41 @@ protocol SectionProperties {
     var label: String? { get }
     var image: SRGImage? { get }
     var imageVariant: SRGImageVariant { get }
-    
+
     /// Properties for section detail display
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
     var emptyType: EmptyContentView.`Type` { get }
     var hasHighlightedItem: Bool { get }
-    
+
     var displayedShow: SRGShow? { get }
-#if os(iOS)
-    var sharingItem: SharingItem? { get }
-    var canResetApplicationBadge: Bool { get }
-#endif
-    
+    #if os(iOS)
+        var sharingItem: SharingItem? { get }
+        var canResetApplicationBadge: Bool { get }
+    #endif
+
     /// Analytics information
     var analyticsTitle: String? { get }
     var analyticsType: String? { get }
     var analyticsLevels: [String]? { get }
     func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent?
-    
+
     /// Properties for section displayed as a row
     var rowHighlight: Highlight? { get }
     var placeholderRowItems: [Content.Item] { get }
     var displaysRowHeader: Bool { get }
     var openContentPageId: String? { get }
-    
+
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
     func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
-    
+
     /// Publisher for interactive updates (addition / removal of items by the user).
     func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never>
-    
+
     /// Signal which can be used to trigger a section reload.
     func reloadSignal() -> AnyPublisher<Void, Never>?
-    
+
     /// Method to be called for removing the specified items from an editable section.
     func remove(_ items: [Content.Item])
 }
@@ -197,187 +193,187 @@ private extension Content {
         let contentSection: SRGContentSection
         let contentType: ContentType
         let show: SRGShow?
-        
+
         private var presentation: SRGContentPresentation {
-            return contentSection.presentation
+            contentSection.presentation
         }
-        
+
         var title: String? {
             if let title = presentation.title {
-                return title
-            }
-            else {
+                title
+            } else {
                 switch presentation.type {
                 case .favoriteShows:
-                    return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
+                    NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
                 case .myProgram:
-                    return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
+                    NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
                 case .livestreams:
-                    return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+                    NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
                 case .continueWatching:
-                    return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
+                    NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
                 case .watchLater:
-                    return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
+                    NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case .showAccess:
-                    return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+                    NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
                 case .topicSelector:
-                    return NSLocalizedString("Topics", comment: "Title label used to present the topic list")
+                    NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
-                    return nil
+                    nil
                 }
             }
         }
-        
+
         var summary: String? {
-            return presentation.summary
+            presentation.summary
         }
-        
+
         var label: String? {
-            return presentation.label
+            presentation.label
         }
-        
+
         var image: SRGImage? {
-            return presentation.image
+            presentation.image
         }
-        
+
         var imageVariant: SRGImageVariant {
             switch contentSection.type {
             case .shows:
-                return contentType.imageVariant
+                contentType.imageVariant
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return contentType.imageVariant
+                    contentType.imageVariant
                 default:
-                    return .default
+                    .default
                 }
             default:
-                return .default
+                .default
             }
         }
-        
+
         var displaysTitle: Bool {
             switch contentSection.type {
             case .showAndMedias:
-                return false
+                false
             default:
-                return true
+                true
             }
         }
-        
+
         var supportsEdition: Bool {
             switch contentSection.type {
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows, .continueWatching, .watchLater:
-                    return true
+                    true
                 default:
-                    return false
+                    false
                 }
             default:
-                return false
+                false
             }
         }
-        
+
         var emptyType: EmptyContentView.`Type` {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows:
-                    return .favoriteShows
+                    .favoriteShows
                 case .myProgram:
-                    return .episodesFromFavorites
+                    .episodesFromFavorites
                 case .continueWatching:
-                    return .resumePlayback
+                    .resumePlayback
                 case .watchLater:
-                    return .watchLater
+                    .watchLater
                 default:
-                    return .generic
+                    .generic
                 }
             default:
-                return .generic
+                .generic
             }
         }
-        
+
         var hasHighlightedItem: Bool {
-            return presentation.type == .showPromotion
+            presentation.type == .showPromotion
         }
-        
+
         var displayedShow: SRGShow? {
-            return show
+            show
         }
-#if os(iOS)
-        var sharingItem: SharingItem? {
-            return SharingItem(for: contentSection)
-        }
-        
-        var canResetApplicationBadge: Bool {
-            return false
-        }
-#endif
-        
+
+        #if os(iOS)
+            var sharingItem: SharingItem? {
+                SharingItem(for: contentSection)
+            }
+
+            var canResetApplicationBadge: Bool {
+                false
+            }
+        #endif
+
         var analyticsTitle: String? {
             switch contentSection.type {
             case .medias, .showAndMedias, .shows:
-                return contentSection.presentation.title ?? contentSection.uid
+                contentSection.presentation.title ?? contentSection.uid
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return AnalyticsPageTitle.favorites.rawValue
+                    AnalyticsPageTitle.favorites.rawValue
                 case .myProgram:
-                    return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
+                    AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
                 case .continueWatching:
-                    return AnalyticsPageTitle.resumePlayback.rawValue
+                    AnalyticsPageTitle.resumePlayback.rawValue
                 case .watchLater:
-                    return AnalyticsPageTitle.watchLater.rawValue
+                    AnalyticsPageTitle.watchLater.rawValue
                 case .topicSelector:
-                    return AnalyticsPageTitle.topics.rawValue
+                    AnalyticsPageTitle.topics.rawValue
                 default:
-                    return nil
+                    nil
                 }
             case .none:
-                return nil
+                nil
             }
         }
-        
+
         var analyticsType: String? {
             switch contentSection.type {
             case .none:
-                return nil
+                nil
             default:
-                return AnalyticsPageType.detail.rawValue
+                AnalyticsPageType.detail.rawValue
             }
         }
-        
+
         var analyticsLevels: [String]? {
             switch contentSection.type {
             case .medias, .showAndMedias, .shows:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
             case .predefined:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .none:
-                return nil
+                nil
             }
         }
-        
+
         func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
             switch presentation.type {
             case .favoriteShows:
-                return AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
+                AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
-                return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
+                AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsEvent.historyRemove(source: source, urn: nil)
+                AnalyticsEvent.historyRemove(source: source, urn: nil)
             default:
-                return nil
+                nil
             }
         }
-        
+
         var rowHighlight: Highlight? {
             guard presentation.type == .highlight || presentation.type == .showPromotion else { return nil }
             return Highlight(from: contentSection)
         }
-        
+
         var placeholderRowItems: [Content.Item] {
             switch presentation.type {
             case .mediaElement:
@@ -385,43 +381,43 @@ private extension Content {
             case .showElement:
                 return [.showPlaceholder(index: 0)]
             case .topicSelector:
-                return (0..<kDefaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
+                return (0 ..< kDefaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
             case .swimlane, .mediaElementSwimlane, .heroStage, .grid, .availableEpisodes:
                 switch contentSection.type {
                 case .showAndMedias:
-                    let mediaPlaceholderItems: [Content.Item] = (1..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                    let mediaPlaceholderItems: [Content.Item] = (1 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
                     return [.showPlaceholder(index: 0)].appending(contentsOf: mediaPlaceholderItems)
                 case .shows:
-                    return (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                    return (0 ..< kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
                 default:
-                    return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                    return (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
                 }
             case .livestreams:
-                return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (0 ..< kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .highlight:
-                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .showPromotion:
-                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0 ..< kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             default:
                 return []
             }
         }
-        
+
         var displaysRowHeader: Bool {
-            return contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
+            contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
         }
-        
+
         var openContentPageId: String? {
             guard let link = contentSection.presentation.contentLink, link.type == .microPage, let id = link.target else {
                 return nil
             }
-            
+
             return id
         }
-        
+
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
-            
+
             switch contentSection.type {
             case .medias:
                 return dataProvider.medias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
@@ -470,19 +466,18 @@ private extension Content {
                     return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-#if os(iOS)
-                case .showAccess:
-                    return Just([.showAccess(radioChannel: nil)])
-                        .setFailureType(to: Error.self)
-                        .eraseToAnyPublisher()
-#endif
+                #if os(iOS)
+                    case .showAccess:
+                        return Just([.showAccess(radioChannel: nil)])
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                #endif
                 case .availableEpisodes:
                     if let show {
                         return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                             .map { $0.map { .media($0) } }
                             .eraseToAnyPublisher()
-                    }
-                    else {
+                    } else {
                         return Just([])
                             .setFailureType(to: Error.self)
                             .eraseToAnyPublisher()
@@ -498,38 +493,38 @@ private extension Content {
                     .eraseToAnyPublisher()
             }
         }
-        
+
         func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows, .myProgram:
-                    return UserInteractionSignal.favoriteUpdates()
+                    UserInteractionSignal.favoriteUpdates()
                 case .continueWatching:
-                    return UserInteractionSignal.historyUpdates()
+                    UserInteractionSignal.historyUpdates()
                 case .watchLater:
-                    return UserInteractionSignal.watchLaterUpdates()
+                    UserInteractionSignal.watchLaterUpdates()
                 default:
-                    return Just([]).eraseToAnyPublisher()
+                    Just([]).eraseToAnyPublisher()
                 }
             default:
-                return Just([]).eraseToAnyPublisher()
+                Just([]).eraseToAnyPublisher()
             }
         }
-        
+
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch presentation.type {
             case .favoriteShows, .myProgram:
-                return ThrottledSignal.preferenceUpdates()
+                ThrottledSignal.preferenceUpdates()
             case .watchLater:
-                return ThrottledSignal.watchLaterUpdates()
+                ThrottledSignal.watchLaterUpdates()
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
-                return nil
+                nil
             }
         }
-        
+
         func remove(_ items: [Content.Item]) {
             switch presentation.type {
             case .favoriteShows:
@@ -542,17 +537,15 @@ private extension Content {
                 break
             }
         }
-        
+
         private func filterItems<T>(_ items: [T]) -> [T] {
             guard presentation.type == .mediaElement || presentation.type == .showElement else { return items }
-            
+
             if presentation.isRandomized, let item = items.randomElement() {
                 return [item]
-            }
-            else if !presentation.isRandomized, let item = items.first {
+            } else if !presentation.isRandomized, let item = items.first {
                 return [item]
-            }
-            else {
+            } else {
                 return []
             }
         }
@@ -564,7 +557,7 @@ private extension Content {
 private extension Content {
     struct ConfiguredSectionProperties: SectionProperties {
         let configuredSection: ConfiguredSection
-        
+
         var title: String? {
             switch configuredSection {
             case .history:
@@ -605,59 +598,59 @@ private extension Content {
                 return NSLocalizedString("Sport livestreams", comment: "Title label used to present sport scheduled livestream medias")
             case .tvScheduledLivestreamsSignLanguage:
                 return NSLocalizedString("Sign language livestreams", comment: "Title label used to present sign language scheduled livestream medias")
-#if os(iOS)
-            case .downloads:
-                return NSLocalizedString("Downloads", comment: "Label to present downloads")
-            case .notifications:
-                return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
-            case .radioShowAccess:
-                return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
-#endif
+            #if os(iOS)
+                case .downloads:
+                    return NSLocalizedString("Downloads", comment: "Label to present downloads")
+                case .notifications:
+                    return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
+                case .radioShowAccess:
+                    return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+            #endif
             default:
                 return nil
             }
         }
-        
+
         var summary: String? {
-            return nil
+            nil
         }
-        
+
         var label: String? {
-            return nil
+            nil
         }
-        
+
         var image: SRGImage? {
-            return nil
+            nil
         }
-        
+
         var imageVariant: SRGImageVariant {
             switch configuredSection {
             case .tvAllShows:
-                return .default
+                .default
             case .radioAllShows:
-                return ContentType.audioOrRadio.imageVariant
+                ContentType.audioOrRadio.imageVariant
             default:
-                return ContentType.mixed.imageVariant
+                ContentType.mixed.imageVariant
             }
         }
-        
+
         var displaysTitle: Bool {
-            return true
+            true
         }
-        
+
         var supportsEdition: Bool {
             switch configuredSection {
             case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
                 return true
-#if os(iOS)
-            case .downloads, .notifications:
-                return true
-#endif
+            #if os(iOS)
+                case .downloads, .notifications:
+                    return true
+            #endif
             default:
                 return false
             }
         }
-        
+
         var emptyType: EmptyContentView.`Type` {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
@@ -670,49 +663,49 @@ private extension Content {
                 return .history
             case .radioResumePlayback:
                 return .resumePlayback
-#if os(iOS)
-            case .downloads:
-                return .downloads
-            case .notifications:
-                return .notifications
-#endif
+            #if os(iOS)
+                case .downloads:
+                    return .downloads
+                case .notifications:
+                    return .notifications
+            #endif
             default:
                 return .generic
             }
         }
-        
+
         var hasHighlightedItem: Bool {
-            return false
+            false
         }
-        
+
         var displayedShow: SRGShow? {
             if case let .availableEpisodes(show) = configuredSection {
-                return show
-            }
-            else {
-                return nil
-            }
-        }
-#if os(iOS)
-        var sharingItem: SharingItem? {
-            switch configuredSection {
-            case let .availableEpisodes(show):
-                return SharingItem(for: show)
-            default:
-                return nil
+                show
+            } else {
+                nil
             }
         }
-        
-        var canResetApplicationBadge: Bool {
-            switch configuredSection {
-            case .notifications:
-                return true
-            default:
-                return false
+
+        #if os(iOS)
+            var sharingItem: SharingItem? {
+                switch configuredSection {
+                case let .availableEpisodes(show):
+                    SharingItem(for: show)
+                default:
+                    nil
+                }
             }
-        }
-#endif
-        
+
+            var canResetApplicationBadge: Bool {
+                switch configuredSection {
+                case .notifications:
+                    true
+                default:
+                    false
+                }
+            }
+        #endif
+
         var analyticsTitle: String? {
             switch configuredSection {
             case .history:
@@ -737,45 +730,44 @@ private extension Content {
                 return AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
                 return AnalyticsPageTitle.scheduledLivestreams.rawValue
-#if os(iOS)
-            case .downloads:
-                return AnalyticsPageTitle.downloads.rawValue
-            case .notifications:
-                return AnalyticsPageTitle.notifications.rawValue
-#endif
+            #if os(iOS)
+                case .downloads:
+                    return AnalyticsPageTitle.downloads.rawValue
+                case .notifications:
+                    return AnalyticsPageTitle.notifications.rawValue
+            #endif
             default:
                 return nil
             }
         }
-        
+
         var analyticsType: String? {
             switch configuredSection {
             case .radioAllShows, .tvAllShows:
-                return AnalyticsPageType.overview.rawValue
+                AnalyticsPageType.overview.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll,
-                    .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage,
-                    .tvLive, .radioLive, .radioLiveSatellite:
-                return AnalyticsPageType.live.rawValue
+                 .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage,
+                 .tvLive, .radioLive, .radioLiveSatellite:
+                AnalyticsPageType.live.rawValue
             default:
-                return AnalyticsPageType.detail.rawValue
+                AnalyticsPageType.detail.rawValue
             }
         }
-        
+
         var analyticsLevels: [String]? {
             switch configuredSection {
             case let .radioAllShows(channelUid),
-                let .radioFavoriteShows(channelUid: channelUid),
-                let .radioLatest(channelUid: channelUid),
-                let .radioLatestEpisodes(channelUid: channelUid),
-                let .radioLatestEpisodesFromFavorites(channelUid: channelUid),
-                let .radioLatestVideos(channelUid: channelUid),
-                let .radioMostPopular(channelUid: channelUid),
-                let .radioResumePlayback(channelUid: channelUid),
-                let .radioWatchLater(channelUid: channelUid):
+                 let .radioFavoriteShows(channelUid: channelUid),
+                 let .radioLatest(channelUid: channelUid),
+                 let .radioLatestEpisodes(channelUid: channelUid),
+                 let .radioLatestEpisodesFromFavorites(channelUid: channelUid),
+                 let .radioLatestVideos(channelUid: channelUid),
+                 let .radioMostPopular(channelUid: channelUid),
+                 let .radioResumePlayback(channelUid: channelUid),
+                 let .radioWatchLater(channelUid: channelUid):
                 if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
                     return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
-                }
-                else {
+                } else {
                     return nil
                 }
             case .tvAllShows:
@@ -794,15 +786,15 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.signLanguage.rawValue]
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
-#if os(iOS)
-            case .downloads, .notifications:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
-#endif
+            #if os(iOS)
+                case .downloads, .notifications:
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+            #endif
             default:
                 return nil
             }
         }
-        
+
         func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
@@ -811,52 +803,52 @@ private extension Content {
                 return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
             case .history, .radioResumePlayback:
                 return AnalyticsEvent.historyRemove(source: source, urn: nil)
-#if os(iOS)
-            case .downloads:
-                return AnalyticsEvent.download(action: .remove, source: source, urn: nil)
-#endif
+            #if os(iOS)
+                case .downloads:
+                    return AnalyticsEvent.download(action: .remove, source: source, urn: nil)
+            #endif
             default:
                 return nil
             }
         }
-        
+
         var rowHighlight: Highlight? {
-            return nil
+            nil
         }
-        
+
         var placeholderRowItems: [Content.Item] {
             switch configuredSection {
             case .availableEpisodes, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
-                    .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
-                    .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
-                return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                 .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
+                 .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
+                return (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
-                return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (0 ..< kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .favoriteShows, .radioAllShows, .tvAllShows:
-                return (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
-#if os(iOS)
-            case .downloads:
-                return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
-#endif
+                return (0 ..< kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+            #if os(iOS)
+                case .downloads:
+                    return (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+            #endif
             default:
                 return []
             }
         }
-        
+
         var displaysRowHeader: Bool {
-            return true
+            true
         }
-        
+
         var openContentPageId: String? {
             nil
         }
-        
+
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
-            
+
             let configuration = ApplicationConfiguration.shared
             let vendor = configuration.vendor
-            
+
             switch configuredSection {
             case let .availableEpisodes(show):
                 return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
@@ -968,25 +960,25 @@ private extension Content {
                 return dataProvider.tvScheduledLivestreams(for: vendor, signLanguageOnly: true, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-#if os(iOS)
-            case .downloads:
-                return Just(Download.downloads)
-                    .map { $0.map { .download($0) } }
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-            case .notifications:
-                return Just(UserNotification.notifications)
-                    .map { $0.map { .notification($0) } }
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-            case let .radioShowAccess(channelUid):
-                return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-#endif
+            #if os(iOS)
+                case .downloads:
+                    return Just(Download.downloads)
+                        .map { $0.map { .download($0) } }
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                case .notifications:
+                    return Just(UserNotification.notifications)
+                        .map { $0.map { .notification($0) } }
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+                case let .radioShowAccess(channelUid):
+                    return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
+                        .setFailureType(to: Error.self)
+                        .eraseToAnyPublisher()
+            #endif
             }
         }
-        
+
         func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
@@ -995,17 +987,17 @@ private extension Content {
                 return UserInteractionSignal.historyUpdates()
             case .radioWatchLater, .watchLater:
                 return UserInteractionSignal.watchLaterUpdates()
-#if os(iOS)
-            case .downloads:
-                return UserInteractionSignal.downloadUpdates()
-            case .notifications:
-                return UserInteractionSignal.notificationUpdates()
-#endif
+            #if os(iOS)
+                case .downloads:
+                    return UserInteractionSignal.downloadUpdates()
+                case .notifications:
+                    return UserInteractionSignal.notificationUpdates()
+            #endif
             default:
                 return Just([]).eraseToAnyPublisher()
             }
         }
-        
+
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
@@ -1014,17 +1006,17 @@ private extension Content {
                 return ThrottledSignal.watchLaterUpdates()
             case .radioLive:
                 return ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)
-#if os(iOS)
-            case .downloads:
-                return ThrottledSignal.downloadUpdates()
-#endif
+            #if os(iOS)
+                case .downloads:
+                    return ThrottledSignal.downloadUpdates()
+            #endif
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
                 return nil
             }
         }
-        
+
         func remove(_ items: [Content.Item]) {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
@@ -1033,12 +1025,12 @@ private extension Content {
                 Content.removeFromWatchLater(items)
             case .history, .radioResumePlayback:
                 Content.removeFromHistory(items)
-#if os(iOS)
-            case .downloads:
-                Content.removeFromDownloads(items)
-            case .notifications:
-                Content.removeFromNotifications(items)
-#endif
+            #if os(iOS)
+                case .downloads:
+                    Content.removeFromDownloads(items)
+                case .notifications:
+                    Content.removeFromNotifications(items)
+            #endif
             default:
                 break
             }
@@ -1053,30 +1045,30 @@ private extension Content {
         let shows = Content.shows(from: items)
         FavoritesRemoveShows(shows)
     }
-    
+
     static func removeFromHistory(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
         HistoryRemoveMedias(medias) { _ in }
     }
-    
-#if os(iOS)
-    static func removeFromNotifications(_ items: [Content.Item]) {
-        let notifications = Content.notifications(from: items)
-        let updatedNotifications = Array(Set(UserNotification.notifications).subtracting(notifications))
-        UserNotification.saveNotifications(updatedNotifications)
-        UserInteractionEvent.removeFromNotifications(notifications)
-    }
-#endif
-    
+
+    #if os(iOS)
+        static func removeFromNotifications(_ items: [Content.Item]) {
+            let notifications = Content.notifications(from: items)
+            let updatedNotifications = Array(Set(UserNotification.notifications).subtracting(notifications))
+            UserNotification.saveNotifications(updatedNotifications)
+            UserInteractionEvent.removeFromNotifications(notifications)
+        }
+    #endif
+
     static func removeFromWatchLater(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
         WatchLaterRemoveMedias(medias) { _ in }
     }
-    
-#if os(iOS)
-    static func removeFromDownloads(_ items: [Content.Item]) {
-        let downloads = Content.downloads(from: items)
-        Download.removeDownloads(downloads)
-    }
-#endif
+
+    #if os(iOS)
+        static func removeFromDownloads(_ items: [Content.Item]) {
+            let downloads = Content.downloads(from: items)
+            Download.removeDownloads(downloads)
+        }
+    #endif
 }

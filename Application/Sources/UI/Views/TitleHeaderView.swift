@@ -14,16 +14,16 @@ struct TitleHeaderView: View, PrimaryColorSettable {
     let description: String?
     let titleTextAlignment: TextAlignment
     let topPadding: CGFloat
-    
+
     init(_ title: String?, description: String? = nil, titleTextAlignment: TextAlignment = .leading, topPadding: CGFloat = 0) {
         self.title = title
         self.description = description
         self.titleTextAlignment = titleTextAlignment
         self.topPadding = topPadding
     }
-    
-    internal var primaryColor: Color = .white
-    
+
+    var primaryColor: Color = .white
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             if let title {
@@ -34,9 +34,9 @@ struct TitleHeaderView: View, PrimaryColorSettable {
                     Text(title)
                         .srgFont(.H1)
                         .foregroundColor(primaryColor)
-                    // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
-                    // when calculated with a `UIHostingController`, but without this the text does not occupy
-                    // all lines it could.
+                        // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
+                        // when calculated with a `UIHostingController`, but without this the text does not occupy
+                        // all lines it could.
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(titleTextAlignment)
                     if titleTextAlignment != .trailing {
@@ -47,9 +47,9 @@ struct TitleHeaderView: View, PrimaryColorSettable {
                     Text(description)
                         .srgFont(.body)
                         .foregroundColor(primaryColor)
-                    // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
-                    // when calculated with a `UIHostingController`, but without this the text does not occupy
-                    // all lines it could.
+                        // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
+                        // when calculated with a `UIHostingController`, but without this the text does not occupy
+                        // all lines it could.
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.leading)
                 }
@@ -70,8 +70,7 @@ enum TitleHeaderViewSize {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
             let size = TitleHeaderView(title, description: description, topPadding: topPadding).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
-        }
-        else {
+        } else {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
         }
     }
@@ -93,7 +92,7 @@ struct TitleHeaderView_Previews: PreviewProvider {
         .previewLayout(.sizeThatFits)
         .frame(width: 1000)
         .environment(\.horizontalSizeClass, .regular)
-        
+
         Group {
             TitleHeaderView("Title", description: "description")
             TitleHeaderView(.loremIpsum, description: .loremIpsum)

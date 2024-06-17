@@ -270,7 +270,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                                                    image:[UIImage imageNamed:@"videos_tab"]
                                                                      tag:TabBarItemIdentifierVideos];
     videosTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierVideosTabBarItem].value;
- 
+    
     PageViewController *pageViewController = [PageViewController videosViewController];
     NavigationController *videosNavigationController = [[NavigationController alloc] initWithRootViewController:pageViewController];
     videosNavigationController.tabBarItem = videosTabBarItem;
@@ -345,7 +345,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                                                    image:[UIImage imageNamed:@"search_tab"]
                                                                      tag:TabBarItemIdentifierSearch];
     searchTabBarItem.accessibilityIdentifier = [AccessibilityIdentifierObjC identifier:AccessibilityIdentifierSearchTabBarItem].value;
- 
+    
     UIViewController *searchViewController = [SearchViewController viewController];
     NavigationController *searchNavigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
     searchNavigationController.tabBarItem = searchTabBarItem;

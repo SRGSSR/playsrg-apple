@@ -10,12 +10,12 @@ import SwiftUI
 
 struct OnboardingView: UIViewControllerRepresentable {
     let onboarding: Onboarding
-    
-    func makeUIViewController(context: Context) -> OnboardingViewController {
-        return .viewController(for: onboarding)
+
+    func makeUIViewController(context _: Context) -> OnboardingViewController {
+        .viewController(for: onboarding)
     }
-    
-    func updateUIViewController(_ uiViewController: OnboardingViewController, context: Context) {
+
+    func updateUIViewController(_: OnboardingViewController, context _: Context) {
         // Never updated
     }
 }

@@ -16,12 +16,12 @@ import SwiftUI
 
 class OpenShowEvent: UIEvent {
     let show: SRGShow
-    
+
     init(show: SRGShow) {
         self.show = show
         super.init()
     }
-    
+
     override init() {
         fatalError("init() is not available")
     }
@@ -33,19 +33,19 @@ class OpenShowEvent: UIEvent {
 struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
-    
+
     fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
-    
+
     @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-    
+
     private var direction: StackDirection {
-        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+        (horizontalSizeClass == .compact) ? .vertical : .horizontal
     }
-    
+
     private var alignment: StackAlignment {
-        return (horizontalSizeClass == .compact) ? .center : .leading
+        (horizontalSizeClass == .compact) ? .center : .leading
     }
-    
+
     var body: some View {
         Stack(direction: direction, alignment: alignment, spacing: 0) {
             ShowVisualView(show: show, size: .medium)
@@ -64,22 +64,22 @@ struct SectionShowHeaderView: View {
         .padding(.bottom, constant(iOS: 20, tvOS: 50))
         .focusable()
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
         let horizontalSizeClass: UIUserInterfaceSizeClass
-        
+
         var body: some View {
             if horizontalSizeClass == .regular {
                 LinearGradient(colors: [.clear, .srgGray16], startPoint: .center, endPoint: .trailing)
             }
         }
     }
-    
+
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         let section: Content.Section
-        
+
         var body: some View {
             VStack(spacing: SectionShowHeaderView.verticalSpacing) {
                 if let title = section.properties.title {
@@ -105,22 +105,22 @@ struct SectionShowHeaderView: View {
             }
         }
     }
-    
+
     /// Behavior: h-hug, v-hug
     private struct ShowAccessButton: View {
         let show: SRGShow
-        
+
         @State private var isFocused = false
         @FirstResponder private var firstResponder
-        
+
         var accessibilityLabel: String? {
-            return show.title
+            show.title
         }
-        
+
         var accessibilityHint: String? {
-            return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show button hint")
+            PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show button hint")
         }
-        
+
         var body: some View {
             SimpleButton(icon: .episodes, label: show.title) {
                 firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
@@ -135,11 +135,10 @@ struct SectionShowHeaderView: View {
 
 private extension View {
     func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
-        return Group {
+        Group {
             if horizontalSizeClass == .compact {
                 self
-            }
-            else {
+            } else {
                 frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
             }
         }
@@ -154,8 +153,7 @@ enum SectionShowHeaderViewSize {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
             let size = SectionShowHeaderView(section: section, show: show).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
-        }
-        else {
+        } else {
             return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(LayoutHeaderHeightZero))
         }
     }
@@ -165,19 +163,19 @@ enum SectionShowHeaderViewSize {
 
 struct SectionShowHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-#if os(tvOS)
-        SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
-            .previewLayout(.sizeThatFits)
-#else
-        SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
-            .frame(width: 1000)
-            .previewLayout(.sizeThatFits)
-            .environment(\.horizontalSizeClass, .regular)
-        
-        SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
-            .frame(width: 375)
-            .previewLayout(.sizeThatFits)
-            .environment(\.horizontalSizeClass, .compact)
-#endif
+        #if os(tvOS)
+            SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
+                .previewLayout(.sizeThatFits)
+        #else
+            SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
+                .frame(width: 1000)
+                .previewLayout(.sizeThatFits)
+                .environment(\.horizontalSizeClass, .regular)
+
+            SectionShowHeaderView(section: .content(Mock.contentSection(), type: Mock.show().play_contentType), show: Mock.show())
+                .frame(width: 375)
+                .previewLayout(.sizeThatFits)
+                .environment(\.horizontalSizeClass, .compact)
+        #endif
     }
 }

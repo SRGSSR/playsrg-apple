@@ -11,18 +11,18 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct TopicGradientView: View {
     enum Style {
-    case topicPage
-    case showPage
+        case topicPage
+        case showPage
     }
-    
+
     let topic: SRGTopic
     let style: Style
-    
+
     init(_ topic: SRGTopic, style: Style) {
         self.topic = topic
         self.style = style
     }
-    
+
     var body: some View {
         if let topicColors = ApplicationConfiguration.shared.topicColors(for: topic) {
             ZStack {
@@ -36,12 +36,12 @@ struct TopicGradientView: View {
             Color.clear
         }
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct RadialColorGradient: View {
         let topicColors: (Color, Color)
         let opacity: Double
-        
+
         var body: some View {
             GeometryReader { geometry in
                 RadialGradient(
@@ -56,7 +56,7 @@ struct TopicGradientView: View {
             }
         }
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct LinearGreyGradient: View {
         var body: some View {
@@ -67,13 +67,13 @@ struct TopicGradientView: View {
             )
         }
     }
-    
+
     private var opacity: Double {
         switch style {
         case .topicPage:
-            return 0.6
+            0.6
         case .showPage:
-            return 0.4
+            0.4
         }
     }
 }
@@ -83,7 +83,7 @@ struct TopicGradientView: View {
 struct TopicGradientView_Previews: PreviewProvider {
     private struct PreviewView<Content: View>: View {
         @ViewBuilder var content: () -> Content
-        
+
         var body: some View {
             ZStack {
                 Rectangle()
@@ -92,7 +92,7 @@ struct TopicGradientView_Previews: PreviewProvider {
             }
         }
     }
-    
+
     static var previews: some View {
         Group {
             PreviewView {
@@ -106,7 +106,7 @@ struct TopicGradientView_Previews: PreviewProvider {
             }
         }
         .previewLayout(.fixed(width: 400, height: 572))
-        
+
         Group {
             PreviewView {
                 TopicGradientView(Mock.topic(), style: .topicPage)

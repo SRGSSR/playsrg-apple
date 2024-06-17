@@ -12,7 +12,7 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct ProgressBar: View {
     let value: Double
-    
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
@@ -23,9 +23,9 @@ struct ProgressBar: View {
             }
         }
     }
-    
+
     init(value: Double) {
-        self.value = value.clamped(to: 0...1)
+        self.value = value.clamped(to: 0 ... 1)
     }
 }
 

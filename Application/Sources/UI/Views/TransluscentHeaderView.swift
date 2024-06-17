@@ -12,7 +12,7 @@ import SwiftUI
 struct TransluscentHeaderView: View {
     let title: String
     let horizontalPadding: CGFloat
-    
+
     var body: some View {
         Text(title)
             .srgFont(.H3)
@@ -30,18 +30,17 @@ struct TransluscentHeaderView: View {
 
 private extension View {
     func transluscentBackground() -> some View {
-#if os(iOS)
-        Group {
-            if #available(iOS 15, *) {
-                background(.thinMaterial)
+        #if os(iOS)
+            Group {
+                if #available(iOS 15, *) {
+                    background(.thinMaterial)
+                } else {
+                    background(Blur(style: .systemThinMaterial))
+                }
             }
-            else {
-                background(Blur(style: .systemThinMaterial))
-            }
-        }
-#else
-        return background(Color.clear)
-#endif
+        #else
+            return background(Color.clear)
+        #endif
     }
 }
 
@@ -53,8 +52,7 @@ enum TransluscentHeaderViewSize {
             let hostController = UIHostingController(rootView: TransluscentHeaderView(title: title, horizontalPadding: horizontalPadding))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
-        }
-        else {
+        } else {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
         }
     }

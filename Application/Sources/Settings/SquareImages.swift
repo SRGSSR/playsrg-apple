@@ -10,19 +10,19 @@ enum SquareImages: String, CaseIterable, Identifiable {
     case `default`
     case forced
     case ignored
-    
+
     var id: Self {
-        return self
+        self
     }
-    
+
     var description: String {
         switch self {
         case .forced:
-            return NSLocalizedString("Force", comment: "Square images setting state")
+            NSLocalizedString("Force", comment: "Square images setting state")
         case .ignored:
-            return NSLocalizedString("Ignore", comment: "Square images setting state")
-        case .`default`:
-            return NSLocalizedString("Default (current configuration)", comment: "Square images setting state")
+            NSLocalizedString("Ignore", comment: "Square images setting state")
+        case .default:
+            NSLocalizedString("Default (current configuration)", comment: "Square images setting state")
         }
     }
 }

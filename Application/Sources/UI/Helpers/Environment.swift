@@ -42,7 +42,7 @@ extension EnvironmentValues {
             self[EditingKey.self] = newValue
         }
     }
-    
+
     /**
      *  Selection state.
      */
@@ -54,7 +54,7 @@ extension EnvironmentValues {
             self[SelectedKey.self] = newValue
         }
     }
-    
+
     /**
      *  UIKit focus state (if focus set by UIKit).
      */
@@ -66,24 +66,24 @@ extension EnvironmentValues {
             self[UIKitFocusedKey.self] = newValue
         }
     }
-    
+
     /**
      *  UIKit size class support for iOS and tvOS (`UserInterfaceSizeClass` is marked as unavailable for tvOS,
      *  unlike `UIUserInterfaceSizeClass`, leading to more preprocessor use than should be necessary).
      */
     var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-#if os(iOS)
-        return horizontalSizeClass == .compact ? .compact : .regular
-#else
-        return .regular
-#endif
+        #if os(iOS)
+            return horizontalSizeClass == .compact ? .compact : .regular
+        #else
+            return .regular
+        #endif
     }
-    
+
     var uiVerticalSizeClass: UIUserInterfaceSizeClass {
-#if os(iOS)
-        return verticalSizeClass == .compact ? .compact : .regular
-#else
-        return .regular
-#endif
+        #if os(iOS)
+            return verticalSizeClass == .compact ? .compact : .regular
+        #else
+            return .regular
+        #endif
     }
 }

@@ -12,7 +12,7 @@ import UIKit
 
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
-    
+
     private var tabContainerViewController: TabContainerViewController
     private(set) var initialPage: Int
     private let tabBarItems: [TMBarItem]
@@ -22,47 +22,47 @@ class PageContainerViewController: UIViewController {
 
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
-        
+
         self.viewControllers = viewControllers
-        if initialPage >= 0 && initialPage < viewControllers.count {
+        if initialPage >= 0, initialPage < viewControllers.count {
             self.initialPage = initialPage
         } else {
             PlayLogWarning(category: "pageViewController", message: "Invalid page. Fixed to 0")
             self.initialPage = 0
         }
-        
-        self.tabBarItems = viewControllers.map {
+
+        tabBarItems = viewControllers.map {
             if let tabBarItem = $0.tabBarItem, let image = tabBarItem.image {
                 let item = TMBarItem(image: image)
                 item.accessibilityLabel = tabBarItem.title ?? $0.title
                 return item
-            }
-            else {
+            } else {
                 let item = TMBarItem(title: $0.title ?? "")
                 item.accessibilityLabel = $0.title
                 return item
             }
         }
-        
-        self.tabContainerViewController = TabContainerViewController()
+
+        tabContainerViewController = TabContainerViewController()
 
         super.init(nibName: nil, bundle: nil)
-        
-        self.addChild(tabContainerViewController)
+
+        addChild(tabContainerViewController)
     }
-    
+
     convenience init(viewControllers: [UIViewController]) {
         self.init(viewControllers: viewControllers, initialPage: 0)
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func configureBarView() {
         let blurView = UIVisualEffectView.play_blurView
         self.blurView = blurView
-        
+
         let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
         barView.backgroundView.style = .custom(view: blurView)
         barView.layout.alignment = .centerDistributed
@@ -72,20 +72,20 @@ class PageContainerViewController: UIViewController {
         }
         tabContainerViewController.addBar(barView, dataSource: self, at: .top)
     }
-    
+
     override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
-        self.view = view
+        view = view
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureBarView()
         if let tabContainerView = tabContainerViewController.view {
             view.insertSubview(tabContainerView, at: 0)
-            
+
             tabContainerView.translatesAutoresizingMaskIntoConstraints = false
             let tabBarTopConstraint = tabContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
             NSLayoutConstraint.activate([
@@ -97,10 +97,10 @@ class PageContainerViewController: UIViewController {
             self.tabBarTopConstraint = tabBarTopConstraint
         }
         tabContainerViewController.didMove(toParent: self)
-        
+
         tabContainerViewController.dataSource = self
         didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
-        
+
         tabContainerViewController
             .updateSignal()
             .debounce(for: 0.1, scheduler: DispatchQueue.main)
@@ -110,13 +110,13 @@ class PageContainerViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
-    
+
     override func accessibilityPerformEscape() -> Bool {
-        if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
+        if let navigationController, navigationController.viewControllers.count > 1 {
             navigationController.popViewController(animated: true)
             return true
         } else if presentingViewController != nil {
@@ -126,22 +126,21 @@ class PageContainerViewController: UIViewController {
             return false
         }
     }
-    
+
     func switchToIndex(_ index: Int, animated: Bool) -> Bool {
         guard index < viewControllers.count else { return false }
-        
-        if self.isViewLoaded {
+
+        if isViewLoaded {
             tabContainerViewController.scrollToPage(.at(index: index), animated: animated)
             didDisplayViewController(tabContainerViewController.currentViewController, animated: animated)
             return true
-        }
-        else {
+        } else {
             initialPage = index
             return true
         }
     }
-    
-    func didDisplayViewController(_ viewController: UIViewController?, animated: Bool) {
+
+    func didDisplayViewController(_: UIViewController?, animated _: Bool) {
         play_setNeedsScrollableViewUpdate()
     }
 }
@@ -150,17 +149,17 @@ class PageContainerViewController: UIViewController {
 
 extension PageContainerViewController: ContainerContentInsets {
     var play_additionalContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: tabContainerViewController.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
+        UIEdgeInsets(top: tabContainerViewController.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
     }
 }
 
 extension PageContainerViewController: Oriented {
     var play_supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        .all
     }
-    
+
     var play_orientingChildViewControllers: [UIViewController] {
-        return viewControllers
+        viewControllers
     }
 }
 
@@ -172,7 +171,7 @@ extension PageContainerViewController: ScrollableContentContainer {
 
 extension PageContainerViewController: SRGAnalyticsContainerViewTracking {
     var srg_activeChildViewControllers: [UIViewController] {
-        return [tabContainerViewController]
+        [tabContainerViewController]
     }
 }
 
@@ -187,7 +186,7 @@ extension PageContainerViewController: TabBarActionable {
 
 extension UIViewController {
     var play_pageContainerViewController: PageContainerViewController? {
-        var parentViewController = self.parent
+        var parentViewController = parent
         while let viewController = parentViewController {
             if let pageContainerViewController = viewController as? PageContainerViewController {
                 return pageContainerViewController
@@ -199,19 +198,19 @@ extension UIViewController {
 }
 
 extension PageContainerViewController: PageboyViewControllerDataSource, TMBarDataSource {
-    func numberOfViewControllers(in pageboyViewController: Pageboy.PageboyViewController) -> Int {
+    func numberOfViewControllers(in _: Pageboy.PageboyViewController) -> Int {
         viewControllers.count
     }
-    
-    func viewController(for pageboyViewController: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
+
+    func viewController(for _: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
         viewControllers[index]
     }
-    
-    func defaultPage(for pageboyViewController: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
+
+    func defaultPage(for _: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
         .at(index: initialPage)
     }
-    
-    func barItem(for bar: any Tabman.TMBar, at index: Int) -> any Tabman.TMBarItemable {
+
+    func barItem(for _: any Tabman.TMBar, at index: Int) -> any Tabman.TMBarItemable {
         tabBarItems[index]
     }
 }

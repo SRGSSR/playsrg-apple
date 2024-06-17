@@ -13,28 +13,28 @@ import UIKit
 
 @objc class AccessibilityView: UIView {
     @IBOutlet private weak var delegate: AccessibilityViewDelegate?
-    
+
     public func setDelegate(_ delegate: AccessibilityViewDelegate?) {
         self.delegate = delegate
     }
-    
+
     override var isAccessibilityElement: Bool {
         get {
-            return true
+            true
         }
         set {}
     }
-    
+
     override var accessibilityLabel: String? {
         get {
-            return delegate?.labelForAccessibilityView(self)
+            delegate?.labelForAccessibilityView(self)
         }
         set {}
     }
-    
+
     override var accessibilityHint: String? {
         get {
-            return delegate?.hintForAccessibilityView(self)
+            delegate?.hintForAccessibilityView(self)
         }
         set {}
     }

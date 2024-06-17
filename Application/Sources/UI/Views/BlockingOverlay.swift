@@ -12,16 +12,16 @@ import SwiftUI
 struct BlockingOverlay: View {
     let media: SRGMedia?
     let messageDisplayed: Bool
-    
+
     init(media: SRGMedia?, messageDisplayed: Bool = false) {
         self.media = media
         self.messageDisplayed = messageDisplayed
     }
-    
+
     private var blockingReason: SRGBlockingReason? {
-        return media?.blockingReason(at: Date())
+        media?.blockingReason(at: Date())
     }
-    
+
     var body: some View {
         if let blockingReason, let blockingIconImage = UIImage.image(for: blockingReason) {
             ZStack {
