@@ -36,6 +36,8 @@ struct HighlightCell: View {
         private func action() {
             if case let .show(show) = item {
                 navigateToShow(show)
+            } else if case let .media(media) = item {
+                navigateToMedia(media)
             } else {
                 navigateToSection(section, filter: filter)
             }

@@ -155,6 +155,7 @@ protocol SectionProperties {
     var supportsEdition: Bool { get }
     var emptyType: EmptyContentView.`Type` { get }
     var hasHighlightedItem: Bool { get }
+    var couldHaveHighlightedItem: Bool { get }
 
     var displayedShow: SRGShow? { get }
     #if os(iOS)
@@ -296,6 +297,10 @@ private extension Content {
 
         var hasHighlightedItem: Bool {
             presentation.type == .showPromotion
+        }
+
+        var couldHaveHighlightedItem: Bool {
+            presentation.type == .highlight
         }
 
         var displayedShow: SRGShow? {
@@ -675,6 +680,10 @@ private extension Content {
         }
 
         var hasHighlightedItem: Bool {
+            false
+        }
+
+        var couldHaveHighlightedItem: Bool {
             false
         }
 
