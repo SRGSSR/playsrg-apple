@@ -97,7 +97,7 @@
 
 /* Audio home page selection view title
    Label of the button for audio homepage option selection */
-"Audio home page" = "Audio home page";
+"Audio home page" = "Page Audios";
 
 /* Audios tab title
    Header for audio search results
@@ -390,10 +390,10 @@
 "Mandatory update" = "Mise à jour obligatoire";
 
 /* Many curated audio homepages option setting state */
-"Many curated pages (PAC landing pages)" = "Many curated pages (PAC landing pages)";
+"Many curated pages (PAC landing pages)" = "Plusieurs pages éditorialisées (Pages d'accueil PAC)";
 
 /* Many predefined audio homepage option setting state */
-"Many predefined pages" = "Many predefined pages";
+"Many predefined pages" = "Plusieurs pages préfinies";
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Contenu non disponible";
@@ -488,7 +488,7 @@
 "OK" = "OK";
 
 /* One curated audio homepage option setting state */
-"One curated page (PAC Audio)" = "One curated page (PAC Audio)";
+"One curated page (PAC Audio)" = "Une page éditorialisée (PAC Audio)";
 
 /* Label of the button opening system settings */
 "Open system settings" = "Ouvrir Réglages";
