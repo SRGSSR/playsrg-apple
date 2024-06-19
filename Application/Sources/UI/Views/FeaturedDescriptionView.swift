@@ -15,38 +15,39 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View, PrimaryColorSett
         case topLeading
         case center
     }
-    
+
     let content: Content
     let alignment: Alignment
     let detailed: Bool
-    
-    internal var primaryColor: Color = .srgGrayD2
-    internal var secondaryColor: Color = .srgGray96
-    
+
+    var primaryColor: Color = .srgGrayD2
+    var secondaryColor: Color = .srgGray96
+
     private var stackAlignment: HorizontalAlignment {
-        return alignment == .center ? .center : .leading
+        alignment == .center ? .center : .leading
     }
-    
+
     private var frameAlignment: SwiftUI.Alignment {
         switch alignment {
         case .leading:
-            return .leading
+            .leading
         case .topLeading:
-            return .topLeading
+            .topLeading
         case .center:
-            return .center
+            .center
         }
     }
-    
+
     private var textAlignment: TextAlignment {
-        return alignment == .center ? .center : .leading
+        alignment == .center ? .center : .leading
     }
-    
+
     var body: some View {
         VStack(alignment: stackAlignment, spacing: 6) {
             HStack(spacing: constant(iOS: 8, tvOS: 12)) {
                 if let label = content.label {
                     Badge(text: label, color: Color(.srgDarkRed))
+                        .layoutPriority(1)
                 }
                 if let introduction = content.introduction {
                     Text(introduction)
@@ -55,7 +56,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View, PrimaryColorSett
                         .foregroundColor(secondaryColor)
                 }
             }
-            
+
             VStack(alignment: stackAlignment, spacing: 10) {
                 Text(content.title ?? "")
                     .srgFont(.H3)
@@ -91,8 +92,8 @@ extension FeaturedDescriptionView where Content == FeaturedShowContent {
 // MARK: Preview
 
 struct FeaturedDescriptionView_Previews: PreviewProvider {
-    private static let label = "New"
-    
+    private static let label = "New label with long text, quite long"
+
     static var previews: some View {
         Group {
             FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .leading, detailed: true)
@@ -100,12 +101,19 @@ struct FeaturedDescriptionView_Previews: PreviewProvider {
             FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .center, detailed: true)
         }
         .previewLayout(.fixed(width: 800, height: 300))
-        
+
         Group {
             FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .leading, detailed: true)
             FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .topLeading, detailed: true)
             FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .center, detailed: true)
         }
         .previewLayout(.fixed(width: 800, height: 300))
+
+        Group {
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .leading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .topLeading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), style: .show, label: label, alignment: .center, detailed: true)
+        }
+        .previewLayout(.fixed(width: 300, height: 300))
     }
 }

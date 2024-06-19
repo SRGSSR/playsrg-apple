@@ -112,6 +112,16 @@
 		042F6F6729E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */; };
 		042F6F6829E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */; };
 		042F6F6929E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */; };
+		04308F5E2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F5F2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F602B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F612B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F622B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F632B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F642B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F652B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F662B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F672B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
 		04395F1B2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */; };
 		04395F1C2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */; };
 		04395F1D2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */; };
@@ -217,16 +227,6 @@
 		0463DA172A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA182A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
 		0463DA192A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */; };
-		046845A62BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845A72BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845A82BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845A92BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845AB2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845AC2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845AD2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845AE2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
-		046845AF2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
 		0468459B2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
 		0468459C2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
 		0468459D2BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
@@ -237,6 +237,16 @@
 		046845A22BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
 		046845A32BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
 		046845A42BF513E2003A0073 /* ShowVisualView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468459A2BF513E2003A0073 /* ShowVisualView.swift */; };
+		046845A62BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A72BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A82BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845A92BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AB2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AC2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AD2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AE2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
+		046845AF2BF56A13003A0073 /* ColorsSettable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046845A52BF56A13003A0073 /* ColorsSettable.swift */; };
 		046F8DC02B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC12B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
 		046F8DC22B778E5300A71091 /* RadioChannelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */; };
@@ -347,6 +357,16 @@
 		0490BA002A3789F500B6FB7B /* UserConsentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490B9F82A3789F500B6FB7B /* UserConsentHelper.swift */; };
 		0490BA012A3789F500B6FB7B /* UserConsentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490B9F82A3789F500B6FB7B /* UserConsentHelper.swift */; };
 		0490BA022A3789F500B6FB7B /* UserConsentHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0490B9F82A3789F500B6FB7B /* UserConsentHelper.swift */; };
+		04B675C72BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675C82BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675C92BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675CA2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675CB2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675CC2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675CD2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675CE2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675CF2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
+		04B675D02BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */; };
 		04C2DE782937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE792937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
 		04C2DE7A2937C67000E85A03 /* AnalyticsClickEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */; };
@@ -2514,6 +2534,16 @@
 		6FFFB9BB252CA310004E40AE /* MediaDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */; };
 		70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */; };
 		8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */; };
+		9984F77A2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
+		9984F77B2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
+		9984F77C2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
+		9984F77D2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
+		9984F77E2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
+		99FE19272BFF49C9000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE19262BFF49C9000B5602 /* Tabman */; };
+		99FE19292BFF49F7000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE19282BFF49F7000B5602 /* Tabman */; };
+		99FE192B2BFF49FD000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE192A2BFF49FD000B5602 /* Tabman */; };
+		99FE192D2BFF4A04000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE192C2BFF4A04000B5602 /* Tabman */; };
+		99FE192F2BFF4A0B000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE192E2BFF4A0B000B5602 /* Tabman */; };
 		9EA78A2C26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A2D26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A2E26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
@@ -2823,6 +2853,7 @@
 		042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+playSRG.swift"; sourceTree = "<group>"; };
 		042F6F5429E0A764003F46AA /* UIColor+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PlaySRG.swift"; sourceTree = "<group>"; };
+		04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareImages.swift; sourceTree = "<group>"; };
 		04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableLoadMoreFooterView.swift; sourceTree = "<group>"; };
 		04395F202B1BBA6600F6A634 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		04395F262B1BC44200F6A634 /* StoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReview.swift; sourceTree = "<group>"; };
@@ -2839,8 +2870,8 @@
 		045F8A032BA5A001005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		045F8A0E2BA5A8A5005DDCEE /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		0463DA0F2A73D8B000CD6556 /* ProgramAndChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramAndChannel.swift; sourceTree = "<group>"; };
-		046845A52BF56A13003A0073 /* ColorsSettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsSettable.swift; sourceTree = "<group>"; };
 		0468459A2BF513E2003A0073 /* ShowVisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVisualView.swift; sourceTree = "<group>"; };
+		046845A52BF56A13003A0073 /* ColorsSettable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsSettable.swift; sourceTree = "<group>"; };
 		046F8DBF2B778E5300A71091 /* RadioChannelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioChannelsViewController.swift; sourceTree = "<group>"; };
 		046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageContainerViewController.swift; sourceTree = "<group>"; };
 		046F8DCB2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIVisualEffectView+PlaySRG.swift"; sourceTree = "<group>"; };
@@ -2856,6 +2887,7 @@
 		048FD24C2A14CF3B00929AE5 /* ProfileCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellModel.swift; sourceTree = "<group>"; };
 		0490B9F82A3789F500B6FB7B /* UserConsentHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserConsentHelper.swift; sourceTree = "<group>"; };
 		0497D5FE29D4B626005BF060 /* REMOTE_CONFIGURATION.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = REMOTE_CONFIGURATION.md; path = docs/REMOTE_CONFIGURATION.md; sourceTree = "<group>"; };
+		04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioHomepageOption.swift; sourceTree = "<group>"; };
 		04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsClickEvent.swift; sourceTree = "<group>"; };
 		04D21DBB299BEB42009CEA15 /* TruncatableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TruncatableTextView.swift; sourceTree = "<group>"; };
 		04D2A92A29ACFE5900E11B28 /* Handle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handle.swift; sourceTree = "<group>"; };
@@ -3423,6 +3455,7 @@
 		881AC8571743B65FBCF1192E /* Pods-Play SRG-iOS-Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
 		92B4B46D0768088FD67B3EFC /* Pods-Play SRG-iOS-Play RTR.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
 		95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
+		9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainerViewController.swift; sourceTree = "<group>"; };
 		9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
 		A660CE9179B6F1E81374096F /* Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		A7E130D069D1EEFCAE9360BC /* Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -3520,6 +3553,7 @@
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */,
 				6F2345D1283BAB3600A9089D /* FSCalendar in Frameworks */,
+				99FE19272BFF49C9000B5602 /* Tabman in Frameworks */,
 				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				0414BF212A685B73004543BD /* SwiftUIIntrospect in Frameworks */,
@@ -3553,6 +3587,7 @@
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAF3262D99CB00F717D0 /* SRGLoggerSwift in Frameworks */,
 				6F2345D3283BAB5000A9089D /* FSCalendar in Frameworks */,
+				99FE19292BFF49F7000B5602 /* Tabman in Frameworks */,
 				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				0414BF232A685B81004543BD /* SwiftUIIntrospect in Frameworks */,
@@ -3586,6 +3621,7 @@
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAF1262D99BF00F717D0 /* SRGLoggerSwift in Frameworks */,
 				6F2345D5283BAB5600A9089D /* FSCalendar in Frameworks */,
+				99FE192B2BFF49FD000B5602 /* Tabman in Frameworks */,
 				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				0414BF252A685B8E004543BD /* SwiftUIIntrospect in Frameworks */,
@@ -3619,6 +3655,7 @@
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAEF262D99B400F717D0 /* SRGLoggerSwift in Frameworks */,
 				6F2345D7283BAB5B00A9089D /* FSCalendar in Frameworks */,
+				99FE192D2BFF4A04000B5602 /* Tabman in Frameworks */,
 				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				0414BF272A685B98004543BD /* SwiftUIIntrospect in Frameworks */,
@@ -3652,6 +3689,7 @@
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAED262D99A900F717D0 /* SRGLoggerSwift in Frameworks */,
 				6F2345D9283BAB6000A9089D /* FSCalendar in Frameworks */,
+				99FE192F2BFF4A0B000B5602 /* Tabman in Frameworks */,
 				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				0414BF292A685BAC004543BD /* SwiftUIIntrospect in Frameworks */,
@@ -3944,12 +3982,14 @@
 				6FDF6FFF2682022C0004437E /* ApplicationSettings+Common.m */,
 				6FB03F5A25DECB3A0033132B /* ApplicationSettingsConstants.h */,
 				6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */,
+				04B675C62BE65C4B00F2A934 /* AudioHomepageOption.swift */,
 				6F5B4D5D2833F8F3004F5BA3 /* FeaturesView.swift */,
 				6F6C7AD32820578900BC3EA5 /* PosterImages.swift */,
 				6FE25909285E66570080548A /* Service.swift */,
 				6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */,
 				6F46B7BA281FB1FB00D20748 /* SettingsView.swift */,
 				6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */,
+				04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */,
 				6F73C639271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift */,
 				6F6C7AC82820576000BC3EA5 /* UserLocation.swift */,
 				6FDAAD8D2832824E008E2806 /* WhatsNewView.swift */,
@@ -4780,6 +4820,7 @@
 				082910AD239E90D200D168F4 /* TabBarController.m */,
 				6F80E9C021A682E60027CA2F /* TableRequestViewController.h */,
 				6F80E9C121A682E60027CA2F /* TableRequestViewController.m */,
+				9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -5390,7 +5431,7 @@
 				08B836951FBDC07100D849D8 /* Restore original icons if needed */,
 				0806E7A71D4BA4ED002ED406 /* Make custom icons */,
 				08C68D851D38D6F400BB8AAA /* Sources */,
-				08AD6C6E266BDC5000FAF1FA /* Swift Lint */,
+				08AD6C6E266BDC5000FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C21F74EC5C00D57D29 /* Update License Information */,
 				08C68D861D38D6F400BB8AAA /* Frameworks */,
 				08C68D871D38D6F400BB8AAA /* Resources */,
@@ -5434,6 +5475,7 @@
 				04030F4D2A34BD1100BC573B /* Usercentrics */,
 				04030F502A34BD3A00BC573B /* UsercentricsUI */,
 				04FA73A72AA62E5C0014E7F7 /* GoogleCastSDK-no-bluetooth */,
+				99FE19262BFF49C9000B5602 /* Tabman */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5447,7 +5489,7 @@
 				08B836941FBDBEAB00D849D8 /* Restore original icons if needed */,
 				0806E7A61D4BA4DF002ED406 /* Make custom icons */,
 				08C68DBC1D38D70D00BB8AAA /* Sources */,
-				08A1C3BF2636E77900276A5E /* Swift Lint */,
+				08A1C3BF2636E77900276A5E /* Swift Lint and Swift Format */,
 				6FE3C7C31F74EEA500D57D29 /* Update License Information */,
 				08C68DBD1D38D70D00BB8AAA /* Frameworks */,
 				08C68DBE1D38D70D00BB8AAA /* Resources */,
@@ -5490,6 +5532,7 @@
 				04030F522A34BD6D00BC573B /* Usercentrics */,
 				04030F542A34BD6D00BC573B /* UsercentricsUI */,
 				04FA73A92AA62E640014E7F7 /* GoogleCastSDK-no-bluetooth */,
+				99FE19282BFF49F7000B5602 /* Tabman */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5503,7 +5546,7 @@
 				08B836961FBDC08400D849D8 /* Restore original icons if needed */,
 				0806E7A51D4BA4CF002ED406 /* Make custom icons */,
 				08C68DF31D38D72000BB8AAA /* Sources */,
-				08AD6C6F266BDC6D00FAF1FA /* Swift Lint */,
+				08AD6C6F266BDC6D00FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C41F74EEBE00D57D29 /* Update License Information */,
 				08C68DF41D38D72000BB8AAA /* Frameworks */,
 				08C68DF51D38D72000BB8AAA /* Resources */,
@@ -5546,6 +5589,7 @@
 				04030F562A34BD7700BC573B /* Usercentrics */,
 				04030F582A34BD7700BC573B /* UsercentricsUI */,
 				04FA73A52AA62E4B0014E7F7 /* GoogleCastSDK-no-bluetooth */,
+				99FE192A2BFF49FD000B5602 /* Tabman */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5559,7 +5603,7 @@
 				08B836971FBDC09500D849D8 /* Restore original icons if needed */,
 				0806E7A41D4BA4BA002ED406 /* Make custom icons */,
 				08C68E2A1D38D73000BB8AAA /* Sources */,
-				08AD6C70266BDC7B00FAF1FA /* Swift Lint */,
+				08AD6C70266BDC7B00FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C61F74EECF00D57D29 /* Update License Information */,
 				08C68E2B1D38D73000BB8AAA /* Frameworks */,
 				08C68E2C1D38D73000BB8AAA /* Resources */,
@@ -5602,6 +5646,7 @@
 				04030F5A2A34BD8300BC573B /* Usercentrics */,
 				04030F5C2A34BD8300BC573B /* UsercentricsUI */,
 				04FA73AB2AA62E760014E7F7 /* GoogleCastSDK-no-bluetooth */,
+				99FE192C2BFF4A04000B5602 /* Tabman */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5615,7 +5660,7 @@
 				08B836981FBDC0A100D849D8 /* Restore original icons if needed */,
 				0806E7A31D4BA494002ED406 /* Make custom icons */,
 				08C68E611D38D73C00BB8AAA /* Sources */,
-				08AD6C71266BDC8D00FAF1FA /* Swift Lint */,
+				08AD6C71266BDC8D00FAF1FA /* Swift Lint and Swift Format */,
 				6FE3C7C71F74EEDB00D57D29 /* Update License Information */,
 				08C68E621D38D73C00BB8AAA /* Frameworks */,
 				08C68E631D38D73C00BB8AAA /* Resources */,
@@ -5658,6 +5703,7 @@
 				04030F5E2A34BD8B00BC573B /* Usercentrics */,
 				04030F602A34BD8B00BC573B /* UsercentricsUI */,
 				04FA73AD2AA62E7D0014E7F7 /* GoogleCastSDK-no-bluetooth */,
+				99FE192E2BFF4A0B000B5602 /* Tabman */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -5856,7 +5902,7 @@
 				08C13555256B2746002F67B8 /* Restore original icons if needed */,
 				08C13557256B277B002F67B8 /* Make custom icons */,
 				6F331CE024D06B8200C096AB /* Sources */,
-				08AD6C72266BDCA100FAF1FA /* Swift Lint */,
+				08AD6C72266BDCA100FAF1FA /* Swift Lint and Swift Format */,
 				6F331CE124D06B8200C096AB /* Frameworks */,
 				6F331CE224D06B8200C096AB /* Resources */,
 				08C13558256B27AC002F67B8 /* Restore original icons */,
@@ -5900,7 +5946,7 @@
 				08C1356D256B28C0002F67B8 /* Restore original icons if needed */,
 				08C13571256B291D002F67B8 /* Make custom icons */,
 				6F331CF824D06BA200C096AB /* Sources */,
-				08AD6C73266BDCBB00FAF1FA /* Swift Lint */,
+				08AD6C73266BDCBB00FAF1FA /* Swift Lint and Swift Format */,
 				6F331CF924D06BA200C096AB /* Frameworks */,
 				6F331CFA24D06BA200C096AB /* Resources */,
 				08C13575256B2977002F67B8 /* Restore original icons */,
@@ -5944,7 +5990,7 @@
 				08C1356E256B28C7002F67B8 /* Restore original icons if needed */,
 				08C13572256B2922002F67B8 /* Make custom icons */,
 				6F331D1024D06BB800C096AB /* Sources */,
-				08AD6C74266BDCC800FAF1FA /* Swift Lint */,
+				08AD6C74266BDCC800FAF1FA /* Swift Lint and Swift Format */,
 				6F331D1124D06BB800C096AB /* Frameworks */,
 				6F331D1224D06BB800C096AB /* Resources */,
 				08C13576256B297E002F67B8 /* Restore original icons */,
@@ -5988,7 +6034,7 @@
 				08C1356F256B28CF002F67B8 /* Restore original icons if needed */,
 				08C13573256B2927002F67B8 /* Make custom icons */,
 				6F331D2824D06BC600C096AB /* Sources */,
-				08AD6C75266BDCD400FAF1FA /* Swift Lint */,
+				08AD6C75266BDCD400FAF1FA /* Swift Lint and Swift Format */,
 				6F331D2924D06BC600C096AB /* Frameworks */,
 				6F331D2A24D06BC600C096AB /* Resources */,
 				08C13577256B2983002F67B8 /* Restore original icons */,
@@ -6032,7 +6078,7 @@
 				08C13570256B28D7002F67B8 /* Restore original icons if needed */,
 				08C13574256B292C002F67B8 /* Make custom icons */,
 				6F331D4024D06C2600C096AB /* Sources */,
-				08AD6C76266BDCDE00FAF1FA /* Swift Lint */,
+				08AD6C76266BDCDE00FAF1FA /* Swift Lint and Swift Format */,
 				6F331D4124D06C2600C096AB /* Frameworks */,
 				6F331D4224D06C2600C096AB /* Resources */,
 				08C13578256B2989002F67B8 /* Restore original icons */,
@@ -6400,6 +6446,7 @@
 				04030F4C2A34BD1100BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-sdk" */,
 				04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */,
 				04FA73A42AA62E4B0014E7F7 /* XCRemoteSwiftPackageReference "GoogleCastSDK-no-bluetooth" */,
+				99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -6968,7 +7015,7 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
-		08A1C3BF2636E77900276A5E /* Swift Lint */ = {
+		08A1C3BF2636E77900276A5E /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -6978,16 +7025,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C6E266BDC5000FAF1FA /* Swift Lint */ = {
+		08AD6C6E266BDC5000FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -6997,16 +7044,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C6F266BDC6D00FAF1FA /* Swift Lint */ = {
+		08AD6C6F266BDC6D00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7016,16 +7063,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C70266BDC7B00FAF1FA /* Swift Lint */ = {
+		08AD6C70266BDC7B00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7035,16 +7082,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C71266BDC8D00FAF1FA /* Swift Lint */ = {
+		08AD6C71266BDC8D00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7054,16 +7101,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C72266BDCA100FAF1FA /* Swift Lint */ = {
+		08AD6C72266BDCA100FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7073,16 +7120,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C73266BDCBB00FAF1FA /* Swift Lint */ = {
+		08AD6C73266BDCBB00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7092,16 +7139,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C74266BDCC800FAF1FA /* Swift Lint */ = {
+		08AD6C74266BDCC800FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7111,16 +7158,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C75266BDCD400FAF1FA /* Swift Lint */ = {
+		08AD6C75266BDCD400FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7130,16 +7177,16 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
-		08AD6C76266BDCDE00FAF1FA /* Swift Lint */ = {
+		08AD6C76266BDCDE00FAF1FA /* Swift Lint and Swift Format */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -7149,14 +7196,14 @@
 			);
 			inputPaths = (
 			);
-			name = "Swift Lint";
+			name = "Swift Lint and Swift Format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict    \n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftlint\n    else\n        swiftlint --strict\n    fi\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n\nif which swiftformat >/dev/null; then\n    if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n        swiftformat --lint --lenient .\n    else\n        swiftformat --lint .\n    fi\nelse\n  echo \"warning: swiftformat not installed, download from https://github.com/nicklockwood/SwiftFormat\"\nfi\n";
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -8455,6 +8502,7 @@
 				08AA551D1D49EBF600C5026E /* ApplicationConfiguration.m in Sources */,
 				6FB90D18270D91010033D860 /* CarPlayList.swift in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
+				04B675C72BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				6FC2A21C265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				041DD1742B1B95AA00C9368A /* GradientView.swift in Sources */,
 				048FD24D2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
@@ -8579,6 +8627,7 @@
 				6FAE561C26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6F30AB9C2604B66600457331 /* TopicCell.swift in Sources */,
 				0463DA102A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
+				04308F5E2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				6F16C7A326025698006F685A /* PageViewController.swift in Sources */,
 				04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
@@ -8592,6 +8641,7 @@
 				6F33E6122860AEFF00724E76 /* Navigation.swift in Sources */,
 				6F8A545A2655100400AE78FD /* SectionViewController.swift in Sources */,
 				0458A51B2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
+				9984F77A2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */,
 				0451D7EE2B1CEDAD005A2150 /* Banner.swift in Sources */,
 				04395F272B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
@@ -8664,6 +8714,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04308F5F2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				046F8DCD2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210E826AEDDD200291CA9 /* Environment.swift in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
@@ -8739,6 +8790,7 @@
 				6F6C7AD52820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F2E160A26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
+				04B675C82BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				04395F2E2B1BF38B00F6A634 /* GoogleCastBarButtonItem.swift in Sources */,
 				6F3B0222245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6FD686202460670600B8018A /* Channel.m in Sources */,
@@ -8858,6 +8910,7 @@
 				085C0D9A2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				0481D5BB29F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
 				6F49EF94263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
+				9984F77B2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */,
 				6FDAAD95283283EB008E2806 /* WebView.swift in Sources */,
 				04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBD299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
@@ -8932,6 +8985,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04308F602B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				046F8DCE2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EA26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
@@ -9007,6 +9061,7 @@
 				6F6C7AD62820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160B26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
+				04B675C92BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				04395F2F2B1BF38B00F6A634 /* GoogleCastBarButtonItem.swift in Sources */,
 				081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F3B0223245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
@@ -9126,6 +9181,7 @@
 				085C0D9B2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				0481D5BC29F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
 				6F49EF95263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
+				9984F77C2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */,
 				6FDAAD96283283EB008E2806 /* WebView.swift in Sources */,
 				04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBE299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
@@ -9200,6 +9256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04308F612B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				046F8DCF2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EB26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
@@ -9275,6 +9332,7 @@
 				6F6C7AD72820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D623EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160C26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
+				04B675CA2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				04395F302B1BF38B00F6A634 /* GoogleCastBarButtonItem.swift in Sources */,
 				081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F3B0224245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
@@ -9394,6 +9452,7 @@
 				085C0D9C2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				0481D5BD29F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
 				6F49EF96263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
+				9984F77D2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */,
 				6FDAAD97283283EB008E2806 /* WebView.swift in Sources */,
 				04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04D21DBF299BEB42009CEA15 /* TruncatableTextView.swift in Sources */,
@@ -9549,6 +9608,7 @@
 				0407EFEA2A509F10004A0FAB /* Bundble+PlaySRG.swift in Sources */,
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				6FB9B3DA26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
+				04B675CB2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				6F56F9F8247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				04E031D328BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */,
 				6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
@@ -9604,6 +9664,7 @@
 				6F80E9C621A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				04395F2B2B1BC44200F6A634 /* StoreReview.swift in Sources */,
 				6FE1B91D1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				9984F77E2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */,
 				6F742941265BE52E0000538D /* Signals.swift in Sources */,
 				6F566E8424EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				0451D7F22B1CEDAD005A2150 /* Banner.swift in Sources */,
@@ -9701,6 +9762,7 @@
 				6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5F270DE4FE00210713 /* Publishers.swift in Sources */,
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
+				04308F622B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				6F16C81026025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10F2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				04EB14C6299E312200FD004A /* SheetTextView.swift in Sources */,
@@ -9848,6 +9910,7 @@
 				6FDF54F728530BAC0068BABB /* SearchViewController.swift in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF98263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
+				04308F632B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C63F271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -9915,6 +9978,7 @@
 				6FEF236C2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6B2719C46C0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5A29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
+				04B675CC2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981352622195900AA586B /* LiveMediaCell.swift in Sources */,
 				0858CA60271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -10005,6 +10069,7 @@
 				6FDF54F828530BAC0068BABB /* SearchViewController.swift in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF99263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
+				04308F642B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C640271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -10072,6 +10137,7 @@
 				6FEF236D2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6D2719C46F0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5B29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
+				04B675CD2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981362622195900AA586B /* LiveMediaCell.swift in Sources */,
 				0858CA61271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -10162,6 +10228,7 @@
 				6FDF54F928530BAC0068BABB /* SearchViewController.swift in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9A263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
+				04308F652B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C641271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -10229,6 +10296,7 @@
 				6FEF236E2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6E2719C4700082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5C29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
+				04B675CE2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981372622195900AA586B /* LiveMediaCell.swift in Sources */,
 				0858CA62271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -10319,6 +10387,7 @@
 				6FDF54FA28530BAC0068BABB /* SearchViewController.swift in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9B263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
+				04308F662B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C642271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -10386,6 +10455,7 @@
 				6FEF236F2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6F2719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				042F6F5D29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
+				04B675CF2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981382622195900AA586B /* LiveMediaCell.swift in Sources */,
 				0858CA63271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
@@ -10498,6 +10568,7 @@
 				6FF5D1F92746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F67685A281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD92813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
+				04308F672B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
 				6FE14E69263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6FEC8A0C261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB19262DC7F700F717D0 /* Logger.swift in Sources */,
@@ -10515,6 +10586,7 @@
 				6FA8E533261CB5D2003FFDCF /* UIViewController+PlaySRG.m in Sources */,
 				08B971E5256EF40300195901 /* AnalyticsConstants.m in Sources */,
 				6F3CCEA226CAC7A2004039E2 /* Blur.swift in Sources */,
+				04B675D02BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */,
 				0481D5B829F460C500D174B3 /* SRGProgramComposition+PlaySRG.swift in Sources */,
 				0825914927285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
@@ -19375,7 +19447,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 19.0.3;
+				minimumVersion = 19.0.4;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
@@ -19472,6 +19544,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 16.1.2;
+			};
+		};
+		99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -20551,6 +20631,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
+		};
+		99FE19262BFF49C9000B5602 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
+		99FE19282BFF49F7000B5602 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
+		99FE192A2BFF49FD000B5602 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
+		99FE192C2BFF4A04000B5602 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
+		99FE192E2BFF4A0B000B5602 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

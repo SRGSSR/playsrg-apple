@@ -66,10 +66,13 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, copy, nullable) NSString *discoverySubtitleOptionLanguage;
 
 @property (nonatomic, readonly, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
+@property (nonatomic, readonly, getter=areSquareImagesEnabled) BOOL squareImagesEnabled;
 
 @property (nonatomic, readonly) NSArray<NSNumber *> *liveHomeSections;                  // wrap `HomeSection` values
 
 @property (nonatomic, readonly) NSInteger minimumSocialViewCount;                       // minimum value to display social view count
+
+@property (nonatomic, readonly, getter=isAudioContentHomepagePreferred) BOOL audioContentHomepagePreferred;
 
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioHomepageChannels;         // radio channels having a corresponding homepage

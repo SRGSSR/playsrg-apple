@@ -19,16 +19,16 @@ struct CalendarView: View {
     @ObservedObject var model: ProgramGuideViewModel
     @State private var selectedDate = Date()
     @FirstResponder private var firstResponder
-    
+
     var body: some View {
         VStack {
             DatePicker("", selection: $selectedDate, displayedComponents: [.date])
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .colorMultiply(.white)
                 .accentColor(.red)
-            
+
             Divider()
-            
+
             ExpandingButton(label: NSLocalizedString("OK", comment: "Title of the button to validate date settings")) {
                 firstResponder.sendAction(#selector(CalendarViewActions.close))
             }

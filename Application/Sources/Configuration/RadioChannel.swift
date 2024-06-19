@@ -25,17 +25,17 @@ extension RadioChannel {
             return .radioResumePlayback(channelUid: channelUid)
         case .radioWatchLater:
             return .radioWatchLater(channelUid: channelUid)
-#if os(iOS)
-        case .radioShowsAccess:
-            return .radioShowAccess(channelUid: channelUid)
-#endif
+        #if os(iOS)
+            case .radioShowsAccess:
+                return .radioShowAccess(channelUid: channelUid)
+        #endif
         default:
             return nil
         }
     }
-    
+
     func configuredSections() -> [ConfiguredSection] {
-        return homeSections.compactMap { homeSection in
+        homeSections.compactMap { homeSection in
             guard let homeSection = HomeSection(rawValue: homeSection.intValue) else { return nil }
             return Self.configuredSection(from: homeSection, withChannelUid: uid)
         }

@@ -14,7 +14,7 @@ struct ShowVisualView: View {
     let size: SRGImageSize
     let imageVariant: SRGImageVariant
     let contentMode: ImageView.ContentMode
-    
+
     init(
         show: SRGShow?,
         size: SRGImageSize,
@@ -26,14 +26,21 @@ struct ShowVisualView: View {
         self.imageVariant = imageVariant
         self.contentMode = contentMode
     }
-    
+
     var body: some View {
         ImageView(source: imageUrl, contentMode: contentMode)
             .background(Color.thumbnailBackground)
     }
-    
+
     private var imageUrl: URL? {
-        return imageVariant == .poster ? url(for: show?.posterImage, size: size) : url(for: show?.image, size: size)
+        switch imageVariant {
+        case .poster:
+            url(for: show?.posterImage, size: size)
+        case .podcast:
+            url(for: show?.podcastImage, size: size)
+        case .default:
+            url(for: show?.image, size: size)
+        }
     }
 }
 

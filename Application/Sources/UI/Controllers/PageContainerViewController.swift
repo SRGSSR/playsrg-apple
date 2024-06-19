@@ -4,154 +4,119 @@
 //  License information is available from the LICENSE file.
 //
 
-import UIKit
+import Combine
+import Pageboy
 import SRGAppearance
+import Tabman
+import UIKit
 
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
-    
+
+    private var tabContainerViewController: TabContainerViewController
     private(set) var initialPage: Int
-    
-    private var pageViewController: UIPageViewController
-    
-    private weak var tabBar: MDCTabBar!
-    private weak var blurView: UIVisualEffectView!
-    private weak var tabBarTopConstraint: NSLayoutConstraint!
-    
+    private let tabBarItems: [TMBarItem]
+    private weak var tabBarTopConstraint: NSLayoutConstraint?
+    private weak var blurView: UIVisualEffectView?
+    private var cancellables: Set<AnyCancellable> = []
+
     init(viewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
-        
+
         self.viewControllers = viewControllers
-        if initialPage >= 0 && initialPage < viewControllers.count {
+        if initialPage >= 0, initialPage < viewControllers.count {
             self.initialPage = initialPage
         } else {
             PlayLogWarning(category: "pageViewController", message: "Invalid page. Fixed to 0")
             self.initialPage = 0
         }
-        
-        let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [.interPageSpacing: 100.0])
-        self.pageViewController = pageViewController
-        
-        super.init(nibName: nil, bundle: nil)
-        
-        pageViewController.delegate = self
-        
-        // Only allow scrolling if several pages are available
-        if viewControllers.count > 1 {
-            pageViewController.dataSource = self
+
+        tabBarItems = viewControllers.map {
+            if let tabBarItem = $0.tabBarItem, let image = tabBarItem.image {
+                let item = TMBarItem(image: image)
+                item.accessibilityLabel = tabBarItem.title ?? $0.title
+                return item
+            } else {
+                let item = TMBarItem(title: $0.title ?? "")
+                item.accessibilityLabel = $0.title
+                return item
+            }
         }
-        self.addChild(pageViewController)
+
+        tabContainerViewController = TabContainerViewController()
+
+        super.init(nibName: nil, bundle: nil)
+
+        addChild(tabContainerViewController)
     }
-    
+
     convenience init(viewControllers: [UIViewController]) {
         self.init(viewControllers: viewControllers, initialPage: 0)
     }
-    
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+    private func configureBarView() {
+        let blurView = UIVisualEffectView.play_blurView
+        self.blurView = blurView
+
+        let barView = TMBarView<TMHorizontalBarLayout, TMTabItemBarButton, TMLineBarIndicator>()
+        barView.backgroundView.style = .custom(view: blurView)
+        barView.layout.alignment = .centerDistributed
+        barView.indicator.tintColor = .white
+        barView.buttons.customize { button in
+            button.imageContentMode = .center
+        }
+        tabContainerViewController.addBar(barView, dataSource: self, at: .top)
+    }
+
     override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
-        
-        let pageView = pageViewController.view!
-        view.insertSubview(pageView, at: 0)
-        
-        pageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            pageView.topAnchor.constraint(equalTo: view.topAnchor),
-            pageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            pageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        
-        pageViewController.didMove(toParent: self)
-        
-        var hasImage = false
-        var tabBarItems = [UITabBarItem]()
-        viewControllers.forEach { viewController in
-            if let tabBarItem = viewController.tabBarItem {
-                tabBarItems.append(tabBarItem)
-                if tabBarItem.image != nil {
-                    hasImage = true
-                }
-            }
-        }
-        
-        let tabBar = MDCTabBar()
-        tabBar.itemAppearance = hasImage ? .images : .titles
-        tabBar.alignment = .center
-        tabBar.delegate = self
-        tabBar.items = tabBarItems
-        
-        tabBar.tintColor = .white
-        tabBar.unselectedItemTintColor = .srgGray96
-        tabBar.selectedItemTintColor = .white
-        
-        // Use ripple effect without color, so that there is no Material-like highlighting (we are NOT adopting Material)
-        tabBar.enableRippleBehavior = true
-        tabBar.rippleColor = .clear
-        
-        view.addSubview(tabBar)
-        self.tabBar = tabBar
-        
-        tabBar.translatesAutoresizingMaskIntoConstraints = false
-        tabBarTopConstraint = tabBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        NSLayoutConstraint.activate([
-            tabBarTopConstraint,
-            tabBar.heightAnchor.constraint(equalToConstant: 60.0),
-            tabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        
-        let blurView = UIVisualEffectView.play_blurView
-        blurView.alpha = 0.0
-        view.insertSubview(blurView, belowSubview: tabBar)
-        self.blurView = blurView
-        
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            blurView.topAnchor.constraint(equalTo: tabBar.topAnchor),
-            blurView.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor),
-            blurView.leadingAnchor.constraint(equalTo: tabBar.leadingAnchor),
-            blurView.trailingAnchor.constraint(equalTo: tabBar.trailingAnchor)
-        ])
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(contentSizeCategoryDidChange(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
-        
-        self.view = view
-        self.updateFonts()
+        view = view
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tabBar.selectedItem = tabBar.items[initialPage]
-        let initialViewController = viewControllers[initialPage]
-        pageViewController.setViewControllers([initialViewController], direction: .forward, animated: false, completion: nil)
-        didDisplayViewController(initialViewController, animated: false)
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: { _ in
-            // viewWillTransition(to:with:) could be called before controller view is loaded.
-            if self.isViewLoaded {
-                // Force a refresh of the tab bar so that the alignment is correct after rotation
-                self.tabBar.alignment = .leading
-                self.tabBar.alignment = .center
+
+        configureBarView()
+        if let tabContainerView = tabContainerViewController.view {
+            view.insertSubview(tabContainerView, at: 0)
+
+            tabContainerView.translatesAutoresizingMaskIntoConstraints = false
+            let tabBarTopConstraint = tabContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            NSLayoutConstraint.activate([
+                tabBarTopConstraint,
+                tabContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                tabContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                tabContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
+            self.tabBarTopConstraint = tabBarTopConstraint
+        }
+        tabContainerViewController.didMove(toParent: self)
+
+        tabContainerViewController.dataSource = self
+        didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
+
+        tabContainerViewController
+            .updateSignal()
+            .debounce(for: 0.1, scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                didDisplayViewController(tabContainerViewController.currentViewController, animated: false)
             }
-        }, completion: nil)
+            .store(in: &cancellables)
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        .lightContent
     }
-    
+
     override func accessibilityPerformEscape() -> Bool {
-        if let navigationController = navigationController, navigationController.viewControllers.count > 1 {
+        if let navigationController, navigationController.viewControllers.count > 1 {
             navigationController.popViewController(animated: true)
             return true
         } else if presentingViewController != nil {
@@ -161,142 +126,67 @@ class PageContainerViewController: UIViewController {
             return false
         }
     }
-    
+
     func switchToIndex(_ index: Int, animated: Bool) -> Bool {
         guard index < viewControllers.count else { return false }
-        
-        if self.isViewLoaded {
-            guard displayPage(at: index, animated: animated) else { return false }
-            
-            tabBar.setSelectedItem(tabBar.items[index], animated: animated)
+
+        if isViewLoaded {
+            tabContainerViewController.scrollToPage(.at(index: index), animated: animated)
+            didDisplayViewController(tabContainerViewController.currentViewController, animated: animated)
             return true
-        }
-        else {
+        } else {
             initialPage = index
             return true
         }
     }
-    
-    private func displayPage(at index: Int, animated: Bool) -> Bool {
-        guard index < viewControllers.count else { return false }
-        
-        if self.isViewLoaded {
-            var direction: UIPageViewController.NavigationDirection = .forward
-            if let currentViewController = pageViewController.viewControllers?.first {
-                let currentIndex = viewControllers.firstIndex(of: currentViewController)!
-                direction = index > currentIndex ? .forward : .reverse
-            }
-            
-            let newViewController = viewControllers[index]
-            pageViewController.setViewControllers([newViewController], direction: direction, animated: animated)
-            self.play_setNeedsScrollableViewUpdate()
-            
-            didDisplayViewController(newViewController, animated: animated)
-            return true
-        }
-        else {
-            initialPage = index
-            return true
-        }
+
+    func didDisplayViewController(_: UIViewController?, animated _: Bool) {
+        play_setNeedsScrollableViewUpdate()
     }
-    
-    private func updateFonts() {
-        let tabBarFont = SRGFont.font(.body) as UIFont
-        tabBar.unselectedItemTitleFont = tabBarFont
-        tabBar.selectedItemTitleFont = tabBarFont
-    }
-    
-    @objc func contentSizeCategoryDidChange(_ notification: Notification) {
-        updateFonts()
-    }
-    
-    func didDisplayViewController(_ viewController: UIViewController, animated: Bool) {}
 }
 
 // MARK: - Protocols
 
 extension PageContainerViewController: ContainerContentInsets {
     var play_additionalContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: blurView.frame.height, left: 0.0, bottom: 0.0, right: 0.0)
-    }
-}
-
-extension PageContainerViewController: MDCTabBarDelegate {
-    func tabBar(_ tabBar: MDCTabBar, didSelect item: UITabBarItem) {
-        if let index = tabBar.items.firstIndex(of: item) {
-            _ = displayPage(at: index, animated: true)
-        }
+        UIEdgeInsets(top: tabContainerViewController.barInsets.top, left: 0.0, bottom: 0.0, right: 0.0)
     }
 }
 
 extension PageContainerViewController: Oriented {
     var play_supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .all
+        .all
     }
-    
+
     var play_orientingChildViewControllers: [UIViewController] {
-        return pageViewController.viewControllers ?? []
+        viewControllers
     }
 }
 
 extension PageContainerViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
-        return pageViewController.viewControllers?.first
-    }
-    
-    func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
-        let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
-        tabBarTopConstraint.constant = max(-adjustedOffset, 0.0)
-        blurView.alpha = max(0.0, min(1.0, adjustedOffset / LayoutBlurActivationDistance))
+        tabContainerViewController.currentViewController
     }
 }
 
 extension PageContainerViewController: SRGAnalyticsContainerViewTracking {
     var srg_activeChildViewControllers: [UIViewController] {
-        return [pageViewController]
+        [tabContainerViewController]
     }
 }
 
 extension PageContainerViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
-        if let currentViewController = pageViewController.viewControllers?.first,
+        if let currentViewController = tabContainerViewController.currentViewController,
            let actionableCurrentViewController = currentViewController as? TabBarActionable {
             actionableCurrentViewController.performActiveTabAction(animated: animated)
         }
     }
 }
 
-extension PageContainerViewController: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if let index = viewControllers.firstIndex(of: viewController), index > 0 {
-            return viewControllers[index - 1]
-        }
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if let index = viewControllers.firstIndex(of: viewController), index < viewControllers.count - 1 {
-            return viewControllers[index + 1]
-        }
-        return nil
-    }
-}
-
-extension PageContainerViewController: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if completed {
-            guard let newViewController = pageViewController.viewControllers?.first else { return }
-            guard let currentIndex = viewControllers.firstIndex(of: newViewController) else { return }
-            tabBar.setSelectedItem(tabBar.items[currentIndex], animated: true)
-            didDisplayViewController(newViewController, animated: true)
-            play_setNeedsScrollableViewUpdate()
-        }
-    }
-}
-
 extension UIViewController {
     var play_pageContainerViewController: PageContainerViewController? {
-        var parentViewController = self.parent
+        var parentViewController = parent
         while let viewController = parentViewController {
             if let pageContainerViewController = viewController as? PageContainerViewController {
                 return pageContainerViewController
@@ -304,5 +194,23 @@ extension UIViewController {
             parentViewController = viewController.parent
         }
         return nil
+    }
+}
+
+extension PageContainerViewController: PageboyViewControllerDataSource, TMBarDataSource {
+    func numberOfViewControllers(in _: Pageboy.PageboyViewController) -> Int {
+        viewControllers.count
+    }
+
+    func viewController(for _: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
+        viewControllers[index]
+    }
+
+    func defaultPage(for _: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
+        .at(index: initialPage)
+    }
+
+    func barItem(for _: any Tabman.TMBar, at index: Int) -> any Tabman.TMBarItemable {
+        tabBarItems[index]
     }
 }

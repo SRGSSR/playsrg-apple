@@ -16,21 +16,20 @@ extension UITableView {
             didSet {
                 if let title {
                     content = ProfileSectionHeaderView(title: title)
-                }
-                else {
+                } else {
                     content = nil
                 }
             }
         }
     }
-    
+
     private static let reuseIdentifier = "ProfileSectionHeaderView"
-    
+
     @objc func registerReusableProfileSectionHeader() {
         register(ProfileSectionTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: Self.reuseIdentifier)
     }
-    
+
     @objc func dequeueReusableProfileSectionHeader() -> UITableViewHeaderFooterView & ProfileSectionSettable {
-        return dequeueReusableHeaderFooterView(withIdentifier: UITableView.reuseIdentifier) as! ProfileSectionTableViewHeaderView
+        dequeueReusableHeaderFooterView(withIdentifier: UITableView.reuseIdentifier) as! ProfileSectionTableViewHeaderView
     }
 }

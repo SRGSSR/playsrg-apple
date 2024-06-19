@@ -88,12 +88,12 @@ static UIInterfaceOrientationMask MediaPlayerUserInterfaceOrientationMask(UIInte
             return UIInterfaceOrientationMaskLandscapeLeft;
             break;
         }
-        
+            
         case UIInterfaceOrientationLandscapeRight: {
             return UIInterfaceOrientationMaskLandscapeRight;
             break;
         }
-        
+            
         case UIInterfaceOrientationPortraitUpsideDown: {
             return UIInterfaceOrientationMaskPortraitUpsideDown;
             break;

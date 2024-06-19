@@ -34,11 +34,53 @@ typedef NS_ENUM(NSInteger, SettingPosterImages) {
     SettingPosterImagesIgnored
 };
 
+/**
+ *  Squared image setting.
+ */
+typedef NS_ENUM(NSInteger, SettingSquareImages) {
+    /**
+     *  Default (Firebase configuration).
+     */
+    SettingSquareImagesDefault,
+    /**
+     *  Forced square images.
+     */
+    SettingSquareImagesForced,
+    /**
+     *  Ignored square images.
+     */
+    SettingSquareImagesIgnored
+};
+
+/**
+ *  Audio homepage option setting.
+ */
+typedef NS_ENUM(NSInteger, SettingAudioHomepageOption) {
+    /**
+     *  Default (Firebase configuration).
+     */
+    SettingAudioHomepageOptionDefault,
+    /**
+     *  Force one audio curated home page usage.
+     */
+    SettingAudioHomepageOptionCuratedOne,
+    /**
+     *  Force many audio curated home pages usage.
+     */
+    SettingAudioHomepageOptionCuratedMany,
+    /**
+     *  Force many audio predefined home pages usage.
+     */
+    SettingAudioHomepageOptionPredefinedMany
+};
+
 OBJC_EXPORT ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(BOOL isCompactHorizontalSizeClass);
 OBJC_EXPORT void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuideLayout layout);
 
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);
+OBJC_EXPORT SettingSquareImages ApplicationSettingSquareImages(void);
+OBJC_EXPORT SettingAudioHomepageOption ApplicationSettingAudioHomepageOption(void);
 
 OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 

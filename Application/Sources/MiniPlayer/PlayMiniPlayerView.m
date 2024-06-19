@@ -382,7 +382,7 @@
     }
     
     if (state == SRGPlaybackButtonStatePlay && media.mediaType == SRGMediaTypeVideo && ! ApplicationSettingBackgroundVideoPlaybackEnabled()
-            && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
+        && ! AVAudioSession.srg_isAirPlayActive && ! controller.pictureInPictureActive) {
         [self.play_nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
 }

@@ -13,11 +13,11 @@ import SRGDataProviderModel
 struct AnalyticsClickEvent {
     let name: String
     let labels: SRGAnalyticsEventLabels
-    
+
     private enum PageId: String {
         case tvGuide
     }
-    
+
     /**
      *  Each struct created have expected values.
      *  Use this method to send the event when needed.
@@ -25,9 +25,9 @@ struct AnalyticsClickEvent {
     func send() {
         SRGAnalyticsTracker.shared.trackEvent(withName: name, labels: labels)
     }
-    
+
     static func tvGuideOpenInfoBox(program: SRGProgram, programGuideLayout: ProgramGuideLayout) -> Self {
-        return Self(
+        Self(
             name: "TvGuideOpenInfoBox",
             value1: PageId.tvGuide.rawValue,
             value2: programGuideLayout == .grid ? "Grid" : "List",
@@ -35,14 +35,14 @@ struct AnalyticsClickEvent {
             value4: program.mediaURN
         )
     }
-    
+
     enum TvGuidePlaySource: String {
         case infoBox = "InfoBox"
         case grid = "Grid"
     }
-    
+
     static func tvGuidePlayLivestream(program: SRGProgram, channel: SRGChannel, source: TvGuidePlaySource = .infoBox) -> Self {
-        return Self(
+        Self(
             name: "TvGuidePlayLivestream",
             value1: PageId.tvGuide.rawValue,
             value2: channel.title,
@@ -50,9 +50,9 @@ struct AnalyticsClickEvent {
             value4: program.mediaURN
         )
     }
-    
+
     static func tvGuidePlayMedia(media: SRGMedia, programIsLive: Bool, channel: SRGChannel, source: TvGuidePlaySource = .infoBox) -> Self {
-        return Self(
+        Self(
             name: "TvGuidePlayMedia",
             value1: PageId.tvGuide.rawValue,
             value2: media.urn,
@@ -60,54 +60,54 @@ struct AnalyticsClickEvent {
             value4: programIsLive ? channel.title : nil
         )
     }
-    
+
     static func tvGuideNow() -> Self {
-        return Self(
+        Self(
             name: "DateSelectionNowClick",
             value1: PageId.tvGuide.rawValue
         )
     }
-    
+
     static func tvGuideTonight() -> Self {
-        return Self(
+        Self(
             name: "DateSelectionTonightClick",
             value1: PageId.tvGuide.rawValue
         )
     }
-    
+
     static func tvGuidePreviousDay() -> Self {
-        return Self(
+        Self(
             name: "DateSelectionPreviousDayClick",
             value1: PageId.tvGuide.rawValue
         )
     }
-    
+
     static func tvGuideNextDay() -> Self {
-        return Self(
+        Self(
             name: "DateSelectionNextDayClick",
             value1: PageId.tvGuide.rawValue
         )
     }
-    
+
     static func tvGuideCalendar(to selectedDate: Date) -> Self {
-        return Self(
+        Self(
             name: "DateSelectionCalendarClick",
             value1: DateFormatter.play_iso8601CalendarDate.string(from: selectedDate),
             value2: PageId.tvGuide.rawValue
         )
     }
-    
+
     static func tvGuideChangeLayout(to programGuideLayout: ProgramGuideLayout) -> Self {
-        return Self(
+        Self(
             name: "TvGuideSwitchLayout",
             value1: PageId.tvGuide.rawValue,
             value2: programGuideLayout == .grid ? "Grid" : "List"
         )
     }
-    
+
     private init(name: String, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
         self.name = name
-        
+
         let labels = SRGAnalyticsEventLabels()
         labels.source = "2797"
         labels.type = "ClickEvent"

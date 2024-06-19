@@ -11,9 +11,9 @@ import SwiftUI
 
 struct WhatsNewView: View {
     let url: URL
-    
+
     @StateObject private var model = WhatsNewViewModel()
-    
+
     var body: some View {
         Group {
             switch model.state {
@@ -40,11 +40,11 @@ struct WhatsNewView: View {
 
 private extension WhatsNewView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.whatsNew.rawValue
+        AnalyticsPageTitle.whatsNew.rawValue
     }
-    
+
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
     }
 }
 

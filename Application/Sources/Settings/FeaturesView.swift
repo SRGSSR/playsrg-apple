@@ -12,7 +12,7 @@ import SwiftUI
 
 struct FeaturesView: View {
     @State private var selectedOnboarding: Onboarding?
-    
+
     var body: some View {
         List {
             ForEach(Onboarding.onboardings) { onboarding in
@@ -31,10 +31,10 @@ struct FeaturesView: View {
         }
         .tracked(withTitle: analyticsPageTitle, type: AnalyticsPageType.help.rawValue, levels: analyticsPageLevels)
     }
-    
+
     private struct OnboardingCell: View {
         let onboarding: Onboarding
-        
+
         var body: some View {
             HStack {
                 Image(decorative: onboarding.iconName)
@@ -49,11 +49,11 @@ struct FeaturesView: View {
 
 private extension FeaturesView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.features.rawValue
+        AnalyticsPageTitle.features.rawValue
     }
-    
+
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
     }
 }
 

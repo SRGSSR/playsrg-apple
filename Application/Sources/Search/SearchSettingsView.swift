@@ -13,10 +13,10 @@ import SwiftUI
 struct SearchSettingsView: View {
     @Binding var query: String
     @Binding var settings: MediaSearchSettings
-    
+
     @StateObject private var model = SearchSettingsViewModel()
     @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
-    
+
     var body: some View {
         List {
             Picker(NSLocalizedString("Sort by", comment: "Search setting"), selection: $settings.sortCriterium) {
@@ -26,7 +26,7 @@ struct SearchSettingsView: View {
                     .tag(SRGSortCriterium.date)
             }
             .pickerStyle(.inline)
-            
+
             Picker(NSLocalizedString("Content", comment: "Search setting"), selection: $settings.mediaType) {
                 Text(NSLocalizedString("All", comment: "Search setting option"))
                     .tag(SRGMediaType.none)
@@ -36,7 +36,7 @@ struct SearchSettingsView: View {
                     .tag(SRGMediaType.audio)
             }
             .pickerStyle(.inline)
-            
+
             NavigationLink {
                 SearchSettingsBucketsView(
                     title: NSLocalizedString("Topics", comment: "Topic list view in search settings"),
@@ -58,7 +58,7 @@ struct SearchSettingsView: View {
                 }
             }
             .disabled(model.isLoadingFilters || !model.hasTopicFilter)
-            
+
             NavigationLink {
                 SearchSettingsBucketsView(
                     title: NSLocalizedString("Shows", comment: "Show list view in search settings"),
@@ -80,7 +80,7 @@ struct SearchSettingsView: View {
                 }
             }
             .disabled(model.isLoadingFilters || !model.hasShowFilter)
-            
+
             Picker(NSLocalizedString("Period", comment: "Search setting"), selection: $settings.period) {
                 Text(NSLocalizedString("Anytime", comment: "Search setting option"))
                     .tag(MediaSearchSettings.Period.anytime)
@@ -94,7 +94,7 @@ struct SearchSettingsView: View {
                     .tag(MediaSearchSettings.Period.lastWeek)
             }
             .pickerStyle(.inline)
-            
+
             Picker(NSLocalizedString("Duration", comment: "Search setting"), selection: $settings.duration) {
                 Text(NSLocalizedString("Any", comment: "Search setting option"))
                     .tag(MediaSearchSettings.Duration.any)
@@ -104,7 +104,7 @@ struct SearchSettingsView: View {
                     .tag(MediaSearchSettings.Duration.moreThanThirtyMinutes)
             }
             .pickerStyle(.inline)
-            
+
             Toggle(NSLocalizedString("Downloadable", comment: "Search setting"), isOn: $settings.downloadAvailable)
             Toggle(NSLocalizedString("Playable abroad", comment: "Search setting"), isOn: $settings.playableAbroad)
             if model.hasSubtitledFilter {
@@ -132,11 +132,11 @@ struct SearchSettingsView: View {
 
 private extension SearchSettingsView {
     private var analyticsPageTitle: String {
-        return AnalyticsPageTitle.settings.rawValue
+        AnalyticsPageTitle.settings.rawValue
     }
-    
+
     private var analyticsPageLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
+        [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
     }
 }
 

@@ -1,0 +1,8 @@
+# format options
+--swiftversion 5.10
+
+# file options
+--exclude Pods,Generated,build,archive,fastlane,vendor
+
+# rules
+--disable trailingCommas,wrapMultilineStatementBraces

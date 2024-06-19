@@ -8,13 +8,13 @@ import UIKit
 
 extension UITableView {
     final class ProfileAccountTableViewHeaderView: HostView<ProfileAccountHeaderView> {
-        override func willMove(toWindow newWindow: UIWindow?) {
+        override func willMove(toWindow _: UIWindow?) {
             content = ProfileAccountHeaderView()
         }
     }
-    
+
     @objc func profileAccountHeaderView() -> UIView {
-        return ProfileAccountTableViewHeaderView(
+        ProfileAccountTableViewHeaderView(
             frame: CGRect(origin: .zero, size: ProfileAccountHeaderView.size()),
             leadingAnchorConstant: LayoutMargin * 2,
             trailingAnchorConstant: -LayoutMargin * 2

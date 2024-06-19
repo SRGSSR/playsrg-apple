@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -336,8 +336,9 @@
                                                                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vef-hf-97c">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="142" height="80"/>
                                                                                         <constraints>
-                                                                                            <constraint firstAttribute="width" secondItem="vef-hf-97c" secondAttribute="height" multiplier="16:9" id="ULA-he-deg"/>
+                                                                                            <constraint firstAttribute="width" secondItem="vef-hf-97c" secondAttribute="height" multiplier="16:9" priority="999" id="ULA-he-deg"/>
                                                                                             <constraint firstAttribute="height" constant="80" id="c5Y-ZO-WQO"/>
+                                                                                            <constraint firstAttribute="width" secondItem="vef-hf-97c" secondAttribute="height" multiplier="1:1" priority="300" id="qGm-YS-UY7"/>
                                                                                         </constraints>
                                                                                     </imageView>
                                                                                 </subviews>
@@ -697,6 +698,8 @@
                         <outlet property="showLabel" destination="IOa-0n-yq2" id="m0b-8k-P2x"/>
                         <outlet property="showStackView" destination="NWy-HJ-fcx" id="6e9-XW-kw7"/>
                         <outlet property="showThumbnailImageView" destination="vef-hf-97c" id="yDZ-uc-al4"/>
+                        <outlet property="showThumbnailImageViewAspectRatio16_9Constraint" destination="ULA-he-deg" id="1KX-9L-9tA"/>
+                        <outlet property="showThumbnailImageViewAspectRatio1_1Constraint" destination="qGm-YS-UY7" id="tmg-Zu-DAi"/>
                         <outlet property="showWrapperView" destination="RRr-yq-C32" id="oXq-Gh-nf5"/>
                         <outlet property="subtitlesImageView" destination="DRb-y2-JT0" id="2Sn-0r-izJ"/>
                         <outlet property="summaryLabel" destination="kRd-cW-giP" id="3dW-rU-Ugz"/>

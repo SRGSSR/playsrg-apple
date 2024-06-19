@@ -11,11 +11,11 @@ import SRGDataProviderCombine
 import SwiftUI
 
 func constant<T>(iOS: T, tvOS: T) -> T {
-#if os(tvOS)
-    return tvOS
-#else
-    return iOS
-#endif
+    #if os(tvOS)
+        return tvOS
+    #else
+        return iOS
+    #endif
 }
 
 /**
@@ -25,7 +25,7 @@ func constant<T>(iOS: T, tvOS: T) -> T {
  */
 func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
     var itemDictionnary = [T: Bool]()
-    
+
     return items.filter {
         let isNew = itemDictionnary.updateValue(true, forKey: $0) == nil
         if !isNew {
@@ -36,86 +36,87 @@ func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
 }
 
 func url(for image: SRGImage?, size: SRGImageSize) -> URL? {
-    return SRGDataProvider.current!.url(for: image, size: size)
+    SRGDataProvider.current!.url(for: image, size: size)
 }
 
 extension Comparable {
     func clamped(to range: ClosedRange<Self>) -> Self {
-        return min(max(self, range.lowerBound), range.upperBound)
+        min(max(self, range.lowerBound), range.upperBound)
     }
 }
 
 extension Float {
     // See https://stackoverflow.com/a/31390678/760435
     var minimalRepresentation: String {
-       return truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+        truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
 
 extension String {
     static func placeholder(length: Int) -> String {
-        return String(repeating: " ", count: length)
+        String(repeating: " ", count: length)
     }
-    
+
     static let loremIpsum: String = """
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
-            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
-            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
-            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
-            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
-            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
-            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
-            """
-    
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+    dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+    Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+    consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+    sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+    sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+    sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
+    """
+
     static let loremIpsumWithSpacesAndNewLine: String = """
-            \r\n   Lorem ipsum dolor sit amet.\r\n\r\n\rConsetetur sadipscing elitr, sed diam \
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\r\n
-            """
-    
+    \r\n   Lorem ipsum dolor sit amet.\r\n\r\n\rConsetetur sadipscing elitr, sed diam \
+    nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\r\n
+    """
+
     func unobfuscated() -> String {
-        return components(separatedBy: .decimalDigits).joined()
+        components(separatedBy: .decimalDigits).joined()
     }
-    
+
     var capitalizedFirstLetter: String {
-        return prefix(1).capitalized + dropFirst()
+        prefix(1).capitalized + dropFirst()
     }
-    
+
     func heightOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
-        let font = SRGFont.font(fontStyle) as UIFont
-        let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = self.size(withAttributes: fontAttributes)
-        return size.height
+        sizeOfString(usingFontStyle: fontStyle).height
     }
-    
+
     func widthOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGFloat {
-        let font = SRGFont.font(fontStyle) as UIFont
-        let fontAttributes = [NSAttributedString.Key.font: font]
-        let size = self.size(withAttributes: fontAttributes)
-        return size.width
+        sizeOfString(usingFontStyle: fontStyle).width
     }
-    
+
+    private func sizeOfString(usingFontStyle fontStyle: SRGFont.Style) -> CGSize {
+        let font = SRGFont.font(fontStyle) as UIFont
+        let attributes = [NSAttributedString.Key.font: font]
+        let attributedString = NSAttributedString(string: self, attributes: attributes)
+        return attributedString.size()
+    }
+
     /*
      * Compact the string to not contain any empty lines or white spaces.
      */
     var compacted: String {
-        return self.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
+        replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespaces)
     }
 }
 
@@ -125,28 +126,27 @@ extension Array {
         array.append(newElement)
         return array
     }
-    
+
     func appending<S>(contentsOf newElements: S) -> Array where Element == S.Element, S: Sequence {
         var array = self
         array.append(contentsOf: newElements)
         return array
     }
-    
+
     subscript(safeIndex index: Int) -> Element? {
         guard index >= 0, index < endIndex else { return nil }
         return self[index]
     }
-    
+
     func median() -> Element? where Element: FloatingPoint {
         guard !isEmpty else { return nil }
-        
+
         let sortedSelf = sorted()
         let count = sortedSelf.count
-        
+
         if count.isMultiple(of: 2) {
             return (sortedSelf[count / 2 - 1] + sortedSelf[count / 2]) / 2
-        }
-        else {
+        } else {
             return sortedSelf[count / 2]
         }
     }
@@ -164,7 +164,7 @@ extension Collection {
             return transformedElement
         }
     }
-    
+
     /**
      *  Transform each item in a collection (getting rid of `nil` items), providing an auto-increased index with each
      *  processed item.
@@ -177,20 +177,19 @@ extension Collection {
             return transformedElement
         }
     }
-    
+
     /**
      *  Groups items from the receiver into an alphabetical list. Preserves the initial ordering in each group,
      *  and collects items starting with non-letter characters under '#'. If a group is present in the returned
      *  array the array of associated items is guaranteed to contain at least 1 item.
      */
-    func groupedAlphabetically<S>(by keyForElement: (Self.Element) throws -> S?) rethrows -> [(key: Character, value: [Self.Element])] where S: StringProtocol {
+    func groupedAlphabetically(by keyForElement: (Self.Element) throws -> (some StringProtocol)?) rethrows -> [(key: Character, value: [Self.Element])] {
         let dictionary = try [Character: [Self.Element]](grouping: self) { element in
             if let key = try keyForElement(element),
                let character = key.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).first, character.isLetter {
-                return character
-            }
-            else {
-                return "#"
+                character
+            } else {
+                "#"
             }
         }
         let hashGroup = dictionary["#"]
@@ -234,25 +233,24 @@ extension View {
             if let label, !label.isEmpty {
                 // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
                 //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
-#if os(tvOS)
-                accessibilityHidden(true)
-                    .accessibilityElement()
-                    .accessibilityLabel(label)
-                    .accessibilityAddTraits(traits)
-#else
-                accessibilityHidden(true)
-                    .accessibilityElement()
-                    .accessibilityLabel(label)
-                    .accessibilityHint(hint ?? "")
-                    .accessibilityAddTraits(traits)
-#endif
-            }
-            else {
+                #if os(tvOS)
+                    accessibilityHidden(true)
+                        .accessibilityElement()
+                        .accessibilityLabel(label)
+                        .accessibilityAddTraits(traits)
+                #else
+                    accessibilityHidden(true)
+                        .accessibilityElement()
+                        .accessibilityLabel(label)
+                        .accessibilityHint(hint ?? "")
+                        .accessibilityAddTraits(traits)
+                #endif
+            } else {
                 accessibilityHidden(true)
             }
         }
     }
-    
+
     /**
      *  Calculate the size of a SwiftUI view provided with some parent size, and for the specified horizontal size class.
      *
@@ -260,14 +258,14 @@ extension View {
      *  all the provided space in this direction.
      */
     func adaptiveSizeThatFits(in size: CGSize, for horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
-#if os(iOS)
-        let hostController = UIHostingController(rootView: self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(horizontalSizeClass)))
-#else
-        let hostController = UIHostingController(rootView: self)
-#endif
+        #if os(iOS)
+            let hostController = UIHostingController(rootView: environment(\.horizontalSizeClass, UserInterfaceSizeClass(horizontalSizeClass)))
+        #else
+            let hostController = UIHostingController(rootView: self)
+        #endif
         return hostController.sizeThatFits(in: size)
     }
-    
+
     /**
      *  Read the size of a view and provides it to the specified closure.
      *
@@ -284,7 +282,7 @@ extension View {
         )
         .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
     }
-    
+
     /**
      *  Small helper to build a frame with a size.
      */
@@ -295,15 +293,15 @@ extension View {
 
 private struct SizePreferenceKey: PreferenceKey {
     static var defaultValue: CGSize = .zero
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
+    static func reduce(value _: inout CGSize, nextValue _: () -> CGSize) {}
 }
 
 /**
  *  Available selection styles.
  */
 enum SelectionAppearance {
-    case dimmed                 // The view is dimmed.
-    case transluscent           // The view is slightly transluscent.
+    case dimmed // The view is dimmed.
+    case transluscent // The view is slightly transluscent.
 }
 
 extension View {
@@ -311,7 +309,7 @@ extension View {
      *  Adjust the selection appearance of the receiver, applying one of the available styles.
      */
     func selectionAppearance(_ appearance: SelectionAppearance = .dimmed, when selected: Bool, while editing: Bool = false) -> some View {
-        return Group {
+        Group {
             if (!editing && selected) || (editing && !selected) {
                 switch appearance {
                 case .dimmed:
@@ -319,8 +317,7 @@ extension View {
                 case .transluscent:
                     opacity(0.5)
                 }
-            }
-            else {
+            } else {
                 self
             }
         }
@@ -331,30 +328,29 @@ extension View {
 extension UIHostingController {
     public convenience init(rootView: Content, ignoreSafeArea: Bool) {
         self.init(rootView: rootView)
-        
+
         if ignoreSafeArea {
             disableSafeArea()
         }
     }
-    
+
     func disableSafeArea() {
         guard let viewClass = object_getClass(view) else { return }
-        
+
         let viewSubclassName = String(cString: class_getName(viewClass)).appending("_IgnoreSafeArea")
         if let viewSubclass = NSClassFromString(viewSubclassName) {
             object_setClass(view, viewSubclass)
-        }
-        else {
+        } else {
             guard let viewClassNameUtf8 = (viewSubclassName as NSString).utf8String else { return }
             guard let viewSubclass = objc_allocateClassPair(viewClass, viewClassNameUtf8, 0) else { return }
-            
+
             if let method = class_getInstanceMethod(UIView.self, #selector(getter: UIView.safeAreaInsets)) {
                 let safeAreaInsets: @convention(block) (AnyObject) -> UIEdgeInsets = { _ in
-                    return .zero
+                    .zero
                 }
                 class_addMethod(viewSubclass, #selector(getter: UIView.safeAreaInsets), imp_implementationWithBlock(safeAreaInsets), method_getTypeEncoding(method))
             }
-            
+
             objc_registerClassPair(viewSubclass)
             object_setClass(view, viewSubclass)
         }
@@ -363,34 +359,34 @@ extension UIHostingController {
 
 extension NSCollectionLayoutSection {
     typealias CellSizer = (_ layoutWidth: CGFloat, _ spacing: CGFloat) -> NSCollectionLayoutSize
-    
+
     static func horizontal(layoutWidth: CGFloat, horizontalMargin: CGFloat = 0, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
-        
+
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: cellSize.widthDimension, heightDimension: cellSize.heightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
+
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }
-    
+
     static func grid(layoutWidth: CGFloat, horizontalMargin: CGFloat = 0, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
-        
+
         let itemSize = NSCollectionLayoutSize(widthDimension: cellSize.widthDimension, heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: cellSize.heightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(spacing)
-        
+
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
@@ -401,42 +397,40 @@ extension NSCollectionLayoutSection {
 extension NSCollectionLayoutDimension {
     func constrained(to size: CGSize) -> CGFloat {
         if isFractionalWidth {
-            return size.width * dimension
-        }
-        else if isFractionalHeight {
-            return size.height * dimension
-        }
-        else {
-            return dimension
+            size.width * dimension
+        } else if isFractionalHeight {
+            size.height * dimension
+        } else {
+            dimension
         }
     }
 }
 
 extension NSCollectionLayoutSize {
     private static let defaultSize: CGSize = constant(iOS: CGSize(width: 750, height: 1334), tvOS: CGSize(width: 1920, height: 1080))
-    
+
     @objc func constrained(to size: CGSize) -> CGSize {
         let width = widthDimension.constrained(to: size)
         let height = heightDimension.constrained(to: size)
         return CGSize(width: width, height: height)
     }
-    
+
     @objc func constrained(by view: UIView) -> CGSize {
-        return constrained(to: view.frame.size)
+        constrained(to: view.frame.size)
     }
-    
+
     var previewSize: CGSize {
-        return constrained(to: Self.defaultSize)
+        constrained(to: Self.defaultSize)
     }
 }
 
 extension View {
     func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
-#if os(iOS)
-        return environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
-#else
-        return self
-#endif
+        #if os(iOS)
+            return environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
+        #else
+            return self
+        #endif
     }
 }
 
@@ -448,19 +442,18 @@ extension UIView {
         /// The view takes as much space as offered.
         case expanding
     }
-    
+
     /// Probe some hosting controller to determine the behavior of its SwiftUI view in some direction.
-    private func sizingBehavior<T>(of hostingController: UIHostingController<T>, for axis: NSLayoutConstraint.Axis) -> SizingBehavior {
+    private func sizingBehavior(of hostingController: UIHostingController<some Any>, for axis: NSLayoutConstraint.Axis) -> SizingBehavior {
         // Fit into the maximal allowed layout size to check which boundaries are adopted by the associated view
         let size = hostingController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
         if axis == .vertical {
             return size.height == UIView.layoutFittingExpandedSize.height ? .expanding : .hugging
-        }
-        else {
+        } else {
             return size.width == UIView.layoutFittingExpandedSize.width ? .expanding : .hugging
         }
     }
-    
+
     /// Apply the specified sizing behavior in some direction.
     func applySizingBehavior(_ sizingBehavior: SizingBehavior, for axis: NSLayoutConstraint.Axis) {
         switch sizingBehavior {
@@ -472,20 +465,20 @@ extension UIView {
             setContentCompressionResistancePriority(UILayoutPriority(0), for: axis)
         }
     }
-    
+
     /// Apply the specified sizing behavior in all directions.
     func applySizingBehavior(_ sizingBehavior: SizingBehavior) {
         applySizingBehavior(sizingBehavior, for: .horizontal)
         applySizingBehavior(sizingBehavior, for: .vertical)
     }
-    
+
     /// Apply the same sizing behavior as the provided hosting controller in some directions (layout neutrality).
-    func applySizingBehavior<T>(of hostingController: UIHostingController<T>, for axis: NSLayoutConstraint.Axis) {
+    func applySizingBehavior(of hostingController: UIHostingController<some Any>, for axis: NSLayoutConstraint.Axis) {
         applySizingBehavior(sizingBehavior(of: hostingController, for: axis), for: axis)
     }
-    
+
     /// Apply the same sizing behavior as the provided hosting controller in all directions (layout neutrality).
-    func applySizingBehavior<T>(of hostingController: UIHostingController<T>) {
+    func applySizingBehavior(of hostingController: UIHostingController<some Any>) {
         applySizingBehavior(of: hostingController, for: .horizontal)
         applySizingBehavior(of: hostingController, for: .vertical)
     }
@@ -495,18 +488,18 @@ extension UIViewController {
     func deselectItems(in collectionView: UICollectionView, animated: Bool) {
         guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
         guard animated, let transitionCoordinator, transitionCoordinator.animate(alongsideTransition: { context in
-                selectedIndexPaths.forEach { indexPath in
-                    collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
+            for indexPath in selectedIndexPaths {
+                collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
+            }
+        }, completion: { context in
+            if context.isCancelled {
+                for indexPath in selectedIndexPaths {
+                    collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
                 }
-            }, completion: { context in
-                if context.isCancelled {
-                    selectedIndexPaths.forEach { indexPath in
-                        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-                    }
-                }
-            })
+            }
+        })
         else {
-            selectedIndexPaths.forEach { indexPath in
+            for indexPath in selectedIndexPaths {
                 collectionView.deselectItem(at: indexPath, animated: animated)
             }
             return
@@ -518,7 +511,7 @@ extension View {
     func eraseToAnyView() -> AnyView {
         AnyView(self)
     }
-    
+
     @ViewBuilder
     func play_scrollClipDisabled() -> some View {
         if #available(iOS 17, tvOS 17, *) {
@@ -532,53 +525,51 @@ extension View {
 extension UIApplication {
     /// Return the main window scene among all connected scenes, if any.
     @objc var mainWindowScene: UIWindowScene? {
-        return connectedScenes
+        connectedScenes
             .filter { $0.delegate is SceneDelegate }
             .compactMap { $0 as? UIWindowScene }
             .first
     }
-    
+
     /// Return the main key window among all connected scenes, if any.
     @objc var mainWindow: UIWindow? {
-        return mainWindowScene?.windows
+        mainWindowScene?.windows
             .first { $0.isKeyWindow }
     }
-    
+
     /// Return the main scene delegate, if any.
     @objc var mainSceneDelegate: SceneDelegate? {
-        return mainWindowScene?.delegate as? SceneDelegate
+        mainWindowScene?.delegate as? SceneDelegate
     }
-    
+
     /// Return the main top view controller, if any.
     @objc var mainTopViewController: UIViewController? {
-        return mainWindow?.play_topViewController
+        mainWindow?.play_topViewController
     }
-    
-#if os(iOS)
-    /// Return the main tab bar root controller, if any.
-    @objc var mainTabBarController: TabBarController? {
-        return mainWindow?.rootViewController as? TabBarController
-    }
-#endif
+
+    #if os(iOS)
+        /// Return the main tab bar root controller, if any.
+        @objc var mainTabBarController: TabBarController? {
+            mainWindow?.rootViewController as? TabBarController
+        }
+    #endif
 }
 
 extension Locale {
-    static let currentLanguageIdentifier: String = {
-        if #available(iOS 16, tvOS 16, *) {
-            return Locale.current.identifier(.bcp47)
-        } else {
-            return Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
-        }
-    }()
+    static let currentLanguageIdentifier: String = if #available(iOS 16, tvOS 16, *) {
+        Locale.current.identifier(.bcp47)
+    } else {
+        Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
+    }
 }
 
 extension SRGAnalyticsLabels {
     @objc class var play_globalLabels: SRGAnalyticsLabels {
         let analyticsLabels = UserConsentHelper.srgAnalyticsLabels
         var customInfo: [String: String] = analyticsLabels.customInfo ?? [:]
-        
+
         customInfo["navigation_app_language"] = Locale.currentLanguageIdentifier
-        
+
         analyticsLabels.customInfo = customInfo
         return analyticsLabels
     }

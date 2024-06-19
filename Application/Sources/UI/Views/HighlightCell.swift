@@ -13,64 +13,64 @@ struct HighlightCell: View {
     let section: Content.Section
     let item: Content.Item?
     let filter: SectionFiltering?
-    
+
     @Environment(\.isSelected) private var isSelected
-    
+
     var body: some View {
-#if os(tvOS)
-        ExpandingCardButton(action: action) {
+        #if os(tvOS)
+            ExpandingCardButton(action: action) {
+                MainView(highlight: highlight)
+                    .redactable()
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+            }
+        #else
             MainView(highlight: highlight)
+                .selectionAppearance(when: isSelected && highlight != nil)
+                .cornerRadius(LayoutStandardViewCornerRadius)
                 .redactable()
-                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
-        }
-#else
-        MainView(highlight: highlight)
-            .selectionAppearance(when: isSelected && highlight != nil)
-            .cornerRadius(LayoutStandardViewCornerRadius)
-            .redactable()
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
-#endif
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+        #endif
     }
-    
-#if os(tvOS)
-    private func action() {
-        if case let .show(show) = item {
-            navigateToShow(show)
+
+    #if os(tvOS)
+        private func action() {
+            if case let .show(show) = item {
+                navigateToShow(show)
+            } else if case let .media(media) = item {
+                navigateToMedia(media)
+            } else {
+                navigateToSection(section, filter: filter)
+            }
         }
-        else {
-            navigateToSection(section, filter: filter)
-        }
-    }
-#endif
-    
+    #endif
+
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
         let highlight: Highlight?
-        
+
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-        
+
         private var direction: StackDirection {
-            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+            (horizontalSizeClass == .compact) ? .vertical : .horizontal
         }
-        
+
         private var isCompact: Bool {
-            return horizontalSizeClass == .compact
+            horizontalSizeClass == .compact
         }
-        
+
         private var imageUrl: URL? {
             guard let highlight else { return nil }
             return url(for: highlight.image, size: .large)
         }
-        
+
         private var contentMode: ImageView.ContentMode {
             if let focalPoint = highlight?.imageFocalPoint {
-                return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
-            }
-            else {
-                return .aspectFillRight
+                .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
+            } else {
+                .aspectFillRight
             }
         }
-        
+
         var body: some View {
             GeometryReader { geometry in
                 if isCompact {
@@ -86,8 +86,7 @@ struct HighlightCell: View {
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     }
-                }
-                else {
+                } else {
                     ZStack(alignment: .leading) {
                         ImageView(source: imageUrl, contentMode: contentMode)
                         if let highlight {
@@ -102,11 +101,11 @@ struct HighlightCell: View {
             }
         }
     }
-    
+
     /// Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         let highlight: Highlight
-        
+
         var body: some View {
             VStack(alignment: .leading, spacing: 15) {
                 Text(highlight.title)
@@ -129,11 +128,11 @@ struct HighlightCell: View {
 
 private extension HighlightCell {
     var accessibilityLabel: String? {
-        return highlight?.title
+        highlight?.title
     }
-    
+
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Highlight cell hint")
+        PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Highlight cell hint")
     }
 }
 
@@ -141,11 +140,11 @@ private extension HighlightCell {
 
 enum HighlightCellSize {
     private static func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
-        return horizontalSizeClass == .compact ? 16 / 9 : 4
+        horizontalSizeClass == .compact ? 16 / 9 : 4
     }
-    
+
     static func fullWidth(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(layoutWidth, aspectRatio(horizontalSizeClass: horizontalSizeClass), 0)
+        LayoutSwimlaneCellSize(layoutWidth, aspectRatio(horizontalSizeClass: horizontalSizeClass), 0)
     }
 }
 
@@ -161,13 +160,13 @@ private extension View {
 
 struct HighlightCell_Previews: PreviewProvider {
     static let highlight = Mock.highlight()
-    
+
     static var previews: some View {
         HighlightCell(highlight: highlight, section: .configured(.tvAllShows), item: nil, filter: nil)
             .previewLayout(layoutWidth: 1000, horizontalSizeClass: .regular)
-#if os(iOS)
-        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), item: nil, filter: nil)
-            .previewLayout(layoutWidth: 400, horizontalSizeClass: .compact)
-#endif
+        #if os(iOS)
+            HighlightCell(highlight: highlight, section: .configured(.tvAllShows), item: nil, filter: nil)
+                .previewLayout(layoutWidth: 400, horizontalSizeClass: .compact)
+        #endif
     }
 }

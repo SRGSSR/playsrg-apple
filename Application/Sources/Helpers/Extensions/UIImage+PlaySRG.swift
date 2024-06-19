@@ -14,29 +14,29 @@ extension UIImage {
     @objc static func image(for youthProtectionColor: SRGYouthProtectionColor) -> UIImage? {
         switch youthProtectionColor {
         case .yellow:
-            return UIImage(resource: .youthProtectionYellow)
+            UIImage(resource: .youthProtectionYellow)
         case .red:
-            return UIImage(resource: .youthProtectionRed)
+            UIImage(resource: .youthProtectionRed)
         default:
-            return nil
+            nil
         }
     }
-    
+
     /**
      *  Return the standard image to be used for a given blocking reason, if any.
      */
     static func image(for blockingReason: SRGBlockingReason) -> UIImage? {
         switch blockingReason {
         case .geoblocking:
-            return UIImage(resource: .geoblocked)
+            UIImage(resource: .geoblocked)
         case .legal:
-            return UIImage(resource: .legal)
+            UIImage(resource: .legal)
         case .ageRating12, .ageRating18:
-            return UIImage(resource: .ageRating)
+            UIImage(resource: .ageRating)
         case .startDate, .endDate, .none:
-            return nil
+            nil
         default:
-            return UIImage(resource: .genericBlocked)
+            UIImage(resource: .genericBlocked)
         }
     }
 }

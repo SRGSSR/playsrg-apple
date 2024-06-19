@@ -12,7 +12,7 @@ extension CPListTemplate {
         template.controller = CarPlayTemplateListController(list: list, template: template, interfaceController: interfaceController)
         return template
     }
-    
+
     static var playbackRate: CPListTemplate {
         let template = CPListTemplate(title: NSLocalizedString("Playback speed", comment: "Playback speed screen title"), sections: [])
         template.controller = CarPlayPlaybackSpeedController(template: template)
@@ -26,19 +26,18 @@ extension CPInterfaceController {
             if controller.play_mainMedia != media {
                 controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
             }
-        }
-        else {
+        } else {
             let controller = SRGLetterboxController()
             controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
             SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
         }
-        
+
         if let controller = SRGLetterboxService.shared.controller {
             let playlist = PlaylistForURN(media.urn)
             controller.playlistDataSource = playlist
             controller.playbackTransitionDelegate = playlist
         }
-        
+
         let nowPlayingTemplate = CPNowPlayingTemplate.shared
         pushTemplate(nowPlayingTemplate, animated: true) { _, _ in
             completion()

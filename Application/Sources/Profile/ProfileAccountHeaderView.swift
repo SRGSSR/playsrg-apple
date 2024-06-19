@@ -12,29 +12,29 @@ import SwiftUI
 
 struct ProfileAccountHeaderView: View {
     @StateObject private var model = ProfileAccountHeaderViewModel()
-    
+
     var body: some View {
         MainView(model: model)
     }
-    
+
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
         @ObservedObject var model: ProfileAccountHeaderViewModel
-        
+
         @Environment(\.isUIKitFocused) private var isFocused
-        
+
         private let spacing: CGFloat = LayoutMargin * 1.5
         private let iconHeight: CGFloat = 24 * 1.5
         private let lineWidth: CGFloat = 1.2
-        
+
         private let serviceLogoHeight: CGFloat = 24 * 1.5 * 0.6
         private let serviceLogoOffsetX: CGFloat = 14
         private let serviceLogoOffsetY: CGFloat = -3
-        
+
         private var trailingImagePadding: CGFloat {
-            return UIImage(named: "identity_service_logo") != nil ? serviceLogoOffsetX : 0
+            UIImage(named: "identity_service_logo") != nil ? serviceLogoOffsetX : 0
         }
-        
+
         var body: some View {
             Button {
                 model.manageAccount()
@@ -62,8 +62,7 @@ struct ProfileAccountHeaderView: View {
                                                 .frame(maxWidth: iconHeight - lineWidth, maxHeight: iconHeight - lineWidth)
                                         )
                                         .opacity(1)
-                                }
-                                else {
+                                } else {
                                     Rectangle()
                                         .foregroundColor(.clear)
                                         .frame(maxWidth: iconHeight, maxHeight: iconHeight)
@@ -104,7 +103,7 @@ struct ProfileAccountHeaderView: View {
 
 extension ProfileAccountHeaderView {
     static func size() -> CGSize {
-        return CGSize(width: .zero, height: 66)
+        CGSize(width: .zero, height: 66)
     }
 }
 

@@ -61,6 +61,8 @@ static void *s_kvoContext = &s_kvoContext;
     [defaults addObserver:self forKeyPath:PlaySRGSettingServiceIdentifier options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingPosterImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingSquareImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingAudioHomepageOption options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
 #endif
 }
 
@@ -71,6 +73,8 @@ static void *s_kvoContext = &s_kvoContext;
     [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceIdentifier];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingUserLocation];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingPosterImages];
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingSquareImages];
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingAudioHomepageOption];
 #endif
 }
 
@@ -537,7 +541,8 @@ static void *s_kvoContext = &s_kvoContext;
     [UserConsentHelper waitCollectingConsentRetain];
     [[SRGDataProvider.currentDataProvider contentSectionForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:sectionUid published:YES withCompletionBlock:^(SRGContentSection * _Nullable contentSection, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (contentSection) {
-            SectionViewController *sectionViewController = [SectionViewController viewControllerForContentSection:contentSection];
+            // FIXME: is section always videoOrTV content type?
+            SectionViewController *sectionViewController = [SectionViewController viewControllerForContentSection:contentSection contentType:ContentTypeVideoOrTV];
             [self.rootTabBarController pushViewController:sectionViewController animated:YES];
         }
         else {
@@ -555,7 +560,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (s_kvoContext == context) {
-        if ([keyPath isEqualToString:PlaySRGSettingServiceIdentifier] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages]) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceIdentifier] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages] || [keyPath isEqualToString:PlaySRGSettingSquareImages] ||  [keyPath isEqualToString:PlaySRGSettingAudioHomepageOption]) {
             // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the
             // user interface. Scheduled for the next run loop to have the same code in the app delegate (updating the
             // data provider) executed first.

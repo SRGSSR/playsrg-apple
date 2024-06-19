@@ -12,35 +12,35 @@ import UIKit
 
 struct MailComposeView: UIViewControllerRepresentable {
     @Environment(\.presentationMode) private var presentationMode
-    
+
     fileprivate var toRecipients: [String]?
     fileprivate var subject: String?
     fileprivate var messageBody: String?
-    
+
     static func canSendMail() -> Bool {
-        return MFMailComposeViewController.canSendMail()
+        MFMailComposeViewController.canSendMail()
     }
-    
+
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
         @Binding var presentationMode: PresentationMode
-        
+
         init(presentation: Binding<PresentationMode>) {
             _presentationMode = presentation
         }
-        
-        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+
+        func mailComposeController(_: MFMailComposeViewController, didFinishWith _: MFMailComposeResult, error _: Error?) {
             presentationMode.dismiss()
         }
     }
-    
+
     func makeCoordinator() -> Coordinator {
-        return Coordinator(presentation: presentationMode)
+        Coordinator(presentation: presentationMode)
     }
-    
+
     func makeUIViewController(context: Context) -> MFMailComposeViewController {
-        return viewController(context: context)
+        viewController(context: context)
     }
-    
+
     func viewController(context: Context?) -> MFMailComposeViewController {
         let viewController = MFMailComposeViewController()
         if let coordinator = context?.coordinator {
@@ -55,8 +55,8 @@ struct MailComposeView: UIViewControllerRepresentable {
         }
         return viewController
     }
-    
-    func updateUIViewController(_ uiViewController: MFMailComposeViewController, context: Context) {
+
+    func updateUIViewController(_: MFMailComposeViewController, context _: Context) {
         // No updates
     }
 }
@@ -69,13 +69,13 @@ extension MailComposeView {
         view.toRecipients = toRecipients
         return view
     }
-    
+
     func subject(_ subject: String) -> Self {
         var view = self
         view.subject = subject
         return view
     }
-    
+
     func messageBody(_ messageBody: String) -> Self {
         var view = self
         view.messageBody = messageBody

@@ -5,15 +5,15 @@
 //
 
 #if DEBUG || NIGHTLY || BETA
-import ShowTime
+    import ShowTime
 #endif
 import SRGLetterbox
 
 final class PresenterMode: NSObject {
     @objc static func enable(_ enabled: Bool) {
         SRGLetterboxService.shared.isMirroredOnExternalScreen = enabled
-#if DEBUG || NIGHTLY || BETA
-        ShowTime.enabled = enabled ? .always : .never
-#endif
+        #if DEBUG || NIGHTLY || BETA
+            ShowTime.enabled = enabled ? .always : .never
+        #endif
     }
 }

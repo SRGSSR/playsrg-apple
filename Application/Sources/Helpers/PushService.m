@@ -291,10 +291,10 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
             [[AnalyticsEventObjC notificationWithAction:AnalyticsNotificationActionPlayMedia
-                                                         from:AnalyticsNotificationFromOperatingSystem
-                                                          uid:mediaURN
-                                               overrideSource:userInfo[@"show"]
-                                                 overrideType:userInfo[@"type"]]
+                                                   from:AnalyticsNotificationFromOperatingSystem
+                                                    uid:mediaURN
+                                         overrideSource:userInfo[@"show"]
+                                           overrideType:userInfo[@"type"]]
              send];
         }];
     }
@@ -303,19 +303,19 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
             [[AnalyticsEventObjC notificationWithAction:AnalyticsNotificationActionDisplayShow
-                                                         from:AnalyticsNotificationFromOperatingSystem
-                                                          uid:showURN
-                                               overrideSource:nil
-                                                 overrideType:userInfo[@"type"]]
+                                                   from:AnalyticsNotificationFromOperatingSystem
+                                                    uid:showURN
+                                         overrideSource:nil
+                                           overrideType:userInfo[@"type"]]
              send];
         }];
     }
     else {
         [[AnalyticsEventObjC notificationWithAction:AnalyticsNotificationActionAlert
-                                                     from:AnalyticsNotificationFromOperatingSystem
-                                                      uid:notificationContent.body
-                                           overrideSource:nil
-                                             overrideType:userInfo[@"type"]]
+                                               from:AnalyticsNotificationFromOperatingSystem
+                                                uid:notificationContent.body
+                                     overrideSource:nil
+                                       overrideType:userInfo[@"type"]]
          send];
     }
     completionHandler();

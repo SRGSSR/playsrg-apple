@@ -7,15 +7,26 @@
 import SRGDataProviderModel
 
 extension SRGShow {
+    @objc var play_contentType: ContentType {
+        switch transmission {
+        case .TV:
+            .videoOrTV
+        case .radio:
+            .audioOrRadio
+        default:
+            .mixed
+        }
+    }
+
     var play_summary: String? {
-        return ApplicationConfiguration.shared.isShowLeadPreferred ? leadOrSummary : summaryOrLead
+        ApplicationConfiguration.shared.isShowLeadPreferred ? leadOrSummary : summaryOrLead
     }
-    
+
     private var leadOrSummary: String? {
-        return lead?.isEmpty ?? true ? summary : lead
+        lead?.isEmpty ?? true ? summary : lead
     }
-    
+
     private var summaryOrLead: String? {
-        return summary?.isEmpty ?? true ? lead : summary
+        summary?.isEmpty ?? true ? lead : summary
     }
 }

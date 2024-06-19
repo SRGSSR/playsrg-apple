@@ -13,29 +13,29 @@ import SRGAppearanceSwift
 final class GoogleCastFloatingButton: GCKUICastButton {
     private static let side: CGFloat = 44
     private static let margin: CGFloat = 2
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
     }
-    
+
     required init(coder decoder: NSCoder) {
         super.init(coder: decoder)
         layout()
     }
-    
+
     private func layout() {
         tintColor = .white
-        
+
         translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: Self.side),
             heightAnchor.constraint(equalToConstant: Self.side)
         ])
-        
+
         let backgroundSide = Self.side - 2 * Self.margin
         assert(backgroundSide > 0, "Cast button layout parameters are incorrect")
-        
+
         let backgroundLayer = CALayer()
         backgroundLayer.frame = CGRect(x: Self.margin, y: Self.margin, width: backgroundSide, height: backgroundSide)
         backgroundLayer.backgroundColor = UIColor.srgGray23.cgColor

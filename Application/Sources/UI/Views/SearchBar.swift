@@ -11,19 +11,18 @@ import UIKit
  */
 final class SearchBar: UISearchBar {
     var textField: UITextField? {
-        return Self.textField(in: self)
+        Self.textField(in: self)
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         showsCancelButton = false
     }
-    
+
     private static func textField(in view: UIView) -> UITextField? {
         if let textField = view as? UITextField {
             return textField
-        }
-        else {
+        } else {
             for subview in view.subviews {
                 if let textField = textField(in: subview) {
                     return textField

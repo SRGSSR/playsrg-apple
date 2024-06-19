@@ -11,7 +11,7 @@ struct Recommendation: Codable {
      *  The recommendation identifier.
      */
     let recommendationId: String
-    
+
     /**
      *  The recommended URN list.
      *

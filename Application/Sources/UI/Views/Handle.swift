@@ -8,12 +8,12 @@ import SwiftUI
 
 /// Behavior: h-exp, v-hug
 struct Handle: View {
-    let action: (() -> Void)
-    
+    let action: () -> Void
+
     var body: some View {
         Button {
             action()
-        }  label: {
+        } label: {
             // Use similar values as Aiolos `ResizeHandle`.
             GeometryReader { geometry in
                 ZStack {
@@ -26,12 +26,12 @@ struct Handle: View {
         .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Close", comment: "Close button label on handle view"),
                               traits: .isButton)
     }
-    
+
     /// Behavior: h-hug, v-hug
     private struct Grabber: View {
         private let grabberHeight = 5.0
         private let grabberWidth = 38.0
-        
+
         var body: some View {
             RoundedRectangle(cornerRadius: grabberHeight / 2)
                 .frame(width: grabberWidth, height: grabberHeight)

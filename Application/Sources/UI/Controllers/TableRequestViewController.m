@@ -352,7 +352,7 @@
     // Start loading the next page when less than a few screen heights from the bottom
     static const NSInteger kNumberOfScreens = 4;
     if (! self.loading && ! self.lastRequestError
-            && scrollView.contentOffset.y > scrollView.contentSize.height - kNumberOfScreens * CGRectGetHeight(scrollView.frame)) {
+        && scrollView.contentOffset.y > scrollView.contentSize.height - kNumberOfScreens * CGRectGetHeight(scrollView.frame)) {
         [self loadNextPage];
     }
 }

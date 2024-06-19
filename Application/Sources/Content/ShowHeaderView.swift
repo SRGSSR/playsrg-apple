@@ -15,12 +15,12 @@ import SwiftUI
 
 class ShowMoreEvent: UIEvent {
     let content: String
-    
+
     init(content: String) {
         self.content = content
         super.init()
     }
-    
+
     override init() {
         fatalError("init() is not available")
     }
@@ -32,24 +32,24 @@ class ShowMoreEvent: UIEvent {
 struct ShowHeaderView: View, PrimaryColorSettable {
     @Binding private(set) var show: SRGShow?
     let horizontalPadding: CGFloat
-    
-    internal var primaryColor: Color = .srgGrayD2
-    
+
+    var primaryColor: Color = .srgGrayD2
+
     static let imageAspectRatio: CGFloat = 16 / 9
-    
+
     static func isVerticalLayout(horizontalSizeClass: UIUserInterfaceSizeClass, isLandscape: Bool) -> Bool {
-        return horizontalSizeClass == .compact || !isLandscape
+        horizontalSizeClass == .compact || !isLandscape
     }
-    
+
     @StateObject private var model = ShowHeaderViewModel()
-    
+
     fileprivate static let verticalSpacing: CGFloat = 24
-    
+
     init(_ show: SRGShow?, horizontalPadding: CGFloat) {
         _show = .constant(show)
         self.horizontalPadding = horizontalPadding
     }
-    
+
     var body: some View {
         MainView(model: model, horizontalPadding: horizontalPadding)
             .primaryColor(primaryColor)
@@ -60,27 +60,27 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                 model.show = newValue
             }
     }
-    
+
     /// Behavior: h-hug, v-hug.
     fileprivate struct MainView: View, PrimaryColorSettable {
         @ObservedObject var model: ShowHeaderViewModel
         let horizontalPadding: CGFloat
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
-        
+
         @State private var isLandscape: Bool
-        
-        internal var primaryColor: Color = .srgGrayD2
-        
+
+        var primaryColor: Color = .srgGrayD2
+
         init(model: ShowHeaderViewModel, horizontalPadding: CGFloat) {
             self.model = model
             self.horizontalPadding = horizontalPadding
-            self.isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
+            isLandscape = (UIApplication.shared.mainWindow?.isLandscape ?? false)
         }
-        
+
         private var padding: CGFloat {
-            return horizontalSizeClass == .compact ? horizontalPadding : horizontalPadding * 2
+            horizontalSizeClass == .compact ? horizontalPadding : horizontalPadding * 2
         }
-        
+
         var body: some View {
             Group {
                 if isVerticalLayout(horizontalSizeClass: horizontalSizeClass, isLandscape: isLandscape) {
@@ -94,8 +94,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                             .padding(.horizontal, padding)
                     }
                     .padding(.bottom, 24)
-                }
-                else {
+                } else {
                     HStack(spacing: constant(iOS: padding, tvOS: 50)) {
                         DescriptionView(model: model, compactLayout: false)
                             .primaryColor(primaryColor)
@@ -113,22 +112,22 @@ struct ShowHeaderView: View, PrimaryColorSettable {
             }
         }
     }
-    
+
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View, PrimaryColorSettable {
         @ObservedObject var model: ShowHeaderViewModel
         let compactLayout: Bool
-        
-        internal var primaryColor: Color = .srgGrayD2
-        
+
+        var primaryColor: Color = .srgGrayD2
+
         var body: some View {
             VStack(alignment: .leading, spacing: ShowHeaderView.verticalSpacing) {
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)
-                // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
-                // when calculated with a `UIHostingController`, but without this the text does not occupy
-                // all lines it could.
+                    // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
+                    // when calculated with a `UIHostingController`, but without this the text does not occupy
+                    // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(primaryColor)
@@ -138,7 +137,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                 if let summary = model.show?.play_summary {
                     SummaryView(summary)
                         .primaryColor(primaryColor)
-                    // See above
+                        // See above
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 ActionsView(model: model, compactLayout: compactLayout)
@@ -148,19 +147,19 @@ struct ShowHeaderView: View, PrimaryColorSettable {
             .frame(maxWidth: .infinity, alignment: .leading)
             .focusable()
         }
-        
+
         /// Behavior: h-exp, v-hug
         private struct SummaryView: View, PrimaryColorSettable {
             let content: String
-            
-            internal var primaryColor: Color = .srgGrayD2
-            
+
+            var primaryColor: Color = .srgGrayD2
+
             @FirstResponder private var firstResponder
-            
+
             init(_ content: String) {
                 self.content = content
             }
-            
+
             var body: some View {
                 TruncatableTextView(content: content, lineLimit: 3) {
                     firstResponder.sendAction(#selector(ShowHeaderViewAction.showMore(sender:event:)), for: ShowMoreEvent(content: content))
@@ -169,13 +168,13 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                 .responderChain(from: firstResponder)
             }
         }
-        
+
         private struct ActionsView: View, PrimaryColorSettable {
             @ObservedObject var model: ShowHeaderViewModel
             let compactLayout: Bool
-            
-            internal var primaryColor: Color = .srgGrayD2
-            
+
+            var primaryColor: Color = .srgGrayD2
+
             var body: some View {
                 HStack(spacing: 8) {
                     if compactLayout {
@@ -183,48 +182,46 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                                         label: model.favoriteLabel,
                                         accessibilityLabel: model.favoriteAccessibilityLabel,
                                         action: favoriteAction)
-                        .primaryColor(primaryColor)
-                        .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
-#if os(iOS)
-                        if model.isSubscriptionPossible {
-                            ExpandingButton(icon: model.subscriptionIcon,
-                                            label: model.subscriptionLabel,
-                                            accessibilityLabel: model.subscriptionAccessibilityLabel,
-                                            action: subscriptionAction)
                             .primaryColor(primaryColor)
-                        }
-#endif
-                    }
-                    else {
+                            .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                        #if os(iOS)
+                            if model.isSubscriptionPossible {
+                                ExpandingButton(icon: model.subscriptionIcon,
+                                                label: model.subscriptionLabel,
+                                                accessibilityLabel: model.subscriptionAccessibilityLabel,
+                                                action: subscriptionAction)
+                                    .primaryColor(primaryColor)
+                            }
+                        #endif
+                    } else {
                         SimpleButton(icon: model.favoriteIcon,
                                      label: model.favoriteLabel,
                                      labelMinimumScaleFactor: 1,
                                      accessibilityLabel: model.favoriteAccessibilityLabel,
                                      action: favoriteAction)
-                        .primaryColor(primaryColor)
-#if os(iOS)
-                        if model.isSubscriptionPossible {
-                            SimpleButton(icon: model.subscriptionIcon,
-                                         label: model.subscriptionLabel,
-                                         accessibilityLabel: model.subscriptionAccessibilityLabel,
-                                         action: subscriptionAction)
                             .primaryColor(primaryColor)
-                        }
-#endif
+                        #if os(iOS)
+                            if model.isSubscriptionPossible {
+                                SimpleButton(icon: model.subscriptionIcon,
+                                             label: model.subscriptionLabel,
+                                             accessibilityLabel: model.subscriptionAccessibilityLabel,
+                                             action: subscriptionAction)
+                                    .primaryColor(primaryColor)
+                            }
+                        #endif
                     }
                 }
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
-            
+
             private func favoriteAction() {
                 if model.shouldDisplayFavoriteRemovalAlert {
                     model.isFavoriteRemovalAlertDisplayed = true
-                }
-                else {
+                } else {
                     model.toggleFavorite()
                 }
             }
-            
+
             private func favoriteRemovalAlert() -> Alert {
                 let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
                 let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
@@ -235,12 +232,12 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
-            
-#if os(iOS)
-            private func subscriptionAction() {
-                model.toggleSubscription()
-            }
-#endif
+
+            #if os(iOS)
+                private func subscriptionAction() {
+                    model.toggleSubscription()
+                }
+            #endif
         }
     }
 }
@@ -255,8 +252,7 @@ enum ShowHeaderViewSize {
             model.show = show
             let size = ShowHeaderView.MainView(model: model, horizontalPadding: horizontalPadding).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
-        }
-        else {
+        } else {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
         }
     }
@@ -268,36 +264,36 @@ struct ShowHeaderView_Previews: PreviewProvider {
         model.show = Mock.show()
         return model
     }()
-    
+
     private static let model2: ShowHeaderViewModel = {
         let model = ShowHeaderViewModel()
         model.show = Mock.show(.overflow)
         return model
     }()
-    
+
     static var previews: some View {
-#if os(tvOS)
-        Group {
-            ShowHeaderView.MainView(model: model1, horizontalPadding: 0)
-            ShowHeaderView.MainView(model: model2, horizontalPadding: 0)
-        }
-        .previewLayout(.sizeThatFits)
-#else
-        Group {
-            ShowHeaderView.MainView(model: model1, horizontalPadding: 16)
-            ShowHeaderView.MainView(model: model2, horizontalPadding: 16)
-        }
-        .previewLayout(.sizeThatFits)
-        .frame(width: 1000)
-        .environment(\.horizontalSizeClass, .regular)
-        
-        Group {
-            ShowHeaderView.MainView(model: model1, horizontalPadding: 16)
-            ShowHeaderView.MainView(model: model2, horizontalPadding: 16)
-        }
-        .frame(width: 375)
-        .previewLayout(.sizeThatFits)
-        .environment(\.horizontalSizeClass, .compact)
-#endif
+        #if os(tvOS)
+            Group {
+                ShowHeaderView.MainView(model: model1, horizontalPadding: 0)
+                ShowHeaderView.MainView(model: model2, horizontalPadding: 0)
+            }
+            .previewLayout(.sizeThatFits)
+        #else
+            Group {
+                ShowHeaderView.MainView(model: model1, horizontalPadding: 16)
+                ShowHeaderView.MainView(model: model2, horizontalPadding: 16)
+            }
+            .previewLayout(.sizeThatFits)
+            .frame(width: 1000)
+            .environment(\.horizontalSizeClass, .regular)
+
+            Group {
+                ShowHeaderView.MainView(model: model1, horizontalPadding: 16)
+                ShowHeaderView.MainView(model: model2, horizontalPadding: 16)
+            }
+            .frame(width: 375)
+            .previewLayout(.sizeThatFits)
+            .environment(\.horizontalSizeClass, .compact)
+        #endif
     }
 }

@@ -12,13 +12,13 @@ import SwiftUI
 struct VerticalNowArrowView: View {
     static let width: CGFloat = 13
     static let headerHeight: CGFloat = 8
-    
+
     var body: some View {
         Triangle()
             .fill(.white)
             .frame(width: Self.width, height: Self.headerHeight)
     }
-    
+
     private struct Triangle: Shape {
         func path(in rect: CGRect) -> Path {
             var path = Path()

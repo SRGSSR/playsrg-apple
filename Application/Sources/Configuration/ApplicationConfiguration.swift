@@ -10,78 +10,76 @@ extension ApplicationConfiguration {
     private static func configuredSection(from homeSection: HomeSection) -> ConfiguredSection? {
         switch homeSection {
         case .tvLive:
-            return .tvLive
+            .tvLive
         case .radioLive:
-            return .radioLive
+            .radioLive
         case .radioLiveSatellite:
-            return .radioLiveSatellite
+            .radioLiveSatellite
         case .tvLiveCenterScheduledLivestreams:
-            return .tvLiveCenterScheduledLivestreams
+            .tvLiveCenterScheduledLivestreams
         case .tvLiveCenterScheduledLivestreamsAll:
-            return .tvLiveCenterScheduledLivestreamsAll
+            .tvLiveCenterScheduledLivestreamsAll
         case .tvLiveCenterEpisodes:
-            return .tvLiveCenterEpisodes
+            .tvLiveCenterEpisodes
         case .tvLiveCenterEpisodesAll:
-            return .tvLiveCenterEpisodesAll
+            .tvLiveCenterEpisodesAll
         case .tvScheduledLivestreams:
-            return .tvScheduledLivestreams
+            .tvScheduledLivestreams
         case .tvScheduledLivestreamsNews:
-            return .tvScheduledLivestreamsNews
+            .tvScheduledLivestreamsNews
         case .tvScheduledLivestreamsSport:
-            return .tvScheduledLivestreamsSport
+            .tvScheduledLivestreamsSport
         case .tvScheduledLivestreamsSignLanguage:
-            return .tvScheduledLivestreamsSignLanguage
+            .tvScheduledLivestreamsSignLanguage
         default:
-            return nil
+            nil
         }
     }
-    
+
     var liveConfiguredSections: [ConfiguredSection] {
-        return liveHomeSections.compactMap { homeSection in
+        liveHomeSections.compactMap { homeSection in
             guard let homeSection = HomeSection(rawValue: homeSection.intValue) else { return nil }
             return Self.configuredSection(from: homeSection)
         }
     }
-    
+
     var serviceMessageUrl: URL {
-        return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
+        URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
     }
-    
+
     func relatedContentUrl(for media: SRGMedia) -> URL {
-        return URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: self.middlewareURL)!
+        URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: middlewareURL)!
     }
-    
+
     func topicColors(for topic: SRGTopic) -> (Color, Color)? {
-        guard let topicColorsArray = self.topicColors[topic.urn], topicColorsArray.count == 2 else { return nil }
-        
+        guard let topicColorsArray = topicColors[topic.urn], topicColorsArray.count == 2 else { return nil }
+
         let colors = topicColorsArray.map { Color($0) }
         return (colors.first!, colors.last!)
     }
-    
+
     private static var version: String {
-        return Bundle.main.play_friendlyVersionNumber
+        Bundle.main.play_friendlyVersionNumber
     }
-    
+
     private static var type: String {
         if ProcessInfo.processInfo.isMacCatalystApp || ProcessInfo.processInfo.isiOSAppOnMac {
-            return "desktop"
-        }
-        else if UIDevice.current.userInterfaceIdiom == .pad {
-            return "tablet"
-        }
-        else {
-            return "phone"
+            "desktop"
+        } else if UIDevice.current.userInterfaceIdiom == .pad {
+            "tablet"
+        } else {
+            "phone"
         }
     }
-    
+
     private static var identifier: String? {
-        return UserDefaults.standard.string(forKey: "tc_unique_id")
+        UserDefaults.standard.string(forKey: "tc_unique_id")
     }
-    
+
     private static func typeformUrlWithParameters(_ url: URL) -> URL {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return url }
         guard let host = urlComponents.host, host.contains("typeform.") else { return url }
-        
+
         let typeformQueryItems = [
             URLQueryItem(name: "platform", value: "iOS"),
             URLQueryItem(name: "version", value: version),
@@ -90,36 +88,35 @@ extension ApplicationConfiguration {
         ]
         if let queryItems = urlComponents.queryItems {
             urlComponents.queryItems = typeformQueryItems.appending(contentsOf: queryItems)
-        }
-        else {
+        } else {
             urlComponents.queryItems = typeformQueryItems
         }
         return urlComponents.url ?? url
     }
-    
+
     var userSuggestionUrlWithParameters: URL? {
         guard let feedbackUrl = feedbackURL else { return nil }
-        
+
         return Self.typeformUrlWithParameters(feedbackUrl)
     }
-    
+
     var tvGuideOtherBouquets: [TVGuideBouquet] {
-        return self.tvGuideOtherBouquetsObjc.map { number in
-            return TVGuideBouquet(rawValue: number.intValue)!
+        tvGuideOtherBouquetsObjc.map { number in
+            TVGuideBouquet(rawValue: number.intValue)!
         }
     }
 }
 
 enum ConfiguredSection: Hashable {
     case availableEpisodes(SRGShow)
-    
-    case favoriteShows
+
+    case favoriteShows(contentType: ContentType)
     case history
     case watchLater
-    
+
     case tvAllShows
     case tvEpisodesForDay(_ day: SRGDay)
-    
+
     case radioAllShows(channelUid: String)
     case radioEpisodesForDay(_ day: SRGDay, channelUid: String)
     case radioFavoriteShows(channelUid: String)
@@ -130,11 +127,11 @@ enum ConfiguredSection: Hashable {
     case radioMostPopular(channelUid: String)
     case radioResumePlayback(channelUid: String)
     case radioWatchLater(channelUid: String)
-    
+
     case tvLive
     case radioLive
     case radioLiveSatellite
-    
+
     case tvLiveCenterScheduledLivestreams
     case tvLiveCenterScheduledLivestreamsAll
     case tvLiveCenterEpisodes
@@ -143,10 +140,10 @@ enum ConfiguredSection: Hashable {
     case tvScheduledLivestreamsNews
     case tvScheduledLivestreamsSport
     case tvScheduledLivestreamsSignLanguage
-    
-#if os(iOS)
-    case downloads
-    case notifications
-    case radioShowAccess(channelUid: String)
-#endif
+
+    #if os(iOS)
+        case downloads
+        case notifications
+        case radioShowAccess(channelUid: String)
+    #endif
 }

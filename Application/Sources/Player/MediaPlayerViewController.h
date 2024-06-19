@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MediaPlayerViewController : BaseViewController <Oriented, SRGLetterboxViewDelegate, SRGLetterboxPictureInPictureDelegate, SRGAnalyticsViewTracking,
-    UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, NSUserActivityDelegate>
+UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, NSUserActivityDelegate>
 
 // Use nil for starting at the default location (resumes if the media is already being played)
 - (instancetype)initWithURN:(NSString *)URN position:(nullable SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification;

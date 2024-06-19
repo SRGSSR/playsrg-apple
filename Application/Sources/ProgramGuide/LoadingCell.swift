@@ -11,7 +11,7 @@ import SwiftUI
 
 struct LoadingCell: View {
     @State private var appeared = false
-    
+
     var body: some View {
         Color(appeared ? .srgGray33 : .srgGray23)
             .animation(Animation.linear(duration: 1).repeatForever(autoreverses: true), value: appeared)
@@ -25,7 +25,7 @@ struct LoadingCell: View {
 
 struct LoadingCell_Previews: PreviewProvider {
     private static let height: CGFloat = constant(iOS: 80, tvOS: 120)
-    
+
     static var previews: some View {
         LoadingCell()
             .previewLayout(.fixed(width: 500, height: height))
