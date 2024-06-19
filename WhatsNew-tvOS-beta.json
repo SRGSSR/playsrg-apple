@@ -97,5 +97,6 @@
     "1.8.6-452": "Branch beta\n- Show page header updated.\n- Topic colors added.\n- Some font weights and gray colors updated for better readability.",
     "1.8.6-453": "- Show page header updated.\n- Topic colors added.\n- Page section headers can open an other content page.",
     "1.8.6-454": "- AppStore release.",
-    "1.8.7-455": "- Internal beta new options for audio content pages."
+    "1.8.7-455": "- Internal beta new options for audio content pages.",
+    "1.8.7-456": "- Allow red badge in UI element to expand horizontally if the contained text is long.\n- Reduce number of clicks to open an highlighted media.\n- Use 16:9 images in alphabetical TV shows view. [SRF]"
 }
