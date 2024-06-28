@@ -1,6 +1,0 @@
-#include? "Configuration/Xcode/Play RTR TV.nightly_appcenter.xcconfig"
-
-#include "Xcode/Shared/BUs/RTR.xcconfig"
-#include "Xcode/Shared/Targets/tvOS/Application.xcconfig"
-
-#include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.nightly_appcenter.xcconfig"
