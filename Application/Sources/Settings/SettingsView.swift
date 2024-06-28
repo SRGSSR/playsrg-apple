@@ -4,10 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#if APPCENTER
-    import AppCenterDistribute
-#endif
-#if os(iOS) && (DEBUG || APPCENTER)
+#if os(iOS) && DEBUG
     import FLEX
 #endif
 import SRGAppearanceSwift
@@ -50,7 +47,7 @@ struct SettingsView: View {
                 AdvancedFeaturesSection(model: model)
                 ResetSection(model: model)
             #endif
-            #if os(iOS) && (DEBUG || APPCENTER)
+            #if os(iOS) && DEBUG
                 DeveloperSection()
             #endif
             #if DEBUG || NIGHTLY || BETA
@@ -557,9 +554,6 @@ struct SettingsView: View {
                         }
                     #endif
                     Toggle(NSLocalizedString("Always ask user consent at launch", comment: "Always ask user consent at launch setting label"), isOn: $isAlwaysAskUserConsentAtLaunchEnabled)
-                    #if os(iOS) && APPCENTER
-                        VersionsAndReleaseNotesButton()
-                    #endif
                 } header: {
                     Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
                 } footer: {
@@ -600,35 +594,6 @@ struct SettingsView: View {
                     }
                 }
             }
-
-            #if os(iOS) && APPCENTER
-                private struct VersionsAndReleaseNotesButton: View {
-                    @State private var isSheetDisplayed = false
-
-                    private var appCenterUrl: URL? {
-                        guard let appCenterUrlString = Bundle.main.object(forInfoDictionaryKey: "AppCenterURL") as? String, !appCenterUrlString.isEmpty else {
-                            return nil
-                        }
-                        return URL(string: appCenterUrlString)
-                    }
-
-                    var body: some View {
-                        if let appCenterUrl {
-                            Button(NSLocalizedString("Versions and release notes", comment: "Label of the button to access release notes and download internal builds (App Center)"), action: action)
-                                .sheet(isPresented: $isSheetDisplayed) {
-                                    SafariView(url: appCenterUrl)
-                                        .ignoresSafeArea()
-                                }
-                        }
-                    }
-
-                    private func action() {
-                        UserDefaults.standard.removeObject(forKey: "MSAppCenterPostponedTimestamp")
-                        Distribute.checkForUpdate()
-                        isSheetDisplayed = true
-                    }
-                }
-            #endif
 
             private struct PosterImagesSelectionCell: View {
                 @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
@@ -917,7 +882,7 @@ struct SettingsView: View {
 
     // MARK: Developer section
 
-    #if os(iOS) && (DEBUG || APPCENTER)
+    #if os(iOS) && DEBUG
         private struct DeveloperSection: View {
             var body: some View {
                 PlaySection {
