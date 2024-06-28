@@ -1,6 +1,0 @@
-#include? "Configuration/Xcode/Play SRF.beta_appcenter.xcconfig"
-
-#include "Xcode/Shared/BUs/SRF.xcconfig"
-#include "Xcode/Shared/Targets/iOS/Application.xcconfig"
-
-#include "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig"
