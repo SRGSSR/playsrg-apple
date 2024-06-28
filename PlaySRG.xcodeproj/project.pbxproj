@@ -3046,7 +3046,6 @@
 		08A913BA2717388E00774985 /* SRF.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SRF.xcconfig; sourceTree = "<group>"; };
 		08A913BB2717388E00774985 /* SWI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SWI.xcconfig; sourceTree = "<group>"; };
 		08A913BC2717388E00774985 /* RSI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = RSI.xcconfig; sourceTree = "<group>"; };
-		08A913BD271832CC00774985 /* TV-Application-enterprise.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TV-Application-enterprise.entitlements"; sourceTree = "<group>"; };
 		08AA551B1D49EBF600C5026E /* ApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationConfiguration.h; sourceTree = "<group>"; };
 		08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationConfiguration.m; sourceTree = "<group>"; };
 		08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterboxDelegate.swift; sourceTree = "<group>"; };
@@ -4794,7 +4793,6 @@
 				6F4FCB1224D07077002675EF /* Resources */,
 				6F4FCB1124D07069002675EF /* Sources */,
 				6F331CF224D06B8400C096AB /* TV-Application-Info.plist */,
-				08A913BD271832CC00774985 /* TV-Application-enterprise.entitlements */,
 				08FCE82525BA11C00031C512 /* TV-Application.entitlements */,
 			);
 			path = "TV Application";
