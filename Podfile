@@ -39,9 +39,7 @@ abstract_target 'Play SRG' do
     project 'PlaySRG.xcodeproj',
             'Debug' => :debug,
             'Nightly' => :release,
-            'Nightly_AppCenter' => :release,
             'Beta' => :release,
-            'Beta_AppCenter' => :release,
             'AppStore' => :release
   end
 
@@ -71,9 +69,7 @@ abstract_target 'Play SRG' do
     project 'PlaySRG.xcodeproj',
             'Debug' => :debug,
             'Nightly' => :release,
-            'Nightly_AppCenter' => :release,
             'Beta' => :release,
-            'Beta_AppCenter' => :release,
             'AppStore' => :release
   end
 end
