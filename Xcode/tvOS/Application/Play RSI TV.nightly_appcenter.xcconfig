@@ -1,6 +1,0 @@
-#include? "Configuration/Xcode/Play RSI TV.nightly_appcenter.xcconfig"
-
-#include "Xcode/Shared/BUs/RSI.xcconfig"
-#include "Xcode/Shared/Targets/tvOS/Application.xcconfig"
-
-#include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.nightly_appcenter.xcconfig"

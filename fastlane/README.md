@@ -15,14 +15,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios iOSnightliesAppCenter
-
-```sh
-[bundle exec] fastlane ios iOSnightliesAppCenter
-```
-
-Builds a new iOS nightly on App Center.
-
 ### ios tvOSnightlies
 
 ```sh
@@ -46,14 +38,6 @@ Builds a new iOS nightly on App Store Connect and waits for build processing.
 ```
 
 Adds a nightly TestFlight tester (email required)
-
-### ios iOSbetasAppCenter
-
-```sh
-[bundle exec] fastlane ios iOSbetasAppCenter
-```
-
-Builds an iOS beta on App Center with the current build number. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.
 
 ### ios tvOSbetas
 

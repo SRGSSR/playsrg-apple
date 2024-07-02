@@ -53,7 +53,7 @@ extension Bundle {
     }
 
     var play_isTestFlightDistribution: Bool {
-        #if !DEBUG && !APPCENTER
+        #if !DEBUG
             return (appStoreReceiptURL?.path ?? "").contains("sandboxReceipt")
         #else
             return false
