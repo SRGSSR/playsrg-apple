@@ -501,14 +501,6 @@ platform :ios do
     # Don't erase existing screenshots, from SRF marketing team.
   end
 
-  desc 'SWI: Makes iOS screenshots and replaces current ones on App Store Connect.'
-  lane :iOSswiScreenshots do
-    platform = 'iOS'
-
-    screenshots(platform, 'SWI')
-    upload_screenshots(platform)
-  end
-
   # Individual iOS App Store build uploads
 
   desc 'RSI only: See `iOSUploadAppStoreBuilds` lane.'
@@ -529,11 +521,6 @@ platform :ios do
   desc 'SRF only: See `iOSUploadAppStoreBuilds` lane.'
   lane :iOSsrfUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'SRF')
-  end
-
-  desc 'SWI only: See `iOSUploadAppStoreBuilds` lane.'
-  lane :iOSswiUploadAppStoreBuild do
-    testflight_appstore_build_upload(platform: 'iOS', bu: 'SWI')
   end
 
   # Individual iOS App Store build private distributions
@@ -563,13 +550,6 @@ platform :ios do
   lane :iOSsrfDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SWI only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSswiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
 
@@ -603,13 +583,6 @@ platform :ios do
     )
   end
 
-  desc 'SWI only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSswiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
-    )
-  end
-
   # Individual iOS AppStore releases
 
   desc 'RSI only: See `iOSPrepareAppStoreRelease` lane.'
@@ -630,11 +603,6 @@ platform :ios do
   desc 'SRF only: See `iOSPrepareAppStoreRelease` lane.'
   lane :iOSsrfPrepareAppStoreRelease do |options|
     prepare_appstore_release('iOS', 'SRF', options)
-  end
-
-  desc 'SWI only: See `iOSPrepareAppStoreRelease` lane.'
-  lane :iOSswiPrepareAppStoreRelease do |options|
-    prepare_appstore_release('iOS', 'SWI', options)
   end
 
   # Individual tvOS screenshots
@@ -671,14 +639,6 @@ platform :ios do
     # Don't erase existing screenshots, from SRF marketing team.
   end
 
-  desc 'SWI: Makes tvOS screenshots and replaces current ones on App Store Connect.'
-  lane :tvOSswiScreenshots do
-    platform = 'tvOS'
-
-    screenshots(platform, 'SWI')
-    upload_screenshots(platform)
-  end
-
   # Individual tvOS App Store build uploads
 
   desc 'RSI only: See `tvOSUploadAppStoreBuilds` lane.'
@@ -699,11 +659,6 @@ platform :ios do
   desc 'SRF only: See `tvOSUploadAppStoreBuilds` lane.'
   lane :tvOSsrfUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'SRF')
-  end
-
-  desc 'SWI only: See `tvOSUploadAppStoreBuilds` lane.'
-  lane :tvOSswiUploadAppStoreBuild do
-    testflight_appstore_build_upload(platform: 'tvOS', bu: 'SWI')
   end
 
   # Individual tvOS App Store build private distributions
@@ -733,13 +688,6 @@ platform :ios do
   lane :tvOSsrfDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SWI only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSswiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
 
@@ -773,13 +721,6 @@ platform :ios do
     )
   end
 
-  desc 'SWI only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSswiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
-    )
-  end
-
   # Individual tvOS AppStore releases
 
   desc 'RSI only: See `tvOSPrepareAppStoreRelease` lane.'
@@ -800,11 +741,6 @@ platform :ios do
   desc 'SRF only: See `tvOSPrepareAppStoreRelease` lane.'
   lane :tvOSsrfPrepareAppStoreRelease do |options|
     prepare_appstore_release('tvOS', 'SRF', options)
-  end
-
-  desc 'SWI only: See `tvOSPrepareAppStoreRelease` lane.'
-  lane :tvOSswiPrepareAppStoreRelease do |options|
-    prepare_appstore_release('tvOS', 'SWI', options)
   end
 
   #
@@ -1117,7 +1053,7 @@ APP_STORE_STATE = Spaceship::ConnectAPI::AppInfo::AppStoreState
 #
 
 def business_units
-  ['RTS', 'SRF', 'RSI', 'RTR', 'SWI']
+  ['RTS', 'SRF', 'RSI', 'RTR']
 end
 
 def business_unit_index(business_unit)
@@ -2265,8 +2201,7 @@ def device_language(business_unit)
     'RSI' => 'it-CH',
     'RTR' => 'de-CH',
     'RTS' => 'fr-CH',
-    'SRF' => 'de-CH',
-    'SWI' => 'en-US'
+    'SRF' => 'de-CH'
   }
   languages[business_unit]
 end
@@ -2353,8 +2288,7 @@ def appstore_language(business_unit)
     'RSI' => 'it',
     'RTR' => 'de-DE',
     'RTS' => 'fr-FR',
-    'SRF' => 'de-DE',
-    'SWI' => 'en-US'
+    'SRF' => 'de-DE'
   }
   languages[business_unit]
 end
@@ -2364,8 +2298,7 @@ def appstore_copyright(business_unit)
     'RSI' => 'Radiotelevisione Svizzera',
     'RTR' => 'RTR Radiotelevisiun Svizra Rumantscha',
     'RTS' => 'RTS Radio Télévision Suisse',
-    'SRF' => 'Schweizer Radio und Fernsehen (SRF)',
-    'SWI' => 'swissinfo.ch'
+    'SRF' => 'Schweizer Radio und Fernsehen (SRF)'
   }
   copyrights[business_unit]
 end
@@ -2425,8 +2358,7 @@ def crowdin_language(business_unit)
     'RSI' => 'it-CH',
     'RTR' => 'rm-CH',
     'RTS' => 'fr-CH',
-    'SRF' => 'de-CH',
-    'SWI' => 'en'
+    'SRF' => 'de-CH'
   }
   languages[business_unit]
 end

@@ -1,338 +1,278 @@
 # frozen_string_literal: true
 
-app_identifier "#{ENV['DEFAULT_APP_IDENTIFIER']}"
-apple_id "#{ENV['DEFAULT_APPLE_ID']}"
-team_id "#{ENV['DEFAULT_TEAM_ID']}"
-itc_team_id "#{ENV['DEFAULT_ITUNES_CONNECT_TEAM_ID']}"
+app_identifier "#{ENV.fetch('DEFAULT_APP_IDENTIFIER', nil)}"
+apple_id "#{ENV.fetch('DEFAULT_APPLE_ID', nil)}"
+team_id "#{ENV.fetch('DEFAULT_TEAM_ID', nil)}"
+itc_team_id "#{ENV.fetch('DEFAULT_ITUNES_CONNECT_TEAM_ID', nil)}"
 
 for_platform :ios do
-  for_lane :iOSswiUploadAppStoreBuild do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :tvOSswiUploadAppStoreBuild do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :iOSswiDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :tvOSswiDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :iOSswiDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :tvOSswiDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :iOSswiScreenshots do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :tvOSswiScreenshots do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :iOSswiPrepareAppStoreRelease do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
-  for_lane :tvOSswiPrepareAppStoreRelease do
-    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SWI_TEAM_ID']}"
-  end
-
   for_lane :iOSsrfUploadAppStoreBuild do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSsrfUploadAppStoreBuild do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :iOSsrfDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSsrfDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :iOSsrfDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSsrfDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :iOSsrfScreenshots do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSsrfScreenshots do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :iOSsrfPrepareAppStoreRelease do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSsrfPrepareAppStoreRelease do
-    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRF_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtsUploadAppStoreBuild do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtsUploadAppStoreBuild do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtsDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtsDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtsDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtsDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtsScreenshots do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtsScreenshots do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtsPrepareAppStoreRelease do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtsPrepareAppStoreRelease do
-    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTS_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrsiUploadAppStoreBuild do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrsiUploadAppStoreBuild do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrsiDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrsiDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrsiDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrsiDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrsiScreenshots do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrsiScreenshots do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrsiPrepareAppStoreRelease do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrsiPrepareAppStoreRelease do
-    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RSI_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtrUploadAppStoreBuild do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtrUploadAppStoreBuild do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtrDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtrDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtrDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtrDistributePublicAppStoreBuild do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtrScreenshots do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtrScreenshots do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :iOSrtrPrepareAppStoreRelease do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSrtrPrepareAppStoreRelease do
-    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
-    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['RTR_TEAM_ID']}"
+    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
+    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSnightlies do
-    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+    itc_team_id "#{ENV.fetch('SRGSSR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRGSSR_TEAM_ID', nil)}"
   end
 
   for_lane :iOSnightlies do
-    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+    itc_team_id "#{ENV.fetch('SRGSSR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRGSSR_TEAM_ID', nil)}"
   end
 
   for_lane :nightlyTester do
-    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+    itc_team_id "#{ENV.fetch('SRGSSR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRGSSR_TEAM_ID', nil)}"
   end
 
   for_lane :tvOSbetas do
-    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+    itc_team_id "#{ENV.fetch('SRGSSR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRGSSR_TEAM_ID', nil)}"
   end
 
   for_lane :iOSbetas do
-    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+    itc_team_id "#{ENV.fetch('SRGSSR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRGSSR_TEAM_ID', nil)}"
   end
 
   for_lane :betaTester do
-    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
-    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+    itc_team_id "#{ENV.fetch('SRGSSR_ITUNES_CONNECT_TEAM_ID', nil)}"
+    team_id "#{ENV.fetch('SRGSSR_TEAM_ID', nil)}"
   end
 end
