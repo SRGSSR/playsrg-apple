@@ -60,12 +60,12 @@
 - Screenshots iOS
 	- Play RSI iOS: `fastlane ios iOSrsiScreenshots`
 	- Play RTR iOS: `fastlane ios iOSrtrScreenshots`
-	- Play RTS iOS: `fastlane ios iOSrtsScreenshots`
+	- Play RTS iOS: `fastlane ios iOSrtsScreenshots` (No upload to ASC, due to some marketing images)
 	- Play SRF iOS: `fastlane ios iOSsrfScreenshots` (No upload to ASC, due to some marketing images)
 - Screenshots tvOS
 	- Play RSI tvOS: `fastlane ios tvOSrsiScreenshots`
 	- Play RTR tvOS: `fastlane ios tvOSrtrScreenshots`
-	- Play RTS tvOS: `fastlane ios tvOSrtsScreenshots`
+	- Play RTS tvOS: `fastlane ios tvOSrtsScreenshots` (No upload to ASC, due to some marketing images)
 	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots` (No upload to ASC, due to some marketing images)
 
 # Private nightlies

@@ -415,12 +415,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'RTS: Makes iOS screenshots and replaces current ones on App Store Connect.'
+  desc 'RTS: Makes iOS screenshots. No replacement made on App Store Connect.'
   lane :iOSrtsScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'RTS')
-    upload_screenshots(platform)
+    # Don't erase existing screenshots, from RTS marketing team.
   end
 
   desc 'SRF: Makes iOS screenshots. No replacement made on App Store Connect.'
@@ -553,12 +553,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'RTS: Makes tvOS screenshots and replaces current ones on App Store Connect.'
+  desc 'RTS: Makes tvOS screenshots. No replacement made on App Store Connect.'
   lane :tvOSrtsScreenshots do
     platform = 'tvOS'
 
     screenshots(platform, 'RTS')
-    upload_screenshots(platform)
+    # Don't erase existing screenshots, from RTS marketing team.
   end
 
   desc 'SRF: Makes tvOS screenshots. No replacement made on App Store Connect.'
