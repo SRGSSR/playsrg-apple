@@ -13,7 +13,7 @@ class ApplicationScreenshots: XCTestCase {
         [:]
     }
 
-    override func setUp() {
+    @MainActor override func setUp() {
         super.setUp()
 
         let app = XCUIApplication()
@@ -23,7 +23,7 @@ class ApplicationScreenshots: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testSnapshots() {
+    @MainActor func testSnapshots() {
         // Wait a bit for the focus engine to determine the first focused item
         sleep(5)
 
