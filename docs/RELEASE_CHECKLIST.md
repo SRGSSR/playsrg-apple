@@ -57,6 +57,8 @@
 
 ### \*\*Manual fastlane:
 
+⚠️ All screenshots lanes must be executed from a Swiss IP, to avoid geo-blocking icons on media items.
+
 - Screenshots iOS
 	- Play RSI iOS: `fastlane ios iOSrsiScreenshots`
 	- Play RTR iOS: `fastlane ios iOSrtrScreenshots`
