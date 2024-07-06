@@ -1014,6 +1014,8 @@ private extension PageViewController {
                         case .video:
                             let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
                             ShowAccessCell(style: style).primaryColor(primaryColor)
+                        case .audio:
+                            ShowAccessCell(style: .calendar).primaryColor(primaryColor)
                         default:
                             ShowAccessCell(style: .calendar).primaryColor(primaryColor)
                         }
