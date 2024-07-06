@@ -210,7 +210,7 @@ private extension Content {
                     NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
                 case .livestreams:
                     NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
-                case .continueWatching:
+                case .continueWatching, .continueListening:
                     NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
                 case .watchLater:
                     NSLocalizedString("Later", comment: "Title Label used to present the video later list")
@@ -265,7 +265,7 @@ private extension Content {
             switch contentSection.type {
             case .predefined:
                 switch presentation.type {
-                case .favoriteShows, .continueWatching, .watchLater:
+                case .favoriteShows, .continueWatching, .watchLater, .continueListening:
                     true
                 default:
                     false
@@ -283,7 +283,7 @@ private extension Content {
                     .favoriteShows
                 case .myProgram:
                     .episodesFromFavorites
-                case .continueWatching:
+                case .continueWatching, .continueListening:
                     .resumePlayback
                 case .watchLater:
                     .watchLater
@@ -327,7 +327,7 @@ private extension Content {
                     AnalyticsPageTitle.favorites.rawValue
                 case .myProgram:
                     AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
-                case .continueWatching:
+                case .continueWatching, .continueListening:
                     AnalyticsPageTitle.resumePlayback.rawValue
                 case .watchLater:
                     AnalyticsPageTitle.watchLater.rawValue
@@ -367,7 +367,7 @@ private extension Content {
                 AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
                 AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
-            case .continueWatching:
+            case .continueWatching, .continueListening:
                 AnalyticsEvent.historyRemove(source: source, urn: nil)
             default:
                 nil
@@ -463,7 +463,7 @@ private extension Content {
                     return dataProvider.tvTopics(for: contentSection.vendor)
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
-                case .continueWatching:
+                case .continueWatching, .continueListening:
                     return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
@@ -505,7 +505,7 @@ private extension Content {
                 switch contentSection.presentation.type {
                 case .favoriteShows, .myProgram:
                     UserInteractionSignal.favoriteUpdates()
-                case .continueWatching:
+                case .continueWatching, .continueListening:
                     UserInteractionSignal.historyUpdates()
                 case .watchLater:
                     UserInteractionSignal.watchLaterUpdates()
@@ -536,7 +536,7 @@ private extension Content {
                 Content.removeFromFavorites(items)
             case .watchLater:
                 Content.removeFromWatchLater(items)
-            case .continueWatching:
+            case .continueWatching, .continueListening:
                 Content.removeFromHistory(items)
             default:
                 break
