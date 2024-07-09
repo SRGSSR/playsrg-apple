@@ -16535,7 +16535,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/PLAYRTS-5541-content-presentation-type-update";
+				branch = develop;
 				kind = branch;
 			};
 		};
