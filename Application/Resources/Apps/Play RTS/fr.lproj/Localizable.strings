@@ -346,6 +346,9 @@
    Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Derniers épisodes de vos favoris";
 
+/* Title label used to present the radio latest podcast episodes */
+"Latest podcasts" = "Derniers podcasts";
+
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Vidéos les plus récentes";
 
@@ -536,6 +539,9 @@
 /* Mail body header to declare a technical issue */
 "Please describe the issue below:" = "Merci de décrire ci-dessous le problème rencontré :";
 
+/* Title label used to present radio associated podcasts */
+"Podcasts" = "Podcasts";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Populaire sur Play RTS";
 
@@ -647,12 +653,6 @@
    Title label used to present the TV shows AZ and TV shows by date access buttons */
 "Shows" = "Émissions";
 
-/*
- Title label used to present radio associated podcasts
- Title label used to present the radio podcasts AZ and radio podcasts by date access buttons
- Title label used to present the TV podcasts AZ and TV podcasts by date access buttons */
-"Podcasts" = "Podcasts";
-
 /* Label to present shows A to Z (radio or TV) */
 "Shows A to Z" = "Émissions de A à Z";
 
@@ -686,7 +686,7 @@
 
 /* Label of the button for Podcast square image format selection
    Podcast square image format selection view title */
-"Square images" = "Square images";
+"Square images" = "Images carrées";
 
 /* Server setting name */
 "Stage" = "Stage";
@@ -760,9 +760,6 @@
 
 /* Title label used to present the radio latest audio episodes */
 "The latest episodes" = "Dernières émissions";
-
-/* Title label used to present the radio latest podcast episodes */
-"Latest podcasts" = "Derniers podcasts";
 
 /* Error message when a media cannot be opened via Handoff
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
@@ -844,9 +841,6 @@
 
 /* Version label in settings */
 "Version" = "Version";
-
-/* Label of the button to access release notes and download internal builds (App Center) */
-"Versions and release notes" = "Versions et notes de mise à jour";
 
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Autorise la lecture vidéo à se poursuivre même quand vous sortez de l'application.";

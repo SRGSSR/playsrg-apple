@@ -346,6 +346,9 @@
    Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Die neusten Episoden aus deinen Favoriten";
 
+/* Title label used to present the radio latest podcast episodes */
+"Latest podcasts" = "Latest podcasts";
+
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Neuste Videos";
 
@@ -535,6 +538,9 @@
 
 /* Mail body header to declare a technical issue */
 "Please describe the issue below:" = "Bitte beschreiben Sie das Problem unten:";
+
+/* Title label used to present radio associated podcasts */
+"Podcasts" = "Podcasts";
 
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Beliebt auf Play SRF";
@@ -835,9 +841,6 @@
 
 /* Version label in settings */
 "Version" = "Version";
-
-/* Label of the button to access release notes and download internal builds (App Center) */
-"Versions and release notes" = "Versionen und neue Funktionen";
 
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Die Videos werden ohne Unterbrechung im Hintergrund abgespielt.";
