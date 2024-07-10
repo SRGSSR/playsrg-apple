@@ -26,6 +26,24 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
     SongsViewStyleExpanded
 };
 
+/**
+ *  Show types for radios
+ */
+typedef NS_ENUM(NSInteger, ShowType) {
+    /**
+     *  Not displayed.
+     */
+    ShowTypeNone = 0,
+    /**
+     *  Usual audios shows
+     */
+    ShowTypeShow,
+    /**
+     *  Podcasts
+     */
+    ShowTypePodcast
+};
+
 @interface Channel : NSObject
 
 /**
@@ -77,6 +95,11 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
  *  The songs view style when added to the view.
  */
 @property (nonatomic, readonly) SongsViewStyle songsViewStyle;
+
+/**
+ *  The type of show hosted by the channel.
+ */
+@property (nonatomic, readonly) ShowType showType;
 
 /**
  *  The channel content page identifier.

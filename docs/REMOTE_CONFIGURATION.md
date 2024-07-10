@@ -67,6 +67,9 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
+* `showType` (optional, string): Whether the channel has content of type show or podcast. It will affect the section titles. Available values are:
+   * `show`
+   * `podcast`
 * `shareURL` (optional, string): The URL used to share the channel website.
 * `contentPageId` (optional, string) - BETA ONLY: The page identifier of the content page to use for the channel page. If omitted, the preconfigured page is used with the related sections for this channel.
 

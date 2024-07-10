@@ -8,13 +8,21 @@ extension RadioChannel {
     private static func configuredSection(from homeSection: HomeSection, withChannelUid channelUid: String) -> ConfiguredSection? {
         switch homeSection {
         case .radioAllShows:
-            return .radioAllShows(channelUid: channelUid)
+            if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                return .podcastAllShows(channelUid: channelUid)
+            } else {
+                return .radioAllShows(channelUid: channelUid)
+            }
         case .radioFavoriteShows:
             return .radioFavoriteShows(channelUid: channelUid)
         case .radioLatest:
             return .radioLatest(channelUid: channelUid)
         case .radioLatestEpisodes:
-            return .radioLatestEpisodes(channelUid: channelUid)
+            if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                return .podcastLatestEpisodes(channelUid: channelUid)
+            } else {
+                return .radioLatestEpisodes(channelUid: channelUid)
+            }
         case .radioLatestEpisodesFromFavorites:
             return .radioLatestEpisodesFromFavorites(channelUid: channelUid)
         case .radioLatestVideos:
@@ -27,7 +35,11 @@ extension RadioChannel {
             return .radioWatchLater(channelUid: channelUid)
         #if os(iOS)
             case .radioShowsAccess:
-                return .radioShowAccess(channelUid: channelUid)
+                if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                    return .radioPodcastAccess(channelUid: channelUid)
+                } else {
+                    return .radioShowAccess(channelUid: channelUid)
+                }
         #endif
         default:
             return nil

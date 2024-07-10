@@ -577,6 +577,10 @@ private extension Content {
                 return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
             case .radioLatestEpisodesFromFavorites:
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from radio favorite shows")
+            case .podcastAllShows:
+                return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
+            case .podcastLatestEpisodes:
+                return NSLocalizedString("Latest podcasts", comment: "Title label used to present the radio latest podcast episodes")
             case .radioLatestVideos:
                 return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
             case .radioLive:
@@ -610,6 +614,8 @@ private extension Content {
                     return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
                 case .radioShowAccess:
                     return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+                case .radioPodcastAccess:
+                    return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
             #endif
             default:
                 return nil
@@ -879,7 +885,7 @@ private extension Content {
                 return dataProvider.tvShows(for: vendor, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
                     .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
-            case let .radioAllShows(channelUid):
+            case let .radioAllShows(channelUid), let .podcastAllShows(channelUid):
                 return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
                     .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
@@ -895,7 +901,7 @@ private extension Content {
                 return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-            case let .radioLatestEpisodes(channelUid: channelUid):
+            case let .radioLatestEpisodes(channelUid), let .podcastLatestEpisodes(channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
@@ -980,7 +986,7 @@ private extension Content {
                         .map { $0.map { .notification($0) } }
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
-                case let .radioShowAccess(channelUid):
+                case let .radioShowAccess(channelUid), let .radioPodcastAccess(channelUid):
                     return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()

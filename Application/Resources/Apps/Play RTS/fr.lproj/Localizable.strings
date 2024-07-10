@@ -647,6 +647,12 @@
    Title label used to present the TV shows AZ and TV shows by date access buttons */
 "Shows" = "Émissions";
 
+/*
+ Title label used to present radio associated podcasts
+ Title label used to present the radio podcasts AZ and radio podcasts by date access buttons
+ Title label used to present the TV podcasts AZ and TV podcasts by date access buttons */
+"Podcasts" = "Podcasts";
+
 /* Label to present shows A to Z (radio or TV) */
 "Shows A to Z" = "Émissions de A à Z";
 
@@ -754,6 +760,9 @@
 
 /* Title label used to present the radio latest audio episodes */
 "The latest episodes" = "Dernières émissions";
+
+/* Title label used to present the radio latest podcast episodes */
+"Latest podcasts" = "Derniers podcasts";
 
 /* Error message when a media cannot be opened via Handoff
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
