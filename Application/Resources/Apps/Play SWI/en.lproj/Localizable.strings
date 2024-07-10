@@ -542,6 +542,9 @@
 /* Title label used to present radio associated podcasts */
 "Podcasts" = "Podcasts";
 
+/* Title of the section when we show podcasts by date */
+"Podcasts by date" = "Podcasts by date";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular on Play SWI";
 
