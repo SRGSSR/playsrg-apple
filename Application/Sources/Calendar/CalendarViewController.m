@@ -65,7 +65,7 @@
 
 - (NSString *)title
 {
-    return TitleForApplicationSection(ApplicationSectionShowByDate);
+    return [self.radioChannel sectionTitleWithSectionContext:ApplicationSectionShowByDate];
 }
 
 #pragma mark View lifecycle

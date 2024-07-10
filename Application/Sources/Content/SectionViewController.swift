@@ -437,9 +437,15 @@ extension SectionViewController {
 
     @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
         if let channelUid {
-            SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
+            let configuredSection: ConfiguredSection =
+                if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                    .podcastAllShows(channelUid: channelUid)
+                } else {
+                    .radioAllShows(channelUid: channelUid)
+                }
+            return SectionViewController(section: .configured(configuredSection), initialSectionId: initialSectionId)
         } else {
-            SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
+            return SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
     }
 
