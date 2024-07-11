@@ -54,7 +54,7 @@ extension RadioChannel {
     }
 
     @objc func sectionTitle(sectionContext: ApplicationSection) -> String {
-        if showType == .podcast {
+        if sectionContext == .showByDate, showType == .podcast {
             NSLocalizedString("Podcasts by date", comment: "Title of the section when we show podcasts by date")
         } else {
             TitleForApplicationSection(sectionContext)
