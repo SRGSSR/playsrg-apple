@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, ShowType) {
      */
     ShowTypeShow,
     /**
-     *  Podcasts
+     *  Podcast shows
      */
     ShowTypePodcast
 };
