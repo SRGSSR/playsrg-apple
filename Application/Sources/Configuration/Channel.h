@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, ShowType) {
      */
     ShowTypeNone = 0,
     /**
-     *  Usual audios shows
+     *  Usual broadcast shows
      */
     ShowTypeShow,
     /**
