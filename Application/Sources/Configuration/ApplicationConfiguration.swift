@@ -128,9 +128,6 @@ enum ConfiguredSection: Hashable {
     case radioResumePlayback(channelUid: String)
     case radioWatchLater(channelUid: String)
 
-    case podcastAllShows(channelUid: String)
-    case podcastLatestEpisodes(channelUid: String)
-
     case tvLive
     case radioLive
     case radioLiveSatellite
@@ -148,6 +145,5 @@ enum ConfiguredSection: Hashable {
         case downloads
         case notifications
         case radioShowAccess(channelUid: String)
-        case radioPodcastAccess(channelUid: String)
     #endif
 }
