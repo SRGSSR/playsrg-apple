@@ -31,11 +31,7 @@ typedef NS_ENUM(NSInteger, SongsViewStyle) {
  */
 typedef NS_ENUM(NSInteger, ShowType) {
     /**
-     *  Not displayed.
-     */
-    ShowTypeNone = 0,
-    /**
-     *  Usual broadcast shows
+     *  Usual broadcast shows, default value if nil
      */
     ShowTypeShow,
     /**

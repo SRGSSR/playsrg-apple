@@ -29,7 +29,7 @@ static ShowType ShowTypeWithString(NSString *string)
                          @"podcast" : @(ShowTypePodcast) };
     });
     NSNumber *showType = s_showTypes[string];
-    return showType ? showType.integerValue : ShowTypeNone;
+    return showType ? showType.integerValue : ShowTypeShow;
 }
 
 @interface Channel ()
