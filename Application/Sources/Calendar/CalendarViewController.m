@@ -65,7 +65,11 @@
 
 - (NSString *)title
 {
-    return [self.radioChannel sectionTitleWithSectionContext:ApplicationSectionShowByDate];
+    if (self.radioChannel == nil) {
+        return TitleForApplicationSection(ApplicationSectionShowByDate);
+    } else {
+        return [self.radioChannel sectionTitleWithSectionContext:ApplicationSectionShowByDate];
+    }
 }
 
 #pragma mark View lifecycle
