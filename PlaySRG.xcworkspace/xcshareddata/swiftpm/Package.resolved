@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "0e48e8e36951bc474ef80f29192759ea93d8009d",
-        "version" : "9.1.0"
+        "revision" : "1532d2a20f65254e1ecff16e8f3ad5435ba549b8",
+        "version" : "9.1.1"
       }
     },
     {
