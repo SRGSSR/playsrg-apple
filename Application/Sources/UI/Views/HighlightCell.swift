@@ -77,7 +77,8 @@ struct HighlightCell: View {
                     ZStack(alignment: .bottom) {
                         ImageView(source: imageUrl, contentMode: contentMode)
                         if let highlight {
-                            LinearGradient(colors: [.srgGray16.opacity(0.9), .clear], startPoint: .bottom, endPoint: .center)
+                            DiagonalGradientView(midwayStop: 0.5)
+                            VerticalGradientView(midwayStop: 0.3)
                             Text(highlight.title)
                                 .srgFont(.H2)
                                 .lineLimit(2)
@@ -90,11 +91,12 @@ struct HighlightCell: View {
                     ZStack(alignment: .leading) {
                         ImageView(source: imageUrl, contentMode: contentMode)
                         if let highlight {
-                            LinearGradient(colors: [.srgGray16.opacity(0.9), .clear], startPoint: .leading, endPoint: .trailing)
+                            DiagonalGradientView(midwayStop: 0.6)
+                            VerticalGradientView(midwayStop: 0.5)
                             DescriptionView(highlight: highlight)
-                                .padding(.horizontal, 60)
-                                .padding(.vertical, 40)
-                                .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
+                                .padding(.horizontal, 30)
+                                .padding(.vertical, 30)
+                                .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height, alignment: .bottomLeading)
                         }
                     }
                 }
@@ -120,6 +122,22 @@ struct HighlightCell: View {
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    private struct VerticalGradientView: View {
+        let midwayStop: CGFloat
+        var body: some View {
+            let stops = [Gradient.Stop(color: .srgGray16.opacity(0.6), location: 0.0), Gradient.Stop(color: .srgGray16.opacity(0.0), location: midwayStop)]
+            return LinearGradient(stops: stops, startPoint: .bottom, endPoint: .top)
+        }
+    }
+
+    private struct DiagonalGradientView: View {
+        let midwayStop: CGFloat
+        var body: some View {
+            let stops = [Gradient.Stop(color: .srgGray16.opacity(0.6), location: 0.0), Gradient.Stop(color: .srgGray16.opacity(0.0), location: midwayStop)]
+            return LinearGradient(stops: stops, startPoint: UnitPoint(x: 0, y: 1), endPoint: UnitPoint(x: 0.2, y: 0.0))
         }
     }
 }
