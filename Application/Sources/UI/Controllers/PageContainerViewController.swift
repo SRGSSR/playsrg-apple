@@ -167,6 +167,11 @@ extension PageContainerViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
         tabContainerViewController.currentViewController
     }
+
+    func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
+        let adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
+        tabBarTopConstraint?.constant = max(-adjustedOffset, 0.0)
+    }
 }
 
 extension PageContainerViewController: SRGAnalyticsContainerViewTracking {
