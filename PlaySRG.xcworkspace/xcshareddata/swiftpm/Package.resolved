@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "0e48e8e36951bc474ef80f29192759ea93d8009d",
-        "version" : "9.1.0"
+        "revision" : "1532d2a20f65254e1ecff16e8f3ad5435ba549b8",
+        "version" : "9.1.1"
       }
     },
     {
@@ -321,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "a1725917c9350f71b19e897021f3d0aafb9ed24a",
-        "version" : "19.0.4"
+        "revision" : "338405f27723e378f4770626a71798464b15506c",
+        "version" : "19.0.5"
       }
     },
     {
