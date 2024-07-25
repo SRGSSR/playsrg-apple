@@ -347,7 +347,7 @@
 "Latest episodes from your favorites" = "Episodi più recenti fra i programmi preferiti";
 
 /* Title label used to present the radio latest podcast episodes */
-"Latest podcasts" = "Latest podcasts";
+"Latest podcasts" = "I più recenti";
 
 /* Title label used to present the radio latest videos */
 "Latest videos" = "I video più recenti";
@@ -393,10 +393,10 @@
 "Mandatory update" = "È necessario aggiornare";
 
 /* Many curated audio homepages option setting state */
-"Many curated pages (PAC landing pages)" = "Many curated pages (PAC landing pages)";
+"Many curated pages (PAC landing pages)" = "Più pagine curate (landing page dal PAC)";
 
 /* Many predefined audio homepage option setting state */
-"Many predefined pages" = "Many predefined pages";
+"Many predefined pages" = "Più pagine predefinite";
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media non disponibile";
@@ -491,7 +491,7 @@
 "OK" = "OK";
 
 /* One curated audio homepage option setting state */
-"One curated page (PAC Audio)" = "One curated page (PAC Audio)";
+"One curated page (PAC Audio)" = "Pagina curata (audio in PAC)";
 
 /* Label of the button opening system settings */
 "Open system settings" = "Aprire le impostazioni del sistema";
@@ -540,10 +540,10 @@
 "Please describe the issue below:" = "Descrivete il problema qui di seguito:";
 
 /* Title label used to present radio associated podcasts */
-"Podcasts" = "Podcasts";
+"Podcasts" = "Podcast";
 
 /* Title of the section when we show podcasts by date */
-"Podcasts by date" = "Podcasts by date";
+"Podcasts by date" = "Puntate per data";
 
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popolari sul Play RSI";
@@ -689,7 +689,7 @@
 
 /* Label of the button for Podcast square image format selection
    Podcast square image format selection view title */
-"Square images" = "Square images";
+"Square images" = "Immagine quadrata";
 
 /* Server setting name */
 "Stage" = "Stage";

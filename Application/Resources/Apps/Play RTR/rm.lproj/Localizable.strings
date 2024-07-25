@@ -347,7 +347,7 @@
 "Latest episodes from your favorites" = "Novissimas episodas da voss favurits";
 
 /* Title label used to present the radio latest podcast episodes */
-"Latest podcasts" = "Latest podcasts";
+"Latest podcasts" = "Ils pli novs podcasts";
 
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Ils pli novs videos";
@@ -540,10 +540,10 @@
 "Please describe the issue below:" = "Descrivai per plaschair il sbagl sutvart:";
 
 /* Title label used to present radio associated podcasts */
-"Podcasts" = "Podcasts";
+"Podcasts" = "Podcast";
 
 /* Title of the section when we show podcasts by date */
-"Podcasts by date" = "Podcasts by date";
+"Podcasts by date" = "Podcasts tenor data";
 
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular sin Play RTR";
