@@ -1,5 +1,5 @@
 {
-  "originHash" : "c5e353bb3292ed471bf2f0e1c2cca74b214eb094f711dc181f2495a4768a3ce1",
+  "originHash" : "75d50617ff4a439adbeebc3e2d4183dcbcc7d8f6d67362af3f661f231f7d23a7",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -366,8 +366,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "fab4f77ec0f6effcb8c3d08e0e006db0219ac8b0"
+        "revision" : "cbf8cf3c1914cf40b663c7cd60d626420fe2a7e9",
+        "version" : "7.2.2"
       }
     },
     {
