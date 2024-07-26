@@ -1,5 +1,5 @@
 {
-  "originHash" : "75d50617ff4a439adbeebc3e2d4183dcbcc7d8f6d67362af3f661f231f7d23a7",
+  "originHash" : "dc6cb5aa8ec915b03236c12d8d3937cf14feb462acc8d12dbb1279f4cf49a549",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -366,8 +366,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "revision" : "cbf8cf3c1914cf40b663c7cd60d626420fe2a7e9",
-        "version" : "7.2.2"
+        "branch" : "feature/dvr-start-fix",
+        "revision" : "cb6facef41e7cfffed0f051d795a6d8544222959"
       }
     },
     {
