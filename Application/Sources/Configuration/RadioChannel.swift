@@ -40,4 +40,12 @@ extension RadioChannel {
             return Self.configuredSection(from: homeSection, withChannelUid: uid)
         }
     }
+
+    @objc func sectionTitle(sectionContext: ApplicationSection) -> String {
+        if sectionContext == .showByDate, showType == .podcast {
+            NSLocalizedString("Podcasts by date", comment: "Title of the section when we show podcasts by date")
+        } else {
+            TitleForApplicationSection(sectionContext)
+        }
+    }
 }

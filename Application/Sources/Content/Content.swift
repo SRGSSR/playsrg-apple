@@ -567,14 +567,24 @@ private extension Content {
             switch configuredSection {
             case .history:
                 return NSLocalizedString("History", comment: "Title label used to present the history")
-            case .radioAllShows, .tvAllShows:
+            case .tvAllShows:
                 return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
+            case let .radioAllShows(channelUid):
+                if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                    return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
+                } else {
+                    return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
+                }
             case .favoriteShows, .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the radio favorite shows")
             case .radioLatest:
                 return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
-            case .radioLatestEpisodes:
-                return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
+            case let .radioLatestEpisodes(channelUid):
+                if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                    return NSLocalizedString("Latest podcasts", comment: "Title label used to present the radio latest podcast episodes")
+                } else {
+                    return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
+                }
             case .radioLatestEpisodesFromFavorites:
                 return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from radio favorite shows")
             case .radioLatestVideos:
@@ -608,8 +618,12 @@ private extension Content {
                     return NSLocalizedString("Downloads", comment: "Label to present downloads")
                 case .notifications:
                     return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
-                case .radioShowAccess:
-                    return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+                case let .radioShowAccess(channelUid):
+                    if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                        return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
+                    } else {
+                        return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+                    }
             #endif
             default:
                 return nil
@@ -895,7 +909,7 @@ private extension Content {
                 return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-            case let .radioLatestEpisodes(channelUid: channelUid):
+            case let .radioLatestEpisodes(channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()

@@ -346,6 +346,9 @@
    Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Novissimas episodas da voss favurits";
 
+/* Title label used to present the radio latest podcast episodes */
+"Latest podcasts" = "Ils pli novs podcasts";
+
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Ils pli novs videos";
 
@@ -535,6 +538,12 @@
 
 /* Mail body header to declare a technical issue */
 "Please describe the issue below:" = "Descrivai per plaschair il sbagl sutvart:";
+
+/* Title label used to present radio associated podcasts */
+"Podcasts" = "Podcast";
+
+/* Title of the section when we show podcasts by date */
+"Podcasts by date" = "Podcasts tenor data";
 
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular sin Play RTR";
@@ -835,9 +844,6 @@
 
 /* Version label in settings */
 "Version" = "Versiun";
-
-/* Label of the button to access release notes and download internal builds (App Center) */
-"Versions and release notes" = "Remartgas davart versiuns e publicaziuns";
 
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Il video marscha vinavant, era sche Vus bandunais l'applicaziun.";
