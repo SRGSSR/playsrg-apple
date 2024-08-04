@@ -104,7 +104,7 @@ name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 9
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srglogger-apple
 
-name: srgmediaplayer-apple, nameSpecified: srgmediaplayer-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgmediaplayer-apple
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 7.2.3, source: https://github.com/SRGSSR/srgmediaplayer-apple
 
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgnetwork-apple
 
