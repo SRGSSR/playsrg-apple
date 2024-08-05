@@ -366,8 +366,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "revision" : "717608146d3787bd269d5a524e109ee30be828e4",
-        "version" : "7.2.1"
+        "revision" : "354b2c5bb53b412504c49c85639620677aeb4948",
+        "version" : "7.2.3"
       }
     },
     {
