@@ -94,8 +94,7 @@ struct HighlightCell: View {
                             DiagonalGradientView(midwayStop: 0.6)
                             VerticalGradientView(midwayStop: 0.5)
                             DescriptionView(highlight: highlight)
-                                .padding(.horizontal, 30)
-                                .padding(.vertical, 30)
+                                .padding(32)
                                 .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height, alignment: .bottomLeading)
                         }
                     }
