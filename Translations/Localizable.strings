@@ -613,6 +613,12 @@
 /* Title label used to present medias whose playback can be resumed */
 "Resume playback" = "Resume playback";
 
+/* Title label used to present audios whose playback can be resumed */
+"Resume audio playback" = "Resume audio playback";
+
+/* Title label used to present videos whose playback can be resumed */
+"Resume video playback" = "Resume video playback";
+
 /* Label to present the search view
    Search shortcut label
    Search tab bar title
