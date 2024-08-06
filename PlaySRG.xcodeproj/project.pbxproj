@@ -16535,8 +16535,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 19.0.4;
+				branch = "feature/missing-calendar-locale";
+				kind = branch;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {

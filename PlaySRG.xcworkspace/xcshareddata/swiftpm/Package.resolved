@@ -321,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "338405f27723e378f4770626a71798464b15506c",
-        "version" : "19.0.5"
+        "branch" : "feature/missing-calendar-locale",
+        "revision" : "73dc0b272731113e3937dc71daa2c0017addd755"
       }
     },
     {
