@@ -610,11 +610,14 @@
    Resume playback button label */
 "Resume" = "Guardar vinavant";
 
+/* Title label used to present medias whose playback can be resumed */
+"Resume playback" = "Cuntinuar";
+
 /* Title label used to present audios whose playback can be resumed */
-"Resume audio playback" = "Cuntinuar";
+"Resume audios playback" = "Cuntinuar consumaziun";
 
 /* Title label used to present videos whose playback can be resumed */
-"Resume video playback" = "Cuntinuar";
+"Resume videos playback" = "Cuntinuar consumaziun";
 
 /* Label to present the search view
    Search shortcut label

@@ -614,10 +614,10 @@
 "Resume playback" = "Resume playback";
 
 /* Title label used to present audios whose playback can be resumed */
-"Resume audio playback" = "Resume audio playback";
+"Resume audios playback" = "Resume audios playback";
 
 /* Title label used to present videos whose playback can be resumed */
-"Resume video playback" = "Resume video playback";
+"Resume videos playback" = "Resume videos playback";
 
 /* Label to present the search view
    Search shortcut label

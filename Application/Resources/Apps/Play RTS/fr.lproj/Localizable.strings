@@ -610,11 +610,14 @@
    Resume playback button label */
 "Resume" = "Reprendre";
 
+/* Title label used to present medias whose playback can be resumed */
+"Resume playback" = "Reprendre la lecture";
+
 /* Title label used to present audios whose playback can be resumed */
-"Resume audio playback" = "Reprendre la lecture";
+"Resume audios playback" = "Reprendre la lecture";
 
 /* Title label used to present videos whose playback can be resumed */
-"Resume video playback" = "Reprendre la lecture";
+"Resume videos playback" = "Reprendre la lecture";
 
 /* Label to present the search view
    Search shortcut label
