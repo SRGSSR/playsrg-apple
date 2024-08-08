@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "1532d2a20f65254e1ecff16e8f3ad5435ba549b8",
-        "version" : "9.1.1"
+        "branch" : "feature/93-incorrect-user-agent-at-startup",
+        "revision" : "d3888e71250d4a47b79db1729039179c4571483e"
       }
     },
     {
