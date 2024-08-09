@@ -56,8 +56,7 @@ import SRGAppearanceSwift
             if let show = media.show, !areRedundant(media: media, show: show) {
                 // Unbreakable spaces before / after the separator
                 return "\(formattedTime(for: media)) · \(show.title)"
-            }
-            else {
+            } else {
                 return formattedTime(for: media)
             }
         }
