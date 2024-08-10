@@ -32,7 +32,7 @@ platform :ios do
     if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
-        UI.user_error! "WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}."
+        UI.user_error! "#{what_s_new_beta_file_name(platform)} has no release notes for #{tag_version}."
       end
     end
 
@@ -1193,7 +1193,7 @@ def marketing_version_from_tag_version(tag_version)
   tag_version.split('-').first
 end
 
-# Returns the what's new text from WhatsNew-beta.json file in the repository
+# Returns the what's new text from WhatsNew-[platform]-beta.json file in the repository
 def what_s_new_for_beta(platform, tag_version)
   tag_version ||= tag_version(platform)
 
@@ -1213,10 +1213,14 @@ def build_number_for_version(platform, version)
 end
 
 def what_s_new_for_beta_json(platform)
-  file = File.open("../WhatsNew-#{platform}-beta.json", 'r')
+  file = File.open("../#{what_s_new_beta_file_name(platform)}", 'r')
   json = JSON.parse(file.read)
   file.close
   json
+end
+
+def what_s_new_beta_file_name(platform)
+  "WhatsNew-#{platform}-beta.json"
 end
 
 def release_notes_html_devices(platform)
