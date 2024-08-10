@@ -76,12 +76,12 @@ platform :ios do
 
   # Betas
 
-  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
+  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the main branch, attempts to tag the current version. On the main or a branch, then bumps the build number and pushes. On a branch, try to report the new build number to main branch.'
   lane :tvOSbetas do
     testflight_betas(platform: 'tvOS')
   end
 
-  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
+  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the main branch, attempts to tag the current version. On the main or a branch, then bumps the build number and pushes. On a branch, try to report the new build number to main branch.'
   lane :iOSbetas do
     testflight_betas(platform: 'iOS')
   end
@@ -677,7 +677,7 @@ platform :ios do
   # Private lanes
   #
 
-  desc 'Builds a new nightly on App Store Connect and waits for build processing.'
+  desc 'See iOSnightlies and tvOSnightlies lane descriptions.'
   private_lane :testflight_nightlies do |options|
     platform = options[:platform] || 'iOS'
     service = 'TestFlight'
@@ -730,7 +730,7 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
-  desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
+  desc 'See iOSbetas and tvOSbetas lane descriptions.'
   private_lane :testflight_betas do |options|
     platform = options[:platform] || 'iOS'
 
@@ -1340,47 +1340,42 @@ end
 
 def nightly_display_name_suffix(branch_name)
   nightly_display_name_suffix = ' 🌙'
-  nightly_display_name_suffix = ' 🌱' if branch_name.include? 'feature/'
+  nightly_display_name_suffix = ' 🌱' unless branch_name == 'main'
   nightly_display_name_suffix
 end
 
 def beta_display_name_suffix(branch_name)
   beta_display_name_suffix = ' 🎯'
-  beta_display_name_suffix = ' 🪴' if branch_name.include? 'feature/'
+  beta_display_name_suffix = ' 🪴' unless branch_name == 'main'
   beta_display_name_suffix
 end
 
 def appstore_display_name_suffix(branch_name)
   appstore_display_name_suffix = ''
-  appstore_display_name_suffix = ' 🌳' if branch_name.include? 'feature/'
+  appstore_display_name_suffix = ' 🌳' unless branch_name == 'main'
   appstore_display_name_suffix
 end
 
 def version_suffix(version_suffix, branch_name)
-  if branch_name.include? 'feature/'
-    "#{version_suffix}+#{branch_name.sub('feature/', '').strip}"
-  else
+  build_name = build_name(branch_name)
+  if build_name == 'main'
     version_suffix
+  else
+    "#{version_suffix}+#{build_name}"
   end
 end
 
 def build_name(branch_name)
   if branch_name.include? 'feature/'
     branch_name.sub('feature/', '').strip
-  else
-    ''
-  end
-end
-
-def changelog_build_name(branch_name)
-  if branch_name.include? 'feature/'
-    branch_name.sub('feature/', '').strip
   elsif branch_name.include? 'release/'
     branch_name.sub('release/', '').strip
   elsif branch_name.include? 'hotfix/'
     branch_name.sub('hotfix/', '').strip
+  elsif branch_name.include? 'fix/'
+    branch_name.sub('fix/', '').strip
   else
-    branch_name
+    branch_name.strip
   end
 end
 
@@ -1399,7 +1394,7 @@ def nightly_changelog(platform, service, branch_name)
 
   changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
 
-  "Built from #{changelog_build_name(branch_name)} branch\n\n#{changelog}"
+  "Built from #{build_name(branch_name)} branch\n\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
@@ -2274,12 +2269,12 @@ def beta_workflow(platform)
   bump_build_number_beta
   commits.append(last_git_commit)
 
-  cherrypick_beta_on_develop(commits)
+  cherrypick_beta_workflow_on_main(commits)
 end
 
-# Beta workflow: tag the new beta and push to the repository only if we are on the develop branch.
+# Beta workflow: tag the new beta and push to the repository only if we are on the main branch.
 def tag_beta(platform)
-  return unless git_branch_name.include? 'develop'
+  return unless git_branch_name == 'main'
 
   tag = srg_tag(platform)
 
@@ -2294,29 +2289,26 @@ def tag_beta(platform)
   end
 end
 
-# Beta workflow: bump build number and push to the repository only if we are on the develop
-# or feature branch. Cherrypick on develop branch if we are on a feature branch.
+# Beta workflow: bump build number and push to the repository on any branches.
 def bump_build_number_beta
-  branch_names = ['develop', 'feature']
-  return unless branch_names.one? { |i| git_branch_name.include? i }
-
   bump_build_number_commit
   git_pull(rebase: true)
   push_to_git_remote(tags: false)
 end
 
-def cherrypick_beta_on_develop(commits)
+# Cherrypick on main branch if we are on an other branch.
+def cherrypick_beta_workflow_on_main(commits)
   branch_name = git_branch_name
-  return unless branch_name.include? 'feature'
+  return if branch_name == 'main'
 
   Dir.chdir('..') do
-    sh 'git checkout develop'
-    sh 'git pull --rebase origin develop'
+    sh 'git checkout main'
+    sh 'git pull --rebase origin main'
     commits.each do |commit|
       sh "git cherry-pick --no-commit #{commit[:commit_hash]}"
       sh "git commit -m \"#{commit[:message].strip}\"" unless git_status_clean
     end
-    sh 'git push origin develop:develop'
+    sh 'git push origin main:main'
     sh "git checkout #{branch_name}"
   end
 end

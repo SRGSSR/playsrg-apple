@@ -45,7 +45,7 @@ Adds a nightly TestFlight tester (email required)
 [bundle exec] fastlane ios tvOSbetas
 ```
 
-Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.
+Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the main branch, attempts to tag the current version. On the main or a branch, then bumps the build number and pushes. On a branch, try to report the new build number to main branch.
 
 ### ios iOSbetas
 
@@ -53,7 +53,7 @@ Builds a tvOS beta on App Store Connect with the current build number and waits 
 [bundle exec] fastlane ios iOSbetas
 ```
 
-Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.
+Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the main branch, attempts to tag the current version. On the main or a branch, then bumps the build number and pushes. On a branch, try to report the new build number to main branch.
 
 ### ios betaTester
 
