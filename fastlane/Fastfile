@@ -1223,6 +1223,19 @@ def what_s_new_beta_file_name(platform)
   "WhatsNew-#{platform}-beta.json"
 end
 
+def what_s_new_beta_commits(platform)
+  commits = []
+
+  beta_file_name = what_s_new_beta_file_name(platform)
+  git_last_commit_hashes(3).each do |commit_hash|
+    files = git_commited_files(commit_hash)
+    is_what_s_new = files.one? { |file| file.include? beta_file_name }
+    commits.append(commit_hash) if is_what_s_new
+  end
+
+  commits
+end
+
 def release_notes_html_devices(platform)
   platform == 'iOS' ? 'iPhone & iPad' : 'Apple TV'
 end
@@ -2263,15 +2276,11 @@ def pull_translations
 end
 
 def beta_workflow(platform)
-  commits = []
-
-  commit = last_git_commit
-  is_what_s_new = ['what\'s new', 'whats new'].one? { |i| commit[:message].downcase.include? i }
-  commits.append(commit) if is_what_s_new
+  commits = what_s_new_beta_commits(platform)
 
   tag_beta(platform)
   bump_build_number_beta
-  commits.append(last_git_commit)
+  commits.append(last_git_commit[:commit_hash])
 
   cherrypick_beta_workflow_on_main(commits)
 end
@@ -2305,16 +2314,25 @@ def cherrypick_beta_workflow_on_main(commits)
   branch_name = git_branch_name
   return if branch_name == 'main'
 
+  jira_issue = sh('git rev-parse --abbrev-ref HEAD 2> /dev/null | grep -oE "[A-Z]+-[0-9]+"').strip
+
   Dir.chdir('..') do
     sh 'git checkout main'
     sh 'git pull --rebase origin main'
     commits.each do |commit|
-      sh "git cherry-pick --no-commit #{commit[:commit_hash]}"
-      sh "git commit -m \"#{commit[:message].strip}\"" unless git_status_clean
+      message = cherry_pick_commit_message(commit, jira_issue)
+
+      sh "git cherry-pick --no-commit #{commit}"
+      sh "git commit -m \"#{message}\"" unless git_status_clean
     end
     sh 'git push origin main:main'
     sh "git checkout #{branch_name}"
   end
+end
+
+def cherry_pick_commit_message(commit, jira_issue)
+  original_message = sh("git log -1 --pretty=%B #{commit}").strip
+  original_message.gsub(jira_issue, '').strip
 end
 
 def git_branch_name
@@ -2378,6 +2396,14 @@ def git_delete(branch_name)
     sh "git push -d origin #{branch_name}"
     sh "git branch -d #{branch_name}"
   end
+end
+
+def git_last_commit_hashes(count)
+  sh("git log --pretty=format:'%H' -n #{count}").split("\n")
+end
+
+def git_commited_files(commit_hash)
+  sh("git show --pretty=format:'' --name-only #{commit_hash}").split("\n")
 end
 
 def bump_marketing_version_commit(platform)
