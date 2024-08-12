@@ -16488,7 +16488,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.2;
+				minimumVersion = 9.1.3;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {

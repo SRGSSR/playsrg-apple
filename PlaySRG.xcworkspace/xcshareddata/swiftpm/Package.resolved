@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
       "state" : {
-        "revision" : "fef761279a592960243e67f2aea110c6fa097fd8",
-        "version" : "6.11.0"
+        "revision" : "2d1cd9c0cb52ca76702023b528a059fc0a7d5a4d",
+        "version" : "6.13.0"
       }
     },
     {
@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "1532d2a20f65254e1ecff16e8f3ad5435ba549b8",
-        "version" : "9.1.1"
+        "revision" : "97ece2185ee456d0d85f0bd1608539f66e74d20f",
+        "version" : "9.1.3"
       }
     },
     {
