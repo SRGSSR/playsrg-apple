@@ -16487,8 +16487,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/93-incorrect-user-agent-at-startup";
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.3;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
