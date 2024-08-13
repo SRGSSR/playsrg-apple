@@ -90,7 +90,7 @@ final class SceneDelegate: UIResponder {
         }
 
         if !configuration.areShowsUnavailable {
-            let showsViewController = SectionViewController.showsViewController(forTransmission: .TV, channelUid: nil)
+            let showsViewController = SectionViewController.showsViewController(for: .TV, channelUid: nil)
             showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 4)
             showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.value
             viewControllers.append(showsViewController)
