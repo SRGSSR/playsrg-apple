@@ -428,10 +428,8 @@ extension SectionViewController {
     }
 
     @objc static func mediasViewController(forDay day: SRGDay, transmission: SRGTransmission, channelUid: String?) -> SectionViewController & DailyMediasViewController {
-        if transmission == .radio, let channelUid {
-            SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
-        } else if transmission == .radio, let channelUid = ApplicationConfiguration.shared.radioHomepageChannels.first?.uid {
-            // FIXME: Load all radio episodes by date, not only from the first channel.
+        // FIXME: If `channelUid` is null, load all radio episodes by date, not only from the first radio channel uid.
+        if transmission == .radio, let channelUid = channelUid ?? ApplicationConfiguration.shared.radioHomepageChannels.first?.uid {
             SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
         } else {
             SectionViewController(section: .configured(.tvEpisodesForDay(day)))

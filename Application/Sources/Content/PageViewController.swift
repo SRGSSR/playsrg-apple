@@ -57,10 +57,8 @@ final class PageViewController: UIViewController {
 
     #if os(iOS)
         private static func showByDateViewController(transmission: SRGTransmission, radioChannel: RadioChannel?, date: Date?) -> UIViewController {
-            if transmission == .radio, let radioChannel {
-                CalendarViewController(radioChannel: radioChannel, date: date)
-            } else if transmission == .radio, let radioChannel = ApplicationConfiguration.shared.radioHomepageChannels.first {
-                // FIXME: Load all radio episodes by date, not only from the first channel.
+            // FIXME: If `radioChannel` is null, load all radio episodes by date, not only from the first radio channel.
+            if transmission == .radio, let radioChannel = radioChannel ?? ApplicationConfiguration.shared.radioHomepageChannels.first {
                 CalendarViewController(radioChannel: radioChannel, date: date)
             } else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
                 ProgramGuideViewController(date: date)
