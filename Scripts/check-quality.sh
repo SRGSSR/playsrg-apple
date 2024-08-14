@@ -6,12 +6,12 @@ echo "... checking Swift code..."
 if [ $# -eq 0 ]; then
   swiftlint --quiet --strict
 elif [[ "$1" == "only-changes" ]]; then
-  git diff --staged --name-only | grep ".swift$" | xargs -I {} swiftlint lint --quiet --strict "{}"
+  git diff --staged --name-only | grep ".swift$" | xargs -I FILE swiftlint lint --quiet --strict "FILE"
 fi
 if [ $# -eq 0 ]; then
   swiftformat --lint --quiet . 
 elif [[ "$1" == "only-changes" ]]; then
-  git diff --staged --name-only | grep ".swift$" | xargs -I {} swiftformat --lint --quiet "{}"
+  git diff --staged --name-only | grep ".swift$" | xargs -I FILE swiftformat --lint --quiet "FILE"
 fi
 echo "... checking Ruby scripts..."
 bundle exec rubocop --format quiet
