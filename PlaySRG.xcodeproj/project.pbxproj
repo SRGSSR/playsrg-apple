@@ -2896,6 +2896,8 @@
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
 		04EB14C1299E312200FD004A /* SheetTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetTextView.swift; sourceTree = "<group>"; };
+		04EE93332C628653008C6C33 /* Accessibility.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Accessibility.strings; sourceTree = "<group>"; };
+		04EE93342C628653008C6C33 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		04F184CD28EC5EE500B1207C /* ShowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowButton.swift; sourceTree = "<group>"; };
 		04F184E728F097E900B1207C /* BadgeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeList.swift; sourceTree = "<group>"; };
 		04FB9CA62A04327900A9B69E /* ProfileHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHelp.swift; sourceTree = "<group>"; };
@@ -3972,6 +3974,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		04EE93352C628653008C6C33 /* Translations */ = {
+			isa = PBXGroup;
+			children = (
+				04EE93332C628653008C6C33 /* Accessibility.strings */,
+				04EE93342C628653008C6C33 /* Localizable.strings */,
+			);
+			path = Translations;
+			sourceTree = "<group>";
+		};
 		0806E7B41D50D8DD002ED406 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -4473,6 +4484,7 @@
 				6F0136DF21395B8400B95405 /* Xcode */,
 				E65311E31D3E6FD100B4B8BB /* Frameworks */,
 				45D67F958D75253E27BCDE9C /* Pods */,
+				04EE93352C628653008C6C33 /* Translations */,
 				08C68D501D38D49600BB8AAA /* Products */,
 			);
 			sourceTree = "<group>";

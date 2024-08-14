@@ -5,13 +5,27 @@
 //
 
 import SRGAppearanceSwift
+import SRGDataProviderModel
 import SwiftUI
 
 // MARK: Contract
 
 @objc protocol ShowAccessCellActions: AnyObject {
-    func openShowAZ()
-    func openShowByDate()
+    func openShowAZ(sender: Any?, event: ShowAccessEvent?)
+    func openShowByDate(sender: Any?, event: ShowAccessEvent?)
+}
+
+class ShowAccessEvent: UIEvent {
+    let transmission: SRGTransmission
+
+    init(transmission: SRGTransmission) {
+        self.transmission = transmission
+        super.init()
+    }
+
+    override init() {
+        fatalError("init() is not available")
+    }
 }
 
 // MARK: View
@@ -48,14 +62,23 @@ struct ShowAccessCell: View, PrimaryColorSettable {
         }
     }
 
+    private var transmission: SRGTransmission {
+        switch style {
+        case .programGuide:
+            .TV
+        case .calendar:
+            .radio
+        }
+    }
+
     var body: some View {
         HStack {
             ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
-                firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
+                firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ), for: ShowAccessEvent(transmission: transmission))
             }
             .primaryColor(primaryColor)
             ExpandingButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
-                firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
+                firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate), for: ShowAccessEvent(transmission: transmission))
             }
             .primaryColor(primaryColor)
         }
