@@ -33,7 +33,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 @property (nonatomic, readonly) NSLayoutConstraint *playerLeadingConstraint;
 @property (nonatomic, readonly) NSLayoutConstraint *playerTrailingConstraint;
 @property (nonatomic, readonly) NSLayoutConstraint *playerHeightConstraint;
-@property (nonatomic, readonly) NSLayoutConstraint *playerBottomConstraint;
+@property (nonatomic, readonly) NSLayoutConstraint *playerBottomToViewConstraint;
+@property (nonatomic, readonly) NSLayoutConstraint *playerBottomToSafeAreaConstraint;
 
 @end
 
@@ -43,7 +44,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 @synthesize playerLeadingConstraint = _playerLeadingConstraint;
 @synthesize playerTrailingConstraint = _playerTrailingConstraint;
 @synthesize playerHeightConstraint = _playerHeightConstraint;
-@synthesize playerBottomConstraint = _playerBottomConstraint;
+@synthesize playerBottomToViewConstraint = _playerBottomToViewConstraint;
+@synthesize playerBottomToSafeAreaConstraint = _playerBottomToSafeAreaConstraint;
 
 #pragma mark Object lifecycle
 
@@ -124,12 +126,21 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     return _playerHeightConstraint;
 }
 
-- (NSLayoutConstraint *)playerBottomConstraint
+- (NSLayoutConstraint *)playerBottomToViewConstraint
 {
-    if (! _playerBottomConstraint) {
-        _playerBottomConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
+    if (! _playerBottomToViewConstraint) {
+        _playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
     }
-    return _playerBottomConstraint;
+    _playerBottomToViewConstraint.constant = -self.tabBar.bounds.size.height;
+    return _playerBottomToViewConstraint;
+}
+
+- (NSLayoutConstraint *)playerBottomToSafeAreaConstraint
+{
+    if (! _playerBottomToSafeAreaConstraint) {
+        _playerBottomToSafeAreaConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
+    }
+    return _playerBottomToSafeAreaConstraint;
 }
 
 #pragma mark View lifecycle
@@ -400,16 +411,20 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         if (self.miniPlayerView.active) {
             self.playerHeightConstraint.constant = MiniPlayerHeight;
-            self.playerBottomConstraint.constant = -self.miniPlayerOffset;
+            self.playerBottomToSafeAreaConstraint.constant = -self.miniPlayerOffset;
         }
         else {
             self.playerHeightConstraint.constant = 0.f;
-            self.playerBottomConstraint.constant = 0.f;
+            self.playerBottomToSafeAreaConstraint.constant = 0.f;
         }
         
         self.playerHeightConstraint.active = YES;
-        self.playerBottomConstraint.active = YES;
-        
+        if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+            self.playerBottomToSafeAreaConstraint.active = YES;
+        } else {
+            self.playerBottomToViewConstraint.active = YES;
+        }
+
         CALayer *miniPlayerLayer = self.miniPlayerView.layer;
         if (UIAccessibilityIsVoiceOverRunning()) {
             miniPlayerLayer.cornerRadius = 0.f;
