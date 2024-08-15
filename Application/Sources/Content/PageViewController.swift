@@ -335,13 +335,19 @@ final class PageViewController: UIViewController {
                     view.addSubview(googleCastButton)
                     self.googleCastButton = googleCastButton
 
-                    // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
-                    // result (might be fragile but should be enough).
-                    let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
-                    NSLayoutConstraint.activate([
-                        googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
-                        googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
-                    ])
+                    // Place the button where it would appear if a navigation bar was available.
+                    if traitCollection.horizontalSizeClass == .regular {
+                        // Try to match the vertical alignment of the new floating UITabBar
+                        NSLayoutConstraint.activate([
+                            googleCastButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
+                            googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+                        ])
+                    } else {
+                        NSLayoutConstraint.activate([
+                            googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+                            googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+                        ])
+                    }
                 }
             } else {
                 googleCastButton?.removeFromSuperview()
