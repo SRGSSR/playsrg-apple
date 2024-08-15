@@ -117,6 +117,7 @@ final class PageViewController: UIViewController {
 
                     self.updateLayoutConfiguration()
                     self.updateTopicGradientLayout()
+                    self.updateNavigationBar(animated: false)
                 }
             }
         #endif
