@@ -1361,25 +1361,25 @@ end
 
 def nightly_display_name_suffix(branch_name)
   nightly_display_name_suffix = ' 🌙'
-  nightly_display_name_suffix = ' 🌱' unless branch_name == 'main'
+  nightly_display_name_suffix = ' 🌱' unless branch_name == github_main_branch
   nightly_display_name_suffix
 end
 
 def beta_display_name_suffix(branch_name)
   beta_display_name_suffix = ' 🎯'
-  beta_display_name_suffix = ' 🪴' unless branch_name == 'main'
+  beta_display_name_suffix = ' 🪴' unless branch_name == github_main_branch
   beta_display_name_suffix
 end
 
 def appstore_display_name_suffix(branch_name)
   appstore_display_name_suffix = ''
-  appstore_display_name_suffix = ' 🌳' unless branch_name == 'main'
+  appstore_display_name_suffix = ' 🌳' unless branch_name == github_main_branch
   appstore_display_name_suffix
 end
 
 def version_suffix(version_suffix, branch_name)
   build_name = build_name(branch_name)
-  if build_name == 'main'
+  if build_name == github_main_branch
     version_suffix
   else
     "#{version_suffix}+#{build_name}"
@@ -1617,6 +1617,10 @@ end
 
 def github_api_path
   '/repos/SRGSSR/playsrg-apple'
+end
+
+def github_main_branch
+  'main'
 end
 
 def github_environment_data(lane, business_unit = nil)
@@ -2291,7 +2295,7 @@ end
 
 # Beta workflow: tag the new beta and push to the repository only if we are on the main branch.
 def tag_beta(platform)
-  return unless git_branch_name == 'main'
+  return unless git_branch_name == github_main_branch
 
   tag = srg_tag(platform)
 
@@ -2316,20 +2320,21 @@ end
 # Cherrypick on main branch if we are on an other branch.
 def cherrypick_beta_workflow_on_main(commits)
   branch_name = git_branch_name
-  return if branch_name == 'main'
+  main_branch = github_main_branch
+  return if branch_name == main_branch
 
   jira_issue = sh('git rev-parse --abbrev-ref HEAD 2> /dev/null | grep -oE "[A-Z]+-[0-9]+"').strip
 
   Dir.chdir('..') do
-    sh 'git checkout main'
-    sh 'git pull --rebase origin main'
+    sh "git checkout #{main_branch}"
+    sh "git pull --rebase origin #{main_branch}"
     commits.each do |commit|
       message = cherry_pick_commit_message(commit, jira_issue)
 
       sh "git cherry-pick --no-commit #{commit}"
       sh "git commit -m \"#{message}\"" unless git_status_clean
     end
-    sh 'git push origin main:main'
+    sh "git push origin #{main_branch}:#{main_branch}"
     sh "git checkout #{branch_name}"
   end
 end
