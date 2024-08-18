@@ -21,6 +21,12 @@ The Jira UI could also help and proposes to create the branch.
 ---
 title: New branch from a Jira ticket
 ---
+%%{init: { 'themeVariables': {
+    'git0': '#af001e', 'gitBranchLabel0': '#ffffff', 'gitInv0': '#af001e',
+    'git1': '#0f5acb', 'gitBranchLabel0': '#ffffff', 'gitInv1': '#0f5acb',
+    'commitLabelColor': '#d2d2d2', 'commitLabelBackground': '#232323',
+    'tagLabelColor': '#ffffff', 'tagLabelBackground': '#8b0019'
+} } }%%
 gitGraph  TB:
     checkout main
 	commit id: "JIRA-1234 Feature A (#456)"
@@ -42,6 +48,12 @@ The Github UI could also help and proposes to create the branch.
 ---
 title: New branch from a Github issue
 ---
+%%{init: { 'themeVariables': {
+    'git0': '#af001e', 'gitBranchLabel0': '#ffffff', 'gitInv0': '#af001e',
+    'git1': '#0f5acb', 'gitBranchLabel0': '#ffffff', 'gitInv1': '#0f5acb',
+    'commitLabelColor': '#d2d2d2', 'commitLabelBackground': '#232323',
+    'tagLabelColor': '#ffffff', 'tagLabelBackground': '#8b0019'
+} } }%%
 gitGraph  TB:
     checkout main
 	commit id: "JIRA-1234 Feature A (#456)"
@@ -92,6 +104,12 @@ When the feature or the bug fix branch is ready to be tested and reviewed:
 ---
 title: Squash and merge PR branch
 ---
+%%{init: { 'themeVariables': {
+    'git0': '#af001e', 'gitBranchLabel0': '#ffffff', 'gitInv0': '#af001e',
+    'git1': '#0f5acb', 'gitBranchLabel0': '#ffffff', 'gitInv1': '#0f5acb',
+    'commitLabelColor': '#d2d2d2', 'commitLabelBackground': '#232323',
+    'tagLabelColor': '#ffffff', 'tagLabelBackground': '#8b0019'
+} } }%%
 gitGraph  TB:
     checkout main
 	commit id: "JIRA-1234 Feature A (#456)"
@@ -135,6 +153,12 @@ Before a release and sometime, during the development, internal **stable** build
 ---
 title: Beta from the main branch
 ---
+%%{init: { 'themeVariables': {
+    'git0': '#af001e', 'gitBranchLabel0': '#ffffff', 'gitInv0': '#af001e',
+    'git1': '#0f5acb', 'gitBranchLabel0': '#ffffff', 'gitInv1': '#0f5acb',
+    'commitLabelColor': '#d2d2d2', 'commitLabelBackground': '#232323',
+    'tagLabelColor': '#ffffff', 'tagLabelBackground': '#8b0019'
+} } }%%
 gitGraph  TB:
     checkout main
     commit id: "JIRA-1234 Feature A (#456)"
@@ -148,6 +172,12 @@ gitGraph  TB:
 ---
 title: Beta from another branch
 ---
+%%{init: { 'themeVariables': {
+    'git0': '#af001e', 'gitBranchLabel0': '#ffffff', 'gitInv0': '#af001e',
+    'git1': '#0f5acb', 'gitBranchLabel0': '#ffffff', 'gitInv1': '#0f5acb',
+    'commitLabelColor': '#d2d2d2', 'commitLabelBackground': '#232323',
+    'tagLabelColor': '#ffffff', 'tagLabelBackground': '#8b0019'
+} } }%%
 gitGraph  TB:
     checkout main
 	commit id: "JIRA-1234 Feature A (#456)"
