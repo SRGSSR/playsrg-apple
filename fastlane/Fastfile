@@ -1223,11 +1223,15 @@ def what_s_new_beta_file_name(platform)
   "WhatsNew-#{platform}-beta.json"
 end
 
+def what_s_new_beta_commits_check_count
+  3
+end
+
 def what_s_new_beta_commits(platform)
   commits = []
 
   beta_file_name = what_s_new_beta_file_name(platform)
-  git_last_commit_hashes(3).each do |commit_hash|
+  git_last_commit_hashes(what_s_new_beta_commits_check_count).each do |commit_hash|
     files = git_commited_files(commit_hash)
     is_what_s_new = files.one? { |file| file.include? beta_file_name }
     commits.append(commit_hash) if is_what_s_new
