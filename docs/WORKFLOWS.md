@@ -159,8 +159,8 @@ gitGraph  TB:
     commit id: "JIRA-1236 Update what's new"
     commit id: "Bump build number to N+1" type: HIGHLIGHT
 	checkout main
-	commit id: "Update what's new (cherry pick)" type: HIGHLIGHT
-	commit id: "Bump build number to N+1 (cherry pick)" type: HIGHLIGHT
+	cherry-pick id: "JIRA-1236 Update what's new"
+	cherry-pick id: "Bump build number to N+1"
 ```
 
 # Public Betas and AppStore Builds
