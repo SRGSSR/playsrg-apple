@@ -213,6 +213,25 @@ On [crowdin.com PlaySRG project](https://crowdin.com/project/play-srg/sources/fi
   - Basic checks are done with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
   - No submission to Apple review is done for now.
 
+```mermaid
+---
+title: Prepare an AppStore release
+---
+sequenceDiagram
+    Fastlane->>Crowdin: Ask what's new translated csv files
+    activate Fastlane
+	activate Crowdin
+	Crowdin-->>Fastlane: Get what's new translated csv files
+	deactivate Crowdin
+	participant ASC as App Store Connect
+	Fastlane->>ASC: Create a new AppStore release for the current version if not existing
+	activate ASC
+	ASC-->>Fastlane: Get AppStore Connect version
+	Fastlane->>ASC: Set translated what's new for this version
+	deactivate ASC
+	deactivate Fastlane
+```
+
 # Update the AppStore screenshots
 
 Optional, update the AppStore screenshots with the latest version of the application.
