@@ -15,6 +15,7 @@ Please first run one time on the Mac device, `make git-hook-install`, to have th
 Create a branch from `main` with the naming convention, starting with the Jira ticket id: `JIRA-1235-feature-b`.
 
 The Jira UI could also help and proposes to create the branch.
+
 ![Jira branch creation](WORKFLOWS-images/jira-branch-creation.jpg)
 
 ```mermaid
@@ -42,6 +43,7 @@ gitGraph  TB:
 Create a branch from `main` with the naming convention, starting with the github issue id: `1235-feature-b`.
 
 The Github UI could also help and proposes to create the branch.
+
 ![Github branch creation](WORKFLOWS-images/github-branch-creation.jpg)
 
 ```mermaid
