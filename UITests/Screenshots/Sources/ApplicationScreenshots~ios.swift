@@ -13,7 +13,7 @@ class ApplicationScreenshots: XCTestCase {
         [:]
     }
 
-    override func setUp() {
+    @MainActor override func setUp() {
         super.setUp()
 
         let app = XCUIApplication()
@@ -25,7 +25,7 @@ class ApplicationScreenshots: XCTestCase {
         XCUIDevice.shared.orientation = (UIDevice.current.userInterfaceIdiom == .pad) ? .landscapeLeft : .portrait
     }
 
-    func testSnapshots() {
+    @MainActor func testSnapshots() {
         if let videosTabBarItem = tabBarItem(withIdentifier: AccessibilityIdentifier.videosTabBarItem.value) {
             videosTabBarItem.tap()
             sleep(10)
