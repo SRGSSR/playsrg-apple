@@ -78,8 +78,8 @@ During the development, some internal builds can be done for internal testers an
 - Build can be done from any branches.
 - On PlayCity CI, build Private Nighties with the current version and a new build number from the lastest build.
 	- With projects:
-		- **Play SRG iOS Nightlies 🌱🌙**: `fastlane ios iOSnightlies`
-		- **Play SRG tvOS Nightlies 🌱🌙**: `fastlane ios tvOSnightlies`
+		- **[Play SRG iOS Nightlies 🌱🌙](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_NightliesIOS)**: `fastlane ios iOSnightlies`
+		- **[Play SRG tvOS Nightlies 🌱🌙](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_NightliesTvOS)**: `fastlane ios tvOSnightlies`
 	- The build number is incremented from the last one found on AppStore Connect. No versioning on git.
 	- Build displayed name contains:
 		- "🌙" if built from the `main` branch.
@@ -140,8 +140,8 @@ Before a release and sometime, during the development, internal **stable** build
 - Build can be done from any branches, but most of the time, it's on the `main` branch.
 - On PlayCity CI, build Private Betas with the current version (`X.Y.Z`) and the current build number (`N`).
 	- With projects (select the right branch and check that it's the expected last commit):
-		- **Play SRG iOS Betas 🪴🎯**: `fastlane ios iOSbetas`
-		- **Play SRG tvOS Betas 🪴🎯**: `fastlane ios tvOSbetas`
+		- **[Play SRG iOS Betas 🪴🎯](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_BetasIOS)**: `fastlane ios iOSbetas`
+		- **[Play SRG tvOS Betas 🪴🎯](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_BetasTvOS)**: `fastlane ios tvOSbetas`
 	- If the build is on the `main` branch, the current commit is tagged with `[ios|tvos]/X.Y.Z-N`.
 	- The build number (`N`) is incremented after the build success and commited on the current branch with message "Bump build number to N+1".
 	- If the build is on another branch, no tags. The latest "Update what's new" and "Bump build number to N+1" commits are cherry picked to the `main` branch.
@@ -210,8 +210,8 @@ For a release and sometime, during the development, external **stable** builds c
 - ⚠️ Never release a build from a feature branch. It must be merged to the `main` branch before.
 - On PlayCity CI, build AppStore Builds with the current version (`X.Y.Z`) and the current build number (`N`).
 	- With projects (select the right branch and check that it's the expected last commit):
-      - **Play SRG iOS AppStore builds 🌳**: `fastlane ios iOSAppStoreBuilds`
-      - **Play SRG tvOS AppStore builds 🌳**: `fastlane ios tvOSAppStoreBuilds`
+      - **[Play SRG iOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightIOS)**: `fastlane ios iOSAppStoreBuilds`
+      - **[Play SRG tvOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightTvOS)**: `fastlane ios tvOSAppStoreBuilds`
     - If the Private Betas are not done in this branch and commit, the PlayCity CI will do the Private Betas before the AppStore Builds.
 	- Build displayed name contains:
 		- No emoji if built from the `main` branch.
@@ -220,8 +220,8 @@ For a release and sometime, during the development, external **stable** builds c
     - The AppStore Builds are uploaded to AppStore Connect and distributed to the SRG Testers TestFlight group.
 - 🚀 To distribute the Public Betas to the (public) Beta Testers TestFlight group, rerun the projects on the same branch and commit,
   - With projects (select the right branch and check that it's the expected last commit, and check `public_testflight_distribution` parameter):
-	- **Play SRG iOS AppStore builds 🌳**: `fastlane ios iOSAppStoreBuilds public_testflight_distribution:true`
-	- **Play SRG tvOS AppStore builds 🌳**: `fastlane ios tvOSAppStoreBuilds public_testflight_distribution:true`
+	- **[Play SRG iOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightIOS)**: `fastlane ios iOSAppStoreBuilds public_testflight_distribution:true`
+	- **[Play SRG tvOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightTvOS)**: `fastlane ios tvOSAppStoreBuilds public_testflight_distribution:true`
   - No new builds, only the distribution is done.
   - Not all Beta builds are distributed to the public Beta Testers TestFlight group. It's a team and PO decision.
   - We can follow Apple TestFlight review status locally with `make appstore-testflight-status`.
@@ -238,8 +238,8 @@ On [crowdin.com PlaySRG project](https://crowdin.com/project/play-srg/sources/fi
 - Ask the translators ([play-srg-translators@rts.ch](mailto:play-srg-translators@rts.ch)) to translate the new entries.
 - On PlayCity CI, prepare the AppStore release with the current version and the current build number.
   - With projects (select the right branch and check that it's the expected last commit):
-	  - **Play SRG iOS AppStore releases**: `fastlane ios iOSPrepareAppStoreReleases`
-	  - **Play SRG tvOS AppStore releases**: `fastlane ios tvOSPrepareAppStoreReleases`
+	  - **[Play SRG iOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgIOSAppStoreReleases)**: `fastlane ios iOSPrepareAppStoreReleases`
+	  - **[Play SRG tvOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgTvOSAppStoreReleases)**: `fastlane ios tvOSPrepareAppStoreReleases`
   - A new AppStore release is created on AppStore Connect with the current version if not already existing.
   - The what's new AppStore release notes are updated with the translated release notes from crowdin.com.
   - Basic checks are done with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
@@ -305,8 +305,8 @@ Let's submit the AppStore release for review:
 
 - On PlayCity CI, submit to Apple review the releases with the current version number.
 	- With projects (select the right branch and check that it's the expected commit with the tag, AND check `submit_for_review` parameter):
-		- **Play SRG iOS AppStore releases**: `fastlane ios iOSPrepareAppStoreReleases submit_for_review:true`
-		- **Play SRG tvOS AppStore releases**: `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
+		- **[Play SRG iOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgIOSAppStoreReleases)**: `fastlane ios iOSPrepareAppStoreReleases submit_for_review:true`
+		- **[Play SRG tvOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgTvOSAppStoreReleases)**: `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
 	- A new AppStore release is created on AppStore Connect with the current version if not already existing.
 	- The what's new AppStore release notes are updated with the translated release notes from crowdin.com.
 	- Basic checks are done with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
@@ -322,7 +322,7 @@ It downloads a html file to display release notes. The html pages are published 
 Publish release notes on Github pages with correct released status (AppStore and TestFlight release notes):
 - On PlayCity CI, prepare the AppStore release with the current version and the current build number.
   - With projects (any branch and commits):
-      - **Play SRG Publish release notes**: `fastlane ios publishReleaseNotes`
+      - **[Play SRG Publish release notes](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgPublishReleaseNotes)**: `fastlane ios publishReleaseNotes`
   - The script does update automatically (recommended)
   - The script is scheduled to run on CI after build success.
 
