@@ -8,13 +8,15 @@ The project implements some workflows. It a mix of:
 
 # Start a feature or a bug fix
 
-Please first run one time on the Mac device, `make git-hook-install`, to have the `pre-commit` linter and Jira `commit-msg`.
+🙏 Please first run one time on the Mac, `make git-hook-install`, so that the `pre-commit` linter and Jira `commit-msg` are installed.
 
-### From an internal Jira ticket
+### Start from an internal Jira ticket
 
-Create a branch from `main` with the naming convention, starting with the Jira ticket id: `JIRA-1235-feature-b`.
+1. Create a branch from `main` with this naming convention: `JIRA-1235-feature-b`. Start with the Jira ticket id.
+2. Checkout the new branch.
+3. Commit your changes with the Jira ticket id in the commit message. `commit-msg` git hook will do it automatically.
 
-The Jira UI could also help and proposes to create the branch.
+ℹ️ The Jira website could help and proposes to create the branch from the ticket page.
 
 ![Jira branch creation](WORKFLOWS-images/jira-branch-creation.jpg)
 
@@ -38,11 +40,13 @@ gitGraph  TB:
 	commit id: "JIRA-1236 Commit 2"
 ```
 
-### From a public Github issue
+### Start from a public Github issue
 
-Create a branch from `main` with the naming convention, starting with the github issue id: `1235-feature-b`.
+1. Create a branch from `main` with this naming convention: `1235-feature-b`. Start with the Github issue id.
+2. Checkout the new branch.
+3. Commit your changes with the Github issue id in the commit message if possible.
 
-The Github UI could also help and proposes to create the branch.
+ℹ️ The Github website could also help and proposes to create the branch from the issue page.
 
 ![Github branch creation](WORKFLOWS-images/github-branch-creation.jpg)
 
@@ -70,37 +74,39 @@ gitGraph  TB:
 	commit id: "PR #458 closed - 1236-feature-c" type: HIGHLIGHT
 ```
 
-# Private Nightlies
+# Build and distribute Private Nightlies
 
-During the development, some internal builds can be done for internal testers and validate the implementation.
+During the development, non-public builds can be done for internal testers and validate the implementation.
 
 - TestFlight release notes for nightlies are from commit messages. No custom commit needed.
-- Build can be done from any branches.
-- On PlayCity CI, build Private Nighties with the current version and a new build number from the lastest build.
-	- With projects:
-		- **[Play SRG iOS Nightlies 🌱🌙](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_NightliesIOS)**: `fastlane ios iOSnightlies`
-		- **[Play SRG tvOS Nightlies 🌱🌙](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_NightliesTvOS)**: `fastlane ios tvOSnightlies`
-	- The build number is incremented from the last one found on AppStore Connect. No versioning on git.
-	- Build displayed name contains:
-		- "🌙" if built from the `main` branch.
-		- "🌱" if built from another branch.
-	- Build name contains the branch name if it's not the `main` branch.
-    - The Private Nightlies are uploaded to AppStore Connect and distributed to the SRG Testers TestFlight group.
+- Build can be done from any branches. 
+1. On PlayCity CI select the project:
+   - **[Play SRG iOS Nightlies 🌱🌙](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_NightliesIOS)**: `fastlane ios iOSnightlies`
+   - **[Play SRG tvOS Nightlies 🌱🌙](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_NightliesTvOS)**: `fastlane ios tvOSnightlies`
+2. Select the branch.
+3. Run the project. Private Nighties builds have:
+   - the current version on the repository.
+   - a build number incremented from the last one found on AppStore Connect. Build number is not versioned on git.
+   - a displayed name containing:
+       - "🌙" if built from the `main` branch.
+       - "🌱" if built from another branch.
+       - the branch name if it's not the `main` branch.
+     - then an upload to AppStore Connect and are distributed to the SRG Testers TestFlight group.
+     - release notes from commit messages. No additional commits needed.
 
 # Submit to review a feature or a bug fix
 
 When the feature or the bug fix branch is ready to be tested and reviewed:
 
-- A [pull request](https://github.com/SRGSSR/playsrg-apple/pulls) is opened from the feature or bug fix branch to the `main` branch.
-- Set the Jira ticket id in the PR title and a comprehensive title. Example: `JIRA-1236 Feature C`.
-  - ℹ️ The PR github id will be added during the merge at the end.
-- Add [one label](https://github.com/SRGSSR/playsrg-apple/labels) to the PR (sued for the generated github release notes later)
-- The PR has to be reviewed by at least one team member. Add reviewers to the PR.
-	- Conversations, code propositions could be added and has to be solved.
-- ✅ When the feature or the bug fix is validated and PR is reviewed, add the PR to the Github queue.
-  - A merge commit is done and tests are run on the `main` branch.
-  - The PR squashes branch commits and merged it into the `main` branch. The commit message is the PR title and the PR github id.
-  - The PR branch is deleted.
+1. A [pull request](https://github.com/SRGSSR/playsrg-apple/pulls) is opened from the branch to be merged to the `main` branch.
+2. Set the Jira ticket id in the PR title and a comprehensive title. Example: `JIRA-1236 Feature C`. The Github PR id will be added during the merge, later.
+3. Add [one label](https://github.com/SRGSSR/playsrg-apple/labels) to the PR (used for automatically generated Github release notes, later).
+4. Add reviewers to the PR. At least one team member has to review the PR. 
+   - Conversations, code propositions, architecture or UI/UX remarks could be added and has to be solved.
+5. ✅ When the feature or the bug fix is validated and the PR is reviewed, add the PR to the Github queue.
+   - A squash commit is done, added onto the `main` branch after passed tests.
+   - The commit message is the PR title and the PR Github id.
+   - The PR branch is deleted.
 
 ```mermaid
 ---
@@ -126,11 +132,11 @@ gitGraph  TB:
 	commit id: "JIRA-1236-feature-c branch deleted" type: REVERSE
 ```
 
-# Private Betas
+# Build and distribute Private Betas
 
-Before a release and sometime, during the development, internal **stable** builds can be done for internal testers.
+Before a release and sometime, during the development, non-public **stable** builds can be done for internal testers and validate the feature or the fix.
 
-ℹ️ The Private Betas workflow can be scheduled with the Public Betas workflow on PlayCity CI. If it's plan to build both betas, refer to [Public Betas and AppStore builds](#Public-Betas-and-AppStore-builds).
+ℹ️ The Private Betas workflow can be scheduled with the Public Betas workflow on PlayCity CI. If it's plan to build both betas, refer to the next section: [Build and distribute Public Betas and AppStore builds](#Build-and-distribute-Public-Betas-and-AppStore-builds).
 
 - Private Betas will uses the current version (`X.Y.Z`) and the current build number (`N`) in the project.
 - TestFlight release notes for betas are custom and need to be commited on the future built branch:
@@ -195,7 +201,7 @@ gitGraph  TB:
 	cherry-pick id: "Bump build number to N+1"
 ```
 
-# Public Betas and AppStore Builds
+# Build and distribute Public Betas and AppStore Builds
 
 For a release and sometime, during the development, external **stable** builds can be done for early adopters, our best testers.
 
