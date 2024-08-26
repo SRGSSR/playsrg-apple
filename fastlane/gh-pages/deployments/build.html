@@ -129,36 +129,31 @@ img {
         'rsi': '1525999232',
         'rtr': '1525999511',
         'rts': '1525999108',
-        'srf': '1525999251',
-        'swi': '1525912081'
+        'srf': '1525999251'
       },
       'beta': {
         'rsi': '1541523749',
         'rtr': '1541523913',
         'rts': '1541524094',
-        'srf': '1541523775',
-        'swi': '1541523969'
+        'srf': '1541523775'
       },
       'testflight': {
         'rsi': '920753497',
         'rtr': '920754925',
         'rts': '920754415',
-        'srf': '638194352',
-        'swi': '920785201'
+        'srf': '638194352'
       },
       'appstore': {
         'rsi': '920753497',
         'rtr': '920754925',
         'rts': '920754415',
-        'srf': '638194352',
-        'swi': '920785201'
+        'srf': '638194352'
       },
       'none': {
         'rsi': '920753497',
         'rtr': '920754925',
         'rts': '920754415',
-        'srf': '638194352',
-        'swi': '920785201'
+        'srf': '638194352'
       }
     };
     return applicationIds[configuration][bu];
@@ -233,7 +228,7 @@ img {
         break;
     }
 
-    bus = ['rsi', 'rtr', 'rts', 'srf', 'swi'];
+    bus = ['rsi', 'rtr', 'rts', 'srf'];
     for (bu of bus) {
       document.write('<p><a href="' + getApplicationLink(configuration, bu) + '" target="_blank"><img src="./icon_' + bu + '-' + getPlatform() + '-' + configuration + '.png" height="60"/></a></p>');
     }

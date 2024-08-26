@@ -53,44 +53,6 @@ platform :ios do
 
   # Nightlies
 
-  desc 'Builds a new iOS nightly on App Center.'
-  lane :iOSnightliesAppCenter do
-    platform = 'iOS'
-    service = 'AppCenter'
-
-    build_number = latest_appcenter_build_number(appcenter_ios_nightly_appcenter_names)
-    xcode_override_build_number(build_number + 1)
-
-    tag_version = tag_version(platform)
-    branch_name = git_branch_name
-
-    # Update CI information because of build number overrided
-    notify_version_to_ci(platform, tag_version, branch_name)
-
-    ios_application_schemes.each_index do |index|
-      build_lane(
-        configuration: 'Nightly_AppCenter',
-        scheme: ios_application_schemes[index],
-        display_name_suffix: nightly_display_name_suffix(branch_name),
-        version_suffix: version_suffix('-nightly', branch_name),
-        build_name: build_name(branch_name),
-        platform:
-      )
-
-      appcenter_lane(
-        appname: appcenter_ios_nightly_appcenter_names[index],
-        destinations: ENV.fetch('PLAY_NIGHTLY_APPCENTER_DESTINATIONS', nil),
-        notes: nightly_changelog(platform, service, branch_name)
-      )
-
-      clean_build_artifacts
-
-      UI.success "#{ios_application_schemes[index]} (#{platform} Nightly #{tag_version}) uploaded and distributed. ✅"
-    end
-
-    save_last_nightlies_success_git_commit_hash(platform, service)
-  end
-
   desc 'Builds a new tvOS nightly on App Store Connect and waits for build processing.'
   lane :tvOSnightlies do
     testflight_nightlies(platform: 'tvOS')
@@ -113,38 +75,6 @@ platform :ios do
   end
 
   # Betas
-
-  desc 'Builds an iOS beta on App Center with the current build number. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
-  lane :iOSbetasAppCenter do
-    platform = 'iOS'
-
-    tag_version = tag_version(platform)
-    branch_name = git_branch_name
-
-    ios_application_schemes.each_index do |index|
-      build_lane(
-        configuration: 'Beta_AppCenter',
-        scheme: ios_application_schemes[index],
-        display_name_suffix: beta_display_name_suffix(branch_name),
-        version_suffix: version_suffix('-beta', branch_name),
-        build_name: build_name(branch_name),
-        platform:
-      )
-
-      appcenter_lane(
-        appname: appcenter_ios_beta_appcenter_names[index],
-        destinations: ENV.fetch('PLAY_BETA_APPCENTER_DESTINATIONS', nil),
-        notes: what_s_new_for_beta(platform, tag_version),
-        notify_testers: true
-      )
-
-      clean_build_artifacts
-
-      UI.success "#{ios_application_schemes[index]} (#{platform} Beta #{tag_version}) uploaded and distributed. ✅"
-    end
-
-    beta_workflow(platform)
-  end
 
   desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
   lane :tvOSbetas do
@@ -485,12 +415,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'RTS: Makes iOS screenshots and replaces current ones on App Store Connect.'
+  desc 'RTS: Makes iOS screenshots. No replacement made on App Store Connect.'
   lane :iOSrtsScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'RTS')
-    upload_screenshots(platform)
+    # Don't erase existing screenshots, from RTS marketing team.
   end
 
   desc 'SRF: Makes iOS screenshots. No replacement made on App Store Connect.'
@@ -499,14 +429,6 @@ platform :ios do
 
     screenshots(platform, 'SRF')
     # Don't erase existing screenshots, from SRF marketing team.
-  end
-
-  desc 'SWI: Makes iOS screenshots and replaces current ones on App Store Connect.'
-  lane :iOSswiScreenshots do
-    platform = 'iOS'
-
-    screenshots(platform, 'SWI')
-    upload_screenshots(platform)
   end
 
   # Individual iOS App Store build uploads
@@ -529,11 +451,6 @@ platform :ios do
   desc 'SRF only: See `iOSUploadAppStoreBuilds` lane.'
   lane :iOSsrfUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'SRF')
-  end
-
-  desc 'SWI only: See `iOSUploadAppStoreBuilds` lane.'
-  lane :iOSswiUploadAppStoreBuild do
-    testflight_appstore_build_upload(platform: 'iOS', bu: 'SWI')
   end
 
   # Individual iOS App Store build private distributions
@@ -563,13 +480,6 @@ platform :ios do
   lane :iOSsrfDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SWI only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSswiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
 
@@ -603,13 +513,6 @@ platform :ios do
     )
   end
 
-  desc 'SWI only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSswiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
-    )
-  end
-
   # Individual iOS AppStore releases
 
   desc 'RSI only: See `iOSPrepareAppStoreRelease` lane.'
@@ -632,11 +535,6 @@ platform :ios do
     prepare_appstore_release('iOS', 'SRF', options)
   end
 
-  desc 'SWI only: See `iOSPrepareAppStoreRelease` lane.'
-  lane :iOSswiPrepareAppStoreRelease do |options|
-    prepare_appstore_release('iOS', 'SWI', options)
-  end
-
   # Individual tvOS screenshots
 
   desc 'RSI: Makes tvOS screenshots and replaces current ones on App Store Connect.'
@@ -655,12 +553,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'RTS: Makes tvOS screenshots and replaces current ones on App Store Connect.'
+  desc 'RTS: Makes tvOS screenshots. No replacement made on App Store Connect.'
   lane :tvOSrtsScreenshots do
     platform = 'tvOS'
 
     screenshots(platform, 'RTS')
-    upload_screenshots(platform)
+    # Don't erase existing screenshots, from RTS marketing team.
   end
 
   desc 'SRF: Makes tvOS screenshots. No replacement made on App Store Connect.'
@@ -669,14 +567,6 @@ platform :ios do
 
     screenshots(platform, 'SRF')
     # Don't erase existing screenshots, from SRF marketing team.
-  end
-
-  desc 'SWI: Makes tvOS screenshots and replaces current ones on App Store Connect.'
-  lane :tvOSswiScreenshots do
-    platform = 'tvOS'
-
-    screenshots(platform, 'SWI')
-    upload_screenshots(platform)
   end
 
   # Individual tvOS App Store build uploads
@@ -699,11 +589,6 @@ platform :ios do
   desc 'SRF only: See `tvOSUploadAppStoreBuilds` lane.'
   lane :tvOSsrfUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'SRF')
-  end
-
-  desc 'SWI only: See `tvOSUploadAppStoreBuilds` lane.'
-  lane :tvOSswiUploadAppStoreBuild do
-    testflight_appstore_build_upload(platform: 'tvOS', bu: 'SWI')
   end
 
   # Individual tvOS App Store build private distributions
@@ -733,13 +618,6 @@ platform :ios do
   lane :tvOSsrfDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SWI only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSswiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
 
@@ -773,13 +651,6 @@ platform :ios do
     )
   end
 
-  desc 'SWI only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSswiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
-    )
-  end
-
   # Individual tvOS AppStore releases
 
   desc 'RSI only: See `tvOSPrepareAppStoreRelease` lane.'
@@ -800,11 +671,6 @@ platform :ios do
   desc 'SRF only: See `tvOSPrepareAppStoreRelease` lane.'
   lane :tvOSsrfPrepareAppStoreRelease do |options|
     prepare_appstore_release('tvOS', 'SRF', options)
-  end
-
-  desc 'SWI only: See `tvOSPrepareAppStoreRelease` lane.'
-  lane :tvOSswiPrepareAppStoreRelease do |options|
-    prepare_appstore_release('tvOS', 'SWI', options)
   end
 
   #
@@ -1017,34 +883,6 @@ platform :ios do
     )
   end
 
-  desc 'Uploads a build on App Center or just a dSYM file'
-  private_lane :appcenter_lane do |options|
-    options[:notify_testers] ||= false
-
-    if options[:upload_dsym]
-      appcenter_upload(
-        api_token: ENV.fetch('PLAY_APPCENTER_TOKEN', nil),
-        owner_type: 'organization',
-        owner_name: ENV.fetch('PLAY_APPCENTER_OWNER', nil),
-        app_name: options[:appname],
-        release_notes: options[:notes],
-        upload_dsym_only: true,
-        dsym: options[:upload_dsym]
-      )
-    else
-      appcenter_upload(
-        api_token: ENV.fetch('PLAY_APPCENTER_TOKEN', nil),
-        owner_type: 'organization',
-        owner_name: ENV.fetch('PLAY_APPCENTER_OWNER', nil),
-        app_name: options[:appname],
-        release_notes: options[:notes],
-        destination_type: 'group',
-        destinations: options[:destinations],
-        notify_testers: options[:notify_testers]
-      )
-    end
-  end
-
   desc 'Add tester to TestFlight, by default for betas'
   private_lane :addTestFlightTester do |options|
     email = spaceship_email_required(options[:email])
@@ -1117,7 +955,7 @@ APP_STORE_STATE = Spaceship::ConnectAPI::AppInfo::AppStoreState
 #
 
 def business_units
-  ['RTS', 'SRF', 'RSI', 'RTR', 'SWI']
+  ['RTS', 'SRF', 'RSI', 'RTR']
 end
 
 def business_unit_index(business_unit)
@@ -1210,10 +1048,16 @@ def notify_ci_condition(lane)
   !lane.to_s.downcase.include?('githubdeployments')
 end
 
-def appcenter_ios_nightly_appcenter_names
-  business_units.map do |business_unit|
-    ENV.fetch("PLAY_#{business_unit}_NIGHTLY_APPCENTER_APPNAME", nil)
-  end
+def appcenter_dsyms_upload(app_name, release_notes, dsym)
+  appcenter_upload(
+    api_token: ENV.fetch('PLAY_APPCENTER_TOKEN', nil),
+    owner_type: 'organization',
+    owner_name: ENV.fetch('PLAY_APPCENTER_OWNER', nil),
+    app_name:,
+    release_notes:,
+    upload_dsym_only: true,
+    dsym:
+  )
 end
 
 def appcenter_tvos_nightly_names
@@ -1235,12 +1079,6 @@ def appcenter_testflight_nightly_names(platform)
     appcenter_ios_nightly_names
   else
     appcenter_tvos_nightly_names
-  end
-end
-
-def appcenter_ios_beta_appcenter_names
-  business_units.map do |business_unit|
-    ENV.fetch("PLAY_#{business_unit}_BETA_APPCENTER_APPNAME", nil)
   end
 end
 
@@ -1710,10 +1548,10 @@ end
 def upload_appcenter_dsyms(appcenter_appname)
   dsym = lane_context[SharedValues::DSYM_OUTPUT_PATH]
   begin
-    appcenter_lane(
-      appname: appcenter_appname,
-      notes: 'DSYMs from local build (via fastlane).',
-      upload_dsym: dsym
+    appcenter_dsyms_upload(
+      appcenter_appname,
+      'DSYMs from local build (via fastlane).',
+      dsym
     )
   rescue StandardError => e
     UI.important "Error uploading dSYM to App Center: #{e.message}"
@@ -1721,21 +1559,6 @@ def upload_appcenter_dsyms(appcenter_appname)
     UI.message "#{dsym.split('/').last} file copied to ./build folder."
   end
   lane_context.delete(SharedValues::DSYM_OUTPUT_PATH)
-end
-
-# Returns current build number on App Center
-def latest_appcenter_build_number(app_names)
-  build_number = 0
-  app_names.each_index do |index|
-    number = Integer(appcenter_fetch_version_number(
-      api_token: ENV.fetch('PLAY_APPCENTER_TOKEN', nil),
-      owner_name: ENV.fetch('PLAY_APPCENTER_OWNER', nil),
-      app_name: app_names[index]
-    )['build_number'])
-
-    build_number = number unless build_number >= number
-  end
-  build_number
 end
 
 # Returns current build number on App Store Connect
@@ -2265,8 +2088,7 @@ def device_language(business_unit)
     'RSI' => 'it-CH',
     'RTR' => 'de-CH',
     'RTS' => 'fr-CH',
-    'SRF' => 'de-CH',
-    'SWI' => 'en-US'
+    'SRF' => 'de-CH'
   }
   languages[business_unit]
 end
@@ -2353,8 +2175,7 @@ def appstore_language(business_unit)
     'RSI' => 'it',
     'RTR' => 'de-DE',
     'RTS' => 'fr-FR',
-    'SRF' => 'de-DE',
-    'SWI' => 'en-US'
+    'SRF' => 'de-DE'
   }
   languages[business_unit]
 end
@@ -2364,8 +2185,7 @@ def appstore_copyright(business_unit)
     'RSI' => 'Radiotelevisione Svizzera',
     'RTR' => 'RTR Radiotelevisiun Svizra Rumantscha',
     'RTS' => 'RTS Radio Télévision Suisse',
-    'SRF' => 'Schweizer Radio und Fernsehen (SRF)',
-    'SWI' => 'swissinfo.ch'
+    'SRF' => 'Schweizer Radio und Fernsehen (SRF)'
   }
   copyrights[business_unit]
 end
@@ -2425,8 +2245,7 @@ def crowdin_language(business_unit)
     'RSI' => 'it-CH',
     'RTR' => 'rm-CH',
     'RTS' => 'fr-CH',
-    'SRF' => 'de-CH',
-    'SWI' => 'en'
+    'SRF' => 'de-CH'
   }
   languages[business_unit]
 end

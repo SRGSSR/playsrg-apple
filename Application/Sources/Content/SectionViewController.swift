@@ -427,24 +427,28 @@ extension SectionViewController {
         SectionViewController(section: .configured(.watchLater))
     }
 
-    @objc static func mediasViewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
-        if let channelUid {
+    @objc static func mediasViewController(forDay day: SRGDay, transmission: SRGTransmission, channelUid: String?) -> SectionViewController & DailyMediasViewController {
+        // FIXME: If `channelUid` is null, load all radio episodes by date, not only from the first radio channel uid.
+        if transmission == .radio, let channelUid = channelUid ?? ApplicationConfiguration.shared.radioHomepageChannels.first?.uid {
             SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
         } else {
             SectionViewController(section: .configured(.tvEpisodesForDay(day)))
         }
     }
 
-    @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
-        if let channelUid {
+    static func showsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?) -> SectionViewController {
+        if transmission == .radio, let channelUid {
+            SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
+        } else if transmission == .radio, let channelUid = ApplicationConfiguration.shared.radioHomepageChannels.first?.uid {
+            // FIXME: Load all radio A to Z shows, not only from the first channel.
             SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         } else {
             SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
     }
 
-    @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
-        showsViewController(forChannelUid: channelUid, initialSectionId: nil)
+    static func showsViewController(for transmission: SRGTransmission, channelUid: String?) -> SectionViewController {
+        showsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil)
     }
 }
 

@@ -1,0 +1,24 @@
+{
+  "images" : [
+    {
+      "filename" : "rts_premiere_22.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "rts_premiere_22 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "rts_premiere_22 2.pdf",
+      "idiom" : "car"
+    },
+    {
+      "filename" : "rts_premiere_22 3.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -20,6 +20,18 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
     return songsViewStyle ? songsViewStyle.integerValue : SongsViewStyleNone;
 }
 
+static ShowType ShowTypeWithString(NSString *string)
+{
+    static dispatch_once_t s_onceToken;
+    static NSDictionary<NSString *, NSNumber *> *s_showTypes;
+    dispatch_once(&s_onceToken, ^{
+        s_showTypes = @{ @"show" : @(ShowTypeShow),
+                         @"podcast" : @(ShowTypePodcast) };
+    });
+    NSNumber *showType = s_showTypes[string];
+    return showType ? showType.integerValue : ShowTypeShow;
+}
+
 @interface Channel ()
 
 @property (nonatomic, copy) NSString *uid;
@@ -31,6 +43,7 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
 @property (nonatomic) UIColor *titleColor;
 @property (nonatomic, getter=hasDarkStatusBar) BOOL darkStatusBar;
 @property (nonatomic) SongsViewStyle songsViewStyle;
+@property (nonatomic) ShowType showType;
 @property (nonatomic, copy) NSString *contentPageId;
 
 @end
@@ -92,7 +105,12 @@ static SongsViewStyle SongsViewStyleWithString(NSString *string)
         if ([songsViewStyleValue isKindOfClass:NSString.class]) {
             self.songsViewStyle = SongsViewStyleWithString(songsViewStyleValue);
         }
-        
+
+        id showTypeValue = dictionary[@"showType"];
+        if ([showTypeValue isKindOfClass:NSString.class]) {
+            self.showType = ShowTypeWithString(showTypeValue);
+        }
+
 #if DEBUG || NIGHTLY || BETA
         id contentPageIdValue = dictionary[@"contentPageId"];
         if ([contentPageIdValue isKindOfClass:NSString.class]) {

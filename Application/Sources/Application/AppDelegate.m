@@ -24,7 +24,6 @@
 @import AirshipCore;
 @import AppCenter;
 @import AppCenterCrashes;
-@import AppCenterDistribute;
 @import AVFoundation;
 @import CarPlay;
 @import Firebase;
@@ -207,12 +206,7 @@ static void *s_kvoContext = &s_kvoContext;
         return;
     }
     
-#if defined(APPCENTER)
-    MSACDistribute.updateTrack = MSACUpdateTrackPrivate;
-    [MSACAppCenter start:appCenterSecret withServices:@[ MSACCrashes.class, MSACDistribute.class ]];
-#else
     [MSACAppCenter start:appCenterSecret withServices:@[ MSACCrashes.class ]];
-#endif
 }
 
 - (void)setupDataProvider

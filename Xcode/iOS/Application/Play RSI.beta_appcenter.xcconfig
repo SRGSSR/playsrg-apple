@@ -1,6 +1,0 @@
-#include? "Configuration/Xcode/Play RSI.beta_appcenter.xcconfig"
-
-#include "Xcode/Shared/BUs/RSI.xcconfig"
-#include "Xcode/Shared/Targets/iOS/Application.xcconfig"
-
-#include "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.beta_appcenter.xcconfig"

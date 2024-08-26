@@ -1,6 +1,0 @@
-#include? "Configuration/Xcode/Play RTR.beta_appcenter.xcconfig"
-
-#include "Xcode/Shared/BUs/RTR.xcconfig"
-#include "Xcode/Shared/Targets/iOS/Application.xcconfig"
-
-#include "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.beta_appcenter.xcconfig"

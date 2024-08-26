@@ -12,8 +12,6 @@
 	<string>LongFormVideo</string>
 	<key>AppCenterSecret</key>
 	<string>$(CONFIG__APPCENTER_SECRET)</string>
-	<key>AppCenterURL</key>
-	<string>$(APPCENTER_URL)</string>
 	<key>AppStoreAppleId</key>
 	<string>$(CONFIG__APPSTORE_APPLE_ID)</string>
 	<key>ApplicationGroupIdentifier</key>
@@ -48,7 +46,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(COMMON__URL_SCHEME)</string>
-				<string>appcenter-$(CONFIG__APPCENTER_SECRET)</string>
 			</array>
 		</dict>
 	</array>

@@ -97,7 +97,7 @@
 
 /* Audio home page selection view title
    Label of the button for audio homepage option selection */
-"Audio home page" = "Audio home page";
+"Audio home page" = "Audio Startseite";
 
 /* Audios tab title
    Header for audio search results
@@ -346,6 +346,9 @@
    Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Die neusten Episoden aus deinen Favoriten";
 
+/* Title label used to present the radio latest podcast episodes */
+"Latest podcasts" = "Neueste Podcasts";
+
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Neuste Videos";
 
@@ -390,10 +393,10 @@
 "Mandatory update" = "Update erforderlich";
 
 /* Many curated audio homepages option setting state */
-"Many curated pages (PAC landing pages)" = "Many curated pages (PAC landing pages)";
+"Many curated pages (PAC landing pages)" = "Viele kuratierte Seiten (PAC Landing Pages)";
 
 /* Many predefined audio homepage option setting state */
-"Many predefined pages" = "Many predefined pages";
+"Many predefined pages" = "Viele vordefinierte Seiten";
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Inhalt noch nicht verfügbar";
@@ -488,7 +491,7 @@
 "OK" = "OK";
 
 /* One curated audio homepage option setting state */
-"One curated page (PAC Audio)" = "One curated page (PAC Audio)";
+"One curated page (PAC Audio)" = "Eine kuratierte Seite (PAC Audio)";
 
 /* Label of the button opening system settings */
 "Open system settings" = "Einstellungen anzeigen";
@@ -535,6 +538,12 @@
 
 /* Mail body header to declare a technical issue */
 "Please describe the issue below:" = "Bitte beschreiben Sie das Problem unten:";
+
+/* Title label used to present radio associated podcasts */
+"Podcasts" = "Podcasts";
+
+/* Title of the section when we show podcasts by date */
+"Podcasts by date" = "Podcasts nach Datum";
 
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Beliebt auf Play SRF";
@@ -603,6 +612,12 @@
 
 /* Title label used to present medias whose playback can be resumed */
 "Resume playback" = "Weiterschauen";
+
+/* Title label used to present audios whose playback can be resumed */
+"Resume audios playback" = "Weiterhören";
+
+/* Title label used to present videos whose playback can be resumed */
+"Resume videos playback" = "Weiterschauen";
 
 /* Label to present the search view
    Search shortcut label
@@ -680,7 +695,7 @@
 
 /* Label of the button for Podcast square image format selection
    Podcast square image format selection view title */
-"Square images" = "Square images";
+"Square images" = "Quadratische Bilder";
 
 /* Server setting name */
 "Stage" = "Stage";
@@ -835,9 +850,6 @@
 
 /* Version label in settings */
 "Version" = "Version";
-
-/* Label of the button to access release notes and download internal builds (App Center) */
-"Versions and release notes" = "Versionen und neue Funktionen";
 
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Die Videos werden ohne Unterbrechung im Hintergrund abgespielt.";

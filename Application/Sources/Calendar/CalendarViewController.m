@@ -22,6 +22,7 @@
 
 @interface CalendarViewController ()
 
+@property (nonatomic) SRGTransmission transmission;
 @property (nonatomic) RadioChannel *radioChannel;
 @property (nonatomic) NSDate *initialDate;
 
@@ -46,6 +47,7 @@
 - (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel date:(NSDate *)date
 {
     if (self = [self init]) {
+        self.transmission = radioChannel ? SRGTransmissionRadio : SRGTransmissionTV;
         self.radioChannel = radioChannel;
         self.initialDate = date;
         self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
@@ -65,7 +67,11 @@
 
 - (NSString *)title
 {
-    return TitleForApplicationSection(ApplicationSectionShowByDate);
+    if (self.radioChannel == nil) {
+        return TitleForApplicationSection(ApplicationSectionShowByDate);
+    } else {
+        return [self.radioChannel sectionTitleWithSectionContext:ApplicationSectionShowByDate];
+    }
 }
 
 #pragma mark View lifecycle
@@ -253,7 +259,7 @@
         }
     }
     
-    UIViewController *newDailyMediasViewController = [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
+    UIViewController *newDailyMediasViewController = [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] transmission:self.transmission channelUid:self.radioChannel.uid];
     [self.pageViewController setViewControllers:@[newDailyMediasViewController] direction:navigationDirection animated:animated completion:nil];
     [self play_setNeedsScrollableViewUpdate];
     
@@ -429,7 +435,7 @@
     
     UIViewController<DailyMediasViewController> *currentDailyMediasViewController = (UIViewController<DailyMediasViewController> *)viewController;
     NSDate *date = [NSCalendar.srg_defaultCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
-    return [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
+    return [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] transmission:self.transmission channelUid:self.radioChannel.uid];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
@@ -443,7 +449,7 @@
     dateComponents.day = 1;
     
     NSDate *date = [NSCalendar.srg_defaultCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
-    return [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
+    return [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] transmission:self.transmission channelUid:self.radioChannel.uid];
 }
 
 #pragma mark UIPageViewControllerDelegate protocol

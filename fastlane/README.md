@@ -15,14 +15,6 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
-### ios iOSnightliesAppCenter
-
-```sh
-[bundle exec] fastlane ios iOSnightliesAppCenter
-```
-
-Builds a new iOS nightly on App Center.
-
 ### ios tvOSnightlies
 
 ```sh
@@ -46,14 +38,6 @@ Builds a new iOS nightly on App Store Connect and waits for build processing.
 ```
 
 Adds a nightly TestFlight tester (email required)
-
-### ios iOSbetasAppCenter
-
-```sh
-[bundle exec] fastlane ios iOSbetasAppCenter
-```
-
-Builds an iOS beta on App Center with the current build number. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.
 
 ### ios tvOSbetas
 
@@ -221,7 +205,7 @@ RTR: Makes iOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios iOSrtsScreenshots
 ```
 
-RTS: Makes iOS screenshots and replaces current ones on App Store Connect.
+RTS: Makes iOS screenshots. No replacement made on App Store Connect.
 
 ### ios iOSsrfScreenshots
 
@@ -230,14 +214,6 @@ RTS: Makes iOS screenshots and replaces current ones on App Store Connect.
 ```
 
 SRF: Makes iOS screenshots. No replacement made on App Store Connect.
-
-### ios iOSswiScreenshots
-
-```sh
-[bundle exec] fastlane ios iOSswiScreenshots
-```
-
-SWI: Makes iOS screenshots and replaces current ones on App Store Connect.
 
 ### ios iOSrsiUploadAppStoreBuild
 
@@ -271,14 +247,6 @@ RTS only: See `iOSUploadAppStoreBuilds` lane.
 
 SRF only: See `iOSUploadAppStoreBuilds` lane.
 
-### ios iOSswiUploadAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios iOSswiUploadAppStoreBuild
-```
-
-SWI only: See `iOSUploadAppStoreBuilds` lane.
-
 ### ios iOSrsiDistributePrivateAppStoreBuild
 
 ```sh
@@ -310,14 +278,6 @@ RTS only: See `iOSDistributePrivateAppStoreBuilds` lane.
 ```
 
 SRF only: See `iOSDistributePrivateAppStoreBuilds` lane.
-
-### ios iOSswiDistributePrivateAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios iOSswiDistributePrivateAppStoreBuild
-```
-
-SWI only: See `iOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios iOSrsiDistributePublicAppStoreBuild
 
@@ -351,14 +311,6 @@ RTS only: See `iOSDistributePublicAppStoreBuild` lane.
 
 SRF only: See `iOSDistributePublicAppStoreBuild` lane.
 
-### ios iOSswiDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios iOSswiDistributePublicAppStoreBuild
-```
-
-SWI only: See `iOSDistributePublicAppStoreBuild` lane.
-
 ### ios iOSrsiPrepareAppStoreRelease
 
 ```sh
@@ -391,14 +343,6 @@ RTS only: See `iOSPrepareAppStoreRelease` lane.
 
 SRF only: See `iOSPrepareAppStoreRelease` lane.
 
-### ios iOSswiPrepareAppStoreRelease
-
-```sh
-[bundle exec] fastlane ios iOSswiPrepareAppStoreRelease
-```
-
-SWI only: See `iOSPrepareAppStoreRelease` lane.
-
 ### ios tvOSrsiScreenshots
 
 ```sh
@@ -421,7 +365,7 @@ RTR: Makes tvOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios tvOSrtsScreenshots
 ```
 
-RTS: Makes tvOS screenshots and replaces current ones on App Store Connect.
+RTS: Makes tvOS screenshots. No replacement made on App Store Connect.
 
 ### ios tvOSsrfScreenshots
 
@@ -430,14 +374,6 @@ RTS: Makes tvOS screenshots and replaces current ones on App Store Connect.
 ```
 
 SRF: Makes tvOS screenshots. No replacement made on App Store Connect.
-
-### ios tvOSswiScreenshots
-
-```sh
-[bundle exec] fastlane ios tvOSswiScreenshots
-```
-
-SWI: Makes tvOS screenshots and replaces current ones on App Store Connect.
 
 ### ios tvOSrsiUploadAppStoreBuild
 
@@ -471,14 +407,6 @@ RTS only: See `tvOSUploadAppStoreBuilds` lane.
 
 SRF only: See `tvOSUploadAppStoreBuilds` lane.
 
-### ios tvOSswiUploadAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios tvOSswiUploadAppStoreBuild
-```
-
-SWI only: See `tvOSUploadAppStoreBuilds` lane.
-
 ### ios tvOSrsiDistributePrivateAppStoreBuild
 
 ```sh
@@ -510,14 +438,6 @@ RTS only: See `tvOSDistributePrivateAppStoreBuilds` lane.
 ```
 
 SRF only: See `tvOSDistributePrivateAppStoreBuilds` lane.
-
-### ios tvOSswiDistributePrivateAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios tvOSswiDistributePrivateAppStoreBuild
-```
-
-SWI only: See `tvOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios tvOSrsiDistributePublicAppStoreBuild
 
@@ -551,14 +471,6 @@ RTS only: See `tvOSDistributePublicAppStoreBuilds` lane.
 
 SRF only: See `tvOSDistributePublicAppStoreBuilds` lane.
 
-### ios tvOSswiDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios tvOSswiDistributePublicAppStoreBuild
-```
-
-SWI only: See `tvOSDistributePublicAppStoreBuilds` lane.
-
 ### ios tvOSrsiPrepareAppStoreRelease
 
 ```sh
@@ -590,14 +502,6 @@ RTS only: See `tvOSPrepareAppStoreRelease` lane.
 ```
 
 SRF only: See `tvOSPrepareAppStoreRelease` lane.
-
-### ios tvOSswiPrepareAppStoreRelease
-
-```sh
-[bundle exec] fastlane ios tvOSswiPrepareAppStoreRelease
-```
-
-SWI only: See `tvOSPrepareAppStoreRelease` lane.
 
 ----
 

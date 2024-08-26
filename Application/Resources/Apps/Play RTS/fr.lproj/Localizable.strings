@@ -346,6 +346,9 @@
    Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Derniers épisodes de vos favoris";
 
+/* Title label used to present the radio latest podcast episodes */
+"Latest podcasts" = "Derniers podcasts";
+
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Vidéos les plus récentes";
 
@@ -536,6 +539,12 @@
 /* Mail body header to declare a technical issue */
 "Please describe the issue below:" = "Merci de décrire ci-dessous le problème rencontré :";
 
+/* Title label used to present radio associated podcasts */
+"Podcasts" = "Podcasts";
+
+/* Title of the section when we show podcasts by date */
+"Podcasts by date" = "Podcasts par date";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Populaire sur Play RTS";
 
@@ -603,6 +612,12 @@
 
 /* Title label used to present medias whose playback can be resumed */
 "Resume playback" = "Reprendre la lecture";
+
+/* Title label used to present audios whose playback can be resumed */
+"Resume audios playback" = "Reprendre la lecture";
+
+/* Title label used to present videos whose playback can be resumed */
+"Resume videos playback" = "Reprendre la lecture";
 
 /* Label to present the search view
    Search shortcut label
@@ -680,7 +695,7 @@
 
 /* Label of the button for Podcast square image format selection
    Podcast square image format selection view title */
-"Square images" = "Square images";
+"Square images" = "Images carrées";
 
 /* Server setting name */
 "Stage" = "Stage";
@@ -835,9 +850,6 @@
 
 /* Version label in settings */
 "Version" = "Version";
-
-/* Label of the button to access release notes and download internal builds (App Center) */
-"Versions and release notes" = "Versions et notes de mise à jour";
 
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Autorise la lecture vidéo à se poursuivre même quand vous sortez de l'application.";

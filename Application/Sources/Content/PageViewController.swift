@@ -56,8 +56,9 @@ final class PageViewController: UIViewController {
     }
 
     #if os(iOS)
-        private static func showByDateViewController(radioChannel: RadioChannel?, date: Date?) -> UIViewController {
-            if let radioChannel {
+        private static func showByDateViewController(transmission: SRGTransmission, radioChannel: RadioChannel?, date: Date?) -> UIViewController {
+            // FIXME: If `radioChannel` is null, load all radio episodes by date, not only from the first radio channel.
+            if transmission == .radio, let radioChannel = radioChannel ?? ApplicationConfiguration.shared.radioHomepageChannels.first {
                 CalendarViewController(radioChannel: radioChannel, date: date)
             } else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
                 ProgramGuideViewController(date: date)
@@ -620,14 +621,14 @@ extension PageViewController: UIScrollViewDelegate {
             case .showByDate:
                 let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
                 if let navigationController {
-                    let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: date)
+                    let showByDateViewController = Self.showByDateViewController(transmission: .radio, radioChannel: radioChannel, date: date)
                     navigationController.pushViewController(showByDateViewController, animated: false)
                 }
                 return true
             case .showAZ:
                 if let navigationController {
                     let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                    let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid, initialSectionId: initialSectionId)
+                    let showsViewController = SectionViewController.showsViewController(for: .radio, channelUid: radioChannel?.uid, initialSectionId: initialSectionId)
                     navigationController.pushViewController(showsViewController, animated: false)
                 }
                 return true
@@ -643,16 +644,16 @@ extension PageViewController: UIScrollViewDelegate {
     }
 
     extension PageViewController: ShowAccessCellActions {
-        func openShowAZ() {
-            if let navigationController {
-                let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
+        func openShowAZ(sender _: Any?, event: ShowAccessEvent?) {
+            if let navigationController, let event {
+                let showsViewController = SectionViewController.showsViewController(for: event.transmission, channelUid: radioChannel?.uid)
                 navigationController.pushViewController(showsViewController, animated: true)
             }
         }
 
-        func openShowByDate() {
-            if let navigationController {
-                let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: nil)
+        func openShowByDate(sender _: Any?, event: ShowAccessEvent?) {
+            if let navigationController, let event {
+                let showByDateViewController = Self.showByDateViewController(transmission: event.transmission, radioChannel: radioChannel, date: nil)
                 navigationController.pushViewController(showByDateViewController, animated: true)
             }
         }
@@ -1014,6 +1015,8 @@ private extension PageViewController {
                         case .video:
                             let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
                             ShowAccessCell(style: style).primaryColor(primaryColor)
+                        case .audio:
+                            ShowAccessCell(style: .calendar).primaryColor(primaryColor)
                         default:
                             ShowAccessCell(style: .calendar).primaryColor(primaryColor)
                         }

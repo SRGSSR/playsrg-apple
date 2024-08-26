@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
       "state" : {
-        "revision" : "fef761279a592960243e67f2aea110c6fa097fd8",
-        "version" : "6.11.0"
+        "revision" : "2d1cd9c0cb52ca76702023b528a059fc0a7d5a4d",
+        "version" : "6.13.0"
       }
     },
     {
@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "0e48e8e36951bc474ef80f29192759ea93d8009d",
-        "version" : "9.1.0"
+        "revision" : "97ece2185ee456d0d85f0bd1608539f66e74d20f",
+        "version" : "9.1.3"
       }
     },
     {
@@ -321,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "a1725917c9350f71b19e897021f3d0aafb9ed24a",
-        "version" : "19.0.4"
+        "revision" : "a315d507213ed16adc3d827aadc6b266c6e21275",
+        "version" : "19.0.6"
       }
     },
     {
@@ -366,8 +366,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "revision" : "717608146d3787bd269d5a524e109ee30be828e4",
-        "version" : "7.2.1"
+        "revision" : "354b2c5bb53b412504c49c85639620677aeb4948",
+        "version" : "7.2.3"
       }
     },
     {
