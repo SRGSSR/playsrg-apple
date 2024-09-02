@@ -343,13 +343,14 @@ Play SRG iOS applications have in `Profile` tab, `Settings` view, a `What's new`
 It downloads a html file to display release notes. The html pages are published on the project Github pages: [https://srgssr.github.io/playsrg-apple](https://srgssr.github.io/playsrg-apple).
 
 Publish release notes on Github pages with correct released status (App Store and TestFlight release notes):
+
+ℹ️ The script is scheduled to run on CI after a private or public beta build success.
+
 1. On PlayCity CI select the project:
    - **[Play SRG Publish release notes](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgPublishReleaseNotes)**: `fastlane ios publishReleaseNotes`
 2. Run the project. The script:
-     - does update automatically (recommended)
-     - can be from any branch. No dependency with versions or build numbers.
-
-ℹ️ The script is scheduled to run on CI after build success.
+     - Does the `gh-pages` branch update automatically.
+     - Can be from any branch. No dependency with versions or build numbers.
 
 The update can be done manually (not recommended), without keeping the commits history on the `gh-pages` branch:
 
