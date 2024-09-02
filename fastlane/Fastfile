@@ -374,7 +374,7 @@ platform :ios do
 
   # After AppStore validation
 
-  desc 'After AppStore validation: Bumps marketing version and pushes current one is the same as all App Store live versions.'
+  desc 'After AppStore validation: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.'
   lane :afterAppStoreValidation do
     unless git_branch_name == github_main_branch
       UI.user_error! 'After AppStore validation must runs on \'main\' branch.'
@@ -397,7 +397,7 @@ platform :ios do
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
         UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
 
-        appstore_live_versions[platform] << live_version.version_string
+        appstore_live_versions[platform] << live_version.version_string if live_version
       end
     end
     UI.message '-----'
@@ -2379,23 +2379,23 @@ def beta_app_review_info
   }
 end
 
-# Bump marketing version if all App Store released versions are the same, and not already done.
+# Bump marketing version if one AppStore version is same as the current version.
 def bump_marketing_version_flow(platform, appstore_versions)
-  if appstore_versions.uniq.count == 1
-    current_version = xcode_marketing_version(platform)
-    if appstore_versions.first == current_version
-      bump_marketing_version_commit(platform)
-      git_pull(rebase: true)
-      push_to_git_remote(tags: false)
-      UI.success "Play #{platform} marketing version bumped to #{xcode_marketing_version(platform)}. ✅"
-      return true
-    else
-      UI.message "Play #{platform} marketing version is already bumped to #{current_version}."
-    end
+  UI.message "Checking Play #{platform} marketing version... #{appstore_versions}"
+  appstore_version = appstore_versions.map { |version| Gem::Version.new(version) }.max
+  current_version = Gem::Version.new(xcode_marketing_version(platform))
+  UI.message "AppStore version: #{appstore_version}, current version: #{current_version}"
+
+  if appstore_version == current_version
+    bump_marketing_version_commit(platform)
+    git_pull(rebase: true)
+    push_to_git_remote(tags: false)
+    UI.success "Play #{platform} marketing version bumped to #{xcode_marketing_version(platform)}. ✅"
+    true
   else
-    UI.important "Play #{platform} released versions are not the same. Waiting App Store validations and releases."
+    UI.message "Play #{platform} marketing version is currently #{xcode_marketing_version(platform)}."
+    false
   end
-  false
 end
 
 def git_last_commit_hashes(count)

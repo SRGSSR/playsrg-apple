@@ -181,7 +181,7 @@ Publish release notes for iOS and tvOS on Github pages
 [bundle exec] fastlane ios afterAppStoreValidation
 ```
 
-After AppStore validation: Bumps marketing version and pushes current one is the same as all App Store live versions.
+After AppStore validation: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.
 
 ### ios iOSrsiScreenshots
 

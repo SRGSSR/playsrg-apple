@@ -373,11 +373,11 @@ When a release is published on the AppStore, the version number (`X.Y.Z`) needs 
 2. Select the `main` branch (should be already selected).
 3. Run the project. The script:
 	- Get AppStore live versions.
-	- If live versions are the same for each BU, and same as current marketing version, the script:
+	- If one live version is same as the current marketing version, the script:
 		- Bumps the patch number of version number (`X.Y.Z`) on the repository.
 		- Commits the version bump with message "Bump version to `X.Y.Z+1`".
 		- Pushes the commit to the repository.
-	- runs `fastlane ios publishReleaseNotes` if a marketing version as been bumped.
+		- Runs `fastlane ios publishReleaseNotes` if a marketing version as been bumped.
 
 ```mermaid
 ---
