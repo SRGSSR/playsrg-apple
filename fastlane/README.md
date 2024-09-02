@@ -175,13 +175,13 @@ Get AppStore TestFlight App status for iOS and tvOS, lastest version
 
 Publish release notes for iOS and tvOS on Github pages
 
-### ios afterAppStoreValidationGitFlow
+### ios afterAppStoreValidation
 
 ```sh
-[bundle exec] fastlane ios afterAppStoreValidationGitFlow
+[bundle exec] fastlane ios afterAppStoreValidation
 ```
 
-After AppStore validation git flow: merges to master, tags released platforms, merges first tag to develop. Bumps marketing version and build number and pushes.
+After AppStore validation: Bumps marketing version and pushes current one is the same as all App Store live versions.
 
 ### ios iOSrsiScreenshots
 

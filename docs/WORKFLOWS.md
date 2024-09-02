@@ -366,15 +366,18 @@ The update can be done manually (not recommended), without keeping the commits h
 
 When a release is published on the AppStore, the version number (`X.Y.Z`) needs to be bumped for the next release.
 
-After AppStore validation:
+ℹ️ The script is scheduled to run on CI automatically.
 
 1. On PlayCity CI select the project:
  	- **Play SRG After AppStore validation**: `fastlane ios afterAppStoreValidation`
 2. Select the `main` branch (should be already selected).
 3. Run the project. The script:
-   - Bumps the path number of version number (`X.Y.Z`) on the repository.
-   - Commits the version bump with message "Bump version to `X.Y.Z+1`".
-   - Pushes the commit to the repository.
+	- Get AppStore live versions.
+	- If live versions are the same for each BU, and same as current marketing version, the script:
+		- Bumps the patch number of version number (`X.Y.Z`) on the repository.
+		- Commits the version bump with message "Bump version to `X.Y.Z+1`".
+		- Pushes the commit to the repository.
+	- runs `fastlane ios publishReleaseNotes` if a marketing version as been bumped.
 
 ```mermaid
 ---

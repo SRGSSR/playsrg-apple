@@ -372,29 +372,45 @@ platform :ios do
     UI.success 'Play release notes pushed on Github pages. ✅'
   end
 
-  # After AppStore validation git flow (similar to 'git flow release finish')
+  # After AppStore validation
 
-  desc 'After AppStore validation git flow: merges to master, tags released platforms, merges first tag to develop. Bumps marketing version and build number and pushes.'
-  lane :afterAppStoreValidationGitFlow do
-    branch_name = git_branch_name
-    unless branch_name.include? 'release/'
-      UI.user_error! 'After AppStore validation git flow must runs on \'release/*\' branch.'
+  desc 'After AppStore validation: Bumps marketing version and pushes current one is the same as all App Store live versions.'
+  lane :afterAppStoreValidation do
+    unless git_branch_name == github_main_branch
+      UI.user_error! 'After AppStore validation must runs on \'main\' branch.'
     end
 
-    # Tag only platforms which not have already a tag and have a what's new for beta.
-    git_pull(only_tags: true)
-    platforms = srg_platforms.reject do |platform|
-      tag = srg_tag(platform)
-      tag_version = tag_version(platform)
-      git_tag_exists(tag:) || what_s_new_for_beta(platform, tag_version).empty?
+    appstore_live_versions = { 'iOS' => [], 'tvOS' => [] }
+
+    # Get App Store live versions
+    UI.message '-----'
+    business_units.map do |business_unit|
+      spaceship_login_with_api_key(business_unit)
+      app = spaceship_bu_appstore_build_app(business_unit)
+      next unless app
+
+      UI.message '-----'
+      UI.command_output "Switch to Play #{business_unit}"
+
+      ['iOS', 'tvOS'].map do |platform|
+        live_version = spaceship_app_live_version(platform, app)
+        UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
+        UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
+
+        appstore_live_versions[platform] << live_version.version_string
+      end
     end
-    unless platforms.count.positive?
-      UI.user_error! 'Tags already exist or what\'s new for tags don\'t exist.'
+    UI.message '-----'
+
+    publish_release_notes = false
+
+    # Bump marketing version if needed
+    appstore_live_versions.each do |platform, appstore_versions|
+      bumped = bump_marketing_version_flow(platform, appstore_versions)
+      publish_release_notes ||= bumped
     end
 
-    UI.message "Start git flow release with Play #{platforms} platforms."
-    gitflow_release_platforms(platforms, branch_name)
-    UI.success "Git flow release with Play #{platforms} platforms succeeded. ✅"
+    sh 'bundle exec fastlane ios publishReleaseNotes' if publish_release_notes
   end
 
   # Individual iOS screenshots
@@ -2363,49 +2379,23 @@ def beta_app_review_info
   }
 end
 
-# Gitflow release platforms: Merge to master, tag platforms, merge one tag to develop, bump
-# marketing version(s) and build number and push to the repository, only if we are not on the
-# master branch and at least, one platform has to be released.
-def gitflow_release_platforms(platforms, branch_name)
-  return if branch_name.include? 'master'
-  return unless platforms.count.positive?
-
-  tags = platforms.map { |platform| srg_tag(platform) }
-
-  gitflow_release(tags, branch_name)
-  git_delete(branch_name)
-
-  bump_build_number_commit
-  platforms.each_index do |index|
-    bump_marketing_version_commit(platforms[index])
+# Bump marketing version if all App Store released versions are the same, and not already done.
+def bump_marketing_version_flow(platform, appstore_versions)
+  if appstore_versions.uniq.count == 1
+    current_version = xcode_marketing_version(platform)
+    if appstore_versions.first == current_version
+      bump_marketing_version_commit(platform)
+      git_pull(rebase: true)
+      push_to_git_remote(tags: false)
+      UI.success "Play #{platform} marketing version bumped to #{xcode_marketing_version(platform)}. ✅"
+      return true
+    else
+      UI.message "Play #{platform} marketing version is already bumped to #{current_version}."
+    end
+  else
+    UI.important "Play #{platform} released versions are not the same. Waiting App Store validations and releases."
   end
-
-  push_to_git_remote(local_branch: 'master', remote_branch: 'master', tags: true)
-  push_to_git_remote(local_branch: 'develop', remote_branch: 'develop', tags: false)
-end
-
-def gitflow_release(tags, branch_name)
-  Dir.chdir('..') do
-    sh 'git checkout master'
-    sh 'git pull --rebase origin master'
-    sh "git merge --no-ff #{branch_name}"
-  end
-  tags.each do |tag|
-    add_git_tag(tag:, sign: true)
-    UI.message "Tag \"#{tag}\" created. ✅"
-  end
-  Dir.chdir('..') do
-    sh 'git checkout develop'
-    sh 'git pull --rebase origin develop'
-    sh "git merge --no-ff #{tags[0]}"
-  end
-end
-
-def git_delete(branch_name)
-  Dir.chdir('..') do
-    sh "git push -d origin #{branch_name}"
-    sh "git branch -d #{branch_name}"
-  end
+  false
 end
 
 def git_last_commit_hashes(count)
