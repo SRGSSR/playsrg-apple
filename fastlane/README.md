@@ -69,7 +69,7 @@ Adds a beta TestFlight tester (email required)
 [bundle exec] fastlane ios iOSAppStoreBuilds
 ```
 
-Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.
+Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter, default value is `true`.
 
 ### ios iOSUploadAppStoreBuilds
 

@@ -99,12 +99,13 @@ platform :ios do
 
   # App Store builds
 
-  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.'
+  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter, default value is `true`.'
   lane :iOSAppStoreBuilds do |options|
-    public_testflight_distribution = options[:public_testflight_distribution] || false
+    public_testflight_distribution = options[:public_testflight_distribution] || true
     distribution_scope = public_testflight_distribution ? 'Public' : 'Private'
 
-    UI.important "The AppStore build will be distributed to the #{distribution_scope.downcase} group."
+    groups_string = public_testflight_distribution ? 'public and private groups' : 'private group'
+    UI.important "The AppStore build will be distributed to the #{groups_string}."
 
     sh 'bundle exec fastlane ios iOSUploadAppStoreBuilds'
     sh "bundle exec fastlane ios iOSDistribute#{distribution_scope}AppStoreBuilds"

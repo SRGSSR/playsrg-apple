@@ -230,9 +230,9 @@ For a release and sometime, during the development, external **stable** builds c
        - No emoji if built from the `main` branch.
        - "🌳" if built from another branch.
        - the branch name if it's not the `main` branch.
-     - then an upload to App Store Connect and are distributed to the SRG Testers TestFlight group.
-     - have also a distribution to the Public Beta Testers TestFlight group if the `public_testflight_distribution` parameter is set.
-     - TestFlight release notes from the `WhatsNew-iOS-beta.json` and `WhatsNew-tvOS-beta.json` files.
+   - then an upload to App Store Connect and are distributed to the SRG Testers TestFlight group.
+   - also a distribution to the Public Beta Testers TestFlight group if no `public_testflight_distribution` parameter set or set it to `true`.
+   - TestFlight release notes from the `WhatsNew-iOS-beta.json` and `WhatsNew-tvOS-beta.json` files.
 7. We can follow the Apple TestFlight review status locally with `make appstore-testflight-status`.
 
 ℹ️ If running the project on a same commit and branch, no new builds are done, only the distribution is done again.
