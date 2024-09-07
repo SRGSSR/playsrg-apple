@@ -163,11 +163,11 @@ Translation tool is [crowdin.com](https://crowdin.com/project/play-srg). The fol
 
 The proprietary project uses [fastlane](https://fastlane.tools/) to release binaries either for internal purposes or for the AppStore to release binaries.
 
-See [workflows](WORKFLOWS.md) for processes.
+See [workflows](WORKFLOWS.md) for processes and fastlane lanes.
 
 A [github page](https://srgssr.github.io/playsrg-apple/) with release notes pages and help pages for builds is also published with a fastlane lane.
 
-See [release checklist and fastlane lanes](RELEASE_CHECKLIST.md) for Appstore release details.
+See [release checklist](RELEASE_CHECKLIST.md) for Appstore release details.
 
 ## Specifications
 
