@@ -69,7 +69,7 @@ Adds a beta TestFlight tester (email required)
 [bundle exec] fastlane ios iOSAppStoreBuilds
 ```
 
-Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter, default value is `true`.
+Applies iOSUploadAppStoreBuilds and iOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.
 
 ### ios iOSUploadAppStoreBuilds
 
@@ -79,21 +79,13 @@ Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDi
 
 Uploads an iOS App Store build on App Store Connect with the current build number.
 
-### ios iOSDistributePrivateAppStoreBuilds
+### ios iOSDistributeAppStoreBuilds
 
 ```sh
-[bundle exec] fastlane ios iOSDistributePrivateAppStoreBuilds
+[bundle exec] fastlane ios iOSDistributeAppStoreBuilds
 ```
 
-Distributes to private groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
-
-### ios iOSDistributePublicAppStoreBuilds
-
-```sh
-[bundle exec] fastlane ios iOSDistributePublicAppStoreBuilds
-```
-
-Distributes to public groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
+Distributes to TestFlight groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.
 
 ### ios tvOSAppStoreBuilds
 
@@ -101,7 +93,7 @@ Distributes to public groups an iOS App Store build on App Store Connect with th
 [bundle exec] fastlane ios tvOSAppStoreBuilds
 ```
 
-Applies tvOSUploadAppStoreBuilds and tvOSDistributePrivateAppStoreBuilds (or tvOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.
+Applies tvOSUploadAppStoreBuilds and tvOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.
 
 ### ios tvOSUploadAppStoreBuilds
 
@@ -111,21 +103,13 @@ Applies tvOSUploadAppStoreBuilds and tvOSDistributePrivateAppStoreBuilds (or tvO
 
 Uploads a tvOS build on App Store Connect with the current build number.
 
-### ios tvOSDistributePrivateAppStoreBuilds
+### ios tvOSDistributeAppStoreBuilds
 
 ```sh
-[bundle exec] fastlane ios tvOSDistributePrivateAppStoreBuilds
+[bundle exec] fastlane ios tvOSDistributeAppStoreBuilds
 ```
 
-Distributes to private groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
-
-### ios tvOSDistributePublicAppStoreBuilds
-
-```sh
-[bundle exec] fastlane ios tvOSDistributePublicAppStoreBuilds
-```
-
-Distributes to public groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
+Distributes to TestFlight groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.
 
 ### ios stopUnfinishedGithubDeployments
 
@@ -247,69 +231,37 @@ RTS only: See `iOSUploadAppStoreBuilds` lane.
 
 SRF only: See `iOSUploadAppStoreBuilds` lane.
 
-### ios iOSrsiDistributePrivateAppStoreBuild
+### ios iOSrsiDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios iOSrsiDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios iOSrsiDistributeAppStoreBuild
 ```
 
-RSI only: See `iOSDistributePrivateAppStoreBuilds` lane.
+RSI only: See `iOSDistributeAppStoreBuilds` lane.
 
-### ios iOSrtrDistributePrivateAppStoreBuild
+### ios iOSrtrDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios iOSrtrDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios iOSrtrDistributeAppStoreBuild
 ```
 
-RTR only: See `iOSDistributePrivateAppStoreBuilds` lane.
+RTR only: See `iOSDistributeAppStoreBuilds` lane.
 
-### ios iOSrtsDistributePrivateAppStoreBuild
+### ios iOSrtsDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios iOSrtsDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios iOSrtsDistributeAppStoreBuild
 ```
 
-RTS only: See `iOSDistributePrivateAppStoreBuilds` lane.
+RTS only: See `iOSDistributeAppStoreBuilds` lane.
 
-### ios iOSsrfDistributePrivateAppStoreBuild
+### ios iOSsrfDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios iOSsrfDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios iOSsrfDistributeAppStoreBuild
 ```
 
-SRF only: See `iOSDistributePrivateAppStoreBuilds` lane.
-
-### ios iOSrsiDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios iOSrsiDistributePublicAppStoreBuild
-```
-
-RSI only: See `iOSDistributePublicAppStoreBuild` lane.
-
-### ios iOSrtrDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios iOSrtrDistributePublicAppStoreBuild
-```
-
-RTR only: See `iOSDistributePublicAppStoreBuild` lane.
-
-### ios iOSrtsDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios iOSrtsDistributePublicAppStoreBuild
-```
-
-RTS only: See `iOSDistributePublicAppStoreBuild` lane.
-
-### ios iOSsrfDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios iOSsrfDistributePublicAppStoreBuild
-```
-
-SRF only: See `iOSDistributePublicAppStoreBuild` lane.
+SRF only: See `iOSDistributeAppStoreBuilds` lane.
 
 ### ios iOSrsiPrepareAppStoreRelease
 
@@ -407,69 +359,37 @@ RTS only: See `tvOSUploadAppStoreBuilds` lane.
 
 SRF only: See `tvOSUploadAppStoreBuilds` lane.
 
-### ios tvOSrsiDistributePrivateAppStoreBuild
+### ios tvOSrsiDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios tvOSrsiDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios tvOSrsiDistributeAppStoreBuild
 ```
 
-RSI only: See `tvOSDistributePrivateAppStoreBuilds` lane.
+RSI only: See `tvOSDistributeAppStoreBuilds` lane.
 
-### ios tvOSrtrDistributePrivateAppStoreBuild
+### ios tvOSrtrDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios tvOSrtrDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios tvOSrtrDistributeAppStoreBuild
 ```
 
-RTR only: See `tvOSDistributePrivateAppStoreBuilds` lane.
+RTR only: See `tvOSDistributeAppStoreBuilds` lane.
 
-### ios tvOSrtsDistributePrivateAppStoreBuild
+### ios tvOSrtsDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios tvOSrtsDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios tvOSrtsDistributeAppStoreBuild
 ```
 
-RTS only: See `tvOSDistributePrivateAppStoreBuilds` lane.
+RTS only: See `tvOSDistributeAppStoreBuilds` lane.
 
-### ios tvOSsrfDistributePrivateAppStoreBuild
+### ios tvOSsrfDistributeAppStoreBuild
 
 ```sh
-[bundle exec] fastlane ios tvOSsrfDistributePrivateAppStoreBuild
+[bundle exec] fastlane ios tvOSsrfDistributeAppStoreBuild
 ```
 
-SRF only: See `tvOSDistributePrivateAppStoreBuilds` lane.
-
-### ios tvOSrsiDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios tvOSrsiDistributePublicAppStoreBuild
-```
-
-RSI only: See `tvOSDistributePublicAppStoreBuilds` lane.
-
-### ios tvOSrtrDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios tvOSrtrDistributePublicAppStoreBuild
-```
-
-RTR only: See `tvOSDistributePublicAppStoreBuilds` lane.
-
-### ios tvOSrtsDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios tvOSrtsDistributePublicAppStoreBuild
-```
-
-RTS only: See `tvOSDistributePublicAppStoreBuilds` lane.
-
-### ios tvOSsrfDistributePublicAppStoreBuild
-
-```sh
-[bundle exec] fastlane ios tvOSsrfDistributePublicAppStoreBuild
-```
-
-SRF only: See `tvOSDistributePublicAppStoreBuilds` lane.
+SRF only: See `tvOSDistributeAppStoreBuilds` lane.
 
 ### ios tvOSrsiPrepareAppStoreRelease
 

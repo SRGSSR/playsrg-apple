@@ -18,25 +18,13 @@ for_platform :ios do
     team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
-  for_lane :iOSsrfDistributePrivateAppStoreBuild do
+  for_lane :iOSsrfDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
   end
 
-  for_lane :tvOSsrfDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
-  end
-
-  for_lane :iOSsrfDistributePublicAppStoreBuild do
-    app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
-  end
-
-  for_lane :tvOSsrfDistributePublicAppStoreBuild do
+  for_lane :tvOSsrfDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('SRF_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('SRF_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('SRF_TEAM_ID', nil)}"
@@ -78,25 +66,13 @@ for_platform :ios do
     team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
-  for_lane :iOSrtsDistributePrivateAppStoreBuild do
+  for_lane :iOSrtsDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
   end
 
-  for_lane :tvOSrtsDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
-  end
-
-  for_lane :iOSrtsDistributePublicAppStoreBuild do
-    app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
-  end
-
-  for_lane :tvOSrtsDistributePublicAppStoreBuild do
+  for_lane :tvOSrtsDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('RTS_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('RTS_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('RTS_TEAM_ID', nil)}"
@@ -138,25 +114,13 @@ for_platform :ios do
     team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
-  for_lane :iOSrsiDistributePrivateAppStoreBuild do
+  for_lane :iOSrsiDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
   end
 
-  for_lane :tvOSrsiDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
-  end
-
-  for_lane :iOSrsiDistributePublicAppStoreBuild do
-    app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
-  end
-
-  for_lane :tvOSrsiDistributePublicAppStoreBuild do
+  for_lane :tvOSrsiDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('RSI_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('RSI_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('RSI_TEAM_ID', nil)}"
@@ -198,25 +162,13 @@ for_platform :ios do
     team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
-  for_lane :iOSrtrDistributePrivateAppStoreBuild do
+  for_lane :iOSrtrDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
   end
 
-  for_lane :tvOSrtrDistributePrivateAppStoreBuild do
-    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
-  end
-
-  for_lane :iOSrtrDistributePublicAppStoreBuild do
-    app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
-    itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
-    team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"
-  end
-
-  for_lane :tvOSrtrDistributePublicAppStoreBuild do
+  for_lane :tvOSrtrDistributeAppStoreBuild do
     app_identifier "#{ENV.fetch('RTR_APP_IDENTIFIER', nil)}"
     itc_team_id "#{ENV.fetch('RTR_ITUNES_CONNECT_TEAM_ID', nil)}"
     team_id "#{ENV.fetch('RTR_TEAM_ID', nil)}"

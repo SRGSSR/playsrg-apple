@@ -99,16 +99,16 @@ platform :ios do
 
   # App Store builds
 
-  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter, default value is `true`.'
+  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.'
   lane :iOSAppStoreBuilds do |options|
-    public_testflight_distribution = options[:public_testflight_distribution] || true
-    distribution_scope = public_testflight_distribution ? 'Public' : 'Private'
+    public_distribution = options[:public_distribution] || true
 
-    groups_string = public_testflight_distribution ? 'public and private groups' : 'private group'
-    UI.important "The AppStore build will be distributed to the #{groups_string}."
+    UI.important "The iOS AppStore build will be distributed to the #{groups_string(public_distribution)}."
+
+    options += " public_distribution:#{public_distribution}"
 
     sh 'bundle exec fastlane ios iOSUploadAppStoreBuilds'
-    sh "bundle exec fastlane ios iOSDistribute#{distribution_scope}AppStoreBuilds"
+    sh "bundle exec fastlane ios iOSDistributeAppStoreBuilds#{options}"
   end
 
   desc 'Uploads an iOS App Store build on App Store Connect with the current build number.'
@@ -118,41 +118,31 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to private groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :iOSDistributePrivateAppStoreBuilds do |options|
+  desc 'Distributes to TestFlight groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.'
+  lane :iOSDistributeAppStoreBuilds do |options|
     tag_version = options[:tag_version]
+    public_distribution = options[:public_distribution] || true
 
     options = ''
+    options += " public_distribution:#{public_distribution}"
     options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}DistributePrivateAppStoreBuild#{options}"
+      sh "bundle exec fastlane ios iOS#{business_unit}DistributeAppStoreBuild#{options}"
     end
   end
 
-  desc 'Distributes to public groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :iOSDistributePublicAppStoreBuilds do |options|
-    tag_version = options[:tag_version]
-
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-
-    business_units.map do |business_unit|
-      business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}DistributePublicAppStoreBuild#{options}"
-    end
-  end
-
-  desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributePrivateAppStoreBuilds (or tvOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.'
+  desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.'
   lane :tvOSAppStoreBuilds do |options|
-    public_testflight_distribution = options[:public_testflight_distribution] || false
-    distribution_scope = public_testflight_distribution ? 'Public' : 'Private'
+    public_distribution = options[:public_distribution] || true
 
-    UI.important "The AppStore build will be distributed to the #{distribution_scope.downcase} group."
+    UI.important "The tvOS AppStore build will be distributed to the #{groups_string(public_distribution)}."
+
+    options += " public_distribution:#{public_distribution}"
 
     sh 'bundle exec fastlane ios tvOSUploadAppStoreBuilds'
-    sh "bundle exec fastlane ios tvOSDistribute#{distribution_scope}AppStoreBuilds"
+    sh "bundle exec fastlane ios tvOSDistributeAppStoreBuilds#{options}"
   end
 
   desc 'Uploads a tvOS build on App Store Connect with the current build number.'
@@ -162,29 +152,18 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to private groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :tvOSDistributePrivateAppStoreBuilds do |options|
+  desc 'Distributes to TestFlight groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.'
+  lane :tvOSDistributeAppStoreBuilds do |options|
     tag_version = options[:tag_version]
+    public_distribution = options[:public_distribution] || true
 
     options = ''
+    options += " public_distribution:#{public_distribution}"
     options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios tvOS#{business_unit}DistributePrivateAppStoreBuild#{options}"
-    end
-  end
-
-  desc 'Distributes to public groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :tvOSDistributePublicAppStoreBuilds do |options|
-    tag_version = options[:tag_version]
-
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-
-    business_units.map do |business_unit|
-      business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios tvOS#{business_unit}DistributePublicAppStoreBuild#{options}"
+      sh "bundle exec fastlane ios tvOS#{business_unit}DistributeAppStoreBuild#{options}"
     end
   end
 
@@ -470,63 +449,45 @@ platform :ios do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'SRF')
   end
 
-  # Individual iOS App Store build private distributions
+  # Individual iOS App Store build distributions
 
-  desc 'RSI only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSrsiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
+  desc 'RSI only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSrsiDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'RSI',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
-  desc 'RTR only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSrtrDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
+  desc 'RTR only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSrtrDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'RTR',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
-  desc 'RTS only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSrtsDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
+  desc 'RTS only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSrtsDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'RTS',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
-  desc 'SRF only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSsrfDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  # Individual iOS App Store build public distributions
-
-  desc 'RSI only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSrsiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTR only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSrtrDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTS only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSrtsDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SRF only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSsrfDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
+  desc 'SRF only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSsrfDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'SRF',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
@@ -608,63 +569,45 @@ platform :ios do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'SRF')
   end
 
-  # Individual tvOS App Store build private distributions
+  # Individual tvOS App Store build distributions
 
-  desc 'RSI only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSrsiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
+  desc 'RSI only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSrsiDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'RSI',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
-  desc 'RTR only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSrtrDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
+  desc 'RTR only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSrtrDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'RTR',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
-  desc 'RTS only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSrtsDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
+  desc 'RTS only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSrtsDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'RTS',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
-  desc 'SRF only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSsrfDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  # Individual tvOS App Store build public distributions
-
-  desc 'RSI only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSrsiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTR only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSrtrDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTS only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSrtsDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SRF only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSsrfDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
+  desc 'SRF only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSsrfDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'SRF',
+      tag_version: options[:tag_version],
+      public_distribution: options[:public_distribution]
     )
   end
 
@@ -837,34 +780,20 @@ platform :ios do
     clean_build_artifacts
   end
 
-  desc 'Distributes the App Store build on App Store Connect with the current build number to private group.'
-  private_lane :testflight_distribute_private_appstore_build do |options|
+  desc 'Distributes the App Store build on App Store Connect with the current build number to TestFlight groups.'
+  private_lane :testflight_distribute_appstore_build do |options|
     platform = options[:platform] || 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
     scheme = application_scheme(platform, options[:bu])
+    public_distribution = options[:public_distribution] || true
 
     UI.important 'A valid bu option is required to distribute an App Store build. Skipping distribution. ⚠️' unless scheme
     next unless scheme
 
     changelog = what_s_new_for_beta(platform, tag_version)
-    pilot_distribute(nil, platform, tag_version, changelog, false)
+    pilot_distribute(nil, platform, tag_version, changelog, public_distribution)
 
-    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to private beta group. ✅"
-  end
-
-  desc 'Distributes the App Store build on App Store Connect with the current build number to public group.'
-  private_lane :testflight_distribute_public_appstore_build do |options|
-    platform = options[:platform] || 'iOS'
-    tag_version = options[:tag_version] || tag_version(platform)
-    scheme = application_scheme(platform, options[:bu])
-
-    UI.important 'A valid bu option is required to distribute an App Store build. Skipping distribution. ⚠️' unless scheme
-    next unless scheme
-
-    changelog = what_s_new_for_beta(platform, tag_version)
-    pilot_distribute(nil, platform, tag_version, changelog, true)
-
-    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to public beta group. ✅"
+    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to #{groups_string(public_distribution)}. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -1543,20 +1472,20 @@ def pilot_fast_upload(app_identifier, platform)
   )
 end
 
-def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+def pilot_distribute(app_identifier, platform, tag_version, changelog, public_distribution)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
   tag_version ||= tag_version(platform)
-  is_public_beta ||= false
+  public_distribution ||= true
 
-  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_distribution)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
   UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'
 end
 
-def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_distribution)
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
@@ -1566,17 +1495,21 @@ def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_pu
     build_number: build_number_from_tag_version(tag_version),
     changelog:,
     distribute_external: true,
-    groups: testflight_groups(is_public_beta),
+    groups: testflight_groups(public_distribution),
     notify_external_testers: true,
     demo_account_required: false,
     beta_app_review_info:
   )
 end
 
-def testflight_groups(is_public_beta)
+def testflight_groups(public_distribution)
   groups = ENV.fetch('ITUNES_CONNECT_TF_GROUPS', nil)
-  groups += ",#{ENV.fetch('ITUNES_CONNECT_TF_PUBLIC_GROUPS', nil)}" if is_public_beta
+  groups += ",#{ENV.fetch('ITUNES_CONNECT_TF_PUBLIC_GROUPS', nil)}" if public_distribution
   groups
+end
+
+def groups_string(public_distribution)
+  public_distribution ? 'public and private groups' : 'private group'
 end
 
 def upload_appcenter_dsyms(appcenter_appname)
