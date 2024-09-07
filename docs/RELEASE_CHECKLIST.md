@@ -3,30 +3,34 @@
 The checklist is a markdown list which can be copy and past in a Jira ticket Smart Checklist.
 
 ```
-# Prepare branch
--! Edit SPM / Podfile dependencies to point at tagged versions
--! Verify that Package.resolved / Podfile.lock only contain tagged versions
+# Prepare release on Git branch
+-! Verify that `Package.resolved` (SPM) / `Podfile.lock` (CocoaPods) only contain tagged versions
 -! Update application translations (with `make pull-translations`)
->Then commit on `main` branch or make a tanslation PR.
+>Then commit on branch and make a PR.
+>Wait PR review and merge when ready.
 -! Perform global diff with last release tag
+>Check all is ok for an App Store release.
 
 
-# Prepare App Store Connect
--! Downloads (iOS|tvOS) what's new CSVs, add version number line at the bottom with an english text.
+# Prepare release on App Store Connect
+- Follow [Prepare an App Store release](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#prepare-an-app-store-release) worflow.
+-! Downloads (iOS|tvOS) what's new CSVs from Crowdin, add version number line at the bottom with an english text.
 -! Upload updated (iOS|tvOS) what's new CSVs and ask for translations by email.
 >Ask the translators ([play-srg-translators@rts.ch](mailto:play-srg-translators@rts.ch)) to translate the new entries.
 -! Create new (iOS|tvOS) version on App Store Connect (with fastlane on CI)
->[Prepare an App Store release](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#prepare-an-app-store-release)
--! Update (iOS|tvOS) screenshots if needed (with fastlane locally)
+>[Prepare an App Store release](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#prepare-an-app-store-release) worflow.
+- Update (iOS|tvOS) screenshots if needed (with fastlane locally)
 >[Update the App Store screenshots](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#update-the-app-store-screenshots)
 
 # Build versions
+-! Check if new commits after the latest beta tags. If not, it's best to use existing tags.
 -! Update (iOS|tvOS) production remote configuration on Firebase
--! Build (iOS|tvOS) App Store builds (with fastlane on CI)
+- Build (iOS|tvOS) App Store builds (with fastlane on CI)
 >[Build and distribute Public Betas and AppStore Builds](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#build-and-distribute-public-betas-and-appstore-builds)
 >It will schedule private beta as well and creates new tags.
 
 # Submit to Apple review
+-! Check what's new App Store release notes are translated on crowdin
 -! Submit to Apple review the new (iOS|tvOS) version on App Store Connect (with fastlane on CI)
 >[Submit an App Store release for review](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#submit-an-app-store-release-for-review)
 >It gets translated what's new from Crowdin
@@ -44,17 +48,17 @@ The checklist is a markdown list which can be copy and past in a Jira ticket Sma
 -! 📺 Obtain successful Apple review and release Play RTS tvOS
 -! 📺 Obtain successful Apple review and release Play SRF tvOS
 
-# finish release
+# Finish release
 -! 📱 Create iOS Github release with the released tag
 >Auto generate the text from the last released tag
 -! 📱 Update iOS status page on Confluence (Up coming status, statistics changes)
--! 📱 Release the iOS Jira release with date and released page
+- 📱 Release the iOS Jira release with date and released page
 >[Mobile app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799081000/Mobile+App+Status)
 -! 📺 Create tvOS Github release with the released tag
 >Auto generate the text from the last released tag
 -! 📺 Update tvOS status page on Confluence (Up coming status, statistics changes)
 >[TV app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799082100/TV+App+Status)
--! 📺 Release the tvOS Jira release with date and released page
+- 📺 Release the tvOS Jira release with date and released page
 ```
 
 # AppStore and TestFlight review status
