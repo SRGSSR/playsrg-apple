@@ -218,11 +218,11 @@ For a release and sometime, during the development, external **stable** builds c
     - `WhatsNew-iOS-beta.json` for iOS platform.
     - `WhatsNew-tvOS-beta.json` for tvOS platform.
 2. On PlayCity CI select the project:
-    - **[Play SRG iOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightIOS)**: `fastlane ios iOSAppStoreBuilds public_testflight_distribution:true`
-    - **[Play SRG tvOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightTvOS)**: `fastlane ios tvOSAppStoreBuilds public_testflight_distribution:true`
+    - **[Play SRG iOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightIOS)**: `fastlane ios iOSAppStoreBuilds public_distribution:true`
+    - **[Play SRG tvOS AppStore builds 🌳](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_TestFlightTvOS)**: `fastlane ios tvOSAppStoreBuilds public_distribution:true`
 3. Select the branch (most of the time, it's the `main` branch).
 4. Select the commit with the tag (or future tag).
-5. (optional) Unselect the `public_testflight_distribution` parameter only if you want to keep the build not distributed to the public Beta Testers TestFlight group. It must be rerun with the parameter to distribute it later. Never forget early adopters.
+5. (optional) Unselect the `public_distribution` parameter only if you want to keep the build not distributed to the public Beta Testers TestFlight group. It must be rerun with the parameter to distribute it later. Never forget early adopters.
 6. Run the project. AppStore Builds have:
    - the current version (`X.Y.Z`) on the repository.
    - the current build number (`N`) on the repository.
@@ -231,7 +231,7 @@ For a release and sometime, during the development, external **stable** builds c
        - "🌳" if built from another branch.
        - the branch name if it's not the `main` branch.
    - then an upload to App Store Connect and are distributed to the SRG Testers TestFlight group.
-   - also a distribution to the Public Beta Testers TestFlight group if no `public_testflight_distribution` parameter set or set it to `true`.
+   - also a distribution to the Public Beta Testers TestFlight group if no `public_distribution` parameter set or set it to `true`.
    - TestFlight release notes from the `WhatsNew-iOS-beta.json` and `WhatsNew-tvOS-beta.json` files.
 7. We can follow the Apple TestFlight review status locally with `make appstore-testflight-status`.
 

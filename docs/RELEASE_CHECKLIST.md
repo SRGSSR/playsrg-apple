@@ -1,6 +1,6 @@
 # Release checklist
 
-The checklist is a markdown list which can be copy and past in a Jira ticket Smart Checklist.
+The checklist is a markdown list which can be copy and past in a Jira ticket Smart Checklist or a Github issue.
 
 ```
 # Prepare release on Git branch
