@@ -99,13 +99,13 @@ platform :ios do
 
   # App Store builds
 
-  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.'
+  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributeAppStoreBuilds. Optional `public_beta_distribution` parameter, default value is `true`.'
   lane :iOSAppStoreBuilds do |options|
-    public_distribution = options[:public_distribution] || true
+    public_beta_distribution = options[:public_beta_distribution] || true
 
-    UI.important "The iOS AppStore build will be distributed to the #{groups_string(public_distribution)}."
+    UI.important "The iOS AppStore build will be distributed to the #{groups_string(public_beta_distribution)}."
 
-    options += " public_distribution:#{public_distribution}"
+    options += " public_beta_distribution:#{public_beta_distribution}"
 
     sh 'bundle exec fastlane ios iOSUploadAppStoreBuilds'
     sh "bundle exec fastlane ios iOSDistributeAppStoreBuilds#{options}"
@@ -118,13 +118,13 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to TestFlight groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.'
+  desc 'Distributes to TestFlight groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_beta_distribution` parameter, default value is `true`.'
   lane :iOSDistributeAppStoreBuilds do |options|
     tag_version = options[:tag_version]
-    public_distribution = options[:public_distribution] || true
+    public_beta_distribution = options[:public_beta_distribution] || true
 
     options = ''
-    options += " public_distribution:#{public_distribution}"
+    options += " public_beta_distribution:#{public_beta_distribution}"
     options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
@@ -133,13 +133,13 @@ platform :ios do
     end
   end
 
-  desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.'
+  desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributeAppStoreBuilds. Optional `public_beta_distribution` parameter, default value is `true`.'
   lane :tvOSAppStoreBuilds do |options|
-    public_distribution = options[:public_distribution] || true
+    public_beta_distribution = options[:public_beta_distribution] || true
 
-    UI.important "The tvOS AppStore build will be distributed to the #{groups_string(public_distribution)}."
+    UI.important "The tvOS AppStore build will be distributed to the #{groups_string(public_beta_distribution)}."
 
-    options += " public_distribution:#{public_distribution}"
+    options += " public_beta_distribution:#{public_beta_distribution}"
 
     sh 'bundle exec fastlane ios tvOSUploadAppStoreBuilds'
     sh "bundle exec fastlane ios tvOSDistributeAppStoreBuilds#{options}"
@@ -152,13 +152,13 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to TestFlight groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.'
+  desc 'Distributes to TestFlight groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_beta_distribution` parameter, default value is `true`.'
   lane :tvOSDistributeAppStoreBuilds do |options|
     tag_version = options[:tag_version]
-    public_distribution = options[:public_distribution] || true
+    public_beta_distribution = options[:public_beta_distribution] || true
 
     options = ''
-    options += " public_distribution:#{public_distribution}"
+    options += " public_beta_distribution:#{public_beta_distribution}"
     options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
@@ -457,7 +457,7 @@ platform :ios do
       platform: 'iOS',
       bu: 'RSI',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -467,7 +467,7 @@ platform :ios do
       platform: 'iOS',
       bu: 'RTR',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -477,7 +477,7 @@ platform :ios do
       platform: 'iOS',
       bu: 'RTS',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -487,7 +487,7 @@ platform :ios do
       platform: 'iOS',
       bu: 'SRF',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -577,7 +577,7 @@ platform :ios do
       platform: 'tvOS',
       bu: 'RSI',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -587,7 +587,7 @@ platform :ios do
       platform: 'tvOS',
       bu: 'RTR',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -597,7 +597,7 @@ platform :ios do
       platform: 'tvOS',
       bu: 'RTS',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -607,7 +607,7 @@ platform :ios do
       platform: 'tvOS',
       bu: 'SRF',
       tag_version: options[:tag_version],
-      public_distribution: options[:public_distribution]
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -785,15 +785,15 @@ platform :ios do
     platform = options[:platform] || 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
     scheme = application_scheme(platform, options[:bu])
-    public_distribution = options[:public_distribution] || true
+    public_beta_distribution = options[:public_beta_distribution] || true
 
     UI.important 'A valid bu option is required to distribute an App Store build. Skipping distribution. ⚠️' unless scheme
     next unless scheme
 
     changelog = what_s_new_for_beta(platform, tag_version)
-    pilot_distribute(nil, platform, tag_version, changelog, public_distribution)
+    pilot_distribute(nil, platform, tag_version, changelog, public_beta_distribution)
 
-    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to #{groups_string(public_distribution)}. ✅"
+    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to #{groups_string(public_beta_distribution)}. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -1472,20 +1472,20 @@ def pilot_fast_upload(app_identifier, platform)
   )
 end
 
-def pilot_distribute(app_identifier, platform, tag_version, changelog, public_distribution)
+def pilot_distribute(app_identifier, platform, tag_version, changelog, public_beta_distribution)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
   tag_version ||= tag_version(platform)
-  public_distribution ||= true
+  public_beta_distribution ||= true
 
-  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_distribution)
+  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_beta_distribution)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
   UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'
 end
 
-def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_distribution)
+def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_beta_distribution)
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
@@ -1495,21 +1495,21 @@ def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, publi
     build_number: build_number_from_tag_version(tag_version),
     changelog:,
     distribute_external: true,
-    groups: testflight_groups(public_distribution),
+    groups: testflight_groups(public_beta_distribution),
     notify_external_testers: true,
     demo_account_required: false,
     beta_app_review_info:
   )
 end
 
-def testflight_groups(public_distribution)
+def testflight_groups(public_beta_distribution)
   groups = ENV.fetch('ITUNES_CONNECT_TF_GROUPS', nil)
-  groups += ",#{ENV.fetch('ITUNES_CONNECT_TF_PUBLIC_GROUPS', nil)}" if public_distribution
+  groups += ",#{ENV.fetch('ITUNES_CONNECT_TF_PUBLIC_GROUPS', nil)}" if public_beta_distribution
   groups
 end
 
-def groups_string(public_distribution)
-  public_distribution ? 'public and private groups' : 'private group'
+def groups_string(public_beta_distribution)
+  public_beta_distribution ? 'public and private groups' : 'private group'
 end
 
 def upload_appcenter_dsyms(appcenter_appname)

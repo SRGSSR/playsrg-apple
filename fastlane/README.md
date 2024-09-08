@@ -69,7 +69,7 @@ Adds a beta TestFlight tester (email required)
 [bundle exec] fastlane ios iOSAppStoreBuilds
 ```
 
-Applies iOSUploadAppStoreBuilds and iOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.
+Applies iOSUploadAppStoreBuilds and iOSDistributeAppStoreBuilds. Optional `public_beta_distribution` parameter, default value is `true`.
 
 ### ios iOSUploadAppStoreBuilds
 
@@ -85,7 +85,7 @@ Uploads an iOS App Store build on App Store Connect with the current build numbe
 [bundle exec] fastlane ios iOSDistributeAppStoreBuilds
 ```
 
-Distributes to TestFlight groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.
+Distributes to TestFlight groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_beta_distribution` parameter, default value is `true`.
 
 ### ios tvOSAppStoreBuilds
 
@@ -93,7 +93,7 @@ Distributes to TestFlight groups an iOS App Store build on App Store Connect wit
 [bundle exec] fastlane ios tvOSAppStoreBuilds
 ```
 
-Applies tvOSUploadAppStoreBuilds and tvOSDistributeAppStoreBuilds. Optional `public_distribution` parameter, default value is `true`.
+Applies tvOSUploadAppStoreBuilds and tvOSDistributeAppStoreBuilds. Optional `public_beta_distribution` parameter, default value is `true`.
 
 ### ios tvOSUploadAppStoreBuilds
 
@@ -109,7 +109,7 @@ Uploads a tvOS build on App Store Connect with the current build number.
 [bundle exec] fastlane ios tvOSDistributeAppStoreBuilds
 ```
 
-Distributes to TestFlight groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_distribution` parameter, default value is `true`.
+Distributes to TestFlight groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_beta_distribution` parameter, default value is `true`.
 
 ### ios stopUnfinishedGithubDeployments
 
