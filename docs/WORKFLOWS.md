@@ -36,8 +36,8 @@ gitGraph  TB:
 	commit id: "JIRA-1235 Feature B (#457)"
     branch JIRA-1236-feature-c
     checkout JIRA-1236-feature-c
-    commit id: "JIRA-1236 Commit 1"
-	commit id: "JIRA-1236 Commit 2"
+    commit id: "JIRA-1236 Commit 1" type: HIGHLIGHT
+	commit id: "JIRA-1236 Commit 2" type: HIGHLIGHT
 ```
 
 ### Start from a public Github issue
@@ -66,12 +66,8 @@ gitGraph  TB:
 	commit id: "JIRA-1235 Feature B (#457)"
     branch 1236-feature-c
     checkout 1236-feature-c
-    commit id: "#1236 Commit 1"
-	commit id: "#1236 Commit 2"
-	checkout main
-	commit id: "JIRA-1236 Feature B (#458)" type: HIGHLIGHT
-	checkout 1236-feature-c
-	commit id: "PR #458 closed - 1236-feature-c" type: HIGHLIGHT
+    commit id: "#1236 Commit 1" type: HIGHLIGHT
+	commit id: "#1236 Commit 2" type: HIGHLIGHT
 ```
 
 # Build and distribute Private Nightlies
@@ -127,7 +123,7 @@ gitGraph  TB:
     commit id: "JIRA-1236 Commit 1"
 	commit id: "JIRA-1236 Commit 2"
 	checkout main
-	commit id: "JIRA-1236 Feature B (#458)"
+	commit id: "JIRA-1236 Feature B (#458)" type: HIGHLIGHT
 	checkout JIRA-1236-feature-c
 	commit id: "JIRA-1236-feature-c branch deleted" type: REVERSE
 ```
@@ -136,7 +132,7 @@ gitGraph  TB:
 
 Before a release and sometime, during the development, non-public **stable** builds can be done for internal testers so that they can validate the feature or the fix.
 
-ℹ️ The Private Betas workflow can be scheduled because of dependency with the Public Betas workflow on PlayCity CI. If it's the plan to build both private and public betas, please refer to the next section: [Build and distribute Public Betas and AppStore builds](#Build-and-distribute-Public-Betas-and-AppStore-builds).
+ℹ️ The Private Betas workflow can be scheduled because of dependency with the Public Betas workflow on PlayCity CI. If it's the plan to build both private and public betas, please refer to the next section: [Build and distribute Public Betas and AppStore builds](#build-and-distribute-public-betas-and-appStore-builds).
 
 1. Commit the release notes for the Betas on the future built branch. Those files are:
     - `WhatsNew-iOS-beta.json` for iOS platform.
@@ -263,7 +259,7 @@ On [crowdin.com PlaySRG project](https://crowdin.com/project/play-srg/sources/fi
 
 ```mermaid
 ---
-title: Prepare an AppStore release
+title: Prepare an App Store release
 ---
 sequenceDiagram
     Fastlane->>Crowdin: Ask what's new translated csv files
@@ -272,7 +268,7 @@ sequenceDiagram
 	Crowdin-->>Fastlane: Get what's new translated csv files
 	deactivate Crowdin
 	participant ASC as App Store Connect
-	Fastlane->>ASC: Create a new AppStore release for the current version if not existing
+	Fastlane->>ASC: Create a new App Store release for the current version if not existing
 	activate ASC
 	ASC-->>Fastlane: Get App Store Connect version
 	Fastlane->>ASC: Set translated what's new for this version
@@ -282,7 +278,7 @@ sequenceDiagram
 
 # Update the App Store screenshots
 
-Optional, update the AppStore screenshots with the latest version of the application.
+Optional, update the App Store screenshots with the latest version of the application.
 
 ⚠️ All screenshots Fastlane lanes must be executed from a Swiss IP, to avoid geo-blocking icons on media items.
 
@@ -314,7 +310,7 @@ When all is ok:
 
 - The what's new App Store release notes are translated on crowdin.com.
   - Sometimes, we need to fix returned lines, points po remove a translated line only for a BU application.
-  - [Prepare an AppStore release](#Prepare-an-AppStore-release) can be rerun to update the AppStore release notes.
+  - [Prepare an App Store release](#prepare-an-app-store-release) can be rerun to update the App Store release notes.
   - We can follow updated translations locally with `make appstore-status`.
 - At least, one AppStore build is uploaded to App Store Connect for this version.
 - The App Store screenshots are updated if needed.
@@ -364,7 +360,7 @@ The update can be done manually (not recommended), without keeping the commits h
 
 # Bump versions
 
-When a release is published on the AppStore, the version number (`X.Y.Z`) needs to be bumped for the next release.
+When a release is published on the App Store, the version number (`X.Y.Z`) needs to be bumped for the next release.
 
 ℹ️ The script is scheduled to run on CI automatically.
 
