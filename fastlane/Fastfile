@@ -2296,7 +2296,15 @@ def cherry_pick_commit_message(commit, jira_issue)
 end
 
 def git_branch_name
-  branch_name = `git branch | grep \\* | cut -d ' ' -f2`
+  branch_name = sh "git branch | grep \\* | cut -d ' ' -f2"
+
+  if branch_name.include? '(HEAD'
+    sh 'git fetch --all'
+    sh_branch = 'git branch --all --contains HEAD'
+    remove = 'remotes/origin/'
+    branch_name = sh "#{sh_branch} | grep -o '#{remove}[^ ]*' | sed 's|#{remove}||'"
+  end
+
   branch_name.strip
 end
 
