@@ -235,6 +235,8 @@ For a release and sometime, during the development, external **stable** builds c
 
 # Prepare an App Store release
 
+🙋**It's recommended to have the markdown [release checklist](RELEASE_CHECKLIST.md) in a shared Jira ticket or github issue to follow steps.** 
+
 ℹ️ The App Store release needs a public and translated what's new App Store release notes.
 
 On [crowdin.com PlaySRG project](https://crowdin.com/project/play-srg/sources/files), `What_s new iOS.csv` and `What_s new tvOS.csv` files are used to translate the release notes from English to Italian, Romansh, French and German.
@@ -280,18 +282,18 @@ sequenceDiagram
 
 Optional, update the App Store screenshots with the latest version of the application.
 
-⚠️ All screenshots Fastlane lanes must be executed from a Swiss IP, to avoid geo-blocking icons on media items.
+⚠️ **All screenshots Fastlane lanes must be executed from a Swiss IP, to avoid geo-blocking icons on media items.**
 
 On a Mac device, with the latest version of Xcode and Fastlane installed:
 
 1. Checkout the `main` branch.
 2. Run the following commands:
-   - Screenshots iOS
+   - Screenshots iOS:
        - Play RSI iOS: `fastlane ios iOSrsiScreenshots`
        - Play RTR iOS: `fastlane ios iOSrtrScreenshots`
        - Play RTS iOS: `fastlane ios iOSrtsScreenshots` (No upload to ASC, due to some marketing images)
        - Play SRF iOS: `fastlane ios iOSsrfScreenshots` (No upload to ASC, due to some marketing images)
-   - Screenshots tvOS
+   - Screenshots tvOS:
        - Play RSI tvOS: `fastlane ios tvOSrsiScreenshots`
        - Play RTR tvOS: `fastlane ios tvOSrtrScreenshots`
        - Play RTS tvOS: `fastlane ios tvOSrtsScreenshots` (No upload to ASC, due to some marketing images)
@@ -304,7 +306,9 @@ On a Mac device, with the latest version of Xcode and Fastlane installed:
 
 # Submit an App Store release for review
 
-- ⚠️ Never release a build from a feature branch. It must be merged to the `main` branch before.
+🙋**It's recommended to have the markdown [release checklist](RELEASE_CHECKLIST.md) in a shared Jira ticket or github issue to follow steps.** 
+
+⚠️ **Never release a build from a feature branch. It must be merged to the `main` branch before.**
 
 When all is ok:
 
