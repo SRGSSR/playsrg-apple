@@ -99,5 +99,6 @@
     "1.8.6-454": "- AppStore release.",
     "1.8.7-455": "- Internal beta new options for audio content pages.",
     "1.8.7-456": "- Allow red badge in UI element to expand horizontally if the contained text is long.\n- Reduce number of clicks to open an highlighted media.\n- Use 16:9 images in alphabetical TV shows view. [SRF]",
-    "1.8.8-457": "- RTS radio channels icon update.\n- Mitigate start position for some series and film VODs."
+    "1.8.8-457": "- RTS radio channels icon update.\n- Mitigate start position for some series and film VODs.",
+    "1.8.9-458": "Branch beta\n- Maintenance build."
 }
