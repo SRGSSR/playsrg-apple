@@ -105,10 +105,11 @@ platform :ios do
 
     UI.important "The iOS AppStore build will be distributed to the #{groups_string(public_beta_distribution)}."
 
-    options += " public_beta_distribution:#{public_beta_distribution}"
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
 
     sh 'bundle exec fastlane ios iOSUploadAppStoreBuilds'
-    sh "bundle exec fastlane ios iOSDistributeAppStoreBuilds#{options}"
+    sh "bundle exec fastlane ios iOSDistributeAppStoreBuilds#{new_options}"
   end
 
   desc 'Uploads an iOS App Store build on App Store Connect with the current build number.'
@@ -123,13 +124,13 @@ platform :ios do
     tag_version = options[:tag_version]
     public_beta_distribution = options[:public_beta_distribution] || true
 
-    options = ''
-    options += " public_beta_distribution:#{public_beta_distribution}"
-    options += " tag_version:#{tag_version}" if tag_version
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
+    new_options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}DistributeAppStoreBuild#{options}"
+      sh "bundle exec fastlane ios iOS#{business_unit}DistributeAppStoreBuild#{new_options}"
     end
   end
 
@@ -139,10 +140,11 @@ platform :ios do
 
     UI.important "The tvOS AppStore build will be distributed to the #{groups_string(public_beta_distribution)}."
 
-    options += " public_beta_distribution:#{public_beta_distribution}"
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
 
     sh 'bundle exec fastlane ios tvOSUploadAppStoreBuilds'
-    sh "bundle exec fastlane ios tvOSDistributeAppStoreBuilds#{options}"
+    sh "bundle exec fastlane ios tvOSDistributeAppStoreBuilds#{new_options}"
   end
 
   desc 'Uploads a tvOS build on App Store Connect with the current build number.'
@@ -157,13 +159,13 @@ platform :ios do
     tag_version = options[:tag_version]
     public_beta_distribution = options[:public_beta_distribution] || true
 
-    options = ''
-    options += " public_beta_distribution:#{public_beta_distribution}"
-    options += " tag_version:#{tag_version}" if tag_version
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
+    new_options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios tvOS#{business_unit}DistributeAppStoreBuild#{options}"
+      sh "bundle exec fastlane ios tvOS#{business_unit}DistributeAppStoreBuild#{new_options}"
     end
   end
 
@@ -186,13 +188,13 @@ platform :ios do
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
 
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+    new_options = ''
+    new_options += " tag_version:#{tag_version}" if tag_version
+    new_options += " submit_for_review:#{submit_for_review}" if submit_for_review
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{options}"
+      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{new_options}"
     end
   end
 
@@ -201,13 +203,13 @@ platform :ios do
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
 
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+    new_options = ''
+    new_options += " tag_version:#{tag_version}" if tag_version
+    new_options += " submit_for_review:#{submit_for_review}" if submit_for_review
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios tvOS#{business_unit}PrepareAppStoreRelease#{options}"
+      sh "bundle exec fastlane ios tvOS#{business_unit}PrepareAppStoreRelease#{new_options}"
     end
   end
 
