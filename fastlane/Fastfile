@@ -1148,8 +1148,9 @@ def what_s_new_for_beta(platform, tag_version)
   json = what_s_new_for_beta_json(platform)
   what_s_new = json[tag_version]
   what_s_new ||= ''
-  if !build_name(git_branch_name).empty? && !what_s_new.include?('Beta from a branch')
-    what_s_new = "Beta from a branch\n\n#{what_s_new}"
+  if !what_s_new.empty? &&
+     !build_name(git_branch_name).empty? && !what_s_new.downcase.include?('branch')
+    what_s_new = "This build is from a test branch.\n\n#{what_s_new}"
   end
   what_s_new
 end
