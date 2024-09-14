@@ -7,5 +7,5 @@
   url = "https://github.com/srgssr/playsrg-apple/issues/$1"
 
 [issuetracker "Jira Rule"]
-  regex = "(PLAYSRG|PLAY|PLAYRTS|SMAC|ADI)-(\\d+)"
+  regex = "(PLAYNEXT|PLAYSRG|PLAY|PLAYRTS|SMAC|ADI)-(\\d+)"
   url = "https://srgssr-ch.atlassian.net/browse/$1-$2"
