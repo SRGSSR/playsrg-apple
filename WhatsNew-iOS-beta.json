@@ -235,5 +235,6 @@
     "3.8.7-456": "- Allow red badge in UI element to expand horizontally if the contained text is long.\n- Reduce number of taps to open an highlighted media.\n- Use 16:9 images in alphabetical TV shows view. [SRF]",
     "3.8.8-457": "- RTS radio channels icon update.\n- Adjustment on the audio podcast page.\n- Fix audio tab bar position when scrolling.\n- Mitigate start position for some series and film VODs.",
     "3.8.9-458": "Branch beta\n- Maintenance build for CI deployment.",
-    "3.8.9-459": "Branch beta\n- Maintenance build for CI deployment."
+    "3.8.9-459": "Branch beta\n- Maintenance build for CI deployment.",
+    "3.8.9-460": "- Maintenance build for CI deployment."
 }
