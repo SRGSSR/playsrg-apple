@@ -1328,11 +1328,9 @@ end
 
 def version_suffix(version_suffix, branch_name)
   build_name = build_name(branch_name)
-  if build_name == github_main_branch
-    version_suffix
-  else
-    "#{version_suffix}+#{build_name}"
-  end
+  return version_suffix if build_name.empty?
+
+  "#{version_suffix}+#{build_name}"
 end
 
 def build_name(branch_name)
