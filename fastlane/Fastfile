@@ -1336,7 +1336,9 @@ def version_suffix(version_suffix, branch_name)
 end
 
 def build_name(branch_name)
-  if branch_name.include? 'feature/'
+  if branch_name == github_main_branch
+    ''
+  elsif branch_name.include? 'feature/'
     branch_name.sub('feature/', '').strip
   elsif branch_name.include? 'release/'
     branch_name.sub('release/', '').strip
@@ -1364,7 +1366,7 @@ def nightly_changelog(platform, service, branch_name)
 
   changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
 
-  "Built from #{build_name(branch_name)} branch\n\n#{changelog}"
+  "Built from #{branch_name} branch\n\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
