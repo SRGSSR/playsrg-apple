@@ -32,7 +32,7 @@ platform :ios do
     if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
-        UI.user_error! "WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}."
+        UI.user_error! "#{what_s_new_beta_file_name(platform)} has no release notes for #{tag_version}."
       end
     end
 
@@ -76,12 +76,12 @@ platform :ios do
 
   # Betas
 
-  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
+  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the main branch, attempts to tag the current version. On the main or a branch, then bumps the build number and pushes. On a branch, try to report the new build number to main branch.'
   lane :tvOSbetas do
     testflight_betas(platform: 'tvOS')
   end
 
-  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
+  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the main branch, attempts to tag the current version. On the main or a branch, then bumps the build number and pushes. On a branch, try to report the new build number to main branch.'
   lane :iOSbetas do
     testflight_betas(platform: 'iOS')
   end
@@ -99,15 +99,17 @@ platform :ios do
 
   # App Store builds
 
-  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.'
+  desc 'Applies iOSUploadAppStoreBuilds and iOSDistributeAppStoreBuilds. Optional `public_beta_distribution` parameter, default value is `true`.'
   lane :iOSAppStoreBuilds do |options|
-    public_testflight_distribution = options[:public_testflight_distribution] || false
-    distribution_scope = public_testflight_distribution ? 'Public' : 'Private'
+    public_beta_distribution = options[:public_beta_distribution] || true
 
-    UI.important "The AppStore build will be distributed to the #{distribution_scope.downcase} group."
+    UI.important "The iOS AppStore build will be distributed to the #{groups_string(public_beta_distribution)}."
+
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
 
     sh 'bundle exec fastlane ios iOSUploadAppStoreBuilds'
-    sh "bundle exec fastlane ios iOSDistribute#{distribution_scope}AppStoreBuilds"
+    sh "bundle exec fastlane ios iOSDistributeAppStoreBuilds#{new_options}"
   end
 
   desc 'Uploads an iOS App Store build on App Store Connect with the current build number.'
@@ -117,41 +119,32 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to private groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :iOSDistributePrivateAppStoreBuilds do |options|
+  desc 'Distributes to TestFlight groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_beta_distribution` parameter, default value is `true`.'
+  lane :iOSDistributeAppStoreBuilds do |options|
     tag_version = options[:tag_version]
+    public_beta_distribution = options[:public_beta_distribution] || true
 
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
+    new_options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}DistributePrivateAppStoreBuild#{options}"
+      sh "bundle exec fastlane ios iOS#{business_unit}DistributeAppStoreBuild#{new_options}"
     end
   end
 
-  desc 'Distributes to public groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :iOSDistributePublicAppStoreBuilds do |options|
-    tag_version = options[:tag_version]
-
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-
-    business_units.map do |business_unit|
-      business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}DistributePublicAppStoreBuild#{options}"
-    end
-  end
-
-  desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributePrivateAppStoreBuilds (or tvOSDistributePublicAppStoreBuilds). Optional `public_testflight_distribution` parameter.'
+  desc 'Applies tvOSUploadAppStoreBuilds and tvOSDistributeAppStoreBuilds. Optional `public_beta_distribution` parameter, default value is `true`.'
   lane :tvOSAppStoreBuilds do |options|
-    public_testflight_distribution = options[:public_testflight_distribution] || false
-    distribution_scope = public_testflight_distribution ? 'Public' : 'Private'
+    public_beta_distribution = options[:public_beta_distribution] || true
 
-    UI.important "The AppStore build will be distributed to the #{distribution_scope.downcase} group."
+    UI.important "The tvOS AppStore build will be distributed to the #{groups_string(public_beta_distribution)}."
+
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
 
     sh 'bundle exec fastlane ios tvOSUploadAppStoreBuilds'
-    sh "bundle exec fastlane ios tvOSDistribute#{distribution_scope}AppStoreBuilds"
+    sh "bundle exec fastlane ios tvOSDistributeAppStoreBuilds#{new_options}"
   end
 
   desc 'Uploads a tvOS build on App Store Connect with the current build number.'
@@ -161,29 +154,18 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to private groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :tvOSDistributePrivateAppStoreBuilds do |options|
+  desc 'Distributes to TestFlight groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`). Optional `public_beta_distribution` parameter, default value is `true`.'
+  lane :tvOSDistributeAppStoreBuilds do |options|
     tag_version = options[:tag_version]
+    public_beta_distribution = options[:public_beta_distribution] || true
 
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
+    new_options = ''
+    new_options += " public_beta_distribution:#{public_beta_distribution}"
+    new_options += " tag_version:#{tag_version}" if tag_version
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios tvOS#{business_unit}DistributePrivateAppStoreBuild#{options}"
-    end
-  end
-
-  desc 'Distributes to public groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
-  lane :tvOSDistributePublicAppStoreBuilds do |options|
-    tag_version = options[:tag_version]
-
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-
-    business_units.map do |business_unit|
-      business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios tvOS#{business_unit}DistributePublicAppStoreBuild#{options}"
+      sh "bundle exec fastlane ios tvOS#{business_unit}DistributeAppStoreBuild#{new_options}"
     end
   end
 
@@ -206,13 +188,13 @@ platform :ios do
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
 
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+    new_options = ''
+    new_options += " tag_version:#{tag_version}" if tag_version
+    new_options += " submit_for_review:#{submit_for_review}" if submit_for_review
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{options}"
+      sh "bundle exec fastlane ios iOS#{business_unit}PrepareAppStoreRelease#{new_options}"
     end
   end
 
@@ -221,13 +203,13 @@ platform :ios do
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
 
-    options = ''
-    options += " tag_version:#{tag_version}" if tag_version
-    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+    new_options = ''
+    new_options += " tag_version:#{tag_version}" if tag_version
+    new_options += " submit_for_review:#{submit_for_review}" if submit_for_review
 
     business_units.map do |business_unit|
       business_unit = business_unit.downcase
-      sh "bundle exec fastlane ios tvOS#{business_unit}PrepareAppStoreRelease#{options}"
+      sh "bundle exec fastlane ios tvOS#{business_unit}PrepareAppStoreRelease#{new_options}"
     end
   end
 
@@ -372,29 +354,45 @@ platform :ios do
     UI.success 'Play release notes pushed on Github pages. ✅'
   end
 
-  # After AppStore validation git flow (similar to 'git flow release finish')
+  # After AppStore validation
 
-  desc 'After AppStore validation git flow: merges to master, tags released platforms, merges first tag to develop. Bumps marketing version and build number and pushes.'
-  lane :afterAppStoreValidationGitFlow do
-    branch_name = git_branch_name
-    unless branch_name.include? 'release/'
-      UI.user_error! 'After AppStore validation git flow must runs on \'release/*\' branch.'
+  desc 'After AppStore validation: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.'
+  lane :afterAppStoreValidation do
+    unless git_branch_name == github_main_branch
+      UI.user_error! 'After AppStore validation must runs on \'main\' branch.'
     end
 
-    # Tag only platforms which not have already a tag and have a what's new for beta.
-    git_pull(only_tags: true)
-    platforms = srg_platforms.reject do |platform|
-      tag = srg_tag(platform)
-      tag_version = tag_version(platform)
-      git_tag_exists(tag:) || what_s_new_for_beta(platform, tag_version).empty?
+    appstore_live_versions = { 'iOS' => [], 'tvOS' => [] }
+
+    # Get App Store live versions
+    UI.message '-----'
+    business_units.map do |business_unit|
+      spaceship_login_with_api_key(business_unit)
+      app = spaceship_bu_appstore_build_app(business_unit)
+      next unless app
+
+      UI.message '-----'
+      UI.command_output "Switch to Play #{business_unit}"
+
+      ['iOS', 'tvOS'].map do |platform|
+        live_version = spaceship_app_live_version(platform, app)
+        UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
+        UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
+
+        appstore_live_versions[platform] << live_version.version_string if live_version
+      end
     end
-    unless platforms.count.positive?
-      UI.user_error! 'Tags already exist or what\'s new for tags don\'t exist.'
+    UI.message '-----'
+
+    publish_release_notes = false
+
+    # Bump marketing version if needed
+    appstore_live_versions.each do |platform, appstore_versions|
+      bumped = bump_marketing_version_flow(platform, appstore_versions)
+      publish_release_notes ||= bumped
     end
 
-    UI.message "Start git flow release with Play #{platforms} platforms."
-    gitflow_release_platforms(platforms, branch_name)
-    UI.success "Git flow release with Play #{platforms} platforms succeeded. ✅"
+    sh 'bundle exec fastlane ios publishReleaseNotes' if publish_release_notes
   end
 
   # Individual iOS screenshots
@@ -453,63 +451,45 @@ platform :ios do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'SRF')
   end
 
-  # Individual iOS App Store build private distributions
+  # Individual iOS App Store build distributions
 
-  desc 'RSI only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSrsiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
+  desc 'RSI only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSrsiDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'RSI',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
-  desc 'RTR only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSrtrDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
+  desc 'RTR only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSrtrDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'RTR',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
-  desc 'RTS only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSrtsDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
+  desc 'RTS only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSrtsDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'RTS',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
-  desc 'SRF only: See `iOSDistributePrivateAppStoreBuilds` lane.'
-  lane :iOSsrfDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  # Individual iOS App Store build public distributions
-
-  desc 'RSI only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSrsiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTR only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSrtrDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTS only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSrtsDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SRF only: See `iOSDistributePublicAppStoreBuild` lane.'
-  lane :iOSsrfDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
+  desc 'SRF only: See `iOSDistributeAppStoreBuilds` lane.'
+  lane :iOSsrfDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'iOS',
+      bu: 'SRF',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -591,63 +571,45 @@ platform :ios do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'SRF')
   end
 
-  # Individual tvOS App Store build private distributions
+  # Individual tvOS App Store build distributions
 
-  desc 'RSI only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSrsiDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
+  desc 'RSI only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSrsiDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'RSI',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
-  desc 'RTR only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSrtrDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
+  desc 'RTR only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSrtrDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'RTR',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
-  desc 'RTS only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSrtsDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
+  desc 'RTS only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSrtsDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'RTS',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
-  desc 'SRF only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
-  lane :tvOSsrfDistributePrivateAppStoreBuild do |options|
-    testflight_distribute_private_appstore_build(
-      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
-    )
-  end
-
-  # Individual tvOS App Store build public distributions
-
-  desc 'RSI only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSrsiDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTR only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSrtrDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'RTS only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSrtsDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
-    )
-  end
-
-  desc 'SRF only: See `tvOSDistributePublicAppStoreBuilds` lane.'
-  lane :tvOSsrfDistributePublicAppStoreBuild do |options|
-    testflight_distribute_public_appstore_build(
-      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
+  desc 'SRF only: See `tvOSDistributeAppStoreBuilds` lane.'
+  lane :tvOSsrfDistributeAppStoreBuild do |options|
+    testflight_distribute_appstore_build(
+      platform: 'tvOS',
+      bu: 'SRF',
+      tag_version: options[:tag_version],
+      public_beta_distribution: options[:public_beta_distribution]
     )
   end
 
@@ -677,7 +639,7 @@ platform :ios do
   # Private lanes
   #
 
-  desc 'Builds a new nightly on App Store Connect and waits for build processing.'
+  desc 'See iOSnightlies and tvOSnightlies lane descriptions.'
   private_lane :testflight_nightlies do |options|
     platform = options[:platform] || 'iOS'
     service = 'TestFlight'
@@ -730,7 +692,7 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
-  desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch, attempts to tag the current version. On the develop or a feature branch, then bumps the build number and pushes.'
+  desc 'See iOSbetas and tvOSbetas lane descriptions.'
   private_lane :testflight_betas do |options|
     platform = options[:platform] || 'iOS'
 
@@ -820,34 +782,20 @@ platform :ios do
     clean_build_artifacts
   end
 
-  desc 'Distributes the App Store build on App Store Connect with the current build number to private group.'
-  private_lane :testflight_distribute_private_appstore_build do |options|
+  desc 'Distributes the App Store build on App Store Connect with the current build number to TestFlight groups.'
+  private_lane :testflight_distribute_appstore_build do |options|
     platform = options[:platform] || 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
     scheme = application_scheme(platform, options[:bu])
+    public_beta_distribution = options[:public_beta_distribution] || true
 
     UI.important 'A valid bu option is required to distribute an App Store build. Skipping distribution. ⚠️' unless scheme
     next unless scheme
 
     changelog = what_s_new_for_beta(platform, tag_version)
-    pilot_distribute(nil, platform, tag_version, changelog, false)
+    pilot_distribute(nil, platform, tag_version, changelog, public_beta_distribution)
 
-    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to private beta group. ✅"
-  end
-
-  desc 'Distributes the App Store build on App Store Connect with the current build number to public group.'
-  private_lane :testflight_distribute_public_appstore_build do |options|
-    platform = options[:platform] || 'iOS'
-    tag_version = options[:tag_version] || tag_version(platform)
-    scheme = application_scheme(platform, options[:bu])
-
-    UI.important 'A valid bu option is required to distribute an App Store build. Skipping distribution. ⚠️' unless scheme
-    next unless scheme
-
-    changelog = what_s_new_for_beta(platform, tag_version)
-    pilot_distribute(nil, platform, tag_version, changelog, true)
-
-    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to public beta group. ✅"
+    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to #{groups_string(public_beta_distribution)}. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -1193,15 +1141,16 @@ def marketing_version_from_tag_version(tag_version)
   tag_version.split('-').first
 end
 
-# Returns the what's new text from WhatsNew-beta.json file in the repository
+# Returns the what's new text from WhatsNew-[platform]-beta.json file in the repository
 def what_s_new_for_beta(platform, tag_version)
   tag_version ||= tag_version(platform)
 
   json = what_s_new_for_beta_json(platform)
   what_s_new = json[tag_version]
   what_s_new ||= ''
-  if !build_name(git_branch_name).empty? && !what_s_new.include?('Beta from a branch')
-    what_s_new = "Beta from a branch\n\n#{what_s_new}"
+  if !what_s_new.empty? &&
+     !build_name(git_branch_name).empty? && !what_s_new.downcase.include?('branch')
+    what_s_new = "This build is from a test branch.\n\n#{what_s_new}"
   end
   what_s_new
 end
@@ -1213,10 +1162,31 @@ def build_number_for_version(platform, version)
 end
 
 def what_s_new_for_beta_json(platform)
-  file = File.open("../WhatsNew-#{platform}-beta.json", 'r')
+  file = File.open("../#{what_s_new_beta_file_name(platform)}", 'r')
   json = JSON.parse(file.read)
   file.close
   json
+end
+
+def what_s_new_beta_file_name(platform)
+  "WhatsNew-#{platform}-beta.json"
+end
+
+def what_s_new_beta_commits_check_count
+  3
+end
+
+def what_s_new_beta_commits(platform)
+  commits = []
+
+  beta_file_name = what_s_new_beta_file_name(platform)
+  git_last_commit_hashes(what_s_new_beta_commits_check_count).each do |commit_hash|
+    files = git_commited_files(commit_hash)
+    is_what_s_new = files.one? { |file| file.include? beta_file_name }
+    commits.append(commit_hash) if is_what_s_new
+  end
+
+  commits
 end
 
 def release_notes_html_devices(platform)
@@ -1340,47 +1310,42 @@ end
 
 def nightly_display_name_suffix(branch_name)
   nightly_display_name_suffix = ' 🌙'
-  nightly_display_name_suffix = ' 🌱' if branch_name.include? 'feature/'
+  nightly_display_name_suffix = ' 🌱' unless branch_name == github_main_branch
   nightly_display_name_suffix
 end
 
 def beta_display_name_suffix(branch_name)
   beta_display_name_suffix = ' 🎯'
-  beta_display_name_suffix = ' 🪴' if branch_name.include? 'feature/'
+  beta_display_name_suffix = ' 🪴' unless branch_name == github_main_branch
   beta_display_name_suffix
 end
 
 def appstore_display_name_suffix(branch_name)
   appstore_display_name_suffix = ''
-  appstore_display_name_suffix = ' 🌳' if branch_name.include? 'feature/'
+  appstore_display_name_suffix = ' 🌳' unless branch_name == github_main_branch
   appstore_display_name_suffix
 end
 
 def version_suffix(version_suffix, branch_name)
-  if branch_name.include? 'feature/'
-    "#{version_suffix}+#{branch_name.sub('feature/', '').strip}"
-  else
+  build_name = build_name(branch_name)
+  if build_name == github_main_branch
     version_suffix
+  else
+    "#{version_suffix}+#{build_name}"
   end
 end
 
 def build_name(branch_name)
   if branch_name.include? 'feature/'
     branch_name.sub('feature/', '').strip
-  else
-    ''
-  end
-end
-
-def changelog_build_name(branch_name)
-  if branch_name.include? 'feature/'
-    branch_name.sub('feature/', '').strip
   elsif branch_name.include? 'release/'
     branch_name.sub('release/', '').strip
   elsif branch_name.include? 'hotfix/'
     branch_name.sub('hotfix/', '').strip
+  elsif branch_name.include? 'fix/'
+    branch_name.sub('fix/', '').strip
   else
-    branch_name
+    branch_name.strip
   end
 end
 
@@ -1399,7 +1364,7 @@ def nightly_changelog(platform, service, branch_name)
 
   changelog = 'No change log found for this build.' unless changelog && !changelog.empty?
 
-  "Built from #{changelog_build_name(branch_name)} branch\n\n#{changelog}"
+  "Built from #{build_name(branch_name)} branch\n\n#{changelog}"
 end
 
 # Save the git commit hash in a local text file for nightlies
@@ -1510,20 +1475,20 @@ def pilot_fast_upload(app_identifier, platform)
   )
 end
 
-def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+def pilot_distribute(app_identifier, platform, tag_version, changelog, public_beta_distribution)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
   tag_version ||= tag_version(platform)
-  is_public_beta ||= false
+  public_beta_distribution ||= true
 
-  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_beta_distribution)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
   UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'
 end
 
-def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, public_beta_distribution)
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
@@ -1533,16 +1498,21 @@ def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_pu
     build_number: build_number_from_tag_version(tag_version),
     changelog:,
     distribute_external: true,
-    groups: testflight_groups(is_public_beta),
+    groups: testflight_groups(public_beta_distribution),
     notify_external_testers: true,
     demo_account_required: false,
     beta_app_review_info:
   )
 end
 
-def testflight_groups(is_public_beta)
-  groups_key = is_public_beta ? 'ITUNES_CONNECT_TF_PUBLIC_GROUPS' : 'ITUNES_CONNECT_TF_GROUPS'
-  ENV.fetch(groups_key, nil)
+def testflight_groups(public_beta_distribution)
+  groups = ENV.fetch('ITUNES_CONNECT_TF_GROUPS', nil)
+  groups += ",#{ENV.fetch('ITUNES_CONNECT_TF_PUBLIC_GROUPS', nil)}" if public_beta_distribution
+  groups
+end
+
+def groups_string(public_beta_distribution)
+  public_beta_distribution ? 'public and private groups' : 'private group'
 end
 
 def upload_appcenter_dsyms(appcenter_appname)
@@ -1601,6 +1571,10 @@ end
 
 def github_api_path
   '/repos/SRGSSR/playsrg-apple'
+end
+
+def github_main_branch
+  'main'
 end
 
 def github_environment_data(lane, business_unit = nil)
@@ -2264,22 +2238,18 @@ def pull_translations
 end
 
 def beta_workflow(platform)
-  commits = []
-
-  commit = last_git_commit
-  is_what_s_new = ['what\'s new', 'whats new'].one? { |i| commit[:message].downcase.include? i }
-  commits.append(commit) if is_what_s_new
+  commits = what_s_new_beta_commits(platform)
 
   tag_beta(platform)
   bump_build_number_beta
-  commits.append(last_git_commit)
+  commits.append(last_git_commit[:commit_hash])
 
-  cherrypick_beta_on_develop(commits)
+  cherrypick_beta_workflow_on_main(commits)
 end
 
-# Beta workflow: tag the new beta and push to the repository only if we are on the develop branch.
+# Beta workflow: tag the new beta and push to the repository only if we are on the main branch.
 def tag_beta(platform)
-  return unless git_branch_name.include? 'develop'
+  return unless git_branch_name == github_main_branch
 
   tag = srg_tag(platform)
 
@@ -2294,35 +2264,50 @@ def tag_beta(platform)
   end
 end
 
-# Beta workflow: bump build number and push to the repository only if we are on the develop
-# or feature branch. Cherrypick on develop branch if we are on a feature branch.
+# Beta workflow: bump build number and push to the repository on any branches.
 def bump_build_number_beta
-  branch_names = ['develop', 'feature']
-  return unless branch_names.one? { |i| git_branch_name.include? i }
-
   bump_build_number_commit
   git_pull(rebase: true)
   push_to_git_remote(tags: false)
 end
 
-def cherrypick_beta_on_develop(commits)
+# Cherrypick on main branch if we are on an other branch.
+def cherrypick_beta_workflow_on_main(commits)
   branch_name = git_branch_name
-  return unless branch_name.include? 'feature'
+  main_branch = github_main_branch
+  return if branch_name == main_branch
+
+  jira_issue = sh('git rev-parse --abbrev-ref HEAD 2> /dev/null | grep -oE "[A-Z]+-[0-9]+"').strip
 
   Dir.chdir('..') do
-    sh 'git checkout develop'
-    sh 'git pull --rebase origin develop'
+    sh "git checkout #{main_branch}"
+    sh "git pull --rebase origin #{main_branch}"
     commits.each do |commit|
-      sh "git cherry-pick --no-commit #{commit[:commit_hash]}"
-      sh "git commit -m \"#{commit[:message].strip}\"" unless git_status_clean
+      message = cherry_pick_commit_message(commit, jira_issue)
+
+      sh "git cherry-pick --no-commit #{commit}"
+      sh "git commit -m \"#{message}\"" unless git_status_clean
     end
-    sh 'git push origin develop:develop'
+    sh "git push origin #{main_branch}:#{main_branch}"
     sh "git checkout #{branch_name}"
   end
 end
 
+def cherry_pick_commit_message(commit, jira_issue)
+  original_message = sh("git log -1 --pretty=%B #{commit}").strip
+  original_message.gsub(jira_issue, '').strip
+end
+
 def git_branch_name
-  branch_name = `git branch | grep \\* | cut -d ' ' -f2`
+  branch_name = sh "git branch | grep \\* | cut -d ' ' -f2"
+
+  if branch_name.include? '(HEAD'
+    sh 'git fetch --all'
+    sh_branch = 'git branch --all --contains HEAD'
+    remove = 'remotes/origin/'
+    branch_name = sh "#{sh_branch} | grep -o '#{remove}[^ ]*' | sed 's|#{remove}||'"
+  end
+
   branch_name.strip
 end
 
@@ -2339,49 +2324,31 @@ def beta_app_review_info
   }
 end
 
-# Gitflow release platforms: Merge to master, tag platforms, merge one tag to develop, bump
-# marketing version(s) and build number and push to the repository, only if we are not on the
-# master branch and at least, one platform has to be released.
-def gitflow_release_platforms(platforms, branch_name)
-  return if branch_name.include? 'master'
-  return unless platforms.count.positive?
+# Bump marketing version if one AppStore version is same as the current version.
+def bump_marketing_version_flow(platform, appstore_versions)
+  UI.message "Checking Play #{platform} marketing version... #{appstore_versions}"
+  appstore_version = appstore_versions.map { |version| Gem::Version.new(version) }.max
+  current_version = Gem::Version.new(xcode_marketing_version(platform))
+  UI.message "AppStore version: #{appstore_version}, current version: #{current_version}"
 
-  tags = platforms.map { |platform| srg_tag(platform) }
-
-  gitflow_release(tags, branch_name)
-  git_delete(branch_name)
-
-  bump_build_number_commit
-  platforms.each_index do |index|
-    bump_marketing_version_commit(platforms[index])
-  end
-
-  push_to_git_remote(local_branch: 'master', remote_branch: 'master', tags: true)
-  push_to_git_remote(local_branch: 'develop', remote_branch: 'develop', tags: false)
-end
-
-def gitflow_release(tags, branch_name)
-  Dir.chdir('..') do
-    sh 'git checkout master'
-    sh 'git pull --rebase origin master'
-    sh "git merge --no-ff #{branch_name}"
-  end
-  tags.each do |tag|
-    add_git_tag(tag:, sign: true)
-    UI.message "Tag \"#{tag}\" created. ✅"
-  end
-  Dir.chdir('..') do
-    sh 'git checkout develop'
-    sh 'git pull --rebase origin develop'
-    sh "git merge --no-ff #{tags[0]}"
+  if appstore_version == current_version
+    bump_marketing_version_commit(platform)
+    git_pull(rebase: true)
+    push_to_git_remote(tags: false)
+    UI.success "Play #{platform} marketing version bumped to #{xcode_marketing_version(platform)}. ✅"
+    true
+  else
+    UI.message "Play #{platform} marketing version is currently #{xcode_marketing_version(platform)}."
+    false
   end
 end
 
-def git_delete(branch_name)
-  Dir.chdir('..') do
-    sh "git push -d origin #{branch_name}"
-    sh "git branch -d #{branch_name}"
-  end
+def git_last_commit_hashes(count)
+  sh("git log --pretty=format:'%H' -n #{count}").split("\n")
+end
+
+def git_commited_files(commit_hash)
+  sh("git show --pretty=format:'' --name-only #{commit_hash}").split("\n")
 end
 
 def bump_marketing_version_commit(platform)
