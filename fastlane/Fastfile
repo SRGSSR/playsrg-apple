@@ -2100,7 +2100,8 @@ end
 
 def prepare_appstore_release(platform, business_unit, options)
   platform ||= 'iOS'
-  tag_version = options[:tag_version] || tag_version(platform)
+  tag_version = options[:tag_version]
+  tag_version = tag_version(platform) unless tag_version && !tag_version.empty?
   submit_for_review = options[:submit_for_review] || false
 
   return unless can_run_deliver(business_unit, platform)
