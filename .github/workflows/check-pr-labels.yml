@@ -1,0 +1,79 @@
+name: PR needs one allowed label
+
+on:
+  pull_request:
+    types: [opened, synchronize, labeled, unlabeled]
+
+jobs:
+  check-pr-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y jq
+          pip install yq # Tool to parse YAML files
+
+      - name: Read allowed labels from .github/release.yml
+        id: read_labels
+        run: |
+          # Will read allowed PR labels from .github/release.yml file.
+          allowed_labels=$(yq '.changelog.categories[].labels[] | select(. != "*")' .github/release.yml)
+          allowed_labels=$(echo "$allowed_labels" | tr -d '"')
+
+          if [ -z "$allowed_labels" ]; then
+            echo "Error: No allowed labels found in .github/release.yml."
+            exit 1
+          fi
+
+          echo "Allowed labels from release.yml:"
+          echo "$allowed_labels"
+          echo "---"
+
+          # Convert to an array of strings
+          allowed_labels=$(echo "$allowed_labels" | tr '\n' ';')
+
+          # set the allowed labels in the GITHUB_OUTPUT
+          echo "ALLOWED_LABELS=${allowed_labels}" >> "$GITHUB_OUTPUT"
+
+      - name: Check PR Labels
+        id: check_labels
+        env:
+          ALLOWED_LABELS: ${{ steps.read_labels.outputs.ALLOWED_LABELS }}
+        run: |
+          # Will check that PR has exactly one of the allowed labels.
+          if [ -z "$ALLOWED_LABELS" ]; then
+            echo "Error: No allowed labels found from .github/release.yml. Configuration issue."
+            exit 1
+          fi
+
+          pr_labels=$(jq -r '.pull_request.labels[].name' $GITHUB_EVENT_PATH)
+
+          if [ -z "$pr_labels" ]; then
+            echo "Error: PR has no labels. Please add one of the allowed labels: $ALLOWED_LABELS"
+            exit 1
+          fi
+
+          echo "Labels on PR:"
+          echo "$pr_labels"
+          echo "---"
+
+          # Convert the string an to an array of strings
+          IFS=';' read -r -a allowed_labels_list <<< "$ALLOWED_LABELS"
+
+          count=0
+          for label in "${allowed_labels_list[@]}"; do
+            echo "Checking allowed label \"$label\" in PR labels."
+            if echo "$pr_labels" | grep -q "^$label$"; then
+              count=$((count + 1))
+            fi
+          done
+
+          echo "Allowed label count: $count"
+
+          if [ "$count" -ne 1 ]; then
+            echo "Error: PR must have exactly one of the allowed labels: $ALLOWED_LABELS"
+            exit 1
+          fi
