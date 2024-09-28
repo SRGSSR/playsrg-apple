@@ -96,7 +96,9 @@ When the feature or the bug fix branch is ready to be tested and reviewed:
 
 1. A [pull request](https://github.com/SRGSSR/playsrg-apple/pulls) is opened from the branch to be merged to the `main` branch.
 2. Set the Jira ticket id in the PR title and a comprehensive title. Example: `JIRA-1236 Feature C`. The Github PR id will be added during the merge, later.
-3. Add [one label](https://github.com/SRGSSR/playsrg-apple/labels) to the PR (used for automatically generated Github release notes, later).
+3. Add [one label](https://github.com/SRGSSR/playsrg-apple/labels) to the PR.
+	- They are used for automatically generated Github release notes, later with tag releases.
+	- A [Github action](https://github.com/SRGSSR/playsrg-apple/actions/workflows/check-pr-labels.yml) is checking that one allowed label is added.
 4. Add reviewers to the PR. At least one team member has to review the PR. 
    - Conversations, code propositions, architecture or UI/UX remarks could be added and has to be solved.
 5. ✅ When the feature or the bug fix is validated and the PR is reviewed, add the PR to the Github queue.
