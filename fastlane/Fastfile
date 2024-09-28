@@ -20,7 +20,7 @@ default_platform :ios
 platform :ios do
   before_all do |lane, options|
     platform = platform(lane)
-    tag_version = options[:tag_version] || tag_version(platform)
+    tag_version = tag_version_from_options(options) || tag_version(platform)
     branch_name = git_branch_name
 
     notify_version_to_ci(platform, tag_version, branch_name) if notify_ci_condition(lane)
@@ -785,7 +785,7 @@ platform :ios do
   desc 'Distributes the App Store build on App Store Connect with the current build number to TestFlight groups.'
   private_lane :testflight_distribute_appstore_build do |options|
     platform = options[:platform] || 'iOS'
-    tag_version = options[:tag_version] || tag_version(platform)
+    tag_version = tag_version_from_options(options) || tag_version(platform)
     scheme = application_scheme(platform, options[:bu])
     public_beta_distribution = options[:public_beta_distribution] || true
 
@@ -1105,6 +1105,11 @@ end
 
 def itc_team_id_index(itc_team_id)
   itc_team_ids.index(itc_team_id)
+end
+
+def tag_version_from_options(options)
+  # CI can set an empty string
+  options[:tag_version] unless options[:tag_version].empty?
 end
 
 # Returns current tag version
@@ -2100,8 +2105,7 @@ end
 
 def prepare_appstore_release(platform, business_unit, options)
   platform ||= 'iOS'
-  tag_version = options[:tag_version]
-  tag_version = tag_version(platform) unless tag_version && !tag_version.empty?
+  tag_version = tag_version_from_options(options) || tag_version(platform)
   submit_for_review = options[:submit_for_review] || false
 
   return unless can_run_deliver(business_unit, platform)
