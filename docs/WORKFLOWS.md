@@ -250,14 +250,15 @@ On [crowdin.com PlaySRG project](https://crowdin.com/project/play-srg/sources/fi
 5. On PlayCity CI select the project:
     - **[Play SRG iOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgIOSAppStoreReleases)**: `fastlane ios iOSPrepareAppStoreReleases`
     - **[Play SRG tvOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgTvOSAppStoreReleases)**: `fastlane ios tvOSPrepareAppStoreReleases`
-6. Select the commit with the tag.
-7. Run the project. The script:
+6. "Run" the project to open the dialog view.
+7. In the *Parameters* tab, set the `tag_version` parameter (`X.Y.Z-N`) to use, if the version on `main` branch is not the expected one (**should not be the case**).
+8. "Run build" from the dialog view. The script:
    - Creates a new App Store release on App Store Connect with the current version if not already existing.
    - Sets the translated what's new for this version.
    - Updates the what's new App Store release notes with the translated release notes from crowdin.com.
    - Does basic checks with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
    - No submission to Apple review is done for now.
-8. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
+9. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
 
 ℹ️ The project can be rerun to update the translated App Store release notes if needed.
 
@@ -328,16 +329,17 @@ Let's submit the App Store release for review:
 2. On PlayCity CI select the project:
    - **[Play SRG iOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgIOSAppStoreReleases)**: `fastlane ios iOSPrepareAppStoreReleases submit_for_review:true`
    - **[Play SRG tvOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgTvOSAppStoreReleases)**: `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
-3. Select the commit with the tag.
-4. Check the `submit_for_review` parameter.
-5. Run the project. The script:
+3. "Run" the project to open the dialog view.
+4. In the *Parameters* tab, check the `submit_for_review` parameter.
+5. In the *Parameters* tab, set the `tag_version` parameter (`X.Y.Z-N`) to use, if the version and build number on `main` branch are not the expected one (**should be the case**).
+6. "Run build" from the dialog view. The script:
    - Creates a new App Store release on App Store Connect with the current version if not already existing.
    - Sets the translated what's new for this version.
    - Updates the what's new App Store release notes with the translated release notes from crowdin.com.
    - Does basic checks with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
    - The latest build related to the version is submitted to Apple review (highest build number).
    - 🚀 Submission to Apple review is done this time.
-6. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
+7. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
 
 # Release notes on Github pages
 
