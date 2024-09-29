@@ -219,7 +219,7 @@ platform :ios do
   lane :appStoreAppStatus do |options|
     github_deployments = options[:github_deployments] || false
     publish_release_notes = options[:publish_release_notes] || false
-    new_release_found = false
+    new_live_version_found = false
 
     UI.message '-----'
     business_units.map do |business_unit|
@@ -238,7 +238,7 @@ platform :ios do
 
         if github_deployments
           state = appstore_github_deployment(business_unit, platform, live_version)
-          new_release_found ||= state == 'success' if state
+          new_live_version_found ||= state == 'success' if state
         end
 
         latest_version = spaceship_app_latest_known_version(platform, app)
@@ -257,7 +257,7 @@ platform :ios do
     end
     UI.message '-----'
 
-    run_publish_release_notes(new_release_found) if publish_release_notes
+    run_publish_release_notes(new_live_version_found) if publish_release_notes
   end
 
   desc 'Get AppStore TestFlight App status for iOS and tvOS, lastest version'
@@ -2565,10 +2565,11 @@ def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
   { state:, message: }
 end
 
-def run_publish_release_notes(new_release_found)
-  return unless new_release_found
+def run_publish_release_notes(need_update)
+  UI.message 'Release notes: no new AppStore releases have been found.'
+  return unless need_update
 
-  UI.command_output 'A new AppStore release has been found. Update github page.'
+  UI.command_output 'Release notes: new AppStore releases have been found. Update github page.'
   sh 'bundle exec fastlane ios publishReleaseNotes'
 end
 
