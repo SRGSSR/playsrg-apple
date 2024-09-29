@@ -2238,7 +2238,8 @@ def crowdin_language(business_unit)
 end
 
 def pull_translations_lane_condition(lane)
-  lane.to_s.downcase.include? 'prepareappstorerelease'
+  included_lanes = ['prepareappstorerelease', 'releasenotes']
+  included_lanes.one? { |i| lane.to_s.downcase.include? i }
 end
 
 def skip_pull_translations
