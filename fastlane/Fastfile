@@ -215,9 +215,11 @@ platform :ios do
 
   # App Store App status
 
-  desc 'Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) parameter.'
+  desc 'Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) and `publish_release_notes` (boolean) parameters.'
   lane :appStoreAppStatus do |options|
     github_deployments = options[:github_deployments] || false
+    publish_release_notes = options[:publish_release_notes] || false
+    new_release_found = false
 
     UI.message '-----'
     business_units.map do |business_unit|
@@ -234,7 +236,10 @@ platform :ios do
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
         UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
 
-        appstore_github_deployment(business_unit, platform, live_version) if github_deployments
+        if github_deployments
+          state = appstore_github_deployment(business_unit, platform, live_version)
+          new_release_found ||= state == 'success' if state
+        end
 
         latest_version = spaceship_app_latest_known_version(platform, app)
         if !latest_version || latest_version.version_string == live_version.version_string
@@ -251,6 +256,8 @@ platform :ios do
       end
     end
     UI.message '-----'
+
+    run_publish_release_notes(new_release_found) if publish_release_notes
   end
 
   desc 'Get AppStore TestFlight App status for iOS and tvOS, lastest version'
@@ -384,15 +391,10 @@ platform :ios do
     end
     UI.message '-----'
 
-    publish_release_notes = false
-
     # Bump marketing version if needed
     appstore_live_versions.each do |platform, appstore_versions|
-      bumped = bump_marketing_version_flow(platform, appstore_versions)
-      publish_release_notes ||= bumped
+      bump_marketing_version_flow(platform, appstore_versions)
     end
-
-    sh 'bundle exec fastlane ios publishReleaseNotes' if publish_release_notes
   end
 
   # Individual iOS screenshots
@@ -1865,6 +1867,7 @@ def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_
 
   state = github_deployment_state_from_app_version(app_version)
   update_github_appstore_deployment(lane_name, business_unit, tag_deployment, state)
+  state
 end
 
 def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
@@ -2559,6 +2562,13 @@ def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
   state = beta_detail.external_build_state
   message = "- External: #{group_names} (#{state})"
   { state:, message: }
+end
+
+def run_publish_release_notes(new_release_found)
+  return unless new_release_found
+
+  UI.command_output 'A new AppStore release has been found. Update github page.'
+  sh 'bundle exec fastlane ios publishReleaseNotes'
 end
 
 def copy_static_github_pages_files(output_directory)
