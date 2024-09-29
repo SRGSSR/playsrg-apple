@@ -1,5 +1,21 @@
 ![SRG Media Player logo](README-images/logo.png)
 
+- [About](#about)
+- [Features](#features)
+- [Compatibility](#compatibility)
+- [Required tools](#required-tools)
+- [Building the project](#building-the-project)
+	- [Project setup](#project-setup)
+	- [Private settings](#private-settings)
+	- [Running the project](#running-the-project)
+	- [Quality checks](#quality-checks)
+	- [Git hooks installation](#git-hooks-installation)
+	- [Licenses for libraries](#licenses-for-libraries)
+	- [Translations](#translations)
+- [Contributing](#contributing)
+- [Releasing binaries](#releasing-binaries)
+- [Documentations](#documentations)
+
 ## About
 
 Play SRG is the [SRG SSR (Swiss Broadcasting Corporation)](https://www.srgssr.ch/en/who-we-are/organisation/) audio and video platform, provided as a distinct service for each of its business units ([RSI](https://www.rsi.ch), [RTR](https://www.rtr.ch), [RTS](https://www.rts.ch), [SRF](https://www.srf.ch) and [SWI](https://www.swissinfo.ch)). This repository contains the source code of the Play SRG applications for iOS and tvOS.
@@ -113,18 +129,6 @@ make check-quality
 
 This ensures that Swift files, and scripts are conform to common best practices.
 
-### Licenses for libraries used in the project
-
-In the iOS application settings, licenses of libraries used in the project can be consulted. To build the list, running an iOS target requires [LicensePlist](https://github.com/mono0926/LicensePlist).
-
-```
-brew install licenseplist
-```
-
-### SRGSSR project
-
-Some links to [internal Jira SRGSSR instance](https://srgssr-ch.atlassian.net) can be found in commit messages, branch names or pull request titles.
-
 ### Git hooks installation
 
 Project git hooks can be installed to help quality checks and commit messages for internal SRGSSR project. Install them by running the following command:
@@ -133,13 +137,17 @@ Project git hooks can be installed to help quality checks and commit messages fo
 make git-hook-install
 ```
 
-## Contributing
+### Licenses for libraries
 
-If you want to contribute to the project as an external contributor, have a look at our [contributing guide](CONTRIBUTING.md).
+In the iOS application settings, licenses of libraries used in the project can be consulted. To build the list, running an iOS target requires [LicensePlist](https://github.com/mono0926/LicensePlist).
 
-## Translations
+```
+brew install licenseplist
+```
 
-Translation tool is [crowdin.com](https://crowdin.com/project/play-srg). The following scripts need [Crowdin CLI](https://crowdin.github.io/crowdin-cli/).
+### Translations
+
+Translation tool is [crowdin.com](https://crowdin.com/project/play-srg). The following scripts need [Crowdin CLI](https://crowdin.github.io/crowdin-cli/) and a private token.
 
 - Review new source translation files in `Translations` folder:
 
@@ -159,6 +167,10 @@ Translation tool is [crowdin.com](https://crowdin.com/project/play-srg). The fol
 	make pull-translations
 	```
 
+## Contributing
+
+If you want to contribute to the project as an external contributor, have a look at our [contributing guide](CONTRIBUTING.md) and our [workflows](WORKFLOWS.md).
+
 ## Releasing binaries
 
 The proprietary project uses [fastlane](https://fastlane.tools/) to release binaries either for internal purposes or for the App Store to release binaries.
@@ -169,12 +181,12 @@ A [github page](https://srgssr.github.io/playsrg-apple/) with release notes page
 
 See [release checklist](RELEASE_CHECKLIST.md) for App Store release details.
 
-## Specifications
+## Documentations
 
 Follow the links below for feature specifications and technical details:
 
-* [Configuration files](CONFIGURATION_FILES.md)
-* [Remote configuration](REMOTE_CONFIGURATION.md)
 * [Custom URL and Universal Link Support](CUSTOM_URLS_AND_UNIVERSAL_LINKS.md)
-* [Push notifications](PUSH_NOTIFICATIONSSS.md)
+* [Push notifications](PUSH_NOTIFICATIONS.md)
+* [Remote configuration](REMOTE_CONFIGURATION.md)
+* [Configuration files](CONFIGURATION_FILES.md)
 * [Github environments and deployments](GITHUB_ENVIRONMENTS_AND_DEPLOYMENTS.md)
