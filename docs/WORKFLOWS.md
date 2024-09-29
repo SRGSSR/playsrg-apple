@@ -1,10 +1,25 @@
-# Workflows
+# Workflows<!-- omit from toc -->
 
 The project implements some workflows. It a mix of:
 
-- Fastlane scripts (needs `make ruby-setup` to setup Ruby).
-- Bash scripts (with `make` commands).
+- Fastlane scripts (mostly running on an [on premise TeamCity instance](https://playcity.eu.ngrok.io/project/playsrgios) but can be run locally as well).
+- Bash scripts (locally with `make` commands).
 - Github actions (running on [github.com](https://github.com/SRGSSR/playsrg-apple)).
+
+### Table of Contents
+- [Start a feature or a bug fix](#start-a-feature-or-a-bug-fix)
+    - [Start from an internal Jira ticket](#start-from-an-internal-jira-ticket)
+    - [Start from a public Github issue](#start-from-a-public-github-issue)
+- [Build and distribute Private Nightlies](#build-and-distribute-private-nightlies)
+- [Submit to review a feature or a bug fix](#submit-to-review-a-feature-or-a-bug-fix)
+- [Build and distribute Private Betas](#build-and-distribute-private-betas)
+- [Build and distribute Public Betas and AppStore Builds](#build-and-distribute-public-betas-and-appstore-builds)
+- [Prepare an App Store release](#prepare-an-app-store-release)
+- [Update the App Store screenshots](#update-the-app-store-screenshots)
+- [Submit an App Store release for review](#submit-an-app-store-release-for-review)
+- [Follow App Store release status](#follow-app-store-release-status)
+- [Release notes on Github pages](#release-notes-on-github-pages)
+- [Bump platform version after a release](#bump-platform-version-after-a-release)
 
 # Start a feature or a bug fix
 
@@ -250,14 +265,15 @@ On [crowdin.com PlaySRG project](https://crowdin.com/project/play-srg/sources/fi
 5. On PlayCity CI select the project:
     - **[Play SRG iOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgIOSAppStoreReleases)**: `fastlane ios iOSPrepareAppStoreReleases`
     - **[Play SRG tvOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgTvOSAppStoreReleases)**: `fastlane ios tvOSPrepareAppStoreReleases`
-6. Select the commit with the tag.
-7. Run the project. The script:
+6. "Run" the project to open the dialog view.
+7. In the *Parameters* tab, set the `tag_version` parameter (`X.Y.Z-N`) to use, if the version on `main` branch is not the expected one (**should not be the case**).
+8. "Run build" from the dialog view. The script:
    - Creates a new App Store release on App Store Connect with the current version if not already existing.
    - Sets the translated what's new for this version.
    - Updates the what's new App Store release notes with the translated release notes from crowdin.com.
-   - Does basic checks with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
+   - Does some basic metadata checks with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
    - No submission to Apple review is done for now.
-8. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
+9. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
 
 ℹ️ The project can be rerun to update the translated App Store release notes if needed.
 
@@ -328,16 +344,65 @@ Let's submit the App Store release for review:
 2. On PlayCity CI select the project:
    - **[Play SRG iOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgIOSAppStoreReleases)**: `fastlane ios iOSPrepareAppStoreReleases submit_for_review:true`
    - **[Play SRG tvOS AppStore releases](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgTvOSAppStoreReleases)**: `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
-3. Select the commit with the tag.
-4. Check the `submit_for_review` parameter.
-5. Run the project. The script:
+3. "Run" the project to open the dialog view.
+4. In the *Parameters* tab, check the `submit_for_review` parameter.
+5. In the *Parameters* tab, set the `tag_version` parameter (`X.Y.Z-N`) to use, if the version and build number on `main` branch are not the expected one (**should be the case**).
+6. "Run build" from the dialog view. The script:
    - Creates a new App Store release on App Store Connect with the current version if not already existing.
    - Sets the translated what's new for this version.
    - Updates the what's new App Store release notes with the translated release notes from crowdin.com.
-   - Does basic checks with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
-   - The latest build related to the version is submitted to Apple review (highest build number).
+   - Does some basic metadata checks with [Fastlane precheck](https://docs.fastlane.tools/actions/precheck/).
+   - The build related to the tag version is submitted to Apple review (build number from the `tag_version` parameter in the dialog view).
    - 🚀 Submission to Apple review is done this time.
-6. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
+   - *Automatically release this version* is set, to automatically release it after it has been approved by Apple App Review.
+7. We can follow Apple release status and what's new release notes locally with `make appstore-status`.
+
+# Follow App Store release status
+
+Now, it's in Apple App Review team hands. Any Apple Ids linked to applications on App Store Connect will receive by email status update.
+
+Locally, on a Mac, running `make appstore-status` give the current status for all Play SRG applications on App Store Connect.
+
+ℹ️ The script is also scheduled to run on CI automatically.
+
+1. On PlayCity CI select the project:
+ 	- **[Play SRG AppStore status](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgAppStoreStatus)**: `fastlane ios appStoreAppStatus github_deployments:true publish_release_notes:true`
+2. Select the `main` branch (should be already selected).
+3. Run the project. The script:
+	- Gets AppStore live versions.
+	- Gets lastest AppStore versions (can be the new submitted one or the live one).
+	- checkes that the lastest AppStore version is different as the live version. Then the script:
+		- Updates Github production deployment according to the last AppStore release state.
+		- Displays in the console, live and latests versions, build number , current release state, and what's new.
+		- Runs `fastlane ios publishReleaseNotes` if a Github production deployment state has switched to `success`. (see [Release notes on Github pages](#release-notes-on-github-pages))
+
+```mermaid
+---
+title: Follow App Store release status
+---
+sequenceDiagram
+    participant Fastlane
+    participant ASC as App Store Connect
+    Fastlane->>ASC: Ask live version
+    activate Fastlane
+	activate ASC
+	ASC-->>Fastlane: Get live version
+	deactivate ASC
+	Fastlane->>Github: Ask production deployment state
+	activate Github
+	Github-->>Fastlane: Get production deployment state
+    deactivate Github
+	Fastlane->>Github: Update production deployment state if needed
+    Fastlane->>ASC: Ask latest version
+	activate ASC
+	ASC-->>Fastlane: Get latest version
+	deactivate ASC
+	Fastlane->>Github: Update production deployment state if needed
+    Fastlane->>Github: Push new gh-page with release notes if needed
+	deactivate Fastlane
+```
+
+ℹ️ To learn more about Github deployments, see [Github environments and deployments](GITHUB_ENVIRONMENTS_AND_DEPLOYMENTS.md).
 
 # Release notes on Github pages
 
@@ -346,13 +411,15 @@ It downloads a html file to display release notes. The html pages are published 
 
 Publish release notes on Github pages with correct released status (App Store and TestFlight release notes):
 
-ℹ️ The script is scheduled to run on CI after a private or public beta build success.
+ℹ️ The script is scheduled to run on CI after a private or public beta build success, also when an AppStore release is found with the [Play SRG AppStore status](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgAppStoreStatus) check.
 
 1. On PlayCity CI select the project:
    - **[Play SRG Publish release notes](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgPublishReleaseNotes)**: `fastlane ios publishReleaseNotes`
 2. Run the project. The script:
-     - Does the `gh-pages` branch update automatically.
-     - Can be from any branch. No dependency with versions or build numbers.
+     - Gets translated whats's new from Crowdin.
+     - Gets live version from App Store Connect.
+     - Force pushes updated pages to the `gh-pages` branch.
+     - Can be run from any branch. No dependency with versions or build numbers.
 
 The update can be done manually (not recommended), without keeping the commits history on the `gh-pages` branch:
 
@@ -364,14 +431,34 @@ The update can be done manually (not recommended), without keeping the commits h
 - Switch back to another branch.
 - Remove local `gh-pages` branch (recommended if the fastlane script needs to run later).
 
-# Bump versions
+```mermaid
+---
+title: Release notes on Github pages
+---
+sequenceDiagram
+    Fastlane->>Crowdin: Ask what's new translated csv files
+    activate Fastlane
+	activate Crowdin
+	Crowdin-->>Fastlane: Get what's new translated csv files
+	deactivate Crowdin
+    participant ASC as App Store Connect
+    Fastlane->>ASC: Ask live version
+    activate Fastlane
+	activate ASC
+	ASC-->>Fastlane: Get live version
+	deactivate ASC
+	Fastlane->>Github: Publish new gh-pages
+	deactivate Fastlane
+```
+
+# Bump platform version after a release
 
 When a release is published on the App Store, the version number (`X.Y.Z`) needs to be bumped for the next release.
 
 ℹ️ The script is scheduled to run on CI automatically.
 
 1. On PlayCity CI select the project:
- 	- **[Play SRG After AppStore validation](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgAfterAppStoreValidation)**: `fastlane ios afterAppStoreValidation`
+ 	- **[Play SRG After AppStore release](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgAfterAppStoreRelease)**: `fastlane ios afterAppStoreRelease`
 2. Select the `main` branch (should be already selected).
 3. Run the project. The script:
 	- Get AppStore live versions.
@@ -379,7 +466,6 @@ When a release is published on the App Store, the version number (`X.Y.Z`) needs
 		- Bumps the patch number of version number (`X.Y.Z`) on the repository.
 		- Commits the version bump with message "Bump version to `X.Y.Z+1`".
 		- Pushes the commit to the repository.
-		- Runs `fastlane ios publishReleaseNotes` if a marketing version as been bumped.
 
 ```mermaid
 ---

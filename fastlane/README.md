@@ -141,7 +141,7 @@ Prepare AppStore tvOS releases on App Store Connect with the current version and
 [bundle exec] fastlane ios appStoreAppStatus
 ```
 
-Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) parameter.
+Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) and `publish_release_notes` (boolean) parameters.
 
 ### ios appStoreTestFlightAppStatus
 
@@ -159,13 +159,13 @@ Get AppStore TestFlight App status for iOS and tvOS, lastest version
 
 Publish release notes for iOS and tvOS on Github pages
 
-### ios afterAppStoreValidation
+### ios afterAppStoreRelease
 
 ```sh
-[bundle exec] fastlane ios afterAppStoreValidation
+[bundle exec] fastlane ios afterAppStoreRelease
 ```
 
-After AppStore validation: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.
+After an AppStore release: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.
 
 ### ios iOSrsiScreenshots
 

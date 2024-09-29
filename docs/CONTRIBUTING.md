@@ -30,7 +30,7 @@ If you are not sure about the likelihood of a change you propose to be accepted,
 Templates are available when you want to contribute:
 
 * [Issues](https://github.com/SRGSSR/playsrg-apple/issues): Please follow our issue template. You can omit information which does not make sense but, in general, the more details you can provide, the better. This ensures we can quickly reproduce the problem you are facing, increasing the likelihood we can fix it. 
-* [Pull requests](https://github.com/SRGSSR/playsrg-apple/pulls): Please follow our code conventions and [workflows](WORKFLOWS.md), test your code well, and write unit tests when this makes sense. We will review your work and, if successful, merge it back into the main development branch.
+* [Pull requests](https://github.com/SRGSSR/playsrg-apple/pulls): Please follow our [code conventions](#code-conventions) and [workflows](WORKFLOWS.md), test your code well, and write unit tests when this makes sense. We will review your work and, if successful, merge it back into the main development branch.
 
 ## Code conventions
 

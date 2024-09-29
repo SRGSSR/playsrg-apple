@@ -20,7 +20,7 @@ default_platform :ios
 platform :ios do
   before_all do |lane, options|
     platform = platform(lane)
-    tag_version = options[:tag_version] || tag_version(platform)
+    tag_version = tag_version_from_options(options) || tag_version(platform)
     branch_name = git_branch_name
 
     notify_version_to_ci(platform, tag_version, branch_name) if notify_ci_condition(lane)
@@ -215,9 +215,11 @@ platform :ios do
 
   # App Store App status
 
-  desc 'Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) parameter.'
+  desc 'Get AppStore App status for iOS and tvOS. Optional `github_deployments` (boolean) and `publish_release_notes` (boolean) parameters.'
   lane :appStoreAppStatus do |options|
     github_deployments = options[:github_deployments] || false
+    publish_release_notes = options[:publish_release_notes] || false
+    new_live_version_found = false
 
     UI.message '-----'
     business_units.map do |business_unit|
@@ -234,7 +236,10 @@ platform :ios do
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
         UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
 
-        appstore_github_deployment(business_unit, platform, live_version) if github_deployments
+        if github_deployments
+          state = appstore_github_deployment(business_unit, platform, live_version)
+          new_live_version_found ||= state == 'success' if state
+        end
 
         latest_version = spaceship_app_latest_known_version(platform, app)
         if !latest_version || latest_version.version_string == live_version.version_string
@@ -251,6 +256,8 @@ platform :ios do
       end
     end
     UI.message '-----'
+
+    run_publish_release_notes(new_live_version_found) if publish_release_notes
   end
 
   desc 'Get AppStore TestFlight App status for iOS and tvOS, lastest version'
@@ -354,12 +361,12 @@ platform :ios do
     UI.success 'Play release notes pushed on Github pages. ✅'
   end
 
-  # After AppStore validation
+  # After AppStore release
 
-  desc 'After AppStore validation: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.'
-  lane :afterAppStoreValidation do
+  desc 'After an AppStore release: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.'
+  lane :afterAppStoreRelease do
     unless git_branch_name == github_main_branch
-      UI.user_error! 'After AppStore validation must runs on \'main\' branch.'
+      UI.user_error! 'After AppStore release must be run on \'main\' branch.'
     end
 
     appstore_live_versions = { 'iOS' => [], 'tvOS' => [] }
@@ -384,15 +391,10 @@ platform :ios do
     end
     UI.message '-----'
 
-    publish_release_notes = false
-
     # Bump marketing version if needed
     appstore_live_versions.each do |platform, appstore_versions|
-      bumped = bump_marketing_version_flow(platform, appstore_versions)
-      publish_release_notes ||= bumped
+      bump_marketing_version_flow(platform, appstore_versions)
     end
-
-    sh 'bundle exec fastlane ios publishReleaseNotes' if publish_release_notes
   end
 
   # Individual iOS screenshots
@@ -785,7 +787,7 @@ platform :ios do
   desc 'Distributes the App Store build on App Store Connect with the current build number to TestFlight groups.'
   private_lane :testflight_distribute_appstore_build do |options|
     platform = options[:platform] || 'iOS'
-    tag_version = options[:tag_version] || tag_version(platform)
+    tag_version = tag_version_from_options(options) || tag_version(platform)
     scheme = application_scheme(platform, options[:bu])
     public_beta_distribution = options[:public_beta_distribution] || true
 
@@ -1107,6 +1109,12 @@ def itc_team_id_index(itc_team_id)
   itc_team_ids.index(itc_team_id)
 end
 
+def tag_version_from_options(options)
+  # CI can set an empty string
+  tag_version = options[:tag_version] || ''
+  tag_version unless tag_version.empty?
+end
+
 # Returns current tag version
 def tag_version(platform)
   "#{xcode_marketing_version(platform)}-#{xcode_build_number}"
@@ -1146,8 +1154,7 @@ def what_s_new_for_beta(platform, tag_version)
   tag_version ||= tag_version(platform)
 
   json = what_s_new_for_beta_json(platform)
-  what_s_new = json[tag_version]
-  what_s_new ||= ''
+  what_s_new = json[tag_version] || ''
   if !what_s_new.empty? &&
      !build_name(git_branch_name).empty? && !what_s_new.downcase.include?('branch')
     what_s_new = "This build is from a test branch.\n\n#{what_s_new}"
@@ -1860,6 +1867,7 @@ def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_
 
   state = github_deployment_state_from_app_version(app_version)
   update_github_appstore_deployment(lane_name, business_unit, tag_deployment, state)
+  state
 end
 
 def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
@@ -2100,8 +2108,13 @@ end
 
 def prepare_appstore_release(platform, business_unit, options)
   platform ||= 'iOS'
-  tag_version = options[:tag_version] || tag_version(platform)
+  tag_version = tag_version_from_options(options) || tag_version(platform)
   submit_for_review = options[:submit_for_review] || false
+
+  tag = srg_tag_from_tag_version(platform, tag_version)
+  if submit_for_review && !git_tag_exists(tag:, remote: true)
+    UI.user_error! "Tag version #{tag_version} for #{platform} does not exist. Please set one which is related to existing AppStore build."
+  end
 
   return unless can_run_deliver(business_unit, platform)
 
@@ -2225,7 +2238,8 @@ def crowdin_language(business_unit)
 end
 
 def pull_translations_lane_condition(lane)
-  lane.to_s.downcase.include? 'release'
+  included_lanes = ['prepareappstorerelease', 'releasenotes']
+  included_lanes.one? { |i| lane.to_s.downcase.include? i }
 end
 
 def skip_pull_translations
@@ -2549,6 +2563,14 @@ def spaceship_app_external_groups_state(beta_detail, group_builds, build_id)
   state = beta_detail.external_build_state
   message = "- External: #{group_names} (#{state})"
   { state:, message: }
+end
+
+def run_publish_release_notes(need_update)
+  UI.message 'Release notes: no new AppStore releases have been found.'
+  return unless need_update
+
+  UI.command_output 'Release notes: new AppStore releases have been found. Update github page.'
+  sh 'bundle exec fastlane ios publishReleaseNotes'
 end
 
 def copy_static_github_pages_files(output_directory)
