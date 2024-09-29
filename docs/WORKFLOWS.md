@@ -373,7 +373,7 @@ When a release is published on the App Store, the version number (`X.Y.Z`) needs
 ℹ️ The script is scheduled to run on CI automatically.
 
 1. On PlayCity CI select the project:
- 	- **[Play SRG After AppStore validation](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgAfterAppStoreValidation)**: `fastlane ios afterAppStoreValidation`
+ 	- **[Play SRG After AppStore release](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgAfterAppStoreRelease)**: `fastlane ios afterAppStoreRelease`
 2. Select the `main` branch (should be already selected).
 3. Run the project. The script:
 	- Get AppStore live versions.

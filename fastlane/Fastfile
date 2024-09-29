@@ -354,12 +354,12 @@ platform :ios do
     UI.success 'Play release notes pushed on Github pages. ✅'
   end
 
-  # After AppStore validation
+  # After AppStore release
 
-  desc 'After AppStore validation: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.'
-  lane :afterAppStoreValidation do
+  desc 'After an AppStore release: Bumps marketing version and pushes if one AppStore live version is same as the current marketing version.'
+  lane :afterAppStoreRelease do
     unless git_branch_name == github_main_branch
-      UI.user_error! 'After AppStore validation must runs on \'main\' branch.'
+      UI.user_error! 'After AppStore release must be run on \'main\' branch.'
     end
 
     appstore_live_versions = { 'iOS' => [], 'tvOS' => [] }
@@ -2235,7 +2235,7 @@ def crowdin_language(business_unit)
 end
 
 def pull_translations_lane_condition(lane)
-  lane.to_s.downcase.include? 'release'
+  lane.to_s.downcase.include? 'prepareappstorerelease'
 end
 
 def skip_pull_translations
