@@ -348,7 +348,7 @@ It downloads a html file to display release notes. The html pages are published 
 
 Publish release notes on Github pages with correct released status (App Store and TestFlight release notes):
 
-ℹ️ The script is scheduled to run on CI after a private or public beta build success.
+ℹ️ The script is scheduled to run on CI after a private or public beta build success, also when an AppStore release is found with the [Play SRG AppStore status](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgAppStoreStatus) check.
 
 1. On PlayCity CI select the project:
    - **[Play SRG Publish release notes](https://playcity.eu.ngrok.io/buildConfiguration/playsrgios_PlaySrgPublishReleaseNotes)**: `fastlane ios publishReleaseNotes`
