@@ -2,8 +2,8 @@
 
 The project implements some workflows. It a mix of:
 
-- Fastlane scripts (needs `make ruby-setup` to setup Ruby).
-- Bash scripts (with `make` commands).
+- Fastlane scripts (mostly running on an [on premise TeamCity instance](https://playcity.eu.ngrok.io/project/playsrgios) but can be run locally as well).
+- Bash scripts (locally with `make` commands).
 - Github actions (running on [github.com](https://github.com/SRGSSR/playsrg-apple)).
 
 # Start a feature or a bug fix
