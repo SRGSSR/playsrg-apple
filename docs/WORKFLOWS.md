@@ -1,10 +1,24 @@
-# Workflows
+# Workflows<!-- omit from toc -->
 
 The project implements some workflows. It a mix of:
 
 - Fastlane scripts (mostly running on an [on premise TeamCity instance](https://playcity.eu.ngrok.io/project/playsrgios) but can be run locally as well).
 - Bash scripts (locally with `make` commands).
 - Github actions (running on [github.com](https://github.com/SRGSSR/playsrg-apple)).
+
+### Table of Contents<!-- omit from toc -->
+- [Start a feature or a bug fix](#start-a-feature-or-a-bug-fix)
+    - [Start from an internal Jira ticket](#start-from-an-internal-jira-ticket)
+    - [Start from a public Github issue](#start-from-a-public-github-issue)
+- [Build and distribute Private Nightlies](#build-and-distribute-private-nightlies)
+- [Submit to review a feature or a bug fix](#submit-to-review-a-feature-or-a-bug-fix)
+- [Build and distribute Private Betas](#build-and-distribute-private-betas)
+- [Build and distribute Public Betas and AppStore Builds](#build-and-distribute-public-betas-and-appstore-builds)
+- [Prepare an App Store release](#prepare-an-app-store-release)
+- [Update the App Store screenshots](#update-the-app-store-screenshots)
+- [Submit an App Store release for review](#submit-an-app-store-release-for-review)
+- [Release notes on Github pages](#release-notes-on-github-pages)
+- [Bump platform versions after a release](#bump-platform-versions-after-a-release)
 
 # Start a feature or a bug fix
 
@@ -366,7 +380,7 @@ The update can be done manually (not recommended), without keeping the commits h
 - Switch back to another branch.
 - Remove local `gh-pages` branch (recommended if the fastlane script needs to run later).
 
-# Bump versions
+# Bump platform versions after a release
 
 When a release is published on the App Store, the version number (`X.Y.Z`) needs to be bumped for the next release.
 
