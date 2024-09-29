@@ -431,6 +431,26 @@ The update can be done manually (not recommended), without keeping the commits h
 - Switch back to another branch.
 - Remove local `gh-pages` branch (recommended if the fastlane script needs to run later).
 
+```mermaid
+---
+title: Release notes on Github pages
+---
+sequenceDiagram
+    Fastlane->>Crowdin: Ask what's new translated csv files
+    activate Fastlane
+	activate Crowdin
+	Crowdin-->>Fastlane: Get what's new translated csv files
+	deactivate Crowdin
+    participant ASC as App Store Connect
+    Fastlane->>ASC: Ask live version
+    activate Fastlane
+	activate ASC
+	ASC-->>Fastlane: Get live version
+	deactivate ASC
+	Fastlane->>Github: Publish new gh-pages
+	deactivate Fastlane
+```
+
 # Bump platform version after a release
 
 When a release is published on the App Store, the version number (`X.Y.Z`) needs to be bumped for the next release.
