@@ -253,7 +253,7 @@ import SRGAppearanceSwift
     }
 
     private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {
-        media.title.lowercased() == show.title.lowercased()
+        media.title.lowercased().contains(show.title.lowercased())
     }
 
     private static func shouldDisplayExpirationDate(for media: SRGMedia) -> Bool {
