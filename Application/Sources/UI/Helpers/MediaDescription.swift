@@ -20,6 +20,8 @@ import SRGAppearanceSwift
         case date
         /// Time information emphasis
         case time
+        /// Title information emphasis
+        case title
     }
 
     static func title(for media: SRGMedia, style: Style) -> String? {
@@ -31,6 +33,8 @@ import SRGAppearanceSwift
                 media.title
             }
         case .date, .time:
+            media.title
+        case .title:
             media.title
         }
     }
@@ -58,6 +62,12 @@ import SRGAppearanceSwift
                 return "\(formattedTime(for: media)) · \(show.title)"
             } else {
                 return formattedTime(for: media)
+            }
+        case .title:
+            if let show = media.show, !areRedundant(media: media, show: show) {
+                return show.title
+            } else {
+                return summary(for: media)
             }
         }
     }
