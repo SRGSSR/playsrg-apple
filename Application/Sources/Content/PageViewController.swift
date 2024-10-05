@@ -184,7 +184,7 @@ final class PageViewController: UIViewController {
         #endif
 
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
-            cell.content = ItemCell(item: item, id: model.id, primaryColor: model.primaryColor, secondaryColor: model.secondaryColor)
+            cell.content = ItemCell(item: item, id: model.id, primaryColor: model.primaryColor, secondaryColor: model.secondaryColor, preview: model.preview)
         }
 
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -971,6 +971,7 @@ private extension PageViewController {
         let section: PageViewModel.Section
         let primaryColor: Color
         let secondaryColor: Color
+        let preview: Content.Preview?
 
         var body: some View {
             switch section.viewModelProperties.layout {
@@ -979,7 +980,7 @@ private extension PageViewController {
             case .element:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .element).primaryColor(primaryColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant).primaryColor(primaryColor)
+                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant, preview: preview).primaryColor(primaryColor)
             }
         }
     }
@@ -989,6 +990,7 @@ private extension PageViewController {
         let id: PageViewModel.Id
         let primaryColor: Color
         let secondaryColor: Color
+        let preview: Content.Preview?
 
         var body: some View {
             switch item.wrappedValue {
@@ -999,13 +1001,13 @@ private extension PageViewController {
                 case let .media(media):
                     MediaCell(media: media, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
                 case .showPlaceholder:
-                    ShowCell(show: nil, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
+                    ShowCell(show: nil, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor, preview: preview)
                 case let .show(show):
-                    ShowCell(show: show, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor)
+                    ShowCell(show: show, section: item.section, primaryColor: primaryColor, secondaryColor: secondaryColor, preview: preview)
                 case .topicPlaceholder:
-                    TopicCell(topic: nil)
+                    TopicCell(topic: nil, preview: nil)
                 case let .topic(topic):
-                    TopicCell(topic: topic)
+                    TopicCell(topic: topic, preview: preview)
                 #if os(iOS)
                     case let .download(download):
                         DownloadCell(download: download)
@@ -1030,7 +1032,7 @@ private extension PageViewController {
                     Color.clear
                 }
             case .more:
-                MoreCell(section: item.section.wrappedValue, imageVariant: item.section.properties.imageVariant, filter: id)
+                MoreCell(section: item.section.wrappedValue, imageVariant: item.section.properties.imageVariant, filter: id, preview: preview)
             }
         }
     }

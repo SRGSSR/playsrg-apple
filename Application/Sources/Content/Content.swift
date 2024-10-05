@@ -92,6 +92,11 @@ enum Content {
         }
     }
 
+    struct Preview {
+        let published: Bool
+        let date: Date?
+    }
+
     static func medias(from items: [Self.Item]) -> [SRGMedia] {
         items.compactMap { item in
             if case let .media(media) = item {

@@ -146,21 +146,21 @@ final class SceneDelegate: UIResponder {
                         UserConsentHelper.waitCollectingConsentRelease()
                     }
                 } receiveValue: { show in
-                    navigateToShow(show)
+                    navigateToShow(show, published: !action.preview)
                     action.analyticsEvent.send()
                     UserConsentHelper.waitCollectingConsentRelease()
                 }
                 .store(in: &cancellables)
         case .page, .microPage:
             UserConsentHelper.waitCollectingConsentRetain()
-            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: action.identifier)
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: action.identifier, published: !action.preview)
                 .receive(on: DispatchQueue.main)
                 .sink { result in
                     if case .failure = result {
                         UserConsentHelper.waitCollectingConsentRelease()
                     }
                 } receiveValue: { page in
-                    navigateToPage(page)
+                    navigateToPage(page, published: !action.preview)
                     action.analyticsEvent.send()
                     UserConsentHelper.waitCollectingConsentRelease()
                 }

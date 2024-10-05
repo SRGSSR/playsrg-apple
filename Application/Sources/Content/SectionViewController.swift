@@ -128,7 +128,7 @@ final class SectionViewController: UIViewController {
             guard let self else { return }
             let section = dataSource.snapshot().sectionIdentifiers[indexPath.section]
             let isLastItem = indexPath.row + 1 == dataSource.snapshot().numberOfItems(inSection: section)
-            cell.content = ItemCell(item: item, configuration: model.configuration, isLastItem: isLastItem)
+            cell.content = ItemCell(item: item, configuration: model.configuration, isLastItem: isLastItem, preview: model.preview)
             if let hostController = cell.hostController {
                 addChild(hostController)
             }
@@ -721,6 +721,7 @@ private extension SectionViewController {
         let item: SectionViewModel.Item
         let configuration: SectionViewModel.Configuration
         let isLastItem: Bool
+        let preview: Content.Preview?
 
         var body: some View {
             switch item {
@@ -764,23 +765,23 @@ private extension SectionViewController {
                     case .predefined:
                         switch contentSection.presentation.type {
                         case .favoriteShows:
-                            ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
+                            ShowCell(show: show, style: .favorite, imageVariant: imageVariant, preview: preview)
                         default:
-                            ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                            ShowCell(show: show, style: .standard, imageVariant: imageVariant, preview: preview)
                         }
                     default:
-                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant, preview: preview)
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .favoriteShows, .radioFavoriteShows:
-                        ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .favorite, imageVariant: imageVariant, preview: preview)
                     default:
-                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant, preview: preview)
                     }
                 }
             case let .topic(topic):
-                TopicCell(topic: topic)
+                TopicCell(topic: topic, preview: preview)
             #if os(iOS)
                 case let .download(download):
                     DownloadCell(download: download)

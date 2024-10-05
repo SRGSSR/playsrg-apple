@@ -12,6 +12,7 @@ import SwiftUI
 
 struct TopicCell: View {
     let topic: SRGTopic?
+    let preview: Content.Preview?
 
     @Environment(\.isSelected) private var isSelected
 
@@ -37,7 +38,7 @@ struct TopicCell: View {
     #if os(tvOS)
         private func action() {
             if let topic {
-                navigateToTopic(topic)
+                navigateToTopic(topic, published: preview?.published ?? true)
             }
         }
     #endif
@@ -102,7 +103,7 @@ struct TopicCell_Previews: PreviewProvider {
     private static let size = TopicCellSize.swimlane().previewSize
 
     static var previews: some View {
-        TopicCell(topic: Mock.topic())
+        TopicCell(topic: Mock.topic(), preview: nil)
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

@@ -20,6 +20,7 @@ struct ShowCell: View, PrimaryColorSettable {
 
     let style: Style
     let imageVariant: SRGImageVariant
+    let preview: Content.Preview?
 
     var primaryColor: Color = .srgGrayD2
 
@@ -28,10 +29,11 @@ struct ShowCell: View, PrimaryColorSettable {
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
 
-    init(show: SRGShow?, style: Style, imageVariant: SRGImageVariant) {
+    init(show: SRGShow?, style: Style, imageVariant: SRGImageVariant, preview: Content.Preview?) {
         _show = .constant(show)
         self.style = style
         self.imageVariant = imageVariant
+        self.preview = preview
     }
 
     var body: some View {
@@ -80,7 +82,7 @@ struct ShowCell: View, PrimaryColorSettable {
     #if os(tvOS)
         private func action() {
             if let show {
-                navigateToShow(show)
+                navigateToShow(show, published: preview?.published ?? true)
             }
         }
     #endif
@@ -170,11 +172,11 @@ struct ShowCell_Previews: PreviewProvider {
     private static let podcastSize = ShowCellSize.swimlane(for: .podcast).previewSize
 
     static var previews: some View {
-        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .default)
+        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .default, preview: nil)
             .previewLayout(.fixed(width: defaultSize.width, height: defaultSize.height))
-        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .poster)
+        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .poster, preview: nil)
             .previewLayout(.fixed(width: posterSize.width, height: posterSize.height))
-        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .podcast)
+        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .podcast, preview: nil)
             .previewLayout(.fixed(width: podcastSize.width, height: podcastSize.height))
     }
 }

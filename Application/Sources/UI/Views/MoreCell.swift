@@ -12,6 +12,7 @@ struct MoreCell: View {
     let section: Content.Section
     let imageVariant: SRGImageVariant
     let filter: SectionFiltering?
+    let preview: Content.Preview?
 
     static let iconHeight: CGFloat = constant(iOS: 60, tvOS: 100)
 
@@ -58,7 +59,7 @@ struct MoreCell: View {
 
     #if os(tvOS)
         private func action() {
-            navigateToSection(section, filter: filter)
+            navigateToSection(section, published: preview?.published ?? true, filter: filter)
         }
     #endif
 }
@@ -79,7 +80,7 @@ private extension MoreCell {
 
 struct MoreCell_Previews: PreviewProvider {
     static var previews: some View {
-        MoreCell(section: .configured(.tvLive), imageVariant: .default, filter: nil)
+        MoreCell(section: .configured(.tvLive), imageVariant: .default, filter: nil, preview: nil)
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

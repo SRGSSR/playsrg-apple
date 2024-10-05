@@ -653,9 +653,9 @@ private extension SearchViewController {
             case let .media(media):
                 MediaCell(media: media, style: .show)
             case let .show(show):
-                ShowCell(show: show, style: .standard, imageVariant: .default)
+                ShowCell(show: show, style: .standard, imageVariant: .default, preview: nil)
             case let .topic(topic):
-                TopicCell(topic: topic)
+                TopicCell(topic: topic, preview: nil)
             case .loading:
                 ActivityIndicator()
             }

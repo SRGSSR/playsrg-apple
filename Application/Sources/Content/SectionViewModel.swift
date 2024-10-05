@@ -298,6 +298,15 @@ extension SectionViewModel {
     }
 }
 
+// MARK: Preview
+
+extension SectionViewModel {
+    var preview: Content.Preview? {
+        guard !published else { return nil }
+        return Content.Preview(published: published, date: date)
+    }
+}
+
 // MARK: Properties
 
 protocol SectionViewModelProperties {
