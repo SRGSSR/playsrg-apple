@@ -11,6 +11,8 @@ import SwiftUI
 
 final class PageViewModel: Identifiable, ObservableObject {
     let id: Id
+    let published: Bool
+    let date: Date?
 
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
@@ -19,16 +21,20 @@ final class PageViewModel: Identifiable, ObservableObject {
 
     private let trigger = Trigger()
 
-    init(id: Id) {
+    init(id: Id, published: Bool = true, at date: Date? = nil) {
         self.id = id
+        self.published = published
+        self.date = date
 
         Publishers.Publish(onOutputFrom: reloadSignal()) { [weak self] in
-            Self.pagePublisher(id: id)
+            Self.pagePublisher(id: id, published: published, at: date)
                 .map { page in
                     Publishers.AccumulateLatestMany(page.sections.map { section in
                         Publishers.PublishAndRepeat(onOutputFrom: Self.rowReloadSignal(for: section, trigger: self?.trigger)) {
                             Self.rowPublisher(id: id,
                                               section: section,
+                                              published: published,
+                                              at: date,
                                               pageSize: Self.pageSize(for: section, in: page.sections),
                                               paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section)))
                                 .replaceError(with: Self.fallbackRow(for: section, state: self?.state))
@@ -543,20 +549,20 @@ extension PageViewModel {
 // MARK: Publishers
 
 private extension PageViewModel {
-    static func pagePublisher(id: Id) -> AnyPublisher<Page, Error> {
+    static func pagePublisher(id: Id, published: Bool = true, at date: Date? = nil) -> AnyPublisher<Page, Error> {
         switch id {
         case .video:
-            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo, published: published, at: date)
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .topic(topic):
-            SRGDataProvider.current!.contentPage(for: topic.vendor, topicWithUrn: topic.urn)
+            SRGDataProvider.current!.contentPage(for: topic.vendor, topicWithUrn: topic.urn, published: published, at: date)
                 // FIXME: is topic page always videoOrTV content type?
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .show(show):
             if show.transmission == .TV, !ApplicationConfiguration.shared.isPredefinedShowPagePreferred {
-                SRGDataProvider.current!.contentPage(for: show.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn)
+                SRGDataProvider.current!.contentPage(for: show.vendor, product: show.transmission == .radio ? .playAudio : .playVideo, showWithUrn: show.urn, published: published, at: date)
                     .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: show.play_contentType, show: show), index: $1) }) }
                     .eraseToAnyPublisher()
             } else {
@@ -565,7 +571,7 @@ private extension PageViewModel {
                     .eraseToAnyPublisher()
             }
         case let .page(page):
-            SRGDataProvider.current!.contentPage(for: page.vendor, uid: page.uid)
+            SRGDataProvider.current!.contentPage(for: page.vendor, uid: page.uid, published: published, at: date)
                 // FIXME: is page always videoOrTV content type?
                 .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0, type: .videoOrTV), index: $1) }) }
                 .eraseToAnyPublisher()
@@ -590,9 +596,9 @@ private extension PageViewModel {
         }
     }
 
-    static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
+    static func rowPublisher(id: Id, section: Section, published: Bool = true, at date: Date? = nil, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
         if let highlight = section.properties.rowHighlight {
-            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+            section.properties.publisher(published: published, at: date, pageSize: pageSize, paginatedBy: paginator, filter: id)
                 .map { items in
                     guard let firstItem = items.first else { return Row(section: section, items: []) }
 
@@ -605,7 +611,7 @@ private extension PageViewModel {
                 .eraseToAnyPublisher()
         } else {
             Publishers.CombineLatest(
-                section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+                section.properties.publisher(published: published, at: date, pageSize: pageSize, paginatedBy: paginator, filter: id)
                     .scan([]) { $0 + $1 },
                 section.properties.interactiveUpdatesPublisher()
                     .prepend(Just([]))

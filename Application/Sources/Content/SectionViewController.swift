@@ -60,8 +60,8 @@ final class SectionViewController: UIViewController {
      *  Use `initialSectionId` to provide the collection view section id where the view should initially open. If not found or
      *  specified the view opens at its top.
      */
-    init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionId: String? = nil, fromPushNotification: Bool = false) {
-        model = SectionViewModel(section: section, filter: filter)
+    init(section: Content.Section, published: Bool = true, at date: Date? = nil, filter: SectionFiltering? = nil, initialSectionId: String? = nil, fromPushNotification: Bool = false) {
+        model = SectionViewModel(section: section, published: published, at: date, filter: filter)
         self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
@@ -401,8 +401,8 @@ extension SectionViewController: DailyMediasViewController {
 }
 
 extension SectionViewController {
-    @objc static func viewController(forContentSection contentSection: SRGContentSection, contentType: ContentType) -> SectionViewController {
-        SectionViewController(section: .content(contentSection, type: contentType))
+    @objc static func viewController(forContentSection contentSection: SRGContentSection, contentType: ContentType, published: Bool = true, at date: Date? = nil) -> SectionViewController {
+        SectionViewController(section: .content(contentSection, type: contentType), published: published, at: date)
     }
 
     #if os(iOS)
@@ -594,10 +594,10 @@ extension SectionViewController: SectionShowHeaderViewAction {
         guard let event else { return }
 
         #if os(tvOS)
-            navigateToShow(event.show)
+            navigateToShow(event.show, published: model.published, at: model.date)
         #else
             if let navigationController {
-                let pageViewController = PageViewController(id: .show(event.show))
+                let pageViewController = PageViewController(id: .show(event.show), published: model.published, at: model.date)
                 navigationController.pushViewController(pageViewController, animated: true)
             }
         #endif

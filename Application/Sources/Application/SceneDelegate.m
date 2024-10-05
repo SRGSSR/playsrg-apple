@@ -542,7 +542,7 @@ static void *s_kvoContext = &s_kvoContext;
     [[SRGDataProvider.currentDataProvider contentSectionForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:sectionUid published:YES withCompletionBlock:^(SRGContentSection * _Nullable contentSection, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (contentSection) {
             // FIXME: is section always videoOrTV content type?
-            SectionViewController *sectionViewController = [SectionViewController viewControllerForContentSection:contentSection contentType:ContentTypeVideoOrTV];
+            SectionViewController *sectionViewController = [SectionViewController viewControllerForContentSection:contentSection contentType:ContentTypeVideoOrTV published:YES at:nil];
             [self.rootTabBarController pushViewController:sectionViewController animated:YES];
         }
         else {

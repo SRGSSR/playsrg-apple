@@ -11,6 +11,8 @@ import SRGDataProviderCombine
 
 final class SectionViewModel: ObservableObject {
     let configuration: SectionViewModel.Configuration
+    let published: Bool
+    let date: Date?
 
     @Published private(set) var state: State = .loading
 
@@ -30,14 +32,18 @@ final class SectionViewModel: ObservableObject {
         return selectedItems.count
     }
 
-    init(section: Content.Section, filter: SectionFiltering?) {
+    init(section: Content.Section, published: Bool = true, at date: Date? = nil, filter: SectionFiltering?) {
         configuration = Self.Configuration(section)
+        self.published = published
+        self.date = date
 
         // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
         // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
         Publishers.Publish(onOutputFrom: reloadSignal()) { [configuration, trigger] in
             return Publishers.CombineLatest(
-                configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+                configuration.properties.publisher(published: published,
+                                                   at: date,
+                                                   pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                    paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
                                                    filter: filter)
                     .scan([]) { $0 + $1 },

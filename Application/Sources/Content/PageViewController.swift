@@ -68,8 +68,8 @@ final class PageViewController: UIViewController {
         }
     #endif
 
-    init(id: PageViewModel.Id, fromPushNotification: Bool = false) {
-        model = PageViewModel(id: id)
+    init(id: PageViewModel.Id, published: Bool = true, at date: Date? = nil, fromPushNotification: Bool = false) {
+        model = PageViewModel(id: id, published: published, at: date)
         self.fromPushNotification = fromPushNotification
         super.init(nibName: nil, bundle: nil)
         title = id.title
@@ -418,7 +418,8 @@ private extension PageViewController {
 
 extension PageViewController {
     @objc static func videosViewController() -> PageViewController {
-        PageViewController(id: .video)
+        // at date 18.09.2024 18:00 GMT+2
+        PageViewController(id: .video, at: DateComponents(calendar: .current, timeZone: .current, year: 2024, month: 9, day: 18, hour: 18, minute: 0).date)
     }
 
     @objc static func audiosViewController() -> PageViewController {
@@ -503,7 +504,7 @@ extension PageViewController: UICollectionViewDelegate {
                         } else if case let .media(media) = highlightedItem {
                             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                         } else {
-                            let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                            let sectionViewController = SectionViewController(section: section.wrappedValue, published: model.published, at: model.date, filter: model.id)
                             navigationController.pushViewController(sectionViewController, animated: true)
                         }
                     }
@@ -512,7 +513,7 @@ extension PageViewController: UICollectionViewDelegate {
                 }
             case .more:
                 if let navigationController {
-                    let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                    let sectionViewController = SectionViewController(section: section.wrappedValue, published: model.published, at: model.date, filter: model.id)
                     navigationController.pushViewController(sectionViewController, animated: true)
                 }
             }
@@ -663,24 +664,24 @@ extension PageViewController: UIScrollViewDelegate {
         fileprivate func openSection(sender _: Any?, event: OpenSectionEvent?) {
             if let event {
                 if let microPageId = event.section.wrappedValue.properties.openContentPageId {
-                    openContentPage(id: microPageId)
+                    openContentPage(id: microPageId, published: model.published, at: model.date)
                 } else {
-                    openSectionPage(section: event.section, filter: model.id)
+                    openSectionPage(section: event.section, published: model.published, at: model.date, filter: model.id)
                 }
             }
         }
 
-        private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
+        private func openSectionPage(section: PageViewModel.Section, published: Bool = true, at date: Date? = nil, filter: PageViewModel.Id) {
             guard let navigationController else { return }
 
-            let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
+            let sectionViewController = SectionViewController(section: section.wrappedValue, published: published, at: date, filter: filter)
             navigationController.pushViewController(sectionViewController, animated: true)
         }
 
-        private func openContentPage(id: String) {
+        private func openContentPage(id: String, published: Bool = true, at date: Date? = nil) {
             guard let navigationController else { return }
 
-            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id, published: published, at: date)
                 .receive(on: DispatchQueue.main)
                 .sink { result in
                     if case .failure = result {

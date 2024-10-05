@@ -177,7 +177,7 @@ protocol SectionProperties {
 
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
-    func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
+    func publisher(published: Bool, at date: Date?, pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
 
     /// Publisher for interactive updates (addition / removal of items by the user).
     func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never>
@@ -422,16 +422,16 @@ private extension Content {
             return id
         }
 
-        func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
+        func publisher(published: Bool, at date: Date?, pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
 
             switch contentSection.type {
             case .medias:
-                return dataProvider.medias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
+                return dataProvider.medias(for: contentSection.vendor, contentSectionUid: contentSection.uid, published: published, at: date, pageSize: pageSize, paginatedBy: paginator)
                     .map { filterItems($0).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAndMedias:
-                return dataProvider.showAndMedias(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
+                return dataProvider.showAndMedias(for: contentSection.vendor, contentSectionUid: contentSection.uid, published: published, at: date, pageSize: pageSize, paginatedBy: paginator)
                     .map {
                         var items = [Content.Item]()
                         if let show = $0.show {
@@ -442,7 +442,7 @@ private extension Content {
                     }
                     .eraseToAnyPublisher()
             case .shows:
-                return dataProvider.shows(for: contentSection.vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
+                return dataProvider.shows(for: contentSection.vendor, contentSectionUid: contentSection.uid, published: published, at: date, pageSize: pageSize, paginatedBy: paginator)
                     .map { filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
@@ -868,7 +868,7 @@ private extension Content {
             nil
         }
 
-        func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
+        func publisher(published _: Bool, at _: Date?, pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
 
             let configuration = ApplicationConfiguration.shared

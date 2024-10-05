@@ -65,13 +65,13 @@ private var cancellable: AnyCancellable?
             }
         }
 
-        func navigateToShow(_ show: SRGShow, animated: Bool = true, completion: (() -> Void)? = nil) {
-            let pageViewController = PageViewController(id: .show(show))
+        func navigateToShow(_ show: SRGShow, published: Bool = true, at date: Date? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+            let pageViewController = PageViewController(id: .show(show), published: published, at: date)
             present(pageViewController, animated: animated, completion: completion)
         }
 
-        func navigateToTopic(_ topic: SRGTopic, animated: Bool = true, completion: (() -> Void)? = nil) {
-            let pageViewController = PageViewController(id: .topic(topic))
+        func navigateToTopic(_ topic: SRGTopic, published: Bool = true, at date: Date? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+            let pageViewController = PageViewController(id: .topic(topic), published: published, at: date)
             present(pageViewController, animated: animated, completion: completion)
         }
 
@@ -90,13 +90,13 @@ private var cancellable: AnyCancellable?
                 }
         }
 
-        func navigateToPage(_ page: SRGContentPage, animated: Bool = true, completion: (() -> Void)? = nil) {
-            let pageViewController = PageViewController(id: .page(page))
+        func navigateToPage(_ page: SRGContentPage, published: Bool = true, at date: Date? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
+            let pageViewController = PageViewController(id: .page(page), published: published, at: date)
             present(pageViewController, animated: animated, completion: completion)
         }
 
-        func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true, completion: (() -> Void)? = nil) {
-            let sectionViewController = SectionViewController(section: section, filter: filter)
+        func navigateToSection(_ section: Content.Section, published: Bool = true, at date: Date? = nil, filter: SectionFiltering?, animated: Bool = true, completion: (() -> Void)? = nil) {
+            let sectionViewController = SectionViewController(section: section, published: published, at: date, filter: filter)
             present(sectionViewController, animated: animated, completion: completion)
         }
 
@@ -146,43 +146,43 @@ private var cancellable: AnyCancellable?
         }
     }
 
-    func navigateToShow(_ show: SRGShow, animated: Bool = true) {
+    func navigateToShow(_ show: SRGShow, published: Bool = true, at date: Date? = nil, animated: Bool = true) {
         guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
         isPresenting = true
-        topViewController.navigateToShow(show, animated: animated) {
+        topViewController.navigateToShow(show, published: published, at: date, animated: animated) {
             isPresenting = false
         }
     }
 
-    func navigateToPage(_ page: SRGContentPage, animated: Bool = true) {
+    func navigateToPage(_ page: SRGContentPage, published: Bool = true, at date: Date? = nil, animated: Bool = true) {
         guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
         isPresenting = true
-        topViewController.navigateToPage(page, animated: animated) {
+        topViewController.navigateToPage(page, published: published, at: date, animated: animated) {
             isPresenting = false
         }
     }
 
-    func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true) {
+    func navigateToSection(_ section: Content.Section, published: Bool = true, at date: Date? = nil, filter: SectionFiltering?, animated: Bool = true) {
         if let microPageId = section.properties.openContentPageId {
-            openContentPage(id: microPageId, animated: animated)
+            openContentPage(id: microPageId, published: published, at: date, animated: animated)
         } else {
-            openSectionPage(section: section, filter: filter, animated: animated)
+            openSectionPage(section: section, published: published, at: date, filter: filter, animated: animated)
         }
     }
 
-    private func openSectionPage(section: Content.Section, filter: SectionFiltering?, animated: Bool) {
+    private func openSectionPage(section: Content.Section, published: Bool = true, at date: Date? = nil, filter: SectionFiltering?, animated: Bool) {
         guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
         isPresenting = true
-        topViewController.navigateToSection(section, filter: filter, animated: animated) {
+        topViewController.navigateToSection(section, published: published, at: date, filter: filter, animated: animated) {
             isPresenting = false
         }
     }
 
-    private func openContentPage(id: String, animated: Bool) {
+    private func openContentPage(id: String, published: Bool = true, at date: Date? = nil, animated: Bool) {
         guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
         isPresenting = true
 
-        SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+        SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id, published: published, at: date)
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 // No error banners displayed on tvOS yet
@@ -195,10 +195,10 @@ private var cancellable: AnyCancellable?
             .store(in: &cancellables)
     }
 
-    func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
+    func navigateToTopic(_ topic: SRGTopic, published: Bool = true, at date: Date? = nil, animated: Bool = true) {
         guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
         isPresenting = true
-        topViewController.navigateToTopic(topic, animated: animated) {
+        topViewController.navigateToTopic(topic, published: published, at: date, animated: animated) {
             isPresenting = false
         }
     }
