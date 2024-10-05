@@ -301,7 +301,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     else if (userInfo[@"show"]) {
         NSString *showURN = userInfo[@"show"];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
-        [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
+        [sceneDelegate openShowWithURN:showURN channelUid:channelUid preview:NO fromPushNotification:YES completionBlock:^{
             [[AnalyticsEventObjC notificationWithAction:AnalyticsNotificationActionDisplayShow
                                                    from:AnalyticsNotificationFromOperatingSystem
                                                     uid:showURN

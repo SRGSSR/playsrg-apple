@@ -34,6 +34,8 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic) AnalyticsEventObjC *analyticsEvent;
 @property (nonatomic) NSArray<NSURLQueryItem *> *queryItems;
+@property (nonatomic) BOOL preview;
+@property (nonatomic, nullable, copy) NSDate *previewDate;
 
 @end
 
@@ -223,6 +225,9 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         self.identifier = identifier;
         self.analyticsEvent = analyticsEvent;
         self.queryItems = queryItems;
+
+        NSString *preview = [DeepLinkAction valueForParameterWithName:@"preview" inQueryItems:queryItems];
+        self.preview = preview ? [preview boolValue] : NO;
     }
     return self;
 }

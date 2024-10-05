@@ -438,12 +438,12 @@ extension PageViewController {
         PageViewController(id: .topic(topic))
     }
 
-    @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool = false) -> PageViewController {
-        PageViewController(id: .show(show), fromPushNotification: fromPushNotification)
+    @objc static func showViewController(for show: SRGShow, published: Bool = true, fromPushNotification: Bool = false) -> PageViewController {
+        PageViewController(id: .show(show), published: published, fromPushNotification: fromPushNotification)
     }
 
-    @objc static func pageViewController(for page: SRGContentPage) -> PageViewController {
-        PageViewController(id: .page(page))
+    @objc static func pageViewController(for page: SRGContentPage, published: Bool = true) -> PageViewController {
+        PageViewController(id: .page(page), published: published)
     }
 }
 

@@ -128,17 +128,17 @@ static void *s_kvoContext = &s_kvoContext;
     }
     else if ([action.type isEqualToString:DeepLinkTypeShow]) {
         NSString *channelUid = [action parameterWithName:@"channel_id"];
-        [self openShowWithURN:action.identifier channelUid:channelUid fromPushNotification:NO completionBlock:^{
+        [self openShowWithURN:action.identifier channelUid:channelUid preview:action.preview fromPushNotification:NO completionBlock:^{
             [action.analyticsEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeTopic]) {
-        [self openTopicWithURN:action.identifier completionBlock:^{
+        [self openTopicWithURN:action.identifier preview:action.preview completionBlock:^{
             [action.analyticsEvent send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypePage] || [action.type isEqualToString:DeepLinkTypeMicroPage]) {
-        [self openPageWithUid:action.identifier completionBlock:^{
+        [self openPageWithUid:action.identifier preview:action.preview completionBlock:^{
             [action.analyticsEvent send];
         }];
     }
@@ -164,7 +164,7 @@ static void *s_kvoContext = &s_kvoContext;
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeSection]) {
-        [self openSectionWithUid:action.identifier completionBlock:^{
+        [self openSectionWithUid:action.identifier preview:action.preview completionBlock:^{
             [action.analyticsEvent send];
         }];
     }
@@ -229,7 +229,7 @@ static void *s_kvoContext = &s_kvoContext;
     }];
 }
 
-- (void)openShowWithURN:(NSString *)showURN channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openShowWithURN:(NSString *)showURN channelUid:(NSString *)channelUid preview:(BOOL)preview fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(showURN);
     
@@ -237,7 +237,7 @@ static void *s_kvoContext = &s_kvoContext;
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel options:nil];
     
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
-        [self openShowURN:showURN show:nil fromPushNotification:fromPushNotification];
+        [self openShowURN:showURN show:nil preview:preview fromPushNotification:fromPushNotification];
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -285,7 +285,7 @@ static void *s_kvoContext = &s_kvoContext;
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:completionBlock];
 }
 
-- (void)openTopicWithURN:(NSString *)topicURN completionBlock:(void (^)(void))completionBlock
+- (void)openTopicWithURN:(NSString *)topicURN preview:(BOOL)preview completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(topicURN);
     
@@ -296,18 +296,18 @@ static void *s_kvoContext = &s_kvoContext;
     }];
 }
 
-- (void)openPageWithUid:(NSString *)pageUid completionBlock:(void (^)(void))completionBlock
+- (void)openPageWithUid:(NSString *)pageUid preview:(BOOL)preview completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(pageUid);
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
-        [self openPageUid:pageUid];
+        [self openPageUid:pageUid preview:preview];
         completionBlock ? completionBlock() : nil;
     }];
 }
 
-- (void)openSectionWithUid:(NSString *)sectionUid completionBlock:(void (^)(void))completionBlock
+- (void)openSectionWithUid:(NSString *)sectionUid preview:(BOOL)preview completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(sectionUid);
     
@@ -369,7 +369,7 @@ static void *s_kvoContext = &s_kvoContext;
             ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel options:nil];
             
             [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
-                [self openShowURN:showURN show:show fromPushNotification:NO];
+                [self openShowURN:showURN show:show preview:NO fromPushNotification:NO];
             }];
             
             [[AnalyticsEventObjC userActivityWithAction:AnalyticsUserActivityActionDisplayShow urn:showURN] send];
@@ -473,18 +473,18 @@ static void *s_kvoContext = &s_kvoContext;
     }
 }
 
-- (void)openShowURN:(NSString *)showURN show:(SRGShow *)show fromPushNotification:(BOOL)fromPushNotification
+- (void)openShowURN:(NSString *)showURN show:(SRGShow *)show preview:(BOOL)preview fromPushNotification:(BOOL)fromPushNotification
 {
     [UserConsentHelper waitCollectingConsentRetain];
     if (show) {
-        PageViewController *pageViewController = [PageViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
+        PageViewController *pageViewController = [PageViewController showViewControllerFor:show published:!preview fromPushNotification:fromPushNotification];
         [self.rootTabBarController pushViewController:pageViewController animated:YES];
         [UserConsentHelper waitCollectingConsentRelease];
     }
     else {
         [[SRGDataProvider.currentDataProvider showWithURN:showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (show) {
-                PageViewController *pageViewController = [PageViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
+                PageViewController *pageViewController = [PageViewController showViewControllerFor:show published:!preview fromPushNotification:fromPushNotification];
                 [self.rootTabBarController pushViewController:pageViewController animated:YES];
             }
             else {
@@ -518,12 +518,12 @@ static void *s_kvoContext = &s_kvoContext;
     }] resume];
 }
 
-- (void)openPageUid:(NSString *)pageUid
+- (void)openPageUid:(NSString *)pageUid preview:(BOOL)preview
 {
     [UserConsentHelper waitCollectingConsentRetain];
     [[SRGDataProvider.currentDataProvider contentPageForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:pageUid published:YES atDate:nil withCompletionBlock:^(SRGContentPage * _Nullable contentPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (contentPage) {
-            PageViewController *pageViewController = [PageViewController pageViewControllerFor:contentPage];
+            PageViewController *pageViewController = [PageViewController pageViewControllerFor:contentPage published:!preview];
             [self.rootTabBarController pushViewController:pageViewController animated:YES];
         }
         else {
