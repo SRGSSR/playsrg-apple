@@ -102,5 +102,6 @@
     "1.8.8-457": "- RTS radio channels icon update.\n- Mitigate start position for some series and film VODs.",
     "1.8.9-458": "Branch beta\n- Maintenance build for CI deployment.",
     "1.8.9-459": "Branch beta\n- Maintenance build for CI deployment.",
-    "1.8.9-460": "- Maintenance build for CI deployment."
+    "1.8.9-460": "- Maintenance build for CI deployment.",
+    "1.8.9-461": "- Fix title and subtitle in some cases on the first top element on the videos home page (hero stage)."
 }

@@ -236,5 +236,6 @@
     "3.8.8-457": "- RTS radio channels icon update.\n- Adjustment on the audio podcast page.\n- Fix audio tab bar position when scrolling.\n- Mitigate start position for some series and film VODs.",
     "3.8.9-458": "Branch beta\n- Maintenance build for CI deployment.",
     "3.8.9-459": "Branch beta\n- Maintenance build for CI deployment.",
-    "3.8.9-460": "- Maintenance build for CI deployment."
+    "3.8.9-460": "- Maintenance build for CI deployment.",
+    "3.8.9-461": "- Fix title and subtitle in some cases on the first top element on the videos home page (hero stage).\n- Fix RTS Podcasts channel icon on CarPlay. [RTS]"
 }
