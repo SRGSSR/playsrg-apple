@@ -5,6 +5,30 @@
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "appstore_icon 1.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "tinted"
+        }
+      ],
+      "filename" : "appstore_icon 2.png",
+      "idiom" : "universal",
+      "platform" : "ios",
+      "size" : "1024x1024"
     }
   ],
   "info" : {
