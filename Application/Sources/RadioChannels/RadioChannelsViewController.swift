@@ -9,7 +9,7 @@ import UIKit
 @objc class RadioChannelsViewController: PageContainerViewController {
     private var radioChannelName: String?
 
-    @objc init(radioChannels: [RadioChannel]) {
+    @objc init(radioChannels: [RadioChannel], satelliteRadioChannels: [RadioChannel]) {
         assert(!radioChannels.isEmpty, "At least 1 radio channel expected")
 
         var viewControllers = [UIViewController]()
@@ -19,6 +19,13 @@ import UIKit
             viewControllers.append(pageViewController)
         }
 
+        var satelliteViewControllers = [UIViewController]()
+        for (index, satelliteRadioChannel) in satelliteRadioChannels.enumerated() {
+            let placeholderVC = UIViewController()
+            placeholderVC.tabBarItem = UITabBarItem(title: satelliteRadioChannel.name, image: RadioChannelLogoImage(satelliteRadioChannel), tag: index + radioChannels.count)
+            satelliteViewControllers.append(placeholderVC)
+        }
+
         let lastOpenedRadioChannel = ApplicationSettingLastOpenedRadioChannel()
         let initialPage: Int = if let lastOpenedRadioChannel {
             radioChannels.firstIndex(of: lastOpenedRadioChannel) ?? NSNotFound
@@ -26,7 +33,7 @@ import UIKit
             NSNotFound
         }
 
-        super.init(viewControllers: viewControllers, initialPage: initialPage)
+        super.init(viewControllers: viewControllers, placeholderViewControllers: satelliteViewControllers, initialPage: initialPage)
         updateTitle()
     }
 
