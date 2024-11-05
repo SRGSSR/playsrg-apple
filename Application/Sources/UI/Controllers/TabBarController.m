@@ -297,7 +297,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         return audiosNavigationController;
     }
     else {
-        NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
+        NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioHomepageChannels;
         if (radioChannels.count > 1) {
             NSArray<RadioChannel *> *satelliteRadioChannels = applicationConfiguration.satelliteRadioChannels;
             UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels satelliteRadioChannels:satelliteRadioChannels];
