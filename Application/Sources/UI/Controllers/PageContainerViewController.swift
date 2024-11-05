@@ -20,11 +20,15 @@ class PageContainerViewController: UIViewController {
     private weak var tabBarTopConstraint: NSLayoutConstraint?
     private weak var blurView: UIVisualEffectView?
     private var cancellables: Set<AnyCancellable> = []
+    private var satelliteRadioChannels: [RadioChannel] = []
+    private var cancellable: AnyCancellable?
 
-    init(viewControllers: [UIViewController], placeholderViewControllers: [UIViewController], initialPage: Int) {
+    init(viewControllers: [UIViewController], placeholderViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
 
         self.viewControllers = viewControllers + placeholderViewControllers
+        self.satelliteRadioChannels = satelliteRadioChannels
+
         if initialPage >= 0, initialPage < viewControllers.count {
             self.initialPage = initialPage
         } else {
@@ -53,8 +57,8 @@ class PageContainerViewController: UIViewController {
         addChild(tabContainerViewController)
     }
 
-    convenience init(viewControllers: [UIViewController], placeholderViewControllers: [UIViewController]) {
-        self.init(viewControllers: viewControllers, placeholderViewControllers: placeholderViewControllers, initialPage: 0)
+    convenience init(viewControllers: [UIViewController], placeholderViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel]) {
+        self.init(viewControllers: viewControllers, placeholderViewControllers: placeholderViewControllers, satelliteRadioChannels: satelliteRadioChannels, initialPage: 0)
     }
 
     @available(*, unavailable)
@@ -80,11 +84,6 @@ class PageContainerViewController: UIViewController {
             buttonIndex += 1
         }
         tabContainerViewController.addBar(barView, dataSource: self, at: .top)
-    }
-
-    @objc private func tabDidChange(_ sender: TMTabItemBarButton) {
-        if sender.tag > regularRadioChannelsMaxIndex {
-        }
     }
 
     override func loadView() {
@@ -235,5 +234,28 @@ extension PageContainerViewController: PageboyViewControllerDataSource, TMBarDat
 
     func barItem(for _: any Tabman.TMBar, at index: Int) -> any Tabman.TMBarItemable {
         tabBarItems[index]
+    }
+}
+
+// MARK: Swiss Satellite Radio
+
+extension PageContainerViewController {
+    func srgMedia(for radioChannel: RadioChannel) -> AnyPublisher<SRGMedia, Error> {
+        SRGDataProvider.current!.regionalizedRadioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: .swissSatelliteRadio)
+            .compactMap { $0.first { $0.uid == radioChannel.uid } }
+            .eraseToAnyPublisher()
+    }
+
+    @objc private func tabDidChange(_ sender: TMTabItemBarButton) {
+        if sender.tag > regularRadioChannelsMaxIndex {
+            cancellable = srgMedia(for: satelliteRadioChannels[sender.tag - regularRadioChannelsMaxIndex - 1])
+                .receive(on: DispatchQueue.main)
+                .sink(
+                    receiveCompletion: { _ in },
+                    receiveValue: { [weak self] srgMedia in
+                        self?.play_presentMediaPlayer(with: srgMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                    }
+                )
+        }
     }
 }
