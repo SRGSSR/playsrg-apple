@@ -26,7 +26,7 @@ final class ProgramGuideGridViewController: UIViewController {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
         for section in state.sections {
             snapshot.appendSections([section])
-            snapshot.appendItems(state.items(for: section), toSection: section)
+            snapshot.appendItems(removeDuplicates(in: state.items(for: section)), toSection: section)
         }
         return snapshot
     }

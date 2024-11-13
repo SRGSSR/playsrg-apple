@@ -32,7 +32,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
         if let channel {
             snapshot.appendSections([channel])
-            snapshot.appendItems(state.items(for: channel), toSection: channel)
+            snapshot.appendItems(removeDuplicates(in: state.items(for: channel)), toSection: channel)
         }
         return snapshot
     }
