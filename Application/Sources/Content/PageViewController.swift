@@ -337,15 +337,15 @@ final class PageViewController: UIViewController {
                     self.googleCastButton = googleCastButton
 
                     // Place the button where it would appear if a navigation bar was available.
-                    if traitCollection.horizontalSizeClass == .regular {
-                        // Try to match the vertical alignment of the new floating UITabBar
+                    if #available(iOS 18.0, *), traitCollection.horizontalSizeClass == .regular {
                         NSLayoutConstraint.activate([
                             googleCastButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
                             googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
                         ])
                     } else {
+                        let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
                         NSLayoutConstraint.activate([
-                            googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+                            googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
                             googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
                         ])
                     }
