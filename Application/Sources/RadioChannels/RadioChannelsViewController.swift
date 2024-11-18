@@ -33,7 +33,7 @@ import UIKit
             NSNotFound
         }
 
-        super.init(viewControllers: viewControllers, placeholderViewControllers: satelliteViewControllers, satelliteRadioChannels: satelliteRadioChannels, initialPage: initialPage)
+        super.init(viewControllers: viewControllers, additionalViewControllers: satelliteViewControllers, satelliteRadioChannels: satelliteRadioChannels, initialPage: initialPage)
         updateTitle()
     }
 

@@ -12,21 +12,22 @@ import UIKit
 
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
+    private let additionalViewControllers: [UIViewController]
 
     private var tabContainerViewController: TabContainerViewController
     private(set) var initialPage: Int
     private let tabBarItems: [TMBarItem]
-    private let regularRadioChannelsMaxIndex: Int
     private weak var tabBarTopConstraint: NSLayoutConstraint?
     private weak var blurView: UIVisualEffectView?
     private var cancellables: Set<AnyCancellable> = []
     private var satelliteRadioChannels: [RadioChannel] = []
     private var cancellable: AnyCancellable?
 
-    init(viewControllers: [UIViewController], placeholderViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel], initialPage: Int) {
+    init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
 
-        self.viewControllers = viewControllers + placeholderViewControllers
+        self.viewControllers = viewControllers
+        self.additionalViewControllers = additionalViewControllers
         self.satelliteRadioChannels = satelliteRadioChannels
 
         if initialPage >= 0, initialPage < viewControllers.count {
@@ -36,7 +37,7 @@ class PageContainerViewController: UIViewController {
             self.initialPage = 0
         }
 
-        tabBarItems = viewControllers.appending(contentsOf: placeholderViewControllers).map {
+        tabBarItems = viewControllers.appending(contentsOf: additionalViewControllers).map {
             if let tabBarItem = $0.tabBarItem, let image = tabBarItem.image {
                 let item = TMBarItem(image: image)
                 item.accessibilityLabel = tabBarItem.title ?? $0.title
@@ -48,8 +49,6 @@ class PageContainerViewController: UIViewController {
             }
         }
 
-        regularRadioChannelsMaxIndex = viewControllers.count - 1
-
         tabContainerViewController = TabContainerViewController()
 
         super.init(nibName: nil, bundle: nil)
@@ -57,8 +56,8 @@ class PageContainerViewController: UIViewController {
         addChild(tabContainerViewController)
     }
 
-    convenience init(viewControllers: [UIViewController], placeholderViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel]) {
-        self.init(viewControllers: viewControllers, placeholderViewControllers: placeholderViewControllers, satelliteRadioChannels: satelliteRadioChannels, initialPage: 0)
+    convenience init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel]) {
+        self.init(viewControllers: viewControllers, additionalViewControllers: additionalViewControllers, satelliteRadioChannels: satelliteRadioChannels, initialPage: 0)
     }
 
     @available(*, unavailable)
@@ -217,11 +216,11 @@ extension UIViewController {
 
 extension PageContainerViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func numberOfViewControllers(in _: Pageboy.PageboyViewController) -> Int {
-        viewControllers.count
+        viewControllers.count + additionalViewControllers.count
     }
 
     func viewController(for _: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
-        if index <= regularRadioChannelsMaxIndex {
+        if index < viewControllers.count {
             viewControllers[index]
         } else {
             nil
@@ -247,8 +246,8 @@ extension PageContainerViewController {
     }
 
     @objc private func tabDidChange(_ sender: TMTabItemBarButton) {
-        if sender.tag > regularRadioChannelsMaxIndex {
-            cancellable = srgMedia(for: satelliteRadioChannels[sender.tag - regularRadioChannelsMaxIndex - 1])
+        if sender.tag >= viewControllers.count {
+            cancellable = srgMedia(for: satelliteRadioChannels[sender.tag - viewControllers.count])
                 .receive(on: DispatchQueue.main)
                 .sink(
                     receiveCompletion: { _ in },
