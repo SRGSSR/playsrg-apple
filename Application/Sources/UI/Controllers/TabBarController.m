@@ -128,11 +128,26 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (NSLayoutConstraint *)playerBottomToViewConstraint
 {
-    if (! _playerBottomToViewConstraint) {
-        _playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
+    NSLayoutConstraint* (^preiOS18ConstraintBlock)() = ^NSLayoutConstraint*() {
+        if (! self->_playerBottomToViewConstraint) {
+            self->_playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
+        }
+        return self->_playerBottomToViewConstraint;
+    };
+
+    if (@available(iOS 18.0, *)) {
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            if (! _playerBottomToViewConstraint) {
+                _playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
+            }
+            _playerBottomToViewConstraint.constant = -self.tabBar.bounds.size.height;
+            return _playerBottomToViewConstraint;
+        } else {
+            return preiOS18ConstraintBlock();
+        }
+    } else {
+        return preiOS18ConstraintBlock();
     }
-    _playerBottomToViewConstraint.constant = -self.tabBar.bounds.size.height;
-    return _playerBottomToViewConstraint;
 }
 
 - (NSLayoutConstraint *)playerBottomToSafeAreaConstraint
