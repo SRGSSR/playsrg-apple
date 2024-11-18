@@ -435,9 +435,11 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         self.playerHeightConstraint.active = YES;
         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
+            self.playerBottomToViewConstraint.active = NO;
             self.playerBottomToSafeAreaConstraint.active = YES;
         } else {
             self.playerBottomToViewConstraint.active = YES;
+            self.playerBottomToSafeAreaConstraint.active = NO;
         }
 
         CALayer *miniPlayerLayer = self.miniPlayerView.layer;
