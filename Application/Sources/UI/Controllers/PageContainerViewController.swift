@@ -20,15 +20,12 @@ class PageContainerViewController: UIViewController {
     private weak var tabBarTopConstraint: NSLayoutConstraint?
     private weak var blurView: UIVisualEffectView?
     private var cancellables: Set<AnyCancellable> = []
-    private var satelliteRadioChannels: [RadioChannel] = []
-    private var cancellable: AnyCancellable?
 
-    init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel], initialPage: Int) {
+    init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
 
         self.viewControllers = viewControllers
         self.additionalViewControllers = additionalViewControllers
-        self.satelliteRadioChannels = satelliteRadioChannels
 
         if initialPage >= 0, initialPage < viewControllers.count {
             self.initialPage = initialPage
@@ -56,8 +53,8 @@ class PageContainerViewController: UIViewController {
         addChild(tabContainerViewController)
     }
 
-    convenience init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController], satelliteRadioChannels: [RadioChannel]) {
-        self.init(viewControllers: viewControllers, additionalViewControllers: additionalViewControllers, satelliteRadioChannels: satelliteRadioChannels, initialPage: 0)
+    convenience init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController]) {
+        self.init(viewControllers: viewControllers, additionalViewControllers: additionalViewControllers, initialPage: 0)
     }
 
     @available(*, unavailable)
@@ -236,25 +233,8 @@ extension PageContainerViewController: PageboyViewControllerDataSource, TMBarDat
     }
 }
 
-// MARK: Swiss Satellite Radio
+// MARK: Events
 
 extension PageContainerViewController {
-    func srgMedia(for radioChannel: RadioChannel) -> AnyPublisher<SRGMedia, Error> {
-        SRGDataProvider.current!.regionalizedRadioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: .swissSatelliteRadio)
-            .compactMap { $0.first { $0.uid == radioChannel.uid } }
-            .eraseToAnyPublisher()
-    }
-
-    @objc private func tabDidChange(_ sender: TMTabItemBarButton) {
-        if sender.tag >= viewControllers.count {
-            cancellable = srgMedia(for: satelliteRadioChannels[sender.tag - viewControllers.count])
-                .receive(on: DispatchQueue.main)
-                .sink(
-                    receiveCompletion: { _ in },
-                    receiveValue: { [weak self] srgMedia in
-                        self?.play_presentMediaPlayer(with: srgMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-                    }
-                )
-        }
-    }
+    @objc func tabDidChange(_ _: TMTabItemBarButton) {}
 }
