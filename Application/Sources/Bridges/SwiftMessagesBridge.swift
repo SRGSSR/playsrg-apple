@@ -60,10 +60,9 @@ final class SwiftMessagesBridge: NSObject {
 
         if #available(iOS 18.0, *), UIDevice.current.userInterfaceIdiom == .pad {
             config.presentationContext = .window(windowLevel: .normal)
-        } else {
-            if let presentationController {
-                config.presentationContext = .viewController(presentationController)
-            }
+        }
+        else if let presentationController {
+            config.presentationContext = .viewController(presentationController)
         }
 
         // Remark: VoiceOver is supported natively, but with the system language (not the one we might set on the
