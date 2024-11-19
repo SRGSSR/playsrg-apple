@@ -33,8 +33,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 @property (nonatomic, readonly) NSLayoutConstraint *playerLeadingConstraint;
 @property (nonatomic, readonly) NSLayoutConstraint *playerTrailingConstraint;
 @property (nonatomic, readonly) NSLayoutConstraint *playerHeightConstraint;
-@property (nonatomic, readonly) NSLayoutConstraint *playerBottomToViewConstraint;
-@property (nonatomic, readonly) NSLayoutConstraint *playerBottomToSafeAreaConstraint;
+@property (nonatomic, readonly) NSLayoutConstraint *playerBottomConstraint;
 
 @end
 
@@ -44,8 +43,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 @synthesize playerLeadingConstraint = _playerLeadingConstraint;
 @synthesize playerTrailingConstraint = _playerTrailingConstraint;
 @synthesize playerHeightConstraint = _playerHeightConstraint;
-@synthesize playerBottomToViewConstraint = _playerBottomToViewConstraint;
-@synthesize playerBottomToSafeAreaConstraint = _playerBottomToSafeAreaConstraint;
+@synthesize playerBottomConstraint = _playerBottomConstraint;
 
 #pragma mark Object lifecycle
 
@@ -128,10 +126,10 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (NSLayoutConstraint*)preiOS18BottomConstraint
 {
-    if (! _playerBottomToViewConstraint) {
-        _playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
+    if (! _playerBottomConstraint) {
+        _playerBottomConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
     }
-    return _playerBottomToViewConstraint;
+    return _playerBottomConstraint;
 
 }
 
@@ -140,25 +138,16 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
     if (@available(iOS 18.0, *)) {
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-            if (! _playerBottomToViewConstraint) {
-                _playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor];
+            if (! _playerBottomConstraint) {
+                _playerBottomConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
             }
-            _playerBottomToViewConstraint.constant = -self.tabBar.bounds.size.height;
-            return _playerBottomToViewConstraint;
+            return _playerBottomConstraint;
         } else {
             return [self preiOS18BottomConstraint];
         }
     } else {
         return [self preiOS18BottomConstraint];
     }
-}
-
-- (NSLayoutConstraint *)playerBottomToSafeAreaConstraint
-{
-    if (! _playerBottomToSafeAreaConstraint) {
-        _playerBottomToSafeAreaConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
-    }
-    return _playerBottomToSafeAreaConstraint;
 }
 
 #pragma mark View lifecycle
@@ -429,17 +418,22 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         if (self.miniPlayerView.active) {
             self.playerHeightConstraint.constant = MiniPlayerHeight;
-            self.playerBottomToSafeAreaConstraint.constant = -self.miniPlayerOffset;
+            if (@available(iOS 18.0, *)) {
+                if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+                    self.playerBottomToViewConstraint.constant = -self.miniPlayerOffset;
+                }
+            } else {
+                self.playerBottomToViewConstraint.constant = -self.miniPlayerOffset;
+            }
         }
         else {
             self.playerHeightConstraint.constant = 0.f;
-            self.playerBottomToSafeAreaConstraint.constant = 0.f;
+            self.playerBottomToViewConstraint.constant = 0.f;
         }
         
         self.playerHeightConstraint.active = YES;
         BOOL isRegular = (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular);
-        self.playerBottomToViewConstraint.active = ! isRegular;
-        self.playerBottomToSafeAreaConstraint.active = isRegular;
+        self.playerBottomToViewConstraint.active = YES;
 
         CALayer *miniPlayerLayer = self.miniPlayerView.layer;
         if (UIAccessibilityIsVoiceOverRunning()) {
