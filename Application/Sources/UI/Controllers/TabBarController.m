@@ -126,14 +126,17 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     return _playerHeightConstraint;
 }
 
+- (NSLayoutConstraint*)preiOS18BottomConstraint
+{
+    if (! _playerBottomToViewConstraint) {
+        _playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
+    }
+    return _playerBottomToViewConstraint;
+
+}
+
 - (NSLayoutConstraint *)playerBottomToViewConstraint
 {
-    NSLayoutConstraint* (^preiOS18ConstraintBlock)() = ^NSLayoutConstraint*() {
-        if (! self->_playerBottomToViewConstraint) {
-            self->_playerBottomToViewConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
-        }
-        return self->_playerBottomToViewConstraint;
-    };
 
     if (@available(iOS 18.0, *)) {
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
@@ -143,10 +146,10 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             _playerBottomToViewConstraint.constant = -self.tabBar.bounds.size.height;
             return _playerBottomToViewConstraint;
         } else {
-            return preiOS18ConstraintBlock();
+            return [self preiOS18BottomConstraint];
         }
     } else {
-        return preiOS18ConstraintBlock();
+        return [self preiOS18BottomConstraint];
     }
 }
 
