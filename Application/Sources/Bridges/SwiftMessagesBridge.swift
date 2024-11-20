@@ -60,8 +60,7 @@ final class SwiftMessagesBridge: NSObject {
 
         if #available(iOS 18.0, *), UIDevice.current.userInterfaceIdiom == .pad {
             config.presentationContext = .window(windowLevel: .normal)
-        }
-        else if let presentationController {
+        } else if let presentationController {
             config.presentationContext = .viewController(presentationController)
         }
 

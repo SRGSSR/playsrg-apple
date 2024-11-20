@@ -432,7 +432,6 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         }
         
         self.playerHeightConstraint.active = YES;
-        BOOL isRegular = (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular);
         self.playerBottomToViewConstraint.active = YES;
 
         CALayer *miniPlayerLayer = self.miniPlayerView.layer;
