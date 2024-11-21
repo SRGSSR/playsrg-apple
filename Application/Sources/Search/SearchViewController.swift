@@ -615,7 +615,7 @@ private extension SearchViewController {
                             MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
-                case .mostSearchedShows, .shows:
+                case .shows:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing) { _, _ in
                         ShowCellSize.swimlane(for: .default)
                     }
@@ -684,8 +684,6 @@ private extension SearchViewController {
                 }
             case .shows:
                 return NSLocalizedString("Shows", comment: "Show search result header")
-            case .mostSearchedShows:
-                return NSLocalizedString("Most searched shows", comment: "Most searched shows header")
             case .topics:
                 return NSLocalizedString("Topics", comment: "Topics header")
             case .loading:

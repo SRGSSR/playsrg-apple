@@ -110,7 +110,6 @@ extension SearchViewModel {
     enum Section: Hashable {
         case medias
         case shows
-        case mostSearchedShows
         case topics
         case loading
     }
@@ -135,12 +134,9 @@ extension SearchViewModel {
 private extension SearchViewModel {
     static func searchSuggestion() -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if !ApplicationConfiguration.shared.areShowsUnavailable {
-            Publishers.CombineLatest(
-                mostSearchedShows(),
-                topics()
-            )
-            .map { (rows: [$0, $1], suggestions: nil) }
-            .eraseToAnyPublisher()
+            topics()
+                .map { (rows: [$0], suggestions: nil) }
+                .eraseToAnyPublisher()
         } else {
             Just([])
                 .map { (rows: $0, suggestions: nil) }
@@ -198,15 +194,6 @@ private extension SearchViewModel {
             }
             .prepend((items: [Item.loading], suggestions: nil))
             .map { (row: Row(section: .medias, items: $0.items), suggestions: $0.suggestions) }
-            .eraseToAnyPublisher()
-    }
-
-    static func mostSearchedShows() -> AnyPublisher<Row, Error> {
-        let vendor = ApplicationConfiguration.shared.vendor
-        return SRGDataProvider.current!.mostSearchedShows(for: vendor, matching: constant(iOS: .none, tvOS: .TV))
-            .map { removeDuplicates(in: $0.map { Item.show($0) }) }
-            .prepend([Item.loading])
-            .map { Row(section: .mostSearchedShows, items: $0) }
             .eraseToAnyPublisher()
     }
 
