@@ -113,8 +113,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
 @property (nonatomic, weak) IBOutlet UIStackView *viewCountStackView;
-@property (nonatomic, weak) IBOutlet UIImageView *viewCountImageView;
-@property (nonatomic, weak) IBOutlet UILabel *viewCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *detailsButton;
 @property (nonatomic, weak) IBOutlet UILabel *summaryLabel;
 
@@ -828,30 +826,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
         
         [self removeSongPanel];
-        
-        self.viewCountLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
-        
-        NSPredicate *socialViewsPredicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSocialCount.new, type), @(SRGSocialCountTypeSRGView)];
-        SRGSocialCount *socialCount = [media.socialCounts filteredArrayUsingPredicate:socialViewsPredicate].firstObject;
-        if (socialCount && socialCount.value >= ApplicationConfiguration.sharedApplicationConfiguration.minimumSocialViewCount) {
-            NSString *viewCountString = [NSNumberFormatter localizedStringFromNumber:@(socialCount.value) numberStyle:NSNumberFormatterDecimalStyle];
-            if (media.mediaType == SRGMediaTypeAudio) {
-                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
-                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
-                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio"];
-            }
-            else {
-                self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
-                self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
-                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video"];
-            }
-            self.viewCountImageView.hidden = NO;
-            self.viewCountLabel.hidden = NO;
-        }
-        else {
-            self.viewCountImageView.hidden = YES;
-            self.viewCountLabel.hidden = YES;
-        }
         
         [self reloadDetailsWithShow:media.show];
         
