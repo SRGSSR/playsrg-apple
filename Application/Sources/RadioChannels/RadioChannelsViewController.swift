@@ -4,19 +4,32 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
+import Tabman
 import UIKit
 
 @objc class RadioChannelsViewController: PageContainerViewController {
     private var radioChannelName: String?
+    private var satelliteRadioChannels: [RadioChannel] = []
+    private var cancellable: AnyCancellable?
 
-    @objc init(radioChannels: [RadioChannel]) {
+    @objc init(radioChannels: [RadioChannel], satelliteRadioChannels: [RadioChannel]) {
         assert(!radioChannels.isEmpty, "At least 1 radio channel expected")
+
+        self.satelliteRadioChannels = satelliteRadioChannels
 
         var viewControllers = [UIViewController]()
         for (index, radioChannel) in radioChannels.enumerated() {
             let pageViewController = PageViewController.audiosViewController(forRadioChannel: radioChannel)
             pageViewController.tabBarItem = UITabBarItem(title: radioChannel.name, image: RadioChannelLogoImage(radioChannel), tag: index)
             viewControllers.append(pageViewController)
+        }
+
+        var satelliteViewControllers = [UIViewController]()
+        for (index, satelliteRadioChannel) in satelliteRadioChannels.enumerated() {
+            let placeholderVC = UIViewController()
+            placeholderVC.tabBarItem = UITabBarItem(title: satelliteRadioChannel.name, image: RadioChannelLogoImage(satelliteRadioChannel), tag: index + radioChannels.count)
+            satelliteViewControllers.append(placeholderVC)
         }
 
         let lastOpenedRadioChannel = ApplicationSettingLastOpenedRadioChannel()
@@ -26,7 +39,7 @@ import UIKit
             NSNotFound
         }
 
-        super.init(viewControllers: viewControllers, initialPage: initialPage)
+        super.init(viewControllers: viewControllers, additionalViewControllers: satelliteViewControllers, initialPage: initialPage)
         updateTitle()
     }
 
@@ -80,5 +93,28 @@ extension RadioChannelsViewController: PlayApplicationNavigation {
         }
 
         return false
+    }
+}
+
+// MARK: Swiss satellite radios
+
+extension RadioChannelsViewController {
+    private func srgMedia(for radioChannel: RadioChannel) -> AnyPublisher<SRGMedia, Error> {
+        SRGDataProvider.current!.regionalizedRadioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: .swissSatelliteRadio)
+            .compactMap { $0.first { $0.uid == radioChannel.uid } }
+            .eraseToAnyPublisher()
+    }
+
+    @objc override func tabDidChange(_ sender: TMTabItemBarButton) {
+        if sender.tag >= viewControllers.count {
+            cancellable = srgMedia(for: satelliteRadioChannels[sender.tag - viewControllers.count])
+                .receive(on: DispatchQueue.main)
+                .sink(
+                    receiveCompletion: { _ in },
+                    receiveValue: { [weak self] srgMedia in
+                        self?.play_presentMediaPlayer(with: srgMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                    }
+                )
+        }
     }
 }

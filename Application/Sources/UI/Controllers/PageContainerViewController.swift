@@ -12,6 +12,7 @@ import UIKit
 
 class PageContainerViewController: UIViewController {
     let viewControllers: [UIViewController]
+    private let additionalViewControllers: [UIViewController]
 
     private var tabContainerViewController: TabContainerViewController
     private(set) var initialPage: Int
@@ -20,10 +21,12 @@ class PageContainerViewController: UIViewController {
     private weak var blurView: UIVisualEffectView?
     private var cancellables: Set<AnyCancellable> = []
 
-    init(viewControllers: [UIViewController], initialPage: Int) {
+    init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController], initialPage: Int) {
         assert(!viewControllers.isEmpty, "At least one view controller is required")
 
         self.viewControllers = viewControllers
+        self.additionalViewControllers = additionalViewControllers
+
         if initialPage >= 0, initialPage < viewControllers.count {
             self.initialPage = initialPage
         } else {
@@ -31,7 +34,7 @@ class PageContainerViewController: UIViewController {
             self.initialPage = 0
         }
 
-        tabBarItems = viewControllers.map {
+        tabBarItems = viewControllers.appending(contentsOf: additionalViewControllers).map {
             if let tabBarItem = $0.tabBarItem, let image = tabBarItem.image {
                 let item = TMBarItem(image: image)
                 item.accessibilityLabel = tabBarItem.title ?? $0.title
@@ -50,8 +53,8 @@ class PageContainerViewController: UIViewController {
         addChild(tabContainerViewController)
     }
 
-    convenience init(viewControllers: [UIViewController]) {
-        self.init(viewControllers: viewControllers, initialPage: 0)
+    convenience init(viewControllers: [UIViewController], additionalViewControllers: [UIViewController]) {
+        self.init(viewControllers: viewControllers, additionalViewControllers: additionalViewControllers, initialPage: 0)
     }
 
     @available(*, unavailable)
@@ -67,8 +70,14 @@ class PageContainerViewController: UIViewController {
         barView.backgroundView.style = .custom(view: blurView)
         barView.layout.alignment = .centerDistributed
         barView.indicator.tintColor = .white
-        barView.buttons.customize { button in
+
+        var buttonIndex = 0
+        barView.buttons.customize { [weak self] button in
+            guard let self else { return }
+            button.tag = buttonIndex
             button.imageContentMode = .center
+            button.addTarget(self, action: #selector(tabDidChange(_:)), for: .touchUpInside)
+            buttonIndex += 1
         }
         tabContainerViewController.addBar(barView, dataSource: self, at: .top)
     }
@@ -204,11 +213,15 @@ extension UIViewController {
 
 extension PageContainerViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func numberOfViewControllers(in _: Pageboy.PageboyViewController) -> Int {
-        viewControllers.count
+        viewControllers.count + additionalViewControllers.count
     }
 
     func viewController(for _: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
-        viewControllers[index]
+        if index < viewControllers.count {
+            viewControllers[index]
+        } else {
+            nil
+        }
     }
 
     func defaultPage(for _: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
@@ -218,4 +231,10 @@ extension PageContainerViewController: PageboyViewControllerDataSource, TMBarDat
     func barItem(for _: any Tabman.TMBar, at index: Int) -> any Tabman.TMBarItemable {
         tabBarItems[index]
     }
+}
+
+// MARK: Events
+
+extension PageContainerViewController {
+    @objc func tabDidChange(_ _: TMTabItemBarButton) {}
 }
