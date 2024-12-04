@@ -117,6 +117,7 @@ final class PageViewController: UIViewController {
 
                     self.updateLayoutConfiguration()
                     self.updateTopicGradientLayout()
+                    self.updateNavigationBar(animated: false)
                 }
             }
         #endif
@@ -136,7 +137,7 @@ final class PageViewController: UIViewController {
         self.topicGradientView = topicGradientView
 
         topicGradientView.translatesAutoresizingMaskIntoConstraints = false
-        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */ )
+        let topicGradientViewFixTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.safeAreaLayoutGuide.topAnchor)
         topicGradientViewFixTopAnchor.priority = .defaultHigh
         let topicGradientViewStickyTopAnchor = topicGradientView.topAnchor.constraint(equalTo: collectionView.topAnchor, constant: 0 /* set in updateTopicGradientLayout() */ )
         topicGradientViewStickyTopAnchor.priority = .defaultLow
@@ -335,13 +336,19 @@ final class PageViewController: UIViewController {
                     view.addSubview(googleCastButton)
                     self.googleCastButton = googleCastButton
 
-                    // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
-                    // result (might be fragile but should be enough).
-                    let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
-                    NSLayoutConstraint.activate([
-                        googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
-                        googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
-                    ])
+                    // Place the button where it would appear if a navigation bar was available.
+                    if #available(iOS 18.0, *), traitCollection.horizontalSizeClass == .regular {
+                        NSLayoutConstraint.activate([
+                            googleCastButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 28),
+                            googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+                        ])
+                    } else {
+                        let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
+                        NSLayoutConstraint.activate([
+                            googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
+                            googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+                        ])
+                    }
                 }
             } else {
                 googleCastButton?.removeFromSuperview()
@@ -882,8 +889,6 @@ private extension PageViewController {
     }
 
     private func updateTopicGradientLayout() {
-        let topScreenOffset = constant(iOS: collectionView.safeAreaInsets.top, tvOS: 0)
-
         if case .show = model.id {
             let configuration = Self.layoutConfiguration(model: model, layoutWidth: view.safeAreaLayoutGuide.layoutFrame.width, horizontalSizeClass: view.traitCollection.horizontalSizeClass, offsetX: view.safeAreaLayoutGuide.layoutFrame.minX)
             let supplementaryItemsHeight = configuration.boundarySupplementaryItems.map(\.layoutSize.heightDimension.dimension).reduce(0, +)
@@ -901,14 +906,12 @@ private extension PageViewController {
                 topicGradientViewStickyTopAnchor.priority = .defaultLow
                 topicGradientViewFixTopAnchor.priority = .defaultHigh
 
-                topicGradientViewFixTopAnchor.constant = topScreenOffset
                 topicGradientViewHeightAnchor.constant = supplementaryItemsHeight + mediaCellHeight
             }
         } else {
             topicGradientViewStickyTopAnchor.priority = .defaultLow
             topicGradientViewFixTopAnchor.priority = .defaultHigh
 
-            topicGradientViewFixTopAnchor.constant = topScreenOffset
             topicGradientViewHeightAnchor.constant = Self.layoutTopicGradientViewHeight
         }
     }
