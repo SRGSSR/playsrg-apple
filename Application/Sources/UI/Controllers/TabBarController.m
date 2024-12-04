@@ -421,7 +421,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
             if (@available(iOS 18.0, *)) {
                 if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
                     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-                        self.playerBottomToViewConstraint.constant = -self.tabBar.bounds.size.height;
+                        self.playerBottomToViewConstraint.constant = -self.tabBar.bounds.size.height - self.miniPlayerOffset + self.view.safeAreaInsets.bottom;
                     } else {
                         self.playerBottomToViewConstraint.constant = -self.miniPlayerOffset;
                     }
