@@ -237,5 +237,6 @@
     "3.8.9-458": "Branch beta\n- Maintenance build for CI deployment.",
     "3.8.9-459": "Branch beta\n- Maintenance build for CI deployment.",
     "3.8.9-460": "- Maintenance build for CI deployment.",
-    "3.8.9-461": "- Fix title and subtitle in some cases on the first top element on the videos home page (hero stage).\n- Fix RTS Podcasts channel icon on CarPlay. [RTS]"
+    "3.8.9-461": "- Fix title and subtitle in some cases on the first top element on the videos home page (hero stage).\n- Fix RTS Podcasts channel icon on CarPlay. [RTS]",
+    "3.8.10-462": "- Improved iOS 18 compatibility.\n- Improve access to Swiss musical radios."
 }
