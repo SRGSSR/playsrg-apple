@@ -83,7 +83,7 @@
     
     // Appearance events need to be notified manually for custom transitions, see https://stackoverflow.com/a/29041911/760435
     
-    if ([[NSProcessInfo processInfo] isiOSAppOnMac] == false) {
+    if (!NSProcessInfo.processInfo.isiOSAppOnMac) {
         [fromViewController beginAppearanceTransition:NO animated:transitionContext.animated];
         [toViewController beginAppearanceTransition:YES animated:transitionContext.animated];
     }
