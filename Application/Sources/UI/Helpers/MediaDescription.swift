@@ -27,11 +27,12 @@ import SRGAppearanceSwift
     static func title(for media: SRGMedia, style: Style) -> String? {
         switch style {
         case .show:
-            if let show = media.show, areRedundant(media: media, show: show) {
-                formattedDate(for: media)
-            } else {
-                media.title
-            }
+            media.title
+//            if let show = media.show, areRedundant(media: media, show: show) {
+//                formattedDate(for: media)
+//            } else {
+//                media.title
+//            }
         case .date, .time:
             media.title
         case .title:
