@@ -159,7 +159,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
 
         private var title: String? {
             guard let media else { return .placeholder(length: 8) }
-            return MediaDescription.title(for: media, style: mediaDescriptionStyle)
+            return MediaDescription.title(for: media)
         }
 
         private var summary: String? {

@@ -43,7 +43,7 @@ struct FeaturedMediaContent: FeaturedContent {
 
     var title: String? {
         guard let media else { return nil }
-        return MediaDescription.title(for: media, style: mediaDescriptionStyle)
+        return MediaDescription.title(for: media)
     }
 
     var summary: String? {
