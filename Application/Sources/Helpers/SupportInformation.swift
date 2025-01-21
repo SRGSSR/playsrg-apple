@@ -18,10 +18,6 @@ import UIKit
         DateFormatter.play_shortDateAndTime.string(from: Date())
     }
 
-    private static var applicationName: String {
-        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
-    }
-
     private static var applicationIdentifier: String {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as! String
     }
@@ -124,6 +120,10 @@ import UIKit
             return pushService.subscribedShowURNs.sorted().joined(separator: ",")
         }
     #endif
+
+    static var applicationName: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+    }
 
     @objc static func generate(toMailBody: Bool = false) -> String {
         var components = [String]()
