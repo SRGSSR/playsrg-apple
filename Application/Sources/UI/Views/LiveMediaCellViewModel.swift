@@ -64,7 +64,7 @@ extension LiveMediaCellViewModel {
         if let channel {
             program?.title ?? channel.title
         } else if let media {
-            MediaDescription.title(for: media, style: .date)
+            MediaDescription.title(for: media)
         } else {
             nil
         }

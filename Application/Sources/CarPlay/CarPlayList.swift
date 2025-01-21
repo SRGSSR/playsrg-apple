@@ -356,7 +356,7 @@ private extension Publisher where Output == [SRGMedia] {
         .switchToLatest()
         .map { mediaDataList in
             let items = mediaDataList.map { mediaData in
-                let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: .show),
+                let item = CPListItem(text: MediaDescription.title(for: mediaData.media),
                                       // Keep same media item height with a detail text in any cases.
                                       detailText: MediaDescription.subtitle(for: mediaData.media, style: .show) ?? " ",
                                       image: mediaData.image)

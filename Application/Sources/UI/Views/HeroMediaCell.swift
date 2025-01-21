@@ -87,7 +87,7 @@ struct HeroMediaCell: View {
 
         private var title: String? {
             guard let media else { return nil }
-            return MediaDescription.title(for: media, style: .title)
+            return MediaDescription.title(for: media)
         }
 
         var body: some View {

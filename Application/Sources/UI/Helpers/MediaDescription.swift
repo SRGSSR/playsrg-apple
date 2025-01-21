@@ -24,19 +24,8 @@ import SRGAppearanceSwift
         case title
     }
 
-    static func title(for media: SRGMedia, style: Style) -> String? {
-        switch style {
-        case .show:
-            if let show = media.show, areRedundant(media: media, show: show) {
-                formattedDate(for: media)
-            } else {
-                media.title
-            }
-        case .date, .time:
-            media.title
-        case .title:
-            media.title
-        }
+    static func title(for media: SRGMedia) -> String? {
+        media.title
     }
 
     static func subtitle(for media: SRGMedia, style: Style) -> String? {
@@ -45,7 +34,7 @@ import SRGAppearanceSwift
         switch style {
         case .show:
             if let show = media.show {
-                if !areRedundant(media: media, show: show), let formattedDate = formattedDate(for: media, style: .shortDate) {
+                if let formattedDate = formattedDate(for: media, style: .shortDate) {
                     // Unbreakable spaces before / after the separator
                     return "\(show.title) · \(formattedDate)"
                 } else {
