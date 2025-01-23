@@ -78,9 +78,10 @@ import SwiftUI
     }
 
     private static func supportEmailMailComposeViewController(_ supportEmailAdress: String) -> UIViewController {
+        let subject = "[\(SupportInformation.applicationName)][Apple] \(NSLocalizedString("Report a technical issue", comment: "Subject of the technical issue mail"))"
         let mailComposeView = MailComposeView()
             .toRecipients([supportEmailAdress])
-            .subject(NSLocalizedString("Report a technical issue", comment: "Subject of the technical issue mail"))
+            .subject(subject)
             .messageBody(SupportInformation.generate(toMailBody: true))
 
         return UIHostingController(rootView: mailComposeView)
