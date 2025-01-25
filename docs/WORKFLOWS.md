@@ -308,12 +308,12 @@ On a Mac device, with the latest version of Xcode and Fastlane installed:
 2. Run the following commands:
    - Screenshots iOS:
        - Play RSI iOS: `fastlane ios iOSrsiScreenshots`
-       - Play RTR iOS: `fastlane ios iOSrtrScreenshots`
+       - Play RTR iOS: `fastlane ios iOSrtrScreenshots` (No upload to ASC, due to some marketing images)
        - Play RTS iOS: `fastlane ios iOSrtsScreenshots` (No upload to ASC, due to some marketing images)
        - Play SRF iOS: `fastlane ios iOSsrfScreenshots` (No upload to ASC, due to some marketing images)
    - Screenshots tvOS:
        - Play RSI tvOS: `fastlane ios tvOSrsiScreenshots`
-       - Play RTR tvOS: `fastlane ios tvOSrtrScreenshots`
+       - Play RTR tvOS: `fastlane ios tvOSrtrScreenshots` (No upload to ASC, due to some marketing images)
        - Play RTS tvOS: `fastlane ios tvOSrtsScreenshots` (No upload to ASC, due to some marketing images)
        - Play SRF tvOS: `fastlane ios tvOSsrfScreenshots` (No upload to ASC, due to some marketing images)
    - The screenshots are done with UITests scripts.
