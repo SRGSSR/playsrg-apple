@@ -407,12 +407,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'RTR: Makes iOS screenshots and replaces current ones on App Store Connect.'
+  desc 'RTR: Makes iOS screenshots. No replacement made on App Store Connect.'
   lane :iOSrtrScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'RTR')
-    upload_screenshots(platform)
+    # Don't erase existing screenshots, from RTR marketing team.
   end
 
   desc 'RTS: Makes iOS screenshots. No replacement made on App Store Connect.'
@@ -527,12 +527,12 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'RTR: Makes tvOS screenshots and replaces current ones on App Store Connect.'
+  desc 'RTR: Makes tvOS screenshots. No replacement made on App Store Connect.'
   lane :tvOSrtrScreenshots do
     platform = 'tvOS'
 
     screenshots(platform, 'RTR')
-    upload_screenshots(platform)
+    # Don't erase existing screenshots, from RTR marketing team.
   end
 
   desc 'RTS: Makes tvOS screenshots. No replacement made on App Store Connect.'
@@ -2409,10 +2409,8 @@ end
 
 def snapshot_ios_devices
   [
-    'iPhone 14 Plus', # 6.5 inch, required
-    'iPhone 8 Plus', # 5.5 inch, required
-    'iPad Pro (12.9-inch) (6th generation)', # 12.9 inch, required
-    'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
+    'iPhone 16 Pro', # 6.9 inch
+    'iPad Pro 13-inch (M4)' # 13 inch
   ]
 end
 

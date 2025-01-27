@@ -181,7 +181,7 @@ RSI: Makes iOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios iOSrtrScreenshots
 ```
 
-RTR: Makes iOS screenshots and replaces current ones on App Store Connect.
+RTR: Makes iOS screenshots. No replacement made on App Store Connect.
 
 ### ios iOSrtsScreenshots
 
@@ -309,7 +309,7 @@ RSI: Makes tvOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios tvOSrtrScreenshots
 ```
 
-RTR: Makes tvOS screenshots and replaces current ones on App Store Connect.
+RTR: Makes tvOS screenshots. No replacement made on App Store Connect.
 
 ### ios tvOSrtsScreenshots
 

@@ -9,3 +9,5 @@ reinstall_app(true)
 launch_arguments(['FL_SCREENSHOTS'])
 
 clear_previous_screenshots(true)
+
+concurrent_simulators(false)
