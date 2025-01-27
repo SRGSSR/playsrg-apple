@@ -2534,6 +2534,16 @@
 		6FFFB9BB252CA310004E40AE /* MediaDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */; };
 		70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */; };
 		8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */; };
+		9930A1F22D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1F32D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1F42D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1F52D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1F62D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1F72D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1F82D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1F92D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1FA2D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
+		9930A1FB2D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */; };
 		9984F77A2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
 		9984F77B2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
 		9984F77C2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
@@ -3456,6 +3466,7 @@
 		881AC8571743B65FBCF1192E /* Pods-Play SRG-iOS-Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
 		92B4B46D0768088FD67B3EFC /* Pods-Play SRG-iOS-Play RTR.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
 		95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
+		9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRadioSquaredCell.swift; sourceTree = "<group>"; };
 		9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainerViewController.swift; sourceTree = "<group>"; };
 		9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
 		A660CE9179B6F1E81374096F /* Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
@@ -4893,6 +4904,7 @@
 				6F9ABCCF2813F43000B118A3 /* ImageViewPortraitPreviews.swift */,
 				0809812E2622195900AA586B /* LiveMediaCell.swift */,
 				6F49EF92263A9F2200ED96D2 /* LiveMediaCellViewModel.swift */,
+				9930A1F12D478AE900AEE8D5 /* LiveRadioSquaredCell.swift */,
 				6F2363182833D57F00A1127C /* MailComposeView.swift */,
 				6FDB2AC424E5923600FF286E /* MediaCell.swift */,
 				0406040D29CE6293001F2BD0 /* MediaMoreButton.swift */,
@@ -8585,6 +8597,7 @@
 				6FB03F5C25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FB89E27283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				08B4650326BC07F900454A28 /* ChannelButton.swift in Sources */,
+				9930A1F32D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				6F54D3FE26051035008B46FF /* MediaDescription.swift in Sources */,
 				6FD9595426989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F5F4FC41DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
@@ -8728,6 +8741,7 @@
 				046F8DCD2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210E826AEDDD200291CA9 /* Environment.swift in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
+				9930A1F42D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				6F4760801EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				04FB9CB42A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				047030E82BBD51340032FA74 /* TopicGradientView.swift in Sources */,
@@ -8999,6 +9013,7 @@
 				046F8DCE2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EA26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
+				9930A1F52D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				6F4760871EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				04FB9CB52A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				047030E92BBD51340032FA74 /* TopicGradientView.swift in Sources */,
@@ -9270,6 +9285,7 @@
 				046F8DCF2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EB26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
+				9930A1FA2D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				6F47608E1EB37DF1003021EA /* UIDevice+PlaySRG.m in Sources */,
 				04FB9CB62A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				047030EA2BBD51340032FA74 /* TopicGradientView.swift in Sources */,
@@ -9560,6 +9576,7 @@
 				6F8BE02B27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6F2DE05726440FB20059335E /* ActivityIndicator.swift in Sources */,
 				0821D542227F5ED300FC091F /* DeepLinkService.m in Sources */,
+				9930A1F22D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				6FD4C2DA268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6FF65C64283617DC00AF0768 /* OnboardingPage.swift in Sources */,
 				04FB9CB72A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
@@ -9990,6 +10007,7 @@
 				042F6F5A29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
 				04B675CC2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981352622195900AA586B /* LiveMediaCell.swift in Sources */,
+				9930A1F62D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				0858CA60271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F61CCAA256E419F00E42E31 /* History.m in Sources */,
@@ -10149,6 +10167,7 @@
 				042F6F5B29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
 				04B675CD2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981362622195900AA586B /* LiveMediaCell.swift in Sources */,
+				9930A1FB2D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				0858CA61271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F61CCAB256E419F00E42E31 /* History.m in Sources */,
@@ -10308,6 +10327,7 @@
 				042F6F5C29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
 				04B675CE2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981372622195900AA586B /* LiveMediaCell.swift in Sources */,
+				9930A1F72D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				0858CA62271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F61CCAC256E41A000E42E31 /* History.m in Sources */,
@@ -10467,6 +10487,7 @@
 				042F6F5D29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
 				04B675CF2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				080981382622195900AA586B /* LiveMediaCell.swift in Sources */,
+				9930A1F82D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				0858CA63271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F61CCAD256E41A000E42E31 /* History.m in Sources */,
@@ -10594,6 +10615,7 @@
 				6FE862752657D2510061D3F0 /* MoreCell.swift in Sources */,
 				6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */,
 				6FA8E533261CB5D2003FFDCF /* UIViewController+PlaySRG.m in Sources */,
+				9930A1F92D478AF200AEE8D5 /* LiveRadioSquaredCell.swift in Sources */,
 				08B971E5256EF40300195901 /* AnalyticsConstants.m in Sources */,
 				6F3CCEA226CAC7A2004039E2 /* Blur.swift in Sources */,
 				04B675D02BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
@@ -16607,8 +16629,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 19.0.6;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
