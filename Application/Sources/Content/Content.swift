@@ -209,7 +209,14 @@ private extension Content {
                 case .myProgram:
                     NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
                 case .livestreams:
-                    NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+                    switch contentSection.mediaType {
+                    case .audio:
+                        NSLocalizedString("Radio channels", comment: "Title label to present radio channels livestreams")
+                    case .video:
+                        NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+                    case .none:
+                        nil
+                    }
                 case .continueWatching:
                     NSLocalizedString("Resume videos playback", comment: "Title label used to present videos whose playback can be resumed")
                 case .continueListening:
@@ -458,9 +465,20 @@ private extension Content {
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .livestreams:
-                    return dataProvider.tvLivestreams(for: contentSection.vendor)
-                        .map { $0.map { .media($0) } }
-                        .eraseToAnyPublisher()
+                    switch contentSection.mediaType {
+                    case .audio:
+                        return dataProvider.radioLivestreams(for: contentSection.vendor, contentProviders: .all)
+                            .map { $0.map { .media($0) } }
+                            .eraseToAnyPublisher()
+                    case .video:
+                        return dataProvider.tvLivestreams(for: contentSection.vendor)
+                            .map { $0.map { .media($0) } }
+                            .eraseToAnyPublisher()
+                    case .none:
+                        return Just([])
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                    }
                 case .topicSelector:
                     return dataProvider.tvTopics(for: contentSection.vendor)
                         .map { $0.map { .topic($0) } }

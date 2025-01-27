@@ -874,6 +874,12 @@ private extension PageViewController {
                             MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     #endif
+                case .liveAudioSquaredSwimlane:
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
+                        LiveRadioSquaredCellSize.swimlane()
+                    }
+                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    return layoutSection
                 }
             }
 
@@ -956,6 +962,8 @@ private extension PageViewController {
                 PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .mediaList:
                 PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal).primaryColor(primaryColor).secondaryColor(secondaryColor)
+            case .liveAudioSquaredSwimlane:
+                LiveRadioSquaredCell(media: media)
             default:
                 PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical).primaryColor(primaryColor).secondaryColor(secondaryColor)
             }
