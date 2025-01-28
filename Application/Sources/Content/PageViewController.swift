@@ -635,8 +635,7 @@ extension PageViewController: UIScrollViewDelegate {
             case .showAZ:
                 if let navigationController {
                     let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                    let showsViewController = SectionViewController.showsViewController(for: .radio, channelUid: radioChannel?.uid, initialSectionId: initialSectionId)
-                    navigationController.pushViewController(showsViewController, animated: false)
+                    SectionViewController.openShowsViewController(for: .radio, channelUid: radioChannel?.uid, initialSectionId: initialSectionId, in: navigationController, sourceView: nil)
                 }
                 return true
             default:
@@ -651,10 +650,9 @@ extension PageViewController: UIScrollViewDelegate {
     }
 
     extension PageViewController: ShowAccessCellActions {
-        func openShowAZ(sender _: Any?, event: ShowAccessEvent?) {
+        func openShowAZ(sender: Any?, event: ShowAccessEvent?) {
             if let navigationController, let event {
-                let showsViewController = SectionViewController.showsViewController(for: event.transmission, channelUid: radioChannel?.uid)
-                navigationController.pushViewController(showsViewController, animated: true)
+                SectionViewController.openShowsViewController(for: event.transmission, channelUid: radioChannel?.uid, in: navigationController, sourceView: sender as? UIView)
             }
         }
 
