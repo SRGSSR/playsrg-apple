@@ -83,7 +83,6 @@ struct Service: Identifiable, Equatable {
     }
 
     @objc static func url(forServiceId serviceId: String) -> URL {
-        ApplicationConfiguration().serviceURL != nil ? ApplicationConfiguration().serviceURL! :
-            Service.service(forId: serviceId).url
+        ApplicationConfiguration().serviceURL ?? Service.service(forId: serviceId).url
     }
 }
