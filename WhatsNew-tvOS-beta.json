@@ -105,5 +105,6 @@
     "1.8.9-460": "- Maintenance build for CI deployment.",
     "1.8.9-461": "- Fix title and subtitle in some cases on the first top element on the videos home page (hero stage).",
     "1.8.10-462": "- Improved tvOS 18 compatibility.",
-    "1.8.11-464": "- Fix some missing video and audio titles."
+    "1.8.11-464": "- Fix some missing video and audio titles.",
+    "1.8.12-465": "- Allow service domain udpate."
 }
