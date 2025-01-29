@@ -5,7 +5,7 @@
   "tvSiteName": "rts-player-tvos-apple",
   "voiceOverLanguageCode": "fr",
   "appStoreProductIdentifier": 920754415,
-  "dataProviderServiceURL": "https://il.srf.ch",
+  "serviceURL": "https://il.srf.ch",
   "playURLs": "{\"rsi\":\"https://www.rsi.ch/play/\",\"rtr\":\"https://www.rtr.ch/play/\",\"rts\":\"https://www.rts.ch/play/\",\"srf\":\"https://www.srf.ch/play/\",\"swi\":\"https://play.swissinfo.ch/play/\"}",
   "playServiceURL": "https://www.rts.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",

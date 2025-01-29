@@ -122,7 +122,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
-@property (nonatomic) NSURL *dataProviderServiceURL;
+@property (nonatomic) NSURL *serviceURL;
 @property (nonatomic) NSDictionary<NSNumber *, NSURL *> *playURLs;
 @property (nonatomic) NSURL *playServiceURL;
 @property (nonatomic) NSURL *middlewareURL;
@@ -450,8 +450,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
 
-    NSString *dataProviderServiceURLString = [firebaseConfiguration stringForKey:@"dataProviderServiceURL"];
-    self.dataProviderServiceURL = dataProviderServiceURLString ? [NSURL URLWithString:dataProviderServiceURLString] : nil;
+    NSString *serviceURLString = [firebaseConfiguration stringForKey:@"serviceURL"];
+    self.serviceURL = serviceURLString ? [NSURL URLWithString:serviceURLString] : nil;
 
     NSString *identityWebserviceURLString = [firebaseConfiguration stringForKey:@"identityWebserviceURL"];
     self.identityWebserviceURL = identityWebserviceURLString ? [NSURL URLWithString:identityWebserviceURLString] : nil;
