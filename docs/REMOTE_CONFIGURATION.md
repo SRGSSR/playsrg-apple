@@ -25,7 +25,8 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `feedbackURL` (optional, string): The URL of the feedback form.
 * `faqURL` (optional, string): The URL of the FAQs.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
-* `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
+* `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed.
+* `dataProviderServiceURL` (optional, string): The URL of the DataProvider service. If set, it overrides the local server non production option.
 * `identityWebserviceURL` (optional, string): The URL of the identity webservices.
 * `identityWebsiteURL` (optional, string): The URL of the identity web portal.
 * `userDataServiceURL` (optional, string): The URL of the service with which user data can be synchronized (history, preferences, playlists).
