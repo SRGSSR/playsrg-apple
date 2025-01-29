@@ -4,6 +4,7 @@
   "siteName": "rtr-player-ios-v",
   "tvSiteName": "rtr-player-tvos-apple",
   "appStoreProductIdentifier": 920754925,
+  "serviceURL": "https://il.srf.ch",
   "playURLs": "{\"rsi\":\"https://www.rsi.ch/play/\",\"rtr\":\"https://www.rtr.ch/play/\",\"rts\":\"https://www.rts.ch/play/\",\"srf\":\"https://www.srf.ch/play/\",\"swi\":\"https://play.swissinfo.ch/play/\"}",
   "playServiceURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
