@@ -436,34 +436,20 @@ extension SectionViewController {
         }
     }
 
-    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?, in navigationController: UINavigationController, sourceView: UIView?) {
+    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?, in navigationController: UINavigationController) {
         if transmission == .radio, let channelUid {
             navigationController.pushViewController(SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId), animated: true)
         } else if transmission == .radio {
             let radiosForAZAccess = ApplicationConfiguration.shared.radioHomepageChannels
-            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-            let actions = radiosForAZAccess.map { (name: $0.name, uid: $0.uid) }
-
-            for action in actions {
-                actionSheet.addAction(UIAlertAction(title: action.name, style: .default, handler: { _ in
-                    navigationController.pushViewController(SectionViewController(section: .configured(.radioAllShows(channelUid: action.uid)), initialSectionId: initialSectionId), animated: true)
-                }))
-            }
-
-            actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button of action sheet"), style: .cancel, handler: { _ in
-                navigationController.dismiss(animated: true)
-            }))
-
-            actionSheet.popoverPresentationController?.sourceView = sourceView
-            navigationController.present(actionSheet, animated: true)
+            let showAccessVC = ShowAccessContainerViewController(radioChannels: radiosForAZAccess)
+            navigationController.pushViewController(showAccessVC, animated: true)
         } else {
             navigationController.pushViewController(SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId), animated: true)
         }
     }
 
-    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, in navigationController: UINavigationController, sourceView: UIView?) {
-        openShowsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil, in: navigationController, sourceView: sourceView)
+    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, in navigationController: UINavigationController) {
+        openShowsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil, in: navigationController)
     }
 }
 
