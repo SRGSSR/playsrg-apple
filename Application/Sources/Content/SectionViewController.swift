@@ -436,19 +436,20 @@ extension SectionViewController {
         }
     }
 
-    static func showsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?) -> SectionViewController {
+    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?, in navigationController: UINavigationController) {
         if transmission == .radio, let channelUid {
-            SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
-        } else if transmission == .radio, let channelUid = ApplicationConfiguration.shared.radioHomepageChannels.first?.uid {
-            // FIXME: Load all radio A to Z shows, not only from the first channel.
-            SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
+            navigationController.pushViewController(SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId), animated: true)
+        } else if transmission == .radio {
+            let radiosForAZAccess = ApplicationConfiguration.shared.radioHomepageChannels
+            let showAccessVC = ShowAccessContainerViewController(radioChannels: radiosForAZAccess)
+            navigationController.pushViewController(showAccessVC, animated: true)
         } else {
-            SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
+            navigationController.pushViewController(SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId), animated: true)
         }
     }
 
-    static func showsViewController(for transmission: SRGTransmission, channelUid: String?) -> SectionViewController {
-        showsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil)
+    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, in navigationController: UINavigationController) {
+        openShowsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil, in: navigationController)
     }
 }
 
