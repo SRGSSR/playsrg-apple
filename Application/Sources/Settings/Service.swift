@@ -12,26 +12,36 @@ struct Service: Identifiable, Equatable {
     let name: String
     let url: URL
 
+    private enum Id {
+        static let production = "production"
+        static let stage = "stage"
+        static let test = "test"
+        static let mmf = "play mmf"
+        static let samProduction = "sam production"
+        static let samStage = "sam stage"
+        static let samTest = "sam test"
+    }
+
     static var production = Self(
-        id: "production",
+        id: Id.production,
         name: NSLocalizedString("Production", comment: "Server setting name"),
         url: SRGIntegrationLayerProductionServiceURL()
     )
 
     static var stage = Self(
-        id: "stage",
+        id: Id.stage,
         name: NSLocalizedString("Stage", comment: "Server setting name"),
         url: SRGIntegrationLayerStagingServiceURL()
     )
 
     static var test = Self(
-        id: "test",
+        id: Id.test,
         name: NSLocalizedString("Test", comment: "Server setting name"),
         url: SRGIntegrationLayerTestServiceURL()
     )
 
     static var mmf = Self(
-        id: "play mmf",
+        id: Id.mmf,
         name: "Play MMF",
         url: mmfUrl
     )
@@ -46,19 +56,19 @@ struct Service: Identifiable, Equatable {
     }()
 
     static var samProduction = Self(
-        id: "sam production",
+        id: Id.samProduction,
         name: "SAM \(NSLocalizedString("Production", comment: "Server setting name"))",
         url: SRGIntegrationLayerProductionServiceURL().appendingPathComponent("sam")
     )
 
     static var samStage = Self(
-        id: "sam stage",
+        id: Id.samStage,
         name: "SAM \(NSLocalizedString("Stage", comment: "Server setting name"))",
         url: SRGIntegrationLayerStagingServiceURL().appendingPathComponent("sam")
     )
 
     static var samTest = Self(
-        id: "sam test",
+        id: Id.samTest,
         name: "SAM \(NSLocalizedString("Test", comment: "Server setting name"))",
         url: SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")
     )
@@ -78,11 +88,13 @@ struct Service: Identifiable, Equatable {
 }
 
 @objc class ServiceObjC: NSObject {
+    @objc static var ids = Service.services.map(\.id)
+
     @objc static func name(forServiceId serviceId: String) -> String {
         Service.service(forId: serviceId).name
     }
 
     @objc static func url(forServiceId serviceId: String) -> URL {
-        ApplicationConfiguration().serviceURL ?? Service.service(forId: serviceId).url
+        ApplicationConfiguration().serviceURL(forId: serviceId) ?? Service.service(forId: serviceId).url
     }
 }

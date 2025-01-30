@@ -72,6 +72,12 @@ OBJC_EXPORT NSArray<NSNumber * /* HomeSection */> * _Nullable FirebaseConfigurat
  */
 - (NSDictionary<NSNumber *, NSURL *> *)playURLsForKey:(NSString *)key;
 
+/**
+ *  Service URLs accessor. Return an empty dictionnary if no valid data is found under the specified key.
+ */
+- (NSDictionary<NSString *, NSURL *> *)serviceURLsForKey:(NSString *)key;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
