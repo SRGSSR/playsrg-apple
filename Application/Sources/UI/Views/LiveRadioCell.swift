@@ -1,5 +1,5 @@
 //
-//  LiveRadioSquaredCell.swift
+//  LiveRadioCell.swift
 //  PlaySRG
 //
 //  Created by Mustapha Tarek BEN LECHHAB on 27.01.2025.
@@ -11,7 +11,7 @@ import SwiftUI
 
 // MARK: View
 
-struct LiveRadioSquaredCell: View {
+struct LiveRadioCell: View {
     @Binding private(set) var media: SRGMedia?
 
     private let imageSize = CGSize(width: 80, height: 80)
@@ -39,7 +39,7 @@ struct LiveRadioSquaredCell: View {
 
 // MARK: Accessibility
 
-private extension LiveRadioSquaredCell {
+private extension LiveRadioCell {
     var accessibilityLabel: String? {
         media?.channel?.title
     }
@@ -51,7 +51,7 @@ private extension LiveRadioSquaredCell {
 
 // MARK: Size
 
-enum LiveRadioSquaredCellSize {
+enum LiveRadioCellSize {
     fileprivate static let aspectRatio: CGFloat = 1 / 1.5
 
     private static let defaultItemWidth: CGFloat = constant(iOS: 88, tvOS: 160)
@@ -63,12 +63,12 @@ enum LiveRadioSquaredCellSize {
 
 // MARK: Preview
 
-struct LiveRadioSquaredCell_Previews: PreviewProvider {
+struct LiveRadioCellCell_Previews: PreviewProvider {
     private static let media = Mock.media(.square)
-    private static let size = LiveRadioSquaredCellSize.swimlane().previewSize
+    private static let size = LiveRadioCellSize.swimlane().previewSize
 
     static var previews: some View {
-        LiveRadioSquaredCell(media: media)
+        LiveRadioCell(media: media)
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
