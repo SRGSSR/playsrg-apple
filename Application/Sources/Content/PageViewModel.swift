@@ -342,6 +342,7 @@ extension PageViewModel {
         case showGrid
         case showSwimlane
         case topicSelector
+        case liveAudioSwimlane
         #if os(iOS)
             case showAccess
         #endif
@@ -701,7 +702,12 @@ private extension PageViewModel {
                     return .mediaGrid
                 #endif
             case .livestreams:
-                return .liveMediaSwimlane
+                switch contentSection.mediaType {
+                case .audio:
+                    return .liveAudioSwimlane
+                case .video, .none:
+                    return .liveMediaSwimlane
+                }
             default:
                 return .mediaSwimlane
             }
