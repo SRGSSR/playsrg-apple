@@ -342,7 +342,7 @@ extension PageViewModel {
         case showGrid
         case showSwimlane
         case topicSelector
-        case liveAudioSquaredSwimlane
+        case liveAudioSwimlane
         #if os(iOS)
             case showAccess
         #endif
@@ -704,7 +704,7 @@ private extension PageViewModel {
             case .livestreams:
                 switch contentSection.mediaType {
                 case .audio:
-                    return .liveAudioSquaredSwimlane
+                    return .liveAudioSwimlane
                 case .video, .none:
                     return .liveMediaSwimlane
                 }
