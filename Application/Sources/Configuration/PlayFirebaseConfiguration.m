@@ -370,7 +370,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
 - (NSDictionary<NSString *, NSURL *> *)serviceURLsForKey:(NSString *)key
 {
-    NSMutableDictionary<NSNumber *, NSURL *> *serviceURLs = [NSMutableDictionary dictionary];
+    NSMutableDictionary<NSString *, NSURL *> *serviceURLs = [NSMutableDictionary dictionary];
 
     NSDictionary *serviceURLsDictionary = [self JSONDictionaryForKey:key];
     for (NSString *key in serviceURLsDictionary) {
