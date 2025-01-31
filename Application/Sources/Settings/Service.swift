@@ -12,7 +12,7 @@ struct Service: Identifiable, Equatable {
     let name: String
     let url: URL
 
-    private enum Id {
+    private enum Environment {
         static let production = "production"
         static let stage = "stage"
         static let test = "test"
@@ -23,25 +23,25 @@ struct Service: Identifiable, Equatable {
     }
 
     static var production = Self(
-        id: Id.production,
+        id: Environment.production,
         name: NSLocalizedString("Production", comment: "Server setting name"),
         url: SRGIntegrationLayerProductionServiceURL()
     )
 
     static var stage = Self(
-        id: Id.stage,
+        id: Environment.stage,
         name: NSLocalizedString("Stage", comment: "Server setting name"),
         url: SRGIntegrationLayerStagingServiceURL()
     )
 
     static var test = Self(
-        id: Id.test,
+        id: Environment.test,
         name: NSLocalizedString("Test", comment: "Server setting name"),
         url: SRGIntegrationLayerTestServiceURL()
     )
 
     static var mmf = Self(
-        id: Id.mmf,
+        id: Environment.mmf,
         name: "Play MMF",
         url: mmfUrl
     )
@@ -56,19 +56,19 @@ struct Service: Identifiable, Equatable {
     }()
 
     static var samProduction = Self(
-        id: Id.samProduction,
+        id: Environment.samProduction,
         name: "SAM \(NSLocalizedString("Production", comment: "Server setting name"))",
         url: SRGIntegrationLayerProductionServiceURL().appendingPathComponent("sam")
     )
 
     static var samStage = Self(
-        id: Id.samStage,
+        id: Environment.samStage,
         name: "SAM \(NSLocalizedString("Stage", comment: "Server setting name"))",
         url: SRGIntegrationLayerStagingServiceURL().appendingPathComponent("sam")
     )
 
     static var samTest = Self(
-        id: Id.samTest,
+        id: Environment.samTest,
         name: "SAM \(NSLocalizedString("Test", comment: "Server setting name"))",
         url: SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")
     )
