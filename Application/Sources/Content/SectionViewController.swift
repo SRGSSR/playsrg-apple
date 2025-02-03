@@ -436,20 +436,22 @@ extension SectionViewController {
         }
     }
 
-    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?, in navigationController: UINavigationController) {
+    static func showsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?) -> UIViewController {
         if transmission == .radio, let channelUid {
-            navigationController.pushViewController(SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId), animated: true)
+            SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         } else if transmission == .radio {
-            let radiosForAZAccess = ApplicationConfiguration.shared.radioHomepageChannels
-            let showAccessVC = ShowAccessContainerViewController(radioChannels: radiosForAZAccess)
-            navigationController.pushViewController(showAccessVC, animated: true)
+            #if os(iOS)
+                ShowAccessContainerViewController(radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
+            #else
+                UIViewController()
+            #endif
         } else {
-            navigationController.pushViewController(SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId), animated: true)
+            SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
     }
 
-    static func openShowsViewController(for transmission: SRGTransmission, channelUid: String?, in navigationController: UINavigationController) {
-        openShowsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil, in: navigationController)
+    static func showsViewController(for transmission: SRGTransmission, channelUid: String?) -> UIViewController {
+        showsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil)
     }
 }
 
