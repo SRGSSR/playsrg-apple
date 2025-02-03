@@ -448,51 +448,44 @@ private extension Content {
                     .map { filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
-                switch presentation.type {
-                case .favoriteShows:
+                switch (presentation.type, contentSection.mediaType) {
+                case (.favoriteShows, _):
                     return dataProvider.favoritesPublisher(filter: filter)
                         .map { $0.map { .show($0) } }
                         .eraseToAnyPublisher()
-                case .myProgram:
+                case (.myProgram, _):
                     return dataProvider.favoritesPublisher(filter: filter)
                         .map { dataProvider.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: pageSize) }
                         .switchToLatest()
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-                case .livestreams:
-                    switch contentSection.mediaType {
-                    case .audio:
-                        return dataProvider.radioLivestreams(for: contentSection.vendor, contentProviders: .all)
-                            .map { $0.map { .media($0) } }
-                            .eraseToAnyPublisher()
-                    case .video:
-                        return dataProvider.tvLivestreams(for: contentSection.vendor)
-                            .map { $0.map { .media($0) } }
-                            .eraseToAnyPublisher()
-                    case .none:
-                        return Just([])
-                            .setFailureType(to: Error.self)
-                            .eraseToAnyPublisher()
-                    }
-                case .topicSelector:
+                case (.livestreams, .audio):
+                    return dataProvider.radioLivestreams(for: contentSection.vendor, contentProviders: .all)
+                        .map { $0.map { .media($0) } }
+                        .eraseToAnyPublisher()
+                case (.livestreams, .video):
+                    return dataProvider.tvLivestreams(for: contentSection.vendor)
+                        .map { $0.map { .media($0) } }
+                        .eraseToAnyPublisher()
+                case (.topicSelector, _):
                     return dataProvider.tvTopics(for: contentSection.vendor)
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
-                case .continueWatching, .continueListening:
+                case (.continueWatching, _), (.continueListening, _):
                     return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-                case .watchLater:
+                case (.watchLater, _):
                     return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 #if os(iOS)
-                    case .showAccess:
+                    case (.showAccess, _):
                         return Just([.showAccess(radioChannel: nil)])
                             .setFailureType(to: Error.self)
                             .eraseToAnyPublisher()
                 #endif
-                case .availableEpisodes:
+                case (.availableEpisodes, _):
                     if let show {
                         return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                             .map { $0.map { .media($0) } }
