@@ -203,29 +203,24 @@ private extension Content {
             if let title = presentation.title {
                 title
             } else {
-                switch presentation.type {
-                case .favoriteShows:
+                switch (presentation.type, contentSection.mediaType) {
+                case (.favoriteShows, _):
                     NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
-                case .myProgram:
+                case (.myProgram, _):
                     NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
-                case .livestreams:
-                    switch contentSection.mediaType {
-                    case .audio:
-                        NSLocalizedString("Radio channels", comment: "Title label to present radio channels livestreams")
-                    case .video:
-                        NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
-                    case .none:
-                        nil
-                    }
-                case .continueWatching:
+                case (.livestreams, .audio):
+                    NSLocalizedString("Radio channels", comment: "Title label to present radio channels livestreams")
+                case (.livestreams, .video):
+                    NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+                case (.continueWatching, _):
                     NSLocalizedString("Resume videos playback", comment: "Title label used to present videos whose playback can be resumed")
-                case .continueListening:
+                case (.continueListening, _):
                     NSLocalizedString("Resume audios playback", comment: "Title label used to present audios whose playback can be resumed")
-                case .watchLater:
+                case (.watchLater, _):
                     NSLocalizedString("Later", comment: "Title Label used to present the video later list")
-                case .showAccess:
+                case (.showAccess, _):
                     NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
-                case .topicSelector:
+                case (.topicSelector, _):
                     NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
                     nil
