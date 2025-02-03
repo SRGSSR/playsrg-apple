@@ -1,9 +1,7 @@
 //
-//  ShowAccessContainerViewController.swift
-//  PlaySRG
+//  Copyright (c) SRG SSR. All rights reserved.
 //
-//  Created by Mustapha Tarek BEN LECHHAB on 30.01.2025.
-//  Copyright © 2025 SRG SSR. All rights reserved.
+//  License information is available from the LICENSE file.
 //
 
 import Pageboy
