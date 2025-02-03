@@ -14,7 +14,7 @@ final class ShowAccessContainerViewController: UIViewController {
     private let tabBarItems: [TMBarItem]
     private let viewControllers: [SectionViewController]
 
-init(radioChannels: [RadioChannel]) {
+    init(radioChannels: [RadioChannel]) {
         self.radioChannels = radioChannels
         tabContainerViewController = TabContainerViewController()
         tabBarItems = radioChannels.enumerated()
@@ -26,8 +26,7 @@ init(radioChannels: [RadioChannel]) {
                     let barItem = TMBarItem(image: image)
                     barItem.accessibilityLabel = item.title
                     return barItem
-                }
-                else {
+                } else {
                     let barItem = TMBarItem(title: item.title ?? "")
                     barItem.accessibilityLabel = item.title
                     return barItem
@@ -117,7 +116,7 @@ extension ShowAccessContainerViewController: PageboyViewControllerDataSource, TM
         .at(index: 0)
     }
 
-    func barItem(for _: any MBar, at index: Int) -> any TMBarItemable {
+    func barItem(for _: any TMBar, at index: Int) -> any TMBarItemable {
         tabBarItems[index]
     }
 }
