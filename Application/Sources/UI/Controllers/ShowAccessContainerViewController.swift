@@ -14,28 +14,25 @@ final class ShowAccessContainerViewController: UIViewController {
     private let tabBarItems: [TMBarItem]
     private let viewControllers: [SectionViewController]
 
-    init(radioChannels: [RadioChannel]) {
+init(radioChannels: [RadioChannel]) {
         self.radioChannels = radioChannels
         tabContainerViewController = TabContainerViewController()
-
-        var items: [UITabBarItem] = []
-
-        for (index, radioChannel) in radioChannels.enumerated() {
-            items.append(UITabBarItem(title: radioChannel.name, image: RadioChannelLogoImage(radioChannel), tag: index))
-        }
-
-        tabBarItems = items.map { item in
-            if let image = item.image {
-                let tmBarItem = TMBarItem(image: image)
-                tmBarItem.accessibilityLabel = item.title
-                return tmBarItem
-            } else {
-                let tmBarItem = TMBarItem(title: item.title ?? "")
-                tmBarItem.accessibilityLabel = item.title
-                return tmBarItem
+        tabBarItems = radioChannels.enumerated()
+            .map { index, radioChannel in
+                UITabBarItem(title: radioChannel.name, image: RadioChannelLogoImage(radioChannel), tag: index)
             }
-        }
-
+            .map { item in
+                if let image = item.image {
+                    let barItem = TMBarItem(image: image)
+                    barItem.accessibilityLabel = item.title
+                    return barItem
+                }
+                else {
+                    let barItem = TMBarItem(title: item.title ?? "")
+                    barItem.accessibilityLabel = item.title
+                    return barItem
+                }
+            }
         viewControllers = radioChannels.map { radioChannel in
             SectionViewController(section: .configured(.radioAllShows(channelUid: radioChannel.uid)))
         }
