@@ -105,19 +105,19 @@ extension ShowAccessContainerViewController: SRGAnalyticsContainerViewTracking {
 }
 
 extension ShowAccessContainerViewController: PageboyViewControllerDataSource, TMBarDataSource {
-    func numberOfViewControllers(in _: Pageboy.PageboyViewController) -> Int {
+    func numberOfViewControllers(in _: PageboyViewController) -> Int {
         viewControllers.count
     }
 
-    func viewController(for _: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
+    func viewController(for _: PageboyViewController, at index: PageboyViewController.PageIndex) -> UIViewController? {
         viewControllers[index]
     }
 
-    func defaultPage(for _: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
+    func defaultPage(for _: PageboyViewController) -> PageboyViewController.Page? {
         .at(index: 0)
     }
 
-    func barItem(for _: any Tabman.TMBar, at index: Int) -> any Tabman.TMBarItemable {
+    func barItem(for _: any MBar, at index: Int) -> any TMBarItemable {
         tabBarItems[index]
     }
 }
