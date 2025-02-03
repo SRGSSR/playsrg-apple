@@ -50,8 +50,7 @@ private extension LiveRadioCell {
 // MARK: Size
 
 enum LiveRadioCellSize {
-    fileprivate static let aspectRatio: CGFloat = 1 / 1.5
-
+    private static let aspectRatio: CGFloat = 1 / 1.5
     private static let defaultItemWidth: CGFloat = constant(iOS: 88, tvOS: 160)
 
     static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
