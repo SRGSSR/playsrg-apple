@@ -110,7 +110,7 @@ static void *s_kvoContext = &s_kvoContext;
         if (! [serviceIdentifier isEqual:ApplicationSettingServiceIdentifier()]) {
             ApplicationSettingSetServiceIdentifier(serviceIdentifier);
             
-            NSString *serviceName = [ServiceObjC nameForServiceId:serviceIdentifier];
+            NSString *serviceName = [ServiceObjC nameFor:serviceIdentifier];
             [Banner showWith:BannerStyleInfo
                      message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a custom URL."), serviceName]
                        image:[UIImage imageNamed:@"settings"]
