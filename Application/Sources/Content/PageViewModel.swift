@@ -342,6 +342,7 @@ extension PageViewModel {
         case showGrid
         case showSwimlane
         case topicSelector
+        case liveAudioSwimlane
         #if os(iOS)
             case showAccess
         #endif
@@ -671,36 +672,38 @@ private extension PageViewModel {
         }
 
         var layout: PageViewModel.SectionLayout {
-            switch presentation.type {
-            case .heroStage:
+            switch (presentation.type, contentSection.mediaType) {
+            case (.heroStage, _):
                 return .heroStage
-            case .highlight:
+            case (.highlight, _):
                 return (Highlight(from: contentSection) != nil) ? .highlight : .mediaSwimlane
-            case .showPromotion:
+            case (.showPromotion, _):
                 return (Highlight(from: contentSection) != nil) ? .highlight : .showSwimlane
-            case .mediaElement, .showElement:
+            case (.mediaElement, _), (.showElement, _):
                 return .element
-            case .mediaElementSwimlane:
+            case (.mediaElementSwimlane, _):
                 return .elementSwimlane
-            case .topicSelector:
+            case (.topicSelector, _):
                 return .topicSelector
             #if os(iOS)
-                case .showAccess:
+                case (.showAccess, _):
                     return .showAccess
             #endif
-            case .favoriteShows:
+            case (.favoriteShows, _):
                 return .showSwimlane
-            case .swimlane:
+            case (.swimlane, _):
                 return (contentSection.type == .shows) ? .showSwimlane : .mediaSwimlane
-            case .grid:
+            case (.grid, _):
                 return (contentSection.type == .shows) ? .showGrid : .mediaGrid
-            case .availableEpisodes:
+            case (.availableEpisodes, _):
                 #if os(iOS)
                     return .mediaList
                 #else
                     return .mediaGrid
                 #endif
-            case .livestreams:
+            case (.livestreams, .audio):
+                return .liveAudioSwimlane
+            case (.livestreams, .video):
                 return .liveMediaSwimlane
             default:
                 return .mediaSwimlane

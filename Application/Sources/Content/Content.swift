@@ -203,22 +203,24 @@ private extension Content {
             if let title = presentation.title {
                 title
             } else {
-                switch presentation.type {
-                case .favoriteShows:
+                switch (presentation.type, contentSection.mediaType) {
+                case (.favoriteShows, _):
                     NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
-                case .myProgram:
+                case (.myProgram, _):
                     NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
-                case .livestreams:
+                case (.livestreams, .audio):
+                    NSLocalizedString("Radio channels", comment: "Title label to present radio channels livestreams")
+                case (.livestreams, .video):
                     NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
-                case .continueWatching:
+                case (.continueWatching, _):
                     NSLocalizedString("Resume videos playback", comment: "Title label used to present videos whose playback can be resumed")
-                case .continueListening:
+                case (.continueListening, _):
                     NSLocalizedString("Resume audios playback", comment: "Title label used to present audios whose playback can be resumed")
-                case .watchLater:
+                case (.watchLater, _):
                     NSLocalizedString("Later", comment: "Title Label used to present the video later list")
-                case .showAccess:
+                case (.showAccess, _):
                     NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
-                case .topicSelector:
+                case (.topicSelector, _):
                     NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
                     nil
@@ -446,40 +448,44 @@ private extension Content {
                     .map { filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
-                switch presentation.type {
-                case .favoriteShows:
+                switch (presentation.type, contentSection.mediaType) {
+                case (.favoriteShows, _):
                     return dataProvider.favoritesPublisher(filter: filter)
                         .map { $0.map { .show($0) } }
                         .eraseToAnyPublisher()
-                case .myProgram:
+                case (.myProgram, _):
                     return dataProvider.favoritesPublisher(filter: filter)
                         .map { dataProvider.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: pageSize) }
                         .switchToLatest()
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-                case .livestreams:
+                case (.livestreams, .audio):
+                    return dataProvider.radioLivestreams(for: contentSection.vendor, contentProviders: .all)
+                        .map { $0.map { .media($0) } }
+                        .eraseToAnyPublisher()
+                case (.livestreams, .video):
                     return dataProvider.tvLivestreams(for: contentSection.vendor)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-                case .topicSelector:
+                case (.topicSelector, _):
                     return dataProvider.tvTopics(for: contentSection.vendor)
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
-                case .continueWatching, .continueListening:
+                case (.continueWatching, _), (.continueListening, _):
                     return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-                case .watchLater:
+                case (.watchLater, _):
                     return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 #if os(iOS)
-                    case .showAccess:
+                    case (.showAccess, _):
                         return Just([.showAccess(radioChannel: nil)])
                             .setFailureType(to: Error.self)
                             .eraseToAnyPublisher()
                 #endif
-                case .availableEpisodes:
+                case (.availableEpisodes, _):
                     if let show {
                         return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                             .map { $0.map { .media($0) } }
