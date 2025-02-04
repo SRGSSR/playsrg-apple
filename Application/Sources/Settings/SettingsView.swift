@@ -565,7 +565,7 @@ struct SettingsView: View {
                 @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
 
                 private var selectedService: Service {
-                    Service.service(forId: selectedServiceId)
+                    Service.service(for: selectedServiceId)
                 }
 
                 var body: some View {
@@ -643,7 +643,7 @@ struct SettingsView: View {
             private struct ServiceSelectionView: View {
                 var body: some View {
                     List {
-                        ForEach(Service.services) { service in
+                        ForEach(Service.allCases) { service in
                             ServiceCell(service: service)
                         }
                     }
@@ -660,7 +660,7 @@ struct SettingsView: View {
             private struct ServiceCell: View {
                 let service: Service
 
-                @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceId: String?
+                @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceIdentifier: String?
 
                 var body: some View {
                     Button(action: select) {
@@ -676,15 +676,11 @@ struct SettingsView: View {
                 }
 
                 private func isSelected() -> Bool {
-                    if let selectedServiceId {
-                        service.id == selectedServiceId
-                    } else {
-                        service == .production
-                    }
+                    service == Service.service(for: selectedServiceIdentifier)
                 }
 
                 private func select() {
-                    selectedServiceId = service.id
+                    selectedServiceIdentifier = service.rawValue
                 }
             }
 

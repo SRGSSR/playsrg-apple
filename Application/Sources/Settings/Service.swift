@@ -7,80 +7,76 @@
 import Foundation
 import SRGDataProvider
 
-struct Service: Identifiable, Equatable {
-    let id: String
-    let name: String
-    let url: URL
+enum Service: String, Identifiable, CaseIterable {
+    case production
+    case stage
+    case test
+    case mmf = "play mmf"
+    case samProduction = "sam production"
+    case samStage = "sam stage"
+    case samTest = "sam test"
 
-    private enum Environment {
-        static let production = "production"
-        static let stage = "stage"
-        static let test = "test"
-        static let mmf = "play mmf"
-        static let samProduction = "sam production"
-        static let samStage = "sam stage"
-        static let samTest = "sam test"
-    }
-
-    static var production = Self(
-        id: Environment.production,
-        name: NSLocalizedString("Production", comment: "Server setting name"),
-        url: SRGIntegrationLayerProductionServiceURL()
-    )
-
-    static var stage = Self(
-        id: Environment.stage,
-        name: NSLocalizedString("Stage", comment: "Server setting name"),
-        url: SRGIntegrationLayerStagingServiceURL()
-    )
-
-    static var test = Self(
-        id: Environment.test,
-        name: NSLocalizedString("Test", comment: "Server setting name"),
-        url: SRGIntegrationLayerTestServiceURL()
-    )
-
-    static var mmf = Self(
-        id: Environment.mmf,
-        name: "Play MMF",
-        url: mmfUrl
-    )
-
-    private static var mmfUrl: URL = {
+    private static var mmfUrl: URL {
         guard let mmfUrlString = Bundle.main.object(forInfoDictionaryKey: "PlayMMFServiceURL") as? String,
               !mmfUrlString.isEmpty
         else {
             return URL(string: "https://play-mmf.herokuapp.com")!
         }
         return URL(string: mmfUrlString)!
-    }()
+    }
 
-    static var samProduction = Self(
-        id: Environment.samProduction,
-        name: "SAM \(NSLocalizedString("Production", comment: "Server setting name"))",
-        url: SRGIntegrationLayerProductionServiceURL().appendingPathComponent("sam")
-    )
+    var id: Self {
+        self
+    }
 
-    static var samStage = Self(
-        id: Environment.samStage,
-        name: "SAM \(NSLocalizedString("Stage", comment: "Server setting name"))",
-        url: SRGIntegrationLayerStagingServiceURL().appendingPathComponent("sam")
-    )
+    var environment: String {
+        rawValue
+    }
 
-    static var samTest = Self(
-        id: Environment.samTest,
-        name: "SAM \(NSLocalizedString("Test", comment: "Server setting name"))",
-        url: SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")
-    )
+    var name: String {
+        switch self {
+        case .production:
+            NSLocalizedString("Production", comment: "Server setting name")
+        case .stage:
+            NSLocalizedString("Stage", comment: "Server setting name")
+        case .test:
+            NSLocalizedString("Test", comment: "Server setting name")
+        case .mmf:
+            "Play MMF"
+        case .samProduction:
+            "SAM \(NSLocalizedString("Production", comment: "Server setting name"))"
+        case .samStage:
+            "SAM \(NSLocalizedString("Stage", comment: "Server setting name"))"
+        case .samTest:
+            "SAM \(NSLocalizedString("Test", comment: "Server setting name"))"
+        }
+    }
 
-    static var services: [Self] = [production, stage, test, mmf, samProduction, samStage, samTest]
+    var url: URL {
+        switch self {
+        case .production:
+            SRGIntegrationLayerProductionServiceURL()
+        case .stage:
+            SRGIntegrationLayerStagingServiceURL()
+        case .test:
+            SRGIntegrationLayerTestServiceURL()
+        case .mmf:
+            Self.mmfUrl
+        case .samProduction:
+            SRGIntegrationLayerProductionServiceURL().appendingPathComponent("sam")
+        case .samStage:
+            SRGIntegrationLayerStagingServiceURL().appendingPathComponent("sam")
+        case .samTest:
+            SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")
+        }
+    }
 
-    static func service(forId id: String?) -> Self {
+    static func service(for environment: String?) -> Self {
         #if DEBUG || NIGHTLY || BETA
-            guard let id, let server = services.first(where: { $0.id == id }) else {
+            guard let environment, let service = Self(rawValue: environment) else {
                 return .production
             }
-            return server
+            return service
         #else
             return .production
         #endif
@@ -88,13 +84,13 @@ struct Service: Identifiable, Equatable {
 }
 
 @objc class ServiceObjC: NSObject {
-    @objc static var ids = Service.services.map(\.id)
+    @objc static var environments = Service.allCases.map(\.environment)
 
-    @objc static func name(forServiceId serviceId: String) -> String {
-        Service.service(forId: serviceId).name
+    @objc static func name(for environment: String) -> String {
+        Service.service(for: environment).name
     }
 
-    @objc static func url(forServiceId serviceId: String) -> URL {
-        ApplicationConfiguration().serviceURL(forId: serviceId) ?? Service.service(forId: serviceId).url
+    @objc static func url(for environment: String) -> URL {
+        ApplicationConfiguration().serviceURL(forId: environment) ?? Service.service(for: environment).url
     }
 }

@@ -26,7 +26,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `faqURL` (optional, string): The URL of the FAQs.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed.
-* `serviceURLs` (optional, JSON): A JSON dictionary describing all URLs of the DataProvider services. Key (string) is the environment identifier of the service, value (string) is the base URL of the DataProvider service. If the key matches a service environment identifier, it overrides the default URL for this service. See `Service.Environment` in `Service.swift` for available identifiers.
+* `serviceURLs` (optional, JSON): A JSON dictionary describing all URLs of the DataProvider services. Key (string) is the environment identifier of the service, value (string) is the base URL of the DataProvider service. If the key matches a service environment identifier, it overrides the default URL for this service. See `Service.swift` enum raw values for available environment identifiers.
 * `identityWebserviceURL` (optional, string): The URL of the identity webservices.
 * `identityWebsiteURL` (optional, string): The URL of the identity web portal.
 * `userDataServiceURL` (optional, string): The URL of the service with which user data can be synchronized (history, preferences, playlists).

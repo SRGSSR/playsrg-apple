@@ -209,7 +209,7 @@ void ApplicationSettingSetServiceIdentifier(NSString *identifier)
 
 NSURL *ApplicationSettingServiceURL(void)
 {
-    return [ServiceObjC urlForServiceId:ApplicationSettingServiceIdentifier()];
+    return [ServiceObjC urlFor:ApplicationSettingServiceIdentifier()];
 }
 
 BOOL ApplicationSettingAutoplayEnabled(void)

@@ -374,7 +374,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
     NSDictionary *serviceURLsDictionary = [self JSONDictionaryForKey:key];
     for (NSString *key in serviceURLsDictionary) {
-        if ([ServiceObjC.ids containsObject:key]) {
+        if ([ServiceObjC.environments containsObject:key]) {
             NSURL *URL = [NSURL URLWithString:serviceURLsDictionary[key]];
             if (URL) {
                 serviceURLs[key] = URL;
