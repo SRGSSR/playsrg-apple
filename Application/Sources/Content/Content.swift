@@ -216,7 +216,7 @@ private extension Content {
                     NSLocalizedString("Resume videos playback", comment: "Title label used to present videos whose playback can be resumed")
                 case (.continueStreaming, _):
                     NSLocalizedString("Resume audios playback", comment: "Title label used to present audios whose playback can be resumed")
-                case (.watchLater, _):
+                case (.watchLater, _), (.streamLater, _):
                     NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case (.showAccess, _):
                     NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
@@ -269,7 +269,7 @@ private extension Content {
             switch contentSection.type {
             case .predefined:
                 switch presentation.type {
-                case .favoriteShows, .continueWatching, .watchLater, .continueStreaming:
+                case .favoriteShows, .continueWatching, .watchLater, .streamLater, .continueStreaming:
                     true
                 default:
                     false
@@ -289,7 +289,7 @@ private extension Content {
                     .episodesFromFavorites
                 case .continueWatching, .continueStreaming:
                     .resumePlayback
-                case .watchLater:
+                case .watchLater, .streamLater:
                     .watchLater
                 default:
                     .generic
@@ -333,7 +333,7 @@ private extension Content {
                     AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
                 case .continueWatching, .continueStreaming:
                     AnalyticsPageTitle.resumePlayback.rawValue
-                case .watchLater:
+                case .watchLater, .streamLater:
                     AnalyticsPageTitle.watchLater.rawValue
                 case .topicSelector:
                     AnalyticsPageTitle.topics.rawValue
@@ -369,7 +369,7 @@ private extension Content {
             switch presentation.type {
             case .favoriteShows:
                 AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
-            case .watchLater:
+            case .watchLater, .streamLater:
                 AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching, .continueStreaming:
                 AnalyticsEvent.historyRemove(source: source, urn: nil)
@@ -475,7 +475,7 @@ private extension Content {
                     return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-                case (.watchLater, _):
+                case (.watchLater, _), (.streamLater, _):
                     return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
@@ -515,7 +515,7 @@ private extension Content {
                     UserInteractionSignal.favoriteUpdates()
                 case .continueWatching, .continueStreaming:
                     UserInteractionSignal.historyUpdates()
-                case .watchLater:
+                case .watchLater, .streamLater:
                     UserInteractionSignal.watchLaterUpdates()
                 default:
                     Just([]).eraseToAnyPublisher()
@@ -529,7 +529,7 @@ private extension Content {
             switch presentation.type {
             case .favoriteShows, .myProgram:
                 ThrottledSignal.preferenceUpdates()
-            case .watchLater:
+            case .watchLater, .streamLater:
                 ThrottledSignal.watchLaterUpdates()
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
@@ -542,7 +542,7 @@ private extension Content {
             switch presentation.type {
             case .favoriteShows:
                 Content.removeFromFavorites(items)
-            case .watchLater:
+            case .watchLater, .streamLater:
                 Content.removeFromWatchLater(items)
             case .continueWatching, .continueStreaming:
                 Content.removeFromHistory(items)

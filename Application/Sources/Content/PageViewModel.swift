@@ -712,7 +712,7 @@ private extension PageViewModel {
 
         var canOpenPage: Bool {
             switch presentation.type {
-            case .favoriteShows, .myProgram, .continueWatching, .continueStreaming, .topicSelector, .watchLater:
+            case .favoriteShows, .myProgram, .continueWatching, .continueStreaming, .topicSelector, .watchLater, .streamLater:
                 true
             default:
                 if presentation.contentLink != nil {
