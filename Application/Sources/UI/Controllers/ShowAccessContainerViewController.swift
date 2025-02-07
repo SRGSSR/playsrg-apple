@@ -9,12 +9,19 @@ import Tabman
 import UIKit
 
 final class ShowAccessContainerViewController: UIViewController {
+    enum AccessType {
+        case alphabetical
+        case byDate
+    }
+
+    private let accessType: AccessType
     private let radioChannels: [RadioChannel]
     private let tabContainerViewController: TabContainerViewController
     private let tabBarItems: [TMBarItem]
-    private let viewControllers: [SectionViewController]
+    private let viewControllers: [UIViewController]
 
-    init(radioChannels: [RadioChannel]) {
+    init(accessType: AccessType, radioChannels: [RadioChannel]) {
+        self.accessType = accessType
         self.radioChannels = radioChannels
         tabContainerViewController = TabContainerViewController()
         tabBarItems = radioChannels.enumerated()
@@ -33,7 +40,12 @@ final class ShowAccessContainerViewController: UIViewController {
                 }
             }
         viewControllers = radioChannels.map { radioChannel in
-            SectionViewController(section: .configured(.radioAllShows(channelUid: radioChannel.uid)))
+            switch accessType {
+            case .alphabetical:
+                SectionViewController(section: .configured(.radioAllShows(channelUid: radioChannel.uid)))
+            case .byDate:
+                CalendarViewController(radioChannel: radioChannel, date: nil)
+            }
         }
 
         super.init(nibName: nil, bundle: nil)
