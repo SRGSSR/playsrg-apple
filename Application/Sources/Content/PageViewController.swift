@@ -57,13 +57,13 @@ final class PageViewController: UIViewController {
 
     #if os(iOS)
         private static func showByDateViewController(transmission: SRGTransmission, radioChannel: RadioChannel?, date: Date?) -> UIViewController {
-        if transmission == .radio {
-            if let radioChannel {
-                CalendarViewController(radioChannel: radioChannel, date: date)
-            } else {
-                ShowAccessContainerViewController(accessType: .byDate, radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
-            }
-        } else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
+            if transmission == .radio {
+                if let radioChannel {
+                    CalendarViewController(radioChannel: radioChannel, date: date)
+                } else {
+                    ShowAccessContainerViewController(accessType: .byDate, radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
+                }
+            } else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
                 ProgramGuideViewController(date: date)
             } else {
                 CalendarViewController(radioChannel: nil, date: date)
@@ -638,8 +638,8 @@ extension PageViewController: UIScrollViewDelegate {
             case .showAZ:
                 if let navigationController {
                     let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                    let showsVC = SectionViewController.showsViewController(for: .radio, channelUid: radioChannel?.uid, initialSectionId: initialSectionId)
-                    navigationController.pushViewController(showsVC, animated: true)
+                    let showsViewController = SectionViewController.showsViewController(for: .radio, channelUid: radioChannel?.uid, initialSectionId: initialSectionId)
+                    navigationController.pushViewController(showsViewController, animated: true)
                 }
                 return true
             default:
@@ -656,8 +656,8 @@ extension PageViewController: UIScrollViewDelegate {
     extension PageViewController: ShowAccessCellActions {
         func openShowAZ(sender _: Any?, event: ShowAccessEvent?) {
             if let navigationController, let event {
-                let showsVC = SectionViewController.showsViewController(for: event.transmission, channelUid: radioChannel?.uid)
-                navigationController.pushViewController(showsVC, animated: true)
+                let showsViewController = SectionViewController.showsViewController(for: event.transmission, channelUid: radioChannel?.uid)
+                navigationController.pushViewController(showsViewController, animated: true)
             }
         }
 
