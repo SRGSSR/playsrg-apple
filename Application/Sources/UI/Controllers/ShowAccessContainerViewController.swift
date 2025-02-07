@@ -8,7 +8,7 @@ import Pageboy
 import Tabman
 import UIKit
 
-final class ShowAccessContainerViewController: PageContainerViewController {
+final class ShowAccessContainerViewController: UIViewController {
     enum AccessType {
         case alphabetical
         case byDate
