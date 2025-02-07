@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import Pageboy
 import Tabman
 import UIKit
@@ -19,6 +20,7 @@ final class ShowAccessContainerViewController: UIViewController {
     private let tabContainerViewController: TabContainerViewController
     private let tabBarItems: [TMBarItem]
     private let viewControllers: [UIViewController]
+    private var cancellables: Set<AnyCancellable> = []
 
     init(accessType: AccessType, radioChannels: [RadioChannel]) {
         self.accessType = accessType
@@ -88,6 +90,32 @@ final class ShowAccessContainerViewController: UIViewController {
         }
         tabContainerViewController.didMove(toParent: self)
         tabContainerViewController.dataSource = self
+
+        tabContainerViewController
+            .updateSignal()
+            .debounce(for: 0.1, scheduler: DispatchQueue.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                updateTitle()
+            }
+            .store(in: &cancellables)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateTitle()
+    }
+
+    private func updateTitle() {
+        guard let currentViewController = tabContainerViewController.currentViewController,
+              let indexOfCurrentSelection = viewControllers.firstIndex(of: currentViewController),
+              indexOfCurrentSelection < radioChannels.count
+        else {
+            navigationItem.title = NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
+            return
+        }
+
+        navigationItem.title = radioChannels[indexOfCurrentSelection].name
     }
 }
 
