@@ -61,7 +61,11 @@ final class PageViewController: UIViewController {
                 if let radioChannel {
                     CalendarViewController(radioChannel: radioChannel, date: date)
                 } else {
-                    ShowAccessContainerViewController(accessType: .byDate, radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
+                    if ApplicationConfiguration.shared.radioHomepageChannels.count == 1 {
+                        CalendarViewController(radioChannel: ApplicationConfiguration.shared.radioHomepageChannels[0], date: date)
+                    } else {
+                        ShowAccessContainerViewController(accessType: .byDate, radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
+                    }
                 }
             } else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
                 ProgramGuideViewController(date: date)

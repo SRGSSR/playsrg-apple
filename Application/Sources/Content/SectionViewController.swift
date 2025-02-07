@@ -441,7 +441,11 @@ extension SectionViewController {
             SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         } else if transmission == .radio {
             #if os(iOS)
-                ShowAccessContainerViewController(accessType: .alphabetical, radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
+                if ApplicationConfiguration.shared.radioHomepageChannels.count == 1 {
+                    SectionViewController(section: .configured(.radioAllShows(channelUid: ApplicationConfiguration.shared.radioHomepageChannels[0].uid)), initialSectionId: nil)
+                } else {
+                    ShowAccessContainerViewController(accessType: .alphabetical, radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
+                }
             #else
                 UIViewController()
             #endif
