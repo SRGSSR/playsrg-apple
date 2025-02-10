@@ -109,25 +109,25 @@ SettingPosterImages ApplicationSettingPosterImages(void)
 #endif
 }
 
-NSValueTransformer *SettingSquareImagesTransformer(void)
+NSValueTransformer *SettingPodcastImagesTransformer(void)
 {
     static NSValueTransformer *s_transformer;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"forced" : @(SettingSquareImagesForced),
-                                                                                         @"ignored" : @(SettingSquareImagesIgnored) }
-                                                                         defaultValue:@(SettingSquareImagesDefault)
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"forced" : @(SettingPodcastImagesForced),
+                                                                                         @"ignored" : @(SettingPodcastImagesIgnored) }
+                                                                         defaultValue:@(SettingPodcastImagesDefault)
                                                                   reverseDefaultValue:nil];
     });
     return s_transformer;
 }
 
-SettingSquareImages ApplicationSettingSquareImages(void)
+SettingPodcastImages ApplicationSettingPodcastImages(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    return [[SettingSquareImagesTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingSquareImages]] integerValue];
+    return [[SettingPodcastImagesTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingPodcastImages]] integerValue];
 #else
-    return SettingSquareImagesDefault;
+    return SettingPodcastImagesDefault;
 #endif
 }
 

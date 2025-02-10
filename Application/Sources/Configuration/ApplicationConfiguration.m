@@ -270,15 +270,15 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
 }
 
-- (BOOL)areSquareImagesEnabled
+- (BOOL)arePodcastImagesEnabled
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    switch (ApplicationSettingSquareImages()) {
-        case SettingSquareImagesForced: {
+    switch (ApplicationSettingPodcastImages()) {
+        case SettingPodcastImagesForced: {
             return YES;
             break;
         }
-        case SettingSquareImagesIgnored: {
+        case SettingPodcastImagesIgnored: {
             return NO;
             break;
         }
