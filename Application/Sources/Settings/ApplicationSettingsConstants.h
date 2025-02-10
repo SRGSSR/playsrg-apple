@@ -13,7 +13,7 @@ OBJC_EXPORT NSString * const PlaySRGSettingPresenterModeEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingStandaloneEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingSectionWideSupportEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingPosterImages;
-OBJC_EXPORT NSString * const PlaySRGSettingSquareImages;
+OBJC_EXPORT NSString * const PlaySRGSettingPodcastImages;
 OBJC_EXPORT NSString * const PlaySRGSettingAudioHomepageOption;
 OBJC_EXPORT NSString * const PlaySRGSettingAutoplayEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled;

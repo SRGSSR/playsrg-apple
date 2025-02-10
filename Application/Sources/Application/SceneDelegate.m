@@ -61,7 +61,7 @@ static void *s_kvoContext = &s_kvoContext;
     [defaults addObserver:self forKeyPath:PlaySRGSettingServiceEnvironment options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingPosterImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
-    [defaults addObserver:self forKeyPath:PlaySRGSettingSquareImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingPodcastImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingAudioHomepageOption options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
 #endif
 }
@@ -73,7 +73,7 @@ static void *s_kvoContext = &s_kvoContext;
     [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceEnvironment];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingUserLocation];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingPosterImages];
-    [defaults removeObserver:self forKeyPath:PlaySRGSettingSquareImages];
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingPodcastImages];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingAudioHomepageOption];
 #endif
 }
@@ -560,7 +560,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (s_kvoContext == context) {
-        if ([keyPath isEqualToString:PlaySRGSettingServiceEnvironment] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages] || [keyPath isEqualToString:PlaySRGSettingSquareImages] ||  [keyPath isEqualToString:PlaySRGSettingAudioHomepageOption]) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceEnvironment] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages] || [keyPath isEqualToString:PlaySRGSettingPodcastImages] ||  [keyPath isEqualToString:PlaySRGSettingAudioHomepageOption]) {
             // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the
             // user interface. Scheduled for the next run loop to have the same code in the app delegate (updating the
             // data provider) executed first.
