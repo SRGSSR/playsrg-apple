@@ -899,7 +899,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)reloadDetailsWithShow:(SRGShow *)show
 {
     if (show) {
-        BOOL prefersSquareImage = show.play_contentType == ContentTypeAudioOrRadio && [ApplicationConfiguration sharedApplicationConfiguration].squareImagesEnabled;
+        BOOL prefersSquareImage = show.play_contentType == ContentTypeAudioOrRadio && [ApplicationConfiguration sharedApplicationConfiguration].podcastImagesEnabled;
         if (prefersSquareImage) {
             self.showThumbnailImageViewAspectRatio16_9Constraint.priority = MediaPlayerViewLowLayoutPriority;
             self.showThumbnailImageViewAspectRatio1_1Constraint.priority = MediaPlayerViewHighLayoutPriority;

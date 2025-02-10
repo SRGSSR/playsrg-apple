@@ -21,7 +21,7 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
         case .videoOrTV:
             ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
         case .audioOrRadio:
-            ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
+            ApplicationConfiguration.shared.arePodcastImagesEnabled ? .podcast : .default
         case .mixed:
             .default
         }
