@@ -825,7 +825,7 @@ private extension PageViewController {
                     return layoutSection
                 case .mediaSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        MediaCellSize.swimlane()
+                        MediaCellSize.swimlane(for: section.properties.imageVariant)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -966,13 +966,13 @@ private extension PageViewController {
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show).primaryColor(primaryColor).secondaryColor(secondaryColor)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, imageVariant: .default).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .mediaList:
-                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal).primaryColor(primaryColor).secondaryColor(secondaryColor)
+                PlaySRG.MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, imageVariant: section.properties.imageVariant).primaryColor(primaryColor).secondaryColor(secondaryColor)
             case .liveAudioSwimlane:
                 LiveRadioCell(media: media)
             default:
-                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical).primaryColor(primaryColor).secondaryColor(secondaryColor)
+                PlaySRG.MediaCell(media: media, style: haveSameShow(media: media, in: section) ? .date : .show, layout: .vertical, imageVariant: section.properties.imageVariant).primaryColor(primaryColor).secondaryColor(secondaryColor)
             }
         }
 

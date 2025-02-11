@@ -241,7 +241,7 @@ struct MediaDetailView: View {
                             ScrollView(.horizontal) {
                                 HStack(spacing: 40) {
                                     ForEach(model.relatedMedias, id: \.uid) { media in
-                                        MediaCell(media: media, style: .show) {
+                                        MediaCell(media: media, style: .show, imageVariant: .default) {
                                             navigateToMedia(media, play: true)
                                         }
                                         .onFocus { isFocused in
