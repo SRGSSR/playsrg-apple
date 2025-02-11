@@ -16,13 +16,15 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
     case audioOrRadio
     case mixed
 
-    var imageVariant: SRGImageVariant {
-        switch self {
-        case .videoOrTV:
+    func imageVariant(mediaType: SRGContentSectionMediaType?) -> SRGImageVariant {
+        switch (self, mediaType) {
+        case (.videoOrTV, _):
             ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
-        case .audioOrRadio:
+        case (.audioOrRadio, .audio):
             ApplicationConfiguration.shared.arePodcastImagesEnabled ? .podcast : .default
-        case .mixed:
+        case (.audioOrRadio, _):
+            .default
+        case (.mixed, _):
             .default
         }
     }
@@ -241,19 +243,7 @@ private extension Content {
         }
 
         var imageVariant: SRGImageVariant {
-            switch contentSection.type {
-            case .shows:
-                contentType.imageVariant
-            case .predefined:
-                switch presentation.type {
-                case .favoriteShows:
-                    contentType.imageVariant
-                default:
-                    .default
-                }
-            default:
-                .default
-            }
+            contentType.imageVariant(mediaType: contentSection.mediaType)
         }
 
         var displaysTitle: Bool {
@@ -655,9 +645,9 @@ private extension Content {
             case .tvAllShows:
                 .default
             case .radioAllShows:
-                ContentType.audioOrRadio.imageVariant
+                ContentType.audioOrRadio.imageVariant(mediaType: nil)
             default:
-                ContentType.mixed.imageVariant
+                ContentType.mixed.imageVariant(mediaType: nil)
             }
         }
 

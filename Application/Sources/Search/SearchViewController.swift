@@ -651,7 +651,7 @@ private extension SearchViewController {
         var body: some View {
             switch item {
             case let .media(media):
-                MediaCell(media: media, style: .show)
+                MediaCell(media: media, style: .show, imageVariant: .default)
             case let .show(show):
                 ShowCell(show: show, style: .standard, imageVariant: .default)
             case let .topic(topic):
