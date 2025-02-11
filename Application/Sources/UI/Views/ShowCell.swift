@@ -150,7 +150,14 @@ enum ShowCellSize {
     }
 
     fileprivate static func itemWidth(for imageVariant: SRGImageVariant) -> CGFloat {
-        imageVariant != .poster ? constant(iOS: 210, tvOS: 375) : constant(iOS: 158, tvOS: 276)
+        switch imageVariant {
+        case .default:
+            constant(iOS: 158, tvOS: 276)
+        case .poster:
+            constant(iOS: 210, tvOS: 375)
+        case .podcast:
+            constant(iOS: 148, tvOS: 258)
+        }
     }
 
     static func swimlane(for imageVariant: SRGImageVariant) -> NSCollectionLayoutSize {

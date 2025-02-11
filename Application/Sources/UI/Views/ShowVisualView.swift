@@ -24,7 +24,11 @@ struct ShowVisualView: View {
         self.show = show
         self.size = size
         self.imageVariant = imageVariant
-        self.contentMode = contentMode
+        if show?.isPodcastImageFallbackURL == true {
+            self.contentMode = .aspectFill
+        } else {
+            self.contentMode = contentMode
+        }
     }
 
     var body: some View {
@@ -37,7 +41,11 @@ struct ShowVisualView: View {
         case .poster:
             url(for: show?.posterImage, size: size)
         case .podcast:
-            url(for: show?.podcastImage, size: size)
+            if show?.isPodcastImageFallbackURL == true {
+                url(for: show?.image, size: size)
+            } else {
+                url(for: show?.podcastImage, size: size)
+            }
         case .default:
             url(for: show?.image, size: size)
         }
