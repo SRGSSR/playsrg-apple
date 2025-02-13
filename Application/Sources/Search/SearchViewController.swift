@@ -653,7 +653,7 @@ private extension SearchViewController {
             case let .media(media):
                 MediaCell(media: media, style: .show, imageVariant: .default)
             case let .show(show):
-                ShowCell(show: show, style: .standard, imageVariant: .default)
+                ShowCell(show: show, style: .standard, imageVariant: .default, isSwimlaneLayout: true)
             case let .topic(topic):
                 TopicCell(topic: topic)
             case .loading:
