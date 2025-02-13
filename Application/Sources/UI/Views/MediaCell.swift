@@ -63,6 +63,32 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         isSelected && media != nil
     }
 
+    private var mediaVisualViewFrame: CGSize {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, layout == .adaptive {
+            .init(width: SmallMediaSquareCellSize.height() * SmallMediaSquareCellSize.defaultAspectRatio, height: SmallMediaSquareCellSize.height())
+        } else if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+            .init(width: MediaSquareCellSize.height() * MediaSquareCellSize.defaultAspectRatio, height: MediaSquareCellSize.height())
+        } else {
+            .init(width: MediaCellSize.height(horizontalSizeClass: horizontalSizeClass) * MediaCellSize.defaultAspectRatio, height: MediaCellSize.height(horizontalSizeClass: horizontalSizeClass))
+        }
+    }
+
+    private var aspectRatio: CGFloat {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+            MediaSquareCellSize.defaultAspectRatio
+        } else {
+            MediaCellSize.defaultAspectRatio
+        }
+    }
+
+    private var contentMode: ContentMode {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+            .fill
+        } else {
+            .fit
+        }
+    }
+
     init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
@@ -88,10 +114,11 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
                 Stack(direction: .vertical, spacing: 0) {
                     Stack(direction: direction, spacing: 0) {
                         MediaVisualView(media: media, size: .small, embeddedDirection: direction)
+                            .aspectRatio(aspectRatio, contentMode: contentMode)
                             .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                             .cornerRadius(LayoutStandardViewCornerRadius)
                             .redactable()
-                            .layoutPriority(1)
+                            .frame(size: mediaVisualViewFrame)
                         DescriptionView(media: media, style: style, embeddedDirection: direction)
                             .primaryColor(primaryColor)
                             .secondaryColor(secondaryColor)
