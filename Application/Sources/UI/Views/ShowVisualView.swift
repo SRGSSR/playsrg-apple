@@ -14,21 +14,24 @@ struct ShowVisualView: View {
     let size: SRGImageSize
     let imageVariant: SRGImageVariant
     let contentMode: ImageView.ContentMode
+    let aspectRatio: CGFloat
 
     init(
         show: SRGShow?,
         size: SRGImageSize,
         imageVariant: SRGImageVariant = .default,
-        contentMode: ImageView.ContentMode = .aspectFit
+        contentMode: ImageView.ContentMode = .aspectFit,
+        aspectRatio: CGFloat = 16 / 9
     ) {
         self.show = show
         self.size = size
         self.imageVariant = imageVariant
-        if show?.isPodcastImageFallbackURL == true {
+        if show?.isPodcastImageFallbackURL == true || aspectRatio != 1 {
             self.contentMode = .aspectFill
         } else {
             self.contentMode = contentMode
         }
+        self.aspectRatio = aspectRatio
     }
 
     var body: some View {
@@ -41,7 +44,7 @@ struct ShowVisualView: View {
         case .poster:
             url(for: show?.posterImage, size: size)
         case .podcast:
-            if show?.isPodcastImageFallbackURL == true {
+            if show?.isPodcastImageFallbackURL == true || aspectRatio != 1 {
                 url(for: show?.image, size: size)
             } else {
                 url(for: show?.podcastImage, size: size)
