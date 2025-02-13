@@ -151,6 +151,7 @@ protocol SectionProperties {
     var label: String? { get }
     var image: SRGImage? { get }
     var imageVariant: SRGImageVariant { get }
+    var mediaType: SRGContentSectionMediaType? { get }
 
     /// Properties for section detail display
     var displaysTitle: Bool { get }
@@ -412,6 +413,10 @@ private extension Content {
             }
 
             return id
+        }
+
+        var mediaType: SRGContentSectionMediaType? {
+            contentSection.mediaType
         }
 
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
@@ -861,6 +866,10 @@ private extension Content {
         }
 
         var openContentPageId: String? {
+            nil
+        }
+
+        var mediaType: SRGContentSectionMediaType? {
             nil
         }
 
