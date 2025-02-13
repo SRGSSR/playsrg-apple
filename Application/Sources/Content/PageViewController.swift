@@ -818,7 +818,16 @@ private extension PageViewController {
                     return layoutSection
                 case .mediaSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                        MediaCellSize.swimlane(for: section.properties.imageVariant)
+                        switch section.properties.mediaType {
+                        case .audio:
+                            if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                                MediaSquareCellSize.swimlane()
+                            } else {
+                                MediaCellSize.swimlane()
+                            }
+                        default:
+                            MediaCellSize.swimlane()
+                        }
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -843,7 +852,16 @@ private extension PageViewController {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                            MediaCellSize.fullWidth()
+                            switch section.properties.mediaType {
+                            case .audio:
+                                if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                                    MediaSquareCellSize.fullWidth()
+                                } else {
+                                    MediaCellSize.fullWidth()
+                                }
+                            default:
+                                MediaCellSize.fullWidth()
+                            }
                         }
                     } else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
@@ -867,7 +885,16 @@ private extension PageViewController {
                 case .mediaList:
                     #if os(iOS)
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { _, _ in
-                            MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                            switch section.properties.mediaType {
+                            case .audio:
+                                if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                                    MediaSquareCellSize.fullWidth()
+                                } else {
+                                    MediaCellSize.fullWidth()
+                                }
+                            default:
+                                MediaCellSize.fullWidth()
+                            }
                         }
                     #else
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin(for: section), spacing: Self.itemSpacing) { layoutWidth, spacing in
