@@ -772,19 +772,19 @@ private extension SectionViewController {
                     case .predefined:
                         switch contentSection.presentation.type {
                         case .favoriteShows:
-                            ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
+                            ShowCell(show: show, style: .favorite, imageVariant: imageVariant, isSwimlaneLayout: false)
                         default:
-                            ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                            ShowCell(show: show, style: .standard, imageVariant: imageVariant, isSwimlaneLayout: false)
                         }
                     default:
-                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant, isSwimlaneLayout: false)
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .favoriteShows, .radioFavoriteShows:
-                        ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .favorite, imageVariant: imageVariant, isSwimlaneLayout: false)
                     default:
-                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant, isSwimlaneLayout: false)
                     }
                 }
             case let .topic(topic):

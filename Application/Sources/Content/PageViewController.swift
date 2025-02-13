@@ -996,7 +996,7 @@ private extension PageViewController {
             case .element:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .element).primaryColor(primaryColor).secondaryColor(secondaryColor)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant).primaryColor(primaryColor)
+                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant, isSwimlaneLayout: true).primaryColor(primaryColor)
             }
         }
     }
