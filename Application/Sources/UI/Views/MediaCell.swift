@@ -73,7 +73,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     var body: some View {
         Group {
             #if os(tvOS)
-                LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
+                LabeledCardButton(aspectRatio: MediaCellSize.defaultAspectRatio, action: action ?? defaultAction) {
                     MediaVisualView(media: media, size: .small)
                         .onParentFocusChange(perform: onFocusChange)
                         .unredactable()
@@ -263,30 +263,8 @@ final class MediaCellSize: NSObject {
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
 
-    fileprivate static func aspectRatio(for imageVariant: SRGImageVariant) -> CGFloat {
-        switch imageVariant {
-        case .poster:
-            2 / 3
-        case .podcast:
-            1
-        case .default:
-            16 / 9
-        }
-    }
-
-    fileprivate static func itemWidth(for imageVariant: SRGImageVariant) -> CGFloat {
-        switch imageVariant {
-        case .default:
-            constant(iOS: 210, tvOS: 375)
-        case .poster:
-            constant(iOS: 210, tvOS: 375)
-        case .podcast:
-            constant(iOS: 148, tvOS: 258)
-        }
-    }
-
-    static func swimlane(for imageVariant: SRGImageVariant, _: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
-        LayoutSwimlaneCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset)
+    static func swimlane() -> NSCollectionLayoutSize {
+        LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
     }
 
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
@@ -298,8 +276,56 @@ final class MediaCellSize: NSObject {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
     }
 
-    static func height(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
-        horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
+    static func height(horizontalSizeClass _: UIUserInterfaceSizeClass) -> CGFloat {
+        constant(iOS: 118, tvOS: 211)
+    }
+}
+
+final class MediaSquareCellSize: NSObject {
+    fileprivate static let defaultAspectRatio: CGFloat = 1
+
+    private static let defaultItemWidth: CGFloat = constant(iOS: 148, tvOS: 258)
+    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
+
+    static func swimlane() -> NSCollectionLayoutSize {
+        LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
+    }
+
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        LayoutGridCellSize(defaultItemWidth, defaultAspectRatio, heightOffset, layoutWidth, spacing, 1)
+    }
+
+    static func fullWidth() -> NSCollectionLayoutSize {
+        let height = height()
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
+    }
+
+    static func height() -> CGFloat {
+        constant(iOS: 148, tvOS: 258)
+    }
+}
+
+final class SmallMediaSquareCellSize: NSObject {
+    fileprivate static let defaultAspectRatio: CGFloat = 1
+
+    private static let defaultItemWidth: CGFloat = constant(iOS: 84, tvOS: 120)
+    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
+
+    static func swimlane() -> NSCollectionLayoutSize {
+        LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
+    }
+
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        LayoutGridCellSize(defaultItemWidth, defaultAspectRatio, heightOffset, layoutWidth, spacing, 1)
+    }
+
+    static func fullWidth() -> NSCollectionLayoutSize {
+        let height = height()
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
+    }
+
+    static func height() -> CGFloat {
+        constant(iOS: 84, tvOS: 120)
     }
 }
 
