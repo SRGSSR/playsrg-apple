@@ -659,7 +659,16 @@ private extension SectionViewController {
                     #if os(iOS)
                         let horizontalMargin = horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
-                            MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                            switch configuration.properties.mediaType {
+                            case .audio:
+                                if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                                    SmallMediaSquareCellSize.fullWidth()
+                                } else {
+                                    MediaCellSize.fullWidth()
+                                }
+                            default:
+                                MediaCellSize.swimlane()
+                            }
                         }
                     #else
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
@@ -669,7 +678,16 @@ private extension SectionViewController {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
-                            MediaCellSize.fullWidth()
+                            switch configuration.properties.mediaType {
+                            case .audio:
+                                if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                                    SmallMediaSquareCellSize.fullWidth()
+                                } else {
+                                    MediaCellSize.fullWidth()
+                                }
+                            default:
+                                MediaCellSize.fullWidth()
+                            }
                         }
                     } else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
