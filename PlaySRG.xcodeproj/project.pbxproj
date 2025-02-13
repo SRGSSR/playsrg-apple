@@ -2549,6 +2549,11 @@
 		9984F77C2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
 		9984F77D2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
 		9984F77E2C075A94009F6CC8 /* TabContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */; };
+		99B4C4F42D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */; };
+		99B4C4F52D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */; };
+		99B4C4F62D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */; };
+		99B4C4F72D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */; };
+		99B4C4F82D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */; };
 		99FE19272BFF49C9000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE19262BFF49C9000B5602 /* Tabman */; };
 		99FE19292BFF49F7000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE19282BFF49F7000B5602 /* Tabman */; };
 		99FE192B2BFF49FD000B5602 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 99FE192A2BFF49FD000B5602 /* Tabman */; };
@@ -3468,6 +3473,7 @@
 		95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
 		9930A1F12D478AE900AEE8D5 /* LiveRadioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRadioCell.swift; sourceTree = "<group>"; };
 		9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabContainerViewController.swift; sourceTree = "<group>"; };
+		99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAccessContainerViewController.swift; sourceTree = "<group>"; };
 		9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
 		A660CE9179B6F1E81374096F /* Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		A7E130D069D1EEFCAE9360BC /* Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -4824,6 +4830,7 @@
 		6F475F8B1EB37BC6003021EA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */,
 				6F475F8C1EB37BC6003021EA /* BaseViewController.h */,
 				6F475F8D1EB37BC6003021EA /* BaseViewController.m */,
 				6F475F901EB37BC6003021EA /* DataViewController.h */,
@@ -8507,6 +8514,7 @@
 				6F73BFB626563C830032D742 /* Content.swift in Sources */,
 				6F340F52220DA99B00778CA3 /* History.m in Sources */,
 				0481D5AF29F460C500D174B3 /* SRGProgramComposition+PlaySRG.swift in Sources */,
+				99B4C4F62D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */,
 				6FF65C5A28360EB100AF0768 /* Onboarding.swift in Sources */,
 				046F8DC62B779E9B00A71091 /* PageContainerViewController.swift in Sources */,
 				0875852223A0025F00FA7207 /* ProfileViewController.m in Sources */,
@@ -8968,6 +8976,7 @@
 				6FCB65F126F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
 				0458A51C2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6FF0C84826B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				99B4C4F42D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */,
 				6F010E12286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				0463DA112A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
 				6F0850F526256A7700B4E410 /* Reachability.m in Sources */,
@@ -9240,6 +9249,7 @@
 				6FCB65F226F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
 				0458A51D2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6FF0C84926B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				99B4C4F52D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */,
 				6F010E13286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				0463DA122A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
 				6F0850F626256A7700B4E410 /* Reachability.m in Sources */,
@@ -9512,6 +9522,7 @@
 				6FCB65F326F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
 				0458A51E2B7AC10A0007BA10 /* TitleHeaderView.swift in Sources */,
 				6FF0C84A26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				99B4C4F72D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */,
 				6F010E14286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				0463DA132A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
 				6F0850F726256A7700B4E410 /* Reachability.m in Sources */,
@@ -9707,6 +9718,7 @@
 				6FF5D1FF2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F861AFC1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				082910B2239E90D200D168F4 /* TabBarController.m in Sources */,
+				99B4C4F82D4B738E00491254 /* ShowAccessContainerViewController.swift in Sources */,
 				080981342622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6F9ABCD42813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6FD2A35923C7628000456DCB /* ForegroundTimer.m in Sources */,
