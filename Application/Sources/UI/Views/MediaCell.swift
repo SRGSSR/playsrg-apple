@@ -63,6 +63,32 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         isSelected && media != nil
     }
 
+    private var mediaVisualViewFrame: CGSize {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, layout == .adaptive {
+            .init(width: SmallMediaSquareCellSize.height() * SmallMediaSquareCellSize.defaultAspectRatio, height: SmallMediaSquareCellSize.height())
+        } else if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+            .init(width: MediaSquareCellSize.height() * MediaSquareCellSize.defaultAspectRatio, height: MediaSquareCellSize.height())
+        } else {
+            .init(width: MediaCellSize.height(horizontalSizeClass: horizontalSizeClass) * MediaCellSize.defaultAspectRatio, height: MediaCellSize.height(horizontalSizeClass: horizontalSizeClass))
+        }
+    }
+
+    private var aspectRatio: CGFloat {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+            MediaSquareCellSize.defaultAspectRatio
+        } else {
+            MediaCellSize.defaultAspectRatio
+        }
+    }
+
+    private var contentMode: ContentMode {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+            .fill
+        } else {
+            .fit
+        }
+    }
+
     init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
@@ -73,7 +99,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     var body: some View {
         Group {
             #if os(tvOS)
-                LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
+                LabeledCardButton(aspectRatio: MediaCellSize.defaultAspectRatio, action: action ?? defaultAction) {
                     MediaVisualView(media: media, size: .small)
                         .onParentFocusChange(perform: onFocusChange)
                         .unredactable()
@@ -88,11 +114,11 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
                 Stack(direction: .vertical, spacing: 0) {
                     Stack(direction: direction, spacing: 0) {
                         MediaVisualView(media: media, size: .small, embeddedDirection: direction)
-                            .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
+                            .aspectRatio(aspectRatio, contentMode: contentMode)
                             .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                             .cornerRadius(LayoutStandardViewCornerRadius)
                             .redactable()
-                            .layoutPriority(1)
+                            .frame(size: mediaVisualViewFrame)
                         DescriptionView(media: media, style: style, embeddedDirection: direction)
                             .primaryColor(primaryColor)
                             .secondaryColor(secondaryColor)
@@ -259,17 +285,17 @@ private extension MediaCell {
 // MARK: Size
 
 final class MediaCellSize: NSObject {
-    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    fileprivate static let defaultAspectRatio: CGFloat = 16 / 9
 
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
 
-    static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
-        LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
+    static func swimlane() -> NSCollectionLayoutSize {
+        LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
     }
 
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
+        LayoutGridCellSize(defaultItemWidth, defaultAspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
 
     static func fullWidth(horizontalSizeClass: UIUserInterfaceSizeClass = .compact) -> NSCollectionLayoutSize {
@@ -277,8 +303,56 @@ final class MediaCellSize: NSObject {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
     }
 
-    static func height(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
-        horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
+    static func height(horizontalSizeClass _: UIUserInterfaceSizeClass) -> CGFloat {
+        constant(iOS: 118, tvOS: 211)
+    }
+}
+
+final class MediaSquareCellSize: NSObject {
+    fileprivate static let defaultAspectRatio: CGFloat = 1
+
+    private static let defaultItemWidth: CGFloat = constant(iOS: 148, tvOS: 258)
+    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
+
+    static func swimlane() -> NSCollectionLayoutSize {
+        LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
+    }
+
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        LayoutGridCellSize(defaultItemWidth, defaultAspectRatio, heightOffset, layoutWidth, spacing, 1)
+    }
+
+    static func fullWidth() -> NSCollectionLayoutSize {
+        let height = height()
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
+    }
+
+    static func height() -> CGFloat {
+        constant(iOS: 148, tvOS: 258)
+    }
+}
+
+final class SmallMediaSquareCellSize: NSObject {
+    fileprivate static let defaultAspectRatio: CGFloat = 1
+
+    private static let defaultItemWidth: CGFloat = constant(iOS: 84, tvOS: 120)
+    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
+
+    static func swimlane() -> NSCollectionLayoutSize {
+        LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
+    }
+
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        LayoutGridCellSize(defaultItemWidth, defaultAspectRatio, heightOffset, layoutWidth, spacing, 1)
+    }
+
+    static func fullWidth() -> NSCollectionLayoutSize {
+        let height = height()
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
+    }
+
+    static func height() -> CGFloat {
+        constant(iOS: 84, tvOS: 120)
     }
 }
 
