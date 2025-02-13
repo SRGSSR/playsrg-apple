@@ -732,7 +732,6 @@ private extension SectionViewController {
         var body: some View {
             switch item {
             case let .media(media):
-                let imageVariant = configuration.properties.imageVariant
                 switch configuration.wrappedValue {
                 case let .content(contentSection, _, _):
                     switch contentSection.type {
@@ -740,28 +739,28 @@ private extension SectionViewController {
                         switch contentSection.presentation.type {
                         case .availableEpisodes:
                             if configuration.viewModelProperties.layout == .mediaList {
-                                MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, imageVariant: imageVariant)
+                                MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
                             } else {
-                                MediaCell(media: media, style: .date, imageVariant: imageVariant)
+                                MediaCell(media: media, style: .date)
                             }
                         default:
-                            MediaCell(media: media, style: .show, imageVariant: imageVariant)
+                            MediaCell(media: media, style: .show)
                         }
                     default:
-                        MediaCell(media: media, style: .show, imageVariant: imageVariant)
+                        MediaCell(media: media, style: .show)
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .availableEpisodes:
                         if configuration.viewModelProperties.layout == .mediaList {
-                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal, imageVariant: imageVariant)
+                            MediaCell(media: media, style: .dateAndSummary, layout: .horizontal)
                         } else {
-                            MediaCell(media: media, style: .date, imageVariant: imageVariant)
+                            MediaCell(media: media, style: .date)
                         }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
-                        MediaCell(media: media, style: .time, imageVariant: imageVariant)
+                        MediaCell(media: media, style: .time)
                     default:
-                        MediaCell(media: media, style: .show, imageVariant: imageVariant)
+                        MediaCell(media: media, style: .show)
                     }
                 }
             case let .show(show):
@@ -798,7 +797,7 @@ private extension SectionViewController {
             case .transparent:
                 Color.clear
             default:
-                MediaCell(media: nil, style: .show, imageVariant: .default)
+                MediaCell(media: nil, style: .show)
             }
         }
     }

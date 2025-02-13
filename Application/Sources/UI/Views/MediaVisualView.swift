@@ -26,12 +26,11 @@ struct MediaVisualView<Content: View>: View {
         size: SRGImageSize,
         contentMode: ImageView.ContentMode = .aspectFit,
         embeddedDirection: StackDirection = .vertical,
-        imageVariant: SRGImageVariant = .default,
         @ViewBuilder content: @escaping (SRGMedia?) -> Content
     ) {
         _media = .constant(media)
         self.size = size
-        if imageVariant == .podcast {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
             self.contentMode = .aspectFill
         } else {
             self.contentMode = contentMode
@@ -120,8 +119,8 @@ struct MediaVisualView<Content: View>: View {
 // MARK: Extensions
 
 extension MediaVisualView where Content == EmptyView {
-    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit, embeddedDirection: StackDirection = .vertical, imageVariant: SRGImageVariant = .default) {
-        self.init(media: media, size: size, contentMode: contentMode, embeddedDirection: embeddedDirection, imageVariant: imageVariant) { _ in
+    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit, embeddedDirection: StackDirection = .vertical) {
+        self.init(media: media, size: size, contentMode: contentMode, embeddedDirection: embeddedDirection) { _ in
             EmptyView()
         }
     }

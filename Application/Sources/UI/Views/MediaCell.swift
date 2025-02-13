@@ -30,7 +30,6 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     let media: SRGMedia?
     let style: Style
     let layout: Layout
-    let imageVariant: SRGImageVariant
     let action: (() -> Void)?
 
     var primaryColor: Color = .srgGrayD2
@@ -64,11 +63,10 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         isSelected && media != nil
     }
 
-    init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, imageVariant: SRGImageVariant, action: (() -> Void)? = nil) {
+    init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
         self.layout = layout
-        self.imageVariant = imageVariant
         self.action = action
     }
 
@@ -89,8 +87,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
             #else
                 Stack(direction: .vertical, spacing: 0) {
                     Stack(direction: direction, spacing: 0) {
-                        MediaVisualView(media: media, size: .small, embeddedDirection: direction, imageVariant: imageVariant)
-//                            .aspectRatio(MediaCellSize.aspectRatio(for: imageVariant), contentMode: imageVariant == .podcast ? .fill : .fit)
+                        MediaVisualView(media: media, size: .small, embeddedDirection: direction)
                             .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                             .cornerRadius(LayoutStandardViewCornerRadius)
                             .redactable()
@@ -309,7 +306,7 @@ final class MediaCellSize: NSObject {
 // MARK: Preview
 
 struct MediaCell_Previews: PreviewProvider {
-    private static let verticalLayoutSize = MediaCellSize.swimlane(for: .default).previewSize
+    private static let verticalLayoutSize = MediaCellSize.swimlane().previewSize
     private static let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
     private static let horizontalLargeListLayoutSize = MediaCellSize.fullWidth(horizontalSizeClass: .regular).previewSize
     private static let style = MediaCell.Style.show
@@ -317,30 +314,30 @@ struct MediaCell_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            MediaCell(media: Mock.media(), style: style, layout: .vertical, imageVariant: .default)
-            MediaCell(media: Mock.media(.noShow), style: style, layout: .vertical, imageVariant: .default)
-            MediaCell(media: Mock.media(.rich), style: style, layout: .vertical, imageVariant: .default)
-            MediaCell(media: Mock.media(.overflow), style: style, layout: .vertical, imageVariant: .default)
-            MediaCell(media: Mock.media(.nineSixteen), style: style, layout: .vertical, imageVariant: .default)
+            MediaCell(media: Mock.media(), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.noShow), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.rich), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.overflow), style: style, layout: .vertical)
+            MediaCell(media: Mock.media(.nineSixteen), style: style, layout: .vertical)
         }
         .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
 
         #if os(iOS)
             Group {
-                MediaCell(media: Mock.media(), style: style, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.noShow), style: style, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.rich), style: style, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.overflow), style: style, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.nineSixteen), style: style, layout: .horizontal, imageVariant: .default)
+                MediaCell(media: Mock.media(), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.noShow), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.rich), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.overflow), style: style, layout: .horizontal)
+                MediaCell(media: Mock.media(.nineSixteen), style: style, layout: .horizontal)
             }
             .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
 
             Group {
-                MediaCell(media: Mock.media(), style: largeListStyle, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.noShow), style: largeListStyle, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.rich), style: largeListStyle, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.overflow), style: largeListStyle, layout: .horizontal, imageVariant: .default)
-                MediaCell(media: Mock.media(.nineSixteen), style: largeListStyle, layout: .horizontal, imageVariant: .default)
+                MediaCell(media: Mock.media(), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.noShow), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.rich), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.overflow), style: largeListStyle, layout: .horizontal)
+                MediaCell(media: Mock.media(.nineSixteen), style: largeListStyle, layout: .horizontal)
             }
             .previewLayout(.fixed(width: horizontalLargeListLayoutSize.width, height: horizontalLargeListLayoutSize.height))
         #endif
