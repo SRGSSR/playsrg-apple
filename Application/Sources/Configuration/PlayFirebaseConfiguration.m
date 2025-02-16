@@ -7,7 +7,6 @@
 #import "PlayFirebaseConfiguration.h"
 
 #import "PlayLogger.h"
-#import "PlaySRG-Swift.h"
 
 @import Firebase;
 @import SRGAppearance;

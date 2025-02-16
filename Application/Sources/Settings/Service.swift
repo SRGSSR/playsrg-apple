@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import SRGDataProvider
 
 enum Service: String, Identifiable, CaseIterable {
     case production
