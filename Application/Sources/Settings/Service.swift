@@ -55,19 +55,19 @@ enum Service: String, Identifiable, CaseIterable {
     var url: URL {
         switch self {
         case .production:
-            SRGIntegrationLayerProductionServiceURL()
+            ApplicationConfiguration().dataProviderProductionServiceURL
         case .stage:
-            SRGIntegrationLayerStagingServiceURL()
+            ApplicationConfiguration().dataProviderStageServiceURL
         case .test:
-            SRGIntegrationLayerTestServiceURL()
+            ApplicationConfiguration().dataProviderTestServiceURL
         case .mmf:
             Self.mmfUrl
         case .samProduction:
-            SRGIntegrationLayerProductionServiceURL().appendingPathComponent("sam")
+            ApplicationConfiguration().dataProviderProductionServiceURL.appendingPathComponent("sam")
         case .samStage:
-            SRGIntegrationLayerStagingServiceURL().appendingPathComponent("sam")
+            ApplicationConfiguration().dataProviderStageServiceURL.appendingPathComponent("sam")
         case .samTest:
-            SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")
+            ApplicationConfiguration().dataProviderTestServiceURL.appendingPathComponent("sam")
         }
     }
 
@@ -91,6 +91,6 @@ enum Service: String, Identifiable, CaseIterable {
     }
 
     @objc static func url(for environment: String) -> URL {
-        ApplicationConfiguration().serviceURL(forId: environment) ?? Service.service(for: environment).url
+        Service.service(for: environment).url
     }
 }

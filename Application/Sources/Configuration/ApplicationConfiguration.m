@@ -122,9 +122,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
-@property (nonatomic) NSDictionary<NSString *, NSURL *> *serviceURLs;
 @property (nonatomic) NSDictionary<NSNumber *, NSURL *> *playURLs;
 @property (nonatomic) NSURL *playServiceURL;
+@property (nonatomic) NSURL *dataProviderProductionServiceURL;
+@property (nonatomic) NSURL *dataProviderStageServiceURL;
+@property (nonatomic) NSURL *dataProviderTestServiceURL;
 @property (nonatomic) NSURL *middlewareURL;
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
@@ -236,6 +238,21 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 }
 
 #pragma mark Getters and setters
+
+- (NSURL *)dataProviderProductionServiceURL
+{
+    return _dataProviderProductionServiceURL ?: SRGIntegrationLayerProductionServiceURL();
+}
+
+- (NSURL *)dataProviderStageServiceURL
+{
+    return _dataProviderStageServiceURL ?: SRGIntegrationLayerStagingServiceURL();
+}
+
+- (NSURL *)dataProviderTestServiceURL
+{
+    return _dataProviderTestServiceURL ?: SRGIntegrationLayerTestServiceURL();
+}
 
 - (BOOL)isContinuousPlaybackAvailable
 {
@@ -449,9 +466,16 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     //
     
     self.voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
-
-    self.serviceURLs = [firebaseConfiguration serviceURLsForKey:@"serviceURLs"];
-
+    
+    NSString *dataProviderProductionServiceURLString = [firebaseConfiguration stringForKey:@"dataProviderProductionServiceURL"];
+    self.dataProviderProductionServiceURL = dataProviderProductionServiceURLString ? [NSURL URLWithString:dataProviderProductionServiceURLString] : nil;
+    
+    NSString *dataProviderStageServiceURLString = [firebaseConfiguration stringForKey:@"dataProviderStageServiceURL"];
+    self.dataProviderStageServiceURL = dataProviderStageServiceURLString ? [NSURL URLWithString:dataProviderStageServiceURLString] : nil;
+    
+    NSString *dataProviderTestServiceURLString = [firebaseConfiguration stringForKey:@"dataProviderTestServiceURL"];
+    self.dataProviderTestServiceURL = dataProviderTestServiceURLString ? [NSURL URLWithString:dataProviderTestServiceURLString] : nil;
+    
     NSString *identityWebserviceURLString = [firebaseConfiguration stringForKey:@"identityWebserviceURL"];
     self.identityWebserviceURL = identityWebserviceURLString ? [NSURL URLWithString:identityWebserviceURLString] : nil;
     
@@ -610,11 +634,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
 #endif
     return playURLs[@(vendor)];
-}
-
-- (NSURL *)serviceURLForId:(NSString *)serviceId
-{
-    return self.serviceURLs[serviceId];
 }
 
 - (NSURL *)sharingURLForMedia:(SRGMedia *)media atTime:(CMTime)time

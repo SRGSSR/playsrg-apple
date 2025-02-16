@@ -39,6 +39,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic, readonly) NSURL *playServiceURL;
+@property (nonatomic, readonly) NSURL *dataProviderProductionServiceURL;
+@property (nonatomic, readonly) NSURL *dataProviderStageServiceURL;
+@property (nonatomic, readonly) NSURL *dataProviderTestServiceURL;
 @property (nonatomic, readonly) NSURL *middlewareURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebserviceURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebsiteURL;
@@ -113,7 +116,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 
 - (nullable NSURL *)playURLForVendor:(SRGVendor)vendor;
-- (nullable NSURL *)serviceURLForId:(NSString *)serviceId;
 
 /**
  *  URLs to be used for sharing

@@ -368,29 +368,6 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
     return playURLs.copy;
 }
 
-- (NSDictionary<NSString *, NSURL *> *)serviceURLsForKey:(NSString *)key
-{
-    NSMutableDictionary<NSString *, NSURL *> *serviceURLs = [NSMutableDictionary dictionary];
-
-    NSDictionary *serviceURLsDictionary = [self JSONDictionaryForKey:key];
-    for (NSString *key in serviceURLsDictionary) {
-        if ([ServiceObjC.environments containsObject:key]) {
-            NSURL *URL = [NSURL URLWithString:serviceURLsDictionary[key]];
-            if (URL) {
-                serviceURLs[key] = URL;
-            }
-            else {
-                PlayLogWarning(@"configuration", @"Service URL configuration is not valid. The URL of %@ is not valid.", key);
-            }
-        }
-        else {
-            PlayLogWarning(@"configuration", @"Service URL configuration identifier is not valid. %@ is not valid.", key);
-        }
-    }
-
-    return serviceURLs.copy;
-}
-
 #pragma mark Update
 
 - (void)update
