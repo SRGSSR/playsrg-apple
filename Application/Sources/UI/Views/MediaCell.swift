@@ -303,8 +303,8 @@ final class MediaCellSize: NSObject {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(CGFloat(height)))
     }
 
-    static func height(horizontalSizeClass _: UIUserInterfaceSizeClass) -> CGFloat {
-        constant(iOS: 118, tvOS: 211)
+    static func height(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
+        horizontalSizeClass == .compact ? constant(iOS: 84, tvOS: 120) : constant(iOS: 104, tvOS: 120)
     }
 }
 
@@ -312,7 +312,7 @@ final class MediaSquareCellSize: NSObject {
     fileprivate static let defaultAspectRatio: CGFloat = 1
 
     private static let defaultItemWidth: CGFloat = constant(iOS: 148, tvOS: 258)
-    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
+    private static let heightOffset: CGFloat = constant(iOS: 44, tvOS: 78)
 
     static func swimlane() -> NSCollectionLayoutSize {
         LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
@@ -343,7 +343,7 @@ final class SmallMediaSquareCellSize: NSObject {
     }
 
     static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        LayoutGridCellSize(defaultItemWidth, defaultAspectRatio, heightOffset, layoutWidth, spacing, 1)
+        LayoutGridCellSize(defaultItemWidth, defaultAspectRatio, 0, layoutWidth, spacing, 1)
     }
 
     static func fullWidth() -> NSCollectionLayoutSize {
