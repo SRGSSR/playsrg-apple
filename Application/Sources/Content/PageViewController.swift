@@ -862,12 +862,12 @@ private extension PageViewController {
                             switch section.properties.mediaType {
                             case .audio:
                                 if ApplicationConfiguration.shared.arePodcastImagesEnabled {
-                                    MediaSquareCellSize.fullWidth()
+                                    MediaSquareCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                                 } else {
-                                    MediaCellSize.fullWidth()
+                                    MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                                 }
                             default:
-                                MediaCellSize.fullWidth()
+                                MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                             }
                         }
                     } else {

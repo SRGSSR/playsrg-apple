@@ -667,7 +667,7 @@ private extension SectionViewController {
                                     MediaCellSize.fullWidth()
                                 }
                             default:
-                                MediaCellSize.swimlane()
+                                MediaCellSize.fullWidth()
                             }
                         }
                     #else
