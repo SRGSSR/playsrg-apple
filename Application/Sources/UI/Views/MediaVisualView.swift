@@ -30,7 +30,7 @@ struct MediaVisualView<Content: View>: View {
     ) {
         _media = .constant(media)
         self.size = size
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, embeddedDirection == .vertical {
             self.contentMode = .aspectFill
         } else {
             self.contentMode = contentMode

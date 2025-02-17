@@ -683,10 +683,10 @@ private extension SectionViewController {
                                 if ApplicationConfiguration.shared.arePodcastImagesEnabled {
                                     SmallMediaSquareCellSize.fullWidth()
                                 } else {
-                                    MediaCellSize.fullWidth()
+                                    MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
                                 }
                             default:
-                                MediaCellSize.fullWidth()
+                                MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
                             }
                         }
                     } else {
