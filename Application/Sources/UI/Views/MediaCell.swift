@@ -82,7 +82,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     }
 
     private var contentMode: ContentMode {
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, aspectRatio == MediaCellSize.defaultAspectRatio {
             .fill
         } else {
             .fit
