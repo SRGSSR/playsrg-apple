@@ -154,14 +154,14 @@ enum ShowCellSize {
     fileprivate static func itemWidth(for imageVariant: SRGImageVariant, isSwimlane: Bool) -> CGFloat {
         switch imageVariant {
         case .default:
-            constant(iOS: 158, tvOS: 276)
-        case .poster:
             constant(iOS: 210, tvOS: 375)
+        case .poster:
+            constant(iOS: 158, tvOS: 276)
         case .podcast:
             if isSwimlane, ApplicationConfiguration.shared.arePodcastImagesEnabled {
                 constant(iOS: 148, tvOS: 258)
             } else {
-                constant(iOS: 158, tvOS: 276)
+                constant(iOS: 210, tvOS: 375)
             }
         }
     }
