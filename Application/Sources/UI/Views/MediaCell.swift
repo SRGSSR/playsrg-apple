@@ -63,16 +63,6 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         isSelected && media != nil
     }
 
-    private var mediaVisualViewFrame: CGSize {
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, layout == .adaptive {
-            .init(width: SmallMediaSquareCellSize.height() * SmallMediaSquareCellSize.defaultAspectRatio, height: SmallMediaSquareCellSize.height())
-        } else if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
-            .init(width: MediaSquareCellSize.height() * MediaSquareCellSize.defaultAspectRatio, height: MediaSquareCellSize.height())
-        } else {
-            .init(width: MediaCellSize.height(horizontalSizeClass: horizontalSizeClass) * MediaCellSize.defaultAspectRatio, height: MediaCellSize.height(horizontalSizeClass: horizontalSizeClass))
-        }
-    }
-
     private var aspectRatio: CGFloat {
         if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
             MediaSquareCellSize.defaultAspectRatio
@@ -118,7 +108,6 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
                             .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                             .cornerRadius(LayoutStandardViewCornerRadius)
                             .redactable()
-                            .frame(size: mediaVisualViewFrame)
                         DescriptionView(media: media, style: style, embeddedDirection: direction)
                             .primaryColor(primaryColor)
                             .secondaryColor(secondaryColor)
