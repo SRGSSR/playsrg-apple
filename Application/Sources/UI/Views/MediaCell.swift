@@ -79,6 +79,18 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
         }
     }
 
+    private var visualViewContentMode: ImageView.ContentMode {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, aspectRatio == MediaSquareCellSize.defaultAspectRatio {
+            .aspectFill
+        } else {
+            .aspectFit
+        }
+    }
+
+    private var isSmallAudioSquaredCell: Bool {
+        ApplicationConfiguration.shared.arePodcastImagesEnabled && media?.mediaType == .audio && direction == .horizontal
+    }
+
     init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
@@ -103,11 +115,12 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
             #else
                 Stack(direction: .vertical, spacing: 0) {
                     Stack(direction: direction, spacing: 0) {
-                        MediaVisualView(media: media, size: .small, embeddedDirection: direction)
+                        MediaVisualView(media: media, size: .small, contentMode: visualViewContentMode, embeddedDirection: direction)
                             .aspectRatio(aspectRatio, contentMode: contentMode)
                             .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                             .cornerRadius(LayoutStandardViewCornerRadius)
                             .redactable()
+                            .layoutPriority(isSmallAudioSquaredCell ? 0 : 1)
                         DescriptionView(media: media, style: style, embeddedDirection: direction)
                             .primaryColor(primaryColor)
                             .secondaryColor(secondaryColor)
