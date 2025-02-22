@@ -85,11 +85,11 @@ enum Service: String, Identifiable, CaseIterable {
 @objc class ServiceObjC: NSObject {
     @objc static var environments = Service.allCases.map(\.environment)
 
-    @objc static func name(for environment: String) -> String {
+    @objc static func name(forEnvironment environment: String) -> String {
         Service.service(for: environment).name
     }
 
-    @objc static func url(for environment: String) -> URL {
+    @objc static func url(forEnvironment environment: String) -> URL {
         Service.service(for: environment).url
     }
 }
