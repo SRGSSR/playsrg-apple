@@ -20,7 +20,7 @@ NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRG
 NSString * const PlaySRGSettingDiscoverySubtitleOptionLanguageRunOnce = @"PlaySRGSettingDiscoverySubtitleOptionLanguageRunOnce";
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLivestreamURNForChannels";
-NSString * const PlaySRGSettingServiceIdentifier = @"PlaySRGSettingServiceIdentifier";
+NSString * const PlaySRGSettingServiceEnvironment = @"PlaySRGSettingServiceEnvironment";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 NSString * const PlaySRGSettingUserConsentAcceptedServiceIds = @"PlaySRGSettingUserConsentAcceptedServiceIds";
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)

@@ -562,7 +562,7 @@ struct SettingsView: View {
             }
 
             private struct ServiceSelectionCell: View {
-                @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
+                @AppStorage(PlaySRGSettingServiceEnvironment) private var selectedServiceId: String?
 
                 private var selectedService: Service {
                     Service.service(for: selectedServiceId)
@@ -660,7 +660,7 @@ struct SettingsView: View {
             private struct ServiceCell: View {
                 let service: Service
 
-                @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceIdentifier: String?
+                @AppStorage(PlaySRGSettingServiceEnvironment) var selectedServiceIdentifier: String?
 
                 var body: some View {
                     Button(action: select) {

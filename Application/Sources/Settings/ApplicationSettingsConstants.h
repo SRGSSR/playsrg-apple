@@ -22,7 +22,7 @@ OBJC_EXPORT NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed
 OBJC_EXPORT NSString * const PlaySRGSettingDiscoverySubtitleOptionLanguageRunOnce;
 OBJC_EXPORT NSString * const PlaySRGSettingLastLoggedInEmailAddress;
 OBJC_EXPORT NSString * const PlaySRGSettingSelectedLivestreamURNForChannels;
-OBJC_EXPORT NSString * const PlaySRGSettingServiceIdentifier;
+OBJC_EXPORT NSString * const PlaySRGSettingServiceEnvironment;
 OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
 OBJC_EXPORT NSString * const PlaySRGSettingUserConsentAcceptedServiceIds;
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
