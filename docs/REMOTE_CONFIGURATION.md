@@ -26,7 +26,9 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `faqURL` (optional, string): The URL of the FAQs.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed.
-* `serviceURL` (optional, string): The URL of the Content service (DataProvider). If set, it overrides the local server option available in beta builds only.
+* `dataProviderProductionServiceURL (optional, string): The URL of the production DataProvider service. If omitted, the default Integration Layer production URL is used.
+* `dataProviderStageServiceURL (optional, string): The URL of the stage/int DataProvider service. If omitted, the default Integration Layer stage URL is used.
+* `dataProviderTestServiceURL (optional, string): The URL of the test/dev DataProvider service. If omitted, the default Integration Layer test URL is used.
 * `identityWebserviceURL` (optional, string): The URL of the identity webservices.
 * `identityWebsiteURL` (optional, string): The URL of the identity web portal.
 * `userDataServiceURL` (optional, string): The URL of the service with which user data can be synchronized (history, preferences, playlists).

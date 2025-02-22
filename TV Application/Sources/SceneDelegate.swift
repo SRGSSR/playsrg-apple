@@ -187,7 +187,7 @@ extension SceneDelegate: UIWindowSceneDelegate {
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSquareImages),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingAudioHomepageOption),
-                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
+                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceEnvironment),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
             )
             .debounce(for: 0.7, scheduler: DispatchQueue.main)

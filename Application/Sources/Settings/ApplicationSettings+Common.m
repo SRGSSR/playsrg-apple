@@ -197,19 +197,19 @@ void ApplicationSettingSetLastSelectedAudioLanguageCode(NSString *languageCode)
 
 NSString *ApplicationSettingServiceIdentifier(void)
 {
-    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingServiceIdentifier];
+    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingServiceEnvironment];
 }
 
 void ApplicationSettingSetServiceIdentifier(NSString *identifier)
 {
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults setObject:identifier forKey:PlaySRGSettingServiceIdentifier];
+    [userDefaults setObject:identifier forKey:PlaySRGSettingServiceEnvironment];
     [userDefaults synchronize];
 }
 
 NSURL *ApplicationSettingServiceURL(void)
 {
-    return [ServiceObjC urlForServiceId:ApplicationSettingServiceIdentifier()];
+    return [ServiceObjC urlForEnvironment:ApplicationSettingServiceIdentifier()];
 }
 
 BOOL ApplicationSettingAutoplayEnabled(void)
