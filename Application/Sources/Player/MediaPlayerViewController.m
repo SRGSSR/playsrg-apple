@@ -899,8 +899,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)reloadDetailsWithShow:(SRGShow *)show
 {
     if (show) {
-        BOOL prefersSquareImage = show.play_contentType == ContentTypeAudioOrRadio && [ApplicationConfiguration sharedApplicationConfiguration].squareImagesEnabled;
-        if (prefersSquareImage) {
+        BOOL prefersPodcastImage = show.play_contentType == ContentTypeAudioOrRadio && [ApplicationConfiguration sharedApplicationConfiguration].podcastImagesEnabled;
+        if (prefersPodcastImage) {
             self.showThumbnailImageViewAspectRatio16_9Constraint.priority = MediaPlayerViewLowLayoutPriority;
             self.showThumbnailImageViewAspectRatio1_1Constraint.priority = MediaPlayerViewHighLayoutPriority;
         }
@@ -908,7 +908,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.showThumbnailImageViewAspectRatio1_1Constraint.priority = MediaPlayerViewLowLayoutPriority;
             self.showThumbnailImageViewAspectRatio16_9Constraint.priority = MediaPlayerViewHighLayoutPriority;
         }
-        [self.showThumbnailImageView play_requestImage:prefersSquareImage ? show.podcastImage : show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
+        [self.showThumbnailImageView play_requestImage:prefersPodcastImage ? show.podcastImage : show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
         
         self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
         self.showLabel.text = show.title;
@@ -1336,8 +1336,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     NSString *channelUid = [self channelUid];
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioHomepageChannelForUid:channelUid];
-    
-    self.radioHomeView.hidden = (radioChannel == nil);
+    BOOL shouldHideRadioHomeView = [[ApplicationConfiguration sharedApplicationConfiguration] isAudioContentHomepagePreferred];
+    self.radioHomeView.hidden = (radioChannel == nil || shouldHideRadioHomeView);
     self.radioHomeButtonImageView.image = RadioChannelLogoImage(radioChannel);
     self.radioHomeButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, self.radioHomeButtonImageView.image.size.width + 2 * 10.f, 0.f, 10.f);
     

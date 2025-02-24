@@ -185,7 +185,7 @@ extension SceneDelegate: UIWindowSceneDelegate {
         #if DEBUG || NIGHTLY || BETA
             Publishers.MergeMany(
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
-                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSquareImages),
+                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPodcastImages),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingAudioHomepageOption),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)

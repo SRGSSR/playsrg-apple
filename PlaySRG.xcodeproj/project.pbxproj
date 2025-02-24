@@ -112,16 +112,16 @@
 		042F6F6729E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */; };
 		042F6F6829E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */; };
 		042F6F6929E0AE6E003F46AA /* UIImage+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */; };
-		04308F5E2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F5F2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F602B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F612B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F622B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F632B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F642B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F652B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F662B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
-		04308F672B9DB2FF00A11CC7 /* SquareImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */; };
+		04308F5E2B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F5F2B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F602B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F612B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F622B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F632B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F642B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F652B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F662B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
+		04308F672B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */; };
 		04395F1B2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */; };
 		04395F1C2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */; };
 		04395F1D2B1BB72400F6A634 /* TableLoadMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */; };
@@ -2868,7 +2868,7 @@
 		042F6F4929E09805003F46AA /* DateFormatter+playSRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+playSRG.swift"; sourceTree = "<group>"; };
 		042F6F5429E0A764003F46AA /* UIColor+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+PlaySRG.swift"; sourceTree = "<group>"; };
 		042F6F5F29E0AE6E003F46AA /* UIImage+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PlaySRG.swift"; sourceTree = "<group>"; };
-		04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareImages.swift; sourceTree = "<group>"; };
+		04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PodcastImages.swift; sourceTree = "<group>"; };
 		04395F1A2B1BB72400F6A634 /* TableLoadMoreFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableLoadMoreFooterView.swift; sourceTree = "<group>"; };
 		04395F202B1BBA6600F6A634 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		04395F262B1BC44200F6A634 /* StoreReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreReview.swift; sourceTree = "<group>"; };
@@ -4016,7 +4016,7 @@
 				6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */,
 				6F46B7BA281FB1FB00D20748 /* SettingsView.swift */,
 				6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */,
-				04308F5D2B9DB2FE00A11CC7 /* SquareImages.swift */,
+				04308F5D2B9DB2FE00A11CC7 /* PodcastImages.swift */,
 				6F73C639271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift */,
 				6F6C7AC82820576000BC3EA5 /* UserLocation.swift */,
 				6FDAAD8D2832824E008E2806 /* WhatsNewView.swift */,
@@ -8658,7 +8658,7 @@
 				6FAE561C26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6F30AB9C2604B66600457331 /* TopicCell.swift in Sources */,
 				0463DA102A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
-				04308F5E2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F5E2B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				6F16C7A326025698006F685A /* PageViewController.swift in Sources */,
 				04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
@@ -8745,7 +8745,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04308F5F2B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F5F2B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				046F8DCD2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210E826AEDDD200291CA9 /* Environment.swift in Sources */,
 				6F80106A20443230009FE197 /* PlayApplication.m in Sources */,
@@ -9018,7 +9018,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04308F602B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F602B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				046F8DCE2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EA26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106B20443230009FE197 /* PlayApplication.m in Sources */,
@@ -9291,7 +9291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04308F612B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F612B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				046F8DCF2B77D5F700A71091 /* UIVisualEffectView+PlaySRG.swift in Sources */,
 				6F9210EB26AEDDD700291CA9 /* Environment.swift in Sources */,
 				6F80106C20443230009FE197 /* PlayApplication.m in Sources */,
@@ -9801,7 +9801,7 @@
 				6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5F270DE4FE00210713 /* Publishers.swift in Sources */,
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
-				04308F622B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F622B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				6F16C81026025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10F2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				04EB14C6299E312200FD004A /* SheetTextView.swift in Sources */,
@@ -9949,7 +9949,7 @@
 				6FDF54F728530BAC0068BABB /* SearchViewController.swift in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF98263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
-				04308F632B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F632B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C63F271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -10109,7 +10109,7 @@
 				6FDF54F828530BAC0068BABB /* SearchViewController.swift in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF99263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
-				04308F642B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F642B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C640271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -10269,7 +10269,7 @@
 				6FDF54F928530BAC0068BABB /* SearchViewController.swift in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9A263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
-				04308F652B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F652B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C641271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -10429,7 +10429,7 @@
 				6FDF54FA28530BAC0068BABB /* SearchViewController.swift in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9B263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
-				04308F662B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F662B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
 				6F73C642271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
@@ -10611,7 +10611,7 @@
 				6FF5D1F92746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F67685A281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD92813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
-				04308F672B9DB2FF00A11CC7 /* SquareImages.swift in Sources */,
+				04308F672B9DB2FF00A11CC7 /* PodcastImages.swift in Sources */,
 				6FE14E69263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6FEC8A0C261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB19262DC7F700F717D0 /* Logger.swift in Sources */,
@@ -16641,7 +16641,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/PLAYNEXT-1964-PLAYNEXT-1634-additional-keys";
+				branch = develop;
 				kind = branch;
 			};
 		};

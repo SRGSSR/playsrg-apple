@@ -6,7 +6,7 @@
 
 import Foundation
 
-enum SquareImages: String, CaseIterable, Identifiable {
+enum PodcastImages: String, CaseIterable, Identifiable {
     case `default`
     case forced
     case ignored

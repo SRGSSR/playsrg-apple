@@ -37,19 +37,19 @@ typedef NS_ENUM(NSInteger, SettingPosterImages) {
 /**
  *  Squared image setting.
  */
-typedef NS_ENUM(NSInteger, SettingSquareImages) {
+typedef NS_ENUM(NSInteger, SettingPodcastImages) {
     /**
      *  Default (Firebase configuration).
      */
-    SettingSquareImagesDefault,
+    SettingPodcastImagesDefault,
     /**
      *  Forced square images.
      */
-    SettingSquareImagesForced,
+    SettingPodcastImagesForced,
     /**
      *  Ignored square images.
      */
-    SettingSquareImagesIgnored
+    SettingPodcastImagesIgnored
 };
 
 /**
@@ -79,7 +79,7 @@ OBJC_EXPORT void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuid
 
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);
-OBJC_EXPORT SettingSquareImages ApplicationSettingSquareImages(void);
+OBJC_EXPORT SettingPodcastImages ApplicationSettingPodcastImages(void);
 OBJC_EXPORT SettingAudioHomepageOption ApplicationSettingAudioHomepageOption(void);
 
 OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
