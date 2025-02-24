@@ -647,12 +647,19 @@ private extension Content {
 
         var imageVariant: SRGImageVariant {
             switch configuredSection {
-            case .tvAllShows:
-                .default
-            case .radioAllShows:
-                ContentType.audioOrRadio.imageVariant(mediaType: nil)
-            default:
-                ContentType.mixed.imageVariant(mediaType: nil)
+            // swiftlint:disable:next line_length
+            case .availableEpisodes, .favoriteShows, .history, .watchLater, .tvAllShows, .tvEpisodesForDay, .tvLive, .radioAllShows, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
+                ContentType.videoOrTV.imageVariant(mediaType: mediaType)
+            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite:
+                ContentType.audioOrRadio.imageVariant(mediaType: mediaType)
+            case .radioLatestVideos:
+                ContentType.mixed.imageVariant(mediaType: mediaType)
+            #if os(iOS)
+                case .downloads, .notifications:
+                    ContentType.videoOrTV.imageVariant(mediaType: mediaType)
+                case .radioShowAccess:
+                    ContentType.audioOrRadio.imageVariant(mediaType: mediaType)
+            #endif
             }
         }
 
@@ -871,64 +878,15 @@ private extension Content {
 
         var mediaType: SRGContentSectionMediaType? {
             switch configuredSection {
-            case .availableEpisodes:
+            // swiftlint:disable:next line_length
+            case .availableEpisodes, .favoriteShows, .history, .watchLater, .tvAllShows, .tvEpisodesForDay, .tvLive, .radioAllShows, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
                 .video
-            case .favoriteShows:
-                .video
-            case .history:
-                .video
-            case .watchLater:
-                .video
-            case .tvAllShows:
-                .video
-            case .tvEpisodesForDay:
-                .video
-            case .radioAllShows:
-                .audio
-            case .radioEpisodesForDay:
-                .audio
-            case .radioFavoriteShows:
-                .audio
-            case .radioLatest:
-                .audio
-            case .radioLatestEpisodes:
-                .audio
-            case .radioLatestEpisodesFromFavorites:
+            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite:
                 .audio
             case .radioLatestVideos:
                 .video
-            case .radioMostPopular:
-                .audio
-            case .radioResumePlayback:
-                .audio
-            case .radioWatchLater:
-                .audio
-            case .tvLive:
-                .video
-            case .radioLive:
-                .audio
-            case .radioLiveSatellite:
-                .audio
-            case .tvLiveCenterScheduledLivestreams:
-                .video
-            case .tvLiveCenterScheduledLivestreamsAll:
-                .video
-            case .tvLiveCenterEpisodes:
-                .video
-            case .tvLiveCenterEpisodesAll:
-                .video
-            case .tvScheduledLivestreams:
-                .video
-            case .tvScheduledLivestreamsNews:
-                .video
-            case .tvScheduledLivestreamsSport:
-                .video
-            case .tvScheduledLivestreamsSignLanguage:
-                .video
             #if os(iOS)
-                case .downloads:
-                    .video
-                case .notifications:
+                case .downloads, .notifications:
                     .video
                 case .radioShowAccess:
                     .audio
