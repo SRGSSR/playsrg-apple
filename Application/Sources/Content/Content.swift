@@ -925,12 +925,14 @@ private extension Content {
                 .video
             case .tvScheduledLivestreamsSignLanguage:
                 .video
-            case .downloads:
-                .video
-            case .notifications:
-                .video
-            case .radioShowAccess:
-                .audio
+            #if os(iOS)
+                case .downloads:
+                    .video
+                case .notifications:
+                    .video
+                case .radioShowAccess:
+                    .audio
+            #endif
             }
         }
 
