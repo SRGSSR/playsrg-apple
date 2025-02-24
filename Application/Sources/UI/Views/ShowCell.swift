@@ -55,7 +55,7 @@ struct ShowCell: View, PrimaryColorSettable {
                 VStack(spacing: 0) {
                     ShowVisualView(show: model.show, size: .small, imageVariant: imageVariant, aspectRatio: ShowCellSize.aspectRatio(for: imageVariant, isSwimlane: isSwimlaneLayout))
                         .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant, isSwimlane: isSwimlaneLayout), contentMode: .fit)
-                    if imageVariant == .default {
+                    if imageVariant == .default || imageVariant == .podcast {
                         DescriptionView(model: model, style: style)
                             .primaryColor(primaryColor)
                             .padding(.horizontal, ShowCellSize.horizontalPadding)
@@ -137,7 +137,7 @@ enum ShowCellSize {
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
 
     private static func heightOffset(for imageVariant: SRGImageVariant) -> CGFloat {
-        imageVariant == .default ? constant(iOS: 32, tvOS: 45) : 0
+        imageVariant == .default || imageVariant == .podcast ? constant(iOS: 32, tvOS: 45) : 0
     }
 
     fileprivate static func aspectRatio(for imageVariant: SRGImageVariant, isSwimlane: Bool) -> CGFloat {
