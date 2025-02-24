@@ -65,14 +65,18 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
 
     private var aspectRatio: CGFloat {
         if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
-            MediaSquareCellSize.defaultAspectRatio
+            if layout == .adaptive, horizontalSizeClass == .regular {
+                MediaCellSize.defaultAspectRatio
+            } else {
+                MediaSquareCellSize.defaultAspectRatio
+            }
         } else {
             MediaCellSize.defaultAspectRatio
         }
     }
 
     private var contentMode: ContentMode {
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, aspectRatio == MediaCellSize.defaultAspectRatio {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, aspectRatio == MediaCellSize.defaultAspectRatio, horizontalSizeClass != .regular {
             .fill
         } else {
             .fit
