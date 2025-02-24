@@ -16641,7 +16641,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/PLAYNEXT-1964-PLAYNEXT-1634-additional-keys";
+				branch = develop;
 				kind = branch;
 			};
 		};
