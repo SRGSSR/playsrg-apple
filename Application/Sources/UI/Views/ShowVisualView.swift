@@ -26,7 +26,7 @@ struct ShowVisualView: View {
         self.show = show
         self.size = size
         self.imageVariant = imageVariant
-        if show?.isPodcastImageFallbackURL == true || aspectRatio != 1 {
+        if show?.shouldFallbackToPodcastImage == true || aspectRatio != 1 {
             self.contentMode = .aspectFill
         } else {
             self.contentMode = contentMode
@@ -44,7 +44,7 @@ struct ShowVisualView: View {
         case .poster:
             url(for: show?.posterImage, size: size)
         case .podcast:
-            if show?.isPodcastImageFallbackURL == true || aspectRatio != 1 {
+            if show?.shouldFallbackToPodcastImage == true || aspectRatio != 1 {
                 url(for: show?.image, size: size)
             } else {
                 url(for: show?.podcastImage, size: size)
