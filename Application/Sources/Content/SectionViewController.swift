@@ -436,18 +436,25 @@ extension SectionViewController {
         }
     }
 
-    static func showsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?) -> SectionViewController {
+    static func showsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?) -> UIViewController {
         if transmission == .radio, let channelUid {
             SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
-        } else if transmission == .radio, let channelUid = ApplicationConfiguration.shared.radioHomepageChannels.first?.uid {
-            // FIXME: Load all radio A to Z shows, not only from the first channel.
-            SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
+        } else if transmission == .radio {
+            #if os(iOS)
+                if ApplicationConfiguration.shared.radioHomepageChannels.count == 1 {
+                    SectionViewController(section: .configured(.radioAllShows(channelUid: ApplicationConfiguration.shared.radioHomepageChannels[0].uid)), initialSectionId: nil)
+                } else {
+                    ShowAccessContainerViewController(accessType: .alphabetical, radioChannels: ApplicationConfiguration.shared.radioHomepageChannels)
+                }
+            #else
+                UIViewController()
+            #endif
         } else {
             SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
     }
 
-    static func showsViewController(for transmission: SRGTransmission, channelUid: String?) -> SectionViewController {
+    static func showsViewController(for transmission: SRGTransmission, channelUid: String?) -> UIViewController {
         showsViewController(for: transmission, channelUid: channelUid, initialSectionId: nil)
     }
 }
