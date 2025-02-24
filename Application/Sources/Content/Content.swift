@@ -870,7 +870,68 @@ private extension Content {
         }
 
         var mediaType: SRGContentSectionMediaType? {
-            nil
+            switch configuredSection {
+            case .availableEpisodes:
+                .video
+            case .favoriteShows:
+                .video
+            case .history:
+                .video
+            case .watchLater:
+                .video
+            case .tvAllShows:
+                .video
+            case .tvEpisodesForDay:
+                .video
+            case .radioAllShows:
+                .audio
+            case .radioEpisodesForDay:
+                .audio
+            case .radioFavoriteShows:
+                .audio
+            case .radioLatest:
+                .audio
+            case .radioLatestEpisodes:
+                .audio
+            case .radioLatestEpisodesFromFavorites:
+                .audio
+            case .radioLatestVideos:
+                .video
+            case .radioMostPopular:
+                .audio
+            case .radioResumePlayback:
+                .audio
+            case .radioWatchLater:
+                .audio
+            case .tvLive:
+                .video
+            case .radioLive:
+                .audio
+            case .radioLiveSatellite:
+                .audio
+            case .tvLiveCenterScheduledLivestreams:
+                .video
+            case .tvLiveCenterScheduledLivestreamsAll:
+                .video
+            case .tvLiveCenterEpisodes:
+                .video
+            case .tvLiveCenterEpisodesAll:
+                .video
+            case .tvScheduledLivestreams:
+                .video
+            case .tvScheduledLivestreamsNews:
+                .video
+            case .tvScheduledLivestreamsSport:
+                .video
+            case .tvScheduledLivestreamsSignLanguage:
+                .video
+            case .downloads:
+                .video
+            case .notifications:
+                .video
+            case .radioShowAccess:
+                .audio
+            }
         }
 
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
