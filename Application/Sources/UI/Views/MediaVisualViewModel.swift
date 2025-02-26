@@ -28,7 +28,11 @@ final class MediaVisualViewModel: ObservableObject {
     }
 
     func imageUrl(for size: SRGImageSize) -> URL? {
-        url(for: media?.image, size: size)
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, media?.show?.shouldFallbackToPodcastImage == false {
+            url(for: media?.show?.podcastImage, size: size)
+        } else {
+            url(for: media?.image, size: size)
+        }
     }
 
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
