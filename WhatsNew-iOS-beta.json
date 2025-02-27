@@ -241,5 +241,6 @@
     "3.8.10-462": "- Improved iOS 18 compatibility.\n- Improve access to Swiss musical radios.",
     "3.8.10-463": "- Improved iOS 18 compatibility.\n- Improve access to Swiss musical radios for all BUs with radio channels.",
     "3.8.11-464": "- Fix some missing video and audio titles.\n- Fix some crashes on Mac (Designed for iPad).",
-    "3.8.12-465": "- Allow service domain udpate."
+    "3.8.12-465": "- Allow service domain udpate.",
+    "3.9.0-466": "- The Audio Home page is now editorially curated and offers a new experience to discover and enjoy audio content."
 }
