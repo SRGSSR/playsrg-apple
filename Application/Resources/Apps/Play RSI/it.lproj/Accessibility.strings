@@ -4,17 +4,11 @@
 /* Song description. First placeholder is song title, second is artist name */
 "%1$@, by %2$@" = "%1$@, di %2$@";
 
-/* Label displaying the number of listenings on the player */
-"%@ listenings" = "%@ ascolti";
-
 /* Live content label, with a channel title */
 "%@ live" = "%@ live";
 
 /* Number of results aggregated in search */
 "%@ results" = "%@ risultati";
-
-/* Label displaying the number of views on the player */
-"%@ views" = "%@ visualizzazioni";
 
 /* Accessibility label for the 360 badge */
 "360-degree content" = "Contenuto 360 gradi";
