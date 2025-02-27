@@ -532,9 +532,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
     
-#if DEBUG || NIGHTLY || BETA
     self.audioContentHomepagePreferred = [firebaseConfiguration boolForKey:@"audioContentHomepagePreferred"];
-#endif
     
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];

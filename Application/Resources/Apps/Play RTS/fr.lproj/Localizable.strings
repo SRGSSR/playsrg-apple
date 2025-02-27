@@ -34,17 +34,11 @@
 /* Short label displayed on a media expiring soon */
 "%@ left" = "Encore %@";
 
-/* Label displaying the number of listenings on the player */
-"%@ listenings" = "%@ écoutes";
-
 /* Title displayed on the radio home button */
 "%@ overview" = "Accueil %@";
 
 /* Text displayed on live cells telling how much time remains for a program currently on air */
 "%@ remaining" = "Encore %@";
-
-/* Label displaying the number of views on the player */
-"%@ views" = "%@ vues";
 
 /* Speed factor */
 "%@×" = "%@×";
@@ -582,7 +576,8 @@
 /* Quality settings section header */
 "Quality" = "Qualité";
 
-/* Title label to present main radio livestreams */
+/* Title label to present main radio livestreams
+   Title label to present radio channels livestreams */
 "Radio channels" = "Chaînes radio";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
@@ -609,9 +604,6 @@
 /* Alert choice to resume playback
    Resume playback button label */
 "Resume" = "Reprendre";
-
-/* Title label used to present medias whose playback can be resumed */
-"Resume playback" = "Reprendre la lecture";
 
 /* Title label used to present audios whose playback can be resumed */
 "Resume audios playback" = "Reprendre la lecture";
