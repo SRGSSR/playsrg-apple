@@ -16641,7 +16641,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "PLAYNEXT-1271-bool-improvement";
+				branch = develop;
 				kind = branch;
 			};
 		};
