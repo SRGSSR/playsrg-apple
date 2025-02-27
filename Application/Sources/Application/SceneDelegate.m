@@ -58,7 +58,7 @@ static void *s_kvoContext = &s_kvoContext;
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
-    [defaults addObserver:self forKeyPath:PlaySRGSettingServiceIdentifier options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingServiceEnvironment options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingPosterImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingSquareImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
@@ -70,7 +70,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
-    [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceIdentifier];
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceEnvironment];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingUserLocation];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingPosterImages];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingSquareImages];
@@ -110,7 +110,7 @@ static void *s_kvoContext = &s_kvoContext;
         if (! [serviceIdentifier isEqual:ApplicationSettingServiceIdentifier()]) {
             ApplicationSettingSetServiceIdentifier(serviceIdentifier);
             
-            NSString *serviceName = [ServiceObjC nameForServiceId:serviceIdentifier];
+            NSString *serviceName = [ServiceObjC nameForEnvironment:serviceIdentifier];
             [Banner showWith:BannerStyleInfo
                      message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a custom URL."), serviceName]
                        image:[UIImage imageNamed:@"settings"]
@@ -560,7 +560,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (s_kvoContext == context) {
-        if ([keyPath isEqualToString:PlaySRGSettingServiceIdentifier] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages] || [keyPath isEqualToString:PlaySRGSettingSquareImages] ||  [keyPath isEqualToString:PlaySRGSettingAudioHomepageOption]) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceEnvironment] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages] || [keyPath isEqualToString:PlaySRGSettingSquareImages] ||  [keyPath isEqualToString:PlaySRGSettingAudioHomepageOption]) {
             // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the
             // user interface. Scheduled for the next run loop to have the same code in the app delegate (updating the
             // data provider) executed first.

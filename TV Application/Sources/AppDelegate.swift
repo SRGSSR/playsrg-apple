@@ -38,7 +38,7 @@ extension AppDelegate: UIApplicationDelegate {
 
         PlayApplicationRunOnce({ completionHandler in
             let userDefaults = UserDefaults.standard
-            userDefaults.removeObject(forKey: PlaySRGSettingServiceIdentifier)
+            userDefaults.removeObject(forKey: PlaySRGSettingServiceEnvironment)
             userDefaults.synchronize()
             completionHandler(true)
         }, "DataProviderServiceURLChange")
@@ -97,7 +97,7 @@ extension AppDelegate: UIApplicationDelegate {
 
         #if DEBUG || NIGHTLY || BETA
             Publishers.Merge(
-                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
+                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceEnvironment),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
             )
             .receive(on: DispatchQueue.main)

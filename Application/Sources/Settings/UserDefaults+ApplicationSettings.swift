@@ -25,8 +25,8 @@ extension UserDefaults {
         string(forKey: PlaySRG.PlaySRGSettingAudioHomepageOption)
     }
 
-    @objc dynamic var PlaySRGSettingServiceIdentifier: String? {
-        string(forKey: PlaySRG.PlaySRGSettingServiceIdentifier)
+    @objc dynamic var PlaySRGSettingServiceEnvironment: String? {
+        string(forKey: PlaySRG.PlaySRGSettingServiceEnvironment)
     }
 
     @objc dynamic var PlaySRGSettingUserLocation: String? {
