@@ -659,7 +659,16 @@ private extension SectionViewController {
                     #if os(iOS)
                         let horizontalMargin = horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: horizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
-                            MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                            switch configuration.properties.mediaType {
+                            case .audio:
+                                if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                                    SmallMediaSquareCellSize.fullWidth()
+                                } else {
+                                    MediaCellSize.fullWidth()
+                                }
+                            default:
+                                MediaCellSize.fullWidth()
+                            }
                         }
                     #else
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
@@ -669,7 +678,16 @@ private extension SectionViewController {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { _, _ in
-                            MediaCellSize.fullWidth()
+                            switch configuration.properties.mediaType {
+                            case .audio:
+                                if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                                    SmallMediaSquareCellSize.fullWidth()
+                                } else {
+                                    MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                                }
+                            default:
+                                MediaCellSize.fullWidth(horizontalSizeClass: horizontalSizeClass)
+                            }
                         }
                     } else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, horizontalMargin: Self.layoutHorizontalMargin, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
@@ -771,19 +789,19 @@ private extension SectionViewController {
                     case .predefined:
                         switch contentSection.presentation.type {
                         case .favoriteShows:
-                            ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
+                            ShowCell(show: show, style: .favorite, imageVariant: imageVariant, isSwimlaneLayout: false)
                         default:
-                            ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                            ShowCell(show: show, style: .standard, imageVariant: imageVariant, isSwimlaneLayout: false)
                         }
                     default:
-                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant, isSwimlaneLayout: false)
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .favoriteShows, .radioFavoriteShows:
-                        ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .favorite, imageVariant: imageVariant, isSwimlaneLayout: false)
                     default:
-                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant, isSwimlaneLayout: false)
                     }
                 }
             case let .topic(topic):

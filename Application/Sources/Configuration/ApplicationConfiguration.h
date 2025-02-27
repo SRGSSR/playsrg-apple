@@ -69,7 +69,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, copy, nullable) NSString *discoverySubtitleOptionLanguage;
 
 @property (nonatomic, readonly, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
-@property (nonatomic, readonly, getter=areSquareImagesEnabled) BOOL squareImagesEnabled;
+@property (nonatomic, readonly, getter=arePodcastImagesEnabled) BOOL podcastImagesEnabled;
 
 @property (nonatomic, readonly) NSArray<NSNumber *> *liveHomeSections;                  // wrap `HomeSection` values
 

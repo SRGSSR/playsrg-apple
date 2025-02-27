@@ -16,13 +16,15 @@ private let kDefaultNumberOfLivestreamPlaceholders = 4
     case audioOrRadio
     case mixed
 
-    var imageVariant: SRGImageVariant {
-        switch self {
-        case .videoOrTV:
+    func imageVariant(mediaType: SRGContentSectionMediaType?) -> SRGImageVariant {
+        switch (self, mediaType) {
+        case (.videoOrTV, _):
             ApplicationConfiguration.shared.arePosterImagesEnabled ? .poster : .default
-        case .audioOrRadio:
-            ApplicationConfiguration.shared.areSquareImagesEnabled ? .podcast : .default
-        case .mixed:
+        case (.audioOrRadio, .audio):
+            ApplicationConfiguration.shared.arePodcastImagesEnabled ? .podcast : .default
+        case (.audioOrRadio, _):
+            .default
+        case (.mixed, _):
             .default
         }
     }
@@ -149,6 +151,7 @@ protocol SectionProperties {
     var label: String? { get }
     var image: SRGImage? { get }
     var imageVariant: SRGImageVariant { get }
+    var mediaType: SRGContentSectionMediaType? { get }
 
     /// Properties for section detail display
     var displaysTitle: Bool { get }
@@ -241,19 +244,7 @@ private extension Content {
         }
 
         var imageVariant: SRGImageVariant {
-            switch contentSection.type {
-            case .shows:
-                contentType.imageVariant
-            case .predefined:
-                switch presentation.type {
-                case .favoriteShows:
-                    contentType.imageVariant
-                default:
-                    .default
-                }
-            default:
-                .default
-            }
+            contentType.imageVariant(mediaType: contentSection.mediaType)
         }
 
         var displaysTitle: Bool {
@@ -422,6 +413,10 @@ private extension Content {
             }
 
             return id
+        }
+
+        var mediaType: SRGContentSectionMediaType? {
+            contentSection.mediaType
         }
 
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
@@ -652,12 +647,19 @@ private extension Content {
 
         var imageVariant: SRGImageVariant {
             switch configuredSection {
-            case .tvAllShows:
-                .default
-            case .radioAllShows:
-                ContentType.audioOrRadio.imageVariant
-            default:
-                ContentType.mixed.imageVariant
+            // swiftlint:disable:next line_length
+            case .availableEpisodes, .favoriteShows, .history, .watchLater, .tvEpisodesForDay, .tvLive, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
+                ContentType.videoOrTV.imageVariant(mediaType: mediaType)
+            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite, .radioAllShows:
+                ContentType.audioOrRadio.imageVariant(mediaType: mediaType)
+            case .radioLatestVideos, .tvAllShows:
+                ContentType.mixed.imageVariant(mediaType: mediaType)
+            #if os(iOS)
+                case .downloads, .notifications:
+                    ContentType.videoOrTV.imageVariant(mediaType: mediaType)
+                case .radioShowAccess:
+                    ContentType.audioOrRadio.imageVariant(mediaType: mediaType)
+            #endif
             }
         }
 
@@ -872,6 +874,24 @@ private extension Content {
 
         var openContentPageId: String? {
             nil
+        }
+
+        var mediaType: SRGContentSectionMediaType? {
+            switch configuredSection {
+            // swiftlint:disable:next line_length
+            case .availableEpisodes, .favoriteShows, .history, .watchLater, .tvAllShows, .tvEpisodesForDay, .tvLive, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
+                .video
+            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite, .radioAllShows:
+                .audio
+            case .radioLatestVideos:
+                .video
+            #if os(iOS)
+                case .downloads, .notifications:
+                    .video
+                case .radioShowAccess:
+                    .audio
+            #endif
+            }
         }
 
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {

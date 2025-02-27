@@ -174,7 +174,7 @@ Feeds
 * `historySynchronizationInterval` (optional, number): Duration in seconds for history synchronization. If omitted, defaults to 30 seconds. Miminum value is 10 seconds.
 * `minimumSocialViewCount` (optional, number): The threshold under which social view counts will not be displayed. If omitted, 0.
 * `posterImagesEnabled` (optional, boolean): If set to `true`, show poster images are displayed where appropriate.
-* `squareImagesEnabled` (optional, boolean): If set to `true`, show square images are displayed where appropriate.
+* `podcastImagesEnabled` (optional, boolean): If set to `true`, show square images are displayed where appropriate.
 * `showsUnavailable` (optional, boolean): If set to `true`, all features related to shows are removed.
 * `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.
 * `discoverySubtitleOptionLanguage` (optional, string): Set system subtitle language to this value once and at the beginning to help user discover that content is subtitled in that language.

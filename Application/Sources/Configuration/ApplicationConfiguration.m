@@ -154,7 +154,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSString *discoverySubtitleOptionLanguage;
 
 @property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
-@property (nonatomic, getter=areSquareImagesEnabled) BOOL squareImagesEnabled;
+@property (nonatomic, getter=arePodcastImagesEnabled) BOOL podcastImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
@@ -287,25 +287,25 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
 }
 
-- (BOOL)areSquareImagesEnabled
+- (BOOL)arePodcastImagesEnabled
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    switch (ApplicationSettingSquareImages()) {
-        case SettingSquareImagesForced: {
+    switch (ApplicationSettingPodcastImages()) {
+        case SettingPodcastImagesForced: {
             return YES;
             break;
         }
-        case SettingSquareImagesIgnored: {
+        case SettingPodcastImagesIgnored: {
             return NO;
             break;
         }
         default: {
-            return _squareImagesEnabled;
+            return _podcastImagesEnabled;
             break;
         }
     }
 #else
-    return _squareImagesEnabled;
+    return _podcastImagesEnabled;
 #endif
 }
 
@@ -522,7 +522,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.discoverySubtitleOptionLanguage = [firebaseConfiguration stringForKey:@"discoverySubtitleOptionLanguage"];
     
     self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
-    self.squareImagesEnabled = [firebaseConfiguration boolForKey:@"squareImagesEnabled"];
+    self.podcastImagesEnabled = [firebaseConfiguration boolForKey:@"podcastImagesEnabled"];
     
 #if TARGET_OS_IOS
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];

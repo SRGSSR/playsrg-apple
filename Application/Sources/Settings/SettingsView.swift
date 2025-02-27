@@ -537,12 +537,12 @@ struct SettingsView: View {
                     }
                     #if os(iOS) || (os(tvOS) && DEBUG)
                         NextLink {
-                            SquareImagesSelectionView()
+                            PodcastImagesSelectionView()
                             #if os(iOS)
                                 .navigationBarTitleDisplayMode(.inline)
                             #endif
                         } label: {
-                            SquareImagesSelectionCell()
+                            PodcastImagesSelectionCell()
                         }
                         NextLink {
                             AudioHomepageSelectionView()
@@ -610,14 +610,14 @@ struct SettingsView: View {
                 }
             }
 
-            private struct SquareImagesSelectionCell: View {
-                @AppStorage(PlaySRGSettingSquareImages) private var selectedSquareImages = SquareImages.default
+            private struct PodcastImagesSelectionCell: View {
+                @AppStorage(PlaySRGSettingPodcastImages) private var selectedPodcastImages = PodcastImages.default
 
                 var body: some View {
                     HStack {
                         Text("🎧 \(NSLocalizedString("Square images", comment: "Label of the button for Podcast square image format selection"))")
                         Spacer()
-                        Text(selectedSquareImages.description)
+                        Text(selectedPodcastImages.description)
                             .foregroundColor(Color.play_sectionSecondary)
                             .multilineTextAlignment(.trailing)
                             .lineLimit(2)
@@ -768,11 +768,11 @@ struct SettingsView: View {
 
             // MARK: Podcast square images selection
 
-            private struct SquareImagesSelectionView: View {
+            private struct PodcastImagesSelectionView: View {
                 var body: some View {
                     List {
-                        ForEach(SquareImages.allCases) { squareImages in
-                            SquareImagesCell(squareImages: squareImages)
+                        ForEach(PodcastImages.allCases) { podcastImages in
+                            PodcastImagesCell(podcastImages: podcastImages)
                         }
                     }
                     .srgFont(.body)
@@ -785,17 +785,17 @@ struct SettingsView: View {
                 }
             }
 
-            private struct SquareImagesCell: View {
-                let squareImages: SquareImages
+            private struct PodcastImagesCell: View {
+                let podcastImages: PodcastImages
 
-                @AppStorage(PlaySRGSettingSquareImages) private var selectedSquareImages = SquareImages.default
+                @AppStorage(PlaySRGSettingPodcastImages) private var selectedPodcastImages = PodcastImages.default
 
                 var body: some View {
                     Button(action: select) {
                         HStack {
-                            Text(squareImages.description)
+                            Text(podcastImages.description)
                             Spacer()
-                            if squareImages == selectedSquareImages {
+                            if podcastImages == selectedPodcastImages {
                                 Image(systemName: "checkmark")
                             }
                         }
@@ -804,7 +804,7 @@ struct SettingsView: View {
                 }
 
                 private func select() {
-                    selectedSquareImages = squareImages
+                    selectedPodcastImages = podcastImages
                 }
             }
 
