@@ -23,20 +23,20 @@ The checklist is a markdown list which can be copy and past in a Jira ticket Sma
 > [Update the App Store screenshots](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#update-the-app-store-screenshots)
 
 # Build versions
--! Check if new commits after the latest beta tags. If not, it's best to use existing tags.
--! Update (iOS|tvOS) production remote configuration on Firebase
+-! If a Private Beta build aldready exist, check if new commits after this latest beta tag. If not, it's best to use this existing tag.
+- If a Private Beta has not been built yet, commit to the `main` branch with message "PLAYNEXT-XXXX Update what's new", including an update to the `WhatsNew-iOS-beta.json` and `WhatsNew-tvOS-beta.json` files with an incremented build number.
 - Build (iOS|tvOS) App Store builds (with fastlane on CI)
 > [Build and distribute Public Betas and AppStore Builds](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#build-and-distribute-public-betas-and-appstore-builds)
-> It will schedule private beta as well and creates new tags.
+> It will schedule Private Beta as well if not yet built and creates new tags, if not already exist.
+-! Update (iOS|tvOS) production remote configuration on Firebase.
 
 # Submit to Apple review
 -! Check what's new App Store release notes are translated on crowdin
 -! Submit to Apple review the new (iOS|tvOS) version on App Store Connect (with fastlane on CI)
 > [Submit an App Store release for review](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#submit-an-app-store-release-for-review)
-> It gets translated what's new from Crowdin
--! Update (iOS|tvOS) status pages on Confluence (Up coming status, statistics changes)
-> [Mobile app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799081000/Mobile+App+Status)
-> [TV app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799082100/TV+App+Status)
+> The "what's new" content for the App Store is automatically retrieved from Crowdin.
+-! Check all versions have the correct build number and state changed to "waiting for review"
+> The status for the 4 BUs and 2 platforms can be check with `make appstore-status`.
 
 # Check validation
 -! 📱 Obtain successful Apple review and release Play RSI iOS
@@ -52,15 +52,9 @@ The checklist is a markdown list which can be copy and past in a Jira ticket Sma
 -! 📱 Create iOS Github release with the released tag
 > https://github.com/SRGSSR/playsrg-apple/releases
 > Auto generate the text from the last released tag
--! 📱 Update iOS status page on Confluence (Up coming status, statistics changes)
-- 📱 Release the iOS Jira release with date and released page
-> [Mobile app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799081000/Mobile+App+Status)
 -! 📺 Create tvOS Github release with the released tag
 > https://github.com/SRGSSR/playsrg-apple/releases
 > Auto generate the text from the last released tag
--! 📺 Update tvOS status page on Confluence (Up coming status, statistics changes)
-> [TV app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799082100/TV+App+Status)
-- 📺 Release the tvOS Jira release with date and released page
 ```
 
 # AppStore and TestFlight review status
