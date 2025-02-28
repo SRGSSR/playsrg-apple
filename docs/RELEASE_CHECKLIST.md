@@ -34,9 +34,6 @@ The checklist is a markdown list which can be copy and past in a Jira ticket Sma
 -! Submit to Apple review the new (iOS|tvOS) version on App Store Connect (with fastlane on CI)
 > [Submit an App Store release for review](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#submit-an-app-store-release-for-review)
 > It gets translated what's new from Crowdin
--! Update (iOS|tvOS) status pages on Confluence (Up coming status, statistics changes)
-> [Mobile app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799081000/Mobile+App+Status)
-> [TV app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799082100/TV+App+Status)
 
 # Check validation
 -! 📱 Obtain successful Apple review and release Play RSI iOS
@@ -52,15 +49,9 @@ The checklist is a markdown list which can be copy and past in a Jira ticket Sma
 -! 📱 Create iOS Github release with the released tag
 > https://github.com/SRGSSR/playsrg-apple/releases
 > Auto generate the text from the last released tag
--! 📱 Update iOS status page on Confluence (Up coming status, statistics changes)
-- 📱 Release the iOS Jira release with date and released page
-> [Mobile app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799081000/Mobile+App+Status)
 -! 📺 Create tvOS Github release with the released tag
 > https://github.com/SRGSSR/playsrg-apple/releases
 > Auto generate the text from the last released tag
--! 📺 Update tvOS status page on Confluence (Up coming status, statistics changes)
-> [TV app status](https://srgssr-ch.atlassian.net/wiki/spaces/SRGPLAY/pages/799082100/TV+App+Status)
-- 📺 Release the tvOS Jira release with date and released page
 ```
 
 # AppStore and TestFlight review status
