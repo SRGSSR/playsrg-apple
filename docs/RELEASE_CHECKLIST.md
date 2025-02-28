@@ -24,8 +24,8 @@ The checklist is a markdown list which can be copy and past in a Jira ticket Sma
 
 # Build versions
 -! If a Private Beta build aldready exist, check if new commits after this latest beta tag. If not, it's best to use this existing tag.
+- If a Private Beta has not been built yet, commit to the `main` branch with message "PLAYNEXT-XXXX Update what's new", including an update to the `WhatsNew-iOS-beta.json` and `WhatsNew-tvOS-beta.json` files with an incremented build number.
 - Build (iOS|tvOS) App Store builds (with fastlane on CI)
-> If a Private Beta has not been built yet, commit to the `main` branch with message "PLAYNEXT-XXXX Update what's new", including an update to the `WhatsNew-iOS-beta.json` and `WhatsNew-tvOS-beta.json` files with an incremented build number.
 > [Build and distribute Public Betas and AppStore Builds](https://github.com/SRGSSR/playsrg-apple/blob/main/docs/WORKFLOWS.md#build-and-distribute-public-betas-and-appstore-builds)
 > It will schedule Private Beta as well if not yet built and creates new tags, if not already exist.
 -! Update (iOS|tvOS) production remote configuration on Firebase.
