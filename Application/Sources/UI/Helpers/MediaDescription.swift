@@ -46,14 +46,14 @@ import SRGAppearanceSwift
         case .date:
             return formattedDate(for: media)
         case .time:
-            if let show = media.show, !areRedundant(media: media, show: show) {
+            if let show = media.show {
                 // Unbreakable spaces before / after the separator
                 return "\(formattedTime(for: media)) · \(show.title)"
             } else {
                 return formattedTime(for: media)
             }
         case .title:
-            if let show = media.show, !areRedundant(media: media, show: show) {
+            if let show = media.show {
                 return show.title
             } else {
                 return summary(for: media)
