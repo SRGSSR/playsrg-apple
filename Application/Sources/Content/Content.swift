@@ -648,11 +648,11 @@ private extension Content {
         var imageVariant: SRGImageVariant {
             switch configuredSection {
             // swiftlint:disable:next line_length
-            case .availableEpisodes, .favoriteShows, .history, .watchLater, .tvEpisodesForDay, .tvLive, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
+            case .availableEpisodes, .history, .watchLater, .tvEpisodesForDay, .tvLive, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
                 ContentType.videoOrTV.imageVariant(mediaType: mediaType)
             case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite, .radioAllShows:
                 ContentType.audioOrRadio.imageVariant(mediaType: mediaType)
-            case .radioLatestVideos, .tvAllShows:
+            case .radioLatestVideos, .tvAllShows, .favoriteShows:
                 ContentType.mixed.imageVariant(mediaType: mediaType)
             #if os(iOS)
                 case .downloads, .notifications:
