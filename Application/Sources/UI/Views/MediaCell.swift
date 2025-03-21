@@ -30,6 +30,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     let media: SRGMedia?
     let style: Style
     let layout: Layout
+    let forceDefaultAspectRatio: Bool
     let action: (() -> Void)?
 
     var primaryColor: Color = .srgGrayD2
@@ -64,7 +65,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     }
 
     private var aspectRatio: CGFloat {
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, !forceDefaultAspectRatio, media?.mediaType == .audio {
             if layout == .adaptive, horizontalSizeClass == .regular {
                 MediaCellSize.defaultAspectRatio
             } else {
@@ -76,7 +77,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     }
 
     private var contentMode: ContentMode {
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, aspectRatio == MediaCellSize.defaultAspectRatio, horizontalSizeClass != .regular {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, !forceDefaultAspectRatio, media?.mediaType == .audio, aspectRatio == MediaCellSize.defaultAspectRatio, horizontalSizeClass != .regular {
             .fill
         } else {
             .fit
@@ -84,7 +85,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     }
 
     private var visualViewContentMode: ImageView.ContentMode {
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, aspectRatio == MediaSquareCellSize.defaultAspectRatio {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, !forceDefaultAspectRatio, media?.mediaType == .audio, aspectRatio == MediaSquareCellSize.defaultAspectRatio {
             .aspectFill
         } else {
             .aspectFit
@@ -92,13 +93,14 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
     }
 
     private var isSmallAudioSquaredCell: Bool {
-        ApplicationConfiguration.shared.arePodcastImagesEnabled && media?.mediaType == .audio && direction == .horizontal
+        !forceDefaultAspectRatio && ApplicationConfiguration.shared.arePodcastImagesEnabled && media?.mediaType == .audio && direction == .horizontal
     }
 
-    init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
+    init(media: SRGMedia?, style: Style, layout: Layout = .adaptive, forceDefaultAspectRatio: Bool = false, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
         self.layout = layout
+        self.forceDefaultAspectRatio = forceDefaultAspectRatio
         self.action = action
     }
 
@@ -119,7 +121,7 @@ struct MediaCell: View, PrimaryColorSettable, SecondaryColorSettable {
             #else
                 Stack(direction: .vertical, spacing: 0) {
                     Stack(direction: direction, spacing: 0) {
-                        MediaVisualView(media: media, size: .small, contentMode: visualViewContentMode, embeddedDirection: direction)
+                        MediaVisualView(media: media, size: .small, contentMode: visualViewContentMode, embeddedDirection: direction, forceDefaultAspectRatio: forceDefaultAspectRatio)
                             .aspectRatio(aspectRatio, contentMode: contentMode)
                             .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                             .cornerRadius(LayoutStandardViewCornerRadius)

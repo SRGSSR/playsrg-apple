@@ -27,8 +27,8 @@ final class MediaVisualViewModel: ObservableObject {
             .assign(to: &$progress)
     }
 
-    func imageUrl(for size: SRGImageSize) -> URL? {
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, media?.show?.shouldFallbackToPodcastImage == false {
+    func imageUrl(for size: SRGImageSize, forceDefaultAspectRatio: Bool) -> URL? {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, !forceDefaultAspectRatio, media?.mediaType == .audio, media?.show?.shouldFallbackToPodcastImage == false {
             url(for: media?.show?.podcastImage, size: size)
         } else {
             url(for: media?.image, size: size)
