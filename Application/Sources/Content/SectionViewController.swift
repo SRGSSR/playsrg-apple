@@ -777,6 +777,8 @@ private extension SectionViewController {
                         }
                     case .radioEpisodesForDay, .tvEpisodesForDay:
                         MediaCell(media: media, style: .time)
+                    case .history:
+                        MediaCell(media: media, style: .show, forceDefaultAspectRatio: true)
                     default:
                         MediaCell(media: media, style: .show)
                     }
