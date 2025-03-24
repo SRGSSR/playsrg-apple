@@ -244,7 +244,19 @@ private extension Content {
         }
 
         var imageVariant: SRGImageVariant {
-            contentType.imageVariant(mediaType: contentSection.mediaType)
+            switch contentSection.type {
+            case .shows:
+                contentType.imageVariant(mediaType: contentSection.mediaType)
+            case .predefined:
+                switch presentation.type {
+                case .favoriteShows:
+                    contentType.imageVariant(mediaType: contentSection.mediaType)
+                default:
+                    .default
+                }
+            default:
+                .default
+            }
         }
 
         var displaysTitle: Bool {
