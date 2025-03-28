@@ -244,16 +244,11 @@ private extension Content {
         }
 
         var imageVariant: SRGImageVariant {
-            switch contentSection.type {
-            case .shows:
+            switch (contentSection.type, presentation.type) {
+            case (.shows, _):
                 contentType.imageVariant(mediaType: contentSection.mediaType)
-            case .predefined:
-                switch presentation.type {
-                case .favoriteShows:
-                    contentType.imageVariant(mediaType: contentSection.mediaType)
-                default:
-                    .default
-                }
+            case (.predefined, .favoriteShows):
+                contentType.imageVariant(mediaType: contentSection.mediaType)
             default:
                 .default
             }
