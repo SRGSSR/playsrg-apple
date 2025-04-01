@@ -651,7 +651,7 @@ private extension SearchViewController {
         var body: some View {
             switch item {
             case let .media(media):
-                MediaCell(media: media, style: .show)
+                MediaCell(media: media, style: .show, forceDefaultAspectRatio: true)
             case let .show(show):
                 ShowCell(show: show, style: .standard, imageVariant: .default, isSwimlaneLayout: true)
             case let .topic(topic):

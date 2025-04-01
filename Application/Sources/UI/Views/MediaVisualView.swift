@@ -16,6 +16,7 @@ struct MediaVisualView<Content: View>: View {
     let size: SRGImageSize
     let contentMode: ImageView.ContentMode
     let embeddedDirection: StackDirection
+    let forceDefaultAspectRatio: Bool
 
     @Binding private var content: (SRGMedia?) -> Content
 
@@ -26,22 +27,24 @@ struct MediaVisualView<Content: View>: View {
         size: SRGImageSize,
         contentMode: ImageView.ContentMode = .aspectFit,
         embeddedDirection: StackDirection = .vertical,
+        forceDefaultAspectRatio: Bool = false,
         @ViewBuilder content: @escaping (SRGMedia?) -> Content
     ) {
         _media = .constant(media)
         self.size = size
-        if ApplicationConfiguration.shared.arePodcastImagesEnabled, media?.mediaType == .audio, embeddedDirection == .vertical {
+        if ApplicationConfiguration.shared.arePodcastImagesEnabled, !forceDefaultAspectRatio, media?.mediaType == .audio, embeddedDirection == .vertical {
             self.contentMode = .aspectFill
         } else {
             self.contentMode = contentMode
         }
         self.embeddedDirection = embeddedDirection
+        self.forceDefaultAspectRatio = forceDefaultAspectRatio
         _content = .constant(content)
     }
 
     var body: some View {
         ZStack {
-            ImageView(source: model.imageUrl(for: size), contentMode: contentMode)
+            ImageView(source: model.imageUrl(for: size, forceDefaultAspectRatio: forceDefaultAspectRatio), contentMode: contentMode)
                 .background(Color.thumbnailBackground)
             content(media)
             BlockingOverlay(media: media)
@@ -119,8 +122,8 @@ struct MediaVisualView<Content: View>: View {
 // MARK: Extensions
 
 extension MediaVisualView where Content == EmptyView {
-    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit, embeddedDirection: StackDirection = .vertical) {
-        self.init(media: media, size: size, contentMode: contentMode, embeddedDirection: embeddedDirection) { _ in
+    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit, embeddedDirection: StackDirection = .vertical, forceDefaultAspectRatio: Bool = false) {
+        self.init(media: media, size: size, contentMode: contentMode, embeddedDirection: embeddedDirection, forceDefaultAspectRatio: forceDefaultAspectRatio) { _ in
             EmptyView()
         }
     }

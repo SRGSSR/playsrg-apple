@@ -867,7 +867,7 @@ private extension PageViewController {
                                     MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                                 }
                             default:
-                                MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                                MediaCellSize.fullWidth()
                             }
                         }
                     } else {
