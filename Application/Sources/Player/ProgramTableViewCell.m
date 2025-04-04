@@ -81,13 +81,19 @@
 {
     self.program = program;
     self.playing = playing;
-    
-    self.titleLabel.text = program.title;
+
+    SRGShow *show = program.show;
+    if (show) {
+        self.titleLabel.text = show.title;
+        [self.thumbnailImageView play_requestImage:show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMedia];
+    }
+    else {
+        self.titleLabel.text = program.title;
+        [self.thumbnailImageView play_requestImage:program.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMedia];
+    }
+
     self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
-    
     self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
-    
-    [self.thumbnailImageView play_requestImage:program.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMedia];
     
     if (mediaType == SRGMediaTypeVideo) {
         [self.waveformImageView play_setPlayAnimationWithTintColor:UIColor.whiteColor];
