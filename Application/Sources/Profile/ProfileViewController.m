@@ -22,6 +22,7 @@
 
 @property (nonatomic) NSArray<NSArray<ApplicationSectionInfo *> *> *sectionInfos;
 @property (nonatomic) ApplicationSectionInfo *currentSectionInfo;
+@property (nonatomic) int loadDataRetryCounter;
 
 @property (nonatomic, weak) UITableView *tableView;
 
@@ -128,14 +129,23 @@
 
 - (void)reloadData
 {
+    [self reloadData: nil];
+}
+
+- (void)reloadData :(void (^)(void))completionBlock
+{
     self.sectionInfos = [NSArray arrayWithObjects:
                          [ApplicationSectionInfo profileApplicationSectionInfos],
                          [ApplicationSectionInfo helpApplicationSectionInfos],
                          nil];
-    
+
     [ApplicationSectionInfo profileApplicationSectionInfos];
     [self reloadTableView];
-    
+
+    if (completionBlock) {
+        completionBlock();
+    }
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView flashScrollIndicators];
     });
@@ -230,7 +240,15 @@
     if (! applicationSectionInfo) {
         return NO;
     }
-    
+
+    if (([[self sectionInfos] count] == 0) && self.loadDataRetryCounter < 3) {
+        self.loadDataRetryCounter++;
+        
+        [self reloadData: ^{
+            [self openApplicationSectionInfo:applicationSectionInfo interactive:interactive animated:animated];
+        }];
+    }
+
     NSIndexPath *indexPath = [self indexPathForSectionInfo:applicationSectionInfo];
     
     if (indexPath.section == 0) {
