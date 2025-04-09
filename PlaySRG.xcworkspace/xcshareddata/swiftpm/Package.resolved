@@ -321,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "branch" : "feature/program-sanitization-removal",
-        "revision" : "b1cc570c0846743cab38e1db1ec7133749b875f6"
+        "revision" : "7e8243cd50a87b6c57666f617155e2e9cd26a847",
+        "version" : "19.0.9"
       }
     },
     {
