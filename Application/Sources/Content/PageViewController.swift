@@ -635,15 +635,23 @@ extension PageViewController: UIScrollViewDelegate {
             case .showByDate:
                 let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
                 if let navigationController {
-                    let showByDateViewController = Self.showByDateViewController(transmission: .radio, radioChannel: radioChannel, date: date)
-                    navigationController.pushViewController(showByDateViewController, animated: false)
+                    let targetViewController = if let radioChannel = applicationSectionInfo.radioChannel {
+                        Self.showByDateViewController(transmission: .radio, radioChannel: radioChannel, date: date)
+                    } else {
+                        ProgramGuideViewController(date: date)
+                    }
+                    navigationController.pushViewController(targetViewController, animated: false)
                 }
                 return true
             case .showAZ:
                 if let navigationController {
                     let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                    let showsViewController = SectionViewController.showsViewController(for: .radio, channelUid: radioChannel?.uid, initialSectionId: initialSectionId)
-                    navigationController.pushViewController(showsViewController, animated: true)
+                    let targetViewController = if let radioChannel = applicationSectionInfo.radioChannel {
+                        SectionViewController.showsViewController(for: .radio, channelUid: radioChannel.uid, initialSectionId: initialSectionId)
+                    } else {
+                        SectionViewController.showsViewController(for: .TV, channelUid: nil, initialSectionId: initialSectionId)
+                    }
+                    navigationController.pushViewController(targetViewController, animated: true)
                 }
                 return true
             default:
