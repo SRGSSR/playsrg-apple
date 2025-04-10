@@ -578,7 +578,7 @@
 
 /* Title label to present main radio livestreams
    Title label to present radio channels livestreams */
-"Radio channels" = "Reti radio";
+"Radio channels" = "Reti radio live";
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Ricevitore inattivo.";
