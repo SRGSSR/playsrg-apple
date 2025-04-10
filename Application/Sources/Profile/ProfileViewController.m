@@ -22,7 +22,7 @@
 
 @property (nonatomic) NSArray<NSArray<ApplicationSectionInfo *> *> *sectionInfos;
 @property (nonatomic) ApplicationSectionInfo *currentSectionInfo;
-@property (nonatomic) int loadDataRetryCounter;
+@property (nonatomic) NSUInteger loadDataRetryCounter;
 
 @property (nonatomic, weak) UITableView *tableView;
 
