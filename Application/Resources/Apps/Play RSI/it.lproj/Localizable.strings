@@ -352,7 +352,7 @@
 /* Button label in media detail view to add an audio to the later list
    Button label in program detail view to add an audio to the later list
    Context menu action to add an audio to the later list */
-"Listen later" = "Ascoltare dopo";
+"Listen later" = "Ascolta dopo";
 
 /* Suggested invocation phrase to listen to a show
    Suggested invocation phrase to listen to an audio

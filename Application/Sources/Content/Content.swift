@@ -219,6 +219,8 @@ private extension Content {
                     NSLocalizedString("Resume videos playback", comment: "Title label used to present videos whose playback can be resumed")
                 case (.continueStreaming, _):
                     NSLocalizedString("Resume audios playback", comment: "Title label used to present audios whose playback can be resumed")
+                case (.watchLater, .audio), (.streamLater, .audio):
+                    NSLocalizedString("Listen later", comment: "Title Label used to present the audio later list")
                 case (.watchLater, _), (.streamLater, _):
                     NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case (.showAccess, _):
@@ -607,8 +609,10 @@ private extension Content {
                 return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
             case .radioResumePlayback:
                 return NSLocalizedString("Resume audios playback", comment: "Title label used to present audios whose playback can be resumed")
-            case .radioWatchLater, .watchLater:
-                return NSLocalizedString("Later", comment: "Title Label used to present the audio later list")
+            case .radioWatchLater:
+                return NSLocalizedString("Listen later", comment: "Title Label used to present the audio later list")
+            case .watchLater:
+                return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
             case .tvLive:
                 return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:

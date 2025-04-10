@@ -428,7 +428,7 @@
 "Never" = "Jamais";
 
 /* Title label used to present news scheduled livestream medias */
-"News livestreams" = "L'info en direct";
+"News livestreams" = "Les autres directs";
 
 /* Title of the button to proceed to the next onboarding page */
 "Next" = "Suivant";
