@@ -222,7 +222,7 @@ private extension Content {
                 case (.watchLater, _), (.streamLater, _):
                     NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case (.showAccess, _):
-                    NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+                    NSLocalizedString("Podcasts", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
                 case (.topicSelector, _):
                     NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
