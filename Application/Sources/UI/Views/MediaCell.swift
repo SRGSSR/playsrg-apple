@@ -320,7 +320,7 @@ final class MediaSquareCellSize: NSObject {
     fileprivate static let defaultAspectRatio: CGFloat = 1
 
     private static let defaultItemWidth: CGFloat = constant(iOS: 148, tvOS: 258)
-    private static let heightOffset: CGFloat = constant(iOS: 44, tvOS: 78)
+    private static let heightOffset: CGFloat = constant(iOS: 64, tvOS: 78)
 
     static func swimlane() -> NSCollectionLayoutSize {
         LayoutSwimlaneCellSize(defaultItemWidth, defaultAspectRatio, heightOffset)
