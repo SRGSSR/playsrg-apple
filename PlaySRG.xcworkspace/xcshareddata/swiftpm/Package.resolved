@@ -321,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "7e8243cd50a87b6c57666f617155e2e9cd26a847",
-        "version" : "19.0.9"
+        "branch" : "PLAYNEXT-2558-new-endpoint-all-shows-AZ",
+        "revision" : "b42bdb3a5136aa0f9ca5b0a0d3c28febd27c4538"
       }
     },
     {
