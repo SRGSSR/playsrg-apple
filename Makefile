@@ -12,7 +12,7 @@ setup:
 	@echo "Setting up the project..."
 	@Scripts/checkout-configuration.sh "${CONFIGURATION_REPOSITORY_URL}" "${CONFIGURATION_COMMIT_SHA1}" "${CONFIGURATION_FOLDER}"
 	@echo "Running pod install..."
-	@pod install > /dev/null
+	@bundle exec pod install > /dev/null
 	@echo "... done.\n"
 
 .PHONY: clean
