@@ -579,7 +579,7 @@ private extension Content {
             switch configuredSection {
             case .history:
                 return NSLocalizedString("History", comment: "Title label used to present the history")
-            case .tvAllShows:
+            case .tvAllShows, .radioAllShowsAZ:
                 return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
             case let .radioAllShows(channelUid):
                 if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
@@ -661,7 +661,7 @@ private extension Content {
             // swiftlint:disable:next line_length
             case .availableEpisodes, .history, .watchLater, .tvEpisodesForDay, .tvLive, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
                 ContentType.videoOrTV.imageVariant(mediaType: mediaType)
-            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite, .radioAllShows:
+            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite, .radioAllShows, .radioAllShowsAZ:
                 ContentType.audioOrRadio.imageVariant(mediaType: mediaType)
             case .radioLatestVideos, .tvAllShows, .favoriteShows:
                 ContentType.mixed.imageVariant(mediaType: mediaType)
@@ -754,7 +754,7 @@ private extension Content {
             switch configuredSection {
             case .history:
                 return AnalyticsPageTitle.history.rawValue
-            case .radioAllShows, .tvAllShows:
+            case .radioAllShows, .tvAllShows, .radioAllShowsAZ:
                 return AnalyticsPageTitle.showsAZ.rawValue
             case .favoriteShows, .radioFavoriteShows:
                 return AnalyticsPageTitle.favorites.rawValue
@@ -787,7 +787,7 @@ private extension Content {
 
         var analyticsType: String? {
             switch configuredSection {
-            case .radioAllShows, .tvAllShows:
+            case .radioAllShows, .tvAllShows, .radioAllShowsAZ:
                 AnalyticsPageType.overview.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll,
                  .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage,
@@ -868,7 +868,7 @@ private extension Content {
                 return (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0 ..< kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .favoriteShows, .radioAllShows, .tvAllShows:
+            case .favoriteShows, .radioAllShows, .tvAllShows, .radioAllShowsAZ:
                 return (0 ..< kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             #if os(iOS)
                 case .downloads:
@@ -892,7 +892,7 @@ private extension Content {
             // swiftlint:disable:next line_length
             case .availableEpisodes, .favoriteShows, .history, .watchLater, .tvAllShows, .tvEpisodesForDay, .tvLive, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
                 .video
-            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite, .radioAllShows:
+            case .radioEpisodesForDay, .radioFavoriteShows, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .radioLive, .radioLiveSatellite, .radioAllShows, .radioAllShowsAZ:
                 .audio
             case .radioLatestVideos:
                 .video
@@ -934,6 +934,10 @@ private extension Content {
                     .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
                 return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
+                    .map { $0.map { .show($0) } }
+                    .eraseToAnyPublisher()
+            case .radioAllShowsAZ:
+                return dataProvider.radioShows(for: vendor, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
                     .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
             case let .radioEpisodesForDay(day, channelUid: channelUid):
