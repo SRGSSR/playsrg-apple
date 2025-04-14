@@ -61,8 +61,10 @@ extension LiveMediaCellViewModel {
     }
 
     var title: String? {
-        if let channel {
-            program?.title ?? channel.title
+        if let program {
+            program.show?.title ?? program.title
+        } else if let channel {
+            channel.title
         } else if let media {
             MediaDescription.title(for: media)
         } else {
@@ -97,7 +99,11 @@ extension LiveMediaCellViewModel {
     }
 
     var imageUrl: URL? {
-        url(for: program?.image, size: .small) ?? url(for: media?.image, size: .small)
+        if let program {
+            url(for: program.show?.image ?? program.image, size: .small)
+        } else {
+            url(for: media?.image, size: .small)
+        }
     }
 }
 

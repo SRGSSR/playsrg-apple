@@ -321,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "543cc5b64294fb5dd52eaf9752b3aff1a1f581db",
-        "version" : "19.0.8"
+        "revision" : "7e8243cd50a87b6c57666f617155e2e9cd26a847",
+        "version" : "19.0.9"
       }
     },
     {

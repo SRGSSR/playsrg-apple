@@ -1521,7 +1521,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         // Use it as limit value if needed. Apply a smaller value to for radio (image less important, more space for metadata, especially
         // when displaying a program list).
         SRGMedia *mainMedia = self.letterboxController.play_mainMedia;
-        CGFloat verticalFillRatio = (mainMedia.mediaType == SRGMediaPlayerMediaTypeVideo) ? 0.5f : 0.4f;
+        CGFloat verticalFillRatio = (mainMedia.mediaType == SRGMediaTypeVideo) ? 0.5f : 0.4f;
         CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (verticalFillRatio * CGRectGetHeight(self.view.frame));
         CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
         
@@ -1835,7 +1835,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     UIKeyCommand *togglePlayPauseCommand = [UIKeyCommand keyCommandWithInput:@" "
                                                                modifierFlags:0
                                                                       action:@selector(togglePlayPause:)];
-    togglePlayPauseCommand.discoverabilityTitle = (self.letterboxController.resource.streamType == SRGMediaPlayerStreamTypeLive) ? NSLocalizedString(@"Play / Stop", @"Play / Stop shortcut label") : NSLocalizedString(@"Play / Pause", @"Play / Pause shortcut label");
+    togglePlayPauseCommand.discoverabilityTitle = (self.letterboxController.resource.streamType == SRGStreamTypeLive) ? NSLocalizedString(@"Play / Stop", @"Play / Stop shortcut label") : NSLocalizedString(@"Play / Pause", @"Play / Pause shortcut label");
     [keyCommands addObject:togglePlayPauseCommand];
     
     UIKeyCommand *toggleFullScreenCommand = [UIKeyCommand keyCommandWithInput:@"f"
