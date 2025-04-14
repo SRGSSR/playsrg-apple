@@ -16641,7 +16641,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "PLAYNEXT-2558-new-endpoint-all-shows-AZ";
+				branch = develop;
 				kind = branch;
 			};
 		};
