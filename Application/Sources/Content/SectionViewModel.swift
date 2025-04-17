@@ -392,7 +392,7 @@ private extension SectionViewModel {
             switch configuredSection {
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
-            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows, .radioAllShowsAZ:
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return .showGrid
             #if os(iOS)
                 case .downloads:
@@ -414,7 +414,7 @@ private extension SectionViewModel {
         var pinHeadersToVisibleBounds: Bool {
             #if os(iOS)
                 switch configuredSection {
-                case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows, .radioAllShowsAZ:
+                case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                     return true
                 default:
                     return false
@@ -432,7 +432,7 @@ private extension SectionViewModel {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
                 return SectionViewModel.alphabeticalRows(from: items, smart: true)
-            case .radioAllShows, .tvAllShows, .radioAllShowsAZ:
+            case .radioAllShows, .tvAllShows:
                 return SectionViewModel.alphabeticalRows(from: items, smart: false)
             #if os(iOS)
                 case .downloads:

@@ -437,18 +437,8 @@ extension SectionViewController {
     }
 
     static func showsViewController(for transmission: SRGTransmission, channelUid: String?, initialSectionId: String?) -> UIViewController {
-        if transmission == .radio, let channelUid {
+        if transmission == .radio {
             SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
-        } else if transmission == .radio {
-            #if os(iOS)
-                if ApplicationConfiguration.shared.radioHomepageChannels.count == 1 {
-                    SectionViewController(section: .configured(.radioAllShows(channelUid: ApplicationConfiguration.shared.radioHomepageChannels[0].uid)), initialSectionId: nil)
-                } else {
-                    SectionViewController(section: .configured(.radioAllShowsAZ), initialSectionId: nil)
-                }
-            #else
-                UIViewController()
-            #endif
         } else {
             SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
