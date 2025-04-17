@@ -580,9 +580,9 @@ private extension Content {
             case .history:
                 return NSLocalizedString("History", comment: "Title label used to present the history")
             case .tvAllShows:
-                return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
+                return NSLocalizedString("Shows", comment: "Title label used to present TV associated shows")
             case let .radioAllShows(channelUid):
-                if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                if ApplicationConfiguration.shared.radioChannel(forUid: channelUid)?.showType == .podcast {
                     return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
                 } else {
                     return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
@@ -592,7 +592,7 @@ private extension Content {
             case .radioLatest:
                 return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
             case let .radioLatestEpisodes(channelUid):
-                if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                if ApplicationConfiguration.shared.radioChannel(forUid: channelUid)?.showType == .podcast {
                     return NSLocalizedString("Latest podcasts", comment: "Title label used to present the radio latest podcast episodes")
                 } else {
                     return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
@@ -633,7 +633,7 @@ private extension Content {
                 case .notifications:
                     return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
                 case let .radioShowAccess(channelUid):
-                    if ApplicationConfiguration.shared.channel(forUid: channelUid)?.showType == .podcast {
+                    if ApplicationConfiguration.shared.radioChannel(forUid: channelUid)?.showType == .podcast {
                         return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
                     } else {
                         return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
@@ -800,8 +800,13 @@ private extension Content {
 
         var analyticsLevels: [String]? {
             switch configuredSection {
-            case let .radioAllShows(channelUid),
-                 let .radioFavoriteShows(channelUid: channelUid),
+            case let .radioAllShows(channelUid: channelUid):
+                if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+                } else {
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
+                }
+            case let .radioFavoriteShows(channelUid: channelUid),
                  let .radioLatest(channelUid: channelUid),
                  let .radioLatestEpisodes(channelUid: channelUid),
                  let .radioLatestEpisodesFromFavorites(channelUid: channelUid),
@@ -812,7 +817,7 @@ private extension Content {
                 if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
                     return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
                 } else {
-                    return nil
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
                 }
             case .tvAllShows:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
@@ -933,9 +938,15 @@ private extension Content {
                     .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
-                return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
-                    .map { $0.map { .show($0) } }
-                    .eraseToAnyPublisher()
+                if let channelUid {
+                    return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
+                        .map { $0.map { .show($0) } }
+                        .eraseToAnyPublisher()
+                } else {
+                    return dataProvider.radioShows(for: vendor, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
+                        .map { $0.map { .show($0) } }
+                        .eraseToAnyPublisher()
+                }
             case let .radioEpisodesForDay(day, channelUid: channelUid):
                 return dataProvider.radioEpisodes(for: vendor, channelUid: channelUid, day: day, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }

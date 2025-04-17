@@ -117,7 +117,7 @@ enum ConfiguredSection: Hashable {
     case tvAllShows
     case tvEpisodesForDay(_ day: SRGDay)
 
-    case radioAllShows(channelUid: String)
+    case radioAllShows(channelUid: String?)
     case radioEpisodesForDay(_ day: SRGDay, channelUid: String)
     case radioFavoriteShows(channelUid: String)
     case radioLatest(channelUid: String)
