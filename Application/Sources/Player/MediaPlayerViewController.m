@@ -522,9 +522,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
     
-    // Youth protection overlay, once per session
-    // A session is an instance of the MediaPlayerViewController appearing + starting feedback, or a new media being load in continuous playing
-    self.hasShownYouthProtectionOverlay = NO;
+    [self scheduleYouthProtectionOverlay:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -2303,18 +2301,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self scrollToNearestSongAnimated:YES];
     }
     
-    // Handle youth protection overlay display scheduling
-    if (playbackState == SRGMediaPlayerPlaybackStatePlaying && ! self.hasShownYouthProtectionOverlay && ! self.youthProtectionDisplayTimer) {
-        self.youthProtectionDisplayTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
-                                                                          target:self
-                                                                        selector:@selector(showYouthProtectionOverlay:)
-                                                                        userInfo:nil
-                                                                         repeats:NO];
-    }
-    else if (playbackState != SRGMediaPlayerPlaybackStatePlaying) {
-        [self.youthProtectionDisplayTimer invalidate];
-        self.youthProtectionDisplayTimer = nil;
-    }
+    [self scheduleYouthProtectionOverlay:notification];
 }
 
 - (void)playbackDidFail:(NSNotification *)notification
@@ -2430,6 +2417,28 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 }
 
 #pragma mark Youth protection overlay
+
+- (void)scheduleYouthProtectionOverlay:(nullable NSNotification *)notification {
+    SRGMediaType mediaType = self.letterboxController.media.mediaType;
+    SRGMediaPlayerPlaybackState playbackState;
+    if (notification) {
+        playbackState = [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue];
+    } else {
+        playbackState = self.letterboxController.playbackState;
+    }
+
+    if (playbackState == SRGMediaPlayerPlaybackStatePlaying && ! self.hasShownYouthProtectionOverlay && ! self.youthProtectionDisplayTimer) {
+        self.youthProtectionDisplayTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                                                          target:self
+                                                                        selector:@selector(showYouthProtectionOverlay:)
+                                                                        userInfo:nil
+                                                                         repeats:NO];
+    }
+    else if (playbackState != SRGMediaPlayerPlaybackStatePlaying) {
+        [self.youthProtectionDisplayTimer invalidate];
+        self.youthProtectionDisplayTimer = nil;
+    }
+}
 
 - (void)showYouthProtectionOverlay:(NSTimer *)timer
 {
