@@ -2419,7 +2419,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 #pragma mark Youth protection overlay
 
 - (void)scheduleYouthProtectionOverlay:(nullable NSNotification *)notification {
-    SRGMediaType mediaType = self.letterboxController.media.mediaType;
     SRGMediaPlayerPlaybackState playbackState;
     if (notification) {
         playbackState = [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue];
