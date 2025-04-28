@@ -2460,7 +2460,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     label.text = youthProtectionText;
     label.numberOfLines = 0;
     label.translatesAutoresizingMaskIntoConstraints = NO;
-    label.translatesAutoresizingMaskIntoConstraints      = NO;
 
     [self.youthProtectionOverlayView addSubview:imageView];
     [self.youthProtectionOverlayView addSubview:label];
