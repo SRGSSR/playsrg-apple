@@ -2253,6 +2253,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SRGMedia *previousMedia = notification.userInfo[SRGLetterboxPreviousMediaKey];
     
     // Update the livestream button hidden state if media or URN changed
+    // Reset youth protection overlay to allow showing it again if necessary
     if (! [media isEqual:previousMedia]) {
         [self updateLivestreamButton];
         
