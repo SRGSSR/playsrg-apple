@@ -523,6 +523,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
     
     // Youth protection overlay, once per session
+    // A session is an instance of the MediaPlayerViewController appearing + starting feedback, or a new media being load in continuous playing
     self.hasShownYouthProtectionOverlay = NO;
 }
 
