@@ -201,6 +201,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) id channelObserver;
 
+// Youth protection overlay
+@property (nonatomic) NSTimer *youthProtectionDisplayTimer;
+@property (nonatomic) NSTimer *youthProtectionRemovalTimer;
+@property (nonatomic) UIView *youthProtectionOverlayView;
+@property (nonatomic) BOOL hasShownYouthProtectionOverlay;
+
 @end
 
 @implementation MediaPlayerViewController
@@ -281,6 +287,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     // Invalidate timers
     self.userInterfaceUpdateTimer = nil;
+    self.youthProtectionDisplayTimer = nil;
+    self.youthProtectionRemovalTimer = nil;
 }
 
 #pragma mark Getters and setters
@@ -513,6 +521,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.shareButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
+    
+    [self scheduleYouthProtectionOverlay:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -566,6 +576,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
     
     self.userActivity = nil;
+    
+    [self invalidateAndRemoveYouthProtectionOverlay:NO];
 }
 
 - (void)viewWillLayoutSubviews
@@ -2240,11 +2252,14 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SRGMedia *previousMedia = notification.userInfo[SRGLetterboxPreviousMediaKey];
     
     // Update the livestream button hidden state if media or URN changed
+    // Reset youth protection overlay to allow showing it again if necessary
     if (! [media isEqual:previousMedia]) {
         [self updateLivestreamButton];
         
         [self unregisterChannelUpdates];
         [self registerForChannelUpdates];
+        
+        [self invalidateAndRemoveYouthProtectionOverlay:YES];
     }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
@@ -2285,6 +2300,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self scrollToNearestProgramAnimated:YES];
         [self scrollToNearestSongAnimated:YES];
     }
+    
+    [self scheduleYouthProtectionOverlay:notification];
 }
 
 - (void)playbackDidFail:(NSNotification *)notification
@@ -2397,6 +2414,102 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
     [self reloadProgramInformationAnimated:NO];
+}
+
+#pragma mark Youth protection overlay
+
+- (void)scheduleYouthProtectionOverlay:(nullable NSNotification *)notification {
+    SRGMediaPlayerPlaybackState playbackState;
+    if (notification) {
+        playbackState = [notification.userInfo[SRGMediaPlayerPlaybackStateKey] integerValue];
+    } else {
+        playbackState = self.letterboxController.playbackState;
+    }
+
+    if (playbackState == SRGMediaPlayerPlaybackStatePlaying && ! self.hasShownYouthProtectionOverlay && ! self.youthProtectionDisplayTimer) {
+        self.youthProtectionDisplayTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                                                          target:self
+                                                                        selector:@selector(showYouthProtectionOverlay:)
+                                                                        userInfo:nil
+                                                                         repeats:NO];
+    }
+    else if (playbackState != SRGMediaPlayerPlaybackStatePlaying) {
+        [self.youthProtectionDisplayTimer invalidate];
+        self.youthProtectionDisplayTimer = nil;
+    }
+}
+
+- (void)showYouthProtectionOverlay:(NSTimer *)timer
+{
+    if (self.hasShownYouthProtectionOverlay) {
+        return;
+    }
+
+    SRGMedia *media = self.letterboxController.media;
+    UIImage *youthProtectionImage = [UIImage imageFor:media.youthProtectionColor];
+    NSString *youthProtectionText = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
+
+    if (!youthProtectionImage) {
+        self.hasShownYouthProtectionOverlay = YES;
+        return;
+    }
+
+    self.youthProtectionOverlayView = [[UIView alloc] init];
+    self.youthProtectionOverlayView.backgroundColor = [UIColor.srg_gray16Color colorWithAlphaComponent:0.8];
+    self.youthProtectionOverlayView.layer.cornerRadius = 4.0;
+    self.youthProtectionOverlayView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:youthProtectionImage];
+    imageView.translatesAutoresizingMaskIntoConstraints = NO;
+
+    UILabel *label = [[UILabel alloc] init];
+    label.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
+    label.textColor = UIColor.whiteColor;
+    label.text = youthProtectionText;
+    label.numberOfLines = 0;
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.youthProtectionOverlayView addSubview:imageView];
+    [self.youthProtectionOverlayView addSubview:label];
+
+    CGFloat margin  = 8.0;
+    CGFloat spacing = 4.0;
+
+    [NSLayoutConstraint activateConstraints:@[
+        [imageView.leadingAnchor constraintEqualToAnchor:self.youthProtectionOverlayView.leadingAnchor constant:margin],
+        [imageView.centerYAnchor constraintEqualToAnchor:self.youthProtectionOverlayView.centerYAnchor],
+        [label.leadingAnchor constraintEqualToAnchor:imageView.trailingAnchor constant:spacing],
+        [label.trailingAnchor constraintEqualToAnchor:self.youthProtectionOverlayView.trailingAnchor constant:-margin],
+        [label.topAnchor constraintEqualToAnchor:self.youthProtectionOverlayView.topAnchor constant:margin],
+        [label.bottomAnchor constraintEqualToAnchor:self.youthProtectionOverlayView.bottomAnchor constant:-margin]
+    ]];
+
+    [self.letterboxView addSubview:self.youthProtectionOverlayView];
+
+    [NSLayoutConstraint activateConstraints:@[[self.youthProtectionOverlayView.topAnchor constraintEqualToAnchor:self.letterboxView.safeAreaLayoutGuide.topAnchor constant:margin],
+                                              [self.youthProtectionOverlayView.leadingAnchor constraintEqualToAnchor:self.letterboxView.safeAreaLayoutGuide.leadingAnchor constant:margin],
+                                              [self.youthProtectionOverlayView.trailingAnchor constraintEqualToAnchor:self.letterboxView.safeAreaLayoutGuide.trailingAnchor constant:-margin]]];
+
+    self.hasShownYouthProtectionOverlay = YES;
+
+    self.youthProtectionRemovalTimer = [NSTimer scheduledTimerWithTimeInterval:10.0
+                                                                       target:self
+                                                                      selector:@selector(invalidateAndRemoveYouthProtectionOverlay:)
+                                                                     userInfo:nil
+                                                                      repeats:NO];
+}
+
+- (void)invalidateAndRemoveYouthProtectionOverlay:(BOOL)shouldResetSession
+{
+    [self.youthProtectionDisplayTimer invalidate];
+    self.youthProtectionDisplayTimer = nil;
+    [self.youthProtectionRemovalTimer invalidate];
+    self.youthProtectionRemovalTimer = nil;
+    [self.youthProtectionOverlayView removeFromSuperview];
+    self.youthProtectionOverlayView = nil;
+    if (shouldResetSession) {
+        self.hasShownYouthProtectionOverlay = NO ;
+    }
 }
 
 @end
