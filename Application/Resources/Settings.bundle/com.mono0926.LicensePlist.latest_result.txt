@@ -90,11 +90,11 @@ name: promises, nameSpecified: Promises, owner: google, version: 2.4.0, source: 
 
 name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 9.1.5, source: https://github.com/SRGSSR/srganalytics-apple
 
-name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.2.2, source: https://github.com/SRGSSR/srgappearance-apple
+name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.2.3, source: https://github.com/SRGSSR/srgappearance-apple
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgcontentprotection-apple
 
-name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 19.0.9, source: https://github.com/SRGSSR/srgdataprovider-apple
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 19.0.10, source: https://github.com/SRGSSR/srgdataprovider-apple
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgdiagnostics-apple
 
@@ -126,4 +126,4 @@ name: YYWebImage, nameSpecified: YYWebImage, owner: SRGSSR, version: 1.0.5-srg3,
 
 add-version-numbers: true
 
-LicensePlist Version: 3.25.1
+LicensePlist Version: 3.27.1
