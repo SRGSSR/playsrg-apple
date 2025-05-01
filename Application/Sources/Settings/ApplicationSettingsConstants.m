@@ -22,6 +22,7 @@ NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLo
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLivestreamURNForChannels";
 NSString * const PlaySRGSettingServiceEnvironment = @"PlaySRGSettingServiceEnvironment";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
+NSString * const PlaySRGSettingProxyDetection = @"PlaySRGSettingProxyDetection";
 NSString * const PlaySRGSettingUserConsentAcceptedServiceIds = @"PlaySRGSettingUserConsentAcceptedServiceIds";
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 NSString * const PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled = @"PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled";

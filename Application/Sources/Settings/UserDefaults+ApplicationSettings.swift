@@ -33,6 +33,10 @@ extension UserDefaults {
         string(forKey: PlaySRG.PlaySRGSettingUserLocation)
     }
 
+    @objc dynamic var PlaySRGSettingProxyDetection: String? {
+        string(forKey: PlaySRG.PlaySRGSettingProxyDetection)
+    }
+
     #if DEBUG || NIGHTLY || BETA
         @objc dynamic var PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled: Bool {
             bool(forKey: PlaySRG.PlaySRGSettingAlwaysAskUserConsentAtLaunchEnabled)

@@ -524,6 +524,14 @@ struct SettingsView: View {
                     } label: {
                         UserLocationSelectionCell()
                     }
+                    NextLink {
+                        ProxyDetectionSelectionView()
+                        #if os(iOS)
+                            .navigationBarTitleDisplayMode(.inline)
+                        #endif
+                    } label: {
+                        ProxyDetectionSelectionCell()
+                    }
                     Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
                     Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
                     Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
@@ -588,6 +596,21 @@ struct SettingsView: View {
                         Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
                         Spacer()
                         Text(selectedUserLocation.description)
+                            .foregroundColor(Color.play_sectionSecondary)
+                            .multilineTextAlignment(.trailing)
+                            .lineLimit(2)
+                    }
+                }
+            }
+
+            private struct ProxyDetectionSelectionCell: View {
+                @AppStorage(PlaySRGSettingProxyDetection) private var selectedProxyDetection = ProxyDetection.default
+
+                var body: some View {
+                    HStack {
+                        Text(NSLocalizedString("VPN or Proxy detection", comment: "Label of the button for VPN or Proxy detection selection"))
+                        Spacer()
+                        Text(selectedProxyDetection.description)
                             .foregroundColor(Color.play_sectionSecondary)
                             .multilineTextAlignment(.trailing)
                             .lineLimit(2)
@@ -721,6 +744,46 @@ struct SettingsView: View {
 
                 private func select() {
                     selectedUserLocation = userLocation
+                }
+            }
+
+            private struct ProxyDetectionSelectionView: View {
+                var body: some View {
+                    List {
+                        ForEach(ProxyDetection.allCases) { proxyDetection in
+                            DetectionCell(proxyDetection: proxyDetection)
+                        }
+                    }
+                    .srgFont(.body)
+                    #if os(tvOS)
+                        .listStyle(GroupedListStyle())
+                        .play_scrollClipDisabled()
+                        .frame(maxWidth: LayoutMaxListWidth)
+                    #endif
+                        .navigationTitle(NSLocalizedString("VPN or Proxy detection", comment: "VPN or Proxy detection selection view title"))
+                }
+            }
+
+            private struct DetectionCell: View {
+                let proxyDetection: ProxyDetection
+
+                @AppStorage(PlaySRGSettingProxyDetection) private var selectedProxyDetection = ProxyDetection.default
+
+                var body: some View {
+                    Button(action: select) {
+                        HStack {
+                            Text(proxyDetection.description)
+                            Spacer()
+                            if proxyDetection == selectedProxyDetection {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                    .foregroundColor(.primary)
+                }
+
+                private func select() {
+                    selectedProxyDetection = proxyDetection
                 }
             }
 
