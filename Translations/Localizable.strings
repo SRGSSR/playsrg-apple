@@ -336,7 +336,6 @@
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
    Label to present the later list
-   Title Label used to present the audio later list
    Title Label used to present the video later list
    Watch later or listen later button label in media detail view when a media is in the later list
    Watch later or listen later button label in program detail view when a media is in the later list */
@@ -357,7 +356,8 @@
 
 /* Button label in media detail view to add an audio to the later list
    Button label in program detail view to add an audio to the later list
-   Context menu action to add an audio to the later list */
+   Context menu action to add an audio to the later list
+   Title Label used to present the audio later list */
 "Listen later" = "Listen later";
 
 /* Suggested invocation phrase to listen to a show
@@ -539,7 +539,8 @@
 /* Mail body header to declare a technical issue */
 "Please describe the issue below:" = "Please describe the issue below:";
 
-/* Title label used to present radio associated podcasts */
+/* Title label used to present radio associated podcasts
+   Title label used to present the Audio shows AZ and Audio shows by date access buttons */
 "Podcasts" = "Podcasts";
 
 /* Title of the section when we show podcasts by date */
@@ -657,7 +658,8 @@
    Shows tab title
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
-   Title label used to present the TV shows AZ and TV shows by date access buttons */
+   Title label used to present the TV shows AZ and TV programme access buttons
+   Title label used to present TV associated shows */
 "Shows" = "Shows";
 
 /* Label to present shows A to Z (radio or TV) */
