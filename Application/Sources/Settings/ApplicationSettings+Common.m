@@ -30,6 +30,24 @@ typedef NS_ENUM(NSInteger, SettingUserLocation) {
     SettingUserLocationIgnored
 };
 
+/**
+ *  Proxy detection options.
+ */
+typedef NS_ENUM(NSInteger, SettingProxyDetection) {
+    /**
+     *  Default IP based proxy detection.
+     */
+    SettingProxyDetectionDefault,
+    /**
+     *  VPN or Proxy detection.
+     */
+    SettingProxyDetectionVpnOrProxy,
+    /**
+     *  Direct connection.
+     */
+    SettingProxyDetectionDirect
+};
+
 NSString * const PlaySRGSettingProgramGuideRecentlyUsedLayout = @"PlaySRGSettingProgramGuideRecentlyUsedLayout";
 NSString * const PlaySRGSettingLastSelectedAudioLanguageCode = @"PlaySRGSettingLastSelectedAudioLanguageCode";
 
@@ -54,6 +72,19 @@ NSValueTransformer *SettingUserLocationTransformer(void)
         s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"WW" : @(SettingUserLocationOutsideCH),
                                                                                          @"CH" : @(SettingUserLocationIgnored) }
                                                                          defaultValue:@(SettingUserLocationDefault)
+                                                                  reverseDefaultValue:nil];
+    });
+    return s_transformer;
+}
+
+NSValueTransformer *SettingProxyDetectionTransformer(void)
+{
+    static NSValueTransformer *s_transformer;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"VPNORPROXY" : @(SettingProxyDetectionVpnOrProxy),
+                                                                                         @"DIRECT" : @(SettingProxyDetectionDirect) }
+                                                                         defaultValue:@(SettingProxyDetectionDefault)
                                                                   reverseDefaultValue:nil];
     });
     return s_transformer;
@@ -171,7 +202,20 @@ NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
     if (location) {
         globalParameters[@"forceLocation"] = location;
     }
-    
+
+    static dispatch_once_t s_proxyOnceToken;
+    static NSDictionary<NSNumber *, NSString *> *s_proxyDetection;
+    dispatch_once(&s_proxyOnceToken, ^{
+        s_proxyDetection = @{ @(SettingProxyDetectionVpnOrProxy) : @"VPNORPROXY",
+                              @(SettingProxyDetectionDirect) : @"DIRECT" };
+    });
+
+    SettingProxyDetection proxyDetection = [[SettingProxyDetectionTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingProxyDetection]] integerValue];
+    NSString *proxy = s_proxyDetection[@(proxyDetection)];
+    if (proxy) {
+        globalParameters[@"forceProxyDetection"] = proxy;
+    }
+
     BOOL forceSAM = [ApplicationSettingServiceIdentifier().lowercaseString containsString:@"sam"];
     if (forceSAM) {
         globalParameters[@"forceSAM"] = @"true";

@@ -162,6 +162,9 @@
    Square images setting state */
 "Default (current configuration)" = "Default (current configuration)";
 
+/* VPN or Proxy detection setting state */
+"Default (IP-based detection)" = "Default (IP-based detection)";
+
 /* User location setting state */
 "Default (IP-based location)" = "Default (IP-based location)";
 
@@ -200,6 +203,9 @@
 
 /* Developer section header */
 "Developer" = "Developer";
+
+/* VPN or Proxy detection setting state */
+"Direct connection" = "Direct connection";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Disable";
@@ -843,6 +849,9 @@
 /* Version label in settings */
 "Version" = "Version";
 
+/* VPN or Proxy detection setting state */
+"Via a VPN or Proxy" = "Via a VPN or Proxy";
+
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Video playback continues even when you leave the application.";
 
@@ -854,6 +863,10 @@
 
 /* Header for video and audio search results */
 "Videos and audios" = "Videos and audios";
+
+/* Label of the button for VPN or Proxy detection selection
+   VPN or Proxy detection selection view title */
+"VPN or Proxy detection" = "VPN or Proxy detection";
 
 /* Play button label for video in media detail view */
 "Watch" = "Watch";

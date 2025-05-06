@@ -188,7 +188,8 @@ extension SceneDelegate: UIWindowSceneDelegate {
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPodcastImages),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingAudioHomepageOption),
                 ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceEnvironment),
-                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
+                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation),
+                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingProxyDetection)
             )
             .debounce(for: 0.7, scheduler: DispatchQueue.main)
             .sink {
