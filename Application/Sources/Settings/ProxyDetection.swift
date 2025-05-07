@@ -18,9 +18,9 @@ enum ProxyDetection: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .VPNORPROXY:
-            NSLocalizedString("Via a VPN or Proxy", comment: "VPN or Proxy detection setting state")
+            NSLocalizedString("Force detection", comment: "VPN or Proxy detection setting state")
         case .DIRECT:
-            NSLocalizedString("Direct connection", comment: "VPN or Proxy detection setting state")
+            NSLocalizedString("Bypass detection", comment: "VPN or Proxy detection setting state")
         case .default:
             NSLocalizedString("Default (IP-based detection)", comment: "VPN or Proxy detection setting state")
         }
