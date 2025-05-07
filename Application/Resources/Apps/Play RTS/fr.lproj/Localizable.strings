@@ -868,7 +868,7 @@
 
 /* Label of the button for VPN or Proxy detection selection
    VPN or Proxy detection selection view title */
-"VPN or Proxy detection" = "VPN or Proxy detection";
+"VPN or Proxy detection" = "Détection VPN ou Proxy";
 
 /* Play button label for video in media detail view */
 "Watch" = "Regarder";
