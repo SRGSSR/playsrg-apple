@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "esc-2025-black_22.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "esc-2025-black_22 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "esc-2025-black_22 2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
