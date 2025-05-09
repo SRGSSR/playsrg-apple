@@ -245,5 +245,6 @@
     "3.9.0-466": "- The Audio Home page is now editorially curated and offers a new experience to discover and enjoy audio content.",
     "3.9.1-470": "- Fixed layout for favorite shows, history, and watch later.\n- Fixed layout issues in mixed content areas.\n- Fixed application context menu from application icon opening the profile view.\n- Fixed DeepLink bug for TV \"by date\" and \"AZ\".\n- Fixed radio livestream programs data displayed in live view.\n- Updated SRF dark app icon.\n- AppStore release with iOS 18.4.",
     "3.9.2-471": "- Remove radio filter on A-Z screen.\n- Update fonts.\n- Display youth protection banner over video player instead of burning it into the video.",
-    "3.9.3-472": "- Prevent access to videos if using VPN or proxy.\n- Fix \"Show\" title for TV."
+    "3.9.3-472": "- Prevent access to videos if using VPN or proxy.\n- Fix \"Show\" title for TV.",
+    "3.9.3-473": "- Prevent access to videos if using VPN or proxy.\n- Fix \"Show\" title for TV."
 }
