@@ -125,6 +125,11 @@ private var cancellable: AnyCancellable?
             present(textViewController, animated: animated, completion: completion)
         }
 
+        func navigateToSupportForm(formURL: URL, animated: Bool = true, completion: (() -> Void)? = nil) {
+            let hostingController = UIHostingController(rootView: SupportFormView(formURL: formURL))
+            present(hostingController, animated: animated, completion: completion)
+        }
+
         private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {
             if program.play_containsDate(Date()) {
                 SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
@@ -215,6 +220,14 @@ private var cancellable: AnyCancellable?
         guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
         isPresenting = true
         topViewController.navigateToText(text, animated: animated) {
+            isPresenting = false
+        }
+    }
+
+    func navigateToSupportForm(formURL: URL, animated: Bool = true) {
+        guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
+        isPresenting = true
+        topViewController.navigateToSupportForm(formURL: formURL, animated: animated) {
             isPresenting = false
         }
     }

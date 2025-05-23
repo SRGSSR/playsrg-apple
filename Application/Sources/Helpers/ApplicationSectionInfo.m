@@ -78,11 +78,8 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
     if (ApplicationConfiguration.sharedApplicationConfiguration.faqURL != nil) {
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFAQs radioChannel:nil]];
     }
-    if (ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress != nil) {
-        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionTechnicaIssue radioChannel:nil]];
-    }
-    if (ApplicationConfiguration.sharedApplicationConfiguration.feedbackURL != nil) {
-        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionFeedback radioChannel:nil]];
+    if (ApplicationConfiguration.sharedApplicationConfiguration.supportFormURL != nil) {
+        [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionSupportForm radioChannel:nil]];
     }
     [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionEvaluateApplication radioChannel:nil]];
     return sectionInfos.copy;
@@ -162,8 +159,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 {
     switch (self.applicationSection) {
         case ApplicationSectionFAQs:
-        case ApplicationSectionTechnicaIssue:
-        case ApplicationSectionFeedback:
+        case ApplicationSectionSupportForm:
         case ApplicationSectionEvaluateApplication: {
             return YES;
             break;

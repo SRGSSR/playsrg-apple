@@ -11,7 +11,7 @@ import UIKit
 
 @objc final class SupportInformation: NSObject {
     private static func status(for bool: Bool) -> String {
-        bool ? "Yes" : "No"
+        bool ? "true" : "false"
     }
 
     private static var dateAndTime: String {
@@ -47,8 +47,17 @@ import UIKit
     }
 
     private static var loginStatus: String {
-        guard let identityService = SRGIdentityService.current else { return "N/A" }
+        guard let identityService = SRGIdentityService.current else { return "None" }
         return status(for: identityService.isLoggedIn)
+    }
+
+    private static var accountIdentifier: String {
+        guard
+            let identityService = SRGIdentityService.current, let accountID = identityService.account?.uid else {
+            return "None"
+        }
+
+        return accountID
     }
 
     private static var continuousAutoplayStatus: String {
@@ -125,61 +134,49 @@ import UIKit
         Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     }
 
-    @objc static func generate(toMailBody: Bool = false) -> String {
-        var components = [String]()
+    @objc static func toQueryItems() -> [URLQueryItem] {
+        var items = [URLQueryItem]()
 
-        if toMailBody {
-            components.append(NSLocalizedString("Please describe the issue below:", comment: "Mail body header to declare a technical issue"))
-            components.append(contentsOf: Array(repeating: "", count: 6))
-            components.append("--------------------------------------")
-        }
+        items.append(URLQueryItem(name: "autoplay", value: continuousAutoplayStatus))
 
-        components.append("General information")
-        components.append("-------------------")
-        components.append("Date and time: \(dateAndTime)")
-        components.append("App name: \(applicationName)")
-        components.append("App identifier: \(applicationIdentifier)")
-        components.append("App version: \(applicationVersion)")
-        components.append("OS: \(operatingSystem)")
-        components.append("OS version: \(operatingSystemVersion)")
-        components.append("Model: \(model)")
-        components.append("Model identifier: \(modelIdentifier)")
-        components.append("")
-
-        components.append("App settings")
-        components.append("-------------------")
-        components.append("Autoplay enabled: \(continuousAutoplayStatus)")
         #if os(iOS)
-            components.append("Background video playback enabled: \(backgroundVideoPlaybackStatus)")
+            items.append(URLQueryItem(name: "background_video_playback", value: backgroundVideoPlaybackStatus))
         #endif
+
         if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
-            components.append("Subtitle availability displayed: \(subtitleAvailabilityDisplayed)")
+            items.append(URLQueryItem(name: "subtitle_availability_displayed", value: subtitleAvailabilityDisplayed))
         }
-        if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
-            components.append("Audio description availability displayed: \(audioDescriptionAvailabilityDisplayed)")
-        }
-        components.append("Most recent audio selection: \(audioSettings)")
-        if SRGIdentityService.current != nil {
-            components.append("Logged in: \(loginStatus)")
-        }
-        components.append("")
 
-        components.append("Device settings")
-        components.append("-------------------")
-        components.append("Subtitle settings: \(subtitleSettings)")
-        components.append("Subtitle accessibility settings: \(subtitleAccessibilitySettings)")
-        components.append("VoiceOver enabled: \(voiceOverEnabled)")
-        components.append("")
+        if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+            items.append(URLQueryItem(name: "ad_availability_displayed", value: audioDescriptionAvailabilityDisplayed))
+        }
+
+        items.append(URLQueryItem(name: "most_recent_audio_selection", value: audioSettings))
+
+        if SRGIdentityService.current != nil {
+            items.append(URLQueryItem(name: "logged_in", value: loginStatus))
+            items.append(URLQueryItem(name: "srg_uuid", value: accountIdentifier))
+        }
+
+        items.append(URLQueryItem(name: "subtitle_settings", value: subtitleSettings))
+        items.append(URLQueryItem(name: "subtitle_accessibility_settings", value: subtitleAccessibilitySettings))
+        items.append(URLQueryItem(name: "voiceover", value: voiceOverEnabled))
 
         #if os(iOS)
-            components.append("Push notification information")
-            components.append("-------------------")
-            components.append("Push notifications enabled: \(pushNotificationStatus)")
-            components.append("Airship identifier: \(airshipIdentifier)")
-            components.append("Device push notification token: \(deviceToken)")
-            components.append("Subscribed URNs: \(subscribedShowUrns)")
+            items.append(URLQueryItem(name: "push_notifications_enabled", value: pushNotificationStatus))
+            items.append(URLQueryItem(name: "airship_identifier", value: airshipIdentifier))
+            items.append(URLQueryItem(name: "device_push_notification_token", value: deviceToken))
+            items.append(URLQueryItem(name: "subscribed_urns", value: subscribedShowUrns))
         #endif
 
-        return components.joined(separator: "\n")
+        items.append(URLQueryItem(name: "app_name", value: applicationName))
+        items.append(URLQueryItem(name: "app_version", value: applicationVersion))
+        items.append(URLQueryItem(name: "os", value: operatingSystem))
+        items.append(URLQueryItem(name: "os_version", value: operatingSystemVersion))
+        items.append(URLQueryItem(name: "app_identifier", value: applicationIdentifier))
+        items.append(URLQueryItem(name: "model", value: model))
+        items.append(URLQueryItem(name: "model_identifier", value: modelIdentifier))
+
+        return items
     }
 }

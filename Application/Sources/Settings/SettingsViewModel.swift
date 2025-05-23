@@ -160,22 +160,20 @@ final class SettingsViewModel: ObservableObject {
             }
         }
     #else
-        var canDisplayHelpAndContactSection: Bool {
-            supportEmailAdress != nil
+        var canDisplayFeedbackAndContactSection: Bool {
+            supportFormURL != nil
         }
 
         var showSupportInformation: (() -> Void)? {
-            guard let supportEmailAdress else { return nil }
+            guard let supportFormURL else { return nil }
             return {
-                let headerText = String(format: NSLocalizedString("Please contact us at %@", comment: "Apple TV header when displayed support information"), supportEmailAdress)
-                let text = String(format: "%@\n\n%@", headerText, SupportInformation.generate())
-                navigateToText(text)
+                navigateToSupportForm(formURL: supportFormURL)
                 AnalyticsEvent.openHelp(action: .technicalIssue).send()
             }
         }
 
-        private var supportEmailAdress: String? {
-            ApplicationConfiguration.shared.supportEmailAddress
+        private var supportFormURL: URL? {
+            ApplicationConfiguration.shared.supportFormUrlWithParameters
         }
     #endif
 

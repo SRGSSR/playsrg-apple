@@ -17,8 +17,7 @@ NSString *TitleForApplicationSection(ApplicationSection applicationSection)
                      @(ApplicationSectionNotifications) : NSLocalizedString(@"Notifications", @"Label to present Notifications"),
                      
                      @(ApplicationSectionFAQs) : NSLocalizedString(@"FAQs", @"Label to present FAQs"),
-                     @(ApplicationSectionTechnicaIssue) : NSLocalizedString(@"Report a technical issue", @"Label to present technical issue report instructions"),
-                     @(ApplicationSectionFeedback) : NSLocalizedString(@"Help us to improve the application", @"Label to present feedback form"),
+                     @(ApplicationSectionSupportForm) : NSLocalizedString(@"Contact support / Make a suggestion", @"Label to present support form"),
                      @(ApplicationSectionEvaluateApplication) : NSLocalizedString(@"Evaluate the application", @"Label to present the rate the application AppStore view"),
                      
                      @(ApplicationSectionSearch) : NSLocalizedString(@"Search", @"Label to present the search view"),

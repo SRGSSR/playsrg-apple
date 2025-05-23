@@ -48,15 +48,13 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *userDataServiceURL;
 
 @property (nonatomic, readonly) NSURL *whatsNewURL;
-@property (nonatomic, readonly, nullable) NSURL *feedbackURL;
+@property (nonatomic, readonly, nullable) NSURL *supportFormURL;
 @property (nonatomic, readonly, nullable) NSURL *faqURL;
 @property (nonatomic, readonly, nullable) NSURL *impressumURL;
 @property (nonatomic, readonly, nullable) NSURL *termsAndConditionsURL;
 @property (nonatomic, readonly, nullable) NSURL *dataProtectionURL;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
-
-@property (nonatomic, readonly, copy, nullable) NSString *supportEmailAddress;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;
