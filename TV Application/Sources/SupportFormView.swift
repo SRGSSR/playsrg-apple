@@ -15,7 +15,7 @@ struct SupportFormView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
-                Text("Scan this code to send a feedback or contact support")
+                Text(NSLocalizedString("Scan this code to send a feedback or contact support", comment: "Title of the screen showing the QR code to send a feedback or contact support"))
                     .srgFont(.H1)
                     .padding([.horizontal, .top])
 
@@ -30,11 +30,14 @@ struct SupportFormView: View {
                 } else {
                     if #available(tvOS 17.0, *) {
                         ContentUnavailableView(
-                            "Unable to generate QR code",
+                            NSLocalizedString("Unable to generate QR code", comment: "Error message to display when unable to generate feedback form QR code"),
                             systemImage: "xmark.circle"
                         )
                     } else {
-                        Label("Unable to generate QR code", systemImage: "xmark.circle")
+                        Label(
+                            NSLocalizedString("Unable to generate QR code", comment: "Error message to display when unable to generate feedback form QR code"),
+                            systemImage: "xmark.circle"
+                        )
                     }
                 }
 

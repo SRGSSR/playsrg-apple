@@ -601,6 +601,9 @@
 /* Title label used to present videos whose playback can be resumed */
 "Resume videos playback" = "Resume videos playback";
 
+/* Title of the screen showing the QR code to send a feedback or contact support */
+"Scan this code to send a feedback or contact support" = "Scan this code to send a feedback or contact support";
+
 /* Label to present the search view
    Search shortcut label
    Search tab bar title
@@ -817,6 +820,9 @@
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Type to start searching";
+
+/* Error message to display when unable to generate feedback form QR code */
+"Unable to generate QR code" = "Unable to generate QR code";
 
 /* Title of the button to update the application */
 "Update" = "Update";
