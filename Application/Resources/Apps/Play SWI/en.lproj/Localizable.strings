@@ -117,6 +117,9 @@
 /* Show by date short button title */
 "By date" = "By date";
 
+/* VPN or Proxy detection setting state */
+"Bypass detection" = "Bypass detection";
+
 /* Calendar button in program guide */
 "Calendar" = "Calendar";
 
@@ -138,18 +141,16 @@
 /* Label of the button to clear the web cache */
 "Clear web cache" = "Clear web cache";
 
+/* Label of the button to present feedback/support form
+   Label to present support form */
+"Contact support / Make a suggestion" = "Contact support / Make a suggestion";
+
 /* Content settings section header
    Search setting */
 "Content" = "Content";
 
 /* Message displayed when the user is about to delete content saved for later */
 "Content saved for later will be deleted on all devices connected to your account." = "Content saved for later will be deleted on all devices connected to your account.";
-
-/* Label of the button to copy support email to the pasteboard */
-"Copy %@" = "Copy %@";
-
-/* Label of the button to copy support information to the pasteboard */
-"Copy support information" = "Copy support information";
 
 /* Label of the button to display the data protection policy */
 "Data protection" = "Data protection";
@@ -203,9 +204,6 @@
 
 /* Developer section header */
 "Developer" = "Developer";
-
-/* VPN or Proxy detection setting state */
-"Direct connection" = "Direct connection";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Disable";
@@ -280,6 +278,9 @@
    Square images setting state */
 "Force" = "Force";
 
+/* VPN or Proxy detection setting state */
+"Force detection" = "Force detection";
+
 /* Total free space size displayed as a list footer */
 "Free space: %@" = "Free space: %@";
 
@@ -295,9 +296,6 @@
 
 /* Label of the button to display help and impressum */
 "Help and impressum" = "Help and impressum";
-
-/* Label to present feedback form */
-"Help us to improve the application" = "Help us to improve the application";
 
 /* Label to present history
    Title label used to present the history */
@@ -457,9 +455,6 @@
 /* Text displayed when no history is available */
 "No history" = "No history";
 
-/* Missing mail application alert title */
-"No mail application found" = "No mail application found";
-
 /* Text displayed when no notifications are available */
 "No notifications" = "No notifications";
 
@@ -532,13 +527,6 @@
 /* Playback speed screen title */
 "Playback speed" = "Playback speed";
 
-/* Apple TV header when displayed support information
-   Missing mail application description */
-"Please contact us at %@" = "Please contact us at %@";
-
-/* Mail body header to declare a technical issue */
-"Please describe the issue below:" = "Please describe the issue below:";
-
 /* Title label used to present radio associated podcasts
    Title label used to present the Audio shows AZ and Audio shows by date access buttons */
 "Podcasts" = "Podcasts";
@@ -599,11 +587,6 @@
 /* Search setting */
 "Relevance" = "Relevance";
 
-/* Label of the button to present technical issue report instructions
-   Label to present technical issue report instructions
-   Subject of the technical issue mail */
-"Report a technical issue" = "Report a technical issue";
-
 /* Reset section header
    Title of the reset search settings button */
 "Reset" = "Reset";
@@ -617,6 +600,9 @@
 
 /* Title label used to present videos whose playback can be resumed */
 "Resume videos playback" = "Resume playback";
+
+/* Title of the screen showing the QR code to send a feedback or contact support */
+"Scan this code to send a feedback or contact support" = "Scan this code to send a feedback or contact support";
 
 /* Label to present the search view
    Search shortcut label
@@ -711,12 +697,6 @@
 
 /* Search setting */
 "Subtitled" = "Subtitled";
-
-/* Information message displayed when support information has been copied to the pasteboard */
-"Support email has been copied to the pasteboard" = "Support email has been copied to the pasteboard";
-
-/* Information message displayed when support information has been copied to the pasteboard */
-"Support information has been copied to the pasteboard" = "Support information has been copied to the pasteboard";
 
 /* Label of the button to open Apple TestFlight application and see other testable builds */
 "Switch version" = "Switch version";
@@ -841,6 +821,9 @@
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Type to start searching";
 
+/* Error message to display when unable to generate feedback form QR code */
+"Unable to generate QR code" = "Unable to generate QR code";
+
 /* Title of the button to update the application */
 "Update" = "Update";
 
@@ -850,9 +833,6 @@
 
 /* Version label in settings */
 "Version" = "Version";
-
-/* VPN or Proxy detection setting state */
-"Via a VPN or Proxy" = "Via a VPN or Proxy";
 
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Video playback continues even when you leave the application.";
