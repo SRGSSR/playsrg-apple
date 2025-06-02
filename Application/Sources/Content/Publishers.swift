@@ -252,6 +252,25 @@ struct PlayChannel: Hashable {
     let external: Bool
 }
 
+struct PlayProgram: Hashable {
+    let wrappedValue: SRGProgram
+    /// Next program start date if any, program end date otherwise
+    let extendedEndDate: Date
+
+    init(wrappedValue: SRGProgram, nextProgram: SRGProgram?) {
+        self.wrappedValue = wrappedValue
+        extendedEndDate = nextProgram?.startDate ?? wrappedValue.endDate
+    }
+
+    func play_containsDate(_ date: Date) -> Bool {
+        // Avoid potential crashes if data is incorrect
+        let startDate = min(wrappedValue.startDate, extendedEndDate)
+        let endDate = max(wrappedValue.startDate, extendedEndDate)
+
+        return DateInterval(start: startDate, end: endDate).contains(date)
+    }
+}
+
 extension Publishers {
     static func concatenateMany<Output, Failure>(_ publishers: [AnyPublisher<Output, Failure>]) -> AnyPublisher<Output, Failure> {
         publishers.reduce(Empty().eraseToAnyPublisher()) { acc, elem in

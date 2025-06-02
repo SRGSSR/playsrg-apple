@@ -83,7 +83,7 @@ final class ProgramGuideGridViewController: UIViewController {
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, ProgramGuideDailyViewModel.Item> { cell, _, item in
             cell.content = ItemCell(item: item)
             #if os(tvOS)
-                if let program = item.program {
+                if let program = item.program?.wrappedValue {
                     cell.accessibilityLabel = program.play_accessibilityLabel(with: item.section.wrappedValue)
                     cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
                 } else {
@@ -276,9 +276,9 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         }
 
         #if os(tvOS)
-            navigateToProgram(program, in: channel.wrappedValue)
+            navigateToProgram(program.wrappedValue, in: channel.wrappedValue)
         #else
-            AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .grid).send()
+            AnalyticsClickEvent.tvGuideOpenInfoBox(program: program.wrappedValue, programGuideLayout: .grid).send()
             // Deselection is managed here rather than in view appearance methods, as those are not called with the
             // modal presentation we use.
             let programViewController = ProgramView.viewController(for: program, channel: channel)

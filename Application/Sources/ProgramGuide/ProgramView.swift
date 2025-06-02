@@ -14,11 +14,11 @@ struct ProgramView: View {
     @Binding var data: ProgramAndChannel
     @StateObject private var model = ProgramViewModel()
 
-    static func viewController(for program: SRGProgram, channel: PlayChannel) -> UIViewController {
+    static func viewController(for program: PlayProgram, channel: PlayChannel) -> UIViewController {
         ProgramViewController(program: program, channel: channel)
     }
 
-    init(program: SRGProgram, channel: PlayChannel) {
+    init(program: PlayProgram, channel: PlayChannel) {
         _data = .constant(.init(program: program, channel: channel))
     }
 
@@ -285,7 +285,7 @@ struct ProgramView: View {
 // MARK: View controller
 
 private final class ProgramViewController: UIHostingController<ProgramView> {
-    init(program: SRGProgram, channel: PlayChannel) {
+    init(program: PlayProgram, channel: PlayChannel) {
         super.init(rootView: ProgramView(program: program, channel: channel))
     }
 
@@ -314,9 +314,9 @@ struct ProgramView_Previews: PreviewProvider {
 
     static var previews: some View {
         Group {
-            ProgramView(program: Mock.program(), channel: Mock.playChannel())
-            ProgramView(program: Mock.program(.overflow), channel: Mock.playChannel())
-            ProgramView(program: Mock.program(.fallbackImageUrl), channel: Mock.playChannel())
+            ProgramView(program: Mock.playProgram(), channel: Mock.playChannel())
+            ProgramView(program: Mock.playProgram(.overflow), channel: Mock.playChannel())
+            ProgramView(program: Mock.playProgram(.fallbackImageUrl), channel: Mock.playChannel())
         }
         .previewLayout(.fixed(width: size.width, height: size.height))
     }

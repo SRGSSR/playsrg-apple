@@ -20,17 +20,17 @@ final class ProgramCellViewModel: ObservableObject {
     }
 
     var title: String? {
-        data?.program.title
+        data?.program.wrappedValue.title
     }
 
     var accessibilityLabel: String? {
-        data?.program.play_accessibilityLabel(with: data?.channel.wrappedValue)
+        data?.program.wrappedValue.play_accessibilityLabel(with: data?.channel.wrappedValue)
     }
 
     var timeRange: String? {
         guard let program = data?.program else { return nil }
-        let startTime = DateFormatter.play_time.string(from: program.startDate)
-        let endTime = DateFormatter.play_time.string(from: program.endDate)
+        let startTime = DateFormatter.play_time.string(from: program.wrappedValue.startDate)
+        let endTime = DateFormatter.play_time.string(from: program.extendedEndDate)
         // Unbreakable spaces before / after the separator
         return "\(startTime) - \(endTime)"
     }
@@ -39,12 +39,13 @@ final class ProgramCellViewModel: ObservableObject {
         guard let channel = data?.channel, !channel.external else {
             return false
         }
-        return progress != nil || data?.program.mediaURN != nil
+        return progress != nil || data?.program.wrappedValue.mediaURN != nil
     }
 
     var progress: Double? {
         guard let program = data?.program else { return nil }
-        let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+        let startDate = program.wrappedValue.startDate
+        let progress = date.timeIntervalSince(startDate) / program.extendedEndDate.timeIntervalSince(program.wrappedValue.startDate)
         return (0 ... 1).contains(progress) ? progress : nil
     }
 }

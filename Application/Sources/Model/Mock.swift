@@ -154,6 +154,10 @@ enum Mock {
         mockObject(kind.rawValue, type: SRGProgram.self)
     }
 
+    static func playProgram(_ kind: Program = .standard) -> PlayProgram {
+        PlayProgram(wrappedValue: program(kind), nextProgram: nil)
+    }
+
     enum Show: String {
         case standard
         case overflow

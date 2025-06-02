@@ -40,7 +40,7 @@ extension ProgramGuideDailyViewModel {
 
     struct Item: Hashable {
         enum WrappedValue: Hashable {
-            case program(_ program: SRGProgram)
+            case program(_ program: PlayProgram)
             case empty
             case loading
         }
@@ -57,7 +57,7 @@ extension ProgramGuideDailyViewModel {
             self.day = day
         }
 
-        var program: SRGProgram? {
+        var program: PlayProgram? {
             switch wrappedValue {
             case let .program(program):
                 program
@@ -69,7 +69,7 @@ extension ProgramGuideDailyViewModel {
         func endsAfter(_ date: Date) -> Bool {
             switch wrappedValue {
             case let .program(program):
-                program.endDate > date
+                program.extendedEndDate > date
             default:
                 false
             }
@@ -147,7 +147,12 @@ extension ProgramGuideDailyViewModel {
             case let .content(programCompositions: programCompositions):
                 let programs = Self.programs(for: channel, in: programCompositions)
                 if !programs.isEmpty {
-                    return programs.map { Item(wrappedValue: .program($0), section: channel, day: day) }
+                    return programs.enumerated()
+                        .map { index, program in
+                            let nextProgram = programs[safeIndex: index + 1]
+                            let playProgram = PlayProgram(wrappedValue: program, nextProgram: nextProgram)
+                            return Item(wrappedValue: .program(playProgram), section: channel, day: day)
+                        }
                 } else {
                     return [Item(wrappedValue: .empty, section: channel, day: day)]
                 }

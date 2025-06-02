@@ -115,7 +115,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index in
                 let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: section))
                 if let program = item.program {
-                    attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section, collectionView: collectionView)
+                    attrs.frame = frame(from: program.wrappedValue.startDate, to: program.extendedEndDate, in: dateInterval, forSection: section, collectionView: collectionView)
                 } else {
                     attrs.frame = frame(from: dateInterval.start, to: dateInterval.end, in: dateInterval, forSection: section, collectionView: collectionView)
                 }

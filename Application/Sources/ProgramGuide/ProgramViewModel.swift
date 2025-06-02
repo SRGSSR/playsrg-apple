@@ -16,7 +16,7 @@ import SRGDataProviderModel
 final class ProgramViewModel: ObservableObject {
     @Published var data: ProgramAndChannel? {
         didSet {
-            Self.mediaDataPublisher(for: data?.program)
+            Self.mediaDataPublisher(for: data?.program.wrappedValue)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$mediaData)
             Self.livestreamMediaPublisher(for: data?.channel.wrappedValue)
@@ -40,7 +40,7 @@ final class ProgramViewModel: ObservableObject {
     }
 
     private var program: SRGProgram? {
-        data?.program
+        data?.program.wrappedValue
     }
 
     private var media: SRGMedia? {
@@ -77,10 +77,10 @@ final class ProgramViewModel: ObservableObject {
     }
 
     var timeAndDate: String? {
-        guard let program else { return nil }
-        let startTime = DateFormatter.play_time.string(from: program.startDate)
-        let endTime = DateFormatter.play_time.string(from: program.endDate)
-        let day = DateFormatter.play_relativeFullDate.string(from: program.startDate)
+        guard let program = data?.program else { return nil }
+        let startTime = DateFormatter.play_time.string(from: program.wrappedValue.startDate)
+        let endTime = DateFormatter.play_time.string(from: program.extendedEndDate)
+        let day = DateFormatter.play_relativeFullDate.string(from: program.wrappedValue.startDate)
         return "\(startTime) - \(endTime) · \(day)"
     }
 
@@ -188,7 +188,7 @@ final class ProgramViewModel: ObservableObject {
             { [self] in
                 if let data {
                     if media.contentType == .livestream {
-                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel.wrappedValue).send()
+                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program.wrappedValue, channel: data.channel.wrappedValue).send()
                     } else {
                         AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel.wrappedValue).send()
                     }

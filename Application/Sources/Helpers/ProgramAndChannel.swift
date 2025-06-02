@@ -7,11 +7,11 @@
 import SRGDataProviderModel
 
 struct ProgramAndChannel: Hashable {
-    let program: SRGProgram
+    let program: PlayProgram
     let channel: PlayChannel
 
     func programGuideImageUrl(size: SRGImageSize) -> URL? {
-        if let image = program.image {
+        if let image = program.wrappedValue.image {
             PlaySRG.url(for: image, size: size)
         }
         // Couldn't use channel image in Play SRG image service. Use raw image.
