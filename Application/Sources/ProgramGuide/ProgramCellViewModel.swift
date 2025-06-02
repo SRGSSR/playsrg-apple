@@ -45,7 +45,7 @@ final class ProgramCellViewModel: ObservableObject {
     var progress: Double? {
         guard let program = data?.program else { return nil }
         let startDate = program.wrappedValue.startDate
-        let progress = date.timeIntervalSince(startDate) / program.extendedEndDate.timeIntervalSince(program.wrappedValue.startDate)
+        let progress = date.timeIntervalSince(startDate) / program.extendedEndDate.timeIntervalSince(startDate)
         return (0 ... 1).contains(progress) ? progress : nil
     }
 }

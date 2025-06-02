@@ -257,9 +257,9 @@ struct PlayProgram: Hashable {
     /// Next program start date if any, program end date otherwise
     let extendedEndDate: Date
 
-    init(wrappedValue: SRGProgram, nextProgram: SRGProgram?) {
+    init(wrappedValue: SRGProgram, nextProgramStartDate: Date?) {
         self.wrappedValue = wrappedValue
-        extendedEndDate = nextProgram?.startDate ?? wrappedValue.endDate
+        extendedEndDate = nextProgramStartDate ?? wrappedValue.endDate
     }
 
     func play_containsDate(_ date: Date) -> Bool {

@@ -150,7 +150,7 @@ extension ProgramGuideDailyViewModel {
                     return programs.enumerated()
                         .map { index, program in
                             let nextProgram = programs[safeIndex: index + 1]
-                            let playProgram = PlayProgram(wrappedValue: program, nextProgram: nextProgram)
+                            let playProgram = PlayProgram(wrappedValue: program, nextProgramStartDate: nextProgram?.startDate)
                             return Item(wrappedValue: .program(playProgram), section: channel, day: day)
                         }
                 } else {

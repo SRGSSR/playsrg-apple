@@ -155,7 +155,7 @@ enum Mock {
     }
 
     static func playProgram(_ kind: Program = .standard) -> PlayProgram {
-        PlayProgram(wrappedValue: program(kind), nextProgram: nil)
+        PlayProgram(wrappedValue: program(kind), nextProgramStartDate: nil)
     }
 
     enum Show: String {
