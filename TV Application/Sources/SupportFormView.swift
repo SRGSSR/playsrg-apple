@@ -12,38 +12,48 @@ import SwiftUI
 struct SupportFormView: View {
     let formURL: URL
 
+    private var accessoryView: Image {
+        if let qrCodeImage = generateQRCode() {
+            Image(uiImage: qrCodeImage)
+                .interpolation(.none)
+        } else {
+            Image(systemName: "xmark.circle")
+        }
+    }
+
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                Text(NSLocalizedString("Scan this code to send a feedback or contact support", comment: "Title of the screen showing the QR code to send a feedback or contact support"))
-                    .srgFont(.H1)
-                    .padding([.horizontal, .top])
+            Text(NSLocalizedString("Support and Feedback", comment: "Title of the screen showing the QR code to send a feedback or contact support"))
+                .srgFont(.H1)
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .center)
+            HStack(alignment: .center) {
+                Spacer()
+
+                VStack {
+                    Text(NSLocalizedString("Contact support / Make a suggestion", comment: "Subtitle of the screen showing the QR code to send a feedback or contact support"))
+                        .multilineTextAlignment(.center)
+                        .srgFont(.H3)
+                        .padding()
+
+                    Text(NSLocalizedString("Need help or want to share a suggestion? Write to us.", comment: "Description of the screen showing the QR code to send a feedback or contact support"))
+                        .multilineTextAlignment(.center)
+                        .srgFont(.subtitle1)
+                        .padding()
+                }
+                .frame(maxWidth: geometry.size.width / 3)
 
                 Spacer()
 
-                if let qrCodeImage = generateQRCode() {
-                    Image(uiImage: qrCodeImage)
-                        .interpolation(.none)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: geometry.size.width / 4)
-                } else {
-                    if #available(tvOS 17.0, *) {
-                        ContentUnavailableView(
-                            NSLocalizedString("Unable to generate QR code", comment: "Error message to display when unable to generate feedback form QR code"),
-                            systemImage: "xmark.circle"
-                        )
-                    } else {
-                        Label(
-                            NSLocalizedString("Unable to generate QR code", comment: "Error message to display when unable to generate feedback form QR code"),
-                            systemImage: "xmark.circle"
-                        )
-                    }
-                }
+                accessoryView
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: geometry.size.width / 4)
 
+                Spacer()
                 Spacer()
             }
-            .frame(width: geometry.size.width)
+            .frame(maxHeight: .infinity)
         }
     }
 

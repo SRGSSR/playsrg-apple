@@ -485,7 +485,7 @@ struct SettingsView: View {
 
                 var body: some View {
                     Button(action: showSupportInformation) {
-                        Text(NSLocalizedString("Contact support / Make a suggestion", comment: "Label of the button to present feedback/support form"))
+                        Text(NSLocalizedString("Support and Feedback", comment: "Label of the button to present feedback/support form"))
                     }
                 }
             }
