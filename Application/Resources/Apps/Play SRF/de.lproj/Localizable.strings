@@ -141,8 +141,8 @@
 /* Label of the button to clear the web cache */
 "Clear web cache" = "Web-Cache leeren";
 
-/* Label of the button to present feedback/support form
-   Label to present support form */
+/* Label to present support form
+   Subtitle of the screen showing the QR code to send a feedback or contact support */
 "Contact support / Make a suggestion" = "Kontakt zum Support / Vorschlag machen";
 
 /* Content settings section header
@@ -428,6 +428,9 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mein Konto";
 
+/* Description of the screen showing the QR code to send a feedback or contact support */
+"Need help or want to share a suggestion? Write to us." = "Brauchen Sie Hilfe oder möchten Sie einen Vorschlag machen? Schreiben Sie uns.";
+
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Nie";
 
@@ -601,9 +604,6 @@
 /* Title label used to present videos whose playback can be resumed */
 "Resume videos playback" = "Weiterschauen";
 
-/* Title of the screen showing the QR code to send a feedback or contact support */
-"Scan this code to send a feedback or contact support" = "Scan this code to send a feedback or contact support";
-
 /* Label to present the search view
    Search shortcut label
    Search tab bar title
@@ -697,6 +697,10 @@
 
 /* Search setting */
 "Subtitled" = "Mit Untertiteln";
+
+/* Label of the button to present feedback/support form
+   Title of the screen showing the QR code to send a feedback or contact support */
+"Support and Feedback" = "Kontakt und Vorschlag";
 
 /* Label of the button to open Apple TestFlight application and see other testable builds */
 "Switch version" = "Version ändern";
@@ -820,9 +824,6 @@
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Suchbegriff eingeben";
-
-/* Error message to display when unable to generate feedback form QR code */
-"Unable to generate QR code" = "Unable to generate QR code";
 
 /* Title of the button to update the application */
 "Update" = "Updaten";

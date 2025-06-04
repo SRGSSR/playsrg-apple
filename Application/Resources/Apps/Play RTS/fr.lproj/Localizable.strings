@@ -141,9 +141,9 @@
 /* Label of the button to clear the web cache */
 "Clear web cache" = "Effacer le cache web";
 
-/* Label of the button to present feedback/support form
-   Label to present support form */
-"Contact support / Make a suggestion" = "Contacter le support / Faire une suggestion";
+/* Label to present support form
+   Subtitle of the screen showing the QR code to send a feedback or contact support */
+"Contact support / Make a suggestion" = "Contacter l'assistance / Faire une suggestion";
 
 /* Content settings section header
    Search setting */
@@ -428,6 +428,9 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
 
+/* Description of the screen showing the QR code to send a feedback or contact support */
+"Need help or want to share a suggestion? Write to us." = "Besoin d'aide ou envie de partager une suggestion ? Écrivez-nous.";
+
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Jamais";
 
@@ -601,9 +604,6 @@
 /* Title label used to present videos whose playback can be resumed */
 "Resume videos playback" = "Reprendre la lecture";
 
-/* Title of the screen showing the QR code to send a feedback or contact support */
-"Scan this code to send a feedback or contact support" = "Scan this code to send a feedback or contact support";
-
 /* Label to present the search view
    Search shortcut label
    Search tab bar title
@@ -697,6 +697,10 @@
 
 /* Search setting */
 "Subtitled" = "Sous-titré";
+
+/* Label of the button to present feedback/support form
+   Title of the screen showing the QR code to send a feedback or contact support */
+"Support and Feedback" = "Contact et suggestion";
 
 /* Label of the button to open Apple TestFlight application and see other testable builds */
 "Switch version" = "Changer de version";
@@ -820,9 +824,6 @@
 
 /* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Saisissez un critère pour commencer la recherche";
-
-/* Error message to display when unable to generate feedback form QR code */
-"Unable to generate QR code" = "Unable to generate QR code";
 
 /* Title of the button to update the application */
 "Update" = "Mettre à jour";
