@@ -87,6 +87,11 @@ extension ApplicationConfiguration {
         } else {
             urlComponents.queryItems = typeformQueryItems
         }
+
+        let query = urlComponents.percentEncodedQuery
+        urlComponents.fragment = query
+        urlComponents.queryItems = nil
+
         return urlComponents.url ?? url
     }
 
