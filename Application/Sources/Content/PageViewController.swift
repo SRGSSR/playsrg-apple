@@ -394,6 +394,40 @@ final class PageViewController: UIViewController {
 
             present(activityViewController, animated: true, completion: nil)
         }
+
+        private func openSectionPage(section: PageViewModel.Section) {
+            guard let navigationController else { return }
+
+            if let microPageId = section.wrappedValue.properties.openContentPageId {
+                openContentPage(id: microPageId)
+            } else {
+                let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                navigationController.pushViewController(sectionViewController, animated: true)
+            }
+        }
+
+        private func openContentPage(id: String) {
+            guard let navigationController else { return }
+
+            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
+                .receive(on: DispatchQueue.main)
+                .sink { result in
+                    if case .failure = result {
+                        let error = NSError(
+                            domain: PlayErrorDomain,
+                            code: PlayErrorCode.notFound.rawValue,
+                            userInfo: [
+                                NSLocalizedDescriptionKey: NSLocalizedString("The page cannot be opened.", comment: "Error message when a page cannot be opened from a page section title")
+                            ]
+                        )
+                        Banner.showError(error)
+                    }
+                } receiveValue: { contentPage in
+                    let pageViewController = Self.pageViewController(for: contentPage)
+                    navigationController.pushViewController(pageViewController, animated: true)
+                }
+                .store(in: &cancellables)
+        }
     #endif
 
     private func trackPageView(state: PageViewModel.State) {
@@ -517,18 +551,14 @@ extension PageViewController: UICollectionViewDelegate {
                         } else if case let .media(media) = highlightedItem {
                             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                         } else {
-                            let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
-                            navigationController.pushViewController(sectionViewController, animated: true)
+                            openSectionPage(section: section)
                         }
                     }
                 default:
                     ()
                 }
             case .more:
-                if let navigationController {
-                    let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
-                    navigationController.pushViewController(sectionViewController, animated: true)
-                }
+                openSectionPage(section: section)
             }
         }
 
@@ -683,43 +713,9 @@ extension PageViewController: UIScrollViewDelegate {
 
     extension PageViewController: SectionHeaderViewAction {
         fileprivate func openSection(sender _: Any?, event: OpenSectionEvent?) {
-            if let event {
-                if let microPageId = event.section.wrappedValue.properties.openContentPageId {
-                    openContentPage(id: microPageId)
-                } else {
-                    openSectionPage(section: event.section, filter: model.id)
-                }
+            if let section = event?.section {
+                openSectionPage(section: section)
             }
-        }
-
-        private func openSectionPage(section: PageViewModel.Section, filter: PageViewModel.Id) {
-            guard let navigationController else { return }
-
-            let sectionViewController = SectionViewController(section: section.wrappedValue, filter: filter)
-            navigationController.pushViewController(sectionViewController, animated: true)
-        }
-
-        private func openContentPage(id: String) {
-            guard let navigationController else { return }
-
-            SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, uid: id)
-                .receive(on: DispatchQueue.main)
-                .sink { result in
-                    if case .failure = result {
-                        let error = NSError(
-                            domain: PlayErrorDomain,
-                            code: PlayErrorCode.notFound.rawValue,
-                            userInfo: [
-                                NSLocalizedDescriptionKey: NSLocalizedString("The page cannot be opened.", comment: "Error message when a page cannot be opened from a page section title")
-                            ]
-                        )
-                        Banner.showError(error)
-                    }
-                } receiveValue: { contentPage in
-                    let pageViewController = PageViewController.pageViewController(for: contentPage)
-                    navigationController.pushViewController(pageViewController, animated: true)
-                }
-                .store(in: &cancellables)
         }
     }
 
