@@ -143,7 +143,7 @@
 
 /* Label to present support form
    Subtitle of the screen showing the QR code to send a feedback or contact support */
-"Contact support / Make a suggestion" = "Kontakt zum Support / Vorschlag machen";
+"Contact support / Make a suggestion" = "Contactar il support / Far ina proposta";
 
 /* Content settings section header
    Search setting */
@@ -429,7 +429,7 @@
 "My account" = "Mes conto";
 
 /* Description of the screen showing the QR code to send a feedback or contact support */
-"Need help or want to share a suggestion? Write to us." = "Brauchen Sie Hilfe oder möchten Sie einen Vorschlag machen? Schreiben Sie uns.";
+"Need help or want to share a suggestion? Write to us." = "Duvrais Vus agid u vulais Vus far ina proposta? Scrivai a nus.";
 
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Mai";
@@ -700,7 +700,7 @@
 
 /* Label of the button to present feedback/support form
    Title of the screen showing the QR code to send a feedback or contact support */
-"Support and Feedback" = "Kontakt und Vorschlag";
+"Support and Feedback" = "Contact e proposta";
 
 /* Label of the button to open Apple TestFlight application and see other testable builds */
 "Switch version" = "Midar la versiun";

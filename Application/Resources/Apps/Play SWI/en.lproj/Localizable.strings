@@ -143,7 +143,7 @@
 
 /* Label to present support form
    Subtitle of the screen showing the QR code to send a feedback or contact support */
-"Contact support / Make a suggestion" = "Contacter le support / Faire une suggestion";
+"Contact support / Make a suggestion" = "Contact support / Make a suggestion";
 
 /* Content settings section header
    Search setting */
@@ -279,7 +279,7 @@
 "Force" = "Force";
 
 /* VPN or Proxy detection setting state */
-"Force detection" = "Forcer la détection";
+"Force detection" = "Force detection";
 
 /* Total free space size displayed as a list footer */
 "Free space: %@" = "Free space: %@";
