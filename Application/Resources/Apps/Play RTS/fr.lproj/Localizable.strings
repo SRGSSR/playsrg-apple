@@ -700,7 +700,7 @@
 
 /* Label of the button to present feedback/support form
    Title of the screen showing the QR code to send a feedback or contact support */
-"Support and Feedback" = "Contact et suggestion";
+"Support and Feedback" = "Contact et suggestions";
 
 /* Label of the button to open Apple TestFlight application and see other testable builds */
 "Switch version" = "Changer de version";
