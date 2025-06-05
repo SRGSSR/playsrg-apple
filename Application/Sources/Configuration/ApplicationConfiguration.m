@@ -133,7 +133,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *userDataServiceURL;
 
 @property (nonatomic) NSURL *whatsNewURL;
-@property (nonatomic) NSURL *feedbackURL;
+@property (nonatomic) NSURL *supportFormURL;
 @property (nonatomic) NSURL *faqURL;
 @property (nonatomic) NSURL *impressumURL;
 @property (nonatomic) NSURL *termsAndConditionsURL;
@@ -141,7 +141,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
-@property (nonatomic, copy) NSString *supportEmailAddress;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
@@ -487,10 +486,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *faqURLString = [firebaseConfiguration stringForKey:@"faqURL"];
     self.faqURL = faqURLString ? [NSURL URLWithString:faqURLString] : nil;
-    
-    NSString *feedbackURLString = [firebaseConfiguration stringForKey:@"feedbackURL"];
-    self.feedbackURL = feedbackURLString ? [NSURL URLWithString:feedbackURLString] : nil;
-    
+
+    NSString *supportFormURLString = [firebaseConfiguration stringForKey:@"supportFormURL"];
+    self.supportFormURL = supportFormURLString ? [NSURL URLWithString:supportFormURLString] : nil;
+
     NSString *impressumURLString = [firebaseConfiguration stringForKey:@"impressumURL"];
     self.impressumURL = impressumURLString ? [NSURL URLWithString:impressumURLString] : nil;
     
@@ -505,8 +504,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *dataProtectionURLString = [firebaseConfiguration stringForKey:@"dataProtectionURL"];
     self.dataProtectionURL = dataProtectionURLString ? [NSURL URLWithString:dataProtectionURLString] : nil;
-    
-    self.supportEmailAddress = [firebaseConfiguration stringForKey:@"supportEmailAddress"];
     
     NSNumber *minimumSocialViewCount = [firebaseConfiguration numberForKey:@"minimumSocialViewCount"];
     self.minimumSocialViewCount = minimumSocialViewCount ? MAX(minimumSocialViewCount.integerValue, 0) : NSIntegerMax;

@@ -9,7 +9,7 @@
   "playServiceURL": "https://play.swissinfo.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "sourceCodeURL": "https://github.com/SRGSSR/playsrg-apple",
-  "supportEmailAddress": "support.play@rts.ch",
+  "supportFormURL": "https://form.typeform.com/to/ibpIGrGw",
   "minimumSocialViewCount": 50,
   "faqURL": "https://play.swissinfo.ch/play/tv/help",
   "dataProtectionURL": "https://www.swissinfo.ch/eng/data-privacy-statement/133174",

@@ -165,14 +165,9 @@
             opened = [ProfileHelp showFaqs];
             break;
         }
-            
-        case ApplicationSectionTechnicaIssue: {
-            opened = [ProfileHelp showSupporByEmail];
-            break;
-        }
-            
-        case ApplicationSectionFeedback: {
-            opened = [ProfileHelp showFeedbackForm];
+
+        case ApplicationSectionSupportForm: {
+            opened = [ProfileHelp showSupportForm];
             break;
         }
             

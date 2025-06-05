@@ -2605,6 +2605,11 @@
 		E6971AF01D4B300C008CA703 /* PlayApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */; };
 		E6971AF11D4B300C008CA703 /* PlayApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */; };
 		FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CFA73B98E03BB3298E17EB /* libPods-Play SRG-tvOS-Play RSI TV.a */; };
+		FC7128BE2DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
+		FC7128BF2DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
+		FC7128C02DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
+		FC7128C12DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
+		FC7128C22DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3525,6 +3530,7 @@
 		EC2DF535757623B50FE8F3E2 /* Pods-Play SRG-iOS-Play SRF.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.appstore.xcconfig"; sourceTree = "<group>"; };
 		F68ECA20B6627579ECED2FF8 /* Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
 		F96229F633EA40ACB18CD9F0 /* Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		FC7128BD2DE08074009134A1 /* SupportFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormView.swift; sourceTree = "<group>"; };
 		FCB0305ADCA82769B114F47F /* Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -5006,6 +5012,7 @@
 				6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */,
 				6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */,
 				6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */,
+				FC7128BD2DE08074009134A1 /* SupportFormView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -9980,6 +9987,7 @@
 				6FCA5BED27DA00A900916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557027B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC6262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
+				FC7128BE2DE08074009134A1 /* SupportFormView.swift in Sources */,
 				6F0B98552726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
@@ -10141,6 +10149,7 @@
 				6FCA5BEE27DA00AA00916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557127B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC7262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
+				FC7128BF2DE08074009134A1 /* SupportFormView.swift in Sources */,
 				6F0B98562726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
@@ -10302,6 +10311,7 @@
 				6FCA5BEF27DA00AA00916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557227B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC8262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
+				FC7128C12DE08074009134A1 /* SupportFormView.swift in Sources */,
 				6F0B98572726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
@@ -10463,6 +10473,7 @@
 				6FCA5BF027DA00AB00916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557327B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC9262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
+				FC7128C22DE08074009134A1 /* SupportFormView.swift in Sources */,
 				6F0B98582726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
@@ -10663,6 +10674,7 @@
 				6FC2A225265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				042F6F5E29E0A764003F46AA /* UIColor+PlaySRG.swift in Sources */,
 				6FD4C2DF268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
+				FC7128C02DE08074009134A1 /* SupportFormView.swift in Sources */,
 				6F742946265BE52E0000538D /* Signals.swift in Sources */,
 				04D5F928286C4542000A5A4E /* Recommendation.swift in Sources */,
 				0866967E273E63D1005AF2BA /* NowLineView.swift in Sources */,

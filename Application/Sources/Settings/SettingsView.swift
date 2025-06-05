@@ -35,7 +35,7 @@ struct SettingsView: View {
             #endif
             ContentSection(model: model)
             #if os(tvOS)
-                if model.canDisplayHelpAndContactSection {
+                if model.canDisplayFeedbackAndContactSection {
                     HelpAndContactSection(model: model)
                 }
             #endif
@@ -483,12 +483,9 @@ struct SettingsView: View {
             private struct SupportInformationButton: View {
                 let showSupportInformation: () -> Void
 
-                @State private var isActionSheetDisplayed = false
-                @State private var isMailComposeDisplayed = false
-
                 var body: some View {
                     Button(action: showSupportInformation) {
-                        Text(NSLocalizedString("Report a technical issue", comment: "Label of the button to present technical issue report instructions"))
+                        Text(NSLocalizedString("Support and Feedback", comment: "Label of the button to present feedback/support form"))
                     }
                 }
             }

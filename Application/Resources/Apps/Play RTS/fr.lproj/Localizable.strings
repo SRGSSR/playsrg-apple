@@ -117,6 +117,9 @@
 /* Show by date short button title */
 "By date" = "Par date";
 
+/* VPN or Proxy detection setting state */
+"Bypass detection" = "Outrepasser la détection";
+
 /* Calendar button in program guide */
 "Calendar" = "Calendrier";
 
@@ -138,18 +141,16 @@
 /* Label of the button to clear the web cache */
 "Clear web cache" = "Effacer le cache web";
 
+/* Label to present support form
+   Subtitle of the screen showing the QR code to send a feedback or contact support */
+"Contact support / Make a suggestion" = "Contacter l'assistance / Faire une suggestion";
+
 /* Content settings section header
    Search setting */
 "Content" = "Contenu";
 
 /* Message displayed when the user is about to delete content saved for later */
 "Content saved for later will be deleted on all devices connected to your account." = "Le contenu à consulter plus tard sera supprimé sur tous les appareils liés à votre compte.";
-
-/* Label of the button to copy support email to the pasteboard */
-"Copy %@" = "Copier %@";
-
-/* Label of the button to copy support information to the pasteboard */
-"Copy support information" = "Copier les informations de support";
 
 /* Label of the button to display the data protection policy */
 "Data protection" = "Protection des données";
@@ -163,7 +164,7 @@
 "Default (current configuration)" = "Défaut (configuration actuelle)";
 
 /* VPN or Proxy detection setting state */
-"Default (IP-based detection)" = "Default (IP-based detection)";
+"Default (IP-based detection)" = "Défaut (détection selon IP)";
 
 /* User location setting state */
 "Default (IP-based location)" = "Défaut (géolocalisation de l'IP)";
@@ -203,9 +204,6 @@
 
 /* Developer section header */
 "Developer" = "Développeur";
-
-/* VPN or Proxy detection setting state */
-"Direct connection" = "Direct connection";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Désactiver";
@@ -280,6 +278,9 @@
    Square images setting state */
 "Force" = "Forcer";
 
+/* VPN or Proxy detection setting state */
+"Force detection" = "Forcer la détection";
+
 /* Total free space size displayed as a list footer */
 "Free space: %@" = "Capacité disponible : %@";
 
@@ -295,9 +296,6 @@
 
 /* Label of the button to display help and impressum */
 "Help and impressum" = "Aide et contact";
-
-/* Label to present feedback form */
-"Help us to improve the application" = "Aidez-nous à améliorer l'application";
 
 /* Label to present history
    Title label used to present the history */
@@ -430,6 +428,9 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
 
+/* Description of the screen showing the QR code to send a feedback or contact support */
+"Need help or want to share a suggestion? Write to us." = "Besoin d'aide ou envie de partager une suggestion ? Écrivez-nous.";
+
 /* Text displayed when no data synchronization has been made yet */
 "Never" = "Jamais";
 
@@ -456,9 +457,6 @@
 
 /* Text displayed when no history is available */
 "No history" = "Aucun historique";
-
-/* Missing mail application alert title */
-"No mail application found" = "Aucune application de mail trouvée";
 
 /* Text displayed when no notifications are available */
 "No notifications" = "Aucune notification";
@@ -532,13 +530,6 @@
 /* Playback speed screen title */
 "Playback speed" = "Vitesse de lecture";
 
-/* Apple TV header when displayed support information
-   Missing mail application description */
-"Please contact us at %@" = "Veuillez nous contacter à %@";
-
-/* Mail body header to declare a technical issue */
-"Please describe the issue below:" = "Merci de décrire ci-dessous le problème rencontré :";
-
 /* Title label used to present radio associated podcasts
    Title label used to present the Audio shows AZ and Audio shows by date access buttons */
 "Podcasts" = "Podcasts";
@@ -598,11 +589,6 @@
 
 /* Search setting */
 "Relevance" = "Pertinence";
-
-/* Label of the button to present technical issue report instructions
-   Label to present technical issue report instructions
-   Subject of the technical issue mail */
-"Report a technical issue" = "Signaler un problème technique";
 
 /* Reset section header
    Title of the reset search settings button */
@@ -712,11 +698,9 @@
 /* Search setting */
 "Subtitled" = "Sous-titré";
 
-/* Information message displayed when support information has been copied to the pasteboard */
-"Support email has been copied to the pasteboard" = "L'email de support a été copié dans le presse-papier";
-
-/* Information message displayed when support information has been copied to the pasteboard */
-"Support information has been copied to the pasteboard" = "Les informations de support ont été copiées dans le presse-papier";
+/* Label of the button to present feedback/support form
+   Title of the screen showing the QR code to send a feedback or contact support */
+"Support and Feedback" = "Contact et suggestions";
 
 /* Label of the button to open Apple TestFlight application and see other testable builds */
 "Switch version" = "Changer de version";
@@ -850,9 +834,6 @@
 
 /* Version label in settings */
 "Version" = "Version";
-
-/* VPN or Proxy detection setting state */
-"Via a VPN or Proxy" = "Via a VPN or Proxy";
 
 /* Background video playback setting section footer */
 "Video playback continues even when you leave the application." = "Autorise la lecture vidéo à se poursuivre même quand vous sortez de l'application.";

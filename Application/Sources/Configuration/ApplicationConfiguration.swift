@@ -80,24 +80,25 @@ extension ApplicationConfiguration {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return url }
         guard let host = urlComponents.host, host.contains("typeform.") else { return url }
 
-        let typeformQueryItems = [
-            URLQueryItem(name: "platform", value: "iOS"),
-            URLQueryItem(name: "version", value: version),
-            URLQueryItem(name: "type", value: type),
-            URLQueryItem(name: "cid", value: identifier)
-        ]
+        let typeformQueryItems = SupportInformation.toQueryItems()
+
         if let queryItems = urlComponents.queryItems {
             urlComponents.queryItems = typeformQueryItems.appending(contentsOf: queryItems)
         } else {
             urlComponents.queryItems = typeformQueryItems
         }
+
+        let query = urlComponents.percentEncodedQuery
+        urlComponents.fragment = query
+        urlComponents.queryItems = nil
+
         return urlComponents.url ?? url
     }
 
-    var userSuggestionUrlWithParameters: URL? {
-        guard let feedbackUrl = feedbackURL else { return nil }
+    var supportFormUrlWithParameters: URL? {
+        guard let supportFormURL else { return nil }
 
-        return Self.typeformUrlWithParameters(feedbackUrl)
+        return Self.typeformUrlWithParameters(supportFormURL)
     }
 
     var tvGuideOtherBouquets: [TVGuideBouquet] {

@@ -9,7 +9,7 @@
   "playServiceURL": "https://www.rsi.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "sourceCodeURL": "https://github.com/SRGSSR/playsrg-apple",
-  "supportEmailAddress": "info@rsi.ch",
+  "supportFormURL": "https://form.typeform.com/to/ibpIGrGw",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvLiveCenterScheduledLivestreams,tvLiveCenterEpisodes",
   "tvLiveHomeSections": "tvLive,tvLiveCenterScheduledLivestreams,tvLiveCenterEpisodes,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioWatchLater",
