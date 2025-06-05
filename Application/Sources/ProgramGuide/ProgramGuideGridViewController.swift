@@ -83,7 +83,7 @@ final class ProgramGuideGridViewController: UIViewController {
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, ProgramGuideDailyViewModel.Item> { cell, _, item in
             cell.content = ItemCell(item: item)
             #if os(tvOS)
-                if let program = item.program?.wrappedValue {
+                if let program = item.program {
                     cell.accessibilityLabel = program.play_accessibilityLabel(with: item.section.wrappedValue)
                     cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
                 } else {

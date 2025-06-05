@@ -24,7 +24,7 @@ final class ProgramCellViewModel: ObservableObject {
     }
 
     var accessibilityLabel: String? {
-        data?.program.wrappedValue.play_accessibilityLabel(with: data?.channel.wrappedValue)
+        data?.program.play_accessibilityLabel(with: data?.channel.wrappedValue)
     }
 
     var timeRange: String? {

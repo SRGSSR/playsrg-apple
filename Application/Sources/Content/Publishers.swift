@@ -269,6 +269,19 @@ struct PlayProgram: Hashable {
 
         return DateInterval(start: startDate, end: endDate).contains(date)
     }
+
+    func play_accessibilityLabel(with channel: SRGChannel?) -> String {
+        let format = PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time.")
+        var label = String(
+            format: format,
+            PlayAccessibilityTimeFromDate(wrappedValue.startDate),
+            PlayAccessibilityTimeFromDate(extendedEndDate)
+        )
+        if let channel {
+            label += " " + String(format: PlaySRGAccessibilityLocalizedString("on %@", comment: "Text providing a channel information. Placeholder is the channel on which it's broadcasted."), channel.title)
+        }
+        return label + ", " + wrappedValue.title
+    }
 }
 
 extension Publishers {
