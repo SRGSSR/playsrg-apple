@@ -1,9 +1,7 @@
 //
-//  SupportFormView.swift
-//  PlaySRG
+//  Copyright © SRG SSR. All rights reserved.
 //
-//  Created by Yoan Smit on 23.05.2025.
-//  Copyright © 2025 SRG SSR. All rights reserved.
+//  License information is available from the LICENSE file.
 //
 
 import CoreImage.CIFilterBuiltins
@@ -11,15 +9,6 @@ import SwiftUI
 
 struct SupportFormView: View {
     let formURL: URL
-
-    private var accessoryView: Image {
-        if let qrCodeImage = generateQRCode() {
-            Image(uiImage: qrCodeImage)
-                .interpolation(.none)
-        } else {
-            Image(systemName: "xmark.circle")
-        }
-    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -45,7 +34,7 @@ struct SupportFormView: View {
 
                 Spacer()
 
-                accessoryView
+                qrCodeView
                     .resizable()
                     .scaledToFit()
                     .frame(width: geometry.size.width / 4)
@@ -54,6 +43,15 @@ struct SupportFormView: View {
                 Spacer()
             }
             .frame(maxHeight: .infinity)
+        }
+    }
+
+    private var qrCodeView: Image {
+        if let qrCodeImage = generateQRCode() {
+            Image(uiImage: qrCodeImage)
+                .interpolation(.none)
+        } else {
+            Image(systemName: "xmark.circle")
         }
     }
 
@@ -75,5 +73,5 @@ struct SupportFormView: View {
 }
 
 #Preview {
-    SupportFormView(formURL: URL(string: "www.google.com")!)
+    SupportFormView(formURL: URL(string: "www.srgssr.com")!)
 }
