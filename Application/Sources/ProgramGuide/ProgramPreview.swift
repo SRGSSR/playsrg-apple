@@ -88,9 +88,9 @@ struct ProgramPreview: View {
 struct ProgramPreview_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ProgramPreview(data: ProgramAndChannel(program: Mock.program(), channel: Mock.playChannel()))
-            ProgramPreview(data: ProgramAndChannel(program: Mock.program(.overflow), channel: Mock.playChannel()))
-            ProgramPreview(data: ProgramAndChannel(program: Mock.program(.fallbackImageUrl), channel: Mock.playChannel()))
+            ProgramPreview(data: ProgramAndChannel(program: Mock.playProgram(), channel: Mock.playChannel()))
+            ProgramPreview(data: ProgramAndChannel(program: Mock.playProgram(.overflow), channel: Mock.playChannel()))
+            ProgramPreview(data: ProgramAndChannel(program: Mock.playProgram(.fallbackImageUrl), channel: Mock.playChannel()))
             ProgramPreview(data: nil)
         }
         .previewLayout(.fixed(width: 1920, height: 700))

@@ -252,6 +252,38 @@ struct PlayChannel: Hashable {
     let external: Bool
 }
 
+struct PlayProgram: Hashable {
+    let wrappedValue: SRGProgram
+    /// Next program start date if any, program end date otherwise
+    let extendedEndDate: Date
+
+    init(wrappedValue: SRGProgram, nextProgramStartDate: Date?) {
+        self.wrappedValue = wrappedValue
+        extendedEndDate = nextProgramStartDate ?? wrappedValue.endDate
+    }
+
+    func play_containsDate(_ date: Date) -> Bool {
+        // Avoid potential crashes if data is incorrect
+        let startDate = min(wrappedValue.startDate, extendedEndDate)
+        let endDate = max(wrappedValue.startDate, extendedEndDate)
+
+        return DateInterval(start: startDate, end: endDate).contains(date)
+    }
+
+    func play_accessibilityLabel(with channel: SRGChannel?) -> String {
+        let format = PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time.")
+        var label = String(
+            format: format,
+            PlayAccessibilityTimeFromDate(wrappedValue.startDate),
+            PlayAccessibilityTimeFromDate(extendedEndDate)
+        )
+        if let channel {
+            label += " " + String(format: PlaySRGAccessibilityLocalizedString("on %@", comment: "Text providing a channel information. Placeholder is the channel on which it's broadcasted."), channel.title)
+        }
+        return label + ", " + wrappedValue.title
+    }
+}
+
 extension Publishers {
     static func concatenateMany<Output, Failure>(_ publishers: [AnyPublisher<Output, Failure>]) -> AnyPublisher<Output, Failure> {
         publishers.reduce(Empty().eraseToAnyPublisher()) { acc, elem in

@@ -13,13 +13,13 @@ final class ProgramPreviewModel: ObservableObject {
     @Published var data: ProgramAndChannel?
     @Published private(set) var date = Date()
 
-    private var program: SRGProgram? {
+    private var program: PlayProgram? {
         data?.program
     }
 
     private var isLive: Bool {
         guard let program else { return false }
-        return (program.startDate ... program.endDate).contains(date)
+        return (program.wrappedValue.startDate ... program.extendedEndDate).contains(date)
     }
 
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
@@ -31,11 +31,11 @@ final class ProgramPreviewModel: ObservableObject {
     }
 
     private var primaryTitle: String {
-        program?.title ?? .placeholder(length: 16)
+        program?.wrappedValue.title ?? .placeholder(length: 16)
     }
 
     private var secondaryTitle: String? {
-        program?.subtitle ?? program?.lead
+        program?.wrappedValue.subtitle ?? program?.wrappedValue.lead
     }
 
     var subtitle: String? {
@@ -52,14 +52,14 @@ final class ProgramPreviewModel: ObservableObject {
 
     var timeInformation: String {
         guard let program else { return .placeholder(length: 8) }
-        let nowDate = Date()
-        if program.play_containsDate(nowDate) {
-            let remainingTimeInterval = program.endDate.timeIntervalSince(nowDate)
+
+        if isLive {
+            let remainingTimeInterval = program.extendedEndDate.timeIntervalSince(date)
             let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
             return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
         } else {
-            let startTime = DateFormatter.play_time.string(from: program.startDate)
-            let endTime = DateFormatter.play_time.string(from: program.endDate)
+            let startTime = DateFormatter.play_time.string(from: program.wrappedValue.startDate)
+            let endTime = DateFormatter.play_time.string(from: program.extendedEndDate)
             // Unbreakable spaces before / after the separator
             return "\(startTime) - \(endTime)"
         }

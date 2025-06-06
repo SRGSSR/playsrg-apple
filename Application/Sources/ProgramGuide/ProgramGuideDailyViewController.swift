@@ -177,7 +177,7 @@ extension ProgramGuideDailyViewController {
         guard let selectedChannel = programGuideModel.selectedChannel,
               let index = collectionView.indexPathForItem(at: CGPoint(x: collectionView.contentOffset.x, y: yOffset))?.row,
               let program = model.state.items(for: selectedChannel)[safeIndex: index]?.program else { return nil }
-        return program.startDate
+        return program.wrappedValue.startDate
     }
 
     func yOffset(for date: Date) -> CGFloat? {
@@ -228,7 +228,7 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
             return
         }
 
-        AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .list).send()
+        AnalyticsClickEvent.tvGuideOpenInfoBox(program: program.wrappedValue, programGuideLayout: .list).send()
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)

@@ -16,7 +16,7 @@ import SRGDataProviderModel
 final class ProgramViewModel: ObservableObject {
     @Published var data: ProgramAndChannel? {
         didSet {
-            Self.mediaDataPublisher(for: data?.program)
+            Self.mediaDataPublisher(for: data?.program.wrappedValue)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$mediaData)
             Self.livestreamMediaPublisher(for: data?.channel.wrappedValue)
@@ -39,7 +39,7 @@ final class ProgramViewModel: ObservableObject {
             .assign(to: &$date)
     }
 
-    private var program: SRGProgram? {
+    private var program: PlayProgram? {
         data?.program
     }
 
@@ -48,7 +48,7 @@ final class ProgramViewModel: ObservableObject {
     }
 
     private var show: SRGShow? {
-        media?.show ?? program?.show
+        media?.show ?? program?.wrappedValue.show
     }
 
     private var channel: SRGChannel? {
@@ -57,47 +57,55 @@ final class ProgramViewModel: ObservableObject {
 
     private var isLive: Bool {
         guard let program else { return false }
-        return (program.startDate ... program.endDate).contains(date)
+        return (program.wrappedValue.startDate ... program.extendedEndDate).contains(date)
     }
 
     var title: String? {
-        program?.title
+        program?.wrappedValue.title
     }
 
     var subtitle: String? {
-        program?.subtitle
+        program?.wrappedValue.subtitle
     }
 
     var lead: String? {
-        program?.lead
+        program?.wrappedValue.lead
     }
 
     var summary: String? {
-        program?.summary
+        program?.wrappedValue.summary
     }
 
     var timeAndDate: String? {
-        guard let program else { return nil }
-        let startTime = DateFormatter.play_time.string(from: program.startDate)
-        let endTime = DateFormatter.play_time.string(from: program.endDate)
-        let day = DateFormatter.play_relativeFullDate.string(from: program.startDate)
+        guard let program = data?.program else { return nil }
+        let startTime = DateFormatter.play_time.string(from: program.wrappedValue.startDate)
+        let endTime = DateFormatter.play_time.string(from: program.extendedEndDate)
+        let day = DateFormatter.play_relativeFullDate.string(from: program.wrappedValue.startDate)
         return "\(startTime) - \(endTime) · \(day)"
     }
 
     var timeAndDateAccessibilityLabel: String? {
         guard let program else { return nil }
-        return String(format: PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
-            .appending(", ")
-            .appending(DateFormatter.play_relativeFullDate.string(from: program.startDate))
+        let format = PlaySRGAccessibilityLocalizedString(
+            "From %1$@ to %2$@",
+            comment: "Text providing program time information. First placeholder is the start time, second is the end time."
+        )
+        return String(
+            format: format,
+            PlayAccessibilityTimeFromDate(program.wrappedValue.startDate),
+            PlayAccessibilityTimeFromDate(program.extendedEndDate)
+        )
+        .appending(", ")
+        .appending(DateFormatter.play_relativeFullDate.string(from: program.wrappedValue.startDate))
     }
 
     private var seasonNumber: NSNumber? {
-        guard let seasonNumber = program?.seasonNumber else { return nil }
+        guard let seasonNumber = program?.wrappedValue.seasonNumber else { return nil }
         return seasonNumber.intValue > 0 ? seasonNumber : nil
     }
 
     private var episodeNumber: NSNumber? {
-        guard let episodeNumber = program?.episodeNumber else { return nil }
+        guard let episodeNumber = program?.wrappedValue.episodeNumber else { return nil }
         return episodeNumber.intValue > 0 ? episodeNumber : nil
     }
 
@@ -111,7 +119,7 @@ final class ProgramViewModel: ObservableObject {
     }
 
     var youthProtectionColor: SRGYouthProtectionColor? {
-        let youthProtectionColor = program?.youthProtectionColor
+        let youthProtectionColor = program?.wrappedValue.youthProtectionColor
         return youthProtectionColor != SRGYouthProtectionColor.none ? youthProtectionColor : nil
     }
 
@@ -121,13 +129,13 @@ final class ProgramViewModel: ObservableObject {
 
     private var duration: Double? {
         guard let program else { return nil }
-        let duration = program.endDate.timeIntervalSince(program.startDate)
+        let duration = program.extendedEndDate.timeIntervalSince(program.wrappedValue.startDate)
         return duration > 0 ? duration : nil
     }
 
     private var production: String? {
-        let year = program?.productionYear?.stringValue
-        let production = [program?.productionCountry, year]
+        let year = program?.wrappedValue.productionYear?.stringValue
+        let production = [program?.wrappedValue.productionCountry, year]
             .compactMap { $0 }
             .joined(separator: " ")
         return !production.isEmpty ? production : nil
@@ -136,7 +144,7 @@ final class ProgramViewModel: ObservableObject {
     var durationAndProduction: String? {
         guard let program else { return nil }
         let durationString = duration != nil ? PlayFormattedMinutes(duration!) : nil
-        let durationAndProduction = [durationString, production, program.genre]
+        let durationAndProduction = [durationString, production, program.wrappedValue.genre]
             .compactMap { $0 }
             .joined(separator: " · ")
         return !durationAndProduction.isEmpty ? durationAndProduction : nil
@@ -144,24 +152,24 @@ final class ProgramViewModel: ObservableObject {
 
     var badgesListData: BadgeList.Data? {
         guard let program else { return nil }
-        return BadgeList.data(for: program)
+        return BadgeList.data(for: program.wrappedValue)
     }
 
     var crewMembersDatas: [CrewMembersData]? {
-        guard let crewMembers = program?.crewMembers, !crewMembers.isEmpty else { return nil }
+        guard let crewMembers = program?.wrappedValue.crewMembers, !crewMembers.isEmpty else { return nil }
         return OrderedDictionary(grouping: crewMembers, by: { $0.role }).map { role, crewMembers in
             CrewMembersData(role: role, crewMembers: crewMembers)
         }
     }
 
     var imageCopyright: String? {
-        guard let imageCopyright = program?.imageCopyright else { return nil }
+        guard let imageCopyright = program?.wrappedValue.imageCopyright else { return nil }
         return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)
     }
 
     var progress: Double? {
         if isLive, let program {
-            let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+            let progress = date.timeIntervalSince(program.wrappedValue.startDate) / program.extendedEndDate.timeIntervalSince(program.wrappedValue.startDate)
             return (0 ... 1).contains(progress) ? progress : nil
         } else {
             return mediaData.progress
@@ -188,7 +196,7 @@ final class ProgramViewModel: ObservableObject {
             { [self] in
                 if let data {
                     if media.contentType == .livestream {
-                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel.wrappedValue).send()
+                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program.wrappedValue, channel: data.channel.wrappedValue).send()
                     } else {
                         AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel.wrappedValue).send()
                     }
@@ -304,9 +312,9 @@ final class ProgramViewModel: ObservableObject {
                         guard let self else { return }
                         if granted {
                             let event = EKEvent(eventStore: eventStore)
-                            event.title = "\(program.title) - \(channel.wrappedValue.title)"
-                            event.startDate = program.startDate
-                            event.endDate = program.endDate
+                            event.title = "\(program.wrappedValue.title) - \(channel.wrappedValue.title)"
+                            event.startDate = program.wrappedValue.startDate
+                            event.endDate = program.extendedEndDate
                             event.url = self.calendarUrl
                             event.notes = self.calendarNotes
 
@@ -353,7 +361,7 @@ final class ProgramViewModel: ObservableObject {
     private var calendarUrl: URL? {
         if let media {
             ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
-        } else if let media = livestreamMedia, program?.timeAvailability(at: Date()) == .notYetAvailable {
+        } else if let media = livestreamMedia, program?.wrappedValue.timeAvailability(at: Date()) == .notYetAvailable {
             ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
         } else if let show {
             ApplicationConfiguration.shared.sharingURL(for: show)
