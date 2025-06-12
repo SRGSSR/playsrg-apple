@@ -88,7 +88,7 @@ extension ApplicationConfiguration {
             urlComponents.queryItems = typeformQueryItems
         }
 
-        let query = urlComponents.percentEncodedQuery
+        let query = urlComponents.query
         urlComponents.fragment = query
         urlComponents.queryItems = nil
 
