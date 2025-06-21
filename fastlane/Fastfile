@@ -1786,6 +1786,8 @@ def github_deployment_sha_correct(result)
 end
 
 def github_deployment_ref_tag(lane)
+  git_pull(only_tags: true)
+
   new_tag = ENV.fetch('OVERRIDE_PLAY_TAG', nil)
   return new_tag if new_tag && !new_tag.empty?
 
@@ -2366,7 +2368,6 @@ def git_commited_files(commit_hash)
 end
 
 def git_tag_commit(tag)
-  git_pull(only_tags: true)
   sh("git rev-list -n 1 tags/#{tag}").strip
 end
 
@@ -2658,6 +2659,8 @@ end
 
 def slack_jira_issues_url(platform, tag_version)
   return 'NaN' unless ENV['JIRA_URL']
+
+  git_pull(only_tags: true)
 
   tag = "#{platform.downcase}/#{tag_version}"
   tag_commit = git_tag_commit(tag)
