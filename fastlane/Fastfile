@@ -2687,7 +2687,7 @@ end
 def jira_issues_url(jira_issues)
   return 'NaN' unless ENV['JIRA_URL']
 
-  jira_issues_query = "key%20in%20(#{jira_issues.join(',')})"
+  jira_issues_query = "key%20in%20%28#{jira_issues.join('%2C%20')}%29"
   "#{ENV.fetch('JIRA_URL', nil)}/issues/?jql=#{jira_issues_query}"
 end
 
