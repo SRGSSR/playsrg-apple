@@ -741,9 +741,9 @@ platform :ios do
       UI.success "#{schemes[index]} (#{platform} Beta #{tag_version}) distributed. ✅"
     end
 
-    slack_beta_release(platform, tag_version)
-
     beta_workflow(platform)
+
+    slack_beta_release(platform, tag_version)
   end
 
   desc 'Builds a new App Store build on App Store Connect with the current build number and and skips build processing.'
@@ -1792,7 +1792,7 @@ def github_deployment_ref_tag(lane)
   return new_tag if new_tag && !new_tag.empty?
 
   tag = last_git_tag(pattern: "#{platform(lane).downcase}/*")
-  tag_commit = sh("git rev-list -n 1 tags/#{tag}").strip
+  tag_commit = git_tag_commit(tag)
   return unless tag_commit && !tag_commit.empty?
 
   return unless last_git_commit[:commit_hash] == tag_commit
@@ -2367,6 +2367,10 @@ def git_commited_files(commit_hash)
   sh("git show --pretty=format:'' --name-only #{commit_hash}").split("\n")
 end
 
+def git_tag_commit(tag)
+  sh("git rev-list -n 1 tags/#{tag}").strip
+end
+
 def bump_marketing_version_commit(platform)
   marketing_version = bump_marketing_version(xcode_marketing_version(platform))
   marketing_version = xcode_override_marketing_version(platform, marketing_version)
@@ -2396,6 +2400,12 @@ end
 def bump_marketing_version(marketing_version)
   major, minor, patch = marketing_version.split('.').map(&:to_i)
   patch += 1
+  [major, minor, patch].join('.')
+end
+
+def decrease_marketing_version(marketing_version)
+  major, minor, patch = marketing_version.split('.').map(&:to_i)
+  patch -= 1
   [major, minor, patch].join('.')
 end
 
@@ -2641,16 +2651,43 @@ def slack_payload(platform, tag_version)
 
   {
     'Version' => "`Play #{platform} #{marketing_version} (#{build_number})`",
-    'Release notes' => what_s_new_for_beta(platform, tag_version),
-    'Jira issues' => jira_issues_url(platform, marketing_version),
+    'Build release notes' => what_s_new_for_beta(platform, tag_version),
+    'Jira issues' => slack_jira_issues_url(platform, tag_version),
     'Distribution date' => Time.new.strftime('%d.%m.%Y %H:%M %z')
   }
 end
 
-def jira_issues_url(platform, marketing_version)
+def slack_jira_issues_url(platform, tag_version)
   return 'NaN' unless ENV['JIRA_URL']
 
-  jira_issues_query = "fixVersion%20%3D%20%22Play%20#{platform}%20#{marketing_version}%22"
+  git_pull(only_tags: true)
+
+  tag = "#{platform.downcase}/#{tag_version}"
+  tag_commit = git_tag_commit(tag)
+
+  marketing_version = marketing_version_from_tag_version(tag_version)
+  previous_marketing_version = decrease_marketing_version(marketing_version)
+
+  previous_tag = last_git_tag(pattern: "#{platform.downcase}/#{previous_marketing_version}*")
+  previous_tag_commit = git_tag_commit(previous_tag)
+
+  return 'NaN' unless previous_tag_commit && tag_commit
+
+  changelog = changelog_from_git_commits(
+    between: [previous_tag_commit, tag_commit],
+    pretty: '- %s'
+  )
+
+  # Get all Jira issues from the changelog
+  jira_issues = changelog.scan(/\b[A-Z]+-[0-9]+\b/).uniq
+
+  jira_issues_url(jira_issues)
+end
+
+def jira_issues_url(jira_issues)
+  return 'NaN' unless ENV['JIRA_URL']
+
+  jira_issues_query = "key%20in%20%28#{jira_issues.join('%2C%20')}%29"
   "#{ENV.fetch('JIRA_URL', nil)}/issues/?jql=#{jira_issues_query}"
 end
 
