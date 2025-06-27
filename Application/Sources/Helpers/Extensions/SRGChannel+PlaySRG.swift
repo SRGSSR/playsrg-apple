@@ -9,9 +9,14 @@ import SRGDataProviderModel
 extension SRGChannel {
     var play_largeLogoImage: UIImage? {
         if transmission == .radio {
-            RadioChannelLargeLogoImage(ApplicationConfiguration.shared.radioChannel(forUid: uid))
+            let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: uid)
+            if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+                return RadioChannelSquareLogoImage(radioChannel)
+            } else {
+                return RadioChannelLargeLogoImage(radioChannel)
+            }
         } else {
-            TVChannelLargeLogoImage(ApplicationConfiguration.shared.tvChannel(forUid: uid))
+            return TVChannelLargeLogoImage(ApplicationConfiguration.shared.tvChannel(forUid: uid))
         }
     }
 }
