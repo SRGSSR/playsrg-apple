@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 OBJC_EXPORT UIImage *RadioChannelLogoImage(RadioChannel * _Nullable radioChannel);
 OBJC_EXPORT UIImage *RadioChannelLargeLogoImage(RadioChannel * _Nullable radioChannel);
+OBJC_EXPORT UIImage *RadioChannelSquareLogoImage(RadioChannel * _Nullable radioChannel);
+
 OBJC_EXPORT UIImage *RadioChannelLogoImageWithTraitCollection(RadioChannel * _Nullable radioChannel, UITraitCollection * _Nullable traitCollection);
 
 NS_ASSUME_NONNULL_END

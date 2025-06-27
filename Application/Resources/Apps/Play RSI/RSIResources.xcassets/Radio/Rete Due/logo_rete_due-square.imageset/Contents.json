@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "image_1x1-retedue.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}
