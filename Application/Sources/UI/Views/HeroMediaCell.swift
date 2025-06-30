@@ -64,7 +64,7 @@ struct HeroMediaCell: View {
 
         var body: some View {
             ZStack {
-                MediaVisualView(media: media, size: .large, contentMode: contentMode) { media in
+                MediaVisualView(media: media, size: .large, contentMode: contentMode, forceDefaultAspectRatio: true) { media in
                     if media != nil {
                         LinearGradient(colors: [.clear, .init(white: 0, opacity: 0.7)], startPoint: .center, endPoint: .bottom)
                     }
