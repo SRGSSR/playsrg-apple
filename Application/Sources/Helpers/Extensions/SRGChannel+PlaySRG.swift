@@ -10,7 +10,7 @@ extension SRGChannel {
     var play_largeLogoImage: UIImage? {
         if transmission == .radio {
             let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: uid)
-            if ApplicationConfiguration.shared.arePodcastImagesEnabled {
+            if ApplicationConfiguration.shared.isAudioContentHomepagePreferred {
                 return RadioChannelSquareLogoImage(radioChannel)
             } else {
                 return RadioChannelLargeLogoImage(radioChannel)
