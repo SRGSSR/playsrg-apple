@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: View
 
 struct FeaturedContentCell<Content: FeaturedContent>: View, PrimaryColorSettable, SecondaryColorSettable {
-    public enum Layout {
+    enum Layout {
         case headline
         case element
     }
