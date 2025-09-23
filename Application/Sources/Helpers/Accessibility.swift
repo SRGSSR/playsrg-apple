@@ -12,11 +12,11 @@ import SwiftUI
 
     private let keyPath: KeyPath<AccessibilitySettings, T>
 
-    public init(_ keyPath: KeyPath<AccessibilitySettings, T>) {
+    init(_ keyPath: KeyPath<AccessibilitySettings, T>) {
         self.keyPath = keyPath
     }
 
-    public var wrappedValue: T {
+    var wrappedValue: T {
         settings[keyPath: keyPath]
     }
 }

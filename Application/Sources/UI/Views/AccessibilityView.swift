@@ -14,7 +14,7 @@ import UIKit
 @objc class AccessibilityView: UIView {
     @IBOutlet private weak var delegate: AccessibilityViewDelegate?
 
-    public func setDelegate(_ delegate: AccessibilityViewDelegate?) {
+    func setDelegate(_ delegate: AccessibilityViewDelegate?) {
         self.delegate = delegate
     }
 
