@@ -60,6 +60,10 @@ import UIKit
         return accountID
     }
 
+    private static var vendorIdentifier: String {
+        UIDevice.current.identifierForVendor?.uuidString ?? "None"
+    }
+
     private static var continuousAutoplayStatus: String {
         status(for: ApplicationSettingAutoplayEnabled())
     }
@@ -176,6 +180,7 @@ import UIKit
         items.append(URLQueryItem(name: "app_identifier", value: applicationIdentifier))
         items.append(URLQueryItem(name: "model", value: model))
         items.append(URLQueryItem(name: "model_identifier", value: modelIdentifier))
+        items.append(URLQueryItem(name: "device_id", value: vendorIdentifier))
 
         return items
     }
