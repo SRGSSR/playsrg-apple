@@ -249,5 +249,6 @@
     "3.9.3-473": "- Prevent access to videos if using VPN or proxy.\n- Fix \"Show\" title for TV.",
     "3.9.4-474": "- New form to give feedback.\n- Remove ESC.\n- Fix gaps in TV guide.",
     "3.9.5-475": "- Update RSI radio icons.",
-    "3.9.6-476": "- Update SRF topic colors."
+    "3.9.6-476": "- Update SRF topic colors.",
+    "3.9.7-477": "- Add information to the feedback form."
 }
