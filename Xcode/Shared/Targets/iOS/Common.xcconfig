@@ -1,7 +1,7 @@
 #include "Xcode/Shared/Common.xcconfig"
 
 // Version information
-MARKETING_VERSION = 3.9.7
+MARKETING_VERSION = 3.9.8
 
 SDKROOT = iphoneos
 TARGETED_DEVICE_FAMILY=1,2
