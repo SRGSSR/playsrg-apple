@@ -116,5 +116,6 @@
     "1.9.4-474": "- New form to give feedback.\n- Remove ESC.\n- Fix gaps in TV guide.",
     "1.9.5-475": "- Update RSI radio icons.",
     "1.9.6-476": "- Fix tvOS 26 crash.",
-    "1.9.7-477": "- Add more information to the feedback form."
+    "1.9.7-477": "- Add more information to the feedback form.",
+    "1.9.8-478": "- Minor bug fixes."
 }
