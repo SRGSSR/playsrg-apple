@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Play RTR (iPhone & iPad)</title>
+</head>
+<meta charset="UTF-8" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta property="og:image" content="https://srgssr.github.io/playsrg-apple/preview.png" />
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face {
+  font-family: "SRG SSR Type Regular";
+  src: url("https://www.rtr.ch/play/v3/fonts/SRGSSRTypeVF_Text_W_Wght.woff2") format("woff2"); 
+}
+body {
+  font-family: "SRG SSR Type Regular";
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+  color: #ffffff;
+  background-color: #161616;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #9d0018; /* Red */
+    margin: 1em 0;
+    padding: 0; 
+}
+.button {
+    background-color: #0f5acb; /* Blue */
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+<script>
+function Hide (elements, exceptItem) {
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    if (elements[index] != exceptItem) {
+      elements[index].style.display = 'none';
+    }
+  }
+}
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+
+function highlightElement () {
+  var build = getUrlVars()['build'];
+  console.log('build='+build);
+
+  var divs = document.querySelectorAll('[id^="build_"]');
+  var highlightDiv;
+  var firstDiv;
+  var hiddenDivs = new Array();
+
+  regex = /build_([0-9]*)/;
+  for (var i=0; i < divs.length; i++) {
+    var div = divs[i];
+    var div_id = div.id;
+    var div_build = div_id.match(regex)[1];
+    var hideDiv = div.hasAttribute('preprod');
+
+    if (!firstDiv && !hideDiv) {
+      firstDiv = div;
+    }
+
+    if (build && (parseInt(div_build) >= parseInt(build))) {
+      highlightDiv = div;
+      console.log('Select highlight ' + div_id);
+    }
+
+    if (hideDiv && (!build || (parseInt(div_build) >= parseInt(build)))) {
+      hiddenDivs.push(div);
+    }
+  }
+
+  if (hiddenDivs.includes(highlightDiv)) {
+    firstDiv = highlightDiv;
+  }
+
+  if (hiddenDivs.length) {
+    Hide(hiddenDivs, highlightDiv);
+  }
+
+  if (highlightDiv) {
+    addHighlightHeader(highlightDiv, highlightDiv != firstDiv);
+    addHighlightFooter(highlightDiv);
+  }
+}
+
+function addHighlightHeader (highlightDiv, withUpdateButton) {
+  var highlightHeader = '<div id="version"><hr /><h2 style="text-align: center">Installierte Version</h2></div>';
+  if (withUpdateButton) {
+      var button = '<p style="text-align: center"><button class="button" onclick="window.location.href=\'https://itunes.apple.com/ch/app/play-rtr/id920754925?mt=8\'">Update</button></p>';
+    highlightHeader = button + '\n' + highlightHeader;
+  }
+  highlightDiv.insertAdjacentHTML('beforeBegin', highlightHeader);
+}
+
+function addHighlightFooter (highlightDiv) {
+  var highlightFooter = '<div id="version"><hr /></div>';
+  highlightDiv.insertAdjacentHTML('afterend', highlightFooter);
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+<body onload="highlightElement()">
+<div style="text-align: center;">
+<h2 style="line-height: 0;">Play RTR</h2>
+<p style="line-height: 2;">iPhone & iPad</p>
+</div>
+<div id="build_478">
+<h2 id="3.9.8">3.9.8</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_477">
+<h2 id="3.9.7">3.9.7</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_476">
+<h2 id="3.9.6">3.9.6</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_475">
+<h2 id="3.9.5">3.9.5</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_474">
+<h2 id="3.9.4">3.9.4</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_473">
+<h2 id="3.9.3">3.9.3</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_471">
+<h2 id="3.9.2">3.9.2</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_470">
+<h2 id="3.9.1">3.9.1</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_466">
+<h2 id="3.9.0">3.9.0</h2>
+<ul>
+<li>La pagina da audio vegn ussa tgirada redacziunalmain e porscha ina nova experientscha da scuvrir e giudair cuntegns.</li>
+</ul>
+</div>
+<div id="build_465">
+<h2 id="3.8.12">3.8.12</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_464">
+<h2 id="3.8.11">3.8.11</h2>
+<ul>
+<li>Pitschnas correcturas da sbagls.</li>
+</ul>
+</div>
+<div id="build_463">
+<h2 id="3.8.10">3.8.10</h2>
+<ul>
+<li>Meglierar compatibilitad iOS 18.</li>
+</ul>
+</div>
+<div id="build_461">
+<h2 id="3.8.9">3.8.9</h2>
+<ul>
+<li>Pitschnas correcturas da sbagls.</li>
+</ul>
+</div>
+<div id="build_457">
+<h2 id="3.8.8">3.8.8</h2>
+<ul>
+<li>Reparaziun da pitschens sbagls.</li>
+</ul>
+</div>
+<div id="build_456">
+<h2 id="3.8.7">3.8.7</h2>
+<ul>
+<li>Optimar la preschentaziun dal cuntegn.</li>
+<li>Actualisaziun da la pagina auditiva. Questa midada eliminescha in problem che pertutga l'utilisader cun ina Vision Pro.</li>
+</ul>
+</div>
+<div id="build_454">
+<h2 id="3.8.6">3.8.6</h2>
+<ul>
+<li>Ina meglra legibladad sin ils chaus da la pagina.</li>
+<li>Agiuntar colurs tematicas per in’experientscha pli immersiva.</li>
+</ul>
+</div>
+<div id="build_451">
+<h2 id="3.8.5">3.8.5</h2>
+<ul>
+<li>Actualisaziun da glistas da shows tar A fin Z (videos ed audios)</li>
+<li>Curregì pitschens sbagls.</li>
+</ul>
+</div>
+<div id="build_448">
+<h2 id="3.8.4">3.8.4</h2>
+<ul>
+<li>Zavrada optimada da las ultimas episodas publitgadas da mes favurits sin la pagina iniziala. [RTS, SRF]</li>
+<li>Curregì pitschens sbagls.</li>
+</ul>
+</div>
+<div id="build_446">
+<h2 id="3.8.3">3.8.3</h2>
+<ul>
+<li>Interfatscha d'utilisaziun (UI) pli discreta en cumparegliaziun cun livestreams en la televisiun ed al radio per cuntegn publitgà sco prepremiera.</li>
+<li>Colurs actualisadas per infurmaziuns davart la disponibladad.</li>
+<li>Il banner areguard il consentiment da l'utilisadra u da l'utilisader è reducì en cas da viadis tranter la Svizra ed il rest dal mund.</li>
+</ul>
+</div>
+<div id="build_443">
+<h2 id="3.8.2">3.8.2</h2>
+<ul>
+<li>Curregì sbagls.</li>
+<li>Correctura da interrupziuns nunspetgadas da leger videos.</li>
+</ul>
+</div>
+<div id="build_441">
+<h2 id="3.8.1">3.8.1</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+<p>Bellas festas da Nadal e bun onn nov!</p>
+</div>
+<div id="build_440">
+<h2 id="3.8.0">3.8.0</h2>
+<ul>
+<li>Scuvri las emissiuns da tut ils emetturs da la SRG en il program da televisiun</li>
+<li>Las paginas da video pon vegnir concepidas en moda redacziunala p.ex. per serias u per documentaziuns</li>
+</ul>
+</div>
+<div id="build_435">
+<h2 id="3.7.9">3.7.9</h2>
+<ul>
+<li>Optimar player.</li>
+</ul>
+</div>
+<div id="build_431">
+<h2 id="3.7.8">3.7.8</h2>
+<ul>
+<li>Meglierar compatibilitad iOS 17.</li>
+</ul>
+</div>
+<div id="build_429">
+<h2 id="3.7.7">3.7.7</h2>
+<ul>
+<li>Meglierar compatibilitad iOS 17.</li>
+</ul>
+</div>
+<div id="build_428">
+<h2 id="3.7.6">3.7.6</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_426">
+<h2 id="3.7.5">3.7.5</h2>
+<ul>
+<li>Implementaziun dal banner da consentiment per il diever da datas persunalas.</li>
+</ul>
+</div>
+<div id="build_424">
+<h2 id="3.7.4">3.7.4</h2>
+<ul>
+<li>Curregì sbagls.</li>
+</ul>
+</div>
+<div id="build_423">
+<h2 id="3.7.3">3.7.3</h2>
+<ul>
+<li>Ils maletgs dals centers da controlla vegnan actualisads.</li>
+<li>Fixar tschertas crudadas en il giugader.</li>
+</ul>
+</div>
+<div id="build_419">
+<h2 id="3.7.2">3.7.2</h2>
+<ul>
+<li>Correctura da bugs pli pitschens.</li>
+</ul>
+<p>Grazia fitg per ils resuns sin la tavla tab profil.</p>
+</div>
+<div id="build_415">
+<h2 id="3.7.1">3.7.1</h2>
+<ul>
+<li>Correctura da bugs pli pitschens.</li>
+</ul>
+</div>
+<div id="build_414">
+<h2 id="3.7.0">3.7.0</h2>
+<ul>
+<li>Agiunta agid e contact sut il tab 'profil'.</li>
+</ul>
+</div>
+<div id="build_412">
+<h2 id="3.6.13">3.6.13</h2>
+<ul>
+<li>Correctura da bugs pli pitschens.</li>
+</ul>
+</div>
+<div id="build_411">
+<h2 id="3.6.12">3.6.12</h2>
+<ul>
+<li>Optimà visuaisaziun tier glistas da emissiuns en fuorma verticala sin IPad.</li>
+</ul>
+</div>
+<div id="build_409">
+<h2 id="3.6.11">3.6.11</h2>
+<ul>
+<li>Optimà las paginas dad emissiuns cun la pussaivladad da leger l'entira descripziun.</li>
+<li>Optimà la legibilitad da las glistas verticalas sin l'iPhone.</li>
+</ul>
+</div>
+<div id="build_406">
+<h2 id="3.6.10">3.6.10</h2>
+<ul>
+<li>Optimar la preschentaziun dal cuntegn.</li>
+<li>Correctura da bugs pli pitschens.</li>
+</ul>
+</div>
+<div id="build_404">
+<h2 id="3.6.9">3.6.9</h2>
+<ul>
+<li>Correctura da bugs pli pitschens.</li>
+</ul>
+</div>
+<div id="build_402">
+<h2 id="3.6.8">3.6.8</h2>
+<ul>
+<li>Agiuntà livestreams online al tab live.</li>
+<li>Correctura da bugs pli pitschens.</li>
+</ul>
+</div>
+<div id="build_399">
+<h2 id="3.6.7">3.6.7</h2>
+<ul>
+<li>Guid TV: dapli detagls davart il program selecziunà èn disponibels.</li>
+<li>Vus pudais agiuntar in program TV a Voss chalender.</li>
+</ul>
+</div>
+<div id="build_397">
+<h2 id="3.6.6">3.6.6</h2>
+<ul>
+<li>Meglierar compatibilitad iOS 16.</li>
+</ul>
+</div>
+<div id="build_396">
+<h2 id="3.6.5">3.6.5</h2>
+<ul>
+<li>Dal CarPlay pon ins siglir enavos sin emissiuns reproducidas oravant.</li>
+<li>Fixà la reproducziun cuntinuanta tar audios segmentads.</li>
+</ul>
+</div>
+<div id="build_393">
+<h2 id="3.6.4">3.6.4</h2>
+<ul>
+<li>Correctura da sbagls pitschens.</li>
+</ul>
+</div>
+<div id="build_391">
+<h2 id="3.6.3">3.6.3</h2>
+<ul>
+<li>Apparientscha optimada.</li>
+</ul>
+</div>
+<div id="build_389">
+<h2 id="3.6.2">3.6.2</h2>
+<ul>
+<li>Correctura da sbagls pitschens.</li>
+</ul>
+</div>
+<div id="build_386">
+<h2 id="3.6.1">3.6.1</h2>
+<ul>
+<li>Agiuntar chanals externs en ils guids da televisiun.</li>
+<li>Novs gests dubels sin il player per siglir enavant u enavos.</li>
+<li>Adatta entgins errurs.</li>
+</ul>
+</div>
+<div id="build_382">
+<h2 id="3.6.0">3.6.0</h2>
+<ul>
+<li>Agiuntà pussaivladad per adattar la spertadad da reproducziun da videos e audios.</li>
+<li>La selecziun dal vial da tun resta tar ina midada da video.</li>
+</ul>
+</div>
+<div id="build_378">
+<h2 id="3.5.1">3.5.1</h2>
+<ul>
+<li>Il program da tv è disponibel sco glista u giatter.</li>
+<li>Recumandaziuns pertutgant la protecziun da la giuventetgna vegnan furnidas.</li>
+<li>Schlià il problem che pudeva impedir notificaziuns correctas da novas episodas.</li>
+<li>Bug fixes.</li>
+</ul>
+</div>
+<div id="build_373">
+<h2 id="3.5.0">3.5.0</h2>
+<ul>
+<li>Program TV: Vista da giatter sin iPad.</li>
+<li>Correcturas pli pitschnas.</li>
+</ul>
+</div>
+<div id="build_371">
+<h2 id="3.4.0">3.4.0</h2>
+<ul>
+<li>Cumpatibilitar cun CarPlay: Vus pudais controllar da moda segira il Play RTR durant timunar cun colliar Voss apparat cun in radio d'auto cumpatibel.</li>
+<li>Vus pudais agiuntar in program a Voss favurits, era sch'i na dat naginas episodas disponiblas.</li>
+<li>Correctura da bugs pli pitschens.</li>
+</ul>
+</div>
+<div id="build_368">
+<h2 id="3.3.0">3.3.0</h2>
+<ul>
+<li>Program da TV.</li>
+<li>Optimar la preschentaziun dal cuntegn.</li>
+<li>Optimar la cumpatibilitad cun iOS 15.</li>
+</ul>
+</div>
+<div id="build_363">
+<h2 id="3.2.1">3.2.1</h2>
+<ul>
+<li>Correctura da sbagls pitschens.</li>
+</ul>
+</div>
+<div id="build_362">
+<h2 id="3.2.0">3.2.0</h2>
+<ul>
+<li>Cuntegn disponibel sut il tab "videos" po vegnir modifitgà</li>
+<li>Funcziunalitad da playback / cuntiunar sin las paginas da "video" e "audio"</li>
+<li>Augmentà la visibilitad da cuntegn ch'è restrenschì per in tschert temp</li>
+<li>Access a las davosas episodas favurisadas via "videos" e "audios"</li>
+<li>Stabilisà la performanza</li>
+</ul>
+</div>
+<div id="build_361">
+<h2 id="3.1.10">3.1.10</h2>
+<ul>
+<li>Correctura da sbagls pitschens.</li>
+</ul>
+</div>
+<div id="build_359">
+<h2 id="3.1.9">3.1.9</h2>
+<ul>
+<li>Correctura da sbagls pitschens.</li>
+</ul>
+</div>
+<div id="build_357">
+<h2 id="3.1.8">3.1.8</h2>
+<ul>
+<li>La reproducziun po esser controllada via tastatura externa.</li>
+</ul>
+</div>
+<div id="build_353">
+<h2 id="3.1.7">3.1.7</h2>
+<ul>
+<li>Curregì sbagl d'instabilitad tar AirPlay, spezialmain sin apparats pli vegls (Apple TV).</li>
+</ul>
+</div>
+<div id="build_352">
+<h2 id="3.1.6">3.1.6</h2>
+<ul>
+<li>Correctura da sbagls pitschens.</li>
+</ul>
+</div>
+<div id="build_350">
+<h2 id="3.1.5">3.1.5</h2>
+<ul>
+<li>Correctura da sbagls pitschens.</li>
+</ul>
+</div>
+<div id="build_346">
+<h2 id="3.1.4">3.1.4</h2>
+<ul>
+<li>Augment da stabilitad tar iOS 14, Google Cast.</li>
+<li>Fixà errur tar laschar ir videos davostiers.</li>
+</ul>
+</div>
+<div id="build_343">
+<h2 id="3.1.3">3.1.3</h2>
+<ul>
+<li>Meglierar compatibilitad iOS 14.</li>
+</ul>
+</div>
+<div id="build_342">
+<h2 id="3.1.2">3.1.2</h2>
+<ul>
+<li>Meglierar compatibilitad iOS 14.</li>
+</ul>
+</div>
+<div id="build_341">
+<h2 id="3.1.1">3.1.1</h2>
+<ul>
+<li>Actualisà la survista da chanals da radio e tv en il live-tab.</li>
+<li>Schlià il sbagl che metteva giu cun guardar videos cun audios via AirPlay.</li>
+</ul>
+</div>
+<div id="build_338">
+<h2 id="3.1.0">3.1.0</h2>
+<ul>
+<li>Durant tadlar in chanal da radio pudais navigar e laschar ir ultimas contribuziuns e chanzuns.</li>
+<li>Temas èn accessibels cun codes ch'ins vesa sisum da la pagina da videos.</li>
+<li>Schlià il problem ch'impedeva che l'apparat giaja en modus da rumir entant che videos gevan anc davostiers.</li>
+</ul>
+</div>
+<div id="build_332">
+<h2 id="3.0.2">3.0.2</h2>
+<ul>
+<li>Il livestream guardà u tadlà ultimamain vegn mussà a l'entschatta da la glista per al chattar pli spert tar in nov start.</li>
+<li>La navigaziun è optimada cun elements da cuntegn ordinads orizontalmain.</li>
+<li>La visualisaziun dal profil sin il iPad è consolidada.</li>
+</ul>
+</div>
+<div id="build_329">
+<h2 id="3.0.1">3.0.1</h2>
+<ul>
+<li>Optimaziun da la performance.</li>
+<li>Curregia in sbagl cun impedir ch'il prim element d'ina glista saja accessibel via VoiceOver.</li>
+</ul>
+</div>
+<div id="build_326">
+<h2 id="3.0.0">3.0.0</h2>
+<p>Char users,</p>
+<p>Nus ans legrain da preschentar la versiun 3.0 dal Play [SRG] che cuntegna pliras optimaziuns da l'usabilitad e funcziunalitads. Nus as dain fadia d'optimar cuntinuadamain noss product e da furnir la megliera experientscha per Vus.</p>
+<p>Nus sperain che la nova versiun As plascha sco era ils updates futurs. Qua ils midaments:</p>
+<p>NAVIGAZIUN SUT</p>
+<p>Navigaziun che sa basa sin tabs per simplifitgar da navigar tras ils cuntegns:</p>
+<ul>
+<li>Videos e programs da tv chattais en il tab ‘Videos’.</li>
+<li>Chanals da radio, audios e programs da radio chattais en il tab ‘Audios’.</li>
+<li>livestreams da tv e radio èn gruppads en il tab ‘Live’.</li>
+<li>La tschertga è accessibla trasora en il tab ‘Tschertga’.</li>
+<li>Funcziunalitads persunalisadas (decurs, favurits, notificaziuns e downloads) ed opziuns da las applicaziuns en il tab ‘Profils’.</li>
+</ul>
+<p>OPTIMAZIUNS</p>
+<p>Autras optimaziuns:</p>
+<ul>
+<li>Opziuns d'audio e selecziun da suttitels èn pli intuitivs.</li>
+<li>Il mini player pon ins deactivar, sch'ins n'al dovra betg.</li>
+<li>Opziun da smatgar ditg mussa ina prevista e las acziuns pussaivlas sin apparats cun iOS 13.</li>
+<li>La preschentaziun è meglierada per nizzegiar meglier il spazi dal visur, independent da la scrittira.</li>
+<li>Chromecast è activabel direct via il buttun sisum las paginas da videos, audios e livestreams.</li>
+</ul>
+<p>REPARÀ</p>
+<p>Nus avain reparà ils suandonts pucnts che users han fatg attent:</p>
+<ul>
+<li>Playback è era optimà per macOS Catalina ed apparats cun iOS registrads cun la medema Apple ID.</li>
+</ul>
+<p>3.0.0</p>
+<p>File: What_s new iOS.csv</p>
+</div>
+</body>
+</html>
