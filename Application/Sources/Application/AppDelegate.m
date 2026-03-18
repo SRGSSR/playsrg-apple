@@ -23,6 +23,7 @@
 
 @import AirshipCore;
 @import AppCenter;
+@import UserNotifications;
 @import AppCenterCrashes;
 @import AVFoundation;
 @import CarPlay;
@@ -102,6 +103,7 @@ static void *s_kvoContext = &s_kvoContext;
                                                name:SRGLetterboxPlaybackDidContinueAutomaticallyNotification
                                              object:nil];
     
+    [UNUserNotificationCenter currentNotificationCenter].delegate = (id<UNUserNotificationCenterDelegate>)self;
     [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
     [PushService.sharedService updateApplicationBadge];
     
