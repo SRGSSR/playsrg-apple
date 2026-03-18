@@ -277,6 +277,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)registerDeviceToken:(NSData *)deviceToken
 {
+    UAirship.push.userPushNotificationsEnabled = YES;
+
     NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
     if (! pushBackendURL) {
         return;
@@ -325,15 +327,18 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (BOOL)presentSystemAlertForPushNotifications
 {
-    // Lazily enable push notifications at the Urban Airship level, so that the user is asked the first time she
-    // attempts to use the functionality.
-    if (! UAirship.push.userPushNotificationsEnabled) {
-        UAirship.push.userPushNotificationsEnabled = YES;
-        return YES;
-    }
-    else {
+    if (self.enabled) {
         return NO;
     }
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                                                                        completionHandler:^(BOOL granted, NSError *error) {
+        if (granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIApplication.sharedApplication registerForRemoteNotifications];
+            });
+        }
+    }];
+    return YES;
 }
 
 #pragma mark UAPushNotificationDelegate protocol
