@@ -67,6 +67,11 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
 - (void)registerDeviceToken:(NSData *)deviceToken;
 
 /**
+ *  Handle a notification response. Call from `userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:`.
+ */
+- (void)handleNotificationResponse:(UNNotificationResponse *)notificationResponse;
+
+/**
  *  Attempt to present the system alert to enable push notifications. Returns `YES` iff presented.
  */
 - (BOOL)presentSystemAlertForPushNotifications;

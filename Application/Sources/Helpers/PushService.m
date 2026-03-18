@@ -341,20 +341,20 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     return YES;
 }
 
-#pragma mark UAPushNotificationDelegate protocol
+#pragma mark Notification response handling
 
-- (void)receivedNotificationResponse:(UNNotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
+- (void)handleNotificationResponse:(UNNotificationResponse *)notificationResponse
 {
     UNNotification *notification = notificationResponse.notification;
     if (notification) {
         UserNotification *savedNotification = [[UserNotification alloc] initWithNotification:notification];
         [UserNotification saveNotification:savedNotification read:YES];
     }
-    
+
     UNNotificationContent *notificationContent = notification.request.content;
     NSDictionary *userInfo = notificationContent.userInfo;
     NSString *channelUid = userInfo[@"channelId"];
-    
+
     if (userInfo[@"media"]) {
         NSString *mediaURN = userInfo[@"media"];
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
@@ -388,6 +388,12 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
                                        overrideType:userInfo[@"type"]]
          send];
     }
+}
+
+#pragma mark UAPushNotificationDelegate protocol
+
+- (void)receivedNotificationResponse:(UNNotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
+{
     completionHandler();
 }
 

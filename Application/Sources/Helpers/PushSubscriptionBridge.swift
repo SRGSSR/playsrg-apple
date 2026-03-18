@@ -5,8 +5,6 @@
 //
 
 import Foundation
-
-#if canImport(PushSDK)
 import PushSDK
 
 /// ObjC-callable bridge to PushSDK's PushSubscriptionService.
@@ -30,14 +28,3 @@ import PushSDK
         }
     }
 }
-
-#else
-
-/// Stub used when PushSDK is not available.
-@objc final class PushSubscriptionBridge: NSObject {
-    @objc(configurePushBackendURL:) static func configure(pushBackendURL: URL) {}
-    @objc static func setToken(_ token: Data, forChannel channel: String) {}
-    @objc static func setTags(_ tags: [String], forChannel channel: String) {}
-}
-
-#endif
