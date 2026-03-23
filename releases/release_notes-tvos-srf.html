@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Play SRF (Apple TV)</title>
+</head>
+<meta charset="UTF-8" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta property="og:image" content="https://srgssr.github.io/playsrg-apple/preview.png" />
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face {
+  font-family: "SRG SSR Type Regular";
+  src: url("https://www.srf.ch/play/v3/fonts/SRGSSRTypeVF_Text_W_Wght.woff2") format("woff2"); 
+}
+body {
+  font-family: "SRG SSR Type Regular";
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+  color: #ffffff;
+  background-color: #161616;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #9d0018; /* Red */
+    margin: 1em 0;
+    padding: 0; 
+}
+.button {
+    background-color: #0f5acb; /* Blue */
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+<script>
+function Hide (elements, exceptItem) {
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    if (elements[index] != exceptItem) {
+      elements[index].style.display = 'none';
+    }
+  }
+}
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+
+function highlightElement () {
+  var build = getUrlVars()['build'];
+  console.log('build='+build);
+
+  var divs = document.querySelectorAll('[id^="build_"]');
+  var highlightDiv;
+  var firstDiv;
+  var hiddenDivs = new Array();
+
+  regex = /build_([0-9]*)/;
+  for (var i=0; i < divs.length; i++) {
+    var div = divs[i];
+    var div_id = div.id;
+    var div_build = div_id.match(regex)[1];
+    var hideDiv = div.hasAttribute('preprod');
+
+    if (!firstDiv && !hideDiv) {
+      firstDiv = div;
+    }
+
+    if (build && (parseInt(div_build) >= parseInt(build))) {
+      highlightDiv = div;
+      console.log('Select highlight ' + div_id);
+    }
+
+    if (hideDiv && (!build || (parseInt(div_build) >= parseInt(build)))) {
+      hiddenDivs.push(div);
+    }
+  }
+
+  if (hiddenDivs.includes(highlightDiv)) {
+    firstDiv = highlightDiv;
+  }
+
+  if (hiddenDivs.length) {
+    Hide(hiddenDivs, highlightDiv);
+  }
+
+  if (highlightDiv) {
+    addHighlightHeader(highlightDiv, highlightDiv != firstDiv);
+    addHighlightFooter(highlightDiv);
+  }
+}
+
+function addHighlightHeader (highlightDiv, withUpdateButton) {
+  var highlightHeader = '<div id="version"><hr /><h2 style="text-align: center">Installierte Version</h2></div>';
+  if (withUpdateButton) {
+      var button = '<p style="text-align: center"><button class="button" onclick="window.location.href=\'https://itunes.apple.com/ch/app/play-srf/id638194352?mt=8\'">Updaten</button></p>';
+    highlightHeader = button + '\n' + highlightHeader;
+  }
+  highlightDiv.insertAdjacentHTML('beforeBegin', highlightHeader);
+}
+
+function addHighlightFooter (highlightDiv) {
+  var highlightFooter = '<div id="version"><hr /></div>';
+  highlightDiv.insertAdjacentHTML('afterend', highlightFooter);
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+<body onload="highlightElement()">
+<div style="text-align: center;">
+<h2 style="line-height: 0;">Play SRF</h2>
+<p style="line-height: 2;">Apple TV</p>
+</div>
+<div>
+<p>Wir freuen uns über Ihr Feedback. Bei Fragen zur Play SRF App wenden Sie sich bitte an den SRF Kundendienst via srf.ch/kontakt oder per Telefon unter 0848 80 80 80.</p>
+</div>
+<div id="build_478">
+<h2 id="1.9.8">1.9.8</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_477">
+<h2 id="1.9.7">1.9.7</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_476">
+<h2 id="1.9.6">1.9.6</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_475">
+<h2 id="1.9.5">1.9.5</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_474">
+<h2 id="1.9.4">1.9.4</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_473">
+<h2 id="1.9.3">1.9.3</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_471">
+<h2 id="1.9.2">1.9.2</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_470">
+<h2 id="1.9.1">1.9.1</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_466">
+<h2 id="1.9.0">1.9.0</h2>
+<ul>
+<li>Kleine Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_465">
+<h2 id="1.8.12">1.8.12</h2>
+<ul>
+<li>Kleine Fehlerbehebungen</li>
+</ul>
+</div>
+<div id="build_464">
+<h2 id="1.8.11">1.8.11</h2>
+<ul>
+<li>Kleine Fehlerbehebungen</li>
+</ul>
+</div>
+<div id="build_462">
+<h2 id="1.8.10">1.8.10</h2>
+<ul>
+<li>Verbesserung der Kompatibilität mit tvOS 18.</li>
+</ul>
+</div>
+<div id="build_461">
+<h2 id="1.8.9">1.8.9</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_457">
+<h2 id="1.8.8">1.8.8</h2>
+<ul>
+<li>Kleine Fehlerbehebungen</li>
+</ul>
+</div>
+<div id="build_456">
+<h2 id="1.8.7">1.8.7</h2>
+<ul>
+<li>Darstellungsoptimierungen.</li>
+</ul>
+</div>
+<div id="build_454">
+<h2 id="1.8.6">1.8.6</h2>
+<ul>
+<li>Verbesserte Lesbarkeit der Header auf Show Seiten.</li>
+<li>Farben für Kategorien hinzugefügt für ein immersives Erlebnis.</li>
+</ul>
+</div>
+<div id="build_451">
+<h2 id="1.8.5">1.8.5</h2>
+<ul>
+<li>Aktualisierung der A-Z Sortierung in Show Listen</li>
+<li>Kleinere Fehlerbehebungen</li>
+</ul>
+</div>
+<div id="build_448">
+<h2 id="1.8.4">1.8.4</h2>
+<ul>
+<li>Verbesserte Sortierung nach zuletzt veröffentlichten Episoden aus meinen Favoriten auf der Startseite.</li>
+</ul>
+</div>
+<div id="build_446">
+<h2 id="1.8.3">1.8.3</h2>
+<ul>
+<li>Verbesserte Benutzeroberfläche für im Voraus veröffentlichte Inhalte im Vergleich zu Livestreams im Fernsehen und Radio.</li>
+<li>Aktualisierte Farben für Verfügbarkeitsinformationen.</li>
+</ul>
+</div>
+<div id="build_443">
+<h2 id="1.8.2">1.8.2</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+<li>Unerwartete Video-Wiedergabestopps wurden behoben.</li>
+</ul>
+</div>
+<div id="build_441">
+<h2 id="1.8.1">1.8.1</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen</li>
+</ul>
+<p>Frohe Weihnachten und ein frohes neues Jahr!</p>
+</div>
+<div id="build_440">
+<h2 id="1.8.0">1.8.0</h2>
+<ul>
+<li>Entdecke die Sendungen aller SRG Sender im TV-Programm</li>
+<li>Die Video Show Seiten können redaktionell gestaltet werden, z.B. für Serien oder Dokumentationen</li>
+</ul>
+</div>
+<div id="build_435">
+<h2 id="1.7.7">1.7.7</h2>
+<ul>
+<li>Qualität der Bilder im TV-Programm verbessert.</li>
+</ul>
+</div>
+<div id="build_431">
+<h2 id="1.7.6">1.7.6</h2>
+<ul>
+<li>Verbesserung der Kompatibilität mit tvOS 17.</li>
+</ul>
+</div>
+<div id="build_428">
+<h2 id="1.7.5">1.7.5</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+<li>Aktualisierung des Erscheinungsbilds im App-Store.</li>
+</ul>
+</div>
+<div id="build_426">
+<h2 id="1.7.4">1.7.4</h2>
+<ul>
+<li>Implementierung eines Einwilligungsbanners für die Nutzung personenbezogener Daten.</li>
+</ul>
+</div>
+<div id="build_424">
+<h2 id="1.7.3">1.7.3</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_423">
+<h2 id="1.7.2">1.7.2</h2>
+<ul>
+<li>Die Bilder des Kontrollzentrums wurden aktualisiert.</li>
+</ul>
+</div>
+<div id="build_415">
+<h2 id="1.7.1">1.7.1</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_414">
+<h2 id="1.7.0">1.7.0</h2>
+<ul>
+<li>Funktionen zur Personalisierung (Favoriten, Verlauf, später schauen) sind im Bereich "Profil" verfügbar.</li>
+<li>"Hilfe und Kontakt" im Bereich "Profil" hinzugefügt.</li>
+</ul>
+</div>
+<div id="build_60" preprod>
+<h2 id="1.6.10">1.6.10</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_59" preprod>
+<h2 id="1.6.9">1.6.9</h2>
+<ul>
+<li>Verbesserte Seiten von Sendungen, mit der Möglichkeit, die vollständige Beschreibung zu lesen.</li>
+</ul>
+</div>
+<div id="build_57" preprod>
+<h2 id="1.6.8">1.6.8</h2>
+<ul>
+<li>Darstellungsoptimierungen.</li>
+</ul>
+</div>
+<div id="build_55" preprod>
+<h2 id="1.6.7">1.6.7</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_53" preprod>
+<h2 id="1.6.6">1.6.6</h2>
+<ul>
+<li>Sport-Livestreams im Live-Tab hinzugefügt.</li>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_50" preprod>
+<h2 id="1.6.5">1.6.5</h2>
+<ul>
+<li>Auf der Sendungsseite kann die vollständige  Beschreibung eingeblendet werden.</li>
+</ul>
+</div>
+<div id="build_48" preprod>
+<h2 id="1.6.4">1.6.4</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_46">
+<h2 id="1.6.3">1.6.3</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_43">
+<h2 id="1.6.2">1.6.2</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_40">
+<h2 id="1.6.1">1.6.1</h2>
+<ul>
+<li>Externe Sender im TV-Programm hinzugefügt.</li>
+<li>Einige Probleme im TV-Programm-Layout behoben.</li>
+</ul>
+</div>
+<div id="build_36">
+<h2 id="1.6.0">1.6.0</h2>
+<ul>
+<li>Die Wiedergabegeschwindigkeit wurde im Video- und Audioplayer hinzugefügt.</li>
+</ul>
+</div>
+<div id="build_32">
+<h2 id="1.5.1">1.5.1</h2>
+<ul>
+<li>[RSI, RTR, SRF] Jugendschutzempfehlungen werden angezeigt.</li>
+<li>Crash bei automatischer wiedergabe wurde behoben.</li>
+<li>Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_29">
+<h2 id="1.5.0">1.5.0</h2>
+<p>TV-Programm</p>
+</div>
+<div id="build_27">
+<h2 id="1.4.0">1.4.0</h2>
+<ul>
+<li>Aktuell beliebte Sendungen können direkt aufgerufen werden, wenn Play SRF an erster Stelle im Apple TV platziert ist.</li>
+<li>Sendungen ohne Episoden können in die Favoritenliste hingefügt werden.</li>
+<li>Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_24">
+<h2 id="1.3.2">1.3.2</h2>
+<ul>
+<li>Darstellungsoptimierungen.</li>
+<li>tvOS 15 Optimierungen.</li>
+<li>Player Optimierungen für tvOS 15.</li>
+</ul>
+</div>
+<div id="build_19">
+<h2 id="1.3.1">1.3.1</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_18">
+<h2 id="1.3.0">1.3.0</h2>
+<ul>
+<li>Die unter dem Tab "Videos" verfügbaren Inhalte werden jetzt redaktionell gepflegt.</li>
+<li>Die allgemeine Performance wurde verbessert.</li>
+</ul>
+</div>
+<div id="build_16">
+<h2 id="1.2.1">1.2.1</h2>
+<ul>
+<li>Kleinere Fehlerbehebungen.</li>
+</ul>
+</div>
+<div id="build_15">
+<h2 id="1.2.0">1.2.0</h2>
+<p>VERBESSERUNGEN</p>
+<ul>
+<li>Das Abspielen der zuletzt angesehene Video kann von der Startseite aus fortgesetzt werden.</li>
+<li>Videos können markiert werden, um sie später anzusehen.</li>
+<li>Wenn die Videowiedergabe endet, wird eine Auswahl von passenden Videos zum Abspielen angeboten.</li>
+<li>Der Benutzerdatenverwaltung wurde eine Profilansicht hinzugefügt.</li>
+</ul>
+<p>FIXES</p>
+<ul>
+<li>Behebung von Abstürzen beim Navigieren zwischen Seiten.</li>
+</ul>
+</div>
+<div id="build_12">
+<h2 id="1.1.0">1.1.0</h2>
+<ul>
+<li>Inhalte können im entsprechenden Bereich direkt gesucht werden.</li>
+<li>Sendungen können favorisiert werden. Sie werden danach auf der Homepage angezeigt.</li>
+</ul>
+</div>
+<div id="build_7" preprod>
+<h2 id="1.0.1">1.0.1</h2>
+<ul>
+<li>Fehlerbehebung eines instabilen Verhaltens.</li>
+</ul>
+</div>
+</body>
+</html>
