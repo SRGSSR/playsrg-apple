@@ -117,5 +117,6 @@
     "1.9.5-475": "- Update RSI radio icons.",
     "1.9.6-476": "- Fix tvOS 26 crash.",
     "1.9.7-477": "- Add more information to the feedback form.",
-    "1.9.8-478": "- Minor bug fixes."
+    "1.9.8-478": "- Minor bug fixes.",
+    "1.9.9-479": "Branch beta\n- Testflight build."
 }
