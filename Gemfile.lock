@@ -122,13 +122,13 @@ GEM
     faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
     faraday-httpclient (1.0.1)
-    faraday-multipart (1.1.0)
+    faraday-multipart (1.2.0)
       multipart-post (~> 2.0)
     faraday-net_http (1.0.2)
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
-    faraday-retry (1.0.3)
+    faraday-retry (1.0.4)
     faraday_middleware (1.2.1)
       faraday (~> 1.0)
     fastimage (2.4.0)
@@ -179,7 +179,7 @@ GEM
     fastlane-plugin-xcconfig (2.1.0)
     fastlane-sirp (1.0.0)
       sysrandom (~> 1.0)
-    ffi (1.17.1)
+    ffi (1.17.3-arm64-darwin)
     fourflusher (2.3.1)
     fuzzy_match (2.0.4)
     gh_inspector (1.1.3)
@@ -235,7 +235,7 @@ GEM
     logger (1.7.0)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    minitest (5.25.5)
+    minitest (5.27.0)
     molinillo (0.8.0)
     multi_json (1.15.0)
     multipart-post (2.4.1)
@@ -322,7 +322,7 @@ GEM
       xcpretty (~> 0.2, >= 0.0.7)
 
 PLATFORMS
-  ruby
+  arm64-darwin-24
 
 DEPENDENCIES
   cocoapods

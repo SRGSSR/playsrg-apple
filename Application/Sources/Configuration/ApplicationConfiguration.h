@@ -47,6 +47,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *identityWebsiteURL;
 @property (nonatomic, readonly, nullable) NSURL *userDataServiceURL;
 
+@property (nonatomic, readonly, nullable) NSURL *pushServiceURL;
+
 @property (nonatomic, readonly) NSURL *whatsNewURL;
 @property (nonatomic, readonly, nullable) NSURL *supportFormURL;
 @property (nonatomic, readonly, nullable) NSURL *faqURL;

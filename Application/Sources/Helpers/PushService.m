@@ -9,6 +9,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
+#import "Favorites.h"
 #import "PlaySRG-Swift.h"
 #import "UIView+PlaySRG.h"
 #import "UserNotification.h"
@@ -26,6 +27,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 @interface PushService () <UAPushNotificationDelegate>
 
 @property (nonatomic, readonly) NSString *appIdentifier;
+@property (nonatomic, readonly) NSString *pushSDKChannel;
 @property (nonatomic, readonly) NSString *environmentIdentifier;
 
 @property (nonatomic) UAConfig *configuration;
@@ -54,6 +56,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     if (self = [super init]) {
         static NSDictionary<NSNumber *, NSString *>  *s_appIdentifiers;
+        static NSDictionary<NSNumber *, NSString *> *s_pushSDKChannels;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
             s_appIdentifiers = @{ @(SRGVendorRSI) : @"playrsi",
@@ -61,11 +64,17 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
                                   @(SRGVendorRTS) : @"playrts",
                                   @(SRGVendorSRF) : @"playsrf",
                                   @(SRGVendorSWI) : @"playswi" };
+            s_pushSDKChannels = @{ @(SRGVendorRSI) : @"play-app-rsi",
+                                   @(SRGVendorRTR) : @"play-app-rtr",
+                                   @(SRGVendorRTS) : @"play-app-rts",
+                                   @(SRGVendorSRF) : @"play-app-srf",
+                                   @(SRGVendorSWI) : @"play-app-swi" };
         });
         _appIdentifier = s_appIdentifiers[@(ApplicationConfiguration.sharedApplicationConfiguration.vendor)];
         if (! _appIdentifier) {
             return nil;
         }
+        _pushSDKChannel = s_pushSDKChannels[@(ApplicationConfiguration.sharedApplicationConfiguration.vendor)];
         
         NSString *configurationFilePath = [NSBundle.mainBundle pathForResource:@"AirshipConfig" ofType:@"plist"];
         if (! configurationFilePath) {
@@ -164,15 +173,25 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)setupWithLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
+    // Disable automatic swizzling so we can forward push events to both Airship and PushSDK manually.
+    self.configuration.isAutomaticSetupEnabled = NO;
+
     [UAirship takeOff:self.configuration launchOptions:launchOptions];
     [UAirship.shared.privacyManager disableFeatures:UAFeaturesAnalytics];
-    
+
     UAirship.push.defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
     UAirship.push.pushNotificationDelegate = self;
     UAirship.push.autobadgeEnabled = YES;
-    
+
     // Use status cached by Airship as initial value
     self.enabled = (UAirship.push.authorizationStatus == UAAuthorizationStatusAuthorized);
+
+    // Configure PushSDK alongside Airship.
+    NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
+    if (pushBackendURL) {
+        [PushSubscriptionBridge configurePushBackendURL:pushBackendURL];
+        [self migrateTagsToPushSDKIfNeeded];
+    }
 }
 
 #pragma mark Badge management
@@ -228,13 +247,16 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (URNs.count == 0) {
         return;
     }
-    
+
     [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
         for (NSString *URN in URNs) {
             [editor addTag:[self tagForShowURN:URN]];
         }
+        // Mark device as migrated so the backend can exclude it from Airship audiences.
+        [editor addTag:@"uses_push_sdk"];
     }];
     [UAirship.push updateRegistration];
+    [self syncTagsToPushSDK];
 }
 
 - (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs
@@ -242,13 +264,58 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (URNs.count == 0) {
         return;
     }
-    
+
     [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
         for (NSString *URN in URNs) {
             [editor removeTag:[self tagForShowURN:URN]];
         }
+        [editor addTag:@"uses_push_sdk"];
     }];
     [UAirship.push updateRegistration];
+    [self syncTagsToPushSDK];
+}
+
+- (void)registerDeviceToken:(NSData *)deviceToken
+{
+    UAirship.push.userPushNotificationsEnabled = YES;
+
+    NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
+    if (! pushBackendURL) {
+        return;
+    }
+    [PushSubscriptionBridge setToken:deviceToken forChannel:self.pushSDKChannel];
+}
+
+#pragma mark PushSDK migration helpers
+
+- (void)migrateTagsToPushSDKIfNeeded
+{
+    if ([NSUserDefaults.standardUserDefaults boolForKey:@"PushSDKTagsMigrated"]) {
+        return;
+    }
+    NSMutableArray<NSString *> *tags = [NSMutableArray array];
+    for (NSString *URN in FavoritesShowURNs()) {
+        if (FavoritesIsSubscribedToShowURN(URN)) {
+            [tags addObject:[self tagForShowURN:URN]];
+        }
+    }
+    [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
+    [NSUserDefaults.standardUserDefaults setBool:YES forKey:@"PushSDKTagsMigrated"];
+}
+
+- (void)syncTagsToPushSDK
+{
+    NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
+    if (! pushBackendURL) {
+        return;
+    }
+    NSMutableArray<NSString *> *tags = [NSMutableArray array];
+    for (NSString *URN in FavoritesShowURNs()) {
+        if (FavoritesIsSubscribedToShowURN(URN)) {
+            [tags addObject:[self tagForShowURN:URN]];
+        }
+    }
+    [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
 }
 
 - (BOOL)isSubscribedToShowURN:(NSString *)URN
@@ -260,31 +327,34 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (BOOL)presentSystemAlertForPushNotifications
 {
-    // Lazily enable push notifications at the Urban Airship level, so that the user is asked the first time she
-    // attempts to use the functionality.
-    if (! UAirship.push.userPushNotificationsEnabled) {
-        UAirship.push.userPushNotificationsEnabled = YES;
-        return YES;
-    }
-    else {
+    if (self.enabled) {
         return NO;
     }
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                                                                        completionHandler:^(BOOL granted, NSError *error) {
+        if (granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIApplication.sharedApplication registerForRemoteNotifications];
+            });
+        }
+    }];
+    return YES;
 }
 
-#pragma mark UAPushNotificationDelegate protocol
+#pragma mark Notification response handling
 
-- (void)receivedNotificationResponse:(UNNotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
+- (void)handleNotificationResponse:(UNNotificationResponse *)notificationResponse
 {
     UNNotification *notification = notificationResponse.notification;
     if (notification) {
         UserNotification *savedNotification = [[UserNotification alloc] initWithNotification:notification];
         [UserNotification saveNotification:savedNotification read:YES];
     }
-    
+
     UNNotificationContent *notificationContent = notification.request.content;
     NSDictionary *userInfo = notificationContent.userInfo;
     NSString *channelUid = userInfo[@"channelId"];
-    
+
     if (userInfo[@"media"]) {
         NSString *mediaURN = userInfo[@"media"];
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
@@ -318,6 +388,12 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
                                        overrideType:userInfo[@"type"]]
          send];
     }
+}
+
+#pragma mark UAPushNotificationDelegate protocol
+
+- (void)receivedNotificationResponse:(UNNotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
+{
     completionHandler();
 }
 
