@@ -16479,8 +16479,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/IdeasOnCanvas/Aiolos.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.7.2;
+				kind = exactVersion;
+				version = 1.9.8;
 			};
 		};
 		6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */ = {
