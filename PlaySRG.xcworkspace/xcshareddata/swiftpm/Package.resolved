@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/abseil-cpp-binary.git",
       "state" : {
-        "revision" : "748c7837511d0e6a507737353af268484e1745e2",
-        "version" : "1.2024011601.1"
+        "revision" : "194a6706acbd25e4ef639bcaddea16e8758a3e27",
+        "version" : "1.2024011602.0"
       }
     },
     {
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/app-check.git",
       "state" : {
-        "revision" : "076b241a625e25eac22f8849be256dfb960fcdfe",
-        "version" : "10.19.1"
+        "revision" : "3b62f154d00019ae29a71e9738800bb6f18b236d",
+        "version" : "10.19.2"
       }
     },
     {
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/appcenter-sdk-apple.git",
       "state" : {
-        "revision" : "ab54f758243f282d290b33027e8aac910d3d859a",
-        "version" : "5.0.5"
+        "revision" : "404f0c432ae9d6191c6ca7c6553fe5566c5f4bc6",
+        "version" : "5.12.0"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "8bcaf973b1d84e119b7c7c119abad72ed460979f",
-        "version" : "10.27.0"
+        "revision" : "eca84fd638116dd6adb633b5a3f31cc7befcbb7d",
+        "version" : "10.29.0"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kaishin/Gifu",
       "state" : {
-        "revision" : "82da0086dea14ca9afc9801234ad8dc4cd9e2738",
-        "version" : "3.4.1"
+        "revision" : "46434cd816f035271beb16d80f7bc91381cbd8e4",
+        "version" : "3.5.1"
       }
     },
     {
@@ -105,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "70df02431e216bed98dd461e0c4665889245ba70",
-        "version" : "10.27.0"
+        "revision" : "fe727587518729046fc1465625b9afd80b5ab361",
+        "version" : "10.28.0"
       }
     },
     {
@@ -114,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/GoogleCastSDK-no-bluetooth",
       "state" : {
-        "revision" : "5e0f9f3deb7dea21856a57cd81a4d538cdb7d241",
-        "version" : "4.8.0"
+        "revision" : "863b98750174945af2fd8f6f66a6024967be371e",
+        "version" : "4.8.3"
       }
     },
     {
@@ -150,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "0382ca27f22fb3494cf657d8dc356dc282cd1193",
-        "version" : "3.4.1"
+        "revision" : "a2ab612cb980066ee56d90d60d8462992c07f24b",
+        "version" : "3.5.0"
       }
     },
     {
@@ -177,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/CommandersAct/iOSV5.git",
       "state" : {
-        "revision" : "b65eb27cde41d3c40b05520f8713d55a52821553",
-        "version" : "5.4.9"
+        "revision" : "3b484abc866976f2cd94f3a499e198ec002f86a9",
+        "version" : "5.4.19"
       }
     },
     {
@@ -267,8 +267,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/PLCrashReporter.git",
       "state" : {
-        "revision" : "6752f71de206f6a53fa6a758c3660fd9a7fe7527",
-        "version" : "1.11.2"
+        "revision" : "0254f941c646b1ed17b243654723d0f071e990d0",
+        "version" : "1.12.2"
       }
     },
     {
@@ -294,8 +294,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "4ef2220b66ca69a321f94d8fdbffb7bd861259be",
-        "version" : "9.2.0"
+        "revision" : "a058f8a01881d8c3a19baf818eb5c56d963cf04e",
+        "version" : "9.2.1"
       }
     },
     {
@@ -303,8 +303,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgappearance-apple.git",
       "state" : {
-        "revision" : "ac03561621915b08a9856ee0146a2dc09b121df2",
-        "version" : "5.2.3"
+        "revision" : "e02cc9a524545f26ec9787a605bde896a58421a2",
+        "version" : "5.2.4"
       }
     },
     {
@@ -312,8 +312,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgcontentprotection-apple.git",
       "state" : {
-        "revision" : "69420d0f2a89ae88d392385422c24acd2e5f450c",
-        "version" : "3.1.0"
+        "revision" : "cc6dc64dafd29d7cf4aa211ba3dfa3751a18804d",
+        "version" : "3.1.1"
       }
     },
     {
@@ -321,8 +321,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "b1e01f9ea60f65ce1688bbb058465edf95d8e788",
-        "version" : "19.0.11"
+        "revision" : "d438354131bd2b144e917cae7139bae1b86e8d10",
+        "version" : "19.0.12"
       }
     },
     {
@@ -330,8 +330,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdiagnostics-apple.git",
       "state" : {
-        "revision" : "c595e8f186eb41335f0ea48848543ab3804ea22e",
-        "version" : "3.1.0"
+        "revision" : "764c45dc57d62bed46d4a45b8c0de0b03bdf6b2a",
+        "version" : "3.1.1"
       }
     },
     {
@@ -339,8 +339,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgidentity-apple.git",
       "state" : {
-        "revision" : "10368fd1679eeaffb05d84bcdc1002f3d66c2d12",
-        "version" : "3.3.0"
+        "revision" : "26cb72a4455d4b93cd2d2fb2566e689763cecf78",
+        "version" : "3.3.1"
       }
     },
     {
@@ -348,8 +348,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "bd38d2d6f918cb69237fe1e9c9e72a189424c75a",
-        "version" : "9.3.3"
+        "revision" : "ff4d4fc70d6f201d4fdd6435d1f98801be540995",
+        "version" : "9.3.4"
       }
     },
     {
@@ -357,8 +357,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srglogger-apple.git",
       "state" : {
-        "revision" : "dd98468422044b53e283d970809b8502e1ef5b8d",
-        "version" : "3.1.0"
+        "revision" : "2e2aeaeb4277f762dfdc66b78bf396a5cc935215",
+        "version" : "3.1.1"
       }
     },
     {
@@ -366,8 +366,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "revision" : "3701fca76c0d13cb85f59d45e2de0ce306ddf987",
-        "version" : "8.0.0"
+        "revision" : "1181ea85391d1635a7ee461f4468c004e0f41a53",
+        "version" : "8.0.1"
       }
     },
     {
@@ -375,8 +375,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgnetwork-apple.git",
       "state" : {
-        "revision" : "153a2544391c1aaccae2d38d8b113fd0a03421b8",
-        "version" : "3.1.0"
+        "revision" : "26643d930bb10b4749e8723e88dbebb305dd27cd",
+        "version" : "3.1.1"
       }
     },
     {
@@ -384,8 +384,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srguserdata-apple.git",
       "state" : {
-        "revision" : "956a83501cc2ce84e2552a80a2ef08fbaa1fc5fc",
-        "version" : "3.3.1"
+        "revision" : "530d6f9cb9728bdb8d930b9857f9dbce1d6181bd",
+        "version" : "3.3.2"
       }
     },
     {
@@ -393,8 +393,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "ee97538f5b81ae89698fd95938896dec5217b148",
-        "version" : "1.1.1"
+        "revision" : "6675bc0ff86e61436e615df6fc5174e043e57924",
+        "version" : "1.4.1"
       }
     },
     {
@@ -402,8 +402,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "9f0c76544701845ad98716f3f6a774a892152bcb",
-        "version" : "1.26.0"
+        "revision" : "a008af1a102ff3dd6cc3764bb69bf63226d0f5f6",
+        "version" : "1.36.1"
       }
     },
     {
