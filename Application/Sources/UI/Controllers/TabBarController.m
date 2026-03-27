@@ -127,7 +127,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 - (NSLayoutConstraint *)playerBottomConstraint
 {
     if (! _playerBottomConstraint) {
-        _playerBottomConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad && NSProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 18) {
+            _playerBottomConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
+        }
+        else {
+            _playerBottomConstraint = [self.miniPlayerView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
+        }
     }
     return _playerBottomConstraint;
 }
