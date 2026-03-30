@@ -11,9 +11,9 @@ func PlaySection(@ViewBuilder content: () -> some View, @ViewBuilder header: () 
     Section {
         content()
             .srgFont(.body)
-#if os(tvOS)
+        #if os(tvOS)
             .tvOS17_backgroundFix()
-#endif
+        #endif
             .eraseToAnyView()
     } header: {
         header()
@@ -36,8 +36,7 @@ private extension View {
             // tvOS 17.0 introduced a new issue when presenting modal, the default focused appearance is broken after modal presentation dismissal. See https://github.com/SRGSSR/playsrg-apple/issues/336
             foregroundColor(.white)
                 .listRowBackground(Color.srgGray33.cornerRadius(10))
-        }
-        else {
+        } else {
             self
         }
     }

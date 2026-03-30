@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: View
 
-/**
+/* 
  *  View containing a text view that can display a "show more" button if text is troncated.
  *
  *  Borrowed from https://www.fivestars.blog/articles/trucated-text/ and https://github.com/NuPlay/ExpandableText
@@ -123,7 +123,7 @@ struct TruncatableTextView: View, PrimaryColorSettable, SecondaryColorSettable {
             let fontStyle: SRGFont.Style
             let showMoreButtonString: String
 
-            // Content size changes are tracked to update mask.
+            /// Content size changes are tracked to update mask.
             @Environment(\.sizeCategory) private var sizeCategory
 
             var body: some View {

@@ -242,7 +242,7 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
         programGuideModel.didScrollToTime(date.timeIntervalSince(day.date))
     }
 
-    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    /// The system default behavior does not lead to correct results when large titles are displayed. Override.
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         scrollView.play_scrollToTop(animated: true)
         return false

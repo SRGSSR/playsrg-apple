@@ -10,7 +10,7 @@ import UIKit
 // MARK: Context menu management
 
 enum ContextMenu {
-    // See https://github.com/SRGSSR/playsrg-apple/issues/192
+    /// See https://github.com/SRGSSR/playsrg-apple/issues/192
     private static let actionDelay = DispatchTimeInterval.seconds(1)
 
     static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {

@@ -46,7 +46,7 @@ extension Comparable {
 }
 
 extension Float {
-    // See https://stackoverflow.com/a/31390678/760435
+    /// See https://stackoverflow.com/a/31390678/760435
     var minimalRepresentation: String {
         truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
@@ -112,7 +112,7 @@ extension String {
         return attributedString.size()
     }
 
-    /*
+    /**
      * Compact the string to not contain any empty lines or white spaces.
      */
     var compacted: String {
@@ -127,7 +127,7 @@ extension Array {
         return array
     }
 
-    func appending<S>(contentsOf newElements: S) -> Array where Element == S.Element, S: Sequence {
+    func appending<S: Sequence>(contentsOf newElements: S) -> Array where Element == S.Element {
         var array = self
         array.append(contentsOf: newElements)
         return array
@@ -204,7 +204,7 @@ extension Sequence {
     /**
      *  Transform each items in a collection into a sequence and flattens the output, providing an auto-increased index with each processed item.
      */
-    func enumeratedFlatMap<S>(_ transform: (Self.Element, Int) throws -> S) rethrows -> [S.Element] where S: Sequence {
+    func enumeratedFlatMap<S: Sequence>(_ transform: (Self.Element, Int) throws -> S) rethrows -> [S.Element] {
         var index = 0
         return try flatMap { element in
             let transformedElement = try transform(element, index)
@@ -228,7 +228,7 @@ extension View {
     /**
      *  Configure accessibility settings. If no label is provided the item will not be enabled for accessibility.
      */
-    func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
+    func accessibilityElement<S: StringProtocol>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View {
         Group {
             if let label, !label.isEmpty {
                 // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
@@ -324,7 +324,7 @@ extension View {
     }
 }
 
-// See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
+/// See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
 extension UIHostingController {
     public convenience init(rootView: Content, ignoreSafeArea: Bool) {
         self.init(rootView: rootView)
@@ -515,7 +515,7 @@ extension View {
     @ViewBuilder
     func play_scrollClipDisabled() -> some View {
         if #available(iOS 17, tvOS 17, *) {
-            self.scrollClipDisabled()
+            scrollClipDisabled()
         } else {
             self
         }

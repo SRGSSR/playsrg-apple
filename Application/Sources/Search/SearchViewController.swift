@@ -487,8 +487,8 @@ extension SearchViewController: UICollectionViewDelegate {
 }
 
 #if os(iOS)
-    // Replace search icon with a back button
-    // See https://betterprogramming.pub/how-to-change-the-search-icon-in-a-uisearchbar-150b775fb6c8
+    /// Replace search icon with a back button
+    /// See https://betterprogramming.pub/how-to-change-the-search-icon-in-a-uisearchbar-150b775fb6c8
     extension SearchViewController: UISearchBarDelegate {
         func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
             guard let searchBar = searchBar as? SearchBar, let textField = searchBar.textField else { return }
@@ -529,7 +529,7 @@ extension SearchViewController: UIScrollViewDelegate {
             }
         }
 
-        // The system default behavior does not lead to correct results when large titles are displayed. Override.
+        /// The system default behavior does not lead to correct results when large titles are displayed. Override.
         func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
             scrollView.play_scrollToTop(animated: true)
             return false

@@ -993,13 +993,13 @@ struct SettingsView: View {
         var body: some View {
             #if os(tvOS)
                 Button(action: action, label: label)
-                .fullScreenCover(isPresented: $isPresented) {
-                    ZStack {
-                        Color(UIColor.play_popoverGrayBackground)
-                            .ignoresSafeArea()
-                        destination()
+                    .fullScreenCover(isPresented: $isPresented) {
+                        ZStack {
+                            Color(UIColor.play_popoverGrayBackground)
+                                .ignoresSafeArea()
+                            destination()
+                        }
                     }
-                }
             #else
                 NavigationLink(destination: {
                     destination()

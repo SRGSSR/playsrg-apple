@@ -62,13 +62,13 @@ enum UCService: Hashable, CaseIterable {
         UsercentricsCore.shared.getConsents()
     }
 
-    // Retain potiential collecting consent banner to be displayed as modal on top of each views.
-    // Don't forget to call `waitCollectingConsentRelease()` when the blocking condition is over.
+    /// Retain potiential collecting consent banner to be displayed as modal on top of each views.
+    /// Don't forget to call `waitCollectingConsentRelease()` when the blocking condition is over.
     @objc static func waitCollectingConsentRetain() {
         waitCollectingConsentPool += 1
     }
 
-    // Release waiting pool to allow to display collecting consent banner as modal on top of each views, if any.
+    /// Release waiting pool to allow to display collecting consent banner as modal on top of each views, if any.
     @objc static func waitCollectingConsentRelease() {
         guard waitCollectingConsentPool > 0 else { return }
 
