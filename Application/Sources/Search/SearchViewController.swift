@@ -596,7 +596,7 @@ private extension SearchViewController {
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
 
             func sectionSupplementaryItems(for section: SearchViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = SectionHeaderView.size(section: section, settings: self.model.settings, layoutWidth: layoutWidth)
+                let headerSize = SectionHeaderView.size(section: section, settings: model.settings, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 return [header]
             }
