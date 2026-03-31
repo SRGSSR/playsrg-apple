@@ -10,7 +10,7 @@ import SRGUserData
 
 // MARK: Signals for throttled data updates
 
-/* 
+/*
  * TODO: User data is currently stored in SRG User Data, but sadly update notifications do not convey information about
  *       what changed (we only know that an updated occurred, and which ids changed, but not what was inserted, deleted
  *       or simply updated). Combined with the need for pagination in Play this creates two challenges:

@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: View
 
-/* 
+/*
  *  View containing a text view that can display a "show more" button if text is troncated.
  *
  *  Borrowed from https://www.fivestars.blog/articles/trucated-text/ and https://github.com/NuPlay/ExpandableText
