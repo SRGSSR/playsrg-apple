@@ -17,7 +17,7 @@ protocol Indexable {
  *
  *  This approach works both for iOS and tvOS.
  */
-class IndexedCollectionViewDiffableDataSource<Section, Item>: UICollectionViewDiffableDataSource<Section, Item> where Section: Hashable & Indexable, Item: Hashable {
+class IndexedCollectionViewDiffableDataSource<Section: Hashable & Indexable, Item: Hashable>: UICollectionViewDiffableDataSource<Section, Item> {
     private let minimumIndexTitlesCount: Int
 
     init(collectionView: UICollectionView, minimumIndexTitlesCount: Int, cellProvider: @escaping CellProvider) {

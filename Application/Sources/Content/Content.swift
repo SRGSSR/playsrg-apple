@@ -162,8 +162,12 @@ protocol SectionProperties {
 
     var displayedShow: SRGShow? { get }
     #if os(iOS)
-        var sharingItem: SharingItem? { get }
-        var canResetApplicationBadge: Bool { get }
+        var sharingItem: SharingItem? {
+            get
+        }
+        var canResetApplicationBadge: Bool {
+            get
+        }
     #endif
 
     /// Analytics information

@@ -11,10 +11,6 @@ import SwiftUI
 struct BadgeList: View {
     let data: Data
 
-    init(data: Data) {
-        self.data = data
-    }
-
     static func data(for program: SRGProgram) -> Data? {
         let data = Data(
             hasSubtitles: program.subtitlesAvailable,

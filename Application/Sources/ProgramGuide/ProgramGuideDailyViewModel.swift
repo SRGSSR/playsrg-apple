@@ -48,7 +48,7 @@ extension ProgramGuideDailyViewModel {
         let wrappedValue: WrappedValue
         let section: Section
 
-        // Only attached to items so that `ProgramGuideGridLayout` can retrieve the current day from a snapshot
+        /// Only attached to items so that `ProgramGuideGridLayout` can retrieve the current day from a snapshot
         let day: SRGDay
 
         fileprivate init(wrappedValue: WrappedValue, section: Section, day: SRGDay) {

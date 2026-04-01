@@ -29,8 +29,6 @@ class AppDelegate: UIResponder {
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        assert(NSClassFromString("ASIdentifierManager") == nil, "No implicit AdSupport.framework dependency must be found")
-
         PlayApplicationRunOnce({ completionHandler in
             PlayFirebaseConfiguration.clearCache()
             completionHandler(true)

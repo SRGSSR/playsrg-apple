@@ -16555,16 +16555,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://bitbucket.org/usercentricscode/usercentrics-spm-sdk";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.8.1;
+				kind = exactVersion;
+				version = 2.15.1;
 			};
 		};
 		04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://bitbucket.org/usercentricscode/usercentrics-spm-ui";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.8.1;
+				kind = exactVersion;
+				version = 2.15.1;
 			};
 		};
 		04FA73A42AA62E4B0014E7F7 /* XCRemoteSwiftPackageReference "GoogleCastSDK-no-bluetooth" */ = {
