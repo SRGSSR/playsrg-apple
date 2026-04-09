@@ -296,7 +296,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
     for (NSString *URN in FavoritesShowURNs()) {
         if (FavoritesIsSubscribedToShowURN(URN)) {
-            [tags addObject:[self tagForShowURN:URN]];
+            [tags addObject:URN];
         }
     }
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
@@ -312,7 +312,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
     for (NSString *URN in FavoritesShowURNs()) {
         if (FavoritesIsSubscribedToShowURN(URN)) {
-            [tags addObject:[self tagForShowURN:URN]];
+            [tags addObject:URN];
         }
     }
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
