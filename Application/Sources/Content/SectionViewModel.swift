@@ -205,9 +205,9 @@ extension SectionViewModel {
 
     typealias Item = Content.Item
 
-    // Non-empty rows only. The section view namely supports optional header pinning, and the layout could raise an
-    // assertion if some collection section has no items, while its header height is smaller than the layout inter group
-    // spacing.
+    /// Non-empty rows only. The section view namely supports optional header pinning, and the layout could raise an
+    /// assertion if some collection section has no items, while its header height is smaller than the layout inter group
+    /// spacing.
     typealias Row = NonEmptyCollectionRow<Section, Item>
 
     enum State {

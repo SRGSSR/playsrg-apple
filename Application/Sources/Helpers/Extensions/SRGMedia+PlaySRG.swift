@@ -19,7 +19,7 @@ extension SRGMedia {
         NSCalendar.srg_default.isDateInToday(date)
     }
 
-    // Return a concatenation of lead and summary, iff summary not contains the lead, to avoid duplicate information.
+    /// Return a concatenation of lead and summary, iff summary not contains the lead, to avoid duplicate information.
     @objc var play_fullSummary: String? {
         if let lead, !lead.isEmpty, let summary, !summary.isEmpty, !summary.contains(lead) {
             "\(lead)\n\n\(summary)"

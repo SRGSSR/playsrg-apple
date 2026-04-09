@@ -486,7 +486,9 @@ extension ProgramViewModel {
 
 private extension TabBarController {
     func dismissAndPresentMediaPlayer(with media: SRGMedia, position: SRGPosition?) {
-        var presentMediaPlayer: Void { play_presentMediaPlayer(with: media, position: position, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil) }
+        var presentMediaPlayer: Void {
+            play_presentMediaPlayer(with: media, position: position, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+        }
 
         if let presentedViewController {
             presentedViewController.dismiss(animated: true) {
@@ -521,7 +523,7 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
 private extension EKEventStore {
     func requestAccessToEvents(completion: @escaping EKEventStoreRequestAccessCompletionHandler) {
         if #available(iOS 17.0, *) {
-            self.requestWriteOnlyAccessToEvents(completion: completion)
+            requestWriteOnlyAccessToEvents(completion: completion)
         } else {
             requestAccess(to: EKEntityType.event, completion: completion)
         }

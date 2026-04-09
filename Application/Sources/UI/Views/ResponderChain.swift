@@ -43,9 +43,9 @@ private struct ResponderChain: UIViewRepresentable {
  *  Provide access to a first responder.
  */
 @propertyWrapper class FirstResponder {
-    // `FirstResponder` is a class so that we can modify the view during UI updates without SwiftUI detecting a change
-    // (which would lead to undefined behavior). Declaring it as a property wrapper is only syntactic sugar to provide
-    // for a more expressive formalism with no need to call the default constructor.
+    /// `FirstResponder` is a class so that we can modify the view during UI updates without SwiftUI detecting a change
+    /// (which would lead to undefined behavior). Declaring it as a property wrapper is only syntactic sugar to provide
+    /// for a more expressive formalism with no need to call the default constructor.
     fileprivate weak var view: UIView?
 
     var wrappedValue: FirstResponder {

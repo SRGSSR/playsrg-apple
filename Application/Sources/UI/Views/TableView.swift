@@ -6,7 +6,7 @@
 
 import UIKit
 
-// Properly configured Play standard table view for instantiation in code (with manual cell height).
+/// Properly configured Play standard table view for instantiation in code (with manual cell height).
 @objc public class TableView: UITableView {
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -18,7 +18,7 @@ import UIKit
         Self.tableViewConfigure(self)
     }
 
-    // Apply standard Play configuration to a given table view (with manual cell height).
+    /// Apply standard Play configuration to a given table view (with manual cell height).
     @objc static func tableViewConfigure(_ tableView: UITableView) {
         tableView.backgroundColor = .clear
         tableView.indicatorStyle = .white

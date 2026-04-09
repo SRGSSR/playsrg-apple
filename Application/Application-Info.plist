@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BuildName</key>
-	<string>$(BUILD_NAME)</string>
-	<key>BundleDisplayNameSuffix</key>
-	<string>$(BUNDLE_DISPLAY_NAME_SUFFIX)</string>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>AVInitialRouteSharingPolicy</key>
 	<string>LongFormVideo</string>
 	<key>AppCenterSecret</key>
@@ -16,6 +10,12 @@
 	<string>$(CONFIG__APPSTORE_APPLE_ID)</string>
 	<key>ApplicationGroupIdentifier</key>
 	<string>$(COMMON__APP_GROUP_IDENTIFIER)</string>
+	<key>BuildName</key>
+	<string>$(BUILD_NAME)</string>
+	<key>BundleDisplayNameSuffix</key>
+	<string>$(BUNDLE_DISPLAY_NAME_SUFFIX)</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(BUNDLE_DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>
@@ -86,6 +86,8 @@
 		<string>itms-beta</string>
 		<string>itms-appss</string>
 	</array>
+	<key>LSMinimumSystemVersion</key>
+	<string>12.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -185,6 +187,8 @@
 		<string>_googlecast._tcp</string>
 		<string>_$(GOOGLE_CAST_RECEIVER_IDENTIFIER)._googlecast._tcp</string>
 	</array>
+	<key>NSCalendarsUsageDescription</key>
+	<string>The application uses the calendar to add TV programs.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>The application uses the local network for Google Cast receiver discovery.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -195,13 +199,13 @@
 	<string>The application should not use your location. Please don’t allow.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The application uses the microphone for Google Cast receiver discovery.</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>The application uses the calendar to add TV programs.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER).playing</string>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER).displaying</string>
 	</array>
+	<key>PlayMMFServiceURL</key>
+	<string>$(CONFIG__PLAY_MMF_SERVICE_URL)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -270,6 +274,8 @@
 		<string>audio</string>
 		<string>remote-notification</string>
 	</array>
+	<key>UIDesignRequiresCompatibility</key>
+	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIPrerenderedIcon</key>
@@ -300,11 +306,7 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Dark</string>
-	<key>PlayMMFServiceURL</key>
-	<string>$(CONFIG__PLAY_MMF_SERVICE_URL)</string>
 	<key>UserCentricsRuleSetId</key>
 	<string>$(CONFIG__USER_CENTRICS_RULE_SET_ID)</string>
-	<key>LSMinimumSystemVersion</key>
-	<string>12.0.0</string>
 </dict>
 </plist>

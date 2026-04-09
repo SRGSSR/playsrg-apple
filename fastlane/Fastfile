@@ -23,7 +23,7 @@ platform :ios do
     tag_version = tag_version_from_options(options) || tag_version(platform)
     branch_name = git_branch_name
 
-    notify_version_to_ci(platform, tag_version, branch_name) if notify_ci_condition(lane)
+    notify_version_to_ci(platform, tag_version, branch_name) if notify_ci_condition?(lane)
 
     create_or_update_github_environment(lane)
     create_github_deployment(lane)
@@ -41,10 +41,10 @@ platform :ios do
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
-      clean_derived_data unless skip_clean_derived_data
+      clean_derived_data unless skip_clean_derived_data?
     end
 
-    pull_translations unless !pull_translations_lane_condition(lane) || skip_pull_translations
+    pull_translations unless !pull_translations_lane_condition(lane) || skip_pull_translations?
   end
 
   #
@@ -393,7 +393,7 @@ platform :ios do
 
     # Bump marketing version if needed
     appstore_live_versions.each do |platform, appstore_versions|
-      bump_marketing_version_flow(platform, appstore_versions)
+      bump_marketing_version_flow?(platform, appstore_versions)
     end
   end
 
@@ -983,7 +983,7 @@ def cleaned_lane_condition(lane)
     excluded_lanes.all? { |i| !lane.to_s.downcase.include? i }
 end
 
-def skip_clean_derived_data
+def skip_clean_derived_data?
   ENV['DERIVED_DATA_CLEANED'] == '1'
 end
 
@@ -996,7 +996,7 @@ def derived_data_path
   'build/DerivedData'
 end
 
-def notify_ci_condition(lane)
+def notify_ci_condition?(lane)
   !lane.to_s.downcase.include?('githubdeployments')
 end
 
@@ -1171,10 +1171,7 @@ def build_number_for_version(platform, version)
 end
 
 def what_s_new_for_beta_json(platform)
-  file = File.open("../#{what_s_new_beta_file_name(platform)}", 'r')
-  json = JSON.parse(file.read)
-  file.close
-  json
+  JSON.parse(File.read("../#{what_s_new_beta_file_name(platform)}"))
 end
 
 def what_s_new_beta_file_name(platform)
@@ -1221,7 +1218,7 @@ end
 def release_notes_table_to_html_divs(platform, table, live_version)
   divs = ''
   table.map do |row|
-    is_preprod = version_is_preprod(platform, row[0], live_version)
+    is_preprod = version_is_preprod?(platform, row[0], live_version)
     divs += release_notes_version_to_html(platform, row[0], row[1], is_preprod)
   end
   divs.strip
@@ -1254,7 +1251,7 @@ def release_notes_version_to_html_export(build_number, version, text, is_preprod
   div
 end
 
-def version_is_preprod(platform, version, live_version)
+def version_is_preprod?(platform, version, live_version)
   released_version = live_version.version_string
   released_build = live_version.build.version
   build_number = build_number_for_version(platform, version)
@@ -1289,7 +1286,7 @@ def update_options_to_appstore(options)
   index = version.index('-')
   return options unless index
 
-  options[:version] = version[0..index - 1]
+  options[:version] = version[(0..index) - 1]
   options
 end
 
@@ -1391,10 +1388,11 @@ def last_nightlies_success_git_commit_hash(platform, service)
   platform = platform ? "#{platform.downcase}-" : ''
   service = service ? "#{service.downcase}-" : ''
   file_name = "last-#{service}#{platform}nightlies-success-git-commit-hash.txt"
-  file = File.open(file_name, 'a+')
-  nightlies_success_git_commit_hash = file.read
-  file.close
-  nightlies_success_git_commit_hash
+  File.open(file_name, 'a+') do |file|
+    nightlies_success_git_commit_hash = file.read
+    file.close
+    nightlies_success_git_commit_hash
+  end
 end
 
 # Returns the marketing version for a platform, without suffix
@@ -1713,7 +1711,7 @@ def create_github_deployment(lane)
   return unless result
 
   # Check the commit sha is the same as the last commit.
-  return result if github_deployment_sha_correct(result)
+  return result if github_deployment_sha_correct?(result)
 
   delete_github_deployment(lane)
   # Try to create a deployment with the last commit instead.
@@ -1778,7 +1776,7 @@ def srg_github_create_deployment_body(environment, ref, production_environment =
   }
 end
 
-def github_deployment_sha_correct(result)
+def github_deployment_sha_correct?(result)
   # Tag commit can be different from the last commit.
   return true if ENV.fetch('OVERRIDE_PLAY_TAG', nil)
 
@@ -1863,7 +1861,7 @@ end
 
 def check_appstore_github_deployment(lane_name, business_unit, app_version, tag_deployment)
   last_status = get_github_deployment_last_status(tag_deployment)
-  is_correct = github_appstore_deployment_state_is_correct(last_status, app_version)
+  is_correct = github_appstore_deployment_state_is_correct?(last_status, app_version)
   UI.message "Github deployment state for tag #{tag_deployment['ref']} is already synchronized. ✅" if is_correct
   return if is_correct
 
@@ -1885,7 +1883,7 @@ def get_github_appstore_tag_deployment(tag, lane_name, business_unit)
   result ? result[:json] : nil
 end
 
-def github_appstore_deployment_state_is_correct(last_status, app_version)
+def github_appstore_deployment_state_is_correct?(last_status, app_version)
   return false unless last_status
 
   last_status['state'] == github_deployment_state_from_app_version(app_version)
@@ -1927,7 +1925,7 @@ def stop_unfinished_github_deployments(lane, business_unit = nil)
     lane_name = lane.to_s
     UI.message "Checking Github deployment #{deployment['id']} for #{lane_name}"
     last_status = get_github_deployment_last_status(deployment)
-    next unless github_deployment_is_unfinished(last_status)
+    next unless github_deployment_is_unfinished?(last_status)
 
     last_state = last_status ? last_status['state'] : 'NaN'
     UI.important "Github deployment #{deployment['id']} for #{lane_name} is unfinished with state: #{last_state}"
@@ -1946,7 +1944,7 @@ def stop_unfinished_github_deployment(lane, deployment, last_status)
   ENV['BUILD_URL'] = original_build_url
 end
 
-def github_deployment_is_unfinished(status)
+def github_deployment_is_unfinished?(status)
   status.nil? || !['success', 'inactive', 'error'].include?(status['state'])
 end
 
@@ -2118,7 +2116,7 @@ def prepare_appstore_release(platform, business_unit, options)
     UI.user_error! "Tag version #{tag_version} for #{platform} does not exist. Please set one which is related to existing AppStore build."
   end
 
-  return unless can_run_deliver(business_unit, platform)
+  return unless can_run_deliver?(business_unit, platform)
 
   metadata_path = appstore_release_metadata_path(platform, business_unit, tag_version)
   srg_deliver(platform, tag_version, metadata_path, submit_for_review)
@@ -2244,7 +2242,7 @@ def pull_translations_lane_condition(lane)
   included_lanes.one? { |i| lane.to_s.downcase.include? i }
 end
 
-def skip_pull_translations
+def skip_pull_translations?
   ENV['CROWDIN_TRANSLATIONS_PULLLED'] == '1'
 end
 
@@ -2302,7 +2300,7 @@ def cherrypick_beta_workflow_on_main(commits)
       message = cherry_pick_commit_message(commit, jira_issue)
 
       sh "git cherry-pick --no-commit #{commit}"
-      sh "git commit -m \"#{message}\"" unless git_status_clean
+      sh "git commit -m \"#{message}\"" unless git_status_clean?
     end
     sh "git push origin #{main_branch}:#{main_branch}"
     sh "git checkout #{branch_name}"
@@ -2327,7 +2325,7 @@ def git_branch_name
   branch_name.strip
 end
 
-def git_status_clean
+def git_status_clean?
   sh('git status --porcelain').strip.empty?
 end
 
@@ -2341,7 +2339,7 @@ def beta_app_review_info
 end
 
 # Bump marketing version if one AppStore version is same as the current version.
-def bump_marketing_version_flow(platform, appstore_versions)
+def bump_marketing_version_flow?(platform, appstore_versions)
   UI.message "Checking Play #{platform} marketing version... #{appstore_versions}"
   appstore_version = appstore_versions.map { |version| Gem::Version.new(version) }.max
   current_version = Gem::Version.new(xcode_marketing_version(platform))
@@ -2421,8 +2419,8 @@ end
 
 def snapshot_ios_devices
   [
-    'iPhone 16 Pro', # 6.9 inch
-    'iPad Pro 13-inch (M4)' # 13 inch
+    'iPhone 17 Pro', # 6.9 inch
+    'iPad Pro 13-inch (M5)' # 13 inch
   ]
 end
 
@@ -2512,7 +2510,7 @@ def spaceship_app_version_localization(version)
   Spaceship::ConnectAPI::AppStoreVersionLocalization.all(app_store_version_id: version.id).first
 end
 
-def can_run_deliver(business_unit, platform)
+def can_run_deliver?(business_unit, platform)
   spaceship_login_with_api_key(business_unit)
   app = spaceship_bu_appstore_build_app(business_unit)
   return false unless app
