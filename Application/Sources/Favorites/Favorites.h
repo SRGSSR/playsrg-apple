@@ -68,4 +68,9 @@ OBJC_EXPORT void FavoritesUpdatePushService(void);
  */
 OBJC_EXPORT BOOL FavoritesIsSubscribedToShow(SRGShow * _Nonnull show);
 
+/**
+ *  Return `YES` iff the user has subscribed to the show with the specified URN.
+ */
+OBJC_EXPORT BOOL FavoritesIsSubscribedToShowURN(NSString * _Nonnull URN);
+
 NS_ASSUME_NONNULL_END
