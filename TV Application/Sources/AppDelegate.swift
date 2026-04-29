@@ -56,8 +56,6 @@ extension AppDelegate: UIApplicationDelegate {
 
         if let identityWebserviceURL = configuration.identityWebserviceURL,
            let identityWebsiteURL = configuration.identityWebsiteURL {
-            SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
-
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
                 .sink { _ in
                     AnalyticsEvent.identity(action: .cancelLogin).send()
