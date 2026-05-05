@@ -41,9 +41,13 @@ extension SRGDataProvider {
     #if os(iOS)
         /// Publishes the regional media which corresponds to the specified media, if any.
         private func regionalizedRadioLivestreamMedia(for media: SRGMedia) -> AnyPublisher<SRGMedia, Never> {
-            if let channelUid = media.channel?.uid,
-               let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
-               media.urn != selectedLivestreamUrn {
+            // Do not request livestreams by channel for SSATR vendor channels.
+            if media.channel?.vendor == .SSATR {
+                Just(media)
+                    .eraseToAnyPublisher()
+            } else if let channelUid = media.channel?.uid,
+                      let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
+                      media.urn != selectedLivestreamUrn {
                 radioLivestreams(for: media.vendor, channelUid: channelUid)
                     .map { medias in
                         if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {

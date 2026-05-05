@@ -69,7 +69,6 @@ static void *s_kvoContext = &s_kvoContext;
     NSURL *identityWebserviceURL = applicationConfiguration.identityWebserviceURL;
     NSURL *identityWebsiteURL = applicationConfiguration.identityWebsiteURL;
     if (identityWebserviceURL && identityWebsiteURL) {
-        SRGIdentityService.currentIdentityService = [[SRGIdentityService alloc] initWithWebserviceURL:identityWebserviceURL websiteURL:identityWebsiteURL];
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(userDidCancelLogin:)
                                                    name:SRGIdentityServiceUserDidCancelLoginNotification

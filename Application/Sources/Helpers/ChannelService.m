@@ -81,6 +81,11 @@
 
 - (id)addObserverForUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
 {
+    // Do not register programs updates for channels belonging to the SSATR vendor
+    if (channel.vendor == SRGVendorSSATR) {
+        return nil;
+    }
+
     BOOL channelAdded = NO;
     
     ChannelServiceSetup *setup = [[ChannelServiceSetup alloc] initWithChannel:channel livestreamUid:livestreamUid];

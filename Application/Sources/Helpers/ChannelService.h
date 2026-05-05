@@ -25,9 +25,10 @@ typedef void (^ChannelServiceUpdateBlock)(SRGProgramComposition * _Nullable prog
 
 /**
  *  Register an observer to be notified of updates for a given channel. The provided block is called when channel information
- *  is available. An opaque handle to the observer is returned for unregistration purposes.
+ *  is available. Returns an opaque handle to the observer for unregistration purposes, or nil if no registration occurs
+ *  (e.g., for unsupported vendors).
  */
-- (id)addObserverForUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block;
+- (nullable id)addObserverForUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block;
 
 /**
  *  Remove the specified observer.

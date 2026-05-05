@@ -218,9 +218,14 @@ private extension CarPlayList {
     }
 
     private static func liveProgramsPublisher(for channel: SRGChannel, media: SRGMedia) -> AnyPublisher<[SRGProgram], Error> {
-        if let controller = SRGLetterboxService.shared.controller,
-           let dateInterval = controller.play_dateInterval,
-           let segments = controller.mediaComposition?.mainChapter.segments, !segments.isEmpty {
+        // Do not create a live programs publisher for SSATR vendor channels.
+        if channel.vendor == .SSATR {
+            Just([])
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        } else if let controller = SRGLetterboxService.shared.controller,
+                  let dateInterval = controller.play_dateInterval,
+                  let segments = controller.mediaComposition?.mainChapter.segments, !segments.isEmpty {
             SRGDataProvider.current!.radioLatestPrograms(for: ApplicationConfiguration.shared.vendor,
                                                          channelUid: channel.uid,
                                                          livestreamUid: media.uid,
