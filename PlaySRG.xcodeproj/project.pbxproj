@@ -878,6 +878,14 @@
 		4C5A8C042F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */; };
 		4CE17FE02F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FDF2F697A2F00E79E9F /* PushSDK */; };
 		4CE17FE22F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE12F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FE52F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE32F697A2F00E79E9F /* PushSDK */; };
+		4CE17FE62F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE42F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FE92F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE72F697A2F00E79E9F /* PushSDK */; };
+		4CE17FEA2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE82F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FED2F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FEB2F697A2F00E79E9F /* PushSDK */; };
+		4CE17FEE2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FEC2F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FF12F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FEF2F697A2F00E79E9F /* PushSDK */; };
+		4CE17FF22F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FF02F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
 		4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B84B55ACE1A98284136AC0E /* libPods-Play SRG-iOS-Play SRF.a */; };
 		6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF0993A83F1F18CBE90AF3E9 /* libPods-Play SRG-iOS-Play SWI.a */; };
 		6F010E11286607450024A745 /* SearchSettingsBucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F010E10286607440024A745 /* SearchSettingsBucketCell.swift */; };
@@ -3650,6 +3658,8 @@
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7A265CD6D300A4882B /* Collections in Frameworks */,
+				4CE17FE52F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FE62F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3684,6 +3694,8 @@
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
 				6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7C265CD6DB00A4882B /* Collections in Frameworks */,
+				4CE17FE92F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FEA2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3718,6 +3730,8 @@
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
 				6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7E265CD6E600A4882B /* Collections in Frameworks */,
+				4CE17FED2F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FEE2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3752,6 +3766,8 @@
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
 				6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE80265CD70000A4882B /* Collections in Frameworks */,
+				4CE17FF12F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FF22F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5599,6 +5615,8 @@
 				04030F542A34BD6D00BC573B /* UsercentricsUI */,
 				04FA73A92AA62E640014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE19282BFF49F7000B5602 /* Tabman */,
+				4CE17FE32F697A2F00E79E9F /* PushSDK */,
+				4CE17FE42F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5656,6 +5674,8 @@
 				04030F582A34BD7700BC573B /* UsercentricsUI */,
 				04FA73A52AA62E4B0014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE192A2BFF49FD000B5602 /* Tabman */,
+				4CE17FE72F697A2F00E79E9F /* PushSDK */,
+				4CE17FE82F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5713,6 +5733,8 @@
 				04030F5C2A34BD8300BC573B /* UsercentricsUI */,
 				04FA73AB2AA62E760014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE192C2BFF4A04000B5602 /* Tabman */,
+				4CE17FEB2F697A2F00E79E9F /* PushSDK */,
+				4CE17FEC2F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5770,6 +5792,8 @@
 				04030F602A34BD8B00BC573B /* UsercentricsUI */,
 				04FA73AD2AA62E7D0014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE192E2BFF4A0B000B5602 /* Tabman */,
+				4CE17FEF2F697A2F00E79E9F /* PushSDK */,
+				4CE17FF02F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -17129,6 +17153,46 @@
 			productName = PushSDK;
 		};
 		4CE17FE12F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FE32F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FE42F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FE72F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FE82F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FEB2F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FEC2F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FEF2F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FF02F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
 			productName = PushSDKNotificationServiceExtension;
