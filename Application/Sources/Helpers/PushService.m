@@ -145,7 +145,14 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSArray<NSString *> *tags = UAirship.channel.tags;
+    NSArray<NSString *> *tags;
+
+    if ([UAirship isFlying]) {
+        tags = UAirship.channel.tags;
+    } else {
+        tags = @[]; // TODO: Get from PushSubscriptionBridge
+    }
+
     if (tags.count == 0) {
         return [NSSet set];
     }
@@ -166,7 +173,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if ([UAirship isFlying]) {
         return UAirship.push.deviceToken;
     } else {
-        return @""; // TODO: Double-check, maybe we need to fall back to Push SDK
+        return @""; // TODO: Get from PushSubscriptionBridge
     }
 }
 
