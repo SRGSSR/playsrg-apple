@@ -33,6 +33,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 @property (nonatomic) UAConfig *configuration;
 
 @property (nonatomic, getter=isEnabled) BOOL enabled;
+@property (nonatomic, copy, nullable) NSString *pushSDKDeviceToken;
 
 @end
 
@@ -156,7 +157,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (tags.count == 0) {
         return [NSSet set];
     }
-    
+
     NSMutableSet<NSString *> *URNs = [NSMutableSet set];
     for (NSString *tag in tags) {
         NSString *URN = [self showURNFromTag:tag];
@@ -164,17 +165,13 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
             [URNs addObject:URN];
         }
     }
-    
+
     return URNs.copy;
 }
 
 - (NSString *)deviceToken
 {
-    if ([UAirship isFlying]) {
-        return UAirship.push.deviceToken;
-    } else {
-        return @""; // TODO: Get from PushSubscriptionBridge
-    }
+    return [UAirship isFlying] ? UAirship.push.deviceToken : self.pushSDKDeviceToken;
 }
 
 - (NSString *)airshipIdentifier
@@ -307,6 +304,12 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (! pushBackendURL) {
         return;
     }
+    NSMutableString *hexToken = [NSMutableString stringWithCapacity:deviceToken.length * 2];
+    const unsigned char *bytes = deviceToken.bytes;
+    for (NSUInteger i = 0; i < deviceToken.length; i++) {
+        [hexToken appendFormat:@"%02x", bytes[i]];
+    }
+    self.pushSDKDeviceToken = hexToken;
     [PushSubscriptionBridge setToken:deviceToken forChannel:self.pushSDKChannel];
 }
 
