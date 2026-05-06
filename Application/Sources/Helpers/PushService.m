@@ -179,11 +179,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSString *)airshipIdentifier
 {
-    if ([UAirship isFlying]) {
-        return UAirship.channel.identifier;
-    } else {
-        return @"";
-    }
+    return [UAirship isFlying] ? UAirship.channel.identifier : nil;
 }
 
 #pragma mark Setup
