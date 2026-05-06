@@ -151,7 +151,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if ([UAirship isFlying]) {
         tags = UAirship.channel.tags;
     } else {
-        tags = @[]; // TODO: Get from PushSubscriptionBridge
+        tags = [PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel];
     }
 
     if (tags.count == 0) {
@@ -347,8 +347,11 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
-    // TODO:
-    return [UAirship.channel.tags containsObject:[self tagForShowURN:URN]];
+    if ([UAirship isFlying]) {
+        return [UAirship.channel.tags containsObject:[self tagForShowURN:URN]];
+    } else {
+        return [[PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel] containsObject:[self tagForShowURN:URN]];
+    }
 }
 
 #pragma mark Actions
