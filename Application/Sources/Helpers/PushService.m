@@ -75,19 +75,21 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
             return nil;
         }
         _pushSDKChannel = s_pushSDKChannels[@(ApplicationConfiguration.sharedApplicationConfiguration.vendor)];
-        
-        NSString *configurationFilePath = [NSBundle.mainBundle pathForResource:@"AirshipConfig" ofType:@"plist"];
-        if (! configurationFilePath) {
-            return nil;
+
+        if ([UAirship isFlying]) {
+            NSString *configurationFilePath = [NSBundle.mainBundle pathForResource:@"AirshipConfig" ofType:@"plist"];
+            if (! configurationFilePath) {
+                return nil;
+            }
+
+            UAConfig *configuration = [UAConfig configWithContentsOfFile:configurationFilePath];
+            if (! [configuration validate]) {
+                return nil;
+            }
+
+            self.configuration = configuration;
         }
-        
-        UAConfig *configuration = [UAConfig configWithContentsOfFile:configurationFilePath];
-        if (! [configuration validate]) {
-            return nil;
-        }
-        
-        self.configuration = configuration;
-        
+
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(applicationDidBecomeActive:)
                                                    name:UIApplicationDidBecomeActiveNotification
@@ -161,12 +163,20 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSString *)deviceToken
 {
-    return UAirship.push.deviceToken;
+    if ([UAirship isFlying]) {
+        return UAirship.push.deviceToken;
+    } else {
+        return @""; // TODO: Double-check, maybe we need to fall back to Push SDK
+    }
 }
 
 - (NSString *)airshipIdentifier
 {
-    return UAirship.channel.identifier;
+    if ([UAirship isFlying]) {
+        return UAirship.channel.identifier;
+    } else {
+        return @"";
+    }
 }
 
 #pragma mark Setup
@@ -176,15 +186,17 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     // Disable automatic swizzling so we can forward push events to both Airship and PushSDK manually.
     self.configuration.isAutomaticSetupEnabled = NO;
 
-    [UAirship takeOff:self.configuration launchOptions:launchOptions];
-    [UAirship.shared.privacyManager disableFeatures:UAFeaturesAnalytics];
+    if ([UAirship isFlying]) {
+        [UAirship takeOff:self.configuration launchOptions:launchOptions];
+        [UAirship.shared.privacyManager disableFeatures:UAFeaturesAnalytics];
 
-    UAirship.push.defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
-    UAirship.push.pushNotificationDelegate = self;
-    UAirship.push.autobadgeEnabled = YES;
+        UAirship.push.defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
+        UAirship.push.pushNotificationDelegate = self;
+        UAirship.push.autobadgeEnabled = YES;
 
-    // Use status cached by Airship as initial value
-    self.enabled = (UAirship.push.authorizationStatus == UAAuthorizationStatusAuthorized);
+        // Use status cached by Airship as initial value
+        self.enabled = (UAirship.push.authorizationStatus == UAAuthorizationStatusAuthorized);
+    }
 
     // Configure PushSDK alongside Airship.
     NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
@@ -198,7 +210,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)resetApplicationBadge
 {
-    [UAirship.push resetBadge];
+    if ([UAirship isFlying]) {
+        [UAirship.push resetBadge];
+    }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
 }
 
@@ -207,7 +221,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSInteger unreadNotificationCount = UserNotification.unreadNotifications.count;
     
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
-        UAirship.push.badgeNumber = unreadNotificationCount;
+        if ([UAirship isFlying]) {
+            UAirship.push.badgeNumber = unreadNotificationCount;
+        }
         [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
     }
 }
@@ -248,14 +264,16 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         return;
     }
 
-    [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
-        for (NSString *URN in URNs) {
-            [editor addTag:[self tagForShowURN:URN]];
-        }
-        // Mark device as migrated so the backend can exclude it from Airship audiences.
-        [editor addTag:@"uses_push_sdk"];
-    }];
-    [UAirship.push updateRegistration];
+    if ([UAirship isFlying]) {
+        [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
+            for (NSString *URN in URNs) {
+                [editor addTag:[self tagForShowURN:URN]];
+            }
+            // Mark device as migrated so the backend can exclude it from Airship audiences.
+            [editor addTag:@"uses_push_sdk"];
+        }];
+        [UAirship.push updateRegistration];
+    }
     [self syncTagsToPushSDK];
 }
 
@@ -265,20 +283,23 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         return;
     }
 
-    [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
-        for (NSString *URN in URNs) {
-            [editor removeTag:[self tagForShowURN:URN]];
-        }
-        [editor addTag:@"uses_push_sdk"];
-    }];
-    [UAirship.push updateRegistration];
+    if ([UAirship isFlying]) {
+        [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
+            for (NSString *URN in URNs) {
+                [editor removeTag:[self tagForShowURN:URN]];
+            }
+            [editor addTag:@"uses_push_sdk"];
+        }];
+        [UAirship.push updateRegistration];
+    }
     [self syncTagsToPushSDK];
 }
 
 - (void)registerDeviceToken:(NSData *)deviceToken
 {
-    UAirship.push.userPushNotificationsEnabled = YES;
-
+    if ([UAirship isFlying]) {
+        UAirship.push.userPushNotificationsEnabled = YES;
+    }
     NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
     if (! pushBackendURL) {
         return;
@@ -320,6 +341,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
+    // TODO:
     return [UAirship.channel.tags containsObject:[self tagForShowURN:URN]];
 }
 

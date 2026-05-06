@@ -330,13 +330,17 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    [UAAppIntegration application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    if ([UAirship isFlying]) {
+        [UAAppIntegration application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    }
     [PushService.sharedService registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    [UAAppIntegration application:application didFailToRegisterForRemoteNotificationsWithError:error];
+    if ([UAirship isFlying]) {
+        [UAAppIntegration application:application didFailToRegisterForRemoteNotificationsWithError:error];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
@@ -346,7 +350,9 @@ static void *s_kvoContext = &s_kvoContext;
     }];
     BOOL isAirshipPayload = [[userInfo.allKeys filteredArrayUsingPredicate:airshipPredicate] count] > 0;
     if (isAirshipPayload) {
-        [UAAppIntegration application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+        if ([UAirship isFlying]) {
+            [UAAppIntegration application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+        }
     }
     else {
         completionHandler(UIBackgroundFetchResultNewData);
@@ -358,13 +364,25 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler
 {
     [PushService.sharedService handleNotificationResponse:response];
-    [UAAppIntegration userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:^{}];
-    completionHandler();
+    if ([UAirship isFlying]) {
+        [UAAppIntegration userNotificationCenter:center
+                  didReceiveNotificationResponse:response
+                           withCompletionHandler:^{}];
+        completionHandler();
+    } else {
+        completionHandler();
+    }
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
 {
-    [UAAppIntegration userNotificationCenter:center willPresentNotification:notification withCompletionHandler:completionHandler];
+    if ([UAirship isFlying]) {
+        [UAAppIntegration userNotificationCenter:center
+                         willPresentNotification:notification
+                           withCompletionHandler:completionHandler];
+    } else {
+        completionHandler(UNNotificationPresentationOptionNone);
+    }
 }
 
 #pragma mark Notifications
