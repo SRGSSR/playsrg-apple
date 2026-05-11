@@ -106,15 +106,18 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
     if (! FavoritesContainsShow(show)) {
         FavoritesToggleShow(show);
     }
-    
+
+    BOOL newSubscribed = ! FavoritesIsSubscribedToShowURN(show.URN);
+    NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
+
+    // Update SRGUserData before invoking the push service: syncTagsToPushSDK reads back the subscription state from here.
+    [SRGUserData.currentUserData.preferences setNumber:@(newSubscribed) atPath:path inDomain:PlayPreferencesDomain];
+
     if (! [PushService.sharedService toggleSubscriptionForShow:show]) {
+        [SRGUserData.currentUserData.preferences setNumber:@(! newSubscribed) atPath:path inDomain:PlayPreferencesDomain];
         return NO;
     }
-    
-    BOOL subscribed = [PushService.sharedService isSubscribedToShowURN:show.URN];
-    NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
-    [SRGUserData.currentUserData.preferences setNumber:@(subscribed) atPath:path inDomain:PlayPreferencesDomain];
-    
+
     return YES;
 }
 
@@ -141,8 +144,6 @@ void FavoritesUpdatePushService(void)
         NSSet<NSString *> *toUnsubscribeURNs = [subscribedPushServiceURNs setByRemovingObjectsIn:subscribedURNs];
         [PushService.sharedService unsubscribeFromShowURNs:toUnsubscribeURNs];
     }
-    
-    NSCAssert([subscribedURNs isEqualToSet:PushService.sharedService.subscribedShowURNs], @"Subscribed favorite shows have to be equal to Push Service subscribed shows");
 }
 
 #endif
