@@ -28,8 +28,8 @@ import PushSDK
         }
     }
 
-    // PushSubscriptionService.getTags() is actor-isolated and cannot be called synchronously from ObjC.
-    // Reading from UserDefaults directly mirrors what the SDK does internally (UserDefaults+PushSubscription.swift, key "PushSDK.tags").
+    /// PushSubscriptionService.getTags() is actor-isolated and cannot be called synchronously from ObjC.
+    /// Reading from UserDefaults directly mirrors what the SDK does internally (UserDefaults+PushSubscription.swift, key "PushSDK.tags").
     @objc static func getTags(forChannel channel: String) -> [String] {
         guard let data = UserDefaults.standard.data(forKey: "PushSDK.tags"),
               let allTags = try? JSONDecoder().decode([String: [String]].self, from: data) else {
