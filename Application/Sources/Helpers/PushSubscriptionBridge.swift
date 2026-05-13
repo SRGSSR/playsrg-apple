@@ -10,6 +10,7 @@ import PushSDK
 /// ObjC-callable bridge to PushSDK's PushSubscriptionService.
 @objc final class PushSubscriptionBridge: NSObject {
     @objc(configurePushBackendURL:) static func configure(pushBackendURL: URL) {
+        NSLog("[PushSDK] Configuring push backend: URL=%@", pushBackendURL.absoluteString)
         let config = Configuration(pushBackendHost: pushBackendURL)
         Task {
             await PushSubscriptionService.shared.configure(with: config)
@@ -17,12 +18,14 @@ import PushSDK
     }
 
     @objc static func setToken(_ token: Data, forChannel channel: String) {
+        NSLog("[PushSDK] Setting token: channel=%@, token=%@", channel, token as NSData)
         Task {
             await PushSubscriptionService.shared.setToken(token, for: channel, type: .push)
         }
     }
 
     @objc static func setTags(_ tags: [String], forChannel channel: String) {
+        NSLog("[PushSDK] Setting tags: channel=%@, tags=%@", channel, tags)
         Task {
             await PushSubscriptionService.shared.setTags(tags, for: channel)
         }
@@ -33,8 +36,11 @@ import PushSDK
     @objc static func getTags(forChannel channel: String) -> [String] {
         guard let data = UserDefaults.standard.data(forKey: "PushSDK.tags"),
               let allTags = try? JSONDecoder().decode([String: [String]].self, from: data) else {
+            NSLog("[PushSDK] No tags found: channel=%@", channel)
             return []
         }
-        return allTags[channel] ?? []
+        let channelTags = allTags[channel] ?? []
+        NSLog("[PushSDK] Getting tags: channel=%@, tags=%@", channel, channelTags)
+        return channelTags
     }
 }

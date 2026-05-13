@@ -318,6 +318,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 - (void)migrateTagsToPushSDKIfNeeded
 {
     if ([NSUserDefaults.standardUserDefaults boolForKey:@"PushSDKTagsMigrated"]) {
+        NSLog(@"[PushSDK] Tags already migrated, skipping.");
         return;
     }
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
@@ -326,6 +327,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
             [tags addObject:URN];
         }
     }
+    NSLog(@"[PushSDK] Migrating tags to PushSDK: channel=%@, tags=%@", self.pushSDKChannel, tags);
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
     [NSUserDefaults.standardUserDefaults setBool:YES forKey:@"PushSDKTagsMigrated"];
 }
@@ -334,6 +336,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
     if (! pushBackendURL) {
+        NSLog(@"[PushSDK] No push backend URL configured, skipping sync.");
         return;
     }
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
@@ -342,6 +345,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
             [tags addObject:URN];
         }
     }
+    NSLog(@"[PushSDK] Syncing tags to PushSDK: channel=%@, tags=%@", self.pushSDKChannel, tags);
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
 }
 
