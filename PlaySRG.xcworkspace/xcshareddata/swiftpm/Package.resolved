@@ -1,5 +1,5 @@
 {
-  "originHash" : "75d50617ff4a439adbeebc3e2d4183dcbcc7d8f6d67362af3f661f231f7d23a7",
+  "originHash" : "e4a733a1a685cdf081d092ee834d5cbba929929ddbbcdb0a5c262d823343be7c",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "3b62f154d00019ae29a71e9738800bb6f18b236d",
         "version" : "10.19.2"
+      }
+    },
+    {
+      "identity" : "app-push-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mmz-srf/app-push-sdk-ios/",
+      "state" : {
+        "revision" : "fa6418cf670d8b7d4795e200b3156914099743d8",
+        "version" : "1.2.0"
       }
     },
     {
