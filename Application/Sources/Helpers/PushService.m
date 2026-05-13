@@ -65,11 +65,11 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
                                   @(SRGVendorRTS) : @"playrts",
                                   @(SRGVendorSRF) : @"playsrf",
                                   @(SRGVendorSWI) : @"playswi" };
-            s_pushSDKChannels = @{ @(SRGVendorRSI) : @"play-app-rsi",
-                                   @(SRGVendorRTR) : @"play-app-rtr",
-                                   @(SRGVendorRTS) : @"play-app-rts",
-                                   @(SRGVendorSRF) : @"play-app-srf",
-                                   @(SRGVendorSWI) : @"play-app-swi" };
+            s_pushSDKChannels = @{ @(SRGVendorRSI) : @"play-rsi-show-updates",
+                                   @(SRGVendorRTR) : @"play-rtr-show-updates",
+                                   @(SRGVendorRTS) : @"play-rts-show-updates",
+                                   @(SRGVendorSRF) : @"play-srf-show-updates",
+                                   @(SRGVendorSWI) : @"play-srf-show-updates" };
         });
         _appIdentifier = s_appIdentifiers[@(ApplicationConfiguration.sharedApplicationConfiguration.vendor)];
         if (! _appIdentifier) {
