@@ -14,7 +14,7 @@ end
 
 abstract_target 'Play SRG' do
   abstract_target 'iOS' do
-    platform :ios, '16.0'
+    platform :ios, '15.0'
 
     target 'Play SRF' do
       ios_pods
