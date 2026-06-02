@@ -6271,7 +6271,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 2650;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {
