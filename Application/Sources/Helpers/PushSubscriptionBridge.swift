@@ -29,11 +29,17 @@
             }
         }
 
-        /// PushSubscriptionService.getTags() is actor-isolated and cannot be called synchronously from ObjC.
-        /// Reading from UserDefaults directly mirrors what the SDK does internally (UserDefaults+PushSubscription.swift, key "PushSDK.tags").
+        /// SDK-internal storage key (UserDefaults+PushSubscription.swift).
+        private static let pushSDKTagsKey = "PushSDK.tags"
+
+        /// SDK's getTags() is actor-isolated, so read the persisted [channel: tags] blob directly. Assert if it no
+        /// longer decodes, which means the SDK changed its storage format.
         @objc static func getTags(forChannel channel: String) -> [String] {
-            guard let data = UserDefaults.standard.data(forKey: "PushSDK.tags"),
-                  let allTags = try? JSONDecoder().decode([String: [String]].self, from: data) else {
+            guard let data = UserDefaults.standard.data(forKey: pushSDKTagsKey) else {
+                return []
+            }
+            guard let allTags = try? JSONDecoder().decode([String: [String]].self, from: data) else {
+                assertionFailure("PushSDK changed its persisted tags format under \"\(pushSDKTagsKey)\"; PushSubscriptionBridge.getTags(forChannel:) must be updated.")
                 return []
             }
             return allTags[channel] ?? []
