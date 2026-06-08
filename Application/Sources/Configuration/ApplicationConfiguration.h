@@ -56,6 +56,12 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
+@property (nonatomic, readonly, getter=isMigrationMandatory) BOOL migrationMandatory;
+@property (nonatomic, readonly, copy) NSString *migrationScreenTitle;
+@property (nonatomic, readonly, copy) NSString *migrationScreenDescription;
+@property (nonatomic, readonly, copy) NSString *migrationScreenPrimaryAction;
+@property (nonatomic, readonly, copy) NSString *migrationScreenSecondaryAction;
+
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, readonly, getter=isTvGuideUnavailable) BOOL tvGuideUnavailable;

@@ -141,6 +141,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
+@property (nonatomic, getter=isMigrationMandatory) BOOL migrationMandatory;
+@property (nonatomic, copy) NSString *migrationScreenTitle;
+@property (nonatomic, copy) NSString *migrationScreenDescription;
+@property (nonatomic, copy) NSString *migrationScreenPrimaryAction;
+@property (nonatomic, copy) NSString *migrationScreenSecondaryAction;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
@@ -441,7 +446,27 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     if (! appStoreProductIdentifier) {
         return NO;
     }
-    
+
+    NSString *migrationScreenTitle = [firebaseConfiguration stringForKey:@"migrationScreenTitle"];
+    if (! migrationScreenTitle) {
+        return NO;
+    }
+
+    NSString *migrationScreenDescription = [firebaseConfiguration stringForKey:@"migrationScreenDescription"];
+    if (! migrationScreenDescription) {
+        return NO;
+    }
+
+    NSString *migrationScreenPrimaryAction = [firebaseConfiguration stringForKey:@"migrationScreenPrimaryAction"];
+    if (! migrationScreenPrimaryAction) {
+        return NO;
+    }
+
+    NSString *migrationScreenSecondaryAction = [firebaseConfiguration stringForKey:@"migrationScreenSecondaryAction"];
+    if (! migrationScreenSecondaryAction) {
+        return NO;
+    }
+
     // Update mandatory values
     self.businessUnitIdentifier = businessUnitIdentifier;
     self.vendor = vendor;
@@ -459,7 +484,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.whatsNewURL = whatsNewURL;
     
     self.appStoreProductIdentifier = appStoreProductIdentifier;
-    
+
+    self.migrationMandatory = [firebaseConfiguration boolForKey:@"mandatoryMigration"];
+    self.migrationScreenTitle = migrationScreenTitle;
+    self.migrationScreenDescription = migrationScreenDescription;
+    self.migrationScreenPrimaryAction = migrationScreenPrimaryAction;
+    self.migrationScreenSecondaryAction = migrationScreenSecondaryAction;
+
     //
     // Optional values
     //
