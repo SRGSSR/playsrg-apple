@@ -353,8 +353,7 @@ static void *s_kvoContext = &s_kvoContext;
         if ([UAirship isFlying]) {
             [UAAppIntegration application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
         }
-    }
-    else {
+    } else {
         completionHandler(UIBackgroundFetchResultNewData);
     }
 }
