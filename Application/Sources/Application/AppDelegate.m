@@ -367,8 +367,7 @@ static void *s_kvoContext = &s_kvoContext;
     if ([UAirship isFlying]) {
         [UAAppIntegration userNotificationCenter:center
                   didReceiveNotificationResponse:response
-                           withCompletionHandler:^{}];
-        completionHandler();
+                           withCompletionHandler:completionHandler];
     } else {
         completionHandler();
     }
