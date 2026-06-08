@@ -77,18 +77,14 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         }
         _pushSDKChannel = s_pushSDKChannels[@(ApplicationConfiguration.sharedApplicationConfiguration.vendor)];
 
-        if ([UAirship isFlying]) {
-            NSString *configurationFilePath = [NSBundle.mainBundle pathForResource:@"AirshipConfig" ofType:@"plist"];
-            if (! configurationFilePath) {
-                return nil;
-            }
-
+        // Load the Airship configuration when available. If it is missing or invalid, Airship stays grounded and
+        // only the PushSDK is used: the service must keep working in that case to support the Airship-free phase.
+        NSString *configurationFilePath = [NSBundle.mainBundle pathForResource:@"AirshipConfig" ofType:@"plist"];
+        if (configurationFilePath) {
             UAConfig *configuration = [UAConfig configWithContentsOfFile:configurationFilePath];
-            if (! [configuration validate]) {
-                return nil;
+            if ([configuration validate]) {
+                self.configuration = configuration;
             }
-
-            self.configuration = configuration;
         }
 
         [NSNotificationCenter.defaultCenter addObserver:self
@@ -186,7 +182,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     // Disable automatic swizzling so we can forward push events to both Airship and PushSDK manually.
     self.configuration.isAutomaticSetupEnabled = NO;
 
-    if ([UAirship isFlying]) {
+    // Take off only when Airship is configured. Afterwards -[UAirship isFlying] is the authoritative guard
+    // used throughout the service to know whether Airship is running alongside the PushSDK.
+    if (self.configuration) {
         [UAirship takeOff:self.configuration launchOptions:launchOptions];
         [UAirship.shared.privacyManager disableFeatures:UAFeaturesAnalytics];
 
