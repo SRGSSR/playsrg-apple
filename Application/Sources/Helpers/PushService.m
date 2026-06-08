@@ -229,6 +229,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     if ([UAirship isFlying]) {
         [UAirship.push resetBadge];
+    } else {
+        UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
     }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
 }
@@ -240,6 +242,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
         if ([UAirship isFlying]) {
             UAirship.push.badgeNumber = unreadNotificationCount;
+        } else {
+            UIApplication.sharedApplication.applicationIconBadgeNumber = unreadNotificationCount;
         }
         [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
     }
