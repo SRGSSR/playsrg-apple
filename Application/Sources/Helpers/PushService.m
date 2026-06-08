@@ -194,6 +194,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
         // Use status cached by Airship as initial value
         self.enabled = (UAirship.push.authorizationStatus == UAAuthorizationStatusAuthorized);
+    } else {
+        // Without Airship there is no cached status, so seed the enabled flag from the system authorization.
+        [self updateEnabledStatus];
     }
 
     // Configure PushSDK alongside Airship.
@@ -202,6 +205,22 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         [PushSubscriptionBridge configurePushBackendURL:pushBackendURL];
         [self migrateTagsToPushSDKIfNeeded];
     }
+}
+
+// Reflects the system push authorization status, regardless of whether delivery runs through Airship or the PushSDK.
+- (void)updateEnabledStatus
+{
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL enabled = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);
+            if (enabled != self.enabled) {
+                self.enabled = enabled;
+                [NSNotificationCenter.defaultCenter postNotificationName:PushServiceStatusDidChangeNotification
+                                                                  object:self
+                                                                userInfo:@{ PushServiceEnabledKey : @(enabled) }];
+            }
+        });
+    }];
 }
 
 #pragma mark Badge management
@@ -444,17 +463,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     // Ensures the state is updated after if the user returns to the app (push notification settings might have been
     // changed)
-    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            BOOL enabled = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);
-            if (enabled != self.enabled) {
-                self.enabled = enabled;
-                [NSNotificationCenter.defaultCenter postNotificationName:PushServiceStatusDidChangeNotification
-                                                                  object:self
-                                                                userInfo:@{ PushServiceEnabledKey : @(enabled) }];
-            }
-        });
-    }];
+    [self updateEnabledStatus];
 }
 
 @end
