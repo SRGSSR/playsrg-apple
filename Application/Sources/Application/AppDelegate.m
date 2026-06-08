@@ -345,6 +345,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
+    // Normal push (com.urbanairship) or silent push (_)
     NSPredicate *airshipPredicate = [NSPredicate predicateWithBlock:^BOOL(id key, NSDictionary *bindings) {
         return [key isKindOfClass:NSString.class] && ([key hasPrefix:@"com.urbanairship"] || [key isEqualToString:@"_"]);
     }];
