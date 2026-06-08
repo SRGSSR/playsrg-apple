@@ -344,7 +344,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
     for (NSString *URN in FavoritesShowURNs()) {
         if (FavoritesIsSubscribedToShowURN(URN)) {
-            [tags addObject:URN];
+            [tags addObject:[self tagForShowURN:URN]];
         }
     }
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
@@ -360,7 +360,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
     for (NSString *URN in FavoritesShowURNs()) {
         if (FavoritesIsSubscribedToShowURN(URN)) {
-            [tags addObject:URN];
+            [tags addObject:[self tagForShowURN:URN]];
         }
     }
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
@@ -474,36 +474,39 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 @implementation PushService (Helpers)
 
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show
+- (BOOL)requestSubscriptionAuthorization
+{
+    if (self.enabled) {
+        return YES;
+    }
+
+    if (! [self presentSystemAlertForPushNotifications]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable notifications?", @"Question displayed at the top of an alert asking the user to enable notifications")
+                                                                                 message:NSLocalizedString(@"For the application to inform you when a new episode is available, notifications must be enabled.", @"Explanation displayed in the alert asking the user to enable notifications")
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable in system settings", @"Title of a button to propose the user to enable notifications in the system settings") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+
+        UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
+        [topViewController presentViewController:alertController animated:YES completion:nil];
+    }
+    return NO;
+}
+
+- (void)toggleSubscriptionForShow:(SRGShow *)show
 {
     if (! show) {
-        return NO;
+        return;
     }
-    
-    if (! self.enabled) {
-        if (! [self presentSystemAlertForPushNotifications]) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable notifications?", @"Question displayed at the top of an alert asking the user to enable notifications")
-                                                                                     message:NSLocalizedString(@"For the application to inform you when a new episode is available, notifications must be enabled.", @"Explanation displayed in the alert asking the user to enable notifications")
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable in system settings", @"Title of a button to propose the user to enable notifications in the system settings") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
-            }]];
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
-            
-            UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
-            [topViewController presentViewController:alertController animated:YES completion:nil];
-        }
-        return NO;
+
+    if ([self isSubscribedToShowURN:show.URN]) {
+        [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
     }
     else {
-        if ([self isSubscribedToShowURN:show.URN]) {
-            [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
-        }
-        else {
-            [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
-        }
-        return YES;
+        [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
     }
 }
 

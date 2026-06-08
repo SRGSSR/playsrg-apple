@@ -107,16 +107,18 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
         FavoritesToggleShow(show);
     }
 
+    // Subscriptions can only be changed when notifications are enabled; this may prompt the user.
+    if (! [PushService.sharedService requestSubscriptionAuthorization]) {
+        return NO;
+    }
+
     BOOL newSubscribed = ! FavoritesIsSubscribedToShowURN(show.URN);
     NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
 
     // Update SRGUserData before invoking the push service: syncTagsToPushSDK reads back the subscription state from here.
     [SRGUserData.currentUserData.preferences setNumber:@(newSubscribed) atPath:path inDomain:PlayPreferencesDomain];
 
-    if (! [PushService.sharedService toggleSubscriptionForShow:show]) {
-        [SRGUserData.currentUserData.preferences setNumber:@(! newSubscribed) atPath:path inDomain:PlayPreferencesDomain];
-        return NO;
-    }
+    [PushService.sharedService toggleSubscriptionForShow:show];
 
     return YES;
 }
