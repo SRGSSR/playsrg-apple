@@ -12,11 +12,19 @@ struct MigrationView: View {
     private let appConfiguration = ApplicationConfiguration.shared
 
     var body: some View {
-        VStack(spacing: 24) {
-            Image(.playPlusAppIcon)
+        VStack(spacing: .zero) {
+            VStack(spacing: 24) {
+                Image(.playPlusAppIcon)
+                    .resizable()
+                    .frame(width: 120, height: 120)
 
-            Text(appConfiguration.migrationScreenTitle)
-            Text(appConfiguration.migrationScreenDescription)
+                Text(appConfiguration.migrationScreenTitle)
+                    .srgFont(family: .text, weight: .srg_bold, fixedSize: 32)
+
+                Text(appConfiguration.migrationScreenDescription)
+                    .srgFont(family: .text, weight: .srg_medium, fixedSize: 14)
+            }
+            .frame(maxHeight: .infinity)
 
             if #available(iOS 17, *) {
                 Button(appConfiguration.migrationScreenPrimaryAction) {
