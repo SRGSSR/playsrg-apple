@@ -11,8 +11,6 @@ import SwiftUI
 struct MigrationView: View {
     private let appConfiguration = ApplicationConfiguration.shared
 
-    let isMigrationMandatory: Bool
-
     var body: some View {
         VStack(spacing: 24) {
             Image(.playPlusAppIcon)
@@ -34,13 +32,11 @@ struct MigrationView: View {
 // MARK: Objective-C bridge
 
 @objc final class MigrationViewController: NSObject {
-    @objc static func viewController(isMigrationMandatory: Bool) -> UIViewController {
-        let controller = UIHostingController(rootView: MigrationView(isMigrationMandatory: isMigrationMandatory))
-        controller.modalPresentationStyle = .fullScreen
-        return controller
+    @objc static func viewController() -> UIViewController {
+        UIHostingController(rootView: MigrationView())
     }
 }
 
 #Preview {
-    MigrationView(isMigrationMandatory: false)
+    MigrationView()
 }
