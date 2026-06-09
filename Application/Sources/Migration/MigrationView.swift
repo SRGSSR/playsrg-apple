@@ -18,14 +18,23 @@ struct MigrationView: View {
             Text(appConfiguration.migrationScreenTitle)
             Text(appConfiguration.migrationScreenDescription)
 
-            Button(appConfiguration.migrationScreenPrimaryAction) {
-                print("Primary Action")
-            }
-
-            Button(appConfiguration.migrationScreenSecondaryAction) {
-                print("Secondary Action")
+            if #available(iOS 17, *) {
+                Button(appConfiguration.migrationScreenPrimaryAction) {
+                    print("Primary Action")
+                }
+            } else {
+                Button(appConfiguration.migrationScreenSecondaryAction) {
+                    print("Secondary Action")
+                }
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(
+            Image(.migrationBackground)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea()
+        )
     }
 }
 
