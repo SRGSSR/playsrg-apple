@@ -48,8 +48,18 @@ static void *s_kvoContext = &s_kvoContext;
     self.window.accessibilityIgnoresInvertColors = YES;
     
     [self.window makeKeyAndVisible];
-    self.window.rootViewController = [[TabBarController alloc] init];
-    
+
+    BOOL isMigrationMandatory = ApplicationConfiguration.sharedApplicationConfiguration.isMigrationMandatory;
+    if (isMigrationMandatory) {
+        // Mandatory migration: the app is no longer accessible, the migration screen replaces the whole UI.
+        self.window.rootViewController = [MigrationViewController viewControllerWithIsMigrationMandatory:isMigrationMandatory];
+    } else {
+        self.window.rootViewController = [[TabBarController alloc] init];
+        // Optional migration: presented full screen over the tab bar and dismissable.
+        UIViewController *migrationViewController = [MigrationViewController viewControllerWithIsMigrationMandatory:isMigrationMandatory];
+        [self.window.rootViewController presentViewController:migrationViewController animated:NO completion:nil];
+    }
+
     [PresenterMode enable:ApplicationSettingPresenterModeEnabled()];
     
     [self handleShortcutItem:connectionOptions.shortcutItem];

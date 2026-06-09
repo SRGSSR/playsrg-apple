@@ -2610,6 +2610,16 @@
 		FC7128C02DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
 		FC7128C12DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
 		FC7128C22DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
+		FCA9398C2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA9398D2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA9398E2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA9398F2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939902FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939912FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939922FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939932FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939942FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939952FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3531,6 +3541,7 @@
 		F68ECA20B6627579ECED2FF8 /* Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
 		F96229F633EA40ACB18CD9F0 /* Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		FC7128BD2DE08074009134A1 /* SupportFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormView.swift; sourceTree = "<group>"; };
+		FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationView.swift; sourceTree = "<group>"; };
 		FCB0305ADCA82769B114F47F /* Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -4589,6 +4600,7 @@
 		08C68EC91D38DEA100BB8AAA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				FCA9398A2FD6EEAC00979C90 /* Migration */,
 				08C68ECA1D38DEA100BB8AAA /* Appplication */,
 				E62459EC1D488CEF00482BE9 /* Bridges */,
 				E6E673221D4A423E000C3CB9 /* Browser */,
@@ -5376,6 +5388,14 @@
 				E64BA3F81D4A587E002C10D5 /* WebViewController.m */,
 			);
 			path = Browser;
+			sourceTree = "<group>";
+		};
+		FCA9398A2FD6EEAC00979C90 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */,
+			);
+			path = Migration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -8552,6 +8572,7 @@
 				6FB90D18270D91010033D860 /* CarPlayList.swift in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
 				04B675C72BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
+				FCA9398E2FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FC2A21C265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				041DD1742B1B95AA00C9368A /* GradientView.swift in Sources */,
 				048FD24D2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
@@ -8972,6 +8993,7 @@
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				041DD1752B1B95AA00C9368A /* GradientView.swift in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
+				FCA939932FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D19270D91010033D860 /* CarPlayList.swift in Sources */,
 				6F73C63B271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
@@ -9246,6 +9268,7 @@
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				041DD1762B1B95AA00C9368A /* GradientView.swift in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
+				FCA939912FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1A270D91010033D860 /* CarPlayList.swift in Sources */,
 				6F73C63C271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
@@ -9520,6 +9543,7 @@
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				041DD1772B1B95AA00C9368A /* GradientView.swift in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
+				FCA9398C2FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1B270D91020033D860 /* CarPlayList.swift in Sources */,
 				6F73C63D271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
@@ -9766,6 +9790,7 @@
 				046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6F8D54462639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
+				FCA939902FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
 				6FEF236B2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F6C7AD82820578900BC3EA5 /* PosterImages.swift in Sources */,
@@ -10097,6 +10122,7 @@
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E55256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413D624EEEDC900FDF806 /* Channel.m in Sources */,
+				FCA9398F2FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FC413CF24EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F0B162F2837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD3261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10259,6 +10285,7 @@
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E56256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */,
+				FCA9398D2FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FC413D724EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F0B16302837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD4261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10421,6 +10448,7 @@
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E57256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */,
+				FCA939952FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FC413DF24EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F0B16312837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD5261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10583,6 +10611,7 @@
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E58256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */,
+				FCA939922FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FC413E724EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F0B16322837C72E0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD6261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10684,6 +10713,7 @@
 				6F3041F827393FC2001E64BF /* UICollectionView+PlaySRG.m in Sources */,
 				042F6F5329E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6F9F575E2746678E00DCA629 /* ProgramPreview.swift in Sources */,
+				FCA939942FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6F6CD8662865767A00DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */,
 				6FB2C1142719AAE3003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
