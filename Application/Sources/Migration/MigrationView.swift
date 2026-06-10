@@ -38,7 +38,9 @@ struct MigrationView: View {
                     }
                 } else {
                     Button(appConfiguration.migrationScreenSecondaryAction) {
-                        print("Secondary Action")
+                        if let url = appConfiguration.migrationHelpURL {
+                            openURL(url)
+                        }
                     }
                 }
             }
