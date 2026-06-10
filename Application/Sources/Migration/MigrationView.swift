@@ -11,6 +11,8 @@ import SwiftUI
 struct MigrationView: View {
     private let appConfiguration = ApplicationConfiguration.shared
 
+    @Environment(\.openURL) private var openURL
+
     var body: some View {
         VStack(spacing: .zero) {
             VStack(spacing: 24) {
@@ -30,7 +32,9 @@ struct MigrationView: View {
             Group {
                 if #available(iOS 17, *) {
                     Button(appConfiguration.migrationScreenPrimaryAction) {
-                        print("Primary Action")
+                        if let url = appConfiguration.playPlusStoreURL {
+                            openURL(url)
+                        }
                     }
                 } else {
                     Button(appConfiguration.migrationScreenSecondaryAction) {

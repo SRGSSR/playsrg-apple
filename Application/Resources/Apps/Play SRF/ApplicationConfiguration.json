@@ -34,5 +34,7 @@
   "migrationScreenTitle": "Cette application n'existe plus",
   "migrationScreenDescription": "Play Suisse a été remplacée par Play+. Tu peux désormais effectuer une mise à jour ou télécharger à nouveau l'application Play+. Toutes tes données seront conservées.",
   "migrationScreenPrimaryAction": "Télécharger Play+",
-  "migrationScreenSecondaryAction": "Comment obtenir Play+"
+  "migrationScreenSecondaryAction": "Comment obtenir Play+",
+  "migrationHelpURL": "https://www.srgssr.ch",
+  "playPlusStoreURL": "https://www.srgssr.ch"
 }

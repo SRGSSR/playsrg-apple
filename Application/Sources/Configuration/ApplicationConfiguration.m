@@ -146,6 +146,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSString *migrationScreenDescription;
 @property (nonatomic, copy) NSString *migrationScreenPrimaryAction;
 @property (nonatomic, copy) NSString *migrationScreenSecondaryAction;
+@property (nonatomic) NSURL *migrationHelpURL;
+@property (nonatomic) NSURL *playPlusStoreURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
@@ -467,6 +469,18 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
 
+    NSString *migrationHelpStringURL = [firebaseConfiguration stringForKey:@"migrationHelpURL"];
+    NSURL *migrationHelpURL = migrationHelpStringURL ? [NSURL URLWithString:migrationHelpStringURL] : nil;
+    if (! migrationHelpURL) {
+        return NO;
+    }
+
+    NSString *playPlusStoreStringURL = [firebaseConfiguration stringForKey:@"playPlusStoreURL"];
+    NSURL *playPlusStoreURL = playPlusStoreStringURL ? [NSURL URLWithString:playPlusStoreStringURL] : nil;
+    if (! playPlusStoreURL) {
+        return NO;
+    }
+
     // Update mandatory values
     self.businessUnitIdentifier = businessUnitIdentifier;
     self.vendor = vendor;
@@ -490,6 +504,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.migrationScreenDescription = migrationScreenDescription;
     self.migrationScreenPrimaryAction = migrationScreenPrimaryAction;
     self.migrationScreenSecondaryAction = migrationScreenSecondaryAction;
+    self.migrationHelpURL = migrationHelpURL;
+    self.playPlusStoreURL = playPlusStoreURL;
 
     //
     // Optional values

@@ -61,6 +61,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, copy) NSString *migrationScreenDescription;
 @property (nonatomic, readonly, copy) NSString *migrationScreenPrimaryAction;
 @property (nonatomic, readonly, copy) NSString *migrationScreenSecondaryAction;
+@property (nonatomic, readonly, nullable) NSURL *migrationHelpURL;
+@property (nonatomic, readonly, nullable) NSURL *playPlusStoreURL;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;
