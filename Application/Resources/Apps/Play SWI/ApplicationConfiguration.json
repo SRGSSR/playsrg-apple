@@ -35,5 +35,6 @@
   "migrationScreenPrimaryAction": "Télécharger Play+",
   "migrationScreenSecondaryAction": "Comment obtenir Play+",
   "migrationHelpURL": "https://www.srgssr.ch",
-  "playPlusStoreURL": "https://www.srgssr.ch"
+  "playPlusStoreURL": "https://www.srgssr.ch",
+  "tvPlayPlusStoreURL": "https://www.srgssr.ch"
 }

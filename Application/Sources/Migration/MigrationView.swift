@@ -20,6 +20,13 @@ struct MigrationView: View {
                 Image(.playPlusAppIcon)
                     .resizable()
                     .frame(width: 120, height: 120)
+                    .shadow(color: .white, radius: 180, x: 0, y: 0)
+                    .shadow(
+                        color: Color(red: 1, green: 0.82, blue: 0.82).opacity(0.7),
+                        radius: 83,
+                        x: 0,
+                        y: 0
+                    )
 
                 Text(appConfiguration.migrationScreenTitle)
                     .srgFont(family: .text, weight: .srg_bold, fixedSize: titleSize)

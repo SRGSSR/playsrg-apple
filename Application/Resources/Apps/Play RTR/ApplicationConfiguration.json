@@ -30,10 +30,11 @@
   "tvGuideOtherBouquets": "thirdparty,rts,rsi",
   "userConsentDefaultLanguage": "de",
   "mandatoryMigration": false,
-  "migrationScreenTitle": "Cette application n'existe plus",
-  "migrationScreenDescription": "Play Suisse a été remplacée par Play+. Tu peux désormais effectuer une mise à jour ou télécharger à nouveau l'application Play+. Toutes tes données seront conservées.",
-  "migrationScreenPrimaryAction": "Télécharger Play+",
+  "migrationScreenTitle": "Questa app n’exista betg pli",
+  "migrationScreenDescription": "Play RTR è vegnì remplazzà cun Play+. Ti pos uss telechargiar la nova app Play+.",
+  "migrationScreenPrimaryAction": "Installar Play+",
   "migrationScreenSecondaryAction": "Comment obtenir Play+",
-  "migrationHelpURL": "https://www.srgssr.ch",
-  "playPlusStoreURL": "https://www.srgssr.ch"
+  "migrationHelpURL": "https://support.playplus.ch/de/starting/30_from_play_to_playplus/#ich-finde-die-play-app-nicht-im-app-store-oder-play-store",
+  "playPlusStoreURL": "https://apps.apple.com/app/id1532890312",
+  "tvPlayPlusStoreURL": "com.apple.TVAppStore://apps.apple.com/app/id1532890312"
 }

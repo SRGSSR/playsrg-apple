@@ -148,6 +148,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSString *migrationScreenSecondaryAction;
 @property (nonatomic) NSURL *migrationHelpURL;
 @property (nonatomic) NSURL *playPlusStoreURL;
+@property (nonatomic) NSURL *tvPlayPlusStoreURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
@@ -481,6 +482,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
 
+    NSString *tvPlayPlusStoreStringURL = [firebaseConfiguration stringForKey:@"tvPlayPlusStoreURL"];
+    NSURL *tvPlayPlusStoreURL = tvPlayPlusStoreStringURL ? [NSURL URLWithString:tvPlayPlusStoreStringURL] : nil;
+    if (! tvPlayPlusStoreURL) {
+        return NO;
+    }
+
     // Update mandatory values
     self.businessUnitIdentifier = businessUnitIdentifier;
     self.vendor = vendor;
@@ -506,6 +513,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.migrationScreenSecondaryAction = migrationScreenSecondaryAction;
     self.migrationHelpURL = migrationHelpURL;
     self.playPlusStoreURL = playPlusStoreURL;
+    self.tvPlayPlusStoreURL = tvPlayPlusStoreURL;
 
     //
     // Optional values
