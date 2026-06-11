@@ -1,9 +1,7 @@
 //
-//  MigrationView.swift
-//  Play SRF
+//  Copyright (c) SRG SSR. All rights reserved.
 //
-//  Created by Yoan Smit on 08.06.2026.
-//  Copyright © 2026 SRG SSR. All rights reserved.
+//  License information is available from the LICENSE file.
 //
 
 import SwiftUI
@@ -13,6 +11,9 @@ struct MigrationView: View {
 
     @Environment(\.openURL) private var openURL
 
+    @ScaledMetric(relativeTo: .largeTitle) private var titleSize: CGFloat = 32
+    @ScaledMetric(relativeTo: .body) private var descriptionSize: CGFloat = 14
+
     var body: some View {
         VStack(spacing: .zero) {
             VStack(spacing: 24) {
@@ -21,10 +22,10 @@ struct MigrationView: View {
                     .frame(width: 120, height: 120)
 
                 Text(appConfiguration.migrationScreenTitle)
-                    .srgFont(family: .text, weight: .srg_bold, fixedSize: 32)
+                    .srgFont(family: .text, weight: .srg_bold, fixedSize: titleSize)
 
                 Text(appConfiguration.migrationScreenDescription)
-                    .srgFont(family: .text, weight: .srg_medium, fixedSize: 14)
+                    .srgFont(family: .text, weight: .srg_medium, fixedSize: descriptionSize)
             }
             .multilineTextAlignment(.center)
             .frame(maxHeight: .infinity)
@@ -58,9 +59,11 @@ struct MigrationView: View {
 }
 
 private struct MigrationPrimaryButtonStyle: ButtonStyle {
+    @ScaledMetric(relativeTo: .body) private var titleSize: CGFloat = 16
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .srgFont(family: .text, weight: .srg_bold, fixedSize: 16)
+            .srgFont(family: .text, weight: .srg_bold, fixedSize: titleSize)
             .foregroundColor(.black)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
