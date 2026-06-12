@@ -1,27 +1,27 @@
 {
   "images" : [
     {
-      "filename" : "bg.png",
+      "filename" : "bg.heic",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "bg@2x.png",
+      "filename" : "bg@2x.heic",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "bg@3x.png",
+      "filename" : "bg@3x.heic",
       "idiom" : "universal",
       "scale" : "3x"
     },
     {
-      "filename" : "bg img.png",
+      "filename" : "bg img.heic",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
-      "filename" : "bg img@2x.png",
+      "filename" : "bg img@2x.heic",
       "idiom" : "tv",
       "scale" : "2x"
     }
