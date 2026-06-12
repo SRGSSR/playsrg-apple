@@ -16,12 +16,12 @@
       "scale" : "3x"
     },
     {
-      "filename" : "bg img.heic",
+      "filename" : "bg-tv.heic",
       "idiom" : "tv",
       "scale" : "1x"
     },
     {
-      "filename" : "bg img@2x.heic",
+      "filename" : "bg-tv@2x.heic",
       "idiom" : "tv",
       "scale" : "2x"
     }
