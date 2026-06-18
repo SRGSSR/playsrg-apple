@@ -14,6 +14,11 @@ SWIFT_ACTIVE_COMPILATION_CONDITIONS[config=Debug] = DEBUG
 
 COMMON__APP_GROUP_IDENTIFIER = group.$(BU__BUNDLE_IDENTIFIER_PREFIX)$(BU__BUNDLE_IDENTIFIER)$(COMMON__BUNDLE_IDENTIFIER_SUFFIX)
 
+// Single shared App Group across all BU apps + Play+ (same Apple team). Per-BU data is namespaced
+// by a subfolder named after BU__IDENTIFIER. PLACEHOLDER VALUE — must be registered in the new
+// Apple org and confirmed before release (PLAYNEXT-7624).
+COMMON__SHARED_APP_GROUP_IDENTIFIER = group.ch.srgssr.playsrg.shared
+
 COMMON__BUNDLE_IDENTIFIER_SUFFIX[config=Beta] = .beta
 COMMON__BUNDLE_IDENTIFIER_SUFFIX[config=Nightly] = .nightly
 COMMON__BUNDLE_IDENTIFIER_SUFFIX[config=Debug] = .debug
