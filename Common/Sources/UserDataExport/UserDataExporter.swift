@@ -71,13 +71,10 @@ import SRGUserData
             group.leave()
         }
 
+        // `Download.downloads` builds an unsynchronized static cache that is mutated on the main
+        // thread, so it must be snapshotted there rather than read from this background queue.
         #if os(iOS)
-            let downloads: [UserDataExport.DownloadItem]? = Download.downloads.compactMap { download in
-                guard let urn = download.media?.urn else { return nil }
-                return UserDataExport.DownloadItem(mediaURN: urn,
-                                                   title: download.media?.title,
-                                                   date: Self.milliseconds(from: download.creationDate))
-            }
+            let downloads: [UserDataExport.DownloadItem]? = Self.downloadItems()
 
             var pushGranted: Bool? = false // swiftlint:disable:this discouraged_optional_boolean
             group.enter()
@@ -122,6 +119,23 @@ import SRGUserData
         guard let date else { return nil }
         return Int64((date.timeIntervalSince1970 * 1000).rounded())
     }
+
+    #if os(iOS)
+        /// Snapshots downloads on the main thread: `Download.downloads` lazily builds an unsynchronized
+        /// static cache that is mutated on the main thread, so it is not safe to read off-main.
+        private static func downloadItems() -> [UserDataExport.DownloadItem] {
+            var items: [UserDataExport.DownloadItem] = []
+            DispatchQueue.main.sync {
+                items = Download.downloads.compactMap { download in
+                    guard let urn = download.media?.urn else { return nil }
+                    return UserDataExport.DownloadItem(mediaURN: urn,
+                                                       title: download.media?.title,
+                                                       date: milliseconds(from: download.creationDate))
+                }
+            }
+            return items
+        }
+    #endif
 
     // MARK: Writer
 
