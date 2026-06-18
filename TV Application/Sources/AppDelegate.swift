@@ -81,6 +81,7 @@ extension AppDelegate: UIApplicationDelegate {
         let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)
         let storeFileUrl = cachesDirectoryUrl.appendingPathComponent("PlayData.sqlite")
         SRGUserData.current = SRGUserData(storeFileURL: storeFileUrl, serviceURL: configuration.userDataServiceURL, identityService: SRGIdentityService.current)
+        UserDataExporter.shared.setNeedsExport()
 
         UserConsentHelper.setup()
 
