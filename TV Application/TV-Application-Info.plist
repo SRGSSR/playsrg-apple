@@ -6,6 +6,10 @@
 	<string>$(BUILD_NAME)</string>
 	<key>BundleDisplayNameSuffix</key>
 	<string>$(BUNDLE_DISPLAY_NAME_SUFFIX)</string>
+	<key>BusinessUnitIdentifier</key>
+	<string>$(BU__IDENTIFIER)</string>
+	<key>SharedApplicationGroupIdentifier</key>
+	<string>$(COMMON__SHARED_APP_GROUP_IDENTIFIER)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
