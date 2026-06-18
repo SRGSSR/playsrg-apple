@@ -102,7 +102,28 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
 
 + (NSURL *)notificationsFilePath
 {
-    return [[NSFileManager.play_applicationGroupContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
+    return [[NSFileManager.play_sharedBusinessUnitContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
+}
+
++ (void)migrateNotificationsToSharedContainerIfNeeded
+{
+    NSURL *newFileURL = [self notificationsFilePath];
+    if (! newFileURL || [NSFileManager.defaultManager fileExistsAtPath:newFileURL.path]) {
+        return;
+    }
+
+    NSURL *oldFileURL = [[NSFileManager.play_applicationGroupContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
+    if (! [NSFileManager.defaultManager fileExistsAtPath:oldFileURL.path]) {
+        return;
+    }
+
+    [NSFileManager.defaultManager createDirectoryAtURL:newFileURL.URLByDeletingLastPathComponent withIntermediateDirectories:YES attributes:nil error:NULL];
+
+    NSError *error = nil;
+    [NSFileManager.defaultManager copyItemAtURL:oldFileURL toURL:newFileURL error:&error];
+    if (error) {
+        PlayLogWarning(@"notifications", @"Could not migrate notifications to shared container. Reason: %@", error);
+    }
 }
 
 + (void)saveNotifications:(NSArray<UserNotification *> *)notifications
