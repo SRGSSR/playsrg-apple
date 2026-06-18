@@ -48,7 +48,7 @@ import SRGUserData
 
         var myList: [UserDataExport.PlaylistItem] = []
         group.enter()
-        userData.playlists.playlistEntries(inPlaylistWithUid: SRGPlaylistUidWatchLater, matchingPredicate: nil, sortedWithDescriptors: nil) { entries, _ in
+        userData.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: nil) { entries, _ in
             myList = (entries ?? []).compactMap { entry in
                 guard let urn = entry.uid else { return nil }
                 return UserDataExport.PlaylistItem(mediaURN: urn, date: Self.milliseconds(from: entry.date))
