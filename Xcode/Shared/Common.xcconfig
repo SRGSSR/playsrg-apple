@@ -15,13 +15,20 @@ SWIFT_ACTIVE_COMPILATION_CONDITIONS[config=Debug] = DEBUG
 COMMON__APP_GROUP_IDENTIFIER = group.$(BU__BUNDLE_IDENTIFIER_PREFIX)$(BU__BUNDLE_IDENTIFIER)$(COMMON__BUNDLE_IDENTIFIER_SUFFIX)
 
 // Single shared App Group across all BU apps + Play+ (same Apple team). Per-BU data is namespaced
-// by a subfolder named after BU__IDENTIFIER. PLACEHOLDER VALUE — must be registered in the new
-// Apple org and confirmed before release (PLAYNEXT-7624).
-COMMON__SHARED_APP_GROUP_IDENTIFIER = group.ch.srgssr.playsrg.shared
+// by a subfolder named after BU__IDENTIFIER. The suffix maps each PlaySRG build config to the
+// matching Play+ environment (Debug -> .dev, Nightly/Beta -> .int, AppStore -> none / production),
+// so e.g. the Debug app shares with the Play+ dev app. Each resulting identifier must be registered
+// in the Apple org before device/TestFlight builds will sign (PLAYNEXT-7624).
+COMMON__SHARED_APP_GROUP_IDENTIFIER = group.ch.srgssr.playsrg$(COMMON__SHARED_APP_GROUP_SUFFIX)
 
 COMMON__BUNDLE_IDENTIFIER_SUFFIX[config=Beta] = .beta
 COMMON__BUNDLE_IDENTIFIER_SUFFIX[config=Nightly] = .nightly
 COMMON__BUNDLE_IDENTIFIER_SUFFIX[config=Debug] = .debug
+
+// Play+ environment suffix for the shared App Group (AppStore -> none / production).
+COMMON__SHARED_APP_GROUP_SUFFIX[config=Debug] = .dev
+COMMON__SHARED_APP_GROUP_SUFFIX[config=Nightly] = .int
+COMMON__SHARED_APP_GROUP_SUFFIX[config=Beta] = .int
 
 COMMON__URL_SCHEME = $(BU__URL_SCHEME)$(COMMON__URL_SCHEME_SUFFIX)
 
