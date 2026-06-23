@@ -151,7 +151,7 @@ import SRGUserData
             let data = try encoder.encode(export)
             try data.write(to: directoryURL.appendingPathComponent("export.json"), options: .atomic)
         } catch {
-            assertionFailure("User data export failed: \(error)")
+            PlayLogError(category: "userDataExport", message: "User data export failed: \(error)")
         }
     }
 }
