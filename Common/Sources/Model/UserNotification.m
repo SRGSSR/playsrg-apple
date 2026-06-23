@@ -107,23 +107,45 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
 
 + (void)migrateNotificationsToSharedContainerIfNeeded
 {
+    NSString * const migrationDoneKey = @"PlayNotificationsSharedContainerMigrationDone";
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    if ([defaults boolForKey:migrationDoneKey]) {
+        return;
+    }
+
     NSURL *newFileURL = [self notificationsFilePath];
-    if (! newFileURL || [NSFileManager.defaultManager fileExistsAtPath:newFileURL.path]) {
+    if (! newFileURL) {
         return;
     }
 
     NSURL *oldFileURL = [[NSFileManager.play_applicationGroupContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
-    if (! [NSFileManager.defaultManager fileExistsAtPath:oldFileURL.path]) {
+    NSArray *oldArray = [NSArray arrayWithContentsOfURL:oldFileURL] ?: @[];
+    if (oldArray.count == 0) {
+        [defaults setBool:YES forKey:migrationDoneKey];
         return;
     }
+    NSArray *newArray = [NSArray arrayWithContentsOfURL:newFileURL] ?: @[];
+
+    NSMutableOrderedSet<UserNotification *> *merged = [NSMutableOrderedSet orderedSet];
+    for (NSArray *source in @[oldArray, newArray]) {
+        for (id obj in source) {
+            if (! [obj isKindOfClass:NSDictionary.class]) {
+                continue;
+            }
+            UserNotification *notification = [[UserNotification alloc] initWithDictionary:obj];
+            if (notification.identifier) {
+                [merged addObject:notification];
+            }
+        }
+    }
+
+    NSSortDescriptor *dateSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(UserNotification.new, date) ascending:NO];
+    NSSortDescriptor *identifierSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(UserNotification.new, identifier) ascending:NO];
+    NSArray<UserNotification *> *sortedNotifications = [merged sortedArrayUsingDescriptors:@[dateSortDescriptor, identifierSortDescriptor]];
 
     [NSFileManager.defaultManager createDirectoryAtURL:newFileURL.URLByDeletingLastPathComponent withIntermediateDirectories:YES attributes:nil error:NULL];
-
-    NSError *error = nil;
-    [NSFileManager.defaultManager copyItemAtURL:oldFileURL toURL:newFileURL error:&error];
-    if (error) {
-        PlayLogWarning(@"notifications", @"Could not migrate notifications to shared container. Reason: %@", error);
-    }
+    [self saveNotifications:sortedNotifications];
+    [defaults setBool:YES forKey:migrationDoneKey];
 }
 
 + (void)saveNotifications:(NSArray<UserNotification *> *)notifications

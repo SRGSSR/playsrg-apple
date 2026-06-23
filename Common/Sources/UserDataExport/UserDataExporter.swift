@@ -13,12 +13,10 @@ import SRGUserData
 #endif
 
 /// Writes a full snapshot of the user's PlaySRG data into the shared App Group container at
-/// `<shared group>/<bu>/export.json`, for the Play+ app to read. Idempotent: every run overwrites.
+/// `<shared group>/<bu>/export.json`, for the Play+ app to read.
 @objc final class UserDataExporter: NSObject {
     @objc static let shared = UserDataExporter()
 
-    /// BUs migrated to Play+. SWI is intentionally excluded (PLAYNEXT-7624) although it joins the
-    /// shared group for its notification inbox.
     private static let exportedBusinessUnits: Set<String> = ["srf", "rts", "rsi", "rtr"]
 
     private let queue = DispatchQueue(label: "ch.srgssr.playsrg.userdataexport", qos: .utility)

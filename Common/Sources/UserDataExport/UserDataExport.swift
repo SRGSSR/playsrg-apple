@@ -9,7 +9,6 @@ import Foundation
 /// JSON contract written into the shared App Group container for the Play+ app to read.
 ///
 /// `downloads` and `pushPermissionGranted` are iOS-only and are omitted from the JSON on tvOS
-/// (optional properties encode via `encodeIfPresent`, so `nil` keys are not written).
 struct UserDataExport: Encodable {
     let version: Int
     let exportedAt: String
