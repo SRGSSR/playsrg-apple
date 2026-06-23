@@ -40,15 +40,11 @@ struct MigrationView: View {
             Group {
                 if #available(iOS 17, *) {
                     Button(appConfiguration.migrationScreenPrimaryAction) {
-                        if let url = appConfiguration.playPlusStoreURL {
-                            openURL(url)
-                        }
+                        openURL(appConfiguration.playPlusStoreURL)
                     }
                 } else {
                     Button(appConfiguration.migrationScreenSecondaryAction) {
-                        if let url = appConfiguration.migrationHelpURL {
-                            openURL(url)
-                        }
+                        openURL(appConfiguration.migrationHelpURL)
                     }
                 }
             }
