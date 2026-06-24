@@ -64,6 +64,11 @@ OBJC_EXPORT NSString * _Nullable UserNotificationTypeString(UserNotificationType
 + (void)saveNotifications:(NSArray<UserNotification *> *)notifications;
 
 /**
+ *  Copy the legacy notifications file from the old per-BU App Group into the shared group, once.
+ */
++ (void)migrateNotificationsToSharedContainerIfNeeded;
+
+/**
  *  Create a notification from a system notification request.
  */
 - (instancetype)initWithRequest:(UNNotificationRequest *)notificationRequest;

@@ -10,6 +10,10 @@
 	<string>$(CONFIG__APPSTORE_APPLE_ID)</string>
 	<key>ApplicationGroupIdentifier</key>
 	<string>$(COMMON__APP_GROUP_IDENTIFIER)</string>
+	<key>SharedApplicationGroupIdentifier</key>
+	<string>$(COMMON__SHARED_APP_GROUP_IDENTIFIER)</string>
+	<key>BusinessUnitIdentifier</key>
+	<string>$(BU__IDENTIFIER)</string>
 	<key>BuildName</key>
 	<string>$(BUILD_NAME)</string>
 	<key>BundleDisplayNameSuffix</key>

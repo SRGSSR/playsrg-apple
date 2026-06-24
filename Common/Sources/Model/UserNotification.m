@@ -102,11 +102,60 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
 
 + (NSURL *)notificationsFilePath
 {
-    return [[NSFileManager.play_applicationGroupContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
+    return [[NSFileManager.play_sharedBusinessUnitContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
+}
+
++ (void)migrateNotificationsToSharedContainerIfNeeded
+{
+    NSString * const migrationDoneKey = @"PlayNotificationsSharedContainerMigrationDone";
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    if ([defaults boolForKey:migrationDoneKey]) {
+        return;
+    }
+
+    NSURL *newFileURL = [self notificationsFilePath];
+    if (! newFileURL) {
+        return;
+    }
+
+    NSURL *oldFileURL = [[NSFileManager.play_applicationGroupContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
+    NSArray *oldArray = [NSArray arrayWithContentsOfURL:oldFileURL] ?: @[];
+    if (oldArray.count == 0) {
+        [defaults setBool:YES forKey:migrationDoneKey];
+        return;
+    }
+    NSArray *newArray = [NSArray arrayWithContentsOfURL:newFileURL] ?: @[];
+
+    NSMutableOrderedSet<UserNotification *> *merged = [NSMutableOrderedSet orderedSet];
+    for (NSArray *source in @[oldArray, newArray]) {
+        for (id obj in source) {
+            if (! [obj isKindOfClass:NSDictionary.class]) {
+                continue;
+            }
+            UserNotification *notification = [[UserNotification alloc] initWithDictionary:obj];
+            if (notification.identifier) {
+                [merged addObject:notification];
+            }
+        }
+    }
+
+    NSSortDescriptor *dateSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(UserNotification.new, date) ascending:NO];
+    NSSortDescriptor *identifierSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(UserNotification.new, identifier) ascending:NO];
+    NSArray<UserNotification *> *sortedNotifications = [merged sortedArrayUsingDescriptors:@[dateSortDescriptor, identifierSortDescriptor]];
+
+    [NSFileManager.defaultManager createDirectoryAtURL:newFileURL.URLByDeletingLastPathComponent withIntermediateDirectories:YES attributes:nil error:NULL];
+    [self saveNotifications:sortedNotifications];
+    [defaults setBool:YES forKey:migrationDoneKey];
 }
 
 + (void)saveNotifications:(NSArray<UserNotification *> *)notifications
 {
+    NSURL *fileURL = [self notificationsFilePath];
+    if (! fileURL) {
+        PlayLogError(@"notifications", @"Could not save notifications data: the shared container is unavailable.");
+        return;
+    }
+
     NSMutableArray<NSDictionary *> *notificationsArray = [NSMutableArray array];
     [notifications enumerateObjectsUsingBlock:^(UserNotification * _Nonnull notification, NSUInteger idx, BOOL * _Nonnull stop) {
         [notificationsArray addObject:notification.dictionary];
@@ -123,7 +172,7 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
     }
     
     NSError *writeError = nil;
-    [plistData writeToURL:[self notificationsFilePath] options:NSDataWritingAtomic error:&writeError];
+    [plistData writeToURL:fileURL options:NSDataWritingAtomic error:&writeError];
     if (writeError) {
         PlayLogError(@"notifications", @"Could not save notifications data. Reason: %@", writeError);
     }
