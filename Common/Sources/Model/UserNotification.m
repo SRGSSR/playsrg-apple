@@ -150,6 +150,12 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
 
 + (void)saveNotifications:(NSArray<UserNotification *> *)notifications
 {
+    NSURL *fileURL = [self notificationsFilePath];
+    if (! fileURL) {
+        PlayLogError(@"notifications", @"Could not save notifications data: the shared container is unavailable.");
+        return;
+    }
+
     NSMutableArray<NSDictionary *> *notificationsArray = [NSMutableArray array];
     [notifications enumerateObjectsUsingBlock:^(UserNotification * _Nonnull notification, NSUInteger idx, BOOL * _Nonnull stop) {
         [notificationsArray addObject:notification.dictionary];
@@ -166,7 +172,7 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
     }
     
     NSError *writeError = nil;
-    [plistData writeToURL:[self notificationsFilePath] options:NSDataWritingAtomic error:&writeError];
+    [plistData writeToURL:fileURL options:NSDataWritingAtomic error:&writeError];
     if (writeError) {
         PlayLogError(@"notifications", @"Could not save notifications data. Reason: %@", writeError);
     }
