@@ -26,7 +26,31 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (TabBarController *)rootTabBarController
 {
-    return (TabBarController *)self.window.rootViewController;
+    if ([self.window.rootViewController isKindOfClass:TabBarController.class]) {
+        return (TabBarController *)self.window.rootViewController;
+    }
+    return nil;
+}
+
+#pragma mark Root view controller management
+
+- (void)applyRootViewController
+{
+    if (ApplicationConfiguration.sharedApplicationConfiguration.isMigrationMandatory) {
+        // Mandatory migration: the app is no longer accessible, the migration screen replaces the whole UI.
+        self.window.rootViewController = [MigrationViewController viewController];
+    } else {
+        if (![self.window.rootViewController isKindOfClass:TabBarController.class]) {
+            self.window.rootViewController = [[TabBarController alloc] init];
+        }
+    }
+}
+
+- (void)applicationConfigurationDidChange:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self applyRootViewController];
+    });
 }
 
 #pragma mark UIWindowSceneDelegate protocol
@@ -41,6 +65,10 @@ static void *s_kvoContext = &s_kvoContext;
                                            selector:@selector(userDefaultsDidChange:)
                                                name:NSUserDefaultsDidChangeNotification
                                              object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(applicationConfigurationDidChange:)
+                                               name:ApplicationConfigurationDidChangeNotification
+                                             object:nil];
     
     UIWindowScene *windowScene = (UIWindowScene *)scene;
     self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
@@ -48,8 +76,9 @@ static void *s_kvoContext = &s_kvoContext;
     self.window.accessibilityIgnoresInvertColors = YES;
     
     [self.window makeKeyAndVisible];
-    self.window.rootViewController = [[TabBarController alloc] init];
-    
+
+    [self applyRootViewController];
+
     [PresenterMode enable:ApplicationSettingPresenterModeEnabled()];
     
     [self handleShortcutItem:connectionOptions.shortcutItem];
@@ -69,6 +98,8 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)sceneDidDisconnect:(UIScene *)scene
 {
+    [NSNotificationCenter.defaultCenter removeObserver:self name:ApplicationConfigurationDidChangeNotification object:nil];
+
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceEnvironment];

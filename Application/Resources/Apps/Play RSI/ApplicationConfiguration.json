@@ -31,5 +31,13 @@
   "subtitleAvailabilityHidden": true,
   "audioDescriptionAvailabilityHidden": true,
   "tvGuideOtherBouquets": "srf,rts",
-  "userConsentDefaultLanguage": "it"
+  "userConsentDefaultLanguage": "it",
+  "mandatoryMigration": false,
+  "migrationScreenTitle": "Questa versione dell'app non è più disponibile",
+  "migrationScreenDescription": "Play RSI è stata sostituita da Play+. Scarica la nuova app per continuare a utilizzare questo servizio.",
+  "migrationScreenPrimaryAction": "Installa Play+",
+  "migrationScreenSecondaryAction": "Come si installa Play+?",
+  "migrationHelpURL": "https://support.playplus.ch/it/starting/30_from_play_to_playplus/#non-trovo-lapp-play-nellapp-store-o-nel-play-store",
+  "playPlusStoreURL": "https://apps.apple.com/app/id1532890312",
+  "tvPlayPlusStoreURL": "com.apple.TVAppStore://apps.apple.com/app/id1532890312"
 }
