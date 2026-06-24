@@ -33,9 +33,7 @@ struct MigrationView: View {
                     .srgFont(family: .text, weight: .srg_medium, fixedSize: 24)
 
                 Button(appConfiguration.migrationScreenPrimaryAction) {
-                    if let url = appConfiguration.tvPlayPlusStoreURL {
-                        openURL(url)
-                    }
+                    openURL(appConfiguration.tvPlayPlusStoreURL)
                 }
                 .buttonStyle(MigrationPrimaryButtonStyle())
             }
