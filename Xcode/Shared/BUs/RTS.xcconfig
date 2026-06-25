@@ -12,6 +12,7 @@ BU__DOMAIN[config=Nightly] = play-web-staging.herokuapp.com
 BU__DOMAIN[config=Debug] = play-web-staging.herokuapp.com
 BU__IDENTIFIER = rts
 BU__PRODUCT_NAME = Play RTS
+BU__PUSH_SDK_CHANNEL = play-rts-show-updates
 BU__TV_TOP_SHELF_CONTENT_REQUEST = popular_shows
 BU__TV_TOP_SHELF_IMAGE_LAYOUT = hdtv
 BU__URL_SCHEME = playrts

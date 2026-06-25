@@ -23,3 +23,8 @@ COMMON__URL_SCHEME = $(BU__URL_SCHEME)$(COMMON__URL_SCHEME_SUFFIX)
 COMMON__URL_SCHEME_SUFFIX[config=Beta] = -beta
 COMMON__URL_SCHEME_SUFFIX[config=Nightly] = -nightly
 COMMON__URL_SCHEME_SUFFIX[config=Debug] = -debug
+
+COMMON__PUSH_SDK_URL = api.srf.ch/push
+COMMON__PUSH_SDK_URL[config=Debug] = api.dev.srf.ch/push
+COMMON__PUSH_SDK_URL[config=Nightly] = api.dev.srf.ch/push
+COMMON__PUSH_SDK_URL[config=Beta] = api.int.srf.ch/push

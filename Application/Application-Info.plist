@@ -53,6 +53,10 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GoogleCastReceiverIdentifier</key>
 	<string>$(GOOGLE_CAST_RECEIVER_IDENTIFIER)</string>
+	<key>PushSDKURL</key>
+	<string>$(COMMON__PUSH_SDK_URL)</string>
+	<key>PushSDKChannel</key>
+	<string>$(BU__PUSH_SDK_CHANNEL)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

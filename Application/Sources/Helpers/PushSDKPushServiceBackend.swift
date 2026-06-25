@@ -12,9 +12,9 @@
 
     /// `PushServiceBackend` implementation backed by the SRG PushSDK.
     ///
-    /// All PushSDK knowledge is confined here, including the per-BU channel naming. The backend is instantiated only
-    /// when a push backend URL is configured; it has no analytics nor app-delegate event forwarding, so the
-    /// corresponding hooks are no-ops and `PushService` falls back to its own defaults.
+    /// All PushSDK knowledge is confined here. The backend is instantiated only when a push backend URL and channel are
+    /// configured; it has no analytics nor app-delegate event forwarding, so the corresponding hooks are no-ops and
+    /// `PushService` falls back to its own defaults.
     @objc final class PushSDKPushServiceBackend: NSObject, PushServiceBackend {
         /// SDK-internal storage key (`UserDefaults+PushSubscription.swift`), read directly because `getTags()` is
         /// actor-isolated.
@@ -22,11 +22,10 @@
 
         private let channel: String
 
-        /// Returns `nil` when no push backend URL or no channel is configured for the current vendor.
         @objc static func make() -> PushSDKPushServiceBackend? {
-            let configuration = ApplicationConfiguration.shared
-            guard let pushBackendURL = configuration.pushServiceURL,
-                  let channel = channel(for: configuration.vendor)
+            guard let host = Bundle.main.object(forInfoDictionaryKey: "PushSDKURL") as? String, !host.isEmpty,
+                  let pushBackendURL = URL(string: "https://\(host)"),
+                  let channel = Bundle.main.object(forInfoDictionaryKey: "PushSDKChannel") as? String, !channel.isEmpty
             else {
                 return nil
             }
@@ -95,24 +94,6 @@
 
         func willPresentNotification(_: UNNotification, completionHandler _: @escaping (UNNotificationPresentationOptions) -> Void) -> Bool {
             false
-        }
-
-        /// PushSDK channel for the given vendor, or `nil` when push notifications are not available for it.
-        private static func channel(for vendor: SRGVendor) -> String? {
-            switch vendor {
-            case .RSI:
-                "play-rsi-show-updates"
-            case .RTR:
-                "play-rtr-show-updates"
-            case .RTS:
-                "play-rts-show-updates"
-            case .SRF:
-                "play-srf-show-updates"
-            case .SWI:
-                "play-srf-show-updates"
-            default:
-                nil
-            }
         }
     }
 #endif

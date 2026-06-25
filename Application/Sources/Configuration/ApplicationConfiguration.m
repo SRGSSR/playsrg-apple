@@ -131,7 +131,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
 @property (nonatomic) NSURL *userDataServiceURL;
-@property (nonatomic) NSURL *pushServiceURL;
 
 @property (nonatomic) NSURL *whatsNewURL;
 @property (nonatomic) NSURL *supportFormURL;
@@ -484,14 +483,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *userDataServiceURLString = [firebaseConfiguration stringForKey:@"userDataServiceURL"];
     self.userDataServiceURL = userDataServiceURLString ? [NSURL URLWithString:userDataServiceURLString] : nil;
-
-#if defined(DEBUG) || defined(NIGHTLY)
-    self.pushServiceURL = [NSURL URLWithString:@"https://api.dev.srf.ch/push"];
-#elif defined(BETA)
-    self.pushServiceURL = [NSURL URLWithString:@"https://api.int.srf.ch/push"];
-#else
-    self.pushServiceURL = [NSURL URLWithString:@"https://api.srf.ch/push"];
-#endif
 
     NSString *faqURLString = [firebaseConfiguration stringForKey:@"faqURL"];
     self.faqURL = faqURLString ? [NSURL URLWithString:faqURLString] : nil;
