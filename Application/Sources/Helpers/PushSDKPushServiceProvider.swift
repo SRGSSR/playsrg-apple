@@ -10,26 +10,26 @@
     import UIKit
     import UserNotifications
 
-    /// `PushServiceBackend` implementation backed by the SRG PushSDK.
+    /// `PushServiceProvider` implementation backed by the SRG PushSDK.
     ///
-    /// All PushSDK knowledge is confined here. The backend is instantiated only when a push backend URL and channel are
+    /// All PushSDK knowledge is confined here. The provider is instantiated only when a push backend URL and channel are
     /// configured; it has no analytics nor app-delegate event forwarding, so the corresponding hooks are no-ops and
     /// `PushService` falls back to its own defaults.
-    @objc final class PushSDKPushServiceBackend: NSObject, PushServiceBackend {
+    @objc final class PushSDKPushServiceProvider: NSObject, PushServiceProvider {
         /// SDK-internal storage key (`UserDefaults+PushSubscription.swift`), read directly because `getTags()` is
         /// actor-isolated.
         private static let tagsStorageKey = "PushSDK.tags"
 
         private let channel: String
 
-        @objc static func make() -> PushSDKPushServiceBackend? {
+        @objc static func make() -> PushSDKPushServiceProvider? {
             guard let host = Bundle.main.object(forInfoDictionaryKey: "PushSDKURL") as? String, !host.isEmpty,
                   let pushBackendURL = URL(string: "https://\(host)"),
                   let channel = Bundle.main.object(forInfoDictionaryKey: "PushSDKChannel") as? String, !channel.isEmpty
             else {
                 return nil
             }
-            return PushSDKPushServiceBackend(channel: channel, pushBackendURL: pushBackendURL)
+            return PushSDKPushServiceProvider(channel: channel, pushBackendURL: pushBackendURL)
         }
 
         private init(channel: String, pushBackendURL: URL) {
@@ -60,7 +60,7 @@
                 return []
             }
             guard let allTags = try? JSONDecoder().decode([String: [String]].self, from: data) else {
-                assertionFailure("PushSDK changed its persisted tags format under \"\(Self.tagsStorageKey)\"; PushSDKPushServiceBackend.subscribedTags must be updated.")
+                assertionFailure("PushSDK changed its persisted tags format under \"\(Self.tagsStorageKey)\"; PushSDKPushServiceProvider.subscribedTags must be updated.")
                 return []
             }
             return allTags[channel] ?? []

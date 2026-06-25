@@ -89,7 +89,7 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
 - (void)willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
 
 /**
- *  Apply the user analytics consent to the underlying backends.
+ *  Apply the user analytics consent to the underlying providers.
  */
 - (void)setAnalyticsConsentGranted:(BOOL)granted;
 

@@ -27,9 +27,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 @property (nonatomic, readonly) NSString *appIdentifier;
 @property (nonatomic, readonly) NSString *environmentIdentifier;
 
-// Active push backends, ordered with the read source-of-truth first (Airship during the migration, the PushSDK once
-// Airship is dropped). Writes fan out to all backends; reads come from the primary one (`firstObject`).
-@property (nonatomic) NSArray<id<PushServiceBackend>> *backends;
+// Active push providers, ordered with the read source-of-truth first (Airship during the migration, the PushSDK once
+// Airship is dropped). Writes fan out to all providers; reads come from the primary one (`firstObject`).
+@property (nonatomic) NSArray<id<PushServiceProvider>> *providers;
 
 @property (nonatomic, getter=isEnabled) BOOL enabled;
 
@@ -68,21 +68,21 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
             return nil;
         }
         
-        // Instantiate the available backends. Each one returns `nil` when it is not configured (no valid Airship
+        // Instantiate the available providers. Each one returns `nil` when it is not configured (no valid Airship
         // configuration / no push backend URL). If none is available, push notifications are not supported.
-        NSMutableArray<id<PushServiceBackend>> *backends = [NSMutableArray array];
-        AirshipPushServiceBackend *airshipBackend = [AirshipPushServiceBackend make];
-        if (airshipBackend) {
-            [backends addObject:airshipBackend];
+        NSMutableArray<id<PushServiceProvider>> *providers = [NSMutableArray array];
+        AirshipPushServiceProvider *airshipProvider = [AirshipPushServiceProvider make];
+        if (airshipProvider) {
+            [providers addObject:airshipProvider];
         }
-        PushSDKPushServiceBackend *pushSDKBackend = [PushSDKPushServiceBackend make];
-        if (pushSDKBackend) {
-            [backends addObject:pushSDKBackend];
+        PushSDKPushServiceProvider *pushSDKProvider = [PushSDKPushServiceProvider make];
+        if (pushSDKProvider) {
+            [providers addObject:pushSDKProvider];
         }
-        if (backends.count == 0) {
+        if (providers.count == 0) {
             return nil;
         }
-        _backends = backends.copy;
+        _providers = providers.copy;
         
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(applicationDidBecomeActive:)
@@ -139,7 +139,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSArray<NSString *> *tags = self.backends.firstObject.subscribedTags;
+    NSArray<NSString *> *tags = self.providers.firstObject.subscribedTags;
     if (tags.count == 0) {
         return [NSSet set];
     }
@@ -157,9 +157,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSString *)deviceToken
 {
-    for (id<PushServiceBackend> backend in self.backends) {
-        if (backend.deviceToken) {
-            return backend.deviceToken;
+    for (id<PushServiceProvider> provider in self.providers) {
+        if (provider.deviceToken) {
+            return provider.deviceToken;
         }
     }
     return nil;
@@ -167,9 +167,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSString *)airshipIdentifier
 {
-    for (id<PushServiceBackend> backend in self.backends) {
-        if (backend.identifier) {
-            return backend.identifier;
+    for (id<PushServiceProvider> provider in self.providers) {
+        if (provider.identifier) {
+            return provider.identifier;
         }
     }
     return nil;
@@ -179,19 +179,19 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)setupWithLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-    for (id<PushServiceBackend> backend in self.backends) {
-        [backend setupWithLaunchOptions:launchOptions];
+    for (id<PushServiceProvider> provider in self.providers) {
+        [provider setupWithLaunchOptions:launchOptions];
     }
     
-    // The system authorization status is the single source of truth, independently of the active backends.
+    // The system authorization status is the single source of truth, independently of the active providers.
     [self updateEnabledStatus];
     
-    // Seed every backend with the current subscription state stored in SRG User Data, keeping a freshly added backend
+    // Seed every provider with the current subscription state stored in SRG User Data, keeping a freshly added provider
     // (e.g. the PushSDK during migration) in sync.
     [self synchronizeSubscriptions];
 }
 
-// Reflects the system push authorization status, regardless of the active backends.
+// Reflects the system push authorization status, regardless of the active providers.
 - (void)updateEnabledStatus
 {
     [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
@@ -211,7 +211,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)resetApplicationBadge
 {
-    [self.backends.firstObject resetBadge];
+    [self.providers.firstObject resetBadge];
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
 }
 
@@ -220,7 +220,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSInteger unreadNotificationCount = UserNotification.unreadNotifications.count;
     
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
-        [self.backends.firstObject setBadgeNumber:unreadNotificationCount];
+        [self.providers.firstObject setBadgeNumber:unreadNotificationCount];
         [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
     }
 }
@@ -250,7 +250,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     return components[3];
 }
 
-// Derive the desired tag set from SRG User Data (the source of truth) and reconcile every backend. Callers must ensure
+// Derive the desired tag set from SRG User Data (the source of truth) and reconcile every provider. Callers must ensure
 // SRG User Data has already been updated before invoking any subscription change.
 - (void)synchronizeSubscriptions
 {
@@ -261,8 +261,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         }
     }
     
-    for (id<PushServiceBackend> backend in self.backends) {
-        [backend setSubscribedTags:tags];
+    for (id<PushServiceProvider> provider in self.providers) {
+        [provider setSubscribedTags:tags];
     }
 }
 
@@ -270,15 +270,15 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)registerDeviceToken:(NSData *)deviceToken
 {
-    for (id<PushServiceBackend> backend in self.backends) {
-        [backend registerDeviceToken:deviceToken];
+    for (id<PushServiceProvider> provider in self.providers) {
+        [provider registerDeviceToken:deviceToken];
     }
 }
 
 - (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    for (id<PushServiceBackend> backend in self.backends) {
-        [backend didFailToRegisterForRemoteNotificationsWithError:error];
+    for (id<PushServiceProvider> provider in self.providers) {
+        [provider didFailToRegisterForRemoteNotificationsWithError:error];
     }
 }
 
@@ -286,8 +286,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)setAnalyticsConsentGranted:(BOOL)granted
 {
-    for (id<PushServiceBackend> backend in self.backends) {
-        [backend setAnalyticsConsentGranted:granted];
+    for (id<PushServiceProvider> provider in self.providers) {
+        [provider setAnalyticsConsentGranted:granted];
     }
 }
 
@@ -315,8 +315,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     
-    for (id<PushServiceBackend> backend in self.backends) {
-        if ([backend handleRemoteNotification:userInfo fetchCompletionHandler:completionHandler]) {
+    for (id<PushServiceProvider> provider in self.providers) {
+        if ([provider handleRemoteNotification:userInfo fetchCompletionHandler:completionHandler]) {
             return;
         }
     }
@@ -327,8 +327,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     [self processNotificationResponse:notificationResponse];
     
-    for (id<PushServiceBackend> backend in self.backends) {
-        if ([backend handleNotificationResponse:notificationResponse completionHandler:completionHandler]) {
+    for (id<PushServiceProvider> provider in self.providers) {
+        if ([provider handleNotificationResponse:notificationResponse completionHandler:completionHandler]) {
             return;
         }
     }
@@ -339,15 +339,15 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     
-    for (id<PushServiceBackend> backend in self.backends) {
-        if ([backend willPresentNotification:notification completionHandler:completionHandler]) {
+    for (id<PushServiceProvider> provider in self.providers) {
+        if ([provider willPresentNotification:notification completionHandler:completionHandler]) {
             return;
         }
     }
     completionHandler(UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
 }
 
-// Application-level handling of a notification response (history, deep linking, analytics), shared by all backends.
+// Application-level handling of a notification response (history, deep linking, analytics), shared by all providers.
 - (void)processNotificationResponse:(UNNotificationResponse *)notificationResponse
 {
     UNNotification *notification = notificationResponse.notification;

@@ -13,10 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PushService (Private)
 
 /**
- *  Reconcile the active push backends with the show subscriptions stored in SRG User Data.
+ *  Reconcile the active push providers with the show subscriptions stored in SRG User Data.
  *
- *  @discussion The push service is level-triggered: it derives the full set of subscribed shows from SRG User Data,
- *              which callers must therefore update beforehand.
+ *  @discussion Derives the full subscription set from SRG User Data, which callers must update first.
  */
 - (void)synchronizeSubscriptions;
 

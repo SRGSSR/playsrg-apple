@@ -9,20 +9,20 @@
     import UIKit
     import UserNotifications
 
-    /// `PushServiceBackend` implementation backed by Airship.
+    /// `PushServiceProvider` implementation backed by Airship.
     ///
     /// All Airship knowledge is confined here: `PushService` never references `Airship` or `UAAppIntegration`. The
-    /// backend takes off only when a valid `AirshipConfig.plist` is bundled; otherwise it is not instantiated and the
-    /// service runs on the PushSDK backend alone.
-    @objc final class AirshipPushServiceBackend: NSObject, PushServiceBackend {
-        /// Marker tag letting the backend exclude migrated devices from Airship audiences.
+    /// provider takes off only when a valid `AirshipConfig.plist` is bundled; otherwise it is not instantiated and the
+    /// service runs on the PushSDK provider alone.
+    @objc final class AirshipPushServiceProvider: NSObject, PushServiceProvider {
+        /// Marker tag letting the provider exclude migrated devices from Airship audiences.
         private static let migrationMarkerTag = "uses_push_sdk"
 
         private let configuration: Config
 
         /// Returns `nil` when no valid Airship configuration is bundled, in which case Airship must stay grounded and
-        /// the service runs on the PushSDK backend alone.
-        @objc static func make() -> AirshipPushServiceBackend? {
+        /// the service runs on the PushSDK provider alone.
+        @objc static func make() -> AirshipPushServiceProvider? {
             guard let path = Bundle.main.path(forResource: "AirshipConfig", ofType: "plist") else {
                 return nil
             }
@@ -30,7 +30,7 @@
             guard configuration.validate() else {
                 return nil
             }
-            return AirshipPushServiceBackend(configuration: configuration)
+            return AirshipPushServiceProvider(configuration: configuration)
         }
 
         private init(configuration: Config) {
@@ -39,7 +39,7 @@
         }
 
         func setup(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
-            // Disable automatic swizzling so push events can be forwarded manually, allowing both backends to coexist.
+            // Disable automatic swizzling so push events can be forwarded manually, allowing both providers to coexist.
             configuration.isAutomaticSetupEnabled = false
 
             Airship.takeOff(configuration, launchOptions: launchOptions)
