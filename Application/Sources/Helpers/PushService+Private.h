@@ -13,21 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PushService (Private)
 
 /**
- *  Add subscription for the specified show URNs.
- */
-- (void)subscribeToShowURNs:(NSSet<NSString *> *)URNs;
-
-/**
- *  Remove any subscription for the specified show URNs.
+ *  Reconcile the active push backends with the show subscriptions stored in SRG User Data.
  *
- *  @discussion: No notification sent.
+ *  @discussion The push service is level-triggered: it derives the full set of subscribed shows from SRG User Data,
+ *              which callers must therefore update beforehand.
  */
-- (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs;
-
-/**
- *  Return YES iff the user has subscribed to the specified show URN.
- */
-- (BOOL)isSubscribedToShowURN:(NSString *)URN;
+- (void)synchronizeSubscriptions;
 
 @end
 
@@ -38,11 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  or an alert directing the user to Settings is presented, and the method returns `NO`.
  */
 - (BOOL)requestSubscriptionAuthorization;
-
-/**
- *  Toggle subscription for the specified show. Callers must ensure `-requestSubscriptionAuthorization` returns `YES` first.
- */
-- (void)toggleSubscriptionForShow:(SRGShow *)show;
 
 @end
 

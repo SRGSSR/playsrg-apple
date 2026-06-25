@@ -4,9 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#if os(iOS)
-    import AirshipCore
-#endif
 import SRGAppearance
 import Usercentrics
 import UsercentricsUI
@@ -282,14 +279,8 @@ enum UCService: Hashable, CaseIterable {
             switch service {
             #if os(iOS)
                 case .airship:
-                    if PushService.shared != nil, Airship.isFlying {
-                        // Airship analytics feature is disabled at launch. See `PushService.m`.
-                        if acceptedConsent {
-                            Airship.shared.privacyManager.enableFeatures(Features.analytics)
-                        } else {
-                            Airship.shared.privacyManager.disableFeatures(Features.analytics)
-                        }
-                    }
+                    // Analytics is disabled at launch by the push backends. See `PushService.m`.
+                    PushService.shared?.setAnalyticsConsentGranted(acceptedConsent)
             #endif
             case .appcenter:
                 // Only `Crashes` service is used. `Analytics` service not instantiated.

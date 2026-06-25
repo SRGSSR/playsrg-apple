@@ -106,20 +106,20 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
     if (! FavoritesContainsShow(show)) {
         FavoritesToggleShow(show);
     }
-
+    
     // Subscriptions can only be changed when notifications are enabled; this may prompt the user.
     if (! [PushService.sharedService requestSubscriptionAuthorization]) {
         return NO;
     }
-
-    BOOL newSubscribed = ! FavoritesIsSubscribedToShowURN(show.URN);
+    
+    BOOL shouldSubscribe = ! FavoritesIsSubscribedToShowURN(show.URN);
     NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:show.URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
-
-    // Update SRGUserData before invoking the push service: syncTagsToPushSDK reads back the subscription state from here.
-    [SRGUserData.currentUserData.preferences setNumber:@(newSubscribed) atPath:path inDomain:PlayPreferencesDomain];
-
-    [PushService.sharedService toggleSubscriptionForShow:show];
-
+    
+    // Update SRGUserData before invoking the push service: it reconciles the backends from the subscription state stored here.
+    [SRGUserData.currentUserData.preferences setNumber:@(shouldSubscribe) atPath:path inDomain:PlayPreferencesDomain];
+    
+    [PushService.sharedService synchronizeSubscriptions];
+    
     return YES;
 }
 
@@ -127,25 +127,7 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
 
 void FavoritesUpdatePushService(void)
 {
-    if (! PushService.sharedService) {
-        return;
-    }
-    
-    NSMutableSet<NSString *> *subscribedURNs = [NSMutableSet set];
-    for (NSString *URN in FavoritesShowURNs()) {
-        if (FavoritesIsSubscribedToShowURN(URN)) {
-            [subscribedURNs addObject:URN];
-        }
-    }
-    NSSet<NSString *> *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
-    
-    if (! [subscribedURNs isEqualToSet:subscribedPushServiceURNs]) {
-        NSSet<NSString *> *toSubscribeURNs = [subscribedURNs setByRemovingObjectsIn:subscribedPushServiceURNs];
-        [PushService.sharedService subscribeToShowURNs:toSubscribeURNs];
-        
-        NSSet<NSString *> *toUnsubscribeURNs = [subscribedPushServiceURNs setByRemovingObjectsIn:subscribedURNs];
-        [PushService.sharedService unsubscribeFromShowURNs:toUnsubscribeURNs];
-    }
+    [PushService.sharedService synchronizeSubscriptions];
 }
 
 #endif

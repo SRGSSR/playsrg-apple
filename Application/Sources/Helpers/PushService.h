@@ -5,6 +5,7 @@
 //
 
 @import UIKit;
+@import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -62,14 +63,35 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
 @property (nonatomic, readonly, copy, nullable) NSString *airshipIdentifier;
 
 /**
- *  Register the device token with PushSDK. Call from `application:didRegisterForRemoteNotificationsWithDeviceToken:`.
+ *  Register the device token. Call from `application:didRegisterForRemoteNotificationsWithDeviceToken:`.
  */
 - (void)registerDeviceToken:(NSData *)deviceToken;
 
 /**
+ *  Forward a remote-notification registration failure. Call from `application:didFailToRegisterForRemoteNotificationsWithError:`.
+ */
+- (void)applicationDidFailToRegisterForRemoteNotificationsWithError:(NSError *)error;
+
+/**
+ *  Process a received remote notification. Call from `application:didReceiveRemoteNotification:fetchCompletionHandler:`.
+ */
+- (void)didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler;
+
+/**
  *  Handle a notification response. Call from `userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:`.
  */
-- (void)handleNotificationResponse:(UNNotificationResponse *)notificationResponse;
+- (void)handleNotificationResponse:(UNNotificationResponse *)notificationResponse withCompletionHandler:(void (^)(void))completionHandler;
+
+/**
+ *  Process a notification about to be presented in the foreground. Call from
+ *  `userNotificationCenter:willPresentNotification:withCompletionHandler:`.
+ */
+- (void)willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler;
+
+/**
+ *  Apply the user analytics consent to the underlying backends.
+ */
+- (void)setAnalyticsConsentGranted:(BOOL)granted;
 
 /**
  *  Attempt to present the system alert to enable push notifications. Returns `YES` iff presented.
