@@ -62,6 +62,16 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
 @property (nonatomic, readonly, copy, nullable) NSString *airshipIdentifier;
 
 /**
+ *  Register the device token with PushSDK. Call from `application:didRegisterForRemoteNotificationsWithDeviceToken:`.
+ */
+- (void)registerDeviceToken:(NSData *)deviceToken;
+
+/**
+ *  Handle a notification response. Call from `userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:`.
+ */
+- (void)handleNotificationResponse:(UNNotificationResponse *)notificationResponse;
+
+/**
  *  Attempt to present the system alert to enable push notifications. Returns `YES` iff presented.
  */
 - (BOOL)presentSystemAlertForPushNotifications;

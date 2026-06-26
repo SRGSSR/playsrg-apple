@@ -34,11 +34,15 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PushService (Helpers)
 
 /**
- *  Toggle subscription for the specified show and notifified with a banner. Return `YES` if toggled. If notifications
- *  are not enabled an alert is presented to ask the user to enable push notifications instead. The toggle action is
- *  ignored and the method returns `NO`.
+ *  Return `YES` if show subscriptions can be changed. If notifications are not enabled the system permission prompt
+ *  or an alert directing the user to Settings is presented, and the method returns `NO`.
  */
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show;
+- (BOOL)requestSubscriptionAuthorization;
+
+/**
+ *  Toggle subscription for the specified show. Callers must ensure `-requestSubscriptionAuthorization` returns `YES` first.
+ */
+- (void)toggleSubscriptionForShow:(SRGShow *)show;
 
 @end
 

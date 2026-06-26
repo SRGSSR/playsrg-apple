@@ -23,6 +23,7 @@
 
 @import AirshipCore;
 @import AppCenter;
+@import UserNotifications;
 @import AppCenterCrashes;
 @import AVFoundation;
 @import CarPlay;
@@ -38,7 +39,7 @@
 
 static void *s_kvoContext = &s_kvoContext;
 
-@interface AppDelegate() <SRGAnalyticsTrackerDataSource>
+@interface AppDelegate() <SRGAnalyticsTrackerDataSource, UNUserNotificationCenterDelegate>
 
 @end
 
@@ -99,6 +100,7 @@ static void *s_kvoContext = &s_kvoContext;
                                                name:SRGLetterboxPlaybackDidContinueAutomaticallyNotification
                                              object:nil];
     
+    [UNUserNotificationCenter currentNotificationCenter].delegate = self;
     [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
     [PushService.sharedService updateApplicationBadge];
     
@@ -322,6 +324,64 @@ static void *s_kvoContext = &s_kvoContext;
     [topViewController dismissViewControllerAnimated:YES completion:^{
         [self checkForForcedUpdates];
     }];
+}
+
+#pragma mark Push registration
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    if ([UAirship isFlying]) {
+        [UAAppIntegration application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    }
+    [PushService.sharedService registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    if ([UAirship isFlying]) {
+        [UAAppIntegration application:application didFailToRegisterForRemoteNotificationsWithError:error];
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    // Normal push (com.urbanairship) or silent push (_)
+    NSPredicate *airshipPredicate = [NSPredicate predicateWithBlock:^BOOL(id key, NSDictionary *bindings) {
+        return [key isKindOfClass:NSString.class] && ([key hasPrefix:@"com.urbanairship"] || [key isEqualToString:@"_"]);
+    }];
+    BOOL isAirshipPayload = [[userInfo.allKeys filteredArrayUsingPredicate:airshipPredicate] count] > 0;
+    if (isAirshipPayload) {
+        if ([UAirship isFlying]) {
+            [UAAppIntegration application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+        }
+    } else {
+        completionHandler(UIBackgroundFetchResultNewData);
+    }
+}
+
+#pragma mark UNUserNotificationCenterDelegate protocol
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler
+{
+    [PushService.sharedService handleNotificationResponse:response];
+    if ([UAirship isFlying]) {
+        [UAAppIntegration userNotificationCenter:center
+                  didReceiveNotificationResponse:response
+                           withCompletionHandler:completionHandler];
+    } else {
+        completionHandler();
+    }
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
+{
+    if ([UAirship isFlying]) {
+        [UAAppIntegration userNotificationCenter:center
+                         willPresentNotification:notification
+                           withCompletionHandler:completionHandler];
+    } else {
+        completionHandler(UNNotificationPresentationOptionNone);
+    }
 }
 
 #pragma mark Notifications

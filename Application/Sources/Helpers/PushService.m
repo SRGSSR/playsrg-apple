@@ -9,6 +9,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
+#import "Favorites.h"
 #import "PlaySRG-Swift.h"
 #import "UIView+PlaySRG.h"
 #import "UserNotification.h"
@@ -26,11 +27,13 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 @interface PushService () <UAPushNotificationDelegate>
 
 @property (nonatomic, readonly) NSString *appIdentifier;
+@property (nonatomic, readonly) NSString *pushSDKChannel;
 @property (nonatomic, readonly) NSString *environmentIdentifier;
 
 @property (nonatomic) UAConfig *configuration;
 
 @property (nonatomic, getter=isEnabled) BOOL enabled;
+@property (nonatomic, copy, nullable) NSString *pushSDKDeviceToken;
 
 @end
 
@@ -54,6 +57,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     if (self = [super init]) {
         static NSDictionary<NSNumber *, NSString *>  *s_appIdentifiers;
+        static NSDictionary<NSNumber *, NSString *> *s_pushSDKChannels;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
             s_appIdentifiers = @{ @(SRGVendorRSI) : @"playrsi",
@@ -61,24 +65,28 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
                                   @(SRGVendorRTS) : @"playrts",
                                   @(SRGVendorSRF) : @"playsrf",
                                   @(SRGVendorSWI) : @"playswi" };
+            s_pushSDKChannels = @{ @(SRGVendorRSI) : @"play-rsi-show-updates",
+                                   @(SRGVendorRTR) : @"play-rtr-show-updates",
+                                   @(SRGVendorRTS) : @"play-rts-show-updates",
+                                   @(SRGVendorSRF) : @"play-srf-show-updates",
+                                   @(SRGVendorSWI) : @"play-srf-show-updates" };
         });
         _appIdentifier = s_appIdentifiers[@(ApplicationConfiguration.sharedApplicationConfiguration.vendor)];
         if (! _appIdentifier) {
             return nil;
         }
-        
+        _pushSDKChannel = s_pushSDKChannels[@(ApplicationConfiguration.sharedApplicationConfiguration.vendor)];
+
+        // Load the Airship configuration when available. If it is missing or invalid, Airship stays grounded and
+        // only the PushSDK is used: the service must keep working in that case to support the Airship-free phase.
         NSString *configurationFilePath = [NSBundle.mainBundle pathForResource:@"AirshipConfig" ofType:@"plist"];
-        if (! configurationFilePath) {
-            return nil;
+        if (configurationFilePath) {
+            UAConfig *configuration = [UAConfig configWithContentsOfFile:configurationFilePath];
+            if ([configuration validate]) {
+                self.configuration = configuration;
+            }
         }
-        
-        UAConfig *configuration = [UAConfig configWithContentsOfFile:configurationFilePath];
-        if (! [configuration validate]) {
-            return nil;
-        }
-        
-        self.configuration = configuration;
-        
+
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(applicationDidBecomeActive:)
                                                    name:UIApplicationDidBecomeActiveNotification
@@ -134,11 +142,18 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSArray<NSString *> *tags = UAirship.channel.tags;
+    NSArray<NSString *> *tags;
+
+    if ([UAirship isFlying]) {
+        tags = UAirship.channel.tags;
+    } else {
+        tags = [PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel];
+    }
+
     if (tags.count == 0) {
         return [NSSet set];
     }
-    
+
     NSMutableSet<NSString *> *URNs = [NSMutableSet set];
     for (NSString *tag in tags) {
         NSString *URN = [self showURNFromTag:tag];
@@ -146,40 +161,77 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
             [URNs addObject:URN];
         }
     }
-    
+
     return URNs.copy;
 }
 
 - (NSString *)deviceToken
 {
-    return UAirship.push.deviceToken;
+    return [UAirship isFlying] ? UAirship.push.deviceToken : self.pushSDKDeviceToken;
 }
 
 - (NSString *)airshipIdentifier
 {
-    return UAirship.channel.identifier;
+    return [UAirship isFlying] ? UAirship.channel.identifier : nil;
 }
 
 #pragma mark Setup
 
 - (void)setupWithLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-    [UAirship takeOff:self.configuration launchOptions:launchOptions];
-    [UAirship.shared.privacyManager disableFeatures:UAFeaturesAnalytics];
-    
-    UAirship.push.defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
-    UAirship.push.pushNotificationDelegate = self;
-    UAirship.push.autobadgeEnabled = YES;
-    
-    // Use status cached by Airship as initial value
-    self.enabled = (UAirship.push.authorizationStatus == UAAuthorizationStatusAuthorized);
+    // Disable automatic swizzling so we can forward push events to both Airship and PushSDK manually.
+    self.configuration.isAutomaticSetupEnabled = NO;
+
+    // Take off only when Airship is configured. Afterwards -[UAirship isFlying] is the authoritative guard
+    // used throughout the service to know whether Airship is running alongside the PushSDK.
+    if (self.configuration) {
+        [UAirship takeOff:self.configuration launchOptions:launchOptions];
+        [UAirship.shared.privacyManager disableFeatures:UAFeaturesAnalytics];
+
+        UAirship.push.defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
+        UAirship.push.pushNotificationDelegate = self;
+        UAirship.push.autobadgeEnabled = YES;
+
+        // Use status cached by Airship as initial value
+        self.enabled = (UAirship.push.authorizationStatus == UAAuthorizationStatusAuthorized);
+    } else {
+        // Without Airship there is no cached status, so seed the enabled flag from the system authorization.
+        [self updateEnabledStatus];
+    }
+
+    // Configure PushSDK alongside Airship.
+    NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
+    if (pushBackendURL) {
+        [PushSubscriptionBridge configurePushBackendURL:pushBackendURL];
+        [self migrateTagsToPushSDKIfNeeded];
+    }
+}
+
+// Reflects the system push authorization status, regardless of whether delivery runs through Airship or the PushSDK.
+- (void)updateEnabledStatus
+{
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL enabled = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);
+            if (enabled != self.enabled) {
+                self.enabled = enabled;
+                [NSNotificationCenter.defaultCenter postNotificationName:PushServiceStatusDidChangeNotification
+                                                                  object:self
+                                                                userInfo:@{ PushServiceEnabledKey : @(enabled) }];
+            }
+        });
+    }];
 }
 
 #pragma mark Badge management
 
 - (void)resetApplicationBadge
 {
-    [UAirship.push resetBadge];
+    if ([UAirship isFlying]) {
+        [UAirship.push resetBadge];
+    } else {
+        UIApplication.sharedApplication.applicationIconBadgeNumber = 0;
+    }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
 }
 
@@ -188,7 +240,11 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSInteger unreadNotificationCount = UserNotification.unreadNotifications.count;
     
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
-        UAirship.push.badgeNumber = unreadNotificationCount;
+        if ([UAirship isFlying]) {
+            UAirship.push.badgeNumber = unreadNotificationCount;
+        } else {
+            UIApplication.sharedApplication.applicationIconBadgeNumber = unreadNotificationCount;
+        }
         [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
     }
 }
@@ -228,13 +284,18 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (URNs.count == 0) {
         return;
     }
-    
-    [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
-        for (NSString *URN in URNs) {
-            [editor addTag:[self tagForShowURN:URN]];
-        }
-    }];
-    [UAirship.push updateRegistration];
+
+    if ([UAirship isFlying]) {
+        [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
+            for (NSString *URN in URNs) {
+                [editor addTag:[self tagForShowURN:URN]];
+            }
+            // Mark device as migrated so the backend can exclude it from Airship audiences.
+            [editor addTag:@"uses_push_sdk"];
+        }];
+        [UAirship.push updateRegistration];
+    }
+    [self syncTagsToPushSDK];
 }
 
 - (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs
@@ -242,49 +303,110 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (URNs.count == 0) {
         return;
     }
-    
-    [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
-        for (NSString *URN in URNs) {
-            [editor removeTag:[self tagForShowURN:URN]];
+
+    if ([UAirship isFlying]) {
+        [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
+            for (NSString *URN in URNs) {
+                [editor removeTag:[self tagForShowURN:URN]];
+            }
+            [editor addTag:@"uses_push_sdk"];
+        }];
+        [UAirship.push updateRegistration];
+    }
+    [self syncTagsToPushSDK];
+}
+
+- (void)registerDeviceToken:(NSData *)deviceToken
+{
+    if ([UAirship isFlying]) {
+        UAirship.push.userPushNotificationsEnabled = YES;
+    }
+    NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
+    if (! pushBackendURL) {
+        return;
+    }
+    NSMutableString *hexToken = [NSMutableString stringWithCapacity:deviceToken.length * 2];
+    const unsigned char *bytes = deviceToken.bytes;
+    for (NSUInteger i = 0; i < deviceToken.length; i++) {
+        [hexToken appendFormat:@"%02x", bytes[i]];
+    }
+    self.pushSDKDeviceToken = hexToken;
+    [PushSubscriptionBridge setToken:deviceToken forChannel:self.pushSDKChannel];
+}
+
+#pragma mark PushSDK migration helpers
+
+- (void)migrateTagsToPushSDKIfNeeded
+{
+    if ([NSUserDefaults.standardUserDefaults boolForKey:@"PushSDKTagsMigrated"]) {
+        return;
+    }
+    NSMutableArray<NSString *> *tags = [NSMutableArray array];
+    for (NSString *URN in FavoritesShowURNs()) {
+        if (FavoritesIsSubscribedToShowURN(URN)) {
+            [tags addObject:[self tagForShowURN:URN]];
         }
-    }];
-    [UAirship.push updateRegistration];
+    }
+    [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
+    [NSUserDefaults.standardUserDefaults setBool:YES forKey:@"PushSDKTagsMigrated"];
+}
+
+- (void)syncTagsToPushSDK
+{
+    NSURL *pushBackendURL = ApplicationConfiguration.sharedApplicationConfiguration.pushServiceURL;
+    if (! pushBackendURL) {
+        return;
+    }
+    NSMutableArray<NSString *> *tags = [NSMutableArray array];
+    for (NSString *URN in FavoritesShowURNs()) {
+        if (FavoritesIsSubscribedToShowURN(URN)) {
+            [tags addObject:[self tagForShowURN:URN]];
+        }
+    }
+    [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
 }
 
 - (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
-    return [UAirship.channel.tags containsObject:[self tagForShowURN:URN]];
+    if ([UAirship isFlying]) {
+        return [UAirship.channel.tags containsObject:[self tagForShowURN:URN]];
+    } else {
+        return [[PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel] containsObject:[self tagForShowURN:URN]];
+    }
 }
 
 #pragma mark Actions
 
 - (BOOL)presentSystemAlertForPushNotifications
 {
-    // Lazily enable push notifications at the Urban Airship level, so that the user is asked the first time she
-    // attempts to use the functionality.
-    if (! UAirship.push.userPushNotificationsEnabled) {
-        UAirship.push.userPushNotificationsEnabled = YES;
-        return YES;
-    }
-    else {
+    if (self.enabled) {
         return NO;
     }
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                                                                        completionHandler:^(BOOL granted, NSError *error) {
+        if (granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIApplication.sharedApplication registerForRemoteNotifications];
+            });
+        }
+    }];
+    return YES;
 }
 
-#pragma mark UAPushNotificationDelegate protocol
+#pragma mark Notification response handling
 
-- (void)receivedNotificationResponse:(UNNotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
+- (void)handleNotificationResponse:(UNNotificationResponse *)notificationResponse
 {
     UNNotification *notification = notificationResponse.notification;
     if (notification) {
         UserNotification *savedNotification = [[UserNotification alloc] initWithNotification:notification];
         [UserNotification saveNotification:savedNotification read:YES];
     }
-    
+
     UNNotificationContent *notificationContent = notification.request.content;
     NSDictionary *userInfo = notificationContent.userInfo;
     NSString *channelUid = userInfo[@"channelId"];
-    
+
     if (userInfo[@"media"]) {
         NSString *mediaURN = userInfo[@"media"];
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
@@ -318,6 +440,12 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
                                        overrideType:userInfo[@"type"]]
          send];
     }
+}
+
+#pragma mark UAPushNotificationDelegate protocol
+
+- (void)receivedNotificationResponse:(UNNotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
+{
     completionHandler();
 }
 
@@ -339,53 +467,46 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     // Ensures the state is updated after if the user returns to the app (push notification settings might have been
     // changed)
-    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            BOOL enabled = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);
-            if (enabled != self.enabled) {
-                self.enabled = enabled;
-                [NSNotificationCenter.defaultCenter postNotificationName:PushServiceStatusDidChangeNotification
-                                                                  object:self
-                                                                userInfo:@{ PushServiceEnabledKey : @(enabled) }];
-            }
-        });
-    }];
+    [self updateEnabledStatus];
 }
 
 @end
 
 @implementation PushService (Helpers)
 
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show
+- (BOOL)requestSubscriptionAuthorization
+{
+    if (self.enabled) {
+        return YES;
+    }
+
+    if (! [self presentSystemAlertForPushNotifications]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable notifications?", @"Question displayed at the top of an alert asking the user to enable notifications")
+                                                                                 message:NSLocalizedString(@"For the application to inform you when a new episode is available, notifications must be enabled.", @"Explanation displayed in the alert asking the user to enable notifications")
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable in system settings", @"Title of a button to propose the user to enable notifications in the system settings") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+
+        UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
+        [topViewController presentViewController:alertController animated:YES completion:nil];
+    }
+    return NO;
+}
+
+- (void)toggleSubscriptionForShow:(SRGShow *)show
 {
     if (! show) {
-        return NO;
+        return;
     }
-    
-    if (! self.enabled) {
-        if (! [self presentSystemAlertForPushNotifications]) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable notifications?", @"Question displayed at the top of an alert asking the user to enable notifications")
-                                                                                     message:NSLocalizedString(@"For the application to inform you when a new episode is available, notifications must be enabled.", @"Explanation displayed in the alert asking the user to enable notifications")
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Enable in system settings", @"Title of a button to propose the user to enable notifications in the system settings") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-                [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
-            }]];
-            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
-            
-            UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
-            [topViewController presentViewController:alertController animated:YES completion:nil];
-        }
-        return NO;
+
+    if ([self isSubscribedToShowURN:show.URN]) {
+        [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
     }
     else {
-        if ([self isSubscribedToShowURN:show.URN]) {
-            [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
-        }
-        else {
-            [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
-        }
-        return YES;
+        [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
     }
 }
 
