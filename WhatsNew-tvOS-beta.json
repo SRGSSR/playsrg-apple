@@ -121,6 +121,6 @@
     "1.9.9-479": "Branch beta\n- Testflight build.",
     "1.9.9-480": "- Improve Radio SSATR management.",
     "1.9.9-481": "- Improve Radio SSATR management.",
-    "1.9.10-482": "- Remove RTS Login."
-
+    "1.9.10-482": "- Remove RTS Login.",
+    "1.9.11-483": "- Migrate Push Notification services."
 }
