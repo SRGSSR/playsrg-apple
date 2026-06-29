@@ -20,6 +20,7 @@
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
 #import "UpdateInfo.h"
+#import "UserNotification.h"
 
 @import AirshipCore;
 @import AppCenter;
@@ -92,7 +93,11 @@ static void *s_kvoContext = &s_kvoContext;
     SRGUserData.currentUserData = [[SRGUserData alloc] initWithStoreFileURL:storeFileURL
                                                                  serviceURL:applicationConfiguration.userDataServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
-    
+
+    [UserDataExporter.shared setNeedsExport];
+
+    [UserNotification migrateNotificationsToSharedContainerIfNeeded];
+
     GoogleCastSetup();
     
     [NSNotificationCenter.defaultCenter addObserver:self
