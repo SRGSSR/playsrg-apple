@@ -32,5 +32,13 @@
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
   "showLeadPreferred": true,
   "tvGuideOtherBouquets": "srf,rsi",
-  "userConsentDefaultLanguage": "fr"
+  "userConsentDefaultLanguage": "fr",
+  "mandatoryMigration": false,
+  "migrationScreenTitle": "Cette app n’est plus disponible",
+  "migrationScreenDescription": "Play RTS a été remplacée par Play+. Téléchargez dès maintenant la nouvelle app Play+.",
+  "migrationScreenPrimaryAction": "Installer Play+",
+  "migrationScreenSecondaryAction": "Comment obtenir Play+",
+  "migrationHelpURL": "https://support.playplus.ch/fr/starting/30_from_play_to_playplus/#je-ne-trouve-pas-lapplication-play-dans-lapp-store-ou-le-play-store",
+  "playPlusStoreURL": "https://apps.apple.com/app/id1532890312",
+  "tvPlayPlusStoreURL": "com.apple.TVAppStore://apps.apple.com/app/id1532890312"
 }

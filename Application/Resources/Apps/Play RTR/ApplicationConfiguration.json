@@ -28,5 +28,13 @@
   "discoverySubtitleOptionLanguage": "de",
   "audioDescriptionAvailabilityHidden": true,
   "tvGuideOtherBouquets": "thirdparty,rts,rsi",
-  "userConsentDefaultLanguage": "de"
+  "userConsentDefaultLanguage": "de",
+  "mandatoryMigration": false,
+  "migrationScreenTitle": "Questa app n’exista betg pli",
+  "migrationScreenDescription": "Play RTR è vegnì remplazzà cun Play+. Ti pos uss telechargiar la nova app Play+.",
+  "migrationScreenPrimaryAction": "Installar Play+",
+  "migrationScreenSecondaryAction": "Co installesch jau Play+",
+  "migrationHelpURL": "https://support.playplus.ch/de/starting/30_from_play_to_playplus/#ich-finde-die-play-app-nicht-im-app-store-oder-play-store",
+  "playPlusStoreURL": "https://apps.apple.com/app/id1532890312",
+  "tvPlayPlusStoreURL": "com.apple.TVAppStore://apps.apple.com/app/id1532890312"
 }
