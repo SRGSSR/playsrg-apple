@@ -256,5 +256,6 @@
     "3.9.9-480": "- Improve Radio SSATR management.\n- Improve iOS 26 compatibility.",
     "3.9.9-481": "- Improve Radio SSATR management.\n- Improve iOS 26 compatibility.",
     "3.9.10-482": "- Remove RTS Login.",
-    "3.9.11-483": "- Migrate Push Notification services."
+    "3.9.11-483": "- Migrate Push Notification services.",
+    "3.9.11-484": "- Migrate Push Notification services."
 }
