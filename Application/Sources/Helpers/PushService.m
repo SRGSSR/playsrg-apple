@@ -142,14 +142,11 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSArray<NSString *> *tags;
-
-    if ([UAirship isFlying]) {
-        tags = UAirship.channel.tags;
-    } else {
-        tags = [PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel];
+    if (! [UAirship isFlying]) {
+        return [NSSet setWithArray:[PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel]];
     }
 
+    NSArray<NSString *> *tags = UAirship.channel.tags;
     if (tags.count == 0) {
         return [NSSet set];
     }
@@ -344,7 +341,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
     for (NSString *URN in FavoritesShowURNs()) {
         if (FavoritesIsSubscribedToShowURN(URN)) {
-            [tags addObject:[self tagForShowURN:URN]];
+            [tags addObject:URN];
         }
     }
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
@@ -360,7 +357,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSMutableArray<NSString *> *tags = [NSMutableArray array];
     for (NSString *URN in FavoritesShowURNs()) {
         if (FavoritesIsSubscribedToShowURN(URN)) {
-            [tags addObject:[self tagForShowURN:URN]];
+            [tags addObject:URN];
         }
     }
     [PushSubscriptionBridge setTags:tags forChannel:self.pushSDKChannel];
@@ -371,7 +368,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if ([UAirship isFlying]) {
         return [UAirship.channel.tags containsObject:[self tagForShowURN:URN]];
     } else {
-        return [[PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel] containsObject:[self tagForShowURN:URN]];
+        return [[PushSubscriptionBridge getTagsForChannel:self.pushSDKChannel] containsObject:URN];
     }
 }
 
