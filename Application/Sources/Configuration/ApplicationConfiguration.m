@@ -142,10 +142,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *sourceCodeURL;
 
 @property (nonatomic, getter=isMigrationMandatory) BOOL migrationMandatory;
-@property (nonatomic, copy) NSString *migrationScreenTitle;
-@property (nonatomic, copy) NSString *migrationScreenDescription;
-@property (nonatomic, copy) NSString *migrationScreenPrimaryAction;
-@property (nonatomic, copy) NSString *migrationScreenSecondaryAction;
 @property (nonatomic) NSURL *migrationHelpURL;
 @property (nonatomic) NSURL *playPlusStoreURL;
 @property (nonatomic) NSURL *tvPlayPlusStoreURL;
@@ -507,10 +503,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.appStoreProductIdentifier = appStoreProductIdentifier;
 
     self.migrationMandatory = [firebaseConfiguration boolForKey:@"mandatoryMigration"];
-    self.migrationScreenTitle = migrationScreenTitle;
-    self.migrationScreenDescription = migrationScreenDescription;
-    self.migrationScreenPrimaryAction = migrationScreenPrimaryAction;
-    self.migrationScreenSecondaryAction = migrationScreenSecondaryAction;
     self.migrationHelpURL = migrationHelpURL;
     self.playPlusStoreURL = playPlusStoreURL;
     self.tvPlayPlusStoreURL = tvPlayPlusStoreURL;

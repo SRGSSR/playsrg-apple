@@ -28,10 +28,10 @@ struct MigrationView: View {
                         y: 0
                     )
 
-                Text(appConfiguration.migrationScreenTitle)
+                Text("This app no longer exists")
                     .srgFont(family: .text, weight: .srg_bold, fixedSize: titleSize)
 
-                Text(appConfiguration.migrationScreenDescription)
+                Text("This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.")
                     .srgFont(family: .text, weight: .srg_medium, fixedSize: descriptionSize)
             }
             .multilineTextAlignment(.center)
@@ -39,11 +39,11 @@ struct MigrationView: View {
 
             Group {
                 if #available(iOS 17, *) {
-                    Button(appConfiguration.migrationScreenPrimaryAction) {
+                    Button("Update now") {
                         openURL(appConfiguration.playPlusStoreURL)
                     }
                 } else {
-                    Button(appConfiguration.migrationScreenSecondaryAction) {
+                    Button("How to get Play+") {
                         openURL(appConfiguration.migrationHelpURL)
                     }
                 }

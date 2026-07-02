@@ -893,3 +893,7 @@
 
 /* Add to Calendar alert title */
 "“%@” would like to access to your calendar" = "« %@ » souhaite accéder à votre calendrier.";
+"This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained." = "Play RTS a été remplacée par Play+. Tu peux désormais effectuer une mise à jour ou télécharger à nouveau l'application Play+. Toutes tes données seront conservées.";
+"Update now" = "Mettre à jour maintenant";
+"How to get Play+" = "Comment obtenir Play+";
+"This app no longer exists" = "Cette application n'existe plus";

@@ -57,10 +57,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
 @property (nonatomic, readonly, getter=isMigrationMandatory) BOOL migrationMandatory;
-@property (nonatomic, readonly, copy) NSString *migrationScreenTitle;
-@property (nonatomic, readonly, copy) NSString *migrationScreenDescription;
-@property (nonatomic, readonly, copy) NSString *migrationScreenPrimaryAction;
-@property (nonatomic, readonly, copy) NSString *migrationScreenSecondaryAction;
 @property (nonatomic, readonly) NSURL *migrationHelpURL;
 @property (nonatomic, readonly) NSURL *playPlusStoreURL;
 @property (nonatomic, readonly) NSURL *tvPlayPlusStoreURL;
