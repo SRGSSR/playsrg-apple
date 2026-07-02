@@ -12,8 +12,6 @@ import SRGUserData
     import UserNotifications
 #endif
 
-/// Writes a full snapshot of the user's PlaySRG data into the shared App Group container at
-/// `<shared group>/<bu>/export.json`, for the Play+ app to read.
 @objc final class UserDataExporter: NSObject {
     @objc static let shared = UserDataExporter()
 
@@ -25,7 +23,6 @@ import SRGUserData
         super.init()
     }
 
-    /// Requests an export. Safe to call from any thread; work is serialized off the main thread.
     @objc func setNeedsExport() {
         queue.async { [weak self] in
             self?.export()
@@ -69,8 +66,6 @@ import SRGUserData
             group.leave()
         }
 
-        // `Download.downloads` builds an unsynchronized static cache that is mutated on the main
-        // thread, so it must be snapshotted there rather than read from this background queue.
         #if os(iOS)
             let downloads: [UserDataExport.DownloadItem]? = Self.downloadItems()
 
@@ -119,8 +114,6 @@ import SRGUserData
     }
 
     #if os(iOS)
-        /// Snapshots downloads on the main thread: `Download.downloads` lazily builds an unsynchronized
-        /// static cache that is mutated on the main thread, so it is not safe to read off-main.
         private static func downloadItems() -> [UserDataExport.DownloadItem] {
             var items: [UserDataExport.DownloadItem] = []
             DispatchQueue.main.sync {
