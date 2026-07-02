@@ -446,26 +446,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
 
-    NSString *migrationScreenTitle = [firebaseConfiguration stringForKey:@"migrationScreenTitle"];
-    if (! migrationScreenTitle) {
-        return NO;
-    }
-
-    NSString *migrationScreenDescription = [firebaseConfiguration stringForKey:@"migrationScreenDescription"];
-    if (! migrationScreenDescription) {
-        return NO;
-    }
-
-    NSString *migrationScreenPrimaryAction = [firebaseConfiguration stringForKey:@"migrationScreenPrimaryAction"];
-    if (! migrationScreenPrimaryAction) {
-        return NO;
-    }
-
-    NSString *migrationScreenSecondaryAction = [firebaseConfiguration stringForKey:@"migrationScreenSecondaryAction"];
-    if (! migrationScreenSecondaryAction) {
-        return NO;
-    }
-
     NSString *migrationHelpStringURL = [firebaseConfiguration stringForKey:@"migrationHelpURL"];
     NSURL *migrationHelpURL = migrationHelpStringURL ? [NSURL URLWithString:migrationHelpStringURL] : nil;
     if (! migrationHelpURL) {
