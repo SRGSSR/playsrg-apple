@@ -7,8 +7,6 @@
 import SwiftUI
 
 struct MigrationView: View {
-    private let appConfiguration = ApplicationConfiguration.shared
-
     @Environment(\.openURL) private var openURL
 
     @ScaledMetric(relativeTo: .largeTitle) private var titleSize: CGFloat = 32
@@ -17,16 +15,7 @@ struct MigrationView: View {
     var body: some View {
         VStack(spacing: .zero) {
             VStack(spacing: 24) {
-                Image(.playPlusAppIcon)
-                    .resizable()
-                    .frame(width: 120, height: 120)
-                    .shadow(color: .white, radius: 180, x: 0, y: 0)
-                    .shadow(
-                        color: Color(red: 1, green: 0.82, blue: 0.82).opacity(0.7),
-                        radius: 83,
-                        x: 0,
-                        y: 0
-                    )
+                appIconView
 
                 Text("This app no longer exists")
                     .srgFont(family: .text, weight: .srg_bold, fixedSize: titleSize)
@@ -37,27 +26,49 @@ struct MigrationView: View {
             .multilineTextAlignment(.center)
             .frame(maxHeight: .infinity)
 
-            Group {
-                if #available(iOS 17, *) {
-                    Button("Update now") {
-                        openURL(appConfiguration.playPlusStoreURL)
-                    }
-                } else {
-                    Button("How to get Play+") {
-                        openURL(appConfiguration.migrationHelpURL)
-                    }
-                }
-            }
-            .buttonStyle(MigrationPrimaryButtonStyle())
+            ctaButtonView
         }
         .padding(.horizontal, 28)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            Image(.migrationBackground)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-        )
+        .background(backgroundImage)
+    }
+
+    @ViewBuilder
+    private var appIconView: some View {
+        Image(.playPlusAppIcon)
+            .resizable()
+            .frame(width: 120, height: 120)
+            .shadow(color: .white, radius: 180, x: 0, y: 0)
+            .shadow(
+                color: Color(red: 1, green: 0.82, blue: 0.82).opacity(0.7),
+                radius: 83,
+                x: 0,
+                y: 0
+            )
+    }
+
+    @ViewBuilder
+    private var ctaButtonView: some View {
+        Group {
+            if #available(iOS 17, *) {
+                Button("Update now") {
+                    openURL(ApplicationConfiguration.shared.playPlusStoreURL)
+                }
+            } else {
+                Button("How to get Play+") {
+                    openURL(ApplicationConfiguration.shared.migrationHelpURL)
+                }
+            }
+        }
+        .buttonStyle(MigrationPrimaryButtonStyle())
+    }
+
+    @ViewBuilder
+    private var backgroundImage: some View {
+        Image(.migrationBackground)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .ignoresSafeArea()
     }
 }
 
