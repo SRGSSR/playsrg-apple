@@ -14,16 +14,7 @@ struct MigrationView: View {
 
     var body: some View {
         VStack(spacing: 88) {
-            Image(.playPlusAppIcon)
-                .resizable()
-                .frame(width: 224, height: 224)
-                .shadow(color: .white, radius: 180, x: 0, y: 0)
-                .shadow(
-                    color: Color(red: 1, green: 0.82, blue: 0.82).opacity(0.7),
-                    radius: 83,
-                    x: 0,
-                    y: 0
-                )
+            appIconView
 
             VStack(spacing: 24) {
                 Text("This app no longer exists")
@@ -41,12 +32,29 @@ struct MigrationView: View {
         }
         .frame(width: 544)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            Image(.migrationBackground)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
-        )
+        .background(backgroundView)
+    }
+
+    @ViewBuilder
+    private var appIconView: some View {
+        Image(.playPlusAppIcon)
+            .resizable()
+            .frame(width: 224, height: 224)
+            .shadow(color: .white, radius: 180, x: 0, y: 0)
+            .shadow(
+                color: Color(red: 1, green: 0.82, blue: 0.82).opacity(0.7),
+                radius: 83,
+                x: 0,
+                y: 0
+            )
+    }
+
+    @ViewBuilder
+    private var backgroundView: some View {
+        Image(.migrationBackground)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .ignoresSafeArea()
     }
 }
 
