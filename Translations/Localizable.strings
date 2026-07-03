@@ -1,4 +1,4 @@
-﻿/* Speed factor with current value if different from desired one */
+/* Speed factor with current value if different from desired one */
 "%1$@× (Currently: %2$@×)" = "%1$@× (Currently: %2$@×)";
 
 /* Seek backward shortcut label */
@@ -893,4 +893,7 @@
 
 /* Add to Calendar alert title */
 "“%@” would like to access to your calendar" = "“%@” would like to access to your calendar";
-
+"This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained." = "This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.";
+"Update now" = "Update now";
+"How to get Play+" = "How to get Play+";
+"This app no longer exists" = "This app no longer exists";

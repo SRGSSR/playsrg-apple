@@ -117,6 +117,18 @@ final class SceneDelegate: UIResponder {
         }
     }
 
+    private func applyRootViewController() {
+        guard let window else { return }
+        if ApplicationConfiguration.shared.isMigrationMandatory {
+            // Mandatory migration: the migration screen replaces the whole UI.
+            if !(window.rootViewController is UIHostingController<MigrationView>) {
+                window.rootViewController = UIHostingController(rootView: MigrationView())
+            }
+        } else if window.rootViewController == nil || window.rootViewController is UIHostingController<MigrationView> {
+            window.rootViewController = Self.applicationRootViewController()
+        }
+    }
+
     private func handleURLContexts(_ urlContexts: Set<UIOpenURLContext>) {
         // FIXME: Works as long as only one context is received
         guard let urlContext = urlContexts.first else { return }
@@ -177,8 +189,17 @@ extension SceneDelegate: UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
-        window.rootViewController = Self.applicationRootViewController()
         self.window = window
+
+        applyRootViewController()
+
+        NotificationCenter.default
+            .publisher(for: .ApplicationConfigurationDidChange)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.applyRootViewController()
+            }
+            .store(in: &cancellables)
 
         handleURLContexts(connectionOptions.urlContexts)
 
