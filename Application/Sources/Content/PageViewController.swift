@@ -357,14 +357,8 @@ final class PageViewController: UIViewController {
                         ])
                     }
                 }
-            } else {
+            } else if model.id.sharingItem != nil {
                 googleCastButton?.removeFromSuperview()
-            }
-
-            navigationItem.title = !headerWithTitleVisible ? title : nil
-            navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
-
-            if model.id.sharingItem != nil {
                 let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
                                                       style: .plain,
                                                       target: self,
@@ -372,8 +366,12 @@ final class PageViewController: UIViewController {
                 shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on content page view")
                 navigationItem.rightBarButtonItem = shareButtonItem
             } else {
+                googleCastButton?.removeFromSuperview()
                 navigationItem.rightBarButtonItem = nil
             }
+
+            navigationItem.title = !headerWithTitleVisible ? title : nil
+            navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
         }
 
         @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
