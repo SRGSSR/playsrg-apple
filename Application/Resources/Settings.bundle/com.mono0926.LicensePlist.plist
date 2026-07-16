@@ -14,7 +14,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/abseil-cpp-binary</string>
 			<key>Title</key>
-			<string>abseil (1.2024011602.0)</string>
+			<string>abseil</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -22,7 +22,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Aiolos</string>
 			<key>Title</key>
-			<string>Aiolos (1.9.8)</string>
+			<string>Aiolos</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -30,7 +30,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/app-check</string>
 			<key>Title</key>
-			<string>AppCheck (10.19.2)</string>
+			<string>AppCheck</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -38,7 +38,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
-			<string>AppCenter (5.12.0)</string>
+			<string>AppCenter</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -46,7 +46,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/AutoCoding</string>
 			<key>Title</key>
-			<string>AutoCoding (2.2.3)</string>
+			<string>AutoCoding</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -54,7 +54,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Comscore-Swift-Package-Manager</string>
 			<key>Title</key>
-			<string>ComScore (6.13.0)</string>
+			<string>ComScore</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>Firebase (10.29.0)</string>
+			<string>Firebase</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -78,7 +78,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FSCalendar</string>
 			<key>Title</key>
-			<string>FSCalendar (2.8.4)</string>
+			<string>FSCalendar</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -86,7 +86,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FXReachability</string>
 			<key>Title</key>
-			<string>FXReachability (1.3.2-srg6)</string>
+			<string>FXReachability</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -94,7 +94,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Gifu</string>
 			<key>Title</key>
-			<string>Gifu (3.5.1)</string>
+			<string>Gifu</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>GoogleAppMeasurement (10.28.0)</string>
+			<string>GoogleAppMeasurement</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -110,7 +110,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleCastSDK-no-bluetooth</string>
 			<key>Title</key>
-			<string>GoogleCastSDK-no-bluetooth (4.8.3)</string>
+			<string>GoogleCastSDK-no-bluetooth</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -118,7 +118,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleDataTransport</string>
 			<key>Title</key>
-			<string>GoogleDataTransport (9.4.0)</string>
+			<string>GoogleDataTransport</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -126,7 +126,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleUtilities</string>
 			<key>Title</key>
-			<string>GoogleUtilities (7.13.3)</string>
+			<string>GoogleUtilities</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/grpc-binary</string>
 			<key>Title</key>
-			<string>gRPC (1.62.2)</string>
+			<string>gRPC</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -142,7 +142,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/gtm-session-fetcher</string>
 			<key>Title</key>
-			<string>gtm-session-fetcher (3.5.0)</string>
+			<string>gtm-session-fetcher</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -150,7 +150,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/interop-ios-for-google-sdks</string>
 			<key>Title</key>
-			<string>InteropForGoogle (100.0.0)</string>
+			<string>InteropForGoogle</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -158,7 +158,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>Airship (16.12.7)</string>
+			<string>Airship</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -166,7 +166,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/iOSV5</string>
 			<key>Title</key>
-			<string>TagCommander SDK V5 (5.4.19)</string>
+			<string>TagCommander SDK V5</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -174,7 +174,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/leveldb</string>
 			<key>Title</key>
-			<string>leveldb (1.22.5)</string>
+			<string>leveldb</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -182,7 +182,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/libextobjc</string>
 			<key>Title</key>
-			<string>libextobjc (0.6.0-srg4)</string>
+			<string>libextobjc</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -190,7 +190,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/MAKVONotificationCenter</string>
 			<key>Title</key>
-			<string>MAKVONotificationCenter (1.0.0-srg6)</string>
+			<string>MAKVONotificationCenter</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -198,7 +198,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Mantle</string>
 			<key>Title</key>
-			<string>Mantle (2.2.0)</string>
+			<string>Mantle</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -206,7 +206,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/nanopb</string>
 			<key>Title</key>
-			<string>nanopb (2.30910.0)</string>
+			<string>nanopb</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -214,7 +214,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Nuke</string>
 			<key>Title</key>
-			<string>Nuke (10.11.2)</string>
+			<string>Nuke</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -222,7 +222,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/NukeUI</string>
 			<key>Title</key>
-			<string>NukeUI (0.8.3)</string>
+			<string>NukeUI</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -230,7 +230,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Pageboy</string>
 			<key>Title</key>
-			<string>Pageboy (4.2.0)</string>
+			<string>Pageboy</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -238,7 +238,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/paper-onboarding</string>
 			<key>Title</key>
-			<string>PaperOnboarding (6.1.5)</string>
+			<string>PaperOnboarding</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -246,7 +246,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/PLCrashReporter</string>
 			<key>Title</key>
-			<string>PLCrashReporter (1.12.2)</string>
+			<string>PLCrashReporter</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -254,7 +254,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/promises</string>
 			<key>Title</key>
-			<string>Promises (2.4.0)</string>
+			<string>Promises</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -262,7 +262,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>SRGAnalytics (9.2.1)</string>
+			<string>SRGAnalytics</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -270,7 +270,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgappearance-apple</string>
 			<key>Title</key>
-			<string>SRGAppearance (5.2.4)</string>
+			<string>SRGAppearance</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -278,7 +278,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgcontentprotection-apple</string>
 			<key>Title</key>
-			<string>SRGContentProtection (3.1.1)</string>
+			<string>SRGContentProtection</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -286,7 +286,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>SRGDataProvider (19.0.12)</string>
+			<string>SRGDataProvider</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -294,7 +294,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdiagnostics-apple</string>
 			<key>Title</key>
-			<string>SRGDiagnostics (3.1.1)</string>
+			<string>SRGDiagnostics</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -302,7 +302,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>SRGIdentity (3.3.1)</string>
+			<string>SRGIdentity</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -310,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>SRGLetterbox (9.3.4)</string>
+			<string>SRGLetterbox</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -318,7 +318,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srglogger-apple</string>
 			<key>Title</key>
-			<string>SRGLogger (3.1.1)</string>
+			<string>SRGLogger</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -326,7 +326,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>SRGMediaPlayer (8.0.1)</string>
+			<string>SRGMediaPlayer</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -334,7 +334,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgnetwork-apple</string>
 			<key>Title</key>
-			<string>SRGNetwork (3.1.1)</string>
+			<string>SRGNetwork</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -342,7 +342,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-apple</string>
 			<key>Title</key>
-			<string>SRGUserData (3.3.2)</string>
+			<string>SRGUserData</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -350,7 +350,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (1.4.1)</string>
+			<string>swift-collections</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -358,7 +358,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-protobuf</string>
 			<key>Title</key>
-			<string>SwiftProtobuf (1.36.1)</string>
+			<string>SwiftProtobuf</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -366,7 +366,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/SwiftMessages</string>
 			<key>Title</key>
-			<string>SwiftMessages (9.0.9)</string>
+			<string>SwiftMessages</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -374,7 +374,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/SwiftUI-Introspect</string>
 			<key>Title</key>
-			<string>Introspect (0.12.0)</string>
+			<string>Introspect</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -382,7 +382,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Tabman</string>
 			<key>Title</key>
-			<string>Tabman (3.2.0)</string>
+			<string>Tabman</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -390,7 +390,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/UICKeyChainStore</string>
 			<key>Title</key>
-			<string>UICKeyChainStore (2.2.1)</string>
+			<string>UICKeyChainStore</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -398,7 +398,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/YYWebImage</string>
 			<key>Title</key>
-			<string>YYWebImage (1.0.5-srg3)</string>
+			<string>YYWebImage</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

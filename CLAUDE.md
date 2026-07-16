@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## About
 
-Play SRG is the SRG SSR (Swiss Broadcasting Corporation) iOS and tvOS audio/video platform. The same codebase produces five distinct apps (Play SRF, Play RSI, Play RTS, Play RTR, Play SWI), each a different Xcode target sharing most of the code but with BU-specific configuration. Minimum deployment: iOS 14.1, tvOS 14.
+Play SRG is the SRG SSR (Swiss Broadcasting Corporation) iOS and tvOS audio/video platform. The same codebase produces five distinct apps (Play SRF, Play RSI, Play RTS, Play RTR, Play SWI), each a different Xcode target sharing most of the code but with BU-specific configuration. Minimum deployment: iOS 15.0, tvOS 14.
 
 ## Commands
 

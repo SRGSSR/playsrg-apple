@@ -131,6 +131,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
 @property (nonatomic) NSURL *userDataServiceURL;
+@property (nonatomic) NSURL *pushServiceURL;
 
 @property (nonatomic) NSURL *whatsNewURL;
 @property (nonatomic) NSURL *supportFormURL;
@@ -141,6 +142,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
+@property (nonatomic, getter=isMigrationMandatory) BOOL migrationMandatory;
+@property (nonatomic) NSURL *migrationHelpURL;
+@property (nonatomic) NSURL *playPlusStoreURL;
+@property (nonatomic) NSURL *tvPlayPlusStoreURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
@@ -441,7 +446,25 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     if (! appStoreProductIdentifier) {
         return NO;
     }
-    
+
+    NSString *migrationHelpStringURL = [firebaseConfiguration stringForKey:@"migrationHelpURL"];
+    NSURL *migrationHelpURL = migrationHelpStringURL ? [NSURL URLWithString:migrationHelpStringURL] : nil;
+    if (! migrationHelpURL) {
+        return NO;
+    }
+
+    NSString *playPlusStoreStringURL = [firebaseConfiguration stringForKey:@"playPlusStoreURL"];
+    NSURL *playPlusStoreURL = playPlusStoreStringURL ? [NSURL URLWithString:playPlusStoreStringURL] : nil;
+    if (! playPlusStoreURL) {
+        return NO;
+    }
+
+    NSString *tvPlayPlusStoreStringURL = [firebaseConfiguration stringForKey:@"tvPlayPlusStoreURL"];
+    NSURL *tvPlayPlusStoreURL = tvPlayPlusStoreStringURL ? [NSURL URLWithString:tvPlayPlusStoreStringURL] : nil;
+    if (! tvPlayPlusStoreURL) {
+        return NO;
+    }
+
     // Update mandatory values
     self.businessUnitIdentifier = businessUnitIdentifier;
     self.vendor = vendor;
@@ -459,7 +482,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.whatsNewURL = whatsNewURL;
     
     self.appStoreProductIdentifier = appStoreProductIdentifier;
-    
+
+    self.migrationMandatory = [firebaseConfiguration boolForKey:@"mandatoryMigration"];
+    self.migrationHelpURL = migrationHelpURL;
+    self.playPlusStoreURL = playPlusStoreURL;
+    self.tvPlayPlusStoreURL = tvPlayPlusStoreURL;
+
     //
     // Optional values
     //
@@ -483,7 +511,15 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *userDataServiceURLString = [firebaseConfiguration stringForKey:@"userDataServiceURL"];
     self.userDataServiceURL = userDataServiceURLString ? [NSURL URLWithString:userDataServiceURLString] : nil;
-    
+
+#if defined(DEBUG) || defined(NIGHTLY)
+    self.pushServiceURL = [NSURL URLWithString:@"https://api.dev.srf.ch/push"];
+#elif defined(BETA)
+    self.pushServiceURL = [NSURL URLWithString:@"https://api.int.srf.ch/push"];
+#else
+    self.pushServiceURL = [NSURL URLWithString:@"https://api.srf.ch/push"];
+#endif
+
     NSString *faqURLString = [firebaseConfiguration stringForKey:@"faqURL"];
     self.faqURL = faqURLString ? [NSURL URLWithString:faqURLString] : nil;
 

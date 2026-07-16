@@ -282,7 +282,7 @@ enum UCService: Hashable, CaseIterable {
             switch service {
             #if os(iOS)
                 case .airship:
-                    if PushService.shared != nil {
+                    if PushService.shared != nil, Airship.isFlying {
                         // Airship analytics feature is disabled at launch. See `PushService.m`.
                         if acceptedConsent {
                             Airship.shared.privacyManager.enableFeatures(Features.analytics)

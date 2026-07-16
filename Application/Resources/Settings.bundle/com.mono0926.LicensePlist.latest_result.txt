@@ -124,6 +124,6 @@ name: UICKeyChainStore, nameSpecified: UICKeyChainStore, owner: kishikawakatsumi
 
 name: YYWebImage, nameSpecified: YYWebImage, owner: SRGSSR, version: 1.0.5-srg3, source: https://github.com/SRGSSR/YYWebImage
 
-add-version-numbers: true
+add-version-numbers: false
 
 LicensePlist Version: 3.27.2

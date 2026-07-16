@@ -47,6 +47,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *identityWebsiteURL;
 @property (nonatomic, readonly, nullable) NSURL *userDataServiceURL;
 
+@property (nonatomic, readonly, nullable) NSURL *pushServiceURL;
+
 @property (nonatomic, readonly) NSURL *whatsNewURL;
 @property (nonatomic, readonly, nullable) NSURL *supportFormURL;
 @property (nonatomic, readonly, nullable) NSURL *faqURL;
@@ -55,6 +57,11 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *dataProtectionURL;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
+
+@property (nonatomic, readonly, getter=isMigrationMandatory) BOOL migrationMandatory;
+@property (nonatomic, readonly) NSURL *migrationHelpURL;
+@property (nonatomic, readonly) NSURL *playPlusStoreURL;
+@property (nonatomic, readonly) NSURL *tvPlayPlusStoreURL;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;

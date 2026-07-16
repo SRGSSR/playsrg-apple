@@ -866,6 +866,21 @@
 		2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */; };
 		2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */; };
 		4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AD1DB5E0679F09CC8A63D91 /* libPods-Play SRG-tvOS-Play SWI TV.a */; };
+		4C5A8BFD2F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */; };
+		4C5A8BFE2F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */; };
+		4C5A8BFF2F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */; };
+		4C5A8C002F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */; };
+		4C5A8C022F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */; };
+		4CE17FE02F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FDF2F697A2F00E79E9F /* PushSDK */; };
+		4CE17FE22F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE12F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FE52F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE32F697A2F00E79E9F /* PushSDK */; };
+		4CE17FE62F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE42F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FE92F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE72F697A2F00E79E9F /* PushSDK */; };
+		4CE17FEA2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FE82F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FED2F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FEB2F697A2F00E79E9F /* PushSDK */; };
+		4CE17FEE2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FEC2F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
+		4CE17FF12F697A2F00E79E9F /* PushSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FEF2F697A2F00E79E9F /* PushSDK */; };
+		4CE17FF22F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 4CE17FF02F697A2F00E79E9F /* PushSDKNotificationServiceExtension */; };
 		4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B84B55ACE1A98284136AC0E /* libPods-Play SRG-iOS-Play SRF.a */; };
 		6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF0993A83F1F18CBE90AF3E9 /* libPods-Play SRG-iOS-Play SWI.a */; };
 		6F010E11286607450024A745 /* SearchSettingsBucketCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F010E10286607440024A745 /* SearchSettingsBucketCell.swift */; };
@@ -2635,6 +2650,16 @@
 		FCFA43152FE419490000BCA4 /* UserDataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA42EF2FE419490000BCA4 /* UserDataExport.swift */; };
 		FCFA43162FE419490000BCA4 /* UserDataExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA42F02FE419490000BCA4 /* UserDataExporter.swift */; };
 		FCFA43172FE419490000BCA4 /* UserDataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA42EF2FE419490000BCA4 /* UserDataExport.swift */; };
+		FCA9398C2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA9398E2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939902FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939912FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939932FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA941122FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941132FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941142FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941152FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941162FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3169,6 +3194,7 @@
 		3F35F04CDC0DFA5BB031004F /* Pods-Play SRG-iOS-Play SWI.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
 		440D5D03A2A02AC62DC4040B /* Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig"; sourceTree = "<group>"; };
 		478E8037AE96E5CBFF1EB1C8 /* Pods-Play SRG-iOS-Play RSI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.beta.xcconfig"; sourceTree = "<group>"; };
+		4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushSubscriptionBridge.swift; sourceTree = "<group>"; };
 		4CE627FBD2CCC4B3AE7286D2 /* Pods-Play SRG-iOS-Play RSI.beta_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.beta_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
 		52E74FBFA1CAB47863D9ECEB /* Pods-Play SRG-tvOS-Play RTS TV.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.beta.xcconfig"; sourceTree = "<group>"; };
 		53B51785B4D437C84E6FDBA2 /* Pods-Play SRG-tvOS-Play RSI TV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RSI TV.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3546,6 +3572,8 @@
 		F68ECA20B6627579ECED2FF8 /* Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
 		F96229F633EA40ACB18CD9F0 /* Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SRF TV/Pods-Play SRG-tvOS-Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		FC7128BD2DE08074009134A1 /* SupportFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormView.swift; sourceTree = "<group>"; };
+		FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationView.swift; sourceTree = "<group>"; };
+		FCA941112FDADDCB00979C90 /* MigrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationView.swift; sourceTree = "<group>"; };
 		FCB0305ADCA82769B114F47F /* Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
 		FCFA42EF2FE419490000BCA4 /* UserDataExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataExport.swift; sourceTree = "<group>"; };
 		FCFA42F02FE419490000BCA4 /* UserDataExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataExporter.swift; sourceTree = "<group>"; };
@@ -3604,6 +3632,7 @@
 				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */,
+				4CE17FE02F697A2F00E79E9F /* PushSDK in Frameworks */,
 				6F2345D1283BAB3600A9089D /* FSCalendar in Frameworks */,
 				99FE19272BFF49C9000B5602 /* Tabman in Frameworks */,
 				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
@@ -3618,6 +3647,7 @@
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
 				6FEC897A261F165600FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE78265CD6A700A4882B /* Collections in Frameworks */,
+				4CE17FE22F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3652,6 +3682,8 @@
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7A265CD6D300A4882B /* Collections in Frameworks */,
+				4CE17FE52F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FE62F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3686,6 +3718,8 @@
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
 				6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7C265CD6DB00A4882B /* Collections in Frameworks */,
+				4CE17FE92F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FEA2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3720,6 +3754,8 @@
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
 				6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7E265CD6E600A4882B /* Collections in Frameworks */,
+				4CE17FED2F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FEE2F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3754,6 +3790,8 @@
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
 				6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE80265CD70000A4882B /* Collections in Frameworks */,
+				4CE17FF12F697A2F00E79E9F /* PushSDK in Frameworks */,
+				4CE17FF22F697A2F00E79E9F /* PushSDKNotificationServiceExtension in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4081,6 +4119,7 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */,
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
 				04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
@@ -4596,6 +4635,7 @@
 		08C68EC91D38DEA100BB8AAA /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				FCA9398A2FD6EEAC00979C90 /* Migration */,
 				08C68ECA1D38DEA100BB8AAA /* Appplication */,
 				E62459EC1D488CEF00482BE9 /* Bridges */,
 				E6E673221D4A423E000C3CB9 /* Browser */,
@@ -5014,6 +5054,7 @@
 				6F30ACB12604CDFD00457331 /* ExpandingCardButton.swift */,
 				6F0ED543252B00B000ECE97B /* LabeledButton.swift */,
 				6F8125E62638C37900EB029E /* LabeledCardButton.swift */,
+				FCA941112FDADDCB00979C90 /* MigrationView.swift */,
 				08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */,
 				086499B124F69FF20027373E /* MediaDetailView.swift */,
 				6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */,
@@ -5395,6 +5436,14 @@
 			path = UserDataExport;
 			sourceTree = "<group>";
 		};
+		FCA9398A2FD6EEAC00979C90 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */,
+			);
+			path = Migration;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -5497,7 +5546,6 @@
 				0806E7A71D4BA4ED002ED406 /* Make custom icons */,
 				08C68D851D38D6F400BB8AAA /* Sources */,
 				08AD6C6E266BDC5000FAF1FA /* Swift Lint and Swift Format */,
-				6FE3C7C21F74EC5C00D57D29 /* Update License Information */,
 				08C68D861D38D6F400BB8AAA /* Frameworks */,
 				08C68D871D38D6F400BB8AAA /* Resources */,
 				085F7DCB1FA4E6890010AF34 /* Restore original icons */,
@@ -5541,6 +5589,8 @@
 				04030F502A34BD3A00BC573B /* UsercentricsUI */,
 				04FA73A72AA62E5C0014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE19262BFF49C9000B5602 /* Tabman */,
+				4CE17FDF2F697A2F00E79E9F /* PushSDK */,
+				4CE17FE12F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5555,7 +5605,6 @@
 				0806E7A61D4BA4DF002ED406 /* Make custom icons */,
 				08C68DBC1D38D70D00BB8AAA /* Sources */,
 				08A1C3BF2636E77900276A5E /* Swift Lint and Swift Format */,
-				6FE3C7C31F74EEA500D57D29 /* Update License Information */,
 				08C68DBD1D38D70D00BB8AAA /* Frameworks */,
 				08C68DBE1D38D70D00BB8AAA /* Resources */,
 				085F7DCA1FA4E67B0010AF34 /* Restore original icons */,
@@ -5598,6 +5647,8 @@
 				04030F542A34BD6D00BC573B /* UsercentricsUI */,
 				04FA73A92AA62E640014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE19282BFF49F7000B5602 /* Tabman */,
+				4CE17FE32F697A2F00E79E9F /* PushSDK */,
+				4CE17FE42F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5612,7 +5663,6 @@
 				0806E7A51D4BA4CF002ED406 /* Make custom icons */,
 				08C68DF31D38D72000BB8AAA /* Sources */,
 				08AD6C6F266BDC6D00FAF1FA /* Swift Lint and Swift Format */,
-				6FE3C7C41F74EEBE00D57D29 /* Update License Information */,
 				08C68DF41D38D72000BB8AAA /* Frameworks */,
 				08C68DF51D38D72000BB8AAA /* Resources */,
 				085F7DC91FA4E6670010AF34 /* Restore original icons */,
@@ -5655,6 +5705,8 @@
 				04030F582A34BD7700BC573B /* UsercentricsUI */,
 				04FA73A52AA62E4B0014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE192A2BFF49FD000B5602 /* Tabman */,
+				4CE17FE72F697A2F00E79E9F /* PushSDK */,
+				4CE17FE82F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5669,7 +5721,6 @@
 				0806E7A41D4BA4BA002ED406 /* Make custom icons */,
 				08C68E2A1D38D73000BB8AAA /* Sources */,
 				08AD6C70266BDC7B00FAF1FA /* Swift Lint and Swift Format */,
-				6FE3C7C61F74EECF00D57D29 /* Update License Information */,
 				08C68E2B1D38D73000BB8AAA /* Frameworks */,
 				08C68E2C1D38D73000BB8AAA /* Resources */,
 				085F7DC71FA4DD510010AF34 /* Restore original icons */,
@@ -5712,6 +5763,8 @@
 				04030F5C2A34BD8300BC573B /* UsercentricsUI */,
 				04FA73AB2AA62E760014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE192C2BFF4A04000B5602 /* Tabman */,
+				4CE17FEB2F697A2F00E79E9F /* PushSDK */,
+				4CE17FEC2F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5726,7 +5779,6 @@
 				0806E7A31D4BA494002ED406 /* Make custom icons */,
 				08C68E611D38D73C00BB8AAA /* Sources */,
 				08AD6C71266BDC8D00FAF1FA /* Swift Lint and Swift Format */,
-				6FE3C7C71F74EEDB00D57D29 /* Update License Information */,
 				08C68E621D38D73C00BB8AAA /* Frameworks */,
 				08C68E631D38D73C00BB8AAA /* Resources */,
 				085F7DC81FA4E6570010AF34 /* Restore original icons */,
@@ -5769,6 +5821,8 @@
 				04030F602A34BD8B00BC573B /* UsercentricsUI */,
 				04FA73AD2AA62E7D0014E7F7 /* GoogleCastSDK-no-bluetooth */,
 				99FE192E2BFF4A0B000B5602 /* Tabman */,
+				4CE17FEF2F697A2F00E79E9F /* PushSDK */,
+				4CE17FF02F697A2F00E79E9F /* PushSDKNotificationServiceExtension */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -6298,19 +6352,16 @@
 						TestTargetID = 08C68D881D38D6F400BB8AAA;
 					};
 					08B77AA42409E0A300A3BC3B = {
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 08C68DBF1D38D70D00BB8AAA;
 					};
 					08B77AB6240A78F200A3BC3B = {
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 08C68DF61D38D72000BB8AAA;
 					};
 					08B77AC7240A7E3200A3BC3B = {
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 08C68E2D1D38D73000BB8AAA;
@@ -6324,7 +6375,6 @@
 					08C68D881D38D6F400BB8AAA = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0910;
-						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -6512,6 +6562,7 @@
 				04030F4F2A34BD3A00BC573B /* XCRemoteSwiftPackageReference "usercentrics-spm-ui" */,
 				04FA73A42AA62E4B0014E7F7 /* XCRemoteSwiftPackageReference "GoogleCastSDK-no-bluetooth" */,
 				99FE19252BFF49C9000B5602 /* XCRemoteSwiftPackageReference "Tabman" */,
+				4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -8182,81 +8233,6 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:0:CFBundleURLSchemes: string srfplayer${MARKETING_VERSION_SUFFIX}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Info.plist\"\n";
 		};
-		6FE3C7C21F74EC5C00D57D29 /* Update License Information */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update License Information";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$CONFIG__LICENSE_PLIST_GITHUB_TOKEN\"\n";
-		};
-		6FE3C7C31F74EEA500D57D29 /* Update License Information */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update License Information";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$CONFIG__LICENSE_PLIST_GITHUB_TOKEN\"\n";
-		};
-		6FE3C7C41F74EEBE00D57D29 /* Update License Information */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update License Information";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$CONFIG__LICENSE_PLIST_GITHUB_TOKEN\"\n";
-		};
-		6FE3C7C61F74EECF00D57D29 /* Update License Information */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update License Information";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$CONFIG__LICENSE_PLIST_GITHUB_TOKEN\"\n";
-		};
-		6FE3C7C71F74EEDB00D57D29 /* Update License Information */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update License Information";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" != \"Debug\" ]; then\n    exit 0\nfi\n\nexport PATH=\"$PATH:/opt/homebrew/bin\"\n\nwhich license-plist > /dev/null\nif [ \"$?\" != \"0\" ]; then\n    echo \"License information was not updated since license-plist (https://github.com/mono0926/LicensePlist) is not available.\"\n    exit 0\nfi\n\nlicense-plist --output-path \"$PROJECT_DIR/Application/Resources/Settings.bundle\" --add-version-numbers --suppress-opening-directory --github-token \"$CONFIG__LICENSE_PLIST_GITHUB_TOKEN\"\n";
-		};
 		6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -8569,6 +8545,7 @@
 				6FB90D18270D91010033D860 /* CarPlayList.swift in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
 				04B675C72BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
+				FCA9398E2FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FC2A21C265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				041DD1742B1B95AA00C9368A /* GradientView.swift in Sources */,
 				048FD24D2A14CF3B00929AE5 /* ProfileCellModel.swift in Sources */,
@@ -8687,6 +8664,7 @@
 				6F47607B1EB37D60003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6F928E77274513AB00CE54B5 /* ProgramGuideViewController.swift in Sources */,
 				08669675273E63D1005AF2BA /* NowLineView.swift in Sources */,
+				4C5A8BFF2F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */,
 				6FD2A35523C7628000456DCB /* ForegroundTimer.m in Sources */,
 				6F0AF6E4267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FDAAD8E2832824E008E2806 /* WhatsNewView.swift in Sources */,
@@ -8873,6 +8851,7 @@
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				04D2A92C29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FB9B3D726CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
+				4C5A8C002F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */,
 				0456C4A22976EE460088508A /* AnalyticsEvent.swift in Sources */,
 				6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
@@ -8993,6 +8972,7 @@
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				041DD1752B1B95AA00C9368A /* GradientView.swift in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
+				FCA939932FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D19270D91010033D860 /* CarPlayList.swift in Sources */,
 				6F73C63B271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
@@ -9149,6 +9129,7 @@
 				6F0AF6E6267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				04D2A92D29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				4C5A8BFD2F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */,
 				0456C4A32976EE460088508A /* AnalyticsEvent.swift in Sources */,
 				6FB9B3D826CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F56F9F6247C407000B2387B /* ChannelServiceSetup.m in Sources */,
@@ -9269,6 +9250,7 @@
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				041DD1762B1B95AA00C9368A /* GradientView.swift in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
+				FCA939912FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1A270D91010033D860 /* CarPlayList.swift in Sources */,
 				6F73C63C271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
@@ -9425,6 +9407,7 @@
 				6F0AF6E7267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				04D2A92E29ACFE5900E11B28 /* Handle.swift in Sources */,
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				4C5A8C022F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */,
 				0456C4A42976EE460088508A /* AnalyticsEvent.swift in Sources */,
 				6FB9B3D926CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F56F9F7247C407100B2387B /* ChannelServiceSetup.m in Sources */,
@@ -9545,6 +9528,7 @@
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				041DD1772B1B95AA00C9368A /* GradientView.swift in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
+				FCA9398C2FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1B270D91020033D860 /* CarPlayList.swift in Sources */,
 				6F73C63D271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
@@ -9793,6 +9777,7 @@
 				046845AA2BF56A13003A0073 /* ColorsSettable.swift in Sources */,
 				6F8D54462639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
+				FCA939902FD6EFDD00979C90 /* MigrationView.swift in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
 				6FEF236B2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F6C7AD82820578900BC3EA5 /* PosterImages.swift in Sources */,
@@ -9861,6 +9846,7 @@
 				6F16C7A726025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9426A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
+				4C5A8BFE2F68948E00D74B62 /* PushSubscriptionBridge.swift in Sources */,
 				0481D5BE29F55EAE00D174B3 /* AccessibilityIdentifier.swift in Sources */,
 				6F23631D2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6FC24A8226395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
@@ -10127,6 +10113,7 @@
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E55256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413D624EEEDC900FDF806 /* Channel.m in Sources */,
+				FCA941122FDADDCB00979C90 /* MigrationView.swift in Sources */,
 				6FC413CF24EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F0B162F2837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD3261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10292,6 +10279,7 @@
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E56256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */,
+				FCA941142FDADDCB00979C90 /* MigrationView.swift in Sources */,
 				6FC413D724EEEDC900FDF806 /* TVChannel.m in Sources */,
 				6F0B16302837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD4261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10457,6 +10445,7 @@
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E57256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */,
+				FCA941132FDADDCB00979C90 /* MigrationView.swift in Sources */,
 				6FC413DF24EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F0B16312837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD5261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10622,6 +10611,7 @@
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E58256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */,
+				FCA941152FDADDCB00979C90 /* MigrationView.swift in Sources */,
 				6FC413E724EEEDCA00FDF806 /* TVChannel.m in Sources */,
 				6F0B16322837C72E0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD6261326C8008E07C8 /* RadioChannel.swift in Sources */,
@@ -10725,6 +10715,7 @@
 				6F3041F827393FC2001E64BF /* UICollectionView+PlaySRG.m in Sources */,
 				042F6F5329E09805003F46AA /* DateFormatter+playSRG.swift in Sources */,
 				6F9F575E2746678E00DCA629 /* ProgramPreview.swift in Sources */,
+				FCA941162FDADDCB00979C90 /* MigrationView.swift in Sources */,
 				6F6CD8662865767A00DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */,
 				6FB2C1142719AAE3003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
@@ -11161,7 +11152,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GOOGLE_CAST_RECEIVER_IDENTIFIER = 1AC2931D;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION_SUFFIX = "-nightly";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -12270,7 +12261,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GOOGLE_CAST_RECEIVER_IDENTIFIER = 1AC2931D;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION_SUFFIX = "-beta";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -13364,7 +13355,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13429,7 +13420,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13494,7 +13485,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13559,7 +13550,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13697,7 +13688,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GOOGLE_CAST_RECEIVER_IDENTIFIER = 1AC2931D;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION_SUFFIX = "-debug";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -13759,7 +13750,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GOOGLE_CAST_RECEIVER_IDENTIFIER = 1AC2931D;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION_SUFFIX = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -13775,8 +13766,8 @@
 			baseConfigurationReference = 08A913962717388E00774985 /* Play SRF.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -13785,6 +13776,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -14006,7 +13998,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14067,7 +14059,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14128,7 +14120,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14189,7 +14181,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14250,7 +14242,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/UITests/Screenshots/Screenshots-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -16633,6 +16625,14 @@
 				minimumVersion = 3.3.0;
 			};
 		};
+		4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mmz-srf/app-push-sdk-ios/";
+			requirement = {
+				kind = exactVersion;
+				version = 1.2.0;
+			};
+		};
 		6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke.git";
@@ -17127,6 +17127,56 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
+		};
+		4CE17FDF2F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FE12F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FE32F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FE42F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FE72F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FE82F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FEB2F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FEC2F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
+		};
+		4CE17FEF2F697A2F00E79E9F /* PushSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDK;
+		};
+		4CE17FF02F697A2F00E79E9F /* PushSDKNotificationServiceExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4CE17FDE2F697A2F00E79E9F /* XCRemoteSwiftPackageReference "app-push-sdk-ios" */;
+			productName = PushSDKNotificationServiceExtension;
 		};
 		6F17DC15266AB81C009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
