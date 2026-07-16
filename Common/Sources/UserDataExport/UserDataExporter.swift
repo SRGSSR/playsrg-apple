@@ -119,9 +119,9 @@ import SRGUserData
             var items: [UserDataExport.DownloadItem] = []
             DispatchQueue.main.sync {
                 items = Download.downloads.compactMap { download in
-                    guard let urn = download.media?.urn else { return nil }
-                    return UserDataExport.DownloadItem(mediaURN: urn,
-                                                       title: download.media?.title,
+                    guard let media = download.media else { return nil }
+                    return UserDataExport.DownloadItem(mediaURN: media.urn,
+                                                       title: media.title,
                                                        date: milliseconds(from: download.creationDate))
                 }
             }
