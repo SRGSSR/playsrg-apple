@@ -56,8 +56,9 @@ import SRGUserData
         userData.history.historyEntries(matching: nil, sortedWith: nil) { entries, _ in
             history = (entries ?? []).compactMap { entry in
                 guard let urn = entry.uid else { return nil }
-                let seconds = CMTimeGetSeconds(entry.lastPlaybackTime)
-                let positionMs = seconds.isFinite ? Int64((seconds * 1000).rounded()) : 0
+                let playbackTime = entry.lastPlaybackTime
+                let seconds = CMTimeGetSeconds(playbackTime)
+                let positionMs = playbackTime.isValid ? Int64((seconds * 1000).rounded()) : 0
                 return UserDataExport.HistoryItem(mediaURN: urn,
                                                   lastPlaybackPositionMs: positionMs,
                                                   date: Self.milliseconds(from: entry.date),
