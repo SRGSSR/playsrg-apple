@@ -202,8 +202,4 @@ extension SceneDelegate: UIWindowSceneDelegate {
     func scene(_: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         handleURLContexts(URLContexts)
     }
-
-    func sceneDidEnterBackground(_: UIScene) {
-        UserDataExporter.shared.setNeedsExport()
-    }
 }

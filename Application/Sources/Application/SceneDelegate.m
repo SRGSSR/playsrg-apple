@@ -80,11 +80,6 @@ static void *s_kvoContext = &s_kvoContext;
 #endif
 }
 
-- (void)sceneDidEnterBackground:(UIScene *)scene
-{
-    [UserDataExporter.shared setNeedsExport];
-}
-
 - (void)windowScene:(UIWindowScene *)windowScene performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
 {
     BOOL handledShortcutItem = [self handleShortcutItem:shortcutItem];
