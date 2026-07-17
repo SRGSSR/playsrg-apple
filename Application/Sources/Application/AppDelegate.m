@@ -92,7 +92,9 @@ static void *s_kvoContext = &s_kvoContext;
     SRGUserData.currentUserData = [[SRGUserData alloc] initWithStoreFileURL:storeFileURL
                                                                  serviceURL:applicationConfiguration.userDataServiceURL
                                                             identityService:SRGIdentityService.currentIdentityService];
-    
+
+    [UserDataExporter.shared setNeedsExport];
+
     GoogleCastSetup();
     
     [NSNotificationCenter.defaultCenter addObserver:self

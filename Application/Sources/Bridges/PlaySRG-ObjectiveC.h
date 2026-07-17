@@ -24,6 +24,7 @@
 #import "MediaPlayerViewController+Private.h"
 #import "MediaPreviewViewController.h"
 #import "NavigationController.h"
+#import "NSFileManager+PlaySRG.h"
 #import "NSString+PlaySRG.h"
 #import "Orientation.h"
 #import "PlayAccessibilityFormatter.h"
