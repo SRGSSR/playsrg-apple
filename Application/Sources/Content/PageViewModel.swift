@@ -504,6 +504,15 @@ extension PageViewModel {
             nil
         }
     }
+
+    var displaysMigrationBanner: Bool {
+        switch id {
+        case .video, .audio, .live:
+            true
+        default:
+            false
+        }
+    }
 }
 
 // MARK: User activity

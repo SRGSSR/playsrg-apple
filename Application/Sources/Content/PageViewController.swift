@@ -788,7 +788,7 @@ private extension PageViewController {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
 
-                if sectionIndex == 0 {
+                if sectionIndex == 0, model.displaysMigrationBanner {
                     let footerSize = MigrationBanner.size()
                     let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
                     return [header, footer]
