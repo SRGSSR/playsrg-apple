@@ -216,13 +216,19 @@ final class PageViewController: UIViewController {
             view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.primaryColor)
         }
 
+        let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<MigrationBanner>>(elementKind: UICollectionView.elementKindSectionFooter) { view, _, _ in
+            view.content = MigrationBanner()
+        }
+
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == Header.titleHeader.rawValue {
                 collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
             } else if kind == Header.showHeader.rawValue {
                 collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
-            } else {
+            } else if kind == UICollectionView.elementKindSectionHeader {
                 collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+            } else {
+                collectionView.dequeueConfiguredReusableSupplementary(using: sectionFooterViewRegistration, for: indexPath)
             }
         }
 
@@ -781,7 +787,14 @@ private extension PageViewController {
             func sectionSupplementaryItems(for section: PageViewModel.Section, horizontalMargin _: CGFloat) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
-                return [header]
+
+                if sectionIndex == 0 {
+                    let footerSize = MigrationBanner.size()
+                    let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
+                    return [header, footer]
+                } else {
+                    return [header]
+                }
             }
 
             func horizontalMargin(for section: PageViewModel.Section) -> CGFloat {

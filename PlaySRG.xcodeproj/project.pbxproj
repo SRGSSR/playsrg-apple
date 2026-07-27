@@ -1788,6 +1788,16 @@
 		6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
 		6FA14538254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
 		6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA14534254729DA006E8D3B /* FocusableRegion.swift */; };
+		6FA33B0D3017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B0E3017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B0F3017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B103017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B113017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B123017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B133017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B143017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B153017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
+		6FA33B163017952000EBB9D6 /* MigrationBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */; };
 		6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
 		6FA5D15E1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
 		6FA5D15F1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */; };
@@ -2625,6 +2635,16 @@
 		FC7128C02DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
 		FC7128C12DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
 		FC7128C22DE08074009134A1 /* SupportFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7128BD2DE08074009134A1 /* SupportFormView.swift */; };
+		FCA9398C2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA9398E2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939902FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939912FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA939932FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
+		FCA941122FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941132FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941142FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941152FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
+		FCA941162FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
 		FCFA42EA2FE3EB9C0000BCA4 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		FCFA42EB2FE3EB9C0000BCA4 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		FCFA42EC2FE3EB9C0000BCA4 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
@@ -2650,16 +2670,6 @@
 		FCFA43152FE419490000BCA4 /* UserDataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA42EF2FE419490000BCA4 /* UserDataExport.swift */; };
 		FCFA43162FE419490000BCA4 /* UserDataExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA42F02FE419490000BCA4 /* UserDataExporter.swift */; };
 		FCFA43172FE419490000BCA4 /* UserDataExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA42EF2FE419490000BCA4 /* UserDataExport.swift */; };
-		FCA9398C2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
-		FCA9398E2FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
-		FCA939902FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
-		FCA939912FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
-		FCA939932FD6EFDD00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */; };
-		FCA941122FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
-		FCA941132FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
-		FCA941142FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
-		FCA941152FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
-		FCA941162FDADDCB00979C90 /* MigrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCA941112FDADDCB00979C90 /* MigrationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3390,6 +3400,7 @@
 		6F9F57592746678E00DCA629 /* ProgramPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramPreview.swift; sourceTree = "<group>"; };
 		6F9FFB48261662D900CDDC26 /* CollectionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRow.swift; sourceTree = "<group>"; };
 		6FA14534254729DA006E8D3B /* FocusableRegion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusableRegion.swift; sourceTree = "<group>"; };
+		6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationBanner.swift; sourceTree = "<group>"; };
 		6FA5D15B1F2077B10059E4E2 /* NSString+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PlaySRG.h"; sourceTree = "<group>"; };
 		6FA5D15C1F2077B10059E4E2 /* NSString+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PlaySRG.m"; sourceTree = "<group>"; };
 		6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Onboardings.json; sourceTree = "<group>"; };
@@ -4982,6 +4993,7 @@
 				0406040D29CE6293001F2BD0 /* MediaMoreButton.swift */,
 				6F3F1AB925060496000FF4DD /* MediaVisualView.swift */,
 				6FD9595326989FD900739FAE /* MediaVisualViewModel.swift */,
+				6FA33B0C3017951C00EBB9D6 /* MigrationBanner.swift */,
 				6FE8626B2657C5F30061D3F0 /* MoreCell.swift */,
 				6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */,
 				6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */,
@@ -5427,6 +5439,14 @@
 			path = Browser;
 			sourceTree = "<group>";
 		};
+		FCA9398A2FD6EEAC00979C90 /* Migration */ = {
+			isa = PBXGroup;
+			children = (
+				FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */,
+			);
+			path = Migration;
+			sourceTree = "<group>";
+		};
 		FCFA42F12FE419490000BCA4 /* UserDataExport */ = {
 			isa = PBXGroup;
 			children = (
@@ -5434,14 +5454,6 @@
 				FCFA42F02FE419490000BCA4 /* UserDataExporter.swift */,
 			);
 			path = UserDataExport;
-			sourceTree = "<group>";
-		};
-		FCA9398A2FD6EEAC00979C90 /* Migration */ = {
-			isa = PBXGroup;
-			children = (
-				FCA9398B2FD6EFDD00979C90 /* MigrationView.swift */,
-			);
-			path = Migration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -8532,6 +8544,7 @@
 				0875852223A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				04FB9CB32A0542BB00A9B69E /* ProfileSectionHeaderView.swift in Sources */,
 				6FB2C10B2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
+				6FA33B153017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				E6971AED1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F46B7B5281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				08280F162258F02400AC978D /* WatchLater.m in Sources */,
@@ -8842,6 +8855,7 @@
 				04B675C82BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				04395F2E2B1BF38B00F6A634 /* GoogleCastBarButtonItem.swift in Sources */,
 				6F3B0222245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
+				6FA33B0F3017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				6FD686202460670600B8018A /* Channel.m in Sources */,
 				6F475FDD1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0825914127285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
@@ -9120,6 +9134,7 @@
 				04B675C92BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				04395F2F2B1BF38B00F6A634 /* GoogleCastBarButtonItem.swift in Sources */,
 				081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
+				6FA33B133017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				6F3B0223245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6FD686212460670600B8018A /* Channel.m in Sources */,
 				6F475FDE1EB37BC6003021EA /* RequestViewController.m in Sources */,
@@ -9398,6 +9413,7 @@
 				04B675CA2BE65C4B00F2A934 /* AudioHomepageOption.swift in Sources */,
 				04395F302B1BF38B00F6A634 /* GoogleCastBarButtonItem.swift in Sources */,
 				081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
+				6FA33B0E3017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				6F3B0224245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6FD686222460670600B8018A /* Channel.m in Sources */,
 				6F475FDF1EB37BC6003021EA /* RequestViewController.m in Sources */,
@@ -9674,6 +9690,7 @@
 				6FD686232460670600B8018A /* Channel.m in Sources */,
 				6F475FE01EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6FE9049626F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
+				6FA33B163017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				042F6F3829E08785003F46AA /* NSSet+PlaySRG.swift in Sources */,
 				6F0AF6E8267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FDF54F628530BAC0068BABB /* SearchViewController.swift in Sources */,
@@ -10015,6 +10032,7 @@
 				6F8125E72638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A02BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8326395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
+				6FA33B113017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0426335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -10181,6 +10199,7 @@
 				6F8125E82638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A12BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8426395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
+				6FA33B103017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0526335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -10347,6 +10366,7 @@
 				6F8125E92638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A22BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8526395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
+				6FA33B0D3017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0626335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -10513,6 +10533,7 @@
 				6F8125EA2638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A32BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8626395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
+				6FA33B143017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB89A0726335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
@@ -10656,6 +10677,7 @@
 				6F30ACB62604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				6FE86F7A2719C5690082CAE9 /* ProgramCellViewModel.swift in Sources */,
 				6FE4F157257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
+				6FA33B123017952000EBB9D6 /* MigrationBanner.swift in Sources */,
 				087B5F4C257C502C002F58AF /* Favorites.m in Sources */,
 				6FC413F224EEEDCB00FDF806 /* RadioChannel.m in Sources */,
 				6FD9595D26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
