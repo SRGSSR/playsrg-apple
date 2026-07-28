@@ -142,7 +142,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
-@property (nonatomic, getter=isMigrationMandatory) BOOL migrationMandatory;
+@property (nonatomic, getter=isMandatoryMigration) BOOL mandatoryMigration;
 @property (nonatomic) NSURL *migrationHelpURL;
 @property (nonatomic) NSURL *playPlusStoreURL;
 @property (nonatomic) NSURL *tvPlayPlusStoreURL;
@@ -483,7 +483,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.appStoreProductIdentifier = appStoreProductIdentifier;
 
-    self.migrationMandatory = [firebaseConfiguration boolForKey:@"mandatoryMigration"];
+    self.mandatoryMigration = [firebaseConfiguration boolForKey:@"mandatoryMigration"];
     self.migrationHelpURL = migrationHelpURL;
     self.playPlusStoreURL = playPlusStoreURL;
     self.tvPlayPlusStoreURL = tvPlayPlusStoreURL;
