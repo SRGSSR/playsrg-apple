@@ -10,15 +10,14 @@ import SwiftUI
 // MARK: View
 
 struct MigrationBanner: View {
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
     var body: some View {
         mainView()
             .padding(.horizontal, constant(iOS: 20, tvOS: 50))
             .padding(.vertical, constant(iOS: 20, tvOS: 30))
             .background(background())
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        #if os(iOS)
-            .onTapGesture(perform: action)
-        #endif
     }
 
     static func size() -> NSCollectionLayoutSize {
@@ -37,12 +36,22 @@ struct MigrationBanner: View {
             .shadow(color: .white.opacity(0.1), radius: 1)
     }
 
+    @ViewBuilder
     private func mainView() -> some View {
         #if os(iOS)
+        if horizontalSizeClass == .compact {
             HStack(spacing: 16) {
                 icon()
                 message()
             }
+        }
+        else {
+            ZStack(alignment: .leading) {
+                message()
+                icon()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+        }
         #else
             ZStack {
                 message()
@@ -69,16 +78,22 @@ struct MigrationBanner: View {
                 .lineLimit(2)
                 .srgFont(.body)
             #if os(iOS)
-                HStack {
-                    Spacer()
-                    Text("Join")
-                        .foregroundColor(.white)
-                        .srgFont(.H3)
-                        .padding(2)
-                }
+            joinButton()
             #endif
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private func joinButton() -> some View {
+        Button(action: action) {
+            Text("Join")
+                .foregroundColor(.white)
+                .srgFont(.H3)
+                .padding(2)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.srgRed)
+        .frame(maxWidth: .infinity, alignment: horizontalSizeClass == .compact ? .trailing : .leading)
     }
 
     private func action() {}
