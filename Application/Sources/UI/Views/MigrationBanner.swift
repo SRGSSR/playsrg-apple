@@ -47,14 +47,17 @@ struct MigrationBanner: View {
     private func message() -> some View {
         VStack(alignment: .leading) {
             Text("Join the Beta Team")
+                .lineLimit(1)
                 .srgFont(.H2)
             Text("We're building the next version of our app")
+                .lineLimit(2)
                 .srgFont(.body)
             HStack {
                 Spacer()
                 Text("Join")
                     .foregroundStyle(.white)
-                    .srgFont(.H2)
+                    .srgFont(.H3)
+                    .padding(2)
             }
         }
     }
