@@ -22,7 +22,9 @@ struct MigrationBanner: View {
     }
 
     static func size() -> NSCollectionLayoutSize {
-        NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
+        let fontMetrics = SRGFont.metricsForFont(with: .body)
+        let height = fontMetrics.scaledValue(for: 150)
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
     }
 
     private func background() -> some View {
