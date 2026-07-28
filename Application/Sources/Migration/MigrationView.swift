@@ -9,45 +9,40 @@ import SwiftUI
 struct MigrationView: View {
     @Environment(\.openURL) private var openURL
 
-    @ScaledMetric(relativeTo: .largeTitle) private var titleSize: CGFloat = 32
-    @ScaledMetric(relativeTo: .body) private var descriptionSize: CGFloat = 14
-
     var body: some View {
-        VStack(spacing: .zero) {
-            VStack(spacing: 24) {
-                appIconView
-
-                Text("This app no longer exists")
-                    .srgFont(family: .text, weight: .srg_bold, fixedSize: titleSize)
-
-                Text("This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.")
-                    .srgFont(family: .text, weight: .srg_medium, fixedSize: descriptionSize)
-            }
-            .multilineTextAlignment(.center)
-            .frame(maxHeight: .infinity)
-
-            ctaButtonView
+        VStack {
+            descriptionView()
+            actionView()
         }
-        .padding(.horizontal, 28)
+        .padding(30)
+        .background(background())
+    }
+
+    private func descriptionView() -> some View {
+        VStack(spacing: 24) {
+            appIcon()
+
+            Text("This app no longer exists")
+                .srgFont(.H1)
+
+            Text("This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.")
+                .srgFont(.body)
+        }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(backgroundImage)
     }
 
-    private var appIconView: some View {
-        Image(.playPlusAppIcon)
-            .resizable()
-            .frame(width: 120, height: 120)
-            .shadow(color: .white, radius: 180, x: 0, y: 0)
-            .shadow(
-                color: Color(red: 1, green: 0.82, blue: 0.82).opacity(0.7),
-                radius: 83,
-                x: 0,
-                y: 0
-            )
+    private func appIcon() -> some View {
+        VStack(spacing: 50) {
+            Image(.playPlusAppIcon)
+                .resizable()
+                .frame(width: 120, height: 120)
+                .shadow(color: .white, radius: 150)
+                .shadow(color: .white, radius: 50)
+        }
     }
 
-    private var ctaButtonView: some View {
-        Group {
+    private func actionView() -> some View {
+        ZStack {
             if #available(iOS 17, *) {
                 Button("Update now") {
                     openURL(ApplicationConfiguration.shared.playPlusStoreURL)
@@ -58,30 +53,14 @@ struct MigrationView: View {
                 }
             }
         }
-        .buttonStyle(MigrationPrimaryButtonStyle())
+        .buttonStyle(.primary)
     }
 
-    private var backgroundImage: some View {
+    private func background() -> some View {
         Image(.migrationBackground)
             .resizable()
             .aspectRatio(contentMode: .fill)
             .ignoresSafeArea()
-    }
-}
-
-private struct MigrationPrimaryButtonStyle: ButtonStyle {
-    @ScaledMetric(relativeTo: .body) private var titleSize: CGFloat = 16
-
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .srgFont(family: .text, weight: .srg_bold, fixedSize: titleSize)
-            .foregroundColor(.black)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .padding(.horizontal, 32)
-            .background(Color.white)
-            .clipShape(Capsule())
-            .opacity(configuration.isPressed ? 0.8 : 1)
     }
 }
 
