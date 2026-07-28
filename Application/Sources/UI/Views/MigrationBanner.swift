@@ -22,7 +22,7 @@ struct MigrationBanner: View {
 
     static func size() -> NSCollectionLayoutSize {
         let fontMetrics = SRGFont.metricsForFont(with: .body)
-        let height = fontMetrics.scaledValue(for: constant(iOS: 120, tvOS: 220)) + 50
+        let height = fontMetrics.scaledValue(for: constant(iOS: 120, tvOS: 220)) + 60
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
     }
 
