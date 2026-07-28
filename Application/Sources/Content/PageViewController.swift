@@ -199,14 +199,18 @@ final class PageViewController: UIViewController {
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
 
-        let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: Header.titleHeader.rawValue) { [weak self] view, _, _ in
+        let titleHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleHeaderView>>(elementKind: SupplementaryView.titleHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
             view.content = TitleHeaderView(model.displayedTitle, description: model.displayedTitleDescription, titleTextAlignment: model.displayedTitleTextAlignment, topPadding: Self.layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding)).primaryColor(model.primaryColor)
         }
 
-        let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: Header.showHeader.rawValue) { [weak self] view, _, _ in
+        let showHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ShowHeaderView>>(elementKind: SupplementaryView.showHeader.rawValue) { [weak self] view, _, _ in
             guard let self else { return }
             view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).primaryColor(model.primaryColor)
+        }
+
+        let migrationBannerViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<MigrationBanner>>(elementKind: SupplementaryView.migrationBanner.rawValue) { view, _, _ in
+            view.content = MigrationBanner()
         }
 
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -216,19 +220,15 @@ final class PageViewController: UIViewController {
             view.content = SectionHeaderView(section: section, pageId: model.id).primaryColor(model.primaryColor)
         }
 
-        let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<MigrationBanner>>(elementKind: UICollectionView.elementKindSectionFooter) { view, _, _ in
-            view.content = MigrationBanner()
-        }
-
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            if kind == Header.titleHeader.rawValue {
+            if kind == SupplementaryView.titleHeader.rawValue {
                 collectionView.dequeueConfiguredReusableSupplementary(using: titleHeaderViewRegistration, for: indexPath)
-            } else if kind == Header.showHeader.rawValue {
+            } else if kind == SupplementaryView.showHeader.rawValue {
                 collectionView.dequeueConfiguredReusableSupplementary(using: showHeaderViewRegistration, for: indexPath)
-            } else if kind == UICollectionView.elementKindSectionHeader {
-                collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+            } else if kind == SupplementaryView.migrationBanner.rawValue {
+                collectionView.dequeueConfiguredReusableSupplementary(using: migrationBannerViewRegistration, for: indexPath)
             } else {
-                collectionView.dequeueConfiguredReusableSupplementary(using: sectionFooterViewRegistration, for: indexPath)
+                collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             }
         }
 
@@ -454,9 +454,10 @@ final class PageViewController: UIViewController {
 // MARK: Types
 
 private extension PageViewController {
-    enum Header: String {
+    enum SupplementaryView: String {
         case titleHeader
         case showHeader
+        case migrationBanner
     }
 
     #if os(iOS)
@@ -593,7 +594,7 @@ extension PageViewController: UICollectionViewDelegate {
 
         func collectionView(_: UICollectionView, willDisplaySupplementaryView _: UICollectionReusableView, forElementKind elementKind: String, at _: IndexPath) {
             switch elementKind {
-            case Header.showHeader.rawValue, Header.titleHeader.rawValue:
+            case SupplementaryView.showHeader.rawValue, SupplementaryView.titleHeader.rawValue:
                 headerWithTitleVisible = true
                 updateNavigationBar(animated: true)
             default:
@@ -603,7 +604,7 @@ extension PageViewController: UICollectionViewDelegate {
 
         func collectionView(_: UICollectionView, didEndDisplayingSupplementaryView _: UICollectionReusableView, forElementOfKind elementKind: String, at _: IndexPath) {
             switch elementKind {
-            case Header.showHeader.rawValue, Header.titleHeader.rawValue:
+            case SupplementaryView.showHeader.rawValue, SupplementaryView.titleHeader.rawValue:
                 headerWithTitleVisible = false
                 updateNavigationBar(animated: true)
             default:
@@ -770,10 +771,10 @@ private extension PageViewController {
         if let title = model.displayedTitle {
             let titleHeaderSize = TitleHeaderViewSize.recommended(for: title, description: model.displayedTitleDescription,
                                                                   topPadding: layoutDisplayedTitleTopPadding(model.displayedTitleNeedsTopPadding), layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: Header.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0))]
+            configuration.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(layoutSize: titleHeaderSize, elementKind: SupplementaryView.titleHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX, y: 0))]
         } else if let show = model.displayedShow {
             let showHeaderSize = ShowHeaderViewSize.recommended(for: show, horizontalPadding: layoutHorizontalMargin, layoutWidth: layoutWidth - layoutHorizontalConfigurationViewMargin * 2, horizontalSizeClass: horizontalSizeClass)
-            configuration.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: Header.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0))]
+            configuration.boundarySupplementaryItems = [NSCollectionLayoutBoundarySupplementaryItem(layoutSize: showHeaderSize, elementKind: SupplementaryView.showHeader.rawValue, alignment: .topLeading, absoluteOffset: CGPoint(x: offsetX + layoutHorizontalConfigurationViewMargin, y: 0))]
         }
 
         return configuration
@@ -785,16 +786,17 @@ private extension PageViewController {
             let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
 
             func sectionSupplementaryItems(for section: PageViewModel.Section, horizontalMargin _: CGFloat) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
-                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+                [header(for: section), migrationBanner()].compactMap(\.self)
+            }
 
-                if sectionIndex == 0, model.displaysMigrationBanner {
-                    let footerSize = MigrationBanner.size()
-                    let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottomLeading)
-                    return [header, footer]
-                } else {
-                    return [header]
-                }
+            func header(for section: PageViewModel.Section) -> NSCollectionLayoutBoundarySupplementaryItem {
+                let size = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
+                return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: size, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+            }
+
+            func migrationBanner() -> NSCollectionLayoutBoundarySupplementaryItem? {
+                guard sectionIndex == 0, model.displaysMigrationBanner else { return nil }
+                return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: MigrationBanner.size(), elementKind: SupplementaryView.migrationBanner.rawValue, alignment: .bottomLeading)
             }
 
             func horizontalMargin(for section: PageViewModel.Section) -> CGFloat {
