@@ -11,21 +11,19 @@ import SwiftUI
 
 struct MigrationBanner: View {
     var body: some View {
-        HStack(spacing: 16) {
-            icon()
-            message()
-        }
-        .padding()
-        .background(background())
-        #if os(iOS)
-            .onTapGesture(perform: action)
-        #endif
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        mainView()
+            .padding(.horizontal, constant(iOS: 20, tvOS: 50))
+            .padding(.vertical, constant(iOS: 20, tvOS: 30))
+            .background(background())
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            #if os(iOS)
+                .onTapGesture(perform: action)
+            #endif
     }
 
     static func size() -> NSCollectionLayoutSize {
         let fontMetrics = SRGFont.metricsForFont(with: .body)
-        let height = fontMetrics.scaledValue(for: 150)
+        let height = fontMetrics.scaledValue(for: constant(iOS: 150, tvOS: 220))
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
     }
 
@@ -39,15 +37,29 @@ struct MigrationBanner: View {
             .shadow(color: .white.opacity(0.1), radius: 1)
     }
 
+    private func mainView() -> some View {
+        #if os(iOS)
+            HStack(spacing: 16) {
+                icon()
+                message()
+            }
+        #else
+            HStack(spacing: 16) {
+                message()
+                icon()
+            }
+        #endif
+    }
+
     private func icon() -> some View {
         Image(.playPlusAppIcon)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(height: 75)
+            .frame(height: constant(iOS: 75, tvOS: 123))
     }
 
     private func message() -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: constant(iOS: .leading, tvOS: .center)) {
             Text("Join the Beta Team")
                 .lineLimit(1)
                 .srgFont(.H2)
@@ -64,6 +76,7 @@ struct MigrationBanner: View {
                 }
             #endif
         }
+        .frame(maxWidth: .infinity)
     }
 
     private func action() {}
