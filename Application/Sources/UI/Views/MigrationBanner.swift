@@ -11,6 +11,7 @@ import SwiftUI
 
 struct MigrationBanner: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @State private var isPresented = false
 
     var body: some View {
         mainView()
@@ -18,6 +19,9 @@ struct MigrationBanner: View {
             .padding(.vertical, constant(iOS: 20, tvOS: 30))
             .background(background())
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .sheet(isPresented: $isPresented) {
+                MigrationView() // TODO: Put the right view in function of the scenario.
+            }
     }
 
     static func size() -> NSCollectionLayoutSize {
@@ -96,7 +100,9 @@ struct MigrationBanner: View {
         .frame(maxWidth: .infinity, alignment: horizontalSizeClass == .compact ? .trailing : .leading)
     }
 
-    private func action() {}
+    private func action() {
+        isPresented.toggle()
+    }
 }
 
 struct MigrationBanner_Previews: PreviewProvider {
