@@ -44,9 +44,11 @@ struct MigrationBanner: View {
                 message()
             }
         #else
-            HStack(spacing: 16) {
+            ZStack {
                 message()
+                    .frame(width: 1000)
                 icon()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         #endif
     }
