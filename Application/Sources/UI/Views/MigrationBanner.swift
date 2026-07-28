@@ -16,9 +16,9 @@ struct MigrationBanner: View {
             .padding(.vertical, constant(iOS: 20, tvOS: 30))
             .background(background())
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            #if os(iOS)
-                .onTapGesture(perform: action)
-            #endif
+        #if os(iOS)
+            .onTapGesture(perform: action)
+        #endif
     }
 
     static func size() -> NSCollectionLayoutSize {
