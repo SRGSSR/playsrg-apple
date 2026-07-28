@@ -33,7 +33,6 @@ struct MigrationView: View {
         .background(backgroundImage)
     }
 
-    @ViewBuilder
     private var appIconView: some View {
         Image(.playPlusAppIcon)
             .resizable()
@@ -47,7 +46,6 @@ struct MigrationView: View {
             )
     }
 
-    @ViewBuilder
     private var ctaButtonView: some View {
         Group {
             if #available(iOS 17, *) {
@@ -63,7 +61,6 @@ struct MigrationView: View {
         .buttonStyle(MigrationPrimaryButtonStyle())
     }
 
-    @ViewBuilder
     private var backgroundImage: some View {
         Image(.migrationBackground)
             .resizable()

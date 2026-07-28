@@ -1120,34 +1120,30 @@ private extension Content {
 // MARK: Removal
 
 private extension Content {
-    static func removeFromFavorites(_ items: [Content.Item]) {
-        let shows = Content.shows(from: items)
-        FavoritesRemoveShows(shows)
+    static func removeFromFavorites(_ items: [Item]) {
+        FavoritesRemoveShows(shows(from: items))
     }
 
-    static func removeFromHistory(_ items: [Content.Item]) {
-        let medias = Content.medias(from: items)
-        HistoryRemoveMedias(medias) { _ in }
+    static func removeFromHistory(_ items: [Item]) {
+        HistoryRemoveMedias(medias(from: items)) { _ in }
     }
 
     #if os(iOS)
-        static func removeFromNotifications(_ items: [Content.Item]) {
-            let notifications = Content.notifications(from: items)
+        static func removeFromNotifications(_ items: [Item]) {
+            let notifications = notifications(from: items)
             let updatedNotifications = Array(Set(UserNotification.notifications).subtracting(notifications))
             UserNotification.saveNotifications(updatedNotifications)
             UserInteractionEvent.removeFromNotifications(notifications)
         }
     #endif
 
-    static func removeFromWatchLater(_ items: [Content.Item]) {
-        let medias = Content.medias(from: items)
-        WatchLaterRemoveMedias(medias) { _ in }
+    static func removeFromWatchLater(_ items: [Item]) {
+        WatchLaterRemoveMedias(medias(from: items)) { _ in }
     }
 
     #if os(iOS)
-        static func removeFromDownloads(_ items: [Content.Item]) {
-            let downloads = Content.downloads(from: items)
-            Download.removeDownloads(downloads)
+        static func removeFromDownloads(_ items: [Item]) {
+            Download.removeDownloads(downloads(from: items))
         }
     #endif
 }

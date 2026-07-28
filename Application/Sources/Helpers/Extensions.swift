@@ -446,11 +446,11 @@ extension UIView {
     /// Probe some hosting controller to determine the behavior of its SwiftUI view in some direction.
     private func sizingBehavior(of hostingController: UIHostingController<some Any>, for axis: NSLayoutConstraint.Axis) -> SizingBehavior {
         // Fit into the maximal allowed layout size to check which boundaries are adopted by the associated view
-        let size = hostingController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
+        let size = hostingController.sizeThatFits(in: Self.layoutFittingExpandedSize)
         if axis == .vertical {
-            return size.height == UIView.layoutFittingExpandedSize.height ? .expanding : .hugging
+            return size.height == Self.layoutFittingExpandedSize.height ? .expanding : .hugging
         } else {
-            return size.width == UIView.layoutFittingExpandedSize.width ? .expanding : .hugging
+            return size.width == Self.layoutFittingExpandedSize.width ? .expanding : .hugging
         }
     }
 

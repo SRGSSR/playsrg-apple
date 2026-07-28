@@ -27,7 +27,7 @@ extension MediaPlayerViewController {
         }
 
         if let programsTableView {
-            let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: MediaPlayerViewController.contentHeight, right: 0.0)
+            let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: Self.contentHeight, right: 0.0)
             programsTableView.contentInset = insets
             programsTableView.scrollIndicatorInsets = insets
         }
@@ -111,9 +111,9 @@ private extension MediaPlayerViewController {
 
     var compactHeight: CGFloat {
         if let window = UIApplication.shared.mainWindow {
-            MediaPlayerViewController.contentHeight + window.safeAreaInsets.bottom
+            Self.contentHeight + window.safeAreaInsets.bottom
         } else {
-            MediaPlayerViewController.contentHeight
+            Self.contentHeight
         }
     }
 

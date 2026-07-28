@@ -35,7 +35,6 @@ struct MigrationView: View {
         .background(backgroundView)
     }
 
-    @ViewBuilder
     private var appIconView: some View {
         Image(.playPlusAppIcon)
             .resizable()
@@ -49,7 +48,6 @@ struct MigrationView: View {
             )
     }
 
-    @ViewBuilder
     private var backgroundView: some View {
         Image(.migrationBackground)
             .resizable()

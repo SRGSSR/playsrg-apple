@@ -32,6 +32,6 @@ extension UIColor {
     }
 
     private static func play_hexadecimal(_ string: String) -> UIColor {
-        UIColor.hexadecimal(string) ?? UIColor.white
+        hexadecimal(string) ?? .white
     }
 }
