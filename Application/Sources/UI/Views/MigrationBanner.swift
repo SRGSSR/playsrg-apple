@@ -7,30 +7,32 @@
 import SRGAppearance
 import SwiftUI
 
+// MARK: Contract
+
+@objc protocol MigrationBannerActions: AnyObject {
+    func openMigrationView(sender: Any?)
+}
+
 // MARK: View
 
 struct MigrationBanner: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    @State private var isPresented = false
+
+    @FirstResponder private var firstResponder
 
     var body: some View {
         ZStack {
             #if os(iOS)
                 mainView()
-                    .sheet(isPresented: $isPresented) {
-                        MigrationView() // TODO: Put the right view in function of the scenario.
-                    }
             #else
                 Button(action: action) {
                     mainView()
                 }
                 .buttonStyle(.card)
-                .fullScreenCover(isPresented: $isPresented) {
-                    MigrationView() // TODO: Put the right view in function of the scenario.
-                }
             #endif
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .responderChain(from: firstResponder)
     }
 
     static func size() -> NSCollectionLayoutSize {
@@ -115,7 +117,7 @@ struct MigrationBanner: View {
     #endif
 
     private func action() {
-        isPresented.toggle()
+        firstResponder.sendAction(#selector(MigrationBannerActions.openMigrationView(sender:)))
     }
 }
 

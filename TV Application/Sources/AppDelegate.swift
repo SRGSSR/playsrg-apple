@@ -15,7 +15,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder {
     var window: UIWindow?
-    
+
     #if DEBUG || NIGHTLY || BETA
         private var settingUpdatesCancellables = Set<AnyCancellable>()
     #endif
