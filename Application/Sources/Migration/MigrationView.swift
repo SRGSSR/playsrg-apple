@@ -54,11 +54,11 @@ struct MigrationView: View {
                     )
                 }
             } else {
-            #if os(iOS)
-                Button("How to get Play+") {
-                    openURL(ApplicationConfiguration.shared.migrationHelpURL)
-                }
-            #endif
+                #if os(iOS)
+                    Button("How to get Play+") {
+                        openURL(ApplicationConfiguration.shared.migrationHelpURL)
+                    }
+                #endif
             }
         }
         .buttonStyle(.primary)

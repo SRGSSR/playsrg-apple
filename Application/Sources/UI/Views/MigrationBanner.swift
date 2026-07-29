@@ -16,18 +16,18 @@ struct MigrationBanner: View {
     var body: some View {
         ZStack {
             #if os(iOS)
-            mainView()
-                .sheet(isPresented: $isPresented) {
+                mainView()
+                    .sheet(isPresented: $isPresented) {
+                        MigrationView() // TODO: Put the right view in function of the scenario.
+                    }
+            #else
+                Button(action: action) {
+                    mainView()
+                }
+                .buttonStyle(.card)
+                .fullScreenCover(isPresented: $isPresented) {
                     MigrationView() // TODO: Put the right view in function of the scenario.
                 }
-            #else
-            Button(action: action) {
-                mainView()
-            }
-            .buttonStyle(.card)
-            .fullScreenCover(isPresented: $isPresented) {
-                MigrationView() // TODO: Put the right view in function of the scenario.
-            }
             #endif
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
@@ -52,26 +52,25 @@ struct MigrationBanner: View {
     private func mainView() -> some View {
         ZStack {
             #if os(iOS)
-            if horizontalSizeClass == .compact {
-                HStack(spacing: 16) {
-                    icon()
-                    message()
+                if horizontalSizeClass == .compact {
+                    HStack(spacing: 16) {
+                        icon()
+                        message()
+                    }
+                } else {
+                    ZStack(alignment: .leading) {
+                        message()
+                        icon()
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                    }
                 }
-            }
-            else {
-                ZStack(alignment: .leading) {
+            #else
+                ZStack {
                     message()
+                        .frame(width: 1000)
                     icon()
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-            }
-            #else
-            ZStack {
-                message()
-                    .frame(width: 1000)
-                icon()
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
             #endif
         }
         .padding(.horizontal, constant(iOS: 20, tvOS: 50))
@@ -95,24 +94,24 @@ struct MigrationBanner: View {
                 .lineLimit(2)
                 .srgFont(.body)
             #if os(iOS)
-            joinButton()
+                joinButton()
             #endif
         }
         .frame(maxWidth: .infinity)
     }
 
     #if os(iOS)
-    private func joinButton() -> some View {
-        Button(action: action) {
-            Text("Join")
-                .foregroundColor(.white)
-                .srgFont(.H3)
-                .padding(2)
+        private func joinButton() -> some View {
+            Button(action: action) {
+                Text("Join")
+                    .foregroundColor(.white)
+                    .srgFont(.H3)
+                    .padding(2)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.srgRed)
+            .frame(maxWidth: .infinity, alignment: horizontalSizeClass == .compact ? .trailing : .leading)
         }
-        .buttonStyle(.borderedProminent)
-        .tint(.srgRed)
-        .frame(maxWidth: .infinity, alignment: horizontalSizeClass == .compact ? .trailing : .leading)
-    }
     #endif
 
     private func action() {
