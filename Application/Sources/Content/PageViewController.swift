@@ -735,9 +735,9 @@ extension PageViewController: UIScrollViewDelegate {
 extension PageViewController: MigrationBannerActions {
     func openMigrationView(sender _: Any?) {
         #if os(iOS)
-            play_present(MigrationViewController.viewController(), animated: true)
+            play_present(MigrationViewController.viewController(configuration: .learnMore), animated: true)
         #else
-            present(MigrationViewController.viewController(), animated: true)
+            present(MigrationViewController.viewController(configuration: .learnMore), animated: true)
         #endif
     }
 }
