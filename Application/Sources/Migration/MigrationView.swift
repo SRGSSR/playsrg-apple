@@ -28,6 +28,7 @@ struct MigrationView: View {
             Text("This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.")
                 .srgFont(.body)
         }
+        .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -43,14 +44,21 @@ struct MigrationView: View {
 
     private func actionView() -> some View {
         ZStack {
-            if #available(iOS 17, *) {
+            if #available(iOS 17, tvOS 17, *) {
                 Button("Update now") {
-                    openURL(ApplicationConfiguration.shared.playPlusStoreURL)
+                    openURL(
+                        constant(
+                            iOS: ApplicationConfiguration.shared.playPlusStoreURL,
+                            tvOS: ApplicationConfiguration.shared.tvPlayPlusStoreURL
+                        )
+                    )
                 }
             } else {
+            #if os(iOS)
                 Button("How to get Play+") {
                     openURL(ApplicationConfiguration.shared.migrationHelpURL)
                 }
+            #endif
             }
         }
         .buttonStyle(.primary)
