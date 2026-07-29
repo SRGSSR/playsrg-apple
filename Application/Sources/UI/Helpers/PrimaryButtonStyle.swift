@@ -19,7 +19,7 @@ struct PrimaryButtonStyle: ButtonStyle {
             .padding(.vertical, 14)
             .frame(maxWidth: .infinity)
             .foregroundColor(.black)
-            .background(.white)
+            .background(Color.white)
             .clipShape(.capsule)
             .opacity(configuration.isPressed ? 0.8 : 1)
     }

@@ -88,6 +88,7 @@ struct MigrationBanner: View {
         .frame(maxWidth: .infinity)
     }
 
+    #if os(iOS)
     private func joinButton() -> some View {
         Button(action: action) {
             Text("Join")
@@ -99,6 +100,7 @@ struct MigrationBanner: View {
         .tint(.srgRed)
         .frame(maxWidth: .infinity, alignment: horizontalSizeClass == .compact ? .trailing : .leading)
     }
+    #endif
 
     private func action() {
         isPresented.toggle()
