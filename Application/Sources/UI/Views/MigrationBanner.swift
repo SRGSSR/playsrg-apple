@@ -15,10 +15,52 @@ import SwiftUI
 
 // MARK: View
 
+extension MigrationBanner {
+    struct Configuration {
+        let title: LocalizedStringKey
+        let subtitle: LocalizedStringKey
+        let action: Action
+
+        static let learnMore = Configuration(
+            title: "Our new app is coming soon!",
+            subtitle: "We’re building the next version of our app",
+            action: .learnMore
+        )
+        static let joinBeta = Configuration(
+            title: "Join the Beta Test",
+            subtitle: "We’re building the next version of our app",
+            action: .joinBeta
+        )
+        static let update = Configuration(
+            title: "Our new app comes on 2nd of January",
+            subtitle: "Update now",
+            action: .update
+        )
+    }
+
+    enum Action {
+        case learnMore
+        case joinBeta
+        case update
+
+        var name: LocalizedStringKey {
+            switch self {
+            case .learnMore:
+                "Learn more"
+            case .joinBeta:
+                "Join"
+            case .update:
+                "Update"
+            }
+        }
+    }
+}
+
 struct MigrationBanner: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @FirstResponder private var firstResponder
+    let configuration: Configuration
 
     var body: some View {
         ZStack {
@@ -89,23 +131,23 @@ struct MigrationBanner: View {
 
     private func message() -> some View {
         VStack(alignment: constant(iOS: .leading, tvOS: .center)) {
-            Text("Join the Beta Team")
+            Text(configuration.title)
                 .lineLimit(1)
                 .srgFont(.H2)
-            Text("We're building the next version of our app")
+            Text(configuration.subtitle)
                 .lineLimit(2)
                 .srgFont(.body)
             #if os(iOS)
-                joinButton()
+                button()
             #endif
         }
         .frame(maxWidth: .infinity)
     }
 
     #if os(iOS)
-        private func joinButton() -> some View {
+        private func button() -> some View {
             Button(action: action) {
-                Text("Join")
+                Text(configuration.action.name)
                     .foregroundColor(.white)
                     .srgFont(.H3)
                     .padding(2)
@@ -123,9 +165,12 @@ struct MigrationBanner: View {
 
 struct MigrationBanner_Previews: PreviewProvider {
     private static let size = MigrationBanner.size().previewSize
-
     static var previews: some View {
-        MigrationBanner()
-            .previewLayout(.fixed(width: size.width, height: size.height))
+        Group {
+            MigrationBanner(configuration: .learnMore)
+            MigrationBanner(configuration: .joinBeta)
+            MigrationBanner(configuration: .update)
+        }
+        .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

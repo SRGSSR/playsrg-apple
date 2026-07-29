@@ -210,7 +210,7 @@ final class PageViewController: UIViewController {
         }
 
         let migrationBannerViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<MigrationBanner>>(elementKind: SupplementaryView.migrationBanner.rawValue) { view, _, _ in
-            view.content = MigrationBanner()
+            view.content = MigrationBanner(configuration: .learnMore)
         }
 
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
