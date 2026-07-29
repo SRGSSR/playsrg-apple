@@ -14,14 +14,23 @@ struct MigrationBanner: View {
     @State private var isPresented = false
 
     var body: some View {
-        mainView()
-            .padding(.horizontal, constant(iOS: 20, tvOS: 50))
-            .padding(.vertical, constant(iOS: 20, tvOS: 30))
-            .background(background())
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            .sheet(isPresented: $isPresented) {
+        ZStack {
+            #if os(iOS)
+            mainView()
+                .sheet(isPresented: $isPresented) {
+                    MigrationView() // TODO: Put the right view in function of the scenario.
+                }
+            #else
+            Button(action: action) {
+                mainView()
+            }
+            .buttonStyle(.card)
+            .fullScreenCover(isPresented: $isPresented) {
                 MigrationView() // TODO: Put the right view in function of the scenario.
             }
+            #endif
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
     }
 
     static func size() -> NSCollectionLayoutSize {
@@ -40,30 +49,34 @@ struct MigrationBanner: View {
             .shadow(color: .white.opacity(0.1), radius: 1)
     }
 
-    @ViewBuilder
     private func mainView() -> some View {
-        #if os(iOS)
-        if horizontalSizeClass == .compact {
-            HStack(spacing: 16) {
-                icon()
-                message()
+        ZStack {
+            #if os(iOS)
+            if horizontalSizeClass == .compact {
+                HStack(spacing: 16) {
+                    icon()
+                    message()
+                }
             }
-        }
-        else {
-            ZStack(alignment: .leading) {
-                message()
-                icon()
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+            else {
+                ZStack(alignment: .leading) {
+                    message()
+                    icon()
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
             }
-        }
-        #else
+            #else
             ZStack {
                 message()
                     .frame(width: 1000)
                 icon()
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
-        #endif
+            #endif
+        }
+        .padding(.horizontal, constant(iOS: 20, tvOS: 50))
+        .padding(.vertical, constant(iOS: 20, tvOS: 30))
+        .background(background())
     }
 
     private func icon() -> some View {
