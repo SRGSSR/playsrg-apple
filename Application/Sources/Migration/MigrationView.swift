@@ -68,6 +68,7 @@ struct MigrationView: View {
         Image(.migrationBackground)
             .resizable()
             .aspectRatio(contentMode: .fill)
+            .overlay(LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom))
             .ignoresSafeArea()
     }
 }
