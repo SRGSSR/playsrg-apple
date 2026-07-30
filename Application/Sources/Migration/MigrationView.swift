@@ -58,7 +58,33 @@ extension MigrationView {
                     "Update now"
                 }
                 else {
+#if os(iOS)
                     "How to get Play+"
+#endif
+                }
+            }
+        }
+
+        func callAsFunction() {
+            switch self {
+            case .learnMore:
+                ()
+            case .joinBeta:
+                if let url = ApplicationConfiguration.shared.betaTestingURL {
+                    UIApplication.shared.open(url)
+                }
+            case .update, .mandatoryUpdate:
+                if #available(iOS 17, tvOS 17, *) {
+                    UIApplication.shared.open(
+                        constant(
+                            iOS: ApplicationConfiguration.shared.playPlusStoreURL,
+                            tvOS: ApplicationConfiguration.shared.tvPlayPlusStoreURL
+                        )
+                    )
+                } else {
+#if os(iOS)
+                    UIApplication.shared.open(ApplicationConfiguration.shared.migrationHelpURL)
+#endif
                 }
             }
         }
@@ -71,11 +97,26 @@ extension MigrationView {
                 true
             }
         }
+
+        var isDisplayable: Bool {
+            switch self {
+            case .mandatoryUpdate:
+                if #unavailable(tvOS 17) {
+                    false
+                }
+                else {
+                    true
+                }
+            case .joinBeta:
+                ApplicationConfiguration.shared.betaTestingURL != nil
+            default:
+                true
+            }
+        }
     }
 }
 
 struct MigrationView: View {
-    @Environment(\.openURL) private var openURL
     @Environment(\.dismiss) private var dismiss
 
     let configuration: Configuration
@@ -114,27 +155,16 @@ struct MigrationView: View {
         }
     }
 
+    @ViewBuilder
     private func actionsView() -> some View {
         VStack(spacing: 20) {
-            ZStack {
-                if #available(iOS 17, tvOS 17, *) {
-                    Button(configuration.action.name) {
-                        openURL(
-                            constant(
-                                iOS: ApplicationConfiguration.shared.playPlusStoreURL,
-                                tvOS: ApplicationConfiguration.shared.tvPlayPlusStoreURL
-                            )
-                        )
-                    }
-                } else {
-#if os(iOS)
-                    Button(configuration.action.name) {
-                        openURL(ApplicationConfiguration.shared.migrationHelpURL)
-                    }
-#endif
+            if configuration.action.isDisplayable {
+                Button(configuration.action.name) {
+                    configuration.action()
+                    dismiss()
                 }
+                .buttonStyle(.primary)
             }
-            .buttonStyle(.primary)
 
             if configuration.action.isCancellable {
                 Button("Cancel", action: dismiss.callAsFunction)
