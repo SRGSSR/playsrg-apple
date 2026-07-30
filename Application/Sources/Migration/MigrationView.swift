@@ -11,39 +11,61 @@ extension MigrationView {
         let title: LocalizedStringKey
         let subtitle: LocalizedStringKey
         let footer: LocalizedStringKey?
-        let action: Action
+        let action: Action?
+        let isCancellable: Bool
 
-        static let learnMore = Configuration(
+        static let learnMore = Self(
             title: "Everything you like, even better",
             subtitle: "Your content synced across all devices.",
             footer: nil,
-            action: .learnMore
+            action: .learnMore,
+            isCancellable: false
         )
-        static let joinBeta = Configuration(
+        static let joinBeta = Self(
             title: "Help us improve the new App",
             subtitle: "Get ready for fresh features, a new design, and much more. Stay tuned!",
             footer: "Important note: The beta app will replace your Play Suisse App",
-            action: .joinBeta
+            action: .joinBeta,
+            isCancellable: true
         )
-        static let update = Configuration(
+        static let download = Self(
             title: "This app will be replaced",
             subtitle: "You can’t use this app any longer from 04.01.2027. Please download the new app.",
             footer: "Important note: The beta app will replace your Play Suisse App",
-            action: .update
+            action: downloadAction(),
+            isCancellable: true
         )
-        static let mandatoryUpdate = Configuration(
+        static let update = Self(
             title: "This app no longer exists",
             subtitle: "This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.",
             footer: nil,
-            action: .mandatoryUpdate
+            action: updateAction(),
+            isCancellable: false
         )
+
+        private static func downloadAction() -> Action? {
+            if #available(iOS 17, tvOS 17, *) {
+                .download
+            } else {
+                nil
+            }
+        }
+
+        private static func updateAction() -> Action? {
+            if #available(iOS 17, tvOS 17, *) {
+                .update
+            } else {
+                constant(iOS: .help, tvOS: nil)
+            }
+        }
     }
 
     enum Action {
         case learnMore
         case joinBeta
+        case download
         case update
-        case mandatoryUpdate
+        case help
 
         var name: LocalizedStringKey {
             switch self {
@@ -51,19 +73,12 @@ extension MigrationView {
                 "Okay"
             case .joinBeta:
                 "Join Play+ Beta test"
-            case .update:
+            case .download:
                 "Download Play+"
-            case .mandatoryUpdate:
-                if #available(iOS 17, tvOS 17, *) {
-                    "Update now"
-                }
-                else {
-#if os(iOS)
-                    "How to get Play+"
-#else
-                    ""
-#endif
-                }
+            case .update:
+                "Update now"
+            case .help:
+                "How to get Play+"
             }
         }
 
@@ -73,44 +88,15 @@ extension MigrationView {
                 ()
             case .joinBeta:
                 UIApplication.shared.openTestFlight?()
-            case .update, .mandatoryUpdate:
-                if #available(iOS 17, tvOS 17, *) {
-                    UIApplication.shared.open(
-                        constant(
-                            iOS: ApplicationConfiguration.shared.playPlusStoreURL,
-                            tvOS: ApplicationConfiguration.shared.tvPlayPlusStoreURL
-                        )
+            case .download, .update:
+                UIApplication.shared.open(
+                    constant(
+                        iOS: ApplicationConfiguration.shared.playPlusStoreURL,
+                        tvOS: ApplicationConfiguration.shared.tvPlayPlusStoreURL
                     )
-                } else {
-#if os(iOS)
-                    UIApplication.shared.open(ApplicationConfiguration.shared.migrationHelpURL)
-#endif
-                }
-            }
-        }
-
-        var isCancellable: Bool {
-            switch self {
-            case .learnMore, .mandatoryUpdate:
-                false
-            default:
-                true
-            }
-        }
-
-        var isDisplayable: Bool {
-            switch self {
-            case .mandatoryUpdate:
-                if #unavailable(tvOS 17) {
-                    false
-                }
-                else {
-                    true
-                }
-            case .joinBeta:
-                ApplicationConfiguration.shared.betaTestingURL != nil
-            default:
-                true
+                )
+            case .help:
+                UIApplication.shared.open(ApplicationConfiguration.shared.migrationHelpURL)
             }
         }
     }
@@ -155,27 +141,26 @@ struct MigrationView: View {
         }
     }
 
-    @ViewBuilder
     private func actionsView() -> some View {
         VStack(spacing: 20) {
-            if configuration.action.isDisplayable {
+            if let action = configuration.action {
                 Button {
-                    configuration.action()
+                    action()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Text(configuration.action.name)
-                        #if os(tvOS)
-                            .srgFont(.H3)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 14)
-                        #endif
+                    Text(action.name)
+                    #if os(tvOS)
+                        .srgFont(.H3)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 14)
+                    #endif
                 }
                 #if os(iOS)
-                    .buttonStyle(.primary)
+                .buttonStyle(.primary)
                 #endif
             }
 
-            if configuration.action.isCancellable {
+            if configuration.isCancellable {
                 Button("Cancel") {
                     presentationMode.wrappedValue.dismiss()
                 }
@@ -201,6 +186,7 @@ struct MigrationView: View {
         if let footer = configuration.footer {
             Text(footer)
                 .srgFont(.subtitle2)
+                .multilineTextAlignment(.center)
         }
     }
 }
@@ -209,7 +195,7 @@ struct MigrationView: View {
 
 @objc final class MigrationViewController: NSObject {
     @objc static func mandatoryUpdateViewController() -> UIViewController {
-        viewController(configuration: .mandatoryUpdate)
+        viewController(configuration: .update)
     }
 
     static func viewController(configuration: MigrationView.Configuration) -> UIViewController {
@@ -225,10 +211,10 @@ struct MigrationView: View {
     MigrationView(configuration: .joinBeta)
 }
 
-#Preview("Update") {
-    MigrationView(configuration: .update)
+#Preview("Download") {
+    MigrationView(configuration: .download)
 }
 
-#Preview("Mandatory update") {
-    MigrationView(configuration: .mandatoryUpdate)
+#Preview("Update") {
+    MigrationView(configuration: .update)
 }
