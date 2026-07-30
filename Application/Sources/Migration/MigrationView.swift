@@ -176,12 +176,14 @@ struct MigrationView: View {
             }
 
             if configuration.action.isCancellable {
-                Button("Cancel", action: { presentationMode.wrappedValue.dismiss() })
-                    .srgFont(.H3)
-                    .padding(.vertical, 14)
-                    #if os(iOS)
-                        .foregroundColor(.white)
-                    #endif
+                Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .srgFont(.H3)
+                .padding(.vertical, 14)
+                #if os(iOS)
+                    .foregroundColor(.white)
+                #endif
             }
         }
     }
