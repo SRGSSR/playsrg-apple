@@ -122,7 +122,7 @@ final class SceneDelegate: UIResponder {
         if ApplicationConfiguration.shared.isMandatoryMigration {
             // Mandatory migration: the migration screen replaces the whole UI.
             if !(window.rootViewController is UIHostingController<MigrationView>) {
-                window.rootViewController = UIHostingController(rootView: MigrationView())
+                window.rootViewController = UIHostingController(rootView: MigrationView(configuration: .mandatoryUpdate))
             }
         } else if window.rootViewController == nil || window.rootViewController is UIHostingController<MigrationView> {
             window.rootViewController = Self.applicationRootViewController()

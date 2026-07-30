@@ -60,6 +60,8 @@ extension MigrationView {
                 else {
 #if os(iOS)
                     "How to get Play+"
+#else
+                    ""
 #endif
                 }
             }
@@ -70,9 +72,7 @@ extension MigrationView {
             case .learnMore:
                 ()
             case .joinBeta:
-                if let url = ApplicationConfiguration.shared.betaTestingURL {
-                    UIApplication.shared.open(url)
-                }
+                UIApplication.shared.openTestFlight?()
             case .update, .mandatoryUpdate:
                 if #available(iOS 17, tvOS 17, *) {
                     UIApplication.shared.open(
@@ -117,7 +117,7 @@ extension MigrationView {
 }
 
 struct MigrationView: View {
-    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) private var presentationMode
 
     let configuration: Configuration
 
@@ -159,18 +159,29 @@ struct MigrationView: View {
     private func actionsView() -> some View {
         VStack(spacing: 20) {
             if configuration.action.isDisplayable {
-                Button(configuration.action.name) {
+                Button {
                     configuration.action()
-                    dismiss()
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Text(configuration.action.name)
+                        #if os(tvOS)
+                            .srgFont(.H3)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 14)
+                        #endif
                 }
-                .buttonStyle(.primary)
+                #if os(iOS)
+                    .buttonStyle(.primary)
+                #endif
             }
 
             if configuration.action.isCancellable {
-                Button("Cancel", action: dismiss.callAsFunction)
+                Button("Cancel", action: { presentationMode.wrappedValue.dismiss() })
                     .srgFont(.H3)
                     .padding(.vertical, 14)
-                    .foregroundColor(.white)
+                    #if os(iOS)
+                        .foregroundColor(.white)
+                    #endif
             }
         }
     }
@@ -187,7 +198,7 @@ struct MigrationView: View {
     private func footerView() -> some View {
         if let footer = configuration.footer {
             Text(footer)
-                .srgFont(.caption)
+                .srgFont(.subtitle2)
         }
     }
 }
