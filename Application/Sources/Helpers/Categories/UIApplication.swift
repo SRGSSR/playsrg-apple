@@ -9,14 +9,14 @@ import Foundation
 extension UIApplication {
     var openTestFlight: (() -> Void)? {
         guard let appStoreAppleId = Bundle.main.object(forInfoDictionaryKey: "AppStoreAppleId") as? String, !appStoreAppleId.isEmpty else { return nil }
-        if let url = URL(string: "itms-beta://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {
+        if let url = URL(string: "itms-beta://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), Self.shared.canOpenURL(url) {
             return {
-                UIApplication.shared.open(url)
+                Self.shared.open(url)
             }
-        } else if let url = URL(string: "https://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {
+        } else if let url = URL(string: "https://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), Self.shared.canOpenURL(url) {
             #if os(iOS)
                 return {
-                    UIApplication.shared.open(url)
+                    Self.shared.open(url)
                 }
             #else
                 return nil

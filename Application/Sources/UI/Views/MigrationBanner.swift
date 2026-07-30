@@ -21,17 +21,17 @@ extension MigrationBanner {
         let subtitle: LocalizedStringKey
         let action: Action
 
-        static let learnMore = Configuration(
+        static let learnMore = Self(
             title: "Our new app is coming soon!",
             subtitle: "We’re building the next version of our app",
             action: .learnMore
         )
-        static let joinBeta = Configuration(
+        static let joinBeta = Self(
             title: "Join the Beta Test",
             subtitle: "We’re building the next version of our app",
             action: .joinBeta
         )
-        static let update = Configuration(
+        static let update = Self(
             title: "Our new app comes on 2nd of January",
             subtitle: "Update now",
             action: .update
