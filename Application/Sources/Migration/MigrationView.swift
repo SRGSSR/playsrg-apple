@@ -10,6 +10,7 @@ extension MigrationView {
     struct Configuration {
         let title: LocalizedStringKey
         let subtitle: LocalizedStringKey
+        let displaysBullets: Bool
         let footer: LocalizedStringKey?
         let action: Action?
         let isCancellable: Bool
@@ -17,6 +18,7 @@ extension MigrationView {
         static let learnMore = Self(
             title: "Everything you like, even better",
             subtitle: "Your content synced across all devices.",
+            displaysBullets: true,
             footer: nil,
             action: .learnMore,
             isCancellable: false
@@ -24,6 +26,7 @@ extension MigrationView {
         static let joinBeta = Self(
             title: "Help us improve the new App",
             subtitle: "Get ready for fresh features, a new design, and much more. Stay tuned!",
+            displaysBullets: true,
             footer: "Important note: The beta app will replace your Play Suisse App",
             action: .joinBeta,
             isCancellable: true
@@ -31,6 +34,7 @@ extension MigrationView {
         static let download = Self(
             title: "This app will be replaced",
             subtitle: "You can’t use this app any longer from 04.01.2027. Please download the new app.",
+            displaysBullets: true,
             footer: "Important note: The beta app will replace your Play Suisse App",
             action: downloadAction(),
             isCancellable: true
@@ -38,6 +42,7 @@ extension MigrationView {
         static let update = Self(
             title: "This app no longer exists",
             subtitle: "This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.",
+            displaysBullets: false,
             footer: nil,
             action: updateAction(),
             isCancellable: false
@@ -108,7 +113,7 @@ struct MigrationView: View {
     let configuration: Configuration
 
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 30) {
             descriptionView()
             actionsView()
             footerView()
@@ -123,12 +128,53 @@ struct MigrationView: View {
 
             Text(configuration.title)
                 .srgFont(.H1)
+                .multilineTextAlignment(.center)
 
             Text(configuration.subtitle)
                 .srgFont(.body)
+                .multilineTextAlignment(.center)
+
+            if configuration.displaysBullets {
+                bulletsView()
+            }
         }
-        .multilineTextAlignment(.center)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private func bulletsView() -> some View {
+        VStack(spacing: 40) {
+            bulletView(
+                icon: .playPlusPlay,
+                title: "Live channels now available",
+                subtitle: "Sports, broadcast TV and more Sports, broadcast TV and more"
+            )
+            bulletView(
+                icon: .playPlusLogo,
+                title: "Live channels now available",
+                subtitle: "Sports, broadcast TV and more Sports, broadcast TV and more"
+            )
+            bulletView(
+                icon: .playPlusWaveform,
+                title: "Live channels now available",
+                subtitle: "Sports, broadcast TV and more Sports, broadcast TV and more"
+            )
+        }
+    }
+
+    private func bulletView(icon: ImageResource, title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
+        HStack(spacing: 20) {
+            Image(icon)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 32)
+
+            VStack(alignment: .leading) {
+                Text(title)
+                    .srgFont(.H4)
+                Text(subtitle)
+                    .srgFont(.subtitle1)
+            }
+        }
     }
 
     private func appIcon() -> some View {
