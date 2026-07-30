@@ -113,17 +113,23 @@ struct MigrationView: View {
     let configuration: Configuration
 
     var body: some View {
-        VStack(spacing: 30) {
-            descriptionView()
-            actionsView()
-            footerView()
+        GeometryReader { geometry in
+            ScrollView {
+                VStack(spacing: constant(iOS: 30, tvOS: 60)) {
+                    descriptionView()
+                    Spacer()
+                    actionsView()
+                    footerView()
+                }
+                .padding(30)
+                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
+            }
         }
-        .padding(30)
         .background(background())
     }
 
     private func descriptionView() -> some View {
-        VStack(spacing: 24) {
+        VStack(spacing: constant(iOS: 24, tvOS: 48)) {
             appIcon()
 
             Text(configuration.title)
@@ -138,7 +144,6 @@ struct MigrationView: View {
                 bulletsView()
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private func bulletsView() -> some View {
@@ -162,11 +167,11 @@ struct MigrationView: View {
     }
 
     private func bulletView(icon: ImageResource, title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
-        HStack(spacing: 20) {
+        HStack(spacing: constant(iOS: 20, tvOS: 40)) {
             Image(icon)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 32)
+                .frame(height: constant(iOS: 32, tvOS: 64))
 
             VStack(alignment: .leading) {
                 Text(title)
