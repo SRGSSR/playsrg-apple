@@ -35,7 +35,7 @@ extension MigrationBanner {
         let action: Action
 
         static let learnMore = Self(
-            title: "Our new app is coming soon!",
+            title: "Our new app comes soon!",
             subtitle: "We’re building the next version of our app",
             action: .learnMore
         )
@@ -145,11 +145,12 @@ struct MigrationBanner: View {
     private func message() -> some View {
         VStack(alignment: constant(iOS: .leading, tvOS: .center)) {
             Text(configuration.title)
-                .lineLimit(1)
                 .srgFont(.H2)
-            Text(configuration.subtitle)
                 .lineLimit(2)
+                .layoutPriority(1)
+            Text(configuration.subtitle)
                 .srgFont(.body)
+                .lineLimit(2)
             #if os(iOS)
                 button()
             #endif
