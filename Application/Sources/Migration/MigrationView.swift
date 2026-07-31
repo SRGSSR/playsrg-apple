@@ -119,6 +119,9 @@ struct MigrationView: View {
                 }
                 .padding(30)
                 .frame(maxWidth: .infinity, minHeight: geometry.size.height)
+                .accessibilityAction(.escape) {
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
         }
         .background(background())
