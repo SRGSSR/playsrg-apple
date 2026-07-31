@@ -504,6 +504,24 @@ extension PageViewModel {
             nil
         }
     }
+
+    var migrationBannerConfiguration: MigrationBanner.Configuration? {
+        switch id {
+        case .video, .audio, .live:
+            switch ApplicationConfiguration.shared.migrationPhase {
+            case .learnMore:
+                .learnMore
+            case .joinBeta:
+                .joinBeta
+            case .download:
+                .download
+            default:
+                nil
+            }
+        default:
+            nil
+        }
+    }
 }
 
 // MARK: User activity

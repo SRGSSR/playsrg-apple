@@ -84,7 +84,7 @@ struct MediaDetailView: View {
                 }
                 .focusScope(namespace)
             }
-            .focusable()
+            .focusableRegion()
         }
     }
 

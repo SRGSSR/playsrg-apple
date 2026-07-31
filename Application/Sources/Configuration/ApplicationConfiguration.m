@@ -47,6 +47,19 @@ static SRGVendor DataProviderVendor(NSString *businessUnitIdentifier)
     return s_vendors[businessUnitIdentifier].integerValue;
 }
 
+static MigrationPhase MigrationPhaseFromString(NSString *string)
+{
+    static NSDictionary<NSString *, NSNumber *> *s_phases;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_phases = @{ @"learnMore" : @(MigrationPhaseLearnMore),
+                      @"joinBeta" : @(MigrationPhaseJoinBeta),
+                      @"download" : @(MigrationPhaseDownload),
+                      @"update" : @(MigrationPhaseUpdate) };
+    });
+    return s_phases[string].integerValue;
+}
+
 void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller)
 {
     controller.audioConfigurationBlock = ^AVMediaSelectionOption * _Nonnull(NSArray<AVMediaSelectionOption *> * _Nonnull audioOptions, AVMediaSelectionOption * _Nonnull defaultAudioOption) {
@@ -142,10 +155,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
-@property (nonatomic, getter=isMigrationMandatory) BOOL migrationMandatory;
+@property (nonatomic) MigrationPhase migrationPhase;
 @property (nonatomic) NSURL *migrationHelpURL;
-@property (nonatomic) NSURL *playPlusStoreURL;
-@property (nonatomic) NSURL *tvPlayPlusStoreURL;
+@property (nonatomic) NSNumber *playPlusAppStoreProductIdentifier;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
@@ -453,15 +465,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
 
-    NSString *playPlusStoreStringURL = [firebaseConfiguration stringForKey:@"playPlusStoreURL"];
-    NSURL *playPlusStoreURL = playPlusStoreStringURL ? [NSURL URLWithString:playPlusStoreStringURL] : nil;
-    if (! playPlusStoreURL) {
-        return NO;
-    }
-
-    NSString *tvPlayPlusStoreStringURL = [firebaseConfiguration stringForKey:@"tvPlayPlusStoreURL"];
-    NSURL *tvPlayPlusStoreURL = tvPlayPlusStoreStringURL ? [NSURL URLWithString:tvPlayPlusStoreStringURL] : nil;
-    if (! tvPlayPlusStoreURL) {
+    NSNumber *playPlusAppStoreProductIdentifier = [firebaseConfiguration numberForKey:@"playPlusAppStoreProductIdentifier"];
+    if (! playPlusAppStoreProductIdentifier) {
         return NO;
     }
 
@@ -483,10 +488,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.appStoreProductIdentifier = appStoreProductIdentifier;
 
-    self.migrationMandatory = [firebaseConfiguration boolForKey:@"mandatoryMigration"];
+    self.migrationPhase = MigrationPhaseFromString([firebaseConfiguration stringForKey:@"migrationPhase"]);
     self.migrationHelpURL = migrationHelpURL;
-    self.playPlusStoreURL = playPlusStoreURL;
-    self.tvPlayPlusStoreURL = tvPlayPlusStoreURL;
+    self.playPlusAppStoreProductIdentifier = playPlusAppStoreProductIdentifier;
 
     //
     // Optional values
@@ -619,6 +623,15 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(RadioChannel.new, homepageHidden)];
     return [self.radioChannels filteredArrayUsingPredicate:predicate];
+}
+
+- (NSURL *)playPlusStoreURL
+{
+#if TARGET_OS_TV
+    return [NSURL URLWithString:[NSString stringWithFormat:@"com.apple.TVAppStore://apps.apple.com/app/id%@", self.playPlusAppStoreProductIdentifier]];
+#else
+    return [NSURL URLWithString:[NSString stringWithFormat:@"https://apps.apple.com/app/id%@", self.playPlusAppStoreProductIdentifier]];
+#endif
 }
 
 #pragma mark Helpers

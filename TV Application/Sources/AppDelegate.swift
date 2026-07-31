@@ -16,7 +16,6 @@ import UIKit
 class AppDelegate: UIResponder {
     var window: UIWindow?
 
-    private var cancellables = Set<AnyCancellable>()
     #if DEBUG || NIGHTLY || BETA
         private var settingUpdatesCancellables = Set<AnyCancellable>()
     #endif
@@ -53,30 +52,6 @@ extension AppDelegate: UIApplicationDelegate {
 
         let configuration = ApplicationConfiguration.shared
         application.accessibilityLanguage = configuration.voiceOverLanguageCode
-
-        if let identityWebserviceURL = configuration.identityWebserviceURL,
-           let identityWebsiteURL = configuration.identityWebsiteURL {
-            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
-                .sink { _ in
-                    AnalyticsEvent.identity(action: .cancelLogin).send()
-                }
-                .store(in: &cancellables)
-
-            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
-                .sink { _ in
-                    AnalyticsEvent.identity(action: .login).send()
-                }
-                .store(in: &cancellables)
-
-            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
-                .sink { notification in
-                    let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
-
-                    let action = unexpectedLogout ? .unexpectedLogout : .logout as AnalyticsIdentityAction
-                    AnalyticsEvent.identity(action: action).send()
-                }
-                .store(in: &cancellables)
-        }
 
         let cachesDirectoryUrl = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true).first!)
         let storeFileUrl = cachesDirectoryUrl.appendingPathComponent("PlayData.sqlite")

@@ -206,7 +206,7 @@ extension SRGDataProvider {
     func tvProgramsPublisher(day: SRGDay? = nil, mainProvider: Bool, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
         let applicationConfiguration = ApplicationConfiguration.shared
         if mainProvider {
-            return SRGDataProvider.current!.tvPrograms(for: applicationConfiguration.vendor, day: day, minimal: minimal)
+            return Self.current!.tvPrograms(for: applicationConfiguration.vendor, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) }) }
                 .eraseToAnyPublisher()
         } else {
@@ -221,19 +221,19 @@ extension SRGDataProvider {
     private func tvOtherPartyProgramsPublisher(day: SRGDay? = nil, bouquet: TVGuideBouquet, minimal: Bool = false) -> AnyPublisher<[PlayProgramComposition], Error> {
         switch bouquet {
         case .RSI:
-            SRGDataProvider.current!.tvPrograms(for: .RSI, day: day, minimal: minimal)
+            Self.current!.tvPrograms(for: .RSI, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) }) }
                 .eraseToAnyPublisher()
         case .RTS:
-            SRGDataProvider.current!.tvPrograms(for: .RTS, day: day, minimal: minimal)
+            Self.current!.tvPrograms(for: .RTS, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) }) }
                 .eraseToAnyPublisher()
         case .SRF:
-            SRGDataProvider.current!.tvPrograms(for: .SRF, day: day, minimal: minimal)
+            Self.current!.tvPrograms(for: .SRF, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: false) }) }
                 .eraseToAnyPublisher()
         case .thirdParty:
-            SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal)
+            Self.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal)
                 .map { Array($0.map { PlayProgramComposition(channel: $0.channel, programs: $0.programs, external: true) }) }
                 .eraseToAnyPublisher()
         }
@@ -291,7 +291,7 @@ struct PlayProgram: Hashable {
 extension Publishers {
     static func concatenateMany<Output, Failure>(_ publishers: [AnyPublisher<Output, Failure>]) -> AnyPublisher<Output, Failure> {
         publishers.reduce(Empty().eraseToAnyPublisher()) { acc, elem in
-            Publishers.Concatenate(prefix: acc, suffix: elem).eraseToAnyPublisher()
+            Concatenate(prefix: acc, suffix: elem).eraseToAnyPublisher()
         }
     }
 }

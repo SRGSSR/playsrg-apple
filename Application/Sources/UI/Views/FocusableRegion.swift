@@ -95,7 +95,7 @@ extension View {
     /**
      *  Ensure the whole view area can catch focus (if focus is supported by the platform), redirecting it onto itself.
      */
-    func focusable() -> some View {
+    func focusableRegion() -> some View {
         // Focus environments are available on iOS but not so useful. Do not wrap into a FocusableRegion unnecessarily.
         #if os(tvOS)
             Group {

@@ -16,6 +16,16 @@
       "scale" : "3x"
     },
     {
+      "filename" : "bg-tv 1.heic",
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "bg-tv@2x 1.heic",
+      "idiom" : "ipad",
+      "scale" : "2x"
+    },
+    {
       "filename" : "bg-tv.heic",
       "idiom" : "tv",
       "scale" : "1x"

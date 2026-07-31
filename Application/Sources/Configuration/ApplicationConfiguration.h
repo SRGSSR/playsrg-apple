@@ -16,6 +16,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_CLOSED_ENUM(NSInteger, MigrationPhase) {
+    MigrationPhaseNone = 0,
+    MigrationPhaseLearnMore,
+    MigrationPhaseJoinBeta,
+    MigrationPhaseDownload,
+    MigrationPhaseUpdate
+};
+
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);
 OBJC_EXPORT NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval duration);
 
@@ -58,10 +66,9 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
-@property (nonatomic, readonly, getter=isMigrationMandatory) BOOL migrationMandatory;
+@property (nonatomic, readonly) MigrationPhase migrationPhase;
 @property (nonatomic, readonly) NSURL *migrationHelpURL;
 @property (nonatomic, readonly) NSURL *playPlusStoreURL;
-@property (nonatomic, readonly) NSURL *tvPlayPlusStoreURL;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;

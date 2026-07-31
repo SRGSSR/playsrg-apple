@@ -28,7 +28,7 @@ struct ProgramGuideHeaderView: View {
                 ProgramPreview(data: model.focusedProgramAndChannel)
                     .accessibilityHidden(true)
                 NavigationBar(model: model)
-                    .focusable()
+                    .focusableRegion()
                     .padding(.horizontal, 56)
                     .padding(.vertical, 40 + ProgramGuideGridLayout.timelineHeight)
                     .frame(maxHeight: .infinity, alignment: .bottom)
