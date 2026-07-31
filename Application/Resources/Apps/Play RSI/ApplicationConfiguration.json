@@ -32,8 +32,6 @@
   "audioDescriptionAvailabilityHidden": true,
   "tvGuideOtherBouquets": "srf,rts",
   "userConsentDefaultLanguage": "it",
-  "mandatoryMigration": false,
-  "migrationHelpURL": "https://support.playplus.ch/it/starting/30_from_play_to_playplus/#non-trovo-lapp-play-nellapp-store-o-nel-play-store",
-  "playPlusStoreURL": "https://apps.apple.com/app/id1532890312",
-  "tvPlayPlusStoreURL": "com.apple.TVAppStore://apps.apple.com/app/id1532890312"
+  "migrationHelpURL": "https://support.playplus.ch/it",
+  "playPlusAppStoreProductIdentifier": 1532890312
 }

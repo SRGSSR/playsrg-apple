@@ -94,12 +94,7 @@ extension MigrationView {
             case .joinBeta:
                 UIApplication.shared.openTestFlight?()
             case .download, .update:
-                UIApplication.shared.open(
-                    constant(
-                        iOS: ApplicationConfiguration.shared.playPlusStoreURL,
-                        tvOS: ApplicationConfiguration.shared.tvPlayPlusStoreURL
-                    )
-                )
+                UIApplication.shared.open(ApplicationConfiguration.shared.playPlusStoreURL)
             case .help:
                 UIApplication.shared.open(ApplicationConfiguration.shared.migrationHelpURL)
             }

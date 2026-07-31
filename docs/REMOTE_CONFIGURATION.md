@@ -164,8 +164,18 @@ Feeds
 * `tvGuideOtherBouquets` (optional, string, multiple): TV guide other bouquets to display below the main vendor bouquet. Available values:
 	* `thirdparty`: Third party bouquet delivered for the vendor.
 	* `rsi`: RSI vendor bouquet.
-	* `rts`: RT vendor bouquet.
-	* `srf`: SR vendor bouquet.
+	* `rts`: RTS vendor bouquet.
+	* `srf`: SRF vendor bouquet.
+
+## Play+ migration
+
+* `migrationHelpURL` (mandatory, string): The URL of the web page to display for help during the migration.
+* `migrationPhase` (optional, string): The Play+ migration phase to display in the app. Available values:
+	* `learnMore`: Learn more about Play+.
+	* `joinBeta`: Join the Play+ beta.
+	* `download`: Optionally update to Play+.
+	* `update`: Force update to Play+. Play SRG cannot be used anymore.
+* `playPlusAppStoreProductIdentifier` (mandatory, number): Application product identifier of Play Plus on the AppStore.
 
 ## Other functionalities
 

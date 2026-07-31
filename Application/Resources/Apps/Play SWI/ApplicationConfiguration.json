@@ -29,8 +29,6 @@
   "subtitleAvailabilityHidden": true,
   "audioDescriptionAvailabilityHidden": true,
   "userConsentDefaultLanguage": "en",
-  "mandatoryMigration": false,
   "migrationHelpURL": "https://www.srgssr.ch",
-  "playPlusStoreURL": "https://www.srgssr.ch",
-  "tvPlayPlusStoreURL": "https://www.srgssr.ch"
+  "playPlusAppStoreProductIdentifier": 1532890312
 }
