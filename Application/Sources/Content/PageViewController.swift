@@ -209,8 +209,9 @@ final class PageViewController: UIViewController {
             view.content = ShowHeaderView(model.displayedShow, horizontalPadding: Self.layoutHorizontalMargin).primaryColor(model.primaryColor)
         }
 
-        let migrationBannerViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<MigrationBanner>>(elementKind: SupplementaryView.migrationBanner.rawValue) { view, _, _ in
-            view.content = MigrationBanner(configuration: .learnMore)
+        let migrationBannerViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<MigrationBanner>>(elementKind: SupplementaryView.migrationBanner.rawValue) { [model] view, _, _ in
+            guard let migrationBannerConfiguration = model.migrationBannerConfiguration else { return }
+            view.content = MigrationBanner(configuration: migrationBannerConfiguration)
         }
 
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -805,7 +806,7 @@ private extension PageViewController {
             }
 
             func migrationBanner() -> NSCollectionLayoutBoundarySupplementaryItem? {
-                guard sectionIndex == 0, model.displaysMigrationBanner else { return nil }
+                guard sectionIndex == 0, model.migrationBannerConfiguration != nil else { return nil }
                 return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: MigrationBanner.size(), elementKind: SupplementaryView.migrationBanner.rawValue, alignment: .bottomLeading)
             }
 

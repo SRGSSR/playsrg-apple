@@ -505,12 +505,21 @@ extension PageViewModel {
         }
     }
 
-    var displaysMigrationBanner: Bool {
+    var migrationBannerConfiguration: MigrationBanner.Configuration? {
         switch id {
         case .video, .audio, .live:
-            true
+            switch ApplicationConfiguration.shared.migrationPhase {
+            case .learnMore:
+                return .learnMore
+            case .joinBeta:
+                return .joinBeta
+            case .download:
+                return .download
+            default:
+                return nil
+            }
         default:
-            false
+            return nil
         }
     }
 }

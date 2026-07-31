@@ -31,17 +31,17 @@ extension MigrationBanner {
             subtitle: "We’re building the next version of our app",
             action: .joinBeta
         )
-        static let update = Self(
+        static let download = Self(
             title: "Our new app comes on 2nd of January",
             subtitle: "Update now",
-            action: .update
+            action: .download
         )
     }
 
     enum Action {
         case learnMore
         case joinBeta
-        case update
+        case download
 
         var name: LocalizedStringKey {
             switch self {
@@ -49,8 +49,8 @@ extension MigrationBanner {
                 "Learn more"
             case .joinBeta:
                 "Join"
-            case .update:
-                "Update"
+            case .download:
+                "Download"
             }
         }
     }
@@ -169,7 +169,7 @@ struct MigrationBanner_Previews: PreviewProvider {
         Group {
             MigrationBanner(configuration: .learnMore)
             MigrationBanner(configuration: .joinBeta)
-            MigrationBanner(configuration: .update)
+            MigrationBanner(configuration: .download)
         }
         .previewLayout(.fixed(width: size.width, height: size.height))
     }
