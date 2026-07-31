@@ -734,11 +734,24 @@ extension PageViewController: UIScrollViewDelegate {
 #endif
 
 extension PageViewController: MigrationBannerActions {
-    func openMigrationView(sender _: Any?) {
+    private static func migrationViewConfiguration(for action: MigrationBanner.Action) -> MigrationView.Configuration {
+        switch action {
+        case .learnMore:
+            .learnMore
+        case .joinBeta:
+            .joinBeta
+        case .download:
+            .download
+        }
+    }
+
+    func openMigrationView(sender _: Any?, event: MigrationBannerEvent?) {
+        guard let event else { return }
+        let configuration = Self.migrationViewConfiguration(for: event.action)
         #if os(iOS)
-            play_present(MigrationViewController.viewController(configuration: .learnMore), animated: true)
+            play_present(MigrationViewController.viewController(configuration: configuration), animated: true)
         #else
-            present(MigrationViewController.viewController(configuration: .learnMore), animated: true)
+            present(MigrationViewController.viewController(configuration: configuration), animated: true)
         #endif
     }
 }

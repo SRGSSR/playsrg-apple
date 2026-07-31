@@ -10,7 +10,20 @@ import SwiftUI
 // MARK: Contract
 
 @objc protocol MigrationBannerActions: AnyObject {
-    func openMigrationView(sender: Any?)
+    func openMigrationView(sender: Any?, event: MigrationBannerEvent?)
+}
+
+final class MigrationBannerEvent: UIEvent {
+    let action: MigrationBanner.Action
+
+    init(action: MigrationBanner.Action) {
+        self.action = action
+        super.init()
+    }
+
+    override init() {
+        fatalError("init() is not available")
+    }
 }
 
 // MARK: View
@@ -159,7 +172,7 @@ struct MigrationBanner: View {
     #endif
 
     private func action() {
-        firstResponder.sendAction(#selector(MigrationBannerActions.openMigrationView(sender:)))
+        firstResponder.sendAction(#selector(MigrationBannerActions.openMigrationView(sender:event:)), for: MigrationBannerEvent(action: configuration.action))
     }
 }
 

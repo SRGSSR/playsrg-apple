@@ -510,16 +510,16 @@ extension PageViewModel {
         case .video, .audio, .live:
             switch ApplicationConfiguration.shared.migrationPhase {
             case .learnMore:
-                return .learnMore
+                .learnMore
             case .joinBeta:
-                return .joinBeta
+                .joinBeta
             case .download:
-                return .download
+                .download
             default:
-                return nil
+                nil
             }
         default:
-            return nil
+            nil
         }
     }
 }
