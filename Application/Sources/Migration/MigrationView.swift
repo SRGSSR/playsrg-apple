@@ -171,6 +171,7 @@ struct MigrationView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: constant(iOS: 32, tvOS: 64))
+                .accessibilityHidden(true)
 
             VStack(alignment: .leading) {
                 Text(title)
@@ -187,6 +188,7 @@ struct MigrationView: View {
             .frame(width: 120, height: 120)
             .shadow(color: .white, radius: 150)
             .shadow(color: .white, radius: 50)
+            .accessibilityHidden(true)
     }
 
     private func actionsView() -> some View {
@@ -227,6 +229,7 @@ struct MigrationView: View {
             .aspectRatio(contentMode: .fill)
             .overlay(LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom))
             .ignoresSafeArea()
+            .accessibilityHidden(true)
     }
 
     @ViewBuilder

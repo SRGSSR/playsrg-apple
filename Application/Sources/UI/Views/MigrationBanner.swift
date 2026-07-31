@@ -140,6 +140,7 @@ struct MigrationBanner: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(height: constant(iOS: 75, tvOS: 123))
+            .accessibilityHidden(true)
     }
 
     private func message() -> some View {
