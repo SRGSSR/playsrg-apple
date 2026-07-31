@@ -111,6 +111,7 @@ struct MigrationView: View {
         GeometryReader { geometry in
             ScrollView {
                 VStack(spacing: constant(iOS: 30, tvOS: 60)) {
+                    Spacer()
                     descriptionView()
                     Spacer()
                     actionsView()
@@ -126,9 +127,9 @@ struct MigrationView: View {
     private func descriptionView() -> some View {
         VStack(spacing: constant(iOS: 24, tvOS: 48)) {
             appIcon()
-#if os(tvOS)
+            #if os(tvOS)
                 .focusable()
-#endif
+            #endif
 
             Text(configuration.title)
                 .srgFont(.H1)

@@ -748,10 +748,12 @@ extension PageViewController: MigrationBannerActions {
     func openMigrationView(sender _: Any?, event: MigrationBannerEvent?) {
         guard let event else { return }
         let configuration = Self.migrationViewConfiguration(for: event.action)
+        let migrationViewController = MigrationViewController.viewController(configuration: configuration)
         #if os(iOS)
-            play_present(MigrationViewController.viewController(configuration: configuration), animated: true)
+            migrationViewController.modalPresentationStyle = .fullScreen
+            play_present(migrationViewController, animated: true)
         #else
-            present(MigrationViewController.viewController(configuration: configuration), animated: true)
+            present(migrationViewController, animated: true)
         #endif
     }
 }
