@@ -126,7 +126,9 @@ struct MigrationView: View {
     private func descriptionView() -> some View {
         VStack(spacing: constant(iOS: 24, tvOS: 48)) {
             appIcon()
+#if os(tvOS)
                 .focusable()
+#endif
 
             Text(configuration.title)
                 .srgFont(.H1)

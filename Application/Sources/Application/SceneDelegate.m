@@ -36,7 +36,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)applyRootViewController
 {
-    if (ApplicationConfiguration.sharedApplicationConfiguration.isMandatoryMigration) {
+    if (ApplicationConfiguration.sharedApplicationConfiguration.migrationPhase == MigrationPhaseUpdate) {
         // Mandatory migration: the app is no longer accessible, the migration screen replaces the whole UI.
         self.window.rootViewController = [MigrationViewController mandatoryUpdateViewController];
     } else if (![self.window.rootViewController isKindOfClass:TabBarController.class]) {
