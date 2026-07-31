@@ -183,13 +183,11 @@ struct MigrationView: View {
     }
 
     private func appIcon() -> some View {
-        VStack(spacing: 50) {
-            Image(.playPlusAppIcon)
-                .resizable()
-                .frame(width: 120, height: 120)
-                .shadow(color: .white, radius: 150)
-                .shadow(color: .white, radius: 50)
-        }
+        Image(.playPlusAppIcon)
+            .resizable()
+            .frame(width: 120, height: 120)
+            .shadow(color: .white, radius: 150)
+            .shadow(color: .white, radius: 50)
     }
 
     private func actionsView() -> some View {

@@ -62,7 +62,7 @@ struct SectionShowHeaderView: View {
             .frame(maxWidth: .infinity)
         }
         .padding(.bottom, constant(iOS: 20, tvOS: 50))
-        .focusable()
+        .focusableRegion()
     }
 
     /// Behavior: h-exp, v-exp

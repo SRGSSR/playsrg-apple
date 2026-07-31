@@ -145,7 +145,7 @@ struct ShowHeaderView: View, PrimaryColorSettable {
                     .frame(height: constant(iOS: 40, tvOS: 70))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .focusable()
+            .focusableRegion()
         }
 
         /// Behavior: h-exp, v-hug
