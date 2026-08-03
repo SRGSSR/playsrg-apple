@@ -32,21 +32,25 @@ extension MigrationBanner {
     struct Configuration {
         let title: LocalizedStringKey
         let subtitle: LocalizedStringKey
+        let icon: ImageResource
         let action: Action
 
         static let learnMore = Self(
             title: "Our new app comes soon!",
             subtitle: "We’re building the next version of our app",
+            icon: .playPlusAppIcon,
             action: .learnMore
         )
         static let joinBeta = Self(
             title: "Join the Beta Test",
             subtitle: "We’re building the next version of our app",
+            icon: .playPlusAppIcon,
             action: .joinBeta
         )
         static let download = Self(
             title: "Our new app comes on 2nd of January",
             subtitle: "Update now",
+            icon: .playPlusAppIcon,
             action: .download
         )
     }
@@ -167,7 +171,7 @@ struct MigrationBanner: View {
     }
 
     private func icon() -> some View {
-        Image(.playPlusAppIcon)
+        Image(configuration.icon)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(height: constant(iOS: 75, tvOS: 123))
