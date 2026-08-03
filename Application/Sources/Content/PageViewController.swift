@@ -754,7 +754,8 @@ extension PageViewController: MigrationBannerActions {
         case .download:
             presentMigrationView(for: .download)
         case .feedback:
-            UIApplication.shared.open(URL(string: "https://rts.ch/play")!)
+            guard let feedbackUrl = ApplicationConfiguration.shared.feedbackURL else { return }
+            UIApplication.shared.open(feedbackUrl)
         }
     }
 }

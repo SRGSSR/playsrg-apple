@@ -35,5 +35,6 @@
   "userConsentDefaultLanguage": "fr",
   "migrationHelpURL": "https://support.playplus.ch/fr",
   "playPlusAppStoreProductIdentifier": 1532890312,
-  "audioContentHomepagePreferred": true
+  "audioContentHomepagePreferred": true,
+  "feedbackURL": "https://app.formbricks.com/s/cmn8yadcda12doe01e9jsqz6j"
 }
