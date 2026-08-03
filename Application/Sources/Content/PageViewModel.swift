@@ -515,6 +515,8 @@ extension PageViewModel {
                 .joinBeta
             case .download:
                 .download
+            case .feedback:
+                .feedback
             default:
                 nil
             }

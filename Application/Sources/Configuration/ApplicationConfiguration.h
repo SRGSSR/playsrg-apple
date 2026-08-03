@@ -21,7 +21,8 @@ typedef NS_CLOSED_ENUM(NSInteger, MigrationPhase) {
     MigrationPhaseLearnMore,
     MigrationPhaseJoinBeta,
     MigrationPhaseDownload,
-    MigrationPhaseUpdate
+    MigrationPhaseUpdate,
+    MigrationPhaseFeedback
 };
 
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);

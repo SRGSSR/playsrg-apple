@@ -53,12 +53,19 @@ extension MigrationBanner {
             icon: .playPlusAppIcon,
             action: .download
         )
+        static let feedback = Self(
+            title: "Need help or want to share a suggestion? Write to us.",
+            subtitle: "",
+            icon: .appIcon,
+            action: .feedback
+        )
     }
 
     enum Action {
         case learnMore
         case joinBeta
         case download
+        case feedback
 
         var name: LocalizedStringKey {
             switch self {
@@ -68,6 +75,8 @@ extension MigrationBanner {
                 "Join"
             case .download:
                 "Download"
+            case .feedback:
+                "Give feedback"
             }
         }
     }
@@ -173,6 +182,7 @@ struct MigrationBanner: View {
     private func icon() -> some View {
         Image(configuration.icon)
             .resizable()
+            .clipShape(RoundedRectangle(cornerRadius: 20))
             .aspectRatio(contentMode: .fit)
             .frame(height: constant(iOS: 75, tvOS: 123))
             .accessibilityHidden(true)
@@ -223,6 +233,7 @@ struct MigrationBanner_Previews: PreviewProvider {
             MigrationBanner(configuration: .learnMore)
             MigrationBanner(configuration: .joinBeta)
             MigrationBanner(configuration: .download)
+            MigrationBanner(configuration: .feedback)
         }
         .previewLayout(.fixed(width: size.width, height: size.height))
     }

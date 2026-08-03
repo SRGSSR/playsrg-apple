@@ -55,7 +55,8 @@ static MigrationPhase MigrationPhaseFromString(NSString *string)
         s_phases = @{ @"learnMore" : @(MigrationPhaseLearnMore),
                       @"joinBeta" : @(MigrationPhaseJoinBeta),
                       @"download" : @(MigrationPhaseDownload),
-                      @"update" : @(MigrationPhaseUpdate) };
+                      @"update" : @(MigrationPhaseUpdate),
+                      @"feedback" : @(MigrationPhaseFeedback) };
     });
     return s_phases[string].integerValue;
 }
