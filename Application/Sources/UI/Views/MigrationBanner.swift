@@ -114,7 +114,7 @@ struct MigrationBanner: View {
         ZStack {
             #if os(iOS)
                 if isCompact {
-                    HStack(spacing: 16) {
+                    HStack(alignment: .top, spacing: 16) {
                         icon()
                         message()
                     }
