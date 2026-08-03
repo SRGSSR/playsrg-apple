@@ -110,29 +110,60 @@ struct MigrationBanner: View {
         ZStack {
             #if os(iOS)
                 if horizontalSizeClass == .compact {
-                    HStack(spacing: 16) {
-                        icon()
-                        message()
-                    }
+                    compactMainView()
+                        .onTapGesture(perform: action)
                 } else {
-                    ZStack(alignment: .leading) {
-                        message()
-                        icon()
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
+                    regularMainView()
                 }
             #else
-                ZStack {
-                    message()
-                        .frame(width: 1000)
-                    icon()
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+                tvMainView()
             #endif
         }
         .padding(.horizontal, constant(iOS: 20, tvOS: 50))
         .padding(.vertical, constant(iOS: 20, tvOS: 30))
         .background(background())
+    }
+
+    #if os(iOS)
+        private func compactMainView() -> some View {
+            HStack(alignment: .top, spacing: 16) {
+                icon()
+
+                VStack(alignment: .leading) {
+                    title()
+                    subtitle()
+                    link()
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+
+        private func regularMainView() -> some View {
+            HStack(spacing: 16) {
+                VStack(alignment: .leading) {
+                    title()
+                    subtitle()
+                    button()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                icon()
+            }
+        }
+    #endif
+
+    private func tvMainView() -> some View {
+        ZStack {
+            VStack {
+                title()
+                subtitle()
+            }
+            .frame(width: 1000)
+
+            icon()
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
     }
 
     private func icon() -> some View {
@@ -143,33 +174,35 @@ struct MigrationBanner: View {
             .accessibilityHidden(true)
     }
 
-    private func message() -> some View {
-        VStack(alignment: constant(iOS: .leading, tvOS: .center)) {
-            Text(configuration.title)
-                .srgFont(.H2)
-                .lineLimit(2)
-                .layoutPriority(1)
-            Text(configuration.subtitle)
-                .srgFont(.body)
-                .lineLimit(2)
-            #if os(iOS)
-                button()
-            #endif
-        }
-        .frame(maxWidth: .infinity)
+    private func title() -> some View {
+        Text(configuration.title)
+            .srgFont(.H3)
+            .lineLimit(2)
+    }
+
+    private func subtitle() -> some View {
+        Text(configuration.subtitle)
+            .srgFont(.body)
+            .lineLimit(2)
     }
 
     #if os(iOS)
+        private func link() -> some View {
+            Text(configuration.action.name)
+                .padding(2)
+                .foregroundColor(.white)
+                .srgFont(.H3)
+        }
+
         private func button() -> some View {
             Button(action: action) {
                 Text(configuration.action.name)
-                    .foregroundColor(.white)
-                    .srgFont(.H3)
                     .padding(2)
             }
             .buttonStyle(.borderedProminent)
             .tint(.srgRed)
-            .frame(maxWidth: .infinity, alignment: horizontalSizeClass == .compact ? .trailing : .leading)
+            .foregroundColor(.white)
+            .srgFont(.H3)
         }
     #endif
 
