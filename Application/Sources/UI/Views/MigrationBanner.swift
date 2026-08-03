@@ -90,10 +90,6 @@ struct MigrationBanner: View {
         .responderChain(from: firstResponder)
     }
 
-    private var isCompact: Bool {
-        horizontalSizeClass == .compact
-    }
-
     static func size() -> NSCollectionLayoutSize {
         let fontMetrics = SRGFont.metricsForFont(with: .body)
         let height = fontMetrics.scaledValue(for: constant(iOS: 120, tvOS: 220)) + 60
@@ -113,7 +109,7 @@ struct MigrationBanner: View {
     private func mainView() -> some View {
         ZStack {
             #if os(iOS)
-                if isCompact {
+                if horizontalSizeClass == .compact {
                     compactMainView()
                         .onTapGesture(perform: action)
                 } else {
