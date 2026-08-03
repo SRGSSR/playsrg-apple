@@ -146,7 +146,7 @@ struct MigrationBanner: View {
     private func message() -> some View {
         VStack(alignment: constant(iOS: .leading, tvOS: .center)) {
             Text(configuration.title)
-                .srgFont(.H2)
+                .srgFont(.H3)
                 .lineLimit(2)
                 .layoutPriority(1)
             Text(configuration.subtitle)
