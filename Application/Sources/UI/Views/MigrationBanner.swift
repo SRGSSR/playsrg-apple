@@ -90,6 +90,10 @@ struct MigrationBanner: View {
         .responderChain(from: firstResponder)
     }
 
+    private var isCompact: Bool {
+        horizontalSizeClass == .compact
+    }
+
     static func size() -> NSCollectionLayoutSize {
         let fontMetrics = SRGFont.metricsForFont(with: .body)
         let height = fontMetrics.scaledValue(for: constant(iOS: 120, tvOS: 220)) + 60
@@ -109,7 +113,7 @@ struct MigrationBanner: View {
     private func mainView() -> some View {
         ZStack {
             #if os(iOS)
-                if horizontalSizeClass == .compact {
+                if isCompact {
                     HStack(spacing: 16) {
                         icon()
                         message()
@@ -169,7 +173,7 @@ struct MigrationBanner: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(.srgRed)
-            .frame(maxWidth: .infinity, alignment: horizontalSizeClass == .compact ? .trailing : .leading)
+            .frame(maxWidth: .infinity, alignment: isCompact ? .trailing : .leading)
         }
     #endif
 
