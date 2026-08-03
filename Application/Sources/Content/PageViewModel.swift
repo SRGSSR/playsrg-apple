@@ -516,7 +516,7 @@ extension PageViewModel {
             case .download:
                 .download
             case .feedback:
-                .feedback
+                constant(iOS: .feedback, tvOS: nil)
             default:
                 nil
             }
