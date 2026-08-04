@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+// swiftlint:disable file_length
+
 import Combine
 import SRGAppearanceSwift
 import SwiftUI
@@ -1199,3 +1201,5 @@ private extension PageViewController {
         }
     }
 }
+
+// swiftlint:enable file_length
