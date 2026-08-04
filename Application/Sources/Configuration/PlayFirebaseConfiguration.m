@@ -117,7 +117,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
 @property (nonatomic) FIRRemoteConfig *remoteConfig;
 @property (nonatomic) NSDictionary *dictionary;
-@property (nonatomic) void (^updateBlock)(PlayFirebaseConfiguration *);
+@property (nonatomic) BOOL (^updateBlock)(PlayFirebaseConfiguration *);
 
 @end
 
@@ -156,7 +156,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(void (^)(PlayFirebaseConfiguration * _Nonnull))updateBlock
+- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(BOOL (^)(PlayFirebaseConfiguration * _Nonnull))updateBlock
 {
     if (self = [super init]) {
         if ([FIRApp defaultApp] != nil) {
@@ -177,7 +177,8 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
                                                    selector:@selector(applicationDidBecomeActive:)
                                                        name:UIApplicationDidBecomeActiveNotification
                                                      object:nil];
-            
+
+            [self requestUpdate];
             [self update];
         }
         else {
@@ -369,7 +370,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
 #pragma mark Update
 
-- (void)update
+- (void)requestUpdate
 {
     // Cached configuration expiration must be large enough, except in development builds, see
     //   https://firebase.google.com/support/faq/#remote-config-values
@@ -382,17 +383,25 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
     [self.remoteConfig fetchWithExpirationDuration:kExpirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError * _Nullable error) {
         [self.remoteConfig activateWithCompletion:^(BOOL changed, NSError * _Nullable error) {
             if (changed) {
-                self.updateBlock(self);
+                [self update];
             }
         }];
     }];
+}
+
+- (void)update
+{
+    if (! self.updateBlock(self)) {
+        PlayLogWarning(@"configuration", @"The configuration is invalid. The local cache has been cleared.");
+        [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
+    }
 }
 
 #pragma mark Notifications
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    [self update];
+    [self requestUpdate];
 }
 
 @end

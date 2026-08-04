@@ -241,14 +241,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         id defaultsDictionary = [NSJSONSerialization JSONObjectWithData:configurationFileData options:0 error:NULL];
         NSAssert([defaultsDictionary isKindOfClass:NSDictionary.class], @"A valid default configuration dictionary is required");
         
-        self.firebaseConfiguration = [[PlayFirebaseConfiguration alloc] initWithDefaultsDictionary:defaultsDictionary updateBlock:^(PlayFirebaseConfiguration * _Nonnull configuration) {
-            if (! [self synchronizeWithFirebaseConfiguration:configuration]) {
-                PlayLogWarning(@"configuration", @"The newly fetched remote application configuration is invalid and was not applied");
-            }
+        self.firebaseConfiguration = [[PlayFirebaseConfiguration alloc] initWithDefaultsDictionary:defaultsDictionary updateBlock:^BOOL(PlayFirebaseConfiguration * _Nonnull configuration) {
+            return [self synchronizeWithFirebaseConfiguration:configuration];
         }];
-        
-        __unused BOOL isDefaultRemoteConfigValid = [self synchronizeWithFirebaseConfiguration:self.firebaseConfiguration];
-        NSAssert(isDefaultRemoteConfigValid, @"The default remote configuration must be valid");
     }
     return self;
 }
