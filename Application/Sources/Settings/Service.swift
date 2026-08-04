@@ -54,19 +54,19 @@ enum Service: String, Identifiable, CaseIterable {
     var url: URL {
         switch self {
         case .production:
-            ApplicationConfiguration().dataProviderProductionServiceURL
+            ApplicationConfiguration.shared.dataProviderProductionServiceURL
         case .stage:
-            ApplicationConfiguration().dataProviderStageServiceURL
+            ApplicationConfiguration.shared.dataProviderStageServiceURL
         case .test:
-            ApplicationConfiguration().dataProviderTestServiceURL
+            ApplicationConfiguration.shared.dataProviderTestServiceURL
         case .mmf:
             Self.mmfUrl
         case .samProduction:
-            ApplicationConfiguration().dataProviderProductionServiceURL.appendingPathComponent("sam")
+            ApplicationConfiguration.shared.dataProviderProductionServiceURL.appendingPathComponent("sam")
         case .samStage:
-            ApplicationConfiguration().dataProviderStageServiceURL.appendingPathComponent("sam")
+            ApplicationConfiguration.shared.dataProviderStageServiceURL.appendingPathComponent("sam")
         case .samTest:
-            ApplicationConfiguration().dataProviderTestServiceURL.appendingPathComponent("sam")
+            ApplicationConfiguration.shared.dataProviderTestServiceURL.appendingPathComponent("sam")
         }
     }
 
