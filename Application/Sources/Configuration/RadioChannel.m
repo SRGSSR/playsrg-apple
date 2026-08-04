@@ -55,6 +55,11 @@ UIImage *RadioChannelSquareLogoImage(RadioChannel *radioChannel)
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-square", radioChannel.resourceUid]] ?: RadioChannelLogoImage(radioChannel);
 }
 
+UIImage *RadioChannelSquareLargeLogoImage(RadioChannel *radioChannel)
+{
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-square-large", radioChannel.resourceUid]] ?: RadioChannelLargeLogoImage(radioChannel);
+}
+
 UIImage *RadioChannelLogoImageWithTraitCollection(RadioChannel *radioChannel, UITraitCollection *traitCollection)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@", radioChannel.resourceUid] inBundle:nil compatibleWithTraitCollection:traitCollection] ?: [UIImage imageNamed:@"radioset"];

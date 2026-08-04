@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "image_1x1-retedue.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

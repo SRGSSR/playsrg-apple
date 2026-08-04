@@ -53,7 +53,7 @@ extension LiveMediaCellViewModel {
     }
 
     var logoImage: UIImage? {
-        channel?.play_largeLogoImage
+        constant(iOS: channel?.play_logoImage, tvOS: channel?.play_largeLogoImage)
     }
 
     var program: SRGProgram? {
