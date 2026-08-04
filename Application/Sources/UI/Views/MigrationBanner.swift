@@ -192,6 +192,7 @@ struct MigrationBanner: View {
                 .padding(2)
                 .foregroundColor(.white)
                 .srgFont(.H3)
+                .accessibilityAddTraits(.isButton)
         }
 
         private func button() -> some View {
