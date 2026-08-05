@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "logo_rsi_podcast.pdf",
+      "filename" : "RTS Podcasts 2.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "logo_rsi_podcast 1.pdf",
+      "filename" : "RTS Podcasts 1.pdf",
       "idiom" : "ipad"
     },
     {
-      "filename" : "RSI Podcast.pdf",
+      "filename" : "RTS Podcasts.pdf",
       "idiom" : "car"
     },
     {
-      "filename" : "logo_rsi_podcast 2.pdf",
+      "filename" : "RTS Podcasts 3.pdf",
       "idiom" : "tv"
     }
   ],
