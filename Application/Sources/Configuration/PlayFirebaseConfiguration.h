@@ -31,7 +31,7 @@ OBJC_EXPORT NSArray<NSNumber * /* HomeSection */> * _Nullable FirebaseConfigurat
  *  Create a configuration with the provided dictionary as local fallback, and a block called when the configuration
  *  is updated.
  */
-- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(void (^)(PlayFirebaseConfiguration *configuration))updateBlock;
+- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(BOOL (^)(PlayFirebaseConfiguration *configuration))updateBlock;
 
 /**
  *  Primitive type accessors. Return `nil` if the key is not found, or if the type of the object is incorrect.

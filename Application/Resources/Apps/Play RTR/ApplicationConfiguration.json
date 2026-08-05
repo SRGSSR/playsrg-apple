@@ -30,5 +30,6 @@
   "tvGuideOtherBouquets": "thirdparty,rts,rsi",
   "userConsentDefaultLanguage": "de",
   "migrationHelpURL": "https://support.playplus.ch/rm",
-  "playPlusAppStoreProductIdentifier": 1532890312
+  "playPlusAppStoreProductIdentifier": 1532890312,
+  "audioContentHomepagePreferred": true
 }

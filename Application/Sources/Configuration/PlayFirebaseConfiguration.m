@@ -117,7 +117,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
 @property (nonatomic) FIRRemoteConfig *remoteConfig;
 @property (nonatomic) NSDictionary *dictionary;
-@property (nonatomic) void (^updateBlock)(PlayFirebaseConfiguration *);
+@property (nonatomic) BOOL (^updateBlock)(PlayFirebaseConfiguration *);
 
 @end
 
@@ -156,13 +156,12 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(void (^)(PlayFirebaseConfiguration * _Nonnull))updateBlock
+- (instancetype)initWithDefaultsDictionary:(NSDictionary *)defaultsDictionary updateBlock:(BOOL (^)(PlayFirebaseConfiguration * _Nonnull))updateBlock
 {
     if (self = [super init]) {
         if ([FIRApp defaultApp] != nil) {
             self.remoteConfig = [FIRRemoteConfig remoteConfig];
-        }
-        if (self.remoteConfig) {
+
 #if defined(DEBUG)
             // Make it possible to retrieve the configuration more frequently during development
             // See https://firebase.google.com/support/faq/#remote-config-values
@@ -171,18 +170,17 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 #endif
             [self.remoteConfig setDefaults:defaultsDictionary];
             
-            self.updateBlock = updateBlock;
-            
             [NSNotificationCenter.defaultCenter addObserver:self
                                                    selector:@selector(applicationDidBecomeActive:)
                                                        name:UIApplicationDidBecomeActiveNotification
                                                      object:nil];
-            
-            [self update];
+
+            [self requestUpdate];
         }
-        else {
-            self.dictionary = defaultsDictionary;
-        }
+        self.dictionary = defaultsDictionary;
+        self.updateBlock = updateBlock;
+
+        [self update];
     }
     return self;
 }
@@ -232,7 +230,11 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
         return (value.source != FIRRemoteConfigSourceStatic && value.dataValue.length != 0) ? value.JSONValue : nil;
     }
     else {
-        return self.dictionary[key];
+        id object = self.dictionary[key];
+        if (! [object isKindOfClass:NSString.class]) {
+            return nil;
+        }
+        return [NSJSONSerialization JSONObjectWithData:[object dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
     }
 }
 
@@ -369,7 +371,7 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
 
 #pragma mark Update
 
-- (void)update
+- (void)requestUpdate
 {
     // Cached configuration expiration must be large enough, except in development builds, see
     //   https://firebase.google.com/support/faq/#remote-config-values
@@ -382,17 +384,29 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
     [self.remoteConfig fetchWithExpirationDuration:kExpirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError * _Nullable error) {
         [self.remoteConfig activateWithCompletion:^(BOOL changed, NSError * _Nullable error) {
             if (changed) {
-                self.updateBlock(self);
+                [self update];
             }
         }];
     }];
+}
+
+- (void)update
+{
+    if (! self.updateBlock(self)) {
+        PlayLogWarning(@"configuration", @"The configuration is invalid. The local cache has been cleared.");
+        [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
+
+        // Use local configuration for the session as a fallback.
+        self.remoteConfig = nil;
+        self.updateBlock(self);
+    }
 }
 
 #pragma mark Notifications
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    [self update];
+    [self requestUpdate];
 }
 
 @end
