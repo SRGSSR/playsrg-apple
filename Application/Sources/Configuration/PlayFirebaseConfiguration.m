@@ -233,7 +233,11 @@ NSArray<NSNumber *> *FirebaseConfigurationTVGuideOtherBouquets(NSString *string,
         return (value.source != FIRRemoteConfigSourceStatic && value.dataValue.length != 0) ? value.JSONValue : nil;
     }
     else {
-        return self.dictionary[key];
+        id object = self.dictionary[key];
+        if (! [object isKindOfClass:NSString.class]) {
+            return nil;
+        }
+        return [NSJSONSerialization JSONObjectWithData:[object dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];
     }
 }
 
