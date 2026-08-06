@@ -92,7 +92,7 @@ extension MigrationView {
             case .learnMore:
                 ()
             case .joinBeta:
-                UIApplication.shared.openTestFlight?()
+                ApplicationConfiguration.shared.openPlayPlusTestFlight()
             case .download, .update:
                 UIApplication.shared.open(ApplicationConfiguration.shared.playPlusStoreURL)
             case .help:

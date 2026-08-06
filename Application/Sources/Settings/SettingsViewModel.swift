@@ -241,7 +241,7 @@ final class SettingsViewModel: ObservableObject {
 
     var switchVersion: (() -> Void)? {
         guard !Bundle.main.play_isAppStoreRelease else { return nil }
-        return UIApplication.shared.openTestFlight
+        return ApplicationConfiguration.shared.openTestFlight
     }
 
     #if DEBUG || NIGHTLY || BETA

@@ -108,6 +108,40 @@ extension ApplicationConfiguration {
     }
 }
 
+extension ApplicationConfiguration {
+    var openTestFlight: (() -> Void)? {
+        guard let appStoreAppleId = Bundle.main.object(forInfoDictionaryKey: "AppStoreAppleId") as? String,
+              let url = testFlightUrl(forAppStoreAppleId: appStoreAppleId) else {
+            return nil
+        }
+        return {
+            UIApplication.shared.open(url)
+        }
+    }
+
+    func openPlayPlusTestFlight() {
+        guard let url = testFlightUrl(forAppStoreAppleId: playPlusAppStoreProductIdentifier.stringValue) else { return }
+        UIApplication.shared.open(url)
+    }
+
+    private func testFlightUrl(forAppStoreAppleId appStoreAppleId: String) -> URL? {
+        guard !appStoreAppleId.isEmpty else { return nil }
+        if let url = URL(string: "itms-beta://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {
+            return url
+        } else {
+            #if os(iOS)
+                if let url = URL(string: "https://beta.itunes.apple.com/v1/app/\(appStoreAppleId)"), UIApplication.shared.canOpenURL(url) {
+                    return url
+                } else {
+                    return nil
+                }
+            #else
+                return nil
+            #endif
+        }
+    }
+}
+
 enum ConfiguredSection: Hashable {
     case availableEpisodes(SRGShow)
 

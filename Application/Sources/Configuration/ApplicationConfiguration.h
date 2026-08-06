@@ -68,6 +68,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) MigrationPhase migrationPhase;
 @property (nonatomic, readonly) NSURL *migrationHelpURL;
+@property (nonatomic, readonly) NSNumber *playPlusAppStoreProductIdentifier;
 @property (nonatomic, readonly) NSURL *playPlusStoreURL;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
