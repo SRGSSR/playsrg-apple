@@ -320,6 +320,9 @@
 /* Information section header */
 "Information" = "Informationen";
 
+/* Migration button label */
+"Install Play+ now" = "Jetzt Play+ installieren";
+
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Behalten";
 
@@ -517,6 +520,9 @@
 
 /* Title label used to present scheduled livestream medias */
 "Play livestreams" = "SRF Livestreams";
+
+/* Migration screen subtitle */
+"Play SRG has been replaced by Play+. Download the new Play+ app now." = "Play SRF wurde von Play+ abgelöst. Du kannst die neue App jetzt herunterladen.";
 
 /* Search setting */
 "Playable abroad" = "Im Ausland verfügbar";
@@ -778,6 +784,9 @@
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "Die Sendung kann nicht geöffnet werden.";
+
+/* Migration screen title */
+"This app is no longer available" = "Diese App gibt es nicht mehr";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Aus rechtlichen Gründen kann dieser Inhalt nicht mit Google Cast abgespielt werden.";

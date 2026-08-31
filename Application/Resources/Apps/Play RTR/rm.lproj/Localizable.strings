@@ -320,6 +320,9 @@
 /* Information section header */
 "Information" = "Infurmaziun";
 
+/* Migration button label */
+"Install Play+ now" = "Installar Play+";
+
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Tegnair";
 
@@ -517,6 +520,9 @@
 
 /* Title label used to present scheduled livestream medias */
 "Play livestreams" = "RTR Livestreams";
+
+/* Migration screen subtitle */
+"Play SRG has been replaced by Play+. Download the new Play+ app now." = "Play RTR è vegnì remplazzà cun Play+. Ti pos uss telechargiar la nova app Play+.";
 
 /* Search setting */
 "Playable abroad" = "Disponibel en l'exteriur";
@@ -778,6 +784,9 @@
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "La preschentaziun na po betg vegnir averta.";
+
+/* Migration screen title */
+"This app is no longer available" = "Questa app n’exista betg pli";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Il cuntegn n'è betg lubì da Google Cast.";
