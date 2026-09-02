@@ -320,6 +320,9 @@
 /* Information section header */
 "Information" = "Information";
 
+/* Migration button label */
+"Install Play+ now" = "Installer Play+";
+
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Garder";
 
@@ -517,6 +520,9 @@
 
 /* Title label used to present scheduled livestream medias */
 "Play livestreams" = "RTS livestreams";
+
+/* Migration screen subtitle */
+"Play SRG has been replaced by Play+. Download the new Play+ app now." = "Play RTS a été remplacée par Play+. Téléchargez dès maintenant la nouvelle app Play+.";
 
 /* Search setting */
 "Playable abroad" = "Jouable à l'étranger";
@@ -778,6 +784,9 @@
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "L'émission ne peut pas être ouverte.";
+
+/* Migration screen title */
+"This app is no longer available" = "Cette app n’est plus disponible";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Ce contenu n'a pas le droit d'être lu par Google Cast.";

@@ -320,6 +320,9 @@
 /* Information section header */
 "Information" = "Informazioni";
 
+/* Migration button label */
+"Install Play+ now" = "Installa Play+";
+
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Tenere";
 
@@ -517,6 +520,9 @@
 
 /* Title label used to present scheduled livestream medias */
 "Play livestreams" = "RSI livestreams";
+
+/* Migration screen subtitle */
+"Play SRG has been replaced by Play+. Download the new Play+ app now." = "Play RSI è stata sostituita da Play+. Scarica la nuova app per continuare a utilizzare questo servizio.";
 
 /* Search setting */
 "Playable abroad" = "Disponibile all'estero";
@@ -778,6 +784,9 @@
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "Il programma non può essere aperto.";
+
+/* Migration screen title */
+"This app is no longer available" = "Questa versione dell'app non è più disponibile";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Non è permesso riprodurre questo contenuto con Google Cast.";

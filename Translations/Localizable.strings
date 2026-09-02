@@ -320,6 +320,9 @@
 /* Information section header */
 "Information" = "Information";
 
+/* Migration button label */
+"Install Play+ now" = "Install Play+ now";
+
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Keep";
 
@@ -517,6 +520,9 @@
 
 /* Title label used to present scheduled livestream medias */
 "Play livestreams" = "Play livestreams";
+
+/* Migration screen subtitle */
+"Play SRG has been replaced by Play+. Download the new Play+ app now." = "Play SRG has been replaced by Play+. Download the new Play+ app now.";
 
 /* Search setting */
 "Playable abroad" = "Playable abroad";
@@ -778,6 +784,9 @@
 /* Error message when a show cannot be opened via Handoff
    Error message when a show cannot be opened via Handoff, deep linking or a push notification */
 "The show cannot be opened." = "The show cannot be opened.";
+
+/* Migration screen title */
+"This app is no longer available" = "This app is no longer available";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "This content is not allowed to be played with Google Cast.";

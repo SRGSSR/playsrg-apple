@@ -40,8 +40,8 @@ extension MigrationView {
             isCancellable: true
         )
         static let update = Self(
-            title: "This app no longer exists",
-            subtitle: "This app has been replaced by Play+. You can now update or re-download the Play+ app. All your data will be retained.",
+            title: "This app is no longer available",
+            subtitle: "Play SRG has been replaced by Play+. Download the new Play+ app now.",
             displaysBullets: false,
             footer: nil,
             action: updateAction(),
@@ -81,7 +81,7 @@ extension MigrationView {
             case .download:
                 "Download Play+"
             case .update:
-                "Update now"
+                "Install Play+ now"
             case .help:
                 "How to get Play+"
             }
