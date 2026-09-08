@@ -906,3 +906,60 @@
 "Update now" = "Update now";
 "How to get Play+" = "How to get Play+";
 "This app no longer exists" = "This app no longer exists";
+
+/* Migration Banner */
+"Play SRG is becoming Play+" = "Play SRG is becoming Play+";
+
+/* Migration Banner */
+"Play+ is coming soon" = "Play+ is coming soon";
+
+/* Migration Banner */
+"Soon you'll find everything from SRG and more on Play+!" = "Soon you'll find everything from SRG and more on Play+!";
+
+/* Migration Banner */
+"Discover the new app in preview and share your opinion with us!" = "Discover the new app in preview and share your opinion with us!";
+
+/* Migration Banner */
+"In a few days, you can find all of SRG's offerings, and more, on Play+." = "In a few days, you can find all of SRG's offerings, and more, on Play+.";
+
+/* Migration Banner */
+"Learn more" = "Learn more";
+
+/* Migration View Header & Subtitles */
+"Play SRG becomes Play+" = "Play SRG becomes Play+";
+
+/* Migration View Header & Subtitles */
+"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland.";
+
+/* Migration View Header & Subtitles */
+"Try out the new Swiss live and streaming platform and share your opinion with us!" = "Try out the new Swiss live and streaming platform and share your opinion with us!";
+
+/* Migration View Header & Subtitles */
+"Play SRG has been replaced by Play+. You can now update or download the Play+. All your data will remain saved." = "Play SRG has been replaced by Play+. You can now update or download the Play+. All your data will remain saved.";
+
+/* Migration View Actions */
+"Back" = "Back";
+
+/* Migration View Actions */
+"I'm testing the app" = "I'm testing the app";
+
+/* Migration View Actions */
+"Install Play+" = "Install Play+";
+
+/* Migration View Bullets */
+"All of Switzerland in one app" = "All of Switzerland in one app";
+
+/* Migration View Bullets */
+"Find RTS, RSI, RTR, SRF, and Play Suisse all in one place" = "Find RTS, RSI, RTR, SRF, and Play Suisse all in one place";
+
+/* Migration View Bullets */
+"More choices for you" = "More choices for you";
+
+/* Migration View Bullets */
+"Live sports, movies, shows, series, podcasts, and more" = "Live sports, movies, shows, series, podcasts, and more";
+
+/* Migration View Bullets */
+"Free. No subscription required" = "Free. No subscription required";
+
+/* Migration View Footers */
+"Important note: The beta app will replace your Play Suisse App" = "Important note: The beta app will replace your Play Suisse App";

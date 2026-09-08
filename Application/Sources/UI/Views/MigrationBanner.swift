@@ -36,25 +36,25 @@ extension MigrationBanner {
         let action: Action
 
         static let learnMore = Self(
-            title: "Our new app comes soon!",
-            subtitle: "We’re building the next version of our app",
+            title: "Play SRG is becoming Play+",
+            subtitle: "Soon you'll find everything from SRG and more on Play+!",
             icon: .playPlusAppIcon,
             action: .learnMore
         )
         static let joinBeta = Self(
-            title: "Join the Beta Test",
-            subtitle: "We’re building the next version of our app",
+            title: "Play+ is coming soon",
+            subtitle: "Discover the new app in preview and share your opinion with us!",
             icon: .playPlusAppIcon,
             action: .joinBeta
         )
         static let download = Self(
-            title: "Our new app comes on 2nd of January",
-            subtitle: "Update now",
+            title: "Play SRG is becoming Play+",
+            subtitle: "In a few days, you can find all of SRG's offerings, and more, on Play+.",
             icon: .playPlusAppIcon,
             action: .download
         )
         static let feedback = Self(
-            title: "Need help or want to share a suggestion? Write to us.",
+            title: "What do you think of Play RTS? We'd love to hear your opinion!",
             subtitle: "",
             icon: .appIcon,
             action: .feedback
@@ -72,11 +72,11 @@ extension MigrationBanner {
             case .learnMore:
                 "Learn more"
             case .joinBeta:
-                "Join"
+                "Learn more"
             case .download:
-                "Download"
+                "Learn more"
             case .feedback:
-                "Give feedback"
+                "To the survey"
             }
         }
     }

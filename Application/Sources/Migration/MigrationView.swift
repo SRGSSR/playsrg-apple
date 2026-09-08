@@ -16,24 +16,24 @@ extension MigrationView {
         let isCancellable: Bool
 
         static let learnMore = Self(
-            title: "Everything you like, even better",
-            subtitle: "Your content synced across all devices.",
+            title: "Play SRG becomes Play+",
+            subtitle: "Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland.",
             displaysBullets: true,
             footer: nil,
             action: .learnMore,
             isCancellable: false
         )
         static let joinBeta = Self(
-            title: "Help us improve the new App",
-            subtitle: "Get ready for fresh features, a new design, and much more. Stay tuned!",
+            title: "Play SRG becomes Play+",
+            subtitle: "Try out the new Swiss live and streaming platform and share your opinion with us!",
             displaysBullets: true,
             footer: "Important note: The beta app will replace your Play Suisse App",
             action: .joinBeta,
             isCancellable: true
         )
         static let download = Self(
-            title: "This app will be replaced",
-            subtitle: "You can’t use this app any longer from 04.01.2027. Please download the new app.",
+            title: "Play SRG becomes Play+",
+            subtitle: "Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland.",
             displaysBullets: true,
             footer: "Important note: The beta app will replace your Play Suisse App",
             action: downloadAction(),
@@ -41,7 +41,7 @@ extension MigrationView {
         )
         static let update = Self(
             title: "This app is no longer available",
-            subtitle: "Play SRG has been replaced by Play+. Download the new Play+ app now.",
+            subtitle: "Play SRG has been replaced by Play+. You can now update or download the Play+. All your data will remain saved.",
             displaysBullets: false,
             footer: nil,
             action: updateAction(),
@@ -75,13 +75,13 @@ extension MigrationView {
         var name: LocalizedStringKey {
             switch self {
             case .learnMore:
-                "Okay"
+                "Back"
             case .joinBeta:
-                "Join Play+ Beta test"
+                "I'm testing the app"
             case .download:
-                "Download Play+"
+                "Learn more"
             case .update:
-                "Install Play+ now"
+                "Install Play+"
             case .help:
                 "How to get Play+"
             }
@@ -152,18 +152,18 @@ struct MigrationView: View {
         VStack(spacing: 40) {
             bulletView(
                 icon: .playPlusPlay,
-                title: "Live channels now available",
-                subtitle: "Sports, broadcast TV and more Sports, broadcast TV and more"
+                title: "All of Switzerland in one app",
+                subtitle: "Find RTS, RSI, RTR, SRF, and Play Suisse all in one place"
             )
             bulletView(
                 icon: .playPlusLogo,
-                title: "Live channels now available",
-                subtitle: "Sports, broadcast TV and more Sports, broadcast TV and more"
+                title: "More choices for you",
+                subtitle: "Live sports, movies, shows, series, podcasts, and more"
             )
             bulletView(
                 icon: .playPlusWaveform,
-                title: "Live channels now available",
-                subtitle: "Sports, broadcast TV and more Sports, broadcast TV and more"
+                title: "Free. No subscription required",
+                subtitle: "Free. No subscription required"
             )
         }
     }
