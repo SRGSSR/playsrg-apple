@@ -906,3 +906,69 @@
 "Update now" = "Jetzt updaten";
 "How to get Play+" = "Co installesch jau Play+";
 "This app no longer exists" = "Diese App gibt es nicht mehr";
+
+/* Migration Banner */
+"Play SRG is becoming Play+" = "Play RTR daventa Play+";
+
+/* Migration Banner */
+"Play+ is coming soon" = "Play+ Beta è qua";
+
+/* Migration Banner */
+"Soon you'll find everything from SRG and more on Play+!" = "Prest chattas ti sin Play+ tut il cuntegn da RTR ed anc dapli!";
+
+/* Migration Banner */
+"Discover the new app in preview and share your opinion with us!" = "Nizzegia la nova app anc avant la publicaziun uffiziala ed ans dà resun!";
+
+/* Migration Banner */
+"In a few days, you can find all of SRG's offerings, and more, on Play+." = "En paucs dis chattas ti sin Play+ tut il cuntegn da RTR ed anc dapil!";
+
+/* Migration Banner */
+"Learn more" = "dapli";
+
+/* Migration View Header & Subtitles */
+"Play SRG becomes Play+" = "Play RTR daventa Play+";
+
+/* Migration View Header & Subtitles */
+"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ è la nova plattafurma live e da streaming da la Svizra. Qua scuvras ti prest istorgias da tia regiun e da tut il pajais.";
+
+/* Migration View Header & Subtitles */
+"Try out the new Swiss live and streaming platform and share your opinion with us!" = "Testescha la nova plattafurma live e da streaming da la Svizra e di a nus tia opiniun!";
+
+/* Migration View Header & Subtitles */
+"Play SRG has been replaced by Play+. You can now update or download the Play+. All your data will remain saved." = "Play RTR è vegnì remplazzà cun Play+. Ti pos uss telechargiar la nova app Play+.";
+
+/* Migration View Actions */
+"Back" = "Enavos";
+
+/* Migration View Actions */
+"I'm testing the app" = "Jau vi testar l’app";
+
+/* Migration View Actions */
+"Install Play+" = "Installar Play+";
+
+/* Migration View Bullets */
+"All of Switzerland in one app" = "L’entira Svizra en in’app";
+
+/* Migration View Bullets */
+"Find RTS, RSI, RTR, SRF, and Play Suisse all in one place" = "Tut da RTR, RSI, RTS e SRF en in lieu";
+
+/* Migration View Bullets */
+"More choices for you" = "Dapli selecziun per tai";
+
+/* Migration View Bullets */
+"Live sports, movies, shows, series, podcasts, and more" = "Da sport live e docus fin a podcasts";
+
+/* Migration View Bullets */
+"Free. No subscription required" = "L’entira Svizra en in’app";
+
+/* Migration View Footers */
+"Important note: The beta app will replace your Play Suisse App" = "Remartga impurtanta: L’app beta remplazza l’app Play Suisse.";
+
+/* Migration Banner */
+"What do you think of Play RTS? We'd love to hear your opinion!" = "Co As plascha Play RTR? Ans schai Vossa opiniun!";
+
+/* Migration Banner */
+"To the survey" = "A la retschertga";
+
+/* Migration View Bullets */
+"Play+ remains funded by the SSR media license fee" = "Tut da RTR, RSI, RTS e SRF en in lieu";
