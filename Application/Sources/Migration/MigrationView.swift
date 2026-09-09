@@ -149,7 +149,7 @@ struct MigrationView: View {
     }
 
     private func bulletsView() -> some View {
-        VStack(spacing: 40) {
+        VStack(alignment: .leading, spacing: 40) {
             bulletView(
                 icon: .playPlusPlay,
                 title: "All of Switzerland in one app",
