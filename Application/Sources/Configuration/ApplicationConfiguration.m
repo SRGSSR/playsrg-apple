@@ -55,7 +55,8 @@ static MigrationPhase MigrationPhaseFromString(NSString *string)
         s_phases = @{ @"learnMore" : @(MigrationPhaseLearnMore),
                       @"joinBeta" : @(MigrationPhaseJoinBeta),
                       @"download" : @(MigrationPhaseDownload),
-                      @"update" : @(MigrationPhaseUpdate) };
+                      @"update" : @(MigrationPhaseUpdate),
+                      @"feedback" : @(MigrationPhaseFeedback) };
     });
     return s_phases[string].integerValue;
 }
@@ -148,6 +149,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSURL *whatsNewURL;
 @property (nonatomic) NSURL *supportFormURL;
+@property (nonatomic) NSURL *feedbackURL;
 @property (nonatomic) NSURL *faqURL;
 @property (nonatomic) NSURL *impressumURL;
 @property (nonatomic) NSURL *termsAndConditionsURL;
@@ -524,6 +526,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
     NSString *supportFormURLString = [firebaseConfiguration stringForKey:@"supportFormURL"];
     self.supportFormURL = supportFormURLString ? [NSURL URLWithString:supportFormURLString] : nil;
+
+    NSString *feedbackURLString = [firebaseConfiguration stringForKey:@"feedbackURL"];
+    self.feedbackURL = feedbackURLString ? [NSURL URLWithString:feedbackURLString] : nil;
 
     NSString *impressumURLString = [firebaseConfiguration stringForKey:@"impressumURL"];
     self.impressumURL = impressumURLString ? [NSURL URLWithString:impressumURLString] : nil;

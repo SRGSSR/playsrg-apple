@@ -21,7 +21,8 @@ typedef NS_CLOSED_ENUM(NSInteger, MigrationPhase) {
     MigrationPhaseLearnMore,
     MigrationPhaseJoinBeta,
     MigrationPhaseDownload,
-    MigrationPhaseUpdate
+    MigrationPhaseUpdate,
+    MigrationPhaseFeedback
 };
 
 OBJC_EXPORT void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller);
@@ -59,6 +60,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) NSURL *whatsNewURL;
 @property (nonatomic, readonly, nullable) NSURL *supportFormURL;
+@property (nonatomic, readonly, nullable) NSURL *feedbackURL;
 @property (nonatomic, readonly, nullable) NSURL *faqURL;
 @property (nonatomic, readonly, nullable) NSURL *impressumURL;
 @property (nonatomic, readonly, nullable) NSURL *termsAndConditionsURL;

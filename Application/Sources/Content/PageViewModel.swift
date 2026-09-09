@@ -515,6 +515,8 @@ extension PageViewModel {
                 .joinBeta
             case .download:
                 .download
+            case .feedback:
+                constant(iOS: .feedback, tvOS: nil)
             default:
                 nil
             }

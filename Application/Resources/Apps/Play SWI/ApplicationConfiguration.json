@@ -30,5 +30,6 @@
   "audioDescriptionAvailabilityHidden": true,
   "userConsentDefaultLanguage": "en",
   "migrationHelpURL": "https://www.srgssr.ch",
-  "playPlusAppStoreProductIdentifier": 1532890312
+  "playPlusAppStoreProductIdentifier": 1532890312,
+  "feedbackURL": "https://app.formbricks.com/s/cmn8yadcda12doe01e9jsqz6j"
 }
