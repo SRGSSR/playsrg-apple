@@ -163,7 +163,7 @@ struct MigrationView: View {
             bulletView(
                 icon: .playPlusWaveform,
                 title: "Free. No subscription required",
-                subtitle: "Free. No subscription required"
+                subtitle: "Play+ remains funded by the SSR media license fee"
             )
         }
     }
