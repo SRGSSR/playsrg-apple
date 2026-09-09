@@ -253,7 +253,7 @@ struct MigrationView: View {
     }
 
     static func viewController(configuration: MigrationView.Configuration) -> UIViewController {
-        UIHostingController(rootView: MigrationView(configuration: configuration))
+        HostingController(rootView: MigrationView(configuration: configuration))
     }
 }
 
