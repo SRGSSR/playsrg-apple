@@ -963,3 +963,9 @@
 
 /* Migration View Footers */
 "Important note: The beta app will replace your Play Suisse App" = "Remarque importante : l'application bêta remplacera votre application Play Suisse";
+
+/* Migration Banner */
+"What do you think of Play RTS? We'd love to hear your opinion!" = "Que pensez-vous de Play RTS ? Votre avis nous intéresse!";
+
+/* Migration Banner */
+"To the survey" = "Vers le sondage";
