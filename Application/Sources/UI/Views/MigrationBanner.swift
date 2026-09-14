@@ -196,6 +196,7 @@ struct MigrationBanner: View {
     private func subtitle() -> some View {
         Text(configuration.subtitle)
             .srgFont(.body)
+            .multilineTextAlignment(constant(iOS: .leading, tvOS: .center))
     }
 
     #if os(iOS)
