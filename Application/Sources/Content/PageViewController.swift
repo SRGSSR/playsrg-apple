@@ -825,8 +825,12 @@ private extension PageViewController {
             }
 
             func migrationBanner() -> NSCollectionLayoutBoundarySupplementaryItem? {
-                guard sectionIndex == 0, model.migrationBannerConfiguration != nil else { return nil }
-                return NSCollectionLayoutBoundarySupplementaryItem(layoutSize: MigrationBanner.size(), elementKind: SupplementaryView.migrationBanner.rawValue, alignment: .bottomLeading)
+                guard sectionIndex == 0, let configuration = model.migrationBannerConfiguration else { return nil }
+                return NSCollectionLayoutBoundarySupplementaryItem(
+                    layoutSize: MigrationBanner.size(for: configuration, layoutWidth: layoutWidth - 2 * Self.layoutHorizontalMargin, horizontalSizeClass: horizontalSizeClass),
+                    elementKind: SupplementaryView.migrationBanner.rawValue,
+                    alignment: .bottomLeading
+                )
             }
 
             func horizontalMargin(for section: PageViewModel.Section) -> CGFloat {

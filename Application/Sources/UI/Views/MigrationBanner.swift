@@ -99,14 +99,14 @@ struct MigrationBanner: View {
                 .buttonStyle(.card)
             #endif
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .padding(.top, 40)
         .responderChain(from: firstResponder)
     }
 
-    static func size() -> NSCollectionLayoutSize {
-        let fontMetrics = SRGFont.metricsForFont(with: .body)
-        let height = fontMetrics.scaledValue(for: constant(iOS: 120, tvOS: 220)) + 60
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
+    static func size(for configuration: Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
+        let size = Self(configuration: configuration).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+        return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
     }
 
     private func background() -> some View {
@@ -183,7 +183,7 @@ struct MigrationBanner: View {
         Image(configuration.icon)
             .resizable()
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .aspectRatio(contentMode: .fit)
+            .scaledToFit()
             .frame(height: constant(iOS: 75, tvOS: 123))
             .accessibilityHidden(true)
     }
@@ -191,13 +191,11 @@ struct MigrationBanner: View {
     private func title() -> some View {
         Text(configuration.title)
             .srgFont(.H3)
-            .lineLimit(2)
     }
 
     private func subtitle() -> some View {
         Text(configuration.subtitle)
             .srgFont(.body)
-            .lineLimit(2)
     }
 
     #if os(iOS)
@@ -227,14 +225,14 @@ struct MigrationBanner: View {
 }
 
 struct MigrationBanner_Previews: PreviewProvider {
-    private static let size = MigrationBanner.size().previewSize
     static var previews: some View {
-        Group {
-            MigrationBanner(configuration: .learnMore)
-            MigrationBanner(configuration: .joinBeta)
-            MigrationBanner(configuration: .download)
-            MigrationBanner(configuration: .feedback)
-        }
-        .previewLayout(.fixed(width: size.width, height: size.height))
+        MigrationBanner(configuration: .learnMore)
+            .previewDisplayName("Learn more")
+        MigrationBanner(configuration: .joinBeta)
+            .previewDisplayName("Join beta")
+        MigrationBanner(configuration: .download)
+            .previewDisplayName("Download")
+        MigrationBanner(configuration: .feedback)
+            .previewDisplayName("Feedback")
     }
 }
