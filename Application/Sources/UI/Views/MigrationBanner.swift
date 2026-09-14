@@ -32,22 +32,32 @@ extension MigrationBanner {
     struct Configuration {
         let title: LocalizedStringKey
         let subtitle: LocalizedStringKey
+        let icon: ImageResource
         let action: Action
 
         static let learnMore = Self(
             title: "Our new app comes soon!",
             subtitle: "We’re building the next version of our app",
+            icon: .playPlusAppIcon,
             action: .learnMore
         )
         static let joinBeta = Self(
             title: "Join the Beta Test",
             subtitle: "We’re building the next version of our app",
+            icon: .playPlusAppIcon,
             action: .joinBeta
         )
         static let download = Self(
             title: "Our new app comes on 2nd of January",
             subtitle: "Update now",
+            icon: .playPlusAppIcon,
             action: .download
+        )
+        static let feedback = Self(
+            title: "Need help or want to share a suggestion? Write to us.",
+            subtitle: "",
+            icon: .appIcon,
+            action: .feedback
         )
     }
 
@@ -55,6 +65,7 @@ extension MigrationBanner {
         case learnMore
         case joinBeta
         case download
+        case feedback
 
         var name: LocalizedStringKey {
             switch self {
@@ -64,6 +75,8 @@ extension MigrationBanner {
                 "Join"
             case .download:
                 "Download"
+            case .feedback:
+                "Give feedback"
             }
         }
     }
@@ -167,8 +180,9 @@ struct MigrationBanner: View {
     }
 
     private func icon() -> some View {
-        Image(.playPlusAppIcon)
+        Image(configuration.icon)
             .resizable()
+            .clipShape(RoundedRectangle(cornerRadius: 20))
             .aspectRatio(contentMode: .fit)
             .frame(height: constant(iOS: 75, tvOS: 123))
             .accessibilityHidden(true)
@@ -219,6 +233,7 @@ struct MigrationBanner_Previews: PreviewProvider {
             MigrationBanner(configuration: .learnMore)
             MigrationBanner(configuration: .joinBeta)
             MigrationBanner(configuration: .download)
+            MigrationBanner(configuration: .feedback)
         }
         .previewLayout(.fixed(width: size.width, height: size.height))
     }

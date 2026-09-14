@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+// swiftlint:disable file_length
+
 import Combine
 import SRGAppearanceSwift
 import SwiftUI
@@ -734,20 +736,7 @@ extension PageViewController: UIScrollViewDelegate {
 #endif
 
 extension PageViewController: MigrationBannerActions {
-    private static func migrationViewConfiguration(for action: MigrationBanner.Action) -> MigrationView.Configuration {
-        switch action {
-        case .learnMore:
-            .learnMore
-        case .joinBeta:
-            .joinBeta
-        case .download:
-            .download
-        }
-    }
-
-    func openMigrationView(sender _: Any?, event: MigrationBannerEvent?) {
-        guard let event else { return }
-        let configuration = Self.migrationViewConfiguration(for: event.action)
+    func presentMigrationView(for configuration: MigrationView.Configuration) {
         let migrationViewController = MigrationViewController.viewController(configuration: configuration)
         #if os(iOS)
             migrationViewController.modalPresentationStyle = .fullScreen
@@ -755,6 +744,21 @@ extension PageViewController: MigrationBannerActions {
         #else
             present(migrationViewController, animated: true)
         #endif
+    }
+
+    func openMigrationView(sender _: Any?, event: MigrationBannerEvent?) {
+        guard let event else { return }
+        switch event.action {
+        case .learnMore:
+            presentMigrationView(for: .learnMore)
+        case .joinBeta:
+            presentMigrationView(for: .joinBeta)
+        case .download:
+            presentMigrationView(for: .download)
+        case .feedback:
+            guard let feedbackUrl = ApplicationConfiguration.shared.feedbackURL else { return }
+            UIApplication.shared.open(feedbackUrl)
+        }
     }
 }
 
@@ -1197,3 +1201,5 @@ private extension PageViewController {
         }
     }
 }
+
+// swiftlint:enable file_length

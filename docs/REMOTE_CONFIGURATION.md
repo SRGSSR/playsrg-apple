@@ -22,7 +22,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 ## URLs
 
 * `betaTestingURL` (optional, string): The URL of the page where beta testers can register.
-* `feedbackURL` (optional, string): The URL of the legacy feedback form (deprecated in iOS 3.9.4).
+* `feedbackURL` (optional, string): The URL of the feedback form.
 * `supportFormURL` (optional, string): The URL of the feedback form.
 * `faqURL` (optional, string): The URL of the FAQs.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
@@ -175,6 +175,7 @@ Feeds
 	* `joinBeta`: Join the Play+ beta.
 	* `download`: Optionally update to Play+.
 	* `update`: Force update to Play+. Play SRG cannot be used anymore.
+    * `feedback`: Give a feedback about Play SRG.
 * `playPlusAppStoreProductIdentifier` (mandatory, number): Application product identifier of Play Plus on the AppStore.
 
 ## Other functionalities
