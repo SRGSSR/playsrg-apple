@@ -127,7 +127,7 @@ struct YouthProtectionBadge: View {
         if let image = UIImage.image(for: color) {
             Image(uiImage: image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(height: BadgeMetrics.length)
                 .accessibilityElement(label: SRGMessageForYouthProtectionColor(color))
         }

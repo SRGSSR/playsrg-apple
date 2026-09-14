@@ -172,7 +172,7 @@ struct MigrationView: View {
         HStack(spacing: constant(iOS: 20, tvOS: 40)) {
             Image(icon)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(height: constant(iOS: 32, tvOS: 64))
                 .accessibilityHidden(true)
 
@@ -229,7 +229,7 @@ struct MigrationView: View {
     private func background() -> some View {
         Image(.migrationBackground)
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .scaledToFill()
             .overlay(LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom))
             .ignoresSafeArea()
             .accessibilityHidden(true)

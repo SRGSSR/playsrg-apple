@@ -54,7 +54,7 @@ struct ProfileCell: View {
                 if let image = model.image {
                     Image(uiImage: image)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .frame(height: iconHeight)
                 }
                 if let title = model.title {
@@ -71,7 +71,7 @@ struct ProfileCell: View {
                 if !model.isModalPresentation {
                     Image(.chevron)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .frame(height: 16)
                 }
             }

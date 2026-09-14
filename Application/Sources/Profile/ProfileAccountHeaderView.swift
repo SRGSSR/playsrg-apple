@@ -43,7 +43,7 @@ struct ProfileAccountHeaderView: View {
                     ZStack(alignment: .topTrailing) {
                         Image(model.data.icon)
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
+                            .scaledToFit()
                             .frame(height: iconHeight)
                         if let emailAddress = model.data.account?.emailAddress,
                            let gravatarImageURL = URL(string: "https://www.gravatar.com/avatar/\(emailAddress.lowercased().play_md5hash)?d=404&s=\(300)") {
@@ -72,7 +72,7 @@ struct ProfileAccountHeaderView: View {
                         if let image = UIImage(named: "identity_service_logo") {
                             Image(uiImage: image)
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
+                                .scaledToFit()
                                 .frame(height: serviceLogoHeight)
                                 .offset(x: serviceLogoOffsetX, y: serviceLogoOffsetY)
                         }
@@ -84,7 +84,7 @@ struct ProfileAccountHeaderView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Image(.chevron)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .frame(height: 16)
                 }
                 .foregroundColor(.srgGrayD2)

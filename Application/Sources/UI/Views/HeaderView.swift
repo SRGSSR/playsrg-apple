@@ -43,7 +43,7 @@ struct HeaderView: View {
                 if hasDetailDisclosure {
                     Image(.chevron)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .scaledToFit()
                         .frame(height: SRGFont.metricsForFont(with: .H3).scaledValue(for: 18))
                         .padding(.horizontal, 2)
                 }
