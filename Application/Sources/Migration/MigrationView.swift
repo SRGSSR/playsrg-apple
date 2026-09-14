@@ -79,7 +79,7 @@ extension MigrationView {
             case .joinBeta:
                 "I'm testing the app"
             case .download:
-                "Learn more"
+                "Install Play+"
             case .update:
                 "Install Play+"
             case .help:
