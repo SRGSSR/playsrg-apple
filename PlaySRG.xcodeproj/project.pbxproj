@@ -1078,6 +1078,16 @@
 		6F1EE83C268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
 		6F1EE83D268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
 		6F1EE83E268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
+		6F212ECF3025C3A200A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED03025C3A200A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED13025C3A200A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED23025C3A200A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED33025C3A200A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED43025C92600A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED53025C92600A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED63025C92600A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED73025C92600A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
+		6F212ED83025C92600A783B8 /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F212ECE3025C3A200A783B8 /* HostingController.swift */; };
 		6F2345D1283BAB3600A9089D /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2345D0283BAB3600A9089D /* FSCalendar */; };
 		6F2345D3283BAB5000A9089D /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2345D2283BAB5000A9089D /* FSCalendar */; };
 		6F2345D5283BAB5600A9089D /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2345D4283BAB5600A9089D /* FSCalendar */; };
@@ -3276,6 +3286,7 @@
 		6F1938371EFBFEC80017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
 		6F1A77822643CAB600A00EFC /* EmptyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyContentView.swift; sourceTree = "<group>"; };
 		6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHeaderView.swift; sourceTree = "<group>"; };
+		6F212ECE3025C3A200A783B8 /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
 		6F2363182833D57F00A1127C /* MailComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposeView.swift; sourceTree = "<group>"; };
 		6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayPlaybackSpeedController.swift; sourceTree = "<group>"; };
 		6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = placeholder_media_list.pdf; sourceTree = "<group>"; };
@@ -4152,7 +4163,6 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */,
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
 				04C2DE772937C67000E85A03 /* AnalyticsClickEvent.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
@@ -4199,6 +4209,7 @@
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
+				4C5A8BFA2F68948E00D74B62 /* PushSubscriptionBridge.swift */,
 				6F0850F226256A7700B4E410 /* Reachability.h */,
 				6F0850F326256A7700B4E410 /* Reachability.m */,
 				04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */,
@@ -4928,11 +4939,11 @@
 		6F475F8B1EB37BC6003021EA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */,
 				6F475F8C1EB37BC6003021EA /* BaseViewController.h */,
 				6F475F8D1EB37BC6003021EA /* BaseViewController.m */,
 				6F475F901EB37BC6003021EA /* DataViewController.h */,
 				6F475F911EB37BC6003021EA /* DataViewController.m */,
+				6F212ECE3025C3A200A783B8 /* HostingController.swift */,
 				6F475F921EB37BC6003021EA /* ListRequestViewController.h */,
 				6F475F931EB37BC6003021EA /* ListRequestViewController.m */,
 				6F475F961EB37BC6003021EA /* NavigationController.h */,
@@ -4940,13 +4951,14 @@
 				046F8DC52B779E9B00A71091 /* PageContainerViewController.swift */,
 				6F475F9C1EB37BC6003021EA /* RequestViewController.h */,
 				6F475F9D1EB37BC6003021EA /* RequestViewController.m */,
+				99B4C4F32D4B738200491254 /* ShowAccessContainerViewController.swift */,
 				6F0506E5245468EE0053253E /* SplitViewController.h */,
 				6F0506E6245468EE0053253E /* SplitViewController.m */,
 				082910AC239E90D200D168F4 /* TabBarController.h */,
 				082910AD239E90D200D168F4 /* TabBarController.m */,
+				9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */,
 				6F80E9C021A682E60027CA2F /* TableRequestViewController.h */,
 				6F80E9C121A682E60027CA2F /* TableRequestViewController.m */,
-				9984F7792C075A94009F6CC8 /* TabContainerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -8591,6 +8603,7 @@
 				6F6C7AC92820576000BC3EA5 /* UserLocation.swift in Sources */,
 				0825914027285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
 				08B4651426BC58C800454A28 /* CalendarView.swift in Sources */,
+				6F212ECF3025C3A200A783B8 /* HostingController.swift in Sources */,
 				6F9FFB49261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				086F8D5522984B29001BE2F4 /* Favorites.m in Sources */,
 				6FE2873C2481448C00358CFF /* SongsViewController.m in Sources */,
@@ -9049,6 +9062,7 @@
 				041DD1802B1BA8B100C9368A /* TableView.swift in Sources */,
 				E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6F488ACC22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
+				6F212ED03025C3A200A783B8 /* HostingController.swift in Sources */,
 				6F9FFB4A261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6F5E99EF283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
@@ -9329,6 +9343,7 @@
 				041DD1812B1BA8B100C9368A /* TableView.swift in Sources */,
 				E62459F01D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6F488ACD22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
+				6F212ED33025C3A200A783B8 /* HostingController.swift in Sources */,
 				6F9FFB4B261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6F5E99F0283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
@@ -9609,6 +9624,7 @@
 				041DD1822B1BA8B100C9368A /* TableView.swift in Sources */,
 				E62459F11D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6F488ACE22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
+				6F212ED13025C3A200A783B8 /* HostingController.swift in Sources */,
 				6F9FFB4C261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6F5E99F1283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
@@ -9736,6 +9752,7 @@
 				6F54D32626050FBD008B46FF /* MediaCell.swift in Sources */,
 				6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */,
 				0463DA142A73D8B000CD6556 /* ProgramAndChannel.swift in Sources */,
+				6F212ED23025C3A200A783B8 /* HostingController.swift in Sources */,
 				6F54D40626051037008B46FF /* MediaDescription.swift in Sources */,
 				E6971AF11D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F978B552849C3CA003061E8 /* ScrollableContent.m in Sources */,
@@ -10059,6 +10076,7 @@
 				0E5CBD793019F88700C04E81 /* ButtonStyle.swift in Sources */,
 				6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */,
 				08F5DB15262DC7F700F717D0 /* Logger.swift in Sources */,
+				6F212ED43025C92600A783B8 /* HostingController.swift in Sources */,
 				6F8125E72638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A02BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8326395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
@@ -10229,6 +10247,7 @@
 				0E5CBD773019F88700C04E81 /* ButtonStyle.swift in Sources */,
 				6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB16262DC7F700F717D0 /* Logger.swift in Sources */,
+				6F212ED53025C92600A783B8 /* HostingController.swift in Sources */,
 				6F8125E82638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A12BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8426395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
@@ -10399,6 +10418,7 @@
 				0E5CBD7B3019F88700C04E81 /* ButtonStyle.swift in Sources */,
 				6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB17262DC7F700F717D0 /* Logger.swift in Sources */,
+				6F212ED63025C92600A783B8 /* HostingController.swift in Sources */,
 				6F8125E92638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A22BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8526395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
@@ -10569,6 +10589,7 @@
 				0E5CBD7A3019F88700C04E81 /* ButtonStyle.swift in Sources */,
 				6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB18262DC7F700F717D0 /* Logger.swift in Sources */,
+				6F212ED73025C92600A783B8 /* HostingController.swift in Sources */,
 				6F8125EA2638C37900EB029E /* LabeledCardButton.swift in Sources */,
 				046845A32BF513E2003A0073 /* ShowVisualView.swift in Sources */,
 				6FC24A8626395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
@@ -10795,6 +10816,7 @@
 				080981392622195900AA586B /* LiveMediaCell.swift in Sources */,
 				044E392929B10C9200C1768A /* SRGShow+PlaySRG.swift in Sources */,
 				6F0B16332837C72E0074845E /* SettingsViewModel.swift in Sources */,
+				6F212ED83025C92600A783B8 /* HostingController.swift in Sources */,
 				040A3B922DC40ED70011C4C6 /* ProxyDetection.swift in Sources */,
 				0858CA64271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
