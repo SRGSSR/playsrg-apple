@@ -225,15 +225,18 @@ struct MigrationBanner: View {
     }
 }
 
-struct MigrationBanner_Previews: PreviewProvider {
-    static var previews: some View {
-        MigrationBanner(configuration: .learnMore)
-            .previewDisplayName("Learn more")
-        MigrationBanner(configuration: .joinBeta)
-            .previewDisplayName("Join beta")
-        MigrationBanner(configuration: .download)
-            .previewDisplayName("Download")
-        MigrationBanner(configuration: .feedback)
-            .previewDisplayName("Feedback")
-    }
+#Preview("Learn more") {
+    MigrationBanner(configuration: .learnMore)
+}
+
+#Preview("Join beta") {
+    MigrationBanner(configuration: .joinBeta)
+}
+
+#Preview("Download") {
+    MigrationBanner(configuration: .download)
+}
+
+#Preview("Update") {
+    MigrationBanner(configuration: .feedback)
 }

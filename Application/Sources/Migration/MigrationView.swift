@@ -261,7 +261,7 @@ struct MigrationView: View {
     MigrationView(configuration: .learnMore)
 }
 
-#Preview("Join Beta") {
+#Preview("Join beta") {
     MigrationView(configuration: .joinBeta)
 }
 
