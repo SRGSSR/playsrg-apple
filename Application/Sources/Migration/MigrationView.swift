@@ -202,7 +202,7 @@ struct MigrationView: View {
                 Text(title)
                     .srgFont(.H4)
                 Text(subtitle)
-                    .srgFont(.subtitle1)
+                    .srgFont(constant(iOS: .subtitle1, tvOS: .subtitle2))
             }
         }
     }
