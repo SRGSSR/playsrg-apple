@@ -118,7 +118,7 @@ struct MigrationView: View {
                     footerView()
                 }
                 .padding(30)
-                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
+                .frame(maxWidth: geometry.size.width, minHeight: geometry.size.height)
                 .accessibilityAction(.escape) {
                     presentationMode.wrappedValue.dismiss()
                 }
@@ -128,7 +128,7 @@ struct MigrationView: View {
     }
 
     private func descriptionView() -> some View {
-        VStack(spacing: constant(iOS: 24, tvOS: 48)) {
+        VStack(spacing: constant(iOS: 32, tvOS: 48)) {
             appIcon()
             #if os(tvOS)
                 .focusable()
@@ -146,6 +146,8 @@ struct MigrationView: View {
                 bulletsView()
             }
         }
+        .frame(maxWidth: constant(iOS: 600, tvOS: 1024))
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private func bulletsView() -> some View {
