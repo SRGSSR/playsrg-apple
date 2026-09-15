@@ -164,20 +164,20 @@ struct MigrationBanner: View {
                 icon()
             }
         }
-    #endif
+    #else
+        private func tvMainView() -> some View {
+            ZStack {
+                VStack {
+                    title()
+                    subtitle()
+                }
+                .frame(width: 1000)
 
-    private func tvMainView() -> some View {
-        ZStack {
-            VStack {
-                title()
-                subtitle()
+                icon()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .frame(width: 1000)
-
-            icon()
-                .frame(maxWidth: .infinity, alignment: .trailing)
         }
-    }
+    #endif
 
     private func icon() -> some View {
         Image(configuration.icon)
