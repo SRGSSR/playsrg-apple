@@ -140,6 +140,7 @@ struct MigrationView: View {
     #else
         private func tvBody() -> some View {
             VStack(spacing: 40) {
+                Spacer()
                 descriptionView()
                 Spacer()
                 actionsView()
