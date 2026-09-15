@@ -238,10 +238,12 @@ struct MigrationView: View {
                 }
 
                 if configuration.isCancellable {
-                    Button("Cancel") {
+                    Button {
                         presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Cancel")
+                            .srgFont(.H3)
                     }
-                    .srgFont(.H3)
                     .padding(.vertical, 14)
                     .foregroundColor(.white)
                 }
