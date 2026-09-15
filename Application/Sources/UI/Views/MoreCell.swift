@@ -31,7 +31,7 @@ struct MoreCell: View {
             LabeledCardButton(aspectRatio: Self.aspectRatio(for: imageVariant), action: action) {
                 Image(.chevronLarge)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
+                    .scaledToFit()
                     .frame(height: Self.iconHeight)
                     .foregroundColor(.srgGrayD2)
                     .opacity(0.8)
@@ -44,7 +44,7 @@ struct MoreCell: View {
         #else
             Image(.chevronLarge)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(height: Self.iconHeight)
                 .foregroundColor(.srgGrayD2)
                 .opacity(0.8)

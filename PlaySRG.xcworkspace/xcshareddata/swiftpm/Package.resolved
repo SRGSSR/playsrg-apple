@@ -1,5 +1,5 @@
 {
-  "originHash" : "e4a733a1a685cdf081d092ee834d5cbba929929ddbbcdb0a5c262d823343be7c",
+  "originHash" : "841aa2c49fe0cf3d90abb56ddb346d2c92491d2f2188bb19fdf37dcbefa80164",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -110,21 +110,21 @@
       }
     },
     {
+      "identity" : "google-cast-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/google-cast-sdk.git",
+      "state" : {
+        "revision" : "516f7111116bc412230309636842d3bbf77efdd8",
+        "version" : "4.8.4"
+      }
+    },
+    {
       "identity" : "googleappmeasurement",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
         "revision" : "fe727587518729046fc1465625b9afd80b5ab361",
         "version" : "10.28.0"
-      }
-    },
-    {
-      "identity" : "googlecastsdk-no-bluetooth",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SRGSSR/GoogleCastSDK-no-bluetooth",
-      "state" : {
-        "revision" : "863b98750174945af2fd8f6f66a6024967be371e",
-        "version" : "4.8.3"
       }
     },
     {

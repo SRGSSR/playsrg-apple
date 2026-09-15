@@ -108,31 +108,52 @@ struct MigrationView: View {
     let configuration: Configuration
 
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView {
-                VStack(spacing: constant(iOS: 30, tvOS: 60)) {
-                    Spacer()
-                    descriptionView()
-                    Spacer()
-                    actionsView()
-                    footerView()
-                }
-                .padding(30)
-                .frame(maxWidth: .infinity, minHeight: geometry.size.height)
-                .accessibilityAction(.escape) {
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
+        ZStack {
+            #if os(iOS)
+                mobileBody()
+            #else
+                tvBody()
+            #endif
         }
         .background(background())
     }
 
+    #if os(iOS)
+        private func mobileBody() -> some View {
+            GeometryReader { geometry in
+                ScrollView {
+                    VStack(spacing: 30) {
+                        Spacer()
+                        descriptionView()
+                        Spacer()
+                        actionsView()
+                        footerView()
+                    }
+                    .padding(30)
+                    .frame(maxWidth: geometry.size.width, minHeight: geometry.size.height)
+                    .accessibilityAction(.escape) {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+            }
+        }
+    #else
+        private func tvBody() -> some View {
+            VStack(spacing: 40) {
+                Spacer()
+                descriptionView()
+                Spacer()
+                actionsView()
+                footerView()
+            }
+            .padding(30)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    #endif
+
     private func descriptionView() -> some View {
-        VStack(spacing: constant(iOS: 24, tvOS: 48)) {
+        VStack(spacing: constant(iOS: 32, tvOS: 48)) {
             appIcon()
-            #if os(tvOS)
-                .focusable()
-            #endif
 
             Text(configuration.title)
                 .srgFont(.H1)
@@ -146,6 +167,8 @@ struct MigrationView: View {
                 bulletsView()
             }
         }
+        .frame(maxWidth: constant(iOS: 600, tvOS: 1200))
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private func bulletsView() -> some View {
@@ -172,7 +195,7 @@ struct MigrationView: View {
         HStack(spacing: constant(iOS: 20, tvOS: 40)) {
             Image(icon)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(height: constant(iOS: 32, tvOS: 64))
                 .accessibilityHidden(true)
 
@@ -180,7 +203,7 @@ struct MigrationView: View {
                 Text(title)
                     .srgFont(.H4)
                 Text(subtitle)
-                    .srgFont(.subtitle1)
+                    .srgFont(constant(iOS: .subtitle1, tvOS: .subtitle2))
             }
         }
     }
@@ -195,41 +218,67 @@ struct MigrationView: View {
     }
 
     private func actionsView() -> some View {
-        VStack(spacing: 20) {
-            if let action = configuration.action {
-                Button {
-                    action()
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text(action.name)
-                    #if os(tvOS)
-                        .srgFont(.H3)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                    #endif
-                }
-                #if os(iOS)
-                .buttonStyle(.primary)
-                #endif
-            }
+        #if os(iOS)
+            mobileActionsView()
+        #else
+            tvActionsView()
+        #endif
+    }
 
-            if configuration.isCancellable {
-                Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
+    #if os(iOS)
+        private func mobileActionsView() -> some View {
+            VStack(spacing: 20) {
+                if let action = configuration.action {
+                    Button {
+                        action()
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text(action.name)
+                    }
+                    .buttonStyle(.primary)
                 }
-                .srgFont(.H3)
-                .padding(.vertical, 14)
-                #if os(iOS)
+
+                if configuration.isCancellable {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Cancel")
+                            .srgFont(.H3)
+                    }
+                    .padding(.vertical, 14)
                     .foregroundColor(.white)
-                #endif
+                }
             }
         }
-    }
+    #else
+        private func tvActionsView() -> some View {
+            HStack(spacing: 40) {
+                if let action = configuration.action {
+                    Button {
+                        action()
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text(action.name)
+                            .srgFont(.H3)
+                    }
+                }
+
+                if configuration.isCancellable {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Cancel")
+                            .srgFont(.H3)
+                    }
+                }
+            }
+        }
+    #endif
 
     private func background() -> some View {
         Image(.migrationBackground)
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .scaledToFill()
             .overlay(LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom))
             .ignoresSafeArea()
             .accessibilityHidden(true)
@@ -261,7 +310,7 @@ struct MigrationView: View {
     MigrationView(configuration: .learnMore)
 }
 
-#Preview("Join Beta") {
+#Preview("Join beta") {
     MigrationView(configuration: .joinBeta)
 }
 
