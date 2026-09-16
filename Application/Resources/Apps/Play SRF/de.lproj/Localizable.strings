@@ -965,7 +965,10 @@
 "Important note: The beta app will replace your Play Suisse App" = "Wichtiger Hinweis: Die Beta-App wird deine Play Suisse-App ersetzen";
 
 /* Migration Banner */
-"What do you think of Play RTS? We'd love to hear your opinion!" = "Wie gefällt Ihnen Play SRF? Sagen Sie uns Ihre Meinung!";
+"What do you think of Play?" = "Wie gefällt Ihnen Play SRF?";
+
+/* Migration Banner */
+"We'd love to hear your opinion!" = "Sagen Sie uns Ihre Meinung!";
 
 /* Migration Banner */
 "To the survey" = "Zur Umfrage";

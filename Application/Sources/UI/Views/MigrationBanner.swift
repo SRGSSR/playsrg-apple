@@ -54,8 +54,8 @@ extension MigrationBanner {
             action: .download
         )
         static let feedback = Self(
-            title: "What do you think of Play RTS? We'd love to hear your opinion!",
-            subtitle: "",
+            title: "What do you think of Play?",
+            subtitle: "We'd love to hear your opinion!",
             icon: .appIcon,
             action: .feedback
         )

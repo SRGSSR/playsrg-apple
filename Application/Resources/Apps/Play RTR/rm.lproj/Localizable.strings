@@ -923,7 +923,7 @@
 "In a few days, you can find all of SRG's offerings, and more, on Play+." = "En paucs dis chattas ti sin Play+ tut il cuntegn da RTR ed anc dapil!";
 
 /* Migration Banner */
-"Learn more" = "dapli";
+"Learn more" = "Dapli";
 
 /* Migration View Header & Subtitles */
 "Play SRG becomes Play+" = "Play RTR daventa Play+";
@@ -965,7 +965,10 @@
 "Important note: The beta app will replace your Play Suisse App" = "Remartga impurtanta: L’app beta remplazza l’app Play Suisse.";
 
 /* Migration Banner */
-"What do you think of Play RTS? We'd love to hear your opinion!" = "Co As plascha Play RTR? Ans schai Vossa opiniun!";
+"What do you think of Play?" = "Co As plascha Play RTR?";
+
+/* Migration Banner */
+"We'd love to hear your opinion!" = "Ans schai Vossa opiniun!";
 
 /* Migration Banner */
 "To the survey" = "A la retschertga";
