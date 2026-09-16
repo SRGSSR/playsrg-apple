@@ -978,3 +978,9 @@
 
 /* Migration View Actions */
 "Okay" = "OK";
+
+/* Migration Banner */
+"Download Play+" = "Installa Play+";
+
+/* Migration View Actions */
+"Download now" = "Installa l'app ora";

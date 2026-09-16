@@ -74,7 +74,7 @@ extension MigrationBanner {
             case .joinBeta:
                 "Learn more"
             case .download:
-                "Learn more"
+                "Download now"
             case .feedback:
                 "To the survey"
             }

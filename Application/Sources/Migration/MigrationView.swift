@@ -13,7 +13,7 @@ extension MigrationView {
         let displaysBullets: Bool
         let footer: LocalizedStringKey?
         let action: Action?
-        let isCancellable: Bool
+        let cancelTitle: String?
 
         static let learnMore = Self(
             title: "Play SRG becomes Play+",
@@ -21,7 +21,7 @@ extension MigrationView {
             displaysBullets: true,
             footer: nil,
             action: .learnMore,
-            isCancellable: false
+            cancelTitle: nil
         )
         static let joinBeta = Self(
             title: "Play SRG becomes Play+",
@@ -29,7 +29,7 @@ extension MigrationView {
             displaysBullets: true,
             footer: "Important note: The beta app will replace your Play Suisse App",
             action: .joinBeta,
-            isCancellable: true
+            cancelTitle: "Okay"
         )
         static let download = Self(
             title: "Play SRG becomes Play+",
@@ -37,7 +37,7 @@ extension MigrationView {
             displaysBullets: true,
             footer: nil,
             action: downloadAction(),
-            isCancellable: true
+            cancelTitle: "Back"
         )
         static let update = Self(
             title: "This app is no longer available",
@@ -45,7 +45,7 @@ extension MigrationView {
             displaysBullets: false,
             footer: nil,
             action: updateAction(),
-            isCancellable: false
+            cancelTitle: nil
         )
 
         private static func downloadAction() -> Action? {
@@ -79,7 +79,7 @@ extension MigrationView {
             case .joinBeta:
                 "I'm testing the app"
             case .download:
-                "Install Play+"
+                "Download Play+"
             case .update:
                 "Install Play+"
             case .help:
@@ -240,11 +240,11 @@ struct MigrationView: View {
                     .buttonStyle(.primary)
                 }
 
-                if configuration.isCancellable {
+                if let cancelTitle = configuration.cancelTitle {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Text("Okay")
+                        Text(cancelTitle)
                             .srgFont(.H3)
                     }
                     .padding(.vertical, 14)
@@ -265,11 +265,11 @@ struct MigrationView: View {
                     }
                 }
 
-                if configuration.isCancellable {
+                if let cancelTitle = configuration.cancelTitle {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Text("Cancel")
+                        Text(cancelTitle)
                             .srgFont(.H3)
                     }
                 }
