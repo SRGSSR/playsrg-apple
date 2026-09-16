@@ -154,12 +154,12 @@ struct MigrationBanner: View {
 
         private func regularMainView() -> some View {
             HStack(spacing: 16) {
-                VStack(alignment: .leading) {
+                VStack(alignment: .center) {
                     title()
                     subtitle()
                     button()
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .center)
 
                 icon()
             }
