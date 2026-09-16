@@ -182,12 +182,12 @@
       }
     },
     {
-      "identity" : "iosv5",
+      "identity" : "iosv5-spm",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CommandersAct/iOSV5.git",
+      "location" : "https://github.com/CommandersAct/iOSV5-spm.git",
       "state" : {
-        "revision" : "3b484abc866976f2cd94f3a499e198ec002f86a9",
-        "version" : "5.4.19"
+        "revision" : "e28f6bcb00d15d9ca113d45074bab27ddb853e1e",
+        "version" : "5.5.1"
       }
     },
     {
@@ -303,8 +303,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "a058f8a01881d8c3a19baf818eb5c56d963cf04e",
-        "version" : "9.2.1"
+        "revision" : "2d872a47d766ab6df02b2d93bccda04550988128",
+        "version" : "9.2.2"
       }
     },
     {
