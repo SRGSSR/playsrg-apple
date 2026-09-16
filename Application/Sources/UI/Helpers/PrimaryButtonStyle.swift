@@ -17,7 +17,7 @@ struct PrimaryButtonStyle: ButtonStyle {
         configuration.label
             .srgFont(.H3)
             .padding(.vertical, 14)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: 400)
             .foregroundColor(.black)
             .background(Color.white)
             .clipShape(.capsule)
