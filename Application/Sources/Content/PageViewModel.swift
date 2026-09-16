@@ -507,7 +507,7 @@ extension PageViewModel {
 
     var migrationBannerConfiguration: MigrationBanner.Configuration? {
         switch id {
-        case .video, .audio, .live:
+        case .video, .audio:
             switch ApplicationConfiguration.shared.migrationPhase {
             case .learnMore:
                 .learnMore
