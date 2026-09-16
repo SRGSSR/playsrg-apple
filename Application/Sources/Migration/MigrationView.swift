@@ -139,11 +139,12 @@ struct MigrationView: View {
         }
     #else
         private func tvBody() -> some View {
-            VStack(spacing: 40) {
+            VStack(spacing: 20) {
                 Spacer()
                 descriptionView()
-                Spacer()
+                Spacer(minLength: 5)
                 actionsView()
+                Spacer(minLength: 5)
                 footerView()
             }
             .padding(30)
