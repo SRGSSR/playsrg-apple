@@ -35,7 +35,7 @@ extension MigrationView {
             title: "Play SRG becomes Play+",
             subtitle: "Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland.",
             displaysBullets: true,
-            footer: "Important note: The beta app will replace your Play Suisse App",
+            footer: nil,
             action: downloadAction(),
             isCancellable: true
         )
