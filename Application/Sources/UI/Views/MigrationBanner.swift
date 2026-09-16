@@ -88,6 +88,10 @@ struct MigrationBanner: View {
     @FirstResponder private var firstResponder
     let configuration: Configuration
 
+    private var multilineTextAlignment: TextAlignment {
+        horizontalSizeClass == .compact ? .leading : .center
+    }
+
     var body: some View {
         ZStack {
             #if os(iOS)
@@ -191,12 +195,13 @@ struct MigrationBanner: View {
     private func title() -> some View {
         Text(configuration.title)
             .srgFont(.H3)
+            .multilineTextAlignment(multilineTextAlignment)
     }
 
     private func subtitle() -> some View {
         Text(configuration.subtitle)
             .srgFont(.body)
-            .multilineTextAlignment(constant(iOS: .leading, tvOS: .center))
+            .multilineTextAlignment(multilineTextAlignment)
     }
 
     #if os(iOS)
