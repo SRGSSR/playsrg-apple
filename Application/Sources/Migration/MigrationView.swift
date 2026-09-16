@@ -243,7 +243,7 @@ struct MigrationView: View {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Text("Cancel")
+                        Text("Okay")
                             .srgFont(.H3)
                     }
                     .padding(.vertical, 14)
