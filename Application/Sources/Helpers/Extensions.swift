@@ -269,7 +269,7 @@ extension View {
     /**
      *  Read the size of a view and provides it to the specified closure.
      *
-     *  Warning: Beware of recurisve layout issues when the closure itself triggers a view update.
+     *  Warning: Beware of recursive layout issues when the closure itself triggers a view update.
      *
      *  Borrowed from https://www.fivestars.blog/articles/flexible-swiftui/
      */
