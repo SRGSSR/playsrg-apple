@@ -174,17 +174,17 @@ struct MigrationView: View {
     private func bulletsView() -> some View {
         VStack(alignment: .leading, spacing: 40) {
             bulletView(
-                icon: .playPlusPlay,
+                icon: .playPlusLogo,
                 title: "All of Switzerland in one app",
                 subtitle: "Find RTS, RSI, RTR, SRF, and Play Suisse all in one place"
             )
             bulletView(
-                icon: .playPlusLogo,
+                icon: .playPlusWaveform,
                 title: "More choices for you",
                 subtitle: "Live sports, movies, shows, series, podcasts, and more"
             )
             bulletView(
-                icon: .playPlusWaveform,
+                icon: .playPlusPlay,
                 title: "Free. No subscription required",
                 subtitle: "Play+ remains funded by the SSR media license fee"
             )
