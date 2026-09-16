@@ -172,7 +172,7 @@ struct MigrationView: View {
     }
 
     private func bulletsView() -> some View {
-        VStack(alignment: .leading, spacing: 40) {
+        VStack(alignment: .leading, spacing: 60) {
             bulletView(
                 icon: .playPlusLogo,
                 title: "All of Switzerland in one app",
@@ -209,9 +209,10 @@ struct MigrationView: View {
     }
 
     private func appIcon() -> some View {
-        Image(.playPlusAppIcon)
+        let size: CGFloat = constant(iOS: 120, tvOS: 150)
+        return Image(.playPlusAppIcon)
             .resizable()
-            .frame(width: 120, height: 120)
+            .frame(width: size, height: size)
             .shadow(color: .white, radius: 150)
             .shadow(color: .white, radius: 50)
             .accessibilityHidden(true)
