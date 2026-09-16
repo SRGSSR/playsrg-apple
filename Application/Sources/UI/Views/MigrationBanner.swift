@@ -131,6 +131,7 @@ struct MigrationBanner: View {
                         .onTapGesture(perform: action)
                 } else {
                     regularMainView()
+                        .onTapGesture(perform: action)
                 }
             #else
                 tvMainView()
