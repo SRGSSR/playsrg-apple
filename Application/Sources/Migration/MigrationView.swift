@@ -13,7 +13,7 @@ extension MigrationView {
         let displaysBullets: Bool
         let footer: LocalizedStringKey?
         let action: Action?
-        let isCancellable: Bool
+        let cancelTitle: String?
 
         static let learnMore = Self(
             title: "Play SRG becomes Play+",
@@ -21,7 +21,7 @@ extension MigrationView {
             displaysBullets: true,
             footer: nil,
             action: .learnMore,
-            isCancellable: false
+            cancelTitle: nil
         )
         static let joinBeta = Self(
             title: "Play SRG becomes Play+",
@@ -29,15 +29,15 @@ extension MigrationView {
             displaysBullets: true,
             footer: "Important note: The beta app will replace your Play Suisse App",
             action: .joinBeta,
-            isCancellable: true
+            cancelTitle: "Okay"
         )
         static let download = Self(
             title: "Play SRG becomes Play+",
             subtitle: "Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland.",
             displaysBullets: true,
-            footer: "Important note: The beta app will replace your Play Suisse App",
+            footer: nil,
             action: downloadAction(),
-            isCancellable: true
+            cancelTitle: "Back"
         )
         static let update = Self(
             title: "This app is no longer available",
@@ -45,7 +45,7 @@ extension MigrationView {
             displaysBullets: false,
             footer: nil,
             action: updateAction(),
-            isCancellable: false
+            cancelTitle: nil
         )
 
         private static func downloadAction() -> Action? {
@@ -79,7 +79,7 @@ extension MigrationView {
             case .joinBeta:
                 "I'm testing the app"
             case .download:
-                "Install Play+"
+                "Download Play+"
             case .update:
                 "Install Play+"
             case .help:
@@ -139,11 +139,12 @@ struct MigrationView: View {
         }
     #else
         private func tvBody() -> some View {
-            VStack(spacing: 40) {
+            VStack(spacing: 20) {
                 Spacer()
                 descriptionView()
-                Spacer()
+                Spacer(minLength: 5)
                 actionsView()
+                Spacer(minLength: 5)
                 footerView()
             }
             .padding(30)
@@ -172,19 +173,19 @@ struct MigrationView: View {
     }
 
     private func bulletsView() -> some View {
-        VStack(alignment: .leading, spacing: 40) {
+        VStack(alignment: .leading, spacing: 60) {
             bulletView(
-                icon: .playPlusPlay,
+                icon: .playPlusLogo,
                 title: "All of Switzerland in one app",
                 subtitle: "Find RTS, RSI, RTR, SRF, and Play Suisse all in one place"
             )
             bulletView(
-                icon: .playPlusLogo,
+                icon: .playPlusWaveform,
                 title: "More choices for you",
                 subtitle: "Live sports, movies, shows, series, podcasts, and more"
             )
             bulletView(
-                icon: .playPlusWaveform,
+                icon: .playPlusPlay,
                 title: "Free. No subscription required",
                 subtitle: "Play+ remains funded by the SSR media license fee"
             )
@@ -209,9 +210,10 @@ struct MigrationView: View {
     }
 
     private func appIcon() -> some View {
-        Image(.playPlusAppIcon)
+        let size: CGFloat = constant(iOS: 120, tvOS: 150)
+        return Image(.playPlusAppIcon)
             .resizable()
-            .frame(width: 120, height: 120)
+            .frame(width: size, height: size)
             .shadow(color: .white, radius: 150)
             .shadow(color: .white, radius: 50)
             .accessibilityHidden(true)
@@ -238,11 +240,11 @@ struct MigrationView: View {
                     .buttonStyle(.primary)
                 }
 
-                if configuration.isCancellable {
+                if let cancelTitle = configuration.cancelTitle {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Text("Cancel")
+                        Text(cancelTitle)
                             .srgFont(.H3)
                     }
                     .padding(.vertical, 14)
@@ -263,11 +265,11 @@ struct MigrationView: View {
                     }
                 }
 
-                if configuration.isCancellable {
+                if let cancelTitle = configuration.cancelTitle {
                     Button {
                         presentationMode.wrappedValue.dismiss()
                     } label: {
-                        Text("Cancel")
+                        Text(cancelTitle)
                             .srgFont(.H3)
                     }
                 }

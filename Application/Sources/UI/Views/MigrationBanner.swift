@@ -54,8 +54,8 @@ extension MigrationBanner {
             action: .download
         )
         static let feedback = Self(
-            title: "What do you think of Play RTS? We'd love to hear your opinion!",
-            subtitle: "",
+            title: "What do you think of Play?",
+            subtitle: "We'd love to hear your opinion!",
             icon: .appIcon,
             action: .feedback
         )
@@ -74,7 +74,7 @@ extension MigrationBanner {
             case .joinBeta:
                 "Learn more"
             case .download:
-                "Learn more"
+                "Download now"
             case .feedback:
                 "To the survey"
             }
@@ -87,6 +87,10 @@ struct MigrationBanner: View {
 
     @FirstResponder private var firstResponder
     let configuration: Configuration
+
+    private var multilineTextAlignment: TextAlignment {
+        horizontalSizeClass == .compact ? .leading : .center
+    }
 
     var body: some View {
         ZStack {
@@ -122,12 +126,15 @@ struct MigrationBanner: View {
     private func mainView() -> some View {
         ZStack {
             #if os(iOS)
-                if horizontalSizeClass == .compact {
-                    compactMainView()
-                        .onTapGesture(perform: action)
-                } else {
-                    regularMainView()
+                ZStack {
+                    if horizontalSizeClass == .compact {
+                        compactMainView()
+                    } else {
+                        regularMainView()
+                    }
                 }
+                .contentShape(.rect)
+                .onTapGesture(perform: action)
             #else
                 tvMainView()
             #endif
@@ -153,15 +160,16 @@ struct MigrationBanner: View {
         }
 
         private func regularMainView() -> some View {
-            HStack(spacing: 16) {
-                VStack(alignment: .leading) {
+            ZStack {
+                VStack {
                     title()
                     subtitle()
                     button()
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 90)
 
                 icon()
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
         }
     #else
@@ -191,12 +199,13 @@ struct MigrationBanner: View {
     private func title() -> some View {
         Text(configuration.title)
             .srgFont(.H3)
+            .multilineTextAlignment(multilineTextAlignment)
     }
 
     private func subtitle() -> some View {
         Text(configuration.subtitle)
             .srgFont(.body)
-            .multilineTextAlignment(constant(iOS: .leading, tvOS: .center))
+            .multilineTextAlignment(multilineTextAlignment)
     }
 
     #if os(iOS)
