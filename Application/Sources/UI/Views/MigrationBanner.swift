@@ -126,13 +126,15 @@ struct MigrationBanner: View {
     private func mainView() -> some View {
         ZStack {
             #if os(iOS)
-                if horizontalSizeClass == .compact {
-                    compactMainView()
-                        .onTapGesture(perform: action)
-                } else {
-                    regularMainView()
-                        .onTapGesture(perform: action)
+                ZStack {
+                    if horizontalSizeClass == .compact {
+                        compactMainView()
+                    } else {
+                        regularMainView()
+                    }
                 }
+                .contentShape(.rect)
+                .onTapGesture(perform: action)
             #else
                 tvMainView()
             #endif
