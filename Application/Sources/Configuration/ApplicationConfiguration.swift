@@ -76,29 +76,41 @@ extension ApplicationConfiguration {
         UserDefaults.standard.string(forKey: "tc_unique_id")
     }
 
-    private static func typeformUrlWithParameters(_ url: URL) -> URL {
+    private static func url(_ url: URL, appendingQueryItems queryItems: [URLQueryItem]) -> URL {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return url }
-        guard let host = urlComponents.host, host.contains("typeform.") else { return url }
 
-        let typeformQueryItems = SupportInformation.toQueryItems()
-
-        if let queryItems = urlComponents.queryItems {
-            urlComponents.queryItems = typeformQueryItems.appending(contentsOf: queryItems)
+        if let existingQueryItems = urlComponents.queryItems {
+            urlComponents.queryItems = queryItems.appending(contentsOf: existingQueryItems)
         } else {
-            urlComponents.queryItems = typeformQueryItems
+            urlComponents.queryItems = queryItems
         }
 
-        let query = urlComponents.query
-        urlComponents.fragment = query
-        urlComponents.queryItems = nil
-
         return urlComponents.url ?? url
+    }
+
+    // Language spoken by the BU audience, not the device / user locale.
+    private var supportFormLanguageCode: String? {
+        switch businessUnitIdentifier {
+        case "rts":
+            "fr-FR"
+        case "srf", "rtr":
+            "de-DE"
+        case "rsi":
+            "it-IT"
+        default:
+            nil
+        }
     }
 
     var supportFormUrlWithParameters: URL? {
         guard let supportFormURL else { return nil }
 
-        return Self.typeformUrlWithParameters(supportFormURL)
+        var queryItems = SupportInformation.toQueryItems()
+        if let supportFormLanguageCode {
+            queryItems.append(URLQueryItem(name: "lang", value: supportFormLanguageCode))
+        }
+
+        return Self.url(supportFormURL, appendingQueryItems: queryItems)
     }
 
     var tvGuideOtherBouquets: [TVGuideBouquet] {
