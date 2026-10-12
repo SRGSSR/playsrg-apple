@@ -922,6 +922,9 @@
 /* Migration Banner */
 "In a few days, you can find all of SRG's offerings, and more, on Play+." = "In a few days, you can find all of SRG's offerings, and more, on Play+.";
 
+/* Migration Banner (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG is being replaced by Play+" = "Play SRG is being replaced by Play+";
+
 /* Migration Banner */
 "Learn more" = "Learn more";
 
@@ -984,3 +987,15 @@
 
 /* Migration View Actions */
 "Download now" = "Download now";
+
+/* Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG makes way for Play+" = "Play SRG makes way for Play+";
+
+/* Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland." = "Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland.";
+
+/* Migration View Actions (close button, pre-launch phase - PLAYNEXT-9625) */
+"Close" = "Close";
+
+/* Migration View Actions (secondary button, beta phase - PLAYNEXT-9449) */
+"Not now" = "Not now";

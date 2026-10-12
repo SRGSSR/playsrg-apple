@@ -48,7 +48,7 @@ extension MigrationBanner {
             action: .joinBeta
         )
         static let download = Self(
-            title: "Play SRG is becoming Play+",
+            title: "Play SRG is being replaced by Play+",
             subtitle: "In a few days, you can find all of SRG's offerings, and more, on Play+.",
             icon: .playPlusAppIcon,
             action: .download
