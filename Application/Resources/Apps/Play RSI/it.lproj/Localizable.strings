@@ -786,7 +786,7 @@
 "The show cannot be opened." = "Il programma non può essere aperto.";
 
 /* Migration screen title */
-"This app is no longer available" = "Questa versione dell'app non è più disponibile";
+"This app is no longer available" = "Questa app non è più disponibile";
 
 /* Message displayed when attempting to play some content not allowed to be played with Google Cast */
 "This content is not allowed to be played with Google Cast." = "Non è permesso riprodurre questo contenuto con Google Cast.";
