@@ -908,7 +908,7 @@
 "This app no longer exists" = "Diese App gibt es nicht mehr";
 
 /* Migration Banner */
-"Play SRG is becoming Play+" = "Play SRF wird durch Play+ ersetzt";
+"Play SRG is becoming Play+" = "Play SRF wird zu Play+";
 
 /* Migration Banner */
 "Play+ is coming soon" = "Play+ Beta ist hier";
@@ -926,10 +926,10 @@
 "Learn more" = "Mehr erfahren";
 
 /* Migration View Header & Subtitles */
-"Play SRG becomes Play+" = "Play SRF wird durch Play+ ersetzt";
+"Play SRG becomes Play+" = "Play SRF wird zu Play+";
 
 /* Migration View Header & Subtitles */
-"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ ist der neue Live- und Streaming-Service der Schweiz. Hier entdecken Sie ab sofort Geschichten aus Ihrer Region und aus allen Ecken unseres Landes.";
+"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ ist der neue Live- und Streaming-Service der Schweiz. Hier entdecken Sie bald Geschichten aus Ihrer Region und aus allen Ecken unseres Landes.";
 
 /* Migration View Header & Subtitles */
 "Try out the new Swiss live and streaming platform and share your opinion with us!" = "Testen Sie den neuen Live- und Streaming-Service der Schweiz und sagen Sie uns Ihre Meinung!";
@@ -962,7 +962,7 @@
 "Free. No subscription required" = "Kostenlos. Ohne Abo.";
 
 /* Migration View Footers */
-"Important note: The beta app will replace your Play Suisse App" = "Wichtiger Hinweis: Die Beta-App wird deine Play Suisse-App ersetzen";
+"Important note: The beta app will replace your Play Suisse App" = "Wichtiger Hinweis: Die Beta-App ersetzt Ihre Play Suisse App";
 
 /* Migration Banner */
 "What do you think of Play?" = "Wie gefällt Ihnen Play SRF?";
@@ -984,3 +984,23 @@
 
 /* Migration View Actions */
 "Download now" = "Jetzt herunterladen";
+
+/* Play SRG is being replaced by Play+
+Migration Banner (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG is being replaced by Play+" = "Play SRF wird durch Play+ ersetzt";
+
+/* Play SRG makes way for Play+
+Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG makes way for Play+" = "Play SRF wird durch Play+ ersetzt";
+
+/* Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland.
+Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland." = "Play+ ist der neue Live- und Streaming-Service der Schweiz. Hier entdecken Sie ab sofort Geschichten aus Ihrer Region und aus allen Ecken unseres Landes.";
+
+/* Close
+Migration View Actions (close button, pre-launch phase - PLAYNEXT-9625) */
+"Close" = "Schliessen";
+
+/* Not now
+Migration View Actions (secondary button, beta phase - PLAYNEXT-9449) */
+"Not now" = "Lieber nicht";
