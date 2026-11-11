@@ -49,7 +49,7 @@ extension MigrationView {
         )
 
         private static func downloadAction() -> Action? {
-            if #available(iOS 17, tvOS 17, *) {
+            if #available(iOS 18, tvOS 18, *) {
                 .download
             } else {
                 nil
@@ -57,7 +57,7 @@ extension MigrationView {
         }
 
         private static func updateAction() -> Action? {
-            if #available(iOS 17, tvOS 17, *) {
+            if #available(iOS 18, tvOS 18, *) {
                 .update
             } else {
                 constant(iOS: .help, tvOS: nil)
