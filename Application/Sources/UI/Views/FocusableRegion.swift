@@ -108,7 +108,7 @@ extension View {
                 }
             }
         #else
-            return self
+            self
         #endif
     }
 }

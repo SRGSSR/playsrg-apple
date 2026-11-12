@@ -73,17 +73,17 @@ extension EnvironmentValues {
      */
     var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
         #if os(iOS)
-            return horizontalSizeClass == .compact ? .compact : .regular
+            horizontalSizeClass == .compact ? .compact : .regular
         #else
-            return .regular
+            .regular
         #endif
     }
 
     var uiVerticalSizeClass: UIUserInterfaceSizeClass {
         #if os(iOS)
-            return verticalSizeClass == .compact ? .compact : .regular
+            verticalSizeClass == .compact ? .compact : .regular
         #else
-            return .regular
+            .regular
         #endif
     }
 }

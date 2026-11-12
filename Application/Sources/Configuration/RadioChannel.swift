@@ -8,29 +8,29 @@ extension RadioChannel {
     private static func configuredSection(from homeSection: HomeSection, withChannelUid channelUid: String) -> ConfiguredSection? {
         switch homeSection {
         case .radioAllShows:
-            return .radioAllShows(channelUid: channelUid)
+            .radioAllShows(channelUid: channelUid)
         case .radioFavoriteShows:
-            return .radioFavoriteShows(channelUid: channelUid)
+            .radioFavoriteShows(channelUid: channelUid)
         case .radioLatest:
-            return .radioLatest(channelUid: channelUid)
+            .radioLatest(channelUid: channelUid)
         case .radioLatestEpisodes:
-            return .radioLatestEpisodes(channelUid: channelUid)
+            .radioLatestEpisodes(channelUid: channelUid)
         case .radioLatestEpisodesFromFavorites:
-            return .radioLatestEpisodesFromFavorites(channelUid: channelUid)
+            .radioLatestEpisodesFromFavorites(channelUid: channelUid)
         case .radioLatestVideos:
-            return .radioLatestVideos(channelUid: channelUid)
+            .radioLatestVideos(channelUid: channelUid)
         case .radioMostPopular:
-            return .radioMostPopular(channelUid: channelUid)
+            .radioMostPopular(channelUid: channelUid)
         case .radioResumePlayback:
-            return .radioResumePlayback(channelUid: channelUid)
+            .radioResumePlayback(channelUid: channelUid)
         case .radioWatchLater:
-            return .radioWatchLater(channelUid: channelUid)
+            .radioWatchLater(channelUid: channelUid)
         #if os(iOS)
             case .radioShowsAccess:
-                return .radioShowAccess(channelUid: channelUid)
+                .radioShowAccess(channelUid: channelUid)
         #endif
         default:
-            return nil
+            nil
         }
     }
 

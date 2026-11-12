@@ -48,21 +48,21 @@ struct EmptyContentView: View {
     private func emptyTitle(for type: Type) -> String {
         switch type {
         case .favoriteShows:
-            return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
+            NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
-            return NSLocalizedString("No history", comment: "Text displayed when no history is available")
+            NSLocalizedString("No history", comment: "Text displayed when no history is available")
         case .search:
-            return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
+            NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         case .searchTutorial:
-            return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
+            NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
         #if os(iOS)
             case .notifications:
-                return NSLocalizedString("No notifications", comment: "Text displayed when no notifications are available")
+                NSLocalizedString("No notifications", comment: "Text displayed when no notifications are available")
             case .downloads:
-                return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
+                NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
         #endif
         default:
-            return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
+            NSLocalizedString("No content", comment: "Default text displayed when no content is available")
         }
     }
 

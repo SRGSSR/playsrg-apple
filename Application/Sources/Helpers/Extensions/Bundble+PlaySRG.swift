@@ -54,17 +54,17 @@ extension Bundle {
 
     var play_isTestFlightDistribution: Bool {
         #if !DEBUG
-            return (appStoreReceiptURL?.path ?? "").contains("sandboxReceipt")
+            (appStoreReceiptURL?.path ?? "").contains("sandboxReceipt")
         #else
-            return false
+            false
         #endif
     }
 
     var play_isAppStoreRelease: Bool {
         #if DEBUG || NIGHTLY || BETA
-            return false
+            false
         #else
-            return !play_isTestFlightDistribution
+            !play_isTestFlightDistribution
         #endif
     }
 }

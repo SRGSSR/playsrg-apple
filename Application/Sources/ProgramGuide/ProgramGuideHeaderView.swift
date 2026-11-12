@@ -59,23 +59,21 @@ struct ProgramGuideHeaderView: View {
         }
 
         var body: some View {
-            Group {
-                if direction == .vertical {
-                    VStack(spacing: Self.spacing) {
-                        DaySelector(model: model)
-                            .frame(height: Self.itemHeight)
-                        DayNavigationBar(model: model)
-                            .frame(height: Self.itemHeight)
-                    }
-                } else {
-                    HStack(spacing: Self.spacing) {
-                        DayNavigationBar(model: model)
-                            .frame(maxWidth: constant(iOS: 400, tvOS: 750))
-                        DaySelector(model: model)
-                            .frame(maxWidth: 480)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: Self.itemHeight, alignment: .leading)
+            if direction == .vertical {
+                VStack(spacing: Self.spacing) {
+                    DaySelector(model: model)
+                        .frame(height: Self.itemHeight)
+                    DayNavigationBar(model: model)
+                        .frame(height: Self.itemHeight)
                 }
+            } else {
+                HStack(spacing: Self.spacing) {
+                    DayNavigationBar(model: model)
+                        .frame(maxWidth: constant(iOS: 400, tvOS: 750))
+                    DaySelector(model: model)
+                        .frame(maxWidth: 480)
+                }
+                .frame(maxWidth: .infinity, maxHeight: Self.itemHeight, alignment: .leading)
             }
         }
     }
@@ -200,12 +198,12 @@ enum ProgramGuideHeaderViewSize {
         #if os(iOS)
             switch layout {
             case .grid:
-                return (horizontalSizeClass == .compact) ? 160 : 80
+                (horizontalSizeClass == .compact) ? 160 : 80
             case .list:
-                return (horizontalSizeClass == .compact) ? 216 : 136
+                (horizontalSizeClass == .compact) ? 216 : 136
             }
         #else
-            return ApplicationConfiguration.shared.tvGuideOtherBouquets.isEmpty ? 760 : 650
+            ApplicationConfiguration.shared.tvGuideOtherBouquets.isEmpty ? 760 : 650
         #endif
     }
 }

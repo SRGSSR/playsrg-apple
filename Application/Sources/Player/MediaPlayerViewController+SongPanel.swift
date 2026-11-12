@@ -118,8 +118,7 @@ private extension MediaPlayerViewController {
     }
 
     var songsViewController: SongsViewController? {
-        guard let panel else { return nil }
-        guard let contentNavigationController = panel.contentViewController as? UINavigationController else { return nil }
+        guard let panel, let contentNavigationController = panel.contentViewController as? UINavigationController else { return nil }
         return contentNavigationController.viewControllers.first as? SongsViewController
     }
 

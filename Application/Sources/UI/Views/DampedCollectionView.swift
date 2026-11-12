@@ -32,8 +32,7 @@ class DampedCollectionView: UICollectionView {
         if let viewSubclass = NSClassFromString(scrollViewSubclassName) {
             object_setClass(scrollView, viewSubclass)
         } else {
-            guard let viewClassNameUtf8 = (scrollViewSubclassName as NSString).utf8String else { return }
-            guard let scrollViewSubclass = objc_allocateClassPair(scrollViewClass, viewClassNameUtf8, 0) else { return }
+            guard let viewClassNameUtf8 = (scrollViewSubclassName as NSString).utf8String, let scrollViewSubclass = objc_allocateClassPair(scrollViewClass, viewClassNameUtf8, 0) else { return }
 
             if let decelerationRateMethod = class_getInstanceMethod(UIScrollView.self, #selector(setter: UIScrollView.decelerationRate)) {
                 let setDecelerationRate: @convention(block) (AnyObject, UIScrollView.DecelerationRate) -> Void = { _, _ in

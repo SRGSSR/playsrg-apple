@@ -48,15 +48,15 @@ struct HeroMediaCell: View {
 
         private var contentMode: ImageView.ContentMode {
             if let focalPoint = media?.imageFocalPoint {
-                return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
+                .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
             } else {
                 #if os(tvOS)
-                    return regularWidthContentMode
+                    regularWidthContentMode
                 #else
                     if horizontalSizeClass == .compact {
-                        return .aspectFillTop
+                        .aspectFillTop
                     } else {
-                        return regularWidthContentMode
+                        regularWidthContentMode
                     }
                 #endif
             }
