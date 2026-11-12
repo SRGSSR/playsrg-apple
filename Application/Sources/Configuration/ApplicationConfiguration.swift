@@ -77,8 +77,7 @@ extension ApplicationConfiguration {
     }
 
     private static func typeformUrlWithParameters(_ url: URL) -> URL {
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return url }
-        guard let host = urlComponents.host, host.contains("typeform.") else { return url }
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false), let host = urlComponents.host, host.contains("typeform.") else { return url }
 
         let typeformQueryItems = SupportInformation.toQueryItems()
 

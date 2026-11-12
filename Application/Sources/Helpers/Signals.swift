@@ -202,11 +202,11 @@ enum ApplicationSignal {
     /// push notifications
     static func pushServiceStatusUpdate() -> AnyPublisher<Void, Never> {
         #if os(iOS)
-            return NotificationCenter.default.weakPublisher(for: .PushServiceStatusDidChange)
+            NotificationCenter.default.weakPublisher(for: .PushServiceStatusDidChange)
                 .map { _ in }
                 .eraseToAnyPublisher()
         #else
-            return Empty(completeImmediately: false)
+            Empty(completeImmediately: false)
                 .eraseToAnyPublisher()
         #endif
     }

@@ -694,39 +694,39 @@ private extension PageViewModel {
         var layout: PageViewModel.SectionLayout {
             switch (presentation.type, contentSection.mediaType) {
             case (.heroStage, _):
-                return .heroStage
+                .heroStage
             case (.highlight, _):
-                return (Highlight(from: contentSection) != nil) ? .highlight : .mediaSwimlane
+                (Highlight(from: contentSection) != nil) ? .highlight : .mediaSwimlane
             case (.showPromotion, _):
-                return (Highlight(from: contentSection) != nil) ? .highlight : .showSwimlane
+                (Highlight(from: contentSection) != nil) ? .highlight : .showSwimlane
             case (.mediaElement, _), (.showElement, _):
-                return .element
+                .element
             case (.mediaElementSwimlane, _):
-                return .elementSwimlane
+                .elementSwimlane
             case (.topicSelector, _):
-                return .topicSelector
+                .topicSelector
             #if os(iOS)
                 case (.showAccess, _):
-                    return .showAccess
+                    .showAccess
             #endif
             case (.favoriteShows, _):
-                return .showSwimlane
+                .showSwimlane
             case (.swimlane, _):
-                return (contentSection.type == .shows) ? .showSwimlane : .mediaSwimlane
+                (contentSection.type == .shows) ? .showSwimlane : .mediaSwimlane
             case (.grid, _):
-                return (contentSection.type == .shows) ? .showGrid : .mediaGrid
+                (contentSection.type == .shows) ? .showGrid : .mediaGrid
             case (.availableEpisodes, _):
                 #if os(iOS)
-                    return .mediaList
+                    .mediaList
                 #else
-                    return .mediaGrid
+                    .mediaGrid
                 #endif
             case (.livestreams, .audio):
-                return .liveAudioSwimlane
+                .liveAudioSwimlane
             case (.livestreams, .video):
-                return .liveMediaSwimlane
+                .liveMediaSwimlane
             default:
-                return .mediaSwimlane
+                .mediaSwimlane
             }
         }
 
@@ -751,29 +751,29 @@ private extension PageViewModel {
         var layout: PageViewModel.SectionLayout {
             switch configuredSection {
             case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-                return index == 0 ? .headline : .mediaSwimlane
+                index == 0 ? .headline : .mediaSwimlane
             case .tvLive, .radioLive, .radioLiveSatellite:
                 #if os(iOS)
-                    return .liveMediaGrid
+                    .liveMediaGrid
                 #else
-                    return .liveMediaSwimlane
+                    .liveMediaSwimlane
                 #endif
             case .favoriteShows, .radioFavoriteShows:
-                return .showSwimlane
+                .showSwimlane
             case .radioAllShows, .tvAllShows:
-                return .showGrid
+                .showGrid
             #if os(iOS)
                 case .radioShowAccess:
-                    return .showAccess
+                    .showAccess
             #endif
             case .availableEpisodes:
                 #if os(iOS)
-                    return .mediaList
+                    .mediaList
                 #else
-                    return .mediaGrid
+                    .mediaGrid
                 #endif
             default:
-                return .mediaSwimlane
+                .mediaSwimlane
             }
         }
 

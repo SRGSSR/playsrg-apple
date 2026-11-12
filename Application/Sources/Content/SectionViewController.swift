@@ -39,9 +39,9 @@ final class SectionViewController: UIViewController {
 
     private var headerTitle: String? {
         #if os(tvOS)
-            return (tabBarController == nil && model.displaysTitle) ? model.title : nil
+            (tabBarController == nil && model.displaysTitle) ? model.title : nil
         #else
-            return nil
+            nil
         #endif
     }
 
@@ -875,10 +875,10 @@ private extension SectionViewController {
             switch section.footer {
             #if os(iOS)
                 case .diskInfo:
-                    return LayoutFullWidthCellSize(30)
+                    LayoutFullWidthCellSize(30)
             #endif
             case .none:
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
     }
@@ -890,10 +890,8 @@ extension SectionViewController: ShowHeaderViewAction {
 
         #if os(iOS)
             let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
-            if #available(iOS 15.0, *) {
-                if let sheet = sheetTextViewController.sheetPresentationController {
-                    sheet.detents = [.medium()]
-                }
+            if #available(iOS 15.0, *), let sheet = sheetTextViewController.sheetPresentationController {
+                sheet.detents = [.medium()]
             }
             present(sheetTextViewController, animated: true, completion: nil)
         #else

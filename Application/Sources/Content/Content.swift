@@ -71,21 +71,21 @@ enum Content {
         private var title: String? {
             switch self {
             case let .media(media):
-                return media.title
+                media.title
             case let .show(show):
-                return show.title
+                show.title
             case let .topic(topic):
-                return topic.title
+                topic.title
             #if os(iOS)
                 case let .download(download):
-                    return download.title
+                    download.title
                 case let .notification(notification):
-                    return notification.title
+                    notification.title
             #endif
             case let .highlight(highlight, _):
-                return highlight.title
+                highlight.title
             default:
-                return nil
+                nil
             }
         }
 
@@ -584,69 +584,69 @@ private extension Content {
         var title: String? {
             switch configuredSection {
             case .history:
-                return NSLocalizedString("History", comment: "Title label used to present the history")
+                NSLocalizedString("History", comment: "Title label used to present the history")
             case .tvAllShows:
-                return NSLocalizedString("Shows", comment: "Title label used to present TV associated shows")
+                NSLocalizedString("Shows", comment: "Title label used to present TV associated shows")
             case let .radioAllShows(channelUid):
                 if ApplicationConfiguration.shared.radioChannel(forUid: channelUid)?.showType == .podcast {
-                    return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
+                    NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
                 } else {
-                    return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
+                    NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
                 }
             case .favoriteShows, .radioFavoriteShows:
-                return NSLocalizedString("Favorites", comment: "Title label used to present the radio favorite shows")
+                NSLocalizedString("Favorites", comment: "Title label used to present the radio favorite shows")
             case .radioLatest:
-                return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
+                NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
             case let .radioLatestEpisodes(channelUid):
                 if ApplicationConfiguration.shared.radioChannel(forUid: channelUid)?.showType == .podcast {
-                    return NSLocalizedString("Latest podcasts", comment: "Title label used to present the radio latest podcast episodes")
+                    NSLocalizedString("Latest podcasts", comment: "Title label used to present the radio latest podcast episodes")
                 } else {
-                    return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
+                    NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
                 }
             case .radioLatestEpisodesFromFavorites:
-                return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from radio favorite shows")
+                NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from radio favorite shows")
             case .radioLatestVideos:
-                return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
+                NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
             case .radioLive:
-                return NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
+                NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
             case .radioLiveSatellite:
-                return NSLocalizedString("Music radios", comment: "Title label to present musical Swiss satellite radios")
+                NSLocalizedString("Music radios", comment: "Title label to present musical Swiss satellite radios")
             case .radioMostPopular:
-                return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
+                NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
             case .radioResumePlayback:
-                return NSLocalizedString("Resume audios playback", comment: "Title label used to present audios whose playback can be resumed")
+                NSLocalizedString("Resume audios playback", comment: "Title label used to present audios whose playback can be resumed")
             case .radioWatchLater:
-                return NSLocalizedString("Listen later", comment: "Title Label used to present the audio later list")
+                NSLocalizedString("Listen later", comment: "Title Label used to present the audio later list")
             case .watchLater:
-                return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
+                NSLocalizedString("Later", comment: "Title Label used to present the video later list")
             case .tvLive:
-                return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+                NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
-                return NSLocalizedString("Sport livestreams", comment: "Title label used to present scheduled livestreams medias from live center (Sport manager)")
+                NSLocalizedString("Sport livestreams", comment: "Title label used to present scheduled livestreams medias from live center (Sport manager)")
             case .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
-                return NSLocalizedString("Past sport livestreams", comment: "Title label used to present on demand medias from live center (Sport manager)")
+                NSLocalizedString("Past sport livestreams", comment: "Title label used to present on demand medias from live center (Sport manager)")
             case .tvScheduledLivestreams:
-                return NSLocalizedString("Play livestreams", comment: "Title label used to present scheduled livestream medias")
+                NSLocalizedString("Play livestreams", comment: "Title label used to present scheduled livestream medias")
             case .tvScheduledLivestreamsNews:
-                return NSLocalizedString("News livestreams", comment: "Title label used to present news scheduled livestream medias")
+                NSLocalizedString("News livestreams", comment: "Title label used to present news scheduled livestream medias")
             case .tvScheduledLivestreamsSport:
-                return NSLocalizedString("Sport livestreams", comment: "Title label used to present sport scheduled livestream medias")
+                NSLocalizedString("Sport livestreams", comment: "Title label used to present sport scheduled livestream medias")
             case .tvScheduledLivestreamsSignLanguage:
-                return NSLocalizedString("Sign language livestreams", comment: "Title label used to present sign language scheduled livestream medias")
+                NSLocalizedString("Sign language livestreams", comment: "Title label used to present sign language scheduled livestream medias")
             #if os(iOS)
                 case .downloads:
-                    return NSLocalizedString("Downloads", comment: "Label to present downloads")
+                    NSLocalizedString("Downloads", comment: "Label to present downloads")
                 case .notifications:
-                    return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
+                    NSLocalizedString("Notifications", comment: "Title label used to present notifications")
                 case let .radioShowAccess(channelUid):
                     if ApplicationConfiguration.shared.radioChannel(forUid: channelUid)?.showType == .podcast {
-                        return NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
+                        NSLocalizedString("Podcasts", comment: "Title label used to present radio associated podcasts")
                     } else {
-                        return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+                        NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
                     }
             #endif
             default:
-                return nil
+                nil
             }
         }
 
@@ -687,36 +687,36 @@ private extension Content {
         var supportsEdition: Bool {
             switch configuredSection {
             case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
-                return true
+                true
             #if os(iOS)
                 case .downloads, .notifications:
-                    return true
+                    true
             #endif
             default:
-                return false
+                false
             }
         }
 
         var emptyType: EmptyContentView.`Type` {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
-                return .favoriteShows
+                .favoriteShows
             case .radioLatestEpisodes:
-                return .episodesFromFavorites
+                .episodesFromFavorites
             case .radioWatchLater, .watchLater:
-                return .watchLater
+                .watchLater
             case .history:
-                return .history
+                .history
             case .radioResumePlayback:
-                return .resumePlayback
+                .resumePlayback
             #if os(iOS)
                 case .downloads:
-                    return .downloads
+                    .downloads
                 case .notifications:
-                    return .notifications
+                    .notifications
             #endif
             default:
-                return .generic
+                .generic
             }
         }
 
@@ -759,35 +759,35 @@ private extension Content {
         var analyticsTitle: String? {
             switch configuredSection {
             case .history:
-                return AnalyticsPageTitle.history.rawValue
+                AnalyticsPageTitle.history.rawValue
             case .radioAllShows, .tvAllShows:
-                return AnalyticsPageTitle.showsAZ.rawValue
+                AnalyticsPageTitle.showsAZ.rawValue
             case .favoriteShows, .radioFavoriteShows:
-                return AnalyticsPageTitle.favorites.rawValue
+                AnalyticsPageTitle.favorites.rawValue
             case .radioLatest, .radioLatestVideos:
-                return AnalyticsPageTitle.latest.rawValue
+                AnalyticsPageTitle.latest.rawValue
             case .radioLatestEpisodes:
-                return AnalyticsPageTitle.latestEpisodes.rawValue
+                AnalyticsPageTitle.latestEpisodes.rawValue
             case .radioLatestEpisodesFromFavorites:
-                return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
+                AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
             case .radioMostPopular:
-                return AnalyticsPageTitle.mostPopular.rawValue
+                AnalyticsPageTitle.mostPopular.rawValue
             case .radioResumePlayback:
-                return AnalyticsPageTitle.resumePlayback.rawValue
+                AnalyticsPageTitle.resumePlayback.rawValue
             case .radioWatchLater, .watchLater:
-                return AnalyticsPageTitle.watchLater.rawValue
+                AnalyticsPageTitle.watchLater.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
-                return AnalyticsPageTitle.sports.rawValue
+                AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
-                return AnalyticsPageTitle.scheduledLivestreams.rawValue
+                AnalyticsPageTitle.scheduledLivestreams.rawValue
             #if os(iOS)
                 case .downloads:
-                    return AnalyticsPageTitle.downloads.rawValue
+                    AnalyticsPageTitle.downloads.rawValue
                 case .notifications:
-                    return AnalyticsPageTitle.notifications.rawValue
+                    AnalyticsPageTitle.notifications.rawValue
             #endif
             default:
-                return nil
+                nil
             }
         }
 
@@ -808,9 +808,9 @@ private extension Content {
             switch configuredSection {
             case let .radioAllShows(channelUid: channelUid):
                 if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+                    [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
                 } else {
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
+                    [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
                 }
             case let .radioFavoriteShows(channelUid: channelUid),
                  let .radioLatest(channelUid: channelUid),
@@ -821,49 +821,49 @@ private extension Content {
                  let .radioResumePlayback(channelUid: channelUid),
                  let .radioWatchLater(channelUid: channelUid):
                 if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+                    [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
                 } else {
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
+                    [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue]
                 }
             case .tvAllShows:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.scheduledLivestream.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.scheduledLivestream.rawValue]
             case .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.episode.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.episode.rawValue]
             case .tvScheduledLivestreams:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .tvScheduledLivestreamsNews:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.news.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.news.rawValue]
             case .tvScheduledLivestreamsSport:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.sport.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.sport.rawValue]
             case .tvScheduledLivestreamsSignLanguage:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.signLanguage.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.signLanguage.rawValue]
             case .favoriteShows, .history, .watchLater:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+                [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
             #if os(iOS)
                 case .downloads, .notifications:
-                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+                    [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
             #endif
             default:
-                return nil
+                nil
             }
         }
 
         func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsEvent? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
-                return AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
+                AnalyticsEvent.favorite(action: .remove, source: source, urn: nil)
             case .radioWatchLater, .watchLater:
-                return AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
+                AnalyticsEvent.watchLater(action: .remove, source: source, urn: nil)
             case .history, .radioResumePlayback:
-                return AnalyticsEvent.historyRemove(source: source, urn: nil)
+                AnalyticsEvent.historyRemove(source: source, urn: nil)
             #if os(iOS)
                 case .downloads:
-                    return AnalyticsEvent.download(action: .remove, source: source, urn: nil)
+                    AnalyticsEvent.download(action: .remove, source: source, urn: nil)
             #endif
             default:
-                return nil
+                nil
             }
         }
 
@@ -876,17 +876,17 @@ private extension Content {
             case .availableEpisodes, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
                  .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
                  .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsNews, .tvScheduledLivestreamsSport, .tvScheduledLivestreamsSignLanguage:
-                return (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
-                return (0 ..< kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+                (0 ..< kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .favoriteShows, .radioAllShows, .tvAllShows:
-                return (0 ..< kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                (0 ..< kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             #if os(iOS)
                 case .downloads:
-                    return (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                    (0 ..< kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             #endif
             default:
-                return []
+                []
             }
         }
 
@@ -1061,38 +1061,38 @@ private extension Content {
         func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return UserInteractionSignal.favoriteUpdates()
+                UserInteractionSignal.favoriteUpdates()
             case .history, .radioResumePlayback:
-                return UserInteractionSignal.historyUpdates()
+                UserInteractionSignal.historyUpdates()
             case .radioWatchLater, .watchLater:
-                return UserInteractionSignal.watchLaterUpdates()
+                UserInteractionSignal.watchLaterUpdates()
             #if os(iOS)
                 case .downloads:
-                    return UserInteractionSignal.downloadUpdates()
+                    UserInteractionSignal.downloadUpdates()
                 case .notifications:
-                    return UserInteractionSignal.notificationUpdates()
+                    UserInteractionSignal.notificationUpdates()
             #endif
             default:
-                return Just([]).eraseToAnyPublisher()
+                Just([]).eraseToAnyPublisher()
             }
         }
 
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return ThrottledSignal.preferenceUpdates()
+                ThrottledSignal.preferenceUpdates()
             case .radioWatchLater, .watchLater:
-                return ThrottledSignal.watchLaterUpdates()
+                ThrottledSignal.watchLaterUpdates()
             case .radioLive:
-                return ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)
+                ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)
             #if os(iOS)
                 case .downloads:
-                    return ThrottledSignal.downloadUpdates()
+                    ThrottledSignal.downloadUpdates()
             #endif
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
-                return nil
+                nil
             }
         }
 

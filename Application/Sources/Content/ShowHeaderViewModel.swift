@@ -46,15 +46,13 @@ final class ShowHeaderViewModel: ObservableObject {
                 .switchToLatest()
                 .receive(on: DispatchQueue.main)
                 .map { subscriptionStatus in
-                    if self.wouldLikeToSubscribe {
-                        if let pushService = PushService.shared, pushService.isEnabled {
-                            if subscriptionStatus != .subscribed {
-                                self.toggleSubscription()
-                            } else if let show = self.show {
-                                Banner.showSubscription(true, forItemWithName: show.title)
-                            }
-                            self.wouldLikeToSubscribe = false
+                    if self.wouldLikeToSubscribe, let pushService = PushService.shared, pushService.isEnabled {
+                        if subscriptionStatus != .subscribed {
+                            self.toggleSubscription()
+                        } else if let show = self.show {
+                            Banner.showSubscription(true, forItemWithName: show.title)
                         }
+                        self.wouldLikeToSubscribe = false
                     }
                     return subscriptionStatus
                 }

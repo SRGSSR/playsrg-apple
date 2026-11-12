@@ -12,9 +12,9 @@ import SwiftUI
 
 func constant<T>(iOS: T, tvOS: T) -> T {
     #if os(tvOS)
-        return tvOS
+        tvOS
     #else
-        return iOS
+        iOS
     #endif
 }
 
@@ -341,8 +341,7 @@ extension UIHostingController {
         if let viewSubclass = NSClassFromString(viewSubclassName) {
             object_setClass(view, viewSubclass)
         } else {
-            guard let viewClassNameUtf8 = (viewSubclassName as NSString).utf8String else { return }
-            guard let viewSubclass = objc_allocateClassPair(viewClass, viewClassNameUtf8, 0) else { return }
+            guard let viewClassNameUtf8 = (viewSubclassName as NSString).utf8String, let viewSubclass = objc_allocateClassPair(viewClass, viewClassNameUtf8, 0) else { return }
 
             if let method = class_getInstanceMethod(UIView.self, #selector(getter: UIView.safeAreaInsets)) {
                 let safeAreaInsets: @convention(block) (AnyObject) -> UIEdgeInsets = { _ in
@@ -427,9 +426,9 @@ extension NSCollectionLayoutSize {
 extension View {
     func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
         #if os(iOS)
-            return environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
+            environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
         #else
-            return self
+            self
         #endif
     }
 }

@@ -283,9 +283,9 @@ private extension MediaCell {
 
     var accessibilityTraits: AccessibilityTraits {
         #if os(tvOS)
-            return .isButton
+            .isButton
         #else
-            return isSelected ? .isSelected : []
+            isSelected ? .isSelected : []
         #endif
     }
 }
