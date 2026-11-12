@@ -258,12 +258,12 @@ extension ProgramGuideViewController {
         switch layout {
         case .list:
             #if os(iOS)
-                return ProgramGuideListViewController(model: model, dailyModel: dailyModel)
+                ProgramGuideListViewController(model: model, dailyModel: dailyModel)
             #else
-                return ProgramGuideGridViewController(model: model, dailyModel: dailyModel)
+                ProgramGuideGridViewController(model: model, dailyModel: dailyModel)
             #endif
         case .grid:
-            return ProgramGuideGridViewController(model: model, dailyModel: dailyModel)
+            ProgramGuideGridViewController(model: model, dailyModel: dailyModel)
         }
     }
 }

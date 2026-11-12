@@ -39,7 +39,7 @@ private extension View {
                 }
             }
         #else
-            return background(Color.clear)
+            background(Color.clear)
         #endif
     }
 }

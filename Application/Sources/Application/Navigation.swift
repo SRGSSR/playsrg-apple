@@ -9,10 +9,10 @@ import SRGAnalytics
 import SRGAppearanceSwift
 import SRGDataProviderModel
 import SwiftUI
+import UIKit
 #if os(tvOS)
     import TvOSTextViewer
 #endif
-import UIKit
 
 private var cancellable: AnyCancellable?
 

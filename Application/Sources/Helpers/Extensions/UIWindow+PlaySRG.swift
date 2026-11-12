@@ -9,9 +9,9 @@ import UIKit
 extension UIWindow {
     var isLandscape: Bool {
         #if os(iOS)
-            return bounds.width > bounds.height
+            bounds.width > bounds.height
         #else
-            return true
+            true
         #endif
     }
 

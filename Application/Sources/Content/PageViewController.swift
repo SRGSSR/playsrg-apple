@@ -768,10 +768,8 @@ extension PageViewController: ShowHeaderViewAction {
 
         #if os(iOS)
             let sheetTextViewController = UIHostingController(rootView: SheetTextView(content: event.content))
-            if #available(iOS 15.0, *) {
-                if let sheet = sheetTextViewController.sheetPresentationController {
-                    sheet.detents = [.medium()]
-                }
+            if #available(iOS 15.0, *), let sheet = sheetTextViewController.sheetPresentationController {
+                sheet.detents = [.medium()]
             }
             present(sheetTextViewController, animated: true, completion: nil)
         #else
@@ -837,12 +835,12 @@ private extension PageViewController {
                 switch section.viewModelProperties.layout {
                 case .mediaList:
                     #if os(iOS)
-                        return horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
+                        horizontalSizeClass == .compact ? Self.layoutHorizontalMargin : Self.layoutHorizontalMargin * 2
                     #else
-                        return Self.layoutHorizontalMargin
+                        Self.layoutHorizontalMargin
                     #endif
                 default:
-                    return Self.layoutHorizontalMargin
+                    Self.layoutHorizontalMargin
                 }
             }
 

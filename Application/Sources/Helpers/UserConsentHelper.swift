@@ -26,20 +26,20 @@ enum UCService: Hashable, CaseIterable {
         switch self {
         #if os(iOS)
             case .airship:
-                return "hFLVABpNP"
+                "hFLVABpNP"
         #endif
         case .appcenter:
-            return "XB0GBAmWEQ7Spr"
+            "XB0GBAmWEQ7Spr"
         case .comscore:
-            return "B1WMgcNodi-7"
+            "B1WMgcNodi-7"
         case .firebase:
-            return "2nEos-2ls"
+            "2nEos-2ls"
         case .srgsnitch:
-            return "OJxjJSgHYThNaE"
+            "OJxjJSgHYThNaE"
         case .tagcommander:
-            return "ryi2qNjOsbX"
+            "ryi2qNjOsbX"
         case .usercentrics:
-            return "H1Vl5NidjWX"
+            "H1Vl5NidjWX"
         }
     }
 }
@@ -104,9 +104,7 @@ enum UCService: Hashable, CaseIterable {
 
     @objc static func setup() {
         // Skip user consent banner if making screenshots
-        guard !ProcessInfo.processInfo.arguments.contains("FL_SCREENSHOTS") else { return }
-
-        guard !hasRunSetup else { return }
+        guard !ProcessInfo.processInfo.arguments.contains("FL_SCREENSHOTS"), !hasRunSetup else { return }
 
         configureAndApplyConsents()
 

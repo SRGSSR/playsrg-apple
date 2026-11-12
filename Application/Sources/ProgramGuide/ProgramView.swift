@@ -65,19 +65,17 @@ struct ProgramView: View {
         @ObservedObject var model: ProgramViewModel
 
         var body: some View {
-            Group {
-                if let action = model.playAction {
-                    Button(action: action) {
-                        ZStack {
-                            VisualView(model: model)
-                            Color(white: 0, opacity: 0.2)
-                            Image(ImageResource.play)
-                                .foregroundColor(.white)
-                        }
+            if let action = model.playAction {
+                Button(action: action) {
+                    ZStack {
+                        VisualView(model: model)
+                        Color(white: 0, opacity: 0.2)
+                        Image(ImageResource.play)
+                            .foregroundColor(.white)
                     }
-                } else {
-                    VisualView(model: model)
                 }
+            } else {
+                VisualView(model: model)
             }
         }
     }

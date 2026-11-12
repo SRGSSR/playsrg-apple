@@ -69,7 +69,7 @@ extension SRGDataProvider {
     /// are retrieved.
     func regionalizedRadioLivestreams(for vendor: SRGVendor, contentProviders: SRGContentProviders = .default) -> AnyPublisher<[SRGMedia], Error> {
         #if os(iOS)
-            return radioLivestreams(for: vendor, contentProviders: contentProviders)
+            radioLivestreams(for: vendor, contentProviders: contentProviders)
                 .map { medias in
                     Publishers.AccumulateLatestMany(medias.map { media in
                         self.regionalizedRadioLivestreamMedia(for: media)
@@ -80,7 +80,7 @@ extension SRGDataProvider {
                 .switchToLatest()
                 .eraseToAnyPublisher()
         #else
-            return radioLivestreams(for: vendor, contentProviders: contentProviders)
+            radioLivestreams(for: vendor, contentProviders: contentProviders)
                 .eraseToAnyPublisher()
         #endif
     }

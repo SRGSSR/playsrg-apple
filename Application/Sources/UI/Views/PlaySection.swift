@@ -28,8 +28,8 @@ func PlaySection(@ViewBuilder content: () -> some View, @ViewBuilder header: () 
     }
 }
 
+@available(iOS, unavailable)
 private extension View {
-    @available(iOS, unavailable)
     @ViewBuilder
     func tvOS17_backgroundFix() -> some View {
         if ProcessInfo.processInfo.operatingSystemVersion.majorVersion == 17 {

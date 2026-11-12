@@ -36,7 +36,7 @@ final class SectionViewModel: ObservableObject {
         // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
         // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
         Publishers.Publish(onOutputFrom: reloadSignal()) { [configuration, trigger] in
-            return Publishers.CombineLatest(
+            Publishers.CombineLatest(
                 configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                    paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
                                                    filter: filter)
@@ -341,16 +341,16 @@ private extension SectionViewModel {
                 case .predefined:
                     switch contentSection.presentation.type {
                     case .favoriteShows:
-                        return true
+                        true
                     default:
-                        return false
+                        false
                     }
                 default:
                     // Remark: `.shows` results cannot be arranged alphabetically because of pagination; no headers.
-                    return false
+                    false
                 }
             #else
-                return false
+                false
             #endif
         }
 
@@ -391,23 +391,23 @@ private extension SectionViewModel {
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection {
             case .tvLive, .radioLive, .radioLiveSatellite:
-                return .liveMediaGrid
+                .liveMediaGrid
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
-                return .showGrid
+                .showGrid
             #if os(iOS)
                 case .downloads:
-                    return .downloadGrid
+                    .downloadGrid
                 case .notifications:
-                    return .notificationList
+                    .notificationList
             #endif
             case .availableEpisodes:
                 #if os(iOS)
-                    return .mediaList
+                    .mediaList
                 #else
-                    return .mediaGrid
+                    .mediaGrid
                 #endif
             default:
-                return .mediaGrid
+                .mediaGrid
             }
         }
 
@@ -415,12 +415,12 @@ private extension SectionViewModel {
             #if os(iOS)
                 switch configuredSection {
                 case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
-                    return true
+                    true
                 default:
-                    return false
+                    false
                 }
             #else
-                return false
+                false
             #endif
         }
 
@@ -431,15 +431,15 @@ private extension SectionViewModel {
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
-                return SectionViewModel.alphabeticalRows(from: items, smart: true)
+                SectionViewModel.alphabeticalRows(from: items, smart: true)
             case .radioAllShows, .tvAllShows:
-                return SectionViewModel.alphabeticalRows(from: items, smart: false)
+                SectionViewModel.alphabeticalRows(from: items, smart: false)
             #if os(iOS)
                 case .downloads:
-                    return SectionViewModel.consolidatedRows(with: items, footer: .diskInfo)
+                    SectionViewModel.consolidatedRows(with: items, footer: .diskInfo)
             #endif
             default:
-                return SectionViewModel.consolidatedRows(with: items)
+                SectionViewModel.consolidatedRows(with: items)
             }
         }
     }
