@@ -920,16 +920,16 @@
 "Discover the new app in preview and share your opinion with us!" = "Nizzegia la nova app anc avant la publicaziun uffiziala ed ans dà resun!";
 
 /* Migration Banner */
-"In a few days, you can find all of SRG's offerings, and more, on Play+." = "En paucs dis chattas ti sin Play+ tut il cuntegn da RTR ed anc dapil!";
+"In a few days, you can find all of SRG's offerings, and more, on Play+." = "A partir d’immediat chattais Vus sin Play+ tut il cuntegn da Play RTR ed anc dapli!";
 
 /* Migration Banner */
-"Learn more" = "Dapli";
+"Learn more" = "Vegnir a savair dapli";
 
 /* Migration View Header & Subtitles */
 "Play SRG becomes Play+" = "Play RTR daventa Play+";
 
 /* Migration View Header & Subtitles */
-"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ è la nova plattafurma live e da streaming da la Svizra. Qua scuvras ti prest istorgias da tia regiun e da tut il pajais.";
+"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ è la nova plattafurma live e da streaming da la Svizra. Qua pudais Vus prest scuvrir istorgias da Vossa regiun e da tut il pajais.";
 
 /* Migration View Header & Subtitles */
 "Try out the new Swiss live and streaming platform and share your opinion with us!" = "Testescha la nova plattafurma live e da streaming da la Svizra e di a nus tia opiniun!";
@@ -941,7 +941,7 @@
 "Back" = "Enavos";
 
 /* Migration View Actions */
-"I'm testing the app" = "Jau vi testar l’app";
+"I'm testing the app" = "Testar l’app";
 
 /* Migration View Actions */
 "Install Play+" = "Installar Play+";
@@ -962,7 +962,7 @@
 "Free. No subscription required" = "Gratuit. Senza abo.";
 
 /* Migration View Footers */
-"Important note: The beta app will replace your Play Suisse App" = "Remartga impurtanta: L’app beta remplazza l’app Play Suisse.";
+"Important note: The beta app will replace your Play Suisse App" = "Avis impurtant: L’app Beta remplazza Vossa App da Play Suisse";
 
 /* Migration Banner */
 "What do you think of Play?" = "Co As plascha Play RTR?";
@@ -984,3 +984,23 @@
 
 /* Migration View Actions */
 "Download now" = "Telechargiar uss";
+
+/* Play SRG is being replaced by Play+
+Migration Banner (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG is being replaced by Play+" = "Play RTR vegn remplazzà";
+
+/* Play SRG makes way for Play+
+Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG makes way for Play+" = "Play RTR vegn remplazzà da Play+";
+
+/* Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland.
+Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland." = "Play+ è la nova plattafurma live e da streaming da la Svizra. Qua scuvras ti uss istorgias da tia regiun e da tut il pajais.";
+
+/* Close
+Migration View Actions (close button, pre-launch phase - PLAYNEXT-9625) */
+"Close" = "Serrar";
+
+/* Not now
+Migration View Actions (secondary button, beta phase - PLAYNEXT-9449) */
+"Not now" = "Pli gugent betg";

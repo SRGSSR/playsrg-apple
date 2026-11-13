@@ -908,19 +908,19 @@
 "This app no longer exists" = "Cette application n'existe plus";
 
 /* Migration Banner */
-"Play SRG is becoming Play+" = "Play RTS fait place à Play+";
+"Play SRG is becoming Play+" = "Play RTS devient Play+";
 
 /* Migration Banner */
-"Play+ is coming soon" = "À vous de tester Play+";
+"Play+ is coming soon" = "Play+ Beta est là";
 
 /* Migration Banner */
 "Soon you'll find everything from SRG and more on Play+!" = "Bientôt, retrouvez sur Play+ toute l’offre de la RTS, et plus encore.";
 
 /* Migration Banner */
-"Discover the new app in preview and share your opinion with us!" = "Profitez de la nouvelle app avant son lancement officiel et donnez‑nous votre avis !";
+"Discover the new app in preview and share your opinion with us!" = "Découvrez la nouvelle app en avant-première et partagez votre avis avec nous !";
 
 /* Migration Banner */
-"In a few days, you can find all of SRG's offerings, and more, on Play+." = "Dès maintenant, retrouvez sur Play+ tout l’offre de la RTS, et plus encore.";
+"In a few days, you can find all of SRG's offerings, and more, on Play+." = "Dès maintenant, retrouvez sur Play+ toute l’offre de la RTS, et plus encore.";
 
 /* Migration Banner */
 "Learn more" = "En savoir plus";
@@ -929,7 +929,7 @@
 "Play SRG becomes Play+" = "Play RTS devient Play+";
 
 /* Migration View Header & Subtitles */
-"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ est la nouvelle plateforme suisse de live et de streaming. Dès maintenant, découvrez des histoires de votre région et de toute la Suisse.";
+"Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland." = "Play+ est la nouvelle plateforme suisse de live et de streaming. Bientôt, découvrez des histoires de votre région et de toute la Suisse.";
 
 /* Migration View Header & Subtitles */
 "Try out the new Swiss live and streaming platform and share your opinion with us!" = "Testez la nouvelle plateforme suisse de live et de streaming et partagez votre avis avec nous !";
@@ -941,7 +941,7 @@
 "Back" = "Retour";
 
 /* Migration View Actions */
-"I'm testing the app" = "Je teste l’app";
+"I'm testing the app" = "Tester Play+";
 
 /* Migration View Actions */
 "Install Play+" = "Installer Play+";
@@ -962,7 +962,7 @@
 "Free. No subscription required" = "Gratuit. Sans abonnement.";
 
 /* Migration View Footers */
-"Important note: The beta app will replace your Play Suisse App" = "Remarque importante : l'application bêta remplacera votre application Play Suisse";
+"Important note: The beta app will replace your Play Suisse App" = "Note importante : l’app bêta remplacera votre app Play Suisse.";
 
 /* Migration Banner */
 "What do you think of Play?" = "Que pensez-vous de Play RTS ?";
@@ -984,3 +984,23 @@
 
 /* Migration View Actions */
 "Download now" = "Télécharger maintenant";
+
+/* Play SRG is being replaced by Play+
+Migration Banner (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG is being replaced by Play+" = "Passez de Play RTS à Play+";
+
+/* Play SRG makes way for Play+
+Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play SRG makes way for Play+" = "Play RTS fait place à Play+";
+
+/* Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland.
+Migration View Header & Subtitles (download phase, after launch - PLAYNEXT-9749) */
+"Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland." = "Play+ est la nouvelle plateforme suisse de live et de streaming. Dès maintenant, découvrez des histoires de votre région et de toute la Suisse.";
+
+/* Close
+Migration View Actions (close button, pre-launch phase - PLAYNEXT-9625) */
+"Close" = "Fermer";
+
+/* Not now
+Migration View Actions (secondary button, beta phase - PLAYNEXT-9449) */
+"Not now" = "Pas maintenant";

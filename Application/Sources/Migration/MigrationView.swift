@@ -13,7 +13,7 @@ extension MigrationView {
         let displaysBullets: Bool
         let footer: LocalizedStringKey?
         let action: Action?
-        let cancelTitle: String?
+        let cancelTitle: LocalizedStringKey?
 
         static let learnMore = Self(
             title: "Play SRG becomes Play+",
@@ -29,11 +29,11 @@ extension MigrationView {
             displaysBullets: true,
             footer: "Important note: The beta app will replace your Play Suisse App",
             action: .joinBeta,
-            cancelTitle: "Okay"
+            cancelTitle: "Not now"
         )
         static let download = Self(
-            title: "Play SRG becomes Play+",
-            subtitle: "Play+ is the new Swiss live streaming platform. Soon, discover stories from your region and all over Switzerland.",
+            title: "Play SRG makes way for Play+",
+            subtitle: "Play+ is the new Swiss live and streaming platform. From now on, discover stories from your region and all over Switzerland.",
             displaysBullets: true,
             footer: nil,
             action: downloadAction(),
@@ -75,7 +75,7 @@ extension MigrationView {
         var name: LocalizedStringKey {
             switch self {
             case .learnMore:
-                "Back"
+                "Close"
             case .joinBeta:
                 "I'm testing the app"
             case .download:
